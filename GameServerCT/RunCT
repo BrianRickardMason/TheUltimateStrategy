@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# TODO: Catch exit code. If is not equal to zero - report a problem.
+
+psql -U postgres -W template1 -f ../GameServer/Persistency/PostgreSQL/CreateDatabase.sql -w ;
+psql -U postgres -W stronghold -f ../GameServer/Persistency/PostgreSQL/CreateTables.sql -w ;
+psql -U postgres -W stronghold -f ../GameServer/Persistency/PostgreSQL/InsertInitialData.sql -w ;
+
+./bin/gcc-4.5.2/debug/GameServerCT --gtest_shuffle --gtest_output=xml

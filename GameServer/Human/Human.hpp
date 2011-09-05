@@ -1,0 +1,228 @@
+// Copyright (C) 2010 and 2011 Marcin Arkadiusz Skrobiranda.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of the project nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS "AS IS" AND
+// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+// OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+// LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+// OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+// SUCH DAMAGE.
+
+#ifndef GAMESERVER_HUMAN_HUMAN_HPP
+#define GAMESERVER_HUMAN_HUMAN_HPP
+
+#include "Key.hpp"
+
+#include "../Resource/Key.hpp"
+#include <boost/assign.hpp>
+#include <map>
+#include <vector>
+
+namespace GameServer
+{
+namespace Human
+{
+
+/**
+ * @brief A human.
+ */
+class Human
+{
+public:
+    /**
+     * @brief Constructs the human.
+     *
+     * @param a_key The key of the human.
+     */
+    explicit Human(
+        Key const & a_key
+    );
+
+    /**
+     * @brief Gets the key of the human.
+     *
+     * @return The key of the human.
+     */
+    Key const & getKey() const;
+
+    /**
+     * @brief Gets the identifier of the human.
+     *
+     * @return The identifier of the human.
+     */
+    IDHuman const & getIDHuman() const;
+
+    /**
+     * @brief Gets the experience of the human.
+     *
+     * @return The experience of the human.
+     */
+    Experience const & getExperience() const;
+
+private:
+    /**
+     * @brief The key of the human.
+     */
+    Key m_key;
+};
+
+/**
+ * @brief The available humans.
+ */
+const Human HUMAN_SOLDIER_ARCHER_NOVICE         (KEY_SOLDIER_ARCHER_NOVICE       );
+const Human HUMAN_SOLDIER_ARCHER_ADVANCED       (KEY_SOLDIER_ARCHER_ADVANCED     );
+const Human HUMAN_SOLDIER_HORSEMAN_NOVICE       (KEY_SOLDIER_HORSEMAN_NOVICE     );
+const Human HUMAN_SOLDIER_HORSEMAN_ADVANCED     (KEY_SOLDIER_HORSEMAN_ADVANCED   );
+const Human HUMAN_SOLDIER_INFANTRYMAN_NOVICE    (KEY_SOLDIER_INFANTRYMAN_NOVICE  );
+const Human HUMAN_SOLDIER_INFANTRYMAN_ADVANCED  (KEY_SOLDIER_INFANTRYMAN_ADVANCED);
+
+const Human HUMAN_SORCERER_EARTH_NOVICE         (KEY_SORCERER_EARTH_NOVICE       );
+const Human HUMAN_SORCERER_EARTH_ADVANCED       (KEY_SORCERER_EARTH_ADVANCED     );
+const Human HUMAN_SORCERER_FIRE_NOVICE          (KEY_SORCERER_FIRE_NOVICE        );
+const Human HUMAN_SORCERER_FIRE_ADVANCED        (KEY_SORCERER_FIRE_ADVANCED      );
+const Human HUMAN_SORCERER_WATER_NOVICE         (KEY_SORCERER_WATER_NOVICE       );
+const Human HUMAN_SORCERER_WATER_ADVANCED       (KEY_SORCERER_WATER_ADVANCED     );
+const Human HUMAN_SORCERER_WIND_NOVICE          (KEY_SORCERER_WIND_NOVICE        );
+const Human HUMAN_SORCERER_WIND_ADVANCED        (KEY_SORCERER_WIND_ADVANCED      );
+
+const Human HUMAN_SPY_AGENT_NOVICE              (KEY_SPY_AGENT_NOVICE            );
+const Human HUMAN_SPY_AGENT_ADVANCED            (KEY_SPY_AGENT_ADVANCED          );
+const Human HUMAN_SPY_SPY_NOVICE                (KEY_SPY_SPY_NOVICE              );
+const Human HUMAN_SPY_SPY_ADVANCED              (KEY_SPY_SPY_ADVANCED            );
+const Human HUMAN_SPY_THUG_NOVICE               (KEY_SPY_THUG_NOVICE             );
+const Human HUMAN_SPY_THUG_ADVANCED             (KEY_SPY_THUG_ADVANCED           );
+
+const Human HUMAN_WORKER_BLACKSMITH_NOVICE      (KEY_WORKER_BLACKSMITH_NOVICE    );
+const Human HUMAN_WORKER_BLACKSMITH_ADVANCED    (KEY_WORKER_BLACKSMITH_ADVANCED  );
+const Human HUMAN_WORKER_BREEDER_NOVICE         (KEY_WORKER_BREEDER_NOVICE       );
+const Human HUMAN_WORKER_BREEDER_ADVANCED       (KEY_WORKER_BREEDER_ADVANCED     );
+const Human HUMAN_WORKER_DRUID_NOVICE           (KEY_WORKER_DRUID_NOVICE         );
+const Human HUMAN_WORKER_DRUID_ADVANCED         (KEY_WORKER_DRUID_ADVANCED       );
+const Human HUMAN_WORKER_FARMER_NOVICE          (KEY_WORKER_FARMER_NOVICE        );
+const Human HUMAN_WORKER_FARMER_ADVANCED        (KEY_WORKER_FARMER_ADVANCED      );
+const Human HUMAN_WORKER_FISHERMAN_NOVICE       (KEY_WORKER_FISHERMAN_NOVICE     );
+const Human HUMAN_WORKER_FISHERMAN_ADVANCED     (KEY_WORKER_FISHERMAN_ADVANCED   );
+const Human HUMAN_WORKER_JOBLESS_NOVICE         (KEY_WORKER_JOBLESS_NOVICE       );
+const Human HUMAN_WORKER_JOBLESS_ADVANCED       (KEY_WORKER_JOBLESS_ADVANCED     );
+const Human HUMAN_WORKER_LUMBERJACK_NOVICE      (KEY_WORKER_LUMBERJACK_NOVICE    );
+const Human HUMAN_WORKER_LUMBERJACK_ADVANCED    (KEY_WORKER_LUMBERJACK_ADVANCED  );
+const Human HUMAN_WORKER_MERCHANT_NOVICE        (KEY_WORKER_MERCHANT_NOVICE      );
+const Human HUMAN_WORKER_MERCHANT_ADVANCED      (KEY_WORKER_MERCHANT_ADVANCED    );
+const Human HUMAN_WORKER_MINER_NOVICE           (KEY_WORKER_MINER_NOVICE         );
+const Human HUMAN_WORKER_MINER_ADVANCED         (KEY_WORKER_MINER_ADVANCED       );
+const Human HUMAN_WORKER_OFFICIAL_NOVICE        (KEY_WORKER_OFFICIAL_NOVICE      );
+const Human HUMAN_WORKER_OFFICIAL_ADVANCED      (KEY_WORKER_OFFICIAL_ADVANCED    );
+const Human HUMAN_WORKER_PRIEST_NOVICE          (KEY_WORKER_PRIEST_NOVICE        );
+const Human HUMAN_WORKER_PRIEST_ADVANCED        (KEY_WORKER_PRIEST_ADVANCED      );
+const Human HUMAN_WORKER_STEELWORKER_NOVICE     (KEY_WORKER_STEELWORKER_NOVICE   );
+const Human HUMAN_WORKER_STEELWORKER_ADVANCED   (KEY_WORKER_STEELWORKER_ADVANCED );
+const Human HUMAN_WORKER_STONE_MASON_NOVICE     (KEY_WORKER_STONE_MASON_NOVICE   );
+const Human HUMAN_WORKER_STONE_MASON_ADVANCED   (KEY_WORKER_STONE_MASON_ADVANCED );
+const Human HUMAN_WORKER_TEACHER_NOVICE         (KEY_WORKER_TEACHER_NOVICE       );
+const Human HUMAN_WORKER_TEACHER_ADVANCED       (KEY_WORKER_TEACHER_ADVANCED     );
+
+/**
+ * @brief The array of available humans.
+ */
+const Human HUMAN_ARR [] = {
+    HUMAN_SOLDIER_ARCHER_NOVICE,
+    HUMAN_SOLDIER_ARCHER_ADVANCED,
+    HUMAN_SOLDIER_HORSEMAN_NOVICE,
+    HUMAN_SOLDIER_HORSEMAN_ADVANCED,
+    HUMAN_SOLDIER_INFANTRYMAN_NOVICE,
+    HUMAN_SOLDIER_INFANTRYMAN_ADVANCED,
+
+    HUMAN_SORCERER_EARTH_NOVICE,
+    HUMAN_SORCERER_EARTH_ADVANCED,
+    HUMAN_SORCERER_FIRE_NOVICE,
+    HUMAN_SORCERER_FIRE_ADVANCED,
+    HUMAN_SORCERER_WATER_NOVICE,
+    HUMAN_SORCERER_WATER_ADVANCED,
+    HUMAN_SORCERER_WIND_NOVICE,
+    HUMAN_SORCERER_WIND_ADVANCED,
+
+    HUMAN_SPY_AGENT_NOVICE,
+    HUMAN_SPY_AGENT_ADVANCED,
+    HUMAN_SPY_SPY_NOVICE,
+    HUMAN_SPY_SPY_ADVANCED,
+    HUMAN_SPY_THUG_NOVICE,
+    HUMAN_SPY_THUG_ADVANCED,
+
+    HUMAN_WORKER_BLACKSMITH_NOVICE,
+    HUMAN_WORKER_BLACKSMITH_ADVANCED,
+    HUMAN_WORKER_BREEDER_NOVICE,
+    HUMAN_WORKER_BREEDER_ADVANCED,
+    HUMAN_WORKER_DRUID_NOVICE,
+    HUMAN_WORKER_DRUID_ADVANCED,
+    HUMAN_WORKER_FARMER_NOVICE,
+    HUMAN_WORKER_FARMER_ADVANCED,
+    HUMAN_WORKER_FISHERMAN_NOVICE,
+    HUMAN_WORKER_FISHERMAN_ADVANCED,
+    HUMAN_WORKER_JOBLESS_NOVICE,
+    HUMAN_WORKER_JOBLESS_ADVANCED,
+    HUMAN_WORKER_LUMBERJACK_NOVICE,
+    HUMAN_WORKER_LUMBERJACK_ADVANCED,
+    HUMAN_WORKER_MERCHANT_NOVICE,
+    HUMAN_WORKER_MERCHANT_ADVANCED,
+    HUMAN_WORKER_MINER_NOVICE,
+    HUMAN_WORKER_MINER_ADVANCED,
+    HUMAN_WORKER_OFFICIAL_NOVICE,
+    HUMAN_WORKER_OFFICIAL_ADVANCED,
+    HUMAN_WORKER_PRIEST_NOVICE,
+    HUMAN_WORKER_PRIEST_ADVANCED,
+    HUMAN_WORKER_STEELWORKER_NOVICE,
+    HUMAN_WORKER_STEELWORKER_ADVANCED,
+    HUMAN_WORKER_STONE_MASON_NOVICE,
+    HUMAN_WORKER_STONE_MASON_ADVANCED,
+    HUMAN_WORKER_TEACHER_NOVICE,
+    HUMAN_WORKER_TEACHER_ADVANCED
+};
+
+/**
+ * @brief The vector of humans.
+ */
+typedef std::vector<Human> HumanVec;
+
+/**
+ * @brief The vector of available humans.
+ */
+const HumanVec HUMAN_VEC(
+    HUMAN_ARR,
+    HUMAN_ARR + sizeof(HUMAN_ARR) / sizeof(HUMAN_ARR[0])
+);
+
+/**
+ * @brief The map of human production.
+ */
+const std::map<IDHuman, Resource::Key> HUMAN_MAP_PRODUCTION = boost::assign::map_list_of
+    (ID_HUMAN_WORKER_BREEDER,     Resource::KEY_RESOURCE_FOOD)
+    (ID_HUMAN_WORKER_DRUID,       Resource::KEY_RESOURCE_MANA)
+    (ID_HUMAN_WORKER_FARMER,      Resource::KEY_RESOURCE_FOOD)
+    (ID_HUMAN_WORKER_FISHERMAN,   Resource::KEY_RESOURCE_FOOD)
+    (ID_HUMAN_WORKER_LUMBERJACK,  Resource::KEY_RESOURCE_WOOD)
+    (ID_HUMAN_WORKER_MERCHANT,    Resource::KEY_RESOURCE_GOLD)
+    (ID_HUMAN_WORKER_MINER,       Resource::KEY_RESOURCE_COAL)
+    (ID_HUMAN_WORKER_STEELWORKER, Resource::KEY_RESOURCE_IRON)
+    (ID_HUMAN_WORKER_STONE_MASON, Resource::KEY_RESOURCE_ROCK);
+
+} // namespace Human
+} // namespace GameServer
+
+#endif // GAMESERVER_HUMAN_HUMAN_HPP
