@@ -59,12 +59,7 @@ public:
         IClientShrPtr               a_client,
         IScenarioActionShrPtr       a_action,
         IScenarioVerificationShrPtr a_verification
-    )
-        : m_client(a_client),
-          m_action(a_action),
-          m_verification(a_verification)
-    {
-    }
+    );
 
     /**
      * @brief Executes the scenario.
