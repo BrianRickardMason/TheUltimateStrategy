@@ -28,9 +28,6 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIODELETESETTLEMENT_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIODELETESETTLEMENT_HPP
 
-#include "../../../Network/XmlRPCCommon/Xml/IXmlNode.hpp"
-#include "../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
-#include "../../Commands/Settlement/SettlementCommands.hpp"
 #include "../IScenario.hpp"
 #include "../IScenarioAction.hpp"
 #include "../IScenarioVerification.hpp"
@@ -72,12 +69,7 @@ public:
     /**
      * @brief Executes the scenario.
      */
-    virtual char const * execute()
-    {
-        Network::XmlRPCCommon::Reply::ReplyShrPtr reply = m_action->perform(m_client);
-
-        return m_verification->verify(reply).c_str();
-    }
+    virtual char const * execute();
 
 private:
     /**
@@ -114,12 +106,7 @@ public:
         unsigned int const   a_id_user,
         std::string  const & a_password,
         unsigned int const   a_id_settlement
-    )
-        : m_id_user(a_id_user),
-          m_password(a_password),
-          m_id_settlement(a_id_settlement)
-    {
-    }
+    );
 
     /**
      * @brief Performs the action.
@@ -130,10 +117,7 @@ public:
      */
     virtual Network::XmlRPCCommon::Reply::ReplyShrPtr perform(
         IClientShrPtr a_client
-    )
-    {
-        return Commands::Settlement::DeleteSettlement(a_client, m_id_user, m_password, m_id_settlement);
-    }
+    );
 
 private:
     /**
@@ -170,12 +154,7 @@ public:
         unsigned int const   a_id_user,
         std::string  const & a_password,
         unsigned int const   a_id_settlement
-    )
-        : m_id_user(a_id_user),
-          m_password(a_password),
-          m_id_settlement(a_id_settlement)
-    {
-    }
+    );
 
     /**
      * @brief Performs the action.
@@ -186,27 +165,7 @@ public:
      */
     virtual Network::XmlRPCCommon::Reply::ReplyShrPtr perform(
         IClientShrPtr a_client
-    )
-    {
-        Network::XmlRPCCommon::Request::RequestShrPtr request(new Network::XmlRPCCommon::Request::Request);
-
-        request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_DELETE_SETTLEMENT);
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
-
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr iduser = parameters->appendNode("iduser");
-        iduser->appendAttribute("type")->setValue("unsigned integer");
-        iduser->appendAttribute("value")->setValue(m_id_user);
-
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr password = parameters->appendNode("password");
-        password->appendAttribute("type")->setValue("unsigned integer");
-        password->appendAttribute("value")->setValue(m_password.c_str());
-
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idsettlement = parameters->appendNode("idsettlement");
-        idsettlement->appendAttribute("type")->setValue("integer");
-        idsettlement->appendAttribute("value")->setValue(m_id_settlement);
-
-        return a_client->sendRequest(request);
-    }
+    );
 
 private:
     /**
@@ -241,26 +200,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::DELETE_SETTLEMENT_SETTLEMENT_DOES_NOT_EXIST.c_str(),
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                       "Invalid node value.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -279,26 +219,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::DELETE_SETTLEMENT_SETTLEMENT_HAS_BEEN_DELETED.c_str(),
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                       "Invalid node value.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -317,26 +238,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::DELETE_SETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_DELETED.c_str(),
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                       "Invalid node value.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -355,26 +257,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::DELETE_SETTLEMENT_UNEXPECTED_ERROR.c_str(),
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                       "Invalid node value.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -393,19 +276,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_INVALID_REQUEST,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -424,19 +295,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_INVALID_RANGE,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -455,19 +314,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_UNAUTHENTICATED,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -486,19 +333,7 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_UNAUTHORIZED,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        return "";
-    }
+    );
 };
 
 /**
@@ -517,21 +352,8 @@ public:
      */
     virtual std::string verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_DELETE_SETTLEMENT,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_EPOCH_IS_NOT_ACTIVE,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        return "";
-    }
+    );
 };
-
 
 } // namespace Settlement
 } // namespace Scenarios
