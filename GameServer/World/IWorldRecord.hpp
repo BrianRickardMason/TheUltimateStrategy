@@ -30,6 +30,7 @@
 
 #include "IDWorld.hpp"
 #include <boost/shared_ptr.hpp>
+#include <map>
 #include <string>
 
 namespace GameServer
@@ -67,6 +68,16 @@ public:
  * @brief The shared pointer of the interface of the record of the world.
  */
 typedef boost::shared_ptr<IWorldRecord> IWorldRecordShrPtr;
+
+/**
+ * @brief The pair of the interface of the record of the world.
+ */
+typedef std::pair<IDWorld, IWorldRecordShrPtr> IWorldRecordPair;
+
+/**
+ * @brief The map of the interface of the record of the world.
+ */
+typedef std::map<IDWorld, IWorldRecordShrPtr> IWorldRecordMap;
 
 } // namespace World
 } // namespace GameServer

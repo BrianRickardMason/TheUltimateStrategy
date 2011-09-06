@@ -29,7 +29,6 @@
 #define GAMESERVER_WORLD_WORLDRECORD_HPP
 
 #include "IWorldRecord.hpp"
-#include <map>
 
 namespace GameServer
 {
