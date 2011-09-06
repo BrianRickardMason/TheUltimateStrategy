@@ -41,12 +41,12 @@ WorldRecord::WorldRecord(
 {
 }
 
-IDWorld const & WorldRecord::getIDWorld() const
+IDWorld WorldRecord::getIDWorld() const
 {
     return m_id_world;
 }
 
-std::string const & WorldRecord::getName() const
+std::string WorldRecord::getName() const
 {
     return m_name;
 }

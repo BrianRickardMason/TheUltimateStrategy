@@ -25,11 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_WORLD_WORLDRECORD_HPP
-#define GAMESERVER_WORLD_WORLDRECORD_HPP
+#ifndef GAMESERVER_WORLD_IWORLDRECORD_HPP
+#define GAMESERVER_WORLD_IWORLDRECORD_HPP
 
-#include "IWorldRecord.hpp"
-#include <map>
+#include "IDWorld.hpp"
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -37,22 +38,15 @@ namespace World
 {
 
 /**
- * @brief The record of the world.
+ * @brief The interface of the record of the world.
  */
-class WorldRecord
-    : public IWorldRecord
+class IWorldRecord
 {
 public:
     /**
-     * @brief Constructs the world record.
-     *
-     * @param a_id_world An identifier of the world.
-     * @param a_name     A name of the world.
+     * @brief Destructs the record of the world.
      */
-    WorldRecord(
-        IDWorld     const & a_id_world,
-        std::string const & a_name
-    );
+    virtual ~IWorldRecord(){}
 
     /**
      * @brief Gets the identifier of the world.
@@ -67,35 +61,14 @@ public:
      * @return The name of the world.
      */
     std::string getName() const;
-
-private:
-    /**
-     * @brief The identifier of the world.
-     */
-    IDWorld m_id_world;
-
-    /**
-     * @brief The name of the world.
-     */
-    std::string m_name;
 };
 
 /**
- * @brief A shared pointer of world record.
+ * @brief The shared pointer of the interface of the record of the world.
  */
-typedef boost::shared_ptr<WorldRecord> WorldRecordShrPtr;
-
-/**
- * @brief A pair of world record.
- */
-typedef std::pair<IDWorld, WorldRecordShrPtr> WorldRecordPair;
-
-/**
- * @brief A map of world records.
- */
-typedef std::map<IDWorld, WorldRecordShrPtr> WorldRecordMap;
+typedef boost::shared_ptr<IWorldRecord> IWorldRecordShrPtr;
 
 } // namespace World
 } // namespace GameServer
 
-#endif // GAMESERVER_WORLD_WORLDRECORD_HPP
+#endif // GAMESERVER_WORLD_IWORLDRECORD_HPP
