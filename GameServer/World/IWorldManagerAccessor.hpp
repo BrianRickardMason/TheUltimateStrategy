@@ -30,9 +30,9 @@
 
 #include "../Land/IDLand.hpp"
 #include "../Persistency/ITransaction.hpp"
-#include "WorldRecord.hpp"
-#include <boost/noncopyable.hpp>
+#include "IWorldRecord.hpp"
 #include <boost/make_shared.hpp>
+#include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
 #include <string>
@@ -73,7 +73,7 @@ public:
      *
      * @return The world record, null if not found.
      */
-    virtual WorldRecordShrPtr getRecord(
+    virtual IWorldRecordShrPtr getRecord(
         Persistency::ITransactionShrPtr         a_transaction,
         IDWorld                         const & a_id_world
     ) const = 0;
@@ -85,7 +85,7 @@ public:
      *
      * @return A map of world records, an empty map if not found.
      */
-    virtual WorldRecordMap getRecords(
+    virtual IWorldRecordMap getRecords(
         Persistency::ITransactionShrPtr a_transaction
     ) const = 0;
 

@@ -33,10 +33,10 @@ namespace World
 {
 
 World::World(
-    WorldRecord const & a_record
+    IWorldRecordShrPtr a_record
 )
-    : m_id_world(a_record.getIDWorld()),
-      m_name(a_record.getName())
+    : m_id_world(a_record->getIDWorld()),
+      m_name(a_record->getName())
 {
 }
 

@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Epoch/Operators/CreateEpoch/CreateEpochOperator.hpp"
+#include "../../../../GameServer/World/WorldRecord.hpp"
 #include "../../../Persistency/TransactionDummy.hpp"
 #include "../../../World/WorldManagerMock.hpp"
 #include "../../EpochManagerMock.hpp"
@@ -90,7 +91,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasBeenCreated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldRecord world_record(m_id_world_1, "World1");
+    IWorldRecordShrPtr world_record(new WorldRecord(m_id_world_1, "World1"));
 
     WorldShrPtr world = make_shared<World>(world_record);
 
@@ -111,7 +112,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasNotBeenCreated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldRecord world_record(m_id_world_1, "World1");
+    IWorldRecordShrPtr world_record(new WorldRecord(m_id_world_1, "World1"));
 
     WorldShrPtr world = make_shared<World>(world_record);
 

@@ -43,10 +43,10 @@ class WorldRecord
 {
 public:
     /**
-     * @brief Constructs the world record.
+     * @brief Constructs the record of the world.
      *
-     * @param a_id_world An identifier of the world.
-     * @param a_name     A name of the world.
+     * @param a_id_world The identifier of the world.
+     * @param a_name     The name of the world.
      */
     WorldRecord(
         IDWorld     const & a_id_world,
@@ -58,41 +58,26 @@ public:
      *
      * @return The identifier of the world.
      */
-    IDWorld getIDWorld() const;
+    virtual IDWorld getIDWorld() const;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    std::string getName() const;
+    virtual std::string getName() const;
 
 private:
     /**
      * @brief The identifier of the world.
      */
-    IDWorld m_id_world;
+    IDWorld const m_id_world;
 
     /**
      * @brief The name of the world.
      */
-    std::string m_name;
+    std::string const m_name;
 };
-
-/**
- * @brief A shared pointer of world record.
- */
-typedef boost::shared_ptr<WorldRecord> WorldRecordShrPtr;
-
-/**
- * @brief A pair of world record.
- */
-typedef std::pair<IDWorld, WorldRecordShrPtr> WorldRecordPair;
-
-/**
- * @brief A map of world records.
- */
-typedef std::map<IDWorld, WorldRecordShrPtr> WorldRecordMap;
 
 } // namespace World
 } // namespace GameServer

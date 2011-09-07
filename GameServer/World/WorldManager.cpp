@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "WorldManager.hpp"
+#include "WorldRecord.hpp"
 
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
@@ -66,9 +67,9 @@ WorldShrPtr WorldManager::getWorld(
     IDWorld            const & a_id_world
 ) const
 {
-    WorldRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_world);
+    IWorldRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_world);
 
-    return record ? make_shared<World>(*record) : WorldShrPtr();
+    return record ? make_shared<World>(record) : WorldShrPtr();
 }
 
 WorldShrPtr WorldManager::getWorldByIDLand(
@@ -85,15 +86,15 @@ WorldMap WorldManager::getWorlds(
     ITransactionShrPtr a_transaction
 ) const
 {
-    WorldRecordMap records = m_accessor->getRecords(a_transaction);
+    IWorldRecordMap records = m_accessor->getRecords(a_transaction);
 
     WorldMap worlds;
 
-    for (WorldRecordMap::iterator it = records.begin(); it != records.end(); ++it)
+    for (IWorldRecordMap::iterator it = records.begin(); it != records.end(); ++it)
     {
         if (it->second)
         {
-            WorldShrPtr world = make_shared<World>(*it->second);
+            WorldShrPtr world = make_shared<World>(it->second);
             WorldPair pair(it->second->getIDWorld(), world);
             worlds.insert(pair);
         }

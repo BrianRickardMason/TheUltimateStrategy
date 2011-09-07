@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_WORLD_HPP
 #define GAMESERVER_WORLD_WORLD_HPP
 
-#include "WorldRecord.hpp"
+#include "IWorldRecord.hpp"
 
 namespace GameServer
 {
@@ -47,7 +47,7 @@ public:
      * @param a_record A corresponding record.
      */
     explicit World(
-        WorldRecord const & a_record
+        IWorldRecordShrPtr a_record
     );
 
     /**

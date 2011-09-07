@@ -61,7 +61,7 @@ public:
      *
      * @return The world record, null if not found.
      */
-    virtual WorldRecordShrPtr getRecord(
+    virtual IWorldRecordShrPtr getRecord(
         Persistency::ITransactionShrPtr         a_transaction,
         IDWorld                         const & a_id_world
     ) const;
@@ -73,7 +73,7 @@ public:
      *
      * @return A map of world records, an empty map if not found.
      */
-    virtual WorldRecordMap getRecords(
+    virtual IWorldRecordMap getRecords(
         Persistency::ITransactionShrPtr a_transaction
     ) const;
 

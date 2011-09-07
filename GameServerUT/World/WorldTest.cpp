@@ -26,47 +26,58 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/World/World.hpp"
+#include "../../GameServer/World/WorldRecord.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::World;
 
 /**
- * @brief A test class.
+ * @brief The test class of the world.
  */
 class WorldTest
     : public testing::Test
 {
 protected:
     /**
-     * @brief Constructs a test class.
+     * @brief Constructs the test class of the world.
      */
     WorldTest()
-        : m_world(WorldRecord(IDWorld(1), "World1"))
+        : m_world_record(new WorldRecord(IDWorld(1), "World1")),
+          m_world(m_world_record)
     {
     }
 
     /**
-     * @brief A world to be tested.
+     * @brief Test constants: the record of the world.
+     */
+    IWorldRecordShrPtr m_world_record;
+
+    /**
+     * @brief Test constants: the world.
      */
     World m_world;
 };
 
-TEST_F(WorldTest, World)
+TEST_F(WorldTest, ConstructorSetsProperIDWorldValue)
 {
-    WorldRecord record(IDWorld(1), "World1");
-
-    World world(record);
+    World world(m_world_record);
 
     ASSERT_EQ(1, world.getIDWorld().getValue());
+}
+
+TEST_F(WorldTest, ConstuctorSetsProperNameValue)
+{
+    World world(m_world_record);
+
     ASSERT_STREQ("World1", world.getName().c_str());
 }
 
-TEST_F(WorldTest, getIDWorld)
+TEST_F(WorldTest, GetIDWorldReturnsProperValue)
 {
     ASSERT_EQ(1, m_world.getIDWorld().getValue());
 }
 
-TEST_F(WorldTest, getName)
+TEST_F(WorldTest, GetNameReturnsProperValue)
 {
     ASSERT_STREQ("World1", m_world.getName().c_str());
 }

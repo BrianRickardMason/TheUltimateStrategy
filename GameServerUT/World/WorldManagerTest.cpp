@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/World/WorldManager.hpp"
+#include "../../GameServer/World/WorldRecord.hpp"
 #include "../Persistency/TransactionDummy.hpp"
 #include "WorldManagerAccessorMock.hpp"
 
@@ -131,7 +132,7 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, id_world))
-    .WillOnce(Return(WorldRecordShrPtr()));
+    .WillOnce(Return(IWorldRecordShrPtr()));
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
@@ -151,7 +152,7 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, id_world))
-    .WillOnce(Return(make_shared<WorldRecord>(id_world, "World1")));
+    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(id_world, "World1"))));
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
@@ -174,7 +175,7 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesNotExist)
     .WillOnce(Return(m_id_world_1));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(WorldRecordShrPtr()));
+    .WillOnce(Return(IWorldRecordShrPtr()));
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
@@ -195,7 +196,7 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesExist)
     .WillOnce(Return(m_id_world_1));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<WorldRecord>(m_id_world_1, "World1")));
+    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_id_world_1, "World1"))));
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
@@ -214,7 +215,7 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoNotExist)
 
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    WorldRecordMap map;
+    IWorldRecordMap map;
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
@@ -236,8 +237,8 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_OneWorld)
 
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    WorldRecordMap map;
-    map.insert(make_pair(id_world, make_shared<WorldRecord>(id_world, "World1")));
+    IWorldRecordMap map;
+    map.insert(make_pair(id_world, IWorldRecordShrPtr(new WorldRecord(id_world, "World1"))));
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
@@ -264,9 +265,9 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_ManyWorlds)
 
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    WorldRecordMap map;
-    map.insert(make_pair(id_world_1, make_shared<WorldRecord>(id_world_1, "World1")));
-    map.insert(make_pair(id_world_2, make_shared<WorldRecord>(id_world_2, "World2")));
+    IWorldRecordMap map;
+    map.insert(make_pair(id_world_1, IWorldRecordShrPtr(new WorldRecord(id_world_1, "World1"))));
+    map.insert(make_pair(id_world_2, IWorldRecordShrPtr(new WorldRecord(id_world_2, "World2"))));
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));

@@ -27,17 +27,19 @@
 
 #include "WorldRecord.hpp"
 
+using namespace std;
+
 namespace GameServer
 {
 namespace World
 {
 
 WorldRecord::WorldRecord(
-    IDWorld     const & a_id_world,
-    std::string const & a_name
+    IDWorld const & a_id_world,
+    string  const & a_name
 )
-    : m_id_world( a_id_world ),
-      m_name( a_name )
+    : m_id_world(a_id_world),
+      m_name(a_name)
 {
 }
 
@@ -46,7 +48,7 @@ IDWorld WorldRecord::getIDWorld() const
     return m_id_world;
 }
 
-std::string WorldRecord::getName() const
+string WorldRecord::getName() const
 {
     return m_name;
 }

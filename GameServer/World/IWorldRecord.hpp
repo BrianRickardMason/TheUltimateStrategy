@@ -54,14 +54,14 @@ public:
      *
      * @return The identifier of the world.
      */
-    IDWorld getIDWorld() const;
+    virtual IDWorld getIDWorld() const = 0;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    std::string getName() const;
+    virtual std::string getName() const = 0;
 };
 
 /**

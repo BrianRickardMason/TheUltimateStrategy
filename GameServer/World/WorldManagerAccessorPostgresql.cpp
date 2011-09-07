@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "WorldManagerAccessorPostgresql.hpp"
-
 #include "../Persistency/TransactionPostgresql.hpp"
+#include "WorldManagerAccessorPostgresql.hpp"
+#include "WorldRecord.hpp"
 
 using namespace GameServer::Persistency;
 using namespace boost;
@@ -52,7 +52,7 @@ void WorldManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-WorldRecordShrPtr WorldManagerAccessorPostgresql::getRecord(
+IWorldRecordShrPtr WorldManagerAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDWorld            const & a_id_world
 ) const
@@ -75,15 +75,15 @@ WorldRecordShrPtr WorldManagerAccessorPostgresql::getRecord(
         id_world = result[0]["id_world"].as(unsigned_integer);
         result[0]["name"].to(name);
 
-        return make_shared<WorldRecord>(id_world, name);
+        return IWorldRecordShrPtr(new WorldRecord(id_world, name));
     }
     else
     {
-        return WorldRecordShrPtr();
+        return IWorldRecordShrPtr();
     }
 }
 
-WorldRecordMap WorldManagerAccessorPostgresql::getRecords(
+IWorldRecordMap WorldManagerAccessorPostgresql::getRecords(
     ITransactionShrPtr a_transaction
 ) const
 {
@@ -94,7 +94,7 @@ WorldRecordMap WorldManagerAccessorPostgresql::getRecords(
 
     pqxx::result result = backbone_transaction.exec(query);
 
-    WorldRecordMap records;
+    IWorldRecordMap records;
 
     // Fake types for libpqxx.
     unsigned int unsigned_integer;
@@ -107,8 +107,8 @@ WorldRecordMap WorldManagerAccessorPostgresql::getRecords(
         id_world = it["id_world"].as(unsigned_integer);
         it["name"].to(name);
 
-        WorldRecordShrPtr record = make_shared<WorldRecord>(id_world, name);
-        WorldRecordPair pair(id_world, record);
+        IWorldRecordShrPtr record = IWorldRecordShrPtr(new WorldRecord(id_world, name));
+        IWorldRecordPair pair(id_world, record);
         records.insert(pair);
     }
 

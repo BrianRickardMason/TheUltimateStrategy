@@ -67,7 +67,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getRecord,
-        WorldRecordShrPtr(
+        IWorldRecordShrPtr(
             Persistency::ITransactionShrPtr         a_transaction,
             IDWorld                         const & a_id_world
         )
@@ -82,7 +82,7 @@ public:
      */
     MOCK_CONST_METHOD1(
         getRecords,
-        WorldRecordMap(
+        IWorldRecordMap(
             Persistency::ITransactionShrPtr a_transaction
         )
     );
