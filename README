@@ -28,9 +28,10 @@
 The Ultimate Strategy is a MMOBS game based on C++. It is open to all
 programming languages. It is not derived from any other project.
 
-The MMOBS acronym stands for Massive Multiple Online Bot Strategy. Its main goal
-is to create the league for programmers willing to challenge  each other
-in the creation of bot players (i.e. programs that will pretend to be players).
+The MMOBS acronym stands for Massive Multiple Online Bot Strategy.
+
+The main goal of the project is to create the league for programmers willing
+to create (develop) bot players (i.e. programs that will pretend to be players).
 
 For more information please visit our site linked below.
 
