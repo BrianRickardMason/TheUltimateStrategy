@@ -56,9 +56,9 @@ public:
     /**
      * @brief Executes the action.
      *
-     * @param a_request A request.
+     * @param a_request The request.
      *
-     * @return A reply.
+     * @return The reply.
      */
     virtual XmlRPCCommon::Reply::ReplyShrPtr execute(
         XmlRPCCommon::Request::RequestShrPtr a_request
@@ -75,7 +75,7 @@ private:
      *
      * @return True if the server is listening, false otherwise.
      */
-    virtual bool serverIsListening() const;
+    bool serverIsListening() const;
 
     /**
      * @brief Gets parameters from the request.
@@ -166,49 +166,49 @@ private:
      *
      * @return The reply.
      */
-    virtual XmlRPCCommon::Reply::ReplyShrPtr produceReplyServerIsNotListening() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyServerIsNotListening() const;
 
     /**
      * @brief Produces the "invalid request" reply.
      *
      * @return The reply.
      */
-    virtual XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRequest() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRequest() const;
 
     /**
      * @brief Produces the "invalid range" reply.
      *
      * @return The reply.
      */
-    virtual XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRange() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRange() const;
 
     /**
      * @brief Produces the "unauthenticated" reply.
      *
      * @return The reply.
      */
-    virtual XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthenticated() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthenticated() const;
 
     /**
      * @brief Produces the "unauthorized" reply.
      *
      * @return The reply.
      */
-    virtual XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthorized() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthorized() const;
 
     /**
      * @brief Produces the "epoch is not active" reply.
      *
      * @return The reply.
      */
-    virtual XmlRPCCommon::Reply::ReplyShrPtr produceReplyEpochIsNotActive() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyEpochIsNotActive() const;
 
     /**
      * @brief Produces the "action unavailable" reply.
      *
      * @return The reply.
      */
-    virtual XmlRPCCommon::Reply::ReplyShrPtr produceReplyActionUnavailable() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyActionUnavailable() const;
 
 protected:
     /**
