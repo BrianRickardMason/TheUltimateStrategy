@@ -35,11 +35,11 @@ namespace User
 {
 
 User::User(
-    UserRecord const & a_record
+    IUserRecordShrPtr const a_record
 )
-    : m_id_user(a_record.getIDUser()),
-      m_login(a_record.getLogin()),
-      m_password(a_record.getPassword())
+    : m_id_user(a_record->getIDUser()),
+      m_login(a_record->getLogin()),
+      m_password(a_record->getPassword())
 {
 }
 

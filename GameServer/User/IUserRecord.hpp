@@ -25,40 +25,57 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "UserRecord.hpp"
+#ifndef GAMESERVER_USER_IUSERRECORD_HPP
+#define GAMESERVER_USER_IUSERRECORD_HPP
 
-using namespace std;
+#include "IDUser.hpp"
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
 namespace User
 {
 
-UserRecord::UserRecord(
-    IDUser const & a_id_user,
-    string const & a_login,
-    string const & a_password
-)
-    : m_id_user(a_id_user),
-      m_login(a_login),
-      m_password(a_password)
+/**
+ * @brief The interface of the record of the user.
+ */
+class IUserRecord
 {
-}
+public:
+    /**
+     * @brief Destructs the record of the user.
+     */
+    virtual ~IUserRecord(){}
 
-IDUser UserRecord::getIDUser() const
-{
-    return m_id_user;
-}
+    /**
+     * @brief Gets the identifier of the user.
+     *
+     * @return The identifier of the user.
+     */
+    virtual IDUser getIDUser() const = 0;
 
-string UserRecord::getLogin() const
-{
-    return m_login;
-}
+    /**
+     * @brief Gets the login of the user.
+     *
+     * @return The login of the user.
+     */
+    virtual std::string getLogin() const = 0;
 
-string UserRecord::getPassword() const
-{
-    return m_password;
-}
+    /**
+     * @brief Gets the password of the user.
+     *
+     * @return The password of the user.
+     */
+    virtual std::string getPassword() const = 0;
+};
+
+/**
+ * @brief The shared pointer of the interface of the record of the user.
+ */
+typedef boost::shared_ptr<IUserRecord> IUserRecordShrPtr;
 
 } // namespace User
 } // namespace GameServer
+
+#endif // GAMESERVER_USER_IUSERRECORD_HPP

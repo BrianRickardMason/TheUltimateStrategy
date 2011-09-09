@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "UserManager.hpp"
-
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Persistency;
@@ -89,10 +88,10 @@ UserShrPtr UserManager::getUserByLogin(
 }
 
 UserShrPtr UserManager::prepareResultGetUser(
-    UserRecordShrPtr a_record
+    IUserRecordShrPtr a_record
 )
 {
-    return a_record ? make_shared<User>(*a_record) : UserShrPtr();
+    return a_record ? make_shared<User>(a_record) : UserShrPtr();
 }
 
 } // namespace User

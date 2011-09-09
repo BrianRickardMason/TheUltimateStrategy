@@ -83,7 +83,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getRecordByLogin,
-        UserRecordShrPtr(
+        IUserRecordShrPtr(
             Persistency::ITransactionShrPtr         a_transaction,
             std::string                     const & a_login
         )

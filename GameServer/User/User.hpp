@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_USER_USER_HPP
 #define GAMESERVER_USER_USER_HPP
 
-#include "UserRecord.hpp"
+#include "IUserRecord.hpp"
 
 namespace GameServer
 {
@@ -44,10 +44,10 @@ public:
     /**
      * @brief Constructs the user.
      *
-     * @param a_record A corresponding record.
+     * @param a_record The corresponding record.
      */
     explicit User(
-        UserRecord const & a_record
+        IUserRecordShrPtr const a_record
     );
 
     /**

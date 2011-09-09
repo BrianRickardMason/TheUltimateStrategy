@@ -26,52 +26,58 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/User/User.hpp"
+#include "../../GameServer/User/UserRecord.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::User;
 
 /**
- * @brief A test class.
+ * @brief The test class of the user.
  */
 class UserTest
     : public testing::Test
 {
 protected:
     /**
-     * @brief Constructs a test class.
+     * @brief Constructs the test class of the user.
      */
     UserTest()
-        : m_user(UserRecord(IDUser(1), "Login", "Password"))
+        : m_user(IUserRecordShrPtr(new UserRecord(IDUser(1), "Login", "Password")))
     {
     }
 
     /**
-     * @brief A user to be tested.
+     * @brief Test constants: the user.
      */
     User m_user;
 };
 
-TEST_F(UserTest, User)
-{
-    UserRecord record(IDUser(1), "Login", "Password");
-    User user(record);
-
-    ASSERT_EQ(1, user.getIDUser().getValue());
-    ASSERT_STREQ("Login", user.getLogin().c_str());
-    ASSERT_STREQ("Password", user.getPassword().c_str());
-}
-
-TEST_F(UserTest, getIDUser)
+TEST_F(UserTest, ConstructorSetsProperIDUserValue)
 {
     ASSERT_EQ(1, m_user.getIDUser().getValue());
 }
 
-TEST_F(UserTest, getLogin)
+TEST_F(UserTest, ConstructorSetsProperLoginValue)
 {
     ASSERT_STREQ("Login", m_user.getLogin().c_str());
 }
 
-TEST_F(UserTest, getPassword)
+TEST_F(UserTest, ConstructorSetsProperPasswordValue)
+{
+    ASSERT_STREQ("Password", m_user.getPassword().c_str());
+}
+
+TEST_F(UserTest, GetIDUserReturnsProperValue)
+{
+    ASSERT_EQ(1, m_user.getIDUser().getValue());
+}
+
+TEST_F(UserTest, GetLoginReturnsProperValue)
+{
+    ASSERT_STREQ("Login", m_user.getLogin().c_str());
+}
+
+TEST_F(UserTest, GetPasswordReturnsProperValue)
 {
     ASSERT_STREQ("Password", m_user.getPassword().c_str());
 }

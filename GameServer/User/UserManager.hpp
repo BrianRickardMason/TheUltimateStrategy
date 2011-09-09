@@ -103,7 +103,7 @@ private:
      * @return The user.
      */
     UserShrPtr prepareResultGetUser(
-        UserRecordShrPtr a_record
+        IUserRecordShrPtr a_record
     );
 
     /**

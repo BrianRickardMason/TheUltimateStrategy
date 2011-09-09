@@ -75,7 +75,7 @@ public:
      *
      * @return The user record, null if not found.
      */
-    virtual UserRecordShrPtr getRecordByLogin(
+    virtual IUserRecordShrPtr getRecordByLogin(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const & a_login
     ) const;
@@ -88,7 +88,7 @@ private:
      *
      * @return A user record.
      */
-    UserRecordShrPtr prepareResultGetRecord(
+    IUserRecordShrPtr prepareResultGetRecord(
         pqxx::result const & a_result
     ) const;
 };

@@ -28,9 +28,7 @@
 #ifndef GAMESERVER_USER_USERRECORD_HPP
 #define GAMESERVER_USER_USERRECORD_HPP
 
-#include "IDUser.hpp"
-#include <boost/shared_ptr.hpp>
-#include <string>
+#include "IUserRecord.hpp"
 
 namespace GameServer
 {
@@ -38,13 +36,14 @@ namespace User
 {
 
 /**
- * @brief A user record.
+ * @brief The record of the user.
  */
 class UserRecord
+    : public IUserRecord
 {
 public:
     /**
-     * @brief Constructs the user record.
+     * @brief Constructs the record of the user.
      *
      * @param a_id_user  The identifier of a user.
      * @param a_login    The login of a user.
@@ -57,47 +56,42 @@ public:
     );
 
     /**
-     * @brief Gets The identifier of a user.
+     * @brief Gets the identifier of the user.
      *
      * @return The identifier of the user.
      */
-    IDUser const & getIDUser() const;
+    virtual IDUser getIDUser() const;
 
     /**
-     * @brief Gets the login of a user.
+     * @brief Gets the login of the user.
      *
      * @return The login of the user.
      */
-    std::string const & getLogin() const;
+    virtual std::string getLogin() const;
 
     /**
-     * @brief Gets the password of a user.
+     * @brief Gets the password of the user.
      *
      * @return The password of the user.
      */
-    std::string const & getPassword() const;
+    virtual std::string getPassword() const;
 
 private:
     /**
-     * @brief The identifier of a user.
+     * @brief The identifier of the user.
      */
-    IDUser m_id_user;
+    IDUser const m_id_user;
 
     /**
-     * @brief The login of a user.
+     * @brief The login of the user.
      */
-    std::string m_login;
+    std::string const m_login;
 
     /**
-     * @brief The password of a user.
+     * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 };
-
-/**
- * @brief A shared pointer of a user record.
- */
-typedef boost::shared_ptr<UserRecord> UserRecordShrPtr;
 
 } // namespace User
 } // namespace GameServer

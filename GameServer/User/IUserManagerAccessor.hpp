@@ -29,7 +29,7 @@
 #define GAMESERVER_USER_IUSERMANAGERACCESSOR_HPP
 
 #include "../Persistency/ITransaction.hpp"
-#include "UserRecord.hpp"
+#include "IUserRecord.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
@@ -83,7 +83,7 @@ public:
      *
      * @return The user record, null if not found.
      */
-    virtual UserRecordShrPtr getRecordByLogin(
+    virtual IUserRecordShrPtr getRecordByLogin(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const & a_login
     ) const = 0;

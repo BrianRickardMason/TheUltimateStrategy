@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/User/UserManager.hpp"
+#include "../../GameServer/User/UserRecord.hpp"
 #include "../Persistency/TransactionDummy.hpp"
 #include "UserManagerAccessorMock.hpp"
 #include <boost/make_shared.hpp>
@@ -139,7 +140,7 @@ TEST_F(UserManagerTest, getUserByIDUser_UserDoesNotExist)
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
-    .WillOnce(Return(UserRecordShrPtr()));
+    .WillOnce(Return(IUserRecordShrPtr()));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
@@ -157,7 +158,7 @@ TEST_F(UserManagerTest, getUserByLogin_UserDoesExist)
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
-    .WillOnce(Return(make_shared<UserRecord>(m_id_user_1, "Login", "Password")));
+    .WillOnce(Return(IUserRecordShrPtr(new UserRecord(m_id_user_1, "Login", "Password"))));
 
     IUserManagerAccessorAutPtr accessor(mock);
 

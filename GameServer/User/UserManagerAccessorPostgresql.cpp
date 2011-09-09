@@ -25,10 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "UserManagerAccessorPostgresql.hpp"
-
 #include "../Persistency/TransactionPostgresql.hpp"
-#include <boost/make_shared.hpp>
+#include "UserManagerAccessorPostgresql.hpp"
+#include "UserRecord.hpp"
 
 using namespace GameServer::Persistency;
 using namespace boost;
@@ -69,7 +68,7 @@ void UserManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-UserRecordShrPtr UserManagerAccessorPostgresql::getRecordByLogin(
+IUserRecordShrPtr UserManagerAccessorPostgresql::getRecordByLogin(
     ITransactionShrPtr         a_transaction,
     string             const & a_login
 ) const
@@ -83,7 +82,7 @@ UserRecordShrPtr UserManagerAccessorPostgresql::getRecordByLogin(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-UserRecordShrPtr UserManagerAccessorPostgresql::prepareResultGetRecord(
+IUserRecordShrPtr UserManagerAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
 {
@@ -100,11 +99,11 @@ UserRecordShrPtr UserManagerAccessorPostgresql::prepareResultGetRecord(
         a_result[0]["login"].to(login);
         a_result[0]["password"].to(password);
 
-        return make_shared<UserRecord>(id_user, login, password);
+        return IUserRecordShrPtr(new UserRecord(id_user, login, password));
     }
     else
     {
-        return UserRecordShrPtr();
+        return IUserRecordShrPtr();
     }
 }
 
