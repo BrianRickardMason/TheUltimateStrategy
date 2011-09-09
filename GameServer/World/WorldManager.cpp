@@ -27,7 +27,6 @@
 
 #include "World.hpp"
 #include "WorldManager.hpp"
-#include "WorldRecord.hpp"
 
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
