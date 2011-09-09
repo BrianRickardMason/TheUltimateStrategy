@@ -43,7 +43,7 @@ namespace Executors
 {
 
 /**
- * @brief An interface of the executor.
+ * @brief The interface of the executor.
  */
 class IExecutor
     : boost::noncopyable
@@ -57,9 +57,9 @@ public:
     /**
      * @brief Executes the action.
      *
-     * @param a_request A request.
+     * @param a_request The request.
      *
-     * @return A reply.
+     * @return The reply.
      */
     virtual XmlRPCCommon::Reply::ReplyShrPtr execute(
         XmlRPCCommon::Request::RequestShrPtr a_request
@@ -67,7 +67,7 @@ public:
 };
 
 /**
- * @brief A shared pointer of the interface of the executor.
+ * @brief The shared pointer of the interface of the executor.
  */
 typedef boost::shared_ptr<IExecutor> IExecutorShrPtr;
 
