@@ -49,7 +49,7 @@ public:
      * @param a_record The corresponding record.
      */
     explicit World(
-        IWorldRecordShrPtr a_record
+        IWorldRecordShrPtr const a_record
     );
 
     /**

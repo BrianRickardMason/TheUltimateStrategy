@@ -35,7 +35,7 @@ namespace World
 {
 
 World::World(
-    IWorldRecordShrPtr a_record
+    IWorldRecordShrPtr const a_record
 )
     : m_id_world(a_record->getIDWorld()),
       m_name(a_record->getName())
