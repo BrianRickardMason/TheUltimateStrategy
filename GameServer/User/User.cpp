@@ -43,17 +43,17 @@ User::User(
 {
 }
 
-IDUser const & User::getIDUser() const
+IDUser User::getIDUser() const
 {
     return m_id_user;
 }
 
-string const & User::getLogin() const
+string User::getLogin() const
 {
     return m_login;
 }
 
-string const & User::getPassword() const
+string User::getPassword() const
 {
     return m_password;
 }

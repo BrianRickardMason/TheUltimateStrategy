@@ -140,7 +140,7 @@ TEST_F(UserManagerTest, getUserByLogin_UserDoesNotExist)
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    UserShrPtr user = m_manager->getUserByLogin(transaction, "Login");
+    IUserShrPtr user = m_manager->getUserByLogin(transaction, "Login");
     transaction->commit();
 
     ASSERT_TRUE(user == NULL);
@@ -156,7 +156,7 @@ TEST_F(UserManagerTest, getUserByLogin_UserDoesExist)
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    UserShrPtr user = m_manager->getUserByLogin(transaction, "Login");
+    IUserShrPtr user = m_manager->getUserByLogin(transaction, "Login");
     transaction->commit();
 
     ASSERT_FALSE(user == NULL);

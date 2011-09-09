@@ -146,7 +146,7 @@ TEST_F(UserManagerTest, getUserByIDUser_UserDoesNotExist)
 
     UserManager manager(accessor);
 
-    UserShrPtr user = manager.getUserByLogin(transaction, "Login");
+    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
 
     ASSERT_TRUE(user == NULL);
 }
@@ -164,7 +164,7 @@ TEST_F(UserManagerTest, getUserByLogin_UserDoesExist)
 
     UserManager manager(accessor);
 
-    UserShrPtr user = manager.getUserByLogin(transaction, "Login");
+    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
 
     ASSERT_TRUE(user != NULL);
 

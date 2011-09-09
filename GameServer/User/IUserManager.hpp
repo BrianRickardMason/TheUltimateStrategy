@@ -29,7 +29,7 @@
 #define GAMESERVER_USER_IUSERMANAGER_HPP
 
 #include "../Persistency/ITransaction.hpp"
-#include "User.hpp"
+#include "IUser.hpp"
 #include <boost/noncopyable.hpp>
 
 namespace GameServer
@@ -85,7 +85,7 @@ public:
      *
      * @return The user, null if not found.
      */
-    virtual UserShrPtr getUserByLogin(
+    virtual IUserShrPtr getUserByLogin(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const & a_login
     ) = 0;

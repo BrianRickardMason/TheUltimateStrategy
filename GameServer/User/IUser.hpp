@@ -25,74 +25,57 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "User.hpp"
-#include "UserManager.hpp"
+#ifndef GAMESERVER_USER_IUSER_HPP
+#define GAMESERVER_USER_IUSER_HPP
 
-using namespace GameServer::Persistency;
-using namespace boost;
-using namespace std;
+#include "IDUser.hpp"
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
 namespace User
 {
 
-UserManager::UserManager(
-    IUserManagerAccessorAutPtr a_accessor
-)
-    : m_accessor(a_accessor)
+/**
+ * @brief The interface of the user.
+ */
+class IUser
 {
-}
+public:
+    /**
+     * @brief Destructs the interface of the user.
+     */
+    virtual ~IUser(){}
 
-bool UserManager::createUser(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login,
-    string             const & a_password
-)
-{
-    try
-    {
-        m_accessor->insertRecord(a_transaction, a_login, a_password);
+    /**
+     * @brief Gets the identifier of the user.
+     *
+     * @return The identifier of the user.
+     */
+    virtual IDUser getIDUser() const = 0;
 
-        return true;
-    }
-    catch (std::exception const & e)
-    {
-        return false;
-    }
-}
+    /**
+     * @brief Gets the login of the user.
+     *
+     * @return The login of the user.
+     */
+    virtual std::string getLogin() const = 0;
 
-bool UserManager::deleteUser(
-    ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user
-)
-{
-    try
-    {
-        m_accessor->deleteRecord(a_transaction, a_id_user);
+    /**
+     * @brief Gets the password of the user.
+     *
+     * @return The password of the user.
+     */
+    virtual std::string getPassword() const = 0;
+};
 
-        return true;
-    }
-    catch (std::exception const & e)
-    {
-        return false;
-    }
-}
-
-IUserShrPtr UserManager::getUserByLogin(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login
-)
-{
-    return prepareResultGetUser(m_accessor->getRecordByLogin(a_transaction, a_login));
-}
-
-IUserShrPtr UserManager::prepareResultGetUser(
-    IUserRecordShrPtr a_record
-)
-{
-    return a_record ? IUserShrPtr(new User(a_record)) : IUserShrPtr();
-}
+/**
+ * @brief The shared pointer of the interface of the user.
+ */
+typedef boost::shared_ptr<IUser> IUserShrPtr;
 
 } // namespace User
 } // namespace GameServer
+
+#endif // GAMESERVER_USER_IUSER_HPP

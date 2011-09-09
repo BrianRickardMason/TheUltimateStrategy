@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_USER_USER_HPP
 #define GAMESERVER_USER_USER_HPP
 
+#include "IUser.hpp"
 #include "IUserRecord.hpp"
 
 namespace GameServer
@@ -36,9 +37,10 @@ namespace User
 {
 
 /**
- * @brief A user.
+ * @brief The user.
  */
 class User
+    : public IUser
 {
 public:
     /**
@@ -51,47 +53,42 @@ public:
     );
 
     /**
-     * @brief Gets an identifier of the user.
+     * @brief Gets the identifier of the user.
      *
      * @return The identifier of the user.
      */
-    IDUser const & getIDUser() const;
+    virtual IDUser getIDUser() const;
 
     /**
-     * @brief Gets a login of the user.
+     * @brief Gets the login of the user.
      *
      * @return The login of the user.
      */
-    std::string const & getLogin() const;
+    virtual std::string getLogin() const;
 
     /**
-     * @brief Gets a password of the user.
+     * @brief Gets the password of the user.
      *
      * @return The password of the user.
      */
-    std::string const & getPassword() const;
+    virtual std::string getPassword() const;
 
 private:
     /**
      * @brief The identifier of the user.
      */
-    IDUser m_id_user;
+    IDUser const m_id_user;
 
     /**
      * @brief The login of the user.
      */
-    std::string m_login;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 };
-
-/**
- * @brief The shared pointer of a user.
- */
-typedef boost::shared_ptr<User> UserShrPtr;
 
 } // namespace User
 } // namespace GameServer
