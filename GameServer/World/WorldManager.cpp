@@ -25,6 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include "World.hpp"
 #include "WorldManager.hpp"
 #include "WorldRecord.hpp"
 
@@ -62,17 +63,17 @@ bool WorldManager::createWorld(
     }
 }
 
-WorldShrPtr WorldManager::getWorld(
+IWorldShrPtr WorldManager::getWorld(
     ITransactionShrPtr         a_transaction,
     IDWorld            const & a_id_world
 ) const
 {
     IWorldRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_world);
 
-    return record ? make_shared<World>(record) : WorldShrPtr();
+    return record ? IWorldShrPtr(new World(record)) : IWorldShrPtr();
 }
 
-WorldShrPtr WorldManager::getWorldByIDLand(
+IWorldShrPtr WorldManager::getWorldByIDLand(
     ITransactionShrPtr         a_transaction,
     IDLand             const & a_id_land
 ) const
@@ -82,20 +83,20 @@ WorldShrPtr WorldManager::getWorldByIDLand(
     return getWorld(a_transaction, id_world);
 }
 
-WorldMap WorldManager::getWorlds(
+IWorldMap WorldManager::getWorlds(
     ITransactionShrPtr a_transaction
 ) const
 {
     IWorldRecordMap records = m_accessor->getRecords(a_transaction);
 
-    WorldMap worlds;
+    IWorldMap worlds;
 
     for (IWorldRecordMap::iterator it = records.begin(); it != records.end(); ++it)
     {
         if (it->second)
         {
-            WorldShrPtr world = make_shared<World>(it->second);
-            WorldPair pair(it->second->getIDWorld(), world);
+            IWorldShrPtr world = IWorldShrPtr(new World(it->second));
+            IWorldPair pair(it->second->getIDWorld(), world);
             worlds.insert(pair);
         }
     }

@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_WORLD_WORLD_HPP
 #define GAMESERVER_WORLD_WORLD_HPP
 
+#include "IWorld.hpp"
 #include "IWorldRecord.hpp"
 
 namespace GameServer
@@ -36,15 +37,16 @@ namespace World
 {
 
 /**
- * @brief A world.
+ * @brief The world.
  */
 class World
+    : public IWorld
 {
 public:
     /**
      * @brief Constructs the world.
      *
-     * @param a_record A corresponding record.
+     * @param a_record The corresponding record.
      */
     explicit World(
         IWorldRecordShrPtr a_record
@@ -55,41 +57,26 @@ public:
      *
      * @return The identifier of the world.
      */
-    IDWorld const & getIDWorld() const;
+    virtual IDWorld getIDWorld() const;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    std::string const & getName() const;
+    virtual std::string getName() const;
 
 private:
     /**
      * @brief The identifier of the world.
      */
-    IDWorld m_id_world;
+    IDWorld const m_id_world;
 
     /**
      * @brief The name of the world.
      */
-    std::string m_name;
+    std::string const m_name;
 };
-
-/**
- * @brief A shared pointer of world.
- */
-typedef boost::shared_ptr<World> WorldShrPtr;
-
-/**
- * @brief A pair of world.
- */
-typedef std::pair<IDWorld, WorldShrPtr> WorldPair;
-
-/**
- * @brief A map of worlds.
- */
-typedef std::map<IDWorld, WorldShrPtr> WorldMap;
 
 } // namespace World
 } // namespace GameServer

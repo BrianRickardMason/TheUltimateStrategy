@@ -61,9 +61,9 @@ protected:
      * @param a_name     An expected name of the world.
      */
     void compareWorld(
-        WorldShrPtr         a_world,
-        IDWorld     const & a_id_world,
-        string      const & a_name
+        IWorldShrPtr         a_world,
+        IDWorld      const & a_id_world,
+        string       const & a_name
     )
     {
         ASSERT_TRUE(a_id_world == a_world->getIDWorld());
@@ -100,7 +100,7 @@ TEST_F(WorldManagerTest, createWorld_WorldDoesNotExist)
 
     ASSERT_TRUE(m_manager->createWorld(transaction, "World1"));
 
-    WorldShrPtr world = m_manager->getWorld(transaction, m_id_world_1);
+    IWorldShrPtr world = m_manager->getWorld(transaction, m_id_world_1);
 
     ASSERT_TRUE(world != NULL);
     compareWorld(world, m_id_world_1, "World1");
@@ -123,7 +123,7 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    WorldShrPtr world = m_manager->getWorld(transaction, m_id_world_4);
+    IWorldShrPtr world = m_manager->getWorld(transaction, m_id_world_4);
 
     ASSERT_TRUE(world == NULL);
 }
@@ -137,9 +137,9 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
     m_manager->createWorld(transaction, "World2");
     m_manager->createWorld(transaction, "World3");
 
-    WorldShrPtr world_1 = m_manager->getWorld(transaction, m_id_world_1);
-    WorldShrPtr world_2 = m_manager->getWorld(transaction, m_id_world_2);
-    WorldShrPtr world_3 = m_manager->getWorld(transaction, m_id_world_3);
+    IWorldShrPtr world_1 = m_manager->getWorld(transaction, m_id_world_1);
+    IWorldShrPtr world_2 = m_manager->getWorld(transaction, m_id_world_2);
+    IWorldShrPtr world_3 = m_manager->getWorld(transaction, m_id_world_3);
 
     ASSERT_TRUE(world_1 != NULL);
     ASSERT_TRUE(world_2 != NULL);
@@ -161,7 +161,7 @@ TEST_F(WorldManagerTest, getWorlds)
     m_manager->createWorld(transaction, "World2");
     m_manager->createWorld(transaction, "World3");
 
-    WorldMap worlds = m_manager->getWorlds(transaction);
+    IWorldMap worlds = m_manager->getWorlds(transaction);
 
     ASSERT_FALSE(worlds.empty());
     ASSERT_EQ(3, worlds.size());

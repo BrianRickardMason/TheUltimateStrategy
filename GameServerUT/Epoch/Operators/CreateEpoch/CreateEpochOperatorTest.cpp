@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Epoch/Operators/CreateEpoch/CreateEpochOperator.hpp"
+#include "../../../../GameServer/World/World.hpp"
 #include "../../../../GameServer/World/WorldRecord.hpp"
 #include "../../../Persistency/TransactionDummy.hpp"
 #include "../../../World/WorldManagerMock.hpp"
@@ -78,7 +79,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_WorldDoesNotExist)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     EXPECT_CALL(*m_world_manager, getWorld(transaction, m_id_world_1))
-    .WillOnce(Return(WorldShrPtr()));
+    .WillOnce(Return(IWorldShrPtr()));
 
     CreateEpochOperator create_epoch_operator((IEpochManagerShrPtr(m_epoch_manager)),
                                               (IWorldManagerShrPtr(m_world_manager)));
@@ -93,7 +94,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasBeenCreated)
 
     IWorldRecordShrPtr world_record(new WorldRecord(m_id_world_1, "World1"));
 
-    WorldShrPtr world = make_shared<World>(world_record);
+    IWorldShrPtr world = IWorldShrPtr(new World(world_record));
 
     EXPECT_CALL(*m_world_manager, getWorld(transaction, m_id_world_1))
     .WillOnce(Return(world));
@@ -114,7 +115,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasNotBeenCreated)
 
     IWorldRecordShrPtr world_record(new WorldRecord(m_id_world_1, "World1"));
 
-    WorldShrPtr world = make_shared<World>(world_record);
+    IWorldShrPtr world = IWorldShrPtr(new World(world_record));
 
     EXPECT_CALL(*m_world_manager, getWorld(transaction, m_id_world_1))
     .WillOnce(Return(world));

@@ -25,48 +25,61 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetWorldByIDLandOperator.hpp"
+#ifndef GAMESERVER_WORLD_IWORLD_HPP
+#define GAMESERVER_WORLD_IWORLD_HPP
 
-using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+#include "IDWorld.hpp"
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
 
 namespace GameServer
 {
 namespace World
 {
 
-GetWorldByIDLandOperator::GetWorldByIDLandOperator(
-    IWorldManagerShrPtr a_world_manager,
-    ILandManagerShrPtr  a_land_manager
-)
-    : m_world_manager(a_world_manager),
-      m_land_manager(a_land_manager)
+/**
+ * @brief The interface of the world.
+ */
+class IWorld
 {
-}
+public:
+    /**
+     * @brief Destructs the the world.
+     */
+    virtual ~IWorld(){}
 
-GetWorldByIDLandOperatorExitCode GetWorldByIDLandOperator::getWorldByIDLand(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
-) const
-{
-    try
-    {
-        // Verify if the land exists.
-        if (!m_land_manager->getLand(a_transaction, a_id_land))
-        {
-            return GetWorldByIDLandOperatorExitCode(GET_WORLD_BY_IDLAND_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
-        }
+    /**
+     * @brief Gets the identifier of the world.
+     *
+     * @return The identifier of the world.
+     */
+    virtual IDWorld getIDWorld() const = 0;
 
-        IWorldShrPtr const world = m_world_manager->getWorldByIDLand(a_transaction, a_id_land);
+    /**
+     * @brief Gets the name of the world.
+     *
+     * @return The name of the world.
+     */
+    virtual std::string getName() const = 0;
+};
 
-        return (world) ? GetWorldByIDLandOperatorExitCode(GET_WORLD_BY_IDLAND_OPERATOR_EXIT_CODE_WORLD_HAS_BEEN_GOT, world)
-                       : GetWorldByIDLandOperatorExitCode(GET_WORLD_BY_IDLAND_OPERATOR_EXIT_CODE_WORLD_HAS_NOT_BEEN_GOT);
-    }
-    catch (...)
-    {
-        return GetWorldByIDLandOperatorExitCode(GET_WORLD_BY_IDLAND_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
-    }
-}
+/**
+ * @brief The shared pointer of the world.
+ */
+typedef boost::shared_ptr<IWorld> IWorldShrPtr;
+
+/**
+ * @brief The pair of the world.
+ */
+typedef std::pair<IDWorld, IWorldShrPtr> IWorldPair;
+
+/**
+ * @brief The map of the world.
+ */
+typedef std::map<IDWorld, IWorldShrPtr> IWorldMap;
 
 } // namespace World
 } // namespace GameServer
+
+#endif // GAMESERVER_WORLD_IWORLD_HPP

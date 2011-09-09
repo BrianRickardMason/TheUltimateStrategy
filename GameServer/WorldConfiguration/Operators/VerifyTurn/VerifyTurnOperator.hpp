@@ -50,7 +50,7 @@ public:
      * @return The exit code.
      */
     virtual VerifyTurnOperatorExitCode verifyTurn(
-        World::WorldShrPtr a_world
+        World::IWorldShrPtr a_world
     ) const;
 };
 

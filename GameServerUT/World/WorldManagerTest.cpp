@@ -63,7 +63,7 @@ protected:
      * @param a_name     An expected name of the world.
      */
     void compareWorld(
-        WorldShrPtr         a_world,
+        IWorldShrPtr        a_world,
         IDWorld     const & a_id_world,
         std::string const & a_name
     )
@@ -138,7 +138,7 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
 
     WorldManager manager(accessor);
 
-    WorldShrPtr world = manager.getWorld(transaction, id_world);
+    IWorldShrPtr world = manager.getWorld(transaction, id_world);
 
     ASSERT_TRUE(world == NULL);
 }
@@ -158,7 +158,7 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
 
     WorldManager manager(accessor);
 
-    WorldShrPtr world = manager.getWorld(transaction, id_world);
+    IWorldShrPtr world = manager.getWorld(transaction, id_world);
 
     ASSERT_TRUE(world != NULL);
 
@@ -181,7 +181,7 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesNotExist)
 
     WorldManager manager(accessor);
 
-    WorldShrPtr world = manager.getWorldByIDLand(transaction, m_id_land_1);
+    IWorldShrPtr world = manager.getWorldByIDLand(transaction, m_id_land_1);
 
     ASSERT_TRUE(world == NULL);
 }
@@ -202,7 +202,7 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesExist)
 
     WorldManager manager(accessor);
 
-    WorldShrPtr world = manager.getWorldByIDLand(transaction, m_id_land_1);
+    IWorldShrPtr world = manager.getWorldByIDLand(transaction, m_id_land_1);
 
     ASSERT_TRUE(world != NULL);
 
@@ -224,7 +224,7 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoNotExist)
 
     WorldManager manager(accessor);
 
-    WorldMap worlds = manager.getWorlds(transaction);
+    IWorldMap worlds = manager.getWorlds(transaction);
 
     ASSERT_TRUE(worlds.empty());
 }
@@ -247,7 +247,7 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_OneWorld)
 
     WorldManager manager(accessor);
 
-    WorldMap worlds = manager.getWorlds(transaction);
+    IWorldMap worlds = manager.getWorlds(transaction);
 
     ASSERT_FALSE(worlds.empty());
 
@@ -276,7 +276,7 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_ManyWorlds)
 
     WorldManager manager(accessor);
 
-    WorldMap worlds = manager.getWorlds(transaction);
+    IWorldMap worlds = manager.getWorlds(transaction);
 
     ASSERT_FALSE(worlds.empty());
 

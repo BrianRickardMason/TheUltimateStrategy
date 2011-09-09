@@ -73,7 +73,7 @@ public:
      *
      * @return The world, null if not found.
      */
-    virtual WorldShrPtr getWorld(
+    virtual IWorldShrPtr getWorld(
         Persistency::ITransactionShrPtr         a_transaction,
         IDWorld                         const & a_id_world
     ) const;
@@ -86,7 +86,7 @@ public:
      *
      * @return The world, null if not found.
      */
-    virtual WorldShrPtr getWorldByIDLand(
+    virtual IWorldShrPtr getWorldByIDLand(
         Persistency::ITransactionShrPtr         a_transaction,
         Land::IDLand                    const & a_id_land
     ) const;
@@ -98,7 +98,7 @@ public:
      *
      * @return A map of worlds, an empty map if not found.
      */
-    virtual WorldMap getWorlds(
+    virtual IWorldMap getWorlds(
         Persistency::ITransactionShrPtr a_transaction
     ) const;
 

@@ -58,7 +58,7 @@ public:
         unsigned short int const a_exit_code
     )
         : m_exit_code(a_exit_code),
-          m_world(WorldShrPtr())
+          m_world(IWorldShrPtr())
     {
     }
 
@@ -70,7 +70,7 @@ public:
      */
     GetWorldByIDLandOperatorExitCode(
         unsigned short int const a_exit_code,
-        WorldShrPtr        const a_world
+        IWorldShrPtr       const a_world
     )
         : m_exit_code(a_exit_code),
           m_world(a_world)
@@ -95,7 +95,7 @@ public:
     /**
      * @brief The world.
      */
-    WorldShrPtr const m_world;
+    IWorldShrPtr const m_world;
 };
 
 } // namespace World

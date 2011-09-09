@@ -27,6 +27,8 @@
 
 #include "World.hpp"
 
+using namespace std;
+
 namespace GameServer
 {
 namespace World
@@ -40,12 +42,12 @@ World::World(
 {
 }
 
-IDWorld const & World::getIDWorld() const
+IDWorld World::getIDWorld() const
 {
     return m_id_world;
 }
 
-std::string const & World::getName() const
+string World::getName() const
 {
     return m_name;
 }

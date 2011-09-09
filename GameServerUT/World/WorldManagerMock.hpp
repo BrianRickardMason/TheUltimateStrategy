@@ -69,7 +69,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getWorld,
-        WorldShrPtr(
+        IWorldShrPtr(
             Persistency::ITransactionShrPtr         a_transaction,
             IDWorld                         const & a_id_world
         )
@@ -85,7 +85,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getWorldByIDLand,
-        WorldShrPtr(
+        IWorldShrPtr(
             Persistency::ITransactionShrPtr         a_transaction,
             Land::IDLand                    const & a_id_land
         )
@@ -100,7 +100,7 @@ public:
      */
     MOCK_CONST_METHOD1(
         getWorlds,
-        WorldMap(
+        IWorldMap(
             Persistency::ITransactionShrPtr a_transaction
         )
     );

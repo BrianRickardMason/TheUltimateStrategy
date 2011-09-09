@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLDCONFIGURATION_IVERIFYTURNOPERATOR_HPP
 #define GAMESERVER_WORLDCONFIGURATION_IVERIFYTURNOPERATOR_HPP
 
-#include "../../../World/World.hpp"
+#include "../../../World/IWorld.hpp"
 #include "VerifyTurnOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -58,7 +58,7 @@ public:
      * @return The exit code.
      */
     virtual VerifyTurnOperatorExitCode verifyTurn(
-        World::WorldShrPtr a_world
+        World::IWorldShrPtr a_world
     ) const = 0;
 };
 

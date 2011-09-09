@@ -33,7 +33,7 @@ namespace WorldConfiguration
 {
 
 VerifyTurnOperatorExitCode VerifyTurnOperator::verifyTurn(
-    World::WorldShrPtr a_world
+    World::IWorldShrPtr a_world
 ) const
 {
     return VerifyTurnOperatorExitCode(VERIFY_TURN_OPERATOR_EXIT_CODE_VERIFICATION_HAS_BEEN_PERFORMED, true);

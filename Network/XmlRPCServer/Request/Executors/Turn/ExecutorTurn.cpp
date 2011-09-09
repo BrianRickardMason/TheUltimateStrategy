@@ -163,7 +163,7 @@ bool ExecutorTurn::verifyWorldConfiguration(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    WorldShrPtr world;
+    IWorldShrPtr world;
 
     IGetWorldByIDLandOperatorShrPtr world_operator = m_operator_abstract_factory->createGetWorldByIDLandOperator();
 
