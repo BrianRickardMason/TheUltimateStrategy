@@ -50,6 +50,11 @@ class IExecutor
 {
 public:
     /**
+     * @brief Destructs the executor.
+     */
+    virtual ~IExecutor(){};
+
+    /**
      * @brief Executes the action.
      *
      * @param a_request A request.
@@ -59,12 +64,6 @@ public:
     virtual XmlRPCCommon::Reply::ReplyShrPtr execute(
         XmlRPCCommon::Request::RequestShrPtr a_request
     ) = 0;
-
-protected:
-    /**
-     * @brief Destructs the executor.
-     */
-    virtual ~IExecutor(){};
 };
 
 /**
