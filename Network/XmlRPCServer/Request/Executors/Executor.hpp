@@ -30,6 +30,7 @@
 
 #include "../../../../GameServer/Common/IOperatorAbstractFactory.hpp"
 #include "../../../../GameServer/Persistency/IPersistency.hpp"
+#include "../../../../GameServer/User/IUser.hpp"
 #include "IExecutor.hpp"
 
 namespace Network
@@ -105,6 +106,13 @@ private:
     virtual bool authenticate(
         GameServer::Persistency::IPersistencyShrPtr a_persistency
     ) const = 0;
+
+    /**
+     * @brief Gets the acting user.
+     *
+     * @return True if the acting user has been got, false otherwise.
+     */
+    bool getActingUser();
 
     /**
      * @brief Authorizes the user.
@@ -190,6 +198,13 @@ private:
     XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthenticated() const;
 
     /**
+     * @brief Produces the "acting user has not been got" reply.
+     *
+     * @return The reply.
+     */
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyActingUserHasNotBeenGot() const;
+
+    /**
      * @brief Produces the "unauthorized" reply.
      *
      * @return The reply.
@@ -212,14 +227,23 @@ private:
 
 protected:
     /**
-     * @brief The persistency.
+     * @brief Persistency.
+     *
+     * TODO: Add "const".
      */
     GameServer::Persistency::IPersistencyShrPtr m_persistency;
 
     /**
      * @brief OperatorAbstractFactory.
+     *
+     * TODO: Add "const".
      */
     GameServer::Common::IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
+
+    /**
+     * @brief The acting user.
+     */
+    GameServer::User::IUserShrPtr m_user;
 };
 
 } // namespace Executors

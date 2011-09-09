@@ -78,6 +78,11 @@ ReplyShrPtr Executor::execute(
         return produceReplyUnauthenticated();
     }
 
+    if (!getActingUser())
+    {
+        return produceReplyActingUserHasNotBeenGot();
+    }
+
     if (!authorize(m_persistency))
     {
         return produceReplyUnauthorized();
@@ -101,6 +106,11 @@ bool Executor::serverIsListening() const
     return true;
 }
 
+bool Executor::getActingUser()
+{
+    return true;
+}
+
 ReplyShrPtr Executor::produceReplyServerIsNotListening() const
 {
     return getBasicReply(REPLY_STATUS_SERVER_IS_NOT_LISTENING);
@@ -119,6 +129,11 @@ ReplyShrPtr Executor::produceReplyInvalidRange() const
 ReplyShrPtr Executor::produceReplyUnauthenticated() const
 {
     return getBasicReply(REPLY_STATUS_UNAUTHENTICATED);
+}
+
+ReplyShrPtr Executor::produceReplyActingUserHasNotBeenGot() const
+{
+    return getBasicReply(REPLY_STATUS_ACTING_USER_HAS_NOT_BEEN_GOT);
 }
 
 ReplyShrPtr Executor::produceReplyUnauthorized() const

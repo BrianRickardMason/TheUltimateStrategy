@@ -90,14 +90,15 @@ unsigned short int const REPLY_ID_TRANSPORT_RESOURCE                 = 34;
 /**
  * @brief The statuses of the replies.
  */
-unsigned short int const REPLY_STATUS_SERVER_IS_NOT_LISTENING = 1;
-unsigned short int const REPLY_STATUS_INVALID_REQUEST         = 2;
-unsigned short int const REPLY_STATUS_INVALID_RANGE           = 3;
-unsigned short int const REPLY_STATUS_UNAUTHENTICATED         = 4;
-unsigned short int const REPLY_STATUS_UNAUTHORIZED            = 5;
-unsigned short int const REPLY_STATUS_EPOCH_IS_NOT_ACTIVE     = 6;
-unsigned short int const REPLY_STATUS_ACTION_UNAVAILABLE      = 7;
-unsigned short int const REPLY_STATUS_OK                      = 8;
+unsigned short int const REPLY_STATUS_SERVER_IS_NOT_LISTENING      = 1;
+unsigned short int const REPLY_STATUS_INVALID_REQUEST              = 2;
+unsigned short int const REPLY_STATUS_INVALID_RANGE                = 3;
+unsigned short int const REPLY_STATUS_UNAUTHENTICATED              = 4;
+unsigned short int const REPLY_STATUS_ACTING_USER_HAS_NOT_BEEN_GOT = 5;
+unsigned short int const REPLY_STATUS_UNAUTHORIZED                 = 6;
+unsigned short int const REPLY_STATUS_EPOCH_IS_NOT_ACTIVE          = 7;
+unsigned short int const REPLY_STATUS_ACTION_UNAVAILABLE           = 8;
+unsigned short int const REPLY_STATUS_OK                           = 9;
 
 /**
  * @brief A reply class.
