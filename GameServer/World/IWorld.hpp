@@ -45,7 +45,7 @@ class IWorld
 {
 public:
     /**
-     * @brief Destructs the the world.
+     * @brief Destructs the interface of the world.
      */
     virtual ~IWorld(){}
 
@@ -65,17 +65,17 @@ public:
 };
 
 /**
- * @brief The shared pointer of the world.
+ * @brief The shared pointer of the interface of the world.
  */
 typedef boost::shared_ptr<IWorld> IWorldShrPtr;
 
 /**
- * @brief The pair of the world.
+ * @brief The pair of the interface of the world.
  */
 typedef std::pair<IDWorld, IWorldShrPtr> IWorldPair;
 
 /**
- * @brief The map of the world.
+ * @brief The map of the interface of the world.
  */
 typedef std::map<IDWorld, IWorldShrPtr> IWorldMap;
 
