@@ -59,6 +59,8 @@ bool ExecutorFinishEpoch::getParameters(
 {
     try
     {
+        m_value_id_user  = a_request->getIDUserValue();
+        m_password       = a_request->getPasswordValue();
         m_value_id_world = a_request->getParameterValueUnsignedInteger("idworld");
 
         return true;
@@ -73,6 +75,7 @@ bool ExecutorFinishEpoch::processParameters()
 {
     try
     {
+        m_id_user  = m_value_id_user;
         m_id_world = m_value_id_world;
 
         return true;

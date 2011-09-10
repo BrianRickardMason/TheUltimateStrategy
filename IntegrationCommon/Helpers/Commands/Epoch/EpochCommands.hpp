@@ -61,26 +61,34 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr CreateEpoch(
  * @brief Deletes a epoch.
  *
  * @param a_client   The client.
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DeleteEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    std::string   const & a_password,
+    unsigned int  const   a_id_world
 );
 
 /**
  * @brief Gets a epoch.
  *
  * @param a_client   The client.
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    std::string   const & a_password,
+    unsigned int  const   a_id_world
 );
 
 /**
@@ -104,39 +112,51 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr ActivateEpoch(
  * @brief Deactivates a epoch.
  *
  * @param a_client   The client.
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DeactivateEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    std::string   const & a_password,
+    unsigned int  const   a_id_world
 );
 
 /**
  * @brief Finishes a epoch.
  *
  * @param a_client   The client.
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr FinishEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    std::string   const & a_password,
+    unsigned int  const   a_id_world
 );
 
 /**
  * @brief Ticks a epoch.
  *
  * @param a_client   The client.
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr TickEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    std::string   const & a_password,
+    unsigned int  const   a_id_world
 );
 
 } // namespace Epoch

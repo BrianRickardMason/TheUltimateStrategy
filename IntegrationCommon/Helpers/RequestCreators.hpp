@@ -84,23 +84,31 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateEpoch(
 /**
  * @brief Creates a request "delete epoch".
  *
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteEpoch(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    std::string  const & a_password,
+    unsigned int const   a_id_world
 );
 
 /**
  * @brief Creates a request "get epoch".
  *
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetEpoch(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    std::string  const & a_password,
+    unsigned int const   a_id_world
 );
 
 /**
@@ -121,34 +129,46 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestActivateEpoch(
 /**
  * @brief Creates a request "deactivate epoch".
  *
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeactivateEpoch(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    std::string  const & a_password,
+    unsigned int const   a_id_world
 );
 
 /**
  * @brief Creates a request "finish epoch".
  *
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestFinishEpoch(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    std::string  const & a_password,
+    unsigned int const   a_id_world
 );
 
 /**
  * @brief Creates a request "tick epoch".
  *
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTickEpoch(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    std::string  const & a_password,
+    unsigned int const   a_id_world
 );
 
 /**

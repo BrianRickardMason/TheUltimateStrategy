@@ -48,7 +48,7 @@ TEST_F(IntegrationFunctionalTest, DeleteEpoch_WorldDoesNotExist)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioDeleteEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeleteEpochVerificationWorldDoesNotExist))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -68,7 +68,7 @@ TEST_F(IntegrationFunctionalTest, DeleteEpoch_WorldDoesExist_EpochDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeleteEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeleteEpochVerificationEpochDoesNotExist))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -92,7 +92,7 @@ TEST_F(IntegrationFunctionalTest, DeleteEpoch_WorldDoesExist_EpochDoesExist_NotF
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeleteEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeleteEpochVerificationEpochHasNotBeenFinished))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -116,11 +116,11 @@ TEST_F(IntegrationFunctionalTest, DeleteEpoch_WorldDoesExist_EpochDoesExist_Fini
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioFinishEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioFinishEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioFinishEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioFinishEpochVerificationEpochHasBeenFinished))))
         (IScenarioShrPtr(new ScenarioDeleteEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioDeleteEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeleteEpochVerificationEpochHasBeenDeleted))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -136,7 +136,7 @@ TEST_F(IntegrationFunctionalTest, DeleteEpoch_InvalidRequest)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioDeleteEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteEpochActionInvalidRequest(1)),
+            IScenarioActionShrPtr(new ScenarioDeleteEpochActionInvalidRequest(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeleteEpochVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

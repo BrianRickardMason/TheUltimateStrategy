@@ -455,7 +455,7 @@ TEST_F(IntegrationFunctionalTest, Turn_EpochIsNotActive)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password1")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
@@ -471,19 +471,19 @@ TEST_F(IntegrationFunctionalTest, Turn_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, "Land")),
+            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password", 1, 1, "Land")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(1, "Password1", 1, "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(1, "Password", 1, "Settlement1")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioTurn(
             client,
-            IScenarioActionShrPtr(new ScenarioTurnActionSuccess(1, "Password1", 1)),
+            IScenarioActionShrPtr(new ScenarioTurnActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioTurnVerificationEpochIsNotActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

@@ -109,9 +109,13 @@ public:
      * @param a_id_world The identifier of the world.
      */
     ScenarioFinishEpochActionSuccess(
-        unsigned int const a_id_world
+        unsigned int const   a_id_user,
+        std::string  const & a_password,
+        unsigned int const   a_id_world
     )
-        : m_id_world(a_id_world)
+        : m_id_user(a_id_user),
+          m_password(a_password),
+          m_id_world(a_id_world)
     {
     }
 
@@ -126,10 +130,20 @@ public:
         IClientShrPtr a_client
     )
     {
-        return Commands::Epoch::FinishEpoch(a_client, m_id_world);
+        return Commands::Epoch::FinishEpoch(a_client, m_id_user, m_password, m_id_world);
     }
 
 private:
+    /**
+     * @brief The identifier of the user.
+     */
+    unsigned int const m_id_user;
+
+    /**
+     * @brief The password of the user.
+     */
+    std::string const m_password;
+
     /**
      * @brief The name of the world.
      */
@@ -149,9 +163,13 @@ public:
      * @param a_id_world The identifier of the world.
      */
     ScenarioFinishEpochActionInvalidRequest(
-        unsigned int const a_id_world
+        unsigned int const   a_id_user,
+        std::string  const & a_password,
+        unsigned int const   a_id_world
     )
-        : m_id_world(a_id_world)
+        : m_id_user(a_id_user),
+          m_password(a_password),
+          m_id_world(a_id_world)
     {
     }
 
@@ -171,6 +189,11 @@ public:
         request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_FINISH_EPOCH);
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
+
+        user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+        user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
+
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
         idworld->appendAttribute("type")->setValue("unsigned");
         idworld->appendAttribute("value")->setValue(m_id_world);
@@ -179,6 +202,16 @@ public:
     }
 
 private:
+    /**
+     * @brief The identifier of the user.
+     */
+    unsigned int const m_id_user;
+
+    /**
+     * @brief The password of the user.
+     */
+    std::string const m_password;
+
     /**
      * @brief The name of the world.
      */

@@ -721,7 +721,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
             client,

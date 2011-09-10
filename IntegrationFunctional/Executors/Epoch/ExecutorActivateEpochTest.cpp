@@ -92,7 +92,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesExist_Fi
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioFinishEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioFinishEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioFinishEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioFinishEpochVerificationEpochHasBeenFinished))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,

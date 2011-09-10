@@ -270,7 +270,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, EpochIsNotActive)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
@@ -298,7 +298,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioTransportResource(
             client,
@@ -322,7 +322,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, TryingToTransportZero
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
@@ -380,7 +380,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, SettlementsAreNotFrom
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
@@ -432,7 +432,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, NotEnoughResources)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
@@ -480,7 +480,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, ResourceHasBeenTransp
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
@@ -528,7 +528,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, ResourceHasBeenTransp
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
@@ -576,7 +576,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, ResourceHasBeenTransp
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
