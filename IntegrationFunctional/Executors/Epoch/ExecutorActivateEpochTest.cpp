@@ -64,7 +64,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesNotExist
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -84,7 +84,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesExist_Fi
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
@@ -112,7 +112,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesExist_Ac
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
@@ -140,7 +140,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesExist_No
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,

@@ -54,12 +54,16 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateUser(
 /**
  * @brief Creates a request "create world".
  *
- * @param a_name The name of the world.
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
+ * @param a_name     The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateWorld(
-    std::string const & a_name
+    unsigned int const   a_id_user,
+    std::string  const & a_password,
+    std::string  const & a_name
 );
 
 /**

@@ -56,7 +56,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByIDWorld_LandsDoNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
@@ -88,7 +88,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByIDWorld_OneLand)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
@@ -124,7 +124,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByIDWorld_ManyLands)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
@@ -172,7 +172,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByIDWorld_AnotherUser)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
@@ -208,7 +208,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByIDWorld_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
@@ -256,7 +256,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByIDWorld_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,

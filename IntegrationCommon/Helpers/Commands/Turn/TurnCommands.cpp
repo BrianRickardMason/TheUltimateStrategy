@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "TurnCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "TurnCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;

@@ -28,6 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEWORLD_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEWORLD_HPP
 
+#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../../../../../GameServer/World/Operators/CreateWorld/CreateWorldOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
@@ -45,6 +46,10 @@ namespace Executors
  *
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_CREATE_WORLD\">
+ *     <user>
+ *         <iduser   value=\"#\" />
+ *         <password value=\"#\" />
+ *     </user>
  *     <parameters>
  *         <name type=\"string\" value=\"#\" />
  *     </parameters>
@@ -158,6 +163,21 @@ class ExecutorCreateWorld
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
         GameServer::World::CreateWorldOperatorExitCode const & a_exit_code
     ) const;
+
+    /**
+     * @brief The value of the identifier of the user.
+     */
+    unsigned int m_value_id_user;
+
+    /**
+     * @brief The identifier of the user.
+     */
+    GameServer::User::IDUser m_id_user;
+
+    /**
+     * @brief The password of the user.
+     */
+    std::string m_password;
 
     /**
      * @brief The name of the world.

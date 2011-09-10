@@ -25,10 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include "../../../IntegrationCommon/Helpers/Scenarios/User/ScenarioCreateUser.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
 
+using namespace IntegrationCommon::Helpers::Scenarios::User;
 using namespace IntegrationCommon::Helpers::Scenarios::World;
 using namespace IntegrationCommon::Helpers::Scenarios;
 using namespace boost::assign;
@@ -42,9 +44,13 @@ TEST_F(IntegrationFunctionalTest, CreateWorld)
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateUser(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -58,13 +64,17 @@ TEST_F(IntegrationFunctionalTest, CreateWorld_TwoWorldsOfDifferentNames)
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateUser(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World1")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World1")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World2")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World2")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -78,13 +88,17 @@ TEST_F(IntegrationFunctionalTest, CreateWorld_TwoWorldsOfTheSameName)
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateUser(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess(1, "Password", "World")),
             // TODO: Change to ScenarioCreateWorldVerificationWorldDoesExist
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasNotBeenCreated))));
 
@@ -99,9 +113,13 @@ TEST_F(IntegrationFunctionalTest, CreateWorld_InvalidRequest)
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateUser(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionInvalidRequest("World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionInvalidRequest(1, "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

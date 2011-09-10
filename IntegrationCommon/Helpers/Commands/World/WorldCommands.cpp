@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "WorldCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "WorldCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -44,10 +43,12 @@ namespace World
 
 ReplyShrPtr CreateWorld(
     IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    string        const & a_password,
     string        const & a_name
 )
 {
-    RequestShrPtr request = createRequestCreateWorld(a_name);
+    RequestShrPtr request = createRequestCreateWorld(a_id_user, a_password, a_name);
 
     return a_client->sendRequest(request);
 }

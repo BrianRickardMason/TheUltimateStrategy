@@ -93,10 +93,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_name The name of the world.
+     * @param a_id_user  The identifier of the user.
+     * @param a_password The password of the user.
+     * @param a_name     The name of the world.
      */
     ScenarioCreateWorldActionSuccess(
-        std::string const & a_name
+        unsigned int const   a_id_user,
+        std::string  const & a_password,
+        std::string  const & a_name
     );
 
     /**
@@ -112,9 +116,19 @@ public:
 
 private:
     /**
+     * @brief The identifier of the user.
+     */
+    unsigned int const m_id_user;
+
+    /**
+     * @brief The password of the user.
+     */
+    std::string const m_password;
+
+    /**
      * @brief The name of the world.
      */
-    std::string m_name;
+    std::string const m_name;
 };
 
 /**
@@ -127,10 +141,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_name The name of the world.
+     * @param a_id_user  The identifier of the user.
+     * @param a_password The password of the user.
+     * @param a_name     The name of the world.
      */
     ScenarioCreateWorldActionInvalidRequest(
-        std::string const & a_name
+        unsigned int const   a_id_user,
+        std::string  const & a_password,
+        std::string  const & a_name
     );
 
     /**
@@ -146,9 +164,19 @@ public:
 
 private:
     /**
+     * @brief The identifier of the user.
+     */
+    unsigned int const m_id_user;
+
+    /**
+     * @brief The password of the user.
+     */
+    std::string const m_password;
+
+    /**
      * @brief The name of the world.
      */
-    std::string m_name;
+    std::string const m_name;
 };
 
 /**
