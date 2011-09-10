@@ -51,10 +51,10 @@ namespace Epoch
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr CreateEpoch(
-    IClientShrPtr      a_client,
+    IClientShrPtr         a_client,
     unsigned int  const   a_id_user,
     std::string   const & a_password,
-    unsigned int  const a_id_world
+    unsigned int  const   a_id_world
 );
 
 /**
@@ -87,13 +87,17 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetEpoch(
  * @brief Activates a epoch.
  *
  * @param a_client   The client.
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr ActivateEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    std::string   const & a_password,
+    unsigned int  const   a_id_world
 );
 
 /**

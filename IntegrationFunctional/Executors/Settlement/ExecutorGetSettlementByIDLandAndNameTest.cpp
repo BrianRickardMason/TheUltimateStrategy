@@ -67,7 +67,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDLandAndName_LandDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioGetSettlementByIDLandAndName(
             client,
@@ -99,7 +99,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDLandAndName_SettlementDoesNot
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -135,7 +135,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDLandAndName)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -191,7 +191,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDLandAndName_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -235,7 +235,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDLandAndName_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -279,7 +279,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDLandAndName_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,

@@ -48,7 +48,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesNotExist)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationWorldDoesNotExist))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -68,7 +68,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesNotExist
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochDoesNotExist))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -96,7 +96,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesExist_Fi
             IScenarioVerificationShrPtr(new ScenarioFinishEpochVerificationEpochHasBeenFinished))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenFinished))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -120,11 +120,11 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesExist_Ac
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochIsActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -148,7 +148,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_WorldDoesExist_EpochDoesExist_No
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -164,7 +164,7 @@ TEST_F(IntegrationFunctionalTest, ActivateEpoch_InvalidRequest)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionInvalidRequest(1)),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionInvalidRequest(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

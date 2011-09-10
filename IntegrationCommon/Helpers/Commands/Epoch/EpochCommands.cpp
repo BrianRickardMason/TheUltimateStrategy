@@ -74,11 +74,13 @@ ReplyShrPtr GetEpoch(
 }
 
 ReplyShrPtr ActivateEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    string        const & a_password,
+    unsigned int  const   a_id_world
 )
 {
-    RequestShrPtr request = createRequestActivateEpoch(a_id_world);
+    RequestShrPtr request = createRequestActivateEpoch(a_id_user, a_password, a_id_world);
 
     return a_client->sendRequest(request);
 }
