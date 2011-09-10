@@ -93,6 +93,88 @@ unsigned short int const Request::getIdRequest() const
     return attribute->asInt();
 }
 
+unsigned int Request::getIDUserValue() const
+{
+    // Verify if the "request" node exists.
+    IXmlNodeShrPtr request_node = m_xml_document->getNode("request");
+    if (!request_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "user" node exists.
+    IXmlNodeShrPtr user_node = request_node->getNode("request");
+    if (!user_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "iduser" node exists.
+    IXmlNodeShrPtr iduser_node = user_node->getNode("request");
+    if (!iduser_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "iduser" node has the "value" attribute.
+    IXmlAttributeShrPtr value_attribute = iduser_node->getAttribute("value");
+    if (!value_attribute)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "value" attribute is an unsigned integer.
+    try
+    {
+        boost::lexical_cast<unsigned int>(value_attribute->getValue());
+    }
+    catch (boost::bad_lexical_cast &)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the value of the "value" attribute is positive.
+    if (value_attribute->asInt() < 0)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    return value_attribute->asInt();
+}
+
+string Request::getPasswordValue() const
+{
+    // Verify if the "request" node exists.
+    IXmlNodeShrPtr request_node = m_xml_document->getNode("request");
+    if (!request_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "user" node exists.
+    IXmlNodeShrPtr user_node = request_node->getNode("request");
+    if (!user_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "password" node exists.
+    IXmlNodeShrPtr password_node = user_node->getNode("password");
+    if (!password_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "password" node has the "value" attribute.
+    IXmlAttributeShrPtr value_attribute = password_node->getAttribute("value");
+    if (!value_attribute)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    return string(value_attribute->getValue());
+}
+
 unsigned int const Request::getParameterValueUnsignedInteger(
     string const & a_name
 ) const
