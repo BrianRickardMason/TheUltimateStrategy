@@ -101,6 +101,11 @@ ReplyShrPtr ScenarioCreateEpochActionInvalidRequest::perform(
     request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_CREATE_EPOCH);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
+    IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
+
+    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+    user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
+
     IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
     idworld->appendAttribute("type")->setValue("unsigned");
     idworld->appendAttribute("value")->setValue(m_id_world);
