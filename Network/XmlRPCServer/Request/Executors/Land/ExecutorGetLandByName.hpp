@@ -46,10 +46,12 @@ namespace Executors
  *
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_GET_LAND_BY_NAME\">
+ *     <user>
+ *         <iduser   value=\"#\" />
+ *         <password value=\"#\" />
+ *     </user>
  *     <parameters>
- *         <iduser   type=\"unsigned integer\" value=\"#\" />
- *         <password type=\"string\"           value=\"#\" />
- *         <name     type=\"string\"           value=\"#\" />
+ *         <name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *

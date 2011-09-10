@@ -103,14 +103,14 @@ unsigned int Request::getIDUserValue() const
     }
 
     // Verify if the "user" node exists.
-    IXmlNodeShrPtr user_node = request_node->getNode("request");
+    IXmlNodeShrPtr user_node = request_node->getNode("user");
     if (!user_node)
     {
         throw InvalidRequestShrPtr();
     }
 
     // Verify if the "iduser" node exists.
-    IXmlNodeShrPtr iduser_node = user_node->getNode("request");
+    IXmlNodeShrPtr iduser_node = user_node->getNode("iduser");
     if (!iduser_node)
     {
         throw InvalidRequestShrPtr();
@@ -152,7 +152,7 @@ string Request::getPasswordValue() const
     }
 
     // Verify if the "user" node exists.
-    IXmlNodeShrPtr user_node = request_node->getNode("request");
+    IXmlNodeShrPtr user_node = request_node->getNode("user");
     if (!user_node)
     {
         throw InvalidRequestShrPtr();

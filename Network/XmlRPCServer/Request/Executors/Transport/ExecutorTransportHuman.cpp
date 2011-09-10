@@ -62,8 +62,8 @@ bool ExecutorTransportHuman::getParameters(
 {
     try
     {
-        m_value_id_user                   = a_request->getParameterValueUnsignedInteger("iduser");
-        m_password                        = a_request->getParameterValueString("password");
+        m_value_id_user                   = a_request->getIDUserValue();
+        m_password                        = a_request->getPasswordValue();
         m_value_id_settlement_source      = a_request->getParameterValueUnsignedInteger("idsettlementsource");
         m_value_id_settlement_destination = a_request->getParameterValueUnsignedInteger("idsettlementdestination");
         m_value_id_human_class            = a_request->getParameterValueUnsignedInteger("idhumanclass");

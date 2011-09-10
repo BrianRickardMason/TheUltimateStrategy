@@ -47,11 +47,13 @@ namespace Executors
  *
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_CREATE_SETTLEMENT\">
+ *     <user>
+ *         <iduser   value=\"#\" />
+ *         <password value=\"#\" />
+ *     </user>
  *     <parameters>
- *         <iduser   type=\"unsigned integer\" value=\"#\" />
- *         <password type=\"string\"           value=\"#\" />
- *         <idland   type=\"unsigned integer\" value=\"#\" />
- *         <name     type=\"string\"           value=\"#\" />
+ *         <idland type=\"unsigned integer\" value=\"#\" />
+ *         <name   type=\"string\"           value=\"#\" />
  *     </parameters>
  * </request>
  *

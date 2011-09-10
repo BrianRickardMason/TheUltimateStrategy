@@ -193,16 +193,13 @@ public:
         request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_GET_SETTLEMENTS_BY_ID_LAND);
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr iduser = parameters->appendNode("iduser");
-        iduser->appendAttribute("type")->setValue("unsigned integer");
-        iduser->appendAttribute("value")->setValue(m_id_user);
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr password = parameters->appendNode("password");
-        password->appendAttribute("type")->setValue("unsigned integer");
-        password->appendAttribute("value")->setValue(m_password.c_str());
+        user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+        user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idland = parameters->appendNode("idland");
-        idland->appendAttribute("type")->setValue("unsigned integer");
+        idland->appendAttribute("type")->setValue("integer");
         idland->appendAttribute("value")->setValue(m_id_land);
 
         return a_client->sendRequest(request);

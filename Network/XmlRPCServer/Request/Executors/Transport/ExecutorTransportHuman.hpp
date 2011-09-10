@@ -50,9 +50,11 @@ namespace Executors
  *
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_TRANSPORT_HUMAN\">
+ *     <user>
+ *         <iduser   value=\"#\" />
+ *         <password value=\"#\" />
+ *     </user>
  *     <parameters>
- *         <iduser                  type=\"unsigned integer\" value=\"#\" />
- *         <password                type=\"string\"           value=\"#\" />
  *         <idsettlementsource      type=\"unsigned integer\" value=\"#\" />
  *         <idsettlementdestination type=\"unsigned integer\" value=\"#\" />
  *         <idhumanclass            type=\"unsigned integer\" value=\"#\" />

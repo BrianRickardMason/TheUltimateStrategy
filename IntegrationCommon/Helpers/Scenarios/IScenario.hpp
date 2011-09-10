@@ -46,7 +46,7 @@ namespace Scenarios
         return message; \
 
 #define I_ASSERT_STREQ(expected, actual, message) \
-    if (strcmp(expected, actual))\
+    if (strcmp(expected, actual)) \
         return message; \
 
 /**

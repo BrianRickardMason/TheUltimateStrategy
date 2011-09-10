@@ -129,6 +129,11 @@ ReplyShrPtr ScenarioDismissHumanActionInvalidRequest::perform(
     request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_DISMISS_HUMAN);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
+    IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
+
+    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+    user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
+
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
     idholderclass->appendAttribute("type")->setValue("integer");
     idholderclass->appendAttribute("value")->setValue(m_id_holder_class);

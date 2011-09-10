@@ -244,6 +244,11 @@ public:
         request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_ENGAGE_HUMAN);
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
+
+        user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+        user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
+
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
         idholderclass->appendAttribute("type")->setValue("integer");
         idholderclass->appendAttribute("value")->setValue(m_id_holder_class);

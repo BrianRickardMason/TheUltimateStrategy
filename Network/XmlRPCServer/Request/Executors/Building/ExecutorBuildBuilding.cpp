@@ -62,8 +62,8 @@ bool ExecutorBuildBuilding::getParameters(
 {
     try
     {
-        m_value_id_user           = a_request->getParameterValueUnsignedInteger("iduser");
-        m_password                = a_request->getParameterValueString("password");
+        m_value_id_user           = a_request->getIDUserValue();
+        m_password                = a_request->getPasswordValue();
         m_value_id_holder_class   = a_request->getParameterValueUnsignedInteger("idholderclass");
         m_value_id_holder         = a_request->getParameterValueUnsignedInteger("idholder");
         m_value_id_building_class = a_request->getParameterValueUnsignedInteger("idbuildingclass");

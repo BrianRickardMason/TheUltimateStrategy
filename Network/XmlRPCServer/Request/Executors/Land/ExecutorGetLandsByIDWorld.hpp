@@ -47,10 +47,12 @@ namespace Executors
  *
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_GET_LANDS_BY_ID_WORLD\">
+ *     <user>
+ *         <iduser   value=\"#\" />
+ *         <password value=\"#\" />
+ *     </user>
  *     <parameters>
- *         <iduser   type=\"unsigned integer\" value=\"#\" />
- *         <password type=\"string\"           value=\"#\" />
- *         <idworld  type=\"unsigned integer\" value=\"#\" />
+ *         <idworld type=\"unsigned integer\" value=\"#\" />
  *     </parameters>
  * </request>
  *

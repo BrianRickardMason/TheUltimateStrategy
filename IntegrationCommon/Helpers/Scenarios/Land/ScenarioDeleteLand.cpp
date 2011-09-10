@@ -101,13 +101,10 @@ ReplyShrPtr ScenarioDeleteLandActionInvalidRequest::perform(
     request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_DELETE_LAND);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
-    IXmlNodeShrPtr iduser = parameters->appendNode("iduser");
-    iduser->appendAttribute("type")->setValue("unsigned integer");
-    iduser->appendAttribute("value")->setValue(m_id_user);
+    IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-    IXmlNodeShrPtr password = parameters->appendNode("password");
-    password->appendAttribute("type")->setValue("unsigned integer");
-    password->appendAttribute("value")->setValue(m_password.c_str());
+    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+    user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr idland = parameters->appendNode("idland");
     idland->appendAttribute("type")->setValue("integer");

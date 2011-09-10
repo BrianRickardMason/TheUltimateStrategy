@@ -48,9 +48,11 @@ namespace Executors
  *
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_GET_RESOURCE\">
+ *     <user>
+ *         <iduser   value=\"#\" />
+ *         <password value=\"#\" />
+ *     </user>
  *     <parameters>
- *         <iduser      type=\"unsigned integer\" value=\"#\" />
- *         <password    type=\"string\"           value=\"#\" />
  *         <holderclass type=\"unsigned integer\" value=\"#\" />
  *         <idholder    type=\"unsigned integer\" value=\"#\" />
  *         <idresource  type=\"unsigned integer\" value=\"#\" />

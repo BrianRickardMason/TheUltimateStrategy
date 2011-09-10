@@ -49,9 +49,11 @@ namespace Executors
  *
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_DESTROY_BUILDING\">
+ *     <user>
+ *         <iduser   value=\"#\" />
+ *         <password value=\"#\" />
+ *     </user>
  *     <parameters>
- *         <iduser          type=\"unsigned integer\" value=\"#\" />
- *         <password        type=\"string\"           value=\"#\" />
  *         <idholderclass   type=\"unsigned integer\" value=\"#\" />
  *         <idholder        type=\"unsigned integer\" value=\"#\" />
  *         <idbuildingclass type=\"unsigned integer\" value=\"#\" />
