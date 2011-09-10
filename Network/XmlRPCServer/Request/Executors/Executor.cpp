@@ -78,7 +78,7 @@ ReplyShrPtr Executor::execute(
         return produceReplyUnauthenticated();
     }
 
-    if (!getActingUser())
+    if (!getActingUser(m_persistency))
     {
         return produceReplyActingUserHasNotBeenGot();
     }
@@ -106,7 +106,9 @@ bool Executor::serverIsListening() const
     return true;
 }
 
-bool Executor::getActingUser()
+bool Executor::getActingUser(
+    IPersistencyShrPtr a_persistency
+)
 {
     return true;
 }

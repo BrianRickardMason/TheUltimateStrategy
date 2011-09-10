@@ -110,9 +110,13 @@ private:
     /**
      * @brief Gets the acting user.
      *
+     * @param a_persistency The persistency.
+     *
      * @return True if the acting user has been got, false otherwise.
      */
-    bool getActingUser();
+    bool getActingUser(
+        GameServer::Persistency::IPersistencyShrPtr a_persistency
+    );
 
     /**
      * @brief Authorizes the user.
