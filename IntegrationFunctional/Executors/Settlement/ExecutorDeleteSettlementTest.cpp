@@ -63,7 +63,7 @@ TEST_F(IntegrationFunctionalTest, DeleteSettlement_SettlementDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -95,7 +95,7 @@ TEST_F(IntegrationFunctionalTest, DeleteSettlement)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -135,7 +135,7 @@ TEST_F(IntegrationFunctionalTest, DeleteSettlement_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -179,7 +179,7 @@ TEST_F(IntegrationFunctionalTest, DeleteSettlement_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -235,7 +235,7 @@ TEST_F(IntegrationFunctionalTest, DeleteSettlement_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,

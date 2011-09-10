@@ -88,7 +88,7 @@ TEST_F(IntegrationFunctionalTest, FinishEpoch_WorldDoesExist_EpochDoesExist_Fini
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioFinishEpoch(
             client,
@@ -116,7 +116,7 @@ TEST_F(IntegrationFunctionalTest, FinishEpoch_WorldDoesExist_EpochDoesExist_Acti
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -144,7 +144,7 @@ TEST_F(IntegrationFunctionalTest, FinishEpoch_WorldDoesExist_EpochDoesExist_NotA
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioFinishEpoch(
             client,

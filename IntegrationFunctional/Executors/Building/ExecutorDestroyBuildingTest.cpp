@@ -69,7 +69,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_SettlementDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -109,7 +109,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -153,7 +153,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_DifferentBuilding)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -205,7 +205,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_NotEnoughBuildings)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -257,7 +257,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_NotEnoughResources)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -309,7 +309,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_MaxBuildings)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -361,7 +361,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_ManyBuildings)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -413,7 +413,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_OneBuilding)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -465,7 +465,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_LastOneBuilding)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -517,7 +517,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_LastOneBuildingDoubleDestroy)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -577,7 +577,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_ZeroBuildings)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -621,7 +621,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -705,7 +705,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess(1, "Password", 1)),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,

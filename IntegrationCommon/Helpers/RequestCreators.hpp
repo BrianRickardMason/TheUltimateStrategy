@@ -69,12 +69,16 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateWorld(
 /**
  * @brief Creates a request "create epoch".
  *
+ * @param a_id_user  The identifier of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateEpoch(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    std::string  const & a_password,
+    unsigned int const   a_id_world
 );
 
 /**

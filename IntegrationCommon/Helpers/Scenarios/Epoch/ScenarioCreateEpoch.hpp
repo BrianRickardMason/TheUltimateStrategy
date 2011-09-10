@@ -93,10 +93,14 @@ public:
     /**
      * @brief Constructs the action.
      *
+     * @param a_id_user  The identifier of the user.
+     * @param a_password The password of the user.
      * @param a_id_world The identifier of the world.
      */
     ScenarioCreateEpochActionSuccess(
-        unsigned int const a_id_world
+        unsigned int const   a_id_user,
+        std::string  const & a_password,
+        unsigned int const   a_id_world
     );
 
     /**
@@ -111,6 +115,16 @@ public:
     );
 
 private:
+    /**
+     * @brief The identifier of the user.
+     */
+    unsigned int const m_id_user;
+
+    /**
+     * @brief The password of the user.
+     */
+    std::string const m_password;
+
     /**
      * @brief The name of the world.
      */
@@ -127,10 +141,14 @@ public:
     /**
      * @brief Constructs the action.
      *
+     * @param a_id_user  The identifier of the user.
+     * @param a_password The password of the user.
      * @param a_id_world The identifier of the world.
      */
     ScenarioCreateEpochActionInvalidRequest(
-        unsigned int const a_id_world
+        unsigned int const   a_id_user,
+        std::string  const & a_password,
+        unsigned int const   a_id_world
     );
 
     /**
@@ -145,6 +163,16 @@ public:
     );
 
 private:
+    /**
+     * @brief The identifier of the user.
+     */
+    unsigned int const m_id_user;
+
+    /**
+     * @brief The password of the user.
+     */
+    std::string const m_password;
+
     /**
      * @brief The name of the world.
      */

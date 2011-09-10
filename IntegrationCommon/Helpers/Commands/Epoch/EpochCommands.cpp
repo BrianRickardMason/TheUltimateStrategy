@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "EpochCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "EpochCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -43,11 +42,13 @@ namespace Epoch
 {
 
 ReplyShrPtr CreateEpoch(
-    IClientShrPtr      a_client,
-    unsigned int const a_id_world
+    IClientShrPtr         a_client,
+    unsigned int  const   a_id_user,
+    string        const & a_password,
+    unsigned int  const   a_id_world
 )
 {
-    RequestShrPtr request = createRequestCreateEpoch(a_id_world);
+    RequestShrPtr request = createRequestCreateEpoch(a_id_user, a_password, a_id_world);
 
     return a_client->sendRequest(request);
 }

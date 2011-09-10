@@ -64,9 +64,13 @@ char const * ScenarioCreateEpoch::execute()
 }
 
 ScenarioCreateEpochActionSuccess::ScenarioCreateEpochActionSuccess(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    string       const & a_password,
+    unsigned int const   a_id_world
 )
-    : m_id_world(a_id_world)
+    : m_id_user(a_id_user),
+      m_password(a_password),
+      m_id_world(a_id_world)
 {
 }
 
@@ -74,13 +78,17 @@ ReplyShrPtr ScenarioCreateEpochActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateEpoch(a_client, m_id_world);
+    return CreateEpoch(a_client, m_id_user, m_password, m_id_world);
 }
 
 ScenarioCreateEpochActionInvalidRequest::ScenarioCreateEpochActionInvalidRequest(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    string       const & a_password,
+    unsigned int const   a_id_world
 )
-    : m_id_world(a_id_world)
+    : m_id_user(a_id_user),
+      m_password(a_password),
+      m_id_world(a_id_world)
 {
 }
 

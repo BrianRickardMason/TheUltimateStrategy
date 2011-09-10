@@ -132,13 +132,20 @@ RequestShrPtr createRequestCreateWorld(
 }
 
 RequestShrPtr createRequestCreateEpoch(
-    unsigned int const a_id_world
+    unsigned int const   a_id_user,
+    string       const & a_password,
+    unsigned int const   a_id_world
 )
 {
     RequestShrPtr request = make_shared<Request>();
 
     request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_CREATE_EPOCH);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
+
+    IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
+
+    user_node->appendNode("iduser")->appendAttribute("value")->setValue(a_id_user);
+    user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("idworld");
     name->appendAttribute("type")->setValue("unsigned integer");
