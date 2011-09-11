@@ -88,6 +88,22 @@ public:
             std::string                     const & a_login
         )
     );
+
+    /**
+     * @brief Gets the record of the user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_id_user     The identifier of the user.
+     *
+     * @return The record of the user, null if not found.
+     */
+    MOCK_CONST_METHOD2(
+        getRecord,
+        IUserRecordShrPtr(
+            Persistency::ITransactionShrPtr a_transaction,
+            IDUser                          a_id_user
+        )
+    );
 };
 
 } // namespace User

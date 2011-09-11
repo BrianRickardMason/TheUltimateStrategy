@@ -80,6 +80,19 @@ public:
         std::string                     const & a_login
     ) const;
 
+    /**
+     * @brief Gets the record of the user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_id_user     The identifier of the user.
+     *
+     * @return The record of the user, null if not found.
+     */
+    virtual IUserRecordShrPtr getRecord(
+        Persistency::ITransactionShrPtr a_transaction,
+        IDUser                          a_id_user
+    ) const;
+
 private:
     /**
      * @brief Prepares the result for getRecord* methods.

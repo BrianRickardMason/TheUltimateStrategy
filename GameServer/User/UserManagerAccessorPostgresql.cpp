@@ -82,6 +82,20 @@ IUserRecordShrPtr UserManagerAccessorPostgresql::getRecordByLogin(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
+IUserRecordShrPtr UserManagerAccessorPostgresql::getRecord(
+    ITransactionShrPtr a_transaction,
+    IDUser             a_id_user
+) const
+{
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+
+    string query = "SELECT * FROM users WHERE id_user = "
+                   + backbone_transaction.quote(a_id_user.getValue());
+
+    return prepareResultGetRecord(backbone_transaction.exec(query));
+}
+
 IUserRecordShrPtr UserManagerAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
