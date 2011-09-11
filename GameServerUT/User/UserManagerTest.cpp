@@ -40,34 +40,40 @@ using testing::Return;
 using testing::Throw;
 
 /**
- * @brief A test class.
+ * @brief The test class of UserManager.
  */
 class UserManagerTest
     : public testing::Test
 {
 protected:
     /**
-     * @brief Constructs a test class.
+     * @brief Constructs the test class of UserManager.
      */
     UserManagerTest()
-        : m_id_user_1(1)
+        : m_id_user(1),
+          m_user_record(new UserRecord(m_id_user, "Login", "Password"))
     {
     }
 
     /**
-     * @brief Test constants identifiers of the user.
+     * @brief Test constants: the identifier of the user.
      */
-    IDUser m_id_user_1;
+    IDUser m_id_user;
+
+    /**
+     * @brief Test constants: the record of the user.
+     */
+    IUserRecordShrPtr m_user_record;
 };
 
-TEST_F(UserManagerTest, UserManager)
+TEST_F(UserManagerTest, ConstructorDoesNotThrow)
 {
     IUserManagerAccessorAutPtr accessor(new UserManagerAccessorMock);
 
     ASSERT_NO_THROW(UserManager manager(accessor));
 }
 
-TEST_F(UserManagerTest, createUser_Success)
+TEST_F(UserManagerTest, CreateUserReturnsTrueOnSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -82,7 +88,7 @@ TEST_F(UserManagerTest, createUser_Success)
     ASSERT_TRUE(manager.createUser(transaction, "Login", "Password"));
 }
 
-TEST_F(UserManagerTest, createUser_Failure)
+TEST_F(UserManagerTest, CreateUserReturnsFalseOnFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -100,7 +106,7 @@ TEST_F(UserManagerTest, createUser_Failure)
     ASSERT_FALSE(manager.createUser(transaction, "Login", "Password"));
 }
 
-TEST_F(UserManagerTest, deleteUser_Success)
+TEST_F(UserManagerTest, DeleteUserReturnsTrueOnSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -115,7 +121,7 @@ TEST_F(UserManagerTest, deleteUser_Success)
     ASSERT_TRUE(manager.deleteUser(transaction, IDUser(1)));
 }
 
-TEST_F(UserManagerTest, deleteUser_Failure)
+TEST_F(UserManagerTest, DeleteUserReturnsFalseOnFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -133,7 +139,7 @@ TEST_F(UserManagerTest, deleteUser_Failure)
     ASSERT_FALSE(manager.deleteUser(transaction, IDUser(1)));
 }
 
-TEST_F(UserManagerTest, getUserByIDUser_UserDoesNotExist)
+TEST_F(UserManagerTest, GetUserByLoginReturnsNullIfUserDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -151,14 +157,14 @@ TEST_F(UserManagerTest, getUserByIDUser_UserDoesNotExist)
     ASSERT_TRUE(user == NULL);
 }
 
-TEST_F(UserManagerTest, getUserByLogin_UserDoesExist)
+TEST_F(UserManagerTest, GetUserByLoginReturnsUserIfUserDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
-    .WillOnce(Return(IUserRecordShrPtr(new UserRecord(m_id_user_1, "Login", "Password"))));
+    .WillOnce(Return(m_user_record));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
@@ -167,8 +173,130 @@ TEST_F(UserManagerTest, getUserByLogin_UserDoesExist)
     IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
 
     ASSERT_TRUE(user != NULL);
+}
 
-    ASSERT_TRUE(m_id_user_1 == user->getIDUser());
+TEST_F(UserManagerTest, GetUserByLoginReturnedUserHasProperIDUser)
+{
+    ITransactionShrPtr transaction(new TransactionDummy);
+
+    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+
+    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
+    .WillOnce(Return(m_user_record));
+
+    IUserManagerAccessorAutPtr accessor(mock);
+
+    UserManager manager(accessor);
+
+    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
+
+    ASSERT_TRUE(m_id_user == user->getIDUser());
+}
+
+TEST_F(UserManagerTest, GetUserByLoginReturnedUserHasProperLogin)
+{
+    ITransactionShrPtr transaction(new TransactionDummy);
+
+    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+
+    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
+    .WillOnce(Return(m_user_record));
+
+    IUserManagerAccessorAutPtr accessor(mock);
+
+    UserManager manager(accessor);
+
+    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
+
     ASSERT_STREQ("Login", user->getLogin().c_str());
+}
+
+TEST_F(UserManagerTest, GetUserByLoginReturnedUserHasProperPassword)
+{
+    ITransactionShrPtr transaction(new TransactionDummy);
+
+    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+
+    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
+    .WillOnce(Return(m_user_record));
+
+    IUserManagerAccessorAutPtr accessor(mock);
+
+    UserManager manager(accessor);
+
+    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
+
+    ASSERT_STREQ("Password", user->getPassword().c_str());
+}
+
+TEST_F(UserManagerTest, GetUserByIDUserReturnsNullIfUserDoesNotExist)
+{
+    ITransactionShrPtr transaction(new TransactionDummy);
+
+    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+
+    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
+    .WillOnce(Return(IUserRecordShrPtr()));
+
+    IUserManagerAccessorAutPtr accessor(mock);
+
+    UserManager manager(accessor);
+
+    IUserShrPtr user = manager.getUser(transaction, m_id_user);
+
+    ASSERT_TRUE(user == NULL);
+}
+
+TEST_F(UserManagerTest, GetUserByIDUserReturnedUserHasProperIDUser)
+{
+    ITransactionShrPtr transaction(new TransactionDummy);
+
+    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+
+    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
+    .WillOnce(Return(m_user_record));
+
+    IUserManagerAccessorAutPtr accessor(mock);
+
+    UserManager manager(accessor);
+
+    IUserShrPtr user = manager.getUser(transaction, m_id_user);
+
+    ASSERT_TRUE(m_id_user == user->getIDUser());
+}
+
+TEST_F(UserManagerTest, GetUserByIDUserReturnedUserHasProperLogin)
+{
+    ITransactionShrPtr transaction(new TransactionDummy);
+
+    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+
+    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
+    .WillOnce(Return(m_user_record));
+
+    IUserManagerAccessorAutPtr accessor(mock);
+
+    UserManager manager(accessor);
+
+    IUserShrPtr user = manager.getUser(transaction, m_id_user);
+
+    ASSERT_STREQ("Login", user->getLogin().c_str());
+}
+
+TEST_F(UserManagerTest, GetUserByIDUserReturnedUserHasProperPassword)
+{
+    ITransactionShrPtr transaction(new TransactionDummy);
+
+    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+
+    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
+    .WillOnce(Return(m_user_record));
+
+    IUserManagerAccessorAutPtr accessor(mock);
+
+    UserManager manager(accessor);
+
+    IUserShrPtr user = manager.getUser(transaction, m_id_user);
+
     ASSERT_STREQ("Password", user->getPassword().c_str());
 }

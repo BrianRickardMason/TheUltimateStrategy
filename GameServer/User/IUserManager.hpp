@@ -89,6 +89,19 @@ public:
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const & a_login
     ) = 0;
+
+    /**
+     * @brief Gets the user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_id_user     The identifier of the user.
+     *
+     * @return The user, null if not found.
+     */
+    virtual IUserShrPtr getUser(
+        Persistency::ITransactionShrPtr a_transaction,
+        IDUser                          a_login
+    ) = 0;
 };
 
 /**

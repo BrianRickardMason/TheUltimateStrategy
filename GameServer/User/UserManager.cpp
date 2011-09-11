@@ -87,6 +87,14 @@ IUserShrPtr UserManager::getUserByLogin(
     return prepareResultGetUser(m_accessor->getRecordByLogin(a_transaction, a_login));
 }
 
+IUserShrPtr UserManager::getUser(
+    ITransactionShrPtr a_transaction,
+    IDUser             a_id_user
+)
+{
+    return prepareResultGetUser(m_accessor->getRecord(a_transaction, a_id_user));
+}
+
 IUserShrPtr UserManager::prepareResultGetUser(
     IUserRecordShrPtr a_record
 )

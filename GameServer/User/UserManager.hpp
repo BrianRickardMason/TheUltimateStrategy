@@ -94,6 +94,19 @@ public:
         std::string                     const & a_login
     );
 
+    /**
+     * @brief Gets the user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_id_user     The identifier of the user.
+     *
+     * @return The user, null if not found.
+     */
+    virtual IUserShrPtr getUser(
+        Persistency::ITransactionShrPtr a_transaction,
+        IDUser                          a_login
+    );
+
 private:
     /**
      * @brief Prepares the result for getUser* methods.
