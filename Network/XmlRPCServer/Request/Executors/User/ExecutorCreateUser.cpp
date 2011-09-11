@@ -81,6 +81,13 @@ bool ExecutorCreateUser::authenticate(
     return true;
 }
 
+bool ExecutorCreateUser::getActingUser(
+    IPersistencyShrPtr a_persistency
+)
+{
+    return true;
+}
+
 bool ExecutorCreateUser::authorize(
     IPersistencyShrPtr a_persistency
 ) const

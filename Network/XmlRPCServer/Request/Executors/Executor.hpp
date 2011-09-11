@@ -114,7 +114,7 @@ private:
      *
      * @return True if the acting user has been got, false otherwise.
      */
-    bool getActingUser(
+    virtual bool getActingUser(
         GameServer::Persistency::IPersistencyShrPtr a_persistency
     );
 
