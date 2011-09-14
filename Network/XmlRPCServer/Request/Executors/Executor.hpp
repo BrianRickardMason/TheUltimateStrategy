@@ -232,17 +232,13 @@ private:
 protected:
     /**
      * @brief Persistency.
-     *
-     * TODO: Add "const".
      */
-    GameServer::Persistency::IPersistencyShrPtr m_persistency;
+    GameServer::Persistency::IPersistencyShrPtr const m_persistency;
 
     /**
      * @brief OperatorAbstractFactory.
-     *
-     * TODO: Add "const".
      */
-    GameServer::Common::IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
+    GameServer::Common::IOperatorAbstractFactoryShrPtr const m_operator_abstract_factory;
 
     /**
      * @brief The acting user.
