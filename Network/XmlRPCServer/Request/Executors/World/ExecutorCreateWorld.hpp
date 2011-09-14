@@ -28,7 +28,6 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEWORLD_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEWORLD_HPP
 
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../../../../../GameServer/World/Operators/CreateWorld/CreateWorldOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
@@ -168,11 +167,6 @@ class ExecutorCreateWorld
      * @brief The value of the identifier of the user.
      */
     unsigned int m_value_id_user;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

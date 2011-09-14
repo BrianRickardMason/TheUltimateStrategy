@@ -30,7 +30,6 @@
 
 #include "../../../../../GameServer/Land/IDLand.hpp"
 #include "../../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -175,11 +174,6 @@ class ExecutorCreateSettlement
      * @brief The value of the identifier of a land.
      */
     unsigned int m_value_id_land;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

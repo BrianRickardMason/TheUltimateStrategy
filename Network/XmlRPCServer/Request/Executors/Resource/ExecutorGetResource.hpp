@@ -31,7 +31,6 @@
 #include "../../../../../GameServer/Common/IDHolder.hpp"
 #include "../../../../../GameServer/Resource/IDResource.hpp"
 #include "../../../../../GameServer/Resource/Operators/GetResource/GetResourceOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -193,11 +192,6 @@ class ExecutorGetResource
      * @brief The value of the identifier of a resource.
      */
     unsigned int m_value_id_resource;
-
-    /**
-     * @brief The identifier of a user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENTBYIDSETTLEMENT_HPP
 
 #include "../../../../../GameServer/Settlement/Operators/GetSettlementByIDSettlement/GetSettlementByIDSettlementOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -176,11 +175,6 @@ class ExecutorGetSettlementByIDSettlement
      * @brief The value of the identifier of a settlement.
      */
     unsigned int m_value_id_settlement;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

@@ -33,7 +33,6 @@
 #include "../../../../../GameServer/Human/Volume.hpp"
 #include "../../../../../GameServer/Settlement/IDSettlement.hpp"
 #include "../../../../../GameServer/Transport/Operators/TransportHuman/TransportHumanOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -207,11 +206,6 @@ class ExecutorTransportHuman
      * @brief The value of the volume.
      */
     unsigned int m_value_volume;
-
-    /**
-     * @brief The identifier of a user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDBYNAME_HPP
 
 #include "../../../../../GameServer/Land/Operators/GetLandByIDUserAndName/GetLandByIDUserAndNameOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -175,11 +174,6 @@ class ExecutorGetLandByName
      * @brief The value of the identifier of a user.
      */
     unsigned int m_value_id_user;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

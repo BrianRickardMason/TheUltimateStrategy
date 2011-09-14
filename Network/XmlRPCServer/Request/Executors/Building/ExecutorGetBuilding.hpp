@@ -31,7 +31,6 @@
 #include "../../../../../GameServer/Building/IDBuilding.hpp"
 #include "../../../../../GameServer/Building/Operators/GetBuilding/GetBuildingOperatorExitCode.hpp"
 #include "../../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -200,11 +199,6 @@ class ExecutorGetBuilding
      * @brief The value of the identifier of a building.
      */
     unsigned int m_value_id_building;
-
-    /**
-     * @brief The identifier of a user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

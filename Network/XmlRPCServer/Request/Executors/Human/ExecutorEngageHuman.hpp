@@ -32,7 +32,6 @@
 #include "../../../../../GameServer/Human/IDHuman.hpp"
 #include "../../../../../GameServer/Human/Operators/EngageHuman/EngageHumanOperatorExitCode.hpp"
 #include "../../../../../GameServer/Human/Volume.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -200,11 +199,6 @@ class ExecutorEngageHuman
      * @brief The value of the volume.
      */
     unsigned int m_value_volume;
-
-    /**
-     * @brief The identifier of a user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

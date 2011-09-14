@@ -30,7 +30,6 @@
 
 #include "../../../../../GameServer/Epoch/IDEpoch.hpp"
 #include "../../../../../GameServer/Land/Operators/CreateLand/CreateLandOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../../../../../GameServer/World/IDWorld.hpp"
 #include "../Executor.hpp"
 
@@ -182,11 +181,6 @@ class ExecutorCreateLand
      * @brief The value of the identifier of a epoch.
      */
     unsigned int m_value_id_epoch;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

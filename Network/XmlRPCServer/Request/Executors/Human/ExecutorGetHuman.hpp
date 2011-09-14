@@ -32,7 +32,6 @@
 #include "../../../../../GameServer/Human/Experience.hpp"
 #include "../../../../../GameServer/Human/IDHuman.hpp"
 #include "../../../../../GameServer/Human/Operators/GetHuman/GetHumanOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -208,11 +207,6 @@ class ExecutorGetHuman
      * @brief The value of the experience of a human.
      */
     unsigned int m_value_experience;
-
-    /**
-     * @brief The identifier of a user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

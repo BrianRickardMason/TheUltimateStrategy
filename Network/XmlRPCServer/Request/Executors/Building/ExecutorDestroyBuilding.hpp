@@ -32,7 +32,6 @@
 #include "../../../../../GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorExitCode.hpp"
 #include "../../../../../GameServer/Building/Volume.hpp"
 #include "../../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -200,11 +199,6 @@ class ExecutorDestroyBuilding
      * @brief The value of the volume.
      */
     unsigned int m_value_volume;
-
-    /**
-     * @brief The identifier of a user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETEPOCH_HPP
 
 #include "../../../../../GameServer/Epoch/Operators/GetEpochByIDWorld/GetEpochByIDWorldOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../../../../../GameServer/World/IDWorld.hpp"
 #include "../Executor.hpp"
 
@@ -179,11 +178,6 @@ class ExecutorGetEpoch
      * @brief The value of the identifier of the world.
      */
     unsigned int m_value_id_world;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

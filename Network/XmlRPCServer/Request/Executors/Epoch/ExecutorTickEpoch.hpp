@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTICKEPOCH_HPP
 
 #include "../../../../../GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../../../../../GameServer/World/IDWorld.hpp"
 #include "../Executor.hpp"
 
@@ -174,11 +173,6 @@ class ExecutorTickEpoch
      * @brief The value of the identifier of the world.
      */
     unsigned int m_value_id_world;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The password of the user.

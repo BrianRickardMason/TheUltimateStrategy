@@ -175,11 +175,6 @@ class ExecutorTurn
     unsigned int m_value_id_land;
 
     /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
-
-    /**
      * @brief The password of the user.
      */
     std::string m_password;

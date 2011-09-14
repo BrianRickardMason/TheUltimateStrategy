@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYIDWORLD_HPP
 
 #include "../../../../../GameServer/Land/Operators/GetLandsByIDUserAndIDWorld/GetLandsByIDUserAndIDWorldOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../../../../../GameServer/World/IDWorld.hpp"
 #include "../Executor.hpp"
 
@@ -190,11 +189,6 @@ class ExecutorGetLandsByIDWorld
      * @brief The password of the user.
      */
     std::string m_password;
-
-    /**
-     * @brief The identifier of the user.
-     */
-    GameServer::User::IDUser m_id_user;
 
     /**
      * @brief The identifier of the world.
