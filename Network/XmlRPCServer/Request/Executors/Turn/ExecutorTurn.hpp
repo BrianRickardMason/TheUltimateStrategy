@@ -30,7 +30,6 @@
 
 #include "../../../../../GameServer/Land/IDLand.hpp"
 #include "../../../../../GameServer/Turn/Operators/Turn/TurnOperatorExitCode.hpp"
-#include "../../../../../GameServer/User/IDUser.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -52,9 +51,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <iduser   type=\"unsigned integer\" value=\"#\" />
- *         <password type=\"string\"           value=\"#\" />
- *         <idland   type=\"unsigned integer\" value=\"#\" />
+ *         <idland type=\"unsigned integer\" value=\"#\" />
  *     </parameters>
  * </request>
  *
