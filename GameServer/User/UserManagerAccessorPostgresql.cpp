@@ -106,14 +106,15 @@ IUserRecordShrPtr UserManagerAccessorPostgresql::prepareResultGetRecord(
     if (a_result.size() > 0)
     {
         IDUser id_user;
-        string login,
-               password;
+        string login, password;
+        bool moderator;
 
         id_user = a_result[0]["id_user"].as(unsigned_integer);
         a_result[0]["login"].to(login);
         a_result[0]["password"].to(password);
+        a_result[0]["moderator"].to(moderator);
 
-        return IUserRecordShrPtr(new UserRecord(id_user, login, password));
+        return IUserRecordShrPtr(new UserRecord(id_user, login, password, moderator));
     }
     else
     {

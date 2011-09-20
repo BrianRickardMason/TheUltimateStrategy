@@ -51,7 +51,7 @@ protected:
      */
     UserManagerTest()
         : m_id_user(1),
-          m_user_record(new UserRecord(m_id_user, "Login", "Password"))
+          m_user_record(new UserRecord(m_id_user, "Login", "Password", false))
     {
     }
 

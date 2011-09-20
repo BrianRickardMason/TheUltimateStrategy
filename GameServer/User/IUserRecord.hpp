@@ -68,6 +68,13 @@ public:
      * @return The password of the user.
      */
     virtual std::string getPassword() const = 0;
+
+    /**
+     * @brief Checks if the user is a moderator.
+     *
+     * @return True if the user is the moderator, false otherwise.
+     */
+    virtual bool isModerator() const = 0;
 };
 
 /**

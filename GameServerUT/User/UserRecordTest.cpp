@@ -41,7 +41,7 @@ protected:
      * @brief Constructs a test class.
      */
     UserRecordTest()
-        : m_record(UserRecord(IDUser(1), "Login", "Password"))
+        : m_record(UserRecord(IDUser(1), "Login", "Password", true))
     {
     }
 
@@ -51,26 +51,42 @@ protected:
     UserRecord m_record;
 };
 
-TEST_F(UserRecordTest, UserRecord)
+TEST_F(UserRecordTest, ConstructorSetsProperIDUserValue)
 {
-    UserRecord record(IDUser(1), "Login", "Password");
-
-    ASSERT_EQ(1, record.getIDUser().getValue());
-    ASSERT_STREQ("Login", record.getLogin().c_str());
-    ASSERT_STREQ("Password", record.getPassword().c_str());
+	ASSERT_EQ(1, m_record.getIDUser().getValue());
 }
 
-TEST_F(UserRecordTest, getIDUser)
+TEST_F(UserRecordTest, ConstructorSetsProperLoginValue)
+{
+	ASSERT_STREQ("Login", m_record.getLogin().c_str());
+}
+
+TEST_F(UserRecordTest, ConstructorSetsProperPasswordValue)
+{
+	ASSERT_STREQ("Password", m_record.getPassword().c_str());
+}
+
+TEST_F(UserRecordTest, ConstructorSetsProperModeratorValue)
+{
+	ASSERT_EQ(true, m_record.isModerator());
+}
+
+TEST_F(UserRecordTest, GetIDUserReturnsProperValue)
 {
     ASSERT_EQ(1, m_record.getIDUser().getValue());
 }
 
-TEST_F(UserRecordTest, getLogin)
+TEST_F(UserRecordTest, GetLoginReturnsProperValue)
 {
     ASSERT_STREQ("Login", m_record.getLogin().c_str());
 }
 
-TEST_F(UserRecordTest, getPassword)
+TEST_F(UserRecordTest, GetPasswordReturnsProperValue)
 {
     ASSERT_STREQ("Password", m_record.getPassword().c_str());
+}
+
+TEST_F(UserRecordTest, IsModeratorReturnsProperValue)
+{
+    ASSERT_EQ(true, m_record.isModerator());
 }

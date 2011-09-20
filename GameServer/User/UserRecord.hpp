@@ -45,14 +45,16 @@ public:
     /**
      * @brief Constructs the record of the user.
      *
-     * @param a_id_user  The identifier of a user.
-     * @param a_login    The login of a user.
-     * @param a_password The password of a user.
+     * @param a_id_user   The identifier of the user.
+     * @param a_login     The login of the user.
+     * @param a_password  The password of the user.
+     * @param a_moderator The "moderator" status of the user.
      */
     UserRecord(
         IDUser      const & a_id_user,
         std::string const & a_login,
-        std::string const & a_password
+        std::string const & a_password,
+        bool        const   a_moderator
     );
 
     /**
@@ -76,6 +78,13 @@ public:
      */
     virtual std::string getPassword() const;
 
+    /**
+     * @brief Checks if the user is a moderator.
+     *
+     * @return True if the user is a moderator, false otherwise.
+     */
+    virtual bool isModerator() const;
+
 private:
     /**
      * @brief The identifier of the user.
@@ -91,6 +100,11 @@ private:
      * @brief The password of the user.
      */
     std::string const m_password;
+
+    /**
+     * @brief True if the user is a moderator, false otherwise.
+     */
+    bool const m_moderator;
 };
 
 } // namespace User

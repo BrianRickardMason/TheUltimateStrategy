@@ -42,7 +42,7 @@ protected:
      * @brief Constructs the test class of the user.
      */
     UserTest()
-        : m_user(IUserRecordShrPtr(new UserRecord(IDUser(1), "Login", "Password")))
+        : m_user(IUserRecordShrPtr(new UserRecord(IDUser(1), "Login", "Password", false)))
     {
     }
 
