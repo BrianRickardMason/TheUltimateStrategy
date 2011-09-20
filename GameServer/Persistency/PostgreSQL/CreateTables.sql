@@ -1,9 +1,10 @@
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users
 (
-    id_user  SERIAL PRIMARY KEY,
-    login    VARCHAR(44) NOT NULL CHECK(login <> ''),
-    password VARCHAR(44) NOT NULL CHECK(password <> ''),
+    id_user   SERIAL PRIMARY KEY,
+    login     VARCHAR(44) NOT NULL CHECK(login <> ''),
+    password  VARCHAR(44) NOT NULL CHECK(password <> ''),
+    moderator BOOLEAN DEFAULT FALSE,
 
     UNIQUE(login)
 );
