@@ -31,6 +31,7 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistency;
+using namespace GameServer::User;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
 using namespace Network::XmlRPCCommon::Xml;
@@ -110,7 +111,31 @@ bool Executor::getActingUser(
     IPersistencyShrPtr a_persistency
 )
 {
-    return true;
+    IGetUserByIDUserOperatorShrPtr get_user_operator = m_operator_abstract_factory->createGetUserByIDUserOperator();
+
+    // The transaction lifetime.
+    {
+        IConnectionShrPtr connection = a_persistency->getConnection();
+        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+
+        GetUserByIDUserOperatorExitCode const exit_code = get_user_operator->getUserByIDUser(transaction, m_id_user);
+
+        if (exit_code.ok())
+        {
+            transaction->commit();
+        }
+
+        if (!exit_code.m_user)
+        {
+            return false;
+        }
+        else
+        {
+            m_user = exit_code.m_user;
+
+            return true;
+        }
+    }
 }
 
 ReplyShrPtr Executor::produceReplyServerIsNotListening() const

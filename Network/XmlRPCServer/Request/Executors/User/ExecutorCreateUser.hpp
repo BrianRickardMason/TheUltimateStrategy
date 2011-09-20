@@ -106,6 +106,7 @@ class ExecutorCreateUser
     virtual bool getActingUser(
         GameServer::Persistency::IPersistencyShrPtr a_persistency
     );
+
     /**
      * @brief Authorizes the user.
      *

@@ -70,6 +70,13 @@ bool ExecutorError::authenticate(
     return true;
 }
 
+bool ExecutorError::getActingUser(
+    IPersistencyShrPtr a_persistency
+)
+{
+    return true;
+}
+
 bool ExecutorError::authorize(
     IPersistencyShrPtr a_persistency
 ) const

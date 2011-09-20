@@ -70,6 +70,13 @@ bool ExecutorEcho::authenticate(
     return true;
 }
 
+bool ExecutorEcho::getActingUser(
+    IPersistencyShrPtr a_persistency
+)
+{
+    return true;
+}
+
 bool ExecutorEcho::authorize(
     IPersistencyShrPtr a_persistency
 ) const

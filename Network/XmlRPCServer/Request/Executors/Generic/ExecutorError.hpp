@@ -90,6 +90,17 @@ class ExecutorError
     ) const;
 
     /**
+     * @brief Gets the acting user.
+     *
+     * @param a_persistency The persistency.
+     *
+     * @return True if the acting user has been got, false otherwise.
+     */
+    virtual bool getActingUser(
+        GameServer::Persistency::IPersistencyShrPtr a_persistency
+    );
+
+    /**
      * @brief Authorizes the user.
      *
      * @param a_persistency The persistency.
