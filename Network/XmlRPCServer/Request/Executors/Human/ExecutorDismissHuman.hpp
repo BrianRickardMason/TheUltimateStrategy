@@ -173,11 +173,6 @@ class ExecutorDismissHuman
     ) const;
 
     /**
-     * @brief The value of the identifier of a user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The value of the identifier of the class of a holder.
      */
     unsigned int m_value_id_holder_class;

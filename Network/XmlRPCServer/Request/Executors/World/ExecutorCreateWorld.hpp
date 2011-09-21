@@ -164,11 +164,6 @@ class ExecutorCreateWorld
     ) const;
 
     /**
-     * @brief The value of the identifier of the user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The password of the user.
      */
     std::string m_password;

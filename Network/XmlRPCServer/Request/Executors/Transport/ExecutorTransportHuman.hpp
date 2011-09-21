@@ -173,11 +173,6 @@ class ExecutorTransportHuman
     ) const;
 
     /**
-     * @brief The value of the identifier of a user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The value of the identifier of the source settlement.
      */
     unsigned int m_value_id_settlement_source;

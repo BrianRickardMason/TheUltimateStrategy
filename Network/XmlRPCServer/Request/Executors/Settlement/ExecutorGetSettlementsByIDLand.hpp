@@ -176,11 +176,6 @@ class ExecutorGetSettlementsByIDLand
     ) const;
 
     /**
-     * @brief The value of the identifier of a user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The value of the identifier of a land.
      */
     unsigned int m_value_id_land;

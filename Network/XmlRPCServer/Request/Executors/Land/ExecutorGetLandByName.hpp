@@ -171,11 +171,6 @@ class ExecutorGetLandByName
     ) const;
 
     /**
-     * @brief The value of the identifier of a user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The password of the user.
      */
     std::string m_password;

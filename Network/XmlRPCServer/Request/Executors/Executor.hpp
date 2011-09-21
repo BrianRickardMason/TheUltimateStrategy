@@ -241,6 +241,11 @@ protected:
     GameServer::Common::IOperatorAbstractFactoryShrPtr const m_operator_abstract_factory;
 
     /**
+     * @brief The value of the identifier of the user.
+     */
+    unsigned int m_value_id_user;
+
+    /**
      * @brief The identifier of the user.
      */
     GameServer::User::IDUser m_id_user;

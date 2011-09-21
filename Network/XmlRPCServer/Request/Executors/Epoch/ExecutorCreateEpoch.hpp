@@ -165,11 +165,6 @@ class ExecutorCreateEpoch
     ) const;
 
     /**
-     * @brief The value of the identifier of the user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The value of the identifier of the world.
      */
     unsigned int m_value_id_world;

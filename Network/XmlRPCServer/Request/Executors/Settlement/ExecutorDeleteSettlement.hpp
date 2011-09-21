@@ -165,11 +165,6 @@ class ExecutorDeleteSettlement
     ) const;
 
     /**
-     * @brief The value of the identifier of a user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The value of the identifier of a settlement.
      */
     unsigned int m_value_id_settlement;

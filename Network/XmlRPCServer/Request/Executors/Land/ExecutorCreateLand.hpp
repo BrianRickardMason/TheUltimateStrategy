@@ -168,11 +168,6 @@ class ExecutorCreateLand
     ) const;
 
     /**
-     * @brief The value of the identifier of a user.
-     */
-    unsigned int m_value_id_user;
-
-    /**
      * @brief The value of the identifier of a world.
      */
     unsigned int m_value_id_world;
