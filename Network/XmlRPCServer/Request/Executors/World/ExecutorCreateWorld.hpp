@@ -164,11 +164,6 @@ class ExecutorCreateWorld
     ) const;
 
     /**
-     * @brief The password of the user.
-     */
-    std::string m_password;
-
-    /**
      * @brief The name of the world.
      */
     std::string m_name;

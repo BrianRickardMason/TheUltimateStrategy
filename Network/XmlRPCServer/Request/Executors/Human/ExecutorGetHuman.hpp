@@ -204,11 +204,6 @@ class ExecutorGetHuman
     unsigned int m_value_experience;
 
     /**
-     * @brief The password of the user.
-     */
-    std::string m_password;
-
-    /**
      * @brief The identifier of a holder.
      */
     GameServer::Common::IDHolder m_id_holder;

@@ -170,11 +170,6 @@ class ExecutorDeleteSettlement
     unsigned int m_value_id_settlement;
 
     /**
-     * @brief The password of the user.
-     */
-    std::string m_password;
-
-    /**
      * @brief The identifier of the settlement.
      */
     GameServer::Settlement::IDSettlement m_id_settlement;

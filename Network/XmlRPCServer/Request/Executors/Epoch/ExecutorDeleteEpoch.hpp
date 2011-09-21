@@ -170,11 +170,6 @@ class ExecutorDeleteEpoch
     unsigned int m_value_id_world;
 
     /**
-     * @brief The password of the user.
-     */
-    std::string m_password;
-
-    /**
      * @brief The identifier of the world.
      */
     GameServer::World::IDWorld m_id_world;

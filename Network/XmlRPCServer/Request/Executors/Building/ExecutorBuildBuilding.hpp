@@ -196,11 +196,6 @@ class ExecutorBuildBuilding
     unsigned int m_value_volume;
 
     /**
-     * @brief The password of the user.
-     */
-    std::string m_password;
-
-    /**
      * @brief The identifier of a holder.
      */
     GameServer::Common::IDHolder m_id_holder;

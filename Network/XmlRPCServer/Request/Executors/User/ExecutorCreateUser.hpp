@@ -175,11 +175,6 @@ class ExecutorCreateUser
      * @brief The value of the login of a user.
      */
     std::string m_login;
-
-    /**
-     * @brief The value of the password of a user.
-     */
-    std::string m_password;
 };
 
 } // namespace Executors

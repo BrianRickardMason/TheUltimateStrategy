@@ -171,11 +171,6 @@ class ExecutorCreateSettlement
     unsigned int m_value_id_land;
 
     /**
-     * @brief The password of the user.
-     */
-    std::string m_password;
-
-    /**
      * @brief The identifier of the land.
      */
     GameServer::Land::IDLand m_id_land;

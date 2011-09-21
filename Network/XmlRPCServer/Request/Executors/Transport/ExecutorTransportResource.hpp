@@ -190,11 +190,6 @@ class ExecutorTransportResource
     unsigned int m_value_volume;
 
     /**
-     * @brief The password of the user.
-     */
-    std::string m_password;
-
-    /**
      * @brief The identifier of the source settlement.
      */
     GameServer::Settlement::IDSettlement m_id_settlement_source;
