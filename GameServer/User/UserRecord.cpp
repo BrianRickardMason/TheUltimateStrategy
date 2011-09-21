@@ -64,7 +64,7 @@ string UserRecord::getPassword() const
 
 bool UserRecord::isModerator() const
 {
-	return m_moderator;
+    return m_moderator;
 }
 
 } // namespace User

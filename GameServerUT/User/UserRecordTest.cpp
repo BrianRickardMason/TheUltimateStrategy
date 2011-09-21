@@ -53,22 +53,22 @@ protected:
 
 TEST_F(UserRecordTest, ConstructorSetsProperIDUserValue)
 {
-	ASSERT_EQ(1, m_record.getIDUser().getValue());
+    ASSERT_EQ(1, m_record.getIDUser().getValue());
 }
 
 TEST_F(UserRecordTest, ConstructorSetsProperLoginValue)
 {
-	ASSERT_STREQ("Login", m_record.getLogin().c_str());
+    ASSERT_STREQ("Login", m_record.getLogin().c_str());
 }
 
 TEST_F(UserRecordTest, ConstructorSetsProperPasswordValue)
 {
-	ASSERT_STREQ("Password", m_record.getPassword().c_str());
+    ASSERT_STREQ("Password", m_record.getPassword().c_str());
 }
 
 TEST_F(UserRecordTest, ConstructorSetsProperModeratorValue)
 {
-	ASSERT_EQ(true, m_record.isModerator());
+    ASSERT_EQ(true, m_record.isModerator());
 }
 
 TEST_F(UserRecordTest, GetIDUserReturnsProperValue)
