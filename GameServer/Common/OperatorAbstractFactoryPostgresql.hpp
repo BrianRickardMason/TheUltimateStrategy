@@ -329,6 +329,13 @@ public:
     virtual User::IGetUserByIDUserOperatorShrPtr createGetUserByIDUserOperator() const;
 
     /**
+     * @brief Creates the get user by login operator.
+     *
+     * @return The newly created get user by login operator.
+     */
+    virtual User::IGetUserByLoginOperatorShrPtr createGetUserByLoginOperator() const;
+
+    /**
      * @brief Creates the create world operator.
      *
      * @return The newly created create world operator.

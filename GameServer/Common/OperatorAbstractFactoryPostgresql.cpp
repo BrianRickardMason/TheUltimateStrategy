@@ -65,6 +65,7 @@
 #include "../Turn/Operators/Turn/TurnOperatorFactory.hpp"
 #include "../User/Operators/CreateUser/CreateUserOperatorFactory.hpp"
 #include "../User/Operators/GetUserByIDUser/GetUserByIDUserOperatorFactory.hpp"
+#include "../User/Operators/GetUserByLogin/GetUserByLoginOperatorFactory.hpp"
 #include "../World/Operators/CreateWorld/CreateWorldOperatorFactory.hpp"
 #include "../World/Operators/GetWorldByIDLand/GetWorldByIDLandOperatorFactory.hpp"
 #include "../WorldConfiguration/Operators/VerifyTurn/VerifyTurnOperatorFactory.hpp"
@@ -293,6 +294,11 @@ ICreateUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateUserOpe
 IGetUserByIDUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetUserByIDUserOperator() const
 {
     return IGetUserByIDUserOperatorShrPtr(GetUserByIDUserOperatorFactory::createGetUserByIDUserOperator(m_manager_abstract_factory));
+}
+
+IGetUserByLoginOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetUserByLoginOperator() const
+{
+    return IGetUserByLoginOperatorShrPtr(GetUserByLoginOperatorFactory::createGetUserByLoginOperator(m_manager_abstract_factory));
 }
 
 ICreateWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateWorldOperator() const

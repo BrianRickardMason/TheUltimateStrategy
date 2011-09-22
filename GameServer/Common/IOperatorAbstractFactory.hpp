@@ -68,6 +68,7 @@
 #include "../Turn/Operators/Turn/ITurnOperator.hpp"
 #include "../User/Operators/CreateUser/ICreateUserOperator.hpp"
 #include "../User/Operators/GetUserByIDUser/IGetUserByIDUserOperator.hpp"
+#include "../User/Operators/GetUserByLogin/IGetUserByLoginOperator.hpp"
 #include "../World/Operators/CreateWorld/ICreateWorldOperator.hpp"
 #include "../World/Operators/GetWorldByIDLand/IGetWorldByIDLandOperator.hpp"
 #include "../WorldConfiguration/Operators/VerifyTurn/IVerifyTurnOperator.hpp"
@@ -368,6 +369,13 @@ public:
      * @return The newly created get user by id user operator.
      */
     virtual User::IGetUserByIDUserOperatorShrPtr createGetUserByIDUserOperator() const = 0;
+
+    /**
+     * @brief Creates the get user by login operator.
+     *
+     * @return The newly created get user by login operator.
+     */
+    virtual User::IGetUserByLoginOperatorShrPtr createGetUserByLoginOperator() const = 0;
 
     /**
      * @brief Creates the create world operator.
