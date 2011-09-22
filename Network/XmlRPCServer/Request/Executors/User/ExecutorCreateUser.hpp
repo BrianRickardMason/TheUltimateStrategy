@@ -170,11 +170,6 @@ class ExecutorCreateUser
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
         GameServer::User::CreateUserOperatorExitCode const & a_exit_code
     ) const;
-
-    /**
-     * @brief The value of the login of a user.
-     */
-    std::string m_login;
 };
 
 } // namespace Executors

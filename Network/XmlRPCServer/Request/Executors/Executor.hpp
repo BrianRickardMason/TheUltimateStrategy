@@ -251,6 +251,13 @@ protected:
     GameServer::User::IDUser m_id_user;
 
     /**
+     * @brief The login of the user.
+     *
+     * Used in a different way in ExecutorCreateUser.
+     */
+    std::string m_login;
+
+    /**
      * @brief The password of the user.
      *
      * Used in a different way in ExecutorCreateUser.
