@@ -150,6 +150,15 @@ public:
     std::string getPasswordValue() const;
 
     /**
+     * @brief Gets the value of the login of the user.
+     *
+     * @return The value of the login of the user.
+     *
+     * @throws InvalidRequestShrPtr When the value of the login of the user cannot be determined.
+     */
+    std::string getLoginValue() const;
+
+    /**
      * @brief Gets the value of the unsigned integer parameter by name.
      *
      * @param a_name The name of the parameter.
