@@ -142,6 +142,39 @@ unsigned int Request::getIDUserValue() const
     return value_attribute->asInt();
 }
 
+string Request::getLoginValue() const
+{
+    // Verify if the "request" node exists.
+    IXmlNodeShrPtr request_node = m_xml_document->getNode("request");
+    if (!request_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "user" node exists.
+    IXmlNodeShrPtr user_node = request_node->getNode("user");
+    if (!user_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "login" node exists.
+    IXmlNodeShrPtr login_node = user_node->getNode("login");
+    if (!login_node)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    // Verify if the "login" node has the "value" attribute.
+    IXmlAttributeShrPtr value_attribute = login_node->getAttribute("value");
+    if (!value_attribute)
+    {
+        throw InvalidRequestShrPtr();
+    }
+
+    return string(value_attribute->getValue());
+}
+
 string Request::getPasswordValue() const
 {
     // Verify if the "request" node exists.
