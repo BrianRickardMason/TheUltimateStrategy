@@ -72,11 +72,15 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(1, "Password1", 1, settlement_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
+                            "Login1", "Password1",
+                            1, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -119,15 +123,21 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(1, "Password1", 1, settlement_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
+                            "Login1", "Password1",
+                            1, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(1, "Password1", 1, settlement_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
+                            "Login1", "Password1",
+                            1, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementDoesExist))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -173,19 +183,27 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name_1)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name_1)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name_2)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name_2)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(1, "Password1", 1, settlement_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
+                            "Login1", "Password1",
+                            1, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(1, "Password1", 2, settlement_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
+                            "Login1", "Password1",
+                            2, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -226,7 +244,9 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionInvalidRequest(1, "Password1", 1, settlement_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateSettlementActionInvalidRequest(
+                            "Login1", "Password1",
+                            1, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationInvalidRequest))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)

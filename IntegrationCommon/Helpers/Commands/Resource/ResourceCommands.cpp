@@ -44,13 +44,13 @@ namespace Resource
 
 ReplyShrPtr GetResources(
     IClientShrPtr              a_client,
-    unsigned int       const   a_id_user,
+    string             const & a_login,
     string             const & a_password,
     unsigned short int const   a_holder_class,
     unsigned int       const   a_id_holder
 )
 {
-    RequestShrPtr request = createRequestGetResources(a_id_user, a_password, a_holder_class, a_id_holder);
+    RequestShrPtr request = createRequestGetResources(a_login, a_password, a_holder_class, a_id_holder);
 
     return a_client->sendRequest(request);
 }

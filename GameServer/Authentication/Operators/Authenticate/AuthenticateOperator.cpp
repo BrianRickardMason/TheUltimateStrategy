@@ -45,13 +45,13 @@ AuthenticateOperator::AuthenticateOperator(
 
 AuthenticateOperatorExitCode AuthenticateOperator::authenticate(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const & a_login,
     string             const & a_password
 ) const
 {
     try
     {
-        bool const result = m_authentication_manager->authenticate(a_transaction, a_id_user, a_password);
+        bool const result = m_authentication_manager->authenticate(a_transaction, a_login, a_password);
 
         return AuthenticateOperatorExitCode(AUTHENTICATE_OPERATOR_EXIT_CODE_AUTHENTICATION_HAS_BEEN_PERFORMED, result);
     }

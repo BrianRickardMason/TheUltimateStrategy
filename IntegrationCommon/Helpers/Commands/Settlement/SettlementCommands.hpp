@@ -44,7 +44,7 @@ namespace Settlement
  * @brief Creates a settlement.
  *
  * @param a_client   The client.
- * @param a_id_user  The identifier of a user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  * @param a_name     The name of a settlement.
@@ -53,7 +53,7 @@ namespace Settlement
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr CreateSettlement(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land,
     std::string  const & a_name
@@ -63,7 +63,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr CreateSettlement(
  * @brief Deletes a settlement.
  *
  * @param a_client        The client.
- * @param a_id_user       The identifier of a user.
+ * @param a_login         The login of the user.
  * @param a_password      The password of the user.
  * @param a_id_settlement The identifier of the settlement.
  *
@@ -71,7 +71,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr CreateSettlement(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DeleteSettlement(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement
 );
@@ -80,7 +80,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DeleteSettlement(
  * @brief Gets a settlement by id land and name.
  *
  * @param a_client   The client.
- * @param a_id_user  The identifier of a user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  * @param a_name     The name of the settlement.
@@ -89,7 +89,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DeleteSettlement(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetSettlementByIDLandAndName(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land,
     std::string  const & a_name
@@ -99,7 +99,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetSettlementByIDLandAndName(
  * @brief Gets a settlement by id settlement.
  *
  * @param a_client        The client.
- * @param a_id_user       The identifier of a user.
+ * @param a_login         The login of the user.
  * @param a_password      The password of the user.
  * @param a_id_settlement The identifier of the settlement.
  *
@@ -107,7 +107,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetSettlementByIDLandAndName(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetSettlementByIDSettlement(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement
 );
@@ -116,7 +116,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetSettlementByIDSettlement(
  * @brief Gets settlements.
  *
  * @param a_client   The client.
- * @param a_id_user  The identifier of a user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  *
@@ -124,7 +124,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetSettlementByIDSettlement(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetSettlements(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land
 );

@@ -64,11 +64,11 @@ char const * ScenarioCreateWorld::execute()
 }
 
 ScenarioCreateWorldActionSuccess::ScenarioCreateWorldActionSuccess(
-    unsigned int const   a_id_user,
-    string       const & a_password,
+    string const & a_login,
+    string const & a_password,
     string const & a_name
 )
-    : m_id_user(a_id_user),
+    : m_login(a_login),
       m_password(a_password),
       m_name(a_name)
 {
@@ -78,15 +78,15 @@ ReplyShrPtr ScenarioCreateWorldActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateWorld(a_client, m_id_user, m_password, m_name);
+    return CreateWorld(a_client, m_login, m_password, m_name);
 }
 
 ScenarioCreateWorldActionInvalidRequest::ScenarioCreateWorldActionInvalidRequest(
-    unsigned int const   a_id_user,
-    string       const & a_password,
+    string const & a_login,
+    string const & a_password,
     string const & a_name
 )
-    : m_id_user(a_id_user),
+    : m_login(a_login),
       m_password(a_password),
       m_name(a_name)
 {
@@ -103,7 +103,7 @@ ReplyShrPtr ScenarioCreateWorldActionInvalidRequest::perform(
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");

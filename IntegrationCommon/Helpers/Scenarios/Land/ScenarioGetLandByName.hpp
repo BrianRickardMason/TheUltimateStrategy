@@ -93,14 +93,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user  The identifier of the user.
+     * @param a_login    The login of the user.
      * @param a_password The password of the user.
      * @param a_name     The name of the land.
      */
     ScenarioGetLandByNameActionSuccess(
-        unsigned int const   a_id_user,
-        std::string  const & a_password,
-        std::string  const   a_name
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_name
     );
 
     /**
@@ -116,19 +116,19 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The name of the land.
      */
-    std::string m_name;
+    std::string const m_name;
 };
 
 /**
@@ -141,14 +141,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user  The identifier of the user.
+     * @param a_login    The login of the user.
      * @param a_password The password of the user.
      * @param a_name     The name of the land.
      */
     ScenarioGetLandByNameActionInvalidRequest(
-        unsigned int const   a_id_user,
-        std::string  const & a_password,
-        std::string  const   a_name
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_name
     );
 
     /**
@@ -164,19 +164,19 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The name of the land.
      */
-    std::string m_name;
+    std::string const m_name;
 };
 
 /**

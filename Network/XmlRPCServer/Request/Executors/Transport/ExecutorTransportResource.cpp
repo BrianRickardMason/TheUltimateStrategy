@@ -62,7 +62,7 @@ bool ExecutorTransportResource::getParameters(
 {
     try
     {
-        m_value_id_user                   = a_request->getIDUserValue();
+        m_login                           = a_request->getLoginValue();
         m_password                        = a_request->getPasswordValue();
         m_value_id_settlement_source      = a_request->getParameterValueUnsignedInteger("idsettlementsource");
         m_value_id_settlement_destination = a_request->getParameterValueUnsignedInteger("idsettlementdestination");
@@ -81,7 +81,6 @@ bool ExecutorTransportResource::processParameters()
 {
     try
     {
-        m_id_user = m_value_id_user;
         m_id_settlement_source = m_value_id_settlement_source;
         m_id_settlement_destination = m_value_id_settlement_destination;
         m_id_resource = m_value_id_resource;
@@ -107,7 +106,7 @@ bool ExecutorTransportResource::authenticate(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthenticateOperatorExitCode const exit_code =
-            authenticate_operator->authenticate(transaction, m_id_user, m_password);
+            authenticate_operator->authenticate(transaction, m_login, m_password);
 
         if (exit_code.ok())
         {
@@ -133,7 +132,7 @@ bool ExecutorTransportResource::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_id_user, m_id_settlement_source);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getIDUser(), m_id_settlement_source);
 
         if (exit_code.ok())
         {
@@ -149,7 +148,7 @@ bool ExecutorTransportResource::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_id_user, m_id_settlement_destination);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getIDUser(), m_id_settlement_destination);
 
         if (exit_code.ok())
         {

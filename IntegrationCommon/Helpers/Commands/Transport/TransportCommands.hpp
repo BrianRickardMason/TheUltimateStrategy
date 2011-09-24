@@ -44,7 +44,7 @@ namespace Transport
  * @brief Transports the human.
  *
  * @param a_client                    The client.
- * @param a_id_user                   The identifier of the user.
+ * @param a_login                     The login of the user.
  * @param a_password                  The password of the user.
  * @param a_id_settlement_source      The identifier of the source settlement.
  * @param a_id_settlement_destination The identifier of the destination settlement.
@@ -57,7 +57,7 @@ namespace Transport
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr TransportHuman(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement_source,
     unsigned int const   a_id_settlement_destination,
@@ -71,7 +71,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr TransportHuman(
  * @brief Transports the resource.
  *
  * @param a_client                    The client.
- * @param a_id_user                   The identifier of the user.
+ * @param a_login                     The login of the user.
  * @param a_password                  The password of the user.
  * @param a_id_settlement_source      The identifier of the source settlement.
  * @param a_id_settlement_destination The identifier of the destination settlement.
@@ -82,7 +82,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr TransportHuman(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr TransportResource(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement_source,
     unsigned int const   a_id_settlement_destination,

@@ -44,62 +44,62 @@ namespace Land
 
 ReplyShrPtr CreateLand(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_world,
     unsigned int const   a_id_epoch,
     string       const & a_name
 )
 {
-    RequestShrPtr request = createRequestCreateLand(a_id_user, a_password, a_id_world, a_id_epoch, a_name);
+    RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_id_world, a_id_epoch, a_name);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr DeleteLand(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_land
 )
 {
-    RequestShrPtr request = createRequestDeleteLand(a_id_user, a_password, a_id_land);
+    RequestShrPtr request = createRequestDeleteLand(a_login, a_password, a_id_land);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetLandByIDLand(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_land
 )
 {
-    RequestShrPtr request = createRequestGetLandByIDLand(a_id_user, a_password, a_id_land);
+    RequestShrPtr request = createRequestGetLandByIDLand(a_login, a_password, a_id_land);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetLandByName(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     string       const & a_name
 )
 {
-    RequestShrPtr request = createRequestGetLandByName(a_id_user, a_password, a_name);
+    RequestShrPtr request = createRequestGetLandByName(a_login, a_password, a_name);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetLandsByIDWorld(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_world
 )
 {
-    RequestShrPtr request = createRequestGetLandsByIDWorld(a_id_user, a_password, a_id_world);
+    RequestShrPtr request = createRequestGetLandsByIDWorld(a_login, a_password, a_id_world);
 
     return a_client->sendRequest(request);
 }

@@ -68,7 +68,9 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -111,11 +113,15 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name1)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name1)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name2)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name2)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -156,7 +162,9 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionInvalidRequest(1, "Password", 1, 1, "Land")),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionInvalidRequest(
+                            "Login1", "Password1",
+                            1, 1, "Land")),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationInvalidRequest))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)

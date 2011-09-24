@@ -65,12 +65,10 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioGetLandsByIDWorld(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandsByIDWorldActionSuccess(1, "Password1", 1)),
+                        IScenarioActionShrPtr(new ScenarioGetLandsByIDWorldActionSuccess("Login1", "Password1", 1)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandsByIDWorldVerificationLandsHaveNotBeenGot))));
 
-                for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
-                     it != scenarios.end();
-                     ++it)
+                for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {
                     ASSERT_STREQ("", (*it)->execute());
                 }
@@ -108,16 +106,16 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioGetLandsByIDWorld(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandsByIDWorldActionSuccess(2, "Password2", 1)),
+                        IScenarioActionShrPtr(new ScenarioGetLandsByIDWorldActionSuccess("Login2", "Password2", 1)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandsByIDWorldVerificationLandsHaveNotBeenGot))));
 
-                for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
-                     it != scenarios.end();
-                     ++it)
+                for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {
                     ASSERT_STREQ("", (*it)->execute());
                 }
@@ -151,7 +149,9 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioGetLandsByIDWorld(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandsByIDWorldActionInvalidRequest(1, "Password1", 1)),
+                        IScenarioActionShrPtr(new ScenarioGetLandsByIDWorldActionInvalidRequest(
+                            "Login1", "Password1",
+                            1)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandsByIDWorldVerificationInvalidRequest))));
 
                 for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();

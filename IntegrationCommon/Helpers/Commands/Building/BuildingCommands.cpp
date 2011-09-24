@@ -44,7 +44,7 @@ namespace Building
 
 ReplyShrPtr BuildBuilding(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -54,14 +54,14 @@ ReplyShrPtr BuildBuilding(
 )
 {
     RequestShrPtr request =
-        createRequestBuildBuilding(a_id_user, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building, a_volume);
+        createRequestBuildBuilding(a_login, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building, a_volume);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr DestroyBuilding(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -71,14 +71,14 @@ ReplyShrPtr DestroyBuilding(
 )
 {
     RequestShrPtr request =
-        createRequestDestroyBuilding(a_id_user, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building, a_volume);
+        createRequestDestroyBuilding(a_login, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building, a_volume);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetBuilding(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -87,20 +87,20 @@ ReplyShrPtr GetBuilding(
 )
 {
     RequestShrPtr request =
-        createRequestGetBuilding(a_id_user, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building);
+        createRequestGetBuilding(a_login, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetBuildings(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder
 )
 {
-    RequestShrPtr request = createRequestGetBuildings(a_id_user, a_password, a_id_holder_class, a_id_holder);
+    RequestShrPtr request = createRequestGetBuildings(a_login, a_password, a_id_holder_class, a_id_holder);
 
     return a_client->sendRequest(request);
 }

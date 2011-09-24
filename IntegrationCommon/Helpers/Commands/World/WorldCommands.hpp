@@ -44,7 +44,7 @@ namespace World
  * @brief Creates a world.
  *
  * @param a_client   The client.
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_name     The name of the world.
  *
@@ -52,7 +52,7 @@ namespace World
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr CreateWorld(
     IClientShrPtr         a_client,
-    unsigned int  const   a_id_user,
+    std::string   const & a_login,
     std::string   const & a_password,
     std::string   const & a_name
 );

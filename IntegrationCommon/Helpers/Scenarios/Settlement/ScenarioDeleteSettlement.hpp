@@ -93,12 +93,12 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user       The identifier of the user.
+     * @param a_login         The login of the user.
      * @param a_password      The password of the user.
      * @param a_id_settlement The identifier of the settlement.
      */
     ScenarioDeleteSettlementActionSuccess(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_settlement
     );
@@ -116,19 +116,19 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The identifier of the settlement.
      */
-    unsigned int m_id_settlement;
+    unsigned int const m_id_settlement;
 };
 
 /**
@@ -141,12 +141,12 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user       The identifier of the user.
+     * @param a_login         The login of the user.
      * @param a_password      The password of the user.
      * @param a_id_settlement The identifier of the settlement.
      */
     ScenarioDeleteSettlementActionInvalidRequest(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_settlement
     );
@@ -164,19 +164,19 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The identifier of the settlement.
      */
-    unsigned int m_id_settlement;
+    unsigned int const m_id_settlement;
 };
 
 /**

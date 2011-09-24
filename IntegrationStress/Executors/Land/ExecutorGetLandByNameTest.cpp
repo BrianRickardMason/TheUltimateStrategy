@@ -70,7 +70,7 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioGetLandByName(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandByNameActionSuccess(1, "Password1", land_name)),
+                        IScenarioActionShrPtr(new ScenarioGetLandByNameActionSuccess("Login1", "Password1", land_name)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandByNameVerificationUnauthorized))));
 
                 for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
@@ -113,11 +113,13 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(1, "Password1", 1, 1, land_name)),
+                        IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
+                            "Login1", "Password1",
+                            1, 1, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioGetLandByName(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandByNameActionSuccess(2, "Password2", land_name)),
+                        IScenarioActionShrPtr(new ScenarioGetLandByNameActionSuccess("Login2", "Password2", land_name)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandByNameVerificationUnauthorized))));
 
                 for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
@@ -160,7 +162,9 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioGetLandByName(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandByNameActionInvalidRequest(1, "Password1", "Land")),
+                        IScenarioActionShrPtr(new ScenarioGetLandByNameActionInvalidRequest(
+                            "Login1", "Password1",
+                            "Land")),
                         IScenarioVerificationShrPtr(new ScenarioGetLandByNameVerificationInvalidRequest))));
 
                 for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();

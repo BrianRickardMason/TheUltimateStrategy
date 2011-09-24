@@ -44,7 +44,7 @@ namespace Resource
  * @brief Gets resources.
  *
  * @param a_client       The client.
- * @param a_id_user      The identifier of a user.
+ * @param a_login        The login of the user.
  * @param a_password     The password of the user.
  * @param a_holder_class The class of a holder.
  * @param a_id_holder    The identifier of the holder.
@@ -53,7 +53,7 @@ namespace Resource
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetResources(
     IClientShrPtr              a_client,
-    unsigned int       const   a_id_user,
+    std::string        const & a_login,
     std::string        const & a_password,
     unsigned short int const   a_holder_class,
     unsigned int       const   a_id_holder

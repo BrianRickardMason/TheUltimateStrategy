@@ -93,7 +93,7 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user         The identifier of the user.
+     * @param a_login           The login of the user.
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_id_holder       The identifier of the holder.
@@ -103,7 +103,7 @@ public:
      * @param a_volume          The volume.
      */
     ScenarioDismissHumanActionSuccess(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_holder_class,
         unsigned int const   a_id_holder,
@@ -126,9 +126,9 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int const m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
@@ -176,7 +176,7 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user         The identifier of the user.
+     * @param a_login           The login of the user.
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_id_holder       The identifier of the holder.
@@ -186,7 +186,7 @@ public:
      * @param a_volume          The volume.
      */
     ScenarioDismissHumanActionInvalidRequest(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_holder_class,
         unsigned int const   a_id_holder,
@@ -209,9 +209,9 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int const m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.

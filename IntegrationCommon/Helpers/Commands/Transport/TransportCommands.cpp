@@ -44,7 +44,7 @@ namespace Transport
 
 ReplyShrPtr TransportHuman(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_settlement_source,
     unsigned int const   a_id_settlement_destination,
@@ -54,7 +54,7 @@ ReplyShrPtr TransportHuman(
     unsigned int const   a_volume
 )
 {
-    RequestShrPtr request = createRequestTransportHuman(a_id_user,
+    RequestShrPtr request = createRequestTransportHuman(a_login,
                                                         a_password,
                                                         a_id_settlement_source,
                                                         a_id_settlement_destination,
@@ -68,7 +68,7 @@ ReplyShrPtr TransportHuman(
 
 ReplyShrPtr TransportResource(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_settlement_source,
     unsigned int const   a_id_settlement_destination,
@@ -76,7 +76,7 @@ ReplyShrPtr TransportResource(
     unsigned int const   a_volume
 )
 {
-    RequestShrPtr request = createRequestTransportResource(a_id_user,
+    RequestShrPtr request = createRequestTransportResource(a_login,
                                                            a_password,
                                                            a_id_settlement_source,
                                                            a_id_settlement_destination,

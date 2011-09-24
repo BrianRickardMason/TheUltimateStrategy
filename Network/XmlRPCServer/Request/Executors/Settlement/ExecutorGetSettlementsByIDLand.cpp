@@ -61,7 +61,7 @@ bool ExecutorGetSettlementsByIDLand::getParameters(
 {
     try
     {
-        m_value_id_user = a_request->getIDUserValue();
+        m_login         = a_request->getLoginValue();
         m_password      = a_request->getPasswordValue();
         m_value_id_land = a_request->getParameterValueUnsignedInteger("idland");
 
@@ -77,7 +77,6 @@ bool ExecutorGetSettlementsByIDLand::processParameters()
 {
     try
     {
-        m_id_user = m_value_id_user;
         m_id_land = m_value_id_land;
 
         return true;
@@ -100,7 +99,7 @@ bool ExecutorGetSettlementsByIDLand::authenticate(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthenticateOperatorExitCode const exit_code =
-            authenticate_operator->authenticate(transaction, m_id_user, m_password);
+            authenticate_operator->authenticate(transaction, m_login, m_password);    
 
         if (exit_code.ok())
         {
@@ -124,7 +123,7 @@ bool ExecutorGetSettlementsByIDLand::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToLandByIDLandOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToLandByIDLand(transaction, m_id_user, m_id_land);
+            authorize_operator->authorizeUserToLandByIDLand(transaction, m_user->getIDUser(), m_id_land);
 
         if (exit_code.ok())
         {

@@ -59,7 +59,7 @@ bool ExecutorTickEpoch::getParameters(
 {
     try
     {
-        m_value_id_user  = a_request->getIDUserValue();
+        m_login          = a_request->getLoginValue();
         m_password       = a_request->getPasswordValue();
         m_value_id_world = a_request->getParameterValueUnsignedInteger("idworld");
 
@@ -75,7 +75,6 @@ bool ExecutorTickEpoch::processParameters()
 {
     try
     {
-        m_id_user  = m_value_id_user;
         m_id_world = m_value_id_world;
 
         return true;

@@ -64,7 +64,7 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioDeleteSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioDeleteSettlementActionSuccess(1, "Password1", 1)),
+                        IScenarioActionShrPtr(new ScenarioDeleteSettlementActionSuccess("Login1", "Password1", 1)),
                         IScenarioVerificationShrPtr(new ScenarioDeleteSettlementVerificationUnauthorized))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -101,7 +101,9 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioDeleteSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioDeleteSettlementActionInvalidRequest(1, "Password", 1)),
+                        IScenarioActionShrPtr(new ScenarioDeleteSettlementActionInvalidRequest(
+                            "Login1", "Password1",
+                            1)),
                         IScenarioVerificationShrPtr(new ScenarioDeleteSettlementVerificationInvalidRequest))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)

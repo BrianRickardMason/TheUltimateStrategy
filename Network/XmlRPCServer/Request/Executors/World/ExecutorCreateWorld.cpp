@@ -58,9 +58,9 @@ bool ExecutorCreateWorld::getParameters(
 {
     try
     {
-        m_value_id_user = a_request->getIDUserValue();
-        m_password      = a_request->getPasswordValue();
-        m_name          = a_request->getParameterValueString("name");
+        m_login    = a_request->getLoginValue();
+        m_password = a_request->getPasswordValue();
+        m_name     = a_request->getParameterValueString("name");
 
         return true;
     }
@@ -72,16 +72,7 @@ bool ExecutorCreateWorld::getParameters(
 
 bool ExecutorCreateWorld::processParameters()
 {
-    try
-    {
-        m_id_user = m_value_id_user;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
 bool ExecutorCreateWorld::authenticate(

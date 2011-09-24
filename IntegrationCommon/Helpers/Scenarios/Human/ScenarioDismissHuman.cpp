@@ -64,7 +64,7 @@ char const * ScenarioDismissHuman::execute()
 }
 
 ScenarioDismissHumanActionSuccess::ScenarioDismissHumanActionSuccess(
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -73,7 +73,7 @@ ScenarioDismissHumanActionSuccess::ScenarioDismissHumanActionSuccess(
     unsigned int const   a_experience,
     unsigned int const   a_volume
 )
-    : m_id_user(a_id_user),
+    : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
       m_id_holder(a_id_holder),
@@ -89,7 +89,7 @@ ReplyShrPtr ScenarioDismissHumanActionSuccess::perform(
 )
 {
     return DismissHuman(a_client,
-                        m_id_user,
+                        m_login,
                         m_password,
                         m_id_holder_class,
                         m_id_holder,
@@ -100,7 +100,7 @@ ReplyShrPtr ScenarioDismissHumanActionSuccess::perform(
 }
 
 ScenarioDismissHumanActionInvalidRequest::ScenarioDismissHumanActionInvalidRequest(
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -109,7 +109,7 @@ ScenarioDismissHumanActionInvalidRequest::ScenarioDismissHumanActionInvalidReque
     unsigned int const   a_experience,
     unsigned int const   a_volume
 )
-    : m_id_user(a_id_user),
+    : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
       m_id_holder(a_id_holder),
@@ -131,7 +131,7 @@ ReplyShrPtr ScenarioDismissHumanActionInvalidRequest::perform(
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");

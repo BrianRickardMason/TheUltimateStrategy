@@ -32,6 +32,7 @@ using namespace GameServer::Authentication;
 using namespace GameServer::Common;
 using namespace GameServer::Persistency;
 using namespace GameServer::User;
+using namespace std;
 
 /**
  * @brief A test class.
@@ -44,9 +45,9 @@ protected:
      * @brief Constructs the test class.
      */
     AuthenticationManagerTest()
-        : m_id_user_1(1),
-          m_id_user_2(2),
-          m_id_user_5(5),
+        : m_login_1("Login1"),
+          m_login_2("Login2"),
+          m_login_5("Login5"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager())
     {
@@ -62,11 +63,11 @@ protected:
     }
 
     /**
-     * @brief Test constants identifiers of the users.
+     * @brief Test constants: the logins of the users.
      */
-    IDUser m_id_user_1,
-           m_id_user_2,
-           m_id_user_5;
+    string m_login_1,
+           m_login_2,
+           m_login_5;
 
     /**
      * @brief The abstract factory of managers.
@@ -74,7 +75,7 @@ protected:
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief A user manager.
+     * @brief The manager of users.
      */
     IUserManagerShrPtr m_user_manager;
 };
@@ -89,8 +90,8 @@ TEST_F(AuthenticationManagerTest, authenticate_Success)
 
     IAuthenticationManagerShrPtr manager = m_manager_abstract_factory->createAuthenticationManager();
 
-    ASSERT_TRUE(manager->authenticate(transaction, m_id_user_1, "Password1"));
-    ASSERT_TRUE(manager->authenticate(transaction, m_id_user_2, "Password2"));
+    ASSERT_TRUE(manager->authenticate(transaction, m_login_1, "Password1"));
+    ASSERT_TRUE(manager->authenticate(transaction, m_login_2, "Password2"));
 }
 
 TEST_F(AuthenticationManagerTest, authenticate_Failure)
@@ -100,8 +101,8 @@ TEST_F(AuthenticationManagerTest, authenticate_Failure)
 
     IAuthenticationManagerShrPtr manager = m_manager_abstract_factory->createAuthenticationManager();
 
-    ASSERT_FALSE(manager->authenticate(transaction, m_id_user_1, "Password2"));
-    ASSERT_FALSE(manager->authenticate(transaction, m_id_user_2, "Password1"));
-    ASSERT_FALSE(manager->authenticate(transaction, m_id_user_5, "Password1"));
-    ASSERT_FALSE(manager->authenticate(transaction, m_id_user_5, "Password2"));
+    ASSERT_FALSE(manager->authenticate(transaction, m_login_1, "Password2"));
+    ASSERT_FALSE(manager->authenticate(transaction, m_login_2, "Password1"));
+    ASSERT_FALSE(manager->authenticate(transaction, m_login_5, "Password1"));
+    ASSERT_FALSE(manager->authenticate(transaction, m_login_5, "Password2"));
 }

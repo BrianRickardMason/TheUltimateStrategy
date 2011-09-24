@@ -41,8 +41,8 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestEcho();
 /**
  * @brief Creates a request "create user".
  *
- * @param a_login    The login of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  *
  * @return The created request.
  */
@@ -54,29 +54,29 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateUser(
 /**
  * @brief Creates a request "create world".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_name     The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateWorld(
-    unsigned int const   a_id_user,
-    std::string  const & a_password,
-    std::string  const & a_name
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const & a_name
 );
 
 /**
  * @brief Creates a request "create epoch".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateEpoch(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -84,14 +84,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateEpoch(
 /**
  * @brief Creates a request "delete epoch".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteEpoch(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -99,14 +99,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteEpoch(
 /**
  * @brief Creates a request "get epoch".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetEpoch(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -114,14 +114,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetEpoch(
 /**
  * @brief Creates a request "activate epoch".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestActivateEpoch(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -129,14 +129,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestActivateEpoch(
 /**
  * @brief Creates a request "deactivate epoch".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeactivateEpoch(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -144,14 +144,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeactivateEpoch(
 /**
  * @brief Creates a request "finish epoch".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestFinishEpoch(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -159,14 +159,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestFinishEpoch(
 /**
  * @brief Creates a request "tick epoch".
  *
- * @param a_id_user  The identifier of the user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTickEpoch(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -174,8 +174,8 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTickEpoch(
 /**
  * @brief Creates a request "create land".
  *
- * @param a_id_user  An identifier of the user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_id_world An identifier of the world.
  * @param a_id_epoch The identifier of the epoch.
  * @param a_name     A name of the land.
@@ -183,7 +183,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTickEpoch(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateLand(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world,
     unsigned int const   a_id_epoch,
@@ -193,14 +193,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateLand(
 /**
  * @brief Creates a request "delete land".
  *
- * @param a_id_user  The identifier of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteLand(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land
 );
@@ -208,14 +208,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteLand(
 /**
  * @brief Creates a request "get land by id land".
  *
- * @param a_id_user  The identifier of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandByIDLand(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land
 );
@@ -223,29 +223,29 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandByIDLand(
 /**
  * @brief Creates a request "get land by name".
  *
- * @param a_id_user  The identifier of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_name     The name of a land.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandByName(
-    unsigned int const   a_id_user,
-    std::string  const & a_password,
-    std::string  const & a_name
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const & a_name
 );
 
 /**
  * @brief Creates a request "get lands by id world".
  *
- * @param a_id_user  The identifier of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_id_world The identifier of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandsByIDWorld(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_world
 );
@@ -253,15 +253,15 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandsByIDWorld(
 /**
  * @brief Creates a request "create settlement".
  *
- * @param a_id_user  The identifier of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  * @param a_name     The name of the settlement.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateSettlement(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land,
     std::string  const & a_name
@@ -270,14 +270,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateSettlement(
 /**
  * @brief Deletes a request "delete settlement".
  *
- * @param a_id_user       The identifier of a user.
- * @param a_password      The password of a user.
+ * @param a_login         The login of the user.
+ * @param a_password      The password of the user.
  * @param a_id_settlement The identifier of a settlement.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteSettlement(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement
 );
@@ -285,15 +285,15 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteSettlement(
 /**
  * @brief Creates a request "get settlement by id land and name".
  *
- * @param a_id_user  The identifier of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  * @param a_name     The name of a settlement.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlementByIDLandAndName(
-    unsigned int const a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const a_id_land,
     std::string  const & a_name
@@ -302,14 +302,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlementByIDLand
 /**
  * @brief Creates a request "get settlement by id settlement".
  *
- * @param a_id_user       The identifier of a user.
- * @param a_password      The password of a user.
+ * @param a_login         The login of the user.
+ * @param a_password      The password of the user.
  * @param a_id_settlement The identifier of a settlement.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlementByIDSettlement(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement
 );
@@ -317,14 +317,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlementByIDSett
 /**
  * @brief Creates a request "get settlements".
  *
- * @param a_id_user  The identifier of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlements(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land
 );
@@ -332,7 +332,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlements(
 /**
  * @brief Creates a request "build building".
  *
- * @param a_id_user           The identifier of a user.
+ * @param a_login             The login of the user.
  * @param a_password          The password of the user.
  * @param a_id_holder_class   The identifier of the class of a holder.
  * @param a_id_holder         The identifier of a holder.
@@ -343,7 +343,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlements(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestBuildBuilding(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -355,7 +355,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestBuildBuilding(
 /**
  * @brief Creates a request "destroy building".
  *
- * @param a_id_user           The identifier of a user.
+ * @param a_login             The login of the user.
  * @param a_password          The password of the user.
  * @param a_id_holder_class   The identifier of the class of a holder.
  * @param a_id_holder         The identifier of a holder.
@@ -366,7 +366,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestBuildBuilding(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDestroyBuilding(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -378,7 +378,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDestroyBuilding(
 /**
  * @brief Creates a request "get building".
  *
- * @param a_id_user           The identifier of a user.
+ * @param a_login             The login of the user.
  * @param a_password          The password of the user.
  * @param a_id_holder_class   The identifier of the class of a holder.
  * @param a_id_holder         The identifier of a holder.
@@ -388,7 +388,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDestroyBuilding(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuilding(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -399,7 +399,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuilding(
 /**
  * @brief Creates a request "get buildings".
  *
- * @param a_id_user         The identifier of a user.
+ * @param a_login           The login of the user.
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_id_holder       The identifier of a holder.
@@ -407,7 +407,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuilding(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuildings(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder
@@ -416,7 +416,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuildings(
 /**
  * @brief Creates a request "engage human".
  *
- * @param a_id_user         The identifier of a user.
+ * @param a_login           The login of the user.
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_id_holder       The identifier of a holder.
@@ -427,7 +427,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuildings(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestEngageHuman(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -439,7 +439,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestEngageHuman(
 /**
  * @brief Creates a request "dismiss human".
  *
- * @param a_id_user         The identifier of a user.
+ * @param a_login           The login of the user.
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_id_holder       The identifier of a holder.
@@ -451,7 +451,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestEngageHuman(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDismissHuman(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -464,7 +464,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDismissHuman(
 /**
  * @brief Creates a request "get human".
  *
- * @param a_id_user         The identifier of a user.
+ * @param a_login           The login of the user.
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_id_holder       The identifier of a holder.
@@ -475,7 +475,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDismissHuman(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHuman(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -487,7 +487,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHuman(
 /**
  * @brief Creates a request "get humans".
  *
- * @param a_id_user         The identifier of a user.
+ * @param a_login           The login of the user.
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_id_holder       The identifier of a holder.
@@ -495,7 +495,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHuman(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHumans(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder
@@ -504,7 +504,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHumans(
 /**
  * @brief Creates a request "get resource".
  *
- * @param a_id_user         The identifier of a user.
+ * @param a_login           The login of the user.
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_id_holder       The identifier of a holder.
@@ -513,7 +513,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHumans(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResource(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -523,7 +523,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResource(
 /**
  * @brief Creates a request "get resources".
  *
- * @param a_id_user         The identifier of a user.
+ * @param a_login           The login of the user.
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_id_holder       The identifier of a holder.
@@ -531,7 +531,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResource(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResources(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder
@@ -540,14 +540,14 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResources(
 /**
  * @brief Creates a request "turn".
  *
- * @param a_id_user  The identifier of a user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_land  The identifier of a land.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTurn(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_land
 );
@@ -555,7 +555,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTurn(
 /**
  * @brief Creates a request "transport human".
  *
- * @param a_id_user                   The identifier of the user.
+ * @param a_login                     The login of the user.
  * @param a_password                  The password of the user.
  * @param a_id_settlement_source      The identifier of the source settlement.
  * @param a_id_settlement_destination The identifier of the destination settlement.
@@ -567,7 +567,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTurn(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportHuman(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement_source,
     unsigned int const   a_id_settlement_destination,
@@ -580,7 +580,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportHuman(
 /**
  * @brief Creates a request "transport resource".
  *
- * @param a_id_user                   The identifier of the user.
+ * @param a_login                     The login of the user.
  * @param a_password                  The password of the user.
  * @param a_id_settlement_source      The identifier of the source settlement.
  * @param a_id_settlement_destination The identifier of the destination settlement.
@@ -590,7 +590,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportHuman(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportResource(
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_settlement_source,
     unsigned int const   a_id_settlement_destination,

@@ -63,7 +63,7 @@ bool ExecutorGetResources::getParameters(
 {
     try
     {
-        m_value_id_user         = a_request->getIDUserValue();
+        m_login                 = a_request->getLoginValue();
         m_password              = a_request->getPasswordValue();
         m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
         m_value_id_holder       = a_request->getParameterValueUnsignedInteger("idholder");
@@ -80,7 +80,6 @@ bool ExecutorGetResources::processParameters()
 {
     try
     {
-        m_id_user = m_value_id_user;
         m_id_holder.assign(m_value_id_holder_class, m_value_id_holder);
 
         return true;
@@ -103,7 +102,7 @@ bool ExecutorGetResources::authenticate(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthenticateOperatorExitCode const exit_code =
-            authenticate_operator->authenticate(transaction, m_id_user, m_password);
+            authenticate_operator->authenticate(transaction, m_login, m_password);    
 
         if (exit_code.ok())
         {
@@ -127,7 +126,7 @@ bool ExecutorGetResources::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToHolderOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToHolder(transaction, m_id_user, m_id_holder);
+            authorize_operator->authorizeUserToHolder(transaction, m_user->getIDUser(), m_id_holder);
 
         if (exit_code.ok())
         {

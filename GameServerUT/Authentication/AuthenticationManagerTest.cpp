@@ -48,26 +48,26 @@ protected:
      * @brief Creates a test class.
      */
     AuthenticationManagerTest()
-        : m_id_user_1(1),
-          m_password_1("Password1")
+        : m_login("Login"),
+          m_password("Password")
     {
     }
 
     /**
-     * @brief The identifier of the user.
+     * @brief Test constants: the login of the user.
      */
-    IDUser m_id_user_1;
+    string m_login;
 
     /**
-     * @brief The password of the user.
+     * @brief Test constants: the password of the user.
      */
-    string m_password_1;
+    string m_password;
 };
 
 /**
  * Unit tests of: AuthenticationManager::AuthenticationManager.
  */
-TEST_F(AuthenticationManagerTest, AuthenticationManager)
+TEST_F(AuthenticationManagerTest, ConstructorDoesNotThrow)
 {
     IAuthenticationManagerAccessorAutPtr accessor(new AuthenticationManagerAccessorMock);
 
@@ -77,32 +77,32 @@ TEST_F(AuthenticationManagerTest, AuthenticationManager)
 /**
  * Unit tests of: AuthenticationManager::authenticate.
  */
-TEST_F(AuthenticationManagerTest, authenticate_Success)
+TEST_F(AuthenticationManagerTest, AuthenticateReturnsTrueOnSuccessfulAuthentication)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthenticationManagerAccessorMock * mock = new AuthenticationManagerAccessorMock;
-    EXPECT_CALL(*mock, authenticate(transaction, m_id_user_1, m_password_1))
+    EXPECT_CALL(*mock, authenticate(transaction, m_login, m_password))
     .WillOnce(Return(true));
 
     IAuthenticationManagerAccessorAutPtr accessor(mock);
 
     AuthenticationManager manager(accessor);
 
-    ASSERT_TRUE(manager.authenticate(transaction, m_id_user_1, m_password_1));
+    ASSERT_TRUE(manager.authenticate(transaction, m_login, m_password));
 }
 
-TEST_F(AuthenticationManagerTest, authenticate_Failure)
+TEST_F(AuthenticationManagerTest, AuthenticateReturnsFalseOnUnsuccessfulAuthentication)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthenticationManagerAccessorMock * mock = new AuthenticationManagerAccessorMock;
-    EXPECT_CALL(*mock, authenticate(transaction, m_id_user_1, m_password_1))
+    EXPECT_CALL(*mock, authenticate(transaction, m_login, m_password))
     .WillOnce(Return(false));
 
     IAuthenticationManagerAccessorAutPtr accessor(mock);
 
     AuthenticationManager manager(accessor);
 
-    ASSERT_FALSE(manager.authenticate(transaction, m_id_user_1, m_password_1));
+    ASSERT_FALSE(manager.authenticate(transaction, m_login, m_password));
 }

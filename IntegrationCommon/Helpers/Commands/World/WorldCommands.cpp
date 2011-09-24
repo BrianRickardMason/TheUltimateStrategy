@@ -43,12 +43,12 @@ namespace World
 
 ReplyShrPtr CreateWorld(
     IClientShrPtr         a_client,
-    unsigned int  const   a_id_user,
+    string        const & a_login,
     string        const & a_password,
     string        const & a_name
 )
 {
-    RequestShrPtr request = createRequestCreateWorld(a_id_user, a_password, a_name);
+    RequestShrPtr request = createRequestCreateWorld(a_login, a_password, a_name);
 
     return a_client->sendRequest(request);
 }

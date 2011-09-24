@@ -45,11 +45,11 @@ AuthenticationManager::AuthenticationManager(
 
 bool AuthenticationManager::authenticate(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const & a_login,
     string             const & a_password
 ) const
 {
-    return m_accessor->authenticate(a_transaction, a_id_user, a_password);
+    return m_accessor->authenticate(a_transaction, a_login, a_password);
 }
 
 } // namespace Authentication

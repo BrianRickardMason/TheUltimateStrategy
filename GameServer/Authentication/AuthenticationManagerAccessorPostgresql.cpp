@@ -41,14 +41,14 @@ namespace Authentication
 
 bool AuthenticationManagerAccessorPostgresql::authenticate(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const & a_login,
     string             const & a_password
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM users WHERE id_user = " + backbone_transaction.quote(a_id_user.getValue())
+    string query = "SELECT * FROM users WHERE login = " + backbone_transaction.quote(a_login)
                    + " AND password = " + backbone_transaction.quote(a_password);
 
     pqxx::result result = backbone_transaction.exec(query);

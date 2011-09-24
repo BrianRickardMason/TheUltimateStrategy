@@ -44,62 +44,62 @@ namespace Settlement
 
 ReplyShrPtr CreateSettlement(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_land,
     string       const & a_name
 )
 {
-    RequestShrPtr request = createRequestCreateSettlement(a_id_user, a_password, a_id_land, a_name);
+    RequestShrPtr request = createRequestCreateSettlement(a_login, a_password, a_id_land, a_name);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr DeleteSettlement(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_settlement
 )
 {
-    RequestShrPtr request = createRequestDeleteSettlement(a_id_user, a_password, a_id_settlement);
+    RequestShrPtr request = createRequestDeleteSettlement(a_login, a_password, a_id_settlement);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetSettlementByIDLandAndName(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_land,
     string       const & a_name
 )
 {
-    RequestShrPtr request = createRequestGetSettlementByIDLandAndName(a_id_user, a_password, a_id_land, a_name);
+    RequestShrPtr request = createRequestGetSettlementByIDLandAndName(a_login, a_password, a_id_land, a_name);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetSettlementByIDSettlement(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_settlement
 )
 {
-    RequestShrPtr request = createRequestGetSettlementByIDSettlement(a_id_user, a_password, a_id_settlement);
+    RequestShrPtr request = createRequestGetSettlementByIDSettlement(a_login, a_password, a_id_settlement);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetSettlements(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    string       const & a_login,
     string       const & a_password,
     unsigned int const   a_id_land
 )
 {
-    RequestShrPtr request = createRequestGetSettlements(a_id_user, a_password, a_id_land);
+    RequestShrPtr request = createRequestGetSettlements(a_login, a_password, a_id_land);
 
     return a_client->sendRequest(request);
 }

@@ -106,18 +106,18 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user  The identifier of the user.
+     * @param a_login    The login of the user.
      * @param a_password The password of the user.
      * @param a_id_land  The identifier of the land.
      * @param a_name     The name of the settlement.
      */
     ScenarioGetSettlementByIDLandAndNameActionSuccess(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_land,
         std::string  const & a_name
     )
-        : m_id_user(a_id_user),
+        : m_login(a_login),
           m_password(a_password),
           m_id_land(a_id_land),
           m_name(a_name)
@@ -136,7 +136,7 @@ public:
     )
     {
         return Commands::Settlement::GetSettlementByIDLandAndName(a_client,
-                                                                  m_id_user,
+                                                                  m_login,
                                                                   m_password,
                                                                   m_id_land,
                                                                   m_name);
@@ -144,24 +144,24 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The identifier of the land.
      */
-    unsigned int m_id_land;
+    unsigned int const m_id_land;
 
     /**
      * @brief The name of the settlement.
      */
-    std::string m_name;
+    std::string const m_name;
 };
 
 /**
@@ -174,18 +174,18 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user  The identifier of the user.
+     * @param a_login    The login of the user.
      * @param a_password The password of the user.
      * @param a_id_land  The identifier of the land.
      * @param a_name     The name of the settlement.
      */
     ScenarioGetSettlementByIDLandAndNameActionInvalidRequest(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_land,
         std::string  const & a_name
     )
-        : m_id_user(a_id_user),
+        : m_login(a_login),
           m_password(a_password),
           m_id_land(a_id_land),
           m_name(a_name)
@@ -210,7 +210,7 @@ public:
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-        user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+        user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_login.c_str());
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idland = parameters->appendNode("idland");
@@ -226,24 +226,24 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The identifier of the land.
      */
-    unsigned int m_id_land;
+    unsigned int const m_id_land;
 
     /**
      * @brief The name of the settlement.
      */
-    std::string m_name;
+    std::string const m_name;
 };
 
 /**

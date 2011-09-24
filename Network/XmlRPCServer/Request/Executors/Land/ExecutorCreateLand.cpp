@@ -60,7 +60,7 @@ bool ExecutorCreateLand::getParameters(
 {
     try
     {
-        m_value_id_user  = a_request->getIDUserValue();
+        m_login          = a_request->getLoginValue();
         m_password       = a_request->getPasswordValue();
         m_value_id_world = a_request->getParameterValueUnsignedInteger("idworld");
         m_value_id_epoch = a_request->getParameterValueUnsignedInteger("idepoch");
@@ -78,7 +78,6 @@ bool ExecutorCreateLand::processParameters()
 {
     try
     {
-        m_id_user  = m_value_id_user;
         m_id_world = m_value_id_world;
         m_id_epoch = m_value_id_epoch;
 
@@ -102,7 +101,7 @@ bool ExecutorCreateLand::authenticate(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthenticateOperatorExitCode const exit_code =
-            authenticate_operator->authenticate(transaction, m_id_user, m_password);
+            authenticate_operator->authenticate(transaction, m_login, m_password);
 
         if (exit_code.ok())
         {
@@ -173,7 +172,7 @@ ReplyShrPtr ExecutorCreateLand::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         CreateLandOperatorExitCode const exit_code =
-            land_operator->createLand(transaction, m_id_user, m_id_world, m_id_epoch, m_name);
+            land_operator->createLand(transaction, m_user->getIDUser(), m_id_world, m_id_epoch, m_name);
 
         if (exit_code.ok())
         {

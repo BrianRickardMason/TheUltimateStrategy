@@ -44,8 +44,8 @@ namespace User
  * @brief Creates a user.
  *
  * @param a_client   The client.
- * @param a_login    The login of a user.
- * @param a_password The password of a user.
+ * @param a_login    The login of the user.
+ * @param a_password The password of the user.
  *
  * @return The reply.
  */

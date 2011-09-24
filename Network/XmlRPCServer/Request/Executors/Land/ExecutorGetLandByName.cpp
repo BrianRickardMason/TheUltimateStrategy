@@ -62,9 +62,9 @@ bool ExecutorGetLandByName::getParameters(
 {
     try
     {
-        m_value_id_user = a_request->getIDUserValue();
-        m_password      = a_request->getPasswordValue();
-        m_name          = a_request->getParameterValueString("name");
+        m_login    = a_request->getLoginValue();
+        m_password = a_request->getPasswordValue();
+        m_name     = a_request->getParameterValueString("name");
 
         return true;
     }
@@ -76,16 +76,7 @@ bool ExecutorGetLandByName::getParameters(
 
 bool ExecutorGetLandByName::processParameters()
 {
-    try
-    {
-        m_id_user = m_value_id_user;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
 bool ExecutorGetLandByName::authenticate(
@@ -100,7 +91,7 @@ bool ExecutorGetLandByName::authenticate(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthenticateOperatorExitCode const exit_code =
-            authenticate_operator->authenticate(transaction, m_id_user, m_password);
+            authenticate_operator->authenticate(transaction, m_login, m_password);
 
         if (exit_code.ok())
         {
@@ -124,7 +115,7 @@ bool ExecutorGetLandByName::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToLandByNameOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToLandByName(transaction, m_id_user, m_name);
+            authorize_operator->authorizeUserToLandByName(transaction, m_user->getIDUser(), m_name);
 
         if (exit_code.ok())
         {
@@ -177,7 +168,7 @@ ReplyShrPtr ExecutorGetLandByName::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         GetLandByIDUserAndNameOperatorExitCode const exit_code =
-            land_operator->getLandByIDUserAndName(transaction, m_id_user, m_name);
+            land_operator->getLandByIDUserAndName(transaction, m_user->getIDUser(), m_name);
 
         if (exit_code.ok())
         {

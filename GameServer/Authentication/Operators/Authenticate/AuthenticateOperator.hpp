@@ -56,14 +56,14 @@ public:
      * @brief Authenticates a user.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_password    The password of the user.
      *
      * @return The exit code.
      */
     virtual AuthenticateOperatorExitCode authenticate(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const & a_login,
         std::string                     const & a_password
     ) const;
 

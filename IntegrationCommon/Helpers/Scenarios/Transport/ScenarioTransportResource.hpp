@@ -106,7 +106,7 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user                   The identifier of the user.
+     * @param a_login                     The login of the user.
      * @param a_password                  The password of the user.
      * @param a_id_settlement_source      The identifier of the source settlement.
      * @param a_id_settlement_destination The identifier of the destination settlement.
@@ -114,14 +114,14 @@ public:
      * @param a_volume                    The volume of the resource.
      */
     ScenarioTransportResourceActionSuccess(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_settlement_source,
         unsigned int const   a_id_settlement_destination,
         unsigned int const   a_id_resource,
         unsigned int const   a_volume
     )
-        : m_id_user(a_id_user),
+        : m_login(a_login),
           m_password(a_password),
           m_id_settlement_source(a_id_settlement_source),
           m_id_settlement_destination(a_id_settlement_destination),
@@ -142,7 +142,7 @@ public:
     )
     {
         return Commands::Transport::TransportResource(a_client,
-                                                      m_id_user,
+                                                      m_login,
                                                       m_password,
                                                       m_id_settlement_source,
                                                       m_id_settlement_destination,
@@ -152,34 +152,34 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The identifier of the source settlement.
      */
-    unsigned int m_id_settlement_source;
+    unsigned int const m_id_settlement_source;
 
     /**
      * @brief The identifier of the destination settlement.
      */
-    unsigned int m_id_settlement_destination;
+    unsigned int const m_id_settlement_destination;
 
     /**
      * @brief The identifier of the resource.
      */
-    unsigned int m_id_resource;
+    unsigned int const m_id_resource;
 
     /**
      * @brief The volume of the resource.
      */
-    unsigned int m_volume;
+    unsigned int const m_volume;
 };
 
 /**
@@ -192,7 +192,7 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_id_user                   The identifier of the user.
+     * @param a_login                     The login of the user.
      * @param a_password                  The password of the user.
      * @param a_id_settlement_source      The identifier of the source settlement.
      * @param a_id_settlement_destination The identifier of the destination settlement.
@@ -200,14 +200,14 @@ public:
      * @param a_volume                    The volume of the resource.
      */
     ScenarioTransportResourceActionInvalidRequest(
-        unsigned int const   a_id_user,
+        std::string  const & a_login,
         std::string  const & a_password,
         unsigned int const   a_id_settlement_source,
         unsigned int const   a_id_settlement_destination,
         unsigned int const   a_id_resource,
         unsigned int const   a_volume
     )
-        : m_id_user(a_id_user),
+        : m_login(a_login),
           m_password(a_password),
           m_id_settlement_source(a_id_settlement_source),
           m_id_settlement_destination(a_id_settlement_destination),
@@ -234,7 +234,7 @@ public:
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-        user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_id_user);
+        user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_login.c_str());
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idsettlementsource = parameters->appendNode("idsettlementsource");
@@ -258,34 +258,34 @@ public:
 
 private:
     /**
-     * @brief The identifier of the user.
+     * @brief The login of the user.
      */
-    unsigned int m_id_user;
+    std::string const m_login;
 
     /**
      * @brief The password of the user.
      */
-    std::string m_password;
+    std::string const m_password;
 
     /**
      * @brief The identifier of the source settlement.
      */
-    unsigned int m_id_settlement_source;
+    unsigned int const m_id_settlement_source;
 
     /**
      * @brief The identifier of the destination settlement.
      */
-    unsigned int m_id_settlement_destination;
+    unsigned int const m_id_settlement_destination;
 
     /**
      * @brief The identifier of the resource.
      */
-    unsigned int m_id_resource;
+    unsigned int const m_id_resource;
 
     /**
      * @brief The volume of the resource.
      */
-    unsigned int m_volume;
+    unsigned int const m_volume;
 };
 
 /**

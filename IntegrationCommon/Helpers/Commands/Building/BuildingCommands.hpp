@@ -44,7 +44,7 @@ namespace Building
  * @brief Builds a building.
  *
  * @param a_client            The client.
- * @param a_id_user           The identifier of a user.
+ * @param a_login             The login of the user.
  * @param a_password          The password of the user.
  * @param a_holder_class      The identifier of the class of a holder.
  * @param a_id_holder         The identifier of a holder.
@@ -56,7 +56,7 @@ namespace Building
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr BuildBuilding(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -69,7 +69,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr BuildBuilding(
  * @brief Destroys a building.
  *
  * @param a_client            The client.
- * @param a_id_user           The identifier of a user.
+ * @param a_login             The login of the user.
  * @param a_password          The password of the user.
  * @param a_holder_class      The identifier of the class of a holder.
  * @param a_id_holder         The identifier of a holder.
@@ -81,7 +81,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr BuildBuilding(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DestroyBuilding(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -94,7 +94,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DestroyBuilding(
  * @brief Gets a building.
  *
  * @param a_client         The client.
- * @param a_id_user        The identifier of a user.
+ * @param a_login          The login of the user.
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
  * @param a_id_holder      The identifier of a holder.
@@ -105,7 +105,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DestroyBuilding(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuilding(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -117,7 +117,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuilding(
  * @brief Gets buildings.
  *
  * @param a_client       The client.
- * @param a_id_user      The identifier of a user.
+ * @param a_login        The login of the user.
  * @param a_password     The password of the user.
  * @param a_holder_class The identifier of the class of a holder.
  * @param a_id_holder    The identifier of a holder.
@@ -126,7 +126,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuilding(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuildings(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder

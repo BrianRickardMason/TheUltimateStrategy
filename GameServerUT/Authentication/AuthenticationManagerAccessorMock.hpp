@@ -47,7 +47,7 @@ public:
      * @brief Authenticates a user.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_password    The password of the user.
      *
      * @return True if authenticated, false otherwise.
@@ -56,7 +56,7 @@ public:
         authenticate,
         bool(
             Persistency::ITransactionShrPtr         a_transaction,
-            User::IDUser                    const & a_id_user,
+            std::string                     const & a_login,
             std::string                     const & a_password
         )
     );

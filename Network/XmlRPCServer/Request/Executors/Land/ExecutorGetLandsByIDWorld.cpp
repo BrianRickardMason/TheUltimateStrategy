@@ -60,7 +60,7 @@ bool ExecutorGetLandsByIDWorld::getParameters(
 {
     try
     {
-        m_value_id_user  = a_request->getIDUserValue();
+        m_login          = a_request->getLoginValue();
         m_password       = a_request->getPasswordValue();
         m_value_id_world = a_request->getParameterValueUnsignedInteger("idworld");
 
@@ -76,7 +76,6 @@ bool ExecutorGetLandsByIDWorld::processParameters()
 {
     try
     {
-        m_id_user  = m_value_id_user;
         m_id_world = m_value_id_world;
 
         return true;
@@ -99,7 +98,7 @@ bool ExecutorGetLandsByIDWorld::authenticate(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthenticateOperatorExitCode const exit_code =
-            authenticate_operator->authenticate(transaction, m_id_user, m_password);
+            authenticate_operator->authenticate(transaction, m_login, m_password);
 
         if (exit_code.ok())
         {
@@ -160,7 +159,7 @@ ReplyShrPtr ExecutorGetLandsByIDWorld::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         GetLandsByIDUserAndIDWorldOperatorExitCode const exit_code =
-            land_operator->getLandByIDUserAndIDWorld(transaction, m_id_user, m_id_world);
+            land_operator->getLandByIDUserAndIDWorld(transaction, m_user->getIDUser(), m_id_world);
 
         if (exit_code.ok())
         {

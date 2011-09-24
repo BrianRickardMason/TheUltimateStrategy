@@ -44,17 +44,17 @@ namespace Turn
  * @brief Performs a turn.
  *
  * @param a_client   The client.
- * @param a_id_user  The identifier of a user.
+ * @param a_login    The login of the user.
  * @param a_password The password of the user.
  * @param a_id_land  The identifier of the land.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr Turn(
-    IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
-    std::string  const & a_password,
-    unsigned int const   a_id_land
+    IClientShrPtr         a_client,
+    std::string   const & a_login,
+    std::string   const & a_password,
+    unsigned int  const   a_id_land
 );
 
 } // namespace Turn

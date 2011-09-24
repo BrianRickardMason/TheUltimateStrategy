@@ -44,7 +44,7 @@ namespace Human
  * @brief Engages a human.
  *
  * @param a_client         The client.
- * @param a_id_user        The identifier of a user.
+ * @param a_login          The login of the user.
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
  * @param a_id_holder      The identifier of a holder.
@@ -56,7 +56,7 @@ namespace Human
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -69,7 +69,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
  * @brief Dismisses a human.
  *
  * @param a_client         The client.
- * @param a_id_user        The identifier of a user.
+ * @param a_login          The login of the user.
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
  * @param a_id_holder      The identifier of a holder.
@@ -82,7 +82,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -96,7 +96,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
  * @brief Gets a human.
  *
  * @param a_client       The client.
- * @param a_id_user      The identifier of a user.
+ * @param a_login        The login of the user.
  * @param a_password     The password of the user.
  * @param a_holder_class The identifier of the class of a holder.
  * @param a_id_holder    The identifier of a holder.
@@ -108,7 +108,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetHuman(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder,
@@ -121,7 +121,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetHuman(
  * @brief Gets humans.
  *
  * @param a_client       The client.
- * @param a_id_user      The identifier of a user.
+ * @param a_login        The login of the user.
  * @param a_password     The password of the user.
  * @param a_holder_class The identifier of the class of a holder.
  * @param a_id_holder    The identifier of a holder.
@@ -130,7 +130,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetHuman(
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetHumans(
     IClientShrPtr        a_client,
-    unsigned int const   a_id_user,
+    std::string  const & a_login,
     std::string  const & a_password,
     unsigned int const   a_id_holder_class,
     unsigned int const   a_id_holder
