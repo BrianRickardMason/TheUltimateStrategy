@@ -105,7 +105,7 @@ private:
      */
     virtual bool authenticate(
         GameServer::Persistency::IPersistencyShrPtr a_persistency
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets the acting user.

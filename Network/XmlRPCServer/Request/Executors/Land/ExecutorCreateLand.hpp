@@ -93,17 +93,6 @@ class ExecutorCreateLand
     virtual bool processParameters();
 
     /**
-     * @brief Authenticates the user.
-     *
-     * @param a_persistency The persistency.
-     *
-     * @return True if user has been authenticated, false otherwise.
-     */
-    virtual bool authenticate(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
-    ) const;
-
-    /**
      * @brief Authorizes the user.
      *
      * @param a_persistency The persistency.

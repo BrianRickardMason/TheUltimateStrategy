@@ -29,6 +29,7 @@
 #include "../../../../GameServer/Persistency/PersistencyPostgresql.hpp"
 #include "Executor.hpp"
 
+using namespace GameServer::Authentication;
 using namespace GameServer::Common;
 using namespace GameServer::Persistency;
 using namespace GameServer::User;
@@ -105,6 +106,29 @@ ReplyShrPtr Executor::execute(
 bool Executor::serverIsListening() const
 {
     return true;
+}
+
+bool Executor::authenticate(
+    IPersistencyShrPtr a_persistency
+) const
+{
+    IAuthenticateOperatorShrPtr authenticate_operator = m_operator_abstract_factory->createAuthenticateOperator();
+
+    // The transaction lifetime.
+    {
+        IConnectionShrPtr connection = a_persistency->getConnection();
+        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+
+        AuthenticateOperatorExitCode const exit_code =
+            authenticate_operator->authenticate(transaction, m_login, m_password);
+
+        if (exit_code.ok())
+        {
+            transaction->commit();
+        }
+
+        return exit_code.m_authenticated;
+    }
 }
 
 bool Executor::getActingUser(

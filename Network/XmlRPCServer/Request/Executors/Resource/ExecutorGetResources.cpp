@@ -31,7 +31,6 @@
 #include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
-using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
 using namespace GameServer::Persistency;
@@ -87,29 +86,6 @@ bool ExecutorGetResources::processParameters()
     catch (std::range_error)
     {
         return false;
-    }
-}
-
-bool ExecutorGetResources::authenticate(
-    IPersistencyShrPtr a_persistency
-) const
-{
-    IAuthenticateOperatorShrPtr authenticate_operator = m_operator_abstract_factory->createAuthenticateOperator();
-
-    // The transaction lifetime.
-    {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
-
-        AuthenticateOperatorExitCode const exit_code =
-            authenticate_operator->authenticate(transaction, m_login, m_password);    
-
-        if (exit_code.ok())
-        {
-            transaction->commit();
-        }
-
-        return exit_code.m_authenticated;
     }
 }
 
