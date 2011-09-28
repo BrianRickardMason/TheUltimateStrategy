@@ -47,7 +47,7 @@ namespace Executors
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_GET_LANDS_BY_ID_WORLD\">
  *     <user>
- *         <iduser   value=\"#\" />
+ *         <login    value=\"#\" />
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>

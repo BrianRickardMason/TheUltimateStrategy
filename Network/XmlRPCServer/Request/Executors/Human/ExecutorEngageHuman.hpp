@@ -49,7 +49,7 @@ namespace Executors
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_ENGAGE_HUMAN\">
  *     <user>
- *         <iduser   value=\"#\" />
+ *         <login    value=\"#\" />
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>

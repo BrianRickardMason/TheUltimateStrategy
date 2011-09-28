@@ -46,7 +46,7 @@ namespace Executors
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_GET_LAND_BY_NAME\">
  *     <user>
- *         <iduser   value=\"#\" />
+ *         <login    value=\"#\" />
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
