@@ -129,7 +129,7 @@ public:
      *           - the value of the "id" attribute is negative
      *         is true.
      */
-    unsigned short int const getIdRequest() const;
+    unsigned short int getIdRequest() const;
 
     /**
      * @brief Gets the value of the identifier of the user.
@@ -173,7 +173,7 @@ public:
      *           - the value is negative
      *         is true.
      */
-    unsigned int const getParameterValueUnsignedInteger(
+    unsigned int getParameterValueUnsignedInteger(
         std::string const & a_name
     ) const;
 
@@ -190,7 +190,7 @@ public:
      *           - the parameter does not have a value
      *         is true.
      */
-    std::string const getParameterValueString(
+    std::string getParameterValueString(
         std::string const & a_name
     ) const;
 

@@ -58,7 +58,7 @@ Request::Request(
     setXmlDocument(string_representation);
 }
 
-unsigned short int const Request::getIdRequest() const
+unsigned short int Request::getIdRequest() const
 {
     // Verify if a "request" tag exists.
     IXmlNodeShrPtr node = m_xml_document->getNode("request");
@@ -208,7 +208,7 @@ string Request::getPasswordValue() const
     return string(value_attribute->getValue());
 }
 
-unsigned int const Request::getParameterValueUnsignedInteger(
+unsigned int Request::getParameterValueUnsignedInteger(
     string const & a_name
 ) const
 {
@@ -241,7 +241,7 @@ unsigned int const Request::getParameterValueUnsignedInteger(
     return attribute->asUnsignedInt();
 }
 
-string const Request::getParameterValueString(
+string Request::getParameterValueString(
     string const & a_name
 ) const
 {
