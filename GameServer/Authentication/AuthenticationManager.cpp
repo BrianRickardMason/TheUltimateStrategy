@@ -28,7 +28,6 @@
 #include "AuthenticationManager.hpp"
 
 using namespace GameServer::Persistency;
-using namespace GameServer::User;
 using namespace std;
 
 namespace GameServer

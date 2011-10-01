@@ -29,7 +29,6 @@
 #define GAMESERVER_AUTHENTICATION_IAUTHENTICATEOPERATOR_HPP
 
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../User/IDUser.hpp"
 #include "AuthenticateOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>

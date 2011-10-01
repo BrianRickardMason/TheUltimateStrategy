@@ -32,7 +32,6 @@
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Persistency;
-using namespace GameServer::User;
 using namespace std;
 
 using testing::Return;

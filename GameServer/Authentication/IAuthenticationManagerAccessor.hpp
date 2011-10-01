@@ -29,7 +29,6 @@
 #define GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGERACCESSOR_HPP
 
 #include "../Persistency/ITransaction.hpp"
-#include "../User/IDUser.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
