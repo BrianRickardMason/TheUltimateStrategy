@@ -28,7 +28,6 @@
 #include "Land.hpp"
 
 using namespace GameServer::Epoch;
-using namespace GameServer::User;
 using namespace GameServer::World;
 using namespace std;
 
@@ -40,7 +39,7 @@ namespace Land
 Land::Land(
     LandRecord const & a_record
 )
-    : m_id_user(a_record.getIDUser()),
+    : m_login(a_record.getLogin()),
       m_id_world(a_record.getIDWorld()),
       m_id_epoch(a_record.getIDEpoch()),
       m_id_land(a_record.getIDLand()),
@@ -49,9 +48,9 @@ Land::Land(
 {
 }
 
-IDUser const & Land::getIDUser() const
+string Land::getLogin() const
 {
-    return m_id_user;
+    return m_login;
 }
 
 IDWorld const & Land::getIDWorld() const

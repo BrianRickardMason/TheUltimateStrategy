@@ -31,7 +31,7 @@
 using namespace GameServer::User;
 
 /**
- * @brief A test class.
+ * @brief The test class of the record of the user.
  */
 class UserRecordTest
     : public testing::Test
@@ -41,20 +41,15 @@ protected:
      * @brief Constructs a test class.
      */
     UserRecordTest()
-        : m_record(UserRecord(IDUser(1), "Login", "Password", true))
+        : m_record(UserRecord("Login", "Password", true))
     {
     }
 
     /**
-     * @brief A user record to be tested.
+     * @brief Test constants: the record of the user.
      */
     UserRecord m_record;
 };
-
-TEST_F(UserRecordTest, ConstructorSetsProperIDUserValue)
-{
-    ASSERT_EQ(1, m_record.getIDUser().getValue());
-}
 
 TEST_F(UserRecordTest, ConstructorSetsProperLoginValue)
 {
@@ -69,11 +64,6 @@ TEST_F(UserRecordTest, ConstructorSetsProperPasswordValue)
 TEST_F(UserRecordTest, ConstructorSetsProperModeratorValue)
 {
     ASSERT_EQ(true, m_record.isModerator());
-}
-
-TEST_F(UserRecordTest, GetIDUserReturnsProperValue)
-{
-    ASSERT_EQ(1, m_record.getIDUser().getValue());
 }
 
 TEST_F(UserRecordTest, GetLoginReturnsProperValue)

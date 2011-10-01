@@ -111,7 +111,7 @@ ReplyShrPtr ScenarioGetResourcesActionInvalidRequest::perform(
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_login.c_str());
+    user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");

@@ -45,9 +45,9 @@ UserManager::UserManager(
 }
 
 bool UserManager::createUser(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login,
-    string             const & a_password
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_password
 )
 {
     try
@@ -56,50 +56,37 @@ bool UserManager::createUser(
 
         return true;
     }
-    catch (std::exception const & e)
+    catch (...)
     {
         return false;
     }
 }
 
 bool UserManager::deleteUser(
-    ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
 )
 {
     try
     {
-        m_accessor->deleteRecord(a_transaction, a_id_user);
+        m_accessor->deleteRecord(a_transaction, a_login);
 
         return true;
     }
-    catch (std::exception const & e)
+    catch (...)
     {
         return false;
     }
 }
 
-IUserShrPtr UserManager::getUserByLogin(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login
-)
-{
-    return prepareResultGetUser(m_accessor->getRecordByLogin(a_transaction, a_login));
-}
-
 IUserShrPtr UserManager::getUser(
-    ITransactionShrPtr a_transaction,
-    IDUser             a_id_user
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
 )
 {
-    return prepareResultGetUser(m_accessor->getRecord(a_transaction, a_id_user));
-}
+    IUserRecordShrPtr user_record = m_accessor->getRecord(a_transaction, a_login);
 
-IUserShrPtr UserManager::prepareResultGetUser(
-    IUserRecordShrPtr a_record
-)
-{
-    return a_record ? IUserShrPtr(new User(a_record)) : IUserShrPtr();
+    return user_record ? IUserShrPtr(new User(user_record)) : IUserShrPtr();
 }
 
 } // namespace User

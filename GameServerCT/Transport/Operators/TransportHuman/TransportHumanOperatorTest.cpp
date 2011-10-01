@@ -39,6 +39,7 @@ using namespace GameServer::Settlement;
 using namespace GameServer::Transport;
 using namespace GameServer::User;
 using namespace GameServer::World;
+using namespace std;
 
 /**
  * @brief The test class.
@@ -66,7 +67,7 @@ protected:
           m_id_settlement_2(2),
           m_id_settlement_3(3),
           m_id_settlement_4(4),
-          m_id_user_1(1),
+          m_login("Login"),
           m_id_world_1(1),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, 2)
@@ -81,8 +82,8 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_id_world_1);
 
-            m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1");
-            m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land2");
+            m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land1");
+            m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land2");
 
             m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement1");
             m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement2");
@@ -152,9 +153,9 @@ protected:
                  m_id_settlement_4;
 
     /**
-     * @brief Test constants: identifiers of users.
+     * @brief Test constants: the login of the user.
      */
-    IDUser m_id_user_1;
+    string m_login;
 
     /**
      * @brief Test constants: identifiers of worlds.

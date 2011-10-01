@@ -53,54 +53,41 @@ public:
      * @brief Creates a user.
      *
      * @param a_transaction The transaction.
-     * @param a_login       The login of a user.
-     * @param a_password    The password of a user.
+     * @param a_login       The login of the user.
+     * @param a_password    The password of the user.
      *
      * @return True on success, false otherwise.
      */
     virtual bool createUser(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login,
-        std::string                     const & a_password
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_password
     ) = 0;
 
     /**
      * @brief Deletes a user.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of a user.
+     * @param a_login       The login of the user.
      *
      * @return True on success, false otherwise.
      */
     virtual bool deleteUser(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDUser                          const & a_id_user
-    ) = 0;
-
-    /**
-     * @brief Gets a user by login.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     *
-     * @return The user, null if not found.
-     */
-    virtual IUserShrPtr getUserByLogin(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
     ) = 0;
 
     /**
      * @brief Gets the user.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      *
      * @return The user, null if not found.
      */
     virtual IUserShrPtr getUser(
-        Persistency::ITransactionShrPtr a_transaction,
-        IDUser                          a_login
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
     ) = 0;
 };
 

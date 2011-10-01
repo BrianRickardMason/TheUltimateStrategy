@@ -103,7 +103,7 @@ ReplyShrPtr ScenarioGetLandsByIDWorldActionInvalidRequest::perform(
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_login.c_str());
+    user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
@@ -125,7 +125,7 @@ string ScenarioGetLandsByIDWorldVerificationLandsHaveBeenGot::verify(
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(    GET_LANDS_BY_IDUSER_AND_IDWORLD_LANDS_HAVE_BEEN_GOT.c_str(),
+    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_IDWORLD_LANDS_HAVE_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
@@ -144,7 +144,7 @@ string ScenarioGetLandsByIDWorldVerificationLandsHaveNotBeenGot::verify(
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(    GET_LANDS_BY_IDUSER_AND_IDWORLD_LANDS_HAVE_NOT_BEEN_GOT.c_str(),
+    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_IDWORLD_LANDS_HAVE_NOT_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
@@ -163,7 +163,7 @@ string ScenarioGetLandsByIDWorldVerificationUnexpectedError::verify(
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LANDS_BY_IDUSER_AND_IDWORLD_UNEXPECTED_ERROR.c_str(),
+    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_IDWORLD_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
@@ -182,7 +182,7 @@ string ScenarioGetLandsByIDWorldVerificationWorldDoesNotExist::verify(
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LANDS_BY_IDUSER_AND_IDWORLD_WORLD_DOES_NOT_EXIST.c_str(),
+    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_IDWORLD_WORLD_DOES_NOT_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 

@@ -25,23 +25,21 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetLandsByIDUserAndIDWorldOperatorFactory.hpp"
+#include "GetUserOperatorFactory.hpp"
 
 using namespace GameServer::Common;
 
 namespace GameServer
 {
-namespace Land
+namespace User
 {
 
-GetLandsByIDUserAndIDWorldOperatorAutPtr GetLandsByIDUserAndIDWorldOperatorFactory::createGetLandsByIDUserAndIDWorldOperator(
+GetUserOperatorAutPtr GetUserOperatorFactory::createGetUserOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetLandsByIDUserAndIDWorldOperatorAutPtr(new GetLandsByIDUserAndIDWorldOperator(a_manager_abstract_factory->createLandManager(),
-                                                                                           a_manager_abstract_factory->createUserManager(),
-                                                                                           a_manager_abstract_factory->createWorldManager()));
+    return GetUserOperatorAutPtr(new GetUserOperator(a_manager_abstract_factory->createUserManager()));
 }
 
-} // namespace Land
+} // namespace User
 } // namespace GameServer

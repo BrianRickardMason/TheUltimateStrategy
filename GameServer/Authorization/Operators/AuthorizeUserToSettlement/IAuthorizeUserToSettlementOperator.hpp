@@ -30,7 +30,6 @@
 
 #include "../../../Persistency/ITransaction.hpp"
 #include "../../../Settlement/IDSettlement.hpp"
-#include "../../../User/IDUser.hpp"
 #include "AuthorizeUserToSettlementOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -56,14 +55,14 @@ public:
      * @brief Authorizes a user to a settlement.
      *
      * @param a_transaction   The transaction.
-     * @param a_id_user       The identifier of the user.
+     * @param a_login         The login of the user.
      * @param a_id_settlement The identifier of the settlement.
      *
      * @return The exit code.
      */
     virtual AuthorizeUserToSettlementOperatorExitCode authorizeUserToSettlement(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         Settlement::IDSettlement        const & a_id_settlement
     ) const = 0;
 };

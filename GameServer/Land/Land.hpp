@@ -51,11 +51,11 @@ public:
     );
 
     /**
-     * @brief Gets an identifier of the user.
+     * @brief Gets the login of the user.
      *
-     * @return The identifier of the user.
+     * @return The login of the user.
      */
-    User::IDUser const & getIDUser() const;
+    std::string getLogin() const;
 
     /**
      * @brief Gets an identifier of the world.
@@ -94,9 +94,9 @@ public:
 
 private:
     /**
-     * @brief An identifier of the user.
+     * @brief The login of the user.
      */
-    User::IDUser const m_id_user;
+    std::string const m_login;
 
     /**
      * @brief An identifier of the world.

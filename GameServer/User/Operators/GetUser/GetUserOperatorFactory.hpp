@@ -25,67 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_GETLANDSBYIDUSERANDIDWORLDOPERATOREXITCODE_HPP
-#define GAMESERVER_LAND_GETLANDSBYIDUSERANDIDWORLDOPERATOREXITCODE_HPP
+#ifndef GAMESERVER_USER_GETUSEROPERATORFACTORY_HPP
+#define GAMESERVER_USER_GETUSEROPERATORFACTORY_HPP
 
-#include "../../Land.hpp"
+#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "GetUserOperator.hpp"
 
 namespace GameServer
 {
-namespace Land
+namespace User
 {
 
 /**
- * @brief Available exit codes.
+ * @brief The factory of GetUserOperator.
  */
-unsigned short int const GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT     = 1;
-unsigned short int const GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT = 2;
-unsigned short int const GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR        = 3;
-unsigned short int const GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST    = 4;
-
-/**
- * @brief The exit code of GetLandsByIDUserAndIDWorldOperator.
- */
-class GetLandsByIDUserAndIDWorldOperatorExitCode
+class GetUserOperatorFactory
 {
 public:
     /**
-     * @brief Constructs the exit code.
+     * @brief The factory method.
      *
-     * @param a_exit_code The value of the exit code.
-     * @param a_lands     The lands.
-     */
-    GetLandsByIDUserAndIDWorldOperatorExitCode(
-        unsigned short int const   a_exit_code,
-        LandMap            const & a_lands
-    )
-        : m_exit_code(a_exit_code),
-          m_lands(a_lands)
-    {
-    }
-
-    /**
-     * @brief The "ok" method.
+     * @param a_manager_abstract_factory The abstract factory of managers.
      *
-     * @return False (a read-only operator).
+     * @return The newly created GetUserOperator.
      */
-    bool ok() const
-    {
-        return false;
-    }
-
-    /**
-     * @brief The exit code.
-     */
-    unsigned short int const m_exit_code;
-
-    /**
-     * @brief The lands.
-     */
-    LandMap const m_lands;
+    static GetUserOperatorAutPtr createGetUserOperator(
+        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    );
 };
 
-} // namespace Land
+} // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_GETLANDSBYIDUSERANDIDWORLDOPERATOREXITCODE_HPP
+#endif // GAMESERVER_USER_GETUSEROPERATORFACTORY_HPP

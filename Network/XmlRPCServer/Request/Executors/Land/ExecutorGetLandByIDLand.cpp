@@ -100,7 +100,7 @@ bool ExecutorGetLandByIDLand::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToLandByIDLandOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToLandByIDLand(transaction, m_user->getIDUser(), m_id_land);
+            authorize_operator->authorizeUserToLandByIDLand(transaction, m_user->getLogin(), m_id_land);
 
         if (exit_code.ok())
         {
@@ -207,9 +207,9 @@ ReplyShrPtr ExecutorGetLandByIDLand::produceReply(
 
     if (a_exit_code.m_land)
     {
-        IXmlNodeShrPtr node_iduser = node_parameters->appendNode("iduser");
-        node_iduser->appendAttribute("type")->setValue("unsigned integer");
-        node_iduser->appendAttribute("value")->setValue(a_exit_code.m_land->getIDUser().getValue());
+        IXmlNodeShrPtr node_login = node_parameters->appendNode("login");
+        node_login->appendAttribute("type")->setValue("string");
+        node_login->appendAttribute("value")->setValue(a_exit_code.m_land->getLogin().c_str());
 
         IXmlNodeShrPtr node_idworld = node_parameters->appendNode("idworld");
         node_idworld->appendAttribute("type")->setValue("unsigned integer");

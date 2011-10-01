@@ -39,9 +39,9 @@ namespace User
 {
 
 void UserManagerAccessorPostgresql::insertRecord(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login,
-    string             const & a_password
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_password
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -55,22 +55,22 @@ void UserManagerAccessorPostgresql::insertRecord(
 }
 
 void UserManagerAccessorPostgresql::deleteRecord(
-    ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "DELETE FROM users WHERE id_user = "
-                   + backbone_transaction.quote(a_id_user.getValue());
+    string query = "DELETE FROM users WHERE login = "
+                   + backbone_transaction.quote(a_login);
 
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-IUserRecordShrPtr UserManagerAccessorPostgresql::getRecordByLogin(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login
+IUserRecordShrPtr UserManagerAccessorPostgresql::getRecord(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -82,39 +82,20 @@ IUserRecordShrPtr UserManagerAccessorPostgresql::getRecordByLogin(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-IUserRecordShrPtr UserManagerAccessorPostgresql::getRecord(
-    ITransactionShrPtr a_transaction,
-    IDUser             a_id_user
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM users WHERE id_user = "
-                   + backbone_transaction.quote(a_id_user.getValue());
-
-    return prepareResultGetRecord(backbone_transaction.exec(query));
-}
-
 IUserRecordShrPtr UserManagerAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
 {
-    // Fake types for libpqxx.
-    unsigned int unsigned_integer;
-
     if (a_result.size() > 0)
     {
-        IDUser id_user;
         string login, password;
         bool moderator;
 
-        id_user = a_result[0]["id_user"].as(unsigned_integer);
         a_result[0]["login"].to(login);
         a_result[0]["password"].to(password);
         a_result[0]["moderator"].to(moderator);
 
-        return IUserRecordShrPtr(new UserRecord(id_user, login, password, moderator));
+        return IUserRecordShrPtr(new UserRecord(login, password, moderator));
     }
     else
     {

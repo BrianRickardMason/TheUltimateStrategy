@@ -54,8 +54,8 @@
 #include "../Land/Operators/CreateLand/ICreateLandOperator.hpp"
 #include "../Land/Operators/DeleteLand/IDeleteLandOperator.hpp"
 #include "../Land/Operators/GetLandByIDLand/IGetLandByIDLandOperator.hpp"
-#include "../Land/Operators/GetLandByIDUserAndName/IGetLandByIDUserAndNameOperator.hpp"
-#include "../Land/Operators/GetLandsByIDUserAndIDWorld/IGetLandsByIDUserAndIDWorldOperator.hpp"
+#include "../Land/Operators/GetLandByLoginAndName/IGetLandByLoginAndNameOperator.hpp"
+#include "../Land/Operators/GetLandsByLoginAndIDWorld/IGetLandsByLoginAndIDWorldOperator.hpp"
 #include "../Resource/Operators/GetResource/IGetResourceOperator.hpp"
 #include "../Resource/Operators/GetResources/IGetResourcesOperator.hpp"
 #include "../Settlement/Operators/CreateSettlement/ICreateSettlementOperator.hpp"
@@ -67,8 +67,7 @@
 #include "../Transport/Operators/TransportResource/ITransportResourceOperator.hpp"
 #include "../Turn/Operators/Turn/ITurnOperator.hpp"
 #include "../User/Operators/CreateUser/ICreateUserOperator.hpp"
-#include "../User/Operators/GetUserByIDUser/IGetUserByIDUserOperator.hpp"
-#include "../User/Operators/GetUserByLogin/IGetUserByLoginOperator.hpp"
+#include "../User/Operators/GetUser/IGetUserOperator.hpp"
 #include "../World/Operators/CreateWorld/ICreateWorldOperator.hpp"
 #include "../World/Operators/GetWorldByIDLand/IGetWorldByIDLandOperator.hpp"
 #include "../WorldConfiguration/Operators/VerifyTurn/IVerifyTurnOperator.hpp"
@@ -273,18 +272,18 @@ public:
     virtual Land::IGetLandByIDLandOperatorShrPtr createGetLandByIDLandOperator() const = 0;
 
     /**
-     * @brief Creates the get land by id user and name operator.
+     * @brief Creates the get land by login and name operator.
      *
-     * @return The newly created get land by id user and name operator.
+     * @return The newly created get land by login and name operator.
      */
-    virtual Land::IGetLandByIDUserAndNameOperatorShrPtr createGetLandByIDUserAndNameOperator() const = 0;
+    virtual Land::IGetLandByLoginAndNameOperatorShrPtr createGetLandByLoginAndNameOperator() const = 0;
 
     /**
-     * @brief Creates the get lands by id user and id world operator.
+     * @brief Creates the get lands by login and id world operator.
      *
-     * @return The newly created get lands by id user and id world operator.
+     * @return The newly created get lands by login and id world operator.
      */
-    virtual Land::IGetLandsByIDUserAndIDWorldOperatorShrPtr createGetLandsByIDUserAndIDWorldOperator() const = 0;
+    virtual Land::IGetLandsByLoginAndIDWorldOperatorShrPtr createGetLandsByLoginAndIDWorldOperator() const = 0;
 
     /**
      * @brief Creates the get resource operator.
@@ -364,18 +363,11 @@ public:
     virtual User::ICreateUserOperatorShrPtr createCreateUserOperator() const = 0;
 
     /**
-     * @brief Creates the get user by id user operator.
+     * @brief Creates the get user operator.
      *
-     * @return The newly created get user by id user operator.
+     * @return The newly created get user operator.
      */
-    virtual User::IGetUserByIDUserOperatorShrPtr createGetUserByIDUserOperator() const = 0;
-
-    /**
-     * @brief Creates the get user by login operator.
-     *
-     * @return The newly created get user by login operator.
-     */
-    virtual User::IGetUserByLoginOperatorShrPtr createGetUserByLoginOperator() const = 0;
+    virtual User::IGetUserOperatorShrPtr createGetUserOperator() const = 0;
 
     /**
      * @brief Creates the create world operator.

@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYIDWORLD_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYIDWORLD_HPP
 
-#include "../../../../../GameServer/Land/Operators/GetLandsByIDUserAndIDWorld/GetLandsByIDUserAndIDWorldOperatorExitCode.hpp"
+#include "../../../../../GameServer/Land/Operators/GetLandsByLoginAndIDWorld/GetLandsByLoginAndIDWorldOperatorExitCode.hpp"
 #include "../../../../../GameServer/World/IDWorld.hpp"
 #include "../Executor.hpp"
 
@@ -63,7 +63,7 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <iduser  type=\"unsigned integer\" value=\"#\" />
+ *             <login   type=\"string\"           value=\"#\" />
  *             <idworld type=\"unsigned integer\" value=\"#\" />
  *             <idland  type=\"unsigned integer\" value=\"#\" />
  *             <granted type=\"boolean\"          value=\"#\" />
@@ -161,7 +161,7 @@ class ExecutorGetLandsByIDWorld
      * @return The reply.
      */
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
-        GameServer::Land::GetLandsByIDUserAndIDWorldOperatorExitCode const & a_exit_code
+        GameServer::Land::GetLandsByLoginAndIDWorldOperatorExitCode const & a_exit_code
     ) const;
 
     /**

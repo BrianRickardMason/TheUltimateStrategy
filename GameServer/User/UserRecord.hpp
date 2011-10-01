@@ -45,24 +45,15 @@ public:
     /**
      * @brief Constructs the record of the user.
      *
-     * @param a_id_user   The identifier of the user.
      * @param a_login     The login of the user.
      * @param a_password  The password of the user.
      * @param a_moderator The "moderator" status of the user.
      */
     UserRecord(
-        IDUser      const & a_id_user,
-        std::string const & a_login,
-        std::string const & a_password,
-        bool        const   a_moderator
+        std::string const a_login,
+        std::string const a_password,
+        bool        const a_moderator
     );
-
-    /**
-     * @brief Gets the identifier of the user.
-     *
-     * @return The identifier of the user.
-     */
-    virtual IDUser getIDUser() const;
 
     /**
      * @brief Gets the login of the user.
@@ -86,11 +77,6 @@ public:
     virtual bool isModerator() const;
 
 private:
-    /**
-     * @brief The identifier of the user.
-     */
-    IDUser const m_id_user;
-
     /**
      * @brief The login of the user.
      */

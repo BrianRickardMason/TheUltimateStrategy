@@ -31,10 +31,10 @@
 #include "../Land/IDLand.hpp"
 #include "../Persistency/ITransaction.hpp"
 #include "../Settlement/IDSettlement.hpp"
-#include "../User/IDUser.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
+#include <string>
 
 namespace GameServer
 {
@@ -57,14 +57,14 @@ public:
      * @brief Authorizes a user to the land.
      *
      * @param a_transaction A transaction.
-     * @param a_id_user     An identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_land     An identifier of the land.
      *
      * @return True if the user is authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         Land::IDLand                    const & a_id_land
     ) const = 0;
 
@@ -72,14 +72,14 @@ public:
      * @brief Authorizes a user to the land.
      *
      * @param a_transaction A transaction.
-     * @param a_id_user     An identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_name        A name of the land.
      *
      * @return True if the user is authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         std::string                     const & a_name
     ) const = 0;
 

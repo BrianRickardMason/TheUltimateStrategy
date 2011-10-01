@@ -31,7 +31,6 @@ using namespace GameServer::Common;
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
-using namespace GameServer::User;
 using namespace std;
 
 namespace GameServer
@@ -48,25 +47,25 @@ AuthorizationManager::AuthorizationManager(
 
 bool AuthorizationManager::authorizeUserToLand(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDLand             const & a_id_land
 ) const
 {
-    return m_accessor->authorizeUserToLand(a_transaction, a_id_user, a_id_land);
+    return m_accessor->authorizeUserToLand(a_transaction, a_login, a_id_land);
 }
 
 bool AuthorizationManager::authorizeUserToLand(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     string             const & a_name
 ) const
 {
-    return m_accessor->authorizeUserToLand(a_transaction, a_id_user, a_name);
+    return m_accessor->authorizeUserToLand(a_transaction, a_login, a_name);
 }
 
 bool AuthorizationManager::authorizeUserToHolder(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDHolder           const & a_id_holder
 ) const
 {
@@ -75,18 +74,18 @@ bool AuthorizationManager::authorizeUserToHolder(
     // TODO: Unit tests.
     IDSettlement id_settlement(a_id_holder.getValue2());
 
-    return authorizeUserToSettlement(a_transaction, a_id_user, id_settlement);
+    return authorizeUserToSettlement(a_transaction, a_login, id_settlement);
 }
 
 bool AuthorizationManager::authorizeUserToSettlement(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDSettlement       const & a_id_settlement
 ) const
 {
     IDLand id_land = m_accessor->getIDLandOfSettlement(a_transaction, a_id_settlement);
 
-    return authorizeUserToLand(a_transaction, a_id_user, id_land);
+    return authorizeUserToLand(a_transaction, a_login, id_land);
 }
 
 } // namespace Authorization

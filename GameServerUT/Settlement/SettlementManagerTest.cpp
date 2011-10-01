@@ -37,8 +37,6 @@ using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
-using namespace GameServer::User;
-using namespace GameServer::World;
 using namespace boost;
 using namespace std;
 
@@ -61,9 +59,7 @@ protected:
           m_id_land_1(1),
           m_id_land_2(2),
           m_id_settlement_1(1),
-          m_id_settlement_2(2),
-          m_id_user_1(1),
-          m_id_world_1(1)
+          m_id_settlement_2(2)
     {
     }
 
@@ -103,16 +99,6 @@ protected:
      */
     IDSettlement m_id_settlement_1,
                  m_id_settlement_2;
-
-    /**
-     * @brief Test constants identifiers of the user.
-     */
-    IDUser m_id_user_1;
-
-    /**
-     * @brief Test constants identifiers of the world.
-     */
-    IDWorld m_id_world_1;
 };
 
 TEST_F(SettlementManagerTest, SettlementManager)

@@ -56,14 +56,14 @@ public:
      * @brief Authorizes a user to a land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user The identifier of the user.
-     * @param a_name    The name of the land.
+     * @param a_login       The login of the user.
+     * @param a_name        The name of the land.
      *
      * @return The exit code.
      */
     virtual AuthorizeUserToLandByNameOperatorExitCode authorizeUserToLandByName(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         std::string                     const & a_name
     ) const;
 

@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperator.hpp"
-#include "../../../../GameServer/User/IDUser.hpp"
 #include "../../../../GameServer/World/IDWorld.hpp"
 #include "../../../Land/LandManagerMock.hpp"
 #include "../../../Persistency/TransactionDummy.hpp"
@@ -38,9 +37,9 @@ using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
-using namespace GameServer::User;
 using namespace GameServer::World;
 using namespace boost;
+using namespace std;
 
 using testing::Return;
 using testing::Throw;
@@ -62,7 +61,7 @@ protected:
           m_id_epoch_1(1),
           m_id_land_1(1),
           m_id_settlement_1(1),
-          m_id_user_1(1),
+          m_login("Login"),
           m_id_world_1(1)
     {
     }
@@ -83,27 +82,27 @@ protected:
     BehaviourGiveGrantMock * m_behaviour_give_grant;
 
     /**
-     * @brief Test constants: identifiers of epochs.
+     * @brief Test constants: the identifier of the epoch.
      */
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants: identifiers of lands.
+     * @brief Test constants: the identifier of the land.
      */
     IDLand m_id_land_1;
 
     /**
-     * @brief Test constants: identifiers of settlements.
+     * @brief Test constants: the identifier of the settlement.
      */
     IDSettlement m_id_settlement_1;
 
     /**
-     * @brief Test constants: identifiers of users.
+     * @brief Test constants: the login of the user.
      */
-    IDUser m_id_user_1;
+    string m_login;
 
     /**
-     * @brief Test constants: identifiers of worlds.
+     * @brief Test constants: the identifier of the world.
      */
     IDWorld m_id_world_1;
 };
@@ -134,7 +133,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
+    LandRecord land_record(m_login, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_id_land_1))
     .WillOnce(Return(make_shared<Land>(land_record)));
@@ -156,7 +155,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementHasNotBeenCreate
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
+    LandRecord land_record(m_login, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_id_land_1))
     .WillOnce(Return(make_shared<Land>(land_record)));
@@ -179,7 +178,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasBeenGivenSettlemen
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", true);
+    LandRecord land_record(m_login, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", true);
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_id_land_1))
     .WillOnce(Return(make_shared<Land>(land_record)));
@@ -202,7 +201,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGetSet
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
+    LandRecord land_record(m_login, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_id_land_1))
     .WillOnce(Return(make_shared<Land>(land_record)));
@@ -226,7 +225,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGiveTh
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
+    LandRecord land_record(m_login, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_id_land_1))
     .WillOnce(Return(make_shared<Land>(land_record)));
@@ -255,7 +254,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
+    LandRecord land_record(m_login, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land", false);
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_id_land_1))
     .WillOnce(Return(make_shared<Land>(land_record)));

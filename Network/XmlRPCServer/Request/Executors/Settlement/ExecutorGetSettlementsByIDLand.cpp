@@ -99,7 +99,7 @@ bool ExecutorGetSettlementsByIDLand::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToLandByIDLandOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToLandByIDLand(transaction, m_user->getIDUser(), m_id_land);
+            authorize_operator->authorizeUserToLandByIDLand(transaction, m_user->getLogin(), m_id_land);
 
         if (exit_code.ok())
         {

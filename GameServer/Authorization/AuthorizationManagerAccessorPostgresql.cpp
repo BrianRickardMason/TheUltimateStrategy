@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "AuthorizationManagerAccessorPostgresql.hpp"
 #include "../Persistency/TransactionPostgresql.hpp"
+#include "AuthorizationManagerAccessorPostgresql.hpp"
 
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
@@ -40,14 +40,14 @@ namespace Authorization
 
 bool AuthorizationManagerAccessorPostgresql::authorizeUserToLand(
     ITransactionShrPtr         a_transaction,
-    User::IDUser       const & a_id_user,
-    Land::IDLand       const & a_id_land
+    string             const   a_login,
+    IDLand             const & a_id_land
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM lands WHERE id_user = " + backbone_transaction.quote(a_id_user.getValue())
+    string query = "SELECT * FROM lands WHERE login = " + backbone_transaction.quote(a_login)
                    + " AND id_land = " + backbone_transaction.quote(a_id_land.getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -57,14 +57,14 @@ bool AuthorizationManagerAccessorPostgresql::authorizeUserToLand(
 
 bool AuthorizationManagerAccessorPostgresql::authorizeUserToLand(
     ITransactionShrPtr         a_transaction,
-    User::IDUser       const & a_id_user,
+    string             const   a_login,
     string             const & a_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM lands WHERE id_user = " + backbone_transaction.quote(a_id_user.getValue())
+    string query = "SELECT * FROM lands WHERE login = " + backbone_transaction.quote(a_login)
                    + " AND name = " + backbone_transaction.quote(a_name);
 
     pqxx::result result = backbone_transaction.exec(query);

@@ -47,50 +47,37 @@ public:
      * @brief Inserts a user record.
      *
      * @param a_transaction The transaction.
-     * @param a_login       The login of a user.
-     * @param a_password    The password of a user.
+     * @param a_login       The login of the user.
+     * @param a_password    The password of the user.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login,
-        std::string                     const & a_password
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_password
     ) const;
 
     /**
      * @brief Deletes a user record.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of a user.
+     * @param a_login       The login of the user.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDUser                          const & a_id_user
-    ) const;
-
-    /**
-     * @brief Gets a user record by the login of the user.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of a user.
-     *
-     * @return The user record, null if not found.
-     */
-    virtual IUserRecordShrPtr getRecordByLogin(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
     ) const;
 
     /**
      * @brief Gets the record of the user.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      *
      * @return The record of the user, null if not found.
      */
     virtual IUserRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr a_transaction,
-        IDUser                          a_id_user
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
     ) const;
 
 private:

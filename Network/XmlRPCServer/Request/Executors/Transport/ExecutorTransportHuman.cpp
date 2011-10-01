@@ -111,7 +111,7 @@ bool ExecutorTransportHuman::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getIDUser(), m_id_settlement_source);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement_source);
 
         if (exit_code.ok())
         {
@@ -127,7 +127,7 @@ bool ExecutorTransportHuman::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getIDUser(), m_id_settlement_destination);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement_destination);
 
         if (exit_code.ok())
         {

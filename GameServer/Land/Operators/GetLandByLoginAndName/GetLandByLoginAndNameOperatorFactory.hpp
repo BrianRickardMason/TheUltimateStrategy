@@ -25,51 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_IGETUSERBYIDUSEROPERATOR_HPP
-#define GAMESERVER_USER_IGETUSERBYIDUSEROPERATOR_HPP
+#ifndef GAMESERVER_LAND_GETLANDBYLOGINANDNAMEOPERATORFACTORY_HPP
+#define GAMESERVER_LAND_GETLANDBYLOGINANDNAMEOPERATORFACTORY_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
-#include "GetUserByIDUserOperatorExitCode.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
+#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "GetLandByLoginAndNameOperator.hpp"
 
 namespace GameServer
 {
-namespace User
+namespace Land
 {
 
 /**
- * @brief The interface of GetUserByIDUserOperator.
+ * @brief The factory of GetLandByLoginAndNameOperator.
  */
-class IGetUserByIDUserOperator
-    : boost::noncopyable
+class GetLandByLoginAndNameOperatorFactory
 {
 public:
     /**
-     * @brief Destructs GetUserByIDUserOperator.
-     */
-    virtual ~IGetUserByIDUserOperator(){};
-
-    /**
-     * @brief Gets the user.
+     * @brief The factory method.
      *
-     * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_manager_abstract_factory The abstract factory of managers.
      *
-     * @return The exit code.
+     * @return The newly created GetLandByNameOperator.
      */
-    virtual GetUserByIDUserOperatorExitCode getUserByIDUser(
-        Persistency::ITransactionShrPtr       a_transaction,
-        IDUser                          const a_id_user
-    ) const = 0;
+    static GetLandByLoginAndNameOperatorAutPtr createGetLandByLoginAndNameOperator(
+        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    );
 };
 
-/**
- * @brief The shared pointer of the interface of GetUserByIDUserOperator.
- */
-typedef boost::shared_ptr<IGetUserByIDUserOperator> IGetUserByIDUserOperatorShrPtr;
-
-} // namespace User
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_IGETUSERBYIDUSEROPERATOR_HPP
+#endif // GAMESERVER_LAND_GETLANDBYLOGINANDNAMEOPERATORFACTORY_HPP

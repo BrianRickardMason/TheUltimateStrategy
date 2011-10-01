@@ -30,8 +30,8 @@
 
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::User;
 using namespace GameServer::World;
+using namespace std;
 
 /**
  * @brief A test class.
@@ -44,9 +44,15 @@ protected:
      * @brief Constructs a test class.
      */
     LandRecordTest()
-        : m_record(LandRecord(IDUser(1), IDWorld(1), IDEpoch(1), IDLand(1), "Land1", false))
+        : m_login("Login"),
+          m_record(LandRecord(m_login, IDWorld(1), IDEpoch(1), IDLand(1), "Land1", false))
     {
     }
+
+    /**
+     * @brief Test constants: the login of the user.
+     */
+    string m_login;
 
     /**
      * @brief A land record to be tested.
@@ -56,9 +62,9 @@ protected:
 
 TEST_F(LandRecordTest, LandRecord)
 {
-    LandRecord record(IDUser(1), IDWorld(1), IDEpoch(1), IDLand(1), "Land1", false);
+    LandRecord record(m_login, IDWorld(1), IDEpoch(1), IDLand(1), "Land1", false);
 
-    ASSERT_EQ(1, record.getIDUser().getValue());
+    ASSERT_STREQ(m_login.c_str(), record.getLogin().c_str());
     ASSERT_EQ(1, record.getIDWorld().getValue());
     ASSERT_EQ(1, record.getIDEpoch().getValue());
     ASSERT_EQ(1, record.getIDLand().getValue());
@@ -66,9 +72,9 @@ TEST_F(LandRecordTest, LandRecord)
     ASSERT_FALSE(record.getGranted());
 }
 
-TEST_F(LandRecordTest, getIDUser)
+TEST_F(LandRecordTest, getLogin)
 {
-    ASSERT_EQ(1, m_record.getIDUser().getValue());
+    ASSERT_STREQ(m_login.c_str(), m_record.getLogin().c_str());
 }
 
 TEST_F(LandRecordTest, getIDWorld)

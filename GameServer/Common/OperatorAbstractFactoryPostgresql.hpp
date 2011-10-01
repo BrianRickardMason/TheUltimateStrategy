@@ -231,18 +231,18 @@ public:
     virtual Land::IGetLandByIDLandOperatorShrPtr createGetLandByIDLandOperator() const;
 
     /**
-     * @brief Creates the get land by id user and name operator.
+     * @brief Creates the get land by login and name operator.
      *
-     * @return The newly created get land by id user and name operator.
+     * @return The newly created get land by login and name operator.
      */
-    virtual Land::IGetLandByIDUserAndNameOperatorShrPtr createGetLandByIDUserAndNameOperator() const;
+    virtual Land::IGetLandByLoginAndNameOperatorShrPtr createGetLandByLoginAndNameOperator() const;
 
     /**
-     * @brief Creates the get lands by id user and id world operator.
+     * @brief Creates the get lands by login and id world operator.
      *
-     * @return The newly created get lands by id user and id world operator.
+     * @return The newly created get lands by login and id world operator.
      */
-    virtual Land::IGetLandsByIDUserAndIDWorldOperatorShrPtr createGetLandsByIDUserAndIDWorldOperator() const;
+    virtual Land::IGetLandsByLoginAndIDWorldOperatorShrPtr createGetLandsByLoginAndIDWorldOperator() const;
 
     /**
      * @brief Creates the get resource operator.
@@ -322,18 +322,11 @@ public:
     virtual User::ICreateUserOperatorShrPtr createCreateUserOperator() const;
 
     /**
-     * @brief Creates the get user by id user operator.
+     * @brief Creates the get user operator.
      *
-     * @return The newly created get user by id user operator.
+     * @return The newly created get user operator.
      */
-    virtual User::IGetUserByIDUserOperatorShrPtr createGetUserByIDUserOperator() const;
-
-    /**
-     * @brief Creates the get user by login operator.
-     *
-     * @return The newly created get user by login operator.
-     */
-    virtual User::IGetUserByLoginOperatorShrPtr createGetUserByLoginOperator() const;
+    virtual User::IGetUserOperatorShrPtr createGetUserOperator() const;
 
     /**
      * @brief Creates the create world operator.

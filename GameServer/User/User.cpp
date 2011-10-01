@@ -37,15 +37,9 @@ namespace User
 User::User(
     IUserRecordShrPtr const a_record
 )
-    : m_id_user(a_record->getIDUser()),
-      m_login(a_record->getLogin()),
+    : m_login(a_record->getLogin()),
       m_password(a_record->getPassword())
 {
-}
-
-IDUser User::getIDUser() const
-{
-    return m_id_user;
 }
 
 string User::getLogin() const

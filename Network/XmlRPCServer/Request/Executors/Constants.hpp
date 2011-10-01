@@ -153,14 +153,14 @@ std::string const GET_LAND_BY_IDLAND_LAND_HAS_BEEN_GOT     = "Land has been got.
 std::string const GET_LAND_BY_IDLAND_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
 std::string const GET_LAND_BY_IDLAND_UNEXPECTED_ERROR      = "Unexpected error.";
 
-std::string const GET_LAND_BY_IDUSER_AND_NAME_LAND_HAS_BEEN_GOT     = "Land has been got.";
-std::string const GET_LAND_BY_IDUSER_AND_NAME_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
-std::string const GET_LAND_BY_IDUSER_AND_NAME_UNEXPECTED_ERROR      = "Unexpected error.";
+std::string const GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_BEEN_GOT     = "Land has been got.";
+std::string const GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
+std::string const GET_LAND_BY_LOGIN_AND_NAME_UNEXPECTED_ERROR      = "Unexpected error.";
 
-std::string const GET_LANDS_BY_IDUSER_AND_IDWORLD_LANDS_HAVE_BEEN_GOT     = "Lands have been got.";
-std::string const GET_LANDS_BY_IDUSER_AND_IDWORLD_LANDS_HAVE_NOT_BEEN_GOT = "Lands have not been got.";
-std::string const GET_LANDS_BY_IDUSER_AND_IDWORLD_UNEXPECTED_ERROR        = "Unexpected error.";
-std::string const GET_LANDS_BY_IDUSER_AND_IDWORLD_WORLD_DOES_NOT_EXIST    = "World does not exist.";
+std::string const GET_LANDS_BY_LOGIN_AND_IDWORLD_LANDS_HAVE_BEEN_GOT     = "Lands have been got.";
+std::string const GET_LANDS_BY_LOGIN_AND_IDWORLD_LANDS_HAVE_NOT_BEEN_GOT = "Lands have not been got.";
+std::string const GET_LANDS_BY_LOGIN_AND_IDWORLD_UNEXPECTED_ERROR        = "Unexpected error.";
+std::string const GET_LANDS_BY_LOGIN_AND_IDWORLD_WORLD_DOES_NOT_EXIST    = "World does not exist.";
 
 std::string const GET_RESOURCE_RESOURCE_HAS_BEEN_GOT = "Resource has been got.";
 std::string const GET_RESOURCE_UNEXPECTED_ERROR      = "Unexpected error.";

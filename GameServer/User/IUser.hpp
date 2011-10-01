@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_USER_IUSER_HPP
 #define GAMESERVER_USER_IUSER_HPP
 
-#include "IDUser.hpp"
 #include <boost/shared_ptr.hpp>
 #include <string>
 
@@ -47,13 +46,6 @@ public:
      * @brief Destructs the interface of the user.
      */
     virtual ~IUser(){}
-
-    /**
-     * @brief Gets the identifier of the user.
-     *
-     * @return The identifier of the user.
-     */
-    virtual IDUser getIDUser() const = 0;
 
     /**
      * @brief Gets the login of the user.

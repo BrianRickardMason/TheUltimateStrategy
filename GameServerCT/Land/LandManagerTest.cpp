@@ -54,10 +54,10 @@ protected:
           m_id_land_1(1),
           m_id_land_2(2),
           m_id_land_3(3),
-          m_id_user_1(1),
-          m_id_user_2(2),
-          m_id_user_3(3),
-          m_id_user_5(5),
+          m_login_1("Login1"),
+          m_login_2("Login2"),
+          m_login_3("Login3"),
+          m_login_5("Login5"),
           m_id_world_1(1),
           m_id_world_2(2),
           m_id_world_3(3),
@@ -92,7 +92,7 @@ protected:
      * @brief Compares the land with expected values.
      *
      * @param a_land     The land to be compared.
-     * @param a_id_user  An expected identifier of the user.
+     * @param a_login    The expected login of the user.
      * @param a_id_world An expected identifier of the world.
      * @param a_id_epoch The expected identifier of the epoch.
      * @param a_id_land  An expected identifier of the land.
@@ -100,14 +100,14 @@ protected:
      */
     void compareLand(
         LandShrPtr         a_land,
-        IDUser     const & a_id_user,
+        string     const   a_login,
         IDWorld    const & a_id_world,
         IDEpoch    const & a_id_epoch,
         IDLand     const & a_id_land,
         string     const & a_name
     )
     {
-        ASSERT_TRUE(a_id_user == a_land->getIDUser());
+        ASSERT_STREQ(a_login.c_str(), a_land->getLogin().c_str());
         ASSERT_TRUE(a_id_world == a_land->getIDWorld());
         ASSERT_TRUE(a_id_epoch == a_land->getIDEpoch());
         ASSERT_TRUE(a_id_land == a_land->getIDLand());
@@ -130,12 +130,12 @@ protected:
            m_id_land_3;
 
     /**
-     * @brief Test constants identifiers of the user.
+     * @brief Test constants: the logins of the users.
      */
-    IDUser m_id_user_1,
-           m_id_user_2,
-           m_id_user_3,
-           m_id_user_5;
+    string m_login_1,
+           m_login_2,
+           m_login_3,
+           m_login_5;
 
     /**
      * @brief Test constants identifiers of the world.
@@ -180,7 +180,7 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_FirstLandOfUser)
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 }
 
@@ -191,12 +191,12 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfUser)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land2"));
     transaction->commit();
 }
 
@@ -207,16 +207,16 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_FirstLandOfAnotherUser)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land2"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land3"));
     transaction->commit();
 }
 
@@ -227,20 +227,20 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfAnotherUser)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land3"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land4"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land4"));
     transaction->commit();
 }
 
@@ -251,24 +251,24 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_ThirdLandOfAnotherUserInAnot
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land3"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land4"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land4"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_2, m_id_epoch_2, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_2, m_id_epoch_2, "Land1"));
     transaction->commit();
 }
 
@@ -279,28 +279,28 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfAnotherUserInAno
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land3"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land4"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land4"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_2, m_id_epoch_2, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_2, m_id_epoch_2, "Land1"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_2, m_id_epoch_2, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_2, m_id_epoch_2, "Land2"));
     transaction->commit();
 }
 
@@ -311,12 +311,12 @@ TEST_F(LandManagerTest, createLand_LandDoesExist_UserAndWorld)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_FALSE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_FALSE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
 }
 
 TEST_F(LandManagerTest, createLand_LandDoesExist_User)
@@ -326,12 +326,12 @@ TEST_F(LandManagerTest, createLand_LandDoesExist_User)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_FALSE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_2, m_id_epoch_2, "Land1"));
+    ASSERT_FALSE(m_land_manager->createLand(transaction, m_login_1, m_id_world_2, m_id_epoch_2, "Land1"));
 }
 
 TEST_F(LandManagerTest, createLand_LandDoesExist_World)
@@ -341,12 +341,12 @@ TEST_F(LandManagerTest, createLand_LandDoesExist_World)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands and assertions.
     transaction = persistency.getTransaction(connection);
-    ASSERT_FALSE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_FALSE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land1"));
 }
 
 /**
@@ -370,7 +370,7 @@ TEST_F(LandManagerTest, deleteLand_LandDoesExist)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands and assertions.
@@ -403,7 +403,7 @@ TEST_F(LandManagerTest, getLand_ByIDLand_LandDoesExist)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
@@ -413,7 +413,7 @@ TEST_F(LandManagerTest, getLand_ByIDLand_LandDoesExist)
 
     // Test assertions.
     ASSERT_TRUE(land != NULL);
-    compareLand(land, m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
+    compareLand(land, m_login_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
 }
 
 TEST_F(LandManagerTest, getLand_ByIDLand_LandDoesExist_MissingIDLand)
@@ -423,7 +423,7 @@ TEST_F(LandManagerTest, getLand_ByIDLand_LandDoesExist_MissingIDLand)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
@@ -438,114 +438,114 @@ TEST_F(LandManagerTest, getLand_ByIDLand_LandDoesExist_MissingIDLand)
 /**
  * Component tests of: LandManager::getLand.
  */
-TEST_F(LandManagerTest, getLand_ByNameAndIDUser_LandDoesNotExist)
+TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesNotExist)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Test commands.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, "Land1", m_id_user_1);
+    LandShrPtr land = m_land_manager->getLand(transaction, m_login_1, "Land1");
     transaction->commit();
 
     // Test assertions.
     ASSERT_TRUE(land == NULL);
 }
 
-TEST_F(LandManagerTest, getLand_ByNameAndIDUser_LandDoesExist)
+TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesExist)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, "Land1", m_id_user_1);
+    LandShrPtr land = m_land_manager->getLand(transaction, m_login_1, "Land1");
     transaction->commit();
 
     // Test assertions.
     ASSERT_TRUE(land != NULL);
-    compareLand(land, m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
+    compareLand(land, m_login_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
 }
 
-TEST_F(LandManagerTest, getLand_ByNameAndIDUser_LandDoesExist_MissingNameMissingIDUser)
+TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesExist_MissingNameMissingLogin)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, "Land5", m_id_user_5);
+    LandShrPtr land = m_land_manager->getLand(transaction, m_login_5, "Land5");
     transaction->commit();
 
     // Test assertions.
     ASSERT_TRUE(land == NULL);
 }
 
-TEST_F(LandManagerTest, getLand_ByNameAndIDUser_LandDoesExist_MissingNameCorrectIDUser)
+TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesExist_MissingNameCorrectLogin)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, "Land5", m_id_user_5);
+    LandShrPtr land = m_land_manager->getLand(transaction, m_login_5, "Land5");
     transaction->commit();
 
     // Test assertions.
     ASSERT_TRUE(land == NULL);
 }
 
-TEST_F(LandManagerTest, getLand_ByNameAndIDUser_LandDoesExist_CorrectNameMissingIDUser)
+TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesExist_CorrectNameMissingLogin)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, "Land1", m_id_user_5);
+    LandShrPtr land = m_land_manager->getLand(transaction, m_login_5, "Land1");
     transaction->commit();
 
     // Test assertions.
     ASSERT_TRUE(land == NULL);
 }
 
-TEST_F(LandManagerTest, getLand_ByNameAndIDUser_LandDoesExist_WrongNameIDUserCombination)
+TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesExist_WrongLoginNameCombination)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land2"));
     transaction->commit();
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, "Land2", m_id_user_1);
+    LandShrPtr land = m_land_manager->getLand(transaction, m_login_1, "Land2");
     transaction->commit();
 
     // Test assertions.
@@ -576,7 +576,7 @@ TEST_F(LandManagerTest, getLand_ByNameAndIDWorld_LandDoesExist)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
@@ -586,7 +586,7 @@ TEST_F(LandManagerTest, getLand_ByNameAndIDWorld_LandDoesExist)
 
     // Test assertions.
     ASSERT_TRUE(land != NULL);
-    compareLand(land, m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
+    compareLand(land, m_login_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
 }
 
 TEST_F(LandManagerTest, getLand_ByNameAndIDWorld_LandDoesExist_MissingNameMissingIDWorld)
@@ -596,7 +596,7 @@ TEST_F(LandManagerTest, getLand_ByNameAndIDWorld_LandDoesExist_MissingNameMissin
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
@@ -615,7 +615,7 @@ TEST_F(LandManagerTest, getLand_ByNameAndIDWorld_LandDoesExist_MissingNameCorrec
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
@@ -634,7 +634,7 @@ TEST_F(LandManagerTest, getLand_ByNameAndIDWorld_LandDoesExist_CorrectNameMissin
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     // Test commands.
@@ -653,11 +653,11 @@ TEST_F(LandManagerTest, getLand_ByNameAndIDWorld_LandDoesExist_WrongNameIDWorldC
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_2, m_id_epoch_2, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_2, m_id_epoch_2, "Land2"));
     transaction->commit();
 
     // Test commands.
@@ -693,15 +693,15 @@ TEST_F(LandManagerTest, getLands_LandsDoExist)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_2, m_id_epoch_2, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_2, m_id_epoch_2, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_3, m_id_world_3, m_id_epoch_3, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_3, m_id_world_3, m_id_epoch_3, "Land3"));
     transaction->commit();
 
     // Test commands.
@@ -714,80 +714,80 @@ TEST_F(LandManagerTest, getLands_LandsDoExist)
     ASSERT_TRUE(lands[m_id_land_1] != NULL);
     ASSERT_TRUE(lands[m_id_land_2] != NULL);
     ASSERT_TRUE(lands[m_id_land_3] != NULL);
-    compareLand(lands[m_id_land_1], m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
-    compareLand(lands[m_id_land_2], m_id_user_2, m_id_world_2, m_id_epoch_2, m_id_land_2, "Land2");
-    compareLand(lands[m_id_land_3], m_id_user_3, m_id_world_3, m_id_epoch_3, m_id_land_3, "Land3");
+    compareLand(lands[m_id_land_1], m_login_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
+    compareLand(lands[m_id_land_2], m_login_2, m_id_world_2, m_id_epoch_2, m_id_land_2, "Land2");
+    compareLand(lands[m_id_land_3], m_login_3, m_id_world_3, m_id_epoch_3, m_id_land_3, "Land3");
 }
 
 /**
  * Component tests of: LandManager::getLands.
  */
-TEST_F(LandManagerTest, getLands_ByIDUser_LandsDoNotExist)
+TEST_F(LandManagerTest, getLands_ByLogin_LandsDoNotExist)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Test commands.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    LandMap lands = m_land_manager->getLands(transaction, m_id_user_1);
+    LandMap lands = m_land_manager->getLands(transaction, m_login_1);
     transaction->commit();
 
     // Test assertions.
     ASSERT_EQ(0, lands.size());
 }
 
-TEST_F(LandManagerTest, getLands_ByIDUser_LandsDoExist)
+TEST_F(LandManagerTest, getLands_ByLogin_LandsDoExist)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_2, m_id_epoch_2, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_2, m_id_epoch_2, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_3, m_id_world_3, m_id_epoch_3, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_3, m_id_world_3, m_id_epoch_3, "Land3"));
     transaction->commit();
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandMap lands = m_land_manager->getLands(transaction, m_id_user_1);
+    LandMap lands = m_land_manager->getLands(transaction, m_login_1);
     transaction->commit();
 
     // Test assertions.
     ASSERT_EQ(2, lands.size());
     ASSERT_TRUE(lands[m_id_land_1] != NULL);
     ASSERT_TRUE(lands[m_id_land_2] != NULL);
-    compareLand(lands[m_id_land_1], m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
-    compareLand(lands[m_id_land_2], m_id_user_1, m_id_world_2, m_id_epoch_2, m_id_land_2, "Land2");
+    compareLand(lands[m_id_land_1], m_login_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
+    compareLand(lands[m_id_land_2], m_login_1, m_id_world_2, m_id_epoch_2, m_id_land_2, "Land2");
 }
 
-TEST_F(LandManagerTest, getLands_ByIDUser_LandsDoExist_MissingIDUser)
+TEST_F(LandManagerTest, getLands_ByLogin_LandsDoExist_MissingLogin)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_2, m_id_epoch_2, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_2, m_id_epoch_2, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_3, m_id_world_3, m_id_epoch_3, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_3, m_id_world_3, m_id_epoch_3, "Land3"));
     transaction->commit();
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandMap lands = m_land_manager->getLands(transaction, m_id_user_5);
+    LandMap lands = m_land_manager->getLands(transaction, m_login_5);
     transaction->commit();
 
     // Test assertions.
@@ -818,15 +818,15 @@ TEST_F(LandManagerTest, getLands_ByIDWorld_LandsDoExist)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_2, m_id_world_1, m_id_epoch_1, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_3, m_id_world_3, m_id_epoch_3, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_3, m_id_world_3, m_id_epoch_3, "Land3"));
     transaction->commit();
 
     // Test commands.
@@ -838,8 +838,8 @@ TEST_F(LandManagerTest, getLands_ByIDWorld_LandsDoExist)
     ASSERT_EQ(2, lands.size());
     ASSERT_TRUE(lands[m_id_land_1] != NULL);
     ASSERT_TRUE(lands[m_id_land_2] != NULL);
-    compareLand(lands[m_id_land_1], m_id_user_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
-    compareLand(lands[m_id_land_2], m_id_user_2, m_id_world_1, m_id_epoch_1, m_id_land_2, "Land2");
+    compareLand(lands[m_id_land_1], m_login_1, m_id_world_1, m_id_epoch_1, m_id_land_1, "Land1");
+    compareLand(lands[m_id_land_2], m_login_2, m_id_world_1, m_id_epoch_1, m_id_land_2, "Land2");
 }
 
 TEST_F(LandManagerTest, getLands_ByIDWorld_LandsDoExist_MissingIDWorld)
@@ -849,15 +849,15 @@ TEST_F(LandManagerTest, getLands_ByIDWorld_LandsDoExist_MissingIDWorld)
 
     // Preconditions.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land1"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, "Land1"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_1, m_id_world_2, m_id_epoch_2, "Land2"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_1, m_id_world_2, m_id_epoch_2, "Land2"));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_land_manager->createLand(transaction, m_id_user_3, m_id_world_3, m_id_epoch_3, "Land3"));
+    ASSERT_TRUE(m_land_manager->createLand(transaction, m_login_3, m_id_world_3, m_id_epoch_3, "Land3"));
     transaction->commit();
 
     // Test commands.

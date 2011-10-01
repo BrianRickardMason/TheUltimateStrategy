@@ -25,15 +25,15 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_IGETLANDSBYIDUSERANDIDWORLDOPERATOR_HPP
-#define GAMESERVER_LAND_IGETLANDSBYIDUSERANDIDWORLDOPERATOR_HPP
+#ifndef GAMESERVER_LAND_IGETLANDSBYLOGINANDIDWORLDOPERATOR_HPP
+#define GAMESERVER_LAND_IGETLANDSBYLOGINANDIDWORLDOPERATOR_HPP
 
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../User/IDUser.hpp"
 #include "../../../World/IDWorld.hpp"
-#include "GetLandsByIDUserAndIDWorldOperatorExitCode.hpp"
+#include "GetLandsByLoginAndIDWorldOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -41,39 +41,39 @@ namespace Land
 {
 
 /**
- * @brief The interface of GetLandsByIDUserAndIDWorldOperator.
+ * @brief The interface of GetLandsByLoginAndIDWorldOperator.
  */
-class IGetLandsByIDUserAndIDWorldOperator
+class IGetLandsByLoginAndIDWorldOperator
     : boost::noncopyable
 {
 public:
     /**
-     * @brief Destructs GetLandsByIDUserAndIDWorldOperator.
+     * @brief Destructs GetLandsByLoginAndIDWorldOperator.
      */
-    virtual ~IGetLandsByIDUserAndIDWorldOperator(){};
+    virtual ~IGetLandsByLoginAndIDWorldOperator(){};
 
     /**
      * @brief Gets lands.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_world    The identifier of the world.
      *
      * @return The exit code.
      */
-    virtual GetLandsByIDUserAndIDWorldOperatorExitCode getLandByIDUserAndIDWorld(
+    virtual GetLandsByLoginAndIDWorldOperatorExitCode getLandByLoginAndIDWorld(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         World::IDWorld                  const & a_id_world
     ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of GetLandsByIDUserAndIDWorldOperator.
+ * @brief The shared pointer of the interface of GetLandsByLoginAndIDWorldOperator.
  */
-typedef boost::shared_ptr<IGetLandsByIDUserAndIDWorldOperator> IGetLandsByIDUserAndIDWorldOperatorShrPtr;
+typedef boost::shared_ptr<IGetLandsByLoginAndIDWorldOperator> IGetLandsByLoginAndIDWorldOperatorShrPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_IGETLANDSBYIDUSERANDIDWORLDOPERATOR_HPP
+#endif // GAMESERVER_LAND_IGETLANDSBYLOGINANDIDWORLDOPERATOR_HPP

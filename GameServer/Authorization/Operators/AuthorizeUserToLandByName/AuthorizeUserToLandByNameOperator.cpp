@@ -28,7 +28,6 @@
 #include "AuthorizeUserToLandByNameOperator.hpp"
 
 using namespace GameServer::Persistency;
-using namespace GameServer::User;
 using namespace std;
 
 namespace GameServer
@@ -45,13 +44,13 @@ AuthorizeUserToLandByNameOperator::AuthorizeUserToLandByNameOperator(
 
 AuthorizeUserToLandByNameOperatorExitCode AuthorizeUserToLandByNameOperator::authorizeUserToLandByName(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     string             const & a_name
 ) const
 {
     try
     {
-        bool const result = m_authorization_manager->authorizeUserToLand(a_transaction, a_id_user, a_name);
+        bool const result = m_authorization_manager->authorizeUserToLand(a_transaction, a_login, a_name);
 
         return AuthorizeUserToLandByNameOperatorExitCode(AUTHORIZE_USER_TO_LAND_BY_NAME_OPERATOR_EXIT_CODE_AUTHORIZATION_HAS_BEEN_PERFORMED, result);
     }

@@ -50,15 +50,21 @@ protected:
      * @brief Constructs the test class of UserManager.
      */
     UserManagerTest()
-        : m_id_user(1),
-          m_user_record(new UserRecord(m_id_user, "Login", "Password", false))
+        : m_login("Login"),
+          m_password("Password"),
+          m_user_record(new UserRecord(m_login, m_password, false))
     {
     }
 
     /**
-     * @brief Test constants: the identifier of the user.
+     * @brief Test constants: the login of the user.
      */
-    IDUser m_id_user;
+    string m_login;
+
+    /**
+     * @brief Test constants: the password of the user.
+     */
+    string m_password;
 
     /**
      * @brief Test constants: the record of the user.
@@ -79,13 +85,13 @@ TEST_F(UserManagerTest, CreateUserReturnsTrueOnSuccess)
 
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
-    EXPECT_CALL(*mock, insertRecord(transaction, "Login", "Password"));
+    EXPECT_CALL(*mock, insertRecord(transaction, m_login, m_password));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
     UserManager manager(accessor);
 
-    ASSERT_TRUE(manager.createUser(transaction, "Login", "Password"));
+    ASSERT_TRUE(manager.createUser(transaction, m_login, m_password));
 }
 
 TEST_F(UserManagerTest, CreateUserReturnsFalseOnFailure)
@@ -96,14 +102,14 @@ TEST_F(UserManagerTest, CreateUserReturnsFalseOnFailure)
 
     std::exception e;
 
-    EXPECT_CALL(*mock, insertRecord(transaction, "Login", "Password"))
+    EXPECT_CALL(*mock, insertRecord(transaction, m_login, m_password))
     .WillOnce(Throw(e));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
     UserManager manager(accessor);
 
-    ASSERT_FALSE(manager.createUser(transaction, "Login", "Password"));
+    ASSERT_FALSE(manager.createUser(transaction, m_login, m_password));
 }
 
 TEST_F(UserManagerTest, DeleteUserReturnsTrueOnSuccess)
@@ -112,13 +118,13 @@ TEST_F(UserManagerTest, DeleteUserReturnsTrueOnSuccess)
 
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
-    EXPECT_CALL(*mock, deleteRecord(transaction, IDUser(1)));
+    EXPECT_CALL(*mock, deleteRecord(transaction, m_login));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
     UserManager manager(accessor);
 
-    ASSERT_TRUE(manager.deleteUser(transaction, IDUser(1)));
+    ASSERT_TRUE(manager.deleteUser(transaction, m_login));
 }
 
 TEST_F(UserManagerTest, DeleteUserReturnsFalseOnFailure)
@@ -129,174 +135,66 @@ TEST_F(UserManagerTest, DeleteUserReturnsFalseOnFailure)
 
     std::exception e;
 
-    EXPECT_CALL(*mock, deleteRecord(transaction, IDUser(1)))
+    EXPECT_CALL(*mock, deleteRecord(transaction, m_login))
     .WillOnce(Throw(e));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
     UserManager manager(accessor);
 
-    ASSERT_FALSE(manager.deleteUser(transaction, IDUser(1)));
+    ASSERT_FALSE(manager.deleteUser(transaction, m_login));
 }
 
-TEST_F(UserManagerTest, GetUserByLoginReturnsNullIfUserDoesNotExist)
+TEST_F(UserManagerTest, GetUserReturnsNullIfUserDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
+    EXPECT_CALL(*mock, getRecord(transaction, m_login))
     .WillOnce(Return(IUserRecordShrPtr()));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
     UserManager manager(accessor);
 
-    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
+    IUserShrPtr user = manager.getUser(transaction, m_login);
 
     ASSERT_TRUE(user == NULL);
 }
 
-TEST_F(UserManagerTest, GetUserByLoginReturnsUserIfUserDoesExist)
+TEST_F(UserManagerTest, GetUserReturnedUserHasProperLogin)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
+    EXPECT_CALL(*mock, getRecord(transaction, m_login))
     .WillOnce(Return(m_user_record));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
     UserManager manager(accessor);
 
-    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
+    IUserShrPtr user = manager.getUser(transaction, m_login);
 
-    ASSERT_TRUE(user != NULL);
+    ASSERT_STREQ(m_login.c_str(), user->getLogin().c_str());
 }
 
-TEST_F(UserManagerTest, GetUserByLoginReturnedUserHasProperIDUser)
+TEST_F(UserManagerTest, GetUserReturnedUserHasProperPassword)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     UserManagerAccessorMock * mock = new UserManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
+    EXPECT_CALL(*mock, getRecord(transaction, m_login))
     .WillOnce(Return(m_user_record));
 
     IUserManagerAccessorAutPtr accessor(mock);
 
     UserManager manager(accessor);
 
-    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
+    IUserShrPtr user = manager.getUser(transaction, m_login);
 
-    ASSERT_TRUE(m_id_user == user->getIDUser());
-}
-
-TEST_F(UserManagerTest, GetUserByLoginReturnedUserHasProperLogin)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
-    .WillOnce(Return(m_user_record));
-
-    IUserManagerAccessorAutPtr accessor(mock);
-
-    UserManager manager(accessor);
-
-    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
-
-    ASSERT_STREQ("Login", user->getLogin().c_str());
-}
-
-TEST_F(UserManagerTest, GetUserByLoginReturnedUserHasProperPassword)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordByLogin(transaction, "Login"))
-    .WillOnce(Return(m_user_record));
-
-    IUserManagerAccessorAutPtr accessor(mock);
-
-    UserManager manager(accessor);
-
-    IUserShrPtr user = manager.getUserByLogin(transaction, "Login");
-
-    ASSERT_STREQ("Password", user->getPassword().c_str());
-}
-
-TEST_F(UserManagerTest, GetUserByIDUserReturnsNullIfUserDoesNotExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
-    .WillOnce(Return(IUserRecordShrPtr()));
-
-    IUserManagerAccessorAutPtr accessor(mock);
-
-    UserManager manager(accessor);
-
-    IUserShrPtr user = manager.getUser(transaction, m_id_user);
-
-    ASSERT_TRUE(user == NULL);
-}
-
-TEST_F(UserManagerTest, GetUserByIDUserReturnedUserHasProperIDUser)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
-    .WillOnce(Return(m_user_record));
-
-    IUserManagerAccessorAutPtr accessor(mock);
-
-    UserManager manager(accessor);
-
-    IUserShrPtr user = manager.getUser(transaction, m_id_user);
-
-    ASSERT_TRUE(m_id_user == user->getIDUser());
-}
-
-TEST_F(UserManagerTest, GetUserByIDUserReturnedUserHasProperLogin)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
-    .WillOnce(Return(m_user_record));
-
-    IUserManagerAccessorAutPtr accessor(mock);
-
-    UserManager manager(accessor);
-
-    IUserShrPtr user = manager.getUser(transaction, m_id_user);
-
-    ASSERT_STREQ("Login", user->getLogin().c_str());
-}
-
-TEST_F(UserManagerTest, GetUserByIDUserReturnedUserHasProperPassword)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_user))
-    .WillOnce(Return(m_user_record));
-
-    IUserManagerAccessorAutPtr accessor(mock);
-
-    UserManager manager(accessor);
-
-    IUserShrPtr user = manager.getUser(transaction, m_id_user);
-
-    ASSERT_STREQ("Password", user->getPassword().c_str());
+    ASSERT_STREQ(m_password.c_str(), user->getPassword().c_str());
 }

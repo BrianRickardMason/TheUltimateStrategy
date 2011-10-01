@@ -25,59 +25,69 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_GETUSERBYLOGINOPERATOR_HPP
-#define GAMESERVER_USER_GETUSERBYLOGINOPERATOR_HPP
+#ifndef GAMESERVER_LAND_GETLANDBYLOGINANDNAMEOPERATOR_HPP
+#define GAMESERVER_LAND_GETLANDBYLOGINANDNAMEOPERATOR_HPP
 
-#include "../../IUserManager.hpp"
-#include "IGetUserByLoginOperator.hpp"
+#include "../../../User/IUserManager.hpp"
+#include "../../ILandManager.hpp"
+#include "IGetLandByLoginAndNameOperator.hpp"
 
 namespace GameServer
 {
-namespace User
+namespace Land
 {
 
 /**
- * @brief GetUserByLoginOperator.
+ * @brief GetLandByLoginAndNameOperator.
  */
-class GetUserByLoginOperator
-    : public IGetUserByLoginOperator
+class GetLandByLoginAndNameOperator
+    : public IGetLandByLoginAndNameOperator
 {
 public:
     /**
      * @brief Constructs the operator.
      *
+     * @param a_land_manager The manager of lands.
      * @param a_user_manager The manager of users.
      */
-    GetUserByLoginOperator(
-        IUserManagerShrPtr a_user_manager
+    GetLandByLoginAndNameOperator(
+        ILandManagerShrPtr       a_land_manager,
+        User::IUserManagerShrPtr a_user_manager
     );
 
     /**
-     * @brief Gets the user.
+     * @brief Gets a land.
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
+     * @param a_name        The name of the land.
      *
      * @return The exit code.
      */
-    virtual GetUserByLoginOperatorExitCode getUserByLogin(
-        Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_login
+    virtual GetLandByLoginAndNameOperatorExitCode getLandByLoginAndName(
+        Persistency::ITransactionShrPtr         a_transaction,
+        std::string                     const   a_login,
+        std::string                     const & a_name
     ) const;
 
 private:
     /**
+     * @brief The manager of lands.
+     */
+    ILandManagerShrPtr m_land_manager;
+
+    /**
      * @brief The manager of users.
      */
-    IUserManagerShrPtr m_user_manager;
+    User::IUserManagerShrPtr m_user_manager;
 };
 
 /**
- * @brief The auto pointer of GetUserByLoginOperator.
+ * @brief The auto pointer of GetLandByLoginAndNameOperator.
  */
-typedef std::auto_ptr<GetUserByLoginOperator> GetUserByLoginOperatorAutPtr;
+typedef std::auto_ptr<GetLandByLoginAndNameOperator> GetLandByLoginAndNameOperatorAutPtr;
 
-} // namespace User
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_GETUSERBYLOGINOPERATOR_HPP
+#endif // GAMESERVER_LAND_GETLANDBYLOGINANDNAMEOPERATOR_HPP

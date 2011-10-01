@@ -25,69 +25,79 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_GETLANDBYIDUSERANDNAMEOPERATOR_HPP
-#define GAMESERVER_LAND_GETLANDBYIDUSERANDNAMEOPERATOR_HPP
+#ifndef GAMESERVER_USER_GETUSEROPERATOREXITCODE_HPP
+#define GAMESERVER_USER_GETUSEROPERATOREXITCODE_HPP
 
-#include "../../../User/IUserManager.hpp"
-#include "../../ILandManager.hpp"
-#include "IGetLandByIDUserAndNameOperator.hpp"
+#include "../../User.hpp"
 
 namespace GameServer
 {
-namespace Land
+namespace User
 {
 
 /**
- * @brief GetLandByIDUserAndNameOperator.
+ * @brief Available exit codes.
  */
-class GetLandByIDUserAndNameOperator
-    : public IGetLandByIDUserAndNameOperator
+unsigned short int const GET_USER_OPERATOR_EXIT_CODE_USER_HAS_BEEN_GOT     = 1;
+unsigned short int const GET_USER_OPERATOR_EXIT_CODE_USER_HAS_NOT_BEEN_GOT = 2;
+unsigned short int const GET_USER_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR      = 3;
+
+/**
+ * @brief The exit code of GetUserOperator.
+ */
+class GetUserOperatorExitCode
 {
 public:
     /**
-     * @brief Constructs the operator.
+     * @brief Constructs the exit code.
      *
-     * @param a_land_manager The manager of lands.
-     * @param a_user_manager The manager of users.
+     * @param a_exit_code The value of the exit code.
      */
-    GetLandByIDUserAndNameOperator(
-        ILandManagerShrPtr       a_land_manager,
-        User::IUserManagerShrPtr a_user_manager
-    );
+    GetUserOperatorExitCode(
+        unsigned short int const a_exit_code
+    )
+        : m_exit_code(a_exit_code),
+          m_user(IUserShrPtr())
+    {
+    }
 
     /**
-     * @brief Gets a land.
+     * @brief Constructs the exit code.
      *
-     * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
-     * @param a_name        The name of the land.
-     *
-     * @return The exit code.
+     * @param a_exit_code The value of the exit code.
+     * @param a_user      The user.
      */
-    virtual GetLandByIDUserAndNameOperatorExitCode getLandByIDUserAndName(
-        Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
-        std::string                     const & a_name
-    ) const;
-
-private:
-    /**
-     * @brief The manager of lands.
-     */
-    ILandManagerShrPtr m_land_manager;
+    GetUserOperatorExitCode(
+        unsigned short int const a_exit_code,
+        IUserShrPtr        const a_user
+    )
+        : m_exit_code(a_exit_code),
+          m_user(a_user)
+    {
+    }
 
     /**
-     * @brief The manager of users.
+     * @brief The "ok" method.
+     *
+     * @return False (a read-only operator).
      */
-    User::IUserManagerShrPtr m_user_manager;
+    bool ok() const
+    {
+        return false;
+    }
+
+    /**
+     * @brief The exit code.
+     */
+    unsigned short int const m_exit_code;
+
+    /**
+     * @brief The user.
+     */
+    IUserShrPtr const m_user;
 };
 
-/**
- * @brief The auto pointer of GetLandByIDUserAndNameOperator.
- */
-typedef std::auto_ptr<GetLandByIDUserAndNameOperator> GetLandByIDUserAndNameOperatorAutPtr;
-
-} // namespace Land
+} // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_GETLANDBYIDUSERANDNAMEOPERATOR_HPP
+#endif // GAMESERVER_USER_GETUSEROPERATOREXITCODE_HPP

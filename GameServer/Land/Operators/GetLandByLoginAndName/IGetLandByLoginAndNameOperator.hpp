@@ -25,47 +25,54 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetLandByIDUserAndNameOperator.hpp"
+#ifndef GAMESERVER_LAND_IGETLANDBYLOGINANDNAMEOPERATOR_HPP
+#define GAMESERVER_LAND_IGETLANDBYLOGINANDNAMEOPERATOR_HPP
 
-using namespace GameServer::Persistency;
-using namespace GameServer::User;
-using namespace std;
+#include "../../../Persistency/ITransaction.hpp"
+#include "GetLandByLoginAndNameOperatorExitCode.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
 namespace Land
 {
 
-GetLandByIDUserAndNameOperator::GetLandByIDUserAndNameOperator(
-    ILandManagerShrPtr a_land_manager,
-    IUserManagerShrPtr a_user_manager
-)
-    : m_land_manager(a_land_manager),
-      m_user_manager(a_user_manager)
+/**
+ * @brief The interface of GetLandByLoginAndNameOperator.
+ */
+class IGetLandByLoginAndNameOperator
+    : boost::noncopyable
 {
-}
+public:
+    /**
+     * @brief Destructs GetLandByLoginAndNameOperator.
+     */
+    virtual ~IGetLandByLoginAndNameOperator(){};
 
-GetLandByIDUserAndNameOperatorExitCode GetLandByIDUserAndNameOperator::getLandByIDUserAndName(
-    ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
-    string             const & a_name
-) const
-{
-    try
-    {
-        // Verify if the user exists.
-        // TODO: UserManager::getUserByIDUser.
+    /**
+     * @brief Gets a land.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     * @param a_name        The name of the land.
+     *
+     * @return The exit code.
+     */
+    virtual GetLandByLoginAndNameOperatorExitCode getLandByLoginAndName(
+        Persistency::ITransactionShrPtr         a_transaction,
+        std::string                     const   a_login,
+        std::string                     const & a_name
+    ) const = 0;
+};
 
-        LandShrPtr const land = m_land_manager->getLand(a_transaction, a_name, a_id_user);
-
-        return (land) ? GetLandByIDUserAndNameOperatorExitCode(GET_LAND_BY_IDUSER_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT, land)
-                      : GetLandByIDUserAndNameOperatorExitCode(GET_LAND_BY_IDUSER_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT, land);
-    }
-    catch (...)
-    {
-        return GetLandByIDUserAndNameOperatorExitCode(GET_LAND_BY_IDUSER_AND_NAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR, LandShrPtr());
-    }
-}
+/**
+ * @brief The shared pointer of the interface of GetLandByLoginAndNameOperator.
+ */
+typedef boost::shared_ptr<IGetLandByLoginAndNameOperator> IGetLandByLoginAndNameOperatorShrPtr;
 
 } // namespace Land
 } // namespace GameServer
+
+#endif // GAMESERVER_LAND_IGETLANDBYLOGINANDNAMEOPERATOR_HPP

@@ -99,7 +99,7 @@ bool ExecutorGetSettlementByIDSettlement::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getIDUser(), m_id_settlement);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement);
 
         if (exit_code.ok())
         {

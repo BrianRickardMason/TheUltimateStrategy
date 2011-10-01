@@ -103,7 +103,7 @@ ReplyShrPtr ScenarioGetLandByNameActionInvalidRequest::perform(
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
-    user_node->appendNode("iduser")->appendAttribute("value")->setValue(m_login.c_str());
+    user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");
@@ -125,7 +125,7 @@ string ScenarioGetLandByNameVerificationLandHasBeenGot::verify(
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LAND_BY_IDUSER_AND_NAME_LAND_HAS_BEEN_GOT.c_str(),
+    I_ASSERT_STREQ(GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
@@ -144,7 +144,7 @@ string ScenarioGetLandByNameVerificationLandHasNotBeenGot::verify(
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LAND_BY_IDUSER_AND_NAME_LAND_HAS_NOT_BEEN_GOT.c_str(),
+    I_ASSERT_STREQ(GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_NOT_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
@@ -163,7 +163,7 @@ string ScenarioGetLandByNameVerificationUnexpectedError::verify(
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LAND_BY_IDUSER_AND_NAME_UNEXPECTED_ERROR.c_str(),
+    I_ASSERT_STREQ(GET_LAND_BY_LOGIN_AND_NAME_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 

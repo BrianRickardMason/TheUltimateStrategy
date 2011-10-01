@@ -47,15 +47,15 @@ public:
      * @brief Inserts a user record.
      *
      * @param a_transaction The transaction.
-     * @param a_login       The login of a user.
-     * @param a_password    The password of a user.
+     * @param a_login       The login of the user.
+     * @param a_password    The password of the user.
      */
     MOCK_CONST_METHOD3(
         insertRecord,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_login,
-            std::string                     const & a_password
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_login,
+            std::string                     const a_password
         )
     );
 
@@ -63,29 +63,13 @@ public:
      * @brief Deletes a user record.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of a user.
+     * @param a_login       The login of a user.
      */
     MOCK_CONST_METHOD2(
         deleteRecord,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            IDUser                          const & a_id_user
-        )
-    );
-
-    /**
-     * @brief Gets a user record by the login of the user.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of a user.
-     *
-     * @return The user record, null if not found.
-     */
-    MOCK_CONST_METHOD2(
-        getRecordByLogin,
-        IUserRecordShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_login
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_login
         )
     );
 
@@ -93,15 +77,15 @@ public:
      * @brief Gets the record of the user.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of a user.
      *
      * @return The record of the user, null if not found.
      */
     MOCK_CONST_METHOD2(
         getRecord,
         IUserRecordShrPtr(
-            Persistency::ITransactionShrPtr a_transaction,
-            IDUser                          a_id_user
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_login
         )
     );
 };

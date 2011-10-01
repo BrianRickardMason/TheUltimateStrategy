@@ -29,7 +29,7 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistency;
-using namespace GameServer::User;
+using namespace std;
 
 namespace GameServer
 {
@@ -45,13 +45,13 @@ AuthorizeUserToHolderOperator::AuthorizeUserToHolderOperator(
 
 AuthorizeUserToHolderOperatorExitCode AuthorizeUserToHolderOperator::authorizeUserToHolder(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDHolder           const & a_id_holder
 ) const
 {
     try
     {
-        bool const result = m_authorization_manager->authorizeUserToHolder(a_transaction, a_id_user, a_id_holder);
+        bool const result = m_authorization_manager->authorizeUserToHolder(a_transaction, a_login, a_id_holder);
 
         return AuthorizeUserToHolderOperatorExitCode(AUTHORIZE_USER_TO_HOLDER_OPERATOR_EXIT_CODE_AUTHORIZATION_HAS_BEEN_PERFORMED, result);
     }

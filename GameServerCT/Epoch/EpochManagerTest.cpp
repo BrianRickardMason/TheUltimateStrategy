@@ -52,7 +52,7 @@ protected:
         : m_id_epoch_1(1),
           m_id_land_1(1),
           m_id_settlement_1(1),
-          m_id_user_1(1),
+          m_login("Login"),
           m_id_world_1(1),
           m_id_world_2(2),
           m_id_world_3(3),
@@ -116,9 +116,9 @@ protected:
     IDSettlement m_id_settlement_1;
 
     /**
-     * @brief Test constants: identifiers of the user.
+     * @brief Test constants: the login of the user.
      */
-    IDUser m_id_user_1;
+    string m_login;
 
     /**
      * @brief Test constants: identifiers of the world.
@@ -386,7 +386,7 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land");
 
         transaction->commit();
     }
@@ -440,7 +440,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land");
 
         transaction->commit();
     }
@@ -494,7 +494,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_id_user_1, m_id_world_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land");
 
         transaction->commit();
     }

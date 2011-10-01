@@ -56,14 +56,14 @@ public:
      * @brief Inserts a record of the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_world    The identifier of the world.
      * @param a_id_epoch    The identifier of the epoch.
      * @param a_name        The name of the land.
      */
     virtual void insertRecord(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         World::IDWorld                  const & a_id_world,
         Epoch::IDEpoch                  const & a_id_epoch,
         std::string                     const & a_name
@@ -97,15 +97,15 @@ public:
      * @brief Gets a record of the land.
      *
      * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
      * @param a_name        The name of the land.
-     * @param a_id_user     The identifier of the user.
      *
      * @return The record of the land, null if not found.
      */
     virtual LandRecordShrPtr getRecord(
         Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_name,
-        User::IDUser                    const & a_id_user
+        std::string                     const   a_login,
+        std::string                     const & a_name
     ) const = 0;
 
     /**
@@ -138,13 +138,13 @@ public:
      * @brief Gets records of the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      *
      * @return A map of records of the land, an empty map if not found.
      */
     virtual LandRecordMap getRecords(
-        Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
     ) const = 0;
 
     /**
@@ -164,14 +164,14 @@ public:
      * @brief Gets records of the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_world    The identifier of the world.
      *
      * @return A map of records of the land, an empty map if not found.
      */
     virtual LandRecordMap getRecords(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         World::IDWorld                  const & a_id_world
     ) const = 0;
 

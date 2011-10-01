@@ -51,8 +51,8 @@
 #include "../Land/Operators/CreateLand/CreateLandOperatorFactory.hpp"
 #include "../Land/Operators/DeleteLand/DeleteLandOperatorFactory.hpp"
 #include "../Land/Operators/GetLandByIDLand/GetLandByIDLandOperatorFactory.hpp"
-#include "../Land/Operators/GetLandByIDUserAndName/GetLandByIDUserAndNameOperatorFactory.hpp"
-#include "../Land/Operators/GetLandsByIDUserAndIDWorld/GetLandsByIDUserAndIDWorldOperatorFactory.hpp"
+#include "../Land/Operators/GetLandByLoginAndName/GetLandByLoginAndNameOperatorFactory.hpp"
+#include "../Land/Operators/GetLandsByLoginAndIDWorld/GetLandsByLoginAndIDWorldOperatorFactory.hpp"
 #include "../Resource/Operators/GetResource/GetResourceOperatorFactory.hpp"
 #include "../Resource/Operators/GetResources/GetResourcesOperatorFactory.hpp"
 #include "../Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
@@ -64,8 +64,7 @@
 #include "../Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp"
 #include "../Turn/Operators/Turn/TurnOperatorFactory.hpp"
 #include "../User/Operators/CreateUser/CreateUserOperatorFactory.hpp"
-#include "../User/Operators/GetUserByIDUser/GetUserByIDUserOperatorFactory.hpp"
-#include "../User/Operators/GetUserByLogin/GetUserByLoginOperatorFactory.hpp"
+#include "../User/Operators/GetUser/GetUserOperatorFactory.hpp"
 #include "../World/Operators/CreateWorld/CreateWorldOperatorFactory.hpp"
 #include "../World/Operators/GetWorldByIDLand/GetWorldByIDLandOperatorFactory.hpp"
 #include "../WorldConfiguration/Operators/VerifyTurn/VerifyTurnOperatorFactory.hpp"
@@ -226,14 +225,14 @@ IGetLandByIDLandOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandB
     return IGetLandByIDLandOperatorShrPtr(GetLandByIDLandOperatorFactory::createGetLandByIDLandOperator(m_manager_abstract_factory));
 }
 
-IGetLandByIDUserAndNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandByIDUserAndNameOperator() const
+IGetLandByLoginAndNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandByLoginAndNameOperator() const
 {
-    return IGetLandByIDUserAndNameOperatorShrPtr(GetLandByIDUserAndNameOperatorFactory::createGetLandByIDUserAndNameOperator(m_manager_abstract_factory));
+    return IGetLandByLoginAndNameOperatorShrPtr(GetLandByLoginAndNameOperatorFactory::createGetLandByLoginAndNameOperator(m_manager_abstract_factory));
 }
 
-IGetLandsByIDUserAndIDWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandsByIDUserAndIDWorldOperator() const
+IGetLandsByLoginAndIDWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandsByLoginAndIDWorldOperator() const
 {
-    return IGetLandsByIDUserAndIDWorldOperatorShrPtr(GetLandsByIDUserAndIDWorldOperatorFactory::createGetLandsByIDUserAndIDWorldOperator(m_manager_abstract_factory));
+    return IGetLandsByLoginAndIDWorldOperatorShrPtr(GetLandsByLoginAndIDWorldOperatorFactory::createGetLandsByLoginAndIDWorldOperator(m_manager_abstract_factory));
 }
 
 IGetResourceOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetResourceOperator() const
@@ -291,14 +290,9 @@ ICreateUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateUserOpe
     return ICreateUserOperatorShrPtr(CreateUserOperatorFactory::createCreateUserOperator(m_manager_abstract_factory));
 }
 
-IGetUserByIDUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetUserByIDUserOperator() const
+IGetUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetUserOperator() const
 {
-    return IGetUserByIDUserOperatorShrPtr(GetUserByIDUserOperatorFactory::createGetUserByIDUserOperator(m_manager_abstract_factory));
-}
-
-IGetUserByLoginOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetUserByLoginOperator() const
-{
-    return IGetUserByLoginOperatorShrPtr(GetUserByLoginOperatorFactory::createGetUserByLoginOperator(m_manager_abstract_factory));
+    return IGetUserOperatorShrPtr(GetUserOperatorFactory::createGetUserOperator(m_manager_abstract_factory));
 }
 
 ICreateWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateWorldOperator() const

@@ -30,10 +30,10 @@
 
 #include "../../../Land/IDLand.hpp"
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../User/IDUser.hpp"
 #include "AuthorizeUserToLandByIDLandOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -56,14 +56,14 @@ public:
      * @brief Authorizes a user to a land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user The identifier of the user.
-     * @param a_id_land The identifier of the land.
+     * @param a_login       The login of the user.
+     * @param a_id_land     The identifier of the land.
      *
      * @return The exit code.
      */
     virtual AuthorizeUserToLandByIDLandOperatorExitCode authorizeUserToLandByIDLand(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         Land::IDLand                    const & a_id_land
     ) const = 0;
 };

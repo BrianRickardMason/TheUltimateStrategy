@@ -1,12 +1,9 @@
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users
 (
-    id_user   SERIAL PRIMARY KEY,
-    login     VARCHAR(44) NOT NULL CHECK(login <> ''),
+    login     VARCHAR(44) PRIMARY KEY NOT NULL CHECK(login <> ''),
     password  VARCHAR(44) NOT NULL CHECK(password <> ''),
-    moderator BOOLEAN DEFAULT FALSE,
-
-    UNIQUE(login)
+    moderator BOOLEAN DEFAULT FALSE
 );
 
 DROP TABLE IF EXISTS worlds CASCADE;
@@ -33,7 +30,7 @@ CREATE TABLE epochs
 DROP TABLE IF EXISTS lands CASCADE;
 CREATE TABLE lands
 (
-    id_user  INTEGER NOT NULL CHECK(id_user > 0) REFERENCES users(id_user) ON DELETE CASCADE,
+    login    VARCHAR(44) NOT NULL CHECK(login <> '') REFERENCES users(login) ON DELETE CASCADE,
     id_world INTEGER NOT NULL CHECK(id_world > 0) REFERENCES worlds(id_world) ON DELETE CASCADE,
     id_epoch INTEGER NOT NULL CHECK(id_epoch > 0) REFERENCES epochs(id_epoch) ON DELETE CASCADE,
     id_land  SERIAL PRIMARY KEY,
@@ -41,7 +38,7 @@ CREATE TABLE lands
 
     granted BOOLEAN DEFAULT FALSE,
 
-    UNIQUE(id_user, name),
+    UNIQUE(login, name),
     UNIQUE(id_world, name)
 );
 

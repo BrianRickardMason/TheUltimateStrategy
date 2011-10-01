@@ -148,7 +148,7 @@ ReplyShrPtr ExecutorCreateLand::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         CreateLandOperatorExitCode const exit_code =
-            land_operator->createLand(transaction, m_user->getIDUser(), m_id_world, m_id_epoch, m_name);
+            land_operator->createLand(transaction, m_user->getLogin(), m_id_world, m_id_epoch, m_name);
 
         if (exit_code.ok())
         {

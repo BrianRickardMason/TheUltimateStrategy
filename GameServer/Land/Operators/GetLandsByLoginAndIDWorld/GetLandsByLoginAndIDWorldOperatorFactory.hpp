@@ -25,21 +25,21 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_GETUSERBYIDUSEROPERATORFACTORY_HPP
-#define GAMESERVER_USER_GETUSERBYIDUSEROPERATORFACTORY_HPP
+#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATORFACTORY_HPP
+#define GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATORFACTORY_HPP
 
 #include "../../../Common/IManagerAbstractFactory.hpp"
-#include "GetUserByIDUserOperator.hpp"
+#include "GetLandsByLoginAndIDWorldOperator.hpp"
 
 namespace GameServer
 {
-namespace User
+namespace Land
 {
 
 /**
- * @brief The factory of GetUserByIDUserOperator.
+ * @brief The factory of GetLandsByLoginAndIDWorldOperator.
  */
-class GetUserByIDUserOperatorFactory
+class GetLandsByLoginAndIDWorldOperatorFactory
 {
 public:
     /**
@@ -47,14 +47,14 @@ public:
      *
      * @param a_manager_abstract_factory The abstract factory of managers.
      *
-     * @return The newly created GetUserByIDUserOperator.
+     * @return The newly created GetLandByNameOperator.
      */
-    static GetUserByIDUserOperatorAutPtr createGetUserByIDUserOperator(
+    static GetLandsByLoginAndIDWorldOperatorAutPtr createGetLandsByLoginAndIDWorldOperator(
         Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 
-} // namespace User
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_GETUSERBYIDUSEROPERATORFACTORY_HPP
+#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATORFACTORY_HPP

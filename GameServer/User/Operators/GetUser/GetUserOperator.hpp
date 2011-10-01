@@ -25,21 +25,59 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetUserByIDUserOperatorFactory.hpp"
+#ifndef GAMESERVER_USER_GETUSEROPERATOR_HPP
+#define GAMESERVER_USER_GETUSEROPERATOR_HPP
 
-using namespace GameServer::Common;
+#include "../../IUserManager.hpp"
+#include "IGetUserOperator.hpp"
 
 namespace GameServer
 {
 namespace User
 {
 
-GetUserByIDUserOperatorAutPtr GetUserByIDUserOperatorFactory::createGetUserByIDUserOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
-)
+/**
+ * @brief GetUserOperator.
+ */
+class GetUserOperator
+    : public IGetUserOperator
 {
-    return GetUserByIDUserOperatorAutPtr(new GetUserByIDUserOperator(a_manager_abstract_factory->createUserManager()));
-}
+public:
+    /**
+     * @brief Constructs the operator.
+     *
+     * @param a_user_manager The manager of users.
+     */
+    GetUserOperator(
+        IUserManagerShrPtr a_user_manager
+    );
+
+    /**
+     * @brief Gets the user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     *
+     * @return The exit code.
+     */
+    virtual GetUserOperatorExitCode getUser(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
+    ) const;
+
+private:
+    /**
+     * @brief The manager of users.
+     */
+    IUserManagerShrPtr m_user_manager;
+};
+
+/**
+ * @brief The auto pointer of GetUserOperator.
+ */
+typedef std::auto_ptr<GetUserOperator> GetUserOperatorAutPtr;
 
 } // namespace User
 } // namespace GameServer
+
+#endif // GAMESERVER_USER_GETUSEROPERATOR_HPP

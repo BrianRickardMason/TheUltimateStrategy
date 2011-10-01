@@ -44,14 +44,14 @@ CreateUserOperator::CreateUserOperator(
 
 CreateUserOperatorExitCode CreateUserOperator::createUser(
     ITransactionShrPtr         a_transaction,
-    string             const & a_login,
+    string             const   a_login,
     string             const & a_password
 ) const
 {
     try
     {
         // Verify if the user exists.
-        if (m_user_manager->getUserByLogin(a_transaction, a_login))
+        if (m_user_manager->getUser(a_transaction, a_login))
         {
             return CreateUserOperatorExitCode(CREATE_USER_OPERATOR_EXIT_CODE_USER_DOES_EXIST);
         }

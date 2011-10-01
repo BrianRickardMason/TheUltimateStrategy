@@ -132,15 +132,6 @@ public:
     unsigned short int getIdRequest() const;
 
     /**
-     * @brief Gets the value of the identifier of the user.
-     *
-     * @return The value of the identifier of the user.
-     *
-     * @throws InvalidRequestShrPtr When the value of the identifier of the user cannot be determined.
-     */
-    unsigned int getIDUserValue() const;
-
-    /**
      * @brief Gets the value of the password of the user.
      *
      * @return The value of the password of the user.

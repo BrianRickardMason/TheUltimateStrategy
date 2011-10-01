@@ -35,21 +35,14 @@ namespace User
 {
 
 UserRecord::UserRecord(
-    IDUser const & a_id_user,
-    string const & a_login,
-    string const & a_password,
-    bool   const   a_moderator
+    string const a_login,
+    string const a_password,
+    bool   const a_moderator
 )
-    : m_id_user(a_id_user),
-      m_login(a_login),
+    : m_login(a_login),
       m_password(a_password),
       m_moderator(a_moderator)
 {
-}
-
-IDUser UserRecord::getIDUser() const
-{
-    return m_id_user;
 }
 
 string UserRecord::getLogin() const

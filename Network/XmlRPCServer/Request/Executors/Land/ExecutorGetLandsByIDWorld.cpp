@@ -126,16 +126,16 @@ ReplyShrPtr ExecutorGetLandsByIDWorld::perform(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetLandsByIDUserAndIDWorldOperatorShrPtr land_operator =
-        m_operator_abstract_factory->createGetLandsByIDUserAndIDWorldOperator();
+    IGetLandsByLoginAndIDWorldOperatorShrPtr land_operator =
+        m_operator_abstract_factory->createGetLandsByLoginAndIDWorldOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetLandsByIDUserAndIDWorldOperatorExitCode const exit_code =
-            land_operator->getLandByIDUserAndIDWorld(transaction, m_user->getIDUser(), m_id_world);
+        GetLandsByLoginAndIDWorldOperatorExitCode const exit_code =
+            land_operator->getLandByLoginAndIDWorld(transaction, m_user->getLogin(), m_id_world);
 
         if (exit_code.ok())
         {
@@ -159,7 +159,7 @@ ReplyShrPtr ExecutorGetLandsByIDWorld::getBasicReply(
 }
 
 ReplyShrPtr ExecutorGetLandsByIDWorld::produceReply(
-    GetLandsByIDUserAndIDWorldOperatorExitCode const & a_exit_code
+    GetLandsByLoginAndIDWorldOperatorExitCode const & a_exit_code
 ) const
 {
     ReplyShrPtr reply = getBasicReply(REPLY_STATUS_OK);
@@ -172,20 +172,20 @@ ReplyShrPtr ExecutorGetLandsByIDWorld::produceReply(
 
     switch (a_exit_code.m_exit_code)
     {
-        case GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_IDUSER_AND_IDWORLD_LANDS_HAVE_BEEN_GOT.c_str());
+        case GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_IDWORLD_LANDS_HAVE_BEEN_GOT.c_str());
             break;
 
-        case GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_IDUSER_AND_IDWORLD_LANDS_HAVE_NOT_BEEN_GOT.c_str());
+        case GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_IDWORLD_LANDS_HAVE_NOT_BEEN_GOT.c_str());
             break;
 
-        case GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_IDUSER_AND_IDWORLD_UNEXPECTED_ERROR.c_str());
+        case GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
+            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_IDWORLD_UNEXPECTED_ERROR.c_str());
             break;
 
-        case GET_LANDS_BY_IDUSER_AND_IDWORLD_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_IDUSER_AND_IDWORLD_WORLD_DOES_NOT_EXIST.c_str());
+        case GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST:
+            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_IDWORLD_WORLD_DOES_NOT_EXIST.c_str());
             break;
 
         default:
@@ -198,9 +198,9 @@ ReplyShrPtr ExecutorGetLandsByIDWorld::produceReply(
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
-        IXmlNodeShrPtr node_iduser = node_object->appendNode("iduser");
-        node_iduser->appendAttribute("type")->setValue("unsigned integer");
-        node_iduser->appendAttribute("value")->setValue(it->second->getIDUser().getValue());
+        IXmlNodeShrPtr node_login = node_object->appendNode("login");
+        node_login->appendAttribute("type")->setValue("string");
+        node_login->appendAttribute("value")->setValue(it->second->getLogin().c_str());
 
         IXmlNodeShrPtr node_idworld = node_object->appendNode("idworld");
         node_idworld->appendAttribute("type")->setValue("unsigned integer");

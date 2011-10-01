@@ -89,7 +89,6 @@ private:
             backbone_transaction.exec("DELETE FROM worlds");
 
             // Reset sequences.
-            backbone_transaction.exec("ALTER SEQUENCE users_id_user_seq MINVALUE 0 RESTART WITH 1");
             backbone_transaction.exec("ALTER SEQUENCE worlds_id_world_seq MINVALUE 0 RESTART WITH 1");
             backbone_transaction.exec("ALTER SEQUENCE epochs_id_epoch_seq MINVALUE 0 RESTART WITH 1");
             backbone_transaction.exec("ALTER SEQUENCE lands_id_land_seq MINVALUE 0 RESTART WITH 1");

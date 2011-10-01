@@ -25,55 +25,23 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_IGETLANDBYIDUSERANDNAMEOPERATOR_HPP
-#define GAMESERVER_LAND_IGETLANDBYIDUSERANDNAMEOPERATOR_HPP
+#include "GetLandsByLoginAndIDWorldOperatorFactory.hpp"
 
-#include "../../../Persistency/ITransaction.hpp"
-#include "../../../User/IDUser.hpp"
-#include "GetLandByIDUserAndNameOperatorExitCode.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
-#include <string>
+using namespace GameServer::Common;
 
 namespace GameServer
 {
 namespace Land
 {
 
-/**
- * @brief The interface of GetLandByIDUserAndNameOperator.
- */
-class IGetLandByIDUserAndNameOperator
-    : boost::noncopyable
+GetLandsByLoginAndIDWorldOperatorAutPtr GetLandsByLoginAndIDWorldOperatorFactory::createGetLandsByLoginAndIDWorldOperator(
+    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+)
 {
-public:
-    /**
-     * @brief Destructs GetLandByIDUserAndNameOperator.
-     */
-    virtual ~IGetLandByIDUserAndNameOperator(){};
-
-    /**
-     * @brief Gets a land.
-     *
-     * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
-     * @param a_name        The name of the land.
-     *
-     * @return The exit code.
-     */
-    virtual GetLandByIDUserAndNameOperatorExitCode getLandByIDUserAndName(
-        Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
-        std::string                     const & a_name
-    ) const = 0;
-};
-
-/**
- * @brief The shared pointer of the interface of GetLandByIDUserAndNameOperator.
- */
-typedef boost::shared_ptr<IGetLandByIDUserAndNameOperator> IGetLandByIDUserAndNameOperatorShrPtr;
+    return GetLandsByLoginAndIDWorldOperatorAutPtr(new GetLandsByLoginAndIDWorldOperator(a_manager_abstract_factory->createLandManager(),
+                                                                                         a_manager_abstract_factory->createUserManager(),
+                                                                                         a_manager_abstract_factory->createWorldManager()));
+}
 
 } // namespace Land
 } // namespace GameServer
-
-#endif // GAMESERVER_LAND_IGETLANDBYIDUSERANDNAMEOPERATOR_HPP

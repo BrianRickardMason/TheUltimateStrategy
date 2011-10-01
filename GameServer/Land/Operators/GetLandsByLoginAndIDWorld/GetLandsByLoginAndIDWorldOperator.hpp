@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_GETLANDSBYIDUSERANDIDWORLDOPERATOR_HPP
-#define GAMESERVER_LAND_GETLANDSBYIDUSERANDIDWORLDOPERATOR_HPP
+#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATOR_HPP
+#define GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATOR_HPP
 
 #include "../../../User/IUserManager.hpp"
 #include "../../../World/IWorldManager.hpp"
 #include "../../ILandManager.hpp"
-#include "IGetLandsByIDUserAndIDWorldOperator.hpp"
+#include "IGetLandsByLoginAndIDWorldOperator.hpp"
 
 namespace GameServer
 {
@@ -39,10 +39,10 @@ namespace Land
 {
 
 /**
- * @brief GetLandsByIDUserAndIDWorldOperator.
+ * @brief GetLandsByLoginAndIDWorldOperator.
  */
-class GetLandsByIDUserAndIDWorldOperator
-    : public IGetLandsByIDUserAndIDWorldOperator
+class GetLandsByLoginAndIDWorldOperator
+    : public IGetLandsByLoginAndIDWorldOperator
 {
 public:
     /**
@@ -52,7 +52,7 @@ public:
      * @param a_user_manager  The manager of users.
      * @param a_world_manager The manager of worlds.
      */
-    GetLandsByIDUserAndIDWorldOperator(
+    GetLandsByLoginAndIDWorldOperator(
         ILandManagerShrPtr         a_land_manager,
         User::IUserManagerShrPtr   a_user_manager,
         World::IWorldManagerShrPtr a_world_manager
@@ -62,14 +62,14 @@ public:
      * @brief Gets lands.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_world    The identifier of the world.
      *
      * @return The exit code.
      */
-    virtual GetLandsByIDUserAndIDWorldOperatorExitCode getLandByIDUserAndIDWorld(
+    virtual GetLandsByLoginAndIDWorldOperatorExitCode getLandByLoginAndIDWorld(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         World::IDWorld                  const & a_id_world
     ) const;
 
@@ -91,11 +91,11 @@ private:
 };
 
 /**
- * @brief The auto pointer of GetLandsByIDUserAndIDWorldOperator.
+ * @brief The auto pointer of GetLandsByLoginAndIDWorldOperator.
  */
-typedef std::auto_ptr<GetLandsByIDUserAndIDWorldOperator> GetLandsByIDUserAndIDWorldOperatorAutPtr;
+typedef std::auto_ptr<GetLandsByLoginAndIDWorldOperator> GetLandsByLoginAndIDWorldOperatorAutPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_GETLANDSBYIDUSERANDIDWORLDOPERATOR_HPP
+#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATOR_HPP

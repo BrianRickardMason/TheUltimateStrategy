@@ -28,10 +28,9 @@
 #ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGER_HPP
 #define GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGER_HPP
 
-#include "IAuthorizationManager.hpp"
-
 #include "../Common/IDHolder.hpp"
 #include "../Persistency/IPersistency.hpp" // TODO: Check if forward declaration is not enough.
+#include "IAuthorizationManager.hpp"
 #include "IAuthorizationManagerAccessor.hpp"
 
 namespace GameServer
@@ -59,14 +58,14 @@ public:
      * @brief Authorizes the user to the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     An identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_land     An identifier of the land.
      *
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         Land::IDLand                    const & a_id_land
     ) const;
 
@@ -74,14 +73,14 @@ public:
      * @brief Authorizes the user to the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     An identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_name        A name of the land.
      *
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         std::string                     const & a_name
     ) const;
 
@@ -89,14 +88,14 @@ public:
      * @brief Authorizes a user to a holder.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     An identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_holder   An identifier of the holder.
      *
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToHolder(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         Common::IDHolder                const & a_id_holder
     ) const;
 
@@ -104,14 +103,14 @@ public:
      * @brief Authorizes the user to the settlement.
      *
      * @param a_transaction   The transaction.
-     * @param a_id_user       An identifier of the user.
+     * @param a_login         The login of the user.
      * @param a_id_settlement An identifier of the settlement.
      *
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToSettlement(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         Settlement::IDSettlement        const & a_id_settlement
     ) const;
 

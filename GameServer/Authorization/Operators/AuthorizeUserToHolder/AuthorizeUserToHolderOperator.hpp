@@ -56,14 +56,14 @@ public:
      * @brief Authorizes a user to a holder.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_holder   The identifier of the holder.
      *
      * @return The exit code.
      */
     virtual AuthorizeUserToHolderOperatorExitCode authorizeUserToHolder(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         Common::IDHolder                const & a_id_holder
     ) const;
 

@@ -25,10 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_GETUSERBYLOGINOPERATOREXITCODE_HPP
-#define GAMESERVER_USER_GETUSERBYLOGINOPERATOREXITCODE_HPP
+#ifndef GAMESERVER_USER_IGETUSEROPERATOR_HPP
+#define GAMESERVER_USER_IGETUSEROPERATOR_HPP
 
-#include "../../User.hpp"
+#include "../../../Persistency/ITransaction.hpp"
+#include "GetUserOperatorExitCode.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace GameServer
 {
@@ -36,68 +39,37 @@ namespace User
 {
 
 /**
- * @brief Available exit codes.
+ * @brief The interface of GetUserOperator.
  */
-unsigned short int const GET_USER_BY_LOGIN_OPERATOR_EXIT_CODE_USER_HAS_BEEN_GOT     = 1;
-unsigned short int const GET_USER_BY_LOGIN_OPERATOR_EXIT_CODE_USER_HAS_NOT_BEEN_GOT = 2;
-unsigned short int const GET_USER_BY_LOGIN_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR      = 3;
-
-/**
- * @brief The exit code of GetUserByLoginOperator.
- */
-class GetUserByLoginOperatorExitCode
+class IGetUserOperator
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the exit code.
+     * @brief Destructs GetUserOperator.
+     */
+    virtual ~IGetUserOperator(){};
+
+    /**
+     * @brief Gets the user.
      *
-     * @param a_exit_code The value of the exit code.
-     */
-    GetUserByLoginOperatorExitCode(
-        unsigned short int const a_exit_code
-    )
-        : m_exit_code(a_exit_code),
-          m_user(IUserShrPtr())
-    {
-    }
-
-    /**
-     * @brief Constructs the exit code.
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
      *
-     * @param a_exit_code The value of the exit code.
-     * @param a_user      The user.
+     * @return The exit code.
      */
-    GetUserByLoginOperatorExitCode(
-        unsigned short int const a_exit_code,
-        IUserShrPtr        const a_user
-    )
-        : m_exit_code(a_exit_code),
-          m_user(a_user)
-    {
-    }
-
-    /**
-     * @brief The "ok" method.
-     *
-     * @return False (a read-only operator).
-     */
-    bool ok() const
-    {
-        return false;
-    }
-
-    /**
-     * @brief The exit code.
-     */
-    unsigned short int const m_exit_code;
-
-    /**
-     * @brief The user.
-     */
-    IUserShrPtr const m_user;
+    virtual GetUserOperatorExitCode getUser(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
+    ) const = 0;
 };
+
+/**
+ * @brief The shared pointer of the interface of GetUserOperator.
+ */
+typedef boost::shared_ptr<IGetUserOperator> IGetUserOperatorShrPtr;
 
 } // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_GETUSERBYLOGINOPERATOREXITCODE_HPP
+#endif // GAMESERVER_USER_IGETUSEROPERATOR_HPP

@@ -30,7 +30,6 @@
 
 #include "../../../Epoch/IDEpoch.hpp"
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../User/IDUser.hpp"
 #include "../../../World/IDWorld.hpp"
 #include "CreateLandOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
@@ -58,7 +57,7 @@ public:
      * @brief Creates a land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
+     * @param a_login       The login of the user.
      * @param a_id_world    The identifier of the world.
      * @param a_id_epoch    The identifier of the epoch.
      * @param a_name        The name of the land.
@@ -67,7 +66,7 @@ public:
      */
     virtual CreateLandOperatorExitCode createLand(
         Persistency::ITransactionShrPtr         a_transaction,
-        User::IDUser                    const & a_id_user,
+        std::string                     const   a_login,
         World::IDWorld                  const & a_id_world,
         Epoch::IDEpoch                  const & a_id_epoch,
         std::string                     const & a_name

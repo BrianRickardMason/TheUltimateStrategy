@@ -30,7 +30,6 @@
 
 using namespace GameServer::Epoch;
 using namespace GameServer::Persistency;
-using namespace GameServer::User;
 using namespace GameServer::World;
 using namespace boost;
 using namespace std;
@@ -42,7 +41,7 @@ namespace Land
 
 void LandManagerAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDWorld            const & a_id_world,
     IDEpoch            const & a_id_epoch,
     string             const & a_name
@@ -51,8 +50,8 @@ void LandManagerAccessorPostgresql::insertRecord(
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "INSERT INTO lands(id_user, id_world, id_epoch, name) VALUES("
-                   + backbone_transaction.quote(a_id_user.getValue()) + ", "
+    string query = "INSERT INTO lands(login, id_world, id_epoch, name) VALUES("
+                   + backbone_transaction.quote(a_login) + ", "
                    + backbone_transaction.quote(a_id_world.getValue()) + ", "
                    + backbone_transaction.quote(a_id_epoch.getValue()) + ", "
                    + backbone_transaction.quote(a_name) + ")";
@@ -90,8 +89,8 @@ LandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
 
 LandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
-    string             const & a_name,
-    IDUser             const & a_id_user
+    string             const   a_login,
+    string             const & a_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -99,7 +98,7 @@ LandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
 
     string query = "SELECT * FROM lands WHERE name = "
                    + backbone_transaction.quote(a_name)
-                   + " AND id_user = " + backbone_transaction.quote(a_id_user.getValue());
+                   + " AND login = " + backbone_transaction.quote(a_login);
 
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
@@ -133,15 +132,15 @@ LandRecordMap LandManagerAccessorPostgresql::getRecords(
 }
 
 LandRecordMap LandManagerAccessorPostgresql::getRecords(
-    ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM lands WHERE id_user = "
-                   + backbone_transaction.quote(a_id_user.getValue());
+    string query = "SELECT * FROM lands WHERE login = "
+                   + backbone_transaction.quote(a_login);
 
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }
@@ -162,15 +161,15 @@ LandRecordMap LandManagerAccessorPostgresql::getRecords(
 
 LandRecordMap LandManagerAccessorPostgresql::getRecords(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDWorld            const & a_id_world
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM lands WHERE id_user = "
-                   + backbone_transaction.quote(a_id_user.getValue())
+    string query = "SELECT * FROM lands WHERE login = "
+                   + backbone_transaction.quote(a_login)
                    + " AND id_world = " + backbone_transaction.quote(a_id_world.getValue());
 
     return prepareResultGetRecords(backbone_transaction.exec(query));
@@ -198,21 +197,21 @@ LandRecordShrPtr LandManagerAccessorPostgresql::prepareResultGetRecord(
 
     if (a_result.size() > 0)
     {
-        IDUser id_user;
+        string login;
         IDWorld id_world;
         IDEpoch id_epoch;
         IDLand id_land;
         string name;
         bool granted;
 
-        id_user  = a_result[0]["id_user"].as(unsigned_integer);
+        a_result[0]["login"].to(login);
         id_world = a_result[0]["id_world"].as(unsigned_integer);
         id_epoch = a_result[0]["id_epoch"].as(unsigned_integer);
         id_land  = a_result[0]["id_land"].as(unsigned_integer);
         a_result[0]["name"].to(name);
         a_result[0]["granted"].to(granted);
 
-        return make_shared<LandRecord>(id_user, id_world, id_epoch, id_land, name, granted);
+        return make_shared<LandRecord>(login, id_world, id_epoch, id_land, name, granted);
     }
     else
     {
@@ -228,7 +227,7 @@ LandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
     // TODO: Fake types should reflect the types of the policy of the ConstrainedValue.
     unsigned int unsigned_integer;
 
-    IDUser id_user;
+    string login;
     IDWorld id_world;
     IDEpoch id_epoch;
     IDLand id_land;
@@ -239,14 +238,14 @@ LandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
 
     for (pqxx::result::const_iterator it = a_result.begin(); it != a_result.end(); ++it)
     {
-        id_user  = it["id_user"].as(unsigned_integer);
+        it["login"].to(login);
         id_world = it["id_world"].as(unsigned_integer);
         id_epoch = it["id_epoch"].as(unsigned_integer);
         id_land  = it["id_land"].as(unsigned_integer);
         it["name"].to(name);
         it["granted"].to(granted);
 
-        LandRecordShrPtr record = make_shared<LandRecord>(id_user, id_world, id_epoch, id_land, name, granted);
+        LandRecordShrPtr record = make_shared<LandRecord>(login, id_world, id_epoch, id_land, name, granted);
         LandRecordPair pair(id_land, record);
         records.insert(pair);
     }

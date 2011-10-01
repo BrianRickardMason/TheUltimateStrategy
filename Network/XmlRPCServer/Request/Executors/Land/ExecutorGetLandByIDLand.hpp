@@ -59,7 +59,7 @@ namespace Executors
  *     <status value=\"#\" />
  *     <parameters>
  *         <message type=\"string"\           value=\"#\" />
- *         <iduser  type=\"unsigned integer\" value=\"#\" />
+ *         <login   type=\"string\"           value=\"#\" />
  *         <idworld type=\"unsigned integer\" value=\"#\" />
  *         <idland  type=\"unsigned integer\" value=\"#\" />
  *         <name    type=\"string\"           value=\"#\" />

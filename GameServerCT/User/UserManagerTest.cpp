@@ -44,15 +44,24 @@ protected:
      * @brief Constructs the test class.
      */
     UserManagerTest()
-        : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
+        : m_login("Login"),
+          m_password("Password"),
+          m_different_password("DifferentPassword"),
+          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_manager(m_manager_abstract_factory->createUserManager())
     {
     }
 
     /**
-     * @brief Test constants identifiers of the user.
+     * @brief Test constants: the login of the user.
      */
-    IDUser m_id_user_1;
+    string m_login;
+
+    /**
+     * @brief Test constants: the passwords of the users.
+     */
+    string m_password,
+           m_different_password;
 
     /**
      * @brief The abstract factory of managers.
@@ -74,7 +83,7 @@ TEST_F(UserManagerTest, createUser_UserDoesNotExist)
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, "Login", "Password"));
+    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
     transaction->commit();
 }
 
@@ -84,11 +93,11 @@ TEST_F(UserManagerTest, createUser_UserDoesExist)
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, "Login", "Password"));
+    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_FALSE(m_manager->createUser(transaction, "Login", "Password"));
+    ASSERT_FALSE(m_manager->createUser(transaction, m_login, m_password));
 }
 
 TEST_F(UserManagerTest, createUser_UserDoesExistDifferentPassword)
@@ -97,11 +106,11 @@ TEST_F(UserManagerTest, createUser_UserDoesExistDifferentPassword)
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, "Login", "Password1"));
+    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_FALSE(m_manager->createUser(transaction, "Login", "Password2"));
+    ASSERT_FALSE(m_manager->createUser(transaction, m_login, m_different_password));
 }
 
 /**
@@ -113,7 +122,7 @@ TEST_F(UserManagerTest, deleteUser_UserDoesNotExist)
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_manager->deleteUser(transaction, m_id_user_1));
+    ASSERT_TRUE(m_manager->deleteUser(transaction, m_login));
     transaction->commit();
 }
 
@@ -123,40 +132,40 @@ TEST_F(UserManagerTest, deleteUser_UserDoesExist)
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, "Login", "Password1"));
+    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    ASSERT_TRUE(m_manager->deleteUser(transaction, m_id_user_1));
+    ASSERT_TRUE(m_manager->deleteUser(transaction, m_login));
     transaction->commit();
 }
 
 /**
- * Component tests of: UserManager::getUserByLogin.
+ * Component tests of: UserManager::getUser.
  */
-TEST_F(UserManagerTest, getUserByLogin_UserDoesNotExist)
+TEST_F(UserManagerTest, getUser_UserDoesNotExist)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    IUserShrPtr user = m_manager->getUserByLogin(transaction, "Login");
+    IUserShrPtr user = m_manager->getUser(transaction, m_login);
     transaction->commit();
 
     ASSERT_TRUE(user == NULL);
 }
 
-TEST_F(UserManagerTest, getUserByLogin_UserDoesExist)
+TEST_F(UserManagerTest, getUser_UserDoesExist)
 {
     PersistencyPostgresql persistency;
     IConnectionShrPtr connection = persistency.getConnection();
 
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    m_manager->createUser(transaction, "Login", "Password1");
+    m_manager->createUser(transaction, m_login, "m_password");
     transaction->commit();
 
     transaction = persistency.getTransaction(connection);
-    IUserShrPtr user = m_manager->getUserByLogin(transaction, "Login");
+    IUserShrPtr user = m_manager->getUser(transaction, m_login);
     transaction->commit();
 
     ASSERT_FALSE(user == NULL);

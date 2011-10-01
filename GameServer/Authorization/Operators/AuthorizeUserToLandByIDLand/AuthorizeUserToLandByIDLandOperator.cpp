@@ -29,7 +29,7 @@
 
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
-using namespace GameServer::User;
+using namespace std;
 
 namespace GameServer
 {
@@ -45,13 +45,13 @@ AuthorizeUserToLandByIDLandOperator::AuthorizeUserToLandByIDLandOperator(
 
 AuthorizeUserToLandByIDLandOperatorExitCode AuthorizeUserToLandByIDLandOperator::authorizeUserToLandByIDLand(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDLand             const & a_id_land
 ) const
 {
     try
     {
-        bool const result = m_authorization_manager->authorizeUserToLand(a_transaction, a_id_user, a_id_land);
+        bool const result = m_authorization_manager->authorizeUserToLand(a_transaction, a_login, a_id_land);
 
         return AuthorizeUserToLandByIDLandOperatorExitCode(AUTHORIZE_USER_TO_LAND_BY_IDLAND_OPERATOR_EXIT_CODE_AUTHORIZATION_HAS_BEEN_PERFORMED, result);
     }

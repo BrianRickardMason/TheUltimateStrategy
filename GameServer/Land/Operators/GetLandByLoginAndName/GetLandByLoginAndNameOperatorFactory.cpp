@@ -25,59 +25,22 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_GETUSERBYIDUSEROPERATOR_HPP
-#define GAMESERVER_USER_GETUSERBYIDUSEROPERATOR_HPP
+#include "GetLandByLoginAndNameOperatorFactory.hpp"
 
-#include "../../IUserManager.hpp"
-#include "IGetUserByIDUserOperator.hpp"
+using namespace GameServer::Common;
 
 namespace GameServer
 {
-namespace User
+namespace Land
 {
 
-/**
- * @brief GetUserByIDUserOperator.
- */
-class GetUserByIDUserOperator
-    : public IGetUserByIDUserOperator
+GetLandByLoginAndNameOperatorAutPtr GetLandByLoginAndNameOperatorFactory::createGetLandByLoginAndNameOperator(
+    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+)
 {
-public:
-    /**
-     * @brief Constructs the operator.
-     *
-     * @param a_user_manager The manager of users.
-     */
-    GetUserByIDUserOperator(
-        IUserManagerShrPtr a_user_manager
-    );
+    return GetLandByLoginAndNameOperatorAutPtr(new GetLandByLoginAndNameOperator(a_manager_abstract_factory->createLandManager(),
+                                                                                 a_manager_abstract_factory->createUserManager()));
+}
 
-    /**
-     * @brief Gets the user.
-     *
-     * @param a_transaction The transaction.
-     * @param a_id_user     The identifier of the user.
-     *
-     * @return The exit code.
-     */
-    virtual GetUserByIDUserOperatorExitCode getUserByIDUser(
-        Persistency::ITransactionShrPtr       a_transaction,
-        IDUser                          const a_id_user
-    ) const;
-
-private:
-    /**
-     * @brief The manager of users.
-     */
-    IUserManagerShrPtr m_user_manager;
-};
-
-/**
- * @brief The auto pointer of GetUserByIDUserOperator.
- */
-typedef std::auto_ptr<GetUserByIDUserOperator> GetUserByIDUserOperatorAutPtr;
-
-} // namespace User
+} // namespace Land
 } // namespace GameServer
-
-#endif // GAMESERVER_USER_GETUSERBYIDUSEROPERATOR_HPP

@@ -92,7 +92,7 @@ bool ExecutorGetLandByName::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToLandByNameOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToLandByName(transaction, m_user->getIDUser(), m_name);
+            authorize_operator->authorizeUserToLandByName(transaction, m_user->getLogin(), m_name);
 
         if (exit_code.ok())
         {
@@ -136,16 +136,16 @@ ReplyShrPtr ExecutorGetLandByName::perform(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetLandByIDUserAndNameOperatorShrPtr land_operator =
-        m_operator_abstract_factory->createGetLandByIDUserAndNameOperator();
+    IGetLandByLoginAndNameOperatorShrPtr land_operator =
+        m_operator_abstract_factory->createGetLandByLoginAndNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetLandByIDUserAndNameOperatorExitCode const exit_code =
-            land_operator->getLandByIDUserAndName(transaction, m_user->getIDUser(), m_name);
+        GetLandByLoginAndNameOperatorExitCode const exit_code =
+            land_operator->getLandByLoginAndName(transaction, m_user->getLogin(), m_name);
 
         if (exit_code.ok())
         {
@@ -169,7 +169,7 @@ ReplyShrPtr ExecutorGetLandByName::getBasicReply(
 }
 
 ReplyShrPtr ExecutorGetLandByName::produceReply(
-    GetLandByIDUserAndNameOperatorExitCode const & a_exit_code
+    GetLandByLoginAndNameOperatorExitCode const & a_exit_code
 ) const
 {
     ReplyShrPtr reply = getBasicReply(REPLY_STATUS_OK);
@@ -183,16 +183,16 @@ ReplyShrPtr ExecutorGetLandByName::produceReply(
 
     switch (a_exit_code.m_exit_code)
     {
-        case GET_LAND_BY_IDUSER_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_LAND_BY_IDUSER_AND_NAME_LAND_HAS_BEEN_GOT.c_str());
+        case GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_BEEN_GOT.c_str());
             break;
 
-        case GET_LAND_BY_IDUSER_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_LAND_BY_IDUSER_AND_NAME_LAND_HAS_NOT_BEEN_GOT.c_str());
+        case GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_NOT_BEEN_GOT.c_str());
             break;
 
-        case GET_LAND_BY_IDUSER_AND_NAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
-            node_message->appendAttribute("value")->setValue(GET_LAND_BY_IDUSER_AND_NAME_UNEXPECTED_ERROR.c_str());
+        case GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
+            node_message->appendAttribute("value")->setValue(GET_LAND_BY_LOGIN_AND_NAME_UNEXPECTED_ERROR.c_str());
             break;
 
         default:
@@ -201,9 +201,9 @@ ReplyShrPtr ExecutorGetLandByName::produceReply(
 
     if (a_exit_code.m_land)
     {
-        IXmlNodeShrPtr node_iduser = node_parameters->appendNode("iduser");
-        node_iduser->appendAttribute("type")->setValue("unsigned integer");
-        node_iduser->appendAttribute("value")->setValue(a_exit_code.m_land->getIDUser().getValue());
+        IXmlNodeShrPtr node_login = node_parameters->appendNode("login");
+        node_login->appendAttribute("type")->setValue("string");
+        node_login->appendAttribute("value")->setValue(a_exit_code.m_land->getLogin().c_str());
 
         IXmlNodeShrPtr node_idworld = node_parameters->appendNode("idworld");
         node_idworld->appendAttribute("type")->setValue("unsigned integer");

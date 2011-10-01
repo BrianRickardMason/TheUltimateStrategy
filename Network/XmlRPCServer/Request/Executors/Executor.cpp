@@ -135,14 +135,14 @@ bool Executor::getActingUser(
     IPersistencyShrPtr a_persistency
 )
 {
-    IGetUserByLoginOperatorShrPtr get_user_operator = m_operator_abstract_factory->createGetUserByLoginOperator();
+    IGetUserOperatorShrPtr get_user_operator = m_operator_abstract_factory->createGetUserOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetUserByLoginOperatorExitCode const exit_code = get_user_operator->getUserByLogin(transaction, m_login);
+        GetUserOperatorExitCode const exit_code = get_user_operator->getUser(transaction, m_login);
 
         if (exit_code.ok())
         {

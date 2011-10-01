@@ -106,7 +106,7 @@ bool ExecutorBuildBuilding::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToHolderOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToHolder(transaction, m_user->getIDUser(), m_id_holder);
+            authorize_operator->authorizeUserToHolder(transaction, m_user->getLogin(), m_id_holder);
 
         if (exit_code.ok())
         {

@@ -25,36 +25,40 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_GETUSERBYLOGINOPERATORFACTORY_HPP
-#define GAMESERVER_USER_GETUSERBYLOGINOPERATORFACTORY_HPP
+#include "GetUserOperator.hpp"
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
-#include "GetUserByLoginOperator.hpp"
+using namespace GameServer::Persistency;
+using namespace std;
 
 namespace GameServer
 {
 namespace User
 {
 
-/**
- * @brief The factory of GetUserByLoginOperator.
- */
-class GetUserByLoginOperatorFactory
+GetUserOperator::GetUserOperator(
+    IUserManagerShrPtr a_user_manager
+)
+    : m_user_manager(a_user_manager)
 {
-public:
-    /**
-     * @brief The factory method.
-     *
-     * @param a_manager_abstract_factory The abstract factory of managers.
-     *
-     * @return The newly created GetUserByLoginOperator.
-     */
-    static GetUserByLoginOperatorAutPtr createGetUserByLoginOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
-    );
-};
+}
+
+GetUserOperatorExitCode GetUserOperator::getUser(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
+) const
+{
+    try
+    {
+        IUserShrPtr const user = m_user_manager->getUser(a_transaction, a_login);
+
+        return (user) ? GetUserOperatorExitCode(GET_USER_OPERATOR_EXIT_CODE_USER_HAS_BEEN_GOT, user)
+                      : GetUserOperatorExitCode(GET_USER_OPERATOR_EXIT_CODE_USER_HAS_NOT_BEEN_GOT);
+    }
+    catch (...)
+    {
+        return GetUserOperatorExitCode(GET_USER_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
+    }
+}
 
 } // namespace User
 } // namespace GameServer
-
-#endif // GAMESERVER_USER_GETUSERBYLOGINOPERATORFACTORY_HPP

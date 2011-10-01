@@ -34,7 +34,6 @@ using namespace GameServer::Authorization;
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
-using namespace GameServer::User;
 using namespace std;
 
 using testing::Return;
@@ -50,7 +49,7 @@ protected:
      * @brief Creates a test class.
      */
     AuthorizationManagerTest()
-        : m_id_user_1(1),
+        : m_login("Login"),
           m_id_land_0(0),
           m_id_land_1(1),
           m_id_settlement_1(1)
@@ -58,9 +57,9 @@ protected:
     }
 
     /**
-     * @brief An identifier of the user.
+     * @brief The login of the user.
      */
-    IDUser m_id_user_1;
+    string m_login;
 
     /**
      * @brief An identifier of the land.
@@ -90,69 +89,69 @@ TEST_F(AuthorizationManagerTest, AuthorizationManager)
 }
 
 /**
- * Unit tests of: AuthorizationManager::authorizeUserToLand by IDUser and IDLand.
+ * Unit tests of: AuthorizationManager::authorizeUserToLand by Login and IDLand.
  */
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDUserAndIDLand_Authorized)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndIDLand_Authorized)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
-    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_id_user_1, m_id_land_1))
+    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_id_land_1))
     .WillOnce(Return(true));
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_TRUE(manager.authorizeUserToLand(transaction, m_id_user_1, m_id_land_1));
+    ASSERT_TRUE(manager.authorizeUserToLand(transaction, m_login, m_id_land_1));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDUserAndIDLand_NotAuthorized)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndIDLand_NotAuthorized)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
-    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_id_user_1, m_id_land_1))
+    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_id_land_1))
     .WillOnce(Return(false));
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_FALSE(manager.authorizeUserToLand(transaction, m_id_user_1, m_id_land_1));
+    ASSERT_FALSE(manager.authorizeUserToLand(transaction, m_login, m_id_land_1));
 }
 
 /**
- * Unit tests of: AuthorizationManager::authorizeUserToLand by IDUser and Name.
+ * Unit tests of: AuthorizationManager::authorizeUserToLand by Login and Name.
  */
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDUserAndLandName_Authorized)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndLandName_Authorized)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
-    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_id_user_1, m_name_1))
+    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_name_1))
     .WillOnce(Return(true));
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_TRUE(manager.authorizeUserToLand(transaction, m_id_user_1, m_name_1));
+    ASSERT_TRUE(manager.authorizeUserToLand(transaction, m_login, m_name_1));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDUserAndLandName_NotAuthorized)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndLandName_NotAuthorized)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
-    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_id_user_1, m_name_1))
+    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_name_1))
     .WillOnce(Return(false));
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_FALSE(manager.authorizeUserToLand(transaction, m_id_user_1, m_name_1));
+    ASSERT_FALSE(manager.authorizeUserToLand(transaction, m_login, m_name_1));
 }
 
 /**
@@ -165,14 +164,14 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
     EXPECT_CALL(*mock, getIDLandOfSettlement(transaction, m_id_settlement_1))
     .WillOnce(Return(m_id_land_1));
-    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_id_user_1, m_id_land_1))
+    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_id_land_1))
     .WillOnce(Return(true));
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_TRUE(manager.authorizeUserToSettlement(transaction, m_id_user_1, m_id_settlement_1));
+    ASSERT_TRUE(manager.authorizeUserToSettlement(transaction, m_login, m_id_settlement_1));
 }
 
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
@@ -182,12 +181,12 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
     EXPECT_CALL(*mock, getIDLandOfSettlement(transaction, m_id_settlement_1))
     .WillOnce(Return(m_id_land_1));
-    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_id_user_1, m_id_land_1))
+    EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_id_land_1))
     .WillOnce(Return(false));
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_FALSE(manager.authorizeUserToSettlement(transaction, m_id_user_1, m_id_settlement_1));
+    ASSERT_FALSE(manager.authorizeUserToSettlement(transaction, m_login, m_id_settlement_1));
 }

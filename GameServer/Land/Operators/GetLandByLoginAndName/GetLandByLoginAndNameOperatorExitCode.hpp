@@ -25,54 +25,41 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_GETUSERBYIDUSEROPERATOREXITCODE_HPP
-#define GAMESERVER_USER_GETUSERBYIDUSEROPERATOREXITCODE_HPP
+#ifndef GAMESERVER_LAND_GETLANDBYLOGINANDNAMOPERATOREXITCODE_HPP
+#define GAMESERVER_LAND_GETLANDBYLOGINANDNAMOPERATOREXITCODE_HPP
 
-#include "../../User.hpp"
+#include "../../Land.hpp"
 
 namespace GameServer
 {
-namespace User
+namespace Land
 {
 
 /**
  * @brief Available exit codes.
  */
-unsigned short int const GET_USER_BY_IDUSER_OPERATOR_EXIT_CODE_USER_HAS_BEEN_GOT     = 1;
-unsigned short int const GET_USER_BY_IDUSER_OPERATOR_EXIT_CODE_USER_HAS_NOT_BEEN_GOT = 2;
-unsigned short int const GET_USER_BY_IDUSER_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR      = 3;
+unsigned short int const GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT     = 1;
+unsigned short int const GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT = 2;
+unsigned short int const GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR      = 3;
 
 /**
- * @brief The exit code of GetUserByIDUserOperator.
+ * @brief The exit code of GetLandByLoginAndNameOperator.
  */
-class GetUserByIDUserOperatorExitCode
+class GetLandByLoginAndNameOperatorExitCode
 {
 public:
     /**
      * @brief Constructs the exit code.
      *
      * @param a_exit_code The value of the exit code.
+     * @param a_land      The land.
      */
-    GetUserByIDUserOperatorExitCode(
-        unsigned short int const a_exit_code
-    )
-        : m_exit_code(a_exit_code),
-          m_user(IUserShrPtr())
-    {
-    }
-
-    /**
-     * @brief Constructs the exit code.
-     *
-     * @param a_exit_code The value of the exit code.
-     * @param a_user      The user.
-     */
-    GetUserByIDUserOperatorExitCode(
+    GetLandByLoginAndNameOperatorExitCode(
         unsigned short int const a_exit_code,
-        IUserShrPtr        const a_user
+        LandShrPtr         const a_land
     )
         : m_exit_code(a_exit_code),
-          m_user(a_user)
+          m_land(a_land)
     {
     }
 
@@ -92,12 +79,12 @@ public:
     unsigned short int const m_exit_code;
 
     /**
-     * @brief The user.
+     * @brief The land.
      */
-    IUserShrPtr const m_user;
+    LandShrPtr const m_land;
 };
 
-} // namespace User
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_GETUSERBYIDUSEROPERATOREXITCODE_HPP
+#endif // GAMESERVER_LAND_GETLANDBYLOGINANDNAMOPERATOREXITCODE_HPP

@@ -27,10 +27,10 @@
 
 #include "CreateLandOperator.hpp"
 
-using namespace GameServer::User;
-using namespace GameServer::World;
 using namespace GameServer::Epoch;
 using namespace GameServer::Persistency;
+using namespace GameServer::User;
+using namespace GameServer::World;
 using namespace std;
 
 namespace GameServer
@@ -53,7 +53,7 @@ CreateLandOperator::CreateLandOperator(
 
 CreateLandOperatorExitCode CreateLandOperator::createLand(
     ITransactionShrPtr         a_transaction,
-    IDUser             const & a_id_user,
+    string             const   a_login,
     IDWorld            const & a_id_world,
     IDEpoch            const & a_id_epoch,
     string             const & a_name
@@ -62,7 +62,7 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
     try
     {
         // Verify if the user exists.
-        // TODO: UserManager::getUserByIDUser.
+        // TODO: UserManager::getUser.
 
         // Verify if the world exists.
         if (!m_world_manager->getWorld(a_transaction, a_id_world))
@@ -77,7 +77,7 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
         }
 
         // Verify if another land of the given name belongs to the user.
-        if (m_land_manager->getLand(a_transaction, a_name, a_id_user))
+        if (m_land_manager->getLand(a_transaction, a_login, a_name))
         {
             return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_BELONGS_TO_THE_USER);
         }
@@ -88,7 +88,7 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
             return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS_IN_THE_WORLD);
         }
 
-        bool const result = m_land_manager->createLand(a_transaction, a_id_user, a_id_world, a_id_epoch, a_name);
+        bool const result = m_land_manager->createLand(a_transaction, a_login, a_id_world, a_id_epoch, a_name);
 
         return (result) ? CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED)
                         : CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_CREATED);

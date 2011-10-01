@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDBYNAME_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDBYNAME_HPP
 
-#include "../../../../../GameServer/Land/Operators/GetLandByIDUserAndName/GetLandByIDUserAndNameOperatorExitCode.hpp"
+#include "../../../../../GameServer/Land/Operators/GetLandByLoginAndName/GetLandByLoginAndNameOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -59,7 +59,7 @@ namespace Executors
  *     <status value=\"#\" />
  *     <parameters>
  *         <message type=\"string"\           value=\"#\" />
- *         <iduser  type=\"unsigned integer\" value=\"#\" />
+ *         <login   type=\"string\"           value=\"#\" />
  *         <idworld type=\"unsigned integer\" value=\"#\" />
  *         <idland  type=\"unsigned integer\" value=\"#\" />
  *         <name    type=\"string\"           value=\"#\" />
@@ -156,7 +156,7 @@ class ExecutorGetLandByName
      * @return The reply.
      */
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
-        GameServer::Land::GetLandByIDUserAndNameOperatorExitCode const & a_exit_code
+        GameServer::Land::GetLandByLoginAndNameOperatorExitCode const & a_exit_code
     ) const;
 
     /**

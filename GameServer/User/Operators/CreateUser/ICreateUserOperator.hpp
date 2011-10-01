@@ -62,7 +62,7 @@ public:
      */
     virtual CreateUserOperatorExitCode createUser(
         Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login,
+        std::string                     const   a_login,
         std::string                     const & a_password
     ) const = 0;
 };

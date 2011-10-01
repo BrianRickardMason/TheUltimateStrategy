@@ -42,7 +42,7 @@ protected:
      * @brief Constructs the test class of the user.
      */
     UserTest()
-        : m_user(IUserRecordShrPtr(new UserRecord(IDUser(1), "Login", "Password", false)))
+        : m_user(IUserRecordShrPtr(new UserRecord("Login", "Password", false)))
     {
     }
 
@@ -52,11 +52,6 @@ protected:
     User m_user;
 };
 
-TEST_F(UserTest, ConstructorSetsProperIDUserValue)
-{
-    ASSERT_EQ(1, m_user.getIDUser().getValue());
-}
-
 TEST_F(UserTest, ConstructorSetsProperLoginValue)
 {
     ASSERT_STREQ("Login", m_user.getLogin().c_str());
@@ -65,11 +60,6 @@ TEST_F(UserTest, ConstructorSetsProperLoginValue)
 TEST_F(UserTest, ConstructorSetsProperPasswordValue)
 {
     ASSERT_STREQ("Password", m_user.getPassword().c_str());
-}
-
-TEST_F(UserTest, GetIDUserReturnsProperValue)
-{
-    ASSERT_EQ(1, m_user.getIDUser().getValue());
 }
 
 TEST_F(UserTest, GetLoginReturnsProperValue)

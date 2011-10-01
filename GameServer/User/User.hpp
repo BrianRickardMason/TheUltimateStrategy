@@ -38,6 +38,8 @@ namespace User
 
 /**
  * @brief The user.
+ *
+ * TODO: Add isModerator method.
  */
 class User
     : public IUser
@@ -51,13 +53,6 @@ public:
     explicit User(
         IUserRecordShrPtr const a_record
     );
-
-    /**
-     * @brief Gets the identifier of the user.
-     *
-     * @return The identifier of the user.
-     */
-    virtual IDUser getIDUser() const;
 
     /**
      * @brief Gets the login of the user.
@@ -74,11 +69,6 @@ public:
     virtual std::string getPassword() const;
 
 private:
-    /**
-     * @brief The identifier of the user.
-     */
-    IDUser const m_id_user;
-
     /**
      * @brief The login of the user.
      */
