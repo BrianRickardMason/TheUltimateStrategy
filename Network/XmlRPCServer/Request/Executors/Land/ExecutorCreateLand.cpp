@@ -61,7 +61,7 @@ bool ExecutorCreateLand::getParameters(
     {
         m_login          = a_request->getLoginValue();
         m_password       = a_request->getPasswordValue();
-        m_value_id_world = a_request->getParameterValueUnsignedInteger("idworld");
+        m_world_name     = a_request->getParameterValueString("world_name");
         m_value_id_epoch = a_request->getParameterValueUnsignedInteger("idepoch");
         m_name           = a_request->getParameterValueString("name");
 
@@ -77,7 +77,6 @@ bool ExecutorCreateLand::processParameters()
 {
     try
     {
-        m_id_world = m_value_id_world;
         m_id_epoch = m_value_id_epoch;
 
         return true;
@@ -99,14 +98,16 @@ bool ExecutorCreateLand::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDWorldOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByIDWorldOperator();
+    IGetEpochByWorldNameOperatorShrPtr epoch_operator =
+        m_operator_abstract_factory->createGetEpochByWorldNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByIDWorldOperatorExitCode const exit_code = epoch_operator->getEpochByIDWorld(transaction, m_id_world);
+        GetEpochByWorldNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochByWorldName(transaction, m_world_name);
 
         if (exit_code.ok())
         {
@@ -148,7 +149,7 @@ ReplyShrPtr ExecutorCreateLand::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         CreateLandOperatorExitCode const exit_code =
-            land_operator->createLand(transaction, m_user->getLogin(), m_id_world, m_id_epoch, m_name);
+            land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_id_epoch, m_name);
 
         if (exit_code.ok())
         {

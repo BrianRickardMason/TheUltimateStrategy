@@ -29,7 +29,6 @@
 #define GAMESERVER_LAND_LANDRECORD_HPP
 
 #include "../Epoch/IDEpoch.hpp"
-#include "../World/IDWorld.hpp"
 #include "IDLand.hpp"
 #include <boost/shared_ptr.hpp>
 #include <map>
@@ -49,16 +48,16 @@ public:
     /**
      * @brief Constructs the land record.
      *
-     * @param a_login    The login of the user.
-     * @param a_id_world The identifier of the world.
-     * @param a_id_epoch The identifier of the epoch.
-     * @param a_id_land  The identifier of the land.
-     * @param a_name     The name of the land.
-     * @param a_granted  The state of the "granted" value, whether or not humans and resources have been granted.
+     * @param a_login      The login of the user.
+     * @param a_world_name The name of the world.
+     * @param a_id_epoch   The identifier of the epoch.
+     * @param a_id_land    The identifier of the land.
+     * @param a_name       The name of the land.
+     * @param a_granted    The state of the "granted" value, whether or not humans and resources have been granted.
      */
     LandRecord(
         std::string    const   a_login,
-        World::IDWorld const & a_id_world,
+        std::string    const   a_world_name,
         Epoch::IDEpoch const & a_id_epoch,
         IDLand         const & a_id_land,
         std::string    const & a_name,
@@ -73,11 +72,11 @@ public:
     std::string getLogin() const;
 
     /**
-     * @brief Gets the identifier of the world.
+     * @brief Gets the name of the world.
      *
-     * @return The identifier of the world.
+     * @return The name of the world.
      */
-    World::IDWorld const & getIDWorld() const;
+    std::string getWorldName() const;
 
     /**
      * @brief Gets the identifier of the epoch.
@@ -114,9 +113,9 @@ private:
     std::string const m_login;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    World::IDWorld const m_id_world;
+    std::string const m_world_name;
 
     /**
      * @brief The identifier of the epoch.

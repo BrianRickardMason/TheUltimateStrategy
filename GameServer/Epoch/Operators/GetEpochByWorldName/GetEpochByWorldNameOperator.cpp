@@ -25,17 +25,18 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetEpochByIDWorldOperator.hpp"
+#include "GetEpochByWorldNameOperator.hpp"
 
 using namespace GameServer::Persistency;
 using namespace GameServer::World;
+using namespace std;
 
 namespace GameServer
 {
 namespace Epoch
 {
 
-GetEpochByIDWorldOperator::GetEpochByIDWorldOperator(
+GetEpochByWorldNameOperator::GetEpochByWorldNameOperator(
     IEpochManagerShrPtr a_epoch_manager,
     IWorldManagerShrPtr a_world_manager
 )
@@ -44,27 +45,27 @@ GetEpochByIDWorldOperator::GetEpochByIDWorldOperator(
 {
 }
 
-GetEpochByIDWorldOperatorExitCode GetEpochByIDWorldOperator::getEpochByIDWorld(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+GetEpochByWorldNameOperatorExitCode GetEpochByWorldNameOperator::getEpochByWorldName(
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
     try
     {
         // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_id_world))
+        if (!m_world_manager->getWorld(a_transaction, a_world_name))
         {
-            return GetEpochByIDWorldOperatorExitCode(GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
+            return GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
 
-        EpochShrPtr const epoch = m_epoch_manager->getEpoch(a_transaction, a_id_world);
+        EpochShrPtr const epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
 
-        return (epoch) ? GetEpochByIDWorldOperatorExitCode(GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT, epoch)
-                       : GetEpochByIDWorldOperatorExitCode(GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT);
+        return (epoch) ? GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT, epoch)
+                       : GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT);
     }
     catch (...)
     {
-        return GetEpochByIDWorldOperatorExitCode(GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
+        return GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
     }
 }
 

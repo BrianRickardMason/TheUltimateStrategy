@@ -115,7 +115,7 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            1, 1, land_name)),
+                            "World1", 1, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioGetLandByName(
                         client,

@@ -44,10 +44,10 @@ protected:
      * @brief Constructs the test class.
      */
     WorldManagerTest()
-        : m_id_world_1(1),
-          m_id_world_2(2),
-          m_id_world_3(3),
-          m_id_world_4(4),
+        : m_world_name_1("World1"),
+          m_world_name_2("World2"),
+          m_world_name_3("World3"),
+          m_world_name_4("World4"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_manager(m_manager_abstract_factory->createWorldManager())
     {
@@ -56,27 +56,24 @@ protected:
     /**
      * @brief Compares the world with expected values.
      *
-     * @param a_world    The world to be compared.
-     * @param a_id_world An expected identifier of the world.
-     * @param a_name     An expected name of the world.
+     * @param a_world      The world to be compared.
+     * @param a_world_name The expected name of the world.
      */
     void compareWorld(
-        IWorldShrPtr         a_world,
-        IDWorld      const & a_id_world,
-        string       const & a_name
+        IWorldShrPtr       a_world,
+        string       const a_world_name
     )
     {
-        ASSERT_TRUE(a_id_world == a_world->getIDWorld());
-        ASSERT_STREQ(a_name.c_str(), a_world->getName().c_str());
+        ASSERT_STREQ(a_world_name.c_str(), a_world->getWorldName().c_str());
     }
 
     /**
-     * @brief Test constants identifiers of the world.
+     * @brief Test constants: the names of the worlds.
      */
-    IDWorld m_id_world_1,
-            m_id_world_2,
-            m_id_world_3,
-            m_id_world_4;
+    string m_world_name_1,
+           m_world_name_2,
+           m_world_name_3,
+           m_world_name_4;
 
 
     /**
@@ -98,12 +95,12 @@ TEST_F(WorldManagerTest, createWorld_WorldDoesNotExist)
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    ASSERT_TRUE(m_manager->createWorld(transaction, "World1"));
+    ASSERT_TRUE(m_manager->createWorld(transaction, m_world_name_1));
 
-    IWorldShrPtr world = m_manager->getWorld(transaction, m_id_world_1);
+    IWorldShrPtr world = m_manager->getWorld(transaction, m_world_name_1);
 
     ASSERT_TRUE(world != NULL);
-    compareWorld(world, m_id_world_1, "World1");
+    compareWorld(world, m_world_name_1);
 }
 
 TEST_F(WorldManagerTest, createWorld_WorldDoesExist)
@@ -111,8 +108,8 @@ TEST_F(WorldManagerTest, createWorld_WorldDoesExist)
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    ASSERT_TRUE(m_manager->createWorld(transaction, "World1"));
-    ASSERT_FALSE(m_manager->createWorld(transaction, "World1"));
+    ASSERT_TRUE(m_manager->createWorld(transaction, m_world_name_1));
+    ASSERT_FALSE(m_manager->createWorld(transaction, m_world_name_1));
 }
 
 /**
@@ -123,7 +120,7 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    IWorldShrPtr world = m_manager->getWorld(transaction, m_id_world_4);
+    IWorldShrPtr world = m_manager->getWorld(transaction, m_world_name_4);
 
     ASSERT_TRUE(world == NULL);
 }
@@ -133,20 +130,20 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    m_manager->createWorld(transaction, "World1");
-    m_manager->createWorld(transaction, "World2");
-    m_manager->createWorld(transaction, "World3");
+    m_manager->createWorld(transaction, m_world_name_1);
+    m_manager->createWorld(transaction, m_world_name_2);
+    m_manager->createWorld(transaction, m_world_name_3);
 
-    IWorldShrPtr world_1 = m_manager->getWorld(transaction, m_id_world_1);
-    IWorldShrPtr world_2 = m_manager->getWorld(transaction, m_id_world_2);
-    IWorldShrPtr world_3 = m_manager->getWorld(transaction, m_id_world_3);
+    IWorldShrPtr world_1 = m_manager->getWorld(transaction, m_world_name_1);
+    IWorldShrPtr world_2 = m_manager->getWorld(transaction, m_world_name_2);
+    IWorldShrPtr world_3 = m_manager->getWorld(transaction, m_world_name_3);
 
     ASSERT_TRUE(world_1 != NULL);
     ASSERT_TRUE(world_2 != NULL);
     ASSERT_TRUE(world_3 != NULL);
-    compareWorld(world_1, m_id_world_1, "World1");
-    compareWorld(world_2, m_id_world_2, "World2");
-    compareWorld(world_3, m_id_world_3, "World3");
+    compareWorld(world_1, m_world_name_1);
+    compareWorld(world_2, m_world_name_2);
+    compareWorld(world_3, m_world_name_3);
 }
 
 /**
@@ -157,15 +154,15 @@ TEST_F(WorldManagerTest, getWorlds)
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    m_manager->createWorld(transaction, "World1");
-    m_manager->createWorld(transaction, "World2");
-    m_manager->createWorld(transaction, "World3");
+    m_manager->createWorld(transaction, m_world_name_1);
+    m_manager->createWorld(transaction, m_world_name_2);
+    m_manager->createWorld(transaction, m_world_name_3);
 
     IWorldMap worlds = m_manager->getWorlds(transaction);
 
     ASSERT_FALSE(worlds.empty());
     ASSERT_EQ(3, worlds.size());
-    compareWorld(worlds[m_id_world_1], m_id_world_1, "World1");
-    compareWorld(worlds[m_id_world_2], m_id_world_2, "World2");
-    compareWorld(worlds[m_id_world_3], m_id_world_3, "World3");
+    compareWorld(worlds[m_world_name_1], m_world_name_1);
+    compareWorld(worlds[m_world_name_2], m_world_name_2);
+    compareWorld(worlds[m_world_name_3], m_world_name_3);
 }

@@ -25,11 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYIDWORLD_HPP
-#define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYIDWORLD_HPP
+#ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYWORLDNAME_HPP
+#define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYWORLDNAME_HPP
 
-#include "../../../../../GameServer/Land/Operators/GetLandsByLoginAndIDWorld/GetLandsByLoginAndIDWorldOperatorExitCode.hpp"
-#include "../../../../../GameServer/World/IDWorld.hpp"
+#include "../../../../../GameServer/Land/Operators/GetLandsByLoginAndWorldName/GetLandsByLoginAndWorldNameOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -42,31 +41,31 @@ namespace Executors
 {
 
 /**
- * @brief The ExecutorGetLandsByIDWorld executor.
+ * @brief The ExecutorGetLandsByWorldName executor.
  *
  * <?xml version=\"1.0\"?>
- * <request id=\"REQUEST_ID_GET_LANDS_BY_ID_WORLD\">
+ * <request id=\"REQUEST_ID_GET_LANDS_BY_WORLD_NAME\">
  *     <user>
  *         <login    value=\"#\" />
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idworld type=\"unsigned integer\" value=\"#\" />
+ *         <world_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *
  * <?xml version=\"1.0\"?>
- * <reply id=\"REPLY_ID_GET_LANDS_BY_ID_WORLD">
+ * <reply id=\"REPLY_ID_GET_LANDS_BY_WORLD_NAME">
  *     <status value=\"#\" />
  *     <parameters>
  *         <message type=\"string"\ value=\"#\" />
  *     </parameters>
  *     <objects>
  *         <object>
- *             <login   type=\"string\"           value=\"#\" />
- *             <idworld type=\"unsigned integer\" value=\"#\" />
- *             <idland  type=\"unsigned integer\" value=\"#\" />
- *             <granted type=\"boolean\"          value=\"#\" />
+ *             <login      type=\"string\"           value=\"#\" />
+ *             <world_name type=\"string\"           value=\"#\" />
+ *             <idland     type=\"unsigned integer\" value=\"#\" />
+ *             <granted    type=\"boolean\"          value=\"#\" />
  *         </object>
  *         <object>
  *             ...
@@ -74,7 +73,7 @@ namespace Executors
  *     </objects>
  * </reply>
  */
-class ExecutorGetLandsByIDWorld
+class ExecutorGetLandsByWorldName
     : public Executor
 {
     /**
@@ -161,18 +160,13 @@ class ExecutorGetLandsByIDWorld
      * @return The reply.
      */
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
-        GameServer::Land::GetLandsByLoginAndIDWorldOperatorExitCode const & a_exit_code
+        GameServer::Land::GetLandsByLoginAndWorldNameOperatorExitCode const & a_exit_code
     ) const;
 
     /**
-     * @brief The value of the identifier of a world.
+     * @brief The name of the world.
      */
-    unsigned int m_value_id_world;
-
-    /**
-     * @brief The identifier of the world.
-     */
-    GameServer::World::IDWorld m_id_world;
+    std::string m_world_name;
 };
 
 } // namespace Executors
@@ -180,4 +174,4 @@ class ExecutorGetLandsByIDWorld
 } // namespace XmlRPCServer
 } // namespace Network
 
-#endif // NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYIDWORLD_HPP
+#endif // NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYWORLDNAME_HPP

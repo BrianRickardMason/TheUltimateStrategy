@@ -58,12 +58,12 @@ namespace Executors
  * <reply id=\"REPLY_ID_GET_LAND_BY_ID_LAND">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\           value=\"#\" />
- *         <login   type=\"string\"           value=\"#\" />
- *         <idworld type=\"unsigned integer\" value=\"#\" />
- *         <idland  type=\"unsigned integer\" value=\"#\" />
- *         <name    type=\"string\"           value=\"#\" />
- *         <granted type=\"boolean\"          value=\"#\" />
+ *         <message    type=\"string"\           value=\"#\" />
+ *         <login      type=\"string\"           value=\"#\" />
+ *         <world_name type=\"string\"           value=\"#\" />
+ *         <idland     type=\"unsigned integer\" value=\"#\" />
+ *         <name       type=\"string\"           value=\"#\" />
+ *         <granted    type=\"boolean\"          value=\"#\" />
  *     </parameters>
  * </reply>
  */

@@ -45,38 +45,24 @@ public:
     /**
      * @brief Constructs the record of the world.
      *
-     * @param a_id_world The identifier of the world.
-     * @param a_name     The name of the world.
+     * @param a_world_name The name of the world.
      */
     WorldRecord(
-        IDWorld     const & a_id_world,
-        std::string const & a_name
+        std::string const a_world_name
     );
-
-    /**
-     * @brief Gets the identifier of the world.
-     *
-     * @return The identifier of the world.
-     */
-    virtual IDWorld getIDWorld() const;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    virtual std::string getName() const;
+    virtual std::string getWorldName() const;
 
 private:
     /**
-     * @brief The identifier of the world.
-     */
-    IDWorld const m_id_world;
-
-    /**
      * @brief The name of the world.
      */
-    std::string const m_name;
+    std::string const m_world_name;
 };
 
 } // namespace World

@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYIDWORLD_HPP
-#define INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYIDWORLD_HPP
+#ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYWORLDNAME_HPP
+#define INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYWORLDNAME_HPP
 
 #include "../IScenario.hpp"
 #include "../IScenarioAction.hpp"
@@ -42,9 +42,9 @@ namespace Land
 {
 
 /**
- * @brief The "GetLandsByIDWorld" scenario.
+ * @brief The "GetLandsByWorldName" scenario.
  */
-class ScenarioGetLandsByIDWorld
+class ScenarioGetLandsByWorldName
     : public IScenario
 {
 public:
@@ -55,7 +55,7 @@ public:
      * @param a_action       The action object.
      * @param a_verification The verification object.
      */
-    ScenarioGetLandsByIDWorld(
+    ScenarioGetLandsByWorldName(
         IClientShrPtr               a_client,
         IScenarioActionShrPtr       a_action,
         IScenarioVerificationShrPtr a_verification
@@ -84,23 +84,23 @@ private:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldActionSuccess" action.
+ * @brief The "ScenarioGetLandsByWorldNameActionSuccess" action.
  */
-class ScenarioGetLandsByIDWorldActionSuccess
+class ScenarioGetLandsByWorldNameActionSuccess
     : public IScenarioAction
 {
 public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
      */
-    ScenarioGetLandsByIDWorldActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_world
+    ScenarioGetLandsByWorldNameActionSuccess(
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_world_name
     );
 
     /**
@@ -126,29 +126,29 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldActionInvalidRequest" action.
+ * @brief The "ScenarioGetLandsByWorldNameActionInvalidRequest" action.
  */
-class ScenarioGetLandsByIDWorldActionInvalidRequest
+class ScenarioGetLandsByWorldNameActionInvalidRequest
     : public IScenarioAction
 {
 public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
      */
-    ScenarioGetLandsByIDWorldActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_world
+    ScenarioGetLandsByWorldNameActionInvalidRequest(
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_world_name
     );
 
     /**
@@ -174,15 +174,15 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationLandsHaveBeenGot" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationLandsHaveBeenGot" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationLandsHaveBeenGot
+class ScenarioGetLandsByWorldNameVerificationLandsHaveBeenGot
     : public IScenarioVerification
 {
 public:
@@ -199,9 +199,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationLandsHaveNotBeenGot" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationLandsHaveNotBeenGot" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationLandsHaveNotBeenGot
+class ScenarioGetLandsByWorldNameVerificationLandsHaveNotBeenGot
     : public IScenarioVerification
 {
 public:
@@ -218,9 +218,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationUnexpectedError" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationUnexpectedError" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationUnexpectedError
+class ScenarioGetLandsByWorldNameVerificationUnexpectedError
     : public IScenarioVerification
 {
 public:
@@ -237,9 +237,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationWorldDoesNotExist" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationWorldDoesNotExist" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationWorldDoesNotExist
+class ScenarioGetLandsByWorldNameVerificationWorldDoesNotExist
     : public IScenarioVerification
 {
 public:
@@ -256,9 +256,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationInvalidRequest" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationInvalidRequest" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationInvalidRequest
+class ScenarioGetLandsByWorldNameVerificationInvalidRequest
     : public IScenarioVerification
 {
 public:
@@ -275,9 +275,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationInvalidRange" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationInvalidRange" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationInvalidRange
+class ScenarioGetLandsByWorldNameVerificationInvalidRange
     : public IScenarioVerification
 {
 public:
@@ -294,9 +294,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationUnauthenticated" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationUnauthenticated" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationUnauthenticated
+class ScenarioGetLandsByWorldNameVerificationUnauthenticated
     : public IScenarioVerification
 {
 public:
@@ -313,9 +313,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationUnauthorized" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationUnauthorized" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationUnauthorized
+class ScenarioGetLandsByWorldNameVerificationUnauthorized
     : public IScenarioVerification
 {
 public:
@@ -332,9 +332,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByIDWorldVerificationEpochIsNotActive" verification.
+ * @brief The "ScenarioGetLandsByWorldNameVerificationEpochIsNotActive" verification.
  */
-class ScenarioGetLandsByIDWorldVerificationEpochIsNotActive
+class ScenarioGetLandsByWorldNameVerificationEpochIsNotActive
     : public IScenarioVerification
 {
 public:
@@ -355,4 +355,4 @@ public:
 } // namespace Helpers
 } // namespace IntegrationCommon
 
-#endif // INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYIDWORLD_HPP
+#endif // INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYWORLDNAME_HPP

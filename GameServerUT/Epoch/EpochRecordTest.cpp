@@ -29,7 +29,7 @@
 #include <gmock/gmock.h>
 
 using namespace GameServer::Epoch;
-using namespace GameServer::World;
+using namespace std;
 
 /**
  * @brief A test class.
@@ -42,22 +42,28 @@ protected:
      * @brief Constructs a test class.
      */
     EpochRecordTest()
-        : m_record(EpochRecord(IDEpoch(1), IDWorld(2), true, false, 22))
+        : m_world_name("World"),
+          m_record(EpochRecord(IDEpoch(1), m_world_name, true, false, 22))
     {
     }
 
     /**
-     * @brief The epoch record to be tested.
+     * @brief Test constants: the name of the world.
+     */
+    string m_world_name;
+
+    /**
+     * @brief Test constants: the record of the epoch.
      */
     EpochRecord m_record;
 };
 
 TEST_F(EpochRecordTest, EpochRecord)
 {
-    EpochRecord record(IDEpoch(1), IDWorld(2), true, false, 22);
+    EpochRecord record(IDEpoch(1), m_world_name, true, false, 22);
 
     ASSERT_EQ(1, record.getIDEpoch().getValue());
-    ASSERT_EQ(2, record.getIDWorld().getValue());
+    ASSERT_STREQ(m_world_name.c_str(), record.getWorldName().c_str());
     ASSERT_TRUE(record.getActive());
     ASSERT_FALSE(record.getFinished());
     ASSERT_EQ(22, record.getTicks());
@@ -68,9 +74,9 @@ TEST_F(EpochRecordTest, getIDEpoch)
     ASSERT_EQ(1, m_record.getIDEpoch().getValue());
 }
 
-TEST_F(EpochRecordTest, getIDWorld)
+TEST_F(EpochRecordTest, GetWorldNameReturnsProperValue)
 {
-    ASSERT_EQ(2, m_record.getIDWorld().getValue());
+    ASSERT_STREQ(m_world_name.c_str(), m_record.getWorldName().c_str());
 }
 
 TEST_F(EpochRecordTest, getActive)

@@ -66,13 +66,13 @@ char const * ScenarioCreateLand::execute()
 ScenarioCreateLandActionSuccess::ScenarioCreateLandActionSuccess(
     string       const & a_login,
     string       const & a_password,
-    unsigned int const   a_id_world,
+    string       const   a_world_name,
     unsigned int const   a_id_epoch,
     string       const   a_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_world(a_id_world),
+      m_world_name(a_world_name),
       m_id_epoch(a_id_epoch),
       m_name(a_name)
 {
@@ -82,19 +82,19 @@ ReplyShrPtr ScenarioCreateLandActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateLand(a_client, m_login, m_password, m_id_world, m_id_epoch, m_name);
+    return CreateLand(a_client, m_login, m_password, m_world_name, m_id_epoch, m_name);
 }
 
 ScenarioCreateLandActionInvalidRequest::ScenarioCreateLandActionInvalidRequest(
     string       const & a_login,
     string       const & a_password,
-    unsigned int const   a_id_world,
+    string       const   a_world_name,
     unsigned int const   a_id_epoch,
     string       const   a_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_world(a_id_world),
+      m_world_name(a_world_name),
       m_id_epoch(a_id_epoch),
       m_name(a_name)
 {
@@ -114,9 +114,9 @@ ReplyShrPtr ScenarioCreateLandActionInvalidRequest::perform(
     user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
-    IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
-    idworld->appendAttribute("type")->setValue("unsigned integer");
-    idworld->appendAttribute("value")->setValue(m_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("unsigned integer");
+    world_name->appendAttribute("value")->setValue(m_world_name.c_str());
 
     IXmlNodeShrPtr idepoch = parameters->appendNode("idepoch");
     idepoch->appendAttribute("type")->setValue("unsigned integer");

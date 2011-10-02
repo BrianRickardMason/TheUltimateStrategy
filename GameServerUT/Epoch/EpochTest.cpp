@@ -29,7 +29,6 @@
 #include <gmock/gmock.h>
 
 using namespace GameServer::Epoch;
-using namespace GameServer::World;
 
 /**
  * @brief A test class.
@@ -42,7 +41,7 @@ protected:
      * @brief Constructs a test class.
      */
     EpochTest()
-        : m_epoch(EpochRecord(IDEpoch(1), IDWorld(2), true, false, 22))
+        : m_epoch(EpochRecord(IDEpoch(1), "World", true, false, 22))
     {
     }
 
@@ -54,12 +53,12 @@ protected:
 
 TEST_F(EpochTest, Epoch)
 {
-    EpochRecord record(IDEpoch(1), IDWorld(2), true, false, 22);
+    EpochRecord record(IDEpoch(1), "World", true, false, 22);
 
     Epoch epoch(record);
 
     ASSERT_EQ(1, epoch.getIDEpoch().getValue());
-    ASSERT_EQ(2, epoch.getIDWorld().getValue());
+    ASSERT_STREQ("World", m_epoch.getWorldName().c_str());
     ASSERT_TRUE(epoch.getActive());
     ASSERT_FALSE(epoch.getFinished());
     ASSERT_EQ(22, epoch.getTicks());
@@ -70,9 +69,9 @@ TEST_F(EpochTest, getIDEpoch)
     ASSERT_EQ(1, m_epoch.getIDEpoch().getValue());
 }
 
-TEST_F(EpochTest, getIDWorld)
+TEST_F(EpochTest, GetWorldNameReturnsProperValue)
 {
-    ASSERT_EQ(2, m_epoch.getIDWorld().getValue());
+    ASSERT_STREQ("World", m_epoch.getWorldName().c_str());
 }
 
 TEST_F(EpochTest, getActive)

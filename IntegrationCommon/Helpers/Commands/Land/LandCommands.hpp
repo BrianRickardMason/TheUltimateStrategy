@@ -43,22 +43,22 @@ namespace Land
 /**
  * @brief Creates a land.
  *
- * @param a_client   The client.
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of a world.
- * @param a_id_epoch The identifier of the epoch.
- * @param a_name     The name of the land.
+ * @param a_client     The client.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of a world.
+ * @param a_id_epoch   The identifier of the epoch.
+ * @param a_name       The name of the land.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr CreateLand(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world,
-    unsigned int const   a_id_epoch,
-    std::string  const & a_name
+    IClientShrPtr         a_client,
+    std::string   const & a_login,
+    std::string   const & a_password,
+    std::string   const   a_world_name,
+    unsigned int  const   a_id_epoch,
+    std::string   const & a_name
 );
 
 /**
@@ -72,10 +72,10 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr CreateLand(
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DeleteLand(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_land
+    IClientShrPtr         a_client,
+    std::string   const & a_login,
+    std::string   const & a_password,
+    unsigned int  const   a_id_land
 );
 
 /**
@@ -89,10 +89,10 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DeleteLand(
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetLandByIDLand(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_land
+    IClientShrPtr         a_client,
+    std::string   const & a_login,
+    std::string   const & a_password,
+    unsigned int  const   a_id_land
 );
 
 /**
@@ -106,27 +106,27 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetLandByIDLand(
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetLandByName(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    std::string  const & a_name
+    IClientShrPtr         a_client,
+    std::string   const & a_login,
+    std::string   const & a_password,
+    std::string   const & a_name
 );
 
 /**
  * @brief Gets lands.
  *
- * @param a_client   The client.
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_client     The client.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The world of the world.
  *
  * @return The reply.
  */
-Network::XmlRPCCommon::Reply::ReplyShrPtr GetLandsByIDWorld(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+Network::XmlRPCCommon::Reply::ReplyShrPtr GetLandsByWorldName(
+    IClientShrPtr         a_client,
+    std::string   const & a_login,
+    std::string   const & a_password,
+    std::string   const   a_world_name
 );
 
 } // namespace Land

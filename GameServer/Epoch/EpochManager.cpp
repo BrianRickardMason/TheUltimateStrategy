@@ -30,7 +30,6 @@
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
-using namespace GameServer::World;
 using namespace boost;
 using namespace std;
 
@@ -47,13 +46,13 @@ EpochManager::EpochManager(
 }
 
 bool EpochManager::createEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
     try
     {
-        m_accessor->insertRecord(a_transaction, a_id_world);
+        m_accessor->insertRecord(a_transaction, a_world_name);
 
         return true;
     }
@@ -64,11 +63,11 @@ bool EpochManager::createEpoch(
 }
 
 bool EpochManager::deleteEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_id_world);
+    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -82,7 +81,7 @@ bool EpochManager::deleteEpoch(
 
     try
     {
-        m_accessor->deleteRecord(a_transaction, a_id_world);
+        m_accessor->deleteRecord(a_transaction, a_world_name);
 
         return true;
     }
@@ -93,11 +92,11 @@ bool EpochManager::deleteEpoch(
 }
 
 EpochShrPtr EpochManager::getEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
-    EpochRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_world);
+    EpochRecordShrPtr record = m_accessor->getRecord(a_transaction, a_world_name);
 
     return record ? make_shared<Epoch>(*record) : EpochShrPtr();
 }
@@ -107,9 +106,9 @@ EpochShrPtr EpochManager::getEpochByIDLand(
     IDLand             const & a_id_land
 ) const
 {
-    IDWorld id_world = m_accessor->getIDWorldOfLand(a_transaction, a_id_land);
+    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_id_land);
 
-    return getEpoch(a_transaction, id_world);
+    return getEpoch(a_transaction, world_name);
 }
 
 EpochShrPtr EpochManager::getEpochByLandName(
@@ -117,9 +116,9 @@ EpochShrPtr EpochManager::getEpochByLandName(
     string             const & a_name
 ) const
 {
-    IDWorld id_world = m_accessor->getIDWorldOfLand(a_transaction, a_name);
+    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_name);
 
-    return getEpoch(a_transaction, id_world);
+    return getEpoch(a_transaction, world_name);
 }
 
 EpochShrPtr EpochManager::getEpochByIDSettlement(
@@ -133,11 +132,11 @@ EpochShrPtr EpochManager::getEpochByIDSettlement(
 }
 
 bool EpochManager::activateEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_id_world);
+    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -156,7 +155,7 @@ bool EpochManager::activateEpoch(
 
     try
     {
-        m_accessor->markActive(a_transaction, a_id_world);
+        m_accessor->markActive(a_transaction, a_world_name);
 
         return true;
     }
@@ -167,11 +166,11 @@ bool EpochManager::activateEpoch(
 }
 
 bool EpochManager::deactivateEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_id_world);
+    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -190,7 +189,7 @@ bool EpochManager::deactivateEpoch(
 
     try
     {
-        m_accessor->markUnactive(a_transaction, a_id_world);
+        m_accessor->markUnactive(a_transaction, a_world_name);
 
         return true;
     }
@@ -201,11 +200,11 @@ bool EpochManager::deactivateEpoch(
 }
 
 bool EpochManager::finishEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_id_world);
+    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -224,7 +223,7 @@ bool EpochManager::finishEpoch(
 
     try
     {
-        m_accessor->markFinished(a_transaction, a_id_world);
+        m_accessor->markFinished(a_transaction, a_world_name);
 
         return true;
     }
@@ -235,11 +234,11 @@ bool EpochManager::finishEpoch(
 }
 
 bool EpochManager::tickEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_id_world);
+    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -258,7 +257,7 @@ bool EpochManager::tickEpoch(
 
     try
     {
-        m_accessor->incrementTicks(a_transaction, a_id_world);
+        m_accessor->incrementTicks(a_transaction, a_world_name);
 
         return true;
     }

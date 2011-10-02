@@ -58,13 +58,13 @@ public:
      * The epoch must not exist.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool createEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
@@ -74,26 +74,26 @@ public:
      * The epoch must be finished before it is deleted.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool deleteEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
      * @brief Gets the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The epoch, null if not found.
      */
     virtual EpochShrPtr getEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
@@ -132,7 +132,7 @@ public:
      */
     virtual EpochShrPtr getEpochByIDSettlement(
         Persistency::ITransactionShrPtr         a_transaction,
-        Settlement::IDSettlement        const & a_id_world
+        Settlement::IDSettlement        const & a_id_settlement
     ) const;
 
     /**
@@ -143,13 +143,13 @@ public:
      * The epoch must not be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool activateEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
@@ -160,13 +160,13 @@ public:
      * The epoch must be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool deactivateEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
@@ -177,13 +177,13 @@ public:
      * The epoch must not be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool finishEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
@@ -194,13 +194,13 @@ public:
      * The epoch must not be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool tickEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
 private:

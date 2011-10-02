@@ -46,103 +46,103 @@ public:
      * @brief Inserts the record of the epoch.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
      * @brief Deletes the record of the epoch.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
      * @brief Gets the record of the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The world record, null if not found.
      */
     virtual EpochRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
      * @brief Sets the active state to true.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     virtual void markActive(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
      * @brief Sets the active state to false.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     virtual void markUnactive(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
      * @brief Marks the finished state to true.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     virtual void markFinished(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
      * @brief Increments the number of ticks.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     virtual void incrementTicks(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**
-     * @brief Gets the identifier of the world of the land.
+     * @brief Gets the name of the world of the land.
      *
      * @param a_transaction The transaction.
      * @param a_id_land     The identifier of the land.
      *
-     * @return The identifier of the world, 0 if not found.
+     * @return The name of the world, an empty string if not found.
      */
-    virtual World::IDWorld getIDWorldOfLand(
+    virtual std::string getWorldNameOfLand(
         Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_settlement
+        Land::IDLand                    const & a_id_land
     ) const;
 
     /**
-     * @brief Gets the identifier of the world of the land.
+     * @brief Gets the name of the world of the land.
      *
      * @param a_transaction The transaction.
      * @param a_name        The name of the land.
      *
-     * @return The identifier of the world, 0 if not found.
+     * @return The name of the world, an empty string if not found.
      */
-    virtual World::IDWorld getIDWorldOfLand(
+    virtual std::string getWorldNameOfLand(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const & a_name
     ) const;

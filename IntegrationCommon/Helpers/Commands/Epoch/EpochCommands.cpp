@@ -45,10 +45,10 @@ ReplyShrPtr CreateEpoch(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_world
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestCreateEpoch(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestCreateEpoch(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }
@@ -57,10 +57,10 @@ ReplyShrPtr DeleteEpoch(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_world
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestDeleteEpoch(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestDeleteEpoch(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }
@@ -69,10 +69,10 @@ ReplyShrPtr GetEpoch(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_world
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestGetEpoch(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestGetEpoch(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }
@@ -81,10 +81,10 @@ ReplyShrPtr ActivateEpoch(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_world
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestActivateEpoch(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestActivateEpoch(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }
@@ -93,10 +93,10 @@ ReplyShrPtr DeactivateEpoch(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_world
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestDeactivateEpoch(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestDeactivateEpoch(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }
@@ -105,10 +105,10 @@ ReplyShrPtr FinishEpoch(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_world
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestFinishEpoch(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestFinishEpoch(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }
@@ -117,10 +117,10 @@ ReplyShrPtr TickEpoch(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_world
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestTickEpoch(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestTickEpoch(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }

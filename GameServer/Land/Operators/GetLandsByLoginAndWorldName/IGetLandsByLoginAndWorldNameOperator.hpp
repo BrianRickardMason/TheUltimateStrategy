@@ -25,36 +25,54 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_GETEPOCHBYIDWORLDOPERATORFACTORY_HPP
-#define GAMESERVER_EPOCH_GETEPOCHBYIDWORLDOPERATORFACTORY_HPP
+#ifndef GAMESERVER_LAND_IGETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
+#define GAMESERVER_LAND_IGETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
-#include "GetEpochByIDWorldOperator.hpp"
+#include "../../../Persistency/ITransaction.hpp"
+#include "GetLandsByLoginAndWorldNameOperatorExitCode.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
-namespace Epoch
+namespace Land
 {
 
 /**
- * @brief The factory of GetEpochByIDWorldOperator.
+ * @brief The interface of GetLandsByLoginAndWorldNameOperator.
  */
-class GetEpochByIDWorldOperatorFactory
+class IGetLandsByLoginAndWorldNameOperator
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief The factory method.
-     *
-     * @param a_manager_abstract_factory The abstract factory of managers.
-     *
-     * @return The newly created GetEpochByIDWorldOperator.
+     * @brief Destructs GetLandsByLoginAndWorldNameOperator.
      */
-    static GetEpochByIDWorldOperatorAutPtr createGetEpochByIDWorldOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
-    );
+    virtual ~IGetLandsByLoginAndWorldNameOperator(){};
+
+    /**
+     * @brief Gets lands.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     * @param a_world_name  The name of the world.
+     *
+     * @return The exit code.
+     */
+    virtual GetLandsByLoginAndWorldNameOperatorExitCode getLandByLoginAndWorldName(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_world_name
+    ) const = 0;
 };
 
-} // namespace Epoch
+/**
+ * @brief The shared pointer of the interface of GetLandsByLoginAndWorldNameOperator.
+ */
+typedef boost::shared_ptr<IGetLandsByLoginAndWorldNameOperator> IGetLandsByLoginAndWorldNameOperatorShrPtr;
+
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_GETEPOCHBYIDWORLDOPERATORFACTORY_HPP
+#endif // GAMESERVER_LAND_IGETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP

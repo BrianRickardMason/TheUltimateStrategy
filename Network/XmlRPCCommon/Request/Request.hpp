@@ -49,7 +49,7 @@ unsigned short int const REQUEST_ID_CREATE_LAND                        =  3;
 unsigned short int const REQUEST_ID_DELETE_LAND                        =  4;
 unsigned short int const REQUEST_ID_GET_LAND_BY_ID_LAND                =  5;
 unsigned short int const REQUEST_ID_GET_LAND_BY_NAME                   =  6;
-unsigned short int const REQUEST_ID_GET_LANDS_BY_ID_WORLD              =  7;
+unsigned short int const REQUEST_ID_GET_LANDS_BY_WORLD_NAME            =  7;
 
 unsigned short int const REQUEST_ID_CREATE_SETTLEMENT                  =  8;
 unsigned short int const REQUEST_ID_DELETE_SETTLEMENT                  =  9;

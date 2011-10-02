@@ -30,8 +30,8 @@
 
 #include "../../../../../GameServer/Epoch/IDEpoch.hpp"
 #include "../../../../../GameServer/Land/Operators/CreateLand/CreateLandOperatorExitCode.hpp"
-#include "../../../../../GameServer/World/IDWorld.hpp"
 #include "../Executor.hpp"
+#include <string>
 
 namespace Network
 {
@@ -52,9 +52,9 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idworld  type=\"unsigned integer\" value=\"#\" />
- *         <idepoch  type=\"unsigned integer\" value=\"#\" />
- *         <name     type=\"string\"           value=\"#\" />
+ *         <world_name type=\"string\"           value=\"#\" />
+ *         <idepoch    type=\"unsigned integer\" value=\"#\" />
+ *         <name       type=\"string\"           value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -157,19 +157,14 @@ class ExecutorCreateLand
     ) const;
 
     /**
-     * @brief The value of the identifier of a world.
-     */
-    unsigned int m_value_id_world;
-
-    /**
      * @brief The value of the identifier of a epoch.
      */
     unsigned int m_value_id_epoch;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    GameServer::World::IDWorld m_id_world;
+    std::string m_world_name;
 
     /**
      * @brief The identifier of the epoch.

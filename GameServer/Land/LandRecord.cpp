@@ -28,7 +28,6 @@
 #include "LandRecord.hpp"
 
 using namespace GameServer::Epoch;
-using namespace GameServer::World;
 using namespace std;
 
 namespace GameServer
@@ -38,14 +37,14 @@ namespace Land
 
 LandRecord::LandRecord(
     string  const   a_login,
-    IDWorld const & a_id_world,
+    string  const   a_world_name,
     IDEpoch const & a_id_epoch,
     IDLand  const & a_id_land,
     string  const & a_name,
     bool            a_granted
 )
     : m_login(a_login),
-      m_id_world(a_id_world),
+      m_world_name(a_world_name),
       m_id_epoch(a_id_epoch),
       m_id_land(a_id_land),
       m_name(a_name),
@@ -58,9 +57,9 @@ string LandRecord::getLogin() const
     return m_login;
 }
 
-IDWorld const & LandRecord::getIDWorld() const
+string LandRecord::getWorldName() const
 {
-    return m_id_world;
+    return m_world_name;
 }
 
 IDEpoch const & LandRecord::getIDEpoch() const

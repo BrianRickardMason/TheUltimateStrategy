@@ -59,9 +59,9 @@ bool ExecutorFinishEpoch::getParameters(
 {
     try
     {
-        m_login          = a_request->getLoginValue();
-        m_password       = a_request->getPasswordValue();
-        m_value_id_world = a_request->getParameterValueUnsignedInteger("idworld");
+        m_login      = a_request->getLoginValue();
+        m_password   = a_request->getPasswordValue();
+        m_world_name = a_request->getParameterValueString("world_name");
 
         return true;
     }
@@ -73,16 +73,7 @@ bool ExecutorFinishEpoch::getParameters(
 
 bool ExecutorFinishEpoch::processParameters()
 {
-    try
-    {
-        m_id_world = m_value_id_world;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
 bool ExecutorFinishEpoch::authenticate(
@@ -124,7 +115,7 @@ ReplyShrPtr ExecutorFinishEpoch::perform(
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        FinishEpochOperatorExitCode const exit_code = epoch_operator->finishEpoch(transaction, m_id_world);
+        FinishEpochOperatorExitCode const exit_code = epoch_operator->finishEpoch(transaction, m_world_name);
 
         if (exit_code.ok())
         {

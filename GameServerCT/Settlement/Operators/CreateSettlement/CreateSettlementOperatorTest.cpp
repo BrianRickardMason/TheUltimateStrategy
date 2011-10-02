@@ -67,7 +67,7 @@ protected:
           m_id_settlement_1(1),
           m_id_settlement_2(2),
           m_login("Login"),
-          m_id_world_1(1)
+          m_world_name("World")
     {
         {
             IConnectionShrPtr connection = m_persistency.getConnection();
@@ -75,12 +75,12 @@ protected:
 
             m_create_user_operator->createUser(transaction, "Login", "Password");
 
-            m_create_world_operator->createWorld(transaction, "World1");
+            m_create_world_operator->createWorld(transaction, m_world_name);
 
-            m_create_epoch_operator->createEpoch(transaction, m_id_world_1);
+            m_create_epoch_operator->createEpoch(transaction, m_world_name);
 
-            m_create_land_operator->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land1");
-            m_create_land_operator->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land2");
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land1");
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land2");
 
             transaction->commit();
         }
@@ -291,9 +291,9 @@ protected:
     string m_login;
 
     /**
-     * @brief Test constants: identifiers of worlds.
+     * @brief Test constants: the name of the world.
      */
-    IDWorld m_id_world_1;
+    string m_world_name;
 };
 
 /**

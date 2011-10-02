@@ -29,6 +29,7 @@
 
 using namespace GameServer::Persistency;
 using namespace GameServer::World;
+using namespace std;
 
 namespace GameServer
 {
@@ -45,20 +46,20 @@ DeactivateEpochOperator::DeactivateEpochOperator(
 }
 
 DeactivateEpochOperatorExitCode DeactivateEpochOperator::deactivateEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
     try
     {
         // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_id_world))
+        if (!m_world_manager->getWorld(a_transaction, a_world_name))
         {
             return DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
 
         // Verify if the epoch exists.
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_id_world);
+        EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
 
         if (!epoch)
         {
@@ -77,7 +78,7 @@ DeactivateEpochOperatorExitCode DeactivateEpochOperator::deactivateEpoch(
             return DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_IS_NOT_ACTIVE);
         }
 
-        bool const result = m_epoch_manager->deactivateEpoch(a_transaction, a_id_world);
+        bool const result = m_epoch_manager->deactivateEpoch(a_transaction, a_world_name);
 
         return (result) ? DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_DEACTIVATED)
                         : DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_DEACTIVATED);

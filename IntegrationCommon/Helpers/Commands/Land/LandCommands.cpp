@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "LandCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "LandCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -43,24 +42,24 @@ namespace Land
 {
 
 ReplyShrPtr CreateLand(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world,
-    unsigned int const   a_id_epoch,
-    string       const & a_name
+    IClientShrPtr         a_client,
+    string        const & a_login,
+    string        const & a_password,
+    string        const   a_world_name,
+    unsigned int  const   a_id_epoch,
+    string        const & a_name
 )
 {
-    RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_id_world, a_id_epoch, a_name);
+    RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_world_name, a_id_epoch, a_name);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr DeleteLand(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_land
+    IClientShrPtr         a_client,
+    string        const & a_login,
+    string        const & a_password,
+    unsigned int  const   a_id_land
 )
 {
     RequestShrPtr request = createRequestDeleteLand(a_login, a_password, a_id_land);
@@ -69,10 +68,10 @@ ReplyShrPtr DeleteLand(
 }
 
 ReplyShrPtr GetLandByIDLand(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_land
+    IClientShrPtr         a_client,
+    string        const & a_login,
+    string        const & a_password,
+    unsigned int  const   a_id_land
 )
 {
     RequestShrPtr request = createRequestGetLandByIDLand(a_login, a_password, a_id_land);
@@ -81,10 +80,10 @@ ReplyShrPtr GetLandByIDLand(
 }
 
 ReplyShrPtr GetLandByName(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    string       const & a_name
+    IClientShrPtr         a_client,
+    string        const & a_login,
+    string        const & a_password,
+    string        const & a_name
 )
 {
     RequestShrPtr request = createRequestGetLandByName(a_login, a_password, a_name);
@@ -92,14 +91,14 @@ ReplyShrPtr GetLandByName(
     return a_client->sendRequest(request);
 }
 
-ReplyShrPtr GetLandsByIDWorld(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+ReplyShrPtr GetLandsByWorldName(
+    IClientShrPtr         a_client,
+    string        const & a_login,
+    string        const & a_password,
+    string        const   a_world_name
 )
 {
-    RequestShrPtr request = createRequestGetLandsByIDWorld(a_login, a_password, a_id_world);
+    RequestShrPtr request = createRequestGetLandsByWorldName(a_login, a_password, a_world_name);
 
     return a_client->sendRequest(request);
 }

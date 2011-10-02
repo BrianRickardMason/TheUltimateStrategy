@@ -33,7 +33,6 @@ using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
-using namespace GameServer::World;
 using namespace boost;
 using namespace std;
 
@@ -52,7 +51,7 @@ protected:
      */
     EpochManagerTest()
         : m_id_epoch_1(1),
-          m_id_world_1(1),
+          m_world_name("World"),
           m_id_land_1(1),
           m_id_settlement_1(1),
           m_name("Land")
@@ -65,9 +64,9 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants: identifiers of worlds.
+     * @brief Test constants: the name of the world.
      */
-    IDWorld m_id_world_1;
+    string m_world_name;
 
     /**
      * @brief Test constants: identifiers of lands.
@@ -98,13 +97,13 @@ TEST_F(EpochManagerTest, createEpoch_Success)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, insertRecord(transaction, m_id_world_1));
+    EXPECT_CALL(*mock, insertRecord(transaction, m_world_name));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_TRUE(manager.createEpoch(transaction, m_id_world_1));
+    ASSERT_TRUE(manager.createEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, createEpoch_Failure)
@@ -115,14 +114,14 @@ TEST_F(EpochManagerTest, createEpoch_Failure)
 
     std::exception e;
 
-    EXPECT_CALL(*mock, insertRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, insertRecord(transaction, m_world_name))
     .WillOnce(Throw(e));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.createEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.createEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deleteEpoch_EpochDoesNotExist)
@@ -131,14 +130,14 @@ TEST_F(EpochManagerTest, deleteEpoch_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.deleteEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.deleteEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deleteEpoch_EpochHasNotBeenFinished)
@@ -147,14 +146,14 @@ TEST_F(EpochManagerTest, deleteEpoch_EpochHasNotBeenFinished)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.deleteEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.deleteEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deleteEpoch_Success)
@@ -163,16 +162,16 @@ TEST_F(EpochManagerTest, deleteEpoch_Success)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, true, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, true, 22)));
 
-    EXPECT_CALL(*mock, deleteRecord(transaction, m_id_world_1));
+    EXPECT_CALL(*mock, deleteRecord(transaction, m_world_name));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_TRUE(manager.deleteEpoch(transaction, m_id_world_1));
+    ASSERT_TRUE(manager.deleteEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deleteEpoch_Failure)
@@ -181,19 +180,19 @@ TEST_F(EpochManagerTest, deleteEpoch_Failure)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, true, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, true, 22)));
 
     std::exception e;
 
-    EXPECT_CALL(*mock, deleteRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, deleteRecord(transaction, m_world_name))
     .WillOnce(Throw(e));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.deleteEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.deleteEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, getEpoch_EpochDoesNotExist)
@@ -202,14 +201,14 @@ TEST_F(EpochManagerTest, getEpoch_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    EpochShrPtr epoch = manager.getEpoch(transaction, m_id_world_1);
+    EpochShrPtr epoch = manager.getEpoch(transaction, m_world_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
@@ -220,19 +219,19 @@ TEST_F(EpochManagerTest, getEpoch_EpochDoesExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    EpochShrPtr epoch = manager.getEpoch(transaction, m_id_world_1);
+    EpochShrPtr epoch = manager.getEpoch(transaction, m_world_name);
 
     ASSERT_TRUE(epoch != NULL);
 
     ASSERT_TRUE(m_id_epoch_1 == epoch->getIDEpoch());
-    ASSERT_TRUE(m_id_world_1 == epoch->getIDWorld());
+    ASSERT_STREQ(m_world_name.c_str(), epoch->getWorldName().c_str());
     ASSERT_TRUE(epoch->getActive());
     ASSERT_FALSE(epoch->getFinished());
     ASSERT_EQ(22, epoch->getTicks());
@@ -244,10 +243,10 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_id_land_1))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    .WillOnce(Return(m_world_name));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
@@ -265,11 +264,11 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_id_land_1))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    .WillOnce(Return(m_world_name));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
@@ -280,7 +279,7 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
     ASSERT_TRUE(epoch != NULL);
 
     ASSERT_TRUE(m_id_epoch_1 == epoch->getIDEpoch());
-    ASSERT_TRUE(m_id_world_1 == epoch->getIDWorld());
+    ASSERT_STREQ(m_world_name.c_str(), epoch->getWorldName().c_str());
     ASSERT_TRUE(epoch->getActive());
     ASSERT_FALSE(epoch->getFinished());
     ASSERT_EQ(22, epoch->getTicks());
@@ -292,10 +291,10 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_name))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_name))
+    .WillOnce(Return(m_world_name));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
@@ -313,11 +312,11 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_name))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_name))
+    .WillOnce(Return(m_world_name));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
@@ -328,7 +327,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
     ASSERT_TRUE(epoch != NULL);
 
     ASSERT_TRUE(m_id_epoch_1 == epoch->getIDEpoch());
-    ASSERT_TRUE(m_id_world_1 == epoch->getIDWorld());
+    ASSERT_STREQ(m_world_name.c_str(), epoch->getWorldName().c_str());
     ASSERT_TRUE(epoch->getActive());
     ASSERT_FALSE(epoch->getFinished());
     ASSERT_EQ(22, epoch->getTicks());
@@ -343,10 +342,10 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesNotExist)
     EXPECT_CALL(*mock, getIDLandOfSettlement(transaction, m_id_settlement_1))
     .WillOnce(Return(m_id_land_1));
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_id_land_1))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    .WillOnce(Return(m_world_name));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
@@ -367,11 +366,11 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
     EXPECT_CALL(*mock, getIDLandOfSettlement(transaction, m_id_settlement_1))
      .WillOnce(Return(m_id_land_1));
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_id_land_1))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    .WillOnce(Return(m_world_name));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
@@ -382,7 +381,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
     ASSERT_TRUE(epoch != NULL);
 
     ASSERT_TRUE(m_id_epoch_1 == epoch->getIDEpoch());
-    ASSERT_TRUE(m_id_world_1 == epoch->getIDWorld());
+    ASSERT_STREQ(m_world_name.c_str(), epoch->getWorldName().c_str());
     ASSERT_TRUE(epoch->getActive());
     ASSERT_FALSE(epoch->getFinished());
     ASSERT_EQ(22, epoch->getTicks());
@@ -394,14 +393,14 @@ TEST_F(EpochManagerTest, activateEpoch_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenFinished)
@@ -410,14 +409,14 @@ TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenFinished)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, true, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, true, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenActivated)
@@ -426,14 +425,14 @@ TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenActivated)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, activateEpoch_Success)
@@ -442,16 +441,16 @@ TEST_F(EpochManagerTest, activateEpoch_Success)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, false, 22)));
 
-    EXPECT_CALL(*mock, markActive(transaction, m_id_world_1));
+    EXPECT_CALL(*mock, markActive(transaction, m_world_name));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_TRUE(manager.activateEpoch(transaction, m_id_world_1));
+    ASSERT_TRUE(manager.activateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, activateEpoch_Failure)
@@ -460,19 +459,19 @@ TEST_F(EpochManagerTest, activateEpoch_Failure)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, false, 22)));
 
     std::exception e;
 
-    EXPECT_CALL(*mock, markActive(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, markActive(transaction, m_world_name))
     .WillOnce(Throw(e));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deactivateEpoch_EpochDoesNotExist)
@@ -481,14 +480,14 @@ TEST_F(EpochManagerTest, deactivateEpoch_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deactivateEpoch_EpochHasBeenFinished)
@@ -497,14 +496,14 @@ TEST_F(EpochManagerTest, deactivateEpoch_EpochHasBeenFinished)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, true, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, true, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deactivateEpoch_EpochHasNotBeenAactivated)
@@ -513,14 +512,14 @@ TEST_F(EpochManagerTest, deactivateEpoch_EpochHasNotBeenAactivated)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, deactivateEpoch_Success)
@@ -529,16 +528,16 @@ TEST_F(EpochManagerTest, deactivateEpoch_Success)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
-    EXPECT_CALL(*mock, markUnactive(transaction, m_id_world_1));
+    EXPECT_CALL(*mock, markUnactive(transaction, m_world_name));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_TRUE(manager.deactivateEpoch(transaction, m_id_world_1));
+    ASSERT_TRUE(manager.deactivateEpoch(transaction, m_world_name));
 }
 
 
@@ -548,19 +547,19 @@ TEST_F(EpochManagerTest, deactivateEpoch_Failure)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     std::exception e;
 
-    EXPECT_CALL(*mock, markUnactive(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, markUnactive(transaction, m_world_name))
     .WillOnce(Throw(e));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, finishEpoch_EpochDoesNotExist)
@@ -569,14 +568,14 @@ TEST_F(EpochManagerTest, finishEpoch_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenFinished)
@@ -585,14 +584,14 @@ TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenFinished)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, true, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, true, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenActivated)
@@ -601,14 +600,14 @@ TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenActivated)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, finishEpoch_Success)
@@ -617,16 +616,16 @@ TEST_F(EpochManagerTest, finishEpoch_Success)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, false, 22)));
 
-    EXPECT_CALL(*mock, markFinished(transaction, m_id_world_1));
+    EXPECT_CALL(*mock, markFinished(transaction, m_world_name));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_TRUE(manager.finishEpoch(transaction, m_id_world_1));
+    ASSERT_TRUE(manager.finishEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, finishEpoch_Failure)
@@ -635,19 +634,19 @@ TEST_F(EpochManagerTest, finishEpoch_Failure)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, false, 22)));
 
     std::exception e;
 
-    EXPECT_CALL(*mock, markFinished(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, markFinished(transaction, m_world_name))
     .WillOnce(Throw(e));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, tickEpoch_EpochDoesNotExist)
@@ -656,14 +655,14 @@ TEST_F(EpochManagerTest, tickEpoch_EpochDoesNotExist)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
     .WillOnce(Return(EpochRecordShrPtr()));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenFinished)
@@ -672,14 +671,14 @@ TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenFinished)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, true, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, true, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenActivated)
@@ -688,14 +687,14 @@ TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenActivated)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, true, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, true, false, 22)));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, tickEpoch_Success)
@@ -704,16 +703,16 @@ TEST_F(EpochManagerTest, tickEpoch_Success)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, false, 22)));
 
-    EXPECT_CALL(*mock, incrementTicks(transaction, m_id_world_1));
+    EXPECT_CALL(*mock, incrementTicks(transaction, m_world_name));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_TRUE(manager.tickEpoch(transaction, m_id_world_1));
+    ASSERT_TRUE(manager.tickEpoch(transaction, m_world_name));
 }
 
 TEST_F(EpochManagerTest, tickEpoch_Failure)
@@ -722,17 +721,17 @@ TEST_F(EpochManagerTest, tickEpoch_Failure)
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_id_world_1, false, false, 22)));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
+    .WillOnce(Return(make_shared<EpochRecord>(m_id_epoch_1, m_world_name, false, false, 22)));
 
     std::exception e;
 
-    EXPECT_CALL(*mock, incrementTicks(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, incrementTicks(transaction, m_world_name))
     .WillOnce(Throw(e));
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
     EpochManager manager(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_id_world_1));
+    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
 }

@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_WORLD_IWORLDRECORD_HPP
 #define GAMESERVER_WORLD_IWORLDRECORD_HPP
 
-#include "IDWorld.hpp"
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -50,18 +49,11 @@ public:
     virtual ~IWorldRecord(){}
 
     /**
-     * @brief Gets the identifier of the world.
-     *
-     * @return The identifier of the world.
-     */
-    virtual IDWorld getIDWorld() const = 0;
-
-    /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    virtual std::string getName() const = 0;
+    virtual std::string getWorldName() const = 0;
 };
 
 /**
@@ -72,12 +64,12 @@ typedef boost::shared_ptr<IWorldRecord> IWorldRecordShrPtr;
 /**
  * @brief The pair of the interface of the record of the world.
  */
-typedef std::pair<IDWorld, IWorldRecordShrPtr> IWorldRecordPair;
+typedef std::pair<std::string, IWorldRecordShrPtr> IWorldRecordPair;
 
 /**
  * @brief The map of the interface of the record of the world.
  */
-typedef std::map<IDWorld, IWorldRecordShrPtr> IWorldRecordMap;
+typedef std::map<std::string, IWorldRecordShrPtr> IWorldRecordMap;
 
 } // namespace World
 } // namespace GameServer

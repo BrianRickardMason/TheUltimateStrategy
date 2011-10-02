@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetLandsByLoginAndIDWorldOperator.hpp"
+#include "GetLandsByLoginAndWorldNameOperator.hpp"
 
 using namespace GameServer::Persistency;
 using namespace GameServer::User;
@@ -37,7 +37,7 @@ namespace GameServer
 namespace Land
 {
 
-GetLandsByLoginAndIDWorldOperator::GetLandsByLoginAndIDWorldOperator(
+GetLandsByLoginAndWorldNameOperator::GetLandsByLoginAndWorldNameOperator(
     ILandManagerShrPtr  a_land_manager,
     IUserManagerShrPtr  a_user_manager,
     IWorldManagerShrPtr a_world_manager
@@ -48,10 +48,10 @@ GetLandsByLoginAndIDWorldOperator::GetLandsByLoginAndIDWorldOperator(
 {
 }
 
-GetLandsByLoginAndIDWorldOperatorExitCode GetLandsByLoginAndIDWorldOperator::getLandByLoginAndIDWorld(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    IDWorld            const & a_id_world
+GetLandsByLoginAndWorldNameOperatorExitCode GetLandsByLoginAndWorldNameOperator::getLandByLoginAndWorldName(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_world_name
 ) const
 {
     try
@@ -60,19 +60,19 @@ GetLandsByLoginAndIDWorldOperatorExitCode GetLandsByLoginAndIDWorldOperator::get
         // TODO: UserManager::getUser.
 
         // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_id_world))
+        if (!m_world_manager->getWorld(a_transaction, a_world_name))
         {
-            return GetLandsByLoginAndIDWorldOperatorExitCode(GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST, LandMap());
+            return GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST, LandMap());
         }
 
-        LandMap const lands = m_land_manager->getLands(a_transaction, a_login, a_id_world);
+        LandMap const lands = m_land_manager->getLands(a_transaction, a_login, a_world_name);
 
-        return (!lands.empty()) ? GetLandsByLoginAndIDWorldOperatorExitCode(GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT, lands)
-                                : GetLandsByLoginAndIDWorldOperatorExitCode(GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT, lands);
+        return (!lands.empty()) ? GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT, lands)
+                                : GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT, lands);
     }
     catch (...)
     {
-        return GetLandsByLoginAndIDWorldOperatorExitCode(GET_LANDS_BY_LOGIN_AND_IDWORLD_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR, LandMap());
+        return GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR, LandMap());
     }
 }
 

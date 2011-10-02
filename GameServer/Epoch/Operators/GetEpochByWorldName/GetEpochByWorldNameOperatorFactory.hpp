@@ -25,23 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetLandsByLoginAndIDWorldOperatorFactory.hpp"
+#ifndef GAMESERVER_EPOCH_GETEPOCHBYWORLDNAMEOPERATORFACTORY_HPP
+#define GAMESERVER_EPOCH_GETEPOCHBYWORLDNAMEOPERATORFACTORY_HPP
 
-using namespace GameServer::Common;
+#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "GetEpochByWorldNameOperator.hpp"
 
 namespace GameServer
 {
-namespace Land
+namespace Epoch
 {
 
-GetLandsByLoginAndIDWorldOperatorAutPtr GetLandsByLoginAndIDWorldOperatorFactory::createGetLandsByLoginAndIDWorldOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
-)
+/**
+ * @brief The factory of GetEpochByWorldNameOperator.
+ */
+class GetEpochByWorldNameOperatorFactory
 {
-    return GetLandsByLoginAndIDWorldOperatorAutPtr(new GetLandsByLoginAndIDWorldOperator(a_manager_abstract_factory->createLandManager(),
-                                                                                         a_manager_abstract_factory->createUserManager(),
-                                                                                         a_manager_abstract_factory->createWorldManager()));
-}
+public:
+    /**
+     * @brief The factory method.
+     *
+     * @param a_manager_abstract_factory The abstract factory of managers.
+     *
+     * @return The newly created GetEpochByWorldNameOperator.
+     */
+    static GetEpochByWorldNameOperatorAutPtr createGetEpochByWorldNameOperator(
+        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    );
+};
 
-} // namespace Land
+} // namespace Epoch
 } // namespace GameServer
+
+#endif // GAMESERVER_EPOCH_GETEPOCHBYWORLDNAMEOPERATORFACTORY_HPP

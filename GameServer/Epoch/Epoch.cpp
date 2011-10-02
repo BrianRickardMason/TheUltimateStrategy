@@ -27,7 +27,7 @@
 
 #include "Epoch.hpp"
 
-using namespace GameServer::World;
+using namespace std;
 
 namespace GameServer
 {
@@ -38,7 +38,7 @@ Epoch::Epoch(
     EpochRecord const & a_record
 )
     : m_id_epoch(a_record.getIDEpoch()),
-      m_id_world(a_record.getIDWorld()),
+      m_world_name(a_record.getWorldName()),
       m_active(a_record.getActive()),
       m_finished(a_record.getFinished()),
       m_ticks(a_record.getTicks())
@@ -50,9 +50,9 @@ IDEpoch const & Epoch::getIDEpoch() const
     return m_id_epoch;
 }
 
-IDWorld const & Epoch::getIDWorld() const
+string Epoch::getWorldName() const
 {
-    return m_id_world;
+    return m_world_name;
 }
 
 bool Epoch::getActive() const

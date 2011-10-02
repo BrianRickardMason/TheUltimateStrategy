@@ -56,7 +56,7 @@ GetLandByLoginAndNameOperatorExitCode GetLandByLoginAndNameOperator::getLandByLo
         // Verify if the user exists.
         // TODO: UserManager::getUser.
 
-        LandShrPtr const land = m_land_manager->getLand(a_transaction, a_login, a_name);
+        LandShrPtr const land = m_land_manager->getLandByLogin(a_transaction, a_login, a_name);
 
         return (land) ? GetLandByLoginAndNameOperatorExitCode(GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT, land)
                       : GetLandByLoginAndNameOperatorExitCode(GET_LAND_BY_LOGIN_AND_NAME_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT, land);

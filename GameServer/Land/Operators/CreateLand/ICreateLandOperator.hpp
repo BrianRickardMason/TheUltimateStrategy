@@ -30,7 +30,6 @@
 
 #include "../../../Epoch/IDEpoch.hpp"
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../World/IDWorld.hpp"
 #include "CreateLandOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -58,7 +57,7 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      * @param a_id_epoch    The identifier of the epoch.
      * @param a_name        The name of the land.
      *
@@ -67,7 +66,7 @@ public:
     virtual CreateLandOperatorExitCode createLand(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
-        World::IDWorld                  const & a_id_world,
+        std::string                     const   a_world_name,
         Epoch::IDEpoch                  const & a_id_epoch,
         std::string                     const & a_name
     ) const = 0;

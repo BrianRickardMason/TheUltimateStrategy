@@ -29,8 +29,8 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTICKEPOCH_HPP
 
 #include "../../../../../GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorExitCode.hpp"
-#include "../../../../../GameServer/World/IDWorld.hpp"
 #include "../Executor.hpp"
+#include <string>
 
 namespace Network
 {
@@ -51,7 +51,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idworld type=\"unsigned integer\" value=\"#\" />
+ *         <world_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -165,14 +165,9 @@ class ExecutorTickEpoch
     ) const;
 
     /**
-     * @brief The value of the identifier of the world.
+     * @brief The name of the world.
      */
-    unsigned int m_value_id_world;
-
-    /**
-     * @brief The identifier of the world.
-     */
-    GameServer::World::IDWorld m_id_world;
+    std::string m_world_name;
 };
 
 } // namespace Executors

@@ -28,9 +28,9 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETEPOCH_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETEPOCH_HPP
 
-#include "../../../../../GameServer/Epoch/Operators/GetEpochByIDWorld/GetEpochByIDWorldOperatorExitCode.hpp"
-#include "../../../../../GameServer/World/IDWorld.hpp"
+#include "../../../../../GameServer/Epoch/Operators/GetEpochByWorldName/GetEpochByWorldNameOperatorExitCode.hpp"
 #include "../Executor.hpp"
+#include <string>
 
 namespace Network
 {
@@ -51,7 +51,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idworld type=\"unsigned integer\" value=\"#\" />
+ *         <world_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -59,12 +59,12 @@ namespace Executors
  * <reply id=\"REPLY_ID_GET_EPOCH">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message  type=\"string"\           value=\"#\" />
- *         <idepoch  type=\"unsigned integer\" value=\"#\" />
- *         <idworld  type=\"unsigned integer\" value=\"#\" />
- *         <active   type=\"boolean\"          value=\"#\" />
- *         <finished type=\"boolean\"          value=\"#\" />
- *         <ticks    type=\"unsigned integer\" value=\"#\" />
+ *         <message    type=\"string"\           value=\"#\" />
+ *         <idepoch    type=\"unsigned integer\" value=\"#\" />
+ *         <world_name type=\"string\"           value=\"#\" />
+ *         <active     type=\"boolean\"          value=\"#\" />
+ *         <finished   type=\"boolean\"          value=\"#\" />
+ *         <ticks      type=\"unsigned integer\" value=\"#\" />
  *     </parameters>
  * </reply>
  */
@@ -166,18 +166,13 @@ class ExecutorGetEpoch
      * @return The reply.
      */
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
-        GameServer::Epoch::GetEpochByIDWorldOperatorExitCode const & a_exit_code
+        GameServer::Epoch::GetEpochByWorldNameOperatorExitCode const & a_exit_code
     ) const;
 
     /**
-     * @brief The value of the identifier of the world.
+     * @brief The name of the world.
      */
-    unsigned int m_value_id_world;
-
-    /**
-     * @brief The identifier of the world.
-     */
-    GameServer::World::IDWorld m_id_world;
+    std::string m_world_name;
 };
 
 } // namespace Executors

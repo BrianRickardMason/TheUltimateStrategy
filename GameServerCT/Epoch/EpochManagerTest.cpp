@@ -53,9 +53,9 @@ protected:
           m_id_land_1(1),
           m_id_settlement_1(1),
           m_login("Login"),
-          m_id_world_1(1),
-          m_id_world_2(2),
-          m_id_world_3(3),
+          m_world_name_1("World1"),
+          m_world_name_2("World2"),
+          m_world_name_3("World3"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -67,8 +67,8 @@ protected:
             IConnectionShrPtr connection = m_persistency.getConnection();
             ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-            m_world_manager->createWorld(transaction, "World1");
-            m_world_manager->createWorld(transaction, "World2");
+            m_world_manager->createWorld(transaction, m_world_name_1);
+            m_world_manager->createWorld(transaction, m_world_name_2);
 
             transaction->commit();
         }
@@ -77,24 +77,24 @@ protected:
     /**
      * @brief Compares the epoch with expected values.
      *
-     * @param a_epoch    The epoch to be compared.
-     * @param a_id_epoch The expected identifier of the epoch.
-     * @param a_id_world The expected identifier of the world.
-     * @param a_active   The expected "active" state.
-     * @param a_finished The expected "finished" state.
-     * @parma a_ticks    The expected number of ticks.
+     * @param a_epoch      The epoch to be compared.
+     * @param a_id_epoch   The expected identifier of the epoch.
+     * @param a_world_name The expected name of the world.
+     * @param a_active     The expected "active" state.
+     * @param a_finished   The expected "finished" state.
+     * @parma a_ticks      The expected number of ticks.
      */
     void compareEpoch(
         EpochShrPtr          a_epoch,
         IDEpoch      const & a_id_epoch,
-        IDWorld      const & a_id_world,
+        string       const   a_world_name,
         bool         const   a_active,
         bool         const   a_finished,
         unsigned int const   a_ticks
     )
     {
         ASSERT_TRUE(a_id_epoch == a_epoch->getIDEpoch());
-        ASSERT_TRUE(a_id_world == a_epoch->getIDWorld());
+        ASSERT_STREQ(a_world_name.c_str(), a_epoch->getWorldName().c_str());
         ASSERT_TRUE(a_active == a_epoch->getActive());
         ASSERT_TRUE(a_finished == a_epoch->getFinished());
         ASSERT_EQ(a_ticks, a_epoch->getTicks());
@@ -121,11 +121,11 @@ protected:
     string m_login;
 
     /**
-     * @brief Test constants: identifiers of the world.
+     * @brief Test constants: the names of the worlds.
      */
-    IDWorld m_id_world_1,
-            m_id_world_2,
-            m_id_world_3;
+    string m_world_name_1,
+           m_world_name_2,
+           m_world_name_3;
 
     /**
      * @brief The abstract factory of managers.
@@ -167,7 +167,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->createEpoch(transaction, m_id_world_3));
+        ASSERT_FALSE(m_epoch_manager->createEpoch(transaction, m_world_name_3));
     }
 }
 
@@ -177,7 +177,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_TRUE(m_epoch_manager->createEpoch(transaction, m_id_world_1));
+        ASSERT_TRUE(m_epoch_manager->createEpoch(transaction, m_world_name_1));
 
         transaction->commit();
     }
@@ -189,7 +189,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -198,7 +198,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->createEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->createEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -208,7 +208,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorl
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -217,7 +217,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorl
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_TRUE(m_epoch_manager->createEpoch(transaction, m_id_world_2));
+        ASSERT_TRUE(m_epoch_manager->createEpoch(transaction, m_world_name_2));
 
         transaction->commit();
     }
@@ -232,7 +232,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->deleteEpoch(transaction, m_id_world_3));
+        ASSERT_FALSE(m_epoch_manager->deleteEpoch(transaction, m_world_name_3));
     }
 }
 
@@ -242,7 +242,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->deleteEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->deleteEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -252,7 +252,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -261,7 +261,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->deleteEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->deleteEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -271,7 +271,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -280,7 +280,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->finishEpoch(transaction, m_id_world_1);
+        m_epoch_manager->finishEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -289,7 +289,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_TRUE(m_epoch_manager->deleteEpoch(transaction, m_id_world_1));
+        ASSERT_TRUE(m_epoch_manager->deleteEpoch(transaction, m_world_name_1));
 
         transaction->commit();
     }
@@ -304,7 +304,7 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_id_world_3);
+        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_world_name_3);
 
         transaction->commit();
 
@@ -318,7 +318,7 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_id_world_1);
+        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_world_name_1);
 
         transaction->commit();
 
@@ -332,7 +332,7 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -341,12 +341,12 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_id_world_1);
+        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_world_name_1);
 
         transaction->commit();
 
         ASSERT_FALSE(epoch == NULL);
-        compareEpoch(epoch, m_id_epoch_1, m_id_world_1, false, false, 0);
+        compareEpoch(epoch, m_id_epoch_1, m_world_name_1, false, false, 0);
     }
 }
 
@@ -368,7 +368,7 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -377,7 +377,7 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->activateEpoch(transaction, m_id_world_1);
+        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -386,7 +386,7 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, "Land");
 
         transaction->commit();
     }
@@ -400,7 +400,7 @@ TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
         transaction->commit();
 
         ASSERT_FALSE(epoch == NULL);
-        compareEpoch(epoch, m_id_epoch_1, m_id_world_1, true, false, 0);
+        compareEpoch(epoch, m_id_epoch_1, m_world_name_1, true, false, 0);
     }
 }
 
@@ -422,7 +422,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -431,7 +431,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->activateEpoch(transaction, m_id_world_1);
+        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -440,7 +440,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, "Land");
 
         transaction->commit();
     }
@@ -454,7 +454,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         transaction->commit();
 
         ASSERT_FALSE(epoch == NULL);
-        compareEpoch(epoch, m_id_epoch_1, m_id_world_1, true, false, 0);
+        compareEpoch(epoch, m_id_epoch_1, m_world_name_1, true, false, 0);
     }
 }
 
@@ -476,7 +476,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -485,7 +485,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->activateEpoch(transaction, m_id_world_1);
+        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -494,7 +494,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, "Land");
 
         transaction->commit();
     }
@@ -517,7 +517,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         transaction->commit();
 
         ASSERT_FALSE(epoch == NULL);
-        compareEpoch(epoch, m_id_epoch_1, m_id_world_1, true, false, 0);
+        compareEpoch(epoch, m_id_epoch_1, m_world_name_1, true, false, 0);
     }
 }
 
@@ -530,7 +530,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_id_world_3));
+        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_world_name_3));
     }
 }
 
@@ -540,7 +540,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -550,7 +550,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -559,7 +559,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->finishEpoch(transaction, m_id_world_1);
+        m_epoch_manager->finishEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -568,7 +568,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -578,7 +578,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -587,7 +587,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->activateEpoch(transaction, m_id_world_1);
+        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -596,7 +596,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -606,7 +606,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -615,7 +615,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_TRUE(m_epoch_manager->activateEpoch(transaction, m_id_world_1));
+        ASSERT_TRUE(m_epoch_manager->activateEpoch(transaction, m_world_name_1));
 
         transaction->commit();
     }
@@ -630,7 +630,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->deactivateEpoch(transaction, m_id_world_3));
+        ASSERT_FALSE(m_epoch_manager->deactivateEpoch(transaction, m_world_name_3));
     }
 }
 
@@ -640,7 +640,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->activateEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -650,7 +650,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -659,7 +659,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->finishEpoch(transaction, m_id_world_1);
+        m_epoch_manager->finishEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -668,7 +668,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->deactivateEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->deactivateEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -678,7 +678,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -687,7 +687,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->activateEpoch(transaction, m_id_world_1);
+        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -696,7 +696,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_TRUE(m_epoch_manager->deactivateEpoch(transaction, m_id_world_1));
+        ASSERT_TRUE(m_epoch_manager->deactivateEpoch(transaction, m_world_name_1));
 
         transaction->commit();
     }
@@ -708,7 +708,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -717,7 +717,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->deactivateEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->deactivateEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -731,7 +731,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_id_world_3));
+        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_world_name_3));
     }
 }
 
@@ -741,7 +741,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -751,7 +751,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -760,7 +760,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->finishEpoch(transaction, m_id_world_1);
+        m_epoch_manager->finishEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -769,7 +769,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -779,7 +779,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -788,7 +788,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->activateEpoch(transaction, m_id_world_1);
+        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -797,7 +797,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->finishEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -807,7 +807,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -816,7 +816,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_TRUE(m_epoch_manager->finishEpoch(transaction, m_id_world_1));
+        ASSERT_TRUE(m_epoch_manager->finishEpoch(transaction, m_world_name_1));
 
         transaction->commit();
     }
@@ -831,7 +831,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_id_world_3));
+        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_world_name_3));
     }
 }
 
@@ -841,7 +841,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -851,7 +851,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -860,7 +860,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->finishEpoch(transaction, m_id_world_1);
+        m_epoch_manager->finishEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -869,7 +869,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Finished)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -879,7 +879,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -888,7 +888,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->activateEpoch(transaction, m_id_world_1);
+        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -897,7 +897,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Active)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_id_world_1));
+        ASSERT_FALSE(m_epoch_manager->tickEpoch(transaction, m_world_name_1));
     }
 }
 
@@ -907,7 +907,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Unactive)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_epoch_manager->createEpoch(transaction, m_id_world_1);
+        m_epoch_manager->createEpoch(transaction, m_world_name_1);
 
         transaction->commit();
     }
@@ -916,7 +916,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Unactive)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ASSERT_TRUE(m_epoch_manager->tickEpoch(transaction, m_id_world_1));
+        ASSERT_TRUE(m_epoch_manager->tickEpoch(transaction, m_world_name_1));
 
         transaction->commit();
     }
@@ -925,11 +925,11 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Unactive)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_id_world_1);
+        EpochShrPtr epoch = m_epoch_manager->getEpoch(transaction, m_world_name_1);
 
         transaction->commit();
 
         ASSERT_FALSE(epoch == NULL);
-        compareEpoch(epoch, m_id_epoch_1, m_id_world_1, false, false, 1);
+        compareEpoch(epoch, m_id_epoch_1, m_world_name_1, false, false, 1);
     }
 }

@@ -41,8 +41,8 @@
 #include "../Epoch/Operators/FinishEpoch/FinishEpochOperatorFactory.hpp"
 #include "../Epoch/Operators/GetEpochByIDLand/GetEpochByIDLandOperatorFactory.hpp"
 #include "../Epoch/Operators/GetEpochByIDSettlement/GetEpochByIDSettlementOperatorFactory.hpp"
-#include "../Epoch/Operators/GetEpochByIDWorld/GetEpochByIDWorldOperatorFactory.hpp"
 #include "../Epoch/Operators/GetEpochByLandName/GetEpochByLandNameOperatorFactory.hpp"
+#include "../Epoch/Operators/GetEpochByWorldName/GetEpochByWorldNameOperatorFactory.hpp"
 #include "../Epoch/Operators/TickEpoch/TickEpochOperatorFactory.hpp"
 #include "../Human/Operators/DismissHuman/DismissHumanOperatorFactory.hpp"
 #include "../Human/Operators/EngageHuman/EngageHumanOperatorFactory.hpp"
@@ -52,7 +52,7 @@
 #include "../Land/Operators/DeleteLand/DeleteLandOperatorFactory.hpp"
 #include "../Land/Operators/GetLandByIDLand/GetLandByIDLandOperatorFactory.hpp"
 #include "../Land/Operators/GetLandByLoginAndName/GetLandByLoginAndNameOperatorFactory.hpp"
-#include "../Land/Operators/GetLandsByLoginAndIDWorld/GetLandsByLoginAndIDWorldOperatorFactory.hpp"
+#include "../Land/Operators/GetLandsByLoginAndWorldName/GetLandsByLoginAndWorldNameOperatorFactory.hpp"
 #include "../Resource/Operators/GetResource/GetResourceOperatorFactory.hpp"
 #include "../Resource/Operators/GetResources/GetResourcesOperatorFactory.hpp"
 #include "../Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
@@ -175,14 +175,14 @@ IGetEpochByIDSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createG
     return IGetEpochByIDSettlementOperatorShrPtr(GetEpochByIDSettlementOperatorFactory::createGetEpochByIDSettlementOperator(m_manager_abstract_factory));
 }
 
-IGetEpochByIDWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByIDWorldOperator() const
-{
-    return IGetEpochByIDWorldOperatorShrPtr(GetEpochByIDWorldOperatorFactory::createGetEpochByIDWorldOperator(m_manager_abstract_factory));
-}
-
 IGetEpochByLandNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByLandNameOperator() const
 {
     return IGetEpochByLandNameOperatorShrPtr(GetEpochByLandNameOperatorFactory::createGetEpochByLandNameOperator(m_manager_abstract_factory));
+}
+
+IGetEpochByWorldNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByWorldNameOperator() const
+{
+    return IGetEpochByWorldNameOperatorShrPtr(GetEpochByWorldNameOperatorFactory::createGetEpochByWorldNameOperator(m_manager_abstract_factory));
 }
 
 ITickEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createTickEpochOperator() const
@@ -230,9 +230,9 @@ IGetLandByLoginAndNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGe
     return IGetLandByLoginAndNameOperatorShrPtr(GetLandByLoginAndNameOperatorFactory::createGetLandByLoginAndNameOperator(m_manager_abstract_factory));
 }
 
-IGetLandsByLoginAndIDWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandsByLoginAndIDWorldOperator() const
+IGetLandsByLoginAndWorldNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandsByLoginAndWorldNameOperator() const
 {
-    return IGetLandsByLoginAndIDWorldOperatorShrPtr(GetLandsByLoginAndIDWorldOperatorFactory::createGetLandsByLoginAndIDWorldOperator(m_manager_abstract_factory));
+    return IGetLandsByLoginAndWorldNameOperatorShrPtr(GetLandsByLoginAndWorldNameOperatorFactory::createGetLandsByLoginAndWorldNameOperator(m_manager_abstract_factory));
 }
 
 IGetResourceOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetResourceOperator() const

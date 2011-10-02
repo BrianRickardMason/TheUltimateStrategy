@@ -30,7 +30,6 @@
 
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::World;
 using namespace std;
 
 /**
@@ -45,7 +44,8 @@ protected:
      */
     LandTest()
         : m_login("Login"),
-          m_land(LandRecord(m_login, IDWorld(2), IDEpoch(4), IDLand(3), "Land1", false))
+          m_world_name("World"),
+          m_land(LandRecord(m_login, m_world_name, IDEpoch(4), IDLand(3), "Land1", false))
     {
     }
 
@@ -55,6 +55,11 @@ protected:
     string m_login;
 
     /**
+     * @brief Test constants: the name of the world.
+     */
+    string m_world_name;
+
+    /**
      * @brief Test constants: the land.
      */
     Land m_land;
@@ -62,11 +67,11 @@ protected:
 
 TEST_F(LandTest, Land)
 {
-    LandRecord record(m_login, IDWorld(2), IDEpoch(4), IDLand(3), "Land1", false);
+    LandRecord record(m_login, m_world_name, IDEpoch(4), IDLand(3), "Land1", false);
     Land land(record);
 
     ASSERT_STREQ(m_login.c_str(), land.getLogin().c_str());
-    ASSERT_EQ(2, land.getIDWorld().getValue());
+    ASSERT_STREQ(m_world_name.c_str(), land.getWorldName().c_str());
     ASSERT_EQ(4, land.getIDEpoch().getValue());
     ASSERT_EQ(3, land.getIDLand().getValue());
     ASSERT_STREQ("Land1", land.getName().c_str());
@@ -78,9 +83,9 @@ TEST_F(LandTest, getLogin)
     ASSERT_EQ(m_login.c_str(), m_land.getLogin().c_str());
 }
 
-TEST_F(LandTest, getIDWorld)
+TEST_F(LandTest, GetWorldNameReturnsProperValue)
 {
-    ASSERT_EQ(2, m_land.getIDWorld().getValue());
+    ASSERT_STREQ(m_world_name.c_str(), m_land.getWorldName().c_str());
 }
 
 TEST_F(LandTest, getIDEpoch)

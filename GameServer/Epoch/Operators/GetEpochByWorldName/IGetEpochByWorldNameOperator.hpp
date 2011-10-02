@@ -25,22 +25,52 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetEpochByIDWorldOperatorFactory.hpp"
+#ifndef GAMESERVER_EPOCH_IGETEPOCHBYWORLDNAMEOPERATOR_HPP
+#define GAMESERVER_EPOCH_IGETEPOCHBYWORLDNAMEOPERATOR_HPP
 
-using namespace GameServer::Common;
+#include "../../../Persistency/ITransaction.hpp"
+#include "GetEpochByWorldNameOperatorExitCode.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
 namespace Epoch
 {
 
-GetEpochByIDWorldOperatorAutPtr GetEpochByIDWorldOperatorFactory::createGetEpochByIDWorldOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
-)
+/**
+ * @brief The interface of GetEpochByWorldNameOperator.
+ */
+class IGetEpochByWorldNameOperator
+    : boost::noncopyable
 {
-    return GetEpochByIDWorldOperatorAutPtr(new GetEpochByIDWorldOperator(a_manager_abstract_factory->createEpochManager(),
-                                                                         a_manager_abstract_factory->createWorldManager()));
-}
+public:
+    /**
+     * @brief Destructs GetEpochByWorldNameOperator.
+     */
+    virtual ~IGetEpochByWorldNameOperator(){};
+
+    /**
+     * @brief Gets an epoch.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world_name  The name of the world.
+     *
+     * @return The exit code.
+     */
+    virtual GetEpochByWorldNameOperatorExitCode getEpochByWorldName(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const = 0;
+};
+
+/**
+ * @brief The shared pointer of the interface of GetEpochByWorldNameOperator.
+ */
+typedef boost::shared_ptr<IGetEpochByWorldNameOperator> IGetEpochByWorldNameOperatorShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer
+
+#endif // GAMESERVER_EPOCH_IGETEPOCHBYWORLDNAMEOPERATOR_HPP

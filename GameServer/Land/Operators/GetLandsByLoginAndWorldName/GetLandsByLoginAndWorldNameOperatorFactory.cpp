@@ -25,36 +25,23 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATORFACTORY_HPP
-#define GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATORFACTORY_HPP
+#include "GetLandsByLoginAndWorldNameOperatorFactory.hpp"
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
-#include "GetLandsByLoginAndIDWorldOperator.hpp"
+using namespace GameServer::Common;
 
 namespace GameServer
 {
 namespace Land
 {
 
-/**
- * @brief The factory of GetLandsByLoginAndIDWorldOperator.
- */
-class GetLandsByLoginAndIDWorldOperatorFactory
+GetLandsByLoginAndWorldNameOperatorAutPtr GetLandsByLoginAndWorldNameOperatorFactory::createGetLandsByLoginAndWorldNameOperator(
+    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+)
 {
-public:
-    /**
-     * @brief The factory method.
-     *
-     * @param a_manager_abstract_factory The abstract factory of managers.
-     *
-     * @return The newly created GetLandByNameOperator.
-     */
-    static GetLandsByLoginAndIDWorldOperatorAutPtr createGetLandsByLoginAndIDWorldOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
-    );
-};
+    return GetLandsByLoginAndWorldNameOperatorAutPtr(new GetLandsByLoginAndWorldNameOperator(a_manager_abstract_factory->createLandManager(),
+                                                                                             a_manager_abstract_factory->createUserManager(),
+                                                                                             a_manager_abstract_factory->createWorldManager()));
+}
 
 } // namespace Land
 } // namespace GameServer
-
-#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDIDWORLDOPERATORFACTORY_HPP

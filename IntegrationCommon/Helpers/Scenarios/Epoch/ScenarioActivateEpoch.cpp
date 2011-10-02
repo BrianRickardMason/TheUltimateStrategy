@@ -64,13 +64,13 @@ char const * ScenarioActivateEpoch::execute()
 }
 
 ScenarioActivateEpochActionSuccess::ScenarioActivateEpochActionSuccess(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_world(a_id_world)
+      m_world_name(a_world_name)
 {
 }
 
@@ -78,17 +78,17 @@ ReplyShrPtr ScenarioActivateEpochActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return ActivateEpoch(a_client, m_login, m_password, m_id_world);
+    return ActivateEpoch(a_client, m_login, m_password, m_world_name);
 }
 
 ScenarioActivateEpochActionInvalidRequest::ScenarioActivateEpochActionInvalidRequest(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_world(a_id_world)
+      m_world_name(a_world_name)
 {
 }
 
@@ -106,9 +106,9 @@ ReplyShrPtr ScenarioActivateEpochActionInvalidRequest::perform(
     user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
-    IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
-    idworld->appendAttribute("type")->setValue("unsigned");
-    idworld->appendAttribute("value")->setValue(m_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("unsigned");
+    world_name->appendAttribute("value")->setValue(m_world_name.c_str());
 
     return a_client->sendRequest(request);
 }

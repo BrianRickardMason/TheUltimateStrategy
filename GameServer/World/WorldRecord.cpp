@@ -35,22 +35,15 @@ namespace World
 {
 
 WorldRecord::WorldRecord(
-    IDWorld const & a_id_world,
-    string  const & a_name
+    string const a_world_name
 )
-    : m_id_world(a_id_world),
-      m_name(a_name)
+    : m_world_name(a_world_name)
 {
 }
 
-IDWorld WorldRecord::getIDWorld() const
+string WorldRecord::getWorldName() const
 {
-    return m_id_world;
-}
-
-string WorldRecord::getName() const
-{
-    return m_name;
+    return m_world_name;
 }
 
 } // namespace World

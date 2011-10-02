@@ -53,7 +53,7 @@ TEST_F(IntegrationFunctionalTest, GetEpoch_WorldDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioGetEpochActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioGetEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioGetEpochVerificationWorldDoesNotExist))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -77,7 +77,7 @@ TEST_F(IntegrationFunctionalTest, GetEpoch_WorldDoesExist_EpochDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioGetEpochActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioGetEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioGetEpochVerificationEpochHasNotBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -101,11 +101,11 @@ TEST_F(IntegrationFunctionalTest, GetEpoch_WorldDoesExist_EpochDoesExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioGetEpochActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioGetEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioGetEpochVerificationEpochHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -121,7 +121,7 @@ TEST_F(IntegrationFunctionalTest, GetEpoch_InvalidRequest)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioGetEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioGetEpochActionInvalidRequest("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioGetEpochActionInvalidRequest("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioGetEpochVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

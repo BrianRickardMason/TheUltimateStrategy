@@ -65,7 +65,7 @@ protected:
           m_login_1("Login1"),
           m_login_2("Login2"),
           m_login_5("Login5"),
-          m_id_world_1(1),
+          m_world_name("World"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -77,15 +77,15 @@ protected:
             IConnectionShrPtr connection = m_persistency.getConnection();
             ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-            m_world_manager->createWorld(transaction, "World1");
+            m_world_manager->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_id_world_1),
+            m_epoch_manager->createEpoch(transaction, m_world_name),
 
             m_user_manager->createUser(transaction, "Login1", "Password1");
             m_user_manager->createUser(transaction, "Login2", "Password2");
 
-            m_land_manager->createLand(transaction, m_login_1, m_id_world_1, m_id_epoch_1, m_name_1);
-            m_land_manager->createLand(transaction, m_login_2, m_id_world_1, m_id_epoch_1, m_name_2);
+            m_land_manager->createLand(transaction, m_login_1, m_world_name, m_id_epoch_1, m_name_1);
+            m_land_manager->createLand(transaction, m_login_2, m_world_name, m_id_epoch_1, m_name_2);
 
             m_settlement_manager->createSettlement(transaction, m_id_land_1, m_name_settlement_1);
             m_settlement_manager->createSettlement(transaction, m_id_land_2, m_name_settlement_2);
@@ -134,9 +134,9 @@ protected:
            m_login_5;
 
     /**
-     * @brief Test constants identifiers of the worlds.
+     * @brief Test constants: the name of the world.
      */
-    IDWorld m_id_world_1;
+    string m_world_name;
 
     /**
      * @brief The abstract factory of managers.

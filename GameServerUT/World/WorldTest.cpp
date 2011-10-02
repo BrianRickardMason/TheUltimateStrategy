@@ -42,7 +42,7 @@ protected:
      * @brief Constructs the test class of the world.
      */
     WorldTest()
-        : m_world(IWorldRecordShrPtr(new WorldRecord(IDWorld(1), "World1")))
+        : m_world(IWorldRecordShrPtr(new WorldRecord("World")))
     {
     }
 
@@ -52,22 +52,12 @@ protected:
     World m_world;
 };
 
-TEST_F(WorldTest, ConstructorSetsProperIDWorldValue)
+TEST_F(WorldTest, ConstuctorSetsProperWorldNameValue)
 {
-    ASSERT_EQ(1, m_world.getIDWorld().getValue());
+    ASSERT_STREQ("World", m_world.getWorldName().c_str());
 }
 
-TEST_F(WorldTest, ConstuctorSetsProperNameValue)
+TEST_F(WorldTest, GetWorldNameReturnsProperValue)
 {
-    ASSERT_STREQ("World1", m_world.getName().c_str());
-}
-
-TEST_F(WorldTest, GetIDWorldReturnsProperValue)
-{
-    ASSERT_EQ(1, m_world.getIDWorld().getValue());
-}
-
-TEST_F(WorldTest, GetNameReturnsProperValue)
-{
-    ASSERT_STREQ("World1", m_world.getName().c_str());
+    ASSERT_STREQ("World", m_world.getWorldName().c_str());
 }

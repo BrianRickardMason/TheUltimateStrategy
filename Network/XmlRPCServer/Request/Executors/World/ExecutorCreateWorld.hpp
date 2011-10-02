@@ -50,7 +50,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <name type=\"string\" value=\"#\" />
+ *         <world_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -166,7 +166,7 @@ class ExecutorCreateWorld
     /**
      * @brief The name of the world.
      */
-    std::string m_name;
+    std::string m_world_name;
 };
 
 } // namespace Executors

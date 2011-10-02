@@ -111,7 +111,7 @@ RequestShrPtr createRequestCreateUser(
 RequestShrPtr createRequestCreateWorld(
     string const & a_login,
     string const & a_password,
-    string const & a_name
+    string const & a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -124,17 +124,17 @@ RequestShrPtr createRequestCreateWorld(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("type")->setValue("string");
-    name->appendAttribute("value")->setValue(a_name.c_str());
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestCreateEpoch(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -147,17 +147,17 @@ RequestShrPtr createRequestCreateEpoch(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("idworld");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestDeleteEpoch(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -170,17 +170,17 @@ RequestShrPtr createRequestDeleteEpoch(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("idworld");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestGetEpoch(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -193,17 +193,17 @@ RequestShrPtr createRequestGetEpoch(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("idworld");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestActivateEpoch(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -216,17 +216,17 @@ RequestShrPtr createRequestActivateEpoch(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("idworld");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestDeactivateEpoch(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -239,17 +239,17 @@ RequestShrPtr createRequestDeactivateEpoch(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("idworld");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestFinishEpoch(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -262,17 +262,17 @@ RequestShrPtr createRequestFinishEpoch(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("idworld");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestTickEpoch(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -285,9 +285,9 @@ RequestShrPtr createRequestTickEpoch(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("idworld");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
@@ -295,7 +295,7 @@ RequestShrPtr createRequestTickEpoch(
 RequestShrPtr createRequestCreateLand(
     string       const & a_login,
     string       const & a_password,
-    unsigned int const   a_id_world,
+    string       const   a_world_name,
     unsigned int const   a_id_epoch,
     string       const & a_name
 )
@@ -310,9 +310,9 @@ RequestShrPtr createRequestCreateLand(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
-    idworld->appendAttribute("type")->setValue("unsigned integer");
-    idworld->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     IXmlNodeShrPtr idepoch = parameters->appendNode("idepoch");
     idepoch->appendAttribute("type")->setValue("unsigned integer");
@@ -387,22 +387,22 @@ RequestShrPtr createRequestGetLandByName(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr idland = parameters->appendNode("name");
-    idland->appendAttribute("type")->setValue("string");
-    idland->appendAttribute("value")->setValue(a_name.c_str());
+    IXmlNodeShrPtr name = parameters->appendNode("name");
+    name->appendAttribute("type")->setValue("string");
+    name->appendAttribute("value")->setValue(a_name.c_str());
 
     return request;
 }
 
-RequestShrPtr createRequestGetLandsByIDWorld(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_world
+RequestShrPtr createRequestGetLandsByWorldName(
+    string const & a_login,
+    string const & a_password,
+    string const   a_world_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
 
-    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LANDS_BY_ID_WORLD);
+    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LANDS_BY_WORLD_NAME);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
@@ -410,9 +410,9 @@ RequestShrPtr createRequestGetLandsByIDWorld(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
-    idworld->appendAttribute("type")->setValue("unsigned integer");
-    idworld->appendAttribute("value")->setValue(a_id_world);
+    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+    world_name->appendAttribute("type")->setValue("string");
+    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }

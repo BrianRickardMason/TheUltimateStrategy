@@ -29,10 +29,10 @@
 #define GAMESERVER_EPOCH_ICREATEEPOCHOPERATOR_HPP
 
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../World/IDWorld.hpp"
 #include "CreateEpochOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -55,13 +55,13 @@ public:
      * @brief Creates an epoch.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The exit code.
      */
     virtual CreateEpochOperatorExitCode createEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const = 0;
 };
 

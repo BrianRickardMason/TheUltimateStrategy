@@ -211,9 +211,9 @@ ReplyShrPtr ExecutorGetLandByIDLand::produceReply(
         node_login->appendAttribute("type")->setValue("string");
         node_login->appendAttribute("value")->setValue(a_exit_code.m_land->getLogin().c_str());
 
-        IXmlNodeShrPtr node_idworld = node_parameters->appendNode("idworld");
-        node_idworld->appendAttribute("type")->setValue("unsigned integer");
-        node_idworld->appendAttribute("value")->setValue(a_exit_code.m_land->getIDWorld().getValue());
+        IXmlNodeShrPtr node_world_name = node_parameters->appendNode("world_name");
+        node_world_name->appendAttribute("type")->setValue("string");
+        node_world_name->appendAttribute("value")->setValue(a_exit_code.m_land->getWorldName().c_str());
 
         IXmlNodeShrPtr node_idland = node_parameters->appendNode("idland");
         node_idland->appendAttribute("type")->setValue("unsigned integer");

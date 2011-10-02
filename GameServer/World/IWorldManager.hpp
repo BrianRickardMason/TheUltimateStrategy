@@ -54,26 +54,26 @@ public:
      * @brief Creates a world.
      *
      * @param a_transaction The transaction.
-     * @param a_name        The name of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool createWorld(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const = 0;
 
     /**
-     * @brief Gets a world by an identifier of the world.
+     * @brief Gets the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The world, null if not found.
      */
     virtual IWorldShrPtr getWorld(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDWorld                         const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const = 0;
 
     /**

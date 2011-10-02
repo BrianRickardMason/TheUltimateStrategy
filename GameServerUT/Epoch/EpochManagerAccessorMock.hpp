@@ -47,13 +47,13 @@ public:
      * @brief Inserts the record of the epoch.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     MOCK_CONST_METHOD2(
         insertRecord,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -61,13 +61,13 @@ public:
      * @brief Deletes the record of the epoch.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     MOCK_CONST_METHOD2(
         deleteRecord,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -75,15 +75,15 @@ public:
      * @brief Gets the record of the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The world record, null if not found.
      */
     MOCK_CONST_METHOD2(
         getRecord,
         EpochRecordShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -91,13 +91,13 @@ public:
      * @brief Sets the active state to true.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     MOCK_CONST_METHOD2(
         markActive,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -105,13 +105,13 @@ public:
      * @brief Sets the active state to false.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     MOCK_CONST_METHOD2(
         markUnactive,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -119,13 +119,13 @@ public:
      * @brief Marks the finished state to true.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     MOCK_CONST_METHOD2(
         markFinished,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -133,43 +133,43 @@ public:
      * @brief Increments the number of ticks.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      */
     MOCK_CONST_METHOD2(
         incrementTicks,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
     /**
-     * @brief Gets the identifier of the world of the land.
+     * @brief Gets the name of the world of the land.
      *
      * @param a_transaction The transaction.
      * @param a_id_land     The identifier of the land.
      *
-     * @return The identifier of the world, 0 if not found.
+     * @return The name of the world, an empty string if not found.
      */
     MOCK_CONST_METHOD2(
-        getIDWorldOfLand,
-        World::IDWorld(
+        getWorldNameOfLand,
+        std::string(
             Persistency::ITransactionShrPtr         a_transaction,
             Land::IDLand                    const & a_id_land
         )
     );
 
     /**
-     * @brief Gets the identifier of the world of the land.
+     * @brief Gets the name of the world of the land.
      *
      * @param a_transaction The transaction.
      * @param a_name        The name of the land.
      *
-     * @return The identifier of the world, 0 if not found.
+     * @return The name of the world, an empty string if not found.
      */
     MOCK_CONST_METHOD2(
-        getIDWorldOfLand,
-        World::IDWorld(
+        getWorldNameOfLand,
+        std::string(
             Persistency::ITransactionShrPtr         a_transaction,
             std::string                     const & a_name
         )
@@ -187,7 +187,7 @@ public:
         getIDLandOfSettlement,
         Land::IDLand(
             Persistency::ITransactionShrPtr         a_transaction,
-            Settlement::IDSettlement        const & a_id_world
+            Settlement::IDSettlement        const & a_id_settlement
         )
     );
 };

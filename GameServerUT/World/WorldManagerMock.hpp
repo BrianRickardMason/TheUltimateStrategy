@@ -47,31 +47,31 @@ public:
      * @brief Creates a world.
      *
      * @param a_transaction The transaction.
-     * @param a_name        The name of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD2(
         createWorld,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_name
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
     /**
-     * @brief Gets a world by an identifier of the world.
+     * @brief Gets a world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The world, null if not found.
      */
     MOCK_CONST_METHOD2(
         getWorld,
         IWorldShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            IDWorld                         const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 

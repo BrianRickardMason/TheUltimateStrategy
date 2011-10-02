@@ -59,13 +59,13 @@ public:
      * @brief Deactivates an epoch.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The exit code.
      */
     virtual DeactivateEpochOperatorExitCode deactivateEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
 private:

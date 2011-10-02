@@ -93,16 +93,16 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
-     * @param a_id_epoch The identifier of the epoch.
-     * @param a_name     The name of the land.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     * @param a_id_epoch   The identifier of the epoch.
+     * @param a_name       The name of the land.
      */
     ScenarioCreateLandActionSuccess(
         std::string  const & a_login,
         std::string  const & a_password,
-        unsigned int const   a_id_world,
+        std::string  const   a_world_name,
         unsigned int const   a_id_epoch,
         std::string  const   a_name
     );
@@ -130,9 +130,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 
     /**
      * @brief The identifier of the epoch.
@@ -155,16 +155,16 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
-     * @param a_id_epoch The identifier of the epoch.
-     * @param a_name     The name of the land.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     * @param a_id_epoch   The identifier of the epoch.
+     * @param a_name       The name of the land.
      */
     ScenarioCreateLandActionInvalidRequest(
         std::string  const & a_login,
         std::string  const & a_password,
-        unsigned int const   a_id_world,
+        std::string  const   a_world_name,
         unsigned int const   a_id_epoch,
         std::string  const   a_name
     );
@@ -192,9 +192,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 
     /**
      * @brief The identifier of the epoch.

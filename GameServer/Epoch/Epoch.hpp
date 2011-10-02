@@ -58,11 +58,11 @@ public:
     IDEpoch const & getIDEpoch() const;
 
     /**
-     * @brief Gets the identifier of the world.
+     * @brief Gets the name of the world.
      *
-     * @return The identifier of the world.
+     * @return The name of the world.
      */
-    World::IDWorld const & getIDWorld() const;
+    std::string getWorldName() const;
 
     /**
      * @brief Gets the "active" status of the epoch.
@@ -92,9 +92,9 @@ private:
     IDEpoch const m_id_epoch;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    World::IDWorld const m_id_world;
+    std::string const m_world_name;
 
     /**
      * @brief The "active" status of the epoch.

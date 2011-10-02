@@ -44,8 +44,8 @@
 #include "../Epoch/Operators/FinishEpoch/IFinishEpochOperator.hpp"
 #include "../Epoch/Operators/GetEpochByIDLand/IGetEpochByIDLandOperator.hpp"
 #include "../Epoch/Operators/GetEpochByIDSettlement/IGetEpochByIDSettlementOperator.hpp"
-#include "../Epoch/Operators/GetEpochByIDWorld/IGetEpochByIDWorldOperator.hpp"
 #include "../Epoch/Operators/GetEpochByLandName/IGetEpochByLandNameOperator.hpp"
+#include "../Epoch/Operators/GetEpochByWorldName/IGetEpochByWorldNameOperator.hpp"
 #include "../Epoch/Operators/TickEpoch/ITickEpochOperator.hpp"
 #include "../Human/Operators/DismissHuman/IDismissHumanOperator.hpp"
 #include "../Human/Operators/EngageHuman/IEngageHumanOperator.hpp"
@@ -55,7 +55,7 @@
 #include "../Land/Operators/DeleteLand/IDeleteLandOperator.hpp"
 #include "../Land/Operators/GetLandByIDLand/IGetLandByIDLandOperator.hpp"
 #include "../Land/Operators/GetLandByLoginAndName/IGetLandByLoginAndNameOperator.hpp"
-#include "../Land/Operators/GetLandsByLoginAndIDWorld/IGetLandsByLoginAndIDWorldOperator.hpp"
+#include "../Land/Operators/GetLandsByLoginAndWorldName/IGetLandsByLoginAndWorldNameOperator.hpp"
 #include "../Resource/Operators/GetResource/IGetResourceOperator.hpp"
 #include "../Resource/Operators/GetResources/IGetResourcesOperator.hpp"
 #include "../Settlement/Operators/CreateSettlement/ICreateSettlementOperator.hpp"
@@ -202,18 +202,18 @@ public:
     virtual Epoch::IGetEpochByIDSettlementOperatorShrPtr createGetEpochByIDSettlementOperator() const = 0;
 
     /**
-     * @brief Creates the get epoch by id world operator.
-     *
-     * @return The newly created get epoch by id worldoperator.
-     */
-    virtual Epoch::IGetEpochByIDWorldOperatorShrPtr createGetEpochByIDWorldOperator() const = 0;
-
-    /**
      * @brief Creates the get epoch by land name operator.
      *
      * @return The newly created get epoch by land name operator.
      */
     virtual Epoch::IGetEpochByLandNameOperatorShrPtr createGetEpochByLandNameOperator() const = 0;
+
+    /**
+     * @brief Creates the get epoch by world name operator.
+     *
+     * @return The newly created get epoch by world name operator.
+     */
+    virtual Epoch::IGetEpochByWorldNameOperatorShrPtr createGetEpochByWorldNameOperator() const = 0;
 
     /**
      * @brief Creates the tick epoch operator.
@@ -279,11 +279,11 @@ public:
     virtual Land::IGetLandByLoginAndNameOperatorShrPtr createGetLandByLoginAndNameOperator() const = 0;
 
     /**
-     * @brief Creates the get lands by login and id world operator.
+     * @brief Creates the get lands by login and world name operator.
      *
-     * @return The newly created get lands by login and id world operator.
+     * @return The newly created get lands by login and world name operator.
      */
-    virtual Land::IGetLandsByLoginAndIDWorldOperatorShrPtr createGetLandsByLoginAndIDWorldOperator() const = 0;
+    virtual Land::IGetLandsByLoginAndWorldNameOperatorShrPtr createGetLandsByLoginAndWorldNameOperator() const = 0;
 
     /**
      * @brief Creates the get resource operator.

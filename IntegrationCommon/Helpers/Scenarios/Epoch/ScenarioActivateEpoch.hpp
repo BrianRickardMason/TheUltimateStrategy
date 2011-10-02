@@ -93,14 +93,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
      */
     ScenarioActivateEpochActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_world
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_world_name
     );
 
     /**
@@ -128,7 +128,7 @@ private:
     /**
      * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 };
 
 /**
@@ -141,14 +141,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
      */
     ScenarioActivateEpochActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_world
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_world_name
     );
 
     /**
@@ -176,7 +176,7 @@ private:
     /**
      * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 };
 
 /**

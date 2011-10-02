@@ -46,13 +46,13 @@ WorldManager::WorldManager(
 }
 
 bool WorldManager::createWorld(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_name
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
     try
     {
-        m_accessor->insertRecord(a_transaction, a_name);
+        m_accessor->insertRecord(a_transaction, a_world_name);
 
         return true;
     }
@@ -63,11 +63,11 @@ bool WorldManager::createWorld(
 }
 
 IWorldShrPtr WorldManager::getWorld(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
-    IWorldRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_world);
+    IWorldRecordShrPtr record = m_accessor->getRecord(a_transaction, a_world_name);
 
     return record ? IWorldShrPtr(new World(record)) : IWorldShrPtr();
 }
@@ -77,9 +77,9 @@ IWorldShrPtr WorldManager::getWorldByIDLand(
     IDLand             const & a_id_land
 ) const
 {
-    IDWorld id_world = m_accessor->getIDWorldOfLand(a_transaction, a_id_land);
+    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_id_land);
 
-    return getWorld(a_transaction, id_world);
+    return getWorld(a_transaction, world_name);
 }
 
 IWorldMap WorldManager::getWorlds(
@@ -95,7 +95,7 @@ IWorldMap WorldManager::getWorlds(
         if (it->second)
         {
             IWorldShrPtr world = IWorldShrPtr(new World(it->second));
-            IWorldPair pair(it->second->getIDWorld(), world);
+            IWorldPair pair(it->second->getWorldName(), world);
             worlds.insert(pair);
         }
     }

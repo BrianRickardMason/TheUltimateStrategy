@@ -48,7 +48,7 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      * @param a_id_epoch    The identifier of the epoch.
      * @param a_name        The name of the land.
      */
@@ -57,7 +57,7 @@ public:
         void(
             Persistency::ITransactionShrPtr         a_transaction,
             std::string                     const   a_login,
-            World::IDWorld                  const & a_id_world,
+            std::string                     const   a_world_name,
             Epoch::IDEpoch                  const & a_id_epoch,
             std::string                     const & a_name
         )
@@ -103,7 +103,7 @@ public:
      * @return The record of the land, null if not found.
      */
     MOCK_CONST_METHOD3(
-        getRecord,
+        getRecordByLogin,
         LandRecordShrPtr(
             Persistency::ITransactionShrPtr         a_transaction,
             std::string                     const   a_login,
@@ -115,17 +115,17 @@ public:
      * @brief Gets a record of the land.
      *
      * @param a_transaction The transaction.
+     * @param a_world_name  The name of the world.
      * @param a_name        The name of the land.
-     * @param a_id_world    The identifier of the world.
      *
      * @return The record of the land, null if not found.
      */
     MOCK_CONST_METHOD3(
-        getRecord,
+        getRecordByWorldName,
         LandRecordShrPtr(
             Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_name,
-            World::IDWorld                  const & a_id_world
+            std::string                     const   a_world_name,
+            std::string                     const & a_name
         )
     );
 
@@ -152,7 +152,7 @@ public:
      * @return A map of records of the land, an empty map if not found.
      */
     MOCK_CONST_METHOD2(
-        getRecords,
+        getRecordsByLogin,
         LandRecordMap(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_login
@@ -163,15 +163,15 @@ public:
      * @brief Gets records of the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return A map of records of the land, an empty map if not found.
      */
     MOCK_CONST_METHOD2(
-        getRecords,
+        getRecordsByWorldName,
         LandRecordMap(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -180,16 +180,16 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return A map of records of the land, an empty map if not found.
      */
     MOCK_CONST_METHOD3(
         getRecords,
         LandRecordMap(
-            Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const   a_login,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_login,
+            std::string                     const a_world_name
         )
     );
 

@@ -29,6 +29,7 @@
 #include "WorldManagerAccessorPostgresql.hpp"
 #include "WorldRecord.hpp"
 
+using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -39,43 +40,38 @@ namespace World
 {
 
 void WorldManagerAccessorPostgresql::insertRecord(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_name
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "INSERT INTO worlds(name) VALUES("
-                   + backbone_transaction.quote(a_name) + ")";
+    string query = "INSERT INTO worlds(world_name) VALUES("
+                   + backbone_transaction.quote(a_world_name) + ")";
 
     pqxx::result result = backbone_transaction.exec(query);
 }
 
 IWorldRecordShrPtr WorldManagerAccessorPostgresql::getRecord(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM worlds WHERE id_world = " + backbone_transaction.quote(a_id_world.getValue());
+    string query = "SELECT * FROM worlds WHERE world_name = " + backbone_transaction.quote(a_world_name);
 
     pqxx::result result = backbone_transaction.exec(query);
 
-    // Fake types for libpqxx.
-    unsigned int unsigned_integer;
-
     if (result.size() > 0)
     {
-        IDWorld id_world;
-        string name;
+        string world_name;
 
-        id_world = result[0]["id_world"].as(unsigned_integer);
-        result[0]["name"].to(name);
+        result[0]["world_name"].to(world_name);
 
-        return IWorldRecordShrPtr(new WorldRecord(id_world, name));
+        return IWorldRecordShrPtr(new WorldRecord(world_name));
     }
     else
     {
@@ -96,46 +92,43 @@ IWorldRecordMap WorldManagerAccessorPostgresql::getRecords(
 
     IWorldRecordMap records;
 
-    // Fake types for libpqxx.
-    unsigned int unsigned_integer;
-
-    IDWorld id_world;
-    string name;
+    string world_name;
 
     for (pqxx::result::const_iterator it = result.begin(); it != result.end(); ++it)
     {
-        id_world = it["id_world"].as(unsigned_integer);
-        it["name"].to(name);
+        it["world_name"].to(world_name);
 
-        IWorldRecordShrPtr record = IWorldRecordShrPtr(new WorldRecord(id_world, name));
-        IWorldRecordPair pair(id_world, record);
+        IWorldRecordShrPtr record = IWorldRecordShrPtr(new WorldRecord(world_name));
+        IWorldRecordPair pair(world_name, record);
         records.insert(pair);
     }
 
     return records;
 }
 
-IDWorld WorldManagerAccessorPostgresql::getIDWorldOfLand(
-    Persistency::ITransactionShrPtr         a_transaction,
-    Land::IDLand                    const & a_id_land
+string WorldManagerAccessorPostgresql::getWorldNameOfLand(
+    ITransactionShrPtr         a_transaction,
+    IDLand             const & a_id_land
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT id_world FROM lands WHERE id_land = " + backbone_transaction.quote(a_id_land.getValue());
+    string query = "SELECT world_name FROM lands WHERE id_land = " + backbone_transaction.quote(a_id_land.getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
 
+    string world_name;
+
     if (result.size() > 0)
     {
-        unsigned int id_world;
-        result[0]["id_world"].to(id_world);
-        return IDWorld(id_world);
+        result[0]["world_name"].to(world_name);
+
+        return world_name;
     }
     else
     {
-        return IDWorld(0);
+        return "";
     }
 }
 

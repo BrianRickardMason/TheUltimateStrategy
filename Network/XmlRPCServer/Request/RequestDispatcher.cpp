@@ -46,7 +46,7 @@
 #include "Executors/Land/ExecutorDeleteLand.hpp"
 #include "Executors/Land/ExecutorGetLandByIDLand.hpp"
 #include "Executors/Land/ExecutorGetLandByName.hpp"
-#include "Executors/Land/ExecutorGetLandsByIDWorld.hpp"
+#include "Executors/Land/ExecutorGetLandsByWorldName.hpp"
 #include "Executors/Resource/ExecutorGetResource.hpp"
 #include "Executors/Resource/ExecutorGetResources.hpp"
 #include "Executors/Settlement/ExecutorCreateSettlement.hpp"
@@ -93,8 +93,8 @@ IExecutorShrPtr RequestDispatcher::dispatchRequest(
             return shared_ptr<IExecutor>(new ExecutorGetLandByIDLand);
         case REQUEST_ID_GET_LAND_BY_NAME:
             return shared_ptr<IExecutor>(new ExecutorGetLandByName);
-        case REQUEST_ID_GET_LANDS_BY_ID_WORLD:
-            return shared_ptr<IExecutor>(new ExecutorGetLandsByIDWorld);
+        case REQUEST_ID_GET_LANDS_BY_WORLD_NAME:
+            return shared_ptr<IExecutor>(new ExecutorGetLandsByWorldName);
         case REQUEST_ID_CREATE_SETTLEMENT:
             return shared_ptr<IExecutor>(new ExecutorCreateSettlement);
         case REQUEST_ID_DELETE_SETTLEMENT:

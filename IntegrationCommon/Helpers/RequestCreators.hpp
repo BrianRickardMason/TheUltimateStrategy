@@ -69,123 +69,123 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateWorld(
 /**
  * @brief Creates a request "create epoch".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateEpoch(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**
  * @brief Creates a request "delete epoch".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteEpoch(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**
  * @brief Creates a request "get epoch".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetEpoch(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**
  * @brief Creates a request "activate epoch".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestActivateEpoch(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**
  * @brief Creates a request "deactivate epoch".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeactivateEpoch(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**
  * @brief Creates a request "finish epoch".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestFinishEpoch(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**
  * @brief Creates a request "tick epoch".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTickEpoch(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**
  * @brief Creates a request "create land".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world An identifier of the world.
- * @param a_id_epoch The identifier of the epoch.
- * @param a_name     A name of the land.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
+ * @param a_id_epoch   The identifier of the epoch.
+ * @param a_name       A name of the land.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateLand(
     std::string  const & a_login,
     std::string  const & a_password,
-    unsigned int const   a_id_world,
+    std::string  const   a_world_name,
     unsigned int const   a_id_epoch,
     std::string  const & a_name
 );
@@ -238,16 +238,16 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandByName(
 /**
  * @brief Creates a request "get lands by id world".
  *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_id_world The identifier of the world.
+ * @param a_login      The login of the user.
+ * @param a_password   The password of the user.
+ * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
-Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandsByIDWorld(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_world
+Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandsByWorldName(
+    std::string const & a_login,
+    std::string const & a_password,
+    std::string const   a_world_name
 );
 
 /**

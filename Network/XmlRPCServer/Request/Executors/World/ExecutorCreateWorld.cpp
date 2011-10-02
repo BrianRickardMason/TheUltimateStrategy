@@ -58,9 +58,9 @@ bool ExecutorCreateWorld::getParameters(
 {
     try
     {
-        m_login    = a_request->getLoginValue();
-        m_password = a_request->getPasswordValue();
-        m_name     = a_request->getParameterValueString("name");
+        m_login      = a_request->getLoginValue();
+        m_password   = a_request->getPasswordValue();
+        m_world_name = a_request->getParameterValueString("world_name");
 
         return true;
     }
@@ -114,7 +114,7 @@ ReplyShrPtr ExecutorCreateWorld::perform(
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        CreateWorldOperatorExitCode const exit_code = world_operator->createWorld(transaction, m_name);
+        CreateWorldOperatorExitCode const exit_code = world_operator->createWorld(transaction, m_world_name);
 
         if (exit_code.ok())
         {

@@ -54,7 +54,7 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_id_world    An identifier of the world.
+     * @param a_world_name  The name of the world.
      * @param a_id_epoch    An identifier of the epoch.
      * @param a_name        A name of the land.
      *
@@ -63,7 +63,7 @@ public:
     virtual bool createLand(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
-        World::IDWorld                  const & a_id_world,
+        std::string                     const   a_world_name,
         Epoch::IDEpoch                  const & a_id_epoch,
         std::string                     const & a_name
     ) const = 0;
@@ -103,7 +103,7 @@ public:
      *
      * @return The land, null if not found.
      */
-    virtual LandShrPtr getLand(
+    virtual LandShrPtr getLandByLogin(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
         std::string                     const & a_name
@@ -114,14 +114,14 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_name        The name of the land.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The land, null if not found.
      */
-    virtual LandShrPtr getLand(
+    virtual LandShrPtr getLandByWorldName(
         Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_name,
-        World::IDWorld                  const & a_id_world
+        std::string                     const   a_world_name,
+        std::string                     const & a_name
     ) const = 0;
 
     /**
@@ -143,7 +143,7 @@ public:
      *
      * @return A map of lands, an empty map if not found.
      */
-    virtual LandMap getLands(
+    virtual LandMap getLandsByLogin(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const = 0;
@@ -152,13 +152,13 @@ public:
      * @brief Gets lands.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return A map of lands, an empty map if not found.
      */
-    virtual LandMap getLands(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+    virtual LandMap getLandsByWorldName(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const = 0;
 
     /**
@@ -166,14 +166,14 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return A map of lands, an empty map if not found.
      */
     virtual LandMap getLands(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_world_name
     ) const = 0;
 
     /**

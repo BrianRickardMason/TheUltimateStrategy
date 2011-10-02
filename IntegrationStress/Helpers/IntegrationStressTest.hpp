@@ -126,7 +126,6 @@ private:
             backbone_transaction.exec("DELETE FROM worlds");
 
             // Reset sequences.
-            backbone_transaction.exec("ALTER SEQUENCE worlds_id_world_seq MINVALUE 0 RESTART WITH 1");
             backbone_transaction.exec("ALTER SEQUENCE epochs_id_epoch_seq MINVALUE 0 RESTART WITH 1");
             backbone_transaction.exec("ALTER SEQUENCE lands_id_land_seq MINVALUE 0 RESTART WITH 1");
             backbone_transaction.exec("ALTER SEQUENCE settlements_id_settlement_seq MINVALUE 0 RESTART WITH 1");
@@ -137,19 +136,19 @@ private:
             backbone_transaction.exec("INSERT INTO users(login, password) VALUES('Login3', 'Password3')");
 
             // FIXME: Temporary workaround until ExecutorCreateWorld is available.
-            backbone_transaction.exec("INSERT INTO worlds(name) VALUES('World1')");
-            backbone_transaction.exec("INSERT INTO worlds(name) VALUES('World2')");
-            backbone_transaction.exec("INSERT INTO worlds(name) VALUES('World3')");
+            backbone_transaction.exec("INSERT INTO worlds(world_name) VALUES('World1')");
+            backbone_transaction.exec("INSERT INTO worlds(world_name) VALUES('World2')");
+            backbone_transaction.exec("INSERT INTO worlds(world_name) VALUES('World3')");
 
             // TODO: Improve it (call the ExecutoCreateEpoch instead).
-             backbone_transaction.exec("INSERT INTO epochs(id_world) VALUES('1')");
-             backbone_transaction.exec("INSERT INTO epochs(id_world) VALUES('2')");
-             backbone_transaction.exec("INSERT INTO epochs(id_world) VALUES('3')");
+            backbone_transaction.exec("INSERT INTO epochs(world_name) VALUES('World1')");
+            backbone_transaction.exec("INSERT INTO epochs(world_name) VALUES('World2')");
+            backbone_transaction.exec("INSERT INTO epochs(world_name) VALUES('World3')");
 
              // TODO: Improve it (call the ExecutoActivateEpoch instead).
-             backbone_transaction.exec("UPDATE epochs set active = true WHERE id_world = 1");
-             backbone_transaction.exec("UPDATE epochs set active = true WHERE id_world = 2");
-             backbone_transaction.exec("UPDATE epochs set active = true WHERE id_world = 3");
+            backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World1'");
+            backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World2'");
+            backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World3'");
 
             transaction->commit();
             return true;

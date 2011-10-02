@@ -63,7 +63,7 @@ protected:
           m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, 3),
           m_id_holder_4 (ID_HOLDER_CLASS_SETTLEMENT, 4),
           m_login("Login"),
-          m_id_world_1(1),
+          m_world_name("World"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -81,12 +81,12 @@ protected:
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
-            m_world_manager->createWorld(transaction, "World1");
+            m_world_manager->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_id_world_1);
+            m_epoch_manager->createEpoch(transaction, m_world_name);
 
-            m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land1");
-            m_land_manager->createLand(transaction, m_login, m_id_world_1, m_id_epoch_1, "Land2");
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land1");
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land2");
 
             m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement11");
             m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement12");
@@ -142,9 +142,9 @@ protected:
     string m_login;
 
     /**
-     * @brief Test constants: identifiers of the world.
+     * @brief Test constants: the name of the world.
      */
-    IDWorld m_id_world_1;
+    string m_world_name;
 
     /**
      * @brief The abstract factory of managers.

@@ -25,52 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_IGETEPOCHBYIDWORLDOPERATOR_HPP
-#define GAMESERVER_EPOCH_IGETEPOCHBYIDWORLDOPERATOR_HPP
+#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATORFACTORY_HPP
+#define GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATORFACTORY_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
-#include "../../../World/IDWorld.hpp"
-#include "GetEpochByIDWorldOperatorExitCode.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
+#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "GetLandsByLoginAndWorldNameOperator.hpp"
 
 namespace GameServer
 {
-namespace Epoch
+namespace Land
 {
 
 /**
- * @brief The interface of GetEpochByIDWorldOperator.
+ * @brief The factory of GetLandsByLoginAndWorldNameOperator.
  */
-class IGetEpochByIDWorldOperator
-    : boost::noncopyable
+class GetLandsByLoginAndWorldNameOperatorFactory
 {
 public:
     /**
-     * @brief Destructs GetEpochByIDWorldOperator.
-     */
-    virtual ~IGetEpochByIDWorldOperator(){};
-
-    /**
-     * @brief Gets an epoch.
+     * @brief The factory method.
      *
-     * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_manager_abstract_factory The abstract factory of managers.
      *
-     * @return The exit code.
+     * @return The newly created GetLandByNameOperator.
      */
-    virtual GetEpochByIDWorldOperatorExitCode getEpochByIDWorld(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
-    ) const = 0;
+    static GetLandsByLoginAndWorldNameOperatorAutPtr createGetLandsByLoginAndWorldNameOperator(
+        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    );
 };
 
-/**
- * @brief The shared pointer of the interface of GetEpochByIDWorldOperator.
- */
-typedef boost::shared_ptr<IGetEpochByIDWorldOperator> IGetEpochByIDWorldOperatorShrPtr;
-
-} // namespace Epoch
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_IGETEPOCHBYIDWORLDOPERATOR_HPP
+#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATORFACTORY_HPP

@@ -25,29 +25,67 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_WORLD_IDWORLD_HPP
-#define GAMESERVER_WORLD_IDWORLD_HPP
+#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOREXITCODE_HPP
+#define GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOREXITCODE_HPP
 
-#include "../Common/ConstrainedValue.hpp"
+#include "../../Land.hpp"
 
 namespace GameServer
 {
-namespace World
+namespace Land
 {
 
 /**
- * @brief The fake type class to declare IDWorld.
+ * @brief Available exit codes.
  */
-class TIDWorld
+unsigned short int const GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT     = 1;
+unsigned short int const GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT = 2;
+unsigned short int const GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR        = 3;
+unsigned short int const GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST    = 4;
+
+/**
+ * @brief The exit code of GetLandsByLoginAndWorldNameOperator.
+ */
+class GetLandsByLoginAndWorldNameOperatorExitCode
 {
+public:
+    /**
+     * @brief Constructs the exit code.
+     *
+     * @param a_exit_code The value of the exit code.
+     * @param a_lands     The lands.
+     */
+    GetLandsByLoginAndWorldNameOperatorExitCode(
+        unsigned short int const   a_exit_code,
+        LandMap            const & a_lands
+    )
+        : m_exit_code(a_exit_code),
+          m_lands(a_lands)
+    {
+    }
+
+    /**
+     * @brief The "ok" method.
+     *
+     * @return False (a read-only operator).
+     */
+    bool ok() const
+    {
+        return false;
+    }
+
+    /**
+     * @brief The exit code.
+     */
+    unsigned short int const m_exit_code;
+
+    /**
+     * @brief The lands.
+     */
+    LandMap const m_lands;
 };
 
-/**
- * @brief The identifier of a world.
- */
-typedef Common::ConstrainedValue<TIDWorld, Common::UnsignedIntPolicy> IDWorld;
-
-} // namespace World
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_WORLD_IDWORLD_HPP
+#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOREXITCODE_HPP

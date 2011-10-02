@@ -106,18 +106,18 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
      */
     ScenarioDeleteEpochActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_world
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_world_name
     )
         : m_login(a_login),
           m_password(a_password),
-          m_id_world(a_id_world)
+          m_world_name(a_world_name)
     {
     }
 
@@ -132,7 +132,7 @@ public:
         IClientShrPtr a_client
     )
     {
-        return Commands::Epoch::DeleteEpoch(a_client, m_login, m_password, m_id_world);
+        return Commands::Epoch::DeleteEpoch(a_client, m_login, m_password, m_world_name);
     }
 
 private:
@@ -149,7 +149,7 @@ private:
     /**
      * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 };
 
 /**
@@ -162,18 +162,18 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_world The identifier of the world.
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
      */
     ScenarioDeleteEpochActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_world
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_world_name
     )
         : m_login(a_login),
           m_password(a_password),
-          m_id_world(a_id_world)
+          m_world_name(a_world_name)
     {
     }
 
@@ -198,9 +198,9 @@ public:
         user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idworld = parameters->appendNode("idworld");
-        idworld->appendAttribute("type")->setValue("unsigned");
-        idworld->appendAttribute("value")->setValue(m_id_world);
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
+        world_name->appendAttribute("type")->setValue("unsigned");
+        world_name->appendAttribute("value")->setValue(m_world_name.c_str());
 
         return a_client->sendRequest(request);
     }
@@ -219,7 +219,7 @@ private:
     /**
      * @brief The name of the world.
      */
-    unsigned int const m_id_world;
+    std::string const m_world_name;
 };
 
 /**

@@ -59,9 +59,9 @@ bool ExecutorGetEpoch::getParameters(
 {
     try
     {
-        m_login          = a_request->getLoginValue();
-        m_password       = a_request->getPasswordValue();
-        m_value_id_world = a_request->getParameterValueUnsignedInteger("idworld");
+        m_login      = a_request->getLoginValue();
+        m_password   = a_request->getPasswordValue();
+        m_world_name = a_request->getParameterValueString("world_name");
 
         return true;
     }
@@ -73,16 +73,7 @@ bool ExecutorGetEpoch::getParameters(
 
 bool ExecutorGetEpoch::processParameters()
 {
-    try
-    {
-        m_id_world = m_value_id_world;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
 bool ExecutorGetEpoch::authenticate(
@@ -117,14 +108,15 @@ ReplyShrPtr ExecutorGetEpoch::perform(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDWorldOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByIDWorldOperator();
+    IGetEpochByWorldNameOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByWorldNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByIDWorldOperatorExitCode const exit_code = epoch_operator->getEpochByIDWorld(transaction, m_id_world);
+        GetEpochByWorldNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochByWorldName(transaction, m_world_name);
 
         if (exit_code.ok())
         {
@@ -148,7 +140,7 @@ ReplyShrPtr ExecutorGetEpoch::getBasicReply(
 }
 
 ReplyShrPtr ExecutorGetEpoch::produceReply(
-    GetEpochByIDWorldOperatorExitCode const & a_exit_code
+    GetEpochByWorldNameOperatorExitCode const & a_exit_code
 ) const
 {
     ReplyShrPtr reply = getBasicReply(REPLY_STATUS_OK);
@@ -162,19 +154,19 @@ ReplyShrPtr ExecutorGetEpoch::produceReply(
 
     switch (a_exit_code.m_exit_code)
     {
-        case GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT:
+        case GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT:
             node_message->appendAttribute("value")->setValue(GET_EPOCH_EPOCH_HAS_BEEN_GOT.c_str());
             break;
 
-        case GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT:
+        case GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT:
             node_message->appendAttribute("value")->setValue(GET_EPOCH_EPOCH_HAS_NOT_BEEN_GOT.c_str());
             break;
 
-        case GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
+        case GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
             node_message->appendAttribute("value")->setValue(GET_EPOCH_UNEXPECTED_ERROR.c_str());
             break;
 
-        case GET_EPOCH_BY_IDWORLD_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST:
+        case GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST:
             node_message->appendAttribute("value")->setValue(GET_EPOCH_WORLD_DOES_NOT_EXIST.c_str());
             break;
 
@@ -188,9 +180,9 @@ ReplyShrPtr ExecutorGetEpoch::produceReply(
         node_idepoch->appendAttribute("type")->setValue("unsigned integer");
         node_idepoch->appendAttribute("value")->setValue(a_exit_code.m_epoch->getIDEpoch().getValue());
 
-        IXmlNodeShrPtr node_idworld = node_parameters->appendNode("idworld");
-        node_idworld->appendAttribute("type")->setValue("unsigned integer");
-        node_idworld->appendAttribute("value")->setValue(a_exit_code.m_epoch->getIDWorld().getValue());
+        IXmlNodeShrPtr node_world_name = node_parameters->appendNode("world_name");
+        node_world_name->appendAttribute("type")->setValue("string");
+        node_world_name->appendAttribute("value")->setValue(a_exit_code.m_epoch->getWorldName().c_str());
 
         IXmlNodeShrPtr node_active = node_parameters->appendNode("active");
         node_active->appendAttribute("type")->setValue("boolean");

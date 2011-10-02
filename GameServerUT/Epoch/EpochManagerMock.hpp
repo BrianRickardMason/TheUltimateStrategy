@@ -49,15 +49,15 @@ public:
      * The epoch must not exist.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD2(
         createEpoch,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -68,15 +68,15 @@ public:
      * The epoch must be finished before it is deleted.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD2(
         deleteEpoch,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -84,15 +84,15 @@ public:
      * @brief Gets the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The epoch, null if not found.
      */
     MOCK_CONST_METHOD2(
         getEpoch,
         EpochShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -100,7 +100,7 @@ public:
      * @brief Gets the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_world_name  The name of the world.
      *
      * @return The epoch, null if not found.
      */
@@ -152,15 +152,15 @@ public:
      * The epoch must not be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD2(
         activateEpoch,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -172,15 +172,15 @@ public:
      * The epoch must be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD2(
         deactivateEpoch,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -192,15 +192,15 @@ public:
      * The epoch must not be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD2(
         finishEpoch,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 
@@ -212,15 +212,15 @@ public:
      * The epoch must not be active.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD2(
         tickEpoch,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
-            World::IDWorld                  const & a_id_world
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
         )
     );
 };

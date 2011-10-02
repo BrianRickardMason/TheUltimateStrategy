@@ -25,54 +25,64 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_GETEPOCHBYIDWORLDOPERATOR_HPP
-#define GAMESERVER_EPOCH_GETEPOCHBYIDWORLDOPERATOR_HPP
+#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
+#define GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
 
+#include "../../../User/IUserManager.hpp"
 #include "../../../World/IWorldManager.hpp"
-#include "../../IEpochManager.hpp"
-#include "IGetEpochByIDWorldOperator.hpp"
+#include "../../ILandManager.hpp"
+#include "IGetLandsByLoginAndWorldNameOperator.hpp"
 
 namespace GameServer
 {
-namespace Epoch
+namespace Land
 {
 
 /**
- * @brief GetEpochByIDWorldOperator.
+ * @brief GetLandsByLoginAndWorldNameOperator.
  */
-class GetEpochByIDWorldOperator
-    : public IGetEpochByIDWorldOperator
+class GetLandsByLoginAndWorldNameOperator
+    : public IGetLandsByLoginAndWorldNameOperator
 {
 public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_epoch_manager The manager of epochs.
+     * @param a_land_manager  The manager of lands.
+     * @param a_user_manager  The manager of users.
      * @param a_world_manager The manager of worlds.
      */
-    GetEpochByIDWorldOperator(
-        IEpochManagerShrPtr        a_epoch_manager,
+    GetLandsByLoginAndWorldNameOperator(
+        ILandManagerShrPtr         a_land_manager,
+        User::IUserManagerShrPtr   a_user_manager,
         World::IWorldManagerShrPtr a_world_manager
     );
 
     /**
-     * @brief Gets an epoch.
+     * @brief Gets lands.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_login       The login of the user.
+     * @param a_world_name  The name of the world.
      *
      * @return The exit code.
      */
-    virtual GetEpochByIDWorldOperatorExitCode getEpochByIDWorld(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+    virtual GetLandsByLoginAndWorldNameOperatorExitCode getLandByLoginAndWorldName(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_world_name
     ) const;
 
 private:
     /**
-     * @brief The manager of epochs.
+     * @brief The manager of lands.
      */
-    IEpochManagerShrPtr m_epoch_manager;
+    ILandManagerShrPtr m_land_manager;
+
+    /**
+     * @brief The manager of users.
+     */
+    User::IUserManagerShrPtr m_user_manager;
 
     /**
      * @brief The manager of worlds.
@@ -81,11 +91,11 @@ private:
 };
 
 /**
- * @brief The auto pointer of GetEpochByIDWorldOperator.
+ * @brief The auto pointer of GetLandsByLoginAndWorldNameOperator.
  */
-typedef std::auto_ptr<GetEpochByIDWorldOperator> GetEpochByIDWorldOperatorAutPtr;
+typedef std::auto_ptr<GetLandsByLoginAndWorldNameOperator> GetLandsByLoginAndWorldNameOperatorAutPtr;
 
-} // namespace Epoch
+} // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_GETEPOCHBYIDWORLDOPERATOR_HPP
+#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP

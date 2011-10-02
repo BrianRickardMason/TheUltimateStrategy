@@ -28,9 +28,9 @@
 #ifndef GAMESERVER_EPOCH_EPOCHRECORD_HPP
 #define GAMESERVER_EPOCH_EPOCHRECORD_HPP
 
-#include "../World/IDWorld.hpp"
 #include "IDEpoch.hpp"
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -46,15 +46,15 @@ public:
     /**
      * @brief Constructs the epoch record.
      *
-     * @param a_id_epoch The identifier of the epoch.
-     * @param a_id_world The identifier of the world.
-     * @param a_active   Indicates whether the epoch is active.
-     * @param a_finished Indicates whether the epoch has been finished.
-     * @param a_ticks    The number of ticks of the epoch.
+     * @param a_id_epoch   The identifier of the epoch.
+     * @param a_world_name The name of the world.
+     * @param a_active     Indicates whether the epoch is active.
+     * @param a_finished   Indicates whether the epoch has been finished.
+     * @param a_ticks      The number of ticks of the epoch.
      */
     EpochRecord(
         IDEpoch        const & a_id_epoch,
-        World::IDWorld const & a_id_world,
+        std::string    const   a_world_name,
         bool           const   a_active,
         bool           const   a_finished,
         unsigned int   const   a_ticks
@@ -68,11 +68,11 @@ public:
     IDEpoch const & getIDEpoch() const;
 
     /**
-     * @brief Gets the identifier of the world.
+     * @brief Gets the name of the world.
      *
-     * @return The identifier of the world.
+     * @return The name of the world.
      */
-    World::IDWorld const & getIDWorld() const;
+    std::string getWorldName() const;
 
     /**
      * @brief Gets the "active" status of the epoch.
@@ -102,9 +102,9 @@ private:
     IDEpoch const m_id_epoch;
 
     /**
-     * @brief The identifier of the world.
+     * @brief The name of the world.
      */
-    World::IDWorld const m_id_world;
+    std::string const m_world_name;
 
     /**
      * @brief The "active" status of the epoch.

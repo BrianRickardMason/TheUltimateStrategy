@@ -29,7 +29,6 @@
 #define GAMESERVER_EPOCH_IACTIVATEEPOCHOPERATOR_HPP
 
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../World/IDWorld.hpp"
 #include "ActivateEpochOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -55,13 +54,13 @@ public:
      * @brief Activates an epoch.
      *
      * @param a_transaction The transaction.
-     * @param a_id_world    The identifier of the world.
+     * @param a_world_name  The name of the world.
      *
      * @return The exit code.
      */
     virtual ActivateEpochOperatorExitCode activateEpoch(
-        Persistency::ITransactionShrPtr         a_transaction,
-        World::IDWorld                  const & a_id_world
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const = 0;
 };
 

@@ -50,7 +50,8 @@ protected:
      * @brief Constructs the test class.
      */
     WorldManagerTest()
-        : m_id_world_1(1),
+        : m_world_name_1("World2"),
+          m_world_name_2("World1"),
           m_id_land_1(1)
     {
     }
@@ -58,24 +59,22 @@ protected:
     /**
      * @brief Compares the world with expected values.
      *
-     * @param a_world    The world to be compared.
-     * @param a_id_world An expected identifier of the world.
-     * @param a_name     An expected name of the world.
+     * @param a_world      The world to be compared.
+     * @param a_world_name The expected name of the world.
      */
     void compareWorld(
-        IWorldShrPtr        a_world,
-        IDWorld     const & a_id_world,
-        std::string const & a_name
+        IWorldShrPtr      a_world,
+        std::string const a_world_name
     )
     {
-        ASSERT_TRUE(a_id_world == a_world->getIDWorld());
-        ASSERT_STREQ(a_name.c_str(), a_world->getName().c_str());
+        ASSERT_STREQ(a_world_name.c_str(), a_world->getWorldName().c_str());
     }
 
     /**
-     * @brief Test constants: identifiers of worlds.
+     * @brief Test constants: the names of the worlds.
      */
-    IDWorld m_id_world_1;
+    string m_world_name_1,
+           m_world_name_2;
 
     /**
      * @brief Test constants: identifiers of lands.
@@ -127,18 +126,16 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    IDWorld id_world(1);
-
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, id_world))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
     .WillOnce(Return(IWorldRecordShrPtr()));
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
     WorldManager manager(accessor);
 
-    IWorldShrPtr world = manager.getWorld(transaction, id_world);
+    IWorldShrPtr world = manager.getWorld(transaction, m_world_name_1);
 
     ASSERT_TRUE(world == NULL);
 }
@@ -147,22 +144,20 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    IDWorld id_world(1);
-
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, id_world))
-    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(id_world, "World1"))));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
+    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
     WorldManager manager(accessor);
 
-    IWorldShrPtr world = manager.getWorld(transaction, id_world);
+    IWorldShrPtr world = manager.getWorld(transaction, m_world_name_1);
 
     ASSERT_TRUE(world != NULL);
 
-    compareWorld(world, id_world, "World1");
+    compareWorld(world, m_world_name_1);
 }
 
 TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesNotExist)
@@ -171,10 +166,10 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesNotExist)
 
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_id_land_1))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    .WillOnce(Return(m_world_name_1));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
     .WillOnce(Return(IWorldRecordShrPtr()));
 
     IWorldManagerAccessorAutPtr accessor(mock);
@@ -192,11 +187,11 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesExist)
 
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getIDWorldOfLand(transaction, m_id_land_1))
-    .WillOnce(Return(m_id_world_1));
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    .WillOnce(Return(m_world_name_1));
 
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_world_1))
-    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_id_world_1, "World1"))));
+    EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
+    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
@@ -206,7 +201,7 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesExist)
 
     ASSERT_TRUE(world != NULL);
 
-    compareWorld(world, m_id_world_1, "World1");
+    compareWorld(world, m_world_name_1);
 }
 
 TEST_F(WorldManagerTest, getWorlds_WorldsDoNotExist)
@@ -233,12 +228,10 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_OneWorld)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    IDWorld id_world(1);
-
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
     IWorldRecordMap map;
-    map.insert(make_pair(id_world, IWorldRecordShrPtr(new WorldRecord(id_world, "World1"))));
+    map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
@@ -253,21 +246,18 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_OneWorld)
 
     ASSERT_EQ(1, worlds.size());
 
-    compareWorld(worlds[id_world], id_world, "World1");
+    compareWorld(worlds[m_world_name_1], m_world_name_1);
 }
 
 TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_ManyWorlds)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    IDWorld id_world_1(1);
-    IDWorld id_world_2(2);
-
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
     IWorldRecordMap map;
-    map.insert(make_pair(id_world_1, IWorldRecordShrPtr(new WorldRecord(id_world_1, "World1"))));
-    map.insert(make_pair(id_world_2, IWorldRecordShrPtr(new WorldRecord(id_world_2, "World2"))));
+    map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
+    map.insert(make_pair(m_world_name_2, IWorldRecordShrPtr(new WorldRecord(m_world_name_2))));
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
@@ -282,6 +272,6 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_ManyWorlds)
 
     ASSERT_EQ(2, worlds.size());
 
-    compareWorld(worlds[id_world_1], id_world_1, "World1");
-    compareWorld(worlds[id_world_2], id_world_2, "World2");
+    compareWorld(worlds[m_world_name_1], m_world_name_1);
+    compareWorld(worlds[m_world_name_2], m_world_name_2);
 }

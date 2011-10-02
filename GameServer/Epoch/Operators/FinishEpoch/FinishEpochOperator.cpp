@@ -29,6 +29,7 @@
 
 using namespace GameServer::Persistency;
 using namespace GameServer::World;
+using namespace std;
 
 namespace GameServer
 {
@@ -45,20 +46,20 @@ FinishEpochOperator::FinishEpochOperator(
 }
 
 FinishEpochOperatorExitCode FinishEpochOperator::finishEpoch(
-    ITransactionShrPtr         a_transaction,
-    IDWorld            const & a_id_world
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
 ) const
 {
     try
     {
         // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_id_world))
+        if (!m_world_manager->getWorld(a_transaction, a_world_name))
         {
             return FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
 
         // Verify if the epoch exists.
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_id_world);
+        EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
 
         if (!epoch)
         {
@@ -77,7 +78,7 @@ FinishEpochOperatorExitCode FinishEpochOperator::finishEpoch(
             return FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_IS_ACTIVE);
         }
 
-        bool const result = m_epoch_manager->finishEpoch(a_transaction, a_id_world);
+        bool const result = m_epoch_manager->finishEpoch(a_transaction, a_world_name);
 
         return (result) ? FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_FINISHED)
                         : FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_FINISHED);

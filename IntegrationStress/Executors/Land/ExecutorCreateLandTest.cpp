@@ -70,7 +70,7 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            1, 1, land_name)),
+                            "World1", 1, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -115,13 +115,13 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            1, 1, land_name1)),
+                            "World1", 1, land_name1)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            1, 1, land_name2)),
+                            "World1", 1, land_name2)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -164,7 +164,7 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionInvalidRequest(
                             "Login1", "Password1",
-                            1, 1, "Land")),
+                            "World1", 1, "Land")),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationInvalidRequest))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
