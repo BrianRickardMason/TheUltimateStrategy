@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGER_HPP
 #define GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGER_HPP
 
-#include "../Land/IDLand.hpp"
 #include "../Persistency/ITransaction.hpp"
 #include "Settlement.hpp"
 #include <boost/noncopyable.hpp>
@@ -54,15 +53,15 @@ public:
      * @brief Creates a settlement.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of a land.
+     * @param a_land_name   The name of a land.
      * @param a_name        The name of the settlement.
      *
      * @return True on success, false otherwise.
      */
     virtual bool createSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name,
+        std::string                     const a_name
     ) const = 0;
 
     /**
@@ -95,15 +94,15 @@ public:
      * @brief Gets a settlement.
      *
      * @param a_transaction The transaction.
+     * @param a_land_name   The name of the land.
      * @param a_name        The name of the settlement.
-     * @param a_id_land     The identifier of the land.
      *
      * @return The settlement, null if not found.
      */
     virtual SettlementShrPtr getSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_name,
-        Land::IDLand                    const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name,
+        std::string                     const a_name
     ) const = 0;
 
     /**
@@ -121,13 +120,13 @@ public:
      * @brief Gets settlements.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return A map of settlements, an empty map if not found.
      */
     virtual SettlementMap getSettlements(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const = 0;
 };
 

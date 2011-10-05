@@ -30,8 +30,7 @@
 
 #include "../Authentication/Operators/Authenticate/IAuthenticateOperator.hpp"
 #include "../Authorization/Operators/AuthorizeUserToHolder/IAuthorizeUserToHolderOperator.hpp"
-#include "../Authorization/Operators/AuthorizeUserToLandByIDLand/IAuthorizeUserToLandByIDLandOperator.hpp"
-#include "../Authorization/Operators/AuthorizeUserToLandByName/IAuthorizeUserToLandByNameOperator.hpp"
+#include "../Authorization/Operators/AuthorizeUserToLand/IAuthorizeUserToLandOperator.hpp"
 #include "../Authorization/Operators/AuthorizeUserToSettlement/IAuthorizeUserToSettlementOperator.hpp"
 #include "../Building/Operators/BuildBuilding/IBuildBuildingOperator.hpp"
 #include "../Building/Operators/DestroyBuilding/IDestroyBuildingOperator.hpp"
@@ -42,7 +41,6 @@
 #include "../Epoch/Operators/DeactivateEpoch/IDeactivateEpochOperator.hpp"
 #include "../Epoch/Operators/DeleteEpoch/IDeleteEpochOperator.hpp"
 #include "../Epoch/Operators/FinishEpoch/IFinishEpochOperator.hpp"
-#include "../Epoch/Operators/GetEpochByIDLand/IGetEpochByIDLandOperator.hpp"
 #include "../Epoch/Operators/GetEpochByIDSettlement/IGetEpochByIDSettlementOperator.hpp"
 #include "../Epoch/Operators/GetEpochByLandName/IGetEpochByLandNameOperator.hpp"
 #include "../Epoch/Operators/GetEpochByWorldName/IGetEpochByWorldNameOperator.hpp"
@@ -53,23 +51,22 @@
 #include "../Human/Operators/GetHumans/IGetHumansOperator.hpp"
 #include "../Land/Operators/CreateLand/ICreateLandOperator.hpp"
 #include "../Land/Operators/DeleteLand/IDeleteLandOperator.hpp"
-#include "../Land/Operators/GetLandByIDLand/IGetLandByIDLandOperator.hpp"
-#include "../Land/Operators/GetLandByLoginAndName/IGetLandByLoginAndNameOperator.hpp"
+#include "../Land/Operators/GetLand/IGetLandOperator.hpp"
 #include "../Land/Operators/GetLandsByLoginAndWorldName/IGetLandsByLoginAndWorldNameOperator.hpp"
 #include "../Resource/Operators/GetResource/IGetResourceOperator.hpp"
 #include "../Resource/Operators/GetResources/IGetResourcesOperator.hpp"
 #include "../Settlement/Operators/CreateSettlement/ICreateSettlementOperator.hpp"
 #include "../Settlement/Operators/DeleteSettlement/IDeleteSettlementOperator.hpp"
-#include "../Settlement/Operators/GetSettlementByIDLandAndName/IGetSettlementByIDLandAndNameOperator.hpp"
+#include "../Settlement/Operators/GetSettlementByLandNameAndName/IGetSettlementByLandNameAndNameOperator.hpp"
 #include "../Settlement/Operators/GetSettlementByIDSettlement/IGetSettlementByIDSettlementOperator.hpp"
-#include "../Settlement/Operators/GetSettlementsByIDLand/IGetSettlementsByIDLandOperator.hpp"
+#include "../Settlement/Operators/GetSettlements/IGetSettlementsOperator.hpp"
 #include "../Transport/Operators/TransportHuman/ITransportHumanOperator.hpp"
 #include "../Transport/Operators/TransportResource/ITransportResourceOperator.hpp"
 #include "../Turn/Operators/Turn/ITurnOperator.hpp"
 #include "../User/Operators/CreateUser/ICreateUserOperator.hpp"
 #include "../User/Operators/GetUser/IGetUserOperator.hpp"
 #include "../World/Operators/CreateWorld/ICreateWorldOperator.hpp"
-#include "../World/Operators/GetWorldByIDLand/IGetWorldByIDLandOperator.hpp"
+#include "../World/Operators/GetWorldByLandName/IGetWorldByLandNameOperator.hpp"
 #include "../WorldConfiguration/Operators/VerifyTurn/IVerifyTurnOperator.hpp"
 #include <boost/shared_ptr.hpp>
 
@@ -108,14 +105,7 @@ public:
      *
      * @return The newly created authorization operator.
      */
-    virtual Authorization::IAuthorizeUserToLandByIDLandOperatorShrPtr createAuthorizeUserToLandByIDLandOperator() const = 0;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
-    virtual Authorization::IAuthorizeUserToLandByNameOperatorShrPtr createAuthorizeUserToLandByNameOperator() const = 0;
+    virtual Authorization::IAuthorizeUserToLandOperatorShrPtr createAuthorizeUserToLandOperator() const = 0;
 
     /**
      * @brief Creates the authorization operator.
@@ -188,13 +178,6 @@ public:
     virtual Epoch::IFinishEpochOperatorShrPtr createFinishEpochOperator() const = 0;
 
     /**
-     * @brief Creates the get epoch by id land operator.
-     *
-     * @return The newly created get epoch by id land operator.
-     */
-    virtual Epoch::IGetEpochByIDLandOperatorShrPtr createGetEpochByIDLandOperator() const = 0;
-
-    /**
      * @brief Creates the get epoch by id settlement operator.
      *
      * @return The newly created get epoch by id settlement operator.
@@ -265,18 +248,11 @@ public:
     virtual Land::IDeleteLandOperatorShrPtr createDeleteLandOperator() const = 0;
 
     /**
-     * @brief Creates the get land by id land operator.
+     * @brief Creates the get land operator.
      *
-     * @return The newly created get land by id land operator.
+     * @return The newly created get land operator.
      */
-    virtual Land::IGetLandByIDLandOperatorShrPtr createGetLandByIDLandOperator() const = 0;
-
-    /**
-     * @brief Creates the get land by login and name operator.
-     *
-     * @return The newly created get land by login and name operator.
-     */
-    virtual Land::IGetLandByLoginAndNameOperatorShrPtr createGetLandByLoginAndNameOperator() const = 0;
+    virtual Land::IGetLandOperatorShrPtr createGetLandOperator() const = 0;
 
     /**
      * @brief Creates the get lands by login and world name operator.
@@ -314,11 +290,11 @@ public:
     virtual Settlement::IDeleteSettlementOperatorShrPtr createDeleteSettlementOperator() const = 0;
 
     /**
-     * @brief Creates the get settlement by id land and name operator.
+     * @brief Creates the get settlement by land name and name operator.
      *
-     * @return The newly created get settlement by id land and name operator.
+     * @return The newly created get settlement by land name and name operator.
      */
-    virtual Settlement::IGetSettlementByIDLandAndNameOperatorShrPtr createGetSettlementByIDLandAndNameOperator() const = 0;
+    virtual Settlement::IGetSettlementByLandNameAndNameOperatorShrPtr createGetSettlementByLandNameAndNameOperator() const = 0;
 
     /**
      * @brief Creates the get settlement by id settlement operator.
@@ -328,11 +304,11 @@ public:
     virtual Settlement::IGetSettlementByIDSettlementOperatorShrPtr createGetSettlementByIDSettlementOperator() const = 0;
 
     /**
-     * @brief Creates the get settlements by id land operator.
+     * @brief Creates the get settlements operator.
      *
-     * @return The newly created get settlements by id land operator.
+     * @return The newly created get settlements operator.
      */
-    virtual Settlement::IGetSettlementsByIDLandOperatorShrPtr createGetSettlementsByIDLandOperator() const = 0;
+    virtual Settlement::IGetSettlementsOperatorShrPtr createGetSettlementsOperator() const = 0;
 
     /**
      * @brief Creates the transport human operator.
@@ -377,11 +353,11 @@ public:
     virtual World::ICreateWorldOperatorShrPtr createCreateWorldOperator() const = 0;
 
     /**
-     * @brief Creates the get world by id land operator.
+     * @brief Creates the get world by land name operator.
      *
-     * @return The newly created get world by id land operator.
+     * @return The newly created get world by land name operator.
      */
-    virtual World::IGetWorldByIDLandOperatorShrPtr createGetWorldByIDLandOperator() const = 0;
+    virtual World::IGetWorldByLandNameOperatorShrPtr createGetWorldByLandNameOperator() const = 0;
 
     /**
      * @brief Creates the verify turn operator.

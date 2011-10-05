@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_WORLD_IWORLDMANAGER_HPP
 #define GAMESERVER_WORLD_IWORLDMANAGER_HPP
 
-#include "../Land/IDLand.hpp"
 #include "../Persistency/ITransaction.hpp"
 #include "IWorld.hpp"
 #include <boost/noncopyable.hpp>
@@ -80,13 +79,13 @@ public:
      * @brief Gets the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The world, null if not found.
      */
-    virtual IWorldShrPtr getWorldByIDLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land
+    virtual IWorldShrPtr getWorldByLandName(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const = 0;
 
     /**

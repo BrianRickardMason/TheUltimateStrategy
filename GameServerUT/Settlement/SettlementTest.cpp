@@ -28,8 +28,8 @@
 #include "../../GameServer/Settlement/Settlement.hpp"
 #include <gmock/gmock.h>
 
-using namespace GameServer::Land;
 using namespace GameServer::Settlement;
+using namespace std;
 
 /**
  * @brief A test class.
@@ -42,37 +42,43 @@ protected:
      * @brief Constructs a test class.
      */
     SettlementTest()
-        : m_settlement(SettlementRecord(IDLand(1), IDSettlement(11), "Settlement1"))
+        : m_land_name("Land"),
+          m_settlement(SettlementRecord(m_land_name, IDSettlement(11), "Settlement1"))
     {
     }
 
     /**
-     * @brief A settlement to be tested.
+     * @brief Test constants: the name of the land.
+     */
+    string m_land_name;
+
+    /**
+     * @brief Test constants: the settlement.
      */
     Settlement m_settlement;
 };
 
 TEST_F(SettlementTest, Settlement)
 {
-    SettlementRecord record(IDLand(1), IDSettlement(11), "Settlement1");
+    SettlementRecord record(m_land_name, IDSettlement(11), "Settlement1");
     Settlement settlement(record);
 
-    ASSERT_EQ(1, settlement.getIDLand().getValue());
+    ASSERT_STREQ(m_land_name.c_str(), record.getLandName().c_str());
     ASSERT_EQ(11, settlement.getIDSettlement().getValue());
     ASSERT_STREQ("Settlement1", settlement.getName().c_str());
 }
 
-TEST_F(SettlementTest, getIDLand)
+TEST_F(SettlementTest, GetLandNameReturnsProperValue)
 {
-    ASSERT_EQ(1, m_settlement.getIDLand().getValue());
+    ASSERT_STREQ(m_land_name.c_str(), m_settlement.getLandName().c_str());
 }
 
-TEST_F(SettlementTest, getIDSettlement)
+TEST_F(SettlementTest, GetIDSettlementReturnsProperValue)
 {
     ASSERT_EQ(11, m_settlement.getIDSettlement().getValue());
 }
 
-TEST_F(SettlementTest, getName)
+TEST_F(SettlementTest, GetNameReturnsProperValue)
 {
     ASSERT_STREQ("Settlement1", m_settlement.getName().c_str());
 }

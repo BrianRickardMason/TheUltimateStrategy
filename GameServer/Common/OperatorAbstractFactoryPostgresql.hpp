@@ -67,14 +67,7 @@ public:
      *
      * @return The newly created authorization operator.
      */
-    virtual Authorization::IAuthorizeUserToLandByIDLandOperatorShrPtr createAuthorizeUserToLandByIDLandOperator() const;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
-    virtual Authorization::IAuthorizeUserToLandByNameOperatorShrPtr createAuthorizeUserToLandByNameOperator() const;
+    virtual Authorization::IAuthorizeUserToLandOperatorShrPtr createAuthorizeUserToLandOperator() const;
 
     /**
      * @brief Creates the authorization operator.
@@ -147,13 +140,6 @@ public:
     virtual Epoch::IFinishEpochOperatorShrPtr createFinishEpochOperator() const;
 
     /**
-     * @brief Creates the get epoch by id land operator.
-     *
-     * @return The newly created get epoch by id land operator.
-     */
-    virtual Epoch::IGetEpochByIDLandOperatorShrPtr createGetEpochByIDLandOperator() const;
-
-    /**
      * @brief Creates the get epoch by id settlement operator.
      *
      * @return The newly created get epoch by id settlement operator.
@@ -224,18 +210,11 @@ public:
     virtual Land::IDeleteLandOperatorShrPtr createDeleteLandOperator() const;
 
     /**
-     * @brief Creates the get land by id land operator.
+     * @brief Creates the get land operator.
      *
-     * @return The newly created get land by id land operator.
+     * @return The newly created get land operator.
      */
-    virtual Land::IGetLandByIDLandOperatorShrPtr createGetLandByIDLandOperator() const;
-
-    /**
-     * @brief Creates the get land by login and name operator.
-     *
-     * @return The newly created get land by login and name operator.
-     */
-    virtual Land::IGetLandByLoginAndNameOperatorShrPtr createGetLandByLoginAndNameOperator() const;
+    virtual Land::IGetLandOperatorShrPtr createGetLandOperator() const;
 
     /**
      * @brief Creates the get lands by login and world name operator.
@@ -273,11 +252,11 @@ public:
     virtual Settlement::IDeleteSettlementOperatorShrPtr createDeleteSettlementOperator() const;
 
     /**
-     * @brief Creates the get settlement by id land and name operator.
+     * @brief Creates the get settlement by land name and name operator.
      *
-     * @return The newly created get settlement by id land and name operator.
+     * @return The newly created get settlement by land name and name operator.
      */
-    virtual Settlement::IGetSettlementByIDLandAndNameOperatorShrPtr createGetSettlementByIDLandAndNameOperator() const;
+    virtual Settlement::IGetSettlementByLandNameAndNameOperatorShrPtr createGetSettlementByLandNameAndNameOperator() const;
 
     /**
      * @brief Creates the get settlement by id settlement operator.
@@ -287,11 +266,11 @@ public:
     virtual Settlement::IGetSettlementByIDSettlementOperatorShrPtr createGetSettlementByIDSettlementOperator() const;
 
     /**
-     * @brief Creates the get settlements by id land operator.
+     * @brief Creates the get settlements operator.
      *
-     * @return The newly created get settlements by id land operator.
+     * @return The newly created get settlements operator.
      */
-    virtual Settlement::IGetSettlementsByIDLandOperatorShrPtr createGetSettlementsByIDLandOperator() const;
+    virtual Settlement::IGetSettlementsOperatorShrPtr createGetSettlementsOperator() const;
 
     /**
      * @brief Creates the transport human operator.
@@ -336,11 +315,11 @@ public:
     virtual World::ICreateWorldOperatorShrPtr createCreateWorldOperator() const;
 
     /**
-     * @brief Creates the get world by id land operator.
+     * @brief Creates the get world by land name operator.
      *
-     * @return The newly created get world by id land operator.
+     * @return The newly created get world by land name operator.
      */
-    virtual World::IGetWorldByIDLandOperatorShrPtr createGetWorldByIDLandOperator() const;
+    virtual World::IGetWorldByLandNameOperatorShrPtr createGetWorldByLandNameOperator() const;
 
     /**
      * @brief Creates the verify turn operator.

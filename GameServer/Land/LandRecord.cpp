@@ -39,15 +39,13 @@ LandRecord::LandRecord(
     string  const   a_login,
     string  const   a_world_name,
     IDEpoch const & a_id_epoch,
-    IDLand  const & a_id_land,
-    string  const & a_name,
+    string  const   a_land_name,
     bool            a_granted
 )
     : m_login(a_login),
       m_world_name(a_world_name),
       m_id_epoch(a_id_epoch),
-      m_id_land(a_id_land),
-      m_name(a_name),
+      m_land_name(a_land_name),
       m_granted(a_granted)
 {
 }
@@ -67,14 +65,9 @@ IDEpoch const & LandRecord::getIDEpoch() const
     return m_id_epoch;
 }
 
-IDLand const & LandRecord::getIDLand() const
+string LandRecord::getLandName() const
 {
-    return m_id_land;
-}
-
-string const & LandRecord::getName() const
-{
-    return m_name;
+    return m_land_name;
 }
 
 bool LandRecord::getGranted() const

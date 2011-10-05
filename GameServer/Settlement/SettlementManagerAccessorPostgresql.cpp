@@ -28,7 +28,6 @@
 #include "../Persistency/TransactionPostgresql.hpp"
 #include "SettlementManagerAccessorPostgresql.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -39,16 +38,16 @@ namespace Settlement
 {
 
 IDSettlement SettlementManagerAccessorPostgresql::insertRecord(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land,
-    string             const & a_name
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name,
+    string             const a_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "INSERT INTO settlements(id_land, name) VALUES("
-                   + backbone_transaction.quote(a_id_land.getValue()) + ", "
+    string query = "INSERT INTO settlements(land_name, name) VALUES("
+                   + backbone_transaction.quote(a_land_name) + ", "
                    + backbone_transaction.quote(a_name) + ")"
                    + "RETURNING id_settlement";
 
@@ -91,9 +90,9 @@ SettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
 }
 
 SettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_name,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name,
+    string             const a_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -101,7 +100,7 @@ SettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
 
     string query = "SELECT * FROM settlements WHERE name = "
                    + backbone_transaction.quote(a_name)
-                   + " AND id_land = " + backbone_transaction.quote(a_id_land.getValue());
+                   + " AND land_name = " + backbone_transaction.quote(a_land_name);
 
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
@@ -119,15 +118,14 @@ SettlementRecordMap SettlementManagerAccessorPostgresql::getRecords(
 }
 
 SettlementRecordMap SettlementManagerAccessorPostgresql::getRecords(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM settlements WHERE id_land = "
-                   + backbone_transaction.quote(a_id_land.getValue());
+    string query = "SELECT * FROM settlements WHERE land_name = " + backbone_transaction.quote(a_land_name);
 
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }
@@ -141,15 +139,15 @@ SettlementRecordShrPtr SettlementManagerAccessorPostgresql::prepareResultGetReco
 
     if (a_result.size() > 0)
     {
-        IDLand id_land;
+        string land_name;
         IDSettlement id_settlement;
         string name;
 
-        id_land       = a_result[0]["id_land"].as(unsigned_integer);
+        a_result[0]["land_name"].to(land_name);
         id_settlement = a_result[0]["id_settlement"].as(unsigned_integer);
         a_result[0]["name"].to(name);
 
-        return make_shared<SettlementRecord>(id_land, id_settlement, name);
+        return make_shared<SettlementRecord>(land_name, id_settlement, name);
     }
     else
     {
@@ -164,7 +162,7 @@ SettlementRecordMap SettlementManagerAccessorPostgresql::prepareResultGetRecords
     // Fake types for libpqxx.
     unsigned int unsigned_integer;
 
-    IDLand id_land;
+    string land_name;
     IDSettlement id_settlement;
     string name;
 
@@ -172,11 +170,11 @@ SettlementRecordMap SettlementManagerAccessorPostgresql::prepareResultGetRecords
 
     for (pqxx::result::const_iterator it = a_result.begin(); it != a_result.end(); ++it)
     {
-        id_land       = it["id_land"].as(unsigned_integer);
+        it["land_name"].to(land_name);
         id_settlement = it["id_settlement"].as(unsigned_integer);
         it["name"].to(name);
 
-        SettlementRecordShrPtr record = make_shared<SettlementRecord>(id_land, id_settlement, name);
+        SettlementRecordShrPtr record = make_shared<SettlementRecord>(land_name, id_settlement, name);
         SettlementRecordPair pair(id_settlement, record);
         records.insert(pair);
     }

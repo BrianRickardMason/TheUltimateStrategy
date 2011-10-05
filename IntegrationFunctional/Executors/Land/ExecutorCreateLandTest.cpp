@@ -277,10 +277,11 @@ TEST_F(IntegrationFunctionalTest, CreateLand_TwoLandsOfTheSameNameDifferentUsers
             client,
             IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login1", "Password1", "World1", 1, "Land")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
+        // TODO: Change the exit code since there is no possibility to have two land of the same names.
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
             IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login2", "Password2", "World2", 2, "Land")),
-            IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))));
+            IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasNotBeenCreated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {

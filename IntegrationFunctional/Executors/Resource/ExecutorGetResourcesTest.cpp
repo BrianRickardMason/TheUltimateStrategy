@@ -110,7 +110,7 @@ TEST_F(IntegrationFunctionalTest, GetResources_MaxResources)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", 1, "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetResources(
             client,
@@ -160,11 +160,11 @@ TEST_F(IntegrationFunctionalTest, GetResources_ZeroResources)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", 1, "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", 1, "Settlement2")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement2")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetResources(
             client,
@@ -224,7 +224,7 @@ TEST_F(IntegrationFunctionalTest, GetResources_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", 1, "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetResources(
             client,
@@ -274,7 +274,7 @@ TEST_F(IntegrationFunctionalTest, GetResources_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login1", "Password1", 1, "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login1", "Password1", "Land1", "Settlement1")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetResources(
             client,
@@ -316,7 +316,7 @@ TEST_F(IntegrationFunctionalTest, GetResources_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", 1, "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,

@@ -34,7 +34,6 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
 using namespace boost;
@@ -56,8 +55,8 @@ protected:
      */
     SettlementManagerTest()
         : m_id_epoch_1(1),
-          m_id_land_1(1),
-          m_id_land_2(2),
+          m_land_name_1("Land1"),
+          m_land_name_2("Land2"),
           m_id_settlement_1(1),
           m_id_settlement_2(2)
     {
@@ -67,18 +66,18 @@ protected:
      * @brief Compares the settlement with expected values.
      *
      * @param a_settlement    The settlement to be compared.
-     * @param a_id_land       An expected identifier of the land.
+     * @param a_land_name     The expected name of the land.
      * @param a_id_settlement An expected identifier of the settlement.
      * @param a_name          An expected name of the settlement.
      */
     void compareSettlement(
         SettlementShrPtr         a_settlement,
-        IDLand           const & a_id_land,
+        string           const   a_land_name,
         IDSettlement     const & a_id_settlement,
-        std::string      const & a_name
+        string           const & a_name
     )
     {
-        ASSERT_TRUE(a_id_land == a_settlement->getIDLand());
+        ASSERT_STREQ(a_land_name.c_str(), a_settlement->getLandName().c_str());
         ASSERT_TRUE(a_id_settlement == a_settlement->getIDSettlement());
         ASSERT_STREQ(a_name.c_str(), a_settlement->getName().c_str());
     }
@@ -89,10 +88,10 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants identifiers of the land.
+     * @brief Test constants: the names of the lands.
      */
-    IDLand m_id_land_1,
-           m_id_land_2;
+    string m_land_name_1,
+           m_land_name_2;
 
     /**
      * @brief Test constants identifiers of the settlement.
@@ -114,14 +113,14 @@ TEST_F(SettlementManagerTest, createSettlement_Success)
 
     SettlementManagerAccessorMock * settlement_manager_accessor_mock = new SettlementManagerAccessorMock;
 
-    EXPECT_CALL(*settlement_manager_accessor_mock, insertRecord(transaction, m_id_land_1, "Settlement1"))
+    EXPECT_CALL(*settlement_manager_accessor_mock, insertRecord(transaction, m_land_name_1, "Settlement1"))
     .WillOnce(Return(m_id_settlement_1));
 
     ISettlementManagerAccessorAutPtr accessor(settlement_manager_accessor_mock);
 
     SettlementManager manager(accessor);
 
-    ASSERT_TRUE(manager.createSettlement(transaction, m_id_land_1, "Settlement1"));
+    ASSERT_TRUE(manager.createSettlement(transaction, m_land_name_1, "Settlement1"));
 }
 
 TEST_F(SettlementManagerTest, createSettlement_Failure)
@@ -132,14 +131,14 @@ TEST_F(SettlementManagerTest, createSettlement_Failure)
 
     std::exception e;
 
-    EXPECT_CALL(*settlement_manager_accessor_mock, insertRecord(transaction, m_id_land_1, "Settlement1"))
+    EXPECT_CALL(*settlement_manager_accessor_mock, insertRecord(transaction, m_land_name_1, "Settlement1"))
     .WillOnce(Throw(e));
 
     ISettlementManagerAccessorAutPtr accessor(settlement_manager_accessor_mock);
 
     SettlementManager manager(accessor);
 
-    ASSERT_FALSE(manager.createSettlement(transaction, m_id_land_1, "Settlement1"));
+    ASSERT_FALSE(manager.createSettlement(transaction, m_land_name_1, "Settlement1"));
 }
 
 TEST_F(SettlementManagerTest, deleteSettlement_Success)
@@ -200,7 +199,7 @@ TEST_F(SettlementManagerTest, getSettlement_ByIDSettlement_SettlementDoesExist)
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_settlement_1))
-    .WillOnce(Return(make_shared<SettlementRecord>(m_id_land_1, m_id_settlement_1, "Settlement1")));
+    .WillOnce(Return(make_shared<SettlementRecord>(m_land_name_1, m_id_settlement_1, "Settlement1")));
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
@@ -211,38 +210,38 @@ TEST_F(SettlementManagerTest, getSettlement_ByIDSettlement_SettlementDoesExist)
     ASSERT_TRUE(settlement != NULL);
 }
 
-TEST_F(SettlementManagerTest, getSettlement_ByNameAndIDLand_SettlementDoesNotExist)
+TEST_F(SettlementManagerTest, getSettlement_ByLandNameAndName_SettlementDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, "Settlement1", m_id_land_1))
+    EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1, "Settlement1"))
     .WillOnce(Return(SettlementRecordShrPtr()));
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
     SettlementManager manager(accessor);
 
-    SettlementShrPtr settlement = manager.getSettlement(transaction, "Settlement1", m_id_land_1);
+    SettlementShrPtr settlement = manager.getSettlement(transaction, m_land_name_1, "Settlement1");
 
     ASSERT_TRUE(settlement == NULL);
 }
 
-TEST_F(SettlementManagerTest, getSettlement_ByNameAndIDLand_SettlementDoesExist)
+TEST_F(SettlementManagerTest, getSettlement_ByLandNameAndName_SettlementDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(transaction, "Settlement1", m_id_land_1))
-    .WillOnce(Return(make_shared<SettlementRecord>(m_id_land_1, m_id_settlement_1, "Settlement1")));
+    EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1, "Settlement1"))
+    .WillOnce(Return(make_shared<SettlementRecord>(m_land_name_1, m_id_settlement_1, "Settlement1")));
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
     SettlementManager manager(accessor);
 
-    SettlementShrPtr settlement = manager.getSettlement(transaction, "Settlement1", m_id_land_1);
+    SettlementShrPtr settlement = manager.getSettlement(transaction, m_land_name_1, "Settlement1");
 
     ASSERT_TRUE(settlement != NULL);
 }
@@ -272,7 +271,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
     SettlementRecordMap map;
-    map.insert(make_pair(m_id_settlement_1, make_shared<SettlementRecord>(m_id_land_2, m_id_settlement_1, "Settlement1")));
+    map.insert(make_pair(m_id_settlement_1, make_shared<SettlementRecord>(m_land_name_2, m_id_settlement_1, "Settlement1")));
 
     EXPECT_CALL(*mock, getRecords(_))
     .WillOnce(Return(map));
@@ -287,7 +286,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
 
     ASSERT_EQ(1, settlements.size());
 
-    compareSettlement(settlements[m_id_settlement_1], m_id_land_2, m_id_settlement_1, "Settlement1");
+    compareSettlement(settlements[m_id_settlement_1], m_land_name_2, m_id_settlement_1, "Settlement1");
 }
 
 TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
@@ -297,8 +296,8 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
     SettlementRecordMap map;
-    map.insert(make_pair(m_id_settlement_1, make_shared<SettlementRecord>(m_id_land_2, m_id_settlement_1, "Settlement1")));
-    map.insert(make_pair(m_id_settlement_2, make_shared<SettlementRecord>(m_id_land_2, m_id_settlement_2, "Settlement2")));
+    map.insert(make_pair(m_id_settlement_1, make_shared<SettlementRecord>(m_land_name_2, m_id_settlement_1, "Settlement1")));
+    map.insert(make_pair(m_id_settlement_2, make_shared<SettlementRecord>(m_land_name_2, m_id_settlement_2, "Settlement2")));
 
     EXPECT_CALL(*mock, getRecords(_))
     .WillOnce(Return(map));
@@ -313,76 +312,6 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
 
     ASSERT_EQ(2, settlements.size());
 
-    compareSettlement(settlements[m_id_settlement_1], m_id_land_2, m_id_settlement_1, "Settlement1");
-    compareSettlement(settlements[m_id_settlement_2], m_id_land_2, m_id_settlement_2, "Settlement2");
-}
-
-TEST_F(SettlementManagerTest, getSettlements_ByIDLand_SettlementsDoNotExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecords(transaction, m_id_land_1))
-    .WillOnce(Return(SettlementRecordMap()));
-
-    ISettlementManagerAccessorAutPtr accessor(mock);
-
-    SettlementManager manager(accessor);
-
-    SettlementMap settlements = manager.getSettlements(transaction, m_id_land_1);
-
-    ASSERT_TRUE(settlements.empty());
-}
-
-TEST_F(SettlementManagerTest, getSettlements_ByIDLand_SettlementsDoExist_OneSettlement)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
-
-    SettlementRecordMap map;
-    map.insert(make_pair(m_id_settlement_1, make_shared<SettlementRecord>(m_id_land_1, m_id_settlement_1, "Settlement1")));
-
-    EXPECT_CALL(*mock, getRecords(transaction, m_id_land_1))
-    .WillOnce(Return(map));
-
-    ISettlementManagerAccessorAutPtr accessor(mock);
-
-    SettlementManager manager(accessor);
-
-    SettlementMap settlements = manager.getSettlements(transaction, m_id_land_1);
-
-    ASSERT_FALSE(settlements.empty());
-
-    ASSERT_EQ(1, settlements.size());
-
-    compareSettlement(settlements[m_id_settlement_1], m_id_land_1, m_id_settlement_1, "Settlement1");
-}
-
-TEST_F(SettlementManagerTest, getSettlements_ByIDLand_SettlementsDoExist_ManySettlements)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
-
-    SettlementRecordMap map;
-    map.insert(make_pair(m_id_settlement_1, make_shared<SettlementRecord>(m_id_land_1, m_id_settlement_1, "Settlement1")));
-    map.insert(make_pair(m_id_settlement_2, make_shared<SettlementRecord>(m_id_land_1, m_id_settlement_2, "Settlement2")));
-
-    EXPECT_CALL(*mock, getRecords(transaction, m_id_land_1))
-    .WillOnce(Return(map));
-
-    ISettlementManagerAccessorAutPtr accessor(mock);
-
-    SettlementManager manager(accessor);
-
-    SettlementMap settlements = manager.getSettlements(transaction, m_id_land_1);
-
-    ASSERT_FALSE(settlements.empty());
-
-    ASSERT_EQ(2, settlements.size());
-
-    compareSettlement(settlements[m_id_settlement_1], m_id_land_1, m_id_settlement_1, "Settlement1");
-    compareSettlement(settlements[m_id_settlement_2], m_id_land_1, m_id_settlement_2, "Settlement2");
+    compareSettlement(settlements[m_id_settlement_1], m_land_name_2, m_id_settlement_1, "Settlement1");
+    compareSettlement(settlements[m_id_settlement_2], m_land_name_2, m_id_settlement_2, "Settlement2");
 }

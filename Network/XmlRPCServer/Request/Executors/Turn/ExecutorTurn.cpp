@@ -1,4 +1,4 @@
-// Copyright (C) 2010 and 2011 Marcin Arkadiusz Skrobiranda.
+// Copyright (C) 2010 and 2011 Marcin Arkadiusz Skrobirandlanda.
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -62,9 +62,9 @@ bool ExecutorTurn::getParameters(
 {
     try
     {
-        m_login         = a_request->getLoginValue();
-        m_password      = a_request->getPasswordValue();
-        m_value_id_land = a_request->getParameterValueUnsignedInteger("idland");
+        m_login     = a_request->getLoginValue();
+        m_password  = a_request->getPasswordValue();
+        m_land_name = a_request->getParameterValueString("land_name");
 
         return true;
     }
@@ -76,32 +76,23 @@ bool ExecutorTurn::getParameters(
 
 bool ExecutorTurn::processParameters()
 {
-    try
-    {
-        m_id_land = m_value_id_land;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
 bool ExecutorTurn::authorize(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IAuthorizeUserToLandByIDLandOperatorShrPtr authorize_operator =
-        m_operator_abstract_factory->createAuthorizeUserToLandByIDLandOperator();
+    IAuthorizeUserToLandOperatorShrPtr authorize_operator =
+        m_operator_abstract_factory->createAuthorizeUserToLandOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        AuthorizeUserToLandByIDLandOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToLandByIDLand(transaction, m_user->getLogin(), m_id_land);
+        AuthorizeUserToLandOperatorExitCode const exit_code =
+            authorize_operator->authorizeUserToLand(transaction, m_user->getLogin(), m_land_name);
 
         if (exit_code.ok())
         {
@@ -116,14 +107,15 @@ bool ExecutorTurn::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDLandOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByIDLandOperator();
+    IGetEpochByLandNameOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByLandNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByIDLandOperatorExitCode const exit_code = epoch_operator->getEpochByIDLand(transaction, m_id_land);
+        GetEpochByLandNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochByLandName(transaction, m_land_name);
 
         if (exit_code.ok())
         {
@@ -140,14 +132,15 @@ bool ExecutorTurn::verifyWorldConfiguration(
 {
     IWorldShrPtr world;
 
-    IGetWorldByIDLandOperatorShrPtr world_operator = m_operator_abstract_factory->createGetWorldByIDLandOperator();
+    IGetWorldByLandNameOperatorShrPtr world_operator = m_operator_abstract_factory->createGetWorldByLandNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetWorldByIDLandOperatorExitCode const exit_code = world_operator->getWorldByIDLand(transaction, m_id_land);
+        GetWorldByLandNameOperatorExitCode const exit_code =
+            world_operator->getWorldByLandName(transaction, m_land_name);
 
         if (exit_code.ok())
         {
@@ -178,7 +171,7 @@ ReplyShrPtr ExecutorTurn::perform(
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        TurnOperatorExitCode const exit_code = turn_operator->turn(transaction, m_id_land);
+        TurnOperatorExitCode const exit_code = turn_operator->turn(transaction, m_land_name);
 
         if (exit_code.ok())
         {

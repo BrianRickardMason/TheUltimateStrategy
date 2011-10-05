@@ -43,12 +43,12 @@ namespace Turn
 
 ReplyShrPtr Turn(
     IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_land
+    string        const & a_login,
+    string        const & a_password,
+    string        const   a_land_name
 )
 {
-    RequestShrPtr request = createRequestTurn(a_login, a_password, a_id_land);
+    RequestShrPtr request = createRequestTurn(a_login, a_password, a_land_name);
 
     return a_client->sendRequest(request);
 }

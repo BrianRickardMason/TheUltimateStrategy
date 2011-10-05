@@ -47,7 +47,7 @@ public:
      * @brief Creates a settlement.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of a land.
+     * @param a_land_name   The name of the land.
      * @param a_name        The name of the settlement.
      *
      * @return True on success, false otherwise.
@@ -56,8 +56,8 @@ public:
         createSettlement,
         bool(
             Persistency::ITransactionShrPtr         a_transaction,
-            Land::IDLand                    const & a_id_land,
-            std::string                     const & a_name
+            std::string                     const a_land_name,
+            std::string                     const a_name
         )
     );
 
@@ -97,17 +97,17 @@ public:
      * @brief Gets a settlement.
      *
      * @param a_transaction The transaction.
+     * @param a_land_name   The name of the land.
      * @param a_name        The name of the settlement.
-     * @param a_id_land     The identifier of the land.
      *
      * @return The settlement, null if not found.
      */
     MOCK_CONST_METHOD3(
         getSettlement,
         SettlementShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_name,
-            Land::IDLand                    const & a_id_land
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_land_name,
+            std::string                     const a_name
         )
     );
 
@@ -129,15 +129,15 @@ public:
      * @brief Gets settlements.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return A map of settlements, an empty map if not found.
      */
     MOCK_CONST_METHOD2(
         getSettlements,
         SettlementMap(
-            Persistency::ITransactionShrPtr         a_transaction,
-            Land::IDLand                    const & a_id_land
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_land_name
         )
     );
 };

@@ -59,7 +59,7 @@ namespace Executors
  *     <status value=\"#\" />
  *     <parameters>
  *         <message      type=\"string"\           value=\"#\" />
- *         <idland       type=\"unsigned integer\" value=\"#\" />
+ *         <land_name    type=\"string\"           value=\"#\" />
  *         <idsettlement type=\"unsigned integer\" value=\"#\" />
  *         <name         type=\"string\"           value=\"#\" />
  *     </parameters>

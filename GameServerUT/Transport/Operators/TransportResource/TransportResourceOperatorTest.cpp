@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../GameServer/Land/IDLand.hpp"
 #include "../../../../GameServer/Resource/Key.hpp"
 #include "../../../../GameServer/Resource/Volume.hpp"
 #include "../../../../GameServer/Transport/Operators/TransportResource/TransportResourceOperator.hpp"
@@ -36,12 +35,12 @@
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Common;
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::Transport;
 using namespace boost;
+using namespace std;
 
 using testing::Return;
 using testing::Throw;
@@ -59,16 +58,16 @@ protected:
     TransportResourceOperatorTest()
         : m_resource_manager(new ResourceManagerMock),
           m_settlement_manager(new SettlementManagerMock),
-          m_id_land_1(1),
-          m_id_land_2(2),
+          m_land_name_1("Land1"),
+          m_land_name_2("Land2"),
           m_id_settlement_1(1),
           m_id_settlement_2(2),
           m_id_settlement_3(3),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, 2),
-          m_settlement_1(make_shared<Settlement>(SettlementRecord(m_id_land_1, m_id_settlement_1, "Settlement1"))),
-          m_settlement_2(make_shared<Settlement>(SettlementRecord(m_id_land_1, m_id_settlement_2, "Settlement2"))),
-          m_settlement_3(make_shared<Settlement>(SettlementRecord(m_id_land_2, m_id_settlement_3, "Settlement3")))
+          m_settlement_1(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_id_settlement_1, "Settlement1"))),
+          m_settlement_2(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_id_settlement_2, "Settlement2"))),
+          m_settlement_3(make_shared<Settlement>(SettlementRecord(m_land_name_2, m_id_settlement_3, "Settlement3")))
     {
     }
 
@@ -83,10 +82,10 @@ protected:
     SettlementManagerMock * m_settlement_manager;
 
     /**
-     * @brief Test constants: identifiers of lands.
+     * @brief Test constants: the names of lands.
      */
-    IDLand m_id_land_1,
-           m_id_land_2;
+    string m_land_name_1,
+           m_land_name_2;
 
     /**
      * @brief Test constants: identifiers of settlements.

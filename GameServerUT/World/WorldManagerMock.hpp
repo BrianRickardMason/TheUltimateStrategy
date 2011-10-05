@@ -79,15 +79,15 @@ public:
      * @brief Gets the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The world, null if not found.
      */
     MOCK_CONST_METHOD2(
-        getWorldByIDLand,
+        getWorldByLandName,
         IWorldShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            Land::IDLand                    const & a_id_land
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_land_name
         )
     );
 

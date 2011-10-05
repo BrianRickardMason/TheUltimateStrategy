@@ -50,12 +50,12 @@ protected:
      */
     EpochManagerTest()
         : m_id_epoch_1(1),
-          m_id_land_1(1),
           m_id_settlement_1(1),
           m_login("Login"),
           m_world_name_1("World1"),
           m_world_name_2("World2"),
           m_world_name_3("World3"),
+          m_land_name("Land"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -106,11 +106,6 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants: identifiers of the land.
-     */
-    IDLand m_id_land_1;
-
-    /**
      * @brief Test constants: identifiers of the settlement.
      */
     IDSettlement m_id_settlement_1;
@@ -126,6 +121,11 @@ protected:
     string m_world_name_1,
            m_world_name_2,
            m_world_name_3;
+
+    /**
+     * @brief Test constants: the name of the land.
+     */
+    string m_land_name;
 
     /**
      * @brief The abstract factory of managers.
@@ -351,60 +351,6 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesExist)
 }
 
 /**
- * Component tests of: EpochManager::getEpochByIDLand.
- */
-TEST_F(EpochManagerTest, getEpochByIDLand_EpochDoesExist)
-{
-    {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-        m_user_manager->createUser(transaction, "Login", "Password");
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-        m_epoch_manager->createEpoch(transaction, m_world_name_1);
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-        m_epoch_manager->activateEpoch(transaction, m_world_name_1);
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, "Land");
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-        EpochShrPtr epoch = m_epoch_manager->getEpochByIDLand(transaction, m_id_land_1);
-
-        transaction->commit();
-
-        ASSERT_FALSE(epoch == NULL);
-        compareEpoch(epoch, m_id_epoch_1, m_world_name_1, true, false, 0);
-    }
-}
-
-/**
  * Component tests of: EpochManager::getEpochByLandName.
  */
 TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
@@ -440,7 +386,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, m_land_name);
 
         transaction->commit();
     }
@@ -449,7 +395,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_manager->getEpochByLandName(transaction, "Land");
+        EpochShrPtr epoch = m_epoch_manager->getEpochByLandName(transaction, m_land_name);
 
         transaction->commit();
 
@@ -494,7 +440,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, "Land");
+        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_id_epoch_1, m_land_name);
 
         transaction->commit();
     }
@@ -503,7 +449,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement");
+        m_create_settlement_operator->createSettlement(transaction, m_land_name, "Settlement");
 
         transaction->commit();
     }

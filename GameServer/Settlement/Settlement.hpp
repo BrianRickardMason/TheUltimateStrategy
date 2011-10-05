@@ -51,11 +51,11 @@ public:
     );
 
     /**
-     * @brief Gets an identifier of the land.
+     * @brief Gets the name of the land.
      *
-     * @return The identifier of the land.
+     * @return The name of the land.
      */
-    Land::IDLand const & getIDLand() const;
+    std::string getLandName() const;
 
     /**
      * @brief Gets an identifier of the settlement.
@@ -73,9 +73,9 @@ public:
 
 private:
     /**
-     * @brief An identifier of the land.
+     * @brief The name of the land.
      */
-    Land::IDLand const m_id_land;
+    std::string const m_land_name;
 
     /**
      * @brief An identifier of the settlement.

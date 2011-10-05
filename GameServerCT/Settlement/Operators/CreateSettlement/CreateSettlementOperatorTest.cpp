@@ -61,13 +61,13 @@ protected:
           m_create_user_operator(m_operator_abstract_factory->createCreateUserOperator()),
           m_create_world_operator(m_operator_abstract_factory->createCreateWorldOperator()),
           m_id_epoch_1(1),
-          m_id_land_1(1),
-          m_id_land_2(2),
-          m_id_land_3(3),
           m_id_settlement_1(1),
           m_id_settlement_2(2),
           m_login("Login"),
-          m_world_name("World")
+          m_world_name("World"),
+          m_land_name_1("Land1"),
+          m_land_name_2("Land2"),
+          m_land_name_3("Land3")
     {
         {
             IConnectionShrPtr connection = m_persistency.getConnection();
@@ -79,8 +79,8 @@ protected:
 
             m_create_epoch_operator->createEpoch(transaction, m_world_name);
 
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land1");
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land2");
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_1);
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_2);
 
             transaction->commit();
         }
@@ -273,13 +273,6 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants: identifiers of lands.
-     */
-    IDLand m_id_land_1,
-           m_id_land_2,
-           m_id_land_3;
-
-    /**
      * @brief Test constants: identifiers of settlements.
      */
     IDSettlement m_id_settlement_1,
@@ -294,6 +287,13 @@ protected:
      * @brief Test constants: the name of the world.
      */
     string m_world_name;
+
+    /**
+     * @brief Test constants: the names of the lands.
+     */
+    string m_land_name_1,
+           m_land_name_2,
+           m_land_name_3;
 };
 
 /**
@@ -306,7 +306,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_LandDoesNotExist)
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST,
-                  m_create_settlement_operator->createSettlement(transaction, m_id_land_3, "Settlement").m_exit_code);
+                  m_create_settlement_operator->createSettlement(transaction, m_land_name_3, "Settlement").m_exit_code);
     }
 }
 
@@ -316,7 +316,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement");
+        m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement");
 
         transaction->commit();
     }
@@ -326,7 +326,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_EXIST,
-                  m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement").m_exit_code);
+                  m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement").m_exit_code);
     }
 }
 
@@ -337,7 +337,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_FirstSettlementOfLand)
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED,
-                  m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement").m_exit_code);
+                  m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement").m_exit_code);
 
         transaction->commit();
     }
@@ -351,7 +351,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SecondSettlementOfLand)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement1");
+        m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement1");
 
         transaction->commit();
     }
@@ -361,7 +361,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SecondSettlementOfLand)
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED,
-                  m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement2").m_exit_code);
+                  m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement2").m_exit_code);
 
         transaction->commit();
     }
@@ -375,7 +375,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_FirstSettlmentOfAnotherLan
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement1");
+        m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement1");
 
         transaction->commit();
     }
@@ -385,7 +385,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_FirstSettlmentOfAnotherLan
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED,
-                  m_create_settlement_operator->createSettlement(transaction, m_id_land_2, "Settlement1").m_exit_code);
+                  m_create_settlement_operator->createSettlement(transaction, m_land_name_2, "Settlement1").m_exit_code);
 
         transaction->commit();
     }

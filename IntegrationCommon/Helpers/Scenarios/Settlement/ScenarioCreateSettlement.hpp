@@ -93,16 +93,16 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_land  The identifier of the land.
-     * @param a_name     The name of the settlement.
+     * @param a_login     The login of the user.
+     * @param a_password  The password of the user.
+     * @param a_land_name The name of the land.
+     * @param a_name      The name of the settlement.
      */
     ScenarioCreateSettlementActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_land,
-        std::string  const & a_name
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_land_name,
+        std::string const a_name
     );
 
     /**
@@ -128,9 +128,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the land.
+     * @brief The name of the land.
      */
-    unsigned int const m_id_land;
+    std::string const m_land_name;
 
     /**
      * @brief The name of the settlement.
@@ -148,16 +148,16 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_land  The identifier of the land.
-     * @param a_name     The name of the settlement.
+     * @param a_login     The login of the user.
+     * @param a_password  The password of the user.
+     * @param a_land_name The name of the land.
+     * @param a_name      The name of the settlement.
      */
     ScenarioCreateSettlementActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_land,
-        std::string  const & a_name
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_land_name,
+        std::string const a_name
     );
 
     /**
@@ -183,9 +183,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the land.
+     * @brief The name of the land.
      */
-    unsigned int const m_id_land;
+    std::string const m_land_name;
 
     /**
      * @brief The name of the settlement.

@@ -93,14 +93,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login   The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_land  The identifier of the land.
+     * @param a_login     The login of the user.
+     * @param a_password  The password of the user.
+     * @param a_land_name The name of the land.
      */
     ScenarioDeleteLandActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_land
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_land_name
     );
 
     /**
@@ -126,9 +126,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the land.
+     * @brief The name of the land.
      */
-    unsigned int const m_id_land;
+    std::string const m_land_name;
 };
 
 /**
@@ -141,14 +141,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login    The login of the user.
-     * @param a_password The password of the user.
-     * @param a_id_land  The identifier of the land.
+     * @param a_login     The login of the user.
+     * @param a_password  The password of the user.
+     * @param a_land_name The name of the land.
      */
     ScenarioDeleteLandActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_land
+        std::string const & a_login,
+        std::string const & a_password,
+        std::string const   a_land_name
     );
 
     /**
@@ -174,9 +174,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the land.
+     * @brief The name of the land.
      */
-    unsigned int const m_id_land;
+    std::string const m_land_name;
 };
 
 /**

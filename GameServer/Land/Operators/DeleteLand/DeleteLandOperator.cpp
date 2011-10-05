@@ -28,6 +28,7 @@
 #include "DeleteLandOperator.hpp"
 
 using namespace GameServer::Persistency;
+using namespace std;
 
 namespace GameServer
 {
@@ -42,19 +43,19 @@ DeleteLandOperator::DeleteLandOperator(
 }
 
 DeleteLandOperatorExitCode DeleteLandOperator::deleteLand(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
     try
     {
         // Verify if the land exists.
-        if (!m_land_manager->getLand(a_transaction, a_id_land))
+        if (!m_land_manager->getLand(a_transaction, a_land_name))
         {
             return DeleteLandOperatorExitCode(DELETE_LAND_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }
 
-        bool const result = m_land_manager->deleteLand(a_transaction, a_id_land);
+        bool const result = m_land_manager->deleteLand(a_transaction, a_land_name);
 
         return (result) ? DeleteLandOperatorExitCode(DELETE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_DELETED)
                         : DeleteLandOperatorExitCode(DELETE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_DELETED);

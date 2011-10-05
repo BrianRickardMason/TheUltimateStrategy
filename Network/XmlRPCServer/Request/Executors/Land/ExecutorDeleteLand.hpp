@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETELAND_HPP
 
 #include "../../../../../GameServer/Land/Operators/DeleteLand/DeleteLandOperatorExitCode.hpp"
-#include "../../../../../GameServer/Land/IDLand.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -51,7 +50,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idland type=\"unsigned integer\" value=\"#\" />
+ *         <land_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -154,14 +153,9 @@ class ExecutorDeleteLand
     ) const;
 
     /**
-     * @brief The value of the identifier of a land.
+     * @brief The name of the land.
      */
-    unsigned int m_value_id_land;
-
-    /**
-     * @brief The identifier of the land.
-     */
-    GameServer::Land::IDLand m_id_land;
+    std::string m_land_name;
 };
 
 } // namespace Executors

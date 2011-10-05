@@ -62,10 +62,10 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <login      type=\"string\"           value=\"#\" />
- *             <world_name type=\"string\"           value=\"#\" />
- *             <idland     type=\"unsigned integer\" value=\"#\" />
- *             <granted    type=\"boolean\"          value=\"#\" />
+ *             <login      type=\"string\"  value=\"#\" />
+ *             <world_name type=\"string\"  value=\"#\" />
+ *             <land_name  type=\"string\"  value=\"#\" />
+ *             <granted    type=\"boolean\" value=\"#\" />
  *         </object>
  *         <object>
  *             ...

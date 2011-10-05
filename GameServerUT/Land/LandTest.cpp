@@ -45,7 +45,8 @@ protected:
     LandTest()
         : m_login("Login"),
           m_world_name("World"),
-          m_land(LandRecord(m_login, m_world_name, IDEpoch(4), IDLand(3), "Land1", false))
+          m_land_name("Land"),
+          m_land(LandRecord(m_login, m_world_name, IDEpoch(4), m_land_name, false))
     {
     }
 
@@ -60,6 +61,11 @@ protected:
     string m_world_name;
 
     /**
+     * @brief Test constants: the name of the land.
+     */
+    string m_land_name;
+
+    /**
      * @brief Test constants: the land.
      */
     Land m_land;
@@ -67,18 +73,17 @@ protected:
 
 TEST_F(LandTest, Land)
 {
-    LandRecord record(m_login, m_world_name, IDEpoch(4), IDLand(3), "Land1", false);
+    LandRecord record(m_login, m_world_name, IDEpoch(4), m_land_name, false);
     Land land(record);
 
     ASSERT_STREQ(m_login.c_str(), land.getLogin().c_str());
     ASSERT_STREQ(m_world_name.c_str(), land.getWorldName().c_str());
     ASSERT_EQ(4, land.getIDEpoch().getValue());
-    ASSERT_EQ(3, land.getIDLand().getValue());
-    ASSERT_STREQ("Land1", land.getName().c_str());
+    ASSERT_STREQ(m_land_name.c_str(), land.getLandName().c_str());
     ASSERT_FALSE(land.getGranted());
 }
 
-TEST_F(LandTest, getLogin)
+TEST_F(LandTest, GetLoginReturnsProperValue)
 {
     ASSERT_EQ(m_login.c_str(), m_land.getLogin().c_str());
 }
@@ -88,22 +93,17 @@ TEST_F(LandTest, GetWorldNameReturnsProperValue)
     ASSERT_STREQ(m_world_name.c_str(), m_land.getWorldName().c_str());
 }
 
-TEST_F(LandTest, getIDEpoch)
+TEST_F(LandTest, GetIDEpochReturnsProperValue)
 {
     ASSERT_EQ(4, m_land.getIDEpoch().getValue());
 }
 
-TEST_F(LandTest, getIDLand)
+TEST_F(LandTest, GetLandNameReturnsProperValue)
 {
-    ASSERT_EQ(3, m_land.getIDLand().getValue());
+    ASSERT_STREQ(m_land_name.c_str(), m_land.getLandName().c_str());
 }
 
-TEST_F(LandTest, getName)
-{
-    ASSERT_STREQ("Land1", m_land.getName().c_str());
-}
-
-TEST_F(LandTest, getGranted)
+TEST_F(LandTest, GetGrantedReturnsProperValue)
 {
     ASSERT_FALSE(m_land.getGranted());
 }

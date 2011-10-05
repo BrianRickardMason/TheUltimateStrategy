@@ -15,11 +15,11 @@ CREATE TABLE worlds
 DROP TABLE IF EXISTS epochs CASCADE;
 CREATE TABLE epochs
 (
-    id_epoch  SERIAL PRIMARY KEY,
+    id_epoch   SERIAL PRIMARY KEY,
     world_name VARCHAR(44) NOT NULL CHECK(world_name <> '') REFERENCES worlds(world_name) ON DELETE CASCADE,
-    active    BOOLEAN DEFAULT FALSE,
-    finished  BOOLEAN DEFAULT FALSE,
-    ticks     INTEGER NOT NULL DEFAULT 0 CHECK(ticks >= 0),
+    active     BOOLEAN DEFAULT FALSE,
+    finished   BOOLEAN DEFAULT FALSE,
+    ticks      INTEGER NOT NULL DEFAULT 0 CHECK(ticks >= 0),
 
     UNIQUE(world_name)
 );
@@ -28,25 +28,21 @@ DROP TABLE IF EXISTS lands CASCADE;
 CREATE TABLE lands
 (
     login      VARCHAR(44) NOT NULL CHECK(login <> '') REFERENCES users(login) ON DELETE CASCADE,
-    world_name VARCHAR(44) NOT NULL CHECK(name <> '') REFERENCES worlds(world_name) ON DELETE CASCADE,
+    world_name VARCHAR(44) NOT NULL CHECK(world_name <> '') REFERENCES worlds(world_name) ON DELETE CASCADE,
     id_epoch   INTEGER NOT NULL CHECK(id_epoch > 0) REFERENCES epochs(id_epoch) ON DELETE CASCADE,
-    id_land    SERIAL PRIMARY KEY,
-    name       VARCHAR(44) NOT NULL CHECK(name <> ''),
+    land_name  VARCHAR(44) PRIMARY KEY NOT NULL CHECK(land_name <> ''),
 
-    granted BOOLEAN DEFAULT FALSE,
-
-    UNIQUE(login, name),
-    UNIQUE(world_name, name)
+    granted BOOLEAN DEFAULT FALSE
 );
 
 DROP TABLE IF EXISTS settlements CASCADE;
 CREATE TABLE settlements
 (
-    id_land       INTEGER NOT NULL CHECK(id_land > 0) REFERENCES lands(id_land) ON DELETE CASCADE,
+    land_name     VARCHAR(44) NOT NULL CHECK(land_name <> '') REFERENCES lands(land_name) ON DELETE CASCADE,
     id_settlement SERIAL PRIMARY KEY,
     name          VARCHAR(44) NOT NULL CHECK(name <> ''),
 
-    UNIQUE(id_land, name)
+    UNIQUE(land_name, name)
 );
 
 DROP TABLE IF EXISTS buildings_settlement CASCADE;

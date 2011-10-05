@@ -198,13 +198,9 @@ ReplyShrPtr ExecutorGetLandsByWorldName::produceReply(
         node_world_name->appendAttribute("type")->setValue("string");
         node_world_name->appendAttribute("value")->setValue(it->second->getWorldName().c_str());
 
-        IXmlNodeShrPtr node_idland = node_object->appendNode("idland");
-        node_idland->appendAttribute("type")->setValue("unsigned integer");
-        node_idland->appendAttribute("value")->setValue(it->second->getIDLand().getValue());
-
-        IXmlNodeShrPtr node_name = node_object->appendNode("name");
-        node_name->appendAttribute("type")->setValue("string");
-        node_name->appendAttribute("value")->setValue(it->second->getName().c_str());
+        IXmlNodeShrPtr node_land_name = node_object->appendNode("land_name");
+        node_land_name->appendAttribute("type")->setValue("string");
+        node_land_name->appendAttribute("value")->setValue(it->second->getLandName().c_str());
 
         IXmlNodeShrPtr node_granted = node_object->appendNode("granted");
         node_granted->appendAttribute("type")->setValue("boolean");

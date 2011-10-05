@@ -28,7 +28,6 @@
 #include "World.hpp"
 #include "WorldManager.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -72,12 +71,12 @@ IWorldShrPtr WorldManager::getWorld(
     return record ? IWorldShrPtr(new World(record)) : IWorldShrPtr();
 }
 
-IWorldShrPtr WorldManager::getWorldByIDLand(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
+IWorldShrPtr WorldManager::getWorldByLandName(
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
-    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_id_land);
+    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_land_name);
 
     return getWorld(a_transaction, world_name);
 }

@@ -210,9 +210,9 @@ ReplyShrPtr ExecutorGetSettlementByIDSettlement::produceReply(
 
     if (a_exit_code.m_settlement)
     {
-        IXmlNodeShrPtr node_idland = node_parameters->appendNode("idland");
-        node_idland->appendAttribute("type")->setValue("unsigned integer");
-        node_idland->appendAttribute("value")->setValue(a_exit_code.m_settlement->getIDLand().getValue());
+        IXmlNodeShrPtr node_land_name = node_parameters->appendNode("land_name");
+        node_land_name->appendAttribute("type")->setValue("string");
+        node_land_name->appendAttribute("value")->setValue(a_exit_code.m_settlement->getLandName().c_str());
 
         IXmlNodeShrPtr node_idsettlement = node_parameters->appendNode("idsettlement");
         node_idsettlement->appendAttribute("type")->setValue("unsigned integer");

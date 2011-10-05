@@ -64,7 +64,7 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioDeleteLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login1", "Password1", 1)),
+                        IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login1", "Password1", "Land")),
                         IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationUnauthorized))));
 
                 for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
@@ -103,7 +103,7 @@ public:
                 vector<IScenarioShrPtr> scenarios = list_of
                     (IScenarioShrPtr(new ScenarioDeleteLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioDeleteLandActionInvalidRequest("Login1", "Password1", 1)),
+                        IScenarioActionShrPtr(new ScenarioDeleteLandActionInvalidRequest("Login1", "Password1", "Land")),
                         IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationInvalidRequest))));
 
                 for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();

@@ -72,18 +72,11 @@ public:
     Epoch::IDEpoch const & getIDEpoch() const;
 
     /**
-     * @brief Gets an identifier of the land.
-     *
-     * @return The identifier of the land.
-     */
-    IDLand const & getIDLand() const;
-
-    /**
-     * @brief Gets a name of the land.
+     * @brief Gets the name of the land.
      *
      * @return The name of the land.
      */
-    std::string const & getName() const;
+    std::string getLandName() const;
 
     /**
      * @brief Gets a granted of the land.
@@ -109,14 +102,9 @@ private:
     Epoch::IDEpoch const m_id_epoch;
 
     /**
-     * @brief An identifier of the land.
+     * @brief The name of the land.
      */
-    IDLand const m_id_land;
-
-    /**
-     * @brief A name of the land.
-     */
-    std::string const m_name;
+    std::string const m_land_name;
 
     /**
      * @brief Defines whether resources and humans has been granted to the land.
@@ -134,12 +122,12 @@ typedef boost::shared_ptr<Land> LandShrPtr;
 /**
  * @brief A pair of land.
  */
-typedef std::pair<IDLand, LandShrPtr> LandPair;
+typedef std::pair<std::string, LandShrPtr> LandPair;
 
 /**
  * @brief A map of land.
  */
-typedef std::map<IDLand, LandShrPtr> LandMap;
+typedef std::map<std::string, LandShrPtr> LandMap;
 
 } // namespace Land
 } // namespace GameServer

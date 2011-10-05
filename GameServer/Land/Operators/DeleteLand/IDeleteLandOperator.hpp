@@ -29,10 +29,10 @@
 #define GAMESERVER_LAND_IDELETELANDOPERATOR_HPP
 
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../IDLand.hpp"
 #include "DeleteLandOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -55,13 +55,13 @@ public:
      * @brief Deletes a land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The exit code.
      */
     virtual DeleteLandOperatorExitCode deleteLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDLand                          const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const = 0;
 };
 

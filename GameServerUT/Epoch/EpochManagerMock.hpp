@@ -100,31 +100,15 @@ public:
      * @brief Gets the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_world_name  The name of the world.
-     *
-     * @return The epoch, null if not found.
-     */
-    MOCK_CONST_METHOD2(
-        getEpochByIDLand,
-        EpochShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            Land::IDLand                    const & a_id_land
-        )
-    );
-
-    /**
-     * @brief Gets the epoch of the world.
-     *
-     * @param a_transaction The transaction.
-     * @param a_name        The name of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The epoch, null if not found.
      */
     MOCK_CONST_METHOD2(
         getEpochByLandName,
         EpochShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_name
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_land_name
         )
     );
 

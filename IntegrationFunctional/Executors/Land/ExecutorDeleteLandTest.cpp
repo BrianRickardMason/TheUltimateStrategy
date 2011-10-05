@@ -73,7 +73,7 @@ TEST_F(IntegrationFunctionalTest, DeleteLand_LandDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -109,7 +109,7 @@ TEST_F(IntegrationFunctionalTest, DeleteLand)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationLandHasBeenDeleted))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -145,11 +145,11 @@ TEST_F(IntegrationFunctionalTest, DeleteLand_Twice)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationLandHasBeenDeleted))))
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -181,7 +181,7 @@ TEST_F(IntegrationFunctionalTest, DeleteLand_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "BadPassword", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "BadPassword", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationUnauthenticated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -221,7 +221,7 @@ TEST_F(IntegrationFunctionalTest, DeleteLand_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login2", "Password2", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login2", "Password2", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -237,7 +237,7 @@ TEST_F(IntegrationFunctionalTest, DeleteLand_InvalidRequest)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionInvalidRequest("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionInvalidRequest("Login", "Password", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -277,7 +277,7 @@ TEST_F(IntegrationFunctionalTest, DeleteLand_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioDeleteLand(
             client,
-            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", 1)),
+            IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login", "Password", "Land")),
             IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationEpochIsNotActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "TransportHumanOperator.hpp"
-
 #include "../../../Common/IDHolder.hpp"
+#include "TransportHumanOperator.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;
@@ -82,7 +81,7 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
         }
 
         // Verify if the settlements are from the same land.
-        if (settlement_source->getIDLand() != settlement_destination->getIDLand())
+        if (settlement_source->getLandName() != settlement_destination->getLandName())
         {
             return TransportHumanOperatorExitCode(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND);
         }

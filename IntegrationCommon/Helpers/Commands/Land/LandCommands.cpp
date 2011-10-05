@@ -47,10 +47,10 @@ ReplyShrPtr CreateLand(
     string        const & a_password,
     string        const   a_world_name,
     unsigned int  const   a_id_epoch,
-    string        const & a_name
+    string        const   a_land_name
 )
 {
-    RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_world_name, a_id_epoch, a_name);
+    RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_world_name, a_id_epoch, a_land_name);
 
     return a_client->sendRequest(request);
 }
@@ -59,34 +59,22 @@ ReplyShrPtr DeleteLand(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_land
+    string        const   a_land_name
 )
 {
-    RequestShrPtr request = createRequestDeleteLand(a_login, a_password, a_id_land);
+    RequestShrPtr request = createRequestDeleteLand(a_login, a_password, a_land_name);
 
     return a_client->sendRequest(request);
 }
 
-ReplyShrPtr GetLandByIDLand(
+ReplyShrPtr GetLand(
     IClientShrPtr         a_client,
     string        const & a_login,
     string        const & a_password,
-    unsigned int  const   a_id_land
+    string        const   a_land_name
 )
 {
-    RequestShrPtr request = createRequestGetLandByIDLand(a_login, a_password, a_id_land);
-
-    return a_client->sendRequest(request);
-}
-
-ReplyShrPtr GetLandByName(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const & a_name
-)
-{
-    RequestShrPtr request = createRequestGetLandByName(a_login, a_password, a_name);
+    RequestShrPtr request = createRequestGetLandByName(a_login, a_password, a_land_name);
 
     return a_client->sendRequest(request);
 }

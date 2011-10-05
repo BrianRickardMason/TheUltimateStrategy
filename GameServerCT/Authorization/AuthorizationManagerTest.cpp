@@ -51,12 +51,9 @@ protected:
      */
     AuthorizationManagerTest()
         : m_id_epoch_1(1),
-          m_id_land_1(1),
-          m_id_land_2(2),
-          m_id_land_5(5),
-          m_name_1("Land1"),
-          m_name_2("Land2"),
-          m_name_5("Land5"),
+          m_land_name_1("Land1"),
+          m_land_name_2("Land2"),
+          m_land_name_5("Land5"),
           m_id_settlement_1(1),
           m_id_settlement_2(2),
           m_id_settlement_5(5),
@@ -84,11 +81,11 @@ protected:
             m_user_manager->createUser(transaction, "Login1", "Password1");
             m_user_manager->createUser(transaction, "Login2", "Password2");
 
-            m_land_manager->createLand(transaction, m_login_1, m_world_name, m_id_epoch_1, m_name_1);
-            m_land_manager->createLand(transaction, m_login_2, m_world_name, m_id_epoch_1, m_name_2);
+            m_land_manager->createLand(transaction, m_login_1, m_world_name, m_id_epoch_1, m_land_name_1);
+            m_land_manager->createLand(transaction, m_login_2, m_world_name, m_id_epoch_1, m_land_name_2);
 
-            m_settlement_manager->createSettlement(transaction, m_id_land_1, m_name_settlement_1);
-            m_settlement_manager->createSettlement(transaction, m_id_land_2, m_name_settlement_2);
+            m_settlement_manager->createSettlement(transaction, m_land_name_1, m_name_settlement_1);
+            m_settlement_manager->createSettlement(transaction, m_land_name_2, m_name_settlement_2);
 
             transaction->commit();
         }
@@ -100,18 +97,11 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants identifiers of the lands.
+     * @brief Test constants: the names of the lands.
      */
-    IDLand m_id_land_1,
-           m_id_land_2,
-           m_id_land_5;
-
-    /**
-     * @brief Test constants names of the lands.
-     */
-    string m_name_1,
-           m_name_2,
-           m_name_5;
+    string m_land_name_1,
+           m_land_name_2,
+           m_land_name_5;
 
     /**
      * @brief Test constants identifiers of the settlements.
@@ -170,93 +160,48 @@ protected:
 };
 
 /**
- * Component tests of: AuthorizationManager::authorizeUserToLand by Login and IDLand.
+ * Component tests of: AuthorizationManager::authorizeUserToLand.
  */
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndIDLand_Authorized)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_Authorized)
 {
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_1, m_id_land_1));
-    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_2, m_id_land_2));
+    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_1, m_land_name_1));
+    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_2, m_land_name_2));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndIDLand_NotAuthorized)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized)
 {
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_2, m_id_land_1));
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_id_land_2));
+    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_2, m_land_name_1));
+    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_land_name_2));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndIDLand_NotAuthorized_MissingLogin)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLogin)
 {
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_5, m_id_land_1));
+    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_5, m_land_name_1));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByLoginAndIDLand_NotAuthorized_MissingIDLand)
+TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLandName)
 {
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_id_land_5));
-}
-
-/**
- * Component tests of: AuthorizationManager::authorizeUserToLand by IDLand and Name.
- */
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDLandAndName_Authorized)
-{
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
-
-    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_1, m_name_1));
-    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_2, m_name_2));
-}
-
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDLandAndName_NotAuthorized)
-{
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
-
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_2, m_name_1));
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_name_2));
-}
-
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDLandAndName_NotAuthorized_MissingLogin)
-{
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
-
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_5, m_name_1));
-}
-
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_ByIDLandAndNanme_NotAuthorized_MissingName)
-{
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
-
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
-
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_name_5));
+    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_land_name_5));
 }
 
 /**

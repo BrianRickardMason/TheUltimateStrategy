@@ -30,7 +30,6 @@
 #include "../Persistency/TransactionDummy.hpp"
 #include "WorldManagerAccessorMock.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::World;
 using namespace boost;
@@ -52,7 +51,7 @@ protected:
     WorldManagerTest()
         : m_world_name_1("World2"),
           m_world_name_2("World1"),
-          m_id_land_1(1)
+          m_land_name("Land")
     {
     }
 
@@ -77,9 +76,9 @@ protected:
            m_world_name_2;
 
     /**
-     * @brief Test constants: identifiers of lands.
+     * @brief Test constants: the name of the land.
      */
-    IDLand m_id_land_1;
+    string m_land_name;
 };
 
 TEST_F(WorldManagerTest, WorldManager)
@@ -160,13 +159,13 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
     compareWorld(world, m_world_name_1);
 }
 
-TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesNotExist)
+TEST_F(WorldManagerTest, getWorldByLandName_WorldDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_land_name))
     .WillOnce(Return(m_world_name_1));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
@@ -176,18 +175,18 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesNotExist)
 
     WorldManager manager(accessor);
 
-    IWorldShrPtr world = manager.getWorldByIDLand(transaction, m_id_land_1);
+    IWorldShrPtr world = manager.getWorldByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(world == NULL);
 }
 
-TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesExist)
+TEST_F(WorldManagerTest, getWorldByLandName_WorldDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_id_land_1))
+    EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_land_name))
     .WillOnce(Return(m_world_name_1));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
@@ -197,7 +196,7 @@ TEST_F(WorldManagerTest, getWorldByIDLand_WorldDoesExist)
 
     WorldManager manager(accessor);
 
-    IWorldShrPtr world = manager.getWorldByIDLand(transaction, m_id_land_1);
+    IWorldShrPtr world = manager.getWorldByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(world != NULL);
 

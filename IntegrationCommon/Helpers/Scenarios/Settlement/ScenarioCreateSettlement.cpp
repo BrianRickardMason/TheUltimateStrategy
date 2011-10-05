@@ -63,14 +63,14 @@ char const * ScenarioCreateSettlement::execute()
 }
 
 ScenarioCreateSettlementActionSuccess::ScenarioCreateSettlementActionSuccess(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_land,
-    string       const & a_name
+    string const a_login,
+    string const a_password,
+    string const a_land_name,
+    string const a_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_land(a_id_land),
+      m_land_name(a_land_name),
       m_name(a_name)
 {
 }
@@ -79,18 +79,18 @@ ReplyShrPtr ScenarioCreateSettlementActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateSettlement(a_client, m_login, m_password, m_id_land, m_name);
+    return CreateSettlement(a_client, m_login, m_password, m_land_name, m_name);
 }
 
 ScenarioCreateSettlementActionInvalidRequest::ScenarioCreateSettlementActionInvalidRequest(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_land,
-    string       const & a_name
+    string const a_login,
+    string const a_password,
+    string const a_land_name,
+    string const a_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_land(a_id_land),
+      m_land_name(a_land_name),
       m_name(a_name)
 {
 }
@@ -109,9 +109,9 @@ ReplyShrPtr ScenarioCreateSettlementActionInvalidRequest::perform(
     user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
-    IXmlNodeShrPtr idland = parameters->appendNode("idland");
-    idland->appendAttribute("type")->setValue("unsigned integer");
-    idland->appendAttribute("value")->setValue(m_id_land);
+    IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
+    land_name->appendAttribute("type")->setValue("unsigned integer");
+    land_name->appendAttribute("value")->setValue(m_land_name.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");
     name->appendAttribute("type")->setValue("integer");

@@ -149,13 +149,13 @@ std::string const DELETE_LAND_LAND_HAS_BEEN_DELETED     = "Land has been deleted
 std::string const DELETE_LAND_LAND_HAS_NOT_BEEN_DELETED = "Land has not been deleted.";
 std::string const DELETE_LAND_UNEXPECTED_ERROR          = "Unexpected error.";
 
-std::string const GET_LAND_BY_IDLAND_LAND_HAS_BEEN_GOT     = "Land has been got.";
-std::string const GET_LAND_BY_IDLAND_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
-std::string const GET_LAND_BY_IDLAND_UNEXPECTED_ERROR      = "Unexpected error.";
+std::string const GET_LAND_BY_LANDNAME_LAND_HAS_BEEN_GOT     = "Land has been got.";
+std::string const GET_LAND_BY_LANDNAME_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
+std::string const GET_LAND_BY_LANDNAME_UNEXPECTED_ERROR      = "Unexpected error.";
 
-std::string const GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_BEEN_GOT     = "Land has been got.";
-std::string const GET_LAND_BY_LOGIN_AND_NAME_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
-std::string const GET_LAND_BY_LOGIN_AND_NAME_UNEXPECTED_ERROR      = "Unexpected error.";
+std::string const GET_LAND_LAND_HAS_BEEN_GOT     = "Land has been got.";
+std::string const GET_LAND_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
+std::string const GET_LAND_UNEXPECTED_ERROR      = "Unexpected error.";
 
 std::string const GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_BEEN_GOT     = "Lands have been got.";
 std::string const GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_NOT_BEEN_GOT = "Lands have not been got.";
@@ -179,19 +179,19 @@ std::string const DELETE_SETTLEMENT_SETTLEMENT_HAS_BEEN_DELETED     = "Settlemen
 std::string const DELETE_SETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_DELETED = "Settlement has not been deleted.";
 std::string const DELETE_SETTLEMENT_UNEXPECTED_ERROR                = "Unexpected error.";
 
-std::string const GET_SETTLEMENT_BY_IDLAND_AND_NAME_LAND_DOES_NOT_EXIST         = "Land does not exist.";
-std::string const GET_SETTLEMENT_BY_IDLAND_AND_NAME_SETTLEMENT_HAS_BEEN_GOT     = "Settlement has been got.";
-std::string const GET_SETTLEMENT_BY_IDLAND_AND_NAME_SETTLEMENT_HAS_NOT_BEEN_GOT = "Settlement has not been got.";
-std::string const GET_SETTLEMENT_BY_IDLAND_AND_NAME_UNEXPECTED_ERROR            = "Unexpected error.";
+std::string const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_LAND_DOES_NOT_EXIST         = "Land does not exist.";
+std::string const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_SETTLEMENT_HAS_BEEN_GOT     = "Settlement has been got.";
+std::string const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_SETTLEMENT_HAS_NOT_BEEN_GOT = "Settlement has not been got.";
+std::string const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_UNEXPECTED_ERROR            = "Unexpected error.";
 
 std::string const GET_SETTLEMENT_BY_IDSETTLEMENT_SETTLEMENT_HAS_BEEN_GOT     = "Settlement has been got.";
 std::string const GET_SETTLEMENT_BY_IDSETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_GOT = "Settlement has not been got.";
 std::string const GET_SETTLEMENT_BY_IDSETTLEMENT_UNEXPECTED_ERROR            = "Unexpected error.";
 
-std::string const GET_SETTLEMENTS_BY_IDLAND_LAND_DOES_NOT_EXIST           = "Land does not exist.";
-std::string const GET_SETTLEMENTS_BY_IDLAND_SETTLEMENTS_HAVE_BEEN_GOT     = "Settlements have been got.";
-std::string const GET_SETTLEMENTS_BY_IDLAND_SETTLEMENTS_HAVE_NOT_BEEN_GOT = "Settlements have not been got.";
-std::string const GET_SETTLEMENTS_BY_IDLAND_UNEXPECTED_ERROR              = "Unexpected error.";
+std::string const GET_SETTLEMENTS_BY_LANDNAME_LAND_DOES_NOT_EXIST           = "Land does not exist.";
+std::string const GET_SETTLEMENTS_BY_LANDNAME_SETTLEMENTS_HAVE_BEEN_GOT     = "Settlements have been got.";
+std::string const GET_SETTLEMENTS_BY_LANDNAME_SETTLEMENTS_HAVE_NOT_BEEN_GOT = "Settlements have not been got.";
+std::string const GET_SETTLEMENTS_BY_LANDNAME_UNEXPECTED_ERROR              = "Unexpected error.";
 
 std::string const TURN_LAND_DOES_NOT_EXIST         = "Land does not exist.";
 std::string const TURN_TURN_HAS_BEEN_PERFORMED     = "Turn has been performed.";

@@ -27,7 +27,6 @@
 
 #include "SettlementManager.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -45,15 +44,15 @@ SettlementManager::SettlementManager(
 }
 
 bool SettlementManager::createSettlement(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land,
-    string             const & a_name
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name,
+    string             const a_name
 ) const
 {
     try
     {
         // TODO: The interface of "insertRecord" can be simplified.
-        IDSettlement id_settlement = m_accessor->insertRecord(a_transaction, a_id_land, a_name);
+        IDSettlement id_settlement = m_accessor->insertRecord(a_transaction, a_land_name, a_name);
 
         return true;
     }
@@ -89,12 +88,12 @@ SettlementShrPtr SettlementManager::getSettlement(
 }
 
 SettlementShrPtr SettlementManager::getSettlement(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_name,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name,
+    string             const a_name
 ) const
 {
-    return prepareResultGetSettlement(m_accessor->getRecord(a_transaction, a_name, a_id_land));
+    return prepareResultGetSettlement(m_accessor->getRecord(a_transaction, a_land_name, a_name));
 }
 
 SettlementMap SettlementManager::getSettlements(
@@ -105,11 +104,11 @@ SettlementMap SettlementManager::getSettlements(
 }
 
 SettlementMap SettlementManager::getSettlements(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
-    return prepareResultGetSettlements(m_accessor->getRecords(a_transaction, a_id_land));
+    return prepareResultGetSettlements(m_accessor->getRecords(a_transaction, a_land_name));
 }
 
 SettlementShrPtr SettlementManager::prepareResultGetSettlement(

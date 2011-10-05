@@ -27,7 +27,6 @@
 
 #include "Settlement.hpp"
 
-using namespace GameServer::Land;
 using namespace std;
 
 namespace GameServer
@@ -38,15 +37,15 @@ namespace Settlement
 Settlement::Settlement(
     SettlementRecord const & a_record
 )
-    : m_id_land(a_record.getIDLand()),
+    : m_land_name(a_record.getLandName()),
       m_id_settlement(a_record.getIDSettlement()),
       m_name(a_record.getName())
 {
 }
 
-IDLand const & Settlement::getIDLand() const
+string Settlement::getLandName() const
 {
-    return m_id_land;
+    return m_land_name;
 }
 
 IDSettlement const & Settlement::getIDSettlement() const

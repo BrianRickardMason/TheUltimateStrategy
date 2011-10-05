@@ -62,15 +62,15 @@ public:
      * @brief Creates a settlement.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      * @param a_name        The name of the settlement.
      *
      * @return The exit code.
      */
     virtual CreateSettlementOperatorExitCode createSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name,
+        std::string                     const a_name
     ) const;
 
 private:

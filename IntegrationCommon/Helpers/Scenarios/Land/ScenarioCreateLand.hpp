@@ -97,14 +97,14 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      * @param a_id_epoch   The identifier of the epoch.
-     * @param a_name       The name of the land.
+     * @param a_land_name  The name of the land.
      */
     ScenarioCreateLandActionSuccess(
         std::string  const & a_login,
         std::string  const & a_password,
         std::string  const   a_world_name,
         unsigned int const   a_id_epoch,
-        std::string  const   a_name
+        std::string  const   a_land_name
     );
 
     /**
@@ -142,7 +142,7 @@ private:
     /**
      * @brief The name of the land.
      */
-    std::string const m_name;
+    std::string const m_land_name;
 };
 
 /**
@@ -159,14 +159,14 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      * @param a_id_epoch   The identifier of the epoch.
-     * @param a_name       The name of the land.
+     * @param a_land_name  The name of the land.
      */
     ScenarioCreateLandActionInvalidRequest(
         std::string  const & a_login,
         std::string  const & a_password,
         std::string  const   a_world_name,
         unsigned int const   a_id_epoch,
-        std::string  const   a_name
+        std::string  const   a_land_name
     );
 
     /**
@@ -204,7 +204,7 @@ private:
     /**
      * @brief The name of the land.
      */
-    std::string const m_name;
+    std::string const m_land_name;
 };
 
 /**

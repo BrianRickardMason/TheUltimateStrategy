@@ -147,45 +147,29 @@ public:
      * @brief Gets the name of the world of the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The name of the world, an empty string if not found.
      */
     MOCK_CONST_METHOD2(
         getWorldNameOfLand,
         std::string(
-            Persistency::ITransactionShrPtr         a_transaction,
-            Land::IDLand                    const & a_id_land
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_land_name
         )
     );
 
     /**
-     * @brief Gets the name of the world of the land.
-     *
-     * @param a_transaction The transaction.
-     * @param a_name        The name of the land.
-     *
-     * @return The name of the world, an empty string if not found.
-     */
-    MOCK_CONST_METHOD2(
-        getWorldNameOfLand,
-        std::string(
-            Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_name
-        )
-    );
-
-    /**
-     * @brief Gets the identifier of the land of the settlement.
+     * @brief Gets the name of the land of the settlement.
      *
      * @param a_transaction   The transaction.
      * @param a_id_settlement The identifier of the settlement
      *
-     * @return The identifier of the land, 0 if not found.
+     * @return The name of the land, an empty string if not found.
      */
     MOCK_CONST_METHOD2(
-        getIDLandOfSettlement,
-        Land::IDLand(
+        getLandNameOfSettlement,
+        std::string(
             Persistency::ITransactionShrPtr         a_transaction,
             Settlement::IDSettlement        const & a_id_settlement
         )

@@ -28,7 +28,6 @@
 #include "../Persistency/TransactionPostgresql.hpp"
 #include "AuthorizationManagerAccessorPostgresql.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -39,40 +38,23 @@ namespace Authorization
 {
 
 bool AuthorizationManagerAccessorPostgresql::authorizeUserToLand(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_land_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
     string query = "SELECT * FROM lands WHERE login = " + backbone_transaction.quote(a_login)
-                   + " AND id_land = " + backbone_transaction.quote(a_id_land.getValue());
+                   + " AND land_name = " + backbone_transaction.quote(a_land_name);
 
     pqxx::result result = backbone_transaction.exec(query);
 
     return result.size() ? true : false;
 }
 
-bool AuthorizationManagerAccessorPostgresql::authorizeUserToLand(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    string             const & a_name
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM lands WHERE login = " + backbone_transaction.quote(a_login)
-                   + " AND name = " + backbone_transaction.quote(a_name);
-
-    pqxx::result result = backbone_transaction.exec(query);
-
-    return result.size() ? true : false;
-}
-
-IDLand AuthorizationManagerAccessorPostgresql::getIDLandOfSettlement(
+string AuthorizationManagerAccessorPostgresql::getLandNameOfSettlement(
     ITransactionShrPtr               a_transaction,
     Settlement::IDSettlement const & a_id_settlement
 ) const
@@ -80,19 +62,19 @@ IDLand AuthorizationManagerAccessorPostgresql::getIDLandOfSettlement(
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT id_land FROM settlements WHERE id_settlement = " + backbone_transaction.quote(a_id_settlement.getValue());
+    string query = "SELECT land_name FROM settlements WHERE id_settlement = " + backbone_transaction.quote(a_id_settlement.getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
 
     if (result.size() > 0)
     {
-        unsigned int id_land;
-        result[0]["id_land"].to(id_land);
-        return IDLand(id_land);
+        string land_name;
+        result[0]["land_name"].to(land_name);
+        return land_name;
     }
     else
     {
-        return IDLand(0);
+        return "";
     }
 }
 

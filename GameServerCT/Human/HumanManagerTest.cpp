@@ -51,9 +51,9 @@ protected:
      */
     HumanManagerTest()
         : m_id_epoch_1(1),
-          m_id_land_1(1),
           m_login("Login"),
           m_world_name("World"),
+          m_land_name("Land"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -75,11 +75,10 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land1");
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land2");
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name);
 
-            m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement1");
-            m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement2");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name, "Settlement1");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name, "Settlement2");
 
             // Remove humans that have been added.
             m_human_manager->subtractHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE, 1000);
@@ -112,11 +111,6 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants identifiers of the land.
-     */
-    IDLand m_id_land_1;
-
-    /**
      * @brief Test constants: the login of the user.
      */
     string m_login;
@@ -125,6 +119,11 @@ protected:
      * @brief Test constants: the name of the world.
      */
     string m_world_name;
+
+    /**
+     * @brief Test constants: the name of the land.
+     */
+    string m_land_name;
 
     /**
      * @brief The abstract factory of managers.

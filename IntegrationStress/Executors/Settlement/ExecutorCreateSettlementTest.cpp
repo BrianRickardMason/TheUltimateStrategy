@@ -80,7 +80,7 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
                             "Login1", "Password1",
-                            1, settlement_name)),
+                            land_name, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -131,13 +131,13 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
                             "Login1", "Password1",
-                            1, settlement_name)),
+                            land_name, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
                             "Login1", "Password1",
-                            1, settlement_name)),
+                            land_name, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementDoesExist))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -197,13 +197,13 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
                             "Login1", "Password1",
-                            1, settlement_name)),
+                            land_name_1, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
                             "Login1", "Password1",
-                            2, settlement_name)),
+                            land_name_2, settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
@@ -246,7 +246,7 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateSettlementActionInvalidRequest(
                             "Login1", "Password1",
-                            1, settlement_name)),
+                            "Land", settlement_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationInvalidRequest))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)

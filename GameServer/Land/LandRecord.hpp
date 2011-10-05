@@ -29,7 +29,6 @@
 #define GAMESERVER_LAND_LANDRECORD_HPP
 
 #include "../Epoch/IDEpoch.hpp"
-#include "IDLand.hpp"
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -51,16 +50,14 @@ public:
      * @param a_login      The login of the user.
      * @param a_world_name The name of the world.
      * @param a_id_epoch   The identifier of the epoch.
-     * @param a_id_land    The identifier of the land.
-     * @param a_name       The name of the land.
+     * @param a_land_name  The name of the land.
      * @param a_granted    The state of the "granted" value, whether or not humans and resources have been granted.
      */
     LandRecord(
         std::string    const   a_login,
         std::string    const   a_world_name,
         Epoch::IDEpoch const & a_id_epoch,
-        IDLand         const & a_id_land,
-        std::string    const & a_name,
+        std::string    const   a_land_name,
         bool                   a_granted
     );
 
@@ -86,18 +83,11 @@ public:
     Epoch::IDEpoch const & getIDEpoch() const;
 
     /**
-     * @brief Gets the identifier of the land.
-     *
-     * @return The identifier of the land.
-     */
-    IDLand const & getIDLand() const;
-
-    /**
      * @brief Gets the name of the land.
      *
      * @return The name of the land.
      */
-    std::string const & getName() const;
+    std::string getLandName() const;
 
     /**
      * @brief Gets the state of the "granted" value of the land.
@@ -123,14 +113,9 @@ private:
     Epoch::IDEpoch const m_id_epoch;
 
     /**
-     * @brief The identifier of the land.
-     */
-    IDLand const m_id_land;
-
-    /**
      * @brief The name of the land.
      */
-    std::string const m_name;
+    std::string const m_land_name;
 
     /**
      * @brief Defines whether resources and humans has been granted to the land.
@@ -148,12 +133,12 @@ typedef boost::shared_ptr<LandRecord> LandRecordShrPtr;
 /**
  * @brief The pair of the record of the land.
  */
-typedef std::pair<IDLand, LandRecordShrPtr> LandRecordPair;
+typedef std::pair<std::string, LandRecordShrPtr> LandRecordPair;
 
 /**
  * @brief The map of the record of the land.
  */
-typedef std::map<IDLand, LandRecordShrPtr> LandRecordMap;
+typedef std::map<std::string, LandRecordShrPtr> LandRecordMap;
 
 } // namespace Land
 } // namespace GameServer

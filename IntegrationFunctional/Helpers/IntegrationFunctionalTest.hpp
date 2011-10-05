@@ -90,7 +90,6 @@ private:
 
             // Reset sequences.
             backbone_transaction.exec("ALTER SEQUENCE epochs_id_epoch_seq MINVALUE 0 RESTART WITH 1");
-            backbone_transaction.exec("ALTER SEQUENCE lands_id_land_seq MINVALUE 0 RESTART WITH 1");
             backbone_transaction.exec("ALTER SEQUENCE settlements_id_settlement_seq MINVALUE 0 RESTART WITH 1");
 
             transaction->commit();
@@ -109,7 +108,7 @@ private:
     void synchronizeServerReady() const
     {
         // TODO: This has to be asynchronous (triggering).
-        usleep(500000);
+        usleep(50000);
     }
 
 protected:

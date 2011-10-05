@@ -46,14 +46,14 @@ public:
     /**
      * @brief Inserts a settlement record.
      *
-     * @param a_transaction A transaction.
-     * @param a_id_land     An identifier of the land.
+     * @param a_transaction The transaction.
+     * @param a_land_name   The name of the land.
      * @param a_name        A name of the settlement.
      */
     virtual IDSettlement insertRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name,
+        std::string                     const a_name
     ) const;
 
     /**
@@ -83,15 +83,16 @@ public:
     /**
      * @brief Gets the record of settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_transaction The transaction.
+     * @param a_land_name   The name of the land.
+     * @param a_name        The name of the settlement.
      *
      * @return The record of the settlement, null if not found.
      */
     virtual SettlementRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_name,
-        Land::IDLand                    const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name,
+        std::string                     const a_name
     ) const;
 
     /**
@@ -109,13 +110,13 @@ public:
      * @brief Gets records of settlement.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return A map of settlement records, an empty map if not found.
      */
     virtual SettlementRecordMap getRecords(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const;
 
 private:

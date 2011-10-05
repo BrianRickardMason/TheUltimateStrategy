@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_EPOCH_IEPOCHMANAGER_HPP
 #define GAMESERVER_EPOCH_IEPOCHMANAGER_HPP
 
-#include "../Land/IDLand.hpp"
 #include "../Persistency/ITransaction.hpp"
 #include "../Settlement/IDSettlement.hpp"
 #include "Epoch.hpp"
@@ -99,26 +98,13 @@ public:
      * @brief Gets the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
-     *
-     * @return The epoch, null if not found.
-     */
-    virtual EpochShrPtr getEpochByIDLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land
-    ) const = 0;
-
-    /**
-     * @brief Gets the epoch of the world.
-     *
-     * @param a_transaction The transaction.
-     * @param a_name        The name of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The epoch, null if not found.
      */
     virtual EpochShrPtr getEpochByLandName(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const = 0;
 
     /**

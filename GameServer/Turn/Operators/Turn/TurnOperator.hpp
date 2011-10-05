@@ -71,13 +71,13 @@ public:
      * @brief Performs a turn.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The exit code.
      */
     virtual TurnOperatorExitCode turn(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const;
 
 private:
@@ -85,13 +85,13 @@ private:
      * @brief Executes a turn.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return True on success, false otherwise.
      */
     bool executeTurn(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Land::IDLand                    const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const;
 
     /**

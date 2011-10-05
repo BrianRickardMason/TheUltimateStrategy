@@ -50,38 +50,38 @@ public:
      * @param a_login       The login of the user.
      * @param a_world_name  The name of the world.
      * @param a_id_epoch    The identifier of the epoch.
-     * @param a_name        The name of the land.
+     * @param a_land_name   The name of the land.
      */
     virtual void insertRecord(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
         std::string                     const   a_world_name,
         Epoch::IDEpoch                  const & a_id_epoch,
-        std::string                     const & a_name
+        std::string                     const   a_land_name
     ) const;
 
     /**
      * @brief Deletes a record of the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDLand                          const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const;
 
     /**
      * @brief Gets a record of the land.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The record of the land, null if not found.
      */
     virtual LandRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDLand                          const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const;
 
     /**
@@ -89,14 +89,14 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_name        The name of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The record of the land, null if not found.
      */
     virtual LandRecordShrPtr getRecordByLogin(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_land_name
     ) const;
 
     /**
@@ -104,14 +104,14 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_world_name  The name of the world.
-     * @param a_name        The name of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The record of the land, null if not found.
      */
     virtual LandRecordShrPtr getRecordByWorldName(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_world_name,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name,
+        std::string                     const a_land_name
     ) const;
 
     /**
@@ -170,11 +170,11 @@ public:
      * @brief Marks that land has been given a grant.
      *
      * @param a_transaction The transaction.
-     * @param a_id_land     The identifier of the land.
+     * @param a_land_name   The name of the land.
      */
     virtual void markGranted(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDLand                          const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
     ) const;
 
 private:

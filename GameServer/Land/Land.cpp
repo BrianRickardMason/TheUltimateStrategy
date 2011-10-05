@@ -41,8 +41,7 @@ Land::Land(
     : m_login(a_record.getLogin()),
       m_world_name(a_record.getWorldName()),
       m_id_epoch(a_record.getIDEpoch()),
-      m_id_land(a_record.getIDLand()),
-      m_name(a_record.getName()),
+      m_land_name(a_record.getLandName()),
       m_granted(a_record.getGranted())
 {
 }
@@ -62,14 +61,9 @@ IDEpoch const & Land::getIDEpoch() const
     return m_id_epoch;
 }
 
-IDLand const & Land::getIDLand() const
+string Land::getLandName() const
 {
-    return m_id_land;
-}
-
-string const & Land::getName() const
-{
-    return m_name;
+    return m_land_name;
 }
 
 bool Land::getGranted() const

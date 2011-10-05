@@ -45,42 +45,27 @@ public:
     /**
      * @brief Authorizes a user to the land.
      *
-     * @param a_transaction A transaction.
+     * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_id_land     An identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return True if the user is authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        Land::IDLand                    const & a_id_land
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_land_name
     ) const;
 
     /**
-     * @brief Authorizes a user to the land.
+     * @brief Gets the name of a land of the settlement.
      *
-     * @param a_transaction A transaction.
-     * @param a_login       The login of the user.
-     * @param a_name        A name of the land.
+     * @param a_transaction   The transaction.
+     * @param a_id_settlement The identifier of the settlement
      *
-     * @return True if the user is authorized, false otherwise.
+     * @return The name of the land, an empty string if not found.
      */
-    virtual bool authorizeUserToLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        std::string                     const & a_name
-    ) const;
-
-    /**
-     * @brief Gets the identifier of a land of the settlement.
-     *
-     * @param a_transaction   A transaction.
-     * @param a_id_settlement An identifier of the settlement
-     *
-     * @return The identifier of the land, 0 if not found.
-     */
-    virtual Land::IDLand getIDLandOfSettlement(
+    virtual std::string getLandNameOfSettlement(
         Persistency::ITransactionShrPtr         a_transaction,
         Settlement::IDSettlement        const & a_id_settlement
     ) const;

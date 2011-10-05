@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_SETTLEMENT_SETTLEMENTRECORD_HPP
 #define GAMESERVER_SETTLEMENT_SETTLEMENTRECORD_HPP
 
-#include "../Land/IDLand.hpp"
 #include "IDSettlement.hpp"
 #include <boost/shared_ptr.hpp>
 #include <map>
@@ -48,22 +47,22 @@ public:
     /**
      * @brief Constructs a settlement record.
      *
-     * @param a_id_land       An identifier of the land.
+     * @param a_land_name     The name of the land.
      * @param a_id_settlement An identifier of the settlement.
      * @param a_name          A name of the settlement.
      */
     SettlementRecord(
-        Land::IDLand const & a_id_land,
+        std::string  const   a_land_name,
         IDSettlement const & a_id_settlement,
         std::string  const & a_name
     );
 
     /**
-     * @brief Gets the identifier of the land.
+     * @brief Gets the name of the land.
      *
-     * @return The identifier of the land.
+     * @return The name of the land.
      */
-    Land::IDLand const & getIDLand() const;
+    std::string getLandName() const;
 
     /**
      * @brief Gets the identifier of the settlement.
@@ -81,9 +80,9 @@ public:
 
 private:
     /**
-     * @brief An identifier of the land.
+     * @brief The name of the land.
      */
-    Land::IDLand const m_id_land;
+    std::string const m_land_name;
 
     /**
      * @brief An identifier of the settlement.

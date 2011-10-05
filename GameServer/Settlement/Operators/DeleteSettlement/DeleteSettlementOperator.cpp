@@ -27,7 +27,6 @@
 
 #include "DeleteSettlementOperator.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace std;
 

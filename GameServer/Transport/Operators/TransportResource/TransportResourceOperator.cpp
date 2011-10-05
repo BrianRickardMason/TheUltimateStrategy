@@ -82,7 +82,7 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
         }
 
         // Verify if the settlements are from the same land.
-        if (settlement_source->getIDLand() != settlement_destination->getIDLand())
+        if (settlement_source->getLandName() != settlement_destination->getLandName())
         {
             return TransportResourceOperatorExitCode(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND);
         }

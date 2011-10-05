@@ -28,7 +28,6 @@
 #include "../Persistency/TransactionPostgresql.hpp"
 #include "EpochManagerAccessorPostgresql.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
 using namespace boost;
@@ -157,14 +156,14 @@ void EpochManagerAccessorPostgresql::incrementTicks(
 }
 
 string EpochManagerAccessorPostgresql::getWorldNameOfLand(
-    Persistency::ITransactionShrPtr         a_transaction,
-    Land::IDLand                    const & a_id_land
+    Persistency::ITransactionShrPtr       a_transaction,
+    string                          const a_land_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT world_name FROM lands WHERE id_land = " + backbone_transaction.quote(a_id_land.getValue());
+    string query = "SELECT world_name FROM lands WHERE land_name = " + backbone_transaction.quote(a_land_name);
 
     pqxx::result result = backbone_transaction.exec(query);
 
@@ -180,31 +179,7 @@ string EpochManagerAccessorPostgresql::getWorldNameOfLand(
     }
 }
 
-string EpochManagerAccessorPostgresql::getWorldNameOfLand(
-    Persistency::ITransactionShrPtr         a_transaction,
-    string                          const & a_name
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT world_name FROM lands WHERE name = " + backbone_transaction.quote(a_name);
-
-    pqxx::result result = backbone_transaction.exec(query);
-
-    if (result.size() > 0)
-    {
-        string world_name;
-        result[0]["world_name"].to(world_name);
-        return world_name;
-    }
-    else
-    {
-        return "";
-    }
-}
-
-IDLand EpochManagerAccessorPostgresql::getIDLandOfSettlement(
+string EpochManagerAccessorPostgresql::getLandNameOfSettlement(
     Persistency::ITransactionShrPtr         a_transaction,
     Settlement::IDSettlement        const & a_id_settlement
 ) const
@@ -212,19 +187,19 @@ IDLand EpochManagerAccessorPostgresql::getIDLandOfSettlement(
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT id_land FROM settlements WHERE id_settlement = " + backbone_transaction.quote(a_id_settlement.getValue());
+    string query = "SELECT land_name FROM settlements WHERE id_settlement = " + backbone_transaction.quote(a_id_settlement.getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
 
     if (result.size() > 0)
     {
-        unsigned int id_land;
-        result[0]["id_land"].to(id_land);
-        return IDLand(id_land);
+        string land_name;
+        result[0]["land_name"].to(land_name);
+        return land_name;
     }
     else
     {
-        return IDLand(0);
+        return "";
     }
 }
 

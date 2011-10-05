@@ -88,6 +88,8 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
             return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS_IN_THE_WORLD);
         }
 
+        // TODO: Change the exit code since there is no possibility to have two land of the same names.
+
         bool const result = m_land_manager->createLand(a_transaction, a_login, a_world_name, a_id_epoch, a_name);
 
         return (result) ? CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED)

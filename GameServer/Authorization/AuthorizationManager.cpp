@@ -28,7 +28,6 @@
 #include "AuthorizationManager.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
 using namespace std;
@@ -46,21 +45,12 @@ AuthorizationManager::AuthorizationManager(
 }
 
 bool AuthorizationManager::authorizeUserToLand(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_land_name
 ) const
 {
-    return m_accessor->authorizeUserToLand(a_transaction, a_login, a_id_land);
-}
-
-bool AuthorizationManager::authorizeUserToLand(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    string             const & a_name
-) const
-{
-    return m_accessor->authorizeUserToLand(a_transaction, a_login, a_name);
+    return m_accessor->authorizeUserToLand(a_transaction, a_login, a_land_name);
 }
 
 bool AuthorizationManager::authorizeUserToHolder(
@@ -83,9 +73,9 @@ bool AuthorizationManager::authorizeUserToSettlement(
     IDSettlement       const & a_id_settlement
 ) const
 {
-    IDLand id_land = m_accessor->getIDLandOfSettlement(a_transaction, a_id_settlement);
+    string land_name = m_accessor->getLandNameOfSettlement(a_transaction, a_id_settlement);
 
-    return authorizeUserToLand(a_transaction, a_login, id_land);
+    return authorizeUserToLand(a_transaction, a_login, land_name);
 }
 
 } // namespace Authorization

@@ -29,7 +29,6 @@
 #include "WorldManagerAccessorPostgresql.hpp"
 #include "WorldRecord.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -107,14 +106,14 @@ IWorldRecordMap WorldManagerAccessorPostgresql::getRecords(
 }
 
 string WorldManagerAccessorPostgresql::getWorldNameOfLand(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT world_name FROM lands WHERE id_land = " + backbone_transaction.quote(a_id_land.getValue());
+    string query = "SELECT world_name FROM lands WHERE land_name = " + backbone_transaction.quote(a_land_name);
 
     pqxx::result result = backbone_transaction.exec(query);
 

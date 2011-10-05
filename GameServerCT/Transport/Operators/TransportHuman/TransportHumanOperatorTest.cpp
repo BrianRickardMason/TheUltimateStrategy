@@ -61,14 +61,14 @@ protected:
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_transport_human_operator(TransportHumanOperatorFactory::createTransportHumanOperator(m_manager_abstract_factory)),
           m_id_epoch_1(1),
-          m_id_land_1(1),
-          m_id_land_2(2),
           m_id_settlement_1(1),
           m_id_settlement_2(2),
           m_id_settlement_3(3),
           m_id_settlement_4(4),
           m_login("Login"),
           m_world_name("World"),
+          m_land_name_1("Land1"),
+          m_land_name_2("Land2"),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, 2)
     {
@@ -82,12 +82,12 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land1");
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, "Land2");
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_1);
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_2);
 
-            m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement1");
-            m_create_settlement_operator->createSettlement(transaction, m_id_land_1, "Settlement2");
-            m_create_settlement_operator->createSettlement(transaction, m_id_land_2, "Settlement3");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement1");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement2");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_2, "Settlement3");
 
             transaction->commit();
         }
@@ -139,12 +139,6 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants: identifiers of lands.
-     */
-    IDLand m_id_land_1,
-           m_id_land_2;
-
-    /**
      * @brief Test constants: identifiers of settlements.
      */
     IDSettlement m_id_settlement_1,
@@ -161,6 +155,12 @@ protected:
      * @brief Test constants: the name of the world.
      */
     string m_world_name;
+
+    /**
+     * @brief Test constants: the names of the lands.
+     */
+    string m_land_name_1,
+           m_land_name_2;
 
     /**
      * @brief Test constants: identifiers of holders.

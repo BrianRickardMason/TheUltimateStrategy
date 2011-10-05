@@ -42,50 +42,49 @@ namespace Request
 /**
  * @brief The identifiers of the requests.
  */
-unsigned short int const REQUEST_ID_ECHO                               =  1;
-unsigned short int const REQUEST_ID_ERROR                              =  2;
+unsigned short int const REQUEST_ID_ECHO                                 =  1;
+unsigned short int const REQUEST_ID_ERROR                                =  2;
 
-unsigned short int const REQUEST_ID_CREATE_LAND                        =  3;
-unsigned short int const REQUEST_ID_DELETE_LAND                        =  4;
-unsigned short int const REQUEST_ID_GET_LAND_BY_ID_LAND                =  5;
-unsigned short int const REQUEST_ID_GET_LAND_BY_NAME                   =  6;
-unsigned short int const REQUEST_ID_GET_LANDS_BY_WORLD_NAME            =  7;
+unsigned short int const REQUEST_ID_CREATE_LAND                          =  3;
+unsigned short int const REQUEST_ID_DELETE_LAND                          =  4;
+unsigned short int const REQUEST_ID_GET_LAND_BY_NAME                     =  5;
+unsigned short int const REQUEST_ID_GET_LANDS_BY_WORLD_NAME              =  6;
 
-unsigned short int const REQUEST_ID_CREATE_SETTLEMENT                  =  8;
-unsigned short int const REQUEST_ID_DELETE_SETTLEMENT                  =  9;
-unsigned short int const REQUEST_ID_GET_SETTLEMENT_BY_ID_LAND_AND_NAME =  0;
-unsigned short int const REQUEST_ID_GET_SETTLEMENT_BY_ID_SETTLEMENT    = 11;
-unsigned short int const REQUEST_ID_GET_SETTLEMENTS_BY_ID_LAND         = 12;
+unsigned short int const REQUEST_ID_CREATE_SETTLEMENT                    =  7;
+unsigned short int const REQUEST_ID_DELETE_SETTLEMENT                    =  8;
+unsigned short int const REQUEST_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME =  9;
+unsigned short int const REQUEST_ID_GET_SETTLEMENT_BY_ID_SETTLEMENT      = 10;
+unsigned short int const REQUEST_ID_GET_SETTLEMENTS_BY_LAND_NAME         = 11;
 
-unsigned short int const REQUEST_ID_BUILD_BUILDING                     = 13;
-unsigned short int const REQUEST_ID_DESTROY_BUILDING                   = 14;
-unsigned short int const REQUEST_ID_GET_BUILDING                       = 15;
-unsigned short int const REQUEST_ID_GET_BUILDINGS                      = 16;
+unsigned short int const REQUEST_ID_BUILD_BUILDING                       = 12;
+unsigned short int const REQUEST_ID_DESTROY_BUILDING                     = 13;
+unsigned short int const REQUEST_ID_GET_BUILDING                         = 14;
+unsigned short int const REQUEST_ID_GET_BUILDINGS                        = 15;
 
-unsigned short int const REQUEST_ID_DISMISS_HUMAN                      = 17;
-unsigned short int const REQUEST_ID_ENGAGE_HUMAN                       = 18;
-unsigned short int const REQUEST_ID_GET_HUMAN                          = 19;
-unsigned short int const REQUEST_ID_GET_HUMANS                         = 20;
+unsigned short int const REQUEST_ID_DISMISS_HUMAN                        = 16;
+unsigned short int const REQUEST_ID_ENGAGE_HUMAN                         = 17;
+unsigned short int const REQUEST_ID_GET_HUMAN                            = 18;
+unsigned short int const REQUEST_ID_GET_HUMANS                           = 19;
 
-unsigned short int const REQUEST_ID_GET_RESOURCE                       = 21;
-unsigned short int const REQUEST_ID_GET_RESOURCES                      = 22;
+unsigned short int const REQUEST_ID_GET_RESOURCE                         = 20;
+unsigned short int const REQUEST_ID_GET_RESOURCES                        = 21;
 
-unsigned short int const REQUEST_ID_CREATE_USER                        = 23;
+unsigned short int const REQUEST_ID_CREATE_USER                          = 22;
 
-unsigned short int const REQUEST_ID_CREATE_WORLD                       = 24;
+unsigned short int const REQUEST_ID_CREATE_WORLD                         = 23;
 
-unsigned short int const REQUEST_ID_TURN                               = 25;
+unsigned short int const REQUEST_ID_TURN                                 = 24;
 
-unsigned short int const REQUEST_ID_CREATE_EPOCH                       = 26;
-unsigned short int const REQUEST_ID_DELETE_EPOCH                       = 27;
-unsigned short int const REQUEST_ID_ACTIVATE_EPOCH                     = 28;
-unsigned short int const REQUEST_ID_DEACTIVATE_EPOCH                   = 29;
-unsigned short int const REQUEST_ID_FINISH_EPOCH                       = 30;
-unsigned short int const REQUEST_ID_TICK_EPOCH                         = 31;
-unsigned short int const REQUEST_ID_GET_EPOCH                          = 32;
+unsigned short int const REQUEST_ID_CREATE_EPOCH                         = 25;
+unsigned short int const REQUEST_ID_DELETE_EPOCH                         = 26;
+unsigned short int const REQUEST_ID_ACTIVATE_EPOCH                       = 27;
+unsigned short int const REQUEST_ID_DEACTIVATE_EPOCH                     = 28;
+unsigned short int const REQUEST_ID_FINISH_EPOCH                         = 29;
+unsigned short int const REQUEST_ID_TICK_EPOCH                           = 30;
+unsigned short int const REQUEST_ID_GET_EPOCH                            = 31;
 
-unsigned short int const REQUEST_ID_TRANSPORT_HUMAN                    = 33;
-unsigned short int const REQUEST_ID_TRANSPORT_RESOURCE                 = 34;
+unsigned short int const REQUEST_ID_TRANSPORT_HUMAN                      = 32;
+unsigned short int const REQUEST_ID_TRANSPORT_RESOURCE                   = 33;
 
 /**
  * @brief A request class.

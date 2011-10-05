@@ -27,7 +27,6 @@
 
 #include "EpochManager.hpp"
 
-using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
 using namespace boost;
@@ -101,22 +100,12 @@ EpochShrPtr EpochManager::getEpoch(
     return record ? make_shared<Epoch>(*record) : EpochShrPtr();
 }
 
-EpochShrPtr EpochManager::getEpochByIDLand(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
-) const
-{
-    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_id_land);
-
-    return getEpoch(a_transaction, world_name);
-}
-
 EpochShrPtr EpochManager::getEpochByLandName(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_name
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
-    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_name);
+    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_land_name);
 
     return getEpoch(a_transaction, world_name);
 }
@@ -126,9 +115,9 @@ EpochShrPtr EpochManager::getEpochByIDSettlement(
     IDSettlement       const & a_id_settlement
 ) const
 {
-    IDLand id_land = m_accessor->getIDLandOfSettlement(a_transaction, a_id_settlement);
+    string land_name = m_accessor->getLandNameOfSettlement(a_transaction, a_id_settlement);
 
-    return getEpochByIDLand(a_transaction, id_land);
+    return getEpochByLandName(a_transaction, land_name);
 }
 
 bool EpochManager::activateEpoch(

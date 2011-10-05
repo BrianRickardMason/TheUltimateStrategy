@@ -61,19 +61,19 @@ TurnOperator::TurnOperator(
 }
 
 TurnOperatorExitCode TurnOperator::turn(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
     try
     {
         // Verify if the land exists.
-        if (!m_land_manager->getLand(a_transaction, a_id_land))
+        if (!m_land_manager->getLand(a_transaction, a_land_name))
         {
             return TurnOperatorExitCode(TURN_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }
 
-        bool const result = executeTurn(a_transaction, a_id_land);
+        bool const result = executeTurn(a_transaction, a_land_name);
 
         return (result) ? TurnOperatorExitCode(TURN_OPERATOR_EXIT_CODE_TURN_HAS_BEEN_PERFORMED)
                         : TurnOperatorExitCode(TURN_OPERATOR_EXIT_CODE_TURN_HAS_NOT_BEEN_PERFORMED);
@@ -85,18 +85,18 @@ TurnOperatorExitCode TurnOperator::turn(
 }
 
 bool TurnOperator::executeTurn(
-    ITransactionShrPtr         a_transaction,
-    IDLand             const & a_id_land
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
 ) const
 {
-    LandShrPtr land = m_land_manager->getLand(a_transaction, a_id_land);
+    LandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
 
     if (!land)
     {
         return false;
     }
 
-    SettlementMap settlements = m_settlement_manager->getSettlements(a_transaction, a_id_land);
+    SettlementMap settlements = m_settlement_manager->getSettlements(a_transaction, a_land_name);
 
     for (SettlementMap::iterator it = settlements.begin(); it != settlements.end(); ++it)
     {

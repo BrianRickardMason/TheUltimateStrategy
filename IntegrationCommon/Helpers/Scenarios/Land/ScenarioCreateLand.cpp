@@ -68,13 +68,13 @@ ScenarioCreateLandActionSuccess::ScenarioCreateLandActionSuccess(
     string       const & a_password,
     string       const   a_world_name,
     unsigned int const   a_id_epoch,
-    string       const   a_name
+    string       const   a_land_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_world_name(a_world_name),
       m_id_epoch(a_id_epoch),
-      m_name(a_name)
+      m_land_name(a_land_name)
 {
 }
 
@@ -82,7 +82,7 @@ ReplyShrPtr ScenarioCreateLandActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateLand(a_client, m_login, m_password, m_world_name, m_id_epoch, m_name);
+    return CreateLand(a_client, m_login, m_password, m_world_name, m_id_epoch, m_land_name);
 }
 
 ScenarioCreateLandActionInvalidRequest::ScenarioCreateLandActionInvalidRequest(
@@ -90,13 +90,13 @@ ScenarioCreateLandActionInvalidRequest::ScenarioCreateLandActionInvalidRequest(
     string       const & a_password,
     string       const   a_world_name,
     unsigned int const   a_id_epoch,
-    string       const   a_name
+    string       const   a_land_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_world_name(a_world_name),
       m_id_epoch(a_id_epoch),
-      m_name(a_name)
+      m_land_name(a_land_name)
 {
 }
 
@@ -122,9 +122,9 @@ ReplyShrPtr ScenarioCreateLandActionInvalidRequest::perform(
     idepoch->appendAttribute("type")->setValue("unsigned integer");
     idepoch->appendAttribute("value")->setValue(m_id_epoch);
 
-    IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("type")->setValue("integer");
-    name->appendAttribute("value")->setValue(m_name.c_str());
+    IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
+    land_name->appendAttribute("type")->setValue("integer");
+    land_name->appendAttribute("value")->setValue(m_land_name.c_str());
 
     return a_client->sendRequest(request);
 }

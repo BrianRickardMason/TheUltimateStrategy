@@ -44,16 +44,15 @@
 #include "Executors/Human/ExecutorGetHumans.hpp"
 #include "Executors/Land/ExecutorCreateLand.hpp"
 #include "Executors/Land/ExecutorDeleteLand.hpp"
-#include "Executors/Land/ExecutorGetLandByIDLand.hpp"
-#include "Executors/Land/ExecutorGetLandByName.hpp"
+#include "Executors/Land/ExecutorGetLand.hpp"
 #include "Executors/Land/ExecutorGetLandsByWorldName.hpp"
 #include "Executors/Resource/ExecutorGetResource.hpp"
 #include "Executors/Resource/ExecutorGetResources.hpp"
 #include "Executors/Settlement/ExecutorCreateSettlement.hpp"
 #include "Executors/Settlement/ExecutorDeleteSettlement.hpp"
-#include "Executors/Settlement/ExecutorGetSettlementByIDLandAndName.hpp"
 #include "Executors/Settlement/ExecutorGetSettlementByIDSettlement.hpp"
-#include "Executors/Settlement/ExecutorGetSettlementsByIDLand.hpp"
+#include "Executors/Settlement/ExecutorGetSettlementByLandNameAndName.hpp"
+#include "Executors/Settlement/ExecutorGetSettlements.hpp"
 #include "Executors/Transport/ExecutorTransportHuman.hpp"
 #include "Executors/Transport/ExecutorTransportResource.hpp"
 #include "Executors/Turn/ExecutorTurn.hpp"
@@ -89,22 +88,20 @@ IExecutorShrPtr RequestDispatcher::dispatchRequest(
             return shared_ptr<IExecutor>(new ExecutorCreateLand);
         case REQUEST_ID_DELETE_LAND:
             return shared_ptr<IExecutor>(new ExecutorDeleteLand);
-        case REQUEST_ID_GET_LAND_BY_ID_LAND:
-            return shared_ptr<IExecutor>(new ExecutorGetLandByIDLand);
         case REQUEST_ID_GET_LAND_BY_NAME:
-            return shared_ptr<IExecutor>(new ExecutorGetLandByName);
+            return shared_ptr<IExecutor>(new ExecutorGetLand);
         case REQUEST_ID_GET_LANDS_BY_WORLD_NAME:
             return shared_ptr<IExecutor>(new ExecutorGetLandsByWorldName);
         case REQUEST_ID_CREATE_SETTLEMENT:
             return shared_ptr<IExecutor>(new ExecutorCreateSettlement);
         case REQUEST_ID_DELETE_SETTLEMENT:
             return shared_ptr<IExecutor>(new ExecutorDeleteSettlement);
-        case REQUEST_ID_GET_SETTLEMENT_BY_ID_LAND_AND_NAME:
-            return shared_ptr<IExecutor>(new ExecutorGetSettlementByIDLandAndName);
         case REQUEST_ID_GET_SETTLEMENT_BY_ID_SETTLEMENT:
             return shared_ptr<IExecutor>(new ExecutorGetSettlementByIDSettlement);
-        case REQUEST_ID_GET_SETTLEMENTS_BY_ID_LAND:
-            return shared_ptr<IExecutor>(new ExecutorGetSettlementsByIDLand);
+        case REQUEST_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME:
+            return shared_ptr<IExecutor>(new ExecutorGetSettlementByLandNameAndName);
+        case REQUEST_ID_GET_SETTLEMENTS_BY_LAND_NAME:
+            return shared_ptr<IExecutor>(new ExecutorGetSettlements);
         case REQUEST_ID_BUILD_BUILDING:
             return shared_ptr<IExecutor>(new ExecutorBuildBuilding);
         case REQUEST_ID_DESTROY_BUILDING:

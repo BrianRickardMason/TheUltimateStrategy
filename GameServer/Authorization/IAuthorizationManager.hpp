@@ -29,7 +29,6 @@
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZATIONMANAGER_HPP
 
 #include "../Common/IDHolder.hpp"
-#include "../Land/IDLand.hpp"
 #include "../Persistency/ITransaction.hpp"
 #include "../Settlement/IDSettlement.hpp"
 #include <boost/noncopyable.hpp>
@@ -58,29 +57,14 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_id_land     An identifier of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        Land::IDLand                    const & a_id_land
-    ) const = 0;
-
-    /**
-     * @brief Authorizes the user to the land.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_name        A name of the land.
-     *
-     * @return True if authorized, false otherwise.
-     */
-    virtual bool authorizeUserToLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        std::string                     const & a_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_land_name
     ) const = 0;
 
     /**
