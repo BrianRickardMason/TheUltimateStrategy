@@ -52,68 +52,42 @@ public:
     /**
      * @brief Creates a settlement.
      *
-     * @param a_transaction The transaction.
-     * @param a_land_name   The name of a land.
-     * @param a_name        The name of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_land_name       The name of a land.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return True on success, false otherwise.
      */
     virtual bool createSettlement(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name,
-        std::string                     const a_name
+        std::string                     const a_settlement_name
     ) const = 0;
 
     /**
      * @brief Deletes a settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement An identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return True on success, false otherwise.
      */
     virtual bool deleteSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDSettlement                    const & a_id_settlement
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
     ) const = 0;
 
     /**
      * @brief Gets a settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement.
-     *
-     * @return The settlement, null if not found.
-     */
-    virtual SettlementShrPtr getSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDSettlement                    const & a_id_settlement
-    ) const = 0;
-
-    /**
-     * @brief Gets a settlement.
-     *
-     * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
-     * @param a_name        The name of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return The settlement, null if not found.
      */
     virtual SettlementShrPtr getSettlement(
         Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_land_name,
-        std::string                     const a_name
-    ) const = 0;
-
-    /**
-     * @brief Gets settlements.
-     *
-     * @param a_transaction The transaction.
-     *
-     * @return A map of settlements, an empty map if not found.
-     */
-    virtual SettlementMap getSettlements(
-        Persistency::ITransactionShrPtr a_transaction
+        std::string                     const a_settlement_name
     ) const = 0;
 
     /**

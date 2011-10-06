@@ -36,7 +36,7 @@ namespace Settlement
 {
 
 /**
- * @brief A settlement.
+ * @brief The settlement.
  */
 class Settlement
 {
@@ -58,18 +58,11 @@ public:
     std::string getLandName() const;
 
     /**
-     * @brief Gets an identifier of the settlement.
-     *
-     * @return The identifier of the settlement.
-     */
-    IDSettlement const & getIDSettlement() const;
-
-    /**
-     * @brief Gets an name of the settlement.
+     * @brief Gets the name of the settlement.
      *
      * @return The name of the settlement.
      */
-    std::string const & getName() const;
+    std::string getSettlementName() const;
 
 private:
     /**
@@ -78,14 +71,9 @@ private:
     std::string const m_land_name;
 
     /**
-     * @brief An identifier of the settlement.
+     * @brief The name of the settlement.
      */
-    IDSettlement const m_id_settlement;
-
-    /**
-     * @brief A name of the settlement.
-     */
-    std::string const m_name;
+    std::string const m_settlement_name;
 };
 
 /**
@@ -96,12 +84,12 @@ typedef boost::shared_ptr<Settlement> SettlementShrPtr;
 /**
  * @brief A pair of settlement.
  */
-typedef std::pair<IDSettlement, SettlementShrPtr> SettlementPair;
+typedef std::pair<std::string, SettlementShrPtr> SettlementPair;
 
 /**
  * @brief A map of settlement.
  */
-typedef std::map<IDSettlement, SettlementShrPtr> SettlementMap;
+typedef std::map<std::string, SettlementShrPtr> SettlementMap;
 
 } // namespace Settlement
 } // namespace GameServer

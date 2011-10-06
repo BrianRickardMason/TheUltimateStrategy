@@ -44,7 +44,7 @@ namespace Executors
  * @brief The ExecutorGetSettlements executor.
  *
  * <?xml version=\"1.0\"?>
- * <request id=\"REQUEST_ID_GET_SETTLEMENTS_BY_LAND_NAME\">
+ * <request id=\"REQUEST_ID_GET_SETTLEMENTS\">
  *     <user>
  *         <login    value=\"#\" />
  *         <password value=\"#\" />
@@ -55,17 +55,17 @@ namespace Executors
  * </request>
  *
  * <?xml version=\"1.0\"?>
- * <reply id=\"REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME">
+ * <reply id=\"REPLY_ID_GET_SETTLEMENTS">
  *     <status value=\"#\" />
  *     <parameters>
  *         <message type=\"string"\ value=\"#\" />
  *     </parameters>
  *     <objects>
  *         <object>
- *             <message      type=\"string\"           value=\"#\" />
- *             <land_name    type=\"string\"           value=\"#\" />
- *             <idsettlement type=\"unsigned integer\" value=\"#\" />
- *             <name         type=\"string\"           value=\"#\" />
+ *             <message         type=\"string\" value=\"#\" />
+ *             <land_name       type=\"string\" value=\"#\" />
+ *             <settlement_name type=\"string\" value=\"#\" />
+ *             <name            type=\"string\" value=\"#\" />
  *         </object>
  *         <object>
  *             ...

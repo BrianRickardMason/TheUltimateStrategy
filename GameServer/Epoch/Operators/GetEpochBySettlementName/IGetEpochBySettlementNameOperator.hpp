@@ -25,12 +25,14 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_GETEPOCHBYIDSETTLEMENTOPERATOR_HPP
-#define GAMESERVER_EPOCH_GETEPOCHBYIDSETTLEMENTOPERATOR_HPP
+#ifndef GAMESERVER_EPOCH_IGETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP
+#define GAMESERVER_EPOCH_IGETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP
 
-#include "../../../Settlement/ISettlementManager.hpp"
-#include "../../IEpochManager.hpp"
-#include "IGetEpochByIDSettlementOperator.hpp"
+#include "../../../Persistency/ITransaction.hpp"
+#include "GetEpochBySettlementNameOperatorExitCode.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -38,54 +40,37 @@ namespace Epoch
 {
 
 /**
- * @brief GetEpochByIDSettlementOperator.
+ * @brief The interface of GetEpochBySettlementNameOperator.
  */
-class GetEpochByIDSettlementOperator
-    : public IGetEpochByIDSettlementOperator
+class IGetEpochBySettlementNameOperator
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the operator.
-     *
-     * @param a_epoch_manager      The manager of epochs.
-     * @param a_settlement_manager The manager of settlements.
+     * @brief Destructs GetEpochBySettlementNameOperator.
      */
-    GetEpochByIDSettlementOperator(
-        IEpochManagerShrPtr                  a_epoch_manager,
-        Settlement::ISettlementManagerShrPtr a_settlement_manager
-    );
+    virtual ~IGetEpochBySettlementNameOperator(){};
 
     /**
      * @brief Gets an epoch.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return The exit code.
      */
-    virtual GetEpochByIDSettlementOperatorExitCode getEpochByIDSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Settlement::IDSettlement        const & a_id_settlement
-    ) const;
-
-private:
-    /**
-     * @brief The manager of epochs.
-     */
-    IEpochManagerShrPtr m_epoch_manager;
-
-    /**
-     * @brief The manager of settlements.
-     */
-    Settlement::ISettlementManagerShrPtr m_settlement_manager;
+    virtual GetEpochBySettlementNameOperatorExitCode getEpochBySettlementName(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const = 0;
 };
 
 /**
- * @brief The auto pointer of GetEpochByIDSettlementOperator.
+ * @brief The shared pointer of the interface of GetEpochBySettlementNameOperator.
  */
-typedef std::auto_ptr<GetEpochByIDSettlementOperator> GetEpochByIDSettlementOperatorAutPtr;
+typedef boost::shared_ptr<IGetEpochBySettlementNameOperator> IGetEpochBySettlementNameOperatorShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_GETEPOCHBYIDSETTLEMENTOPERATOR_HPP
+#endif // GAMESERVER_EPOCH_IGETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP

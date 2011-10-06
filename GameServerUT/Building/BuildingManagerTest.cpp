@@ -49,7 +49,7 @@ protected:
      * @brief Creates a test class.
      */
     BuildingManagerTest()
-        : m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 1),
+        : m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
           m_key_1(ID_BUILDING_DEFENSIVE_BARBICAN),
           m_key_2(ID_BUILDING_GOLD_ALTAR_OF_WISHES)
     {

@@ -93,14 +93,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login         The login of the user.
-     * @param a_password      The password of the user.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_settlement_name The name of the settlement.
      */
     ScenarioDeleteSettlementActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_settlement
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_settlement_name
     );
 
     /**
@@ -126,9 +126,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the settlement.
+     * @brief The name of the settlement.
      */
-    unsigned int const m_id_settlement;
+    std::string const m_settlement_name;
 };
 
 /**
@@ -141,14 +141,14 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login         The login of the user.
-     * @param a_password      The password of the user.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_settlement_name The name of the settlement.
      */
     ScenarioDeleteSettlementActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_settlement
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_settlement_name
     );
 
     /**
@@ -174,9 +174,9 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the settlement.
+     * @brief The name of the settlement.
      */
-    unsigned int const m_id_settlement;
+    std::string const m_settlement_name;
 };
 
 /**

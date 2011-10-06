@@ -64,19 +64,19 @@ char const * ScenarioDismissHuman::execute()
 }
 
 ScenarioDismissHumanActionSuccess::ScenarioDismissHumanActionSuccess(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_human_class,
+    unsigned int const a_id_human,
+    unsigned int const a_experience,
+    unsigned int const a_volume
 )
     : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
-      m_id_holder(a_id_holder),
+      m_holder_name(a_holder_name),
       m_id_human_class(a_id_human_class),
       m_id_human(a_id_human),
       m_experience(a_experience),
@@ -92,7 +92,7 @@ ReplyShrPtr ScenarioDismissHumanActionSuccess::perform(
                         m_login,
                         m_password,
                         m_id_holder_class,
-                        m_id_holder,
+                        m_holder_name,
                         m_id_human_class,
                         m_id_human,
                         m_experience,
@@ -100,19 +100,19 @@ ReplyShrPtr ScenarioDismissHumanActionSuccess::perform(
 }
 
 ScenarioDismissHumanActionInvalidRequest::ScenarioDismissHumanActionInvalidRequest(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_human_class,
+    unsigned int const a_id_human,
+    unsigned int const a_experience,
+    unsigned int const a_volume
 )
     : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
-      m_id_holder(a_id_holder),
+      m_holder_name(a_holder_name),
       m_id_human_class(a_id_human_class),
       m_id_human(a_id_human),
       m_experience(a_experience),
@@ -138,9 +138,9 @@ ReplyShrPtr ScenarioDismissHumanActionInvalidRequest::perform(
     idholderclass->appendAttribute("type")->setValue("integer");
     idholderclass->appendAttribute("value")->setValue(m_id_holder_class);
 
-    IXmlNodeShrPtr idholder = parameters->appendNode("idholder");
-    idholder->appendAttribute("type")->setValue("integer");
-    idholder->appendAttribute("value")->setValue(m_id_holder);
+    IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
+    holder_name->appendAttribute("type")->setValue("integer");
+    holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
     IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
     idhumanclass->appendAttribute("type")->setValue("integer");

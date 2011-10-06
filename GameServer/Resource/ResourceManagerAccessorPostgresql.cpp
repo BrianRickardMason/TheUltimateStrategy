@@ -50,7 +50,7 @@ void ResourceManagerAccessorPostgresql::insertRecord(
 
     string query = "INSERT INTO "
                    + getTableName(a_id_holder)
-                   + "(id_holder, id_resource, volume) VALUES("
+                   + "(holder_name, id_resource, volume) VALUES("
                    + backbone_transaction.quote(a_id_holder.getValue2()) + ", "
                    + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue()) + ", "
                    + backbone_transaction.quote(a_volume) + ")";
@@ -69,7 +69,7 @@ void ResourceManagerAccessorPostgresql::deleteRecord(
 
     string query = "DELETE FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -86,7 +86,7 @@ ResourceWithVolumeRecordShrPtr ResourceManagerAccessorPostgresql::getRecord(
 
     string query = "SELECT volume FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -113,7 +113,7 @@ ResourceWithVolumeRecordMap ResourceManagerAccessorPostgresql::getRecords(
 
     string query = "SELECT * FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2());
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2());
 
     pqxx::result result = backbone_transaction.exec(query);
 
@@ -155,7 +155,7 @@ void ResourceManagerAccessorPostgresql::increaseVolume(
     string query = "UPDATE "
                    + getTableName(a_id_holder)
                    + " SET volume = volume + " + backbone_transaction.quote(a_volume)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -174,7 +174,7 @@ void ResourceManagerAccessorPostgresql::decreaseVolume(
     string query = "UPDATE "
                    + getTableName(a_id_holder)
                    + " SET volume = volume - " + backbone_transaction.quote(a_volume)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
 
     pqxx::result result = backbone_transaction.exec(query);

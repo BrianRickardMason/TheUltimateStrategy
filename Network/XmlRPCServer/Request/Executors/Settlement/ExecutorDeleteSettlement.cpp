@@ -60,9 +60,9 @@ bool ExecutorDeleteSettlement::getParameters(
 {
     try
     {
-        m_login               = a_request->getLoginValue();
-        m_password            = a_request->getPasswordValue();
-        m_value_id_settlement = a_request->getParameterValueUnsignedInteger("idsettlement");
+        m_login           = a_request->getLoginValue();
+        m_password        = a_request->getPasswordValue();
+        m_settlement_name = a_request->getParameterValueString("settlement_name");
 
         return true;
     }
@@ -74,16 +74,7 @@ bool ExecutorDeleteSettlement::getParameters(
 
 bool ExecutorDeleteSettlement::processParameters()
 {
-    try
-    {
-        m_id_settlement = m_value_id_settlement;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
 bool ExecutorDeleteSettlement::authorize(
@@ -99,7 +90,7 @@ bool ExecutorDeleteSettlement::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name);
 
         if (exit_code.ok())
         {
@@ -114,16 +105,16 @@ bool ExecutorDeleteSettlement::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDSettlementOperatorShrPtr epoch_operator =
-        m_operator_abstract_factory->createGetEpochByIDSettlementOperator();
+    IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
+        m_operator_abstract_factory->createGetEpochBySettlementNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByIDSettlementOperatorExitCode const exit_code =
-            epoch_operator->getEpochByIDSettlement(transaction, m_id_settlement);
+        GetEpochBySettlementNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochBySettlementName(transaction, m_settlement_name);
 
         if (exit_code.ok())
         {
@@ -154,7 +145,7 @@ ReplyShrPtr ExecutorDeleteSettlement::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         DeleteSettlementOperatorExitCode const exit_code =
-            delete_settlement_operator->deleteSettlement(transaction, m_id_settlement);
+            delete_settlement_operator->deleteSettlement(transaction, m_settlement_name);
 
         if (exit_code.ok())
         {

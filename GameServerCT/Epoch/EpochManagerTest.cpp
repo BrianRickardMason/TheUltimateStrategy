@@ -50,12 +50,12 @@ protected:
      */
     EpochManagerTest()
         : m_id_epoch_1(1),
-          m_id_settlement_1(1),
           m_login("Login"),
           m_world_name_1("World1"),
           m_world_name_2("World2"),
           m_world_name_3("World3"),
           m_land_name("Land"),
+          m_settlement_name("Settlement"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -106,11 +106,6 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants: identifiers of the settlement.
-     */
-    IDSettlement m_id_settlement_1;
-
-    /**
      * @brief Test constants: the login of the user.
      */
     string m_login;
@@ -126,6 +121,11 @@ protected:
      * @brief Test constants: the name of the land.
      */
     string m_land_name;
+
+    /**
+     * @brief Test constants: the name of the settlement.
+     */
+    string m_settlement_name;
 
     /**
      * @brief The abstract factory of managers.
@@ -405,9 +405,9 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
 }
 
 /**
- * Component tests of: EpochManager::getEpochByIDSettlement.
+ * Component tests of: EpochManager::getEpochBySettlementName.
  */
-TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
+TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistency.getConnection();
@@ -458,7 +458,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_manager->getEpochByIDSettlement(transaction, m_id_settlement_1);
+        EpochShrPtr epoch = m_epoch_manager->getEpochBySettlementName(transaction, m_settlement_name);
 
         transaction->commit();
 

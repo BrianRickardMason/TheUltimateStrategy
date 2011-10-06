@@ -29,7 +29,6 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistency;
-using namespace GameServer::Settlement;
 using namespace std;
 
 namespace GameServer
@@ -62,18 +61,17 @@ bool AuthorizationManager::authorizeUserToHolder(
     // TODO: Not complete yet.
     // TODO: Chicken and egg problem.
     // TODO: Unit tests.
-    IDSettlement id_settlement(a_id_holder.getValue2());
 
-    return authorizeUserToSettlement(a_transaction, a_login, id_settlement);
+    return authorizeUserToSettlement(a_transaction, a_login, a_id_holder.getValue2());
 }
 
 bool AuthorizationManager::authorizeUserToSettlement(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    IDSettlement       const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_settlement_name
 ) const
 {
-    string land_name = m_accessor->getLandNameOfSettlement(a_transaction, a_id_settlement);
+    string land_name = m_accessor->getLandNameOfSettlement(a_transaction, a_settlement_name);
 
     return authorizeUserToLand(a_transaction, a_login, land_name);
 }

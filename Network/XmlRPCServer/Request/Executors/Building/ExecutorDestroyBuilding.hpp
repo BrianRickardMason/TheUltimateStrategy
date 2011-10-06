@@ -33,6 +33,7 @@
 #include "../../../../../GameServer/Building/Volume.hpp"
 #include "../../../../../GameServer/Common/IDHolder.hpp"
 #include "../Executor.hpp"
+#include <string>
 
 namespace Network
 {
@@ -54,7 +55,7 @@ namespace Executors
  *     </user>
  *     <parameters>
  *         <idholderclass   type=\"unsigned integer\" value=\"#\" />
- *         <idholder        type=\"unsigned integer\" value=\"#\" />
+ *         <holder_name     type=\"string\"           value=\"#\" />
  *         <idbuildingclass type=\"unsigned integer\" value=\"#\" />
  *         <idbuilding      type=\"unsigned integer\" value=\"#\" />
  *         <volume          type=\"unsigned integer\" value=\"#\" />
@@ -165,9 +166,9 @@ class ExecutorDestroyBuilding
     unsigned int m_value_id_holder_class;
 
     /**
-     * @brief The value of the identifier of a holder.
+     * @brief The name of the holder.
      */
-    unsigned int m_value_id_holder;
+    std::string m_holder_name;
 
     /**
      * @brief The value of the identifier of the class of a building.

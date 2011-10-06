@@ -61,7 +61,7 @@ public:
      */
     ConstrainedPair()
         : m_value1(Policy::default_value1),
-          m_value2(Policy::default_value2)
+          m_value2()
     {
     }
 
@@ -242,20 +242,19 @@ template<
     unsigned short int Min,
     unsigned short int Max
 >
-class RangedUnsignedShortIntPlusUnsignedIntPolicy
+class RangedUnsignedShortIntPlusStringPolicy
 {
 public:
     /**
      * @brief Public typedefs.
      */
     typedef unsigned short int value1_type;
-    typedef unsigned int       value2_type;
+    typedef std::string        value2_type;
 
     /**
      * @brief Default value.
      */
     static const value1_type default_value1 = Min;
-    static const value2_type default_value2 = 0;
 
     /**
      * @brief Assigns the value.

@@ -106,29 +106,29 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login                     The login of the user.
-     * @param a_password                  The password of the user.
-     * @param a_id_settlement_source      The identifier of the source settlement.
-     * @param a_id_settlement_destination The identifier of the destination settlement.
-     * @param a_id_human_class            The identifier of the class of the human.
-     * @param a_id_human                  The identifier of the human.
-     * @param a_experience                The experience of the human.
-     * @param a_volume                    The volume of the human.
+     * @param a_login                       The login of the user.
+     * @param a_password                    The password of the user.
+     * @param a_settlement_name_source      The name of the source settlement.
+     * @param a_settlement_name_destination The name of the destination settlement.
+     * @param a_id_human_class              The identifier of the class of the human.
+     * @param a_id_human                    The identifier of the human.
+     * @param a_experience                  The experience of the human.
+     * @param a_volume                      The volume of the human.
      */
     ScenarioTransportHumanActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_settlement_source,
-        unsigned int const   a_id_settlement_destination,
-        unsigned int const   a_id_human_class,
-        unsigned int const   a_id_human,
-        unsigned int const   a_experience,
-        unsigned int const   a_volume
+        std::string  const a_login,
+        std::string  const a_password,
+        std::string  const a_settlement_name_source,
+        std::string  const a_settlement_name_destination,
+        unsigned int const a_id_human_class,
+        unsigned int const a_id_human,
+        unsigned int const a_experience,
+        unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
-          m_id_settlement_source(a_id_settlement_source),
-          m_id_settlement_destination(a_id_settlement_destination),
+          m_settlement_name_source(a_settlement_name_source),
+          m_settlement_name_destination(a_settlement_name_destination),
           m_id_human_class(a_id_human_class),
           m_id_human(a_id_human),
           m_experience(a_experience),
@@ -150,8 +150,8 @@ public:
         return Commands::Transport::TransportHuman(a_client,
                                                    m_login,
                                                    m_password,
-                                                   m_id_settlement_source,
-                                                   m_id_settlement_destination,
+                                                   m_settlement_name_source,
+                                                   m_settlement_name_destination,
                                                    m_id_human_class,
                                                    m_id_human,
                                                    m_experience,
@@ -170,14 +170,14 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the source settlement.
+     * @brief The name of the source settlement.
      */
-    unsigned int const m_id_settlement_source;
+    std::string const m_settlement_name_source;
 
     /**
-     * @brief The identifier of the destination settlement.
+     * @brief The name of the destination settlement.
      */
-    unsigned int const m_id_settlement_destination;
+    std::string const m_settlement_name_destination;
 
     /**
      * @brief The identifier of the class of the human.
@@ -210,29 +210,29 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login                     The login of the user.
-     * @param a_password                  The password of the user.
-     * @param a_id_settlement_source      The identifier of the source settlement.
-     * @param a_id_settlement_destination The identifier of the destination settlement.
-     * @param a_id_human_class            The identifier of the class of the human.
-     * @param a_id_human                  The identifier of the human.
-     * @param a_experience                The experience of the human.
-     * @param a_volume                    The volume of the human.
+     * @param a_login                       The login of the user.
+     * @param a_password                    The password of the user.
+     * @param a_settlement_name_source      The name of the source settlement.
+     * @param a_settlement_name_destination The name of the destination settlement.
+     * @param a_id_human_class              The identifier of the class of the human.
+     * @param a_id_human                    The identifier of the human.
+     * @param a_experience                  The experience of the human.
+     * @param a_volume                      The volume of the human.
      */
     ScenarioTransportHumanActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_settlement_source,
-        unsigned int const   a_id_settlement_destination,
-        unsigned int const   a_id_human_class,
-        unsigned int const   a_id_human,
-        unsigned int const   a_experience,
-        unsigned int const   a_volume
+        std::string  const a_login,
+        std::string  const a_password,
+        std::string  const a_settlement_name_source,
+        std::string  const a_settlement_name_destination,
+        unsigned int const a_id_human_class,
+        unsigned int const a_id_human,
+        unsigned int const a_experience,
+        unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
-          m_id_settlement_source(a_id_settlement_source),
-          m_id_settlement_destination(a_id_settlement_destination),
+          m_settlement_name_source(a_settlement_name_source),
+          m_settlement_name_destination(a_settlement_name_destination),
           m_id_human_class(a_id_human_class),
           m_id_human(a_id_human),
           m_experience(a_experience),
@@ -261,13 +261,13 @@ public:
         user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idsettlementsource = parameters->appendNode("idsettlementsource");
-        idsettlementsource->appendAttribute("type")->setValue("unsigned integer");
-        idsettlementsource->appendAttribute("value")->setValue(m_id_settlement_source);
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr settlement_name_source = parameters->appendNode("settlement_name_source");
+        settlement_name_source->appendAttribute("type")->setValue("unsigned integer");
+        settlement_name_source->appendAttribute("value")->setValue(m_settlement_name_source.c_str());
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idsettlementdestination = parameters->appendNode("idsettlementdestination");
-        idsettlementdestination->appendAttribute("type")->setValue("unsigned integer");
-        idsettlementdestination->appendAttribute("value")->setValue(m_id_settlement_destination);
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
+        settlement_name_destination->appendAttribute("type")->setValue("unsigned integer");
+        settlement_name_destination->appendAttribute("value")->setValue(m_settlement_name_destination.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
         idhumanclass->appendAttribute("type")->setValue("unsigned integer");
@@ -300,14 +300,14 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The identifier of the source settlement.
+     * @brief The name of the source settlement.
      */
-    unsigned int const m_id_settlement_source;
+    std::string const m_settlement_name_source;
 
     /**
-     * @brief The identifier of the destination settlement.
+     * @brief The name of the destination settlement.
      */
-    unsigned int const m_id_settlement_destination;
+    std::string const m_settlement_name_destination;
 
     /**
      * @brief The identifier of the class of the human.

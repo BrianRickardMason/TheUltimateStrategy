@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "TransportCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "TransportCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -43,21 +42,21 @@ namespace Transport
 {
 
 ReplyShrPtr TransportHuman(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_settlement_source,
-    unsigned int const   a_id_settlement_destination,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_settlement_name_source,
+    string        const a_settlement_name_destination,
+    unsigned int  const a_id_human_class,
+    unsigned int  const a_id_human,
+    unsigned int  const a_experience,
+    unsigned int  const a_volume
 )
 {
     RequestShrPtr request = createRequestTransportHuman(a_login,
                                                         a_password,
-                                                        a_id_settlement_source,
-                                                        a_id_settlement_destination,
+                                                        a_settlement_name_source,
+                                                        a_settlement_name_destination,
                                                         a_id_human_class,
                                                         a_id_human,
                                                         a_experience,
@@ -67,19 +66,19 @@ ReplyShrPtr TransportHuman(
 }
 
 ReplyShrPtr TransportResource(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_settlement_source,
-    unsigned int const   a_id_settlement_destination,
-    unsigned int const   a_id_resource,
-    unsigned int const   a_volume
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_settlement_name_source,
+    string        const a_settlement_name_destination,
+    unsigned int  const a_id_resource,
+    unsigned int  const a_volume
 )
 {
     RequestShrPtr request = createRequestTransportResource(a_login,
                                                            a_password,
-                                                           a_id_settlement_source,
-                                                           a_id_settlement_destination,
+                                                           a_settlement_name_source,
+                                                           a_settlement_name_destination,
                                                            a_id_resource,
                                                            a_volume);
 

@@ -54,11 +54,9 @@ protected:
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_land_name_5("Land5"),
-          m_id_settlement_1(1),
-          m_id_settlement_2(2),
-          m_id_settlement_5(5),
-          m_name_settlement_1("Settlement1"),
-          m_name_settlement_2("Settlement2"),
+          m_settlement_name_1("Settlement1"),
+          m_settlement_name_2("Settlement2"),
+          m_settlement_name_5("Settlement5"),
           m_login_1("Login1"),
           m_login_2("Login2"),
           m_login_5("Login5"),
@@ -84,8 +82,8 @@ protected:
             m_land_manager->createLand(transaction, m_login_1, m_world_name, m_id_epoch_1, m_land_name_1);
             m_land_manager->createLand(transaction, m_login_2, m_world_name, m_id_epoch_1, m_land_name_2);
 
-            m_settlement_manager->createSettlement(transaction, m_land_name_1, m_name_settlement_1);
-            m_settlement_manager->createSettlement(transaction, m_land_name_2, m_name_settlement_2);
+            m_settlement_manager->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
+            m_settlement_manager->createSettlement(transaction, m_land_name_2, m_settlement_name_2);
 
             transaction->commit();
         }
@@ -104,17 +102,11 @@ protected:
            m_land_name_5;
 
     /**
-     * @brief Test constants identifiers of the settlements.
+     * @brief Test constants: the names of the settlements.
      */
-    IDSettlement m_id_settlement_1,
-                 m_id_settlement_2,
-                 m_id_settlement_5;
-
-    /**
-     * @brief Test constants names of the settlements.
-     */
-    string m_name_settlement_1,
-           m_name_settlement_2;
+    string m_settlement_name_1,
+           m_settlement_name_2,
+           m_settlement_name_5;
 
     /**
      * @brief Test constants: the logins of the users.
@@ -214,8 +206,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_TRUE(manager->authorizeUserToSettlement(transaction, m_login_1, m_id_settlement_1));
-    ASSERT_TRUE(manager->authorizeUserToSettlement(transaction, m_login_2, m_id_settlement_2));
+    ASSERT_TRUE(manager->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_1));
+    ASSERT_TRUE(manager->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_2));
 }
 
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
@@ -225,8 +217,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_1, m_id_settlement_2));
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_2, m_id_settlement_1));
+    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_2));
+    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_1));
 }
 
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_MissingLogin)
@@ -236,15 +228,15 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_Missing
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_5, m_id_settlement_1));
+    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_5, m_settlement_name_1));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_MissingIDSettlement)
+TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_MissingSettlementName)
 {
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_1, m_id_settlement_5));
+    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_5));
 }

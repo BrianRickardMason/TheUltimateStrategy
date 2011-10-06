@@ -28,10 +28,9 @@
 #ifndef GAMESERVER_TRANSPORT_TRANSPORTRESOURCEOPERATOR_HPP
 #define GAMESERVER_TRANSPORT_TRANSPORTRESOURCEOPERATOR_HPP
 
-#include "ITransportResourceOperator.hpp"
-
 #include "../../../Resource/IResourceManager.hpp"
 #include "../../../Settlement/ISettlementManager.hpp"
+#include "ITransportResourceOperator.hpp"
 
 namespace GameServer
 {
@@ -59,18 +58,18 @@ public:
     /**
      * @brief Transports a resource from one settlement to another.
      *
-     * @param a_transaction               The transaction.
-     * @param a_id_settlement_source      The identifier of the source settlement.
-     * @param a_id_settlement_destination The identifier of the destination settlement.
-     * @param a_key                       The key of the resource.
-     * @param a_volume                    The volume of the resource.
+     * @param a_transaction                 The transaction.
+     * @param a_settlement_name_source      The name of the source settlement.
+     * @param a_settlement_name_destination The name of the destination settlement.
+     * @param a_key                         The key of the resource.
+     * @param a_volume                      The volume of the resource.
      *
      * @returns The exit code.
      */
     virtual TransportResourceOperatorExitCode transportResource(
         Persistency::ITransactionShrPtr         a_transaction,
-        Settlement::IDSettlement        const & a_id_settlement_source,
-        Settlement::IDSettlement        const & a_id_settlement_destination,
+        std::string                     const   a_settlement_name_source,
+        std::string                     const   a_settlement_name_destination,
         Resource::Key                   const & a_key,
         Resource::Volume                const & a_volume
     ) const;

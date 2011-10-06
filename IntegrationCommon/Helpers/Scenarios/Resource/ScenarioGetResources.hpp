@@ -96,13 +96,13 @@ public:
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
-     * @param a_id_holder       The identifier of the holder.
+     * @param a_holder_name     The name of the holder.
      */
     ScenarioGetResourcesActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_holder_class,
-        unsigned int const   a_id_holder
+        std::string  const a_login,
+        std::string  const a_password,
+        unsigned int const a_id_holder_class,
+        std::string  const a_holder_name
     );
 
     /**
@@ -133,9 +133,9 @@ private:
     unsigned int const m_id_holder_class;
 
     /**
-     * @brief The identifier of the holder.
+     * @brief The name of the holder.
      */
-    unsigned int const m_id_holder;
+    std::string const m_holder_name;
 };
 
 /**
@@ -151,13 +151,13 @@ public:
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
-     * @param a_id_holder       The identifier of the holder.
+     * @param a_holder_name     The name of the holder.
      */
     ScenarioGetResourcesActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_holder_class,
-        unsigned int const   a_id_holder
+        std::string  const a_login,
+        std::string  const a_password,
+        unsigned int const a_id_holder_class,
+        std::string  const a_holder_name
     );
 
     /**
@@ -188,9 +188,9 @@ private:
     unsigned int const m_id_holder_class;
 
     /**
-     * @brief The identifier of the holder.
+     * @brief The name of the holder.
      */
-    unsigned int const m_id_holder;
+    std::string const m_holder_name;
 };
 
 /**

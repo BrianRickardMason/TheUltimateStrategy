@@ -42,7 +42,7 @@ protected:
      * @brief Constructs a test class.
      */
     ResourceWithVolumeRecordTest()
-        : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, 1),
+        : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
           m_record(m_id_holder, Key(ID_RESOURCE_FOOD), 3),
           m_model_key(ID_RESOURCE_FOOD)
     {
@@ -68,7 +68,7 @@ TEST_F(ResourceWithVolumeRecordTest, ResourceWithVolumeRecord)
 {
     ResourceWithVolumeRecord record(m_id_holder, Key(ID_RESOURCE_FOOD), 3);
 
-    ASSERT_TRUE(m_id_holder== record.getIDHolder());
+    ASSERT_TRUE(m_id_holder == record.getIDHolder());
     ASSERT_TRUE(m_model_key == record.getKey());
     ASSERT_EQ(3, record.getVolume());
 }

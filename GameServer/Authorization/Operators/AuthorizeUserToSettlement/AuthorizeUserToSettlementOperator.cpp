@@ -28,7 +28,6 @@
 #include "AuthorizeUserToSettlementOperator.hpp"
 
 using namespace GameServer::Persistency;
-using namespace GameServer::Settlement;
 using namespace std;
 
 namespace GameServer
@@ -44,14 +43,14 @@ AuthorizeUserToSettlementOperator::AuthorizeUserToSettlementOperator(
 }
 
 AuthorizeUserToSettlementOperatorExitCode AuthorizeUserToSettlementOperator::authorizeUserToSettlement(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    IDSettlement       const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_settlement_name
 ) const
 {
     try
     {
-        bool const result = m_authorization_manager->authorizeUserToSettlement(a_transaction, a_login, a_id_settlement);
+        bool const result = m_authorization_manager->authorizeUserToSettlement(a_transaction, a_login, a_settlement_name);
 
         return AuthorizeUserToSettlementOperatorExitCode(AUTHORIZE_USER_TO_SETTLEMENT_OPERATOR_EXIT_CODE_AUTHORIZATION_HAS_BEEN_PERFORMED, result);
     }

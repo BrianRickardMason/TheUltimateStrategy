@@ -25,21 +25,22 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetSettlementByIDSettlementOperatorFactory.hpp"
+#include "GetEpochBySettlementNameOperatorFactory.hpp"
 
 using namespace GameServer::Common;
 
 namespace GameServer
 {
-namespace Settlement
+namespace Epoch
 {
 
-GetSettlementByIDSettlementOperatorAutPtr GetSettlementByIDSettlementOperatorFactory::createGetSettlementByIDSettlementOperator(
+GetEpochBySettlementNameOperatorAutPtr GetEpochBySettlementNameOperatorFactory::createGetEpochBySettlementNameOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetSettlementByIDSettlementOperatorAutPtr(new GetSettlementByIDSettlementOperator(a_manager_abstract_factory->createSettlementManager()));
+    return GetEpochBySettlementNameOperatorAutPtr(new GetEpochBySettlementNameOperator(a_manager_abstract_factory->createEpochManager(),
+                                                                                       a_manager_abstract_factory->createSettlementManager()));
 }
 
-} // namespace Settlement
+} // namespace Epoch
 } // namespace GameServer

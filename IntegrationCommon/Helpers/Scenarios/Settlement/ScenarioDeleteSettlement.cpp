@@ -64,13 +64,13 @@ char const * ScenarioDeleteSettlement::execute()
 }
 
 ScenarioDeleteSettlementActionSuccess::ScenarioDeleteSettlementActionSuccess(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_settlement
+    string const a_login,
+    string const a_password,
+    string const a_settlement_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_settlement(a_id_settlement)
+      m_settlement_name(a_settlement_name)
 {
 }
 
@@ -78,17 +78,17 @@ ReplyShrPtr ScenarioDeleteSettlementActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return DeleteSettlement(a_client, m_login, m_password, m_id_settlement);
+    return DeleteSettlement(a_client, m_login, m_password, m_settlement_name);
 }
 
 ScenarioDeleteSettlementActionInvalidRequest::ScenarioDeleteSettlementActionInvalidRequest(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_settlement
+    string const a_login,
+    string const a_password,
+    string const a_settlement_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_id_settlement(a_id_settlement)
+      m_settlement_name(a_settlement_name)
 {
 }
 
@@ -106,9 +106,9 @@ ReplyShrPtr ScenarioDeleteSettlementActionInvalidRequest::perform(
     user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
-    IXmlNodeShrPtr idsettlement = parameters->appendNode("idsettlement");
-    idsettlement->appendAttribute("type")->setValue("integer");
-    idsettlement->appendAttribute("value")->setValue(m_id_settlement);
+    IXmlNodeShrPtr settlement_name = parameters->appendNode("settlement_name");
+    settlement_name->appendAttribute("type")->setValue("integer");
+    settlement_name->appendAttribute("value")->setValue(m_settlement_name.c_str());
 
     return a_client->sendRequest(request);
 }

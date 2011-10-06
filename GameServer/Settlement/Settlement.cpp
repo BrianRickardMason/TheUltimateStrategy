@@ -38,8 +38,7 @@ Settlement::Settlement(
     SettlementRecord const & a_record
 )
     : m_land_name(a_record.getLandName()),
-      m_id_settlement(a_record.getIDSettlement()),
-      m_name(a_record.getName())
+      m_settlement_name(a_record.getSettlementName())
 {
 }
 
@@ -48,14 +47,9 @@ string Settlement::getLandName() const
     return m_land_name;
 }
 
-IDSettlement const & Settlement::getIDSettlement() const
+string Settlement::getSettlementName() const
 {
-    return m_id_settlement;
-}
-
-string const & Settlement::getName() const
-{
-    return m_name;
+    return m_settlement_name;
 }
 
 } // namespace Settlement

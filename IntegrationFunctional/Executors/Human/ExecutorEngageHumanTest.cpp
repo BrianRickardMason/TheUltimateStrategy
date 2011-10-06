@@ -82,7 +82,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_SettlementDoesNotExist)
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_SOLDIER_ARCHER.getValue1(), ID_HUMAN_SOLDIER_ARCHER.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthorized))));
@@ -125,13 +125,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughResources)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioBuildBuilding(
             client,
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_BUILDING_DEFENSIVE_BARBICAN.getValue1(), ID_BUILDING_DEFENSIVE_BARBICAN.getValue2(),
                 50)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
@@ -139,7 +139,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughResources)
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 90)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationNotEnoughResources))));
@@ -177,13 +177,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughBuildings)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioBuildBuilding(
             client,
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_BUILDING_DEFENSIVE_BARBICAN.getValue1(), ID_BUILDING_DEFENSIVE_BARBICAN.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
@@ -191,7 +191,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughBuildings)
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_SOLDIER_ARCHER.getValue1(), ID_HUMAN_SOLDIER_ARCHER.getValue2(),
                 11)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationNotEnoughBuildings))));
@@ -229,13 +229,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_MaxHumans)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 100)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
@@ -273,13 +273,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_ManyHumans)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 80)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
@@ -317,13 +317,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_OneHuman)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
@@ -361,13 +361,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_ZeroHumans)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 0)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationTryingToEngageZeroHumans))));
@@ -387,7 +387,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_InvalidRequest)
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionInvalidRequest(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationInvalidRequest))));
@@ -407,7 +407,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_InvalidRange)
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_TROOP + 1, 1,
+                ID_HOLDER_CLASS_TROOP + 1, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationInvalidRange))));
@@ -445,13 +445,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "BadPassword",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthenticated))));
@@ -493,13 +493,13 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login1", "Password1", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login1", "Password1", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login2", "Password2",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_SOLDIER_ARCHER.getValue1(), ID_HUMAN_SOLDIER_ARCHER.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthorized))));
@@ -537,7 +537,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
@@ -547,7 +547,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_EpochIsNotActive)
             client,
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationEpochIsNotActive))));

@@ -25,14 +25,14 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "TransportResourceOperator.hpp"
-
 #include "../../../Common/IDHolder.hpp"
+#include "TransportResourceOperator.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistency;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
+using namespace std;
 
 namespace GameServer
 {
@@ -49,9 +49,9 @@ TransportResourceOperator::TransportResourceOperator(
 }
 
 TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
-    ITransactionShrPtr          a_transaction,
-    IDSettlement       const & a_id_settlement_source,
-    IDSettlement       const & a_id_settlement_destination,
+    ITransactionShrPtr         a_transaction,
+    string             const   a_settlement_name_source,
+    string             const   a_settlement_name_destination,
     Key                const & a_key,
     Volume             const & a_volume
 ) const
@@ -65,7 +65,8 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
         }
 
         // Verify if the source settlement exists.
-        SettlementShrPtr settlement_source = m_settlement_manager->getSettlement(a_transaction, a_id_settlement_source);
+        SettlementShrPtr settlement_source =
+            m_settlement_manager->getSettlement(a_transaction, a_settlement_name_source);
 
         if (!settlement_source)
         {
@@ -74,7 +75,7 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
 
         // Verify if the destination settlement exists.
         SettlementShrPtr settlement_destination =
-            m_settlement_manager->getSettlement(a_transaction, a_id_settlement_destination);
+            m_settlement_manager->getSettlement(a_transaction, a_settlement_name_destination);
 
         if (!settlement_destination)
         {
@@ -87,8 +88,8 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
             return TransportResourceOperatorExitCode(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND);
         }
 
-        IDHolder id_holder_source(ID_HOLDER_CLASS_SETTLEMENT, a_id_settlement_source.getValue());
-        IDHolder id_holder_destination(ID_HOLDER_CLASS_SETTLEMENT, a_id_settlement_destination.getValue());
+        IDHolder id_holder_source(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_source);
+        IDHolder id_holder_destination(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_destination);
 
         bool const result = m_resource_manager->subtractResource(a_transaction, id_holder_source, a_key, a_volume);
 

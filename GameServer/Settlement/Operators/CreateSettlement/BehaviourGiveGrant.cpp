@@ -31,6 +31,7 @@ using namespace GameServer::Common;
 using namespace GameServer::Human;
 using namespace GameServer::Persistency;
 using namespace GameServer::Resource;
+using namespace std;
 
 namespace GameServer
 {
@@ -47,13 +48,13 @@ BehaviourGiveGrant::BehaviourGiveGrant(
 }
 
 bool BehaviourGiveGrant::giveGrant(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
 ) const
 {
     try
     {
-        IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_id_settlement.getValue());
+        IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
         // Grant humans.
         m_human_manager->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, 1000);

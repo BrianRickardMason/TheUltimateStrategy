@@ -61,14 +61,18 @@ protected:
      */
     EngageHumanOperatorTest()
         : m_id_epoch_1(1),
-          m_id_holder_11(ID_HOLDER_CLASS_SETTLEMENT, 1),
-          m_id_holder_12(ID_HOLDER_CLASS_SETTLEMENT, 2),
-          m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, 3),
-          m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, 4),
           m_login("Login"),
           m_world_name("World"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
+          m_settlement_name_1("Settlement1"),
+          m_settlement_name_2("Settlement2"),
+          m_settlement_name_3("Settlement3"),
+          m_settlement_name_4("Settlement5"),
+          m_id_holder_11(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
+          m_id_holder_12(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
+          m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3),
+          m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -95,9 +99,9 @@ protected:
             m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_1);
             m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_2);
 
-            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement11");
-            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement12");
-            m_create_settlement_operator->createSettlement(transaction, m_land_name_2, "Settlement21");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_2);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_2, m_settlement_name_3);
 
             transaction->commit();
         }
@@ -159,14 +163,6 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants identifiers of a holder.
-     */
-    IDHolder m_id_holder_11,
-             m_id_holder_12,
-             m_id_holder_21,
-             m_id_holder_4;
-
-    /**
      * @brief Test constants: the login of the user.
      */
     string m_login;
@@ -181,6 +177,22 @@ protected:
      */
     string m_land_name_1,
            m_land_name_2;
+
+    /**
+     * @brief Test constants: the names of the settlements.
+     */
+    string m_settlement_name_1,
+           m_settlement_name_2,
+           m_settlement_name_3,
+           m_settlement_name_4;
+
+    /**
+     * @brief Test constants identifiers of a holder.
+     */
+    IDHolder m_id_holder_11,
+             m_id_holder_12,
+             m_id_holder_21,
+             m_id_holder_4;
 
     /**
      * @brief The abstract factory of managers.
@@ -297,7 +309,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
         transaction->commit();
     }
 
-    vector<IDHolder> ids = assign::list_of(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, 1))(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, 2));
+    vector<IDHolder> ids = assign::list_of(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1))
+                                          (IDHolder(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2));
 
     for (vector<IDHolder>::const_iterator it = ids.begin(); it != ids.end(); ++it)
     {
@@ -395,7 +408,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroResources)
         transaction->commit();
     }
 
-    vector<IDHolder> ids = assign::list_of(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, 1))(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, 2));
+    vector<IDHolder> ids = assign::list_of(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1))
+                                          (IDHolder(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2));
 
     for (vector<IDHolder>::const_iterator it = ids.begin(); it != ids.end(); ++it)
     {

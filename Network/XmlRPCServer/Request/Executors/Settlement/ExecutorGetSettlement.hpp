@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENTBYIDSETTLEMENT_HPP
-#define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENTBYIDSETTLEMENT_HPP
+#ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENT_HPP
+#define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENT_HPP
 
-#include "../../../../../GameServer/Settlement/Operators/GetSettlementByIDSettlement/GetSettlementByIDSettlementOperatorExitCode.hpp"
+#include "../../../../../GameServer/Settlement/Operators/GetSettlement/GetSettlementOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -41,31 +41,30 @@ namespace Executors
 {
 
 /**
- * @brief The ExecutorGetSettlementByIDSettlement executor.
+ * @brief The ExecutorGetSettlement executor.
  *
  * <?xml version=\"1.0\"?>
- * <request id=\"REQUEST_ID_GET_SETTLEMENT_BY_ID_SETTLEMENT\">
+ * <request id=\"REQUEST_ID_GET_SETTLEMENT\">
  *     <user>
  *         <login    value=\"#\" />
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idsettlement type=\"unsigned integer\" value=\"#\" />
+ *         <settlement_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *
  * <?xml version=\"1.0\"?>
- * <reply id=\"REPLY_ID_GET_SETTLEMENT_BY_ID_SETTLEMENT">
+ * <reply id=\"REPLY_ID_GET_SETTLEMENT">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message      type=\"string"\           value=\"#\" />
- *         <land_name    type=\"string\"           value=\"#\" />
- *         <idsettlement type=\"unsigned integer\" value=\"#\" />
- *         <name         type=\"string\"           value=\"#\" />
+ *         <message         type=\"string\" value=\"#\" />
+ *         <land_name       type=\"string\" value=\"#\" />
+ *         <settlement_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </reply>
  */
-class ExecutorGetSettlementByIDSettlement
+class ExecutorGetSettlement
     : public Executor
 {
     /**
@@ -152,18 +151,13 @@ class ExecutorGetSettlementByIDSettlement
      * @return The reply.
      */
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
-        GameServer::Settlement::GetSettlementByIDSettlementOperatorExitCode const & a_exit_code
+        GameServer::Settlement::GetSettlementOperatorExitCode const & a_exit_code
     ) const;
 
     /**
-     * @brief The value of the identifier of a settlement.
+     * @brief The name of the settlement.
      */
-    unsigned int m_value_id_settlement;
-
-    /**
-     * @brief The identifier of the settlement.
-     */
-    GameServer::Settlement::IDSettlement m_id_settlement;
+    std::string m_settlement_name;
 };
 
 } // namespace Executors
@@ -171,4 +165,4 @@ class ExecutorGetSettlementByIDSettlement
 } // namespace XmlRPCServer
 } // namespace Network
 
-#endif // NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENTBYIDSETTLEMENT_HPP
+#endif // NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENT_HPP

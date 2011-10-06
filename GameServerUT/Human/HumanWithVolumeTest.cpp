@@ -68,7 +68,7 @@ TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnArguments)
 
 TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnRecord)
 {
-    HumanWithVolumeRecord human_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, 22), Key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED), 4);
+    HumanWithVolumeRecord human_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), Key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED), 4);
 
     HumanWithVolume human_with_volume(human_with_volume_record);
 

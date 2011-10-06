@@ -60,14 +60,14 @@ protected:
           m_settlement_manager(new SettlementManagerMock),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
-          m_id_settlement_1(1),
-          m_id_settlement_2(2),
-          m_id_settlement_3(3),
-          m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 1),
-          m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, 2),
-          m_settlement_1(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_id_settlement_1, "Settlement1"))),
-          m_settlement_2(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_id_settlement_2, "Settlement2"))),
-          m_settlement_3(make_shared<Settlement>(SettlementRecord(m_land_name_2, m_id_settlement_3, "Settlement3")))
+          m_settlement_name_1("Settlement1"),
+          m_settlement_name_2("Settlement2"),
+          m_settlement_name_3("Settlement3"),
+          m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
+          m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
+          m_settlement_1(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_settlement_name_1))),
+          m_settlement_2(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_settlement_name_2))),
+          m_settlement_3(make_shared<Settlement>(SettlementRecord(m_land_name_2, m_settlement_name_3)))
     {
     }
 
@@ -82,17 +82,17 @@ protected:
     SettlementManagerMock * m_settlement_manager;
 
     /**
-     * @brief Test constants: the names of lands.
+     * @brief Test constants: the names of the lands.
      */
     string m_land_name_1,
            m_land_name_2;
 
     /**
-     * @brief Test constants: identifiers of settlements.
+     * @brief Test constants: the names of the settlements.
      */
-    IDSettlement m_id_settlement_1,
-                 m_id_settlement_2,
-                 m_id_settlement_3;
+    string m_settlement_name_1,
+           m_settlement_name_2,
+           m_settlement_name_3;
 
     /**
      * @brief Test constants: identifiers of holders.
@@ -129,8 +129,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_TryingToTransportZeroRes
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_TRYING_TO_TRANSPORT_ZERO_RESOURCES,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_2,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_2,
                                                             KEY_RESOURCE_COAL,
                                                             0).m_exit_code);
 }
@@ -139,7 +139,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_SourceSettlementDoesNotE
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(SettlementShrPtr()));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
@@ -147,8 +147,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_SourceSettlementDoesNotE
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SOURCE_SETTLEMENT_DOES_NOT_EXIST,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_2,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_2,
                                                             KEY_RESOURCE_COAL,
                                                             10).m_exit_code);
 }
@@ -157,10 +157,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_DestinationSettlementDoe
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_2))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(SettlementShrPtr()));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
@@ -168,8 +168,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_DestinationSettlementDoe
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_DESTINATION_SETTLEMENT_DOES_NOT_EXIST,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_2,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_2,
                                                             KEY_RESOURCE_COAL,
                                                             10).m_exit_code);
 }
@@ -178,10 +178,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_SettlementsAreNotFromThe
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_3))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_3))
     .WillOnce(Return(m_settlement_3));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
@@ -189,8 +189,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_SettlementsAreNotFromThe
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_3,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_3,
                                                             KEY_RESOURCE_COAL,
                                                             10).m_exit_code);
 }
@@ -199,10 +199,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_NotEnoughResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_2))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     EXPECT_CALL(*m_resource_manager, subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 10))
@@ -213,8 +213,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_NotEnoughResources)
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_2,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_2,
                                                             KEY_RESOURCE_COAL,
                                                             10).m_exit_code);
 }
@@ -223,10 +223,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_SubtractResourceThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_2))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     std::exception e;
@@ -238,8 +238,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_SubtractResourceThrows)
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_2,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_2,
                                                             KEY_RESOURCE_COAL,
                                                             10).m_exit_code);
 }
@@ -248,10 +248,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_AddResourceThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_2))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     EXPECT_CALL(*m_resource_manager, subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 10))
@@ -266,8 +266,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_AddResourceThrows)
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_2,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_2,
                                                             KEY_RESOURCE_COAL,
                                                             10).m_exit_code);
 }
@@ -276,10 +276,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_id_settlement_2))
+    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     EXPECT_CALL(*m_resource_manager, subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 10))
@@ -292,8 +292,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success)
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
               transport_resource_operator.transportResource(transaction,
-                                                            m_id_settlement_1,
-                                                            m_id_settlement_2,
+                                                            m_settlement_name_1,
+                                                            m_settlement_name_2,
                                                             KEY_RESOURCE_COAL,
                                                             10).m_exit_code);
 }

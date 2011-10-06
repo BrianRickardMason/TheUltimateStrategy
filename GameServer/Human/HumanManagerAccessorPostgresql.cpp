@@ -50,7 +50,7 @@ void HumanManagerAccessorPostgresql::insertRecord(
 
     string query = "INSERT INTO "
                    + getTableName(a_id_holder)
-                   + "(id_holder, id_human_class, id_human, experience, volume) VALUES("
+                   + "(holder_name, id_human_class, id_human, experience, volume) VALUES("
                    + backbone_transaction.quote(a_id_holder.getValue2()) + ", "
                    + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1()) + ", "
                    + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2()) + ", "
@@ -71,7 +71,7 @@ void HumanManagerAccessorPostgresql::deleteRecord(
 
     string query = "DELETE FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
                    + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());
@@ -90,7 +90,7 @@ HumanWithVolumeRecordShrPtr HumanManagerAccessorPostgresql::getRecord(
 
     string query = "SELECT volume FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
                    + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());
@@ -120,7 +120,7 @@ HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::getRecords(
 
     string query = "SELECT * FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_human_class = " + backbone_transaction.quote(a_id_human.getValue1())
                    + " AND id_human = " + backbone_transaction.quote(a_id_human.getValue2());
 
@@ -137,7 +137,7 @@ HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::getRecords(
 
     string query = "SELECT * FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2());
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2());
 
     return prepareResultGetRecords(backbone_transaction.exec(query), a_id_holder);
 }
@@ -155,7 +155,7 @@ void HumanManagerAccessorPostgresql::increaseVolume(
     string query = "UPDATE "
                    + getTableName(a_id_holder)
                    + " SET volume = volume + " + backbone_transaction.quote(a_volume)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
                    + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());
@@ -176,7 +176,7 @@ void HumanManagerAccessorPostgresql::decreaseVolume(
     string query = "UPDATE "
                    + getTableName(a_id_holder)
                    + " SET volume = volume - " + backbone_transaction.quote(a_volume)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
                    + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());

@@ -54,6 +54,9 @@ protected:
           m_login("Login"),
           m_world_name("World"),
           m_land_name("Land"),
+          m_settlement_name_1("Settlement1"),
+          m_settlement_name_2("Settlement2"),
+          m_settlement_name_3("Settlement3"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
@@ -61,9 +64,9 @@ protected:
           m_land_manager(m_manager_abstract_factory->createLandManager()),
           m_building_manager(m_manager_abstract_factory->createBuildingManager()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
-          m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 1),
-          m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, 2),
-          m_id_holder_3(ID_HOLDER_CLASS_SETTLEMENT, 3)
+          m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
+          m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
+          m_id_holder_3(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3)
     {
         {
             IConnectionShrPtr connection = m_persistency.getConnection();
@@ -77,8 +80,8 @@ protected:
 
             m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name);
 
-            m_create_settlement_operator->createSettlement(transaction, m_land_name, "Settlement1");
-            m_create_settlement_operator->createSettlement(transaction, m_land_name, "Settlement2");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_1);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_2);
 
             transaction->commit();
         }
@@ -120,6 +123,13 @@ protected:
      * @brief Test constants: the name of the land.
      */
     string m_land_name;
+
+    /**
+     * @brief Test constants: the names of the settlements.
+     */
+    string m_settlement_name_1,
+           m_settlement_name_2,
+           m_settlement_name_3;
 
     /**
      * @brief The abstract factory of managers.

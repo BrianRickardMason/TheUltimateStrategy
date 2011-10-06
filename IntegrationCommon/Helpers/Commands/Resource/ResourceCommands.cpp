@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "ResourceCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "ResourceCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -43,14 +42,14 @@ namespace Resource
 {
 
 ReplyShrPtr GetResources(
-    IClientShrPtr              a_client,
-    string             const & a_login,
-    string             const & a_password,
-    unsigned short int const   a_holder_class,
-    unsigned int       const   a_id_holder
+    IClientShrPtr            a_client,
+    string             const a_login,
+    string             const a_password,
+    unsigned short int const a_holder_class,
+    string             const a_holder_name
 )
 {
-    RequestShrPtr request = createRequestGetResources(a_login, a_password, a_holder_class, a_id_holder);
+    RequestShrPtr request = createRequestGetResources(a_login, a_password, a_holder_class, a_holder_name);
 
     return a_client->sendRequest(request);
 }

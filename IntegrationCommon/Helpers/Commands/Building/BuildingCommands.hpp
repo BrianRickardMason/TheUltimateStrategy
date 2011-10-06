@@ -47,7 +47,7 @@ namespace Building
  * @param a_login             The login of the user.
  * @param a_password          The password of the user.
  * @param a_holder_class      The identifier of the class of a holder.
- * @param a_id_holder         The identifier of a holder.
+ * @param a_holder_name       The name of the holder.
  * @param a_id_building_class The identifier of the class of a building.
  * @param a_id_building       The identifier of a building.
  * @param a_volume            The volume.
@@ -55,14 +55,14 @@ namespace Building
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr BuildBuilding(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building,
-    unsigned int const   a_volume
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name,
+    unsigned int  const a_id_building_class,
+    unsigned int  const a_id_building,
+    unsigned int  const a_volume
 );
 
 /**
@@ -72,7 +72,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr BuildBuilding(
  * @param a_login             The login of the user.
  * @param a_password          The password of the user.
  * @param a_holder_class      The identifier of the class of a holder.
- * @param a_id_holder         The identifier of a holder.
+ * @param a_holder_name       The name of the holder.
  * @param a_id_building_class The identifier of the class of a building.
  * @param a_id_building       The identifier of a building.
  * @param a_volume            The volume.
@@ -80,14 +80,14 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr BuildBuilding(
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DestroyBuilding(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building,
-    unsigned int const   a_volume
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name,
+    unsigned int  const a_id_building_class,
+    unsigned int  const a_id_building,
+    unsigned int  const a_volume
 );
 
 /**
@@ -97,20 +97,20 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DestroyBuilding(
  * @param a_login          The login of the user.
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
- * @param a_id_holder      The identifier of a holder.
+ * @param a_holder_name    The name of the holder.
  * @param a_building_class The identifier of the class of a building.
  * @param a_id_building    The identifier of a building.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuilding(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name,
+    unsigned int  const a_id_building_class,
+    unsigned int  const a_id_building
 );
 
 /**
@@ -120,16 +120,16 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuilding(
  * @param a_login        The login of the user.
  * @param a_password     The password of the user.
  * @param a_holder_class The identifier of the class of a holder.
- * @param a_id_holder    The identifier of a holder.
+ * @param a_holder_name  The name of the holder.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuildings(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name
 );
 
 } // namespace Building

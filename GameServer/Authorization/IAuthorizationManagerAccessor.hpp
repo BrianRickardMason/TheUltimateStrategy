@@ -29,7 +29,6 @@
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZATIONMANAGERACCESSOR_HPP
 
 #include "../Persistency/ITransaction.hpp"
-#include "../Settlement/IDSettlement.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
@@ -70,14 +69,14 @@ public:
     /**
      * @brief Gets the name of a land of the settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement
      *
      * @return The name of the land, an empty string if not found.
      */
     virtual std::string getLandNameOfSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Settlement::IDSettlement        const & a_id_settlement
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
     ) const = 0;
 };
 

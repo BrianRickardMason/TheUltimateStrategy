@@ -100,7 +100,7 @@ bool TurnOperator::executeTurn(
 
     for (SettlementMap::iterator it = settlements.begin(); it != settlements.end(); ++it)
     {
-        bool const result = executeTurnSettlement(a_transaction, it->second->getIDSettlement());
+        bool const result = executeTurnSettlement(a_transaction, it->second->getSettlementName());
 
         if (!result)
         {
@@ -112,11 +112,11 @@ bool TurnOperator::executeTurn(
 }
 
 bool TurnOperator::executeTurnSettlement(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
 ) const
 {
-    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_id_settlement.getValue());
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
     // Correct engagement.
     // TODO: Implement me!
@@ -125,7 +125,7 @@ bool TurnOperator::executeTurnSettlement(
     ResourceSet available_resources = m_resource_manager->getResources(a_transaction, id_holder);
 
     // Get the cost of living.
-    ResourceSet cost_of_living = getCostOfLiving(a_transaction, a_id_settlement);
+    ResourceSet cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
 
     // Verify famine.
     // FIXME: Code smell: envious class.
@@ -262,13 +262,13 @@ bool TurnOperator::executeTurnSettlement(
 }
 
 ResourceSet TurnOperator::getCostOfLiving(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
 ) const
 {
     ResourceSet total_cost;
 
-    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_id_settlement.getValue());
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
     HumanWithVolumeMap humans = m_human_manager->getHumans(a_transaction, id_holder);
 

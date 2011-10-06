@@ -47,7 +47,7 @@ namespace Human
  * @param a_login          The login of the user.
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
- * @param a_id_holder      The identifier of a holder.
+ * @param a_holder_name    The name of the holder.
  * @param a_id_human_class The identifier of the class of a human.
  * @param a_id_human       The identifier of a human.
  * @param a_volume         The volume.
@@ -55,14 +55,14 @@ namespace Human
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_volume
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name,
+    unsigned int  const a_id_human_class,
+    unsigned int  const a_id_human,
+    unsigned int  const a_volume
 );
 
 /**
@@ -72,7 +72,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
  * @param a_login          The login of the user.
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
- * @param a_id_holder      The identifier of a holder.
+ * @param a_holder_name    The name of the holder.
  * @param a_id_human_class The identifier of the class of a human.
  * @param a_id_human       The identifier of a human.
  * @param a_experience     The experience of a human.
@@ -81,15 +81,15 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name,
+    unsigned int  const a_id_human_class,
+    unsigned int  const a_id_human,
+    unsigned int  const a_experience,
+    unsigned int  const a_volume
 );
 
 /**
@@ -99,7 +99,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
  * @param a_login        The login of the user.
  * @param a_password     The password of the user.
  * @param a_holder_class The identifier of the class of a holder.
- * @param a_id_holder    The identifier of a holder.
+ * @param a_holder_name  The name of the holder.
  * @param a_human_class  The identifier of the class of a human.
  * @param a_id_human     The identifier of a human.
  * @param a_experience   The experience of a human.
@@ -107,14 +107,14 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetHuman(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name,
+    unsigned int  const a_id_human_class,
+    unsigned int  const a_id_human,
+    unsigned int  const a_experience
 );
 
 /**
@@ -124,16 +124,16 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetHuman(
  * @param a_login        The login of the user.
  * @param a_password     The password of the user.
  * @param a_holder_class The identifier of the class of a holder.
- * @param a_id_holder    The identifier of a holder.
+ * @param a_holder_name  The name of the holder.
  *
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr GetHumans(
-    IClientShrPtr        a_client,
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    unsigned int  const a_id_holder_class,
+    std::string   const a_holder_name
 );
 
 } // namespace Human

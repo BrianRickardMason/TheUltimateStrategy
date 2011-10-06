@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENTBYLANDNAMEANDNAME_HPP
-#define INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENTBYLANDNAMEANDNAME_HPP
+#ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENT_HPP
+#define INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENT_HPP
 
 #include "../../../Network/XmlRPCCommon/Xml/IXmlNode.hpp"
 #include "../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
@@ -45,9 +45,9 @@ namespace Settlement
 {
 
 /**
- * @brief The "GetSettlementByLandNameAndName" scenario.
+ * @brief The "GetSettlement" scenario.
  */
-class ScenarioGetSettlementByLandNameAndName
+class ScenarioGetSettlement
     : public IScenario
 {
 public:
@@ -58,7 +58,7 @@ public:
      * @param a_action       The action object.
      * @param a_verification The verification object.
      */
-    ScenarioGetSettlementByLandNameAndName(
+    ScenarioGetSettlement(
         IClientShrPtr               a_client,
         IScenarioActionShrPtr       a_action,
         IScenarioVerificationShrPtr a_verification
@@ -97,30 +97,27 @@ private:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameActionSuccess" action.
+ * @brief The "ScenarioGetSettlementActionSuccess" action.
  */
-class ScenarioGetSettlementByLandNameAndNameActionSuccess
+class ScenarioGetSettlementActionSuccess
     : public IScenarioAction
 {
 public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login     The login of the user.
-     * @param a_password  The password of the user.
-     * @param a_land_name The name of the land.
-     * @param a_name      The name of the settlement.
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_settlement_name The name of the settlement.
      */
-    ScenarioGetSettlementByLandNameAndNameActionSuccess(
-        std::string const & a_login,
-        std::string const & a_password,
-        std::string const   a_land_name,
-        std::string const & a_name
+    ScenarioGetSettlementActionSuccess(
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_settlement_name
     )
         : m_login(a_login),
           m_password(a_password),
-          m_land_name(a_land_name),
-          m_name(a_name)
+          m_settlement_name(a_settlement_name)
     {
     }
 
@@ -135,11 +132,7 @@ public:
         IClientShrPtr a_client
     )
     {
-        return Commands::Settlement::GetSettlementByLandNameAndName(a_client,
-                                                                    m_login,
-                                                                    m_password,
-                                                                    m_land_name,
-                                                                    m_name);
+        return Commands::Settlement::GetSettlement(a_client, m_login, m_password, m_settlement_name);
     }
 
 private:
@@ -154,41 +147,33 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The name of the land.
-     */
-    std::string const m_land_name;
-
-    /**
      * @brief The name of the settlement.
      */
-    std::string const m_name;
+    std::string const m_settlement_name;
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameActionInvalidRequest" action.
+ * @brief The "ScenarioGetSettlementActionInvalidRequest" action.
  */
-class ScenarioGetSettlementByLandNameAndNameActionInvalidRequest
+class ScenarioGetSettlementActionInvalidRequest
     : public IScenarioAction
 {
 public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login     The login of the user.
-     * @param a_password  The password of the user.
-     * @param a_land_name The name of the land.
-     * @param a_name      The name of the settlement.
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_settlement_name The name of the settlement.
      */
-    ScenarioGetSettlementByLandNameAndNameActionInvalidRequest(
-        std::string const & a_login,
-        std::string const & a_password,
-        std::string const   a_land_name,
-        std::string const & a_name
+    ScenarioGetSettlementActionInvalidRequest(
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_settlement_name
     )
         : m_login(a_login),
           m_password(a_password),
-          m_land_name(a_land_name),
-          m_name(a_name)
+          m_settlement_name(a_settlement_name)
     {
     }
 
@@ -205,7 +190,7 @@ public:
     {
         Network::XmlRPCCommon::Request::RequestShrPtr request(new Network::XmlRPCCommon::Request::Request);
 
-        request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME);
+        request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_GET_SETTLEMENT);
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
@@ -213,13 +198,9 @@ public:
         user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-        land_name->appendAttribute("type")->setValue("string");
-        land_name->appendAttribute("value")->setValue(m_land_name.c_str());
-
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr name = parameters->appendNode("name");
-        name->appendAttribute("type")->setValue("integer");
-        name->appendAttribute("value")->setValue(m_name.c_str());
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr settlement_name = parameters->appendNode("settlement_name");
+        settlement_name->appendAttribute("type")->setValue("integer");
+        settlement_name->appendAttribute("value")->setValue(m_settlement_name.c_str());
 
         return a_client->sendRequest(request);
     }
@@ -236,20 +217,15 @@ private:
     std::string const m_password;
 
     /**
-     * @brief The name of the land.
-     */
-    std::string const m_land_name;
-
-    /**
      * @brief The name of the settlement.
      */
-    std::string const m_name;
+    std::string const m_settlement_name;
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationLandDoesNotExist" verification.
+ * @brief The "ScenarioGetSettlementVerificationSettlementHasBeenGot" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationLandDoesNotExist
+class ScenarioGetSettlementVerificationSettlementHasBeenGot
     : public IScenarioVerification
 {
 public:
@@ -266,7 +242,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
@@ -276,7 +252,7 @@ public:
         I_ASSERT_STREQ("string",
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                        "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENT_BY_LANDNAME_AND_NAME_LAND_DOES_NOT_EXIST.c_str(),
+        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENT_SETTLEMENT_HAS_BEEN_GOT.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
 
@@ -285,9 +261,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationSettlementHasBeenGot" verification.
+ * @brief The "ScenarioGetSettlementVerificationSettlementHasNotBeenGot" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationSettlementHasBeenGot
+class ScenarioGetSettlementVerificationSettlementHasNotBeenGot
     : public IScenarioVerification
 {
 public:
@@ -304,7 +280,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
@@ -314,7 +290,7 @@ public:
         I_ASSERT_STREQ("string",
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                        "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENT_BY_LANDNAME_AND_NAME_SETTLEMENT_HAS_BEEN_GOT.c_str(),
+        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_GOT.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
 
@@ -323,9 +299,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationSettlementHasNotBeenGot" verification.
+ * @brief The "ScenarioGetSettlementVerificationUnexpectedError" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationSettlementHasNotBeenGot
+class ScenarioGetSettlementVerificationUnexpectedError
     : public IScenarioVerification
 {
 public:
@@ -342,7 +318,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
@@ -352,7 +328,7 @@ public:
         I_ASSERT_STREQ("string",
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                        "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENT_BY_LANDNAME_AND_NAME_SETTLEMENT_HAS_NOT_BEEN_GOT.c_str(),
+        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::DELETE_SETTLEMENT_UNEXPECTED_ERROR.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
 
@@ -361,9 +337,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationUnexpectedError" verification.
+ * @brief The "ScenarioGetSettlementVerificationInvalidRequest" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationUnexpectedError
+class ScenarioGetSettlementVerificationInvalidRequest
     : public IScenarioVerification
 {
 public:
@@ -380,45 +356,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
-                    node_reply->getAttribute("id")->asInt(),
-                    "Invalid reply ID.");
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
-                    "Invalid status.");
-
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
-        I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENT_BY_LANDNAME_AND_NAME_UNEXPECTED_ERROR.c_str(),
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                       "Invalid node value.");
-
-        return "";
-    }
-};
-
-/**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationInvalidRequest" verification.
- */
-class ScenarioGetSettlementByLandNameAndNameVerificationInvalidRequest
-    : public IScenarioVerification
-{
-public:
-    /**
-     * @brief Performs the verification.
-     *
-     * @param a_reply The reply to be verified.
-     *
-     * @return An empty "string" on success, a message otherwise.
-     */
-    virtual std::string verify(
-        Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    )
-    {
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_INVALID_REQUEST,
@@ -430,9 +368,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationInvalidRange" verification.
+ * @brief The "ScenarioGetSettlementVerificationInvalidRange" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationInvalidRange
+class ScenarioGetSettlementVerificationInvalidRange
     : public IScenarioVerification
 {
 public:
@@ -449,7 +387,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_INVALID_RANGE,
@@ -461,9 +399,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationUnauthenticated" verification.
+ * @brief The "ScenarioGetSettlementVerificationUnauthenticated" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationUnauthenticated
+class ScenarioGetSettlementVerificationUnauthenticated
     : public IScenarioVerification
 {
 public:
@@ -480,7 +418,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_UNAUTHENTICATED,
@@ -492,9 +430,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationUnauthorized" verification.
+ * @brief The "ScenarioGetSettlementVerificationUnauthorized" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationUnauthorized
+class ScenarioGetSettlementVerificationUnauthorized
     : public IScenarioVerification
 {
 public:
@@ -511,7 +449,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_UNAUTHORIZED,
@@ -523,9 +461,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetSettlementByLandNameAndNameVerificationEpochIsNotActive" verification.
+ * @brief The "ScenarioGetSettlementVerificationEpochIsNotActive" verification.
  */
-class ScenarioGetSettlementByLandNameAndNameVerificationEpochIsNotActive
+class ScenarioGetSettlementVerificationEpochIsNotActive
     : public IScenarioVerification
 {
 public:
@@ -542,7 +480,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENT,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_EPOCH_IS_NOT_ACTIVE,
@@ -559,4 +497,4 @@ public:
 } // namespace Helpers
 } // namespace IntegrationCommon
 
-#endif // INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENTBYLANDNAMEANDNAME_HPP
+#endif // INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENT_HPP

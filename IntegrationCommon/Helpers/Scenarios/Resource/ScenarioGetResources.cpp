@@ -64,15 +64,15 @@ char const * ScenarioGetResources::execute()
 }
 
 ScenarioGetResourcesActionSuccess::ScenarioGetResourcesActionSuccess(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
-      m_id_holder(a_id_holder)
+      m_holder_name(a_holder_name)
 {
 }
 
@@ -84,19 +84,19 @@ ReplyShrPtr ScenarioGetResourcesActionSuccess::perform(
                         m_login,
                         m_password,
                         m_id_holder_class,
-                        m_id_holder);
+                        m_holder_name);
 }
 
 ScenarioGetResourcesActionInvalidRequest::ScenarioGetResourcesActionInvalidRequest(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
-      m_id_holder(a_id_holder)
+      m_holder_name(a_holder_name)
 {
 }
 
@@ -118,9 +118,9 @@ ReplyShrPtr ScenarioGetResourcesActionInvalidRequest::perform(
     idholderclass->appendAttribute("type")->setValue("integer");
     idholderclass->appendAttribute("value")->setValue(m_id_holder_class);
 
-    IXmlNodeShrPtr idholder = parameters->appendNode("idholder");
-    idholder->appendAttribute("type")->setValue("integer");
-    idholder->appendAttribute("value")->setValue(m_id_holder);
+    IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
+    holder_name->appendAttribute("type")->setValue("integer");
+    holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
     return a_client->sendRequest(request);
 }

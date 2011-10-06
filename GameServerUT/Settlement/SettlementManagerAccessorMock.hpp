@@ -46,78 +46,46 @@ public:
     /**
      * @brief Inserts a settlement record.
      *
-     * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
-     * @param a_name        The name of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_land_name       The name of the land.
+     * @param a_settlement_name The name of the settlement.
      */
     MOCK_CONST_METHOD3(
         insertRecord,
-        IDSettlement(
+        void(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name,
-            std::string                     const a_name
+            std::string                     const a_settlement_name
         )
     );
 
     /**
      * @brief Deletes a settlement record.
      *
-     * @param a_transaction   A transaction.
-     * @param a_id_settlement An identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      */
     MOCK_CONST_METHOD2(
         deleteRecord,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
-            IDSettlement                    const & a_id_settlement
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_settlement_name
         )
     );
 
     /**
      * @brief Gets the record of settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return The record of the settlement, null if not found.
      */
     MOCK_CONST_METHOD2(
         getRecord,
         SettlementRecordShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
-            IDSettlement                    const & a_id_settlement
-        )
-    );
-
-    /**
-     * @brief Gets the record of settlement.
-     *
-     * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
-     * @param a_name        The name of the settlement.
-     *
-     * @return The record of the settlement, null if not found.
-     */
-    MOCK_CONST_METHOD3(
-        getRecord,
-        SettlementRecordShrPtr(
             Persistency::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name,
-            std::string                     const a_name
-        )
-    );
-
-    /**
-     * @brief Gets records of settlement.
-     *
-     * @param a_transaction The transaction.
-     *
-     * @return A map of settlement records, an empty map if not found.
-     */
-    MOCK_CONST_METHOD1(
-        getRecords,
-        SettlementRecordMap(
-            Persistency::ITransactionShrPtr a_transaction
+            std::string                     const a_settlement_name
         )
     );
 

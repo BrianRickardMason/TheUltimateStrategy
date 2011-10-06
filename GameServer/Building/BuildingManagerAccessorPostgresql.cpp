@@ -50,7 +50,7 @@ void BuildingManagerAccessorPostgresql::insertRecord(
 
     string query = "INSERT INTO "
                    + getTableName(a_id_holder)
-                   + "(id_holder, id_building_class, id_building, volume) VALUES("
+                   + "(holder_name, id_building_class, id_building, volume) VALUES("
                    + backbone_transaction.quote(a_id_holder.getValue2()) + ", "
                    + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1()) + ", "
                    + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2()) + ", "
@@ -70,7 +70,7 @@ void BuildingManagerAccessorPostgresql::deleteRecord(
 
     string query = "DELETE FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
 
@@ -88,7 +88,7 @@ BuildingWithVolumeRecordShrPtr BuildingManagerAccessorPostgresql::getRecord(
 
     string query = "SELECT volume FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
 
@@ -119,7 +119,7 @@ BuildingWithVolumeRecordMap BuildingManagerAccessorPostgresql::getRecords(
 
     string query = "SELECT * FROM "
                    + getTableName(a_id_holder)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2());
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2());
 
     pqxx::result result = backbone_transaction.exec(query);
 
@@ -157,7 +157,7 @@ void BuildingManagerAccessorPostgresql::increaseVolume(
     string query = "UPDATE "
                    + getTableName(a_id_holder)
                    + " SET volume = volume + " + backbone_transaction.quote(a_volume)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
 
@@ -177,7 +177,7 @@ void BuildingManagerAccessorPostgresql::decreaseVolume(
     string query = "UPDATE "
                    + getTableName(a_id_holder)
                    + " SET volume = volume - " + backbone_transaction.quote(a_volume)
-                   + " WHERE id_holder = " + backbone_transaction.quote(a_id_holder.getValue2())
+                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
                    + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
                    + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
 

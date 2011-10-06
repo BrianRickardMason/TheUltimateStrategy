@@ -77,7 +77,9 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_SettlementDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login", "Password", ID_HOLDER_CLASS_SETTLEMENT, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login", "Password",
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -117,11 +119,13 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login1", "Password1", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login1", "Password1", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login2", "Password2", ID_HOLDER_CLASS_SETTLEMENT, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login2", "Password2",
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -157,13 +161,13 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_ManyBuildings)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioBuildBuilding(
             client,
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_BUILDING_CLASS_DEFENSIVE, 1,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
@@ -171,13 +175,15 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_ManyBuildings)
             client,
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_BUILDING_CLASS_DEFENSIVE, 2,
                 2)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login", "Password", ID_HOLDER_CLASS_SETTLEMENT, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login", "Password",
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationBuildingsHaveBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -213,19 +219,21 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_SettlementDoesExist_Authorized_On
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioBuildBuilding(
             client,
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1,
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
                 ID_BUILDING_CLASS_DEFENSIVE, 1,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login", "Password", ID_HOLDER_CLASS_SETTLEMENT, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login", "Password",
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationBuildingsHaveBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -261,11 +269,13 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_ZeroBuildings)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login", "Password", ID_HOLDER_CLASS_SETTLEMENT, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login", "Password",
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationBuildingsHaveBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -301,11 +311,13 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login", "BadPassword", ID_HOLDER_CLASS_SETTLEMENT, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login", "BadPassword",
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationUnauthenticated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -323,7 +335,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_InvalidRequest)
             client,
             IScenarioActionShrPtr(new ScenarioGetBuildingsActionInvalidRequest(
                 "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, 1)),
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -339,7 +351,9 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_InvalidRange)
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login", "Password", ID_HOLDER_CLASS_TROOP + 1, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login", "Password",
+                ID_HOLDER_CLASS_TROOP + 1, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationInvalidRange))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -375,7 +389,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
@@ -383,7 +397,9 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
             client,
-            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess("Login", "Password", ID_HOLDER_CLASS_SETTLEMENT, 1)),
+            IScenarioActionShrPtr(new ScenarioGetBuildingsActionSuccess(
+                "Login", "Password",
+                ID_HOLDER_CLASS_SETTLEMENT, "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingsVerificationEpochIsNotActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

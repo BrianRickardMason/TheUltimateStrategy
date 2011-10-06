@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATOREXITCODE_HPP
-#define GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATOREXITCODE_HPP
+#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOREXITCODE_HPP
+#define GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOREXITCODE_HPP
 
 #include "../../Settlement.hpp"
 
@@ -38,15 +38,14 @@ namespace Settlement
 /**
  * @brief Available exit codes.
  */
-unsigned short int const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST         = 1;
-unsigned short int const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT     = 2;
-unsigned short int const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_GOT = 3;
-unsigned short int const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR            = 4;
+unsigned short int const GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT     = 1;
+unsigned short int const GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_GOT = 2;
+unsigned short int const GET_SETTLEMENT_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR            = 3;
 
 /**
- * @brief The exit code of GetSettlementByLandNameAndNameOperator.
+ * @brief The exit code of GetSettlementOperator.
  */
-class GetSettlementByLandNameAndNameOperatorExitCode
+class GetSettlementOperatorExitCode
 {
 public:
     /**
@@ -54,7 +53,7 @@ public:
      *
      * @param a_exit_code The value of the exit code.
      */
-    GetSettlementByLandNameAndNameOperatorExitCode(
+    GetSettlementOperatorExitCode(
         unsigned short int const a_exit_code
     )
         : m_exit_code(a_exit_code),
@@ -68,9 +67,9 @@ public:
      * @param a_exit_code  The value of the exit code.
      * @param a_settlement The settlement.
      */
-    GetSettlementByLandNameAndNameOperatorExitCode(
+    GetSettlementOperatorExitCode(
         unsigned short int const a_exit_code,
-        SettlementShrPtr   const a_settlement
+        SettlementShrPtr         const a_settlement
     )
         : m_exit_code(a_exit_code),
           m_settlement(a_settlement)
@@ -101,4 +100,4 @@ public:
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATOREXITCODE_HPP
+#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOREXITCODE_HPP

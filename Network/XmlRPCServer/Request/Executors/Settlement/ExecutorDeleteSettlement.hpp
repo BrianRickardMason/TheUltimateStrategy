@@ -28,7 +28,6 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETESETTLEMENT_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETESETTLEMENT_HPP
 
-#include "../../../../../GameServer/Settlement/IDSettlement.hpp"
 #include "../../../../../GameServer/Settlement/Operators/DeleteSettlement/DeleteSettlementOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
@@ -51,7 +50,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idsettlement type=\"string\" value=\"#\" />
+ *         <settlement_name type=\"string\" value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -154,14 +153,9 @@ class ExecutorDeleteSettlement
     ) const;
 
     /**
-     * @brief The value of the identifier of a settlement.
+     * @brief The name of the settlement.
      */
-    unsigned int m_value_id_settlement;
-
-    /**
-     * @brief The identifier of the settlement.
-     */
-    GameServer::Settlement::IDSettlement m_id_settlement;
+    std::string m_settlement_name;
 };
 
 } // namespace Executors

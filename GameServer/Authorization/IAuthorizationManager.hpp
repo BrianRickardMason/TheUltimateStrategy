@@ -30,7 +30,6 @@
 
 #include "../Common/IDHolder.hpp"
 #include "../Persistency/ITransaction.hpp"
-#include "../Settlement/IDSettlement.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
@@ -79,22 +78,22 @@ public:
     virtual bool authorizeUserToHolder(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
-        Common::IDHolder                const & a_id_settlement
+        Common::IDHolder                const & a_id_holder
     ) const = 0;
 
     /**
      * @brief Authorizes the user to the settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_login         The login of the user.
-     * @param a_id_settlement An identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_login           The login of the user.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        Settlement::IDSettlement        const & a_id_settlement
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_settlement_name
     ) const = 0;
 };
 

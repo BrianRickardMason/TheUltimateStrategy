@@ -25,29 +25,21 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_IDSETTLEMENT_HPP
-#define GAMESERVER_SETTLEMENT_IDSETTLEMENT_HPP
+#include "GetSettlementOperatorFactory.hpp"
 
-#include "../Common/ConstrainedValue.hpp"
+using namespace GameServer::Common;
 
 namespace GameServer
 {
 namespace Settlement
 {
 
-/**
- * @brief The fake type class to declare IDSettlement.
- */
-class TIDSettlement
+GetSettlementOperatorAutPtr GetSettlementOperatorFactory::createGetSettlementOperator(
+    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+)
 {
-};
-
-/**
- * @brief The identifier of a settlement.
- */
-typedef Common::ConstrainedValue<TIDSettlement, Common::UnsignedIntPolicy> IDSettlement;
+    return GetSettlementOperatorAutPtr(new GetSettlementOperator(a_manager_abstract_factory->createSettlementManager()));
+}
 
 } // namespace Settlement
 } // namespace GameServer
-
-#endif // GAMESERVER_SETTLEMENT_IDSETTLEMENT_HPP

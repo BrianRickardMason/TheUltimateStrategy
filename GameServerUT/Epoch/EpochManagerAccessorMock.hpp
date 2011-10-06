@@ -162,16 +162,16 @@ public:
     /**
      * @brief Gets the name of the land of the settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The nameof the settlement
      *
      * @return The name of the land, an empty string if not found.
      */
     MOCK_CONST_METHOD2(
         getLandNameOfSettlement,
         std::string(
-            Persistency::ITransactionShrPtr         a_transaction,
-            Settlement::IDSettlement        const & a_id_settlement
+            Persistency::ITransactionShrPtr       a_transaction,
+            std::string                     const a_settlement_name
         )
     );
 };

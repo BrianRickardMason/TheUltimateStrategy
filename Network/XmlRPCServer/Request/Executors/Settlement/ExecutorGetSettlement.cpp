@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Constants.hpp"
-#include "ExecutorGetSettlementByIDSettlement.hpp"
+#include "ExecutorGetSettlement.hpp"
 #include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
@@ -49,20 +49,20 @@ namespace Request
 namespace Executors
 {
 
-void ExecutorGetSettlementByIDSettlement::logExecutorStart() const
+void ExecutorGetSettlement::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetSettlementByIDSettlement.";
+    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetSettlement.";
 }
 
-bool ExecutorGetSettlementByIDSettlement::getParameters(
+bool ExecutorGetSettlement::getParameters(
     RequestShrPtr a_request
 )
 {
     try
     {
-        m_login               = a_request->getLoginValue();
-        m_password            = a_request->getPasswordValue();
-        m_value_id_settlement = a_request->getParameterValueUnsignedInteger("idsettlement");
+        m_login           = a_request->getLoginValue();
+        m_password        = a_request->getPasswordValue();
+        m_settlement_name = a_request->getParameterValueString("settlement_name");
 
         return true;
     }
@@ -72,21 +72,12 @@ bool ExecutorGetSettlementByIDSettlement::getParameters(
     }
 }
 
-bool ExecutorGetSettlementByIDSettlement::processParameters()
+bool ExecutorGetSettlement::processParameters()
 {
-    try
-    {
-        m_id_settlement = m_value_id_settlement;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
-bool ExecutorGetSettlementByIDSettlement::authorize(
+bool ExecutorGetSettlement::authorize(
     IPersistencyShrPtr a_persistency
 ) const
 {
@@ -99,7 +90,7 @@ bool ExecutorGetSettlementByIDSettlement::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name);
 
         if (exit_code.ok())
         {
@@ -110,20 +101,20 @@ bool ExecutorGetSettlementByIDSettlement::authorize(
     }
 }
 
-bool ExecutorGetSettlementByIDSettlement::epochIsActive(
+bool ExecutorGetSettlement::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDSettlementOperatorShrPtr epoch_operator =
-        m_operator_abstract_factory->createGetEpochByIDSettlementOperator();
+    IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
+        m_operator_abstract_factory->createGetEpochBySettlementNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByIDSettlementOperatorExitCode const exit_code =
-            epoch_operator->getEpochByIDSettlement(transaction, m_id_settlement);
+        GetEpochBySettlementNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochBySettlementName(transaction, m_settlement_name);
 
         if (exit_code.ok())
         {
@@ -134,27 +125,27 @@ bool ExecutorGetSettlementByIDSettlement::epochIsActive(
     }
 }
 
-bool ExecutorGetSettlementByIDSettlement::verifyWorldConfiguration(
+bool ExecutorGetSettlement::verifyWorldConfiguration(
     IPersistencyShrPtr a_persistency
 ) const
 {
     return true;
 }
 
-ReplyShrPtr ExecutorGetSettlementByIDSettlement::perform(
+ReplyShrPtr ExecutorGetSettlement::perform(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetSettlementByIDSettlementOperatorShrPtr settlement_operator =
-        m_operator_abstract_factory->createGetSettlementByIDSettlementOperator();
+    IGetSettlementOperatorShrPtr settlement_operator =
+        m_operator_abstract_factory->createGetSettlementOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetSettlementByIDSettlementOperatorExitCode const exit_code =
-            settlement_operator->getSettlementByIDSettlement(transaction, m_id_settlement);
+        GetSettlementOperatorExitCode const exit_code =
+            settlement_operator->getSettlement(transaction, m_settlement_name);
 
         if (exit_code.ok())
         {
@@ -165,20 +156,20 @@ ReplyShrPtr ExecutorGetSettlementByIDSettlement::perform(
     }
 }
 
-ReplyShrPtr ExecutorGetSettlementByIDSettlement::getBasicReply(
+ReplyShrPtr ExecutorGetSettlement::getBasicReply(
     unsigned int const a_status
 ) const
 {
     ReplyShrPtr reply = make_shared<Reply>();
 
-    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_SETTLEMENT_BY_ID_SETTLEMENT);
+    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_SETTLEMENT);
     reply->m_xml_document->getNode("reply")->appendNode("status")->appendAttribute("value")->setValue(a_status);
 
     return reply;
 }
 
-ReplyShrPtr ExecutorGetSettlementByIDSettlement::produceReply(
-    GetSettlementByIDSettlementOperatorExitCode const & a_exit_code
+ReplyShrPtr ExecutorGetSettlement::produceReply(
+    GetSettlementOperatorExitCode const & a_exit_code
 ) const
 {
     ReplyShrPtr reply = getBasicReply(REPLY_STATUS_OK);
@@ -192,16 +183,16 @@ ReplyShrPtr ExecutorGetSettlementByIDSettlement::produceReply(
 
     switch (a_exit_code.m_exit_code)
     {
-        case GET_SETTLEMENT_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_SETTLEMENT_BY_IDSETTLEMENT_SETTLEMENT_HAS_BEEN_GOT.c_str());
+        case GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_SETTLEMENT_SETTLEMENT_HAS_BEEN_GOT.c_str());
             break;
 
-        case GET_SETTLEMENT_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_SETTLEMENT_BY_IDSETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_GOT.c_str());
+        case GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_SETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_GOT.c_str());
             break;
 
-        case GET_SETTLEMENT_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
-            node_message->appendAttribute("value")->setValue(GET_SETTLEMENT_BY_IDSETTLEMENT_UNEXPECTED_ERROR.c_str());
+        case GET_SETTLEMENT_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
+            node_message->appendAttribute("value")->setValue(GET_SETTLEMENT_UNEXPECTED_ERROR.c_str());
             break;
 
         default:
@@ -214,13 +205,9 @@ ReplyShrPtr ExecutorGetSettlementByIDSettlement::produceReply(
         node_land_name->appendAttribute("type")->setValue("string");
         node_land_name->appendAttribute("value")->setValue(a_exit_code.m_settlement->getLandName().c_str());
 
-        IXmlNodeShrPtr node_idsettlement = node_parameters->appendNode("idsettlement");
-        node_idsettlement->appendAttribute("type")->setValue("unsigned integer");
-        node_idsettlement->appendAttribute("value")->setValue(a_exit_code.m_settlement->getIDSettlement().getValue());
-
-        IXmlNodeShrPtr node_name = node_parameters->appendNode("name");
-        node_name->appendAttribute("type")->setValue("string");
-        node_name->appendAttribute("value")->setValue(a_exit_code.m_settlement->getName().c_str());
+        IXmlNodeShrPtr node_settlement_name = node_parameters->appendNode("settlement_name");
+        node_settlement_name->appendAttribute("type")->setValue("string");
+        node_settlement_name->appendAttribute("value")->setValue(a_exit_code.m_settlement->getSettlementName().c_str());
     }
 
     return reply;

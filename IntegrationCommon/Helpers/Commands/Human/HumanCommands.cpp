@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "HumanCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "HumanCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -43,66 +42,66 @@ namespace Human
 {
 
 ReplyShrPtr EngageHuman(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_volume
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_human_class,
+    unsigned int const a_id_human,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestEngageHuman(a_login, a_password, a_id_holder_class, a_id_holder, a_id_human_class, a_id_human, a_volume);
+        createRequestEngageHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_volume);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr DismissHuman(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_human_class,
+    unsigned int const a_id_human,
+    unsigned int const a_experience,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestDismissHuman(a_login, a_password, a_id_holder_class, a_id_holder, a_id_human_class, a_id_human, a_experience, a_volume);
+        createRequestDismissHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_experience, a_volume);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetHuman(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_human_class,
+    unsigned int const a_id_human,
+    unsigned int const a_experience
 )
 {
     RequestShrPtr request =
-        createRequestGetHuman(a_login, a_password, a_id_holder_class, a_id_holder, a_id_human_class, a_id_human, a_experience);
+        createRequestGetHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_experience);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetHumans(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name
 )
 {
-    RequestShrPtr request = createRequestGetHumans(a_login, a_password, a_id_holder_class, a_id_holder);
+    RequestShrPtr request = createRequestGetHumans(a_login, a_password, a_id_holder_class, a_holder_name);
 
     return a_client->sendRequest(request);
 }

@@ -50,7 +50,7 @@ protected:
      * @brief Creates a test class.
      */
     HumanManagerTest()
-        : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, 1)
+        : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }
 

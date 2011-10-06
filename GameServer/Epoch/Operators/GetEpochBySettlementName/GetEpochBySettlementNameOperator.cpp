@@ -25,21 +25,48 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetEpochByIDSettlementOperatorFactory.hpp"
+#include "GetEpochBySettlementNameOperator.hpp"
 
-using namespace GameServer::Common;
+using namespace GameServer::Persistency;
+using namespace GameServer::Settlement;
+using namespace std;
 
 namespace GameServer
 {
 namespace Epoch
 {
 
-GetEpochByIDSettlementOperatorAutPtr GetEpochByIDSettlementOperatorFactory::createGetEpochByIDSettlementOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+GetEpochBySettlementNameOperator::GetEpochBySettlementNameOperator(
+    IEpochManagerShrPtr      a_epoch_manager,
+    ISettlementManagerShrPtr a_settlement_manager
 )
+    : m_epoch_manager(a_epoch_manager),
+      m_settlement_manager(a_settlement_manager)
 {
-    return GetEpochByIDSettlementOperatorAutPtr(new GetEpochByIDSettlementOperator(a_manager_abstract_factory->createEpochManager(),
-                                                                                   a_manager_abstract_factory->createSettlementManager()));
+}
+
+GetEpochBySettlementNameOperatorExitCode GetEpochBySettlementNameOperator::getEpochBySettlementName(
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
+) const
+{
+    try
+    {
+        // Verify if the settlement exists.
+        if (!m_settlement_manager->getSettlement(a_transaction, a_settlement_name))
+        {
+            return GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST);
+        }
+
+        EpochShrPtr const epoch = m_epoch_manager->getEpochBySettlementName(a_transaction, a_settlement_name);
+
+        return (epoch) ? GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT, epoch)
+                       : GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT);
+    }
+    catch (...)
+    {
+        return GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
+    }
 }
 
 } // namespace Epoch

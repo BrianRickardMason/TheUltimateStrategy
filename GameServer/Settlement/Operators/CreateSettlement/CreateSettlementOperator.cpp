@@ -50,7 +50,7 @@ CreateSettlementOperator::CreateSettlementOperator(
 CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name,
-    string             const a_name
+    string             const a_settlement_name
 ) const
 {
     try
@@ -64,7 +64,8 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         }
 
         // Verify if settlement of that name exists.
-        SettlementShrPtr const settlement = m_settlement_manager->getSettlement(a_transaction, a_land_name, a_name);
+        SettlementShrPtr const settlement =
+            m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
 
         if (settlement)
         {
@@ -72,7 +73,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         }
 
         // Create the settlement.
-        bool const result = m_settlement_manager->createSettlement(a_transaction, a_land_name, a_name);
+        bool const result = m_settlement_manager->createSettlement(a_transaction, a_land_name, a_settlement_name);
 
         if (!result)
         {
@@ -82,7 +83,8 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         if (!land->getGranted())
         {
             // Get the settlement.
-            SettlementShrPtr const settlement = m_settlement_manager->getSettlement(a_transaction, a_land_name, a_name);
+            SettlementShrPtr const settlement =
+                m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
 
             if (!settlement)
             {
@@ -90,7 +92,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
             }
 
             // Give the grant.
-            bool const result = m_behaviour_give_grant->giveGrant(a_transaction, settlement->getIDSettlement());
+            bool const result = m_behaviour_give_grant->giveGrant(a_transaction, settlement->getSettlementName());
 
             if (!result)
             {

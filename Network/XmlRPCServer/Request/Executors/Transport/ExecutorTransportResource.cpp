@@ -61,12 +61,12 @@ bool ExecutorTransportResource::getParameters(
 {
     try
     {
-        m_login                           = a_request->getLoginValue();
-        m_password                        = a_request->getPasswordValue();
-        m_value_id_settlement_source      = a_request->getParameterValueUnsignedInteger("idsettlementsource");
-        m_value_id_settlement_destination = a_request->getParameterValueUnsignedInteger("idsettlementdestination");
-        m_value_id_resource               = a_request->getParameterValueUnsignedInteger("idresource");
-        m_value_volume                    = a_request->getParameterValueUnsignedInteger("volume");
+        m_login                       = a_request->getLoginValue();
+        m_password                    = a_request->getPasswordValue();
+        m_settlement_name_source      = a_request->getParameterValueString("settlement_name_source");
+        m_settlement_name_destination = a_request->getParameterValueString("settlement_name_destination");
+        m_value_id_resource           = a_request->getParameterValueUnsignedInteger("idresource");
+        m_value_volume                = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;
     }
@@ -80,8 +80,6 @@ bool ExecutorTransportResource::processParameters()
 {
     try
     {
-        m_id_settlement_source = m_value_id_settlement_source;
-        m_id_settlement_destination = m_value_id_settlement_destination;
         m_id_resource = m_value_id_resource;
         m_volume = m_value_volume;
 
@@ -108,7 +106,7 @@ bool ExecutorTransportResource::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement_source);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name_source);
 
         if (exit_code.ok())
         {
@@ -124,7 +122,7 @@ bool ExecutorTransportResource::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement_destination);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name_destination);
 
         if (exit_code.ok())
         {
@@ -141,16 +139,16 @@ bool ExecutorTransportResource::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDSettlementOperatorShrPtr epoch_operator =
-        m_operator_abstract_factory->createGetEpochByIDSettlementOperator();
+    IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
+        m_operator_abstract_factory->createGetEpochBySettlementNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByIDSettlementOperatorExitCode const exit_code =
-            epoch_operator->getEpochByIDSettlement(transaction, m_id_settlement_source);
+        GetEpochBySettlementNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochBySettlementName(transaction, m_settlement_name_source);
 
         if (exit_code.ok())
         {
@@ -182,8 +180,8 @@ ReplyShrPtr ExecutorTransportResource::perform(
 
         TransportResourceOperatorExitCode const exit_code =
             transport_resource_operator->transportResource(transaction,
-                                                           m_id_settlement_source,
-                                                           m_id_settlement_destination,
+                                                           m_settlement_name_source,
+                                                           m_settlement_name_destination,
                                                            Key(m_id_resource),
                                                            m_volume);
 

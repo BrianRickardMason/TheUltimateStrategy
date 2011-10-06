@@ -59,7 +59,7 @@ protected:
         : m_building_manager(new BuildingManagerMock),
           m_cost_manager(new CostManagerMock),
           m_resource_manager(new ResourceManagerMock),
-          m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, 1)
+          m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }
 

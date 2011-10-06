@@ -161,7 +161,7 @@ ReplyShrPtr ExecutorGetSettlements::getBasicReply(
 {
     ReplyShrPtr reply = make_shared<Reply>();
 
-    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME);
+    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_SETTLEMENTS);
     reply->m_xml_document->getNode("reply")->appendNode("status")->appendAttribute("value")->setValue(a_status);
 
     return reply;
@@ -213,13 +213,9 @@ ReplyShrPtr ExecutorGetSettlements::produceReply(
         node_land_name->appendAttribute("type")->setValue("string");
         node_land_name->appendAttribute("value")->setValue(it->second->getLandName().c_str());
 
-        IXmlNodeShrPtr node_idsettlement = node_object->appendNode("idsettlement");
-        node_idsettlement->appendAttribute("type")->setValue("unsigned integer");
-        node_idsettlement->appendAttribute("value")->setValue(it->second->getIDSettlement().getValue());
-
-        IXmlNodeShrPtr node_name = node_object->appendNode("name");
-        node_name->appendAttribute("type")->setValue("string");
-        node_name->appendAttribute("value")->setValue(it->second->getName().c_str());
+        IXmlNodeShrPtr node_settlement_name = node_object->appendNode("settlement_name");
+        node_settlement_name->appendAttribute("type")->setValue("string");
+        node_settlement_name->appendAttribute("value")->setValue(it->second->getSettlementName().c_str());
     }
 
     return reply;

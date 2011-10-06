@@ -43,7 +43,8 @@ protected:
      */
     SettlementTest()
         : m_land_name("Land"),
-          m_settlement(SettlementRecord(m_land_name, IDSettlement(11), "Settlement1"))
+          m_settlement_name("Settlement"),
+          m_settlement(SettlementRecord(m_land_name, m_settlement_name))
     {
     }
 
@@ -53,6 +54,11 @@ protected:
     string m_land_name;
 
     /**
+     * @brief Test constants: the name of the settlement.
+     */
+    string m_settlement_name;
+
+    /**
      * @brief Test constants: the settlement.
      */
     Settlement m_settlement;
@@ -60,12 +66,11 @@ protected:
 
 TEST_F(SettlementTest, Settlement)
 {
-    SettlementRecord record(m_land_name, IDSettlement(11), "Settlement1");
+    SettlementRecord record(m_land_name, m_settlement_name);
     Settlement settlement(record);
 
     ASSERT_STREQ(m_land_name.c_str(), record.getLandName().c_str());
-    ASSERT_EQ(11, settlement.getIDSettlement().getValue());
-    ASSERT_STREQ("Settlement1", settlement.getName().c_str());
+    ASSERT_STREQ(m_settlement_name.c_str(), settlement.getSettlementName().c_str());
 }
 
 TEST_F(SettlementTest, GetLandNameReturnsProperValue)
@@ -73,12 +78,7 @@ TEST_F(SettlementTest, GetLandNameReturnsProperValue)
     ASSERT_STREQ(m_land_name.c_str(), m_settlement.getLandName().c_str());
 }
 
-TEST_F(SettlementTest, GetIDSettlementReturnsProperValue)
+TEST_F(SettlementTest, GetSettlementNameReturnsProperValue)
 {
-    ASSERT_EQ(11, m_settlement.getIDSettlement().getValue());
-}
-
-TEST_F(SettlementTest, GetNameReturnsProperValue)
-{
-    ASSERT_STREQ("Settlement1", m_settlement.getName().c_str());
+    ASSERT_STREQ(m_settlement_name.c_str(), m_settlement.getSettlementName().c_str());
 }

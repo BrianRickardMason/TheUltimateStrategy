@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "SettlementCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "SettlementCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -43,60 +42,47 @@ namespace Settlement
 {
 
 ReplyShrPtr CreateSettlement(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_land_name,
-    string        const & a_name
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_land_name,
+    string        const a_settlement_name
 )
 {
-    RequestShrPtr request = createRequestCreateSettlement(a_login, a_password, a_land_name, a_name);
+    RequestShrPtr request = createRequestCreateSettlement(a_login, a_password, a_land_name, a_settlement_name);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr DeleteSettlement(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    unsigned int  const   a_id_settlement
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_settlement_name
 )
 {
-    RequestShrPtr request = createRequestDeleteSettlement(a_login, a_password, a_id_settlement);
+    RequestShrPtr request = createRequestDeleteSettlement(a_login, a_password, a_settlement_name);
 
     return a_client->sendRequest(request);
 }
 
-ReplyShrPtr GetSettlementByLandNameAndName(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_land_name,
-    string        const & a_name
+ReplyShrPtr GetSettlement(
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_settlement_name
 )
 {
-    RequestShrPtr request = createRequestGetSettlementByLandNameAndName(a_login, a_password, a_land_name, a_name);
-
-    return a_client->sendRequest(request);
-}
-
-ReplyShrPtr GetSettlementByIDSettlement(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    unsigned int  const   a_id_settlement
-)
-{
-    RequestShrPtr request = createRequestGetSettlementByIDSettlement(a_login, a_password, a_id_settlement);
+    RequestShrPtr request = createRequestGetSettlement(a_login, a_password, a_settlement_name);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetSettlements(
-    IClientShrPtr        a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_land_name
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_land_name
 )
 {
     RequestShrPtr request = createRequestGetSettlements(a_login, a_password, a_land_name);

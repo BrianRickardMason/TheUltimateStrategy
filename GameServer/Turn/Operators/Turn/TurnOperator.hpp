@@ -97,27 +97,27 @@ private:
     /**
      * @brief Executes a turn in settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of a settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of a settlement.
      *
      * @return True on success, false otherwise.
      */
     bool executeTurnSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Settlement::IDSettlement        const & a_id_settlement
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
     ) const;
 
     /**
      * @brief Gets the total cost of living humans in the settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of a settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of a settlement.
      *
      * @return The total cost of living humans in the settlement.
      */
     Resource::ResourceSet getCostOfLiving(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Settlement::IDSettlement        const & a_id_settlement
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
     ) const;
 
     /**

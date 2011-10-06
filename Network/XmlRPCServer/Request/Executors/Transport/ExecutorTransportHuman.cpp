@@ -61,14 +61,14 @@ bool ExecutorTransportHuman::getParameters(
 {
     try
     {
-        m_login                           = a_request->getLoginValue();
-        m_password                        = a_request->getPasswordValue();
-        m_value_id_settlement_source      = a_request->getParameterValueUnsignedInteger("idsettlementsource");
-        m_value_id_settlement_destination = a_request->getParameterValueUnsignedInteger("idsettlementdestination");
-        m_value_id_human_class            = a_request->getParameterValueUnsignedInteger("idhumanclass");
-        m_value_id_human                  = a_request->getParameterValueUnsignedInteger("idhuman");
-        m_value_experience                = a_request->getParameterValueUnsignedInteger("experience");
-        m_value_volume                    = a_request->getParameterValueUnsignedInteger("volume");
+        m_login                       = a_request->getLoginValue();
+        m_password                    = a_request->getPasswordValue();
+        m_settlement_name_source      = a_request->getParameterValueString("settlement_name_source");
+        m_settlement_name_destination = a_request->getParameterValueString("settlement_name_destination");
+        m_value_id_human_class        = a_request->getParameterValueUnsignedInteger("idhumanclass");
+        m_value_id_human              = a_request->getParameterValueUnsignedInteger("idhuman");
+        m_value_experience            = a_request->getParameterValueUnsignedInteger("experience");
+        m_value_volume                = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;
     }
@@ -82,8 +82,6 @@ bool ExecutorTransportHuman::processParameters()
 {
     try
     {
-        m_id_settlement_source = m_value_id_settlement_source;
-        m_id_settlement_destination = m_value_id_settlement_destination;
         m_id_human.assign(m_value_id_human_class, m_value_id_human);
         m_experience = m_value_experience;
         m_volume = m_value_volume;
@@ -111,7 +109,7 @@ bool ExecutorTransportHuman::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement_source);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name_source);
 
         if (exit_code.ok())
         {
@@ -127,7 +125,7 @@ bool ExecutorTransportHuman::authorize(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
-            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_id_settlement_destination);
+            authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name_destination);
 
         if (exit_code.ok())
         {
@@ -144,16 +142,16 @@ bool ExecutorTransportHuman::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDSettlementOperatorShrPtr epoch_operator =
-        m_operator_abstract_factory->createGetEpochByIDSettlementOperator();
+    IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
+        m_operator_abstract_factory->createGetEpochBySettlementNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByIDSettlementOperatorExitCode const exit_code =
-            epoch_operator->getEpochByIDSettlement(transaction, m_id_settlement_source);
+        GetEpochBySettlementNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochBySettlementName(transaction, m_settlement_name_source);
 
         if (exit_code.ok())
         {
@@ -185,8 +183,8 @@ ReplyShrPtr ExecutorTransportHuman::perform(
 
         TransportHumanOperatorExitCode const exit_code =
             transport_human_operator->transportHuman(transaction,
-                                                     m_id_settlement_source,
-                                                     m_id_settlement_destination,
+                                                     m_settlement_name_source,
+                                                     m_settlement_name_destination,
                                                      Key(m_id_human, m_experience),
                                                      m_volume);
 

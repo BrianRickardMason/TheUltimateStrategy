@@ -38,8 +38,8 @@
 #include "../Epoch/Operators/DeactivateEpoch/DeactivateEpochOperatorFactory.hpp"
 #include "../Epoch/Operators/DeleteEpoch/DeleteEpochOperatorFactory.hpp"
 #include "../Epoch/Operators/FinishEpoch/FinishEpochOperatorFactory.hpp"
-#include "../Epoch/Operators/GetEpochByIDSettlement/GetEpochByIDSettlementOperatorFactory.hpp"
 #include "../Epoch/Operators/GetEpochByLandName/GetEpochByLandNameOperatorFactory.hpp"
+#include "../Epoch/Operators/GetEpochBySettlementName/GetEpochBySettlementNameOperatorFactory.hpp"
 #include "../Epoch/Operators/GetEpochByWorldName/GetEpochByWorldNameOperatorFactory.hpp"
 #include "../Epoch/Operators/TickEpoch/TickEpochOperatorFactory.hpp"
 #include "../Human/Operators/DismissHuman/DismissHumanOperatorFactory.hpp"
@@ -54,8 +54,7 @@
 #include "../Resource/Operators/GetResources/GetResourcesOperatorFactory.hpp"
 #include "../Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../Settlement/Operators/DeleteSettlement/DeleteSettlementOperatorFactory.hpp"
-#include "../Settlement/Operators/GetSettlementByLandNameAndName/GetSettlementByLandNameAndNameOperatorFactory.hpp"
-#include "../Settlement/Operators/GetSettlementByIDSettlement/GetSettlementByIDSettlementOperatorFactory.hpp"
+#include "../Settlement/Operators/GetSettlement/GetSettlementOperatorFactory.hpp"
 #include "../Settlement/Operators/GetSettlements/GetSettlementsOperatorFactory.hpp"
 #include "../Transport/Operators/TransportHuman/TransportHumanOperatorFactory.hpp"
 #include "../Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp"
@@ -157,14 +156,14 @@ IFinishEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createFinishEpochO
     return IFinishEpochOperatorShrPtr(FinishEpochOperatorFactory::createFinishEpochOperator(m_manager_abstract_factory));
 }
 
-IGetEpochByIDSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByIDSettlementOperator() const
-{
-    return IGetEpochByIDSettlementOperatorShrPtr(GetEpochByIDSettlementOperatorFactory::createGetEpochByIDSettlementOperator(m_manager_abstract_factory));
-}
-
 IGetEpochByLandNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByLandNameOperator() const
 {
     return IGetEpochByLandNameOperatorShrPtr(GetEpochByLandNameOperatorFactory::createGetEpochByLandNameOperator(m_manager_abstract_factory));
+}
+
+IGetEpochBySettlementNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochBySettlementNameOperator() const
+{
+    return IGetEpochBySettlementNameOperatorShrPtr(GetEpochBySettlementNameOperatorFactory::createGetEpochBySettlementNameOperator(m_manager_abstract_factory));
 }
 
 IGetEpochByWorldNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByWorldNameOperator() const
@@ -237,14 +236,9 @@ IDeleteSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createDeleteS
     return IDeleteSettlementOperatorShrPtr(DeleteSettlementOperatorFactory::createDeleteSettlementOperator(m_manager_abstract_factory));
 }
 
-IGetSettlementByLandNameAndNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetSettlementByLandNameAndNameOperator() const
+IGetSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetSettlementOperator() const
 {
-    return IGetSettlementByLandNameAndNameOperatorShrPtr(GetSettlementByLandNameAndNameOperatorFactory::createGetSettlementByLandNameAndNameOperator(m_manager_abstract_factory));
-}
-
-IGetSettlementByIDSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetSettlementByIDSettlementOperator() const
-{
-    return IGetSettlementByIDSettlementOperatorShrPtr(GetSettlementByIDSettlementOperatorFactory::createGetSettlementByIDSettlementOperator(m_manager_abstract_factory));
+    return IGetSettlementOperatorShrPtr(GetSettlementOperatorFactory::createGetSettlementOperator(m_manager_abstract_factory));
 }
 
 IGetSettlementsOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetSettlementsOperator() const

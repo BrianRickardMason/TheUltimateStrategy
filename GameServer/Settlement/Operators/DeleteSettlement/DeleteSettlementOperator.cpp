@@ -43,19 +43,19 @@ DeleteSettlementOperator::DeleteSettlementOperator(
 }
 
 DeleteSettlementOperatorExitCode DeleteSettlementOperator::deleteSettlement(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
 ) const
 {
     try
     {
         // Verify if the settlement exists.
-        if (!m_settlement_manager->getSettlement(a_transaction, a_id_settlement))
+        if (!m_settlement_manager->getSettlement(a_transaction, a_settlement_name))
         {
             return DeleteSettlementOperatorExitCode(DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST);
         }
 
-        bool const result = m_settlement_manager->deleteSettlement(a_transaction, a_id_settlement);
+        bool const result = m_settlement_manager->deleteSettlement(a_transaction, a_settlement_name);
 
         return (result) ? DeleteSettlementOperatorExitCode(DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_DELETED)
                         : DeleteSettlementOperatorExitCode(DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_DELETED);

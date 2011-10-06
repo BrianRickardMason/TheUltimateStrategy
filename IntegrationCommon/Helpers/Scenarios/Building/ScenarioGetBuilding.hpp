@@ -109,22 +109,22 @@ public:
      * @param a_login             The login of the user.
      * @param a_password          The password of the user.
      * @param a_id_holder_class   The identifier of the class of the holder.
-     * @param a_id_holder         The identifier of the holder.
+     * @param a_holder_name       The name of the holder.
      * @param a_id_building_class The identifier of the class of the building.
      * @param a_id_building       The identifier of the building.
      */
     ScenarioGetBuildingActionSuccess(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_holder_class,
-        unsigned int const   a_id_holder,
-        unsigned int const   a_id_building_class,
-        unsigned int const   a_id_building
+        std::string  const a_login,
+        std::string  const a_password,
+        unsigned int const a_id_holder_class,
+        std::string  const a_holder_name,
+        unsigned int const a_id_building_class,
+        unsigned int const a_id_building
     )
         : m_login(a_login),
           m_password(a_password),
           m_id_holder_class(a_id_holder_class),
-          m_id_holder(a_id_holder),
+          m_holder_name(a_holder_name),
           m_id_building_class(a_id_building_class),
           m_id_building(a_id_building)
     {
@@ -145,7 +145,7 @@ public:
                                                m_login,
                                                m_password,
                                                m_id_holder_class,
-                                               m_id_holder,
+                                               m_holder_name,
                                                m_id_building_class,
                                                m_id_building);
     }
@@ -167,9 +167,9 @@ private:
     unsigned int const m_id_holder_class;
 
     /**
-     * @brief The identifier of the holder.
+     * @brief The name of the holder.
      */
-    unsigned int const m_id_holder;
+    std::string const m_holder_name;
 
     /**
      * @brief The identifier of the class of the building.
@@ -195,22 +195,22 @@ public:
      * @param a_login             The login of the user.
      * @param a_password          The password of the user.
      * @param a_id_holder_class   The identifier of the class of the holder.
-     * @param a_id_holder         The identifier of the holder.
+     * @param a_holder_name       The name of the holder.
      * @param a_id_building_class The identifier of the class of the building.
      * @param a_id_building       The identifier of the building.
      */
     ScenarioGetBuildingActionInvalidRequest(
-        std::string  const & a_login,
-        std::string  const & a_password,
-        unsigned int const   a_id_holder_class,
-        unsigned int const   a_id_holder,
-        unsigned int const   a_id_building_class,
-        unsigned int const   a_id_building
+        std::string  const a_login,
+        std::string  const a_password,
+        unsigned int const a_id_holder_class,
+        std::string  const a_holder_name,
+        unsigned int const a_id_building_class,
+        unsigned int const a_id_building
     )
         : m_login(a_login),
           m_password(a_password),
           m_id_holder_class(a_id_holder_class),
-          m_id_holder(a_id_holder),
+          m_holder_name(a_holder_name),
           m_id_building_class(a_id_building_class),
           m_id_building(a_id_building)
     {
@@ -241,9 +241,9 @@ public:
         idholderclass->appendAttribute("type")->setValue("integer");
         idholderclass->appendAttribute("value")->setValue(m_id_holder_class);
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idholder = parameters->appendNode("idholder");
-        idholder->appendAttribute("type")->setValue("integer");
-        idholder->appendAttribute("value")->setValue(m_id_holder);
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
+        holder_name->appendAttribute("type")->setValue("integer");
+        holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idbuildingclass = parameters->appendNode("idbuildingclass");
         idbuildingclass->appendAttribute("type")->setValue("integer");
@@ -273,9 +273,9 @@ private:
     unsigned int const m_id_holder_class;
 
     /**
-     * @brief The identifier of the holder.
+     * @brief The name of the holder.
      */
-    unsigned int const m_id_holder;
+    std::string const m_holder_name;
 
     /**
      * @brief The identifier of the class of the building.

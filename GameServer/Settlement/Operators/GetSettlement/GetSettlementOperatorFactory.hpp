@@ -25,43 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetSettlementByIDSettlementOperator.hpp"
+#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATORFACTORY_HPP
+#define GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATORFACTORY_HPP
 
-using namespace GameServer::Persistency;
+#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "GetSettlementOperator.hpp"
 
 namespace GameServer
 {
 namespace Settlement
 {
 
-GetSettlementByIDSettlementOperator::GetSettlementByIDSettlementOperator(
-    ISettlementManagerShrPtr a_settlement_manager
-)
-    : m_settlement_manager(a_settlement_manager)
+/**
+ * @brief The factory of GetSettlementOperator.
+ */
+class GetSettlementOperatorFactory
 {
-}
-
-GetSettlementByIDSettlementOperatorExitCode GetSettlementByIDSettlementOperator::getSettlementByIDSettlement(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
-) const
-{
-    try
-    {
-        SettlementShrPtr const settlement = m_settlement_manager->getSettlement(a_transaction, a_id_settlement);
-
-        return (settlement) ? GetSettlementByIDSettlementOperatorExitCode(
-                                  GET_SETTLEMENT_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT,
-                                  settlement)
-                            : GetSettlementByIDSettlementOperatorExitCode(
-                                  GET_SETTLEMENT_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_GOT,
-                                  settlement);
-    }
-    catch (...)
-    {
-        return GetSettlementByIDSettlementOperatorExitCode(GET_SETTLEMENT_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
-    }
-}
+public:
+    /**
+     * @brief The factory method.
+     *
+     * @param a_manager_abstract_factory The abstract factory of managers.
+     *
+     * @return The newly created GetSettlementOperator.
+     */
+    static GetSettlementOperatorAutPtr createGetSettlementOperator(
+        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    );
+};
 
 } // namespace Settlement
 } // namespace GameServer
+
+#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATORFACTORY_HPP

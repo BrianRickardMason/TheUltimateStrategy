@@ -68,7 +68,7 @@ TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnArguments)
 
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnRecord)
 {
-    BuildingWithVolumeRecord building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, 22), Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4);
+    BuildingWithVolumeRecord building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4);
 
     BuildingWithVolume building_with_volume(building_with_volume_record);
 

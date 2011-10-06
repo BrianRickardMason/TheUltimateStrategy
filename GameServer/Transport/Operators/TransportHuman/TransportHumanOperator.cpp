@@ -32,6 +32,7 @@ using namespace GameServer::Common;
 using namespace GameServer::Human;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
+using namespace std;
 
 namespace GameServer
 {
@@ -49,8 +50,8 @@ TransportHumanOperator::TransportHumanOperator(
 
 TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
     ITransactionShrPtr          a_transaction,
-    IDSettlement        const & a_id_settlement_source,
-    IDSettlement        const & a_id_settlement_destination,
+    string              const   a_settlement_name_source,
+    string              const   a_settlement_name_destination,
     Key                 const & a_key,
     Volume              const & a_volume
 ) const
@@ -64,7 +65,8 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
         }
 
         // Verify if the source settlement exists.
-        SettlementShrPtr settlement_source = m_settlement_manager->getSettlement(a_transaction, a_id_settlement_source);
+        SettlementShrPtr settlement_source =
+            m_settlement_manager->getSettlement(a_transaction, a_settlement_name_source);
 
         if (!settlement_source)
         {
@@ -73,7 +75,7 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
 
         // Verify if the destination settlement exists.
         SettlementShrPtr settlement_destination =
-            m_settlement_manager->getSettlement(a_transaction, a_id_settlement_destination);
+            m_settlement_manager->getSettlement(a_transaction, a_settlement_name_destination);
 
         if (!settlement_destination)
         {
@@ -86,8 +88,8 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
             return TransportHumanOperatorExitCode(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND);
         }
 
-        IDHolder id_holder_source(ID_HOLDER_CLASS_SETTLEMENT, a_id_settlement_source.getValue());
-        IDHolder id_holder_destination(ID_HOLDER_CLASS_SETTLEMENT, a_id_settlement_destination.getValue());
+        IDHolder id_holder_source(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_source);
+        IDHolder id_holder_destination(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_destination);
 
         bool const result = m_human_manager->subtractHuman(a_transaction, id_holder_source, a_key, a_volume);
 

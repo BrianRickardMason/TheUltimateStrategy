@@ -63,19 +63,19 @@ protected:
         : m_scenario_action_invalid_request(
             new ScenarioTransportHumanActionInvalidRequest(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 22)),
           m_scenario_action_invalid_range(
               new ScenarioTransportHumanActionSuccess(
                   "Login", "Password",
-                  1, 2,
+                  "Settlement1", "Settlement2",
                   ID_HUMAN_WORKER_TEACHER.getValue1() + 1, ID_HUMAN_WORKER_TEACHER.getValue2() + 1, EXPERIENCE_ADVANCED.getValue() + 1,
                   22)),
           m_scenario_action_unauthenticated(
               new ScenarioTransportHumanActionSuccess(
                   "Login", "BadPassword",
-                  1, 2,
+                  "Settlement1", "Settlement2",
                   ID_HUMAN_WORKER_TEACHER.getValue1(), ID_HUMAN_WORKER_TEACHER.getValue2(), EXPERIENCE_ADVANCED.getValue(),
                   22)),
           m_scenario_verification_invalid_request(new ScenarioTransportHumanVerificationInvalidRequest),
@@ -214,7 +214,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, UnauthorizedToTheSourceS
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login2", "Password2",
-                1, 3,
+                "Settlement1", "Settlement3",
                 ID_HUMAN_WORKER_TEACHER.getValue1(), ID_HUMAN_WORKER_TEACHER.getValue2(), EXPERIENCE_ADVANCED.getValue(),
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationUnauthorized))));
@@ -274,7 +274,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, UnauthorizedToTheDestina
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login2", "Password2",
-                3, 1,
+                "Settlement3", "Settlement1",
                 ID_HUMAN_WORKER_TEACHER.getValue1(), ID_HUMAN_WORKER_TEACHER.getValue2(), EXPERIENCE_ADVANCED.getValue(),
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationUnauthorized))));
@@ -326,7 +326,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, EpochIsNotActive)
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationEpochIsNotActive))));
@@ -374,7 +374,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, TryingToTransportZeroHum
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 0)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationTryingToTransportZeroHumans))));
@@ -436,7 +436,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, SettlementsAreNotFromThe
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationSettlementsAreNotFromTheSameLand))));
@@ -484,7 +484,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, NotEnoughHumans)
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 1001)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationNotEnoughHumans))));
@@ -532,7 +532,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, HumanHasBeenTransportedO
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 1)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationHumanHasBeenTransported))));
@@ -580,7 +580,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, HumanHasBeenTransportedM
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 501)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationHumanHasBeenTransported))));
@@ -628,7 +628,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, HumanHasBeenTransportedM
             client,
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
-                1, 2,
+                "Settlement1", "Settlement2",
                 ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
                 1000)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationHumanHasBeenTransported))));

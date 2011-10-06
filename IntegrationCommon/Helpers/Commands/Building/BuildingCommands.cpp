@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "BuildingCommands.hpp"
-
 #include "../../RequestCreators.hpp"
+#include "BuildingCommands.hpp"
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -43,64 +42,64 @@ namespace Building
 {
 
 ReplyShrPtr BuildBuilding(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building,
-    unsigned int const   a_volume
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_building_class,
+    unsigned int const a_id_building,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestBuildBuilding(a_login, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building, a_volume);
+        createRequestBuildBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building, a_volume);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr DestroyBuilding(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building,
-    unsigned int const   a_volume
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_building_class,
+    unsigned int const a_id_building,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestDestroyBuilding(a_login, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building, a_volume);
+        createRequestDestroyBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building, a_volume);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetBuilding(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_building_class,
+    unsigned int const a_id_building
 )
 {
     RequestShrPtr request =
-        createRequestGetBuilding(a_login, a_password, a_id_holder_class, a_id_holder, a_id_building_class, a_id_building);
+        createRequestGetBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building);
 
     return a_client->sendRequest(request);
 }
 
 ReplyShrPtr GetBuildings(
-    IClientShrPtr        a_client,
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    unsigned int const   a_id_holder
+    IClientShrPtr      a_client,
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name
 )
 {
-    RequestShrPtr request = createRequestGetBuildings(a_login, a_password, a_id_holder_class, a_id_holder);
+    RequestShrPtr request = createRequestGetBuildings(a_login, a_password, a_id_holder_class, a_holder_name);
 
     return a_client->sendRequest(request);
 }

@@ -38,44 +38,41 @@ CREATE TABLE lands
 DROP TABLE IF EXISTS settlements CASCADE;
 CREATE TABLE settlements
 (
-    land_name     VARCHAR(44) NOT NULL CHECK(land_name <> '') REFERENCES lands(land_name) ON DELETE CASCADE,
-    id_settlement SERIAL PRIMARY KEY,
-    name          VARCHAR(44) NOT NULL CHECK(name <> ''),
-
-    UNIQUE(land_name, name)
+    land_name       VARCHAR(44) NOT NULL CHECK(land_name <> '') REFERENCES lands(land_name) ON DELETE CASCADE,
+    settlement_name VARCHAR(44) PRIMARY KEY NOT NULL CHECK(settlement_name <> '')
 );
 
 DROP TABLE IF EXISTS buildings_settlement CASCADE;
 CREATE TABLE buildings_settlement
 (
-    id_holder         INTEGER NOT NULL CHECK(id_holder > 0) REFERENCES settlements(id_settlement) ON DELETE CASCADE,
+    holder_name       VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
     id_building_class SMALLINT NOT NULL CHECK(id_building_class IN (1, 2, 3, 4)), -- TODO: Mapping to source code needed.
     id_building       SMALLINT NOT NULL CHECK(id_building > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
     volume            INTEGER NOT NULL CHECK(volume > 0),
 
-    UNIQUE(id_holder, id_building_class, id_building)
+    UNIQUE(holder_name, id_building_class, id_building)
 );
 
 DROP TABLE IF EXISTS humans_settlement CASCADE;
 CREATE TABLE humans_settlement
 (
-    id_holder      INTEGER NOT NULL CHECK(id_holder > 0) REFERENCES settlements(id_settlement) ON DELETE CASCADE,
+    holder_name    VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
     id_human_class SMALLINT NOT NULL CHECK(id_human_class IN (1, 2, 3, 4)), -- TODO: Mapping to source code needed.
     id_human       SMALLINT NOT NULL CHECK(id_human > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
     experience     SMALLINT NOT NULL CHECK(experience IN (1, 2)), -- TODO: Mapping to source code needed.
     volume         INTEGER NOT NULL CHECK(volume > 0),
 
-    UNIQUE(id_holder, id_human_class, id_human, experience)
+    UNIQUE(holder_name, id_human_class, id_human, experience)
 );
 
 DROP TABLE IF EXISTS resources_settlement CASCADE;
 CREATE TABLE resources_settlement
 (
-    id_holder   INTEGER NOT NULL CHECK(id_holder > 0) REFERENCES settlements(id_settlement) ON DELETE CASCADE,
+    holder_name VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
     id_resource SMALLINT NOT NULL CHECK(id_resource IN (1, 2, 3, 4, 5, 6, 7)), -- TODO: Mapping to source code needed.
     volume      INTEGER NOT NULL CHECK(volume > 0),
 
-    UNIQUE(id_holder, id_resource)
+    UNIQUE(holder_name, id_resource)
 );
 
 DROP TABLE IF EXISTS costs CASCADE;

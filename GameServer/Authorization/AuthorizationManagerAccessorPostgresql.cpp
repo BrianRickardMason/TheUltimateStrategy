@@ -55,14 +55,14 @@ bool AuthorizationManagerAccessorPostgresql::authorizeUserToLand(
 }
 
 string AuthorizationManagerAccessorPostgresql::getLandNameOfSettlement(
-    ITransactionShrPtr               a_transaction,
-    Settlement::IDSettlement const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT land_name FROM settlements WHERE id_settlement = " + backbone_transaction.quote(a_id_settlement.getValue());
+    string query = "SELECT land_name FROM settlements WHERE settlement_name = " + backbone_transaction.quote(a_settlement_name);
 
     pqxx::result result = backbone_transaction.exec(query);
 

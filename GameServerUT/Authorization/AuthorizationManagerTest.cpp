@@ -32,7 +32,6 @@
 
 using namespace GameServer::Authorization;
 using namespace GameServer::Persistency;
-using namespace GameServer::Settlement;
 using namespace std;
 
 using testing::Return;
@@ -50,7 +49,7 @@ protected:
     AuthorizationManagerTest()
         : m_login("Login"),
           m_land_name("Land"),
-          m_id_settlement_1(1)
+          m_settlement_name("Settlement")
     {
     }
 
@@ -65,9 +64,9 @@ protected:
     string m_land_name;
 
     /**
-     * @brief An identifier of the settlement.
+     * @brief Test constants: the name of the settlement.
      */
-    IDSettlement m_id_settlement_1;
+    string m_settlement_name;
 };
 
 /**
@@ -121,7 +120,7 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
-    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_settlement_name))
     .WillOnce(Return(m_land_name));
     EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_land_name))
     .WillOnce(Return(true));
@@ -130,7 +129,7 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_TRUE(manager.authorizeUserToSettlement(transaction, m_login, m_id_settlement_1));
+    ASSERT_TRUE(manager.authorizeUserToSettlement(transaction, m_login, m_settlement_name));
 }
 
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
@@ -138,7 +137,7 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
-    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_settlement_name))
     .WillOnce(Return(m_land_name));
     EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_land_name))
     .WillOnce(Return(false));
@@ -147,5 +146,5 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
 
     AuthorizationManager manager(accessor);
 
-    ASSERT_FALSE(manager.authorizeUserToSettlement(transaction, m_login, m_id_settlement_1));
+    ASSERT_FALSE(manager.authorizeUserToSettlement(transaction, m_login, m_settlement_name));
 }

@@ -25,11 +25,14 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTBYIDSETTLEMENTOPERATOR_HPP
-#define GAMESERVER_SETTLEMENT_GETSETTLEMENTBYIDSETTLEMENTOPERATOR_HPP
+#ifndef GAMESERVER_SETTLEMENT_IGETSETTLEMENTOPERATOR_HPP
+#define GAMESERVER_SETTLEMENT_IGETSETTLEMENTOPERATOR_HPP
 
-#include "../../ISettlementManager.hpp"
-#include "IGetSettlementByIDSettlementOperator.hpp"
+#include "../../../Persistency/ITransaction.hpp"
+#include "GetSettlementOperatorExitCode.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -37,47 +40,37 @@ namespace Settlement
 {
 
 /**
- * @brief GetSettlementByIDSettlementOperator.
+ * @brief The interface of GetSettlementOperator.
  */
-class GetSettlementByIDSettlementOperator
-    : public IGetSettlementByIDSettlementOperator
+class IGetSettlementOperator
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the operator.
-     *
-     * @param a_settlement_manager The manager of settlements.
+     * @brief Destructs GetSettlementOperator.
      */
-    GetSettlementByIDSettlementOperator(
-        ISettlementManagerShrPtr a_settlement_manager
-    );
+    virtual ~IGetSettlementOperator(){};
 
     /**
      * @brief Gets a settlement.
      *
-     * @param a_transaction The transaction.
-     * @param a_id_settlement     The identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return The exit code.
      */
-    virtual GetSettlementByIDSettlementOperatorExitCode getSettlementByIDSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDSettlement                    const & a_id_settlement
-    ) const;
-
-private:
-    /**
-     * @brief The manager of settlements.
-     */
-    ISettlementManagerShrPtr m_settlement_manager;
+    virtual GetSettlementOperatorExitCode getSettlement(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const = 0;
 };
 
 /**
- * @brief The auto pointer of GetSettlementByIDSettlementOperator.
+ * @brief The shared pointer of the interface of GetSettlementOperator.
  */
-typedef std::auto_ptr<GetSettlementByIDSettlementOperator> GetSettlementByIDSettlementOperatorAutPtr;
+typedef boost::shared_ptr<IGetSettlementOperator> IGetSettlementOperatorShrPtr;
 
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTBYIDSETTLEMENTOPERATOR_HPP
+#endif // GAMESERVER_SETTLEMENT_IGETSETTLEMENTOPERATOR_HPP

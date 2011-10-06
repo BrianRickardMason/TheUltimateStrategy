@@ -31,7 +31,6 @@
 
 using namespace GameServer::Epoch;
 using namespace GameServer::Persistency;
-using namespace GameServer::Settlement;
 using namespace boost;
 using namespace std;
 
@@ -52,7 +51,7 @@ protected:
         : m_id_epoch_1(1),
           m_world_name("World"),
           m_land_name("Land"),
-          m_id_settlement_1(1)
+          m_settlement_name("Settlement")
     {
     }
 
@@ -72,9 +71,9 @@ protected:
     string m_land_name;
 
     /**
-     * @brief Test constants: identifiers of settlements.
+     * @brief Test constants: the name of the settlement.
      */
-    IDSettlement m_id_settlement_1;
+    string m_settlement_name;
 };
 
 TEST_F(EpochManagerTest, EpochManager)
@@ -278,13 +277,13 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
     ASSERT_EQ(22, epoch->getTicks());
 }
 
-TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesNotExist)
+TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_settlement_name))
     .WillOnce(Return(m_land_name));
 
     EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_land_name))
@@ -297,18 +296,18 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesNotExist)
 
     EpochManager manager(accessor);
 
-    EpochShrPtr epoch = manager.getEpochByIDSettlement(transaction, m_id_settlement_1);
+    EpochShrPtr epoch = manager.getEpochBySettlementName(transaction, m_settlement_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
 
-TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
+TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     EpochManagerAccessorMock * mock = new EpochManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_id_settlement_1))
+    EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_settlement_name))
      .WillOnce(Return(m_land_name));
 
     EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_land_name))
@@ -321,7 +320,7 @@ TEST_F(EpochManagerTest, getEpochByIDSettlement_EpochDoesExist)
 
     EpochManager manager(accessor);
 
-    EpochShrPtr epoch = manager.getEpochByIDSettlement(transaction, m_id_settlement_1);
+    EpochShrPtr epoch = manager.getEpochBySettlementName(transaction, m_settlement_name);
 
     ASSERT_TRUE(epoch != NULL);
 

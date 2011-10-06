@@ -111,9 +111,9 @@ public:
      * @param a_land_name The name of the land.
      */
     ScenarioGetSettlementsActionSuccess(
-        std::string const & a_login,
-        std::string const & a_password,
-        std::string const   a_land_name
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_land_name
     )
         : m_login(a_login),
           m_password(a_password),
@@ -167,9 +167,9 @@ public:
      * @param a_land_name The name of the land.
      */
     ScenarioGetSettlementsActionInvalidRequest(
-        std::string const & a_login,
-        std::string const & a_password,
-        std::string const   a_land_name
+        std::string const a_login,
+        std::string const a_password,
+        std::string const a_land_name
     )
         : m_login(a_login),
           m_password(a_password),
@@ -190,7 +190,7 @@ public:
     {
         Network::XmlRPCCommon::Request::RequestShrPtr request(new Network::XmlRPCCommon::Request::Request);
 
-        request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_GET_SETTLEMENTS_BY_LAND_NAME);
+        request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(Network::XmlRPCCommon::Request::REQUEST_ID_GET_SETTLEMENTS);
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
@@ -242,7 +242,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
@@ -280,7 +280,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
@@ -318,7 +318,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
@@ -356,7 +356,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_OK,
@@ -394,7 +394,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_INVALID_REQUEST,
@@ -425,7 +425,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_INVALID_RANGE,
@@ -456,7 +456,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_UNAUTHENTICATED,
@@ -487,7 +487,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_UNAUTHORIZED,
@@ -518,7 +518,7 @@ public:
     {
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS_BY_LAND_NAME,
+        I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_ID_GET_SETTLEMENTS,
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_EPOCH_IS_NOT_ACTIVE,

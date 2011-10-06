@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_SETTLEMENT_SETTLEMENTRECORD_HPP
 #define GAMESERVER_SETTLEMENT_SETTLEMENTRECORD_HPP
 
-#include "IDSettlement.hpp"
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -47,14 +46,12 @@ public:
     /**
      * @brief Constructs a settlement record.
      *
-     * @param a_land_name     The name of the land.
-     * @param a_id_settlement An identifier of the settlement.
-     * @param a_name          A name of the settlement.
+     * @param a_land_name       The name of the land.
+     * @param a_settlement_name The name of the settlement.
      */
     SettlementRecord(
-        std::string  const   a_land_name,
-        IDSettlement const & a_id_settlement,
-        std::string  const & a_name
+        std::string const a_land_name,
+        std::string const a_settlement_name
     );
 
     /**
@@ -65,18 +62,11 @@ public:
     std::string getLandName() const;
 
     /**
-     * @brief Gets the identifier of the settlement.
-     *
-     * @return The identifier of the settlement.
-     */
-    IDSettlement const & getIDSettlement() const;
-
-    /**
      * @brief Gets the name of the settlement.
      *
      * @return The name of the settlement.
      */
-    std::string const & getName() const;
+    std::string getSettlementName() const;
 
 private:
     /**
@@ -85,14 +75,9 @@ private:
     std::string const m_land_name;
 
     /**
-     * @brief An identifier of the settlement.
+     * @brief The name of the settlement.
      */
-    IDSettlement const m_id_settlement;
-
-    /**
-     * @brief A name of the settlement.
-     */
-    std::string const m_name;
+    std::string const m_settlement_name;
 };
 
 /**
@@ -103,12 +88,12 @@ typedef boost::shared_ptr<SettlementRecord> SettlementRecordShrPtr;
 /**
  * @brief A pair of settlement record.
  */
-typedef std::pair<IDSettlement, SettlementRecordShrPtr> SettlementRecordPair;
+typedef std::pair<std::string, SettlementRecordShrPtr> SettlementRecordPair;
 
 /**
  * @brief A map of settlement record.
  */
-typedef std::map<IDSettlement, SettlementRecordShrPtr> SettlementRecordMap;
+typedef std::map<std::string, SettlementRecordShrPtr> SettlementRecordMap;
 
 } // namespace Settlement
 } // namespace GameServer

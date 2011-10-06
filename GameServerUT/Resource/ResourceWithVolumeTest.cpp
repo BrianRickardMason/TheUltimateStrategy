@@ -68,7 +68,7 @@ TEST_F(ResourceWithVolumeTest, ResourceWithVolume_BasedOnArguments)
 
 TEST_F(ResourceWithVolumeTest, ResourceWithVolume_BasedOnRecord)
 {
-    ResourceWithVolumeRecord resource_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, 22), Key(ID_RESOURCE_COAL), 2);
+    ResourceWithVolumeRecord resource_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), Key(ID_RESOURCE_COAL), 2);
 
     ResourceWithVolume resource_with_volume(resource_with_volume_record);
 

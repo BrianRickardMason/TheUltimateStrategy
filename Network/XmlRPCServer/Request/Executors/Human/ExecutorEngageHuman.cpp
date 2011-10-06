@@ -63,7 +63,7 @@ bool ExecutorEngageHuman::getParameters(
         m_login                 = a_request->getLoginValue();
         m_password              = a_request->getPasswordValue();
         m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
-        m_value_id_holder       = a_request->getParameterValueUnsignedInteger("idholder");
+        m_holder_name           = a_request->getParameterValueString("holder_name");
         m_value_id_human_class  = a_request->getParameterValueUnsignedInteger("idhumanclass");
         m_value_id_human        = a_request->getParameterValueUnsignedInteger("idhuman");
         m_value_volume          = a_request->getParameterValueUnsignedInteger("volume");
@@ -80,7 +80,7 @@ bool ExecutorEngageHuman::processParameters()
 {
     try
     {
-        m_id_holder.assign(m_value_id_holder_class, m_value_id_holder);
+        m_id_holder.assign(m_value_id_holder_class, m_holder_name);
         m_id_human.assign(m_value_id_human_class, m_value_id_human);
         m_volume = m_value_volume;
 
@@ -120,18 +120,16 @@ bool ExecutorEngageHuman::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDSettlementOperatorShrPtr epoch_operator =
-        m_operator_abstract_factory->createGetEpochByIDSettlementOperator();
+    IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
+        m_operator_abstract_factory->createGetEpochBySettlementNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        IDSettlement id_settlement(m_id_holder.getValue2());
-
-        GetEpochByIDSettlementOperatorExitCode const exit_code =
-            epoch_operator->getEpochByIDSettlement(transaction, id_settlement);
+        GetEpochBySettlementNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochBySettlementName(transaction, m_holder_name);
 
         if (exit_code.ok())
         {

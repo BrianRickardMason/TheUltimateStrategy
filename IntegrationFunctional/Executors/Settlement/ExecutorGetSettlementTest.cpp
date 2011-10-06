@@ -30,7 +30,7 @@
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioDeactivateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Land/ScenarioCreateLand.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Settlement/ScenarioCreateSettlement.hpp"
-#include "../../../IntegrationCommon/Helpers/Scenarios/Settlement/ScenarioGetSettlementByIDSettlement.hpp"
+#include "../../../IntegrationCommon/Helpers/Scenarios/Settlement/ScenarioGetSettlement.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/User/ScenarioCreateUser.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
@@ -46,9 +46,9 @@ using namespace boost::assign;
 using namespace std;
 
 /**
- * Integration functional tests of: ExecutorGetSettlementByIDSettlement.
+ * Integration functional tests of: ExecutorGetSettlement.
  */
-TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_LandDoesNotExist)
+TEST_F(IntegrationFunctionalTest, GetSettlement_LandDoesNotExist)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -69,10 +69,10 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_LandDoesNotExist)
             client,
             IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
-        (IScenarioShrPtr(new ScenarioGetSettlementByIDSettlement(
+        (IScenarioShrPtr(new ScenarioGetSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioGetSettlementByIDSettlementActionSuccess("Login", "Password", 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetSettlementByIDSettlementVerificationUnauthorized))));
+            IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess("Login", "Password", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -80,43 +80,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_LandDoesNotExist)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_SettlementDoesNotExist)
-{
-    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
-
-    m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioCreateUser(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
-            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioCreateWorld(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioCreateEpoch(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioActivateEpoch(
-            client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
-        (IScenarioShrPtr(new ScenarioCreateLand(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", 1, "Land")),
-            IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetSettlementByIDSettlement(
-            client,
-            IScenarioActionShrPtr(new ScenarioGetSettlementByIDSettlementActionSuccess("Login", "Password", 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetSettlementByIDSettlementVerificationUnauthorized))));
-
-    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
-    {
-        ASSERT_STREQ("", (*it)->execute());
-    }
-}
-
-TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement)
+TEST_F(IntegrationFunctionalTest, GetSettlement_SettlementDoesNotExist)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -141,14 +105,10 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement)
             client,
             IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", 1, "Land")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioCreateSettlement(
+        (IScenarioShrPtr(new ScenarioGetSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
-            IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetSettlementByIDSettlement(
-            client,
-            IScenarioActionShrPtr(new ScenarioGetSettlementByIDSettlementActionSuccess("Login", "Password", 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetSettlementByIDSettlementVerificationSettlementHasBeenGot))));
+            IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess("Login", "Password", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -156,7 +116,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_Unauthenticated)
+TEST_F(IntegrationFunctionalTest, GetSettlement)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -183,12 +143,12 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetSettlementByIDSettlement(
+        (IScenarioShrPtr(new ScenarioGetSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioGetSettlementByIDSettlementActionSuccess("Login", "BadPassword", 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetSettlementByIDSettlementVerificationUnauthenticated))));
+            IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess("Login", "Password", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationSettlementHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -196,7 +156,47 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_Unauthenticated)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_Unauthorized)
+TEST_F(IntegrationFunctionalTest, GetSettlement_Unauthenticated)
+{
+    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
+
+    m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateUser(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioCreateWorld(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
+            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioCreateEpoch(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioActivateEpoch(
+            client,
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
+        (IScenarioShrPtr(new ScenarioCreateLand(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", 1, "Land")),
+            IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioCreateSettlement(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioGetSettlement(
+            client,
+            IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess("Login", "BadPassword", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationUnauthenticated))));
+
+    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
+    {
+        ASSERT_STREQ("", (*it)->execute());
+    }
+}
+
+TEST_F(IntegrationFunctionalTest, GetSettlement_Unauthorized)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -229,10 +229,10 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_Unauthorized)
             client,
             IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login2", "Password2", "World", 1, "Land2")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetSettlementByIDSettlement(
+        (IScenarioShrPtr(new ScenarioGetSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioGetSettlementByIDSettlementActionSuccess("Login2", "Password2", 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetSettlementByIDSettlementVerificationUnauthorized))));
+            IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess("Login2", "Password2", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -240,15 +240,15 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_Unauthorized)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_InvalidRequest)
+TEST_F(IntegrationFunctionalTest, GetSettlement_InvalidRequest)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioGetSettlementByIDSettlement(
+        (IScenarioShrPtr(new ScenarioGetSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioGetSettlementByIDSettlementActionInvalidRequest("Login", "Password", 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetSettlementByIDSettlementVerificationInvalidRequest))));
+            IScenarioActionShrPtr(new ScenarioGetSettlementActionInvalidRequest("Login", "Password", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -256,7 +256,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_InvalidRequest)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_EpochIsNotActive)
+TEST_F(IntegrationFunctionalTest, GetSettlement_EpochIsNotActive)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -283,16 +283,16 @@ TEST_F(IntegrationFunctionalTest, GetSettlementByIDSettlement_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement1")),
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land", "Settlement")),
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
             IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
-        (IScenarioShrPtr(new ScenarioGetSettlementByIDSettlement(
+        (IScenarioShrPtr(new ScenarioGetSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioGetSettlementByIDSettlementActionSuccess("Login", "Password", 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetSettlementByIDSettlementVerificationEpochIsNotActive))));
+            IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess("Login", "Password", "Settlement")),
+            IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationEpochIsNotActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {

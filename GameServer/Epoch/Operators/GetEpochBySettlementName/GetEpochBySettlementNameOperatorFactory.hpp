@@ -25,14 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_IGETEPOCHBYIDSETTLEMENTOPERATOR_HPP
-#define GAMESERVER_EPOCH_IGETEPOCHBYIDSETTLEMENTOPERATOR_HPP
+#ifndef GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATORFACTORY_HPP
+#define GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATORFACTORY_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
-#include "../../../Settlement/IDSettlement.hpp"
-#include "GetEpochByIDSettlementOperatorExitCode.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
+#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "GetEpochBySettlementNameOperator.hpp"
 
 namespace GameServer
 {
@@ -40,37 +37,24 @@ namespace Epoch
 {
 
 /**
- * @brief The interface of GetEpochByIDSettlementOperator.
+ * @brief The factory of GetEpochBySettlementNameOperator.
  */
-class IGetEpochByIDSettlementOperator
-    : boost::noncopyable
+class GetEpochBySettlementNameOperatorFactory
 {
 public:
     /**
-     * @brief Destructs GetEpochByIDSettlementOperator.
-     */
-    virtual ~IGetEpochByIDSettlementOperator(){};
-
-    /**
-     * @brief Gets an epoch.
+     * @brief The factory method.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_manager_abstract_factory The abstract factory of managers.
      *
-     * @return The exit code.
+     * @return The newly created GetEpochBySettlementNameOperator.
      */
-    virtual GetEpochByIDSettlementOperatorExitCode getEpochByIDSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        Settlement::IDSettlement        const & a_id_settlement
-    ) const = 0;
+    static GetEpochBySettlementNameOperatorAutPtr createGetEpochBySettlementNameOperator(
+        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    );
 };
-
-/**
- * @brief The shared pointer of the interface of GetEpochByIDSettlementOperator.
- */
-typedef boost::shared_ptr<IGetEpochByIDSettlementOperator> IGetEpochByIDSettlementOperatorShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_IGETEPOCHBYIDSETTLEMENTOPERATOR_HPP
+#endif // GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATORFACTORY_HPP

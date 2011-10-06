@@ -38,7 +38,7 @@ namespace Common
 /**
  * @brief The identifier of a holder.
  */
-typedef ConstrainedPair<RangedUnsignedShortIntPlusUnsignedIntPolicy<1, 4> > IDHolder;
+typedef ConstrainedPair<RangedUnsignedShortIntPlusStringPolicy<1, 4> > IDHolder;
 
 /**
  * @brief The available classes of a holder.

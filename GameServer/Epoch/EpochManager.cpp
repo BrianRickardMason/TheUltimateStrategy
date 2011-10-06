@@ -28,7 +28,6 @@
 #include "EpochManager.hpp"
 
 using namespace GameServer::Persistency;
-using namespace GameServer::Settlement;
 using namespace boost;
 using namespace std;
 
@@ -55,7 +54,7 @@ bool EpochManager::createEpoch(
 
         return true;
     }
-    catch (std::exception const &)
+    catch (...)
     {
         return false;
     }
@@ -84,7 +83,7 @@ bool EpochManager::deleteEpoch(
 
         return true;
     }
-    catch (std::exception const &)
+    catch (...)
     {
         return false;
     }
@@ -110,12 +109,12 @@ EpochShrPtr EpochManager::getEpochByLandName(
     return getEpoch(a_transaction, world_name);
 }
 
-EpochShrPtr EpochManager::getEpochByIDSettlement(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
+EpochShrPtr EpochManager::getEpochBySettlementName(
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
 ) const
 {
-    string land_name = m_accessor->getLandNameOfSettlement(a_transaction, a_id_settlement);
+    string land_name = m_accessor->getLandNameOfSettlement(a_transaction, a_settlement_name);
 
     return getEpochByLandName(a_transaction, land_name);
 }
@@ -148,7 +147,7 @@ bool EpochManager::activateEpoch(
 
         return true;
     }
-    catch (std::exception const &)
+    catch (...)
     {
         return false;
     }
@@ -182,7 +181,7 @@ bool EpochManager::deactivateEpoch(
 
         return true;
     }
-    catch (std::exception const &)
+    catch (...)
     {
         return false;
     }
@@ -216,7 +215,7 @@ bool EpochManager::finishEpoch(
 
         return true;
     }
-    catch (std::exception const &)
+    catch (...)
     {
         return false;
     }
@@ -250,7 +249,7 @@ bool EpochManager::tickEpoch(
 
         return true;
     }
-    catch (std::exception const &)
+    catch (...)
     {
         return false;
     }

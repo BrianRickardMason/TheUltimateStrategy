@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_GETEPOCHBYIDSETTLEMENTOPERATOREXITCODE_HPP
-#define GAMESERVER_EPOCH_GETEPOCHBYIDSETTLEMENTOPERATOREXITCODE_HPP
+#ifndef GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOREXITCODE_HPP
+#define GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOREXITCODE_HPP
 
 #include "../../Epoch.hpp"
 
@@ -38,15 +38,15 @@ namespace Epoch
 /**
  * @brief Available exit codes.
  */
-unsigned short int const GET_EPOCH_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT        = 1;
-unsigned short int const GET_EPOCH_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT    = 2;
-unsigned short int const GET_EPOCH_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST = 3;
-unsigned short int const GET_EPOCH_BY_IDSETTLEMENT_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR          = 4;
+unsigned short int const GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT        = 1;
+unsigned short int const GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT    = 2;
+unsigned short int const GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST = 3;
+unsigned short int const GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR          = 4;
 
 /**
- * @brief The exit code of GetEpochByIDSettlementOperator.
+ * @brief The exit code of GetEpochBySettlementNameOperator.
  */
-class GetEpochByIDSettlementOperatorExitCode
+class GetEpochBySettlementNameOperatorExitCode
 {
 public:
     /**
@@ -54,7 +54,7 @@ public:
      *
      * @param a_exit_code The value of the exit code.
      */
-    GetEpochByIDSettlementOperatorExitCode(
+    GetEpochBySettlementNameOperatorExitCode(
         unsigned short int const a_exit_code
     )
         : m_exit_code(a_exit_code),
@@ -68,7 +68,7 @@ public:
      * @param a_exit_code The value of the exit code.
      * @param a_epoch     The epoch.
      */
-    GetEpochByIDSettlementOperatorExitCode(
+    GetEpochBySettlementNameOperatorExitCode(
         unsigned short int const a_exit_code,
         EpochShrPtr        const a_epoch
     )
@@ -101,4 +101,4 @@ public:
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_GETEPOCHBYIDSETTLEMENTOPERATOREXITCODE_HPP
+#endif // GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOREXITCODE_HPP

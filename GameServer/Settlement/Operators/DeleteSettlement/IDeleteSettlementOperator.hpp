@@ -29,7 +29,6 @@
 #define GAMESERVER_SETTLEMENT_IDELETESETTLEMENTOPERATOR_HPP
 
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../IDSettlement.hpp"
 #include "DeleteSettlementOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -55,14 +54,14 @@ public:
     /**
      * @brief Deletes a settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return The exit code.
      */
     virtual DeleteSettlementOperatorExitCode deleteSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        IDSettlement                    const & a_id_settlement
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
     ) const = 0;
 };
 

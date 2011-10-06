@@ -140,18 +140,18 @@ public:
     virtual Epoch::IFinishEpochOperatorShrPtr createFinishEpochOperator() const;
 
     /**
-     * @brief Creates the get epoch by id settlement operator.
-     *
-     * @return The newly created get epoch by id settlement operator.
-     */
-    virtual Epoch::IGetEpochByIDSettlementOperatorShrPtr createGetEpochByIDSettlementOperator() const;
-
-    /**
      * @brief Creates the get epoch by land name operator.
      *
      * @return The newly created get epoch by land name operator.
      */
     virtual Epoch::IGetEpochByLandNameOperatorShrPtr createGetEpochByLandNameOperator() const;
+
+    /**
+     * @brief Creates the get epoch by settlement name operator.
+     *
+     * @return The newly created get epoch by settlement name operator.
+     */
+    virtual Epoch::IGetEpochBySettlementNameOperatorShrPtr createGetEpochBySettlementNameOperator() const;
 
     /**
      * @brief Creates the get epoch by world name operator.
@@ -252,18 +252,11 @@ public:
     virtual Settlement::IDeleteSettlementOperatorShrPtr createDeleteSettlementOperator() const;
 
     /**
-     * @brief Creates the get settlement by land name and name operator.
+     * @brief Creates the get settlement operator.
      *
-     * @return The newly created get settlement by land name and name operator.
+     * @return The newly created get settlement operator.
      */
-    virtual Settlement::IGetSettlementByLandNameAndNameOperatorShrPtr createGetSettlementByLandNameAndNameOperator() const;
-
-    /**
-     * @brief Creates the get settlement by id settlement operator.
-     *
-     * @return The newly created get settlement by id settlement operator.
-     */
-    virtual Settlement::IGetSettlementByIDSettlementOperatorShrPtr createGetSettlementByIDSettlementOperator() const;
+    virtual Settlement::IGetSettlementOperatorShrPtr createGetSettlementOperator() const;
 
     /**
      * @brief Creates the get settlements operator.

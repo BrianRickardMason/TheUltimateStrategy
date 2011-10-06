@@ -35,13 +35,11 @@ namespace Settlement
 {
 
 SettlementRecord::SettlementRecord(
-    string       const   a_land_name,
-    IDSettlement const & a_id_settlement,
-    string       const & a_name
+    string const a_land_name,
+    string const a_settlement_name
 )
     : m_land_name(a_land_name),
-      m_id_settlement(a_id_settlement),
-      m_name(a_name)
+      m_settlement_name(a_settlement_name)
 {
 }
 
@@ -50,14 +48,9 @@ string SettlementRecord::getLandName() const
     return m_land_name;
 }
 
-IDSettlement const & SettlementRecord::getIDSettlement() const
+string SettlementRecord::getSettlementName() const
 {
-    return m_id_settlement;
-}
-
-string const & SettlementRecord::getName() const
-{
-    return m_name;
+    return m_settlement_name;
 }
 
 } // namespace Settlement

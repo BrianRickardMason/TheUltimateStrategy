@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATORFACTORY_HPP
-#define GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATORFACTORY_HPP
+#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOR_HPP
+#define GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOR_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
-#include "GetSettlementByLandNameAndNameOperator.hpp"
+#include "../../ISettlementManager.hpp"
+#include "IGetSettlementOperator.hpp"
 
 namespace GameServer
 {
@@ -37,24 +37,47 @@ namespace Settlement
 {
 
 /**
- * @brief The factory of GetSettlementByLandNameAndNameOperator.
+ * @brief GetSettlementOperator.
  */
-class GetSettlementByLandNameAndNameOperatorFactory
+class GetSettlementOperator
+    : public IGetSettlementOperator
 {
 public:
     /**
-     * @brief The factory method.
+     * @brief Constructs the operator.
      *
-     * @param a_manager_abstract_factory The abstract factory of managers.
-     *
-     * @return The newly created GetSettlementByLandNameAndNameOperator.
+     * @param a_settlement_manager The manager of settlements.
      */
-    static GetSettlementByLandNameAndNameOperatorAutPtr createGetSettlementByLandNameAndNameOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    GetSettlementOperator(
+        ISettlementManagerShrPtr a_settlement_manager
     );
+
+    /**
+     * @brief Gets a settlement.
+     *
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
+     *
+     * @return The exit code.
+     */
+    virtual GetSettlementOperatorExitCode getSettlement(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const;
+
+private:
+    /**
+     * @brief The manager of settlements.
+     */
+    ISettlementManagerShrPtr m_settlement_manager;
 };
+
+/**
+ * @brief The auto pointer of GetSettlementOperator.
+ */
+typedef std::auto_ptr<GetSettlementOperator> GetSettlementOperatorAutPtr;
 
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATORFACTORY_HPP
+#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOR_HPP

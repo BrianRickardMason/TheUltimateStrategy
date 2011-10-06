@@ -46,61 +46,44 @@ SettlementManager::SettlementManager(
 bool SettlementManager::createSettlement(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name,
-    string             const a_name
+    string             const a_settlement_name
 ) const
 {
     try
     {
-        // TODO: The interface of "insertRecord" can be simplified.
-        IDSettlement id_settlement = m_accessor->insertRecord(a_transaction, a_land_name, a_name);
+        m_accessor->insertRecord(a_transaction, a_land_name, a_settlement_name);
 
         return true;
     }
-    catch (std::exception const & e)
+    catch (...)
     {
         return false;
     }
 }
 
 bool SettlementManager::deleteSettlement(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
 ) const
 {
     try
     {
-        m_accessor->deleteRecord(a_transaction, a_id_settlement);
+        m_accessor->deleteRecord(a_transaction, a_settlement_name);
 
         return true;
     }
-    catch (std::exception const & e)
+    catch (...)
     {
         return false;
     }
 }
 
 SettlementShrPtr SettlementManager::getSettlement(
-    ITransactionShrPtr         a_transaction,
-    IDSettlement       const & a_id_settlement
-) const
-{
-    return prepareResultGetSettlement(m_accessor->getRecord(a_transaction, a_id_settlement));
-}
-
-SettlementShrPtr SettlementManager::getSettlement(
     ITransactionShrPtr       a_transaction,
-    string             const a_land_name,
-    string             const a_name
+    string             const a_settlement_name
 ) const
 {
-    return prepareResultGetSettlement(m_accessor->getRecord(a_transaction, a_land_name, a_name));
-}
-
-SettlementMap SettlementManager::getSettlements(
-    ITransactionShrPtr a_transaction
-) const
-{
-    return prepareResultGetSettlements(m_accessor->getRecords(a_transaction));
+    return prepareResultGetSettlement(m_accessor->getRecord(a_transaction, a_settlement_name));
 }
 
 SettlementMap SettlementManager::getSettlements(
@@ -129,7 +112,7 @@ SettlementMap SettlementManager::prepareResultGetSettlements(
         if (it->second)
         {
             SettlementShrPtr settlement = make_shared<Settlement>(*it->second);
-            SettlementPair pair(it->second->getIDSettlement(), settlement);
+            SettlementPair pair(it->second->getSettlementName(), settlement);
             result.insert(pair);
         }
     }

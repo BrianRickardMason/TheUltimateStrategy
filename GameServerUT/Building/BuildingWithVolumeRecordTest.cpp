@@ -42,7 +42,7 @@ protected:
      * @brief Constructs a test class.
      */
     BuildingWithVolumeRecordTest()
-        : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, 1),
+        : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
           m_record(m_id_holder, Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4),
           m_model_key(ID_BUILDING_DEFENSIVE_BARBICAN)
     {

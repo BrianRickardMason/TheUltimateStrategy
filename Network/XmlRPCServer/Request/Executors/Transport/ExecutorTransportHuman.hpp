@@ -31,7 +31,6 @@
 #include "../../../../../GameServer/Human/Experience.hpp"
 #include "../../../../../GameServer/Human/IDHuman.hpp"
 #include "../../../../../GameServer/Human/Volume.hpp"
-#include "../../../../../GameServer/Settlement/IDSettlement.hpp"
 #include "../../../../../GameServer/Transport/Operators/TransportHuman/TransportHumanOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
@@ -54,12 +53,12 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idsettlementsource      type=\"unsigned integer\" value=\"#\" />
- *         <idsettlementdestination type=\"unsigned integer\" value=\"#\" />
- *         <idhumanclass            type=\"unsigned integer\" value=\"#\" />
- *         <idhuman                 type=\"unsigned integer\" value=\"#\" />
- *         <experience              type=\"unsigned integer\" value=\"#\" />
- *         <volume                  type=\"unsigned integer\" value=\"#\" />
+ *         <settlement_name_source      type=\"string\"           value=\"#\" />
+ *         <settlement_name_destination type=\"string\"           value=\"#\" />
+ *         <idhumanclass                type=\"unsigned integer\" value=\"#\" />
+ *         <idhuman                     type=\"unsigned integer\" value=\"#\" />
+ *         <experience                  type=\"unsigned integer\" value=\"#\" />
+ *         <volume                      type=\"unsigned integer\" value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -162,16 +161,6 @@ class ExecutorTransportHuman
     ) const;
 
     /**
-     * @brief The value of the identifier of the source settlement.
-     */
-    unsigned int m_value_id_settlement_source;
-
-    /**
-     * @brief The value of the identifier of the destination settlement.
-     */
-    unsigned int m_value_id_settlement_destination;
-
-    /**
      * @brief The value of the identifier of the class of a human.
      */
     unsigned int m_value_id_human_class;
@@ -192,14 +181,14 @@ class ExecutorTransportHuman
     unsigned int m_value_volume;
 
     /**
-     * @brief The identifier of the source settlement.
+     * @brief The name of the source settlement.
      */
-    GameServer::Settlement::IDSettlement m_id_settlement_source;
+    std::string m_settlement_name_source;
 
     /**
-     * @brief The identifier of the destination settlement.
+     * @brief The name of the destination settlement.
      */
-    GameServer::Settlement::IDSettlement m_id_settlement_destination;
+    std::string m_settlement_name_destination;
 
     /**
      * @brief The identifier of a human.

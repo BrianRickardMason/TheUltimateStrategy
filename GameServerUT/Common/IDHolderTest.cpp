@@ -37,60 +37,60 @@ TEST(IDHolderTest, IDHolder_Parameterless)
     IDHolder id_holder;
 
     ASSERT_EQ(ID_HOLDER_CLASS_SETTLEMENT, id_holder.getValue1());
-    ASSERT_EQ(0, id_holder.getValue2());
+    ASSERT_STREQ("", id_holder.getValue2().c_str());
 }
 
 TEST(IDHolderTest, IDHolder_ValueType)
 {
-    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, 1));
-    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_SETTLER,    1));
-    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_TRANSPORT,  1));
-    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_TROOP,      1));
+    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"));
+    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_SETTLER,    "Settler"));
+    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_TRANSPORT,  "Transport"));
+    ASSERT_NO_THROW(IDHolder id_holder(ID_HOLDER_CLASS_TROOP,      "Troop"));
 
-    ASSERT_THROW(IDHolder id_holder(0, 1), std::range_error);
-    ASSERT_THROW(IDHolder id_holder(5, 1), std::range_error);
+    ASSERT_THROW(IDHolder id_holder(0, "Settlement"), std::range_error);
+    ASSERT_THROW(IDHolder id_holder(5, "Settlement"), std::range_error);
 
-    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, 22);
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement");
     ASSERT_EQ(ID_HOLDER_CLASS_SETTLEMENT, id_holder.getValue1());
-    ASSERT_EQ(22, id_holder.getValue2());
+    ASSERT_STREQ("Settlement", id_holder.getValue2().c_str());
 }
 
 TEST(IDHolderTest, IDHolder_Copy)
 {
-    IDHolder id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 22);
+    IDHolder id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement");
 
     ASSERT_NO_THROW(IDHolder id_holder(id_holder_1));
 
     IDHolder id_holder = id_holder_1;
     ASSERT_EQ(ID_HOLDER_CLASS_SETTLEMENT, id_holder.getValue1());
-    ASSERT_EQ(22, id_holder.getValue2());
+    ASSERT_STREQ("Settlement", id_holder.getValue2().c_str());
 }
 
 TEST(IDHolderTest, Assignment)
 {
-    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_SETTLEMENT, 1));
-    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_SETTLER,    1));
-    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_TRANSPORT,  1));
-    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_TROOP,      1));
+    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"));
+    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_SETTLER,    "Settler"));
+    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_TRANSPORT,  "Transport"));
+    ASSERT_NO_THROW(IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_TROOP,      "Troop"));
 
-    ASSERT_THROW(IDHolder id_holder; id_holder.assign(0, 22), std::range_error);
-    ASSERT_THROW(IDHolder id_holder; id_holder.assign(5, 22), std::range_error);
+    ASSERT_THROW(IDHolder id_holder; id_holder.assign(0, "Settlement"), std::range_error);
+    ASSERT_THROW(IDHolder id_holder; id_holder.assign(5, "Settlement"), std::range_error);
 
-    IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_SETTLEMENT, 22);
+    IDHolder id_holder; id_holder.assign(ID_HOLDER_CLASS_SETTLEMENT, "Settlement");
     ASSERT_EQ(ID_HOLDER_CLASS_SETTLEMENT, id_holder.getValue1());
-    ASSERT_EQ(22, id_holder.getValue2());
+    ASSERT_STREQ("Settlement", id_holder.getValue2().c_str());
 }
 
 TEST(IDHolderTest, GetValue1)
 {
-    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, 22);
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement");
 
     ASSERT_EQ(ID_HOLDER_CLASS_SETTLEMENT, id_holder.getValue1());
 }
 
 TEST(IDHolderTest, GetValue2)
 {
-    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, 22);
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement");
 
-    ASSERT_EQ(22, id_holder.getValue2());
+    ASSERT_STREQ("Settlement", id_holder.getValue2().c_str());
 }

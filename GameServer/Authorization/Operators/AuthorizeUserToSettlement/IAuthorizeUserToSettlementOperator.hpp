@@ -29,7 +29,6 @@
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZEUSERTOSETTLEMENTOPERATOR_HPP
 
 #include "../../../Persistency/ITransaction.hpp"
-#include "../../../Settlement/IDSettlement.hpp"
 #include "AuthorizeUserToSettlementOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -54,16 +53,16 @@ public:
     /**
      * @brief Authorizes a user to a settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_login         The login of the user.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_login           The login of the user.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return The exit code.
      */
     virtual AuthorizeUserToSettlementOperatorExitCode authorizeUserToSettlement(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        Settlement::IDSettlement        const & a_id_settlement
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_settlement_name
     ) const = 0;
 };
 

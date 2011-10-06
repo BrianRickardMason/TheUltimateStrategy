@@ -62,7 +62,7 @@ protected:
           m_human_manager(new HumanManagerMock),
           m_property_manager(new PropertyManagerMock),
           m_resource_manager(new ResourceManagerMock),
-          m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, 1)
+          m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }
 

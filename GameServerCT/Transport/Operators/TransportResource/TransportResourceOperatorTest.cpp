@@ -61,16 +61,16 @@ protected:
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_transport_resource_operator(TransportResourceOperatorFactory::createTransportResourceOperator(m_manager_abstract_factory)),
           m_id_epoch_1(1),
-          m_id_settlement_1(1),
-          m_id_settlement_2(2),
-          m_id_settlement_3(3),
-          m_id_settlement_4(4),
           m_login("Login"),
           m_world_name("World"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
-          m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, 1),
-          m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, 2)
+          m_settlement_name_1("Settlement1"),
+          m_settlement_name_2("Settlement2"),
+          m_settlement_name_3("Settlement3"),
+          m_settlement_name_4("Settlement4"),
+          m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
+          m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2)
     {
         {
             IConnectionShrPtr connection = m_persistency.getConnection();
@@ -85,9 +85,9 @@ protected:
             m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_1);
             m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_2);
 
-            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement1");
-            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, "Settlement2");
-            m_create_settlement_operator->createSettlement(transaction, m_land_name_2, "Settlement3");
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_2);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_2, m_settlement_name_3);
 
             transaction->commit();
         }
@@ -139,14 +139,6 @@ protected:
     IDEpoch m_id_epoch_1;
 
     /**
-     * @brief Test constants: identifiers of settlements.
-     */
-    IDSettlement m_id_settlement_1,
-                 m_id_settlement_2,
-                 m_id_settlement_3,
-                 m_id_settlement_4;
-
-    /**
      * @brief Test constants: the login of the user.
      */
     string m_login;
@@ -161,6 +153,14 @@ protected:
      */
     string m_land_name_1,
            m_land_name_2;
+
+    /**
+     * @brief Test constants: the names of the settlements.
+     */
+    string m_settlement_name_1,
+           m_settlement_name_2,
+           m_settlement_name_3,
+           m_settlement_name_4;
 
     /**
      * @brief Test constants: identifiers of holders.
@@ -179,8 +179,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_TryingToTransportZeroRes
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_TRYING_TO_TRANSPORT_ZERO_RESOURCES,
               m_transport_resource_operator->transportResource(transaction,
-                                                               m_id_settlement_1,
-                                                               m_id_settlement_2,
+                                                               m_settlement_name_1,
+                                                               m_settlement_name_2,
                                                                KEY_RESOURCE_COAL,
                                                                0).m_exit_code);
 }
@@ -192,8 +192,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_SourceSettlementDoesNotE
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SOURCE_SETTLEMENT_DOES_NOT_EXIST,
               m_transport_resource_operator->transportResource(transaction,
-                                                               m_id_settlement_4,
-                                                               m_id_settlement_2,
+                                                               m_settlement_name_4,
+                                                               m_settlement_name_2,
                                                                KEY_RESOURCE_COAL,
                                                                10).m_exit_code);
 }
@@ -205,8 +205,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_DestinationSettlementDoe
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_DESTINATION_SETTLEMENT_DOES_NOT_EXIST,
               m_transport_resource_operator->transportResource(transaction,
-                                                               m_id_settlement_1,
-                                                               m_id_settlement_4,
+                                                               m_settlement_name_1,
+                                                               m_settlement_name_4,
                                                                KEY_RESOURCE_COAL,
                                                                10).m_exit_code);
 }
@@ -218,8 +218,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_SettlementsAreNotFromThe
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND,
               m_transport_resource_operator->transportResource(transaction,
-                                                               m_id_settlement_1,
-                                                               m_id_settlement_3,
+                                                               m_settlement_name_1,
+                                                               m_settlement_name_3,
                                                                KEY_RESOURCE_COAL,
                                                                10).m_exit_code);
 }
@@ -231,8 +231,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_NotEnoughResources)
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               m_transport_resource_operator->transportResource(transaction,
-                                                               m_id_settlement_1,
-                                                               m_id_settlement_2,
+                                                               m_settlement_name_1,
+                                                               m_settlement_name_2,
                                                                KEY_RESOURCE_COAL,
                                                                1001).m_exit_code);
 }
@@ -245,8 +245,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_OneResource)
 
         ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
                   m_transport_resource_operator->transportResource(transaction,
-                                                                   m_id_settlement_1,
-                                                                   m_id_settlement_2,
+                                                                   m_settlement_name_1,
+                                                                   m_settlement_name_2,
                                                                    KEY_RESOURCE_COAL,
                                                                    1).m_exit_code);
 
@@ -270,8 +270,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_ManyResources)
 
         ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
                   m_transport_resource_operator->transportResource(transaction,
-                                                                   m_id_settlement_1,
-                                                                   m_id_settlement_2,
+                                                                   m_settlement_name_1,
+                                                                   m_settlement_name_2,
                                                                    KEY_RESOURCE_COAL,
                                                                    500).m_exit_code);
 
@@ -295,8 +295,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_AllResources)
 
         ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
                   m_transport_resource_operator->transportResource(transaction,
-                                                                   m_id_settlement_1,
-                                                                   m_id_settlement_2,
+                                                                   m_settlement_name_1,
+                                                                   m_settlement_name_2,
                                                                    KEY_RESOURCE_COAL,
                                                                    1000).m_exit_code);
 

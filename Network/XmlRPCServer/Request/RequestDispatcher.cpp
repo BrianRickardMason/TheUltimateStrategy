@@ -50,8 +50,7 @@
 #include "Executors/Resource/ExecutorGetResources.hpp"
 #include "Executors/Settlement/ExecutorCreateSettlement.hpp"
 #include "Executors/Settlement/ExecutorDeleteSettlement.hpp"
-#include "Executors/Settlement/ExecutorGetSettlementByIDSettlement.hpp"
-#include "Executors/Settlement/ExecutorGetSettlementByLandNameAndName.hpp"
+#include "Executors/Settlement/ExecutorGetSettlement.hpp"
 #include "Executors/Settlement/ExecutorGetSettlements.hpp"
 #include "Executors/Transport/ExecutorTransportHuman.hpp"
 #include "Executors/Transport/ExecutorTransportResource.hpp"
@@ -96,11 +95,9 @@ IExecutorShrPtr RequestDispatcher::dispatchRequest(
             return shared_ptr<IExecutor>(new ExecutorCreateSettlement);
         case REQUEST_ID_DELETE_SETTLEMENT:
             return shared_ptr<IExecutor>(new ExecutorDeleteSettlement);
-        case REQUEST_ID_GET_SETTLEMENT_BY_ID_SETTLEMENT:
-            return shared_ptr<IExecutor>(new ExecutorGetSettlementByIDSettlement);
-        case REQUEST_ID_GET_SETTLEMENT_BY_LAND_NAME_AND_NAME:
-            return shared_ptr<IExecutor>(new ExecutorGetSettlementByLandNameAndName);
-        case REQUEST_ID_GET_SETTLEMENTS_BY_LAND_NAME:
+        case REQUEST_ID_GET_SETTLEMENT:
+            return shared_ptr<IExecutor>(new ExecutorGetSettlement);
+        case REQUEST_ID_GET_SETTLEMENTS:
             return shared_ptr<IExecutor>(new ExecutorGetSettlements);
         case REQUEST_ID_BUILD_BUILDING:
             return shared_ptr<IExecutor>(new ExecutorBuildBuilding);

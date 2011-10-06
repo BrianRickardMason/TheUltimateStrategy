@@ -204,7 +204,7 @@ public:
                         IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess(
                             "Login1", "Password1",
                             land_name_2, settlement_name)),
-                        IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))));
+                        IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementDoesExist))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {

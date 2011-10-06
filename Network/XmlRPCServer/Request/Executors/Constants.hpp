@@ -184,9 +184,9 @@ std::string const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_SETTLEMENT_HAS_BEEN_GOT   
 std::string const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_SETTLEMENT_HAS_NOT_BEEN_GOT = "Settlement has not been got.";
 std::string const GET_SETTLEMENT_BY_LANDNAME_AND_NAME_UNEXPECTED_ERROR            = "Unexpected error.";
 
-std::string const GET_SETTLEMENT_BY_IDSETTLEMENT_SETTLEMENT_HAS_BEEN_GOT     = "Settlement has been got.";
-std::string const GET_SETTLEMENT_BY_IDSETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_GOT = "Settlement has not been got.";
-std::string const GET_SETTLEMENT_BY_IDSETTLEMENT_UNEXPECTED_ERROR            = "Unexpected error.";
+std::string const GET_SETTLEMENT_SETTLEMENT_HAS_BEEN_GOT     = "Settlement has been got.";
+std::string const GET_SETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_GOT = "Settlement has not been got.";
+std::string const GET_SETTLEMENT_UNEXPECTED_ERROR            = "Unexpected error.";
 
 std::string const GET_SETTLEMENTS_BY_LANDNAME_LAND_DOES_NOT_EXIST           = "Land does not exist.";
 std::string const GET_SETTLEMENTS_BY_LANDNAME_SETTLEMENTS_HAVE_BEEN_GOT     = "Settlements have been got.";

@@ -46,14 +46,14 @@ public:
     /**
      * @brief Gives the grant to settlement.
      *
-     * @param a_transaction   The transaction.
-     * @param a_id_settlement The identifier of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      */
     MOCK_CONST_METHOD2(
         giveGrant,
         bool(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
-            IDSettlement                                const & a_id_settlement
+            GameServer::Persistency::ITransactionShrPtr       a_transaction,
+            std::string                                 const a_settlement_name
         )
     );
 };

@@ -74,7 +74,6 @@ private:
 
             // Reset sequences.
             backbone_transaction.exec("ALTER SEQUENCE epochs_id_epoch_seq MINVALUE 0 RESTART WITH 1");
-            backbone_transaction.exec("ALTER SEQUENCE settlements_id_settlement_seq MINVALUE 0 RESTART WITH 1");
 
             transaction->commit();
             return true;

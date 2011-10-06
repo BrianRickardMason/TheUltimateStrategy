@@ -25,69 +25,67 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATOR_HPP
-#define GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATOR_HPP
+#ifndef GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP
+#define GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP
 
-#include "../../../Land/ILandManager.hpp"
-#include "../../ISettlementManager.hpp"
-#include "IGetSettlementByLandNameAndNameOperator.hpp"
+#include "../../../Settlement/ISettlementManager.hpp"
+#include "../../IEpochManager.hpp"
+#include "IGetEpochBySettlementNameOperator.hpp"
 
 namespace GameServer
 {
-namespace Settlement
+namespace Epoch
 {
 
 /**
- * @brief GetSettlementByLandNameAndNameOperator.
+ * @brief GetEpochBySettlementNameOperator.
  */
-class GetSettlementByLandNameAndNameOperator
-    : public IGetSettlementByLandNameAndNameOperator
+class GetEpochBySettlementNameOperator
+    : public IGetEpochBySettlementNameOperator
 {
 public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_land_manager       The manager of lands.
+     * @param a_epoch_manager      The manager of epochs.
      * @param a_settlement_manager The manager of settlements.
      */
-    GetSettlementByLandNameAndNameOperator(
-        Land::ILandManagerShrPtr a_land_manager,
-        ISettlementManagerShrPtr a_settlement_manager
+    GetEpochBySettlementNameOperator(
+        IEpochManagerShrPtr                  a_epoch_manager,
+        Settlement::ISettlementManagerShrPtr a_settlement_manager
     );
 
     /**
-     * @brief Gets a settlement.
+     * @brief Gets an epoch.
      *
-     * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
-     * @param a_name        The name of the settlement.
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement.
      *
      * @return The exit code.
      */
-    virtual GetSettlementByLandNameAndNameOperatorExitCode getSettlementByLandNameAndName(
+    virtual GetEpochBySettlementNameOperatorExitCode getEpochBySettlementName(
         Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_land_name,
-        std::string                     const a_name
+        std::string                     const a_settlement_name
     ) const;
 
 private:
     /**
-     * @brief The manager of lands.
+     * @brief The manager of epochs.
      */
-    Land::ILandManagerShrPtr m_land_manager;
+    IEpochManagerShrPtr m_epoch_manager;
 
     /**
      * @brief The manager of settlements.
      */
-    ISettlementManagerShrPtr m_settlement_manager;
+    Settlement::ISettlementManagerShrPtr m_settlement_manager;
 };
 
 /**
- * @brief The auto pointer of GetSettlementByLandNameAndNameOperator.
+ * @brief The auto pointer of GetEpochBySettlementNameOperator.
  */
-typedef std::auto_ptr<GetSettlementByLandNameAndNameOperator> GetSettlementByLandNameAndNameOperatorAutPtr;
+typedef std::auto_ptr<GetEpochBySettlementNameOperator> GetEpochBySettlementNameOperatorAutPtr;
 
-} // namespace Settlement
+} // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTBYLANDNAMEANDNAMEOPERATOR_HPP
+#endif // GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP

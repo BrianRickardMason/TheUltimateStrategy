@@ -25,7 +25,6 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../../../GameServer/Settlement/IDSettlement.hpp"
 #include "../Constants.hpp"
 #include "ExecutorGetBuildings.hpp"
 #include <boost/make_shared.hpp>
@@ -65,7 +64,7 @@ bool ExecutorGetBuildings::getParameters(
         m_login                 = a_request->getLoginValue();
         m_password              = a_request->getPasswordValue();
         m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
-        m_value_id_holder       = a_request->getParameterValueUnsignedInteger("idholder");
+        m_holder_name           = a_request->getParameterValueString("holder_name");
 
         return true;
     }
@@ -79,7 +78,7 @@ bool ExecutorGetBuildings::processParameters()
 {
     try
     {
-        m_id_holder.assign(m_value_id_holder_class, m_value_id_holder);
+        m_id_holder.assign(m_value_id_holder_class, m_holder_name);
 
         return true;
     }
@@ -117,18 +116,16 @@ bool ExecutorGetBuildings::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByIDSettlementOperatorShrPtr epoch_operator =
-        m_operator_abstract_factory->createGetEpochByIDSettlementOperator();
+    IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
+        m_operator_abstract_factory->createGetEpochBySettlementNameOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        IDSettlement id_settlement(m_id_holder.getValue2());
-
-        GetEpochByIDSettlementOperatorExitCode const exit_code =
-            epoch_operator->getEpochByIDSettlement(transaction, id_settlement);
+        GetEpochBySettlementNameOperatorExitCode const exit_code =
+            epoch_operator->getEpochBySettlementName(transaction, m_holder_name);
 
         if (exit_code.ok())
         {
