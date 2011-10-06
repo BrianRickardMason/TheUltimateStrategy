@@ -46,8 +46,8 @@ namespace Executors
  * <?xml version=\"1.0\"?>
  * <request id=\"REQUEST_ID_CREATE_USER\">
  *     <parameters>
- *         <login    type=\"string\" value=\"#\" />
- *         <password type=\"string\" value=\"#\" />
+ *         <login    value=\"#\" />
+ *         <password value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -55,7 +55,7 @@ namespace Executors
  * <reply id=\"REPLY_ID_CREATE_USER">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  * </reply>
  */

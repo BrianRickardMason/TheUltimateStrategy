@@ -165,12 +165,6 @@ unsigned int Request::getParameterValueUnsignedInteger(
 {
     Network::XmlRPCCommon::Xml::IXmlNodeShrPtr node = verifyIfParameterExists(a_name);
 
-    // Verify if parameter is declared as an unsigned integer.
-    if (strcmp(node->getAttribute("type")->getValue(), "unsigned integer"))
-    {
-        throw InvalidRequestShrPtr();
-    }
-
     IXmlAttributeShrPtr attribute = verifyIfParameterHasAValueAtribute(node);
 
     // Verify if parameter is declared as an unsigned integer and is an unsigned integer.
@@ -197,12 +191,6 @@ string Request::getParameterValueString(
 ) const
 {
     IXmlNodeShrPtr node = verifyIfParameterExists(a_name);
-
-    // Verify if parameter is declared as a string.
-    if (strcmp(node->getAttribute("type")->getValue(), "string"))
-    {
-        throw InvalidRequestShrPtr();
-    }
 
     IXmlAttributeShrPtr attribute = verifyIfParameterHasAValueAtribute(node);
 

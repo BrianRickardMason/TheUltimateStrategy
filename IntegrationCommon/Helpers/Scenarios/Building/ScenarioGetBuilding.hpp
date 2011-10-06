@@ -238,20 +238,16 @@ public:
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-        idholderclass->appendAttribute("type")->setValue("integer");
         idholderclass->appendAttribute("value")->setValue(m_id_holder_class);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-        holder_name->appendAttribute("type")->setValue("integer");
         holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idbuildingclass = parameters->appendNode("idbuildingclass");
-        idbuildingclass->appendAttribute("type")->setValue("integer");
         idbuildingclass->appendAttribute("value")->setValue(m_id_building_class);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idbuilding = parameters->appendNode("idbuilding");
-        idbuilding->appendAttribute("type")->setValue("integer");
-        idbuilding->appendAttribute("value")->setValue(m_id_building);
+        idbuilding->appendAttribute("valve")->setValue(m_id_building);
 
         return a_client->sendRequest(request);
     }
@@ -315,9 +311,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_BUILDING_BUILDING_HAS_BEEN_GOT.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -353,9 +346,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_BUILDING_UNEXPECTED_ERROR.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");

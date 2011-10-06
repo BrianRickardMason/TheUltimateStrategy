@@ -55,14 +55,14 @@ namespace Executors
  * <reply id=\"REPLY_ID_GET_LANDS">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  *     <objects>
  *         <object>
- *             <login      type=\"string\"  value=\"#\" />
- *             <world_name type=\"string\"  value=\"#\" />
- *             <land_name  type=\"string\"  value=\"#\" />
- *             <granted    type=\"boolean\" value=\"#\" />
+ *             <login      value=\"#\" />
+ *             <world_name value=\"#\" />
+ *             <land_name  value=\"#\" />
+ *             <granted    value=\"#\" />
  *         </object>
  *         <object>
  *             ...

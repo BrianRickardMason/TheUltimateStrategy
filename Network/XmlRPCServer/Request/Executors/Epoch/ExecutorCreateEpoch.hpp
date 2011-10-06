@@ -51,7 +51,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <world_name type=\"string\" value=\"#\" />
+ *         <world_name value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -59,7 +59,7 @@ namespace Executors
  * <reply id=\"REPLY_ID_CREATE_EPOCH">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  * </reply>
  */

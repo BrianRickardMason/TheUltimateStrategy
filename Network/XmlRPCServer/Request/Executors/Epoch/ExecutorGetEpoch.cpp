@@ -150,7 +150,6 @@ ReplyShrPtr ExecutorGetEpoch::produceReply(
     IXmlNodeShrPtr node_parameters = reply->m_xml_document->getNode("reply")->appendNode("parameters");
 
     IXmlNodeShrPtr node_message = node_parameters->appendNode("message");
-    node_message->appendAttribute("type")->setValue("string");
 
     switch (a_exit_code.m_exit_code)
     {
@@ -177,23 +176,18 @@ ReplyShrPtr ExecutorGetEpoch::produceReply(
     if (a_exit_code.m_epoch)
     {
         IXmlNodeShrPtr node_idepoch = node_parameters->appendNode("idepoch");
-        node_idepoch->appendAttribute("type")->setValue("unsigned integer");
         node_idepoch->appendAttribute("value")->setValue(a_exit_code.m_epoch->getIDEpoch().getValue());
 
         IXmlNodeShrPtr node_world_name = node_parameters->appendNode("world_name");
-        node_world_name->appendAttribute("type")->setValue("string");
         node_world_name->appendAttribute("value")->setValue(a_exit_code.m_epoch->getWorldName().c_str());
 
         IXmlNodeShrPtr node_active = node_parameters->appendNode("active");
-        node_active->appendAttribute("type")->setValue("boolean");
         node_active->appendAttribute("value")->setValue(a_exit_code.m_epoch->getActive());
 
         IXmlNodeShrPtr node_finished = node_parameters->appendNode("finished");
-        node_finished->appendAttribute("type")->setValue("boolean");
         node_finished->appendAttribute("value")->setValue(a_exit_code.m_epoch->getFinished());
 
         IXmlNodeShrPtr node_ticks = node_parameters->appendNode("ticks");
-        node_ticks->appendAttribute("type")->setValue("unsigned integer");
         node_ticks->appendAttribute("value")->setValue(a_exit_code.m_epoch->getTicks());
     }
 

@@ -217,8 +217,6 @@ ReplyShrPtr ExecutorTransportHuman::produceReply(
 
     IXmlNodeShrPtr node_message = reply->m_xml_document->getNode("reply")->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_DESTINATION_SETTLEMENT_DOES_NOT_EXIST:

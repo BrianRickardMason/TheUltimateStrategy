@@ -190,8 +190,6 @@ ReplyShrPtr ExecutorEngageHuman::produceReply(
 
     IXmlNodeShrPtr node_message = reply->m_xml_document->getNode("reply")->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED:

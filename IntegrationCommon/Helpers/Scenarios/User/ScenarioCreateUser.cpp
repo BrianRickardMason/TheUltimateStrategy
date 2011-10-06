@@ -98,12 +98,10 @@ ReplyShrPtr ScenarioCreateUserActionInvalidRequest::perform(
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
     IXmlNodeShrPtr login = parameters->appendNode("login");
-    login->appendAttribute("type")->setValue("unsigned integer");
     login->appendAttribute("value")->setValue(m_login.c_str());
 
     IXmlNodeShrPtr password = parameters->appendNode("password");
-    password->appendAttribute("type")->setValue("unsigned integer");
-    password->appendAttribute("value")->setValue(m_password.c_str());
+    password->appendAttribute("valve")->setValue(m_password.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -117,9 +115,6 @@ string ScenarioCreateUserVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_USER, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_USER_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -136,9 +131,6 @@ string ScenarioCreateUserVerificationUserDoesExist::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_USER, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_USER_USER_DOES_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -155,9 +147,6 @@ string ScenarioCreateUserVerificationUserHasBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_USER, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_USER_USER_HAS_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -174,9 +163,6 @@ string ScenarioCreateUserVerificationUserHasNotBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_USER, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_USER_USER_HAS_NOT_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

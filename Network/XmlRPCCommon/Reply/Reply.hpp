@@ -151,9 +151,7 @@ public:
      *
      * @throws InvalidReplyShrPtr When any of the following:
      *           - the parameter does not exist,
-     *           - the parameter is not declared as an unsigned integer,
      *           - the parameter does not have a value,
-     *           - the parameter is declared as an unsigned integer and its value's type is not an unsigned integer,
      *           - the value is negative
      *         is true.
      */
@@ -170,7 +168,6 @@ public:
      *
      * @throws InvalidReplyShrPtr When any of the following:
      *           - the parameter does not exist,
-     *           - the parameter is not declared as an string,
      *           - the parameter does not have a value
      *         is true.
      */

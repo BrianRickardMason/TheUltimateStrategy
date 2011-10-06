@@ -107,8 +107,7 @@ ReplyShrPtr ScenarioCreateWorldActionInvalidRequest::perform(
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("type")->setValue("unsigned integer");
-    name->appendAttribute("value")->setValue(m_name.c_str());
+    name->appendAttribute("valve")->setValue(m_name.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -122,9 +121,6 @@ string ScenarioCreateWorldVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_WORLD, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::CREATE_WORLD_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -141,9 +137,6 @@ string ScenarioCreateWorldVerificationWorldDoesExist::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_WORLD, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::CREATE_WORLD_WORLD_DOES_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -160,9 +153,6 @@ string ScenarioCreateWorldVerificationWorldHasBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_WORLD, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::CREATE_WORLD_WORLD_HAS_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -179,9 +169,6 @@ string ScenarioCreateWorldVerificationWorldHasNotBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_WORLD, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::CREATE_WORLD_WORLD_HAS_NOT_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

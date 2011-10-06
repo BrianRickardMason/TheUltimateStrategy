@@ -107,8 +107,7 @@ ReplyShrPtr ScenarioCreateEpochActionInvalidRequest::perform(
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("unsigned");
-    world_name->appendAttribute("value")->setValue(m_world_name.c_str());
+    world_name->appendAttribute("valve")->setValue(m_world_name.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -122,9 +121,6 @@ string ScenarioCreateEpochVerificationEpochHasBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_EPOCH, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_EPOCH_EPOCH_HAS_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -141,9 +137,6 @@ string ScenarioCreateEpochVerificationEpochHasNotBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_EPOCH, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_EPOCH_EPOCH_HAS_NOT_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -160,9 +153,6 @@ string ScenarioCreateEpochVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_EPOCH, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_EPOCH_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -179,9 +169,6 @@ string ScenarioCreateEpochVerificationWorldDoesNotExist::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_EPOCH, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_EPOCH_WORLD_DOES_NOT_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

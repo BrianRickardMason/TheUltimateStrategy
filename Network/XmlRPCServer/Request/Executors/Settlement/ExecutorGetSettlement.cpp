@@ -179,7 +179,6 @@ ReplyShrPtr ExecutorGetSettlement::produceReply(
     IXmlNodeShrPtr node_parameters = reply->m_xml_document->getNode("reply")->appendNode("parameters");
 
     IXmlNodeShrPtr node_message = node_parameters->appendNode("message");
-    node_message->appendAttribute("type")->setValue("string");
 
     switch (a_exit_code.m_exit_code)
     {
@@ -202,11 +201,9 @@ ReplyShrPtr ExecutorGetSettlement::produceReply(
     if (a_exit_code.m_settlement)
     {
         IXmlNodeShrPtr node_land_name = node_parameters->appendNode("land_name");
-        node_land_name->appendAttribute("type")->setValue("string");
         node_land_name->appendAttribute("value")->setValue(a_exit_code.m_settlement->getLandName().c_str());
 
         IXmlNodeShrPtr node_settlement_name = node_parameters->appendNode("settlement_name");
-        node_settlement_name->appendAttribute("type")->setValue("string");
         node_settlement_name->appendAttribute("value")->setValue(a_exit_code.m_settlement->getSettlementName().c_str());
     }
 

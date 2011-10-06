@@ -106,8 +106,7 @@ ReplyShrPtr ScenarioTurnActionInvalidRequest::perform(
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("integer");
-    land_name->appendAttribute("value")->setValue(m_land_name.c_str());
+    land_name->appendAttribute("valve")->setValue(m_land_name.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -121,9 +120,6 @@ string ScenarioTurnVerificationLandDoesNotExist::verify(
     I_ASSERT_EQ(REPLY_ID_TURN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(TURN_LAND_DOES_NOT_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -140,9 +136,6 @@ string ScenarioTurnVerificationTurnHasBeenPerformed::verify(
     I_ASSERT_EQ(REPLY_ID_TURN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(TURN_TURN_HAS_BEEN_PERFORMED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -159,9 +152,6 @@ string ScenarioTurnVerificationTurnHasNotBeenPerformed::verify(
     I_ASSERT_EQ(REPLY_ID_TURN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(TURN_TURN_HAS_NOT_BEEN_PERFORMED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -178,9 +168,6 @@ string ScenarioTurnVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_TURN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(TURN_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

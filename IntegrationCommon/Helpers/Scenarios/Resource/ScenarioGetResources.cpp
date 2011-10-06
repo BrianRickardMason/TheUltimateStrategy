@@ -115,12 +115,10 @@ ReplyShrPtr ScenarioGetResourcesActionInvalidRequest::perform(
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("integer");
     idholderclass->appendAttribute("value")->setValue(m_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("integer");
-    holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
+    holder_name->appendAttribute("valve")->setValue(m_holder_name.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -134,9 +132,6 @@ string ScenarioGetResourcesVerificationResourcesHaveBeenGot::verify(
     I_ASSERT_EQ(REPLY_ID_GET_RESOURCES, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(GET_RESOURCES_RESOURCES_HAVE_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -153,9 +148,6 @@ string ScenarioGetResourcesVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_GET_RESOURCES, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(GET_RESOURCES_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

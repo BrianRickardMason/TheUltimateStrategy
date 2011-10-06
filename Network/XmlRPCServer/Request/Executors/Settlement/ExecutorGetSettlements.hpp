@@ -50,7 +50,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <land_name type=\"string\" value=\"#\" />
+ *         <land_name value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -58,14 +58,14 @@ namespace Executors
  * <reply id=\"REPLY_ID_GET_SETTLEMENTS">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  *     <objects>
  *         <object>
- *             <message         type=\"string\" value=\"#\" />
- *             <land_name       type=\"string\" value=\"#\" />
- *             <settlement_name type=\"string\" value=\"#\" />
- *             <name            type=\"string\" value=\"#\" />
+ *             <message         value=\"#\" />
+ *             <land_name       value=\"#\" />
+ *             <settlement_name value=\"#\" />
+ *             <name            value=\"#\" />
  *         </object>
  *         <object>
  *             ...

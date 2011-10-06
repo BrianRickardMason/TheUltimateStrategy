@@ -250,24 +250,19 @@ public:
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-        idholderclass->appendAttribute("type")->setValue("integer");
         idholderclass->appendAttribute("value")->setValue(m_id_holder_class);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-        holder_name->appendAttribute("type")->setValue("integer");
         holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-        idhumanclass->appendAttribute("type")->setValue("integer");
         idhumanclass->appendAttribute("value")->setValue(m_id_human_class);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-        idhuman->appendAttribute("type")->setValue("integer");
         idhuman->appendAttribute("value")->setValue(m_id_human);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr experience = parameters->appendNode("experience");
-        experience->appendAttribute("type")->setValue("integer");
-        experience->appendAttribute("value")->setValue(m_experience);
+        experience->appendAttribute("valve")->setValue(m_experience);
 
         return a_client->sendRequest(request);
     }
@@ -336,9 +331,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_HUMAN_HUMAN_HAS_BEEN_GOT.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -374,9 +366,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_HUMAN_UNEXPECTED_ERROR.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");

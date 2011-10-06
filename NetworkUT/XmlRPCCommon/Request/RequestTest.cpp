@@ -219,7 +219,7 @@ TEST(RequestTest, getIdRequest_IdAttributeIsNotAnInteger)
 TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_PositiveValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"1\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid value=\"1\" /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -233,7 +233,7 @@ TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_PositiveVal
 TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ZeroValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"0\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid value=\"0\" /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -247,21 +247,7 @@ TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ZeroValue)
 TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_NegativeValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"-1\" /></parameters></request>");
-
-    MessageWrapperShrPtr message_wrapper(new MessageWrapper);
-    message_wrapper->setContent(content);
-
-    Request request(message_wrapper);
-
-    // Test commands and assertions.
-    ASSERT_THROW(request.getParameterValueUnsignedInteger("userid"), InvalidRequestShrPtr);
-}
-
-TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIsNotDeclaredAsAnUnsignedInteger)
-{
-    // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid type=\"string\" value=\"1\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid value=\"-1\" /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -275,7 +261,7 @@ TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIs
 TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIsDeclaredAsAnUnsignedIntegerButItsValueIsNotAnUnsignedInteger)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"notunsignedinteger\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid value=\"notunsignedinteger\" /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -289,7 +275,7 @@ TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIs
 TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterDoesNotHaveAValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid type=\"unsigned integer\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -303,7 +289,7 @@ TEST(RequestTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterDo
 TEST(RequestTest, getParameterValueUnsignedInteger_NonExistingParameter)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"1\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><userid value=\"1\" /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -320,7 +306,7 @@ TEST(RequestTest, getParameterValueUnsignedInteger_NonExistingParameter)
 TEST(RequestTest, getParameterValueString_ExistingParameter)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><name type=\"string\" value=\"stringvalue\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><name value=\"stringvalue\" /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -331,24 +317,10 @@ TEST(RequestTest, getParameterValueString_ExistingParameter)
     ASSERT_STREQ("stringvalue", request.getParameterValueString("name").c_str());
 }
 
-TEST(RequestTest, getParameterValueString_ExistingParameter_ParameterIsNotDeclaredAsAString)
-{
-    // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><name type=\"notstring\" value=\"stringvalue\" /></parameters></request>");
-
-    MessageWrapperShrPtr message_wrapper(new MessageWrapper);
-    message_wrapper->setContent(content);
-
-    Request request(message_wrapper);
-
-    // Test commands and assertions.
-    ASSERT_THROW(request.getParameterValueString("name"), InvalidRequestShrPtr);
-}
-
 TEST(RequestTest, getParameterValueString_ExistingParameter_ParameterDoesNotHaveAValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><name type=\"string\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><name /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -362,7 +334,7 @@ TEST(RequestTest, getParameterValueString_ExistingParameter_ParameterDoesNotHave
 TEST(RequestTest, getParameterValueString_NonExistingParameter)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><name type=\"string\" value=\"stringvalue\" /></parameters></request>");
+    string content("<?xml version=\"1.0\"?><request id=\"1\"><parameters><name value=\"stringvalue\" /></parameters></request>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);

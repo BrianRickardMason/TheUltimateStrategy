@@ -51,7 +51,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <world_name type=\"string\" value=\"#\" />
+ *         <world_name value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -59,12 +59,12 @@ namespace Executors
  * <reply id=\"REPLY_ID_GET_EPOCH">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message    type=\"string"\           value=\"#\" />
- *         <idepoch    type=\"unsigned integer\" value=\"#\" />
- *         <world_name type=\"string\"           value=\"#\" />
- *         <active     type=\"boolean\"          value=\"#\" />
- *         <finished   type=\"boolean\"          value=\"#\" />
- *         <ticks      type=\"unsigned integer\" value=\"#\" />
+ *         <message    value=\"#\" />
+ *         <idepoch    value=\"#\" />
+ *         <world_name value=\"#\" />
+ *         <active     value=\"#\" />
+ *         <finished   value=\"#\" />
+ *         <ticks      value=\"#\" />
  *     </parameters>
  * </reply>
  */

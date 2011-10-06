@@ -262,28 +262,22 @@ public:
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr settlement_name_source = parameters->appendNode("settlement_name_source");
-        settlement_name_source->appendAttribute("type")->setValue("unsigned integer");
         settlement_name_source->appendAttribute("value")->setValue(m_settlement_name_source.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
-        settlement_name_destination->appendAttribute("type")->setValue("unsigned integer");
         settlement_name_destination->appendAttribute("value")->setValue(m_settlement_name_destination.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-        idhumanclass->appendAttribute("type")->setValue("unsigned integer");
         idhumanclass->appendAttribute("value")->setValue(m_id_human_class);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-        idhuman->appendAttribute("type")->setValue("unsigned integer");
         idhuman->appendAttribute("value")->setValue(m_id_human);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr experience = parameters->appendNode("experience");
-        experience->appendAttribute("type")->setValue("unsigned integer");
         experience->appendAttribute("value")->setValue(m_experience);
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr volume = parameters->appendNode("volume");
-        volume->appendAttribute("type")->setValue("integer");
-        volume->appendAttribute("value")->setValue(m_volume);
+        volume->appendAttribute("valve")->setValue(m_volume);
 
         return a_client->sendRequest(request);
     }
@@ -357,9 +351,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::TRANSPORT_HUMAN_DESTINATION_SETTLEMENT_DOES_NOT_EXIST.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -395,9 +386,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::TRANSPORT_HUMAN_HUMAN_HAS_BEEN_TRANSPORTED.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -433,9 +421,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::TRANSPORT_HUMAN_NOT_ENOUGH_HUMANS.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -471,9 +456,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::TRANSPORT_HUMAN_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -509,9 +491,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::TRANSPORT_HUMAN_SOURCE_SETTLEMENT_DOES_NOT_EXIST.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -547,9 +526,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::TRANSPORT_HUMAN_TRYING_TO_TRANSPORT_ZERO_HUMANS.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");

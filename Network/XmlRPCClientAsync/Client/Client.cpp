@@ -57,8 +57,8 @@ Client::Client(
     string content1  = "<?xml version=\"1.0\"?>";
            content1 += "<request id=\"2\">";
            content1 +=     "<parameters>";
-           content1 +=         "<userid type=\"unsigned integer\" value=\"1\" />";
-           content1 +=         "<name type=\"string\" value=\"Land1\" />";
+           content1 +=         "<userid value=\"1\" />";
+           content1 +=         "<name value=\"Land1\" />";
            content1 +=     "</parameters>";
            content1 += "</request>";
 

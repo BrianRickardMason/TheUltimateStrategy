@@ -99,12 +99,6 @@ unsigned int const Reply::getParameterValueUnsignedInteger(
 {
     IXmlNodeShrPtr node = verifyIfParameterExists(a_name);
 
-    // Verify if parameter is declared as an unsigned integer.
-    if (strcmp(node->getAttribute("type")->getValue(), "unsigned integer"))
-    {
-        throw InvalidReplyShrPtr();
-    }
-
     IXmlAttributeShrPtr attribute = verifyIfParameterHasAValueAtribute(node);
 
     // Verify if parameter is declared as an unsigned integer and is an unsigned integer.
@@ -131,12 +125,6 @@ string const Reply::getParameterValueString(
 ) const
 {
     IXmlNodeShrPtr node = verifyIfParameterExists(a_name);
-
-    // Verify if parameter is declared as a string.
-    if (strcmp(node->getAttribute("type")->getValue(), "string"))
-    {
-        throw InvalidReplyShrPtr();
-    }
 
     IXmlAttributeShrPtr attribute = verifyIfParameterHasAValueAtribute(node);
 

@@ -191,8 +191,6 @@ ReplyShrPtr ExecutorDestroyBuilding::produceReply(
 
     IXmlNodeShrPtr node_message = reply->m_xml_document->getNode("reply")->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDINGS_MISSING_IN_THE_MEANTIME:

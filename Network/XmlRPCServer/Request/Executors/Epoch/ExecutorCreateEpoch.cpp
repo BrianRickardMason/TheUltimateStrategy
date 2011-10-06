@@ -146,8 +146,6 @@ ReplyShrPtr ExecutorCreateEpoch::produceReply(
 
     IXmlNodeShrPtr node_message = reply->m_xml_document->getNode("reply")->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_CREATED:

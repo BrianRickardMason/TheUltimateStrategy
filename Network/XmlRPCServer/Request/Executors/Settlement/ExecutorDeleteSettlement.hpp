@@ -50,7 +50,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <settlement_name type=\"string\" value=\"#\" />
+ *         <settlement_name value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -58,7 +58,7 @@ namespace Executors
  * <reply id=\"REPLY_ID_DELETE_SETTLEMENT">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  * </reply>
  */

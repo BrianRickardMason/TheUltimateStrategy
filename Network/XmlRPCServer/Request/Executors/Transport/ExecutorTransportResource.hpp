@@ -52,10 +52,10 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <settlement_name_source      type=\"string\"           value=\"#\" />
- *         <settlement_name_destination type=\"string\"           value=\"#\" />
- *         <idresource                  type=\"unsigned integer\" value=\"#\" />
- *         <volume                      type=\"unsigned integer\" value=\"#\" />
+ *         <settlement_name_source      value=\"#\" />
+ *         <settlement_name_destination value=\"#\" />
+ *         <idresource                  value=\"#\" />
+ *         <volume                      value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -63,7 +63,7 @@ namespace Executors
  * <reply id=\"REPLY_ID_TRANSPORT_RESOURCE">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  * </reply>
  */

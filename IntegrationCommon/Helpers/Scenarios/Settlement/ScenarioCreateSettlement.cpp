@@ -110,12 +110,10 @@ ReplyShrPtr ScenarioCreateSettlementActionInvalidRequest::perform(
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("unsigned integer");
     land_name->appendAttribute("value")->setValue(m_land_name.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("type")->setValue("integer");
-    name->appendAttribute("value")->setValue(m_name.c_str());
+    name->appendAttribute("valve")->setValue(m_name.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -129,9 +127,6 @@ string ScenarioCreateSettlementVerificationLandDoesNotExist::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_SETTLEMENT, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_SETTLEMENT_LAND_DOES_NOT_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -148,9 +143,6 @@ string ScenarioCreateSettlementVerificationSettlementDoesExist::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_SETTLEMENT, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_SETTLEMENT_SETTLEMENT_DOES_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -167,9 +159,6 @@ string ScenarioCreateSettlementVerificationSettlementHasBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_SETTLEMENT, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_SETTLEMENT_SETTLEMENT_HAS_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -186,9 +175,6 @@ string ScenarioCreateSettlementVerificationSettlementHasNotBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_SETTLEMENT, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_SETTLEMENT_SETTLEMENT_HAS_NOT_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -205,9 +191,6 @@ string ScenarioCreateSettlementVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_SETTLEMENT, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_SETTLEMENT_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

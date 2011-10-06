@@ -199,8 +199,7 @@ public:
         user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-        land_name->appendAttribute("type")->setValue("integer");
-        land_name->appendAttribute("value")->setValue(m_land_name.c_str());
+        land_name->appendAttribute("valve")->setValue(m_land_name.c_str());
 
         return a_client->sendRequest(request);
     }
@@ -249,9 +248,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENTS_BY_LANDNAME_LAND_DOES_NOT_EXIST.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -287,9 +283,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENTS_BY_LANDNAME_SETTLEMENTS_HAVE_BEEN_GOT.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -325,9 +318,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENTS_BY_LANDNAME_SETTLEMENTS_HAVE_NOT_BEEN_GOT.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");
@@ -363,9 +353,6 @@ public:
                     node_reply->getNode("status")->getAttribute("value")->asInt(),
                     "Invalid status.");
 
-        I_ASSERT_STREQ("string",
-                       node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                       "Invalid node type.");
         I_ASSERT_STREQ(Network::XmlRPCServer::Request::Executors::GET_SETTLEMENTS_BY_LANDNAME_UNEXPECTED_ERROR.c_str(),
                        node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                        "Invalid node value.");

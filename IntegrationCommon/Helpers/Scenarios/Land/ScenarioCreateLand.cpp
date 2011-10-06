@@ -115,16 +115,13 @@ ReplyShrPtr ScenarioCreateLandActionInvalidRequest::perform(
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("unsigned integer");
     world_name->appendAttribute("value")->setValue(m_world_name.c_str());
 
     IXmlNodeShrPtr idepoch = parameters->appendNode("idepoch");
-    idepoch->appendAttribute("type")->setValue("unsigned integer");
     idepoch->appendAttribute("value")->setValue(m_id_epoch);
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("integer");
-    land_name->appendAttribute("value")->setValue(m_land_name.c_str());
+    land_name->appendAttribute("valve")->setValue(m_land_name.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -138,9 +135,6 @@ string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -157,9 +151,6 @@ string ScenarioCreateLandVerificationEpochDoesNotExist::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_LAND_EPOCH_DOES_NOT_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -176,9 +167,6 @@ string ScenarioCreateLandVerificationLandHasBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_LAND_LAND_HAS_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -195,9 +183,6 @@ string ScenarioCreateLandVerificationLandHasNotBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_LAND_LAND_HAS_NOT_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -214,9 +199,6 @@ string ScenarioCreateLandVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_LAND_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -233,9 +215,6 @@ string ScenarioCreateLandVerificationWorldDoesNotExist::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(CREATE_LAND_WORLD_DOES_NOT_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

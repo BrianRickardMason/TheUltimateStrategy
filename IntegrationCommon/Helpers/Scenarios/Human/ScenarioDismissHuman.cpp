@@ -135,28 +135,22 @@ ReplyShrPtr ScenarioDismissHumanActionInvalidRequest::perform(
     user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("integer");
     idholderclass->appendAttribute("value")->setValue(m_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("integer");
     holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
     IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("type")->setValue("integer");
     idhumanclass->appendAttribute("value")->setValue(m_id_human_class);
 
     IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("type")->setValue("integer");
     idhuman->appendAttribute("value")->setValue(m_id_human);
 
     IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("type")->setValue("integer");
     experience->appendAttribute("value")->setValue(m_experience);
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
-    volume->appendAttribute("type")->setValue("integer");
-    volume->appendAttribute("value")->setValue(m_volume);
+    volume->appendAttribute("valve")->setValue(m_volume);
 
     return a_client->sendRequest(request);
 }
@@ -170,9 +164,6 @@ string ScenarioDismissHumanVerificationHumanMissingInTheMeantime::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_HUMANS_MISSING_IN_THE_MEANTIME.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -189,9 +180,6 @@ string ScenarioDismissHumanVerificationHumanHasBeenDismissed::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_HUMAN_HAS_BEEN_DISMISSED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -208,9 +196,6 @@ string ScenarioDismissHumanVerificationHumanIsNotDismissable::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_HUMAN_IS_NOT_DISMISSABLE.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -227,9 +212,6 @@ string ScenarioDismissHumanVerificationNotEnoughEngaged::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_NOT_ENOUGH_ENGAGED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -246,9 +228,6 @@ string ScenarioDismissHumanVerificationNotEnoughResources::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_NOT_ENOUGH_RESOURCES.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -265,9 +244,6 @@ string ScenarioDismissHumanVerificationResourcesMissingInTheMeantime::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_RESOURCES_MISSING_IN_THE_MEANTIME.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -284,9 +260,6 @@ string ScenarioDismissHumanVerificationTryingToDismissZeroHumans::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_TRYING_TO_DISMISS_ZERO_HUMANS.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -303,9 +276,6 @@ string ScenarioDismissHumanVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_DISMISS_HUMAN, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(DISMISS_HUMAN_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

@@ -173,7 +173,7 @@ public:
                     node_reply->getAttribute("id")->asInt(),
                     "Invalid reply ID.");
         I_ASSERT_EQ(Network::XmlRPCCommon::Reply::REPLY_STATUS_INVALID_REQUEST,
-                    node_reply->getNode("status")->getAttribute("value")->asInt(),
+                    node_reply->getNode("status")->getAttribute("valve")->asInt(),
                     "Invalid status.");
 
         return "";

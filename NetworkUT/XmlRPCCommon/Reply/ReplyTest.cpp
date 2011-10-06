@@ -219,7 +219,7 @@ TEST(ReplyTest, getIdReply_IdAttributeIsNotAnInteger)
 TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_PositiveValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"1\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid value=\"1\" /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -233,7 +233,7 @@ TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_PositiveValue
 TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ZeroValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"0\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid value=\"0\" /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -247,21 +247,7 @@ TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ZeroValue)
 TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_NegativeValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"-1\" /></parameters></reply>");
-
-    MessageWrapperShrPtr message_wrapper(new MessageWrapper);
-    message_wrapper->setContent(content);
-
-    Reply reply(message_wrapper);
-
-    // Test commands and assertions.
-    ASSERT_THROW(reply.getParameterValueUnsignedInteger("userid"), InvalidReplyShrPtr);
-}
-
-TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIsNotDeclaredAsAnUnsignedInteger)
-{
-    // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid type=\"string\" value=\"1\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid value=\"-1\" /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -275,7 +261,7 @@ TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIsNo
 TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIsDeclaredAsAnUnsignedIntegerButItsValueIsNotAnUnsignedInteger)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"notunsignedinteger\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid value=\"notunsignedinteger\" /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -289,7 +275,7 @@ TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterIsDe
 TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterDoesNotHaveAValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid type=\"unsigned integer\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -303,7 +289,7 @@ TEST(ReplyTest, getParameterValueUnsignedInteger_ExistingParameter_ParameterDoes
 TEST(ReplyTest, getParameterValueUnsignedInteger_NonExistingParameter)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid type=\"unsigned integer\" value=\"1\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><userid value=\"1\" /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -320,7 +306,7 @@ TEST(ReplyTest, getParameterValueUnsignedInteger_NonExistingParameter)
 TEST(ReplyTest, getParameterValueString_ExistingParameter)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><name type=\"string\" value=\"stringvalue\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><name value=\"stringvalue\" /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -331,24 +317,10 @@ TEST(ReplyTest, getParameterValueString_ExistingParameter)
     ASSERT_STREQ("stringvalue", reply.getParameterValueString("name").c_str());
 }
 
-TEST(ReplyTest, getParameterValueString_ExistingParameter_ParameterIsNotDeclaredAsAString)
-{
-    // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><name type=\"notstring\" value=\"stringvalue\" /></parameters></reply>");
-
-    MessageWrapperShrPtr message_wrapper(new MessageWrapper);
-    message_wrapper->setContent(content);
-
-    Reply reply(message_wrapper);
-
-    // Test commands and assertions.
-    ASSERT_THROW(reply.getParameterValueString("name"), InvalidReplyShrPtr);
-}
-
 TEST(ReplyTest, getParameterValueString_ExistingParameter_ParameterDoesNotHaveAValue)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><name type=\"string\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><name /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);
@@ -362,7 +334,7 @@ TEST(ReplyTest, getParameterValueString_ExistingParameter_ParameterDoesNotHaveAV
 TEST(ReplyTest, getParameterValueString_NonExistingParameter)
 {
     // Preconditions.
-    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><name type=\"string\" value=\"stringvalue\" /></parameters></reply>");
+    string content("<?xml version=\"1.0\"?><reply id=\"1\"><parameters><name value=\"stringvalue\" /></parameters></reply>");
 
     MessageWrapperShrPtr message_wrapper(new MessageWrapper);
     message_wrapper->setContent(content);

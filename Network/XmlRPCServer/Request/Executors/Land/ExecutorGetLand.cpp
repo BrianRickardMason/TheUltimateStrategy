@@ -178,7 +178,6 @@ ReplyShrPtr ExecutorGetLand::produceReply(
     IXmlNodeShrPtr node_parameters = reply->m_xml_document->getNode("reply")->appendNode("parameters");
 
     IXmlNodeShrPtr node_message = node_parameters->appendNode("message");
-    node_message->appendAttribute("type")->setValue("string");
 
     switch (a_exit_code.m_exit_code)
     {
@@ -201,19 +200,15 @@ ReplyShrPtr ExecutorGetLand::produceReply(
     if (a_exit_code.m_land)
     {
         IXmlNodeShrPtr node_login = node_parameters->appendNode("login");
-        node_login->appendAttribute("type")->setValue("string");
         node_login->appendAttribute("value")->setValue(a_exit_code.m_land->getLogin().c_str());
 
         IXmlNodeShrPtr node_world_name = node_parameters->appendNode("world_name");
-        node_world_name->appendAttribute("type")->setValue("string");
         node_world_name->appendAttribute("value")->setValue(a_exit_code.m_land->getWorldName().c_str());
 
         IXmlNodeShrPtr node_land_name = node_parameters->appendNode("land_name");
-        node_land_name->appendAttribute("type")->setValue("string");
         node_land_name->appendAttribute("value")->setValue(a_exit_code.m_land->getLandName().c_str());
 
         IXmlNodeShrPtr node_granted = node_parameters->appendNode("granted");
-        node_granted->appendAttribute("type")->setValue("boolean");
         node_granted->appendAttribute("value")->setValue(a_exit_code.m_land->getGranted());
     }
 

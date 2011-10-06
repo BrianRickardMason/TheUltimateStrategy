@@ -51,8 +51,8 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idholderclass type=\"unsigned integer\" value=\"#\" />
- *         <holder_name   type=\"string\"           value=\"#\" />
+ *         <idholderclass value=\"#\" />
+ *         <holder_name   value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -60,13 +60,13 @@ namespace Executors
  * <reply id=\"REPLY_ID_GET_BUILDINGS">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  *     <objects>
  *         <object>
- *             <idbuildingclass type=\"unsigned integer\" value=\"#\" />
- *             <idbuilding      type=\"unsigned integer\" value=\"#\" />
- *             <volume          type=\"unsigned integer\" value=\"#\" />
+ *             <idbuildingclass value=\"#\" />
+ *             <idbuilding      value=\"#\" />
+ *             <volume          value=\"#\" />
  *         </object>
  *         <object>
  *             ...

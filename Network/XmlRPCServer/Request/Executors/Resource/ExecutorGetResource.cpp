@@ -190,8 +190,6 @@ ReplyShrPtr ExecutorGetResource::produceReply(
 
     IXmlNodeShrPtr node_message = node_reply->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case GET_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_GOT:
@@ -213,11 +211,9 @@ ReplyShrPtr ExecutorGetResource::produceReply(
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
         IXmlNodeShrPtr node_idresource = node_object->appendNode("idresource");
-        node_idresource->appendAttribute("type")->setValue("unsigned integer");
         node_idresource->appendAttribute("value")->setValue(a_exit_code.m_resource->getIDResource().getValue());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
-        node_volume->appendAttribute("type")->setValue("unsigned integer");
         node_volume->appendAttribute("value")->setValue(a_exit_code.m_resource->getVolume());
     }
 

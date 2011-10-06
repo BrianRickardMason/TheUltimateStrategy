@@ -188,8 +188,6 @@ ReplyShrPtr ExecutorGetBuildings::produceReply(
 
     IXmlNodeShrPtr node_message = node_reply->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case GET_BUILDINGS_OPERATOR_EXIT_CODE_BUILDINGS_HAVE_BEEN_GOT:
@@ -213,15 +211,12 @@ ReplyShrPtr ExecutorGetBuildings::produceReply(
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
         IXmlNodeShrPtr node_idbuildingclass = node_object->appendNode("idbuildingclass");
-        node_idbuildingclass->appendAttribute("type")->setValue("unsigned integer");
         node_idbuildingclass->appendAttribute("value")->setValue(it->second->getIDBuilding().getValue1());
 
         IXmlNodeShrPtr node_idbuilding = node_object->appendNode("idbuilding");
-        node_idbuilding->appendAttribute("type")->setValue("unsigned integer");
         node_idbuilding->appendAttribute("value")->setValue(it->second->getIDBuilding().getValue2());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
-        node_volume->appendAttribute("type")->setValue("unsigned integer");
         node_volume->appendAttribute("value")->setValue(it->second->getVolume());
     }
 

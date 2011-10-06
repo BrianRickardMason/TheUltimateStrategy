@@ -100,7 +100,7 @@ ReplyShrPtr ScenarioGetLandsActionInvalidRequest::perform(
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
     user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
-    user_node->appendNode("badpassword")->appendAttribute("value")->setValue(m_password.c_str());
+    user_node->appendNode("badpassword")->appendAttribute("valve")->setValue(m_password.c_str());
 
     return a_client->sendRequest(request);
 }
@@ -114,9 +114,6 @@ string ScenarioGetLandsVerificationLandsHaveBeenGot::verify(
     I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(GET_LANDS_LANDS_HAVE_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -133,9 +130,6 @@ string ScenarioGetLandsVerificationLandsHaveNotBeenGot::verify(
     I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(GET_LANDS_LANDS_HAVE_NOT_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
@@ -152,9 +146,6 @@ string ScenarioGetLandsVerificationUnexpectedError::verify(
     I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
     I_ASSERT_STREQ(GET_LANDS_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");

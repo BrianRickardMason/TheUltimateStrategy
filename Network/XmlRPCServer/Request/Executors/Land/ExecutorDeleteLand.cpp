@@ -174,7 +174,6 @@ ReplyShrPtr ExecutorDeleteLand::produceReply(
     IXmlNodeShrPtr node_parameters = reply->m_xml_document->getNode("reply")->appendNode("parameters");
 
     IXmlNodeShrPtr node_message = node_parameters->appendNode("message");
-    node_message->appendAttribute("type")->setValue("string");
 
     switch (a_exit_code.m_exit_code)
     {

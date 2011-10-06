@@ -52,9 +52,9 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <world_name type=\"string\"           value=\"#\" />
- *         <idepoch    type=\"unsigned integer\" value=\"#\" />
- *         <name       type=\"string\"           value=\"#\" />
+ *         <world_name value=\"#\" />
+ *         <idepoch    value=\"#\" />
+ *         <name       value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -62,7 +62,7 @@ namespace Executors
  * <reply id=\"REPLY_ID_CREATE_LAND">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  * </reply>
  */

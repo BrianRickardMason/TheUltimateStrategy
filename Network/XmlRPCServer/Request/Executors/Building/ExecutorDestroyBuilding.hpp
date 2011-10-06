@@ -54,11 +54,11 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idholderclass   type=\"unsigned integer\" value=\"#\" />
- *         <holder_name     type=\"string\"           value=\"#\" />
- *         <idbuildingclass type=\"unsigned integer\" value=\"#\" />
- *         <idbuilding      type=\"unsigned integer\" value=\"#\" />
- *         <volume          type=\"unsigned integer\" value=\"#\" />
+ *         <idholderclass   value=\"#\" />
+ *         <holder_name     value=\"#\" />
+ *         <idbuildingclass value=\"#\" />
+ *         <idbuilding      value=\"#\" />
+ *         <volume          value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -66,7 +66,7 @@ namespace Executors
  * <reply id=\"REPLY_ID_DESTROY_BUILDING">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  * </reply>
  */

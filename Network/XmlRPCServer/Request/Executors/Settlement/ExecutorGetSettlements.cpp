@@ -177,8 +177,6 @@ ReplyShrPtr ExecutorGetSettlements::produceReply(
 
     IXmlNodeShrPtr node_message = node_reply->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case GET_SETTLEMENTS_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST:
@@ -210,11 +208,9 @@ ReplyShrPtr ExecutorGetSettlements::produceReply(
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
         IXmlNodeShrPtr node_land_name = node_object->appendNode("land_name");
-        node_land_name->appendAttribute("type")->setValue("string");
         node_land_name->appendAttribute("value")->setValue(it->second->getLandName().c_str());
 
         IXmlNodeShrPtr node_settlement_name = node_object->appendNode("settlement_name");
-        node_settlement_name->appendAttribute("type")->setValue("string");
         node_settlement_name->appendAttribute("value")->setValue(it->second->getSettlementName().c_str());
     }
 

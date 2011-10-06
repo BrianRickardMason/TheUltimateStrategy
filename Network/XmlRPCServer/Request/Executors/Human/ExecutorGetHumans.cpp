@@ -187,8 +187,6 @@ ReplyShrPtr ExecutorGetHumans::produceReply(
 
     IXmlNodeShrPtr node_message = node_reply->appendNode("parameters")->appendNode("message");
 
-    node_message->appendAttribute("type")->setValue("string");
-
     switch (a_exit_code.m_exit_code)
     {
         case GET_HUMANS_OPERATOR_EXIT_CODE_HUMANS_HAVE_BEEN_GOT:
@@ -212,19 +210,15 @@ ReplyShrPtr ExecutorGetHumans::produceReply(
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
         IXmlNodeShrPtr node_idhumanclass = node_object->appendNode("idhumanclass");
-        node_idhumanclass->appendAttribute("type")->setValue("unsigned integer");
         node_idhumanclass->appendAttribute("value")->setValue(it->second->getIDHuman().getValue1());
 
         IXmlNodeShrPtr node_idhuman = node_object->appendNode("idhuman");
-        node_idhuman->appendAttribute("type")->setValue("unsigned integer");
         node_idhuman->appendAttribute("value")->setValue(it->second->getIDHuman().getValue2());
 
         IXmlNodeShrPtr node_experience = node_object->appendNode("experience");
-        node_experience->appendAttribute("type")->setValue("unsigned integer");
         node_experience->appendAttribute("value")->setValue(it->second->getExperience().getValue());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
-        node_volume->appendAttribute("type")->setValue("unsigned integer");
         node_volume->appendAttribute("value")->setValue(it->second->getVolume());
     }
 

@@ -50,7 +50,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <land_name type=\"string\" value=\"#\" />
+ *         <land_name value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -58,7 +58,7 @@ namespace Executors
  * <reply id=\"REPLY_ID_DELETE_LAND">
  *     <status value=\"#\" />
  *     <parameters>
- *         <message type=\"string"\ value=\"#\" />
+ *         <message value=\"#\" />
  *     </parameters>
  * </reply>
  */
