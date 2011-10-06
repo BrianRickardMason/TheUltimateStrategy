@@ -98,56 +98,6 @@ public:
     );
 
     /**
-     * @brief Gets a land.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_land_name   The name of the land.
-     *
-     * @return The land, null if not found.
-     */
-    MOCK_CONST_METHOD3(
-        getLandByLogin,
-        LandShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
-            std::string                     const a_login,
-            std::string                     const a_land_name
-        )
-    );
-
-    /**
-     * @brief Gets a land.
-     *
-     * @param a_transaction The transaction.
-     * @param a_world_name  The name of the world.
-     * @param a_land_name   The name of the land.
-     *
-     * @return The land, null if not found.
-     */
-    MOCK_CONST_METHOD3(
-        getLandByWorldName,
-        LandShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name,
-            std::string                     const a_land_name
-        )
-    );
-
-    /**
-     * @brief Gets lands.
-     *
-     * @param a_transaction The transaction.
-     *
-     * @return A map of lands, an empty map if not found.
-     */
-    MOCK_CONST_METHOD1(
-        getLands,
-        LandMap(
-            Persistency::ITransactionShrPtr a_transaction
-        )
-    );
-
-    /**
      * @brief Gets lands.
      *
      * @param a_transaction The transaction.
@@ -156,44 +106,10 @@ public:
      * @return A map of lands, an empty map if not found.
      */
     MOCK_CONST_METHOD2(
-        getLandsByLogin,
+        getLands,
         LandMap(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_login
-        )
-    );
-
-    /**
-     * @brief Gets lands.
-     *
-     * @param a_transaction The transaction.
-     * @param a_world_name  The name of the world.
-     *
-     * @return A map of lands, an empty map if not found.
-     */
-    MOCK_CONST_METHOD2(
-        getLandsByWorldName,
-        LandMap(
-            Persistency::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
-        )
-    );
-
-    /**
-     * @brief Gets lands.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_world_name  The name of the world.
-     *
-     * @return A map of lands, an empty map if not found.
-     */
-    MOCK_CONST_METHOD3(
-        getLands,
-        LandMap(
-            Persistency::ITransactionShrPtr       a_transaction,
-            std::string                     const a_login,
-            std::string                     const a_world_name
         )
     );
 

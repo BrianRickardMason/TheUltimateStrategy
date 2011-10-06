@@ -349,14 +349,14 @@ RequestShrPtr createRequestDeleteLand(
 }
 
 RequestShrPtr createRequestGetLand(
-    string const & a_login,
-    string const & a_password,
-    string const   a_land_name
+    string const a_login,
+    string const a_password,
+    string const a_land_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
 
-    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LAND_BY_NAME);
+    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LAND);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
@@ -371,48 +371,20 @@ RequestShrPtr createRequestGetLand(
     return request;
 }
 
-RequestShrPtr createRequestGetLandByName(
-    string const & a_login,
-    string const & a_password,
-    string const & a_land_name
+RequestShrPtr createRequestGetLands(
+    string const a_login,
+    string const a_password
 )
 {
     RequestShrPtr request = make_shared<Request>();
 
-    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LAND_BY_NAME);
+    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LANDS);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
-
-    IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("string");
-    land_name->appendAttribute("value")->setValue(a_land_name.c_str());
-
-    return request;
-}
-
-RequestShrPtr createRequestGetLandsByWorldName(
-    string const & a_login,
-    string const & a_password,
-    string const   a_world_name
-)
-{
-    RequestShrPtr request = make_shared<Request>();
-
-    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LANDS_BY_WORLD_NAME);
-    IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
-
-    IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
-
-    user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
-    user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
-
-    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
-    world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }

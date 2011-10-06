@@ -25,56 +25,67 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetLandsByLoginAndWorldNameOperator.hpp"
+#ifndef GAMESERVER_LAND_GETLANDSOPERATOREXITCODE_HPP
+#define GAMESERVER_LAND_GETLANDSOPERATOREXITCODE_HPP
 
-using namespace GameServer::Persistency;
-using namespace GameServer::User;
-using namespace GameServer::World;
-using namespace std;
+#include "../../Land.hpp"
 
 namespace GameServer
 {
 namespace Land
 {
 
-GetLandsByLoginAndWorldNameOperator::GetLandsByLoginAndWorldNameOperator(
-    ILandManagerShrPtr  a_land_manager,
-    IUserManagerShrPtr  a_user_manager,
-    IWorldManagerShrPtr a_world_manager
-)
-    : m_land_manager(a_land_manager),
-      m_user_manager(a_user_manager),
-      m_world_manager(a_world_manager)
+/**
+ * @brief Available exit codes.
+ */
+unsigned short int const GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT     = 1;
+unsigned short int const GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT = 2;
+unsigned short int const GET_LANDS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR        = 3;
+unsigned short int const GET_LANDS_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST    = 4;
+
+/**
+ * @brief The exit code of GetLandsOperator.
+ */
+class GetLandsOperatorExitCode
 {
-}
-
-GetLandsByLoginAndWorldNameOperatorExitCode GetLandsByLoginAndWorldNameOperator::getLandByLoginAndWorldName(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login,
-    string             const a_world_name
-) const
-{
-    try
+public:
+    /**
+     * @brief Constructs the exit code.
+     *
+     * @param a_exit_code The value of the exit code.
+     * @param a_lands     The lands.
+     */
+    GetLandsOperatorExitCode(
+        unsigned short int const   a_exit_code,
+        LandMap            const & a_lands
+    )
+        : m_exit_code(a_exit_code),
+          m_lands(a_lands)
     {
-        // Verify if the user exists.
-        // TODO: UserManager::getUser.
-
-        // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_world_name))
-        {
-            return GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST, LandMap());
-        }
-
-        LandMap const lands = m_land_manager->getLands(a_transaction, a_login, a_world_name);
-
-        return (!lands.empty()) ? GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT, lands)
-                                : GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT, lands);
     }
-    catch (...)
+
+    /**
+     * @brief The "ok" method.
+     *
+     * @return False (a read-only operator).
+     */
+    bool ok() const
     {
-        return GetLandsByLoginAndWorldNameOperatorExitCode(GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR, LandMap());
+        return false;
     }
-}
+
+    /**
+     * @brief The exit code.
+     */
+    unsigned short int const m_exit_code;
+
+    /**
+     * @brief The lands.
+     */
+    LandMap const m_lands;
+};
 
 } // namespace Land
 } // namespace GameServer
+
+#endif // GAMESERVER_LAND_GETLANDSOPERATOREXITCODE_HPP

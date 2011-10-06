@@ -49,7 +49,7 @@
 #include "../Land/Operators/CreateLand/CreateLandOperatorFactory.hpp"
 #include "../Land/Operators/DeleteLand/DeleteLandOperatorFactory.hpp"
 #include "../Land/Operators/GetLand/GetLandOperatorFactory.hpp"
-#include "../Land/Operators/GetLandsByLoginAndWorldName/GetLandsByLoginAndWorldNameOperatorFactory.hpp"
+#include "../Land/Operators/GetLands/GetLandsOperatorFactory.hpp"
 #include "../Resource/Operators/GetResource/GetResourceOperatorFactory.hpp"
 #include "../Resource/Operators/GetResources/GetResourcesOperatorFactory.hpp"
 #include "../Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
@@ -211,9 +211,9 @@ IGetLandOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandOperator(
     return IGetLandOperatorShrPtr(GetLandOperatorFactory::createGetLandOperator(m_manager_abstract_factory));
 }
 
-IGetLandsByLoginAndWorldNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandsByLoginAndWorldNameOperator() const
+IGetLandsOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandsOperator() const
 {
-    return IGetLandsByLoginAndWorldNameOperatorShrPtr(GetLandsByLoginAndWorldNameOperatorFactory::createGetLandsByLoginAndWorldNameOperator(m_manager_abstract_factory));
+    return IGetLandsOperatorShrPtr(GetLandsOperatorFactory::createGetLandsOperator(m_manager_abstract_factory));
 }
 
 IGetResourceOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetResourceOperator() const

@@ -215,24 +215,9 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDeleteLand(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLand(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_land_name
-);
-
-/**
- * @brief Creates a request "get land by name".
- *
- * @param a_login    The login of the user.
- * @param a_password The password of the user.
- * @param a_name     The name of a land.
- *
- * @return The created request.
- */
-Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandByName(
-    std::string const & a_login,
-    std::string const & a_password,
-    std::string const & a_name
+    std::string const a_login,
+    std::string const a_password,
+    std::string const a_land_name
 );
 
 /**
@@ -240,14 +225,12 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandByName(
  *
  * @param a_login      The login of the user.
  * @param a_password   The password of the user.
- * @param a_world_name The name of the world.
  *
  * @return The created request.
  */
-Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLandsByWorldName(
-    std::string const & a_login,
-    std::string const & a_password,
-    std::string const   a_world_name
+Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLands(
+    std::string const a_login,
+    std::string const a_password
 );
 
 /**

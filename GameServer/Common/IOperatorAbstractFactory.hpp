@@ -52,7 +52,7 @@
 #include "../Land/Operators/CreateLand/ICreateLandOperator.hpp"
 #include "../Land/Operators/DeleteLand/IDeleteLandOperator.hpp"
 #include "../Land/Operators/GetLand/IGetLandOperator.hpp"
-#include "../Land/Operators/GetLandsByLoginAndWorldName/IGetLandsByLoginAndWorldNameOperator.hpp"
+#include "../Land/Operators/GetLands/IGetLandsOperator.hpp"
 #include "../Resource/Operators/GetResource/IGetResourceOperator.hpp"
 #include "../Resource/Operators/GetResources/IGetResourcesOperator.hpp"
 #include "../Settlement/Operators/CreateSettlement/ICreateSettlementOperator.hpp"
@@ -254,11 +254,11 @@ public:
     virtual Land::IGetLandOperatorShrPtr createGetLandOperator() const = 0;
 
     /**
-     * @brief Creates the get lands by login and world name operator.
+     * @brief Creates the get lands operator.
      *
-     * @return The newly created get lands by login and world name operator.
+     * @return The newly created get lands operator.
      */
-    virtual Land::IGetLandsByLoginAndWorldNameOperatorShrPtr createGetLandsByLoginAndWorldNameOperator() const = 0;
+    virtual Land::IGetLandsOperatorShrPtr createGetLandsOperator() const = 0;
 
     /**
      * @brief Creates the get resource operator.

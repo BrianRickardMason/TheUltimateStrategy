@@ -27,7 +27,7 @@
 
 #include "../../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
 #include "../../Commands/Land/LandCommands.hpp"
-#include "ScenarioGetLandsByWorldName.hpp"
+#include "ScenarioGetLands.hpp"
 
 using namespace IntegrationCommon::Helpers::Commands::Land;
 using namespace Network::XmlRPCCommon::Reply;
@@ -45,7 +45,7 @@ namespace Scenarios
 namespace Land
 {
 
-ScenarioGetLandsByWorldName::ScenarioGetLandsByWorldName(
+ScenarioGetLands::ScenarioGetLands(
     IClientShrPtr               a_client,
     IScenarioActionShrPtr       a_action,
     IScenarioVerificationShrPtr a_verification
@@ -56,146 +56,119 @@ ScenarioGetLandsByWorldName::ScenarioGetLandsByWorldName(
 {
 }
 
-char const * ScenarioGetLandsByWorldName::execute()
+char const * ScenarioGetLands::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
     return m_verification->verify(reply).c_str();
 }
 
-ScenarioGetLandsByWorldNameActionSuccess::ScenarioGetLandsByWorldNameActionSuccess(
-    string const & a_login,
-    string const & a_password,
-    string const   a_world_name
+ScenarioGetLandsActionSuccess::ScenarioGetLandsActionSuccess(
+    string const a_login,
+    string const a_password
 )
     : m_login(a_login),
-      m_password(a_password),
-      m_world_name(a_world_name)
+      m_password(a_password)
 {
 }
 
-ReplyShrPtr ScenarioGetLandsByWorldNameActionSuccess::perform(
+ReplyShrPtr ScenarioGetLandsActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return GetLandsByWorldName(a_client, m_login, m_password, m_world_name);
+    return GetLands(a_client, m_login, m_password);
 }
 
-ScenarioGetLandsByWorldNameActionInvalidRequest::ScenarioGetLandsByWorldNameActionInvalidRequest(
-    string const & a_login,
-    string const & a_password,
-    string const   a_world_name
+ScenarioGetLandsActionInvalidRequest::ScenarioGetLandsActionInvalidRequest(
+    string const a_login,
+    string const a_password
 )
     : m_login(a_login),
-      m_password(a_password),
-      m_world_name(a_world_name)
+      m_password(a_password)
 {
 }
 
-ReplyShrPtr ScenarioGetLandsByWorldNameActionInvalidRequest::perform(
+ReplyShrPtr ScenarioGetLandsActionInvalidRequest::perform(
     IClientShrPtr a_client
 )
 {
     RequestShrPtr request(new Request);
 
-    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LANDS_BY_WORLD_NAME);
+    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_GET_LANDS);
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
     IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
 
     user_node->appendNode("login")->appendAttribute("value")->setValue(m_login.c_str());
-    user_node->appendNode("password")->appendAttribute("value")->setValue(m_password.c_str());
-
-    IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("integer");
-    world_name->appendAttribute("value")->setValue(m_world_name.c_str());
+    user_node->appendNode("badpassword")->appendAttribute("value")->setValue(m_password.c_str());
 
     return a_client->sendRequest(request);
 }
 
-string ScenarioGetLandsByWorldNameVerificationLandsHaveBeenGot::verify(
+string ScenarioGetLandsVerificationLandsHaveBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
     IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_BEEN_GOT.c_str(),
+    I_ASSERT_STREQ(GET_LANDS_LANDS_HAVE_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
     return "";
 }
 
-string ScenarioGetLandsByWorldNameVerificationLandsHaveNotBeenGot::verify(
+string ScenarioGetLandsVerificationLandsHaveNotBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
     IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_NOT_BEEN_GOT.c_str(),
+    I_ASSERT_STREQ(GET_LANDS_LANDS_HAVE_NOT_BEEN_GOT.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
     return "";
 }
 
-string ScenarioGetLandsByWorldNameVerificationUnexpectedError::verify(
+string ScenarioGetLandsVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
     IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_WORLDNAME_UNEXPECTED_ERROR.c_str(),
+    I_ASSERT_STREQ(GET_LANDS_UNEXPECTED_ERROR.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 
     return "";
 }
 
-string ScenarioGetLandsByWorldNameVerificationWorldDoesNotExist::verify(
+string ScenarioGetLandsVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
     IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
-    I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
-
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
-    I_ASSERT_STREQ(GET_LANDS_BY_LOGIN_AND_WORLDNAME_WORLD_DOES_NOT_EXIST.c_str(),
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                   "Invalid node value.");
-
-    return "";
-}
-
-string ScenarioGetLandsByWorldNameVerificationInvalidRequest::verify(
-    ReplyShrPtr a_reply
-)
-{
-    IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_INVALID_REQUEST,
                 node_reply->getNode("status")->getAttribute("value")->asInt(),
                 "Invalid status.");
@@ -203,13 +176,13 @@ string ScenarioGetLandsByWorldNameVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioGetLandsByWorldNameVerificationInvalidRange::verify(
+string ScenarioGetLandsVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
     IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_INVALID_RANGE,
                 node_reply->getNode("status")->getAttribute("value")->asInt(),
                 "Invalid status.");
@@ -217,13 +190,13 @@ string ScenarioGetLandsByWorldNameVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioGetLandsByWorldNameVerificationUnauthenticated::verify(
+string ScenarioGetLandsVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
     IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_UNAUTHENTICATED,
                 node_reply->getNode("status")->getAttribute("value")->asInt(),
                 "Invalid status.");
@@ -231,28 +204,14 @@ string ScenarioGetLandsByWorldNameVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioGetLandsByWorldNameVerificationUnauthorized::verify(
+string ScenarioGetLandsVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
     IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
 
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_ID_GET_LANDS, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_UNAUTHORIZED,
-                node_reply->getNode("status")->getAttribute("value")->asInt(),
-                "Invalid status.");
-
-    return "";
-}
-
-string ScenarioGetLandsByWorldNameVerificationEpochIsNotActive::verify(
-    ReplyShrPtr a_reply
-)
-{
-    IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-    I_ASSERT_EQ(REPLY_ID_GET_LANDS_BY_WORLD_NAME, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
-    I_ASSERT_EQ(REPLY_STATUS_EPOCH_IS_NOT_ACTIVE,
                 node_reply->getNode("status")->getAttribute("value")->asInt(),
                 "Invalid status.");
 

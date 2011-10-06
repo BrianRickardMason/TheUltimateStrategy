@@ -89,54 +89,12 @@ LandShrPtr LandManager::getLand(
     return prepareResultGetLand(m_accessor->getRecord(a_transaction, a_land_name));
 }
 
-LandShrPtr LandManager::getLandByLogin(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login,
-    string             const a_land_name
-) const
-{
-    return prepareResultGetLand(m_accessor->getRecordByLogin(a_transaction, a_login, a_land_name));
-}
-
-LandShrPtr LandManager::getLandByWorldName(
-    ITransactionShrPtr       a_transaction,
-    string             const a_world_name,
-    string             const a_land_name
-) const
-{
-    return prepareResultGetLand(m_accessor->getRecordByWorldName(a_transaction, a_world_name, a_land_name));
-}
-
 LandMap LandManager::getLands(
-    ITransactionShrPtr a_transaction
-) const
-{
-    return prepareResultGetLands(m_accessor->getRecords(a_transaction));
-}
-
-LandMap LandManager::getLandsByLogin(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
 {
-    return prepareResultGetLands(m_accessor->getRecordsByLogin(a_transaction, a_login));
-}
-
-LandMap LandManager::getLandsByWorldName(
-    ITransactionShrPtr       a_transaction,
-    string             const a_world_name
-) const
-{
-    return prepareResultGetLands(m_accessor->getRecordsByWorldName(a_transaction, a_world_name));
-}
-
-LandMap LandManager::getLands(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login,
-    string             const a_world_name
-) const
-{
-    return prepareResultGetLands(m_accessor->getRecords(a_transaction, a_login, a_world_name));
+    return prepareResultGetLands(m_accessor->getRecords(a_transaction, a_login));
 }
 
 void LandManager::markGranted(

@@ -136,31 +136,25 @@ std::string const GET_HUMAN_UNEXPECTED_ERROR   = "Unexpected error.";
 std::string const GET_HUMANS_HUMANS_HAVE_BEEN_GOT = "Humans have been got.";
 std::string const GET_HUMANS_UNEXPECTED_ERROR     = "Humans have not been got.";
 
-std::string const CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_BELONGS_TO_THE_USER = "Another land of the given name belongs to the user.";
-std::string const CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS_IN_THE_WORLD = "Another land of the given name exists in the world.";
-std::string const CREATE_LAND_EPOCH_DOES_NOT_EXIST                               = "Epoch does not exist.";
-std::string const CREATE_LAND_LAND_HAS_BEEN_CREATED                              = "Land has been created.";
-std::string const CREATE_LAND_LAND_HAS_NOT_BEEN_CREATED                          = "Land has not been created.";
-std::string const CREATE_LAND_UNEXPECTED_ERROR                                   = "Unexpected error.";
-std::string const CREATE_LAND_WORLD_DOES_NOT_EXIST                               = "World does not exist.";
+std::string const CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS = "Another land of the given name exists.";
+std::string const CREATE_LAND_EPOCH_DOES_NOT_EXIST                  = "Epoch does not exist.";
+std::string const CREATE_LAND_LAND_HAS_BEEN_CREATED                 = "Land has been created.";
+std::string const CREATE_LAND_LAND_HAS_NOT_BEEN_CREATED             = "Land has not been created.";
+std::string const CREATE_LAND_UNEXPECTED_ERROR                      = "Unexpected error.";
+std::string const CREATE_LAND_WORLD_DOES_NOT_EXIST                  = "World does not exist.";
 
 std::string const DELETE_LAND_LAND_DOES_NOT_EXIST       = "Land does not exist.";
 std::string const DELETE_LAND_LAND_HAS_BEEN_DELETED     = "Land has been deleted.";
 std::string const DELETE_LAND_LAND_HAS_NOT_BEEN_DELETED = "Land has not been deleted.";
 std::string const DELETE_LAND_UNEXPECTED_ERROR          = "Unexpected error.";
 
-std::string const GET_LAND_BY_LANDNAME_LAND_HAS_BEEN_GOT     = "Land has been got.";
-std::string const GET_LAND_BY_LANDNAME_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
-std::string const GET_LAND_BY_LANDNAME_UNEXPECTED_ERROR      = "Unexpected error.";
-
 std::string const GET_LAND_LAND_HAS_BEEN_GOT     = "Land has been got.";
 std::string const GET_LAND_LAND_HAS_NOT_BEEN_GOT = "Land has not been got.";
 std::string const GET_LAND_UNEXPECTED_ERROR      = "Unexpected error.";
 
-std::string const GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_BEEN_GOT     = "Lands have been got.";
-std::string const GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_NOT_BEEN_GOT = "Lands have not been got.";
-std::string const GET_LANDS_BY_LOGIN_AND_WORLDNAME_UNEXPECTED_ERROR        = "Unexpected error.";
-std::string const GET_LANDS_BY_LOGIN_AND_WORLDNAME_WORLD_DOES_NOT_EXIST    = "World does not exist.";
+std::string const GET_LANDS_LANDS_HAVE_BEEN_GOT     = "Lands have been got.";
+std::string const GET_LANDS_LANDS_HAVE_NOT_BEEN_GOT = "Lands have not been got.";
+std::string const GET_LANDS_UNEXPECTED_ERROR        = "Unexpected error.";
 
 std::string const GET_RESOURCE_RESOURCE_HAS_BEEN_GOT = "Resource has been got.";
 std::string const GET_RESOURCE_UNEXPECTED_ERROR      = "Unexpected error.";

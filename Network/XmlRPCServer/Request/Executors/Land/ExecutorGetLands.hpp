@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYWORLDNAME_HPP
-#define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYWORLDNAME_HPP
+#ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDS_HPP
+#define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDS_HPP
 
-#include "../../../../../GameServer/Land/Operators/GetLandsByLoginAndWorldName/GetLandsByLoginAndWorldNameOperatorExitCode.hpp"
+#include "../../../../../GameServer/Land/Operators/GetLands/GetLandsOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
 namespace Network
@@ -41,21 +41,18 @@ namespace Executors
 {
 
 /**
- * @brief The ExecutorGetLandsByWorldName executor.
+ * @brief The ExecutorGetLands executor.
  *
  * <?xml version=\"1.0\"?>
- * <request id=\"REQUEST_ID_GET_LANDS_BY_WORLD_NAME\">
+ * <request id=\"REQUEST_ID_GET_LANDS\">
  *     <user>
  *         <login    value=\"#\" />
  *         <password value=\"#\" />
  *     </user>
- *     <parameters>
- *         <world_name type=\"string\" value=\"#\" />
- *     </parameters>
  * </request>
  *
  * <?xml version=\"1.0\"?>
- * <reply id=\"REPLY_ID_GET_LANDS_BY_WORLD_NAME">
+ * <reply id=\"REPLY_ID_GET_LANDS">
  *     <status value=\"#\" />
  *     <parameters>
  *         <message type=\"string"\ value=\"#\" />
@@ -73,7 +70,7 @@ namespace Executors
  *     </objects>
  * </reply>
  */
-class ExecutorGetLandsByWorldName
+class ExecutorGetLands
     : public Executor
 {
     /**
@@ -160,13 +157,8 @@ class ExecutorGetLandsByWorldName
      * @return The reply.
      */
     XmlRPCCommon::Reply::ReplyShrPtr produceReply(
-        GameServer::Land::GetLandsByLoginAndWorldNameOperatorExitCode const & a_exit_code
+        GameServer::Land::GetLandsOperatorExitCode const & a_exit_code
     ) const;
-
-    /**
-     * @brief The name of the world.
-     */
-    std::string m_world_name;
 };
 
 } // namespace Executors
@@ -174,4 +166,4 @@ class ExecutorGetLandsByWorldName
 } // namespace XmlRPCServer
 } // namespace Network
 
-#endif // NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDSBYWORLDNAME_HPP
+#endif // NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDS_HPP

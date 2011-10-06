@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYWORLDNAME_HPP
-#define INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYWORLDNAME_HPP
+#ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDS_HPP
+#define INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDS_HPP
 
 #include "../IScenario.hpp"
 #include "../IScenarioAction.hpp"
@@ -42,9 +42,9 @@ namespace Land
 {
 
 /**
- * @brief The "GetLandsByWorldName" scenario.
+ * @brief The "GetLands" scenario.
  */
-class ScenarioGetLandsByWorldName
+class ScenarioGetLands
     : public IScenario
 {
 public:
@@ -55,7 +55,7 @@ public:
      * @param a_action       The action object.
      * @param a_verification The verification object.
      */
-    ScenarioGetLandsByWorldName(
+    ScenarioGetLands(
         IClientShrPtr               a_client,
         IScenarioActionShrPtr       a_action,
         IScenarioVerificationShrPtr a_verification
@@ -84,23 +84,21 @@ private:
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameActionSuccess" action.
+ * @brief The "ScenarioGetLandsActionSuccess" action.
  */
-class ScenarioGetLandsByWorldNameActionSuccess
+class ScenarioGetLandsActionSuccess
     : public IScenarioAction
 {
 public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login      The login of the user.
-     * @param a_password   The password of the user.
-     * @param a_world_name The name of the world.
+     * @param a_login    The login of the user.
+     * @param a_password The password of the user.
      */
-    ScenarioGetLandsByWorldNameActionSuccess(
-        std::string const & a_login,
-        std::string const & a_password,
-        std::string const   a_world_name
+    ScenarioGetLandsActionSuccess(
+        std::string const a_login,
+        std::string const a_password
     );
 
     /**
@@ -124,31 +122,24 @@ private:
      * @brief The password of the user.
      */
     std::string const m_password;
-
-    /**
-     * @brief The name of the world.
-     */
-    std::string const m_world_name;
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameActionInvalidRequest" action.
+ * @brief The "ScenarioGetLandsActionInvalidRequest" action.
  */
-class ScenarioGetLandsByWorldNameActionInvalidRequest
+class ScenarioGetLandsActionInvalidRequest
     : public IScenarioAction
 {
 public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login      The login of the user.
-     * @param a_password   The password of the user.
-     * @param a_world_name The name of the world.
+     * @param a_login    The login of the user.
+     * @param a_password The password of the user.
      */
-    ScenarioGetLandsByWorldNameActionInvalidRequest(
-        std::string const & a_login,
-        std::string const & a_password,
-        std::string const   a_world_name
+    ScenarioGetLandsActionInvalidRequest(
+        std::string const a_login,
+        std::string const a_password
     );
 
     /**
@@ -172,17 +163,12 @@ private:
      * @brief The password of the user.
      */
     std::string const m_password;
-
-    /**
-     * @brief The name of the world.
-     */
-    std::string const m_world_name;
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameVerificationLandsHaveBeenGot" verification.
+ * @brief The "ScenarioGetLandsVerificationLandsHaveBeenGot" verification.
  */
-class ScenarioGetLandsByWorldNameVerificationLandsHaveBeenGot
+class ScenarioGetLandsVerificationLandsHaveBeenGot
     : public IScenarioVerification
 {
 public:
@@ -199,9 +185,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameVerificationLandsHaveNotBeenGot" verification.
+ * @brief The "ScenarioGetLandsVerificationLandsHaveNotBeenGot" verification.
  */
-class ScenarioGetLandsByWorldNameVerificationLandsHaveNotBeenGot
+class ScenarioGetLandsVerificationLandsHaveNotBeenGot
     : public IScenarioVerification
 {
 public:
@@ -218,9 +204,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameVerificationUnexpectedError" verification.
+ * @brief The "ScenarioGetLandsVerificationUnexpectedError" verification.
  */
-class ScenarioGetLandsByWorldNameVerificationUnexpectedError
+class ScenarioGetLandsVerificationUnexpectedError
     : public IScenarioVerification
 {
 public:
@@ -237,9 +223,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameVerificationWorldDoesNotExist" verification.
+ * @brief The "ScenarioGetLandsVerificationInvalidRequest" verification.
  */
-class ScenarioGetLandsByWorldNameVerificationWorldDoesNotExist
+class ScenarioGetLandsVerificationInvalidRequest
     : public IScenarioVerification
 {
 public:
@@ -256,9 +242,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameVerificationInvalidRequest" verification.
+ * @brief The "ScenarioGetLandsVerificationInvalidRange" verification.
  */
-class ScenarioGetLandsByWorldNameVerificationInvalidRequest
+class ScenarioGetLandsVerificationInvalidRange
     : public IScenarioVerification
 {
 public:
@@ -275,9 +261,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameVerificationInvalidRange" verification.
+ * @brief The "ScenarioGetLandsVerificationUnauthenticated" verification.
  */
-class ScenarioGetLandsByWorldNameVerificationInvalidRange
+class ScenarioGetLandsVerificationUnauthenticated
     : public IScenarioVerification
 {
 public:
@@ -294,47 +280,9 @@ public:
 };
 
 /**
- * @brief The "ScenarioGetLandsByWorldNameVerificationUnauthenticated" verification.
+ * @brief The "ScenarioGetLandsVerificationUnauthorized" verification.
  */
-class ScenarioGetLandsByWorldNameVerificationUnauthenticated
-    : public IScenarioVerification
-{
-public:
-    /**
-     * @brief Performs the verification.
-     *
-     * @param a_reply The reply to be verified.
-     *
-     * @return An empty "string" on success, a message otherwise.
-     */
-    virtual std::string verify(
-        Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    );
-};
-
-/**
- * @brief The "ScenarioGetLandsByWorldNameVerificationUnauthorized" verification.
- */
-class ScenarioGetLandsByWorldNameVerificationUnauthorized
-    : public IScenarioVerification
-{
-public:
-    /**
-     * @brief Performs the verification.
-     *
-     * @param a_reply The reply to be verified.
-     *
-     * @return An empty "string" on success, a message otherwise.
-     */
-    virtual std::string verify(
-        Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    );
-};
-
-/**
- * @brief The "ScenarioGetLandsByWorldNameVerificationEpochIsNotActive" verification.
- */
-class ScenarioGetLandsByWorldNameVerificationEpochIsNotActive
+class ScenarioGetLandsVerificationUnauthorized
     : public IScenarioVerification
 {
 public:
@@ -355,4 +303,4 @@ public:
 } // namespace Helpers
 } // namespace IntegrationCommon
 
-#endif // INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDSBYWORLDNAME_HPP
+#endif // INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOGETLANDS_HPP

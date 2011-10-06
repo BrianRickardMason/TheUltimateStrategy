@@ -129,7 +129,7 @@ ReplyShrPtr ScenarioCreateLandActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameBelongsToTheUser::verify(
+string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -141,26 +141,7 @@ string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameBelongsToTheUser::
     I_ASSERT_STREQ("string",
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
                    "Invalid node type.");
-    I_ASSERT_STREQ(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_BELONGS_TO_THE_USER.c_str(),
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                   "Invalid node value.");
-
-    return "";
-}
-
-string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExistsInTheWorld::verify(
-    ReplyShrPtr a_reply
-)
-{
-    IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-    I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
-    I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
-
-    I_ASSERT_STREQ("string",
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("type")->getValue(),
-                   "Invalid node type.");
-    I_ASSERT_STREQ(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS_IN_THE_WORLD.c_str(),
+    I_ASSERT_STREQ(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 

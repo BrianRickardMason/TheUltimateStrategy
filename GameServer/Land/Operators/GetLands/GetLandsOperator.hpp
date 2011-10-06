@@ -25,11 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATORFACTORY_HPP
-#define GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATORFACTORY_HPP
+#ifndef GAMESERVER_LAND_GETLANDSOPERATOR_HPP
+#define GAMESERVER_LAND_GETLANDSOPERATOR_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
-#include "GetLandsByLoginAndWorldNameOperator.hpp"
+#include "../../../User/IUserManager.hpp"
+#include "../../ILandManager.hpp"
+#include "IGetLandsOperator.hpp"
 
 namespace GameServer
 {
@@ -37,24 +38,54 @@ namespace Land
 {
 
 /**
- * @brief The factory of GetLandsByLoginAndWorldNameOperator.
+ * @brief GetLandsOperator.
  */
-class GetLandsByLoginAndWorldNameOperatorFactory
+class GetLandsOperator
+    : public IGetLandsOperator
 {
 public:
     /**
-     * @brief The factory method.
+     * @brief Constructs the operator.
      *
-     * @param a_manager_abstract_factory The abstract factory of managers.
-     *
-     * @return The newly created GetLandByNameOperator.
+     * @param a_land_manager  The manager of lands.
+     * @param a_user_manager  The manager of users.
      */
-    static GetLandsByLoginAndWorldNameOperatorAutPtr createGetLandsByLoginAndWorldNameOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    GetLandsOperator(
+        ILandManagerShrPtr         a_land_manager,
+        User::IUserManagerShrPtr   a_user_manager
     );
+
+    /**
+     * @brief Gets lands.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     *
+     * @return The exit code.
+     */
+    virtual GetLandsOperatorExitCode getLands(
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
+    ) const;
+
+private:
+    /**
+     * @brief The manager of lands.
+     */
+    ILandManagerShrPtr m_land_manager;
+
+    /**
+     * @brief The manager of users.
+     */
+    User::IUserManagerShrPtr m_user_manager;
 };
+
+/**
+ * @brief The auto pointer of GetLandsOperator.
+ */
+typedef std::auto_ptr<GetLandsOperator> GetLandsOperatorAutPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATORFACTORY_HPP
+#endif // GAMESERVER_LAND_GETLANDSOPERATOR_HPP

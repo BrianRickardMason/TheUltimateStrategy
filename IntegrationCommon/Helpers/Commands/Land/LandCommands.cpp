@@ -42,12 +42,12 @@ namespace Land
 {
 
 ReplyShrPtr CreateLand(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_world_name,
-    unsigned int  const   a_id_epoch,
-    string        const   a_land_name
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_world_name,
+    unsigned int  const a_id_epoch,
+    string        const a_land_name
 )
 {
     RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_world_name, a_id_epoch, a_land_name);
@@ -56,10 +56,10 @@ ReplyShrPtr CreateLand(
 }
 
 ReplyShrPtr DeleteLand(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_land_name
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_land_name
 )
 {
     RequestShrPtr request = createRequestDeleteLand(a_login, a_password, a_land_name);
@@ -68,25 +68,24 @@ ReplyShrPtr DeleteLand(
 }
 
 ReplyShrPtr GetLand(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_land_name
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_land_name
 )
 {
-    RequestShrPtr request = createRequestGetLandByName(a_login, a_password, a_land_name);
+    RequestShrPtr request = createRequestGetLand(a_login, a_password, a_land_name);
 
     return a_client->sendRequest(request);
 }
 
-ReplyShrPtr GetLandsByWorldName(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_world_name
+ReplyShrPtr GetLands(
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password
 )
 {
-    RequestShrPtr request = createRequestGetLandsByWorldName(a_login, a_password, a_world_name);
+    RequestShrPtr request = createRequestGetLands(a_login, a_password);
 
     return a_client->sendRequest(request);
 }

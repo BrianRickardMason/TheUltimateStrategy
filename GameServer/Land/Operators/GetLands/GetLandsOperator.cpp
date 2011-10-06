@@ -25,22 +25,45 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "GetLandsByLoginAndWorldNameOperatorFactory.hpp"
+#include "GetLandsOperator.hpp"
 
-using namespace GameServer::Common;
+using namespace GameServer::Persistency;
+using namespace GameServer::User;
+using namespace std;
 
 namespace GameServer
 {
 namespace Land
 {
 
-GetLandsByLoginAndWorldNameOperatorAutPtr GetLandsByLoginAndWorldNameOperatorFactory::createGetLandsByLoginAndWorldNameOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+GetLandsOperator::GetLandsOperator(
+    ILandManagerShrPtr  a_land_manager,
+    IUserManagerShrPtr  a_user_manager
 )
+    : m_land_manager(a_land_manager),
+      m_user_manager(a_user_manager)
 {
-    return GetLandsByLoginAndWorldNameOperatorAutPtr(new GetLandsByLoginAndWorldNameOperator(a_manager_abstract_factory->createLandManager(),
-                                                                                             a_manager_abstract_factory->createUserManager(),
-                                                                                             a_manager_abstract_factory->createWorldManager()));
+}
+
+GetLandsOperatorExitCode GetLandsOperator::getLands(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
+) const
+{
+    try
+    {
+        // Verify if the user exists.
+        // TODO: UserManager::getUser.
+
+        LandMap const lands = m_land_manager->getLands(a_transaction, a_login);
+
+        return (!lands.empty()) ? GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT, lands)
+                                : GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT, lands);
+    }
+    catch (...)
+    {
+        return GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR, LandMap());
+    }
 }
 
 } // namespace Land

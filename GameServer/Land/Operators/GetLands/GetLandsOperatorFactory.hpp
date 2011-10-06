@@ -25,14 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_IGETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
-#define GAMESERVER_LAND_IGETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
+#ifndef GAMESERVER_LAND_GETLANDSOPERATORFACTORY_HPP
+#define GAMESERVER_LAND_GETLANDSOPERATORFACTORY_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
-#include "GetLandsByLoginAndWorldNameOperatorExitCode.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
-#include <string>
+#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "GetLandsOperator.hpp"
 
 namespace GameServer
 {
@@ -40,39 +37,24 @@ namespace Land
 {
 
 /**
- * @brief The interface of GetLandsByLoginAndWorldNameOperator.
+ * @brief The factory of GetLandsOperator.
  */
-class IGetLandsByLoginAndWorldNameOperator
-    : boost::noncopyable
+class GetLandsOperatorFactory
 {
 public:
     /**
-     * @brief Destructs GetLandsByLoginAndWorldNameOperator.
-     */
-    virtual ~IGetLandsByLoginAndWorldNameOperator(){};
-
-    /**
-     * @brief Gets lands.
+     * @brief The factory method.
      *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_world_name  The name of the world.
+     * @param a_manager_abstract_factory The abstract factory of managers.
      *
-     * @return The exit code.
+     * @return The newly created GetLandsOperator.
      */
-    virtual GetLandsByLoginAndWorldNameOperatorExitCode getLandByLoginAndWorldName(
-        Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_login,
-        std::string                     const a_world_name
-    ) const = 0;
+    static GetLandsOperatorAutPtr createGetLandsOperator(
+        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    );
 };
-
-/**
- * @brief The shared pointer of the interface of GetLandsByLoginAndWorldNameOperator.
- */
-typedef boost::shared_ptr<IGetLandsByLoginAndWorldNameOperator> IGetLandsByLoginAndWorldNameOperatorShrPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_IGETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
+#endif // GAMESERVER_LAND_GETLANDSOPERATORFACTORY_HPP

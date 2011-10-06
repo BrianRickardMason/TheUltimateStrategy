@@ -222,96 +222,20 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
     compareLand(land, m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, true);
 }
 
-TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesNotExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordByLogin(transaction, m_login_1, m_land_name_1))
-    .WillOnce(Return(LandRecordShrPtr()));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandShrPtr land = manager.getLandByLogin(transaction, m_login_1, m_land_name_1);
-
-    ASSERT_TRUE(land == NULL);
-}
-
-TEST_F(LandManagerTest, getLand_ByLoginAndName_LandDoesExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordByLogin(transaction, m_login_1, m_land_name_1))
-    .WillOnce(Return(make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, true)));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandShrPtr land = manager.getLandByLogin(transaction, m_login_1, m_land_name_1);
-
-    ASSERT_TRUE(land != NULL);
-
-    compareLand(land, m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, true);
-}
-
-TEST_F(LandManagerTest, getLand_ByWorldNameAndName_LandDoesNotExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordByWorldName(transaction, m_world_name_1, m_land_name_1))
-    .WillOnce(Return(LandRecordShrPtr()));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandShrPtr land = manager.getLandByWorldName(transaction, m_world_name_1, m_land_name_1);
-
-    ASSERT_TRUE(land == NULL);
-}
-
-TEST_F(LandManagerTest, getLand_ByWorldNameAndName_LandDoesExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordByWorldName(transaction, m_world_name_1, m_land_name_1))
-    .WillOnce(Return(make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, true)));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandShrPtr land = manager.getLandByWorldName(transaction, m_world_name_1, m_land_name_1);
-
-    ASSERT_TRUE(land != NULL);
-
-    compareLand(land, m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, true);
-}
-
 TEST_F(LandManagerTest, getLands_LandsDoNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
-    EXPECT_CALL(*mock, getRecords(transaction))
+    EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(LandRecordMap()));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
     LandManager manager(accessor);
 
-    LandMap lands = manager.getLands(transaction);
+    LandMap lands = manager.getLands(transaction, m_login_1);
 
     ASSERT_TRUE(lands.empty());
 }
@@ -325,14 +249,14 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
     LandRecordMap map;
     map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
 
-    EXPECT_CALL(*mock, getRecords(transaction))
+    EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
     LandManager manager(accessor);
 
-    LandMap lands = manager.getLands(transaction);
+    LandMap lands = manager.getLands(transaction, m_login_1);
 
     ASSERT_FALSE(lands.empty());
 
@@ -349,86 +273,16 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
 
     LandRecordMap map;
     map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
-    map.insert(make_pair(m_land_name_2, make_shared<LandRecord>(m_login_2, m_world_name_2, m_id_epoch_2, m_land_name_2, true)));
-
-    EXPECT_CALL(*mock, getRecords(transaction))
-    .WillOnce(Return(map));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLands(transaction);
-
-    ASSERT_FALSE(lands.empty());
-
-    ASSERT_EQ(2, lands.size());
-
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false);
-    compareLand(lands[m_land_name_2], m_login_2, m_world_name_2, m_id_epoch_2, m_land_name_2, true);
-}
-
-TEST_F(LandManagerTest, getLands_ByLogin_LandsDoNotExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordsByLogin(transaction, m_login_1))
-    .WillOnce(Return(LandRecordMap()));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLandsByLogin(transaction, m_login_1);
-
-    ASSERT_TRUE(lands.empty());
-}
-
-TEST_F(LandManagerTest, getLands_ByLogin_LandsDoExist_OneLand)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
-
-    EXPECT_CALL(*mock, getRecordsByLogin(transaction, m_login_1))
-    .WillOnce(Return(map));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLandsByLogin(transaction, m_login_1);
-
-    ASSERT_FALSE(lands.empty());
-
-    ASSERT_EQ(1, lands.size());
-
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false);
-}
-
-TEST_F(LandManagerTest, getLands_ByLogin_LandsDoExist_ManyLands)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
     map.insert(make_pair(m_land_name_2, make_shared<LandRecord>(m_login_1, m_world_name_2, m_id_epoch_2, m_land_name_2, true)));
 
-    EXPECT_CALL(*mock, getRecordsByLogin(transaction, m_login_1))
+    EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
     LandManager manager(accessor);
 
-    LandMap lands = manager.getLandsByLogin(transaction, m_login_1);
+    LandMap lands = manager.getLands(transaction, m_login_1);
 
     ASSERT_FALSE(lands.empty());
 
@@ -436,146 +290,6 @@ TEST_F(LandManagerTest, getLands_ByLogin_LandsDoExist_ManyLands)
 
     compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false);
     compareLand(lands[m_land_name_2], m_login_1, m_world_name_2, m_id_epoch_2, m_land_name_2, true);
-}
-
-TEST_F(LandManagerTest, getLands_ByWorldName_LandsDoNotExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecordsByWorldName(transaction, m_world_name_1))
-    .WillOnce(Return(LandRecordMap()));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLandsByWorldName(transaction, m_world_name_1);
-
-    ASSERT_TRUE(lands.empty());
-}
-
-TEST_F(LandManagerTest, getLands_ByWorldName_LandsDoExist_OneLand)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
-
-    EXPECT_CALL(*mock, getRecordsByWorldName(transaction, m_world_name_1))
-    .WillOnce(Return(map));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLandsByWorldName(transaction, m_world_name_1);
-
-    ASSERT_FALSE(lands.empty());
-
-    ASSERT_EQ(1, lands.size());
-
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false);
-}
-
-TEST_F(LandManagerTest, getLands_ByWorldName_LandsDoExist_ManyLands)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
-    map.insert(make_pair(m_land_name_2, make_shared<LandRecord>(m_login_2, m_world_name_1, m_id_epoch_1, m_land_name_2, true)));
-
-    EXPECT_CALL(*mock, getRecordsByWorldName(transaction, m_world_name_1))
-    .WillOnce(Return(map));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLandsByWorldName(transaction, m_world_name_1);
-
-    ASSERT_FALSE(lands.empty());
-
-    ASSERT_EQ(2, lands.size());
-
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false);
-    compareLand(lands[m_land_name_2], m_login_2, m_world_name_1, m_id_epoch_1, m_land_name_2, true);
-}
-
-TEST_F(LandManagerTest, getLands_ByLoginAndWorld_LandsDoNotExist)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    EXPECT_CALL(*mock, getRecords(transaction, m_login_1, m_world_name_1))
-    .WillOnce(Return(LandRecordMap()));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLands(transaction, m_login_1, m_world_name_1);
-
-    ASSERT_TRUE(lands.empty());
-}
-
-TEST_F(LandManagerTest, getLands_ByLoginAndWorldName_LandsDoExist_OneLand)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
-
-    EXPECT_CALL(*mock, getRecords(transaction, m_login_1, m_world_name_1))
-    .WillOnce(Return(map));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLands(transaction, m_login_1, m_world_name_1);
-
-    ASSERT_FALSE(lands.empty());
-
-    ASSERT_EQ(1, lands.size());
-
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false);
-}
-
-TEST_F(LandManagerTest, getLands_ByLoginAndWorldName_LandsDoExist_ManyLands)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
-
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
-    map.insert(make_pair(m_land_name_2, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_2, true)));
-
-    EXPECT_CALL(*mock, getRecords(transaction, m_login_1, m_world_name_1))
-    .WillOnce(Return(map));
-
-    ILandManagerAccessorAutPtr accessor(mock);
-
-    LandManager manager(accessor);
-
-    LandMap lands = manager.getLands(transaction, m_login_1, m_world_name_1);
-
-    ASSERT_FALSE(lands.empty());
-
-    ASSERT_EQ(2, lands.size());
-
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false);
-    compareLand(lands[m_land_name_2], m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_2, true);
 }
 
 TEST_F(LandManagerTest, markGranted)

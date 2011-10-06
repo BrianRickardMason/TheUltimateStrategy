@@ -25,13 +25,14 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
-#define GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
+#ifndef GAMESERVER_LAND_IGETLANDSOPERATOR_HPP
+#define GAMESERVER_LAND_IGETLANDSOPERATOR_HPP
 
-#include "../../../User/IUserManager.hpp"
-#include "../../../World/IWorldManager.hpp"
-#include "../../ILandManager.hpp"
-#include "IGetLandsByLoginAndWorldNameOperator.hpp"
+#include "../../../Persistency/ITransaction.hpp"
+#include "GetLandsOperatorExitCode.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -39,63 +40,37 @@ namespace Land
 {
 
 /**
- * @brief GetLandsByLoginAndWorldNameOperator.
+ * @brief The interface of GetLandsOperator.
  */
-class GetLandsByLoginAndWorldNameOperator
-    : public IGetLandsByLoginAndWorldNameOperator
+class IGetLandsOperator
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the operator.
-     *
-     * @param a_land_manager  The manager of lands.
-     * @param a_user_manager  The manager of users.
-     * @param a_world_manager The manager of worlds.
+     * @brief Destructs GetLandsOperator.
      */
-    GetLandsByLoginAndWorldNameOperator(
-        ILandManagerShrPtr         a_land_manager,
-        User::IUserManagerShrPtr   a_user_manager,
-        World::IWorldManagerShrPtr a_world_manager
-    );
+    virtual ~IGetLandsOperator(){};
 
     /**
      * @brief Gets lands.
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_world_name  The name of the world.
      *
      * @return The exit code.
      */
-    virtual GetLandsByLoginAndWorldNameOperatorExitCode getLandByLoginAndWorldName(
+    virtual GetLandsOperatorExitCode getLands(
         Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_login,
-        std::string                     const a_world_name
-    ) const;
-
-private:
-    /**
-     * @brief The manager of lands.
-     */
-    ILandManagerShrPtr m_land_manager;
-
-    /**
-     * @brief The manager of users.
-     */
-    User::IUserManagerShrPtr m_user_manager;
-
-    /**
-     * @brief The manager of worlds.
-     */
-    World::IWorldManagerShrPtr m_world_manager;
+        std::string                     const a_login
+    ) const = 0;
 };
 
 /**
- * @brief The auto pointer of GetLandsByLoginAndWorldNameOperator.
+ * @brief The shared pointer of the interface of GetLandsOperator.
  */
-typedef std::auto_ptr<GetLandsByLoginAndWorldNameOperator> GetLandsByLoginAndWorldNameOperatorAutPtr;
+typedef boost::shared_ptr<IGetLandsOperator> IGetLandsOperatorShrPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_GETLANDSBYLOGINANDWORLDNAMEOPERATOR_HPP
+#endif // GAMESERVER_LAND_IGETLANDSOPERATOR_HPP

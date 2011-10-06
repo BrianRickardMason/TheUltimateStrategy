@@ -28,7 +28,7 @@
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioActivateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Land/ScenarioCreateLand.hpp"
-#include "../../../IntegrationCommon/Helpers/Scenarios/Land/ScenarioGetLandsByWorldName.hpp"
+#include "../../../IntegrationCommon/Helpers/Scenarios/Land/ScenarioGetLands.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/User/ScenarioCreateUser.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
@@ -43,9 +43,9 @@ using namespace boost::assign;
 using namespace std;
 
 /**
- * Integration functional tests of: ExecutorGetLandsByWorldName.
+ * Integration functional tests of: ExecutorGetLands.
  */
-TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_LandsDoNotExist)
+TEST_F(IntegrationFunctionalTest, GetLands_LandsDoNotExist)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -66,10 +66,10 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_LandsDoNotExist)
             client,
             IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
-        (IScenarioShrPtr(new ScenarioGetLandsByWorldName(
+        (IScenarioShrPtr(new ScenarioGetLands(
             client,
-            IScenarioActionShrPtr(new ScenarioGetLandsByWorldNameActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioGetLandsByWorldNameVerificationLandsHaveNotBeenGot))));
+            IScenarioActionShrPtr(new ScenarioGetLandsActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioGetLandsVerificationLandsHaveNotBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -77,7 +77,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_LandsDoNotExist)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_OneLand)
+TEST_F(IntegrationFunctionalTest, GetLands_OneLand)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -102,10 +102,10 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_OneLand)
             client,
             IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", 1, "Land")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetLandsByWorldName(
+        (IScenarioShrPtr(new ScenarioGetLands(
             client,
-            IScenarioActionShrPtr(new ScenarioGetLandsByWorldNameActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioGetLandsByWorldNameVerificationLandsHaveBeenGot))));
+            IScenarioActionShrPtr(new ScenarioGetLandsActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioGetLandsVerificationLandsHaveBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -113,7 +113,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_OneLand)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_ManyLands)
+TEST_F(IntegrationFunctionalTest, GetLands_ManyLands)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -146,10 +146,10 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_ManyLands)
             client,
             IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", 1, "Land3")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetLandsByWorldName(
+        (IScenarioShrPtr(new ScenarioGetLands(
             client,
-            IScenarioActionShrPtr(new ScenarioGetLandsByWorldNameActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioGetLandsByWorldNameVerificationLandsHaveBeenGot))));
+            IScenarioActionShrPtr(new ScenarioGetLandsActionSuccess("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioGetLandsVerificationLandsHaveBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -157,7 +157,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_ManyLands)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_AnotherUser)
+TEST_F(IntegrationFunctionalTest, GetLands_AnotherUser)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -186,10 +186,10 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_AnotherUser)
             client,
             IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login1", "Password1", "World", 1, "Land")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetLandsByWorldName(
+        (IScenarioShrPtr(new ScenarioGetLands(
             client,
-            IScenarioActionShrPtr(new ScenarioGetLandsByWorldNameActionSuccess("Login2", "Password2", "World")),
-            IScenarioVerificationShrPtr(new ScenarioGetLandsByWorldNameVerificationLandsHaveNotBeenGot))));
+            IScenarioActionShrPtr(new ScenarioGetLandsActionSuccess("Login2", "Password2")),
+            IScenarioVerificationShrPtr(new ScenarioGetLandsVerificationLandsHaveNotBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -197,7 +197,7 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_AnotherUser)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_Unauthenticated)
+TEST_F(IntegrationFunctionalTest, GetLands_Unauthenticated)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
@@ -218,10 +218,10 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_Unauthenticated)
             client,
             IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
-        (IScenarioShrPtr(new ScenarioGetLandsByWorldName(
+        (IScenarioShrPtr(new ScenarioGetLands(
             client,
-            IScenarioActionShrPtr(new ScenarioGetLandsByWorldNameActionSuccess("Login", "BadPassword", "World")),
-            IScenarioVerificationShrPtr(new ScenarioGetLandsByWorldNameVerificationUnauthenticated))));
+            IScenarioActionShrPtr(new ScenarioGetLandsActionSuccess("Login", "BadPassword")),
+            IScenarioVerificationShrPtr(new ScenarioGetLandsVerificationUnauthenticated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -229,43 +229,15 @@ TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_Unauthenticated)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_InvalidRequest)
+TEST_F(IntegrationFunctionalTest, GetLands_InvalidRequest)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioGetLandsByWorldName(
+        (IScenarioShrPtr(new ScenarioGetLands(
             client,
-            IScenarioActionShrPtr(new ScenarioGetLandsByWorldNameActionInvalidRequest("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioGetLandsByWorldNameVerificationInvalidRequest))));
-
-    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
-    {
-        ASSERT_STREQ("", (*it)->execute());
-    }
-}
-
-TEST_F(IntegrationFunctionalTest, GetLandsByWorldName_EpochIsNotActive)
-{
-    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
-
-    m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioCreateUser(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
-            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioCreateWorld(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioCreateEpoch(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioGetLandsByWorldName(
-            client,
-            IScenarioActionShrPtr(new ScenarioGetLandsByWorldNameActionSuccess("Login", "Password", "World")),
-            IScenarioVerificationShrPtr(new ScenarioGetLandsByWorldNameVerificationEpochIsNotActive))));
+            IScenarioActionShrPtr(new ScenarioGetLandsActionInvalidRequest("Login", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioGetLandsVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {

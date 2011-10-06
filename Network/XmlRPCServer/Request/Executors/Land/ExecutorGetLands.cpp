@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Constants.hpp"
-#include "ExecutorGetLandsByWorldName.hpp"
+#include "ExecutorGetLands.hpp"
 #include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
@@ -48,20 +48,19 @@ namespace Request
 namespace Executors
 {
 
-void ExecutorGetLandsByWorldName::logExecutorStart() const
+void ExecutorGetLands::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetLandsByWorldName.";
+    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetLands.";
 }
 
-bool ExecutorGetLandsByWorldName::getParameters(
+bool ExecutorGetLands::getParameters(
     RequestShrPtr a_request
 )
 {
     try
     {
-        m_login      = a_request->getLoginValue();
-        m_password   = a_request->getPasswordValue();
-        m_world_name = a_request->getParameterValueString("world_name");
+        m_login    = a_request->getLoginValue();
+        m_password = a_request->getPasswordValue();
 
         return true;
     }
@@ -71,63 +70,44 @@ bool ExecutorGetLandsByWorldName::getParameters(
     }
 }
 
-bool ExecutorGetLandsByWorldName::processParameters()
+bool ExecutorGetLands::processParameters()
 {
     return true;
 }
 
-bool ExecutorGetLandsByWorldName::authorize(
+bool ExecutorGetLands::authorize(
     IPersistencyShrPtr a_persistency
 ) const
 {
     return true;
 }
 
-bool ExecutorGetLandsByWorldName::epochIsActive(
+bool ExecutorGetLands::epochIsActive(
     IPersistencyShrPtr a_persistency
 ) const
 {
-    IGetEpochByWorldNameOperatorShrPtr epoch_operator =
-        m_operator_abstract_factory->createGetEpochByWorldNameOperator();
+    return true;
+}
+
+bool ExecutorGetLands::verifyWorldConfiguration(
+    IPersistencyShrPtr a_persistency
+) const
+{
+    return true;
+}
+
+ReplyShrPtr ExecutorGetLands::perform(
+    IPersistencyShrPtr a_persistency
+) const
+{
+    IGetLandsOperatorShrPtr land_operator = m_operator_abstract_factory->createGetLandsOperator();
 
     // The transaction lifetime.
     {
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        GetEpochByWorldNameOperatorExitCode const exit_code =
-            epoch_operator->getEpochByWorldName(transaction, m_world_name);
-
-        if (exit_code.ok())
-        {
-            transaction->commit();
-        }
-
-        return exit_code.m_epoch ? exit_code.m_epoch->getActive() : false;
-    }
-}
-
-bool ExecutorGetLandsByWorldName::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
-) const
-{
-    return true;
-}
-
-ReplyShrPtr ExecutorGetLandsByWorldName::perform(
-    IPersistencyShrPtr a_persistency
-) const
-{
-    IGetLandsByLoginAndWorldNameOperatorShrPtr land_operator =
-        m_operator_abstract_factory->createGetLandsByLoginAndWorldNameOperator();
-
-    // The transaction lifetime.
-    {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
-
-        GetLandsByLoginAndWorldNameOperatorExitCode const exit_code =
-            land_operator->getLandByLoginAndWorldName(transaction, m_user->getLogin(), m_world_name);
+        GetLandsOperatorExitCode const exit_code = land_operator->getLands(transaction, m_user->getLogin());
 
         if (exit_code.ok())
         {
@@ -138,20 +118,20 @@ ReplyShrPtr ExecutorGetLandsByWorldName::perform(
     }
 }
 
-ReplyShrPtr ExecutorGetLandsByWorldName::getBasicReply(
+ReplyShrPtr ExecutorGetLands::getBasicReply(
     unsigned int const a_status
 ) const
 {
     ReplyShrPtr reply = make_shared<Reply>();
 
-    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_LANDS_BY_WORLD_NAME);
+    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_LANDS);
     reply->m_xml_document->getNode("reply")->appendNode("status")->appendAttribute("value")->setValue(a_status);
 
     return reply;
 }
 
-ReplyShrPtr ExecutorGetLandsByWorldName::produceReply(
-    GetLandsByLoginAndWorldNameOperatorExitCode const & a_exit_code
+ReplyShrPtr ExecutorGetLands::produceReply(
+    GetLandsOperatorExitCode const & a_exit_code
 ) const
 {
     ReplyShrPtr reply = getBasicReply(REPLY_STATUS_OK);
@@ -164,20 +144,16 @@ ReplyShrPtr ExecutorGetLandsByWorldName::produceReply(
 
     switch (a_exit_code.m_exit_code)
     {
-    case GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_BEEN_GOT.c_str());
+        case GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_LANDS_LANDS_HAVE_BEEN_GOT.c_str());
             break;
 
-        case GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_WORLDNAME_LANDS_HAVE_NOT_BEEN_GOT.c_str());
+        case GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT:
+            node_message->appendAttribute("value")->setValue(GET_LANDS_LANDS_HAVE_NOT_BEEN_GOT.c_str());
             break;
 
-        case GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_WORLDNAME_UNEXPECTED_ERROR.c_str());
-            break;
-
-        case GET_LANDS_BY_LOGIN_AND_WORLDNAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST:
-            node_message->appendAttribute("value")->setValue(GET_LANDS_BY_LOGIN_AND_WORLDNAME_WORLD_DOES_NOT_EXIST.c_str());
+        case GET_LANDS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
+            node_message->appendAttribute("value")->setValue(GET_LANDS_UNEXPECTED_ERROR.c_str());
             break;
 
         default:

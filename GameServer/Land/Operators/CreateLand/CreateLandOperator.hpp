@@ -68,7 +68,7 @@ public:
      * @param a_login       The login of the user.
      * @param a_world_name  The name of the world.
      * @param a_id_epoch    The identifier of the epoch.
-     * @param a_name        The name of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return The exit code.
      */
@@ -77,7 +77,7 @@ public:
         std::string                     const   a_login,
         std::string                     const   a_world_name,
         Epoch::IDEpoch                  const & a_id_epoch,
-        std::string                     const & a_name
+        std::string                     const   a_land_name
     ) const;
 
 private:

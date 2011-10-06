@@ -161,7 +161,7 @@ ReplyShrPtr ExecutorGetLand::getBasicReply(
 {
     ReplyShrPtr reply = make_shared<Reply>();
 
-    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_LAND_BY_NAME);
+    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_GET_LAND);
     reply->m_xml_document->getNode("reply")->appendNode("status")->appendAttribute("value")->setValue(a_status);
 
     return reply;

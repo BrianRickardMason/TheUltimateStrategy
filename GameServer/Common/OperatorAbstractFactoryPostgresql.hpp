@@ -217,11 +217,11 @@ public:
     virtual Land::IGetLandOperatorShrPtr createGetLandOperator() const;
 
     /**
-     * @brief Creates the get lands by login and world name operator.
+     * @brief Creates the get lands operator.
      *
-     * @return The newly created get lands by login and world name operator.
+     * @return The newly created get lands operator.
      */
-    virtual Land::IGetLandsByLoginAndWorldNameOperatorShrPtr createGetLandsByLoginAndWorldNameOperator() const;
+    virtual Land::IGetLandsOperatorShrPtr createGetLandsOperator() const;
 
     /**
      * @brief Creates the get resource operator.

@@ -56,7 +56,7 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
     string             const   a_login,
     string             const   a_world_name,
     IDEpoch            const & a_id_epoch,
-    string             const & a_name
+    string             const   a_land_name
 ) const
 {
     try
@@ -76,21 +76,13 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
             return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_EPOCH_DOES_NOT_EXIST);
         }
 
-        // Verify if another land of the given name belongs to the user.
-        if (m_land_manager->getLandByLogin(a_transaction, a_login, a_name))
+        // Verify if another land of the given name exists.
+        if (m_land_manager->getLand(a_transaction, a_land_name))
         {
-            return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_BELONGS_TO_THE_USER);
+            return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS);
         }
 
-        // Verify if another land of the given name exists in the world.
-        if (m_land_manager->getLandByWorldName(a_transaction, a_world_name, a_name))
-        {
-            return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS_IN_THE_WORLD);
-        }
-
-        // TODO: Change the exit code since there is no possibility to have two land of the same names.
-
-        bool const result = m_land_manager->createLand(a_transaction, a_login, a_world_name, a_id_epoch, a_name);
+        bool const result = m_land_manager->createLand(a_transaction, a_login, a_world_name, a_id_epoch, a_land_name);
 
         return (result) ? CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED)
                         : CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_CREATED);

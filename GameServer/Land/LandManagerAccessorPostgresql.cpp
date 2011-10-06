@@ -86,51 +86,7 @@ LandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-LandRecordShrPtr LandManagerAccessorPostgresql::getRecordByLogin(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login,
-    string             const a_land_name
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM lands WHERE land_name = "
-                   + backbone_transaction.quote(a_land_name)
-                   + " AND login = " + backbone_transaction.quote(a_login);
-
-    return prepareResultGetRecord(backbone_transaction.exec(query));
-}
-
-LandRecordShrPtr LandManagerAccessorPostgresql::getRecordByWorldName(
-    ITransactionShrPtr       a_transaction,
-    string             const a_world_name,
-    string             const a_land_name
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM lands WHERE land_name = "
-                   + backbone_transaction.quote(a_land_name)
-                   + " AND world_name = " + backbone_transaction.quote(a_world_name);
-
-    return prepareResultGetRecord(backbone_transaction.exec(query));
-}
-
 LandRecordMap LandManagerAccessorPostgresql::getRecords(
-    ITransactionShrPtr a_transaction
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM lands";
-
-    return prepareResultGetRecords(backbone_transaction.exec(query));
-}
-
-LandRecordMap LandManagerAccessorPostgresql::getRecordsByLogin(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
@@ -140,36 +96,6 @@ LandRecordMap LandManagerAccessorPostgresql::getRecordsByLogin(
 
     string query = "SELECT * FROM lands WHERE login = "
                    + backbone_transaction.quote(a_login);
-
-    return prepareResultGetRecords(backbone_transaction.exec(query));
-}
-
-LandRecordMap LandManagerAccessorPostgresql::getRecordsByWorldName(
-    ITransactionShrPtr       a_transaction,
-    string             const a_world_name
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM lands WHERE world_name = "
-                   + backbone_transaction.quote(a_world_name);
-
-    return prepareResultGetRecords(backbone_transaction.exec(query));
-}
-
-LandRecordMap LandManagerAccessorPostgresql::getRecords(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login,
-    string             const a_world_name
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM lands WHERE login = "
-                   + backbone_transaction.quote(a_login)
-                   + " AND world_name = " + backbone_transaction.quote(a_world_name);
 
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }

@@ -208,28 +208,9 @@ private:
 };
 
 /**
- * @brief The "ScenarioCreateLandVerificationAnotherLandOfTheGivenNameBelongsToTheUser" verification.
+ * @brief The "ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists" verification.
  */
-class ScenarioCreateLandVerificationAnotherLandOfTheGivenNameBelongsToTheUser
-    : public IScenarioVerification
-{
-public:
-    /**
-     * @brief Performs the verification.
-     *
-     * @param a_reply The reply to be verified.
-     *
-     * @return An empty "string" on success, a message otherwise.
-     */
-    virtual std::string verify(
-        Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    );
-};
-
-/**
- * @brief The "ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExistsInTheWorld" verification.
- */
-class ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExistsInTheWorld
+class ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists
     : public IScenarioVerification
 {
 public:

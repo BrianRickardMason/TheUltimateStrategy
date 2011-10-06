@@ -184,12 +184,8 @@ ReplyShrPtr ExecutorCreateLand::produceReply(
 
     switch (a_exit_code.m_exit_code)
     {
-        case CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_BELONGS_TO_THE_USER:
-            node_message->appendAttribute("value")->setValue(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_BELONGS_TO_THE_USER.c_str());
-            break;
-
-        case CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS_IN_THE_WORLD:
-            node_message->appendAttribute("value")->setValue(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS_IN_THE_WORLD.c_str());
+        case CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS:
+            node_message->appendAttribute("value")->setValue(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS.c_str());
             break;
 
         case CREATE_LAND_OPERATOR_EXIT_CODE_EPOCH_DOES_NOT_EXIST:
