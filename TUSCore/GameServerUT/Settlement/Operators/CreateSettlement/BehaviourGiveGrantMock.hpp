@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_BEHAVIOURGIVEGRANTMOCK_HPP
 #define GAMESERVER_SETTLEMENT_BEHAVIOURGIVEGRANTMOCK_HPP
 
+#include "../../../../GameServer/Land/LandRecord.hpp"
 #include "../../../../GameServer/Settlement/Operators/CreateSettlement/IBehaviourGiveGrant.hpp"
 #include <gmock/gmock.h>
 

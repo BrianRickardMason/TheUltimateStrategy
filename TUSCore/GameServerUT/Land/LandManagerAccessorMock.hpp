@@ -87,7 +87,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getRecord,
-        LandRecordShrPtr(
+        ILandRecordShrPtr(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
@@ -103,7 +103,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getRecords,
-        LandRecordMap(
+        ILandRecordMap(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_login
         )

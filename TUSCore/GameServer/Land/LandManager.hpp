@@ -130,7 +130,7 @@ private:
      * @return A land.
      */
     ILandShrPtr prepareResultGetLand(
-        LandRecordShrPtr a_record
+        ILandRecordShrPtr a_record
     ) const;
 
     /**
@@ -141,7 +141,7 @@ private:
      * @return A map of lands.
      */
     ILandMap prepareResultGetLands(
-        LandRecordMap a_records
+        ILandRecordMap a_records
     ) const;
 
     /**

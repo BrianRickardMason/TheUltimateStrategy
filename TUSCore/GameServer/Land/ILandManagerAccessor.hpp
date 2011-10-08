@@ -29,7 +29,7 @@
 #define GAMESERVER_LAND_ILANDMANAGERACCESSOR_HPP
 
 #include "../Persistency/ITransaction.hpp"
-#include "LandRecord.hpp"
+#include "ILandRecord.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -88,7 +88,7 @@ public:
      *
      * @return The record of the land, null if not found.
      */
-    virtual LandRecordShrPtr getRecord(
+    virtual ILandRecordShrPtr getRecord(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
@@ -101,7 +101,7 @@ public:
      *
      * @return A map of records of the land, an empty map if not found.
      */
-    virtual LandRecordMap getRecords(
+    virtual ILandRecordMap getRecords(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const = 0;

@@ -48,7 +48,7 @@ public:
      * @param a_record A corresponding record.
      */
     explicit Land(
-        LandRecordShrPtr a_record
+        ILandRecordShrPtr a_record
     );
 
     /**

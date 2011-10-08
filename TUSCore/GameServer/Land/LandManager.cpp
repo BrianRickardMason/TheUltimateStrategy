@@ -106,19 +106,19 @@ void LandManager::markGranted(
 }
 
 ILandShrPtr LandManager::prepareResultGetLand(
-    LandRecordShrPtr a_record
+    ILandRecordShrPtr a_record
 ) const
 {
     return a_record ? ILandShrPtr(new Land(a_record)) : ILandShrPtr();
 }
 
 ILandMap LandManager::prepareResultGetLands(
-    LandRecordMap a_records
+    ILandRecordMap a_records
 ) const
 {
     ILandMap result;
 
-    for (LandRecordMap::iterator it = a_records.begin(); it != a_records.end(); ++it)
+    for (ILandRecordMap::iterator it = a_records.begin(); it != a_records.end(); ++it)
     {
         if (it->second)
         {

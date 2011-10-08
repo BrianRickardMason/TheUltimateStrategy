@@ -28,10 +28,7 @@
 #ifndef GAMESERVER_LAND_LANDRECORD_HPP
 #define GAMESERVER_LAND_LANDRECORD_HPP
 
-#include "../Epoch/IDEpoch.hpp"
-#include <boost/shared_ptr.hpp>
-#include <map>
-#include <string>
+#include "ILandRecord.hpp"
 
 namespace GameServer
 {
@@ -39,13 +36,14 @@ namespace Land
 {
 
 /**
- * @brief The land record.
+ * @brief The record of the land.
  */
 class LandRecord
+    : public ILandRecord
 {
 public:
     /**
-     * @brief Constructs the land record.
+     * @brief Constructs the record of the land.
      *
      * @param a_login      The login of the user.
      * @param a_world_name The name of the world.
@@ -66,35 +64,35 @@ public:
      *
      * @return The login of the user.
      */
-    std::string getLogin() const;
+    virtual std::string getLogin() const;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    std::string getWorldName() const;
+    virtual std::string getWorldName() const;
 
     /**
      * @brief Gets the identifier of the epoch.
      *
      * @return The identifier of the epoch.
      */
-    Epoch::IDEpoch const & getIDEpoch() const;
+    virtual Epoch::IDEpoch const & getIDEpoch() const;
 
     /**
      * @brief Gets the name of the land.
      *
      * @return The name of the land.
      */
-    std::string getLandName() const;
+    virtual std::string getLandName() const;
 
     /**
      * @brief Gets the state of the "granted" value of the land.
      *
      * @return The state of the "granted" value of the land.
      */
-    bool getGranted() const;
+    virtual bool getGranted() const;
 
 private:
     /**
@@ -124,21 +122,6 @@ private:
      */
     bool const m_granted;
 };
-
-/**
- * @brief The shared pointer of the record of the land.
- */
-typedef boost::shared_ptr<LandRecord> LandRecordShrPtr;
-
-/**
- * @brief The pair of the record of the land.
- */
-typedef std::pair<std::string, LandRecordShrPtr> LandRecordPair;
-
-/**
- * @brief The map of the record of the land.
- */
-typedef std::map<std::string, LandRecordShrPtr> LandRecordMap;
 
 } // namespace Land
 } // namespace GameServer

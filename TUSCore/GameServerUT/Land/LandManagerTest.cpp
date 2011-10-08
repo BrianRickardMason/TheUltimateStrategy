@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Land/LandManager.hpp"
+#include "../../GameServer/Land/LandRecord.hpp"
 #include "../Persistency/PersistencyDummy.hpp"
 #include "LandManagerAccessorMock.hpp"
 
@@ -191,7 +192,7 @@ TEST_F(LandManagerTest, getLand_LandDoesNotExist)
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1))
-    .WillOnce(Return(LandRecordShrPtr()));
+    .WillOnce(Return(ILandRecordShrPtr()));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
@@ -209,7 +210,7 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1))
-    .WillOnce(Return(make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, true)));
+    .WillOnce(Return(ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, true))));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
@@ -229,7 +230,7 @@ TEST_F(LandManagerTest, getLands_LandsDoNotExist)
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
-    .WillOnce(Return(LandRecordMap()));
+    .WillOnce(Return(ILandRecordMap()));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
@@ -246,8 +247,8 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
 
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
+    ILandRecordMap map;
+    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
@@ -271,9 +272,9 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
 
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
-    LandRecordMap map;
-    map.insert(make_pair(m_land_name_1, make_shared<LandRecord>(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false)));
-    map.insert(make_pair(m_land_name_2, make_shared<LandRecord>(m_login_1, m_world_name_2, m_id_epoch_2, m_land_name_2, true)));
+    ILandRecordMap map;
+    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_id_epoch_1, m_land_name_1, false))));
+    map.insert(make_pair(m_land_name_2, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_2, m_id_epoch_2, m_land_name_2, true))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));

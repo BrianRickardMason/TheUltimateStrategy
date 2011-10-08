@@ -25,51 +25,77 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "Land.hpp"
+#ifndef GAMESERVER_LAND_ILANDRECORD_HPP
+#define GAMESERVER_LAND_ILANDRECORD_HPP
 
-using namespace GameServer::Epoch;
-using namespace std;
+#include "../Epoch/IDEpoch.hpp"
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
 
 namespace GameServer
 {
 namespace Land
 {
 
-Land::Land(
-    ILandRecordShrPtr a_record
-)
-    : m_login(a_record->getLogin()),
-      m_world_name(a_record->getWorldName()),
-      m_id_epoch(a_record->getIDEpoch()),
-      m_land_name(a_record->getLandName()),
-      m_granted(a_record->getGranted())
+/**
+ * @brief The interface of the record of the land.
+ */
+class ILandRecord
 {
-}
+public:
+    /**
+     * @brief Gets the login of the user.
+     *
+     * @return The login of the user.
+     */
+    virtual std::string getLogin() const = 0;
 
-string Land::getLogin() const
-{
-    return m_login;
-}
+    /**
+     * @brief Gets the name of the world.
+     *
+     * @return The name of the world.
+     */
+    virtual std::string getWorldName() const = 0;
 
-string Land::getWorldName() const
-{
-    return m_world_name;
-}
+    /**
+     * @brief Gets the identifier of the epoch.
+     *
+     * @return The identifier of the epoch.
+     */
+    virtual Epoch::IDEpoch const & getIDEpoch() const = 0;
 
-IDEpoch const & Land::getIDEpoch() const
-{
-    return m_id_epoch;
-}
+    /**
+     * @brief Gets the name of the land.
+     *
+     * @return The name of the land.
+     */
+    virtual std::string getLandName() const = 0;
 
-string Land::getLandName() const
-{
-    return m_land_name;
-}
+    /**
+     * @brief Gets the state of the "granted" value of the land.
+     *
+     * @return The state of the "granted" value of the land.
+     */
+    virtual bool getGranted() const = 0;
+};
 
-bool Land::getGranted() const
-{
-    return m_granted;
-}
+/**
+ * @brief The shared pointer of the interface of the record of the land.
+ */
+typedef boost::shared_ptr<ILandRecord> ILandRecordShrPtr;
+
+/**
+ * @brief The pair of the interface of the record of the land.
+ */
+typedef std::pair<std::string, ILandRecordShrPtr> ILandRecordPair;
+
+/**
+ * @brief The map of the interface of the record of the land.
+ */
+typedef std::map<std::string, ILandRecordShrPtr> ILandRecordMap;
 
 } // namespace Land
 } // namespace GameServer
+
+#endif // GAMESERVER_LAND_ILANDRECORD_HPP

@@ -27,6 +27,7 @@
 
 #include "../Persistency/TransactionPostgresql.hpp"
 #include "LandManagerAccessorPostgresql.hpp"
+#include "LandRecord.hpp"
 
 using namespace GameServer::Epoch;
 using namespace GameServer::Persistency;
@@ -72,7 +73,7 @@ void LandManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-LandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
+ILandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -86,7 +87,7 @@ LandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-LandRecordMap LandManagerAccessorPostgresql::getRecords(
+ILandRecordMap LandManagerAccessorPostgresql::getRecords(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
@@ -114,7 +115,7 @@ void LandManagerAccessorPostgresql::markGranted(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-LandRecordShrPtr LandManagerAccessorPostgresql::prepareResultGetRecord(
+ILandRecordShrPtr LandManagerAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
 {
@@ -135,15 +136,15 @@ LandRecordShrPtr LandManagerAccessorPostgresql::prepareResultGetRecord(
         a_result[0]["land_name"].to(land_name);
         a_result[0]["granted"].to(granted);
 
-        return make_shared<LandRecord>(login, world_name, id_epoch, land_name, granted);
+        return ILandRecordShrPtr(new LandRecord(login, world_name, id_epoch, land_name, granted));
     }
     else
     {
-        return LandRecordShrPtr();
+        return ILandRecordShrPtr();
     }
 }
 
-LandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
+ILandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
     pqxx::result const & a_result
 ) const
 {
@@ -157,7 +158,7 @@ LandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
     string land_name;
     bool granted;
 
-    LandRecordMap records;
+    ILandRecordMap records;
 
     for (pqxx::result::const_iterator it = a_result.begin(); it != a_result.end(); ++it)
     {
@@ -167,8 +168,8 @@ LandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
         it["land_name"].to(land_name);
         it["granted"].to(granted);
 
-        LandRecordShrPtr record = make_shared<LandRecord>(login, world_name, id_epoch, land_name, granted);
-        LandRecordPair pair(land_name, record);
+        ILandRecordShrPtr record = ILandRecordShrPtr(new LandRecord(login, world_name, id_epoch, land_name, granted));
+        ILandRecordPair pair(land_name, record);
         records.insert(pair);
     }
 

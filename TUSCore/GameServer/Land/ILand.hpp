@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_ILAND_HPP
 #define GAMESERVER_LAND_ILAND_HPP
 
-#include "LandRecord.hpp"
+#include "ILandRecord.hpp"
 
 namespace GameServer
 {

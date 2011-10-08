@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Land/Land.hpp"
+#include "../../GameServer/Land/LandRecord.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Epoch;
@@ -69,7 +70,7 @@ protected:
     /**
      * @brief Test constants: the record of the land.
      */
-    LandRecordShrPtr m_land_record;
+    ILandRecordShrPtr m_land_record;
 
     /**
      * @brief Test constants: the land.
