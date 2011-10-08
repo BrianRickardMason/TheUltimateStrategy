@@ -58,10 +58,14 @@ GetSettlementsOperatorExitCode GetSettlementsOperator::getSettlements(
             return GetSettlementsOperatorExitCode(GET_SETTLEMENTS_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }
 
-        SettlementMap const settlements = m_settlement_manager->getSettlements(a_transaction, a_land_name);
+        ISettlementMap const settlements = m_settlement_manager->getSettlements(a_transaction, a_land_name);
 
-        return (!settlements.empty()) ? GetSettlementsOperatorExitCode(GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_BEEN_GOT, settlements)
-                                      : GetSettlementsOperatorExitCode(GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_NOT_BEEN_GOT, settlements);
+        return (!settlements.empty()) ? GetSettlementsOperatorExitCode(
+                                            GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_BEEN_GOT,
+                                            settlements)
+                                      : GetSettlementsOperatorExitCode(
+                                            GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_NOT_BEEN_GOT,
+                                            settlements);
     }
     catch (...)
     {

@@ -96,9 +96,9 @@ bool TurnOperator::executeTurn(
         return false;
     }
 
-    SettlementMap settlements = m_settlement_manager->getSettlements(a_transaction, a_land_name);
+    ISettlementMap settlements = m_settlement_manager->getSettlements(a_transaction, a_land_name);
 
-    for (SettlementMap::iterator it = settlements.begin(); it != settlements.end(); ++it)
+    for (ISettlementMap::iterator it = settlements.begin(); it != settlements.end(); ++it)
     {
         bool const result = executeTurnSettlement(a_transaction, it->second->getSettlementName());
 

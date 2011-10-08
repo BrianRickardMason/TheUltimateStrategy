@@ -44,7 +44,8 @@ protected:
     SettlementTest()
         : m_land_name("Land"),
           m_settlement_name("Settlement"),
-          m_settlement(SettlementRecord(m_land_name, m_settlement_name))
+          m_settlement_record(new SettlementRecord(m_land_name, m_settlement_name)),
+          m_settlement(m_settlement_record)
     {
     }
 
@@ -59,18 +60,19 @@ protected:
     string m_settlement_name;
 
     /**
+     * @brief Test constants: the record of the settlement.
+     */
+    SettlementRecordShrPtr m_settlement_record;
+
+    /**
      * @brief Test constants: the settlement.
      */
     Settlement m_settlement;
 };
 
-TEST_F(SettlementTest, Settlement)
+TEST_F(SettlementTest, CtorDoesNotThrow)
 {
-    SettlementRecord record(m_land_name, m_settlement_name);
-    Settlement settlement(record);
-
-    ASSERT_STREQ(m_land_name.c_str(), record.getLandName().c_str());
-    ASSERT_STREQ(m_settlement_name.c_str(), settlement.getSettlementName().c_str());
+    ASSERT_NO_THROW(Settlement settlement(m_settlement_record));
 }
 
 TEST_F(SettlementTest, GetLandNameReturnsProperValue)

@@ -137,10 +137,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    SettlementRecord settlement_record(m_land_name, m_settlement_name);
+    SettlementRecordShrPtr settlement_record =
+        SettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
-    .WillOnce(Return(make_shared<Settlement>(settlement_record)));
+    .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
     CreateSettlementOperator create_settlement_operator((ILandManagerShrPtr(m_land_manager)),
                                                         (ISettlementManagerShrPtr(m_settlement_manager)),
@@ -161,7 +162,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementHasNotBeenCreate
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
-    .WillOnce(Return(SettlementShrPtr()));
+    .WillOnce(Return(ISettlementShrPtr()));
 
     EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
     .WillOnce(Return(false));
@@ -185,7 +186,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasBeenGivenSettlemen
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
-    .WillOnce(Return(SettlementShrPtr()));
+    .WillOnce(Return(ISettlementShrPtr()));
 
     EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
     .WillOnce(Return(true));
@@ -209,8 +210,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGetSet
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
-    .WillOnce(Return(SettlementShrPtr()))
-    .WillOnce(Return(SettlementShrPtr()));
+    .WillOnce(Return(ISettlementShrPtr()))
+    .WillOnce(Return(ISettlementShrPtr()));
 
     EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
     .WillOnce(Return(true));
@@ -233,11 +234,12 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGiveTh
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    SettlementRecord settlement_record(m_land_name, m_settlement_name);
+    SettlementRecordShrPtr settlement_record =
+        SettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
-    .WillOnce(Return(SettlementShrPtr()))
-    .WillOnce(Return(make_shared<Settlement>(settlement_record)));
+    .WillOnce(Return(ISettlementShrPtr()))
+    .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
     EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
     .WillOnce(Return(true));
@@ -263,11 +265,12 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    SettlementRecord settlement_record(m_land_name, m_settlement_name);
+    SettlementRecordShrPtr settlement_record =
+        SettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
-    .WillOnce(Return(SettlementShrPtr()))
-    .WillOnce(Return(make_shared<Settlement>(settlement_record)));
+    .WillOnce(Return(ISettlementShrPtr()))
+    .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
     EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
     .WillOnce(Return(true));

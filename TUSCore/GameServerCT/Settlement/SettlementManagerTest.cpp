@@ -89,9 +89,9 @@ protected:
      * @param a_settlement_name The expected name of the settlement.
      */
     void compareSettlement(
-        SettlementShrPtr       a_settlement,
-        string           const a_land_name,
-        string           const a_settlement_name
+        ISettlementShrPtr       a_settlement,
+        string            const a_land_name,
+        string            const a_settlement_name
     )
     {
         ASSERT_STREQ(a_land_name.c_str(), a_settlement->getLandName().c_str());
@@ -296,7 +296,7 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        SettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_1);
+        ISettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_1);
 
         ASSERT_TRUE(settlement != NULL);
         compareSettlement(settlement, m_land_name_1, m_settlement_name_1);
@@ -318,7 +318,7 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist_MissingSettlemen
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        SettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_2);
+        ISettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_2);
 
         ASSERT_TRUE(settlement == NULL);
     }
@@ -330,7 +330,7 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        SettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_1);
+        ISettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_1);
 
         ASSERT_TRUE(settlement == NULL);
     }
@@ -345,7 +345,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        SettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_1);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_1);
 
         ASSERT_TRUE(settlements.empty());
     }
@@ -367,7 +367,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        SettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_1);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_1);
 
         ASSERT_FALSE(settlements.empty());
         ASSERT_EQ(2, settlements.size());
@@ -394,7 +394,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_LandDoesNotHaveA
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        SettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_2);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_2);
 
         ASSERT_TRUE(settlements.empty());
     }
@@ -417,7 +417,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_MissingLandName)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        SettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_3);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_3);
 
         ASSERT_TRUE(settlements.empty());
     }

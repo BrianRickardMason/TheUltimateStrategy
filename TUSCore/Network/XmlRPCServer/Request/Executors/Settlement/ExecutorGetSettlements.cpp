@@ -201,7 +201,7 @@ ReplyShrPtr ExecutorGetSettlements::produceReply(
 
     IXmlNodeShrPtr node_objects = node_reply->appendNode("objects");
 
-    for (SettlementMap::const_iterator it = a_exit_code.m_settlements.begin();
+    for (ISettlementMap::const_iterator it = a_exit_code.m_settlements.begin();
          it != a_exit_code.m_settlements.end();
          ++it)
     {

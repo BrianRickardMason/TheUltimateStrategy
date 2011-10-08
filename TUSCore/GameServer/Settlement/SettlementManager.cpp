@@ -78,7 +78,7 @@ bool SettlementManager::deleteSettlement(
     }
 }
 
-SettlementShrPtr SettlementManager::getSettlement(
+ISettlementShrPtr SettlementManager::getSettlement(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -86,7 +86,7 @@ SettlementShrPtr SettlementManager::getSettlement(
     return prepareResultGetSettlement(m_accessor->getRecord(a_transaction, a_settlement_name));
 }
 
-SettlementMap SettlementManager::getSettlements(
+ISettlementMap SettlementManager::getSettlements(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -94,25 +94,25 @@ SettlementMap SettlementManager::getSettlements(
     return prepareResultGetSettlements(m_accessor->getRecords(a_transaction, a_land_name));
 }
 
-SettlementShrPtr SettlementManager::prepareResultGetSettlement(
+ISettlementShrPtr SettlementManager::prepareResultGetSettlement(
     SettlementRecordShrPtr a_record
 ) const
 {
-    return a_record ? make_shared<Settlement>(*a_record) : SettlementShrPtr();
+    return a_record ? ISettlementShrPtr(new Settlement(a_record)) : ISettlementShrPtr();
 }
 
-SettlementMap SettlementManager::prepareResultGetSettlements(
+ISettlementMap SettlementManager::prepareResultGetSettlements(
     SettlementRecordMap a_records
 ) const
 {
-    SettlementMap result;
+    ISettlementMap result;
 
     for (SettlementRecordMap::iterator it = a_records.begin(); it != a_records.end(); ++it)
     {
         if (it->second)
         {
-            SettlementShrPtr settlement = make_shared<Settlement>(*it->second);
-            SettlementPair pair(it->second->getSettlementName(), settlement);
+            ISettlementShrPtr settlement = ISettlementShrPtr(new Settlement(it->second));
+            ISettlementPair pair(it->second->getSettlementName(), settlement);
             result.insert(pair);
         }
     }

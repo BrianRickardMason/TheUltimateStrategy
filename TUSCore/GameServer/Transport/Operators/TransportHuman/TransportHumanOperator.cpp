@@ -65,7 +65,7 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
         }
 
         // Verify if the source settlement exists.
-        SettlementShrPtr settlement_source =
+        ISettlementShrPtr settlement_source =
             m_settlement_manager->getSettlement(a_transaction, a_settlement_name_source);
 
         if (!settlement_source)
@@ -74,7 +74,7 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
         }
 
         // Verify if the destination settlement exists.
-        SettlementShrPtr settlement_destination =
+        ISettlementShrPtr settlement_destination =
             m_settlement_manager->getSettlement(a_transaction, a_settlement_name_destination);
 
         if (!settlement_destination)

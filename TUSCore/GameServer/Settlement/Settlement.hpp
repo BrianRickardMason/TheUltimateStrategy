@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_SETTLEMENT_HPP
 #define GAMESERVER_SETTLEMENT_SETTLEMENT_HPP
 
-#include "SettlementRecord.hpp"
+#include "ISettlement.hpp"
 
 namespace GameServer
 {
@@ -39,6 +39,7 @@ namespace Settlement
  * @brief The settlement.
  */
 class Settlement
+    : public ISettlement
 {
 public:
     /**
@@ -47,7 +48,7 @@ public:
      * @param a_record A corresponding record.
      */
     explicit Settlement(
-        SettlementRecord const & a_record
+        SettlementRecordShrPtr a_record
     );
 
     /**
@@ -55,14 +56,14 @@ public:
      *
      * @return The name of the land.
      */
-    std::string getLandName() const;
+    virtual std::string getLandName() const;
 
     /**
      * @brief Gets the name of the settlement.
      *
      * @return The name of the settlement.
      */
-    std::string getSettlementName() const;
+    virtual std::string getSettlementName() const;
 
 private:
     /**
@@ -75,21 +76,6 @@ private:
      */
     std::string const m_settlement_name;
 };
-
-/**
- * @brief A shared pointer of settlement.
- */
-typedef boost::shared_ptr<Settlement> SettlementShrPtr;
-
-/**
- * @brief A pair of settlement.
- */
-typedef std::pair<std::string, SettlementShrPtr> SettlementPair;
-
-/**
- * @brief A map of settlement.
- */
-typedef std::map<std::string, SettlementShrPtr> SettlementMap;
 
 } // namespace Settlement
 } // namespace GameServer

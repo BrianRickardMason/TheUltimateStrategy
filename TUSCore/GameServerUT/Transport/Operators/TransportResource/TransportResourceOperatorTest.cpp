@@ -65,9 +65,9 @@ protected:
           m_settlement_name_3("Settlement3"),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
-          m_settlement_1(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_settlement_name_1))),
-          m_settlement_2(make_shared<Settlement>(SettlementRecord(m_land_name_1, m_settlement_name_2))),
-          m_settlement_3(make_shared<Settlement>(SettlementRecord(m_land_name_2, m_settlement_name_3)))
+          m_settlement_1(new Settlement(SettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_1)))),
+          m_settlement_2(new Settlement(SettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_2)))),
+          m_settlement_3(new Settlement(SettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_3))))
     {
     }
 
@@ -103,9 +103,9 @@ protected:
     /**
      * @brief Test constants: settlements.
      */
-    SettlementShrPtr m_settlement_1,
-                     m_settlement_2,
-                     m_settlement_3;
+    ISettlementShrPtr m_settlement_1,
+                      m_settlement_2,
+                      m_settlement_3;
 };
 
 /**
@@ -140,7 +140,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_SourceSettlementDoesNotE
     ITransactionShrPtr transaction(new TransactionDummy);
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
-    .WillOnce(Return(SettlementShrPtr()));
+    .WillOnce(Return(ISettlementShrPtr()));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
                                                           (ISettlementManagerShrPtr(m_settlement_manager)));
@@ -161,7 +161,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_DestinationSettlementDoe
     .WillOnce(Return(m_settlement_1));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
-    .WillOnce(Return(SettlementShrPtr()));
+    .WillOnce(Return(ISettlementShrPtr()));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
                                                           (ISettlementManagerShrPtr(m_settlement_manager)));

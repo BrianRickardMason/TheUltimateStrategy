@@ -70,9 +70,9 @@ protected:
      * @param a_settlement_name The expected name of the settlement.
      */
     void compareSettlement(
-        SettlementShrPtr       a_settlement,
-        string           const a_land_name,
-        string           const a_settlement_name
+        ISettlementShrPtr       a_settlement,
+        string            const a_land_name,
+        string            const a_settlement_name
     )
     {
         ASSERT_STREQ(a_land_name.c_str(), a_settlement->getLandName().c_str());
@@ -183,7 +183,7 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesNotExist)
 
     SettlementManager manager(accessor);
 
-    SettlementShrPtr settlement = manager.getSettlement(transaction, m_settlement_name_1);
+    ISettlementShrPtr settlement = manager.getSettlement(transaction, m_settlement_name_1);
 
     ASSERT_TRUE(settlement == NULL);
 }
@@ -201,7 +201,7 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist)
 
     SettlementManager manager(accessor);
 
-    SettlementShrPtr settlement = manager.getSettlement(transaction, m_settlement_name_1);
+    ISettlementShrPtr settlement = manager.getSettlement(transaction, m_settlement_name_1);
 
     ASSERT_TRUE(settlement != NULL);
 }
@@ -219,7 +219,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
 
     SettlementManager manager(accessor);
 
-    SettlementMap settlements = manager.getSettlements(transaction, m_land_name_1);
+    ISettlementMap settlements = manager.getSettlements(transaction, m_land_name_1);
 
     ASSERT_TRUE(settlements.empty());
 }
@@ -240,7 +240,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
 
     SettlementManager manager(accessor);
 
-    SettlementMap settlements = manager.getSettlements(transaction, m_land_name_1);
+    ISettlementMap settlements = manager.getSettlements(transaction, m_land_name_1);
 
     ASSERT_FALSE(settlements.empty());
 
@@ -266,7 +266,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
 
     SettlementManager manager(accessor);
 
-    SettlementMap settlements = manager.getSettlements(transaction, m_land_name_2);
+    ISettlementMap settlements = manager.getSettlements(transaction, m_land_name_2);
 
     ASSERT_FALSE(settlements.empty());
 

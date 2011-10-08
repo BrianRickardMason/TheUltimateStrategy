@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOREXITCODE_HPP
 #define GAMESERVER_SETTLEMENT_GETSETTLEMENTOPERATOREXITCODE_HPP
 
-#include "../../Settlement.hpp"
+#include "../../ISettlement.hpp"
 
 namespace GameServer
 {
@@ -57,7 +57,7 @@ public:
         unsigned short int const a_exit_code
     )
         : m_exit_code(a_exit_code),
-          m_settlement(SettlementShrPtr())
+          m_settlement(ISettlementShrPtr())
     {
     }
 
@@ -69,7 +69,7 @@ public:
      */
     GetSettlementOperatorExitCode(
         unsigned short int const a_exit_code,
-        SettlementShrPtr         const a_settlement
+        ISettlementShrPtr  const a_settlement
     )
         : m_exit_code(a_exit_code),
           m_settlement(a_settlement)
@@ -94,7 +94,7 @@ public:
     /**
      * @brief The settlement.
      */
-    SettlementShrPtr const m_settlement;
+    ISettlementShrPtr const m_settlement;
 };
 
 } // namespace Settlement

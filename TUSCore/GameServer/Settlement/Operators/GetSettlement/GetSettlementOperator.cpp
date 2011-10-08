@@ -49,7 +49,7 @@ GetSettlementOperatorExitCode GetSettlementOperator::getSettlement(
 {
     try
     {
-        SettlementShrPtr const settlement = m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
+        ISettlementShrPtr const settlement = m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
 
         return (settlement) ? GetSettlementOperatorExitCode(
                                   GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT,

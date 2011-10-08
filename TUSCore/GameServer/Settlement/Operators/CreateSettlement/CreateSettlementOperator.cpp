@@ -64,7 +64,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         }
 
         // Verify if settlement of that name exists.
-        SettlementShrPtr const settlement =
+        ISettlementShrPtr const settlement =
             m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
 
         if (settlement)
@@ -83,7 +83,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         if (!land->getGranted())
         {
             // Get the settlement.
-            SettlementShrPtr const settlement =
+            ISettlementShrPtr const settlement =
                 m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
 
             if (!settlement)

@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTSOPERATOREXITCODE_HPP
-#define GAMESERVER_SETTLEMENT_GETSETTLEMENTSOPERATOREXITCODE_HPP
+#ifndef GAMESERVER_SETTLEMENT_ISETTLEMENT_HPP
+#define GAMESERVER_SETTLEMENT_ISETTLEMENT_HPP
 
-#include "../../ISettlement.hpp"
+#include "SettlementRecord.hpp"
 
 namespace GameServer
 {
@@ -36,68 +36,47 @@ namespace Settlement
 {
 
 /**
- * @brief Available exit codes.
+ * @brief The interface of the settlement.
  */
-unsigned short int const GET_SETTLEMENTS_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST           = 1;
-unsigned short int const GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_BEEN_GOT     = 2;
-unsigned short int const GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_NOT_BEEN_GOT = 3;
-unsigned short int const GET_SETTLEMENTS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR              = 4;
-
-/**
- * @brief The exit code of GetSettlementsOperator.
- */
-class GetSettlementsOperatorExitCode
+class ISettlement
 {
 public:
     /**
-     * @brief Constructs the exit code.
+     * @brief Destructs the interface of the settlement.
+     */
+    virtual ~ISettlement(){}
+
+    /**
+     * @brief Gets the name of the land.
      *
-     * @param a_exit_code The value of the exit code.
+     * @return The name of the land.
      */
-    GetSettlementsOperatorExitCode(
-        unsigned short int const a_exit_code
-    )
-        : m_exit_code(a_exit_code)
-    {
-    }
+    virtual std::string getLandName() const = 0;
 
     /**
-     * @brief Constructs the exit code.
+     * @brief Gets the name of the settlement.
      *
-     * @param a_exit_code The value of the exit code.
-     * @param a_settlements     The settlements.
+     * @return The name of the settlement.
      */
-    GetSettlementsOperatorExitCode(
-        unsigned short int const   a_exit_code,
-        ISettlementMap     const & a_settlements
-    )
-        : m_exit_code(a_exit_code),
-          m_settlements(a_settlements)
-    {
-    }
-
-    /**
-     * @brief The "ok" method.
-     *
-     * @return False (a read-only operator).
-     */
-    bool ok() const
-    {
-        return false;
-    }
-
-    /**
-     * @brief The exit code.
-     */
-    unsigned short int const m_exit_code;
-
-    /**
-     * @brief The settlements.
-     */
-    ISettlementMap const m_settlements;
+    virtual std::string getSettlementName() const = 0;
 };
+
+/**
+ * @brief The shared pointer of the interface of the settlement.
+ */
+typedef boost::shared_ptr<ISettlement> ISettlementShrPtr;
+
+/**
+ * @brief The pair of the interface of the settlement.
+ */
+typedef std::pair<std::string, ISettlementShrPtr> ISettlementPair;
+
+/**
+ * @brief The map of the interface of the settlement.
+ */
+typedef std::map<std::string, ISettlementShrPtr> ISettlementMap;
 
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_GETSETTLEMENTSOPERATOREXITCODE_HPP
+#endif // GAMESERVER_SETTLEMENT_ISETTLEMENT_HPP
