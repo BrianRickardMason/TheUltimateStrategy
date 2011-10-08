@@ -83,7 +83,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getRecord,
-        SettlementRecordShrPtr(
+        ISettlementRecordShrPtr(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )
@@ -99,7 +99,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getRecords,
-        SettlementRecordMap(
+        ISettlementRecordMap(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )

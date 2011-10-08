@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Settlement/Settlement.hpp"
+#include "../../GameServer/Settlement/SettlementRecord.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Settlement;
@@ -62,7 +63,7 @@ protected:
     /**
      * @brief Test constants: the record of the settlement.
      */
-    SettlementRecordShrPtr m_settlement_record;
+    ISettlementRecordShrPtr m_settlement_record;
 
     /**
      * @brief Test constants: the settlement.

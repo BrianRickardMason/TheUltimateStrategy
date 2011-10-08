@@ -95,19 +95,19 @@ ISettlementMap SettlementManager::getSettlements(
 }
 
 ISettlementShrPtr SettlementManager::prepareResultGetSettlement(
-    SettlementRecordShrPtr a_record
+    ISettlementRecordShrPtr a_record
 ) const
 {
     return a_record ? ISettlementShrPtr(new Settlement(a_record)) : ISettlementShrPtr();
 }
 
 ISettlementMap SettlementManager::prepareResultGetSettlements(
-    SettlementRecordMap a_records
+    ISettlementRecordMap a_records
 ) const
 {
     ISettlementMap result;
 
-    for (SettlementRecordMap::iterator it = a_records.begin(); it != a_records.end(); ++it)
+    for (ISettlementRecordMap::iterator it = a_records.begin(); it != a_records.end(); ++it)
     {
         if (it->second)
         {

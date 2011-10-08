@@ -28,6 +28,7 @@
 #include "../../../../GameServer/Common/IDHolder.hpp"
 #include "../../../../GameServer/Human/Key.hpp"
 #include "../../../../GameServer/Human/Volume.hpp"
+#include "../../../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../../../../GameServer/Transport/Operators/TransportHuman/TransportHumanOperator.hpp"
 #include "../../../Human/HumanManagerMock.hpp"
 #include "../../../Persistency/TransactionDummy.hpp"
@@ -65,9 +66,9 @@ protected:
           m_settlement_name_3("Settlement3"),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
-          m_settlement_1(new Settlement(SettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_1)))),
-          m_settlement_2(new Settlement(SettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_2)))),
-          m_settlement_3(new Settlement(SettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_3))))
+          m_settlement_1(new Settlement(ISettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_1)))),
+          m_settlement_2(new Settlement(ISettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_2)))),
+          m_settlement_3(new Settlement(ISettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_3))))
     {
     }
 

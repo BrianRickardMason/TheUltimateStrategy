@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperator.hpp"
+#include "../../../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../../../Land/LandManagerMock.hpp"
 #include "../../../Persistency/TransactionDummy.hpp"
 #include "../../SettlementManagerMock.hpp"
@@ -137,8 +138,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    SettlementRecordShrPtr settlement_record =
-        SettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
+    ISettlementRecordShrPtr settlement_record =
+        ISettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
@@ -234,8 +235,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGiveTh
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    SettlementRecordShrPtr settlement_record =
-        SettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
+    ISettlementRecordShrPtr settlement_record =
+        ISettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()))
@@ -265,8 +266,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    SettlementRecordShrPtr settlement_record =
-        SettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
+    ISettlementRecordShrPtr settlement_record =
+        ISettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()))

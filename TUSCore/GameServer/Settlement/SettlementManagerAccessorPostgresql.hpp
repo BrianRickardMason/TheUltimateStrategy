@@ -75,7 +75,7 @@ public:
      *
      * @return The record of the settlement, null if not found.
      */
-    virtual SettlementRecordShrPtr getRecord(
+    virtual ISettlementRecordShrPtr getRecord(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const a_settlement_name
     ) const;
@@ -88,7 +88,7 @@ public:
      *
      * @return The map of settlement records, an empty map if not found.
      */
-    virtual SettlementRecordMap getRecords(
+    virtual ISettlementRecordMap getRecords(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
@@ -101,7 +101,7 @@ private:
      *
      * @return A settlement record.
      */
-    SettlementRecordShrPtr prepareResultGetRecord(
+    ISettlementRecordShrPtr prepareResultGetRecord(
         pqxx::result const & a_result
     ) const;
 
@@ -112,7 +112,7 @@ private:
      *
      * @return A map of settlement records.
      */
-    SettlementRecordMap prepareResultGetRecords(
+    ISettlementRecordMap prepareResultGetRecords(
         pqxx::result const & a_result
     ) const;
 };

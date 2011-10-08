@@ -29,7 +29,7 @@
 #define GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGERACCESSOR_HPP
 
 #include "../Persistency/ITransaction.hpp"
-#include "SettlementRecord.hpp"
+#include "ISettlementRecord.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -85,7 +85,7 @@ public:
      *
      * @return The record of the settlement, null if not found.
      */
-    virtual SettlementRecordShrPtr getRecord(
+    virtual ISettlementRecordShrPtr getRecord(
         Persistency::ITransactionShrPtr         a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
@@ -98,7 +98,7 @@ public:
      *
      * @return The map of settlement records, an empty map if not found.
      */
-    virtual SettlementRecordMap getRecords(
+    virtual ISettlementRecordMap getRecords(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;

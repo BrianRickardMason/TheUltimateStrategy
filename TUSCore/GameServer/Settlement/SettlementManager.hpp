@@ -115,7 +115,7 @@ private:
      * @return A settlement.
      */
     ISettlementShrPtr prepareResultGetSettlement(
-        SettlementRecordShrPtr a_record
+        ISettlementRecordShrPtr a_record
     ) const;
 
     /**
@@ -126,7 +126,7 @@ private:
      * @return A map of settlements.
      */
     ISettlementMap prepareResultGetSettlements(
-        SettlementRecordMap a_records
+        ISettlementRecordMap a_records
     ) const;
 
     /**

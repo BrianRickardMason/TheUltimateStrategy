@@ -35,7 +35,7 @@ namespace Settlement
 {
 
 Settlement::Settlement(
-    SettlementRecordShrPtr a_record
+    ISettlementRecordShrPtr a_record
 )
     : m_land_name(a_record->getLandName()),
       m_settlement_name(a_record->getSettlementName())

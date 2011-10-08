@@ -64,12 +64,9 @@ protected:
     SettlementRecord m_record;
 };
 
-TEST_F(SettlementRecordTest, SettlementRecord)
+TEST_F(SettlementRecordTest, CtorDoesNotThrow)
 {
-    SettlementRecord record(m_land_name, m_settlement_name);
-
-    ASSERT_STREQ(m_land_name.c_str(), record.getLandName().c_str());
-    ASSERT_STREQ(m_settlement_name.c_str(), record.getSettlementName().c_str());
+    ASSERT_NO_THROW(SettlementRecord record(m_land_name, m_settlement_name));
 }
 
 TEST_F(SettlementRecordTest, GetLandNameReturnsProperValue)

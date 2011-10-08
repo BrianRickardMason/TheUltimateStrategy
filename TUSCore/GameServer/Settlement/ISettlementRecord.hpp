@@ -25,10 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_SETTLEMENT_HPP
-#define GAMESERVER_SETTLEMENT_SETTLEMENT_HPP
+#ifndef GAMESERVER_SETTLEMENT_ISETTLEMENTRECORD_HPP
+#define GAMESERVER_SETTLEMENT_ISETTLEMENTRECORD_HPP
 
-#include "ISettlement.hpp"
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
 
 namespace GameServer
 {
@@ -36,48 +38,47 @@ namespace Settlement
 {
 
 /**
- * @brief The settlement.
+ * @brief The interface of the record of the settlement.
  */
-class Settlement
-    : public ISettlement
+class ISettlementRecord
 {
 public:
     /**
-     * @brief Constructs the settlement.
-     *
-     * @param a_record A corresponding record.
+     * @brief Destructs the interface of the record of the settlement.
      */
-    explicit Settlement(
-        ISettlementRecordShrPtr a_record
-    );
+    virtual ~ISettlementRecord(){}
 
     /**
      * @brief Gets the name of the land.
      *
      * @return The name of the land.
      */
-    virtual std::string getLandName() const;
+    virtual std::string getLandName() const = 0;
 
     /**
      * @brief Gets the name of the settlement.
      *
      * @return The name of the settlement.
      */
-    virtual std::string getSettlementName() const;
-
-private:
-    /**
-     * @brief The name of the land.
-     */
-    std::string const m_land_name;
-
-    /**
-     * @brief The name of the settlement.
-     */
-    std::string const m_settlement_name;
+    virtual std::string getSettlementName() const = 0;
 };
+
+/**
+ * @brief The shared pointer of the interface of the record of the settlement.
+ */
+typedef boost::shared_ptr<ISettlementRecord> ISettlementRecordShrPtr;
+
+/**
+ * @brief The pair of the interface of the record of the settlement.
+ */
+typedef std::pair<std::string, ISettlementRecordShrPtr> ISettlementRecordPair;
+
+/**
+ * @brief The map of the interface of the record of the settlement.
+ */
+typedef std::map<std::string, ISettlementRecordShrPtr> ISettlementRecordMap;
 
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_SETTLEMENT_HPP
+#endif // GAMESERVER_SETTLEMENT_ISETTLEMENTRECORD_HPP

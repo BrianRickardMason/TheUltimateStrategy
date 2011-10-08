@@ -27,6 +27,7 @@
 
 #include "../Persistency/TransactionPostgresql.hpp"
 #include "SettlementManagerAccessorPostgresql.hpp"
+#include "SettlementRecord.hpp"
 
 using namespace GameServer::Persistency;
 using namespace boost;
@@ -67,7 +68,7 @@ void SettlementManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-SettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
+ISettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -81,7 +82,7 @@ SettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-SettlementRecordMap SettlementManagerAccessorPostgresql::getRecords(
+ISettlementRecordMap SettlementManagerAccessorPostgresql::getRecords(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -94,7 +95,7 @@ SettlementRecordMap SettlementManagerAccessorPostgresql::getRecords(
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }
 
-SettlementRecordShrPtr SettlementManagerAccessorPostgresql::prepareResultGetRecord(
+ISettlementRecordShrPtr SettlementManagerAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
 {
@@ -106,30 +107,30 @@ SettlementRecordShrPtr SettlementManagerAccessorPostgresql::prepareResultGetReco
         a_result[0]["land_name"].to(land_name);
         a_result[0]["settlement_name"].to(settlement_name);
 
-        return make_shared<SettlementRecord>(land_name, settlement_name);
+        return ISettlementRecordShrPtr(new SettlementRecord(land_name, settlement_name));
     }
     else
     {
-        return SettlementRecordShrPtr();
+        return ISettlementRecordShrPtr();
     }
 }
 
-SettlementRecordMap SettlementManagerAccessorPostgresql::prepareResultGetRecords(
+ISettlementRecordMap SettlementManagerAccessorPostgresql::prepareResultGetRecords(
     pqxx::result const & a_result
 ) const
 {
     string land_name;
     string settlement_name;
 
-    SettlementRecordMap records;
+    ISettlementRecordMap records;
 
     for (pqxx::result::const_iterator it = a_result.begin(); it != a_result.end(); ++it)
     {
         it["land_name"].to(land_name);
         it["settlement_name"].to(settlement_name);
 
-        SettlementRecordShrPtr record = make_shared<SettlementRecord>(land_name, settlement_name);
-        SettlementRecordPair pair(settlement_name, record);
+        ISettlementRecordShrPtr record = ISettlementRecordShrPtr(new SettlementRecord(land_name, settlement_name));
+        ISettlementRecordPair pair(settlement_name, record);
         records.insert(pair);
     }
 

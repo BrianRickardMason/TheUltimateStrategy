@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Land/LandRecord.hpp"
 #include "../../GameServer/Settlement/SettlementManager.hpp"
+#include "../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../Land/LandManagerMock.hpp"
 #include "../Persistency/TransactionDummy.hpp"
 #include "Operators/CreateSettlement/BehaviourGiveGrantMock.hpp"
@@ -177,7 +178,7 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesNotExist)
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_settlement_name_1))
-    .WillOnce(Return(SettlementRecordShrPtr()));
+    .WillOnce(Return(ISettlementRecordShrPtr()));
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
@@ -195,7 +196,7 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist)
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_settlement_name_1))
-    .WillOnce(Return(make_shared<SettlementRecord>(m_land_name_1, m_settlement_name_1)));
+    .WillOnce(Return(ISettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_1))));
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
@@ -213,7 +214,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(transaction, m_land_name_1))
-    .WillOnce(Return(SettlementRecordMap()));
+    .WillOnce(Return(ISettlementRecordMap()));
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
@@ -230,8 +231,8 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
 
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
-    SettlementRecordMap map;
-    map.insert(make_pair(m_settlement_name_1, make_shared<SettlementRecord>(m_land_name_2, m_settlement_name_1)));
+    ISettlementRecordMap map;
+    map.insert(make_pair(m_settlement_name_1, ISettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_1))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_land_name_1))
     .WillOnce(Return(map));
@@ -255,17 +256,17 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
 
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
-    SettlementRecordMap map;
-    map.insert(make_pair(m_settlement_name_1, make_shared<SettlementRecord>(m_land_name_2, m_settlement_name_1)));
-    map.insert(make_pair(m_settlement_name_2, make_shared<SettlementRecord>(m_land_name_2, m_settlement_name_2)));
+    ISettlementRecordMap map;
+    map.insert(make_pair(m_settlement_name_1, ISettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_1))));
+    map.insert(make_pair(m_settlement_name_2, ISettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_2))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_land_name_2))
     .WillOnce(Return(map));
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
-    SettlementManager manager(accessor);
 
+    SettlementManager manager(accessor);
     ISettlementMap settlements = manager.getSettlements(transaction, m_land_name_2);
 
     ASSERT_FALSE(settlements.empty());
