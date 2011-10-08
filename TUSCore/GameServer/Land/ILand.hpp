@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_GETLANDOPERATOREXITCODE_HPP
-#define GAMESERVER_LAND_GETLANDOPERATOREXITCODE_HPP
+#ifndef GAMESERVER_LAND_ILAND_HPP
+#define GAMESERVER_LAND_ILAND_HPP
 
-#include "../../ILand.hpp"
+#include "LandRecord.hpp"
 
 namespace GameServer
 {
@@ -36,68 +36,63 @@ namespace Land
 {
 
 /**
- * @brief Available exit codes.
+ * @brief The interface of the land.
  */
-unsigned short int const GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT     = 1;
-unsigned short int const GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT = 2;
-unsigned short int const GET_LAND_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR      = 3;
-
-/**
- * @brief The exit code of GetLandOperator.
- */
-class GetLandOperatorExitCode
+class ILand
 {
 public:
     /**
-     * @brief Constructs the exit code.
+     * @brief Gets the login of the user.
      *
-     * @param a_exit_code The value of the exit code.
+     * @return The login of the user.
      */
-    GetLandOperatorExitCode(
-        unsigned short int const a_exit_code
-    )
-        : m_exit_code(a_exit_code),
-          m_land(ILandShrPtr())
-    {
-    }
+    virtual std::string getLogin() const = 0;
 
     /**
-     * @brief Constructs the exit code.
+     * @brief Gets the name of the world.
      *
-     * @param a_exit_code The value of the exit code.
-     * @param a_land      The land.
+     * @return The name of the world.
      */
-    GetLandOperatorExitCode(
-        unsigned short int const a_exit_code,
-        ILandShrPtr        const a_land
-    )
-        : m_exit_code(a_exit_code),
-          m_land(a_land)
-    {
-    }
+    virtual std::string getWorldName() const = 0;
 
     /**
-     * @brief The "ok" method.
+     * @brief Gets the identifier of the epoch.
      *
-     * @return False (a read-only operator).
+     * @return The identifier of the epoch.
      */
-    bool ok() const
-    {
-        return false;
-    }
+    virtual Epoch::IDEpoch const & getIDEpoch() const = 0;
 
     /**
-     * @brief The exit code.
+     * @brief Gets the name of the land.
+     *
+     * @return The name of the land.
      */
-    unsigned short int const m_exit_code;
+    virtual std::string getLandName() const = 0;
 
     /**
-     * @brief The land.
+     * @brief Gets a granted of the land.
+     *
+     * @return The granted of the land.
      */
-    ILandShrPtr const m_land;
+    virtual bool getGranted() const = 0;
 };
+
+/**
+ * @brief The shared pointer of the interface of the land.
+ */
+typedef boost::shared_ptr<ILand> ILandShrPtr;
+
+/**
+ * @brief The pair of the interface of the land.
+ */
+typedef std::pair<std::string, ILandShrPtr> ILandPair;
+
+/**
+ * @brief The map of the interface of the land.
+ */
+typedef std::map<std::string, ILandShrPtr> ILandMap;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_GETLANDOPERATOREXITCODE_HPP
+#endif // GAMESERVER_LAND_ILAND_HPP

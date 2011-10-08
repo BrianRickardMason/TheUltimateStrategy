@@ -36,13 +36,13 @@ namespace Land
 {
 
 Land::Land(
-    LandRecord const & a_record
+    LandRecordShrPtr a_record
 )
-    : m_login(a_record.getLogin()),
-      m_world_name(a_record.getWorldName()),
-      m_id_epoch(a_record.getIDEpoch()),
-      m_land_name(a_record.getLandName()),
-      m_granted(a_record.getGranted())
+    : m_login(a_record->getLogin()),
+      m_world_name(a_record->getWorldName()),
+      m_id_epoch(a_record->getIDEpoch()),
+      m_land_name(a_record->getLandName()),
+      m_granted(a_record->getGranted())
 {
 }
 

@@ -55,14 +55,14 @@ GetLandsOperatorExitCode GetLandsOperator::getLands(
         // Verify if the user exists.
         // TODO: UserManager::getUser.
 
-        LandMap const lands = m_land_manager->getLands(a_transaction, a_login);
+        ILandMap const lands = m_land_manager->getLands(a_transaction, a_login);
 
         return (!lands.empty()) ? GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT, lands)
                                 : GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT, lands);
     }
     catch (...)
     {
-        return GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR, LandMap());
+        return GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
     }
 }
 

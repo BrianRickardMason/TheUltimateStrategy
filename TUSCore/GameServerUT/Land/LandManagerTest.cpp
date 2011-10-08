@@ -71,7 +71,7 @@ protected:
      * @param a_granted    An expected state of the granted of the land.
      */
     void compareLand(
-        LandShrPtr          a_land,
+        ILandShrPtr         a_land,
         string      const   a_login,
         string      const   a_world_name,
         IDEpoch     const & a_id_epoch,
@@ -197,7 +197,7 @@ TEST_F(LandManagerTest, getLand_LandDoesNotExist)
 
     LandManager manager(accessor);
 
-    LandShrPtr land = manager.getLand(transaction, m_land_name_1);
+    ILandShrPtr land = manager.getLand(transaction, m_land_name_1);
 
     ASSERT_TRUE(land == NULL);
 }
@@ -215,7 +215,7 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
 
     LandManager manager(accessor);
 
-    LandShrPtr land = manager.getLand(transaction, m_land_name_1);
+    ILandShrPtr land = manager.getLand(transaction, m_land_name_1);
 
     ASSERT_TRUE(land != NULL);
 
@@ -235,7 +235,7 @@ TEST_F(LandManagerTest, getLands_LandsDoNotExist)
 
     LandManager manager(accessor);
 
-    LandMap lands = manager.getLands(transaction, m_login_1);
+    ILandMap lands = manager.getLands(transaction, m_login_1);
 
     ASSERT_TRUE(lands.empty());
 }
@@ -256,7 +256,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
 
     LandManager manager(accessor);
 
-    LandMap lands = manager.getLands(transaction, m_login_1);
+    ILandMap lands = manager.getLands(transaction, m_login_1);
 
     ASSERT_FALSE(lands.empty());
 
@@ -282,7 +282,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
 
     LandManager manager(accessor);
 
-    LandMap lands = manager.getLands(transaction, m_login_1);
+    ILandMap lands = manager.getLands(transaction, m_login_1);
 
     ASSERT_FALSE(lands.empty());
 

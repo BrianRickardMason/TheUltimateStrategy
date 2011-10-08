@@ -100,11 +100,11 @@ protected:
      * @param a_land_name  The expected name of the land.
      */
     void compareLand(
-        LandShrPtr         a_land,
-        string     const   a_login,
-        string     const   a_world_name,
-        IDEpoch    const & a_id_epoch,
-        string     const   a_land_name
+        ILandShrPtr         a_land,
+        string      const   a_login,
+        string      const   a_world_name,
+        IDEpoch     const & a_id_epoch,
+        string      const   a_land_name
     )
     {
         ASSERT_STREQ(a_login.c_str(), a_land->getLogin().c_str());
@@ -388,7 +388,7 @@ TEST_F(LandManagerTest, getLand_LandDoesNotExist)
 
     // Test.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, m_land_name_1);
+    ILandShrPtr land = m_land_manager->getLand(transaction, m_land_name_1);
     transaction->commit();
 
     // Test commands and assertions.
@@ -407,7 +407,7 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, m_land_name_1);
+    ILandShrPtr land = m_land_manager->getLand(transaction, m_land_name_1);
     transaction->commit();
 
     // Test assertions.
@@ -427,7 +427,7 @@ TEST_F(LandManagerTest, getLand_LandDoesExist_MissingLandName)
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandShrPtr land = m_land_manager->getLand(transaction, m_land_name_2);
+    ILandShrPtr land = m_land_manager->getLand(transaction, m_land_name_2);
     transaction->commit();
 
     // Test assertions.
@@ -444,7 +444,7 @@ TEST_F(LandManagerTest, getLands_LandsDoNotExist)
 
     // Test commands.
     ITransactionShrPtr transaction = persistency.getTransaction(connection);
-    LandMap lands = m_land_manager->getLands(transaction, m_login_1);
+    ILandMap lands = m_land_manager->getLands(transaction, m_login_1);
     transaction->commit();
 
     // Test assertions.
@@ -471,7 +471,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist)
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandMap lands = m_land_manager->getLands(transaction, m_login_1);
+    ILandMap lands = m_land_manager->getLands(transaction, m_login_1);
     transaction->commit();
 
     // Test assertions.
@@ -502,7 +502,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_MissingLogin)
 
     // Test commands.
     transaction = persistency.getTransaction(connection);
-    LandMap lands = m_land_manager->getLands(transaction, m_login_5);
+    ILandMap lands = m_land_manager->getLands(transaction, m_login_5);
     transaction->commit();
 
     // Test assertions.

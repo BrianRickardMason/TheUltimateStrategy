@@ -56,7 +56,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
     try
     {
         // Verify if the land exists.
-        LandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
+        ILandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
 
         if (!land)
         {

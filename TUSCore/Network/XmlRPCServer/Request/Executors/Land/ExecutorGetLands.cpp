@@ -160,7 +160,7 @@ ReplyShrPtr ExecutorGetLands::produceReply(
 
     IXmlNodeShrPtr node_objects = node_reply->appendNode("objects");
 
-    for (LandMap::const_iterator it = a_exit_code.m_lands.begin(); it != a_exit_code.m_lands.end(); ++it)
+    for (ILandMap::const_iterator it = a_exit_code.m_lands.begin(); it != a_exit_code.m_lands.end(); ++it)
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 

@@ -49,14 +49,14 @@ GetLandOperatorExitCode GetLandOperator::getLand(
 {
     try
     {
-        LandShrPtr const land = m_land_manager->getLand(a_transaction, a_land_name);
+        ILandShrPtr const land = m_land_manager->getLand(a_transaction, a_land_name);
 
         return (land) ? GetLandOperatorExitCode(GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT, land)
                       : GetLandOperatorExitCode(GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT, land);
     }
     catch (...)
     {
-        return GetLandOperatorExitCode(GET_LAND_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR, LandShrPtr());
+        return GetLandOperatorExitCode(GET_LAND_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
     }
 }
 

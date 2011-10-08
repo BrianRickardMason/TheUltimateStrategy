@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_GETLANDSOPERATOREXITCODE_HPP
 #define GAMESERVER_LAND_GETLANDSOPERATOREXITCODE_HPP
 
-#include "../../Land.hpp"
+#include "../../ILand.hpp"
 
 namespace GameServer
 {
@@ -53,11 +53,24 @@ public:
      * @brief Constructs the exit code.
      *
      * @param a_exit_code The value of the exit code.
+     */
+    GetLandsOperatorExitCode(
+        unsigned short int const a_exit_code
+    )
+        : m_exit_code(a_exit_code),
+          m_lands(ILandMap())
+    {
+    }
+
+    /**
+     * @brief Constructs the exit code.
+     *
+     * @param a_exit_code The value of the exit code.
      * @param a_lands     The lands.
      */
     GetLandsOperatorExitCode(
         unsigned short int const   a_exit_code,
-        LandMap            const & a_lands
+        ILandMap           const & a_lands
     )
         : m_exit_code(a_exit_code),
           m_lands(a_lands)
@@ -82,7 +95,7 @@ public:
     /**
      * @brief The lands.
      */
-    LandMap const m_lands;
+    ILandMap const m_lands;
 };
 
 } // namespace Land

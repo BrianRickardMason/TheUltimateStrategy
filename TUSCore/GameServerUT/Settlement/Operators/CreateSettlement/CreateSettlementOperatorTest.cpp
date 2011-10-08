@@ -117,7 +117,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_LandDoesNotExist)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
-    .WillOnce(Return(LandShrPtr()));
+    .WillOnce(Return(ILandShrPtr()));
 
     CreateSettlementOperator create_settlement_operator((ILandManagerShrPtr(m_land_manager)),
                                                         (ISettlementManagerShrPtr(m_settlement_manager)),
@@ -131,10 +131,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_login, m_world_name, m_id_epoch_1, m_land_name, false);
+    LandRecordShrPtr land_record =
+        LandRecordShrPtr(new LandRecord(m_login, m_world_name, m_id_epoch_1, m_land_name, false));
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
-    .WillOnce(Return(make_shared<Land>(land_record)));
+    .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     SettlementRecord settlement_record(m_land_name, m_settlement_name);
 
@@ -153,10 +154,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementHasNotBeenCreate
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_login, m_world_name, m_id_epoch_1, m_land_name, false);
+    LandRecordShrPtr land_record =
+        LandRecordShrPtr(new LandRecord(m_login, m_world_name, m_id_epoch_1, m_land_name, false));
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
-    .WillOnce(Return(make_shared<Land>(land_record)));
+    .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(SettlementShrPtr()));
@@ -176,10 +178,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasBeenGivenSettlemen
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_login, m_world_name, m_id_epoch_1, m_land_name, true);
+    LandRecordShrPtr land_record =
+        LandRecordShrPtr(new LandRecord(m_login, m_world_name, m_id_epoch_1, m_land_name, true));
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
-    .WillOnce(Return(make_shared<Land>(land_record)));
+    .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(SettlementShrPtr()));
@@ -199,10 +202,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGetSet
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_login, m_world_name, m_id_epoch_1, m_land_name, false);
+    LandRecordShrPtr land_record =
+        LandRecordShrPtr(new LandRecord(m_login, m_world_name, m_id_epoch_1, m_land_name, false));
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
-    .WillOnce(Return(make_shared<Land>(land_record)));
+    .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(SettlementShrPtr()))
@@ -223,10 +227,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGiveTh
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_login, m_world_name, m_id_epoch_1, m_land_name, false);
+    LandRecordShrPtr land_record =
+        LandRecordShrPtr(new LandRecord(m_login, m_world_name, m_id_epoch_1, m_land_name, false));
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
-    .WillOnce(Return(make_shared<Land>(land_record)));
+    .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     SettlementRecord settlement_record(m_land_name, m_settlement_name);
 
@@ -252,10 +257,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandRecord land_record(m_login, m_world_name, m_id_epoch_1, m_land_name, false);
+    LandRecordShrPtr land_record =
+        LandRecordShrPtr(new LandRecord(m_login, m_world_name, m_id_epoch_1, m_land_name, false));
 
     EXPECT_CALL(*m_land_manager, getLand(transaction, m_land_name))
-    .WillOnce(Return(make_shared<Land>(land_record)));
+    .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
     SettlementRecord settlement_record(m_land_name, m_settlement_name);
 

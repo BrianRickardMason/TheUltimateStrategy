@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_LAND_HPP
 #define GAMESERVER_LAND_LAND_HPP
 
-#include "LandRecord.hpp"
+#include "ILand.hpp"
 
 namespace GameServer
 {
@@ -36,9 +36,10 @@ namespace Land
 {
 
 /**
- * @brief A land.
+ * @brief The land.
  */
 class Land
+   : public ILand
 {
 public:
     /**
@@ -47,7 +48,7 @@ public:
      * @param a_record A corresponding record.
      */
     explicit Land(
-        LandRecord const & a_record
+        LandRecordShrPtr a_record
     );
 
     /**
@@ -55,35 +56,35 @@ public:
      *
      * @return The login of the user.
      */
-    std::string getLogin() const;
+    virtual std::string getLogin() const;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    std::string getWorldName() const;
+    virtual std::string getWorldName() const;
 
     /**
-     * @brief Gets an identifier of the epoch.
+     * @brief Gets the identifier of the epoch.
      *
      * @return The identifier of the epoch.
      */
-    Epoch::IDEpoch const & getIDEpoch() const;
+    virtual Epoch::IDEpoch const & getIDEpoch() const;
 
     /**
      * @brief Gets the name of the land.
      *
      * @return The name of the land.
      */
-    std::string getLandName() const;
+    virtual std::string getLandName() const;
 
     /**
      * @brief Gets a granted of the land.
      *
      * @return The granted of the land.
      */
-    bool getGranted() const;
+    virtual bool getGranted() const;
 
 private:
     /**
@@ -113,21 +114,6 @@ private:
      */
     bool const m_granted;
 };
-
-/**
- * @brief A shared pointer of land.
- */
-typedef boost::shared_ptr<Land> LandShrPtr;
-
-/**
- * @brief A pair of land.
- */
-typedef std::pair<std::string, LandShrPtr> LandPair;
-
-/**
- * @brief A map of land.
- */
-typedef std::map<std::string, LandShrPtr> LandMap;
 
 } // namespace Land
 } // namespace GameServer

@@ -92,7 +92,7 @@ public:
      *
      * @return The land, null if not found.
      */
-    virtual LandShrPtr getLand(
+    virtual ILandShrPtr getLand(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
@@ -105,7 +105,7 @@ public:
      *
      * @return A map of lands, an empty map if not found.
      */
-    virtual LandMap getLands(
+    virtual ILandMap getLands(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const;
@@ -129,7 +129,7 @@ private:
      *
      * @return A land.
      */
-    LandShrPtr prepareResultGetLand(
+    ILandShrPtr prepareResultGetLand(
         LandRecordShrPtr a_record
     ) const;
 
@@ -140,7 +140,7 @@ private:
      *
      * @return A map of lands.
      */
-    LandMap prepareResultGetLands(
+    ILandMap prepareResultGetLands(
         LandRecordMap a_records
     ) const;
 

@@ -81,7 +81,7 @@ bool LandManager::deleteLand(
     }
 }
 
-LandShrPtr LandManager::getLand(
+ILandShrPtr LandManager::getLand(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -89,7 +89,7 @@ LandShrPtr LandManager::getLand(
     return prepareResultGetLand(m_accessor->getRecord(a_transaction, a_land_name));
 }
 
-LandMap LandManager::getLands(
+ILandMap LandManager::getLands(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
@@ -105,25 +105,25 @@ void LandManager::markGranted(
     m_accessor->markGranted(a_transaction, a_land_name);
 }
 
-LandShrPtr LandManager::prepareResultGetLand(
+ILandShrPtr LandManager::prepareResultGetLand(
     LandRecordShrPtr a_record
 ) const
 {
-    return a_record ? make_shared<Land>(*a_record) : LandShrPtr();
+    return a_record ? ILandShrPtr(new Land(a_record)) : ILandShrPtr();
 }
 
-LandMap LandManager::prepareResultGetLands(
+ILandMap LandManager::prepareResultGetLands(
     LandRecordMap a_records
 ) const
 {
-    LandMap result;
+    ILandMap result;
 
     for (LandRecordMap::iterator it = a_records.begin(); it != a_records.end(); ++it)
     {
         if (it->second)
         {
-            LandShrPtr land = make_shared<Land>(*it->second);
-            LandPair pair(it->second->getLandName(), land);
+            ILandShrPtr land = ILandShrPtr(new Land(it->second));
+            ILandPair pair(it->second->getLandName(), land);
             result.insert(pair);
         }
     }

@@ -46,7 +46,8 @@ protected:
         : m_login("Login"),
           m_world_name("World"),
           m_land_name("Land"),
-          m_land(LandRecord(m_login, m_world_name, IDEpoch(4), m_land_name, false))
+          m_land_record(new LandRecord(m_login, m_world_name, IDEpoch(4), m_land_name, false)),
+          m_land(new Land(m_land_record))
     {
     }
 
@@ -66,44 +67,42 @@ protected:
     string m_land_name;
 
     /**
+     * @brief Test constants: the record of the land.
+     */
+    LandRecordShrPtr m_land_record;
+
+    /**
      * @brief Test constants: the land.
      */
-    Land m_land;
+    ILandShrPtr m_land;
 };
 
-TEST_F(LandTest, Land)
+TEST_F(LandTest, CtorDoesNotThrow)
 {
-    LandRecord record(m_login, m_world_name, IDEpoch(4), m_land_name, false);
-    Land land(record);
-
-    ASSERT_STREQ(m_login.c_str(), land.getLogin().c_str());
-    ASSERT_STREQ(m_world_name.c_str(), land.getWorldName().c_str());
-    ASSERT_EQ(4, land.getIDEpoch().getValue());
-    ASSERT_STREQ(m_land_name.c_str(), land.getLandName().c_str());
-    ASSERT_FALSE(land.getGranted());
+    ASSERT_NO_THROW(Land land(m_land_record));
 }
 
 TEST_F(LandTest, GetLoginReturnsProperValue)
 {
-    ASSERT_EQ(m_login.c_str(), m_land.getLogin().c_str());
+    ASSERT_EQ(m_login.c_str(), m_land->getLogin().c_str());
 }
 
 TEST_F(LandTest, GetWorldNameReturnsProperValue)
 {
-    ASSERT_STREQ(m_world_name.c_str(), m_land.getWorldName().c_str());
+    ASSERT_STREQ(m_world_name.c_str(), m_land->getWorldName().c_str());
 }
 
 TEST_F(LandTest, GetIDEpochReturnsProperValue)
 {
-    ASSERT_EQ(4, m_land.getIDEpoch().getValue());
+    ASSERT_EQ(4, m_land->getIDEpoch().getValue());
 }
 
 TEST_F(LandTest, GetLandNameReturnsProperValue)
 {
-    ASSERT_STREQ(m_land_name.c_str(), m_land.getLandName().c_str());
+    ASSERT_STREQ(m_land_name.c_str(), m_land->getLandName().c_str());
 }
 
 TEST_F(LandTest, GetGrantedReturnsProperValue)
 {
-    ASSERT_FALSE(m_land.getGranted());
+    ASSERT_FALSE(m_land->getGranted());
 }

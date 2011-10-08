@@ -89,7 +89,7 @@ bool TurnOperator::executeTurn(
     string             const a_land_name
 ) const
 {
-    LandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
+    ILandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
 
     if (!land)
     {
