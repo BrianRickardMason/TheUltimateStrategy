@@ -45,6 +45,11 @@ class ILandRecord
 {
 public:
     /**
+     * @brief Destructs the interface of the record of the land.
+     */
+    virtual ~ILandRecord(){}
+
+    /**
      * @brief Gets the login of the user.
      *
      * @return The login of the user.
