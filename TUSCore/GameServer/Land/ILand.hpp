@@ -42,6 +42,11 @@ class ILand
 {
 public:
     /**
+     * @brief Destructs the interface of the land.
+     */
+    virtual ~ILand(){}
+
+    /**
      * @brief Gets the login of the user.
      *
      * @return The login of the user.
