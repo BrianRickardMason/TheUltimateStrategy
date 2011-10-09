@@ -53,12 +53,14 @@ GetSettlementsOperatorExitCode GetSettlementsOperator::getSettlements(
     try
     {
         // Verify if the land exists.
-        if (!m_land_manager->getLand(a_transaction, a_land_name))
+        ILandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
+
+        if (!land)
         {
             return GetSettlementsOperatorExitCode(GET_SETTLEMENTS_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }
 
-        ISettlementMap const settlements = m_settlement_manager->getSettlements(a_transaction, a_land_name);
+        ISettlementMap const settlements = m_settlement_manager->getSettlements(a_transaction, land);
 
         return (!settlements.empty()) ? GetSettlementsOperatorExitCode(
                                             GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_BEEN_GOT,

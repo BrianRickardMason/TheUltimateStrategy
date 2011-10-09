@@ -96,7 +96,7 @@ bool TurnOperator::executeTurn(
         return false;
     }
 
-    ISettlementMap settlements = m_settlement_manager->getSettlements(a_transaction, a_land_name);
+    ISettlementMap settlements = m_settlement_manager->getSettlements(a_transaction, land);
 
     for (ISettlementMap::iterator it = settlements.begin(); it != settlements.end(); ++it)
     {

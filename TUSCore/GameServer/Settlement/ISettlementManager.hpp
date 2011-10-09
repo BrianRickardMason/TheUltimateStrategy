@@ -95,13 +95,13 @@ public:
      * @brief Gets settlements.
      *
      * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
+     * @param a_land        The land.
      *
      * @return A map of settlements, an empty map if not found.
      */
     virtual ISettlementMap getSettlements(
         Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_land_name
+        Land::ILandShrPtr               const a_land
     ) const = 0;
 };
 

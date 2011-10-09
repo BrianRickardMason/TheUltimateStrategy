@@ -355,7 +355,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_1);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_1);
 
         ASSERT_TRUE(settlements.empty());
     }
@@ -377,7 +377,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_1);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_1);
 
         ASSERT_FALSE(settlements.empty());
         ASSERT_EQ(2, settlements.size());
@@ -404,7 +404,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_LandDoesNotHaveA
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_2);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_2);
 
         ASSERT_TRUE(settlements.empty());
     }
@@ -427,7 +427,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_MissingLandName)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_name_3);
+        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_3);
 
         ASSERT_TRUE(settlements.empty());
     }

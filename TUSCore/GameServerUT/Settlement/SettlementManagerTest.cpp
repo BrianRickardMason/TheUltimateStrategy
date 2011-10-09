@@ -62,7 +62,9 @@ protected:
           m_settlement_name_1("Settlement1"),
           m_settlement_name_2("Settlement2"),
           m_land_record_1(new LandRecord("Login", "World", IDEpoch(1), m_land_name_1, false)),
-          m_land_1(new Land(m_land_record_1))
+          m_land_record_2(new LandRecord("Login", "World", IDEpoch(1), m_land_name_2, false)),
+          m_land_1(new Land(m_land_record_1)),
+          m_land_2(new Land(m_land_record_2))
     {
     }
 
@@ -101,14 +103,16 @@ protected:
            m_settlement_name_2;
 
     /**
-     * @brief Test constants: the record of the land.
+     * @brief Test constants: the records of the lands.
      */
-    ILandRecordShrPtr m_land_record_1;
+    ILandRecordShrPtr m_land_record_1,
+                      m_land_record_2;
 
     /**
-     * @brief Test constants: the land.
+     * @brief Test constants: the lands.
      */
-    ILandShrPtr m_land_1;
+    ILandShrPtr m_land_1,
+                m_land_2;
 };
 
 TEST_F(SettlementManagerTest, SettlementManager)
@@ -233,7 +237,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
 
     SettlementManager manager(accessor);
 
-    ISettlementMap settlements = manager.getSettlements(transaction, m_land_name_1);
+    ISettlementMap settlements = manager.getSettlements(transaction, m_land_1);
 
     ASSERT_TRUE(settlements.empty());
 }
@@ -245,7 +249,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
     SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
 
     ISettlementRecordMap map;
-    map.insert(make_pair(m_settlement_name_1, ISettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_1))));
+    map.insert(make_pair(m_settlement_name_1, ISettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_1))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_land_name_1))
     .WillOnce(Return(map));
@@ -254,13 +258,13 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
 
     SettlementManager manager(accessor);
 
-    ISettlementMap settlements = manager.getSettlements(transaction, m_land_name_1);
+    ISettlementMap settlements = manager.getSettlements(transaction, m_land_1);
 
     ASSERT_FALSE(settlements.empty());
 
     ASSERT_EQ(1, settlements.size());
 
-    compareSettlement(settlements[m_settlement_name_1], m_land_name_2, m_settlement_name_1);
+    compareSettlement(settlements[m_settlement_name_1], m_land_name_1, m_settlement_name_1);
 }
 
 TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
@@ -280,7 +284,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
 
 
     SettlementManager manager(accessor);
-    ISettlementMap settlements = manager.getSettlements(transaction, m_land_name_2);
+    ISettlementMap settlements = manager.getSettlements(transaction, m_land_2);
 
     ASSERT_FALSE(settlements.empty());
 

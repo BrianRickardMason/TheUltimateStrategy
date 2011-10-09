@@ -94,10 +94,17 @@ ISettlementShrPtr SettlementManager::getSettlement(
 
 ISettlementMap SettlementManager::getSettlements(
     ITransactionShrPtr       a_transaction,
-    string             const a_land_name
+    ILandShrPtr        const a_land
 ) const
 {
-    return prepareResultGetSettlements(m_accessor->getRecords(a_transaction, a_land_name));
+    if (!a_land)
+    {
+        ISettlementMap result;
+
+        return result;
+    }
+
+    return prepareResultGetSettlements(m_accessor->getRecords(a_transaction, a_land->getLandName()));
 }
 
 ISettlementShrPtr SettlementManager::prepareResultGetSettlement(
