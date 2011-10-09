@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Land/LandRecord.hpp"
+#include "../../GameServer/Land/Land.hpp"
 #include "../../GameServer/Settlement/SettlementManager.hpp"
 #include "../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../Land/LandManagerMock.hpp"
@@ -35,6 +35,7 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
+using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
 using namespace boost;
@@ -59,7 +60,9 @@ protected:
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_settlement_name_1("Settlement1"),
-          m_settlement_name_2("Settlement2")
+          m_settlement_name_2("Settlement2"),
+          m_land_record_1(new LandRecord("Login", "World", IDEpoch(1), m_land_name_1, false)),
+          m_land_1(new Land(m_land_record_1))
     {
     }
 
@@ -96,6 +99,16 @@ protected:
      */
     string m_settlement_name_1,
            m_settlement_name_2;
+
+    /**
+     * @brief Test constants: the record of the land.
+     */
+    ILandRecordShrPtr m_land_record_1;
+
+    /**
+     * @brief Test constants: the land.
+     */
+    ILandShrPtr m_land_1;
 };
 
 TEST_F(SettlementManagerTest, SettlementManager)
@@ -117,7 +130,7 @@ TEST_F(SettlementManagerTest, createSettlement_Success)
 
     SettlementManager manager(accessor);
 
-    ASSERT_TRUE(manager.createSettlement(transaction, m_land_name_1, m_settlement_name_1));
+    ASSERT_TRUE(manager.createSettlement(transaction, m_land_1, m_settlement_name_1));
 }
 
 TEST_F(SettlementManagerTest, createSettlement_Failure)
@@ -135,7 +148,7 @@ TEST_F(SettlementManagerTest, createSettlement_Failure)
 
     SettlementManager manager(accessor);
 
-    ASSERT_FALSE(manager.createSettlement(transaction, m_land_name_1, m_settlement_name_1));
+    ASSERT_FALSE(manager.createSettlement(transaction, m_land_1, m_settlement_name_1));
 }
 
 TEST_F(SettlementManagerTest, deleteSettlement_Success)

@@ -73,7 +73,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         }
 
         // Create the settlement.
-        bool const result = m_settlement_manager->createSettlement(a_transaction, a_land_name, a_settlement_name);
+        bool const result = m_settlement_manager->createSettlement(a_transaction, land, a_settlement_name);
 
         if (!result)
         {

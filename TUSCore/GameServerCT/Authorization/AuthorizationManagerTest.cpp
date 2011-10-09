@@ -82,8 +82,11 @@ protected:
             m_land_manager->createLand(transaction, m_login_1, m_world_name, m_id_epoch_1, m_land_name_1);
             m_land_manager->createLand(transaction, m_login_2, m_world_name, m_id_epoch_1, m_land_name_2);
 
-            m_settlement_manager->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
-            m_settlement_manager->createSettlement(transaction, m_land_name_2, m_settlement_name_2);
+            m_land_1 = m_land_manager->getLand(transaction, m_land_name_1);
+            m_land_2 = m_land_manager->getLand(transaction, m_land_name_2);
+
+            m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
+            m_settlement_manager->createSettlement(transaction, m_land_2, m_settlement_name_2);
 
             transaction->commit();
         }
@@ -119,6 +122,13 @@ protected:
      * @brief Test constants: the name of the world.
      */
     string m_world_name;
+
+    /**
+     * @brief Test constants: the lands.
+     */
+    ILandShrPtr m_land_1,
+                m_land_2,
+                m_land_5;
 
     /**
      * @brief The abstract factory of managers.

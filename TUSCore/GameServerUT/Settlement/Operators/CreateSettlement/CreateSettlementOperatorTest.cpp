@@ -42,6 +42,7 @@ using namespace std;
 
 using testing::Return;
 using testing::Throw;
+using testing::_;
 
 /**
  * @brief A test class.
@@ -165,7 +166,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementHasNotBeenCreate
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
+    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(false));
 
     CreateSettlementOperator create_settlement_operator((ILandManagerShrPtr(m_land_manager)),
@@ -189,7 +190,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasBeenGivenSettlemen
     EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
+    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     CreateSettlementOperator create_settlement_operator((ILandManagerShrPtr(m_land_manager)),
@@ -214,7 +215,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGetSet
     .WillOnce(Return(ISettlementShrPtr()))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
+    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     CreateSettlementOperator create_settlement_operator((ILandManagerShrPtr(m_land_manager)),
@@ -242,7 +243,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGiveTh
     .WillOnce(Return(ISettlementShrPtr()))
     .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
+    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     EXPECT_CALL(*m_behaviour_give_grant, giveGrant(transaction, m_settlement_name))
@@ -273,7 +274,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
     .WillOnce(Return(ISettlementShrPtr()))
     .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, m_land_name, m_settlement_name))
+    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     EXPECT_CALL(*m_behaviour_give_grant, giveGrant(transaction, m_settlement_name))

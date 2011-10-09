@@ -47,7 +47,7 @@ public:
      * @brief Creates a settlement.
      *
      * @param a_transaction     The transaction.
-     * @param a_land_name       The name of the land.
+     * @param a_land            The land.
      * @param a_settlement_name The name of the settlement.
      *
      * @return True on success, false otherwise.
@@ -56,7 +56,7 @@ public:
         createSettlement,
         bool(
             Persistency::ITransactionShrPtr         a_transaction,
-            std::string                     const a_land_name,
+            Land::ILandShrPtr               const a_land,
             std::string                     const a_settlement_name
         )
     );

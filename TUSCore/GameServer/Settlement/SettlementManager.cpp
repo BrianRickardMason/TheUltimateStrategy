@@ -27,6 +27,7 @@
 
 #include "SettlementManager.hpp"
 
+using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -45,13 +46,18 @@ SettlementManager::SettlementManager(
 
 bool SettlementManager::createSettlement(
     ITransactionShrPtr       a_transaction,
-    string             const a_land_name,
+    ILandShrPtr        const a_land,
     string             const a_settlement_name
 ) const
 {
+    if (!a_land)
+    {
+        return false;
+    }
+
     try
     {
-        m_accessor->insertRecord(a_transaction, a_land_name, a_settlement_name);
+        m_accessor->insertRecord(a_transaction, a_land->getLandName(), a_settlement_name);
 
         return true;
     }
