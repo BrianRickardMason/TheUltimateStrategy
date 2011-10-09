@@ -29,6 +29,7 @@
 #define GAMESERVER_SETTLEMENT_SETTLEMENT_HPP
 
 #include "ISettlement.hpp"
+#include "ISettlementRecord.hpp"
 
 namespace GameServer
 {

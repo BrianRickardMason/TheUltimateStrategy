@@ -28,7 +28,10 @@
 #ifndef GAMESERVER_LAND_ILAND_HPP
 #define GAMESERVER_LAND_ILAND_HPP
 
-#include "ILandRecord.hpp"
+#include "../Epoch/IDEpoch.hpp"
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
 
 namespace GameServer
 {

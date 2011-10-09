@@ -28,7 +28,9 @@
 #ifndef GAMESERVER_SETTLEMENT_ISETTLEMENT_HPP
 #define GAMESERVER_SETTLEMENT_ISETTLEMENT_HPP
 
-#include "ISettlementRecord.hpp"
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
 
 namespace GameServer
 {
