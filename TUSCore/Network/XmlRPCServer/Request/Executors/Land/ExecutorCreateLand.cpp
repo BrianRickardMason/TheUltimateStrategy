@@ -59,11 +59,11 @@ bool ExecutorCreateLand::getParameters(
 {
     try
     {
-        m_login          = a_request->getLoginValue();
-        m_password       = a_request->getPasswordValue();
-        m_world_name     = a_request->getParameterValueString("world_name");
-        m_value_id_epoch = a_request->getParameterValueUnsignedInteger("idepoch");
-        m_name           = a_request->getParameterValueString("name");
+        m_login      = a_request->getLoginValue();
+        m_password   = a_request->getPasswordValue();
+        m_world_name = a_request->getParameterValueString("world_name");
+        m_epoch_name = a_request->getParameterValueString("epoch_name");
+        m_name       = a_request->getParameterValueString("name"); // TODO: Set me to land_name.
 
         return true;
     }
@@ -75,16 +75,7 @@ bool ExecutorCreateLand::getParameters(
 
 bool ExecutorCreateLand::processParameters()
 {
-    try
-    {
-        m_id_epoch = m_value_id_epoch;
-
-        return true;
-    }
-    catch (std::range_error)
-    {
-        return false;
-    }
+    return true;
 }
 
 bool ExecutorCreateLand::authorize(
@@ -116,7 +107,7 @@ bool ExecutorCreateLand::epochIsActive(
 
         if (exit_code.m_epoch)
         {
-            if (exit_code.m_epoch->getIDEpoch() != m_id_epoch)
+            if (exit_code.m_epoch->getEpochName() != m_epoch_name)
             {
                 return false;
             }
@@ -149,7 +140,7 @@ ReplyShrPtr ExecutorCreateLand::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         CreateLandOperatorExitCode const exit_code =
-            land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_id_epoch, m_name);
+            land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_epoch_name, m_name);
 
         if (exit_code.ok())
         {

@@ -41,7 +41,7 @@ protected:
      * @brief Constructs a test class.
      */
     EpochTest()
-        : m_epoch(EpochRecord(IDEpoch(1), "World", true, false, 22))
+        : m_epoch(EpochRecord("Epoch", "World", true, false, 22))
     {
     }
 
@@ -51,22 +51,14 @@ protected:
     Epoch m_epoch;
 };
 
-TEST_F(EpochTest, Epoch)
+TEST_F(EpochTest, CtorDoesNotThrow)
 {
-    EpochRecord record(IDEpoch(1), "World", true, false, 22);
-
-    Epoch epoch(record);
-
-    ASSERT_EQ(1, epoch.getIDEpoch().getValue());
-    ASSERT_STREQ("World", m_epoch.getWorldName().c_str());
-    ASSERT_TRUE(epoch.getActive());
-    ASSERT_FALSE(epoch.getFinished());
-    ASSERT_EQ(22, epoch.getTicks());
+    ASSERT_NO_THROW(EpochRecord record("Epoch", "World", true, false, 22));
 }
 
-TEST_F(EpochTest, getIDEpoch)
+TEST_F(EpochTest, GetEpochNameReturnsProperValue)
 {
-    ASSERT_EQ(1, m_epoch.getIDEpoch().getValue());
+    ASSERT_STREQ("Epoch", m_epoch.getEpochName().c_str());
 }
 
 TEST_F(EpochTest, GetWorldNameReturnsProperValue)
@@ -74,17 +66,17 @@ TEST_F(EpochTest, GetWorldNameReturnsProperValue)
     ASSERT_STREQ("World", m_epoch.getWorldName().c_str());
 }
 
-TEST_F(EpochTest, getActive)
+TEST_F(EpochTest, GetActiveReturnsProperValue)
 {
     ASSERT_TRUE(m_epoch.getActive());
 }
 
-TEST_F(EpochTest, getFinished)
+TEST_F(EpochTest, GetFinishedReturnsProperValue)
 {
     ASSERT_FALSE(m_epoch.getFinished());
 }
 
-TEST_F(EpochTest, getTicks)
+TEST_F(EpochTest, GetTicksReturnsProperValue)
 {
     ASSERT_EQ(22, m_epoch.getTicks());
 }

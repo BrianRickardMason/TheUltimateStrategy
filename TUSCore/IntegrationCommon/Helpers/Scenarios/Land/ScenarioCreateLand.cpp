@@ -64,16 +64,16 @@ char const * ScenarioCreateLand::execute()
 }
 
 ScenarioCreateLandActionSuccess::ScenarioCreateLandActionSuccess(
-    string       const & a_login,
-    string       const & a_password,
-    string       const   a_world_name,
-    unsigned int const   a_id_epoch,
-    string       const   a_land_name
+    string const a_login,
+    string const a_password,
+    string const a_world_name,
+    string const a_epoch_name,
+    string const a_land_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_world_name(a_world_name),
-      m_id_epoch(a_id_epoch),
+      m_epoch_name(a_epoch_name),
       m_land_name(a_land_name)
 {
 }
@@ -82,20 +82,20 @@ ReplyShrPtr ScenarioCreateLandActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateLand(a_client, m_login, m_password, m_world_name, m_id_epoch, m_land_name);
+    return CreateLand(a_client, m_login, m_password, m_world_name, m_epoch_name, m_land_name);
 }
 
 ScenarioCreateLandActionInvalidRequest::ScenarioCreateLandActionInvalidRequest(
-    string       const & a_login,
-    string       const & a_password,
-    string       const   a_world_name,
-    unsigned int const   a_id_epoch,
-    string       const   a_land_name
+    string const a_login,
+    string const a_password,
+    string const a_world_name,
+    string const a_epoch_name,
+    string const a_land_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_world_name(a_world_name),
-      m_id_epoch(a_id_epoch),
+      m_epoch_name(a_epoch_name),
       m_land_name(a_land_name)
 {
 }
@@ -117,8 +117,8 @@ ReplyShrPtr ScenarioCreateLandActionInvalidRequest::perform(
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
     world_name->appendAttribute("value")->setValue(m_world_name.c_str());
 
-    IXmlNodeShrPtr idepoch = parameters->appendNode("idepoch");
-    idepoch->appendAttribute("value")->setValue(m_id_epoch);
+    IXmlNodeShrPtr epoch_name = parameters->appendNode("epoch_name");
+    epoch_name->appendAttribute("value")->setValue(m_epoch_name.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
     land_name->appendAttribute("valve")->setValue(m_land_name.c_str());

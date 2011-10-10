@@ -47,7 +47,7 @@ namespace Land
  * @param a_login      The login of the user.
  * @param a_password   The password of the user.
  * @param a_world_name The name of a world.
- * @param a_id_epoch   The identifier of the epoch.
+ * @param a_epoch_name The name of the epoch.
  * @param a_land_name  The name of the land.
  *
  * @return The reply.
@@ -57,7 +57,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr CreateLand(
     std::string   const a_login,
     std::string   const a_password,
     std::string   const a_world_name,
-    unsigned int  const a_id_epoch,
+    std::string   const a_epoch_name,
     std::string   const a_land_name
 );
 

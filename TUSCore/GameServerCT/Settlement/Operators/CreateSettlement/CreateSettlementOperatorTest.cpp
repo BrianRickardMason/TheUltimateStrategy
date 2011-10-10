@@ -60,7 +60,7 @@ protected:
           m_create_settlement_operator(m_operator_abstract_factory->createCreateSettlementOperator()),
           m_create_user_operator(m_operator_abstract_factory->createCreateUserOperator()),
           m_create_world_operator(m_operator_abstract_factory->createCreateWorldOperator()),
-          m_id_epoch_1(1),
+          m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
           m_land_name_1("Land1"),
@@ -77,10 +77,10 @@ protected:
 
             m_create_world_operator->createWorld(transaction, m_world_name);
 
-            m_create_epoch_operator->createEpoch(transaction, m_world_name);
+            m_create_epoch_operator->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_1);
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_2);
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_1);
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_2);
 
             transaction->commit();
         }
@@ -268,9 +268,9 @@ protected:
     ICreateWorldOperatorShrPtr m_create_world_operator;
 
     /**
-     * @brief Test constants: identifiers of epochs.
+     * @brief Test constants: the name of the epoch.
      */
-    IDEpoch m_id_epoch_1;
+    string m_epoch_name;
 
     /**
      * @brief Test constants: the login of the user.

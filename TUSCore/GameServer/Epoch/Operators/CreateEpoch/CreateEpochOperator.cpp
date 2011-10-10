@@ -47,7 +47,8 @@ CreateEpochOperator::CreateEpochOperator(
 
 CreateEpochOperatorExitCode CreateEpochOperator::createEpoch(
     ITransactionShrPtr       a_transaction,
-    string             const a_world_name
+    string             const a_world_name,
+    string             const a_epoch_name
 ) const
 {
     try
@@ -58,7 +59,7 @@ CreateEpochOperatorExitCode CreateEpochOperator::createEpoch(
             return CreateEpochOperatorExitCode(CREATE_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
 
-        bool const result = m_epoch_manager->createEpoch(a_transaction, a_world_name);
+        bool const result = m_epoch_manager->createEpoch(a_transaction, a_world_name, a_epoch_name);
 
         return (result) ? CreateEpochOperatorExitCode(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_CREATED)
                         : CreateEpochOperatorExitCode(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_CREATED);

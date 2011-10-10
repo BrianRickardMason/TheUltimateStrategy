@@ -55,23 +55,18 @@ RequestShrPtr createRequestBuildOrDestroyBuilding(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("unsigned integer");
     idholderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     IXmlNodeShrPtr idbuildingclass = parameters->appendNode("idbuildingclass");
-    idbuildingclass->appendAttribute("type")->setValue("unsigned integer");
     idbuildingclass->appendAttribute("value")->setValue(a_id_building_class);
 
     IXmlNodeShrPtr idbuilding = parameters->appendNode("idbuilding");
-    idbuilding->appendAttribute("type")->setValue("unsigned integer");
     idbuilding->appendAttribute("value")->setValue(a_id_building);
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
-    volume->appendAttribute("type")->setValue("unsigned integer");
     volume->appendAttribute("value")->setValue(a_volume);
 
     return request;
@@ -98,11 +93,9 @@ RequestShrPtr createRequestCreateUser(
     IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
 
     IXmlNodeShrPtr login = parameters->appendNode("login");
-    login->appendAttribute("type")->setValue("string");
     login->appendAttribute("value")->setValue(a_login.c_str());
 
     IXmlNodeShrPtr password = parameters->appendNode("password");
-    password->appendAttribute("type")->setValue("string");
     password->appendAttribute("value")->setValue(a_password.c_str());
 
     return request;
@@ -125,16 +118,16 @@ RequestShrPtr createRequestCreateWorld(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestCreateEpoch(
-    string const & a_login,
-    string const & a_password,
-    string const   a_world_name
+    string const a_login,
+    string const a_password,
+    string const a_world_name,
+    string const a_epoch_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -148,8 +141,10 @@ RequestShrPtr createRequestCreateEpoch(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
+
+    IXmlNodeShrPtr epoch_name = parameters->appendNode("epoch_name");
+    epoch_name->appendAttribute("value")->setValue(a_epoch_name.c_str());
 
     return request;
 }
@@ -171,7 +166,6 @@ RequestShrPtr createRequestDeleteEpoch(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
@@ -194,7 +188,6 @@ RequestShrPtr createRequestGetEpoch(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
@@ -217,7 +210,6 @@ RequestShrPtr createRequestActivateEpoch(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
@@ -240,7 +232,6 @@ RequestShrPtr createRequestDeactivateEpoch(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
@@ -263,7 +254,6 @@ RequestShrPtr createRequestFinishEpoch(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
@@ -286,18 +276,17 @@ RequestShrPtr createRequestTickEpoch(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestCreateLand(
-    string       const & a_login,
-    string       const & a_password,
-    string       const   a_world_name,
-    unsigned int const   a_id_epoch,
-    string       const & a_name
+    string const a_login,
+    string const a_password,
+    string const a_world_name,
+    string const a_epoch_name,
+    string const a_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -311,15 +300,12 @@ RequestShrPtr createRequestCreateLand(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
-    world_name->appendAttribute("type")->setValue("string");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
 
-    IXmlNodeShrPtr idepoch = parameters->appendNode("idepoch");
-    idepoch->appendAttribute("type")->setValue("unsigned integer");
-    idepoch->appendAttribute("value")->setValue(a_id_epoch);
+    IXmlNodeShrPtr epoch_name = parameters->appendNode("epoch_name");
+    epoch_name->appendAttribute("value")->setValue(a_epoch_name.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("type")->setValue("string");
     name->appendAttribute("value")->setValue(a_name.c_str());
 
     return request;
@@ -342,7 +328,6 @@ RequestShrPtr createRequestDeleteLand(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("string");
     land_name->appendAttribute("value")->setValue(a_land_name.c_str());
 
     return request;
@@ -365,7 +350,6 @@ RequestShrPtr createRequestGetLand(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("string");
     land_name->appendAttribute("value")->setValue(a_land_name.c_str());
 
     return request;
@@ -407,11 +391,9 @@ RequestShrPtr createRequestCreateSettlement(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("string");
     land_name->appendAttribute("value")->setValue(a_land_name.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("type")->setValue("string");
     name->appendAttribute("value")->setValue(a_name.c_str());
 
     return request;
@@ -434,7 +416,6 @@ RequestShrPtr createRequestDeleteSettlement(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr settlement_name = parameters->appendNode("settlement_name");
-    settlement_name->appendAttribute("type")->setValue("string");
     settlement_name->appendAttribute("value")->setValue(a_settlement_name.c_str());
 
     return request;
@@ -457,7 +438,6 @@ RequestShrPtr createRequestGetSettlement(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr settlement_name = parameters->appendNode("settlement_name");
-    settlement_name->appendAttribute("type")->setValue("string");
     settlement_name->appendAttribute("value")->setValue(a_settlement_name.c_str());
 
     return request;
@@ -480,7 +460,6 @@ RequestShrPtr createRequestGetSettlements(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("string");
     land_name->appendAttribute("value")->setValue(a_land_name.c_str());
 
     return request;
@@ -532,19 +511,15 @@ RequestShrPtr createRequestGetBuilding(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("unsigned integer");
     idholderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     IXmlNodeShrPtr idbuildingclass = parameters->appendNode("idbuildingclass");
-    idbuildingclass->appendAttribute("type")->setValue("unsigned integer");
     idbuildingclass->appendAttribute("value")->setValue(a_id_building_class);
 
     IXmlNodeShrPtr idbuilding = parameters->appendNode("idbuilding");
-    idbuilding->appendAttribute("type")->setValue("unsigned integer");
     idbuilding->appendAttribute("value")->setValue(a_id_building);
 
     return request;
@@ -568,11 +543,9 @@ RequestShrPtr createRequestGetBuildings(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("unsigned integer");
     idholderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     return request;
@@ -599,23 +572,18 @@ RequestShrPtr createRequestEngageHuman(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("unsigned integer");
     idholderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("type")->setValue("unsigned integer");
     idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
 
     IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("type")->setValue("unsigned integer");
     idhuman->appendAttribute("value")->setValue(a_id_human);
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
-    volume->appendAttribute("type")->setValue("unsigned integer");
     volume->appendAttribute("value")->setValue(a_volume);
 
     return request;
@@ -643,27 +611,21 @@ RequestShrPtr createRequestDismissHuman(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("unsigned integer");
     idholderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("type")->setValue("unsigned integer");
     idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
 
     IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("type")->setValue("unsigned integer");
     idhuman->appendAttribute("value")->setValue(a_id_human);
 
     IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("type")->setValue("unsigned integer");
     experience->appendAttribute("value")->setValue(a_experience);
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
-    volume->appendAttribute("type")->setValue("unsigned integer");
     volume->appendAttribute("value")->setValue(a_volume);
 
     return request;
@@ -690,23 +652,18 @@ RequestShrPtr createRequestGetHuman(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("unsigned integer");
     idholderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("type")->setValue("unsigned integer");
     idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
 
     IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("type")->setValue("unsigned integer");
     idhuman->appendAttribute("value")->setValue(a_id_human);
 
     IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("type")->setValue("unsigned integer");
     experience->appendAttribute("value")->setValue(a_experience);
 
     return request;
@@ -730,11 +687,9 @@ RequestShrPtr createRequestGetHumans(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr idholderclass = parameters->appendNode("idholderclass");
-    idholderclass->appendAttribute("type")->setValue("unsigned integer");
     idholderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     return request;
@@ -759,15 +714,12 @@ RequestShrPtr createRequestGetResource(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr holderclass = parameters->appendNode("holderclass");
-    holderclass->appendAttribute("type")->setValue("unsigned integer");
     holderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     IXmlNodeShrPtr idresource = parameters->appendNode("idresource");
-    idresource->appendAttribute("type")->setValue("unsigned integer");
     idresource->appendAttribute("value")->setValue(a_id_resource);
 
     return request;
@@ -791,11 +743,9 @@ RequestShrPtr createRequestGetResources(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr holderclass = parameters->appendNode("idholderclass");
-    holderclass->appendAttribute("type")->setValue("unsigned integer");
     holderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
-    holder_name->appendAttribute("type")->setValue("string");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
     return request;
@@ -818,7 +768,6 @@ RequestShrPtr createRequestTurn(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("type")->setValue("string");
     land_name->appendAttribute("value")->setValue(a_land_name.c_str());
 
     return request;
@@ -846,27 +795,21 @@ RequestShrPtr createRequestTransportHuman(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr settlement_name_source = parameters->appendNode("settlement_name_source");
-    settlement_name_source->appendAttribute("type")->setValue("string");
     settlement_name_source->appendAttribute("value")->setValue(a_settlement_name_source.c_str());
 
     IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
-    settlement_name_destination->appendAttribute("type")->setValue("string");
     settlement_name_destination->appendAttribute("value")->setValue(a_settlement_name_destination.c_str());
 
     IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("type")->setValue("unsigned integer");
     idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
 
     IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("type")->setValue("unsigned integer");
     idhuman->appendAttribute("value")->setValue(a_id_human);
 
     IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("type")->setValue("unsigned integer");
     experience->appendAttribute("value")->setValue(a_experience);
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
-    volume->appendAttribute("type")->setValue("unsigned integer");
     volume->appendAttribute("value")->setValue(a_volume);
 
     return request;
@@ -892,19 +835,15 @@ RequestShrPtr createRequestTransportResource(
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
     IXmlNodeShrPtr settlement_name_source = parameters->appendNode("settlement_name_source");
-    settlement_name_source->appendAttribute("type")->setValue("string");
     settlement_name_source->appendAttribute("value")->setValue(a_settlement_name_source.c_str());
 
     IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
-    settlement_name_destination->appendAttribute("type")->setValue("string");
     settlement_name_destination->appendAttribute("value")->setValue(a_settlement_name_destination.c_str());
 
     IXmlNodeShrPtr idresource = parameters->appendNode("idresource");
-    idresource->appendAttribute("type")->setValue("unsigned integer");
     idresource->appendAttribute("value")->setValue(a_id_resource);
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
-    volume->appendAttribute("type")->setValue("unsigned integer");
     volume->appendAttribute("value")->setValue(a_volume);
 
     return request;

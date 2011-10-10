@@ -35,13 +35,13 @@ namespace Epoch
 {
 
 EpochRecord::EpochRecord(
-    IDEpoch      const & a_id_epoch,
-    string       const   a_world_name,
-    bool         const   a_active,
-    bool         const   a_finished,
-    unsigned int const   a_ticks
+    string       const a_epoch_name,
+    string       const a_world_name,
+    bool         const a_active,
+    bool         const a_finished,
+    unsigned int const a_ticks
 )
-    : m_id_epoch(a_id_epoch),
+    : m_epoch_name(a_epoch_name),
       m_world_name(a_world_name),
       m_active(a_active),
       m_finished(a_finished),
@@ -49,9 +49,9 @@ EpochRecord::EpochRecord(
 {
 }
 
-IDEpoch const & EpochRecord::getIDEpoch() const
+string EpochRecord::getEpochName() const
 {
-    return m_id_epoch;
+    return m_epoch_name;
 }
 
 string EpochRecord::getWorldName() const

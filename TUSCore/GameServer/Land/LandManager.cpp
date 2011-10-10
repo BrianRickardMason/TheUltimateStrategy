@@ -27,7 +27,6 @@
 
 #include "LandManager.hpp"
 
-using namespace GameServer::Epoch;
 using namespace GameServer::Persistency;
 using namespace boost;
 using namespace std;
@@ -45,16 +44,16 @@ LandManager::LandManager(
 }
 
 bool LandManager::createLand(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    string             const   a_world_name,
-    IDEpoch            const & a_id_epoch,
-    string             const   a_land_name
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_world_name,
+    string             const a_epoch_name,
+    string             const a_land_name
 ) const
 {
     try
     {
-        m_accessor->insertRecord(a_transaction, a_login, a_world_name, a_id_epoch, a_land_name);
+        m_accessor->insertRecord(a_transaction, a_login, a_world_name, a_epoch_name, a_land_name);
 
         return true;
     }

@@ -96,11 +96,13 @@ public:
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
+     * @param a_epoch_name The name of the epoch.
      */
     ScenarioCreateEpochActionSuccess(
         std::string const a_login,
         std::string const a_password,
-        std::string const a_world_name
+        std::string const a_world_name,
+        std::string const a_epoch_name
     );
 
     /**
@@ -129,6 +131,11 @@ private:
      * @brief The name of the world.
      */
     std::string const m_world_name;
+
+    /**
+     * @brief The name of the epoch.
+     */
+    std::string const m_epoch_name;
 };
 
 /**
@@ -144,11 +151,13 @@ public:
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
+     * @param a_epoch_name The name of the epoch.
      */
     ScenarioCreateEpochActionInvalidRequest(
         std::string const a_login,
         std::string const a_password,
-        std::string const a_world_name
+        std::string const a_world_name,
+        std::string const a_epoch_name
     );
 
     /**
@@ -177,6 +186,11 @@ private:
      * @brief The name of the world.
      */
     std::string const m_world_name;
+
+    /**
+     * @brief The name of the epoch.
+     */
+    std::string const m_epoch_name;
 };
 
 /**

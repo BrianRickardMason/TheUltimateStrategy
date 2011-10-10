@@ -52,11 +52,11 @@ CreateLandOperator::CreateLandOperator(
 }
 
 CreateLandOperatorExitCode CreateLandOperator::createLand(
-    ITransactionShrPtr         a_transaction,
-    string             const   a_login,
-    string             const   a_world_name,
-    IDEpoch            const & a_id_epoch,
-    string             const   a_land_name
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_world_name,
+    string             const a_epoch_name,
+    string             const a_land_name
 ) const
 {
     try
@@ -82,7 +82,7 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
             return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS);
         }
 
-        bool const result = m_land_manager->createLand(a_transaction, a_login, a_world_name, a_id_epoch, a_land_name);
+        bool const result = m_land_manager->createLand(a_transaction, a_login, a_world_name, a_epoch_name, a_land_name);
 
         return (result) ? CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED)
                         : CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_CREATED);

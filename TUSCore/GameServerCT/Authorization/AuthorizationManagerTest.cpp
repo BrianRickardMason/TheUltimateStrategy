@@ -50,7 +50,7 @@ protected:
      * @brief Constructs the test class.
      */
     AuthorizationManagerTest()
-        : m_id_epoch_1(1),
+        : m_epoch_name("Epoch"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_land_name_5("Land5"),
@@ -74,13 +74,13 @@ protected:
 
             m_world_manager->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_world_name),
+            m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
             m_user_manager->createUser(transaction, "Login1", "Password1");
             m_user_manager->createUser(transaction, "Login2", "Password2");
 
-            m_land_manager->createLand(transaction, m_login_1, m_world_name, m_id_epoch_1, m_land_name_1);
-            m_land_manager->createLand(transaction, m_login_2, m_world_name, m_id_epoch_1, m_land_name_2);
+            m_land_manager->createLand(transaction, m_login_1, m_world_name, m_epoch_name, m_land_name_1);
+            m_land_manager->createLand(transaction, m_login_2, m_world_name, m_epoch_name, m_land_name_2);
 
             m_land_1 = m_land_manager->getLand(transaction, m_land_name_1);
             m_land_2 = m_land_manager->getLand(transaction, m_land_name_2);
@@ -93,9 +93,9 @@ protected:
     }
 
     /**
-     * @brief Test constants identifiers of the epochs.
+     * @brief Test constants: the name of the epoch.
      */
-    IDEpoch m_id_epoch_1;
+    string m_epoch_name;
 
     /**
      * @brief Test constants: the names of the lands.

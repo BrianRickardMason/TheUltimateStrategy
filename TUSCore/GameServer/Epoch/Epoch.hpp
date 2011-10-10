@@ -51,11 +51,11 @@ public:
     );
 
     /**
-     * @brief Gets the identifier of the epoch.
+     * @brief Gets the name of the epoch.
      *
-     * @return The identifier of the epoch.
+     * @return The name of the epoch.
      */
-    IDEpoch const & getIDEpoch() const;
+    std::string getEpochName() const;
 
     /**
      * @brief Gets the name of the world.
@@ -87,9 +87,9 @@ public:
 
 private:
     /**
-     * @brief The identifier of the epoch.
+     * @brief The name of the epoch.
      */
-    IDEpoch const m_id_epoch;
+    std::string const m_epoch_name;
 
     /**
      * @brief The name of the world.

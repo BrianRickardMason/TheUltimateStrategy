@@ -62,6 +62,7 @@ bool ExecutorCreateEpoch::getParameters(
         m_login      = a_request->getLoginValue();
         m_password   = a_request->getPasswordValue();
         m_world_name = a_request->getParameterValueString("world_name");
+        m_epoch_name = a_request->getParameterValueString("epoch_name");
 
         return true;
     }
@@ -115,7 +116,8 @@ ReplyShrPtr ExecutorCreateEpoch::perform(
         IConnectionShrPtr connection = a_persistency->getConnection();
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
-        CreateEpochOperatorExitCode const exit_code = epoch_operator->createEpoch(transaction, m_world_name);
+        CreateEpochOperatorExitCode const exit_code =
+            epoch_operator->createEpoch(transaction, m_world_name, m_epoch_name);
 
         if (exit_code.ok())
         {

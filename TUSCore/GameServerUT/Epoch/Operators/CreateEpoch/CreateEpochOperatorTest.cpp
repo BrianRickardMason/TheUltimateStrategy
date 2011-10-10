@@ -55,6 +55,7 @@ protected:
     CreateEpochOperatorTest()
         : m_epoch_manager(new EpochManagerMock),
           m_world_manager(new WorldManagerMock),
+          m_epoch_name("Epoch"),
           m_world_name("World")
     {
     }
@@ -68,6 +69,11 @@ protected:
      * @brief The manager of worlds.
      */
     WorldManagerMock * m_world_manager;
+
+    /**
+     * @brief Test constants: the name of the epoch.
+     */
+    string m_epoch_name;
 
     /**
      * @brief Test constants: the name of the world.
@@ -86,7 +92,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_WorldDoesNotExist)
                                               (IWorldManagerShrPtr(m_world_manager)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST,
-              create_epoch_operator.createEpoch(transaction, m_world_name).m_exit_code);
+              create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);
 }
 
 TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasBeenCreated)
@@ -100,14 +106,14 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasBeenCreated)
     EXPECT_CALL(*m_world_manager, getWorld(transaction, m_world_name))
     .WillOnce(Return(world));
 
-    EXPECT_CALL(*m_epoch_manager, createEpoch(transaction, m_world_name))
+    EXPECT_CALL(*m_epoch_manager, createEpoch(transaction, m_world_name, m_epoch_name))
     .WillOnce(Return(true));
 
     CreateEpochOperator create_epoch_operator((IEpochManagerShrPtr(m_epoch_manager)),
                                               (IWorldManagerShrPtr(m_world_manager)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_CREATED,
-              create_epoch_operator.createEpoch(transaction, m_world_name).m_exit_code);
+              create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);
 }
 
 TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasNotBeenCreated)
@@ -121,14 +127,14 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasNotBeenCreated)
     EXPECT_CALL(*m_world_manager, getWorld(transaction, m_world_name))
     .WillOnce(Return(world));
 
-    EXPECT_CALL(*m_epoch_manager, createEpoch(transaction, m_world_name))
+    EXPECT_CALL(*m_epoch_manager, createEpoch(transaction, m_world_name, m_epoch_name))
     .WillOnce(Return(false));
 
     CreateEpochOperator create_epoch_operator((IEpochManagerShrPtr(m_epoch_manager)),
                                               (IWorldManagerShrPtr(m_world_manager)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_CREATED,
-              create_epoch_operator.createEpoch(transaction, m_world_name).m_exit_code);
+              create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);
 }
 
 TEST_F(CreateEpochOperatorTest, createEpoch_UnexpectedError)
@@ -144,5 +150,5 @@ TEST_F(CreateEpochOperatorTest, createEpoch_UnexpectedError)
                                               (IWorldManagerShrPtr(m_world_manager)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              create_epoch_operator.createEpoch(transaction, m_world_name).m_exit_code);
+              create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);
 }

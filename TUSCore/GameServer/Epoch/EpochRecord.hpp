@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_EPOCH_EPOCHRECORD_HPP
 #define GAMESERVER_EPOCH_EPOCHRECORD_HPP
 
-#include "IDEpoch.hpp"
 #include <boost/shared_ptr.hpp>
 #include <string>
 
@@ -46,26 +45,26 @@ public:
     /**
      * @brief Constructs the epoch record.
      *
-     * @param a_id_epoch   The identifier of the epoch.
+     * @param a_epoch_name The name of the epoch.
      * @param a_world_name The name of the world.
      * @param a_active     Indicates whether the epoch is active.
      * @param a_finished   Indicates whether the epoch has been finished.
      * @param a_ticks      The number of ticks of the epoch.
      */
     EpochRecord(
-        IDEpoch        const & a_id_epoch,
-        std::string    const   a_world_name,
-        bool           const   a_active,
-        bool           const   a_finished,
-        unsigned int   const   a_ticks
+        std::string  const a_epoch_name,
+        std::string  const a_world_name,
+        bool         const a_active,
+        bool         const a_finished,
+        unsigned int const a_ticks
     );
 
     /**
-     * @brief Gets the identifier of the epoch.
+     * @brief Gets the name of the epoch.
      *
-     * @return The identifier of the epoch.
+     * @return The name of the epoch.
      */
-    IDEpoch const & getIDEpoch() const;
+    std::string getEpochName() const;
 
     /**
      * @brief Gets the name of the world.
@@ -97,9 +96,9 @@ public:
 
 private:
     /**
-     * @brief The identifier of the epoch.
+     * @brief The name of the epoch.
      */
-    IDEpoch const m_id_epoch;
+    std::string const m_epoch_name;
 
     /**
      * @brief The name of the world.

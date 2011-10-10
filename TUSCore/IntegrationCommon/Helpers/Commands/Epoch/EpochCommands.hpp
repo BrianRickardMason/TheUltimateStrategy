@@ -51,10 +51,11 @@ namespace Epoch
  * @return The reply.
  */
 Network::XmlRPCCommon::Reply::ReplyShrPtr CreateEpoch(
-    IClientShrPtr         a_client,
-    std::string   const & a_login,
-    std::string   const & a_password,
-    std::string   const   a_world_name
+    IClientShrPtr       a_client,
+    std::string   const a_login,
+    std::string   const a_password,
+    std::string   const a_world_name,
+    std::string   const a_epoch_name
 );
 
 /**

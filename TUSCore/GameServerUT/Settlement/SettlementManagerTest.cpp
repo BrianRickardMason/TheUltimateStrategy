@@ -33,8 +33,6 @@
 #include "Operators/CreateSettlement/BehaviourGiveGrantMock.hpp"
 #include "SettlementManagerAccessorMock.hpp"
 
-using namespace GameServer::Common;
-using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace GameServer::Persistency;
 using namespace GameServer::Settlement;
@@ -56,13 +54,13 @@ protected:
      * @brief Constructs a test class.
      */
     SettlementManagerTest()
-        : m_id_epoch_1(1),
+        : m_epoch_name_1("Epoch"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_settlement_name_1("Settlement1"),
           m_settlement_name_2("Settlement2"),
-          m_land_record_1(new LandRecord("Login", "World", IDEpoch(1), m_land_name_1, false)),
-          m_land_record_2(new LandRecord("Login", "World", IDEpoch(1), m_land_name_2, false)),
+          m_land_record_1(new LandRecord("Login", "World", m_epoch_name_1, m_land_name_1, false)),
+          m_land_record_2(new LandRecord("Login", "World", m_epoch_name_1, m_land_name_2, false)),
           m_land_1(new Land(m_land_record_1)),
           m_land_2(new Land(m_land_record_2))
     {
@@ -86,9 +84,9 @@ protected:
     }
 
     /**
-     * @brief Test constants identifiers of the epoch.
+     * @brief Test constants: the name of the epoch.
      */
-    IDEpoch m_id_epoch_1;
+    string m_epoch_name_1;
 
     /**
      * @brief Test constants: the names of the lands.

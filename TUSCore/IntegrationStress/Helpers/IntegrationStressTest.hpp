@@ -125,9 +125,6 @@ private:
             backbone_transaction.exec("DELETE FROM users");
             backbone_transaction.exec("DELETE FROM worlds");
 
-            // Reset sequences.
-            backbone_transaction.exec("ALTER SEQUENCE epochs_id_epoch_seq MINVALUE 0 RESTART WITH 1");
-
             // FIXME: Temporary workaround until ExecutorCreateUser is available.
             backbone_transaction.exec("INSERT INTO users(login, password) VALUES('Login1', 'Password1')");
             backbone_transaction.exec("INSERT INTO users(login, password) VALUES('Login2', 'Password2')");
@@ -139,9 +136,9 @@ private:
             backbone_transaction.exec("INSERT INTO worlds(world_name) VALUES('World3')");
 
             // TODO: Improve it (call the ExecutoCreateEpoch instead).
-            backbone_transaction.exec("INSERT INTO epochs(world_name) VALUES('World1')");
-            backbone_transaction.exec("INSERT INTO epochs(world_name) VALUES('World2')");
-            backbone_transaction.exec("INSERT INTO epochs(world_name) VALUES('World3')");
+            backbone_transaction.exec("INSERT INTO epochs(world_name, epoch_name) VALUES('World1', 'Epoch1')");
+            backbone_transaction.exec("INSERT INTO epochs(world_name, epoch_name) VALUES('World2', 'Epoch2')");
+            backbone_transaction.exec("INSERT INTO epochs(world_name, epoch_name) VALUES('World3', 'Epoch3')");
 
              // TODO: Improve it (call the ExecutoActivateEpoch instead).
             backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World1'");

@@ -175,8 +175,8 @@ ReplyShrPtr ExecutorGetEpoch::produceReply(
 
     if (a_exit_code.m_epoch)
     {
-        IXmlNodeShrPtr node_idepoch = node_parameters->appendNode("idepoch");
-        node_idepoch->appendAttribute("value")->setValue(a_exit_code.m_epoch->getIDEpoch().getValue());
+        IXmlNodeShrPtr node_epoch_name = node_parameters->appendNode("epoch_name");
+        node_epoch_name->appendAttribute("value")->setValue(a_exit_code.m_epoch->getEpochName().c_str());
 
         IXmlNodeShrPtr node_world_name = node_parameters->appendNode("world_name");
         node_world_name->appendAttribute("value")->setValue(a_exit_code.m_epoch->getWorldName().c_str());

@@ -74,7 +74,7 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            "World1", 1, land_name)),
+                            "World1", "Epoch1", land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
@@ -125,7 +125,7 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            "World1", 1, land_name)),
+                            "World1", "Epoch1", land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,
@@ -185,13 +185,13 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            "World1", 1, land_name_1)),
+                            "World1", "Epoch1", land_name_1)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
                             "Login1", "Password1",
-                            "World1", 1, land_name_2)),
+                            "World1", "Epoch1", land_name_2)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateSettlement(
                         client,

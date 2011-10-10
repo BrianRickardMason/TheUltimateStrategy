@@ -67,11 +67,11 @@ public:
     virtual std::string getWorldName() const;
 
     /**
-     * @brief Gets the identifier of the epoch.
+     * @brief Gets the name of the epoch.
      *
-     * @return The identifier of the epoch.
+     * @return The name of the epoch.
      */
-    virtual Epoch::IDEpoch const & getIDEpoch() const;
+    virtual std::string getEpochName() const;
 
     /**
      * @brief Gets the name of the land.
@@ -99,9 +99,9 @@ private:
     std::string const m_world_name;
 
     /**
-     * @brief An identifier of the epoch.
+     * @brief The name of the epoch.
      */
-    Epoch::IDEpoch const m_id_epoch;
+    std::string const m_epoch_name;
 
     /**
      * @brief The name of the land.

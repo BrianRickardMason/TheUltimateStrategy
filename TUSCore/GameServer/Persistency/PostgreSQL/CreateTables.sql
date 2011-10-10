@@ -15,7 +15,7 @@ CREATE TABLE worlds
 DROP TABLE IF EXISTS epochs CASCADE;
 CREATE TABLE epochs
 (
-    id_epoch   SERIAL PRIMARY KEY,
+    epoch_name VARCHAR(44) PRIMARY KEY NOT NULL CHECK(epoch_name <> ''),
     world_name VARCHAR(44) NOT NULL CHECK(world_name <> '') REFERENCES worlds(world_name) ON DELETE CASCADE,
     active     BOOLEAN DEFAULT FALSE,
     finished   BOOLEAN DEFAULT FALSE,
@@ -29,7 +29,7 @@ CREATE TABLE lands
 (
     login      VARCHAR(44) NOT NULL CHECK(login <> '') REFERENCES users(login) ON DELETE CASCADE,
     world_name VARCHAR(44) NOT NULL CHECK(world_name <> '') REFERENCES worlds(world_name) ON DELETE CASCADE,
-    id_epoch   INTEGER NOT NULL CHECK(id_epoch > 0) REFERENCES epochs(id_epoch) ON DELETE CASCADE,
+    epoch_name VARCHAR(44) NOT NULL CHECK(epoch_name <> '') REFERENCES epochs(epoch_name) ON DELETE CASCADE,
     land_name  VARCHAR(44) PRIMARY KEY NOT NULL CHECK(land_name <> ''),
 
     granted BOOLEAN DEFAULT FALSE

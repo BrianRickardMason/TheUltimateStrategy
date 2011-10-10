@@ -29,7 +29,6 @@
 #include "../../GameServer/Land/LandRecord.hpp"
 #include <gmock/gmock.h>
 
-using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace std;
 
@@ -47,7 +46,7 @@ protected:
         : m_login("Login"),
           m_world_name("World"),
           m_land_name("Land"),
-          m_land_record(new LandRecord(m_login, m_world_name, IDEpoch(4), m_land_name, false)),
+          m_land_record(new LandRecord(m_login, m_world_name, "Epoch", m_land_name, false)),
           m_land(new Land(m_land_record))
     {
     }
@@ -93,9 +92,9 @@ TEST_F(LandTest, GetWorldNameReturnsProperValue)
     ASSERT_STREQ(m_world_name.c_str(), m_land->getWorldName().c_str());
 }
 
-TEST_F(LandTest, GetIDEpochReturnsProperValue)
+TEST_F(LandTest, GetEpochNameReturnsProperValue)
 {
-    ASSERT_EQ(4, m_land->getIDEpoch().getValue());
+    ASSERT_STREQ("Epoch", m_land->getEpochName().c_str());
 }
 
 TEST_F(LandTest, GetLandNameReturnsProperValue)

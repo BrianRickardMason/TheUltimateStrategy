@@ -60,7 +60,7 @@ namespace Executors
  *     <status value=\"#\" />
  *     <parameters>
  *         <message    value=\"#\" />
- *         <idepoch    value=\"#\" />
+ *         <epoch_name value=\"#\" />
  *         <world_name value=\"#\" />
  *         <active     value=\"#\" />
  *         <finished   value=\"#\" />

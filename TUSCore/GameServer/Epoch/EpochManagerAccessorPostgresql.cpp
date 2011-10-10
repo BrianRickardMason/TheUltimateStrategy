@@ -39,13 +39,15 @@ namespace Epoch
 
 void EpochManagerAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
-    string             const a_world_name
+    string             const a_world_name,
+    string             const a_epoch_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "INSERT INTO epochs(world_name) VALUES("
+    string query = "INSERT INTO epochs(epoch_name, world_name) VALUES("
+                   + backbone_transaction.quote(a_epoch_name) + ", "
                    + backbone_transaction.quote(a_world_name) + ")";
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -83,18 +85,18 @@ EpochRecordShrPtr EpochManagerAccessorPostgresql::getRecord(
 
     if (result.size() > 0)
     {
-        IDEpoch id_epoch;
+        string epoch_name;
         string world_name;
         bool active, finished;
         unsigned int ticks;
 
-        id_epoch = result[0]["id_epoch"].as(unsigned_integer);
+        result[0]["epoch_name"].to(epoch_name);
         result[0]["world_name"].to(world_name);
         active   = result[0]["active"  ].as(boolean);
         finished = result[0]["finished"].as(boolean);
         ticks    = result[0]["ticks"   ].as(unsigned_integer);
 
-        return make_shared<EpochRecord>(id_epoch, world_name, active, finished, ticks);
+        return make_shared<EpochRecord>(epoch_name, world_name, active, finished, ticks);
     }
     else
     {

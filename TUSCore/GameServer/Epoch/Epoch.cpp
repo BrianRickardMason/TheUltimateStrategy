@@ -37,7 +37,7 @@ namespace Epoch
 Epoch::Epoch(
     EpochRecord const & a_record
 )
-    : m_id_epoch(a_record.getIDEpoch()),
+    : m_epoch_name(a_record.getEpochName()),
       m_world_name(a_record.getWorldName()),
       m_active(a_record.getActive()),
       m_finished(a_record.getFinished()),
@@ -45,9 +45,9 @@ Epoch::Epoch(
 {
 }
 
-IDEpoch const & Epoch::getIDEpoch() const
+string Epoch::getEpochName() const
 {
-    return m_id_epoch;
+    return m_epoch_name;
 }
 
 string Epoch::getWorldName() const

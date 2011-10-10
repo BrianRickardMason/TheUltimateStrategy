@@ -45,12 +45,13 @@ EpochManager::EpochManager(
 
 bool EpochManager::createEpoch(
     ITransactionShrPtr       a_transaction,
-    string             const a_world_name
+    string             const a_world_name,
+    string             const a_epoch_name
 ) const
 {
     try
     {
-        m_accessor->insertRecord(a_transaction, a_world_name);
+        m_accessor->insertRecord(a_transaction, a_world_name, a_epoch_name);
 
         return true;
     }

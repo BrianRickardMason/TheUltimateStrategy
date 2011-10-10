@@ -52,6 +52,7 @@ namespace Executors
  *     </user>
  *     <parameters>
  *         <world_name value=\"#\" />
+ *         <epoch_name value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -168,6 +169,11 @@ class ExecutorCreateEpoch
      * @brief The name of the world.
      */
     std::string m_world_name;
+
+    /**
+     * @brief The name of the epoch.
+     */
+    std::string m_epoch_name;
 };
 
 } // namespace Executors

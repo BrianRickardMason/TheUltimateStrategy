@@ -42,13 +42,14 @@ namespace Epoch
 {
 
 ReplyShrPtr CreateEpoch(
-    IClientShrPtr         a_client,
-    string        const & a_login,
-    string        const & a_password,
-    string        const   a_world_name
+    IClientShrPtr       a_client,
+    string        const a_login,
+    string        const a_password,
+    string        const a_world_name,
+    string        const a_epoch_name
 )
 {
-    RequestShrPtr request = createRequestCreateEpoch(a_login, a_password, a_world_name);
+    RequestShrPtr request = createRequestCreateEpoch(a_login, a_password, a_world_name, a_epoch_name);
 
     return a_client->sendRequest(request);
 }

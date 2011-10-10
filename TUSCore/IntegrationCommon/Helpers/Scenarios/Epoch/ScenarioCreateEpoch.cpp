@@ -66,11 +66,13 @@ char const * ScenarioCreateEpoch::execute()
 ScenarioCreateEpochActionSuccess::ScenarioCreateEpochActionSuccess(
     string const a_login,
     string const a_password,
-    string const a_world_name
+    string const a_world_name,
+    string const a_epoch_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_world_name(a_world_name)
+      m_world_name(a_world_name),
+      m_epoch_name(a_epoch_name)
 {
 }
 
@@ -78,17 +80,19 @@ ReplyShrPtr ScenarioCreateEpochActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateEpoch(a_client, m_login, m_password, m_world_name);
+    return CreateEpoch(a_client, m_login, m_password, m_world_name, m_epoch_name);
 }
 
 ScenarioCreateEpochActionInvalidRequest::ScenarioCreateEpochActionInvalidRequest(
     string const a_login,
     string const a_password,
-    string const a_world_name
+    string const a_world_name,
+    string const a_epoch_name
 )
     : m_login(a_login),
       m_password(a_password),
-      m_world_name(a_world_name)
+      m_world_name(a_world_name),
+      m_epoch_name(a_epoch_name)
 {
 }
 
@@ -108,6 +112,9 @@ ReplyShrPtr ScenarioCreateEpochActionInvalidRequest::perform(
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
     world_name->appendAttribute("valve")->setValue(m_world_name.c_str());
+
+    IXmlNodeShrPtr epoch_name = parameters->appendNode("epoch_name");
+    epoch_name->appendAttribute("valve")->setValue(m_epoch_name.c_str());
 
     return a_client->sendRequest(request);
 }

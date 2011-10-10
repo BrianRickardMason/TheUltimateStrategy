@@ -55,17 +55,17 @@ public:
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
      * @param a_world_name  The name of the world.
-     * @param a_id_epoch    An identifier of the epoch.
+     * @param a_epoch_name  The name of the epoch.
      * @param a_name        The name of the land.
      *
      * @return True on success, false otherwise.
      */
     virtual bool createLand(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const   a_login,
-        std::string                     const   a_world_name,
-        Epoch::IDEpoch                  const & a_id_epoch,
-        std::string                     const   a_land_name
+        Persistency::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_world_name,
+        std::string                     const a_epoch_name,
+        std::string                     const a_land_name
     ) const = 0;
 
     /**

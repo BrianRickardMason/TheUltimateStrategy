@@ -48,7 +48,7 @@ protected:
      * @brief Constructs the test class.
      */
     SettlementManagerTest()
-        : m_id_epoch_1(1),
+        : m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
           m_land_name_1("Land1"),
@@ -72,10 +72,10 @@ protected:
 
             m_world_manager->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_world_name);
+            m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_1);
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_id_epoch_1, m_land_name_2);
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_1);
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_2);
 
             m_land_1 = m_land_manager->getLand(transaction, m_land_name_1);
             m_land_2 = m_land_manager->getLand(transaction, m_land_name_2);
@@ -102,9 +102,9 @@ protected:
     }
 
     /**
-     * @brief Test constants identifiers of the epoch.
+     * @brief Test constants: the name of the epoch.
      */
-    IDEpoch m_id_epoch_1;
+    string m_epoch_name;
 
     /**
      * @brief Test constants: the login of the user.

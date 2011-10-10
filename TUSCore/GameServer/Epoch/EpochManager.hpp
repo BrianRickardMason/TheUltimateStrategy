@@ -59,12 +59,14 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_world_name  The name of the world.
+     * @param a_epoch_name  The name of the epoch.
      *
      * @return True on success, false otherwise.
      */
     virtual bool createEpoch(
         Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_world_name
+        std::string                     const a_world_name,
+        std::string                     const a_epoch_name
     ) const;
 
     /**

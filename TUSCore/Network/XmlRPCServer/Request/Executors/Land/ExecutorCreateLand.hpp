@@ -28,7 +28,6 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATELAND_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATELAND_HPP
 
-#include "../../../../../GameServer/Epoch/IDEpoch.hpp"
 #include "../../../../../GameServer/Land/Operators/CreateLand/CreateLandOperatorExitCode.hpp"
 #include "../Executor.hpp"
 #include <string>
@@ -53,7 +52,7 @@ namespace Executors
  *     </user>
  *     <parameters>
  *         <world_name value=\"#\" />
- *         <idepoch    value=\"#\" />
+ *         <epoch_name value=\"#\" />
  *         <name       value=\"#\" />
  *     </parameters>
  * </request>
@@ -157,19 +156,14 @@ class ExecutorCreateLand
     ) const;
 
     /**
-     * @brief The value of the identifier of a epoch.
-     */
-    unsigned int m_value_id_epoch;
-
-    /**
      * @brief The name of the world.
      */
     std::string m_world_name;
 
     /**
-     * @brief The identifier of the epoch.
+     * @brief The name of the epoch.
      */
-    GameServer::Epoch::IDEpoch m_id_epoch;
+    std::string m_epoch_name;
 
     /**
      * @brief The name of the land.

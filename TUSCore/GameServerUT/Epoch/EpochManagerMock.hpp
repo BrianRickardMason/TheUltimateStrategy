@@ -50,14 +50,16 @@ public:
      *
      * @param a_transaction The transaction.
      * @param a_world_name  The name of the world.
+     * @param a_epoch_name  The name of the epoch.
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
+    MOCK_CONST_METHOD3(
         createEpoch,
         bool(
             Persistency::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
+            std::string                     const a_world_name,
+            std::string                     const a_epoch_name
         )
     );
 

@@ -28,7 +28,6 @@
 #include "../../GameServer/Land/LandRecord.hpp"
 #include <gmock/gmock.h>
 
-using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace std;
 
@@ -46,7 +45,7 @@ protected:
         : m_login("Login"),
           m_world_name("World"),
           m_land_name("Land"),
-          m_record(LandRecord(m_login, m_world_name, IDEpoch(1), m_land_name, false))
+          m_record(LandRecord(m_login, m_world_name, "Epoch", m_land_name, false))
     {
     }
 
@@ -71,15 +70,9 @@ protected:
     LandRecord m_record;
 };
 
-TEST_F(LandRecordTest, LandRecord)
+TEST_F(LandRecordTest, CtorDoesNotThrow)
 {
-    LandRecord record(m_login, m_world_name, IDEpoch(1), m_land_name, false);
-
-    ASSERT_STREQ(m_login.c_str(), record.getLogin().c_str());
-    ASSERT_STREQ(m_world_name.c_str(), record.getWorldName().c_str());
-    ASSERT_EQ(1, record.getIDEpoch().getValue());
-    ASSERT_STREQ(m_land_name.c_str(), record.getLandName().c_str());
-    ASSERT_FALSE(record.getGranted());
+    ASSERT_NO_THROW(LandRecord record(m_login, m_world_name, "Epoch", m_land_name, false));
 }
 
 TEST_F(LandRecordTest, GetLoginReturnsProperValue)
@@ -92,9 +85,9 @@ TEST_F(LandRecordTest, GetWorldNameReturnsProperValue)
     ASSERT_STREQ(m_world_name.c_str(), m_record.getWorldName().c_str());
 }
 
-TEST_F(LandRecordTest, GetIDEpochReturnsProperValue)
+TEST_F(LandRecordTest, GetEpochNameReturnsProperValue)
 {
-    ASSERT_EQ(1, m_record.getIDEpoch().getValue());
+    ASSERT_STREQ("Epoch", m_record.getEpochName().c_str());
 }
 
 TEST_F(LandRecordTest, GetLandNameReturnsProperValue)

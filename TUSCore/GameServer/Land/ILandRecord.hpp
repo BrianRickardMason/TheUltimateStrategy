@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_LAND_ILANDRECORD_HPP
 #define GAMESERVER_LAND_ILANDRECORD_HPP
 
-#include "../Epoch/IDEpoch.hpp"
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -64,11 +63,11 @@ public:
     virtual std::string getWorldName() const = 0;
 
     /**
-     * @brief Gets the identifier of the epoch.
+     * @brief Gets the name of the epoch.
      *
-     * @return The identifier of the epoch.
+     * @return The name of the epoch.
      */
-    virtual Epoch::IDEpoch const & getIDEpoch() const = 0;
+    virtual std::string getEpochName() const = 0;
 
     /**
      * @brief Gets the name of the land.
