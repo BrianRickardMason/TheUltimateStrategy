@@ -46,11 +46,10 @@ ReplyShrPtr CreateLand(
     string        const a_login,
     string        const a_password,
     string        const a_world_name,
-    string        const a_epoch_name,
     string        const a_land_name
 )
 {
-    RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_world_name, a_epoch_name, a_land_name);
+    RequestShrPtr request = createRequestCreateLand(a_login, a_password, a_world_name, a_land_name);
 
     return a_client->sendRequest(request);
 }

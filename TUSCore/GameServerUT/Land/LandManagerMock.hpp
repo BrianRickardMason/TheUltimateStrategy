@@ -49,18 +49,16 @@ public:
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
      * @param a_world_name  The name of the world.
-     * @param a_epoch_name  The name of the epoch.
      * @param a_land_name   The name of the land.
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD5(
+    MOCK_CONST_METHOD4(
         createLand,
         bool(
             Persistency::ITransactionShrPtr       a_transaction,
             std::string                     const a_login,
             std::string                     const a_world_name,
-            std::string                     const a_epoch_name,
             std::string                     const a_land_name
         )
     );

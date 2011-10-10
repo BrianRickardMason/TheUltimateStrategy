@@ -45,7 +45,7 @@ protected:
         : m_login("Login"),
           m_world_name("World"),
           m_land_name("Land"),
-          m_record(LandRecord(m_login, m_world_name, "Epoch", m_land_name, false))
+          m_record(LandRecord(m_login, m_world_name, m_land_name, false))
     {
     }
 
@@ -72,7 +72,7 @@ protected:
 
 TEST_F(LandRecordTest, CtorDoesNotThrow)
 {
-    ASSERT_NO_THROW(LandRecord record(m_login, m_world_name, "Epoch", m_land_name, false));
+    ASSERT_NO_THROW(LandRecord record(m_login, m_world_name, m_land_name, false));
 }
 
 TEST_F(LandRecordTest, GetLoginReturnsProperValue)
@@ -83,11 +83,6 @@ TEST_F(LandRecordTest, GetLoginReturnsProperValue)
 TEST_F(LandRecordTest, GetWorldNameReturnsProperValue)
 {
     ASSERT_STREQ(m_world_name.c_str(), m_record.getWorldName().c_str());
-}
-
-TEST_F(LandRecordTest, GetEpochNameReturnsProperValue)
-{
-    ASSERT_STREQ("Epoch", m_record.getEpochName().c_str());
 }
 
 TEST_F(LandRecordTest, GetLandNameReturnsProperValue)

@@ -38,8 +38,7 @@ CreateLandOperatorAutPtr CreateLandOperatorFactory::createCreateLandOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return CreateLandOperatorAutPtr(new CreateLandOperator(a_manager_abstract_factory->createEpochManager(),
-                                                           a_manager_abstract_factory->createLandManager(),
+    return CreateLandOperatorAutPtr(new CreateLandOperator(a_manager_abstract_factory->createLandManager(),
                                                            a_manager_abstract_factory->createUserManager(),
                                                            a_manager_abstract_factory->createWorldManager()));
 }

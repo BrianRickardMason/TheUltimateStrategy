@@ -47,14 +47,12 @@ public:
      *
      * @param a_login      The login of the user.
      * @param a_world_name The name of the world.
-     * @param a_epoch_name The name of the epoch.
      * @param a_land_name  The name of the land.
      * @param a_granted    The state of the "granted" value, whether or not humans and resources have been granted.
      */
     LandRecord(
         std::string const a_login,
         std::string const a_world_name,
-        std::string const a_epoch_name,
         std::string const a_land_name,
         bool              a_granted
     );
@@ -72,13 +70,6 @@ public:
      * @return The name of the world.
      */
     virtual std::string getWorldName() const;
-
-    /**
-     * @brief Gets the name of the epoch.
-     *
-     * @return The name of the epoch.
-     */
-    virtual std::string getEpochName() const;
 
     /**
      * @brief Gets the name of the land.
@@ -104,11 +95,6 @@ private:
      * @brief The name of the world.
      */
     std::string const m_world_name;
-
-    /**
-     * @brief The name of the epoch.
-     */
-    std::string const m_epoch_name;
 
     /**
      * @brief The name of the land.

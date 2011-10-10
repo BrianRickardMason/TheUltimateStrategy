@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_LAND_CREATELANDOPERATOR_HPP
 #define GAMESERVER_LAND_CREATELANDOPERATOR_HPP
 
-#include "../../../Epoch/IEpochManager.hpp"
 #include "../../../User/IUserManager.hpp"
 #include "../../../World/IWorldManager.hpp"
 #include "../../ILandManager.hpp"
@@ -49,13 +48,11 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_epoch_manager The manager of epochs.
      * @param a_land_manager  The manager of lands.
      * @param a_user_manager  The manager of users.
      * @param a_world_manager The manager of worlds.
      */
     CreateLandOperator(
-        Epoch::IEpochManagerShrPtr a_epoch_manager,
         ILandManagerShrPtr         a_land_manager,
         User::IUserManagerShrPtr   a_user_manager,
         World::IWorldManagerShrPtr a_world_manager
@@ -67,7 +64,6 @@ public:
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
      * @param a_world_name  The name of the world.
-     * @param a_epoch_name  The name of the epoch.
      * @param a_land_name   The name of the land.
      *
      * @return The exit code.
@@ -76,16 +72,10 @@ public:
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_world_name,
-        std::string                     const a_epoch_name,
         std::string                     const a_land_name
     ) const;
 
 private:
-    /**
-     * @brief The manager of epochs.
-     */
-    Epoch::IEpochManagerShrPtr m_epoch_manager;
-
     /**
      * @brief The manager of lands.
      */

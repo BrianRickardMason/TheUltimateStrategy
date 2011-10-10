@@ -37,13 +37,11 @@ namespace Land
 LandRecord::LandRecord(
     string const a_login,
     string const a_world_name,
-    string const a_epoch_name,
     string const a_land_name,
     bool         a_granted
 )
     : m_login(a_login),
       m_world_name(a_world_name),
-      m_epoch_name(a_epoch_name),
       m_land_name(a_land_name),
       m_granted(a_granted)
 {
@@ -57,11 +55,6 @@ string LandRecord::getLogin() const
 string LandRecord::getWorldName() const
 {
     return m_world_name;
-}
-
-string LandRecord::getEpochName() const
-{
-    return m_epoch_name;
 }
 
 string LandRecord::getLandName() const

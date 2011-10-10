@@ -285,7 +285,6 @@ RequestShrPtr createRequestCreateLand(
     string const a_login,
     string const a_password,
     string const a_world_name,
-    string const a_epoch_name,
     string const a_name
 )
 {
@@ -301,9 +300,6 @@ RequestShrPtr createRequestCreateLand(
 
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
     world_name->appendAttribute("value")->setValue(a_world_name.c_str());
-
-    IXmlNodeShrPtr epoch_name = parameters->appendNode("epoch_name");
-    epoch_name->appendAttribute("value")->setValue(a_epoch_name.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("land_name");
     name->appendAttribute("value")->setValue(a_name.c_str());

@@ -62,7 +62,6 @@ bool ExecutorCreateLand::getParameters(
         m_login      = a_request->getLoginValue();
         m_password   = a_request->getPasswordValue();
         m_world_name = a_request->getParameterValueString("world_name");
-        m_epoch_name = a_request->getParameterValueString("epoch_name");
         m_land_name  = a_request->getParameterValueString("land_name");
 
         return true;
@@ -105,19 +104,7 @@ bool ExecutorCreateLand::epochIsActive(
             transaction->commit();
         }
 
-        if (exit_code.m_epoch)
-        {
-            if (exit_code.m_epoch->getEpochName() != m_epoch_name)
-            {
-                return false;
-            }
-
-            return exit_code.m_epoch->getActive();
-        }
-        else
-        {
-            return false;
-        }
+        return exit_code.m_epoch ? exit_code.m_epoch->getActive() : false;
     }
 }
 
@@ -140,7 +127,7 @@ ReplyShrPtr ExecutorCreateLand::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         CreateLandOperatorExitCode const exit_code =
-            land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_epoch_name, m_land_name);
+            land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_land_name);
 
         if (exit_code.ok())
         {
@@ -175,10 +162,6 @@ ReplyShrPtr ExecutorCreateLand::produceReply(
     {
         case CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS:
             node_message->appendAttribute("value")->setValue(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS.c_str());
-            break;
-
-        case CREATE_LAND_OPERATOR_EXIT_CODE_EPOCH_DOES_NOT_EXIST:
-            node_message->appendAttribute("value")->setValue(CREATE_LAND_EPOCH_DOES_NOT_EXIST.c_str());
             break;
 
         case CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED:

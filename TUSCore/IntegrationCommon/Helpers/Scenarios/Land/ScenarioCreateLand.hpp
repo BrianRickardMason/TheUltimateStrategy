@@ -96,14 +96,12 @@ public:
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
-     * @param a_epoch_name The name of the epoch.
      * @param a_land_name  The name of the land.
      */
     ScenarioCreateLandActionSuccess(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name,
-        std::string const a_epoch_name,
         std::string const a_land_name
     );
 
@@ -133,11 +131,6 @@ private:
      * @brief The name of the world.
      */
     std::string const m_world_name;
-
-    /**
-     * @brief The name of the epoch.
-     */
-    std::string const m_epoch_name;
 
     /**
      * @brief The name of the land.
@@ -158,14 +151,12 @@ public:
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
-     * @param a_epoch_name The name of the epoch.
      * @param a_land_name  The name of the land.
      */
     ScenarioCreateLandActionInvalidRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name,
-        std::string const a_epoch_name,
         std::string const a_land_name
     );
 
@@ -197,11 +188,6 @@ private:
     std::string const m_world_name;
 
     /**
-     * @brief The name of the epoch.
-     */
-    std::string const m_epoch_name;
-
-    /**
      * @brief The name of the land.
      */
     std::string const m_land_name;
@@ -211,25 +197,6 @@ private:
  * @brief The "ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists" verification.
  */
 class ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists
-    : public IScenarioVerification
-{
-public:
-    /**
-     * @brief Performs the verification.
-     *
-     * @param a_reply The reply to be verified.
-     *
-     * @return An empty "string" on success, a message otherwise.
-     */
-    virtual std::string verify(
-        Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
-    );
-};
-
-/**
- * @brief The "ScenarioCreateLandVerificationEpochDoesNotExist" verification.
- */
-class ScenarioCreateLandVerificationEpochDoesNotExist
     : public IScenarioVerification
 {
 public:

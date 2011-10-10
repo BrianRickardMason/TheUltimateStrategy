@@ -49,9 +49,7 @@ protected:
      * @brief Constructs a test class.
      */
     LandManagerTest()
-        : m_epoch_name_1("Epoch1"),
-          m_epoch_name_2("Epoch2"),
-          m_land_name_1("Land1"),
+        : m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_login_1("Login1"),
           m_login_2("Login2"),
@@ -66,7 +64,6 @@ protected:
      * @param a_land       The land to be compared.
      * @param a_login      The expected login of the user.
      * @param a_world_name The expected name of the world.
-     * @param a_epoch_name The expected name of the epoch.
      * @param a_land_name  The expected name of the land.
      * @param a_granted    An expected state of the granted of the land.
      */
@@ -74,23 +71,15 @@ protected:
         ILandShrPtr       a_land,
         string      const a_login,
         string      const a_world_name,
-        string      const a_epoch_name,
         string      const a_land_name,
         bool              a_granted
     )
     {
         ASSERT_STREQ(a_login.c_str(), a_land->getLogin().c_str());
         ASSERT_STREQ(a_world_name.c_str(), a_land->getWorldName().c_str());
-        ASSERT_STREQ(a_epoch_name.c_str(), a_land->getEpochName().c_str());
         ASSERT_STREQ(a_land_name.c_str(), a_land->getLandName().c_str());
         ASSERT_EQ(a_granted, a_land->getGranted());
     }
-
-    /**
-     * @brief Test constants: the names of the epochs.
-     */
-    string m_epoch_name_1,
-           m_epoch_name_2;
 
     /**
      * @brief Test constants: the names of the lands.
@@ -124,13 +113,13 @@ TEST_F(LandManagerTest, createLand_Success)
 
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
-    EXPECT_CALL(*mock, insertRecord(transaction, m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1));
+    EXPECT_CALL(*mock, insertRecord(transaction, m_login_1, m_world_name_1, m_land_name_1));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
     LandManager manager(accessor);
 
-    ASSERT_TRUE(manager.createLand(transaction, m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1));
+    ASSERT_TRUE(manager.createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
 }
 
 TEST_F(LandManagerTest, createLand_Failure)
@@ -141,14 +130,14 @@ TEST_F(LandManagerTest, createLand_Failure)
 
     std::exception e;
 
-    EXPECT_CALL(*mock, insertRecord(transaction, m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1))
+    EXPECT_CALL(*mock, insertRecord(transaction, m_login_1, m_world_name_1, m_land_name_1))
     .WillOnce(Throw(e));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
     LandManager manager(accessor);
 
-    ASSERT_FALSE(manager.createLand(transaction, m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1));
+    ASSERT_FALSE(manager.createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
 }
 
 TEST_F(LandManagerTest, deleteLand_Success)
@@ -209,7 +198,7 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1))
-    .WillOnce(Return(ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1, true))));
+    .WillOnce(Return(ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, true))));
 
     ILandManagerAccessorAutPtr accessor(mock);
 
@@ -219,7 +208,7 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
 
     ASSERT_TRUE(land != NULL);
 
-    compareLand(land, m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1, true);
+    compareLand(land, m_login_1, m_world_name_1, m_land_name_1, true);
 }
 
 TEST_F(LandManagerTest, getLands_LandsDoNotExist)
@@ -247,7 +236,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
     ILandRecordMap map;
-    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1, false))));
+    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, false))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
@@ -262,7 +251,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
 
     ASSERT_EQ(1, lands.size());
 
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1, false);
+    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_land_name_1, false);
 }
 
 TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
@@ -272,8 +261,8 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
     LandManagerAccessorMock * mock = new LandManagerAccessorMock;
 
     ILandRecordMap map;
-    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1, false))));
-    map.insert(make_pair(m_land_name_2, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_2, m_epoch_name_2, m_land_name_2, true))));
+    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, false))));
+    map.insert(make_pair(m_land_name_2, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_2, m_land_name_2, true))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
@@ -288,8 +277,8 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
 
     ASSERT_EQ(2, lands.size());
 
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_epoch_name_1, m_land_name_1, false);
-    compareLand(lands[m_land_name_2], m_login_1, m_world_name_2, m_epoch_name_2, m_land_name_2, true);
+    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_land_name_1, false);
+    compareLand(lands[m_land_name_2], m_login_1, m_world_name_2, m_land_name_2, true);
 }
 
 TEST_F(LandManagerTest, markGranted)

@@ -79,8 +79,8 @@ protected:
             m_user_manager->createUser(transaction, "Login1", "Password1");
             m_user_manager->createUser(transaction, "Login2", "Password2");
 
-            m_land_manager->createLand(transaction, m_login_1, m_world_name, m_epoch_name, m_land_name_1);
-            m_land_manager->createLand(transaction, m_login_2, m_world_name, m_epoch_name, m_land_name_2);
+            m_land_manager->createLand(transaction, m_login_1, m_world_name, m_land_name_1);
+            m_land_manager->createLand(transaction, m_login_2, m_world_name, m_land_name_2);
 
             m_land_1 = m_land_manager->getLand(transaction, m_land_name_1);
             m_land_2 = m_land_manager->getLand(transaction, m_land_name_2);

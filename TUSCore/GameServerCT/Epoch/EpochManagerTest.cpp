@@ -409,7 +409,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_epoch_name_1, m_land_name);
+        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_land_name);
 
         transaction->commit();
     }
@@ -463,7 +463,7 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistency.getConnection();
         ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_epoch_name_1, m_land_name);
+        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_land_name);
 
         transaction->commit();
     }

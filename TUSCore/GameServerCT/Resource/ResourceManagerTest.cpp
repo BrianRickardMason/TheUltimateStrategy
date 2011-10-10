@@ -82,7 +82,7 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name);
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name);
 
             m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_1);
             m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_2);

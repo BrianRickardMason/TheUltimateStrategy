@@ -79,8 +79,8 @@ protected:
 
             m_create_epoch_operator->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_1);
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_2);
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_land_name_1);
+            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_land_name_2);
 
             transaction->commit();
         }

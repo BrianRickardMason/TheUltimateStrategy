@@ -37,11 +37,10 @@ namespace Land
  * @brief Available exit codes.
  */
 unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS = 1;
-unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_EPOCH_DOES_NOT_EXIST                  = 2;
-unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED                 = 3;
-unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_CREATED             = 4;
-unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR                      = 5;
-unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST                  = 6;
+unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED                 = 2;
+unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_CREATED             = 3;
+unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR                      = 4;
+unsigned short int const CREATE_LAND_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST                  = 5;
 
 /**
  * @brief The exit code of CreateLandOperator.

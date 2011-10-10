@@ -42,17 +42,15 @@ void LandManagerAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_login,
     string             const a_world_name,
-    string             const a_epoch_name,
     string             const a_land_name
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "INSERT INTO lands(login, world_name, epoch_name, land_name) VALUES("
+    string query = "INSERT INTO lands(login, world_name, land_name) VALUES("
                    + backbone_transaction.quote(a_login) + ", "
                    + backbone_transaction.quote(a_world_name) + ", "
-                   + backbone_transaction.quote(a_epoch_name) + ", "
                    + backbone_transaction.quote(a_land_name) + ")";
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -122,17 +120,15 @@ ILandRecordShrPtr LandManagerAccessorPostgresql::prepareResultGetRecord(
     {
         string login;
         string world_name;
-        string epoch_name;
         string land_name;
         bool granted;
 
         a_result[0]["login"].to(login);
         a_result[0]["world_name"].to(world_name);
-        a_result[0]["epoch_name"].to(epoch_name);
         a_result[0]["land_name"].to(land_name);
         a_result[0]["granted"].to(granted);
 
-        return ILandRecordShrPtr(new LandRecord(login, world_name, epoch_name, land_name, granted));
+        return ILandRecordShrPtr(new LandRecord(login, world_name, land_name, granted));
     }
     else
     {
@@ -146,7 +142,6 @@ ILandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
 {
     string login;
     string world_name;
-    string epoch_name;
     string land_name;
     bool granted;
 
@@ -156,11 +151,10 @@ ILandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
     {
         it["login"].to(login);
         it["world_name"].to(world_name);
-        it["epoch_name"].to(epoch_name);
         it["land_name"].to(land_name);
         it["granted"].to(granted);
 
-        ILandRecordShrPtr record = ILandRecordShrPtr(new LandRecord(login, world_name, epoch_name, land_name, granted));
+        ILandRecordShrPtr record = ILandRecordShrPtr(new LandRecord(login, world_name, land_name, granted));
         ILandRecordPair pair(land_name, record);
         records.insert(pair);
     }

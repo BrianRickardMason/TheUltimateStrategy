@@ -67,13 +67,11 @@ ScenarioCreateLandActionSuccess::ScenarioCreateLandActionSuccess(
     string const a_login,
     string const a_password,
     string const a_world_name,
-    string const a_epoch_name,
     string const a_land_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_world_name(a_world_name),
-      m_epoch_name(a_epoch_name),
       m_land_name(a_land_name)
 {
 }
@@ -82,20 +80,18 @@ ReplyShrPtr ScenarioCreateLandActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateLand(a_client, m_login, m_password, m_world_name, m_epoch_name, m_land_name);
+    return CreateLand(a_client, m_login, m_password, m_world_name, m_land_name);
 }
 
 ScenarioCreateLandActionInvalidRequest::ScenarioCreateLandActionInvalidRequest(
     string const a_login,
     string const a_password,
     string const a_world_name,
-    string const a_epoch_name,
     string const a_land_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_world_name(a_world_name),
-      m_epoch_name(a_epoch_name),
       m_land_name(a_land_name)
 {
 }
@@ -117,9 +113,6 @@ ReplyShrPtr ScenarioCreateLandActionInvalidRequest::perform(
     IXmlNodeShrPtr world_name = parameters->appendNode("world_name");
     world_name->appendAttribute("value")->setValue(m_world_name.c_str());
 
-    IXmlNodeShrPtr epoch_name = parameters->appendNode("epoch_name");
-    epoch_name->appendAttribute("value")->setValue(m_epoch_name.c_str());
-
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
     land_name->appendAttribute("valve")->setValue(m_land_name.c_str());
 
@@ -136,22 +129,6 @@ string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists::verify(
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
     I_ASSERT_STREQ(CREATE_LAND_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS.c_str(),
-                   node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
-                   "Invalid node value.");
-
-    return "";
-}
-
-string ScenarioCreateLandVerificationEpochDoesNotExist::verify(
-    ReplyShrPtr a_reply
-)
-{
-    IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
-
-    I_ASSERT_EQ(REPLY_ID_CREATE_LAND, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
-    I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
-
-    I_ASSERT_STREQ(CREATE_LAND_EPOCH_DOES_NOT_EXIST.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
 

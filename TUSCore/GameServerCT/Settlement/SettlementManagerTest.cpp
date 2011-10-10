@@ -74,8 +74,8 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_1);
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_epoch_name, m_land_name_2);
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name_1);
+            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name_2);
 
             m_land_1 = m_land_manager->getLand(transaction, m_land_name_1);
             m_land_2 = m_land_manager->getLand(transaction, m_land_name_2);

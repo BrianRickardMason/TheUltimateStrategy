@@ -67,13 +67,6 @@ public:
     virtual std::string getWorldName() const;
 
     /**
-     * @brief Gets the name of the epoch.
-     *
-     * @return The name of the epoch.
-     */
-    virtual std::string getEpochName() const;
-
-    /**
      * @brief Gets the name of the land.
      *
      * @return The name of the land.
@@ -97,11 +90,6 @@ private:
      * @brief The name of the world.
      */
     std::string const m_world_name;
-
-    /**
-     * @brief The name of the epoch.
-     */
-    std::string const m_epoch_name;
 
     /**
      * @brief The name of the land.

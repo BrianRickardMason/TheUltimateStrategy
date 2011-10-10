@@ -29,7 +29,6 @@ CREATE TABLE lands
 (
     login      VARCHAR(44) NOT NULL CHECK(login <> '') REFERENCES users(login) ON DELETE CASCADE,
     world_name VARCHAR(44) NOT NULL CHECK(world_name <> '') REFERENCES worlds(world_name) ON DELETE CASCADE,
-    epoch_name VARCHAR(44) NOT NULL CHECK(epoch_name <> '') REFERENCES epochs(epoch_name) ON DELETE CASCADE,
     land_name  VARCHAR(44) PRIMARY KEY NOT NULL CHECK(land_name <> ''),
 
     granted BOOLEAN DEFAULT FALSE
