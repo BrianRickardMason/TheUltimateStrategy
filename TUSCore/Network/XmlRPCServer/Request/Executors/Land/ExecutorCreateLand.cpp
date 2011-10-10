@@ -63,7 +63,7 @@ bool ExecutorCreateLand::getParameters(
         m_password   = a_request->getPasswordValue();
         m_world_name = a_request->getParameterValueString("world_name");
         m_epoch_name = a_request->getParameterValueString("epoch_name");
-        m_name       = a_request->getParameterValueString("name"); // TODO: Set me to land_name.
+        m_land_name  = a_request->getParameterValueString("land_name");
 
         return true;
     }
@@ -140,7 +140,7 @@ ReplyShrPtr ExecutorCreateLand::perform(
         ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
 
         CreateLandOperatorExitCode const exit_code =
-            land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_epoch_name, m_name);
+            land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_epoch_name, m_land_name);
 
         if (exit_code.ok())
         {

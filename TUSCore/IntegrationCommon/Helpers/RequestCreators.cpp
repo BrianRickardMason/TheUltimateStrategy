@@ -305,7 +305,7 @@ RequestShrPtr createRequestCreateLand(
     IXmlNodeShrPtr epoch_name = parameters->appendNode("epoch_name");
     epoch_name->appendAttribute("value")->setValue(a_epoch_name.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("name");
+    IXmlNodeShrPtr name = parameters->appendNode("land_name");
     name->appendAttribute("value")->setValue(a_name.c_str());
 
     return request;

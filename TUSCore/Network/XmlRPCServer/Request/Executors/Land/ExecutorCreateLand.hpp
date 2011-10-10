@@ -53,7 +53,7 @@ namespace Executors
  *     <parameters>
  *         <world_name value=\"#\" />
  *         <epoch_name value=\"#\" />
- *         <name       value=\"#\" />
+ *         <land_name  value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -168,7 +168,7 @@ class ExecutorCreateLand
     /**
      * @brief The name of the land.
      */
-    std::string m_name;
+    std::string m_land_name;
 };
 
 } // namespace Executors
