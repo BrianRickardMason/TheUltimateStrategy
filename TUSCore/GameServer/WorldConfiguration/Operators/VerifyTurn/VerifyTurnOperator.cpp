@@ -36,7 +36,10 @@ VerifyTurnOperatorExitCode VerifyTurnOperator::verifyTurn(
     World::IWorldShrPtr a_world
 ) const
 {
-    return VerifyTurnOperatorExitCode(VERIFY_TURN_OPERATOR_EXIT_CODE_VERIFICATION_HAS_BEEN_PERFORMED, true);
+    return VerifyTurnOperatorExitCode(
+               VERIFY_TURN_OPERATOR_EXIT_CODE_VERIFICATION_HAS_BEEN_PERFORMED,
+               a_world->getTurnAvailable()
+           );
 }
 
 } // namespace WorldConfiguration
