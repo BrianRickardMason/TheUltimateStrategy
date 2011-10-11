@@ -67,10 +67,12 @@ IWorldRecordShrPtr WorldManagerAccessorPostgresql::getRecord(
     if (result.size() > 0)
     {
         string world_name;
+        bool turn_available;
 
         result[0]["world_name"].to(world_name);
+        result[0]["turn_available"].to(turn_available);
 
-        return IWorldRecordShrPtr(new WorldRecord(world_name));
+        return IWorldRecordShrPtr(new WorldRecord(world_name, turn_available));
     }
     else
     {
@@ -92,12 +94,14 @@ IWorldRecordMap WorldManagerAccessorPostgresql::getRecords(
     IWorldRecordMap records;
 
     string world_name;
+    bool turn_available;
 
     for (pqxx::result::const_iterator it = result.begin(); it != result.end(); ++it)
     {
         it["world_name"].to(world_name);
+        it["turn_available"].to(turn_available);
 
-        IWorldRecordShrPtr record = IWorldRecordShrPtr(new WorldRecord(world_name));
+        IWorldRecordShrPtr record = IWorldRecordShrPtr(new WorldRecord(world_name, turn_available));
         IWorldRecordPair pair(world_name, record);
         records.insert(pair);
     }

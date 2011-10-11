@@ -37,13 +37,19 @@ namespace World
 World::World(
     IWorldRecordShrPtr const a_record
 )
-    : m_world_name(a_record->getWorldName())
+    : m_world_name(a_record->getWorldName()),
+      m_turn_available(a_record->getTurnAvailable())
 {
 }
 
 string World::getWorldName() const
 {
     return m_world_name;
+}
+
+bool World::getTurnAvailable() const
+{
+    return m_turn_available;
 }
 
 } // namespace World
