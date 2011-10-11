@@ -25,73 +25,33 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
-#define GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
+#include "BehaviourTickEpochTurnAvailable.hpp"
 
-#include "../../../World/IWorldManager.hpp"
-#include "../../IEpochManager.hpp"
-#include "IBehaviourTickEpoch.hpp"
-#include "ITickEpochOperator.hpp"
+using namespace GameServer::Persistency;
+using namespace GameServer::World;
+using namespace std;
 
 namespace GameServer
 {
 namespace Epoch
 {
 
-/**
- * @brief TickEpochOperator.
- */
-class TickEpochOperator
-    : public ITickEpochOperator
+BehaviourTickEpochTurnAvailable::BehaviourTickEpochTurnAvailable(
+	IEpochManagerShrPtr a_epoch_manager
+)
+    : m_epoch_manager(a_epoch_manager)
 {
-public:
-    /**
-     * @brief Constructs the operator.
-     *
-     * @param a_epoch_manager The manager of epochs.
-     * @param a_world_manager The manager of worlds.
-     */
-    TickEpochOperator(
-        IEpochManagerShrPtr        a_epoch_manager,
-        World::IWorldManagerShrPtr a_world_manager
-    );
+}
 
-    /**
-     * @brief Ticks an epoch.
-     *
-     * @param a_transaction The transaction.
-     * @param a_world_name  The name of the world.
-     *
-     * @return The exit code.
-     */
-    virtual TickEpochOperatorExitCode tickEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_world_name
-    );
+bool BehaviourTickEpochTurnAvailable::tickEpoch(
+    ITransactionShrPtr       a_transaction,
+    IWorldShrPtr       const a_world
+) const
+{
+	// TODO: Add turns to the lands.
 
-private:
-    /**
-     * @brief The manager of epochs.
-     */
-    IEpochManagerShrPtr m_epoch_manager;
-
-    /**
-     * @brief The manager of worlds.
-     */
-    World::IWorldManagerShrPtr m_world_manager;
-
-    /**
-     * @brief The behaviour TickEpoch.
-     */
-    IBehaviourTickEpochShrPtr m_behaviour_tick_epoch;
-};
-
-/**
- * @brief The auto pointer of TickEpochOperator.
- */
-typedef std::auto_ptr<TickEpochOperator> TickEpochOperatorAutPtr;
+    return m_epoch_manager->tickEpoch(a_transaction, a_world->getWorldName());
+}
 
 } // namespace Epoch
 } // namespace GameServer
-
-#endif // GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP

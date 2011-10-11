@@ -62,7 +62,7 @@ public:
     virtual TickEpochOperatorExitCode tickEpoch(
         Persistency::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) = 0;
 };
 
 /**

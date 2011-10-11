@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "TickEpochOperator.hpp"
+#include "BehaviourTickEpochAbstractFactory.hpp"
 
 using namespace GameServer::Persistency;
 using namespace GameServer::World;
@@ -48,15 +49,21 @@ TickEpochOperator::TickEpochOperator(
 TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
-) const
+)
 {
     try
     {
         // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_world_name))
+    	IWorldShrPtr world = m_world_manager->getWorld(a_transaction, a_world_name);
+
+        if (!world)
         {
             return TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
+
+        // Set the behaviour.
+        m_behaviour_tick_epoch =
+        	BehaviourTickEpochAbstractFactory::createBehaviourTickEpoch(m_epoch_manager, world);
 
         // Verify if the epoch exists.
         EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
@@ -78,7 +85,7 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
             return TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_IS_ACTIVE);
         }
 
-        bool const result = m_epoch_manager->tickEpoch(a_transaction, a_world_name);
+        bool const result = m_behaviour_tick_epoch->tickEpoch(a_transaction, world);
 
         return (result) ? TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_TACK)
                         : TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_TACK);

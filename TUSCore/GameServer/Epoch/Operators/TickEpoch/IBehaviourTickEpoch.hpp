@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
-#define GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
+#ifndef GAMESERVER_EPOCH_IBEHAVIOURTICKEPOCH_HPP
+#define GAMESERVER_EPOCH_IBEHAVIOURTICKEPOCH_HPP
 
-#include "../../../World/IWorldManager.hpp"
-#include "../../IEpochManager.hpp"
-#include "IBehaviourTickEpoch.hpp"
-#include "ITickEpochOperator.hpp"
+#include "../../../Persistency/ITransaction.hpp"
+#include "../../../World/IWorld.hpp"
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -39,59 +39,36 @@ namespace Epoch
 {
 
 /**
- * @brief TickEpochOperator.
+ * @brief The interface of BehaviourTickEpoch.
  */
-class TickEpochOperator
-    : public ITickEpochOperator
+class IBehaviourTickEpoch
 {
 public:
     /**
-     * @brief Constructs the operator.
-     *
-     * @param a_epoch_manager The manager of epochs.
-     * @param a_world_manager The manager of worlds.
+     * @brief Destructs BehaviourTickEpoch.
      */
-    TickEpochOperator(
-        IEpochManagerShrPtr        a_epoch_manager,
-        World::IWorldManagerShrPtr a_world_manager
-    );
+    virtual ~IBehaviourTickEpoch(){};
 
     /**
-     * @brief Ticks an epoch.
+     * @brief Ticks the epoch of the world.
      *
      * @param a_transaction The transaction.
-     * @param a_world_name  The name of the world.
+     * @param a_world       The world.
      *
-     * @return The exit code.
+     * @return True on success, false otherwise.
      */
-    virtual TickEpochOperatorExitCode tickEpoch(
+    virtual bool tickEpoch(
         Persistency::ITransactionShrPtr       a_transaction,
-        std::string                     const a_world_name
-    );
-
-private:
-    /**
-     * @brief The manager of epochs.
-     */
-    IEpochManagerShrPtr m_epoch_manager;
-
-    /**
-     * @brief The manager of worlds.
-     */
-    World::IWorldManagerShrPtr m_world_manager;
-
-    /**
-     * @brief The behaviour TickEpoch.
-     */
-    IBehaviourTickEpochShrPtr m_behaviour_tick_epoch;
+        World::IWorldShrPtr             const a_world
+    ) const = 0;
 };
 
 /**
- * @brief The auto pointer of TickEpochOperator.
+ * @brief The shared pointer of the interface of BehaviourTickEpoch.
  */
-typedef std::auto_ptr<TickEpochOperator> TickEpochOperatorAutPtr;
+typedef boost::shared_ptr<IBehaviourTickEpoch> IBehaviourTickEpochShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
+#endif // GAMESERVER_EPOCH_IBEHAVIOURTICKEPOCH_HPP
