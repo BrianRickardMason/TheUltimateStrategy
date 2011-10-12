@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_COMMON_IACCESSORABSTRACTFACTORY_HPP
 #define GAMESERVER_COMMON_IACCESSORABSTRACTFACTORY_HPP
 
+#include "../Achievement/IAchievementAccessor.hpp"
 #include "../Authentication/IAuthenticationManagerAccessor.hpp"
 #include "../Authorization/IAuthorizationManagerAccessor.hpp"
 #include "../Building/IBuildingManagerAccessor.hpp"
@@ -57,6 +58,13 @@ public:
      * @brief Destructs AccessorAbstractFactory.
      */
     virtual ~IAccessorAbstractFactory(){}
+
+    /**
+     * @brief Creates the achievement accessor.
+     *
+     * @return The newly created achievement accessor.
+     */
+    virtual Achievement::IAchievementAccessorAutPtr createAchievementAccessor() const = 0;
 
     /**
      * @brief Creates the authentication accessor.

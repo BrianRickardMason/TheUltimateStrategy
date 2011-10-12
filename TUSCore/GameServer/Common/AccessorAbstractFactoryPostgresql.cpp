@@ -25,6 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include "../Achievement/AchievementAccessorPostgresql.hpp"
 #include "../Authentication/AuthenticationManagerAccessorPostgresql.hpp"
 #include "../Authorization/AuthorizationManagerAccessorPostgresql.hpp"
 #include "../Building/BuildingManagerAccessorPostgresql.hpp"
@@ -39,6 +40,7 @@
 #include "../World/WorldManagerAccessorPostgresql.hpp"
 #include "AccessorAbstractFactoryPostgresql.hpp"
 
+using namespace GameServer::Achievement;
 using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;
 using namespace GameServer::Building;
@@ -56,6 +58,11 @@ namespace GameServer
 {
 namespace Common
 {
+
+IAchievementAccessorAutPtr AccessorAbstractFactoryPostgresql::createAchievementAccessor() const
+{
+    return IAchievementAccessorAutPtr(new AchievementAccessorPostgresql);
+}
 
 IAuthenticationManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createAuthenticationAccessor() const
 {

@@ -43,6 +43,13 @@ class AccessorAbstractFactoryPostgresql
 {
 public:
     /**
+     * @brief Creates the achievement accessor.
+     *
+     * @return The newly created achievement accessor.
+     */
+    virtual Achievement::IAchievementAccessorAutPtr createAchievementAccessor() const;
+
+    /**
      * @brief Creates the authentication accessor.
      *
      * @return The newly created authentication accessor.
