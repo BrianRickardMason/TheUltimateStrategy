@@ -42,14 +42,14 @@ IBehaviourTickEpochShrPtr BehaviourTickEpochAbstractFactory::createBehaviourTick
     IWorldShrPtr        const a_world
 )
 {
-	if (a_world->getTurnAvailable())
-	{
-		return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnAvailable(a_epoch_manager));
-	}
-	else
-	{
-		return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnUnavailable(a_epoch_manager));
-	}
+    if (a_world->getTurnAvailable())
+    {
+        return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnAvailable(a_epoch_manager));
+    }
+    else
+    {
+        return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnUnavailable(a_epoch_manager));
+    }
 }
 
 } // namespace Epoch

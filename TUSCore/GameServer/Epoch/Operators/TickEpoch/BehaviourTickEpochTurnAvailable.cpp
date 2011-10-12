@@ -37,7 +37,7 @@ namespace Epoch
 {
 
 BehaviourTickEpochTurnAvailable::BehaviourTickEpochTurnAvailable(
-	IEpochManagerShrPtr a_epoch_manager
+    IEpochManagerShrPtr a_epoch_manager
 )
     : m_epoch_manager(a_epoch_manager)
 {
@@ -48,7 +48,7 @@ bool BehaviourTickEpochTurnAvailable::tickEpoch(
     IWorldShrPtr       const a_world
 ) const
 {
-	// TODO: Add turns to the lands.
+    // TODO: Add turns to the lands.
 
     return m_epoch_manager->tickEpoch(a_transaction, a_world->getWorldName());
 }

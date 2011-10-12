@@ -54,7 +54,7 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
     try
     {
         // Verify if the world exists.
-    	IWorldShrPtr world = m_world_manager->getWorld(a_transaction, a_world_name);
+        IWorldShrPtr world = m_world_manager->getWorld(a_transaction, a_world_name);
 
         if (!world)
         {
@@ -63,7 +63,7 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
 
         // Set the behaviour.
         m_behaviour_tick_epoch =
-        	BehaviourTickEpochAbstractFactory::createBehaviourTickEpoch(m_epoch_manager, world);
+            BehaviourTickEpochAbstractFactory::createBehaviourTickEpoch(m_epoch_manager, world);
 
         // Verify if the epoch exists.
         EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
