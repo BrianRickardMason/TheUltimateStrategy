@@ -22,7 +22,24 @@ CREATE TABLE epochs
     finished   BOOLEAN DEFAULT FALSE,
     ticks      INTEGER NOT NULL DEFAULT 0 CHECK(ticks >= 0),
 
-    UNIQUE(world_name)
+    UNIQUE(world_name) -- TODO: Unique (world_name, finished == false)
+);
+
+DROP TABLE IF EXISTS achievements_available CASCADE;
+CREATE TABLE achievements_available
+(
+    achievement_name VARCHAR(44) PRIMARY KEY NOT NULL CHECK(achievement_name <> '')
+);
+
+DROP TABLE IF EXISTS achievements CASCADE;
+CREATE TABLE achievements
+(
+    world_name       VARCHAR(44) NOT NULL CHECK(world_name <> '')       REFERENCES worlds(world_name)                       ON DELETE CASCADE,
+    epoch_name       VARCHAR(44) NOT NULL CHECK(epoch_name <> '')       REFERENCES epochs(epoch_name)                       ON DELETE CASCADE,
+    login            VARCHAR(44) NOT NULL CHECK(login <> '')            REFERENCES users(login)                             ON DELETE CASCADE,
+    achievement_name VARCHAR(44) NOT NULL CHECK(achievement_name <> '') REFERENCES achievements_available(achievement_name) ON DELETE CASCADE,
+
+    UNIQUE(epoch_name, login, achievement_name)
 );
 
 DROP TABLE IF EXISTS lands CASCADE;
