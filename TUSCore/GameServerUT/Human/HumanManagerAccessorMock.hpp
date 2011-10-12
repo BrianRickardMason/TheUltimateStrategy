@@ -50,8 +50,6 @@ public:
      * @param a_id_holder   An identifier of the holder.
      * @param a_key         A key of the human.
      * @param a_volume      A volume of the human.
-     *
-     * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD4(
         insertRecord,
@@ -69,8 +67,6 @@ public:
      * @param a_transaction A transaction.
      * @param a_id_holder   An identifier of the holder.
      * @param a_key         A key of the human.
-     *
-     * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD3(
         deleteRecord,
@@ -140,8 +136,6 @@ public:
      * @param a_id_holder   An identifier of the holder.
      * @param a_key         A key of the human.
      * @param a_volume      A volume to be increased.
-     *
-     * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD4(
         increaseVolume,
@@ -160,8 +154,6 @@ public:
      * @param a_id_holder    An identifier of the holder.
      * @param a_key          A key of the human.
      * @param a_volume       A volume to be decreased.
-     *
-     * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD4(
         decreaseVolume,

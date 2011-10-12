@@ -60,8 +60,6 @@ public:
      * @param a_id_holder   An identifier of the holder.
      * @param a_key         A key of the human.
      * @param a_volume      A volume of the human.
-     *
-     * @return True on success, false otherwise.
      */
     virtual void insertRecord(
         Persistency::ITransactionShrPtr         a_transaction,
@@ -76,8 +74,6 @@ public:
      * @param a_transaction A transaction.
      * @param a_id_holder   An identifier of the holder.
      * @param a_key         A key of the human.
-     *
-     * @return True on success, false otherwise.
      */
     virtual void deleteRecord(
         Persistency::ITransactionShrPtr         a_transaction,
@@ -135,8 +131,6 @@ public:
      * @param a_id_holder   An identifier of the holder.
      * @param a_key         A key of the human.
      * @param a_volume      A volume to be increased.
-     *
-     * @return True on success, false otherwise.
      */
     virtual void increaseVolume(
         Persistency::ITransactionShrPtr         a_transaction,
@@ -152,8 +146,6 @@ public:
      * @param a_id_holder   An identifier of the holder.
      * @param a_key         A key of the human.
      * @param a_volume      A volume to be decreased.
-     *
-     * @return True on success, false otherwise.
      */
     virtual void decreaseVolume(
         Persistency::ITransactionShrPtr         a_transaction,
