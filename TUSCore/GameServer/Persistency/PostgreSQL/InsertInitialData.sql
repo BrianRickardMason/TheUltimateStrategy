@@ -1,5 +1,8 @@
 BEGIN;
 
+-- Achievements.
+INSERT INTO achievements_available(achievement_name) VALUES ('achievement');
+
 -- Cost type: ID_COST_TYPE_BUILDING_BUILD.
 -- Building class: ID_BUILDING_CLASS_DEFENSIVE.
 INSERT INTO costs(key_hash, id_cost_type, id_resource, volume) VALUES(1000101, 1, 1, 10);
