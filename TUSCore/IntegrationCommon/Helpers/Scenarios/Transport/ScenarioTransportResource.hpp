@@ -28,8 +28,8 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_TRANSPORT_SCENARIOTRANSPORTRESOURCE_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_TRANSPORT_SCENARIOTRANSPORTRESOURCE_HPP
 
-#include "../../../Network/XmlRPCCommon/Xml/IXmlNode.hpp"
-#include "../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
+#include <Network/XmlRPCCommon/Xml/IXmlNode.hpp>
+#include <Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include "../../Commands/Transport/TransportCommands.hpp"
 #include "../IScenario.hpp"
 #include "../IScenarioAction.hpp"

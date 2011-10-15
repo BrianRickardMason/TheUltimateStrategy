@@ -44,8 +44,6 @@ All packages used to build and run The Ultimate Strategy come with
 Ubuntu 11.04 Desktop distribution.
 
 Additional packages that are used in TUSCore project:
-- bjam (ver. 3.1.16),
-- boost-build (ver. 2.0-m12-2),
 - google-mock (ver. 1.4.0-3),
 - libboost1.42-dev (1.42.0-4ubuntu2),
 - libgtest-dev (ver. 1.5.0-1),

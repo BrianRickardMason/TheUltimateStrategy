@@ -49,7 +49,7 @@ protected:
     {
         BOOST_ASSERT(resetDatabase());
 
-        std::string command("../../../../Network/bin/gcc-4.5.2/debug/XmlRPCServer");
+        std::string command("./server");
         Poco::Process::Args args = boost::assign::list_of("localhost")("2222")("1");
 
         Poco::ProcessHandle process_handle = Poco::Process::launch(command, args);
@@ -64,7 +64,7 @@ protected:
      */
     virtual ~IntegrationFunctionalTest()
     {
-        Poco::Process::kill(m_pid);
+        //Poco::Process::kill(m_pid);
     };
 
 private:

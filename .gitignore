@@ -1,9 +1,13 @@
 # Directories.
-bin
+build
 
-# Eclipse files.
+# Eclipse specific files.
 .cproject
 .project
 
 # Test specific files.
 *.xml
+
+# Waf specific files.
+.lock*
+.waf*

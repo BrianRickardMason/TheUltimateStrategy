@@ -28,8 +28,8 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_GENERIC_SCENARIOECHO_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_GENERIC_SCENARIOECHO_HPP
 
-#include "../../../Network/XmlRPCCommon/Xml/IXmlNode.hpp"
-#include "../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
+#include <Network/XmlRPCCommon/Xml/IXmlNode.hpp>
+#include <Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include "../../Commands/Generic/GenericCommands.hpp"
 #include "../IScenario.hpp"
 #include "../IScenarioAction.hpp"

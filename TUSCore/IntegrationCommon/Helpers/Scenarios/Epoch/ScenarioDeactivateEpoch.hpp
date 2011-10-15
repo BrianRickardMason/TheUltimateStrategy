@@ -28,8 +28,8 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_EPOCH_SCENARIODEACTIVATEEPOCH_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_EPOCH_SCENARIODEACTIVATEEPOCH_HPP
 
-#include "../../../Network/XmlRPCCommon/Xml/IXmlNode.hpp"
-#include "../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
+#include <Network/XmlRPCCommon/Xml/IXmlNode.hpp>
+#include <Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include "../../Commands/Epoch/EpochCommands.hpp"
 #include "../IScenario.hpp"
 #include "../IScenarioAction.hpp"

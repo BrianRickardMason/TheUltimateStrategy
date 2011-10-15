@@ -1,0 +1,122 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+APPANME='TheUltimateStrategy'
+VERSION='master'
+
+top='.'
+out='build'
+
+import glob
+
+def options(opt):
+    opt.load('compiler_cxx')
+
+def configure(conf):
+    conf.load('compiler_cxx')
+    conf.check_cxx(lib='PocoFoundation')
+    conf.check_cxx(lib='boost_thread')
+    conf.check_cxx(lib='boost_system')
+    conf.check_cxx(lib='log4cpp')
+    conf.check_cxx(lib='gmock')
+    conf.check_cxx(lib='gtest')
+    conf.check_cxx(lib='pqxx')
+    conf.check_cxx(lib='pthread')
+
+def build(bld):
+    gameserver = bld.new_task_gen(
+                         features='cxx cxxstlib',
+                         target='gameserver',
+                         source=bld.path.ant_glob('GameServer/**/*.cpp')
+                     )
+
+    gameserverut = bld.new_task_gen(
+                       features='cxx cxxprogram',
+                       target='gameserverut', 
+                       source=bld.path.ant_glob('GameServerUT/**/*.cpp'),
+                       use='gameserver',
+                       lib='gtest gmock pthread pqxx'
+                   )
+
+    gameserverct = bld.new_task_gen(
+                       features='cxx cxxprogram',
+                       target='gameserverct', 
+                       source=bld.path.ant_glob('GameServerCT/**/*.cpp'),
+                       use='gameserver',
+                       lib='gtest gmock pthread pqxx'
+                   )
+
+    pugixml = bld.new_task_gen(
+                  features='cxx cxxstlib',
+                  target='pugixml',
+                  source=bld.path.ant_glob('3rdParty/**/*.cpp')
+              )
+
+    xmlrpcclientasync = bld.new_task_gen(
+                            features='cxx cxxstlib',
+                            target='xmlrpcclientasync',
+                            source=bld.path.ant_glob('Network/XmlRPCClientAsync/Client/*.cpp')
+                        )
+
+    xmlrpccommon = bld.new_task_gen(
+                       features='cxx cxxstlib',
+                       target='xmlrpccommon',
+                       source=bld.path.ant_glob('Network/XmlRPCCommon/**/*.cpp')
+                   )
+
+    xmlrpcserver = bld.new_task_gen(
+                       features='cxx cxxstlib',
+                       target='xmlrpcserver',
+                       source=  bld.path.ant_glob('Network/XmlRPCServer/*/*.cpp') 
+                              + bld.path.ant_glob('Network/XmlRPCServer/*/*/*.cpp')
+                              + bld.path.ant_glob('Network/XmlRPCServer/*/*/*/*.cpp'),
+                       use='gameserver'
+                   )
+    networkut = bld.new_task_gen(
+                    features='cxx cxxprogram',
+                    target='networkut',
+                    source=bld.path.ant_glob('NetworkUT/**/*.cpp'),
+                    use='gameserver xmlrpccommon xmlrpcserver',
+                    lib='boost_system boost_thread gmock gtest log4cpp pqxx pthread pugixml'
+                )
+
+    server = bld.new_task_gen(
+                 features='cxx cxxprogram',
+                 target='server',
+                 source='Network/XmlRPCServer/xml_server_main.cpp',
+                 use='gameserver xmlrpccommon xmlrpcserver',
+                 lib='boost_system boost_thread log4cpp pqxx pugixml'
+             )
+
+    client = bld.new_task_gen(
+                 features='cxx cxxprogram',
+                 target='client',
+                 source='Network/XmlRPCClientAsync/xml_client_async_main.cpp',
+                 use='xmlrpcclientasync xmlrpccommon',
+                 lib='boost_system boost_thread pthread pugixml'
+             )
+
+    integrationcommon = bld.new_task_gen(
+                            features='cxx cxxstlib',
+                            target='integrationcommon',
+                            source=bld.path.ant_glob('IntegrationCommon/**/*.cpp')
+                        )
+
+    integrationfunctional = bld.new_task_gen(
+                                features='cxx cxxprogram',
+                                target='integrationfunctional',
+                                source=bld.path.ant_glob('IntegrationFunctional/**/*.cpp'),
+                                use='gameserver integrationcommon xmlrpccommon xmlrpcserver',
+                                lib='PocoFoundation boost_system boost_thread gmock gtest log4cpp pqxx pugixml',
+                                includes='.'
+                            )
+
+    integrationstress = bld.new_task_gen(
+                            features='cxx cxxprogram',
+                            target='integrationstress',
+                            source=bld.path.ant_glob('IntegrationStress/**/*.cpp'),
+                            use='gameserver integrationcommon xmlrpccommon xmlrpcserver',
+                            lib='PocoFoundation boost_system boost_thread gmock gtest log4cpp pqxx pugixml',
+                            includes='.'
+                        )
+                            

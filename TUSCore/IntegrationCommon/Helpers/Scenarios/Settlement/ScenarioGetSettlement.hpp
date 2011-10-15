@@ -28,8 +28,8 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENT_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENT_HPP
 
-#include "../../../Network/XmlRPCCommon/Xml/IXmlNode.hpp"
-#include "../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
+#include <Network/XmlRPCCommon/Xml/IXmlNode.hpp>
+#include <Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include "../../Commands/Settlement/SettlementCommands.hpp"
 #include "../IScenario.hpp"
 #include "../IScenarioAction.hpp"

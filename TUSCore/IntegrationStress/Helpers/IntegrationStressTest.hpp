@@ -68,7 +68,7 @@ protected:
 
         BOOST_ASSERT(sprintf(number_of_server_threads, "%d", a_number_of_server_threads) > 0);
 
-        std::string command("../../../../Network/bin/gcc-4.5.2/debug/XmlRPCServer");
+        std::string command("./server");
         Poco::Process::Args args = boost::assign::list_of("localhost")("2222")(number_of_server_threads);
         Poco::ProcessHandle process_handle = Poco::Process::launch(command, args);
         Poco::ProcessHandle::PID server_pid = process_handle.id();
