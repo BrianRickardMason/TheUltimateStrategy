@@ -41,19 +41,18 @@ https://github.com/BrianRickardMason/TheUltimateStrategy
 1. Requirements.
 
 All packages used to build and run The Ultimate Strategy come with
-Ubuntu 11.04 Desktop distribution.
+Ubuntu 11.10 Desktop distribution.
 
 Additional packages that are used in TUSCore project:
-- google-mock (ver. 1.4.0-3),
-- libboost1.42-dev (1.42.0-4ubuntu2),
-- libgtest-dev (ver. 1.5.0-1),
-- libgtest0 (ver. 1.5.0-1),
+- google-mock (ver. 1.6.0-0ubuntu1),
+- libboost1.46-dev (1.46.1.1),
+- libgtest-dev (ver. 1.6.0-1),
 - liblog4cpp5 (ver. 1.0-4),
 - liblog4cpp5-dev (ver. 1.0-4),
-- libpoco-dev (ver. 1.3.6p1-1build1),
-- libpocofoundation9 (ver. 1.3.6p1-1build1),
-- libpqxx-3.0 (ver. 3.0.2-1),
-- libpqxx3-dev (ver. 3.0.2-1),
-- postgresql-8.4 (ver. 8.4.8-0ubuntu0.11.04).
+- libpoco-dev (ver. 1.3.6p1-1build2),
+- libpocofoundation9 (ver. 1.3.6p1-1build2),
+- libpqxx-3.0 (ver. 3.0.2-1ubuntu1),
+- libpqxx3-dev (ver. 3.0.2-1ubuntu1),
+- postgresql-9.1 (ver. postgresql-9.1).
 
 Additional packages that are used in TUSPythonInterface project:
