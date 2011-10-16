@@ -39,14 +39,14 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class LandManagerTest
+class LandPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    LandManagerTest()
+    LandPersistenceFacadeTest()
         : m_epoch_name_1("Epoch1"),
           m_epoch_name_2("Epoch2"),
           m_epoch_name_3("Epoch3"),
@@ -170,9 +170,9 @@ protected:
 };
 
 /**
- * Component tests of: LandManager::createLand.
+ * Component tests of: LandPersistenceFacade::createLand.
  */
-TEST_F(LandManagerTest, createLand_LandDoesNotExist_FirstLandOfUser)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesNotExist_FirstLandOfUser)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -182,7 +182,7 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_FirstLandOfUser)
     transaction->commit();
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfUser)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesNotExist_SecondLandOfUser)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -198,7 +198,7 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfUser)
     transaction->commit();
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesNotExist_FirstLandOfAnotherUser)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesNotExist_FirstLandOfAnotherUser)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -218,7 +218,7 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_FirstLandOfAnotherUser)
     transaction->commit();
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfAnotherUser)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesNotExist_SecondLandOfAnotherUser)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -242,7 +242,7 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfAnotherUser)
     transaction->commit();
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesNotExist_ThirdLandOfAnotherUserInAnotherWorld)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesNotExist_ThirdLandOfAnotherUserInAnotherWorld)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -269,7 +269,7 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_ThirdLandOfAnotherUserInAnot
     ASSERT_FALSE(m_land_persistence_facade->createLand(transaction, m_login_2, m_world_name_2, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfAnotherUserInAnotherWorld)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesNotExist_SecondLandOfAnotherUserInAnotherWorld)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -300,7 +300,7 @@ TEST_F(LandManagerTest, createLand_LandDoesNotExist_SecondLandOfAnotherUserInAno
     ASSERT_FALSE(m_land_persistence_facade->createLand(transaction, m_login_2, m_world_name_2, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesExist_UserAndWorld)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesExist_UserAndWorld)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -315,7 +315,7 @@ TEST_F(LandManagerTest, createLand_LandDoesExist_UserAndWorld)
     ASSERT_FALSE(m_land_persistence_facade->createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesExist_User)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesExist_User)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -330,7 +330,7 @@ TEST_F(LandManagerTest, createLand_LandDoesExist_User)
     ASSERT_FALSE(m_land_persistence_facade->createLand(transaction, m_login_1, m_world_name_2, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, createLand_LandDoesExist_World)
+TEST_F(LandPersistenceFacadeTest, createLand_LandDoesExist_World)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -346,9 +346,9 @@ TEST_F(LandManagerTest, createLand_LandDoesExist_World)
 }
 
 /**
- * Component tests of: LandManager::deleteLand.
+ * Component tests of: LandPersistenceFacade::deleteLand.
  */
-TEST_F(LandManagerTest, deleteLand_LandDoesNotExist)
+TEST_F(LandPersistenceFacadeTest, deleteLand_LandDoesNotExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -359,7 +359,7 @@ TEST_F(LandManagerTest, deleteLand_LandDoesNotExist)
     transaction->commit();
 }
 
-TEST_F(LandManagerTest, deleteLand_LandDoesExist)
+TEST_F(LandPersistenceFacadeTest, deleteLand_LandDoesExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -376,9 +376,9 @@ TEST_F(LandManagerTest, deleteLand_LandDoesExist)
 }
 
 /**
- * Component tests of: LandManager::getLand.
+ * Component tests of: LandPersistenceFacade::getLand.
  */
-TEST_F(LandManagerTest, getLand_LandDoesNotExist)
+TEST_F(LandPersistenceFacadeTest, getLand_LandDoesNotExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -392,7 +392,7 @@ TEST_F(LandManagerTest, getLand_LandDoesNotExist)
     ASSERT_TRUE(land == NULL);
 }
 
-TEST_F(LandManagerTest, getLand_LandDoesExist)
+TEST_F(LandPersistenceFacadeTest, getLand_LandDoesExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -412,7 +412,7 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
     compareLand(land, m_login_1, m_world_name_1, m_land_name_1);
 }
 
-TEST_F(LandManagerTest, getLand_LandDoesExist_MissingLandName)
+TEST_F(LandPersistenceFacadeTest, getLand_LandDoesExist_MissingLandName)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -432,9 +432,9 @@ TEST_F(LandManagerTest, getLand_LandDoesExist_MissingLandName)
 }
 
 /**
- * Component tests of: LandManager::getLands.
+ * Component tests of: LandPersistenceFacade::getLands.
  */
-TEST_F(LandManagerTest, getLands_LandsDoNotExist)
+TEST_F(LandPersistenceFacadeTest, getLands_LandsDoNotExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -448,7 +448,7 @@ TEST_F(LandManagerTest, getLands_LandsDoNotExist)
     ASSERT_EQ(0, lands.size());
 }
 
-TEST_F(LandManagerTest, getLands_LandsDoExist)
+TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
@@ -479,7 +479,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist)
     compareLand(lands[m_land_name_2], m_login_1, m_world_name_2, m_land_name_2);
 }
 
-TEST_F(LandManagerTest, getLands_LandsDoExist_MissingLogin)
+TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_MissingLogin)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();

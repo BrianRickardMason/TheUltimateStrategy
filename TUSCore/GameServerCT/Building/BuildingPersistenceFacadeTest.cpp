@@ -42,14 +42,14 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class BuildingManagerTest
+class BuildingPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    BuildingManagerTest()
+    BuildingPersistenceFacadeTest()
         : m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
@@ -175,9 +175,9 @@ protected:
 };
 
 /**
- * Component tests of: BuildingManager::addBuilding.
+ * Component tests of: BuildingPersistenceFacade::addBuilding.
  */
-TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent)
+TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsNotPresent)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -200,7 +200,7 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent)
     }
 }
 
-TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
+TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -232,7 +232,7 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
     }
 }
 
-TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_DifferentBuilding)
+TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent_DifferentBuilding)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -266,9 +266,9 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_DifferentBuilding)
 
 }
 /**
- * Component tests of: BuildingManager::subtractBuilding.
+ * Component tests of: BuildingPersistenceFacade::subtractBuilding.
  */
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingsArePresent_SubtractAllOfOneBuildingAtOnce)
+TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsArePresent_SubtractAllOfOneBuildingAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -301,7 +301,7 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsArePresent_SubtractAllOfOn
     }
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractHalfAtOnce)
+TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingIsPresent_SubtractHalfAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -333,7 +333,7 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractHalfAtOnc
     }
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_TryToSubtractToMuch)
+TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsPresent_TryToSubtractToMuch)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -363,7 +363,7 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_TryToSubtractToM
     }
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_SubtractRest)
+TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsPresent_SubtractRest)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -393,7 +393,7 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_SubtractRest)
     }
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsNotPresent_TryToSubtract)
+TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsNotPresent_TryToSubtract)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
@@ -402,9 +402,9 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsNotPresent_TryToSubtract
 }
 
 /**
- * Component tests of: BuildingManager::getBuilding.
+ * Component tests of: BuildingPersistenceFacade::getBuilding.
  */
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsNotPresent)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsNotPresent)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
@@ -414,7 +414,7 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsNotPresent)
     ASSERT_TRUE(building == NULL);
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -436,7 +436,7 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfH
     }
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfDifferentHolder_ExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -457,7 +457,7 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfD
     }
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfDifferentHolder_NonExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfDifferentHolder_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -478,7 +478,7 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfD
     }
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -499,7 +499,7 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
     }
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfDifferentHolder_ExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -520,7 +520,7 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
     }
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfDifferentHolder_NonExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfDifferentHolder_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -542,9 +542,9 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
 }
 
 /**
- * Component tests of: BuildingManager::getBuildings.
+ * Component tests of: BuildingPersistenceFacade::getBuildings.
  */
-TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_ExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsAreNotPresent_ExistentHolder)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
@@ -554,7 +554,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_ExistentHolder)
     ASSERT_TRUE(buildings.empty());
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_NonExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsAreNotPresent_NonExistentHolder)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
@@ -564,7 +564,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_NonExistentHolde
     ASSERT_TRUE(buildings.empty());
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingIsPresent_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -587,7 +587,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfHolder)
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_ExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingIsPresent_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -608,7 +608,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_Exi
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_NonExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingIsPresent_OfDifferentHolder_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -629,7 +629,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_Non
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -654,7 +654,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfHolder)
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_ExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -676,7 +676,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_E
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_NonExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfDifferentHolder_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -698,7 +698,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_N
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfFirstHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolders_OfFirstHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -724,7 +724,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfFirstH
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfSecondHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolders_OfSecondHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -749,7 +749,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfSecond
     }
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_NonExistentHolder)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolders_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
