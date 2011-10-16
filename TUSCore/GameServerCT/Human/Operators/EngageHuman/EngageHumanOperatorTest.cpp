@@ -77,7 +77,7 @@ protected:
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
-          m_building_manager(m_manager_abstract_factory->createBuildingManager()),
+          m_building_persistence_facade(m_manager_abstract_factory->createBuildingPersistenceFacade()),
           m_cost_manager(m_manager_abstract_factory->createCostManager()),
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
           m_land_manager(m_manager_abstract_factory->createLandManager()),
@@ -215,9 +215,9 @@ protected:
     IEpochManagerShrPtr m_epoch_manager;
 
     /**
-     * @brief A building manager.
+     * @brief A building persistence facade.
      */
-    IBuildingManagerShrPtr m_building_manager;
+    IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
 
     /**
      * @brief A cost manager.
@@ -602,7 +602,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_TooFewBuil
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
         transaction->commit();
     }
@@ -624,7 +624,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 5);
 
@@ -670,7 +670,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_ADVANCED, 5);
 
@@ -716,7 +716,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED, 3);
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_NOVICE, 1);
@@ -766,7 +766,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildi
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 3);
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED, 7);
@@ -982,7 +982,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
         transaction->commit();
     }
@@ -1029,7 +1029,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
         transaction->commit();
     }
@@ -1076,7 +1076,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResou
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 11);
 
         transaction->commit();
 
@@ -1126,7 +1126,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJoble
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE, 930);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 11);
 
         transaction->commit();
     }
@@ -1172,7 +1172,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 24);
 
@@ -1221,7 +1221,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE, 24);
 
@@ -1271,7 +1271,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 2);
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED, 6);

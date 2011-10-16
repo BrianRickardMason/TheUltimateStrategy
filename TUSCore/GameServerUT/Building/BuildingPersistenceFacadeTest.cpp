@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Building/BuildingManager.hpp"
+#include "../../GameServer/Building/BuildingPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "BuildingManagerAccessorMock.hpp"
 
@@ -41,14 +41,14 @@ using testing::Throw;
 /**
  * @brief A test class.
  */
-class BuildingManagerTest
+class BuildingPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Creates a test class.
      */
-    BuildingManagerTest()
+    BuildingPersistenceFacadeTest()
         : m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
           m_key_1(ID_BUILDING_DEFENSIVE_BARBICAN),
           m_key_2(ID_BUILDING_GOLD_ALTAR_OF_WISHES)
@@ -84,14 +84,14 @@ protected:
     Key m_key_2;
 };
 
-TEST_F(BuildingManagerTest, BuildingManager)
+TEST_F(BuildingPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IBuildingManagerAccessorAutPtr accessor(new BuildingManagerAccessorMock);
 
-    BuildingManager manager(accessor);
+    ASSERT_NO_THROW(BuildingPersistenceFacade persistence_facade(accessor));
 }
 
-TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent)
+TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -104,12 +104,12 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    manager.addBuilding(transaction, m_id_holder_1, m_key_1, 5);
+    persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5);
 }
 
-TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent_Throw)
+TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresentThrowFromAccessorIsPropagatedProperly)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -125,12 +125,12 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent_Throw)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.addBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
+    ASSERT_THROW(persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
 }
 
-TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
+TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -143,12 +143,12 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    manager.addBuilding(transaction, m_id_holder_1, m_key_1, 5);
+    persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5);
 }
 
-TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_Throw)
+TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsPresentThrowFromAccessorIsPropagatedProperly)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -164,12 +164,12 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_Throw)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.addBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
+    ASSERT_THROW(persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsNotPresent_TryToSubtract)
+TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsNotPresentReturnsFalseWhileTryingToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -180,12 +180,12 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsNotPresent_TryToSubtract)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5));
+    ASSERT_FALSE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5));
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractPart)
+TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractPartReturnsTrue)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -198,12 +198,12 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractPart)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.subtractBuilding(transaction, m_id_holder_1, m_key_1, 3));
+    ASSERT_TRUE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 3));
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractPart_Throw)
+TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractPartThrowFromAccessorIsPropagatedProperly)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -219,12 +219,12 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractPart_Thro
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.subtractBuilding(transaction, m_id_holder_1, m_key_1, 3), std::exception);
+    ASSERT_THROW(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 3), std::exception);
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractAll)
+TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractAllReturnsTrue)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -237,12 +237,12 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractAll)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5));
+    ASSERT_TRUE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5));
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractAll_Throw)
+TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractAllThrowFromAccessorIsPropagatedPropely)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -258,12 +258,12 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractAll_Throw
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
+    ASSERT_THROW(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
 }
 
-TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_TryToSubtractTooMuch)
+TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentReturnsFalseWhileTryingToSubtractTooMuch)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -274,12 +274,12 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_TryToSubtractTooM
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.subtractBuilding(transaction, m_id_holder_1, m_key_1, 6));
+    ASSERT_FALSE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 6));
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsNotPresent)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -290,14 +290,14 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsNotPresent)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    BuildingWithVolumeShrPtr building = manager.getBuilding(transaction, m_id_holder_1, m_key_1);
+    BuildingWithVolumeShrPtr building = persistence_facade.getBuilding(transaction, m_id_holder_1, m_key_1);
 
     ASSERT_TRUE(building == NULL);
 }
 
-TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent)
+TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -308,16 +308,16 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    BuildingWithVolumeShrPtr building = manager.getBuilding(transaction, m_id_holder_1, m_key_1);
+    BuildingWithVolumeShrPtr building = persistence_facade.getBuilding(transaction, m_id_holder_1, m_key_1);
 
     ASSERT_TRUE(building != NULL);
 
     compareBuilding(building, m_key_1, 5);
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -328,14 +328,14 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    BuildingWithVolumeMap buildings = manager.getBuildings(transaction, m_id_holder_1);
+    BuildingWithVolumeMap buildings = persistence_facade.getBuildings(transaction, m_id_holder_1);
 
     ASSERT_TRUE(buildings.empty());
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OneBuilding)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OneBuilding)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -349,9 +349,9 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OneBuilding)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    BuildingWithVolumeMap buildings = manager.getBuildings(transaction, m_id_holder_1);
+    BuildingWithVolumeMap buildings = persistence_facade.getBuildings(transaction, m_id_holder_1);
 
     ASSERT_FALSE(buildings.empty());
 
@@ -360,7 +360,7 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OneBuilding)
     compareBuilding(buildings[m_key_1], m_key_1, 5);
 }
 
-TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoBuildings)
+TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoBuildings)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -375,9 +375,9 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoBuildings)
 
     IBuildingManagerAccessorAutPtr accessor(mock);
 
-    BuildingManager manager(accessor);
+    BuildingPersistenceFacade persistence_facade(accessor);
 
-    BuildingWithVolumeMap buildings = manager.getBuildings(transaction, m_id_holder_1);
+    BuildingWithVolumeMap buildings = persistence_facade.getBuildings(transaction, m_id_holder_1);
 
     ASSERT_FALSE(buildings.empty());
 

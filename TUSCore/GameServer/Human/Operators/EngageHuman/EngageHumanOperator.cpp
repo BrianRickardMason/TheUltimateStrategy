@@ -43,13 +43,13 @@ namespace Human
 {
 
 EngageHumanOperator::EngageHumanOperator(
-    IBuildingManagerShrPtr a_building_manager,
-    ICostManagerShrPtr     a_cost_manager,
-    IHumanManagerShrPtr    a_human_manager,
-    IPropertyManagerShrPtr a_property_manager,
-    IResourceManagerShrPtr a_resource_manager
+    IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
+    ICostManagerShrPtr               a_cost_manager,
+    IHumanManagerShrPtr              a_human_manager,
+    IPropertyManagerShrPtr           a_property_manager,
+    IResourceManagerShrPtr           a_resource_manager
 )
-    : m_building_manager(a_building_manager),
+    : m_building_persistence_facade(a_building_persistence_facade),
       m_cost_manager(a_cost_manager),
       m_human_manager(a_human_manager),
       m_property_manager(a_property_manager),
@@ -156,7 +156,8 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
     if (building)
     {
         // Get available buildings.
-        BuildingWithVolumeShrPtr building_with_volume = m_building_manager->getBuilding(a_transaction, a_id_holder, building->getKey());
+        BuildingWithVolumeShrPtr building_with_volume =
+            m_building_persistence_facade->getBuilding(a_transaction, a_id_holder, building->getKey());
 
         // Building does not exist.
         if (!building_with_volume)

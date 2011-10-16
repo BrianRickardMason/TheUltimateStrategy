@@ -36,9 +36,9 @@ namespace Building
 {
 
 GetBuildingsOperator::GetBuildingsOperator(
-    IBuildingManagerShrPtr a_building_manager
+    IBuildingPersistenceFacadeShrPtr a_building_persistence_facade
 )
-    : m_building_manager(a_building_manager)
+    : m_building_persistence_facade(a_building_persistence_facade)
 {
 }
 
@@ -49,7 +49,7 @@ GetBuildingsOperatorExitCode GetBuildingsOperator::getBuildings(
 {
     try
     {
-        BuildingWithVolumeMap const buildings = m_building_manager->getBuildings(a_transaction, a_id_holder);
+        BuildingWithVolumeMap const buildings = m_building_persistence_facade->getBuildings(a_transaction, a_id_holder);
 
         return GetBuildingsOperatorExitCode(GET_BUILDINGS_OPERATOR_EXIT_CODE_BUILDINGS_HAVE_BEEN_GOT, buildings);
     }

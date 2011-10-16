@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_BUILDING_BUILDINGMANAGERFACTORY_HPP
-#define GAMESERVER_BUILDING_BUILDINGMANAGERFACTORY_HPP
+#ifndef GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEFACTORY_HPP
 
 #include "../Common/IAccessorAbstractFactory.hpp"
-#include "BuildingManager.hpp"
+#include "BuildingPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,9 +37,9 @@ namespace Building
 {
 
 /**
- * @brief A factory of building manager.
+ * @brief A factory of building persistence facade.
  */
-class BuildingManagerFactory
+class BuildingPersistenceFacadeFactory
 {
 public:
     /**
@@ -47,9 +47,9 @@ public:
      *
      * @param a_accessor_abstract_factory The abstract factory of accessors.
      *
-     * @return A newly created building manager.
+     * @return A newly created building persistence facade.
      */
-    static BuildingManagerAutPtr createBuildingManager(
+    static BuildingPersistenceFacadeAutPtr create(
         Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
     );
 };
@@ -57,4 +57,4 @@ public:
 } // namespace Building
 } // namespace GameServer
 
-#endif // GAMESERVER_BUILDING_BUILDINGMANAGERFACTORY_HPP
+#endif // GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEFACTORY_HPP

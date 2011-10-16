@@ -38,11 +38,13 @@ EngageHumanOperatorAutPtr EngageHumanOperatorFactory::createEngageHumanOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return EngageHumanOperatorAutPtr(new EngageHumanOperator(a_manager_abstract_factory->createBuildingManager(),
-                                                             a_manager_abstract_factory->createCostManager(),
-                                                             a_manager_abstract_factory->createHumanManager(),
-                                                             a_manager_abstract_factory->createPropertyManager(),
-                                                             a_manager_abstract_factory->createResourceManager()));
+    return EngageHumanOperatorAutPtr(
+               new EngageHumanOperator(a_manager_abstract_factory->createBuildingPersistenceFacade(),
+                                       a_manager_abstract_factory->createCostManager(),
+                                       a_manager_abstract_factory->createHumanManager(),
+                                       a_manager_abstract_factory->createPropertyManager(),
+                                       a_manager_abstract_factory->createResourceManager())
+           );
 }
 
 } // namespace Human

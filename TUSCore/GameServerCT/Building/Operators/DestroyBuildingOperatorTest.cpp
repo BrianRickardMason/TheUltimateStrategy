@@ -75,7 +75,7 @@ protected:
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
-          m_building_manager(m_manager_abstract_factory->createBuildingManager()),
+          m_building_persistence_facade(m_manager_abstract_factory->createBuildingPersistenceFacade()),
           m_cost_manager(m_manager_abstract_factory->createCostManager()),
           m_land_manager(m_manager_abstract_factory->createLandManager()),
           m_resource_manager(m_manager_abstract_factory->createResourceManager()),
@@ -115,9 +115,9 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            ASSERT_TRUE(m_building_manager->getBuildings(transaction, m_id_holder_11).empty());
-            ASSERT_TRUE(m_building_manager->getBuildings(transaction, m_id_holder_12).empty());
-            ASSERT_TRUE(m_building_manager->getBuildings(transaction, m_id_holder_21).empty());
+            ASSERT_TRUE(m_building_persistence_facade->getBuildings(transaction, m_id_holder_11).empty());
+            ASSERT_TRUE(m_building_persistence_facade->getBuildings(transaction, m_id_holder_12).empty());
+            ASSERT_TRUE(m_building_persistence_facade->getBuildings(transaction, m_id_holder_21).empty());
 
             ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
             ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -208,9 +208,9 @@ protected:
     IEpochManagerShrPtr m_epoch_manager;
 
     /**
-     * @brief A building manager.
+     * @brief A building persistence facade.
      */
-    IBuildingManagerShrPtr m_building_manager;
+    IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
 
     /**
      * @brief A cost manager.
@@ -247,7 +247,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -264,7 +264,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -278,7 +278,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_MissingIDHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -295,7 +295,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_MissingIDHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -317,7 +317,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -342,7 +342,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
-        m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -351,7 +351,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -373,7 +373,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -390,7 +390,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -399,7 +399,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
+        ASSERT_TRUE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
     }
 
     {
@@ -421,7 +421,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
 
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -438,7 +438,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
+        m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
         transaction->commit();
     }
@@ -447,7 +447,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
+        ASSERT_TRUE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
     }
 
     {
@@ -467,7 +467,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
 
         transaction->commit();
     }
@@ -486,8 +486,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
-        ASSERT_EQ(199, m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
+        ASSERT_FALSE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
+        ASSERT_EQ(199, m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
     }
 
     {
@@ -507,7 +507,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
 
         transaction->commit();
     }
@@ -526,8 +526,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
-        ASSERT_EQ(137, m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
+        ASSERT_FALSE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
+        ASSERT_EQ(137, m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
     }
 
     {
@@ -547,7 +547,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 50);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 50);
 
         transaction->commit();
     }
@@ -566,7 +566,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
+        ASSERT_TRUE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
     }
 
     {
@@ -586,7 +586,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
 
         transaction->commit();
     }
@@ -605,8 +605,8 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
-        ASSERT_EQ(100, m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
+        ASSERT_FALSE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
+        ASSERT_EQ(100, m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
     }
 
     {

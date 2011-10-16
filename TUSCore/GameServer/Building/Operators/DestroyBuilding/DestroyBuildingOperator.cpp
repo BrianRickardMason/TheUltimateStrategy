@@ -38,11 +38,11 @@ namespace Building
 {
 
 DestroyBuildingOperator::DestroyBuildingOperator(
-    IBuildingManagerShrPtr     a_building_manager,
-    ICostManagerShrPtr         a_cost_manager,
-    IResourceManagerShrPtr     a_resource_manager
+    IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
+    ICostManagerShrPtr               a_cost_manager,
+    IResourceManagerShrPtr           a_resource_manager
 )
-    : m_building_manager(a_building_manager),
+    : m_building_persistence_facade(a_building_persistence_facade),
       m_cost_manager(a_cost_manager),
       m_resource_manager(a_resource_manager)
 {
@@ -64,7 +64,7 @@ DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
         }
 
         // Verify if the building exists.
-        BuildingWithVolumeShrPtr building_with_volume = m_building_manager->getBuilding(a_transaction, a_id_holder, a_key);
+        BuildingWithVolumeShrPtr building_with_volume = m_building_persistence_facade->getBuilding(a_transaction, a_id_holder, a_key);
 
         // The building does not exist.
         if (!building_with_volume)
@@ -106,7 +106,7 @@ DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
 
         // Subtract the building.
         bool const result_subtract_building =
-            m_building_manager->subtractBuilding(a_transaction, a_id_holder, a_key, a_volume);
+            m_building_persistence_facade->subtractBuilding(a_transaction, a_id_holder, a_key, a_volume);
 
         // There is a possible situation (in multithreaded application) of a race condition between checking if
         // there is enough buildings and trying to subtract it.

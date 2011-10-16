@@ -25,11 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_BUILDING_BUILDINGMANAGER_HPP
-#define GAMESERVER_BUILDING_BUILDINGMANAGER_HPP
+#ifndef GAMESERVER_BUILDING_IBUILDINGPERSISTENCEFACADE_HPP
+#define GAMESERVER_BUILDING_IBUILDINGPERSISTENCEFACADE_HPP
 
-#include "IBuildingManager.hpp"
-#include "IBuildingManagerAccessor.hpp"
+#include "../Common/IDHolder.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "BuildingWithVolume.hpp"
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
@@ -37,20 +39,16 @@ namespace Building
 {
 
 /**
- * @brief A building manager.
+ * @brief An interface of building persistence facade.
  */
-class BuildingManager
-    : public IBuildingManager
+class IBuildingPersistenceFacade
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the building manager.
-     *
-     * @param a_accessor An accessor to be injected.
+     * @brief Destructs the building persistence facade.
      */
-    BuildingManager(
-        IBuildingManagerAccessorAutPtr a_accessor
-    );
+    virtual ~IBuildingPersistenceFacade(){};
 
     /**
      * @brief Adds the building.
@@ -67,7 +65,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Subtracts the building.
@@ -86,14 +84,14 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets a building.
      *
      * @param a_transaction The transaction.
-     * @param a_id_holder   An identifier of the holder.
-     * @param a_key         A key of the building.
+     * @param a_id_holder   The identifier of the holder.
+     * @param a_key         The key of the building.
      *
      * @return The building, null if not found.
      */
@@ -101,34 +99,28 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets buildings.
      *
      * @param a_transaction The transaction.
-     * @param a_id_holder   An identifier of the holder.
+     * @param a_id_holder   The identifier of the holder.
      *
      * @return A map of buildings, an empty map if not found.
      */
     virtual BuildingWithVolumeMap getBuildings(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    IBuildingManagerAccessorScpPtr m_accessor;
+    ) const = 0;
 };
 
 /**
- * @brief An auto pointer of building manager.
+ * @brief A shared pointer of interface of building persistence facade.
  */
-typedef std::auto_ptr<BuildingManager> BuildingManagerAutPtr;
+typedef boost::shared_ptr<IBuildingPersistenceFacade> IBuildingPersistenceFacadeShrPtr;
 
 } // namespace Building
 } // namespace GameServer
 
-#endif // GAMESERVER_BUILDING_BUILDINGMANAGER_HPP
+#endif // GAMESERVER_BUILDING_IBUILDINGPERSISTENCEFACADE_HPP

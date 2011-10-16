@@ -38,7 +38,9 @@ GetBuildingOperatorAutPtr GetBuildingOperatorFactory::createGetBuildingOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetBuildingOperatorAutPtr(new GetBuildingOperator(a_manager_abstract_factory->createBuildingManager()));
+    return GetBuildingOperatorAutPtr(
+               new GetBuildingOperator(a_manager_abstract_factory->createBuildingPersistenceFacade())
+           );
 }
 
 } // namespace Building

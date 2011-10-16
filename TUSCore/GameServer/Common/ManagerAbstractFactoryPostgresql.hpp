@@ -63,11 +63,11 @@ public:
     virtual Authorization::IAuthorizationPersistenceFacadeShrPtr createAuthorizationPersistenceFacade() const;
 
     /**
-     * @brief Creates the building manager.
+     * @brief Creates the building persistence facade.
      *
-     * @return The newly created building manager.
+     * @return The newly created building persistence facade.
      */
-    virtual Building::IBuildingManagerShrPtr createBuildingManager() const;
+    virtual Building::IBuildingPersistenceFacadeShrPtr createBuildingPersistenceFacade() const;
 
     /**
      * @brief Creates the cost manager.

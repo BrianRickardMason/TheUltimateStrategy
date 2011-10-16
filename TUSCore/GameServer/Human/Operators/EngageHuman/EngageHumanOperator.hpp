@@ -30,7 +30,7 @@
 
 #include "IEngageHumanOperator.hpp"
 
-#include "../../../Building/IBuildingManager.hpp"
+#include "../../../Building/IBuildingPersistenceFacade.hpp"
 #include "../../../Cost/ICostManager.hpp"
 #include "../../../Human/IHumanManager.hpp"
 #include "../../../Property/IPropertyManager.hpp"
@@ -51,18 +51,18 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_building_manager The manager of buildings.
-     * @param a_cost_manager     The manager of costs.
-     * @param a_human_manager    The manager of humans.
-     * @param a_property_manager The manager of properties.
-     * @param a_resource_manager The manager of resources.
+     * @param a_building_persistence_facade The persistence facade of buildings.
+     * @param a_cost_manager                The manager of costs.
+     * @param a_human_manager               The manager of humans.
+     * @param a_property_manager            The manager of properties.
+     * @param a_resource_manager            The manager of resources.
      */
     EngageHumanOperator(
-        Building::IBuildingManagerShrPtr a_building_manager,
-        Cost::ICostManagerShrPtr         a_cost_manager,
-        IHumanManagerShrPtr              a_human_manager,
-        Property::IPropertyManagerShrPtr a_property_manager,
-        Resource::IResourceManagerShrPtr a_resource_manager
+        Building::IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
+        Cost::ICostManagerShrPtr                   a_cost_manager,
+        IHumanManagerShrPtr                        a_human_manager,
+        Property::IPropertyManagerShrPtr           a_property_manager,
+        Resource::IResourceManagerShrPtr           a_resource_manager
     );
 
     /**
@@ -129,9 +129,9 @@ private:
     ) const;
 
     /**
-     * @brief The manager of buildings.
+     * @brief The persistence facade of buildings.
      */
-    Building::IBuildingManagerShrPtr m_building_manager;
+    Building::IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
 
     /**
      * @brief The manager of costs.

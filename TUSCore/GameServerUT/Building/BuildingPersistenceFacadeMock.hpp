@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_BUILDING_BUILDINGMANAGERMOCK_HPP
-#define GAMESERVER_BUILDING_BUILDINGMANAGERMOCK_HPP
+#ifndef GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEMOCK_HPP
+#define GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEMOCK_HPP
 
-#include "../../GameServer/Building/IBuildingManager.hpp"
+#include "../../GameServer/Building/IBuildingPersistenceFacade.hpp"
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace Building
 {
 
 /**
- * @brief A mock of building manager.
+ * @brief A mock of building persistence facade.
  */
-class BuildingManagerMock
-    : public IBuildingManager
+class BuildingPersistenceFacadeMock
+    : public IBuildingPersistenceFacade
 {
 public:
     /**
@@ -123,4 +123,4 @@ public:
 } // namespace Building
 } // namespace GameServer
 
-#endif // GAMESERVER_BUILDING_BUILDINGMANAGERMOCK_HPP
+#endif // GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEMOCK_HPP

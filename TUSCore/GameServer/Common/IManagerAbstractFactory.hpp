@@ -30,7 +30,7 @@
 
 #include "../Authentication/IAuthenticationPersistenceFacade.hpp"
 #include "../Authorization/IAuthorizationPersistenceFacade.hpp"
-#include "../Building/IBuildingManager.hpp"
+#include "../Building/IBuildingPersistenceFacade.hpp"
 #include "../Cost/ICostManager.hpp"
 #include "../Epoch/IEpochManager.hpp"
 #include "../Human/IHumanManager.hpp"
@@ -73,11 +73,11 @@ public:
     virtual Authorization::IAuthorizationPersistenceFacadeShrPtr createAuthorizationPersistenceFacade() const = 0;
 
     /**
-     * @brief Creates the building manager.
+     * @brief Creates the building persistence facade.
      *
-     * @return The newly created building manager.
+     * @return The newly created building persistence facade.
      */
-    virtual Building::IBuildingManagerShrPtr createBuildingManager() const = 0;
+    virtual Building::IBuildingPersistenceFacadeShrPtr createBuildingPersistenceFacade() const = 0;
 
     /**
      * @brief Creates the cost manager.

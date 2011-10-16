@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "BuildingManager.hpp"
+#include "BuildingPersistenceFacade.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -36,14 +36,14 @@ namespace GameServer
 namespace Building
 {
 
-BuildingManager::BuildingManager(
+BuildingPersistenceFacade::BuildingPersistenceFacade(
     IBuildingManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-void BuildingManager::addBuilding(
+void BuildingPersistenceFacade::addBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -60,7 +60,7 @@ void BuildingManager::addBuilding(
     }
 }
 
-bool BuildingManager::subtractBuilding(
+bool BuildingPersistenceFacade::subtractBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -90,7 +90,7 @@ bool BuildingManager::subtractBuilding(
     return false;
 }
 
-BuildingWithVolumeShrPtr BuildingManager::getBuilding(
+BuildingWithVolumeShrPtr BuildingPersistenceFacade::getBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -101,7 +101,7 @@ BuildingWithVolumeShrPtr BuildingManager::getBuilding(
     return record ? make_shared<BuildingWithVolume>(*record) : BuildingWithVolumeShrPtr();
 }
 
-BuildingWithVolumeMap BuildingManager::getBuildings(
+BuildingWithVolumeMap BuildingPersistenceFacade::getBuildings(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder
 ) const

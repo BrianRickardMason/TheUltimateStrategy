@@ -38,11 +38,11 @@ namespace Building
 {
 
 BuildBuildingOperator::BuildBuildingOperator(
-    IBuildingManagerShrPtr a_building_manager,
-    ICostManagerShrPtr     a_cost_manager,
-    IResourceManagerShrPtr a_resource_manager
+    IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
+    ICostManagerShrPtr               a_cost_manager,
+    IResourceManagerShrPtr           a_resource_manager
 )
-    : m_building_manager(a_building_manager),
+    : m_building_persistence_facade(a_building_persistence_facade),
       m_cost_manager(a_cost_manager),
       m_resource_manager(a_resource_manager)
 {
@@ -90,7 +90,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         }
 
         // Add the building.
-        m_building_manager->addBuilding(a_transaction, a_id_holder, a_key, a_volume);
+        m_building_persistence_facade->addBuilding(a_transaction, a_id_holder, a_key, a_volume);
 
         return BuildBuildingOperatorExitCode(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT);
     }

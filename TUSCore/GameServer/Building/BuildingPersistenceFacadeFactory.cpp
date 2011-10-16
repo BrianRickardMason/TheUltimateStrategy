@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "BuildingManagerFactory.hpp"
+#include "BuildingPersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
 
@@ -34,11 +34,13 @@ namespace GameServer
 namespace Building
 {
 
-BuildingManagerAutPtr BuildingManagerFactory::createBuildingManager(
+BuildingPersistenceFacadeAutPtr BuildingPersistenceFacadeFactory::create(
     IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
 )
 {
-    return BuildingManagerAutPtr(new BuildingManager(a_accessor_abstract_factory->createBuildingAccessor()));
+    return BuildingPersistenceFacadeAutPtr(
+               new BuildingPersistenceFacade(a_accessor_abstract_factory->createBuildingAccessor())
+           );
 }
 
 } // namespace Building

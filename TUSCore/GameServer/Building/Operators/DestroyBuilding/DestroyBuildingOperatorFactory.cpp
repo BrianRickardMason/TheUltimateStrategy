@@ -38,9 +38,11 @@ DestroyBuildingOperatorAutPtr DestroyBuildingOperatorFactory::createDestroyBuild
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return DestroyBuildingOperatorAutPtr(new DestroyBuildingOperator(a_manager_abstract_factory->createBuildingManager(),
-                                                                     a_manager_abstract_factory->createCostManager(),
-                                                                     a_manager_abstract_factory->createResourceManager()));
+    return DestroyBuildingOperatorAutPtr(
+               new DestroyBuildingOperator(a_manager_abstract_factory->createBuildingPersistenceFacade(),
+                                           a_manager_abstract_factory->createCostManager(),
+                                           a_manager_abstract_factory->createResourceManager())
+           );
 }
 
 } // namespace Building

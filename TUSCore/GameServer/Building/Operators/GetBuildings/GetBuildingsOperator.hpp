@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_GETBUILDINGSOPERATOR_HPP
 #define GAMESERVER_BUILDING_GETBUILDINGSOPERATOR_HPP
 
-#include "../../IBuildingManager.hpp"
+#include "../../IBuildingPersistenceFacade.hpp"
 #include "IGetBuildingsOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_building_manager The manager of buildings.
+     * @param a_building_persistence_facade The persistence facade of buildings.
      */
     GetBuildingsOperator(
-        IBuildingManagerShrPtr a_building_manager
+        IBuildingPersistenceFacadeShrPtr a_building_persistence_facade
     );
 
     /**
@@ -67,9 +67,9 @@ public:
 
 private:
     /**
-     * @brief The manager of buildings.
+     * @brief The persistence facade of buildings.
      */
-    IBuildingManagerShrPtr m_building_manager;
+    IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
 };
 
 /**

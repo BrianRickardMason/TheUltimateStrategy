@@ -30,7 +30,7 @@
 #include "../../../Helpers/Functions.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Resource/ResourceManagerMock.hpp"
-#include "../../BuildingManagerMock.hpp"
+#include "../../BuildingPersistenceFacadeMock.hpp"
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
@@ -56,7 +56,7 @@ protected:
      * @brief Constructs the test class.
      */
     DestroyBuildingOperatorTest()
-        : m_building_manager(new BuildingManagerMock),
+        : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
           m_cost_manager(new CostManagerMock),
           m_resource_manager(new ResourceManagerMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
@@ -72,7 +72,7 @@ protected:
         GameServer::Building::Volume const & a_volume
     )
     {
-        EXPECT_CALL(*m_building_manager, getBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN))
+        EXPECT_CALL(*m_building_persistence_facade, getBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN))
         .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_DEFENSIVE_BARBICAN, a_volume)));
     }
 
@@ -115,9 +115,9 @@ protected:
     }
 
     /**
-     * @brief The manager of buildings.
+     * @brief The persistence facade of buildings.
      */
-    BuildingManagerMock * m_building_manager;
+    BuildingPersistenceFacadeMock * m_building_persistence_facade;
 
     /**
      * @brief The manager of costs.
@@ -140,7 +140,7 @@ protected:
  */
 TEST_F(DestroyBuildingOperatorTest, DestroyBuildingOperator)
 {
-    ASSERT_NO_THROW(DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    ASSERT_NO_THROW(DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                                       (IResourceManagerShrPtr(m_resource_manager))));
 }
@@ -152,7 +152,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -164,10 +164,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_ZeroBuildings)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_building_manager, getBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN))
+    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN))
     .WillOnce(Return(BuildingWithVolumeShrPtr()));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -181,7 +181,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughBuildings)
 
     configureBuildingManagerMockForGetBuilding(1);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -200,7 +200,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetResourcesThrows)
     EXPECT_CALL(*m_resource_manager, getResources(_, m_id_holder))
     .WillOnce(Throw(e));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -222,7 +222,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetCostThrows)
     std::vector<GameServer::Resource::Volume> resource_volumes;
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -241,7 +241,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(9)(9)(9)(9)(9)(9)(9);
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -260,7 +260,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(9)(10)(10);
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -285,7 +285,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
     EXPECT_CALL(*m_resource_manager, subtractResourceSet(_, m_id_holder, resource_set))
     .WillOnce(Throw(e));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -307,7 +307,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse
     EXPECT_CALL(*m_resource_manager, subtractResourceSet(_, m_id_holder, resource_set))
     .WillOnce(Return(false));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -321,7 +321,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
 
     configureBuildingManagerMockForGetBuilding(10);
     std::exception e;
-    EXPECT_CALL(*m_building_manager, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Throw(e));
 
     configureCostManagerMockForGetCost();
@@ -331,7 +331,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
     configureResourceManagerMockForGetResources(resource_set);
     configureResourceManagerMockForSubtractResourceSet(resource_set);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -344,7 +344,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingManagerMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_manager, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(false));
 
     configureCostManagerMockForGetCost();
@@ -354,7 +354,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
     configureResourceManagerMockForGetResources(resource_set);
     configureResourceManagerMockForSubtractResourceSet(resource_set);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -367,7 +367,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingManagerMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_manager, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(true));
 
     configureCostManagerMockForGetCost();
@@ -379,7 +379,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     resource_set = getResourceSet(resource_volumes);
     configureResourceManagerMockForSubtractResourceSet(resource_set);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -392,7 +392,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingManagerMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_manager, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5))
     .WillOnce(Return(true));
 
     configureCostManagerMockForGetCost();
@@ -404,7 +404,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     resource_set = getResourceSet(resource_volumes);
 
     configureResourceManagerMockForSubtractResourceSet(resource_set);
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -417,7 +417,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingManagerMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_manager, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
 
     configureCostManagerMockForGetCost();
@@ -429,7 +429,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
     resource_set = getResourceSet(resource_volumes);
 
     configureResourceManagerMockForSubtractResourceSet(resource_set);
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -442,7 +442,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingManagerMockForGetBuilding(20);
-    EXPECT_CALL(*m_building_manager, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
 
     configureCostManagerMockForGetCost();
@@ -454,7 +454,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
     resource_set = getResourceSet(resource_volumes);
 
     configureResourceManagerMockForSubtractResourceSet(resource_set);
-    DestroyBuildingOperator destroy_building_operator((IBuildingManagerShrPtr(m_building_manager)),
+    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostManagerShrPtr(m_cost_manager)),
                                                       (IResourceManagerShrPtr(m_resource_manager)));
 

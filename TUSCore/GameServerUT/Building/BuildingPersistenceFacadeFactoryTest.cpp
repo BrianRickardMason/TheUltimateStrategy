@@ -25,18 +25,29 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Building/BuildingManagerFactory.hpp"
+#include "../../GameServer/Building/BuildingPersistenceFacadeFactory.hpp"
 #include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
 
-TEST(BuildingagerFactoryTest, createBuildingManager)
+TEST(BuildingagerFactoryTest, CreateDoesNotThrow)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    BuildingManagerAutPtr manager = BuildingManagerFactory::createBuildingManager(accessor_abstract_factory);
+    ASSERT_NO_THROW(
+        BuildingPersistenceFacadeAutPtr persistence_facade =
+            BuildingPersistenceFacadeFactory::create(accessor_abstract_factory)
+    );
+}
 
-    ASSERT_TRUE(manager.get() != NULL);
+TEST(BuildingagerFactoryTest, CreateReturnsNotNullObject)
+{
+    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
+
+    BuildingPersistenceFacadeAutPtr persistence_facade =
+        BuildingPersistenceFacadeFactory::create(accessor_abstract_factory);
+
+    ASSERT_TRUE(persistence_facade.get() != NULL);
 }
