@@ -62,7 +62,7 @@ protected:
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
-          m_land_manager(m_manager_abstract_factory->createLandManager()),
+          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory))
     {
         {
@@ -152,9 +152,9 @@ protected:
     IEpochManagerShrPtr m_epoch_manager;
 
     /**
-     * @brief The land manager.
+     * @brief The land persistence facade.
      */
-    ILandManagerShrPtr m_land_manager;
+    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief CreateSettlementOperator.
@@ -409,7 +409,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_land_name);
+        m_land_persistence_facade->createLand(transaction, m_login, m_world_name_1, m_land_name);
 
         transaction->commit();
     }
@@ -463,7 +463,7 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_land_manager->createLand(transaction, m_login, m_world_name_1, m_land_name);
+        m_land_persistence_facade->createLand(transaction, m_login, m_world_name_1, m_land_name);
 
         transaction->commit();
     }

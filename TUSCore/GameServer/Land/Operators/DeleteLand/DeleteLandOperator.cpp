@@ -36,9 +36,9 @@ namespace Land
 {
 
 DeleteLandOperator::DeleteLandOperator(
-    ILandManagerShrPtr a_land_manager
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade
 )
-    : m_land_manager(a_land_manager)
+    : m_land_persistence_facade(a_land_persistence_facade)
 {
 }
 
@@ -50,12 +50,12 @@ DeleteLandOperatorExitCode DeleteLandOperator::deleteLand(
     try
     {
         // Verify if the land exists.
-        if (!m_land_manager->getLand(a_transaction, a_land_name))
+        if (!m_land_persistence_facade->getLand(a_transaction, a_land_name))
         {
             return DeleteLandOperatorExitCode(DELETE_LAND_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }
 
-        bool const result = m_land_manager->deleteLand(a_transaction, a_land_name);
+        bool const result = m_land_persistence_facade->deleteLand(a_transaction, a_land_name);
 
         return (result) ? DeleteLandOperatorExitCode(DELETE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_DELETED)
                         : DeleteLandOperatorExitCode(DELETE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_DELETED);

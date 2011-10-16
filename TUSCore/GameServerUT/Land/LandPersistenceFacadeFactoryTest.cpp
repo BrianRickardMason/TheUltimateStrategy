@@ -25,36 +25,18 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_LANDMANAGERFACTORY_HPP
-#define GAMESERVER_LAND_LANDMANAGERFACTORY_HPP
+#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Land/LandPersistenceFacadeFactory.hpp"
+#include <gmock/gmock.h>
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "LandManager.hpp"
+using namespace GameServer::Common;
+using namespace GameServer::Land;
 
-namespace GameServer
+TEST(LandPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
-namespace Land
-{
+    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-/**
- * @brief A factory of land manager.
- */
-class LandManagerFactory
-{
-public:
-    /**
-     * @brief A factory method.
-     *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created land manager.
-     */
-    static LandManagerAutPtr createLandManager(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-    );
-};
+    LandPersistenceFacadeAutPtr persistence_facade = LandPersistenceFacadeFactory::create(accessor_abstract_factory);
 
-} // namespace Land
-} // namespace GameServer
-
-#endif // GAMESERVER_LAND_LANDMANAGERFACTORY_HPP
+    ASSERT_TRUE(persistence_facade.get() != NULL);
+}

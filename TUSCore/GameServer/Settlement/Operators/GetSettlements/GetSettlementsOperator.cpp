@@ -37,10 +37,10 @@ namespace Settlement
 {
 
 GetSettlementsOperator::GetSettlementsOperator(
-    ILandManagerShrPtr       a_land_manager,
-    ISettlementManagerShrPtr a_settlement_manager
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+    ISettlementManagerShrPtr     a_settlement_manager
 )
-    : m_land_manager(a_land_manager),
+    : m_land_persistence_facade(a_land_persistence_facade),
       m_settlement_manager(a_settlement_manager)
 {
 }
@@ -53,7 +53,7 @@ GetSettlementsOperatorExitCode GetSettlementsOperator::getSettlements(
     try
     {
         // Verify if the land exists.
-        ILandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
+        ILandShrPtr land = m_land_persistence_facade->getLand(a_transaction, a_land_name);
 
         if (!land)
         {

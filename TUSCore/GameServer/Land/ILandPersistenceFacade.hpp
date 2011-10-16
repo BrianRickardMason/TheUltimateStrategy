@@ -25,11 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_LANDMANAGERMOCK_HPP
-#define GAMESERVER_LAND_LANDMANAGERMOCK_HPP
+#ifndef GAMESERVER_LAND_ILANDPERSISTENCEFACADE_HPP
+#define GAMESERVER_LAND_ILANDPERSISTENCEFACADE_HPP
 
-#include "../../GameServer/Land/ILandManager.hpp"
-#include <gmock/gmock.h>
+#include "../Persistence/ITransaction.hpp"
+#include "Land.hpp"
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
@@ -37,31 +38,33 @@ namespace Land
 {
 
 /**
- * @brief The mock of LandManager.
+ * @brief The interface of LandPersistenceFacade.
  */
-class LandManagerMock
-    : public ILandManager
+class ILandPersistenceFacade
+    : boost::noncopyable
 {
 public:
+    /**
+     * @brief Destructs ILandPersistenceFacade.
+     */
+    virtual ~ILandPersistenceFacade(){};
+
     /**
      * @brief Creates a land.
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
      * @param a_world_name  The name of the world.
-     * @param a_land_name   The name of the land.
+     * @param a_name        The name of the land.
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD4(
-        createLand,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_login,
-            std::string                     const a_world_name,
-            std::string                     const a_land_name
-        )
-    );
+    virtual bool createLand(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_world_name,
+        std::string                     const a_land_name
+    ) const = 0;
 
     /**
      * @brief Deletes a land.
@@ -71,13 +74,10 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
-        deleteLand,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name
-        )
-    );
+    virtual bool deleteLand(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
+    ) const = 0;
 
     /**
      * @brief Gets a land.
@@ -87,13 +87,10 @@ public:
      *
      * @return The land, null if not found.
      */
-    MOCK_CONST_METHOD2(
-        getLand,
-        ILandShrPtr(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name
-        )
-    );
+    virtual ILandShrPtr getLand(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
+    ) const = 0;
 
     /**
      * @brief Gets lands.
@@ -103,13 +100,10 @@ public:
      *
      * @return A map of lands, an empty map if not found.
      */
-    MOCK_CONST_METHOD2(
-        getLands,
-        ILandMap(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_login
-        )
-    );
+    virtual ILandMap getLands(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
+    ) const = 0;
 
     /**
      * @brief Marks that land has been given a grant.
@@ -117,16 +111,18 @@ public:
      * @param a_transaction The transaction.
      * @param a_land_name   The name of the land.
      */
-    MOCK_CONST_METHOD2(
-        markGranted,
-        void(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name
-        )
-    );
+    virtual void markGranted(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
+    ) const = 0;
 };
+
+/**
+ * @brief The shared pointer of the interface of land persistence facade.
+ */
+typedef boost::shared_ptr<ILandPersistenceFacade> ILandPersistenceFacadeShrPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_LANDMANAGERMOCK_HPP
+#endif // GAMESERVER_LAND_ILANDPERSISTENCEFACADE_HPP

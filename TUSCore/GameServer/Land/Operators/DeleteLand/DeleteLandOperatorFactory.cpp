@@ -38,7 +38,7 @@ DeleteLandOperatorAutPtr DeleteLandOperatorFactory::createDeleteLandOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return DeleteLandOperatorAutPtr(new DeleteLandOperator(a_manager_abstract_factory->createLandManager()));
+    return DeleteLandOperatorAutPtr(new DeleteLandOperator(a_manager_abstract_factory->createLandPersistenceFacade()));
 }
 
 } // namespace Land

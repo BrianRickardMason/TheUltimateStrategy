@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_GETWORLDBYLANDNAMEOPERATOR_HPP
 #define GAMESERVER_WORLD_GETWORLDBYLANDNAMEOPERATOR_HPP
 
-#include "../../../Land/ILandManager.hpp"
+#include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../IWorldManager.hpp"
 #include "IGetWorldByLandNameOperator.hpp"
 
@@ -47,12 +47,12 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_world_manager The manager of worlds.
-     * @param a_land_manager  The manager of lands.
+     * @param a_world_manager           The manager of worlds.
+     * @param a_land_persistence_facade The persistence facade of lands.
      */
     GetWorldByLandNameOperator(
-        IWorldManagerShrPtr      a_world_manager,
-        Land::ILandManagerShrPtr a_land_manager
+        IWorldManagerShrPtr                a_world_manager,
+        Land::ILandPersistenceFacadeShrPtr a_land_persistence_facade
     );
 
     /**
@@ -75,9 +75,9 @@ private:
     IWorldManagerShrPtr m_world_manager;
 
     /**
-     * @brief The manager of lands.
+     * @brief The persistence facade of lands.
      */
-    Land::ILandManagerShrPtr m_land_manager;
+    Land::ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 };
 
 /**

@@ -36,9 +36,9 @@ namespace Land
 {
 
 GetLandOperator::GetLandOperator(
-    ILandManagerShrPtr a_land_manager
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade
 )
-    : m_land_manager(a_land_manager)
+    : m_land_persistence_facade(a_land_persistence_facade)
 {
 }
 
@@ -49,7 +49,7 @@ GetLandOperatorExitCode GetLandOperator::getLand(
 {
     try
     {
-        ILandShrPtr const land = m_land_manager->getLand(a_transaction, a_land_name);
+        ILandShrPtr const land = m_land_persistence_facade->getLand(a_transaction, a_land_name);
 
         return (land) ? GetLandOperatorExitCode(GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT, land)
                       : GetLandOperatorExitCode(GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT, land);

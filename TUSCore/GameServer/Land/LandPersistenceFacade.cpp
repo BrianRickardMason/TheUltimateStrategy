@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "LandManager.hpp"
+#include "LandPersistenceFacade.hpp"
 
 using namespace GameServer::Persistence;
 using namespace boost;
@@ -36,14 +36,14 @@ namespace GameServer
 namespace Land
 {
 
-LandManager::LandManager(
+LandPersistenceFacade::LandPersistenceFacade(
     ILandManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-bool LandManager::createLand(
+bool LandPersistenceFacade::createLand(
     ITransactionShrPtr       a_transaction,
     string             const a_login,
     string             const a_world_name,
@@ -62,7 +62,7 @@ bool LandManager::createLand(
     }
 }
 
-bool LandManager::deleteLand(
+bool LandPersistenceFacade::deleteLand(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -79,7 +79,7 @@ bool LandManager::deleteLand(
     }
 }
 
-ILandShrPtr LandManager::getLand(
+ILandShrPtr LandPersistenceFacade::getLand(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -87,7 +87,7 @@ ILandShrPtr LandManager::getLand(
     return prepareResultGetLand(m_accessor->getRecord(a_transaction, a_land_name));
 }
 
-ILandMap LandManager::getLands(
+ILandMap LandPersistenceFacade::getLands(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
@@ -95,7 +95,7 @@ ILandMap LandManager::getLands(
     return prepareResultGetLands(m_accessor->getRecords(a_transaction, a_login));
 }
 
-void LandManager::markGranted(
+void LandPersistenceFacade::markGranted(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -103,14 +103,14 @@ void LandManager::markGranted(
     m_accessor->markGranted(a_transaction, a_land_name);
 }
 
-ILandShrPtr LandManager::prepareResultGetLand(
+ILandShrPtr LandPersistenceFacade::prepareResultGetLand(
     ILandRecordShrPtr a_record
 ) const
 {
     return a_record ? ILandShrPtr(new Land(a_record)) : ILandShrPtr();
 }
 
-ILandMap LandManager::prepareResultGetLands(
+ILandMap LandPersistenceFacade::prepareResultGetLands(
     ILandRecordMap a_records
 ) const
 {

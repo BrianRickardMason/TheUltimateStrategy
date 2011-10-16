@@ -38,8 +38,10 @@ GetSettlementsOperatorAutPtr GetSettlementsOperatorFactory::createGetSettlements
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetSettlementsOperatorAutPtr(new GetSettlementsOperator(a_manager_abstract_factory->createLandManager(),
-                                                                   a_manager_abstract_factory->createSettlementManager()));
+    return GetSettlementsOperatorAutPtr(
+               new GetSettlementsOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
+                                          a_manager_abstract_factory->createSettlementManager())
+           );
 }
 
 } // namespace Settlement

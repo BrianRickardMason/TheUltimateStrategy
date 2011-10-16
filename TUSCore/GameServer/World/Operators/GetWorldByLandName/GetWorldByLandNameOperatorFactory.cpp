@@ -38,8 +38,10 @@ GetWorldByLandNameOperatorAutPtr GetWorldByLandNameOperatorFactory::createGetWor
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetWorldByLandNameOperatorAutPtr(new GetWorldByLandNameOperator(a_manager_abstract_factory->createWorldManager(),
-                                                                           a_manager_abstract_factory->createLandManager()));
+    return GetWorldByLandNameOperatorAutPtr(
+               new GetWorldByLandNameOperator(a_manager_abstract_factory->createWorldManager(),
+                                              a_manager_abstract_factory->createLandPersistenceFacade())
+           );
 }
 
 } // namespace World

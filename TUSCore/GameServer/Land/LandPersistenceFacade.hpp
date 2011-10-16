@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_LANDMANAGER_HPP
-#define GAMESERVER_LAND_LANDMANAGER_HPP
+#ifndef GAMESERVER_LAND_LANDPERSISTENCEFACADE_HPP
+#define GAMESERVER_LAND_LANDPERSISTENCEFACADE_HPP
 
-#include "ILandManager.hpp"
 #include "ILandManagerAccessor.hpp"
+#include "ILandPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,18 +37,18 @@ namespace Land
 {
 
 /**
- * @brief LandManager.
+ * @brief LandPersistenceFacade.
  */
-class LandManager
-    : public ILandManager
+class LandPersistenceFacade
+    : public ILandPersistenceFacade
 {
 public:
     /**
-     * @brief Constructs the land manager.
+     * @brief Constructs the persistence facade.
      *
      * @param a_accessor An accessor to be injected.
      */
-    LandManager(
+    LandPersistenceFacade(
         ILandManagerAccessorAutPtr a_accessor
     );
 
@@ -149,11 +149,11 @@ private:
 };
 
 /**
- * @brief An auto pointer of land manager.
+ * @brief An auto pointer of land persistence facade.
  */
-typedef std::auto_ptr<LandManager> LandManagerAutPtr;
+typedef std::auto_ptr<LandPersistenceFacade> LandPersistenceFacadeAutPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_LANDMANAGER_HPP
+#endif // GAMESERVER_LAND_LANDPERSISTENCEFACADE_HPP

@@ -25,18 +25,21 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
-#include "../../GameServer/Land/LandManagerFactory.hpp"
-#include <gmock/gmock.h>
+#include "LandPersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::Land;
 
-TEST(LandManagerFactoryTest, createLandManager)
+namespace GameServer
 {
-    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
+namespace Land
+{
 
-    LandManagerAutPtr manager = LandManagerFactory::createLandManager(accessor_abstract_factory);
-
-    ASSERT_TRUE(manager.get() != NULL);
+LandPersistenceFacadeAutPtr LandPersistenceFacadeFactory::create(
+    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+)
+{
+    return LandPersistenceFacadeAutPtr(new LandPersistenceFacade(a_accessor_abstract_factory->createLandAccessor()));
 }
+} // namespace Land
+} // namespace GameServer
+

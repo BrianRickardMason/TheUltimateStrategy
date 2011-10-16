@@ -28,7 +28,6 @@
 #include "../../GameServer/Land/Land.hpp"
 #include "../../GameServer/Settlement/SettlementManager.hpp"
 #include "../../GameServer/Settlement/SettlementRecord.hpp"
-#include "../Land/LandManagerMock.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "Operators/CreateSettlement/BehaviourGiveGrantMock.hpp"
 #include "SettlementManagerAccessorMock.hpp"

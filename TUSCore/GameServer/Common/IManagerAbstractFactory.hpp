@@ -34,7 +34,7 @@
 #include "../Cost/ICostManager.hpp"
 #include "../Epoch/IEpochManager.hpp"
 #include "../Human/IHumanManager.hpp"
-#include "../Land/ILandManager.hpp"
+#include "../Land/ILandPersistenceFacade.hpp"
 #include "../Property/IPropertyManager.hpp"
 #include "../Resource/IResourceManager.hpp"
 #include "../Settlement/ISettlementManager.hpp"
@@ -101,11 +101,11 @@ public:
     virtual Human::IHumanManagerShrPtr createHumanManager() const = 0;
 
     /**
-     * @brief Creates the land manager.
+     * @brief Creates the land persistence facade.
      *
-     * @return The newly created land manager.
+     * @return The newly created land persistence facade.
      */
-    virtual Land::ILandManagerShrPtr createLandManager() const = 0;
+    virtual Land::ILandPersistenceFacadeShrPtr createLandPersistenceFacade() const = 0;
 
     /**
      * @brief Creates the property manager.

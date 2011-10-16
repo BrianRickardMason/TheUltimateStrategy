@@ -80,7 +80,7 @@ protected:
           m_building_persistence_facade(m_manager_abstract_factory->createBuildingPersistenceFacade()),
           m_cost_manager(m_manager_abstract_factory->createCostManager()),
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
-          m_land_manager(m_manager_abstract_factory->createLandManager()),
+          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_property_manager(m_manager_abstract_factory->createPropertyManager()),
           m_resource_manager(m_manager_abstract_factory->createResourceManager()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
@@ -96,8 +96,8 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name_1);
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name_2);
+            m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_1);
+            m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_2);
 
             m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
             m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_2);
@@ -230,9 +230,9 @@ protected:
     IHumanManagerShrPtr m_human_manager;
 
     /**
-     * @brief A land manager.
+     * @brief A land persistence facade.
      */
-    ILandManagerShrPtr m_land_manager;
+    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief A property manager.

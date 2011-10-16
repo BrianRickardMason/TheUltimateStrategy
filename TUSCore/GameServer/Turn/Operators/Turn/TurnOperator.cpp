@@ -44,16 +44,16 @@ namespace Turn
 {
 
 TurnOperator::TurnOperator(
-    ICostManagerShrPtr       a_cost_manager,
-    IHumanManagerShrPtr      a_human_manager,
-    ILandManagerShrPtr       a_land_manager,
-    IPropertyManagerShrPtr   a_property_manager,
-    IResourceManagerShrPtr   a_resource_manager,
-    ISettlementManagerShrPtr a_settlement_manager
+    ICostManagerShrPtr           a_cost_manager,
+    IHumanManagerShrPtr          a_human_manager,
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+    IPropertyManagerShrPtr       a_property_manager,
+    IResourceManagerShrPtr       a_resource_manager,
+    ISettlementManagerShrPtr     a_settlement_manager
 )
     : m_cost_manager(a_cost_manager),
       m_human_manager(a_human_manager),
-      m_land_manager(a_land_manager),
+      m_land_persistence_facade(a_land_persistence_facade),
       m_property_manager(a_property_manager),
       m_resource_manager(a_resource_manager),
       m_settlement_manager(a_settlement_manager)
@@ -68,7 +68,7 @@ TurnOperatorExitCode TurnOperator::turn(
     try
     {
         // Verify if the land exists.
-        if (!m_land_manager->getLand(a_transaction, a_land_name))
+        if (!m_land_persistence_facade->getLand(a_transaction, a_land_name))
         {
             return TurnOperatorExitCode(TURN_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }
@@ -89,7 +89,7 @@ bool TurnOperator::executeTurn(
     string             const a_land_name
 ) const
 {
-    ILandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
+    ILandShrPtr land = m_land_persistence_facade->getLand(a_transaction, a_land_name);
 
     if (!land)
     {

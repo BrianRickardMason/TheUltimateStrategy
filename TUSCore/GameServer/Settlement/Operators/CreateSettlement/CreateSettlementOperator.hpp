@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_CREATESETTLEMENTOPERATOR_HPP
 #define GAMESERVER_SETTLEMENT_CREATESETTLEMENTOPERATOR_HPP
 
-#include "../../../Land/ILandManager.hpp"
+#include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../ISettlementManager.hpp"
 #include "IBehaviourGiveGrant.hpp"
 #include "ICreateSettlementOperator.hpp"
@@ -48,14 +48,14 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_land_manager         The manager of lands.
-     * @param a_settlement_manager   The manager of settlements.
-     * @param a_behaviour_give_grant The behaviour "GiveGrant".
+     * @param a_land_persistence_facade The persistence facade of lands.
+     * @param a_settlement_manager      The manager of settlements.
+     * @param a_behaviour_give_grant    The behaviour "GiveGrant".
      */
     CreateSettlementOperator(
-        Land::ILandManagerShrPtr  a_land_manager,
-        ISettlementManagerShrPtr  a_settlement_manager,
-        IBehaviourGiveGrantShrPtr a_behaviour_give_grant
+        Land::ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+        ISettlementManagerShrPtr           a_settlement_manager,
+        IBehaviourGiveGrantShrPtr          a_behaviour_give_grant
     );
 
     /**
@@ -75,9 +75,9 @@ public:
 
 private:
     /**
-     * @brief The manager of lands.
+     * @brief The persistence facade of lands.
      */
-    Land::ILandManagerShrPtr m_land_manager;
+    Land::ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief The manager of settlements.

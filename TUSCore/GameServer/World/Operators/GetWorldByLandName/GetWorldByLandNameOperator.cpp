@@ -37,11 +37,11 @@ namespace World
 {
 
 GetWorldByLandNameOperator::GetWorldByLandNameOperator(
-    IWorldManagerShrPtr a_world_manager,
-    ILandManagerShrPtr  a_land_manager
+    IWorldManagerShrPtr          a_world_manager,
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade
 )
     : m_world_manager(a_world_manager),
-      m_land_manager(a_land_manager)
+      m_land_persistence_facade(a_land_persistence_facade)
 {
 }
 
@@ -53,7 +53,7 @@ GetWorldByLandNameOperatorExitCode GetWorldByLandNameOperator::getWorldByLandNam
     try
     {
         // Verify if the land exists.
-        if (!m_land_manager->getLand(a_transaction, a_land_name))
+        if (!m_land_persistence_facade->getLand(a_transaction, a_land_name))
         {
             return GetWorldByLandNameOperatorExitCode(GET_WORLD_BY_LANDNAME_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }

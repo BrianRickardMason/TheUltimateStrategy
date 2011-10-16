@@ -38,11 +38,11 @@ namespace Land
 {
 
 CreateLandOperator::CreateLandOperator(
-    ILandManagerShrPtr  a_land_manager,
-    IUserManagerShrPtr  a_user_manager,
-    IWorldManagerShrPtr a_world_manager
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+    IUserManagerShrPtr           a_user_manager,
+    IWorldManagerShrPtr          a_world_manager
 )
-    : m_land_manager(a_land_manager),
+    : m_land_persistence_facade(a_land_persistence_facade),
       m_user_manager(a_user_manager),
       m_world_manager(a_world_manager)
 {
@@ -67,12 +67,12 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
         }
 
         // Verify if another land of the given name exists.
-        if (m_land_manager->getLand(a_transaction, a_land_name))
+        if (m_land_persistence_facade->getLand(a_transaction, a_land_name))
         {
             return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_ANOTHER_LAND_OF_THE_GIVEN_NAME_EXISTS);
         }
 
-        bool const result = m_land_manager->createLand(a_transaction, a_login, a_world_name, a_land_name);
+        bool const result = m_land_persistence_facade->createLand(a_transaction, a_login, a_world_name, a_land_name);
 
         return (result) ? CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_CREATED)
                         : CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_CREATED);

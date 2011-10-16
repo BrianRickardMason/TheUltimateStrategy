@@ -30,7 +30,7 @@
 
 #include "../../../Cost/ICostManager.hpp"
 #include "../../../Human/IHumanManager.hpp"
-#include "../../../Land/ILandManager.hpp"
+#include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
 #include "../../../Resource/IResourceManager.hpp"
 #include "../../../Settlement/ISettlementManager.hpp"
@@ -51,17 +51,17 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_cost_manager       The manager of costs.
-     * @param a_human_manager      The manager of humans.
-     * @param a_land_manager       The manager of lands.
-     * @param a_property_manager   The manager of properties.
-     * @param a_resource_manager   The manager of resources.
-     * @param a_settlement_manager The manager of settlements.
+     * @param a_cost_manager            The manager of costs.
+     * @param a_human_manager           The manager of humans.
+     * @param a_land_persistence_facade The persistence facade of lands.
+     * @param a_property_manager        The manager of properties.
+     * @param a_resource_manager        The manager of resources.
+     * @param a_settlement_manager      The manager of settlements.
      */
     TurnOperator(
         Cost::ICostManagerShrPtr             a_cost_manager,
         Human::IHumanManagerShrPtr           a_human_manager,
-        Land::ILandManagerShrPtr             a_land_manager,
+        Land::ILandPersistenceFacadeShrPtr   a_land_persistence_facade,
         Property::IPropertyManagerShrPtr     a_property_manager,
         Resource::IResourceManagerShrPtr     a_resource_manager,
         Settlement::ISettlementManagerShrPtr a_settlement_manager
@@ -131,9 +131,9 @@ private:
     Human::IHumanManagerShrPtr m_human_manager;
 
     /**
-     * @brief The manager of lands.
+     * @brief The persistence facade of lands.
      */
-    Land::ILandManagerShrPtr m_land_manager;
+    Land::ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief The manager of properties.

@@ -31,7 +31,7 @@
 #include "../Cost/CostManagerFactory.hpp"
 #include "../Epoch/EpochManagerFactory.hpp"
 #include "../Human/HumanManagerFactory.hpp"
-#include "../Land/LandManagerFactory.hpp"
+#include "../Land/LandPersistenceFacadeFactory.hpp"
 #include "../Property/PropertyManagerFactory.hpp"
 #include "../Resource/ResourceManagerFactory.hpp"
 #include "../Settlement/SettlementManagerFactory.hpp"
@@ -97,9 +97,9 @@ IHumanManagerShrPtr ManagerAbstractFactoryPostgresql::createHumanManager() const
     return IHumanManagerShrPtr(HumanManagerFactory::createHumanManager(m_accessor_abstract_factory));
 }
 
-ILandManagerShrPtr ManagerAbstractFactoryPostgresql::createLandManager() const
+ILandPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createLandPersistenceFacade() const
 {
-    return ILandManagerShrPtr(LandManagerFactory::createLandManager(m_accessor_abstract_factory));
+    return ILandPersistenceFacadeShrPtr(LandPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
 IPropertyManagerShrPtr ManagerAbstractFactoryPostgresql::createPropertyManager() const

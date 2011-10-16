@@ -41,9 +41,11 @@ CreateSettlementOperatorAutPtr CreateSettlementOperatorFactory::createCreateSett
 {
     IBehaviourGiveGrantShrPtr behaviour_give_grant(BehaviourGiveGrantFactory::createBehaviourGiveGrant(a_manager_abstract_factory));
 
-    return CreateSettlementOperatorAutPtr(new CreateSettlementOperator(a_manager_abstract_factory->createLandManager(),
-                                                                       a_manager_abstract_factory->createSettlementManager(),
-                                                                       behaviour_give_grant));
+    return CreateSettlementOperatorAutPtr(
+               new CreateSettlementOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
+                                            a_manager_abstract_factory->createSettlementManager(),
+                                            behaviour_give_grant)
+           );
 }
 
 } // namespace Settlement

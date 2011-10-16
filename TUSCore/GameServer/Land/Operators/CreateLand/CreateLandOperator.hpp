@@ -30,7 +30,7 @@
 
 #include "../../../User/IUserManager.hpp"
 #include "../../../World/IWorldManager.hpp"
-#include "../../ILandManager.hpp"
+#include "../../ILandPersistenceFacade.hpp"
 #include "ICreateLandOperator.hpp"
 
 namespace GameServer
@@ -48,14 +48,14 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_land_manager  The manager of lands.
-     * @param a_user_manager  The manager of users.
-     * @param a_world_manager The manager of worlds.
+     * @param a_land_persistence_facade The persistence facade of lands.
+     * @param a_user_manager            The manager of users.
+     * @param a_world_manager           The manager of worlds.
      */
     CreateLandOperator(
-        ILandManagerShrPtr         a_land_manager,
-        User::IUserManagerShrPtr   a_user_manager,
-        World::IWorldManagerShrPtr a_world_manager
+        ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+        User::IUserManagerShrPtr     a_user_manager,
+        World::IWorldManagerShrPtr   a_world_manager
     );
 
     /**
@@ -77,9 +77,9 @@ public:
 
 private:
     /**
-     * @brief The manager of lands.
+     * @brief The persistence facade of lands.
      */
-    ILandManagerShrPtr m_land_manager;
+    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief The manager of users.

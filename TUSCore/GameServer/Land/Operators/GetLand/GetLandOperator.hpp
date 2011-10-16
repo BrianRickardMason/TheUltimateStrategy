@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_GETLANDOPERATOR_HPP
 #define GAMESERVER_LAND_GETLANDOPERATOR_HPP
 
-#include "../../ILandManager.hpp"
+#include "../../ILandPersistenceFacade.hpp"
 #include "IGetLandOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_land_manager The manager of lands.
+     * @param a_land_persistence_facade The persistence facade of lands.
      */
     GetLandOperator(
-        ILandManagerShrPtr a_land_manager
+        ILandPersistenceFacadeShrPtr a_land_persistence_facade
     );
 
     /**
@@ -67,9 +67,9 @@ public:
 
 private:
     /**
-     * @brief The manager of lands.
+     * @brief The persistence facade of lands.
      */
-    ILandManagerShrPtr m_land_manager;
+    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 };
 
 /**

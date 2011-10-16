@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_GETSETTLEMENTSOPERATOR_HPP
 #define GAMESERVER_SETTLEMENT_GETSETTLEMENTSOPERATOR_HPP
 
-#include "../../../Land/ILandManager.hpp"
+#include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../ISettlementManager.hpp"
 #include "IGetSettlementsOperator.hpp"
 
@@ -47,12 +47,12 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_land_manager       The manager of lands.
-     * @param a_settlement_manager The manager of settlements.
+     * @param a_land_persistence_facade The persistence facade of lands.
+     * @param a_settlement_manager      The manager of settlements.
      */
     GetSettlementsOperator(
-        Land::ILandManagerShrPtr a_land_manager,
-        ISettlementManagerShrPtr a_settlement_manager
+        Land::ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+        ISettlementManagerShrPtr           a_settlement_manager
     );
 
     /**
@@ -70,9 +70,9 @@ public:
 
 private:
     /**
-     * @brief The manager of lands.
+     * @brief The persistence facade of lands.
      */
-    Land::ILandManagerShrPtr m_land_manager;
+    Land::ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief The manager of settlements.

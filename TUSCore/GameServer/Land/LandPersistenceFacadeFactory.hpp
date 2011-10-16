@@ -25,21 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "LandManagerFactory.hpp"
+#ifndef GAMESERVER_LAND_LANDPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_LAND_LANDPERSISTENCEFACADEFACTORY_HPP
 
-using namespace GameServer::Common;
+#include "../Common/IAccessorAbstractFactory.hpp"
+#include "LandPersistenceFacade.hpp"
 
 namespace GameServer
 {
 namespace Land
 {
 
-LandManagerAutPtr LandManagerFactory::createLandManager(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-)
+/**
+ * @brief A factory of land persistence facade.
+ */
+class LandPersistenceFacadeFactory
 {
-    return LandManagerAutPtr(new LandManager(a_accessor_abstract_factory->createLandAccessor()));
-}
+public:
+    /**
+     * @brief A factory method.
+     *
+     * @param a_accessor_abstract_factory The abstract factory of accessors.
+     *
+     * @return A newly created land persistence facade.
+     */
+    static LandPersistenceFacadeAutPtr create(
+        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    );
+};
+
 } // namespace Land
 } // namespace GameServer
 
+#endif // GAMESERVER_LAND_LANDPERSISTENCEFACADEFACTORY_HPP

@@ -37,11 +37,11 @@ namespace Settlement
 {
 
 CreateSettlementOperator::CreateSettlementOperator(
-    ILandManagerShrPtr        a_land_manager,
-    ISettlementManagerShrPtr  a_settlement_manager,
-    IBehaviourGiveGrantShrPtr a_behaviour_give_grant
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+    ISettlementManagerShrPtr     a_settlement_manager,
+    IBehaviourGiveGrantShrPtr    a_behaviour_give_grant
 )
-    : m_land_manager(a_land_manager),
+    : m_land_persistence_facade(a_land_persistence_facade),
       m_settlement_manager(a_settlement_manager),
       m_behaviour_give_grant(a_behaviour_give_grant)
 {
@@ -56,7 +56,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
     try
     {
         // Verify if the land exists.
-        ILandShrPtr land = m_land_manager->getLand(a_transaction, a_land_name);
+        ILandShrPtr land = m_land_persistence_facade->getLand(a_transaction, a_land_name);
 
         if (!land)
         {
@@ -101,7 +101,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
 
             // Mark that the land has been given the grant.
             // TODO: Get the result.
-            m_land_manager->markGranted(a_transaction, a_land_name);
+            m_land_persistence_facade->markGranted(a_transaction, a_land_name);
         }
 
         return CreateSettlementOperatorExitCode(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED);

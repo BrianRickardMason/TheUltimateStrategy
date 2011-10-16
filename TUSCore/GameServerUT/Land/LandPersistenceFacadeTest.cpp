@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Land/LandManager.hpp"
+#include "../../GameServer/Land/LandPersistenceFacade.hpp"
 #include "../../GameServer/Land/LandRecord.hpp"
 #include "../Persistence/PersistenceDummy.hpp"
 #include "LandManagerAccessorMock.hpp"
@@ -41,14 +41,14 @@ using testing::Throw;
 /**
  * @brief A test class.
  */
-class LandManagerTest
+class LandPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Constructs a test class.
      */
-    LandManagerTest()
+    LandPersistenceFacadeTest()
         : m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_login_1("Login1"),
@@ -100,14 +100,14 @@ protected:
            m_world_name_2;
 };
 
-TEST_F(LandManagerTest, LandManager)
+TEST_F(LandPersistenceFacadeTest, LandPersistenceFacade)
 {
     ILandManagerAccessorAutPtr accessor(new LandManagerAccessorMock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 }
 
-TEST_F(LandManagerTest, createLand_Success)
+TEST_F(LandPersistenceFacadeTest, createLand_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -117,12 +117,12 @@ TEST_F(LandManagerTest, createLand_Success)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
+    ASSERT_TRUE(persistence_facade.createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, createLand_Failure)
+TEST_F(LandPersistenceFacadeTest, createLand_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -135,12 +135,12 @@ TEST_F(LandManagerTest, createLand_Failure)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
+    ASSERT_FALSE(persistence_facade.createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, deleteLand_Success)
+TEST_F(LandPersistenceFacadeTest, deleteLand_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -150,12 +150,12 @@ TEST_F(LandManagerTest, deleteLand_Success)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.deleteLand(transaction, m_land_name_1));
+    ASSERT_TRUE(persistence_facade.deleteLand(transaction, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, deleteLand_Failure)
+TEST_F(LandPersistenceFacadeTest, deleteLand_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -168,12 +168,12 @@ TEST_F(LandManagerTest, deleteLand_Failure)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deleteLand(transaction, m_land_name_1));
+    ASSERT_FALSE(persistence_facade.deleteLand(transaction, m_land_name_1));
 }
 
-TEST_F(LandManagerTest, getLand_LandDoesNotExist)
+TEST_F(LandPersistenceFacadeTest, getLand_LandDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -184,14 +184,14 @@ TEST_F(LandManagerTest, getLand_LandDoesNotExist)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ILandShrPtr land = manager.getLand(transaction, m_land_name_1);
+    ILandShrPtr land = persistence_facade.getLand(transaction, m_land_name_1);
 
     ASSERT_TRUE(land == NULL);
 }
 
-TEST_F(LandManagerTest, getLand_LandDoesExist)
+TEST_F(LandPersistenceFacadeTest, getLand_LandDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -202,16 +202,16 @@ TEST_F(LandManagerTest, getLand_LandDoesExist)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ILandShrPtr land = manager.getLand(transaction, m_land_name_1);
+    ILandShrPtr land = persistence_facade.getLand(transaction, m_land_name_1);
 
     ASSERT_TRUE(land != NULL);
 
     compareLand(land, m_login_1, m_world_name_1, m_land_name_1, true);
 }
 
-TEST_F(LandManagerTest, getLands_LandsDoNotExist)
+TEST_F(LandPersistenceFacadeTest, getLands_LandsDoNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -222,14 +222,14 @@ TEST_F(LandManagerTest, getLands_LandsDoNotExist)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ILandMap lands = manager.getLands(transaction, m_login_1);
+    ILandMap lands = persistence_facade.getLands(transaction, m_login_1);
 
     ASSERT_TRUE(lands.empty());
 }
 
-TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
+TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_OneLand)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -243,9 +243,9 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ILandMap lands = manager.getLands(transaction, m_login_1);
+    ILandMap lands = persistence_facade.getLands(transaction, m_login_1);
 
     ASSERT_FALSE(lands.empty());
 
@@ -254,7 +254,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_OneLand)
     compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_land_name_1, false);
 }
 
-TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
+TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_ManyLands)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -269,9 +269,9 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ILandMap lands = manager.getLands(transaction, m_login_1);
+    ILandMap lands = persistence_facade.getLands(transaction, m_login_1);
 
     ASSERT_FALSE(lands.empty());
 
@@ -281,7 +281,7 @@ TEST_F(LandManagerTest, getLands_LandsDoExist_ManyLands)
     compareLand(lands[m_land_name_2], m_login_1, m_world_name_2, m_land_name_2, true);
 }
 
-TEST_F(LandManagerTest, markGranted)
+TEST_F(LandPersistenceFacadeTest, markGranted)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -291,7 +291,7 @@ TEST_F(LandManagerTest, markGranted)
 
     ILandManagerAccessorAutPtr accessor(mock);
 
-    LandManager manager(accessor);
+    LandPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.markGranted(transaction, m_land_name_1));
+    ASSERT_NO_THROW(persistence_facade.markGranted(transaction, m_land_name_1));
 }

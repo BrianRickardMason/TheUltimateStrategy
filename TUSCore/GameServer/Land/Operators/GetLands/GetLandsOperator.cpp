@@ -37,10 +37,10 @@ namespace Land
 {
 
 GetLandsOperator::GetLandsOperator(
-    ILandManagerShrPtr  a_land_manager,
-    IUserManagerShrPtr  a_user_manager
+    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
+    IUserManagerShrPtr           a_user_manager
 )
-    : m_land_manager(a_land_manager),
+    : m_land_persistence_facade(a_land_persistence_facade),
       m_user_manager(a_user_manager)
 {
 }
@@ -55,7 +55,7 @@ GetLandsOperatorExitCode GetLandsOperator::getLands(
         // Verify if the user exists.
         // TODO: UserManager::getUser.
 
-        ILandMap const lands = m_land_manager->getLands(a_transaction, a_login);
+        ILandMap const lands = m_land_persistence_facade->getLands(a_transaction, a_login);
 
         return (!lands.empty()) ? GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_BEEN_GOT, lands)
                                 : GetLandsOperatorExitCode(GET_LANDS_OPERATOR_EXIT_CODE_LANDS_HAVE_NOT_BEEN_GOT, lands);

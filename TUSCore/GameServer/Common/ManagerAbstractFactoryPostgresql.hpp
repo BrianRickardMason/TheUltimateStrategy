@@ -91,11 +91,11 @@ public:
     virtual Human::IHumanManagerShrPtr createHumanManager() const;
 
     /**
-     * @brief Creates the land manager.
+     * @brief Creates the land persistence facade.
      *
-     * @return The newly created land manager.
+     * @return The newly created land persistence facade.
      */
-    virtual Land::ILandManagerShrPtr createLandManager() const;
+    virtual Land::ILandPersistenceFacadeShrPtr createLandPersistenceFacade() const;
 
     /**
      * @brief Creates the property manager.

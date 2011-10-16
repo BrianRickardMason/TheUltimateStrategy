@@ -61,7 +61,7 @@ protected:
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
-          m_land_manager(m_manager_abstract_factory->createLandManager()),
+          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_settlement_manager(m_manager_abstract_factory->createSettlementManager())
     {
         {
@@ -74,11 +74,11 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name_1);
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name_2);
+            m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_1);
+            m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_2);
 
-            m_land_1 = m_land_manager->getLand(transaction, m_land_name_1);
-            m_land_2 = m_land_manager->getLand(transaction, m_land_name_2);
+            m_land_1 = m_land_persistence_facade->getLand(transaction, m_land_name_1);
+            m_land_2 = m_land_persistence_facade->getLand(transaction, m_land_name_2);
 
             transaction->commit();
         }
@@ -158,9 +158,9 @@ protected:
     IEpochManagerShrPtr m_epoch_manager;
 
     /**
-     * @brief A land manager.
+     * @brief A land persistence facade.
      */
-    ILandManagerShrPtr m_land_manager;
+    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief The manager of settlements.

@@ -61,7 +61,7 @@ protected:
           m_user_manager(m_manager_abstract_factory->createUserManager()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
-          m_land_manager(m_manager_abstract_factory->createLandManager()),
+          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
@@ -78,7 +78,7 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_land_manager->createLand(transaction, m_login, m_world_name, m_land_name);
+            m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name);
 
             m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_1);
             m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_2);
@@ -156,9 +156,9 @@ protected:
     IEpochManagerShrPtr m_epoch_manager;
 
     /**
-     * @brief A land manager.
+     * @brief A land persistence facade.
      */
-    ILandManagerShrPtr m_land_manager;
+    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
      * @brief A human manager.
