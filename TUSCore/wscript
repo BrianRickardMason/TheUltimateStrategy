@@ -32,7 +32,7 @@ def build(bld):
 
     gameserverut = bld.new_task_gen(
                        features='cxx cxxprogram',
-                       target='gameserverut', 
+                       target='gameserverut',
                        source=bld.path.ant_glob('GameServerUT/**/*.cpp'),
                        use='gameserver',
                        lib='gtest gmock pthread pqxx'
@@ -40,7 +40,7 @@ def build(bld):
 
     gameserverct = bld.new_task_gen(
                        features='cxx cxxprogram',
-                       target='gameserverct', 
+                       target='gameserverct',
                        source=bld.path.ant_glob('GameServerCT/**/*.cpp'),
                        use='gameserver',
                        lib='gtest gmock pthread pqxx'
@@ -67,11 +67,12 @@ def build(bld):
     xmlrpcserver = bld.new_task_gen(
                        features='cxx cxxstlib',
                        target='xmlrpcserver',
-                       source=  bld.path.ant_glob('Network/XmlRPCServer/*/*.cpp') 
+                       source=  bld.path.ant_glob('Network/XmlRPCServer/*/*.cpp')
                               + bld.path.ant_glob('Network/XmlRPCServer/*/*/*.cpp')
                               + bld.path.ant_glob('Network/XmlRPCServer/*/*/*/*.cpp'),
                        use='gameserver'
                    )
+
     networkut = bld.new_task_gen(
                     features='cxx cxxprogram',
                     target='networkut',
@@ -119,4 +120,3 @@ def build(bld):
                             lib='PocoFoundation boost_system boost_thread gmock gtest log4cpp pqxx pugixml',
                             includes='.'
                         )
-                            
