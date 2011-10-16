@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
 #define GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
 
-#include "../Authentication/IAuthenticationManager.hpp"
+#include "../Authentication/IAuthenticationPersistencyFacade.hpp"
 #include "../Authorization/IAuthorizationManager.hpp"
 #include "../Building/IBuildingManager.hpp"
 #include "../Cost/ICostManager.hpp"
@@ -59,11 +59,11 @@ public:
     virtual ~IManagerAbstractFactory(){}
 
     /**
-     * @brief Creates the authentication manager.
+     * @brief Creates the authentication persistency facade.
      *
-     * @return The newly created authentication manager.
+     * @return The newly created authentication persistency facade.
      */
-    virtual Authentication::IAuthenticationManagerShrPtr createAuthenticationManager() const = 0;
+    virtual Authentication::IAuthenticationPersistencyFacadeShrPtr createAuthenticationPersistencyFacade() const = 0;
 
     /**
      * @brief Creates the authorization manager.

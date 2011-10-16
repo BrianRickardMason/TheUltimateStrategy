@@ -25,18 +25,61 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Authentication/AuthenticationManagerFactory.hpp"
-#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
-#include <gmock/gmock.h>
+#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADE_HPP
+#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADE_HPP
 
-using namespace GameServer::Authentication;
-using namespace GameServer::Common;
+#include "IAuthenticationManagerAccessor.hpp"
+#include "IAuthenticationPersistencyFacade.hpp"
 
-TEST(AuthenticationManagerFactoryTest, createAuthenticationManager)
+namespace GameServer
 {
-    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
+namespace Authentication
+{
 
-    AuthenticationManagerAutPtr manager = AuthenticationManagerFactory::createAuthenticationManager(accessor_abstract_factory);
+/**
+ * @brief An authentication persistency facade.
+ */
+class AuthenticationPersistencyFacade
+    : public IAuthenticationPersistencyFacade
+{
+public:
+    /**
+     * @brief Constructs the authentication persistency facade.
+     *
+     * @param a_accessor An accessor to be injected.
+     */
+    AuthenticationPersistencyFacade(
+        IAuthenticationManagerAccessorAutPtr a_accessor
+    );
 
-    ASSERT_TRUE(manager.get() != NULL);
-}
+    /**
+     * @brief Authenticates a user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     * @param a_password    The password of the user.
+     *
+     * @return True if authenticated, false otherwise.
+     */
+    virtual bool authenticate(
+        Persistency::ITransactionShrPtr         a_transaction,
+        std::string                     const & a_login,
+        std::string                     const & a_password
+    ) const;
+
+private:
+    /**
+     * @brief An accessor.
+     */
+    IAuthenticationManagerAccessorScpPtr m_accessor;
+};
+
+/**
+ * @brief An auto pointer of authentication persistency facade.
+ */
+typedef std::auto_ptr<AuthenticationPersistencyFacade> AuthenticationPersistencyFacadeAutPtr;
+
+} // namespace Authentication
+} // namespace GameServer
+
+#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADE_HPP

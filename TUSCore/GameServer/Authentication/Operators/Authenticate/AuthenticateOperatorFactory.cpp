@@ -38,7 +38,9 @@ AuthenticateOperatorAutPtr AuthenticateOperatorFactory::createAuthenticateOperat
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return AuthenticateOperatorAutPtr(new AuthenticateOperator(a_manager_abstract_factory->createAuthenticationManager()));
+    return AuthenticateOperatorAutPtr(
+               new AuthenticateOperator(a_manager_abstract_factory->createAuthenticationPersistencyFacade())
+           );
 }
 
 } // namespace Authentication

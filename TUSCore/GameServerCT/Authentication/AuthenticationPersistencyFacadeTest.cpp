@@ -37,14 +37,14 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class AuthenticationManagerTest
+class AuthenticationPersistencyFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    AuthenticationManagerTest()
+    AuthenticationPersistencyFacadeTest()
         : m_login_1("Login1"),
           m_login_2("Login2"),
           m_login_5("Login5"),
@@ -80,29 +80,29 @@ protected:
     IUserManagerShrPtr m_user_manager;
 };
 
-/**
- * Component tests of: AuthenticationManager::authenticate.
- */
-TEST_F(AuthenticationManagerTest, authenticate_Success)
+// TODO: More specific tests, more granularity.
+TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateSuccess)
 {
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    IAuthenticationManagerShrPtr manager = m_manager_abstract_factory->createAuthenticationManager();
+    IAuthenticationPersistencyFacadeShrPtr persistency_facade =
+        m_manager_abstract_factory->createAuthenticationPersistencyFacade();
 
-    ASSERT_TRUE(manager->authenticate(transaction, m_login_1, "Password1"));
-    ASSERT_TRUE(manager->authenticate(transaction, m_login_2, "Password2"));
+    ASSERT_TRUE(persistency_facade->authenticate(transaction, m_login_1, "Password1"));
+    ASSERT_TRUE(persistency_facade->authenticate(transaction, m_login_2, "Password2"));
 }
 
-TEST_F(AuthenticationManagerTest, authenticate_Failure)
+TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateFailure)
 {
     IConnectionShrPtr connection = m_persistency.getConnection();
     ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
 
-    IAuthenticationManagerShrPtr manager = m_manager_abstract_factory->createAuthenticationManager();
+    IAuthenticationPersistencyFacadeShrPtr persistency_facade =
+        m_manager_abstract_factory->createAuthenticationPersistencyFacade();
 
-    ASSERT_FALSE(manager->authenticate(transaction, m_login_1, "Password2"));
-    ASSERT_FALSE(manager->authenticate(transaction, m_login_2, "Password1"));
-    ASSERT_FALSE(manager->authenticate(transaction, m_login_5, "Password1"));
-    ASSERT_FALSE(manager->authenticate(transaction, m_login_5, "Password2"));
+    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_1, "Password2"));
+    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_2, "Password1"));
+    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_5, "Password1"));
+    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_5, "Password2"));
 }

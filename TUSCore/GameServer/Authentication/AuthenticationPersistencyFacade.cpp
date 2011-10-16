@@ -25,61 +25,31 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGER_HPP
-#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGER_HPP
+#include "AuthenticationPersistencyFacade.hpp"
 
-#include "IAuthenticationManager.hpp"
-#include "IAuthenticationManagerAccessor.hpp"
+using namespace GameServer::Persistency;
+using namespace std;
 
 namespace GameServer
 {
 namespace Authentication
 {
 
-/**
- * @brief An authentication manager.
- */
-class AuthenticationManager
-    : public IAuthenticationManager
+AuthenticationPersistencyFacade::AuthenticationPersistencyFacade(
+    IAuthenticationManagerAccessorAutPtr a_accessor
+)
+    : m_accessor(a_accessor)
 {
-public:
-    /**
-     * @brief Constructs the authentication manager.
-     *
-     * @param a_accessor An accessor to be injected.
-     */
-    AuthenticationManager(
-        IAuthenticationManagerAccessorAutPtr a_accessor
-    );
+}
 
-    /**
-     * @brief Authenticates a user.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_password    The password of the user.
-     *
-     * @return True if authenticated, false otherwise.
-     */
-    virtual bool authenticate(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login,
-        std::string                     const & a_password
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    IAuthenticationManagerAccessorScpPtr m_accessor;
-};
-
-/**
- * @brief An auto pointer of authentication manager.
- */
-typedef std::auto_ptr<AuthenticationManager> AuthenticationManagerAutPtr;
+bool AuthenticationPersistencyFacade::authenticate(
+    ITransactionShrPtr         a_transaction,
+    string             const & a_login,
+    string             const & a_password
+) const
+{
+    return m_accessor->authenticate(a_transaction, a_login, a_password);
+}
 
 } // namespace Authentication
 } // namespace GameServer
-
-#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGER_HPP

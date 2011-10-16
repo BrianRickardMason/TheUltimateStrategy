@@ -25,30 +25,22 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "AuthenticationManager.hpp"
+#include "AuthenticationPersistencyFacadeFactory.hpp"
 
-using namespace GameServer::Persistency;
-using namespace std;
+using namespace GameServer::Common;
 
 namespace GameServer
 {
 namespace Authentication
 {
 
-AuthenticationManager::AuthenticationManager(
-    IAuthenticationManagerAccessorAutPtr a_accessor
+AuthenticationPersistencyFacadeAutPtr AuthenticationPersistencyFacadeFactory::create(
+    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
 )
-    : m_accessor(a_accessor)
 {
-}
-
-bool AuthenticationManager::authenticate(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login,
-    string             const & a_password
-) const
-{
-    return m_accessor->authenticate(a_transaction, a_login, a_password);
+    return AuthenticationPersistencyFacadeAutPtr(
+               new AuthenticationPersistencyFacade(a_accessor_abstract_factory->createAuthenticationAccessor())
+           );
 }
 
 } // namespace Authentication

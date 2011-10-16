@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATEOPERATOR_HPP
 #define GAMESERVER_AUTHENTICATION_AUTHENTICATEOPERATOR_HPP
 
-#include "../../IAuthenticationManager.hpp"
+#include "../../IAuthenticationPersistencyFacade.hpp"
 #include "IAuthenticateOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_authentication_manager The manager of authentication.
+     * @param a_authentication_persistency_facade The persistency facade of authentication.
      */
     AuthenticateOperator(
-        IAuthenticationManagerShrPtr a_authentication_manager
+        IAuthenticationPersistencyFacadeShrPtr a_authentication_persistency_facade
     );
 
     /**
@@ -69,9 +69,9 @@ public:
 
 private:
     /**
-     * @brief The manager of authentication.
+     * @brief The persistency facade of authentication.
      */
-    IAuthenticationManagerShrPtr m_authentication_manager;
+    IAuthenticationPersistencyFacadeShrPtr m_authentication_persistency_facade;
 };
 
 /**

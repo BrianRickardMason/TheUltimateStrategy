@@ -25,13 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGER_HPP
-#define GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGER_HPP
+#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADEFACTORY_HPP
+#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADEFACTORY_HPP
 
-#include "../Persistency/ITransaction.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
-#include <string>
+#include "../Common/IAccessorAbstractFactory.hpp"
+#include "AuthenticationPersistencyFacade.hpp"
 
 namespace GameServer
 {
@@ -39,39 +37,24 @@ namespace Authentication
 {
 
 /**
- * @brief The interface of an authentication manager.
+ * @brief A factory of authentication persistency facade.
  */
-class IAuthenticationManager
-    : boost::noncopyable
+class AuthenticationPersistencyFacadeFactory
 {
 public:
     /**
-     * @brief Destructs the authentication manager.
-     */
-    virtual ~IAuthenticationManager(){};
-
-    /**
-     * @brief Authenticates a user.
+     * @brief A factory method.
      *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_password    The password of the user.
+     * @param a_accessor_abstract_factory The abstract factory of accessors.
      *
-     * @return True if authenticated, false otherwise.
+     * @return A newly created authentication persistency facade.
      */
-    virtual bool authenticate(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                    const & a_login,
-        std::string                    const & a_password
-    ) const = 0;
+    static AuthenticationPersistencyFacadeAutPtr create(
+        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    );
 };
-
-/**
- * @brief A shared pointer of the interface of the authentication manager.
- */
-typedef boost::shared_ptr<IAuthenticationManager> IAuthenticationManagerShrPtr;
 
 } // namespace Authentication
 } // namespace GameServer
 
-#endif // GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGER_HPP
+#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADEFACTORY_HPP
