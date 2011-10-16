@@ -76,7 +76,7 @@ public:
      * @return The exit code.
      */
     virtual TurnOperatorExitCode turn(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
 
@@ -90,7 +90,7 @@ private:
      * @return True on success, false otherwise.
      */
     bool executeTurn(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
 
@@ -103,7 +103,7 @@ private:
      * @return True on success, false otherwise.
      */
     bool executeTurnSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 
@@ -116,7 +116,7 @@ private:
      * @return The total cost of living humans in the settlement.
      */
     Resource::ResourceSet getCostOfLiving(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 

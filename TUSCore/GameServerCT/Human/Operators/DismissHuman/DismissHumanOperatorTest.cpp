@@ -37,7 +37,7 @@ using namespace GameServer::Cost;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
@@ -85,8 +85,8 @@ protected:
           m_dismiss_human_operator(DismissHumanOperatorFactory::createDismissHumanOperator(m_manager_abstract_factory))
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
@@ -135,8 +135,8 @@ protected:
         vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
             ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -254,8 +254,8 @@ protected:
 TEST_F(DismissHumanOperatorTest, dismissHuman_TryingToDismissZeroHumans)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_DISMISS_ZERO_HUMANS,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 0).m_exit_code);
@@ -267,8 +267,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_TryingToDismissZeroHumans)
 TEST_F(DismissHumanOperatorTest, dismissHuman_HolderDoesNotExist)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_4, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
@@ -282,8 +282,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_HumanIsNotDismissable)
     for (KeyVec::const_iterator it = HUMAN_IS_NOT_DISMISSABLE.begin(); it != HUMAN_IS_NOT_DISMISSABLE.end(); ++it)
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_IS_NOT_DISMISSABLE,
                       m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE, 1).m_exit_code);
@@ -296,8 +296,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_HumanIsNotDismissable)
 TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroEngaged)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
@@ -309,8 +309,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroEngaged)
 TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
 
@@ -318,16 +318,16 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 2).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
 
@@ -340,8 +340,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
 TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
         m_human_manager->addHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
@@ -364,8 +364,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
     for (vector<IDHolder>::const_iterator it = ids.begin(); it != ids.end(); ++it)
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                       m_dismiss_human_operator->dismissHuman(transaction, *it, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
@@ -373,8 +373,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
         m_human_manager->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
@@ -396,8 +396,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
 TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -414,16 +414,16 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -444,8 +444,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
 TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -459,16 +459,16 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -486,8 +486,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
 TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -497,16 +497,16 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -521,8 +521,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
 TEST_F(DismissHumanOperatorTest, dismissHuman_One)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -530,8 +530,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
@@ -544,9 +544,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
     vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
+        IConnectionShrPtr connection = m_persistence.getConnection();
 
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -569,8 +569,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
 TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -578,8 +578,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 6).m_exit_code);
@@ -592,8 +592,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
     vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -616,8 +616,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
 TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
@@ -625,8 +625,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10).m_exit_code);
@@ -639,8 +639,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
     vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -662,8 +662,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
 TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 200);
 
@@ -671,8 +671,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
                   m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 100).m_exit_code);
@@ -685,8 +685,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
     vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);

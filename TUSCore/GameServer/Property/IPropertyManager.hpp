@@ -29,7 +29,7 @@
 #define GAMESERVER_PROPERTY_IPROPERTYMANAGER_HPP
 
 #include "../Common/KeyHash.hpp"
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "Property.hpp"
 #include "PropertySet.hpp"
 #include <boost/noncopyable.hpp>
@@ -62,7 +62,7 @@ public:
      * @return The property.
      */
     virtual PropertyBooleanShrPtr getPropertyBoolean(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
     ) const = 0;
@@ -77,7 +77,7 @@ public:
      * @return The property.
      */
     virtual PropertyIntegerShrPtr getPropertyInteger(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
     ) const = 0;
@@ -92,7 +92,7 @@ public:
      * @return The property.
      */
     virtual PropertyStringShrPtr getPropertyString(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
     ) const = 0;
@@ -106,7 +106,7 @@ public:
      * @return The set of properties.
      */
     virtual PropertySet getProperties(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash
     ) const = 0;
 };

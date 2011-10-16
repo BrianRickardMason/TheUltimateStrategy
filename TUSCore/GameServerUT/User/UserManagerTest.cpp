@@ -27,11 +27,11 @@
 
 #include "../../GameServer/User/UserManager.hpp"
 #include "../../GameServer/User/UserRecord.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "UserManagerAccessorMock.hpp"
 #include <boost/make_shared.hpp>
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::User;
 using namespace boost;
 using namespace std;

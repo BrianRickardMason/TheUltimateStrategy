@@ -56,7 +56,7 @@ public:
     MOCK_CONST_METHOD4(
         insertRecord,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key,
             Volume                          const & a_volume
@@ -75,7 +75,7 @@ public:
     MOCK_CONST_METHOD3(
         deleteRecord,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key
         )
@@ -93,7 +93,7 @@ public:
     MOCK_CONST_METHOD3(
         getRecord,
         ResourceWithVolumeRecordShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key
         )
@@ -110,7 +110,7 @@ public:
     MOCK_CONST_METHOD2(
         getRecords,
         ResourceWithVolumeRecordMap(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder
         )
     );
@@ -128,7 +128,7 @@ public:
     MOCK_CONST_METHOD4(
         increaseVolume,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key,
             Volume                          const & a_volume
@@ -148,7 +148,7 @@ public:
     MOCK_CONST_METHOD4(
         decreaseVolume,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key,
             Volume                          const & a_volume

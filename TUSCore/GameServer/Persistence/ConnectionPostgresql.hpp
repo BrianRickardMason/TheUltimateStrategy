@@ -25,53 +25,49 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PERSISTENCY_PERSISTENCYDUMMY_HPP
-#define GAMESERVER_PERSISTENCY_PERSISTENCYDUMMY_HPP
+#ifndef GAMESERVER_PERSISTENCE_CONNECTIONPOSTGRESQL_HPP
+#define GAMESERVER_PERSISTENCE_CONNECTIONPOSTGRESQL_HPP
 
-#include "../../GameServer/Persistency/IPersistency.hpp"
-#include "ConnectionDummy.hpp"
-#include "TransactionDummy.hpp"
+#include "IConnection.hpp"
+#include <pqxx/connection.hxx>
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
 /**
- * @brief The dummy persistency.
+ * @brief The PostgreSQL connection.
  */
-class PersistencyDummy
-    : public IPersistency
+class ConnectionPostgresql
+    : public IConnection
 {
 public:
     /**
-     * @brief Constructs the persistency.
+     * @brief Constructs the connection.
      */
-    PersistencyDummy();
+    ConnectionPostgresql();
 
     /**
-     * @brief Gets the connection.
+     * @brief Gets the backbone connection.
      *
-     * @return The connection.
+     * @return The backbone connection.
      */
-    virtual IConnectionShrPtr getConnection();
-
-    /**
-     * @brief Gets a transaction.
-     *
-     * @param a_connection A connection that transaction bases upon.
-     *
-     * @return The transaction.
-     */
-    virtual ITransactionShrPtr getTransaction(
-        IConnectionShrPtr a_connection
-    );
+    pqxx::connection & getBackboneConnection();
 
 private:
-    ConnectionDummyShrPtr m_connection;
+    /**
+     * @brief The backbone connection.
+     */
+    pqxx::connection m_backbone_connection;
 };
 
-} // namespace Persistency
+/**
+ * @brief The shared pointer of the PostgreSQL connection.
+ */
+typedef boost::shared_ptr<ConnectionPostgresql> ConnectionPostgresqlShrPtr;
+
+} // namespace Persistence
 } // namespace GameServer
 
-#endif // GAMESERVER_PERSISTENCY_PERSISTENCYDUMMY_HPP
+#endif // GAMESERVER_PERSISTENCE_CONNECTIONPOSTGRESQL_HPP

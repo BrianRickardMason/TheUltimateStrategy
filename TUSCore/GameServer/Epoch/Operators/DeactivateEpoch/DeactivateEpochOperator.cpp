@@ -27,7 +27,7 @@
 
 #include "DeactivateEpochOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::World;
 using namespace std;
 

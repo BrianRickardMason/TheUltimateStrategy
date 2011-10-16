@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_COST_ICOSTMANAGER_HPP
 #define GAMESERVER_COST_ICOSTMANAGER_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "../Resource/ResourceSet.hpp"
 #include "IDCostType.hpp"
 #include <boost/noncopyable.hpp>
@@ -60,7 +60,7 @@ public:
      * @return The cost.
      */
     virtual Resource::ResourceSet getCost(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDCostType                      const & a_id_cost_type
     ) const = 0;

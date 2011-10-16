@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistency/TransactionPostgresql.hpp"
+#include "../Persistence/TransactionPostgresql.hpp"
 #include "EpochManagerAccessorPostgresql.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 
@@ -157,7 +157,7 @@ void EpochManagerAccessorPostgresql::incrementTicks(
 }
 
 string EpochManagerAccessorPostgresql::getWorldNameOfLand(
-    Persistency::ITransactionShrPtr       a_transaction,
+    Persistence::ITransactionShrPtr       a_transaction,
     string                          const a_land_name
 ) const
 {
@@ -181,7 +181,7 @@ string EpochManagerAccessorPostgresql::getWorldNameOfLand(
 }
 
 string EpochManagerAccessorPostgresql::getLandNameOfSettlement(
-    Persistency::ITransactionShrPtr       a_transaction,
+    Persistence::ITransactionShrPtr       a_transaction,
     string                          const a_settlement_name
 ) const
 {

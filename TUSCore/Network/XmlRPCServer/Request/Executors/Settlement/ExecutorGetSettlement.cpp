@@ -32,7 +32,7 @@
 
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -78,7 +78,7 @@ bool ExecutorGetSettlement::processParameters()
 }
 
 bool ExecutorGetSettlement::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToSettlementOperatorShrPtr authorize_operator =
@@ -86,8 +86,8 @@ bool ExecutorGetSettlement::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name);
@@ -102,7 +102,7 @@ bool ExecutorGetSettlement::authorize(
 }
 
 bool ExecutorGetSettlement::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
@@ -110,8 +110,8 @@ bool ExecutorGetSettlement::epochIsActive(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochBySettlementNameOperatorExitCode const exit_code =
             epoch_operator->getEpochBySettlementName(transaction, m_settlement_name);
@@ -126,14 +126,14 @@ bool ExecutorGetSettlement::epochIsActive(
 }
 
 bool ExecutorGetSettlement::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorGetSettlement::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetSettlementOperatorShrPtr settlement_operator =
@@ -141,8 +141,8 @@ ReplyShrPtr ExecutorGetSettlement::perform(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetSettlementOperatorExitCode const exit_code =
             settlement_operator->getSettlement(transaction, m_settlement_name);

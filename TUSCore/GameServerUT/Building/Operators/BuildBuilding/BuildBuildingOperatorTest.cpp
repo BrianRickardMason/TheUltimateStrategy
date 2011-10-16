@@ -28,7 +28,7 @@
 #include "../../../../GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp"
 #include "../../../Cost/CostManagerMock.hpp"
 #include "../../../Helpers/Functions.hpp"
-#include "../../../Persistency/TransactionDummy.hpp"
+#include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Resource/ResourceManagerMock.hpp"
 #include "../../BuildingManagerMock.hpp"
 #include <boost/assign.hpp>
@@ -36,7 +36,7 @@
 using namespace GameServer::Building;
 using namespace GameServer::Common;
 using namespace GameServer::Cost;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace boost;
 using namespace std;

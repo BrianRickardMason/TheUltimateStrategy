@@ -27,11 +27,11 @@
 
 #include "../../GameServer/Land/LandManager.hpp"
 #include "../../GameServer/Land/LandRecord.hpp"
-#include "../Persistency/PersistencyDummy.hpp"
+#include "../Persistence/PersistenceDummy.hpp"
 #include "LandManagerAccessorMock.hpp"
 
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 

@@ -30,7 +30,7 @@
 #include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::User;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -75,50 +75,50 @@ bool ExecutorCreateUser::processParameters()
 }
 
 bool ExecutorCreateUser::authenticate(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorCreateUser::getActingUser(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 )
 {
     return true;
 }
 
 bool ExecutorCreateUser::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorCreateUser::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorCreateUser::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorCreateUser::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     ICreateUserOperatorShrPtr user_operator = m_operator_abstract_factory->createCreateUserOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         CreateUserOperatorExitCode const exit_code = user_operator->createUser(transaction, m_login, m_password);
 

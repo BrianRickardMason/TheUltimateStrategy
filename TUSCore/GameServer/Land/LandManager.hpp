@@ -63,7 +63,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool createLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_world_name,
         std::string                     const a_land_name
@@ -78,7 +78,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool deleteLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
 
@@ -91,7 +91,7 @@ public:
      * @return The land, null if not found.
      */
     virtual ILandShrPtr getLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
 
@@ -104,7 +104,7 @@ public:
      * @return A map of lands, an empty map if not found.
      */
     virtual ILandMap getLands(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const;
 
@@ -115,7 +115,7 @@ public:
      * @param a_land_name   The name of the land.
      */
     virtual void markGranted(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
 

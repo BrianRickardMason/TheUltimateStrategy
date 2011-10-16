@@ -49,11 +49,11 @@ public:
     ManagerAbstractFactoryPostgresql();
 
     /**
-     * @brief Creates the authentication persistency facade.
+     * @brief Creates the authentication persistence facade.
      *
-     * @return The newly created authentication persistency facade.
+     * @return The newly created authentication persistence facade.
      */
-    virtual Authentication::IAuthenticationPersistencyFacadeShrPtr createAuthenticationPersistencyFacade() const;
+    virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const;
 
     /**
      * @brief Creates the authorization manager.

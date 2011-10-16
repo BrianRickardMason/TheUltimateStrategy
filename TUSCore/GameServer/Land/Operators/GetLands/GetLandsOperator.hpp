@@ -64,7 +64,7 @@ public:
      * @return The exit code.
      */
     virtual GetLandsOperatorExitCode getLands(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const;
 

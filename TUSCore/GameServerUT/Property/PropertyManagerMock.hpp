@@ -57,7 +57,7 @@ public:
     MOCK_CONST_METHOD3(
         getPropertyBoolean,
         PropertyBooleanShrPtr(
-            Persistency::ITransactionShrPtr        a_transaction,
+            Persistence::ITransactionShrPtr        a_transaction,
             Common::KeyHash                const & a_key_hash,
             IDProperty                     const & a_id_property
         )
@@ -75,7 +75,7 @@ public:
     MOCK_CONST_METHOD3(
         getPropertyInteger,
         PropertyIntegerShrPtr(
-            Persistency::ITransactionShrPtr        a_transaction,
+            Persistence::ITransactionShrPtr        a_transaction,
             Common::KeyHash                const & a_key_hash,
             IDProperty                     const & a_id_property
         )
@@ -93,7 +93,7 @@ public:
     MOCK_CONST_METHOD3(
         getPropertyString,
         PropertyStringShrPtr(
-            Persistency::ITransactionShrPtr        a_transaction,
+            Persistence::ITransactionShrPtr        a_transaction,
             Common::KeyHash                const & a_key_hash,
             IDProperty                     const & a_id_property
         )
@@ -110,7 +110,7 @@ public:
     MOCK_CONST_METHOD2(
         getProperties,
         PropertySet(
-            Persistency::ITransactionShrPtr        a_transaction,
+            Persistence::ITransactionShrPtr        a_transaction,
             Common::KeyHash                const & a_key_hash
         )
     );

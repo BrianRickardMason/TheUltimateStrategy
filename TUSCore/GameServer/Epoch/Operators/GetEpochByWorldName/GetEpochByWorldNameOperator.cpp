@@ -27,7 +27,7 @@
 
 #include "GetEpochByWorldNameOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::World;
 using namespace std;
 

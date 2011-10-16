@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHORIZATION_IAUTHORIZEUSERTOLANDOPERATOR_HPP
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZEUSERTOLANDOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "AuthorizeUserToLandOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -61,7 +61,7 @@ public:
      * @return The exit code.
      */
     virtual AuthorizeUserToLandOperatorExitCode authorizeUserToLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_land_name
     ) const = 0;

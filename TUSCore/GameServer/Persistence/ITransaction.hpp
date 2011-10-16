@@ -25,20 +25,44 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "TransactionDummy.hpp"
+#ifndef GAMESERVER_PERSISTENCE_ITRANSACTION_HPP
+#define GAMESERVER_PERSISTENCE_ITRANSACTION_HPP
+
+#include <boost/shared_ptr.hpp>
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
-void TransactionDummy::commit()
+/**
+ * @brief The interface of transaction.
+ */
+class ITransaction
 {
-}
+public:
+    /**
+     * @brief Destructs the transaction.
+     */
+    virtual ~ITransaction(){};
 
-void TransactionDummy::abort()
-{
-}
+    /**
+     * @brief Commits the transaction.
+     */
+    virtual void commit() = 0;
 
-} // namespace Persistency
+    /**
+     * @brief Aborts the transaction.
+     */
+    virtual void abort() = 0;
+};
+
+/**
+ * @brief The shared pointer of the interface of transaction.
+ */
+typedef boost::shared_ptr<ITransaction> ITransactionShrPtr;
+
+} // namespace Persistence
 } // namespace GameServer
+
+#endif // GAMESERVER_PERSISTENCE_ITRANSACTION_HPP

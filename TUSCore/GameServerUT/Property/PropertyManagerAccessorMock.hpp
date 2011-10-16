@@ -55,7 +55,7 @@ public:
     MOCK_CONST_METHOD3(
         getPropertyRecord,
         PropertyRecordShrPtr(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::KeyHash                 const & a_key_hash,
             IDProperty                                  const & a_id_property
         )
@@ -72,7 +72,7 @@ public:
     MOCK_CONST_METHOD2(
         getPropertyRecords,
         PropertyRecordMap(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::KeyHash                 const & a_key_hash
         )
     );

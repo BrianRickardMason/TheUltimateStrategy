@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_IEPOCHMANAGER_HPP
 #define GAMESERVER_EPOCH_IEPOCHMANAGER_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "Epoch.hpp"
 #include <boost/noncopyable.hpp>
 
@@ -61,7 +61,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool createEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name,
         std::string                     const a_epoch_name
     ) const = 0;
@@ -78,7 +78,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool deleteEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -91,7 +91,7 @@ public:
      * @return The epoch, null if not found.
      */
     virtual EpochShrPtr getEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -104,7 +104,7 @@ public:
      * @return The epoch, null if not found.
      */
     virtual EpochShrPtr getEpochByLandName(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 
@@ -117,7 +117,7 @@ public:
      * @return The epoch, null if not found.
      */
     virtual EpochShrPtr getEpochBySettlementName(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 
@@ -134,7 +134,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool activateEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -151,7 +151,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool deactivateEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -168,7 +168,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool finishEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -185,7 +185,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool tickEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 };

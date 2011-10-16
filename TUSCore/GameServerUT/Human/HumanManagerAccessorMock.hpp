@@ -54,7 +54,7 @@ public:
     MOCK_CONST_METHOD4(
         insertRecord,
         void(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key,
             Volume                                      const & a_volume
@@ -71,7 +71,7 @@ public:
     MOCK_CONST_METHOD3(
         deleteRecord,
         void(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key
         )
@@ -89,7 +89,7 @@ public:
     MOCK_CONST_METHOD3(
         getRecord,
         HumanWithVolumeRecordShrPtr(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key
         )
@@ -107,7 +107,7 @@ public:
     MOCK_CONST_METHOD3(
         getRecords,
         HumanWithVolumeRecordMap(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             IDHuman                                     const & a_id_human
         )
@@ -124,7 +124,7 @@ public:
     MOCK_CONST_METHOD2(
         getRecords,
         HumanWithVolumeRecordMap(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder
         )
     );
@@ -140,7 +140,7 @@ public:
     MOCK_CONST_METHOD4(
         increaseVolume,
         void(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key,
             Volume                                      const & a_volume
@@ -158,7 +158,7 @@ public:
     MOCK_CONST_METHOD4(
         decreaseVolume,
         void(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key,
             Volume                                      const & a_volume

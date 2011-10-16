@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_IFINISHEPOCHOPERATOR_HPP
 #define GAMESERVER_EPOCH_IFINISHEPOCHOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "FinishEpochOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -60,7 +60,7 @@ public:
      * @return The exit code.
      */
     virtual FinishEpochOperatorExitCode finishEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 };

@@ -29,7 +29,7 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTOR_HPP
 
 #include "../../../../GameServer/Common/IOperatorAbstractFactory.hpp"
-#include "../../../../GameServer/Persistency/IPersistency.hpp"
+#include "../../../../GameServer/Persistence/IPersistence.hpp"
 #include "../../../../GameServer/User/IUser.hpp"
 #include "IExecutor.hpp"
 
@@ -99,67 +99,67 @@ private:
     /**
      * @brief Authenticates the user.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if user has been authenticated, false otherwise.
      */
     virtual bool authenticate(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
     /**
      * @brief Gets the acting user.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if the acting user has been got, false otherwise.
      */
     virtual bool getActingUser(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     );
 
     /**
      * @brief Authorizes the user.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if user has been authorized, false otherwise.
      */
     virtual bool authorize(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const = 0;
 
     /**
      * @brief Verifies whether the epoch is active.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if the epoch is active, false otherwise.
      */
     virtual bool epochIsActive(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const = 0;
 
     /**
      * @brief Verifies whether the world configuration allows an action.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if the action is allowed, false otherwise.
      */
     virtual bool verifyWorldConfiguration(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const = 0;
 
     /**
      * @brief Performs the main operation.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return The reply.
      */
     virtual XmlRPCCommon::Reply::ReplyShrPtr perform(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const = 0;
 
     /**
@@ -231,9 +231,9 @@ private:
 
 protected:
     /**
-     * @brief Persistency.
+     * @brief Persistence.
      */
-    GameServer::Persistency::IPersistencyShrPtr const m_persistency;
+    GameServer::Persistence::IPersistenceShrPtr const m_persistence;
 
     /**
      * @brief OperatorAbstractFactory.

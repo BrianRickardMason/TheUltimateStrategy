@@ -63,7 +63,7 @@ public:
      * @return The exit code.
      */
     virtual GetResourceOperatorExitCode getResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const;

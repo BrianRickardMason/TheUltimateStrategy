@@ -29,7 +29,7 @@
 #define GAMESERVER_BUILDING_IBUILDINGMANAGERACCESSOR_HPP
 
 #include "../Common/IDHolder.hpp"
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "BuildingWithVolumeRecord.hpp"
 #include <boost/make_shared.hpp>
 #include <boost/noncopyable.hpp>
@@ -64,7 +64,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -80,7 +80,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const = 0;
@@ -95,7 +95,7 @@ public:
      * @return The building with volume record, null if not found.
      */
     virtual BuildingWithVolumeRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const = 0;
@@ -109,7 +109,7 @@ public:
      * @return A map of building with volume records, an empty map if not found.
      */
     virtual BuildingWithVolumeRecordMap getRecords(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const = 0;
 
@@ -124,7 +124,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void increaseVolume(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -141,7 +141,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void decreaseVolume(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume

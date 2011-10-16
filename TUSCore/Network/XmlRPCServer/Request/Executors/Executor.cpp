@@ -26,12 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Common/OperatorAbstractFactoryPostgresql.hpp"
-#include "../../../../GameServer/Persistency/PersistencyPostgresql.hpp"
+#include "../../../../GameServer/Persistence/PersistencePostgresql.hpp"
 #include "Executor.hpp"
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::User;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -46,10 +46,10 @@ namespace Request
 namespace Executors
 {
 
-// TODO: Remove hardcoded persistency.
+// TODO: Remove hardcoded persistence.
 // TODO: Remove hardcoded operator factory.
 Executor::Executor()
-    : m_persistency(new PersistencyPostgresql),
+    : m_persistence(new PersistencePostgresql),
       m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql)
 {
 }
@@ -75,32 +75,32 @@ ReplyShrPtr Executor::execute(
         return produceReplyInvalidRange();
     }
 
-    if (!authenticate(m_persistency))
+    if (!authenticate(m_persistence))
     {
         return produceReplyUnauthenticated();
     }
 
-    if (!getActingUser(m_persistency))
+    if (!getActingUser(m_persistence))
     {
         return produceReplyActingUserHasNotBeenGot();
     }
 
-    if (!authorize(m_persistency))
+    if (!authorize(m_persistence))
     {
         return produceReplyUnauthorized();
     }
 
-    if (!epochIsActive(m_persistency))
+    if (!epochIsActive(m_persistence))
     {
         return produceReplyEpochIsNotActive();
     }
 
-    if (!verifyWorldConfiguration(m_persistency))
+    if (!verifyWorldConfiguration(m_persistence))
     {
         return produceReplyActionUnavailable();
     }
 
-    return perform(m_persistency);
+    return perform(m_persistence);
 }
 
 bool Executor::serverIsListening() const
@@ -109,15 +109,15 @@ bool Executor::serverIsListening() const
 }
 
 bool Executor::authenticate(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthenticateOperatorShrPtr authenticate_operator = m_operator_abstract_factory->createAuthenticateOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthenticateOperatorExitCode const exit_code =
             authenticate_operator->authenticate(transaction, m_login, m_password);
@@ -132,15 +132,15 @@ bool Executor::authenticate(
 }
 
 bool Executor::getActingUser(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 )
 {
     IGetUserOperatorShrPtr get_user_operator = m_operator_abstract_factory->createGetUserOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetUserOperatorExitCode const exit_code = get_user_operator->getUser(transaction, m_login);
 

@@ -33,7 +33,7 @@
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::Transport;
@@ -73,8 +73,8 @@ protected:
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2)
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
@@ -174,8 +174,8 @@ protected:
  */
 TEST_F(TransportResourceOperatorTest, transportResource_TryingToTransportZeroResources)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_TRYING_TO_TRANSPORT_ZERO_RESOURCES,
               m_transport_resource_operator->transportResource(transaction,
@@ -187,8 +187,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_TryingToTransportZeroRes
 
 TEST_F(TransportResourceOperatorTest, transportResource_SourceSettlementDoesNotExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SOURCE_SETTLEMENT_DOES_NOT_EXIST,
               m_transport_resource_operator->transportResource(transaction,
@@ -200,8 +200,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_SourceSettlementDoesNotE
 
 TEST_F(TransportResourceOperatorTest, transportResource_DestinationSettlementDoesNotExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_DESTINATION_SETTLEMENT_DOES_NOT_EXIST,
               m_transport_resource_operator->transportResource(transaction,
@@ -213,8 +213,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_DestinationSettlementDoe
 
 TEST_F(TransportResourceOperatorTest, transportResource_SettlementsAreNotFromTheSameLand)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND,
               m_transport_resource_operator->transportResource(transaction,
@@ -226,8 +226,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_SettlementsAreNotFromThe
 
 TEST_F(TransportResourceOperatorTest, transportResource_NotEnoughResources)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               m_transport_resource_operator->transportResource(transaction,
@@ -240,8 +240,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_NotEnoughResources)
 TEST_F(TransportResourceOperatorTest, transportResource_Success_OneResource)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
                   m_transport_resource_operator->transportResource(transaction,
@@ -254,8 +254,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_OneResource)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(999, m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL)->getVolume());
         ASSERT_EQ(1, m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
@@ -265,8 +265,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_OneResource)
 TEST_F(TransportResourceOperatorTest, transportResource_Success_ManyResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
                   m_transport_resource_operator->transportResource(transaction,
@@ -279,8 +279,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_ManyResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(500, m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL)->getVolume());
         ASSERT_EQ(500, m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
@@ -290,8 +290,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_ManyResources)
 TEST_F(TransportResourceOperatorTest, transportResource_Success_AllResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
                   m_transport_resource_operator->transportResource(transaction,
@@ -304,8 +304,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_AllResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL) == NULL);
         ASSERT_EQ(1000, m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());

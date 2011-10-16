@@ -33,7 +33,7 @@ using namespace GameServer::Authorization;
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
 using namespace GameServer::World;
@@ -69,8 +69,8 @@ protected:
           m_settlement_manager(m_manager_abstract_factory->createSettlementManager())
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_world_manager->createWorld(transaction, m_world_name);
 
@@ -166,8 +166,8 @@ protected:
  */
 TEST_F(AuthorizationManagerTest, authorizeUserToLand_Authorized)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
@@ -177,8 +177,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToLand_Authorized)
 
 TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
@@ -188,8 +188,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized)
 
 TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLogin)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
@@ -198,8 +198,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLogin)
 
 TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLandName)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
@@ -211,8 +211,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLandNa
  */
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
@@ -222,8 +222,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
 
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
@@ -233,8 +233,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
 
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_MissingLogin)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 
@@ -243,8 +243,8 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_Missing
 
 TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_MissingSettlementName)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
 

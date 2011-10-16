@@ -61,7 +61,7 @@ public:
      * @return The exit code.
      */
     virtual GetSettlementOperatorExitCode getSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 

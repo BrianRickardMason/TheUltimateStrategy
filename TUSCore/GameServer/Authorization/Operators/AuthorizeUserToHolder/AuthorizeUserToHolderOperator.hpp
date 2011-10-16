@@ -62,7 +62,7 @@ public:
      * @return The exit code.
      */
     virtual AuthorizeUserToHolderOperatorExitCode authorizeUserToHolder(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
         Common::IDHolder                const & a_id_holder
     ) const;

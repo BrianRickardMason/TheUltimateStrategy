@@ -68,7 +68,7 @@ public:
      * @return The exit code.
      */
     virtual CreateSettlementOperatorExitCode createSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name,
         std::string                     const a_settlement_name
     ) const;

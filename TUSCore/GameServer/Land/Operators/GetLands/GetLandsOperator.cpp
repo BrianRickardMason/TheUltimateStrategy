@@ -27,7 +27,7 @@
 
 #include "GetLandsOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::User;
 using namespace std;
 

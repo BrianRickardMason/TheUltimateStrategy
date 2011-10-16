@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_ILANDMANAGERACCESSOR_HPP
 #define GAMESERVER_LAND_ILANDMANAGERACCESSOR_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "ILandRecord.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/make_shared.hpp>
@@ -61,7 +61,7 @@ public:
      * @param a_land_name   The name of the land.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_world_name,
         std::string                     const a_land_name
@@ -74,7 +74,7 @@ public:
      * @param a_land_name   The name of the land.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 
@@ -87,7 +87,7 @@ public:
      * @return The record of the land, null if not found.
      */
     virtual ILandRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 
@@ -100,7 +100,7 @@ public:
      * @return A map of records of the land, an empty map if not found.
      */
     virtual ILandRecordMap getRecords(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const = 0;
 
@@ -111,7 +111,7 @@ public:
      * @param a_land_name   The name of the land.
      */
     virtual void markGranted(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 };

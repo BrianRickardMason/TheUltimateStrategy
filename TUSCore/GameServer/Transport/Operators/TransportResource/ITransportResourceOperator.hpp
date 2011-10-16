@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_TRANSPORT_ITRANSPORTRESOURCEOPERATOR_HPP
 #define GAMESERVER_TRANSPORT_ITRANSPORTRESOURCEOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "../../../Resource/Key.hpp"
 #include "../../../Resource/Volume.hpp"
 #include "TransportResourceOperatorExitCode.hpp"
@@ -65,7 +65,7 @@ public:
      * @returns The exit code.
      */
     virtual TransportResourceOperatorExitCode transportResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
         Resource::Key                   const & a_key,

@@ -61,7 +61,7 @@ public:
      * @param a_volume      A volume of the resource.
      */
     virtual void addResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -80,7 +80,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool subtractResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -97,7 +97,7 @@ public:
      * @param a_volume      A volume of the resource.
      */
     virtual void subtractResourceSafely(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -115,7 +115,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool subtractResourceSet(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceSet                     const & a_resource_set
     ) const;
@@ -130,7 +130,7 @@ public:
      * @param a_resource_set A set of resources.
      */
     virtual void subtractResourceSetSafely(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceSet                     const & a_resource_set
     ) const;
@@ -145,7 +145,7 @@ public:
      * @return The resource, null if not found.
      */
     virtual ResourceWithVolumeShrPtr getResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const;
@@ -159,7 +159,7 @@ public:
      * @return A map of resources, an empty map if not found.
      */
     virtual ResourceSet getResources(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const;
 

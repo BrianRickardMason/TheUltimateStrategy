@@ -27,7 +27,7 @@
 
 #include "GetSettlementsOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Land;
 using namespace std;
 

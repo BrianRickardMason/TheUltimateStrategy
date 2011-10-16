@@ -33,7 +33,7 @@
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -94,7 +94,7 @@ bool ExecutorGetHuman::processParameters()
 }
 
 bool ExecutorGetHuman::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToHolderOperatorShrPtr authorize_operator =
@@ -102,8 +102,8 @@ bool ExecutorGetHuman::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToHolderOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToHolder(transaction, m_user->getLogin(), m_id_holder);
@@ -118,7 +118,7 @@ bool ExecutorGetHuman::authorize(
 }
 
 bool ExecutorGetHuman::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
@@ -126,8 +126,8 @@ bool ExecutorGetHuman::epochIsActive(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochBySettlementNameOperatorExitCode const exit_code =
             epoch_operator->getEpochBySettlementName(transaction, m_holder_name);
@@ -142,22 +142,22 @@ bool ExecutorGetHuman::epochIsActive(
 }
 
 bool ExecutorGetHuman::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorGetHuman::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetHumanOperatorShrPtr get_human_operator = m_operator_abstract_factory->createGetHumanOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetHumanOperatorExitCode const exit_code =
             get_human_operator->getHuman(transaction, m_id_holder, GameServer::Human::Key(m_id_human, m_experience));

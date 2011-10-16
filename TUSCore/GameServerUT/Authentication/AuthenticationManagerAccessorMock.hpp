@@ -55,7 +55,7 @@ public:
     MOCK_CONST_METHOD3(
         authenticate,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             std::string                     const & a_login,
             std::string                     const & a_password
         )

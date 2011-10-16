@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGERACCESSOR_HPP
 #define GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGERACCESSOR_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "ISettlementRecord.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/make_shared.hpp>
@@ -61,7 +61,7 @@ public:
      * @param a_settlement_name The name of the settlement.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name,
         std::string                     const a_settlement_name
     ) const = 0;
@@ -73,7 +73,7 @@ public:
      * @param a_settlement_name The name of the settlement.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 
@@ -86,7 +86,7 @@ public:
      * @return The record of the settlement, null if not found.
      */
     virtual ISettlementRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 
@@ -99,7 +99,7 @@ public:
      * @return The map of settlement records, an empty map if not found.
      */
     virtual ISettlementRecordMap getRecords(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 };

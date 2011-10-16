@@ -52,7 +52,7 @@ public:
      * @return True if the user is authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_land_name
     ) const;
@@ -66,7 +66,7 @@ public:
      * @return The name of the land, an empty string if not found.
      */
     virtual std::string getLandNameOfSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 };

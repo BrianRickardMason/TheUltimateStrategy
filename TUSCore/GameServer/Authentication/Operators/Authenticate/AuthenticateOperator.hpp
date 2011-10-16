@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATEOPERATOR_HPP
 #define GAMESERVER_AUTHENTICATION_AUTHENTICATEOPERATOR_HPP
 
-#include "../../IAuthenticationPersistencyFacade.hpp"
+#include "../../IAuthenticationPersistenceFacade.hpp"
 #include "IAuthenticateOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_authentication_persistency_facade The persistency facade of authentication.
+     * @param a_authentication_persistence_facade The persistence facade of authentication.
      */
     AuthenticateOperator(
-        IAuthenticationPersistencyFacadeShrPtr a_authentication_persistency_facade
+        IAuthenticationPersistenceFacadeShrPtr a_authentication_persistence_facade
     );
 
     /**
@@ -62,16 +62,16 @@ public:
      * @return The exit code.
      */
     virtual AuthenticateOperatorExitCode authenticate(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const & a_login,
         std::string                     const & a_password
     ) const;
 
 private:
     /**
-     * @brief The persistency facade of authentication.
+     * @brief The persistence facade of authentication.
      */
-    IAuthenticationPersistencyFacadeShrPtr m_authentication_persistency_facade;
+    IAuthenticationPersistenceFacadeShrPtr m_authentication_persistence_facade;
 };
 
 /**

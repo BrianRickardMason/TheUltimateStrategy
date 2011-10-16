@@ -61,7 +61,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool tickEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         World::IWorldShrPtr             const a_world
     ) const;
 

@@ -26,13 +26,13 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Property/PropertyManager.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "PropertyManagerAccessorMock.hpp"
 #include <boost/make_shared.hpp>
 #include <stdexcept>
 
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Property;
 using namespace boost;
 using namespace std;

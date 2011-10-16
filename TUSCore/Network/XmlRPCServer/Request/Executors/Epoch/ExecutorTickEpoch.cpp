@@ -32,7 +32,7 @@
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
 using namespace Network::XmlRPCCommon::Xml;
@@ -77,43 +77,43 @@ bool ExecutorTickEpoch::processParameters()
 }
 
 bool ExecutorTickEpoch::authenticate(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorTickEpoch::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorTickEpoch::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorTickEpoch::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorTickEpoch::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     ITickEpochOperatorShrPtr epoch_operator = m_operator_abstract_factory->createTickEpochOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         TickEpochOperatorExitCode const exit_code = epoch_operator->tickEpoch(transaction, m_world_name);
 

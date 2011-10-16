@@ -25,53 +25,23 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PERSISTENCY_IPERSISTENCY_HPP
-#define GAMESERVER_PERSISTENCY_IPERSISTENCY_HPP
+#include "AuthenticationPersistenceFacadeFactory.hpp"
 
-#include "IConnection.hpp"
-#include "ITransaction.hpp"
+using namespace GameServer::Common;
 
 namespace GameServer
 {
-namespace Persistency
+namespace Authentication
 {
 
-/**
- * @brief The interface of persistency.
- */
-class IPersistency
+AuthenticationPersistenceFacadeAutPtr AuthenticationPersistenceFacadeFactory::create(
+    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+)
 {
-public:
-    /**
-     * @brief Destructs the persistency.
-     */
-    virtual ~IPersistency(){};
+    return AuthenticationPersistenceFacadeAutPtr(
+               new AuthenticationPersistenceFacade(a_accessor_abstract_factory->createAuthenticationAccessor())
+           );
+}
 
-    /**
-     * @brief Gets the connection.
-     *
-     * @return The connection.
-     */
-    virtual IConnectionShrPtr getConnection() = 0;
-
-    /**
-     * @brief Gets a transaction.
-     *
-     * @param a_connection The connection that transaction bases upon.
-     *
-     * @return The transaction.
-     */
-    virtual ITransactionShrPtr getTransaction(
-        IConnectionShrPtr a_connection
-    ) = 0;
-};
-
-/**
- * @brief The shared pointer of the interface of persistency.
- */
-typedef boost::shared_ptr<IPersistency> IPersistencyShrPtr;
-
-} // namespace Persistency
+} // namespace Authentication
 } // namespace GameServer
-
-#endif // GAMESERVER_PERSISTENCY_PERSISTENCY_HPP

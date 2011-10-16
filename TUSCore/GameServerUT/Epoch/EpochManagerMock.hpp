@@ -57,7 +57,7 @@ public:
     MOCK_CONST_METHOD3(
         createEpoch,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name,
             std::string                     const a_epoch_name
         )
@@ -77,7 +77,7 @@ public:
     MOCK_CONST_METHOD2(
         deleteEpoch,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -93,7 +93,7 @@ public:
     MOCK_CONST_METHOD2(
         getEpoch,
         EpochShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -109,7 +109,7 @@ public:
     MOCK_CONST_METHOD2(
         getEpochByLandName,
         EpochShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
     );
@@ -125,7 +125,7 @@ public:
     MOCK_CONST_METHOD2(
         getEpochBySettlementName,
         EpochShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )
     );
@@ -145,7 +145,7 @@ public:
     MOCK_CONST_METHOD2(
         activateEpoch,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -165,7 +165,7 @@ public:
     MOCK_CONST_METHOD2(
         deactivateEpoch,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -185,7 +185,7 @@ public:
     MOCK_CONST_METHOD2(
         finishEpoch,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -205,7 +205,7 @@ public:
     MOCK_CONST_METHOD2(
         tickEpoch,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );

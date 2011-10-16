@@ -25,49 +25,35 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PERSISTENCY_CONNECTIONPOSTGRESQL_HPP
-#define GAMESERVER_PERSISTENCY_CONNECTIONPOSTGRESQL_HPP
+#ifndef GAMESERVER_PERSISTENCE_TRANSACTIONDUMMY_HPP
+#define GAMESERVER_PERSISTENCE_TRANSACTIONDUMMY_HPP
 
-#include "IConnection.hpp"
-#include <pqxx/connection.hxx>
+#include "../../GameServer/Persistence/ITransaction.hpp"
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
 /**
- * @brief The PostgreSQL connection.
+ * @brief A dummy transaction.
  */
-class ConnectionPostgresql
-    : public IConnection
+class TransactionDummy
+    : public ITransaction
 {
 public:
     /**
-     * @brief Constructs the connection.
+     * @brief Commits the transaction.
      */
-    ConnectionPostgresql();
+    virtual void commit();
 
     /**
-     * @brief Gets the backbone connection.
-     *
-     * @return The backbone connection.
+     * @brief Aborts the transaction.
      */
-    pqxx::connection & getBackboneConnection();
-
-private:
-    /**
-     * @brief The backbone connection.
-     */
-    pqxx::connection m_backbone_connection;
+    virtual void abort();
 };
 
-/**
- * @brief The shared pointer of the PostgreSQL connection.
- */
-typedef boost::shared_ptr<ConnectionPostgresql> ConnectionPostgresqlShrPtr;
-
-} // namespace Persistency
+} // namespace Persistence
 } // namespace GameServer
 
-#endif // GAMESERVER_PERSISTENCY_CONNECTIONPOSTGRESQL_HPP
+#endif // GAMESERVER_PERSISTENCE_TRANSACTIONPOSTGRESQL_HPP

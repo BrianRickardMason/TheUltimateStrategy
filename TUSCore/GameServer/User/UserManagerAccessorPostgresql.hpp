@@ -51,7 +51,7 @@ public:
      * @param a_password    The password of the user.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_password
     ) const;
@@ -63,7 +63,7 @@ public:
      * @param a_login       The login of the user.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const;
 
@@ -76,7 +76,7 @@ public:
      * @return The record of the user, null if not found.
      */
     virtual IUserRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const;
 

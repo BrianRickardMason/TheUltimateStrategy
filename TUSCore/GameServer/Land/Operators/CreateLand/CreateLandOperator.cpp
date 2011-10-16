@@ -27,7 +27,7 @@
 
 #include "CreateLandOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::User;
 using namespace GameServer::World;
 using namespace std;

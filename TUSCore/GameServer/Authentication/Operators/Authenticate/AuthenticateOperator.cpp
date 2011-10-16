@@ -27,7 +27,7 @@
 
 #include "AuthenticateOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace std;
 
 namespace GameServer
@@ -36,9 +36,9 @@ namespace Authentication
 {
 
 AuthenticateOperator::AuthenticateOperator(
-    IAuthenticationPersistencyFacadeShrPtr a_authentication_persistency_facade
+    IAuthenticationPersistenceFacadeShrPtr a_authentication_persistence_facade
 )
-    : m_authentication_persistency_facade(a_authentication_persistency_facade)
+    : m_authentication_persistence_facade(a_authentication_persistence_facade)
 {
 }
 
@@ -50,7 +50,7 @@ AuthenticateOperatorExitCode AuthenticateOperator::authenticate(
 {
     try
     {
-        bool const result = m_authentication_persistency_facade->authenticate(a_transaction, a_login, a_password);
+        bool const result = m_authentication_persistence_facade->authenticate(a_transaction, a_login, a_password);
 
         return AuthenticateOperatorExitCode(AUTHENTICATE_OPERATOR_EXIT_CODE_AUTHENTICATION_HAS_BEEN_PERFORMED, result);
     }

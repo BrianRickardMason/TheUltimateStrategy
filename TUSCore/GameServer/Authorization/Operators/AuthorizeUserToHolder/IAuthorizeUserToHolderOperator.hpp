@@ -29,7 +29,7 @@
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZEUSERTOHOLDEROPERATOR_HPP
 
 #include "../../../Common/IDHolder.hpp"
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "AuthorizeUserToHolderOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -62,7 +62,7 @@ public:
      * @return The exit code.
      */
     virtual AuthorizeUserToHolderOperatorExitCode authorizeUserToHolder(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
         Common::IDHolder                const & a_id_holder
     ) const = 0;

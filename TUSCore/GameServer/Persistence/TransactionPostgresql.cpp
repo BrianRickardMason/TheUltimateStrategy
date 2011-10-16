@@ -25,36 +25,37 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADEFACTORY_HPP
-#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADEFACTORY_HPP
+#include "TransactionPostgresql.hpp"
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "AuthenticationPersistencyFacade.hpp"
+using namespace pqxx;
+using namespace std;
 
 namespace GameServer
 {
-namespace Authentication
+namespace Persistence
 {
 
-/**
- * @brief A factory of authentication persistency facade.
- */
-class AuthenticationPersistencyFacadeFactory
+TransactionPostgresql::TransactionPostgresql(
+    pqxx::connection & a_connection
+)
+    : m_backbone_transaction(a_connection)
 {
-public:
-    /**
-     * @brief A factory method.
-     *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created authentication persistency facade.
-     */
-    static AuthenticationPersistencyFacadeAutPtr create(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-    );
-};
+}
 
-} // namespace Authentication
+void TransactionPostgresql::commit()
+{
+    m_backbone_transaction.commit();
+}
+
+void TransactionPostgresql::abort()
+{
+    m_backbone_transaction.abort();
+}
+
+pqxx::transaction<> & TransactionPostgresql::getBackboneTransaction()
+{
+    return m_backbone_transaction;
+}
+
+} // namespace Persistence
 } // namespace GameServer
-
-#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADEFACTORY_HPP

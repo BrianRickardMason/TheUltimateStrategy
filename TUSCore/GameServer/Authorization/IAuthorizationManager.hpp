@@ -29,7 +29,7 @@
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZATIONMANAGER_HPP
 
 #include "../Common/IDHolder.hpp"
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
@@ -61,7 +61,7 @@ public:
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_land_name
     ) const = 0;
@@ -76,7 +76,7 @@ public:
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToHolder(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
         Common::IDHolder                const & a_id_holder
     ) const = 0;
@@ -91,7 +91,7 @@ public:
      * @return True if authorized, false otherwise.
      */
     virtual bool authorizeUserToSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_settlement_name
     ) const = 0;

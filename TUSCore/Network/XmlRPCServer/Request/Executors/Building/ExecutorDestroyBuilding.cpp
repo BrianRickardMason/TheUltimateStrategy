@@ -32,7 +32,7 @@
 using namespace GameServer::Authorization;
 using namespace GameServer::Building;
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -93,7 +93,7 @@ bool ExecutorDestroyBuilding::processParameters()
 }
 
 bool ExecutorDestroyBuilding::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToHolderOperatorShrPtr authorize_operator =
@@ -101,8 +101,8 @@ bool ExecutorDestroyBuilding::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToHolderOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToHolder(transaction, m_user->getLogin(), m_id_holder);
@@ -117,7 +117,7 @@ bool ExecutorDestroyBuilding::authorize(
 }
 
 bool ExecutorDestroyBuilding::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
@@ -125,8 +125,8 @@ bool ExecutorDestroyBuilding::epochIsActive(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochBySettlementNameOperatorExitCode const exit_code =
             epoch_operator->getEpochBySettlementName(transaction, m_holder_name);
@@ -141,14 +141,14 @@ bool ExecutorDestroyBuilding::epochIsActive(
 }
 
 bool ExecutorDestroyBuilding::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorDestroyBuilding::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IDestroyBuildingOperatorShrPtr destroy_building_operator =
@@ -156,8 +156,8 @@ ReplyShrPtr ExecutorDestroyBuilding::perform(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         DestroyBuildingOperatorExitCode const exit_code =
             destroy_building_operator->destroyBuilding(transaction, m_id_holder, GameServer::Building::Key(m_id_building), m_volume);

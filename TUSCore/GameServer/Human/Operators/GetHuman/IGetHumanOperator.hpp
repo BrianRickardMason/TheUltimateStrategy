@@ -29,7 +29,7 @@
 #define GAMESERVER_HUMAN_IGETHUMANOPERATOR_HPP
 
 #include "../../../Common/IDHolder.hpp"
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "../../Key.hpp"
 #include "GetHumanOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
@@ -62,7 +62,7 @@ public:
      * @return The exit code.
      */
     virtual GetHumanOperatorExitCode getHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const = 0;

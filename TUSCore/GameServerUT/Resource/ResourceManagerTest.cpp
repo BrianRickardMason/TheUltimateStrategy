@@ -26,11 +26,11 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Resource/ResourceManager.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "ResourceManagerAccessorMock.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace boost;
 using namespace std;

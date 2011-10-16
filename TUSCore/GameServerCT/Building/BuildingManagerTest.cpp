@@ -33,7 +33,7 @@ using namespace GameServer::Building;
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
 using namespace GameServer::World;
@@ -69,8 +69,8 @@ protected:
           m_id_holder_3(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3)
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
@@ -180,8 +180,8 @@ protected:
 TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -189,8 +189,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -203,8 +203,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsNotPresent)
 TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -212,8 +212,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -221,8 +221,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -235,8 +235,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent)
 TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_DifferentBuilding)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -244,8 +244,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_DifferentBuilding)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
 
@@ -253,8 +253,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_DifferentBuilding)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -271,8 +271,8 @@ TEST_F(BuildingManagerTest, addBuilding_BuildingIsPresent_DifferentBuilding)
 TEST_F(BuildingManagerTest, subtractBuilding_BuildingsArePresent_SubtractAllOfOneBuildingAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
@@ -281,8 +281,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsArePresent_SubtractAllOfOn
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_building_manager->subtractBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22));
 
@@ -290,8 +290,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsArePresent_SubtractAllOfOn
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -304,8 +304,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsArePresent_SubtractAllOfOn
 TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractHalfAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 22);
 
@@ -313,8 +313,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractHalfAtOnc
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_building_manager->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11));
 
@@ -322,8 +322,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractHalfAtOnc
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -336,8 +336,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingIsPresent_SubtractHalfAtOnc
 TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_TryToSubtractToMuch)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -345,15 +345,15 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_TryToSubtractToM
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_FALSE(m_building_manager->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 12));
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -366,8 +366,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_TryToSubtractToM
 TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_SubtractRest)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -375,8 +375,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_SubtractRest)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_building_manager->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11));
 
@@ -384,8 +384,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_SubtractRest)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -395,8 +395,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsPresent_SubtractRest)
 
 TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsNotPresent_TryToSubtract)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_FALSE(m_building_manager->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11));
 }
@@ -406,8 +406,8 @@ TEST_F(BuildingManagerTest, subtractBuilding_BuildingsIsNotPresent_TryToSubtract
  */
 TEST_F(BuildingManagerTest, getBuilding_BuildingIsNotPresent)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     BuildingWithVolumeShrPtr building = m_building_manager->getBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN);
 
@@ -417,8 +417,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsNotPresent)
 TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -426,8 +426,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfH
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeShrPtr building = m_building_manager->getBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN);
 
@@ -439,8 +439,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfH
 TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -448,8 +448,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfD
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeShrPtr building = m_building_manager->getBuilding(transaction, m_id_holder_2, KEY_DEFENSIVE_BARBICAN);
 
@@ -460,8 +460,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfD
 TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -469,8 +469,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfD
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeShrPtr building = m_building_manager->getBuilding(transaction, m_id_holder_3, KEY_DEFENSIVE_BARBICAN);
 
@@ -481,8 +481,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetPresentBuilding_OfD
 TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -490,8 +490,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeShrPtr building = m_building_manager->getBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES);
 
@@ -502,8 +502,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
 TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -511,8 +511,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeShrPtr building = m_building_manager->getBuilding(transaction, m_id_holder_2, KEY_GOLD_ALTAR_OF_WISHES);
 
@@ -523,8 +523,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
 TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -532,8 +532,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeShrPtr building = m_building_manager->getBuilding(transaction, m_id_holder_3, KEY_GOLD_ALTAR_OF_WISHES);
 
@@ -546,8 +546,8 @@ TEST_F(BuildingManagerTest, getBuilding_BuildingIsPresent_GetNonPresentBuilding_
  */
 TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_ExistentHolder)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -556,8 +556,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_ExistentHolder)
 
 TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_NonExistentHolder)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_3);
 
@@ -567,8 +567,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsAreNotPresent_NonExistentHolde
 TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -576,8 +576,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfHolder)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -590,8 +590,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfHolder)
 TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -599,8 +599,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_Exi
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_2);
 
@@ -611,8 +611,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_Exi
 TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
 
@@ -620,8 +620,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_Non
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_3);
 
@@ -632,8 +632,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingIsPresent_OfDifferentHolder_Non
 TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
@@ -642,8 +642,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfHolder)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -657,8 +657,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfHolder)
 TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
@@ -667,8 +667,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_E
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_2);
 
@@ -679,8 +679,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_E
 TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
@@ -689,8 +689,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_N
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_3);
 
@@ -701,8 +701,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_OfDifferentHolder_N
 TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfFirstHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
@@ -712,8 +712,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfFirstH
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_1);
 
@@ -727,8 +727,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfFirstH
 TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfSecondHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
@@ -738,8 +738,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfSecond
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_2);
 
@@ -752,8 +752,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_OfSecond
 TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
         m_building_manager->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
@@ -763,8 +763,8 @@ TEST_F(BuildingManagerTest, getBuildings_BuildingsArePresent_TwoHolders_NonExist
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         BuildingWithVolumeMap buildings = m_building_manager->getBuildings(transaction, m_id_holder_3);
 

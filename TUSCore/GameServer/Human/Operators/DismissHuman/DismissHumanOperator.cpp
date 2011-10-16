@@ -29,7 +29,7 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Cost;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Property;
 using namespace GameServer::Resource;
 

@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Authentication/AuthenticationPersistencyFacade.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../../GameServer/Authentication/AuthenticationPersistenceFacade.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "AuthenticationManagerAccessorMock.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Authentication;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace std;
 
 using testing::Return;
@@ -39,14 +39,14 @@ using testing::Return;
 /**
  * @brief A test class.
  */
-class AuthenticationPersistencyFacadeTest
+class AuthenticationPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Creates a test class.
      */
-    AuthenticationPersistencyFacadeTest()
+    AuthenticationPersistenceFacadeTest()
         : m_login("Login"),
           m_password("Password")
     {
@@ -63,17 +63,17 @@ protected:
     string m_password;
 };
 
-TEST_F(AuthenticationPersistencyFacadeTest, CtorDoesNotThrow)
+TEST_F(AuthenticationPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IAuthenticationManagerAccessorAutPtr accessor(new AuthenticationManagerAccessorMock);
 
-    ASSERT_NO_THROW(AuthenticationPersistencyFacade persistency_facade(accessor));
+    ASSERT_NO_THROW(AuthenticationPersistenceFacade persistence_facade(accessor));
 }
 
 /**
- * Unit tests of: AuthenticationPersistencyFacade::authenticate.
+ * Unit tests of: AuthenticationPersistenceFacade::authenticate.
  */
-TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateReturnsTrueOnSuccessfulAuthentication)
+TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateReturnsTrueOnSuccessfulAuthentication)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -83,12 +83,12 @@ TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateReturnsTrueOnSuccessfulA
 
     IAuthenticationManagerAccessorAutPtr accessor(mock);
 
-    AuthenticationPersistencyFacade persistency_facade(accessor);
+    AuthenticationPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(persistency_facade.authenticate(transaction, m_login, m_password));
+    ASSERT_TRUE(persistence_facade.authenticate(transaction, m_login, m_password));
 }
 
-TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateReturnsFalseOnUnsuccessfulAuthentication)
+TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateReturnsFalseOnUnsuccessfulAuthentication)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -98,7 +98,7 @@ TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateReturnsFalseOnUnsuccessf
 
     IAuthenticationManagerAccessorAutPtr accessor(mock);
 
-    AuthenticationPersistencyFacade persistency_facade(accessor);
+    AuthenticationPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(persistency_facade.authenticate(transaction, m_login, m_password));
+    ASSERT_FALSE(persistence_facade.authenticate(transaction, m_login, m_password));
 }

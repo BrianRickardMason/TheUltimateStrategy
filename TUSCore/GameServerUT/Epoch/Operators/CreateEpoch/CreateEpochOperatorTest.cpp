@@ -28,13 +28,13 @@
 #include "../../../../GameServer/Epoch/Operators/CreateEpoch/CreateEpochOperator.hpp"
 #include "../../../../GameServer/World/World.hpp"
 #include "../../../../GameServer/World/WorldRecord.hpp"
-#include "../../../Persistency/TransactionDummy.hpp"
+#include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../World/WorldManagerMock.hpp"
 #include "../../EpochManagerMock.hpp"
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::World;
 using namespace boost;
 using namespace std;

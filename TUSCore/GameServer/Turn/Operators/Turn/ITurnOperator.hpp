@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_TURN_ITURNOPERATOR_HPP
 #define GAMESERVER_TURN_ITURNOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "TurnOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -59,7 +59,7 @@ public:
      * @return The exit code.
      */
     virtual TurnOperatorExitCode turn(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 };

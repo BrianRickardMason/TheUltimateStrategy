@@ -53,7 +53,7 @@ public:
      * @param a_volume      A volume of the human.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -67,7 +67,7 @@ public:
      * @param a_key         A key of the human.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const;
@@ -82,7 +82,7 @@ public:
      * @return The human with volume record, null if not found.
      */
     virtual HumanWithVolumeRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const;
@@ -97,7 +97,7 @@ public:
      * @return A map of human with volume records, an empty map if not found.
      */
     virtual HumanWithVolumeRecordMap getRecords(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         IDHuman                         const & a_id_human
     ) const;
@@ -111,7 +111,7 @@ public:
      * @return A map of human with volume records, an empty map if not found.
      */
     virtual HumanWithVolumeRecordMap getRecords(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const;
 
@@ -124,7 +124,7 @@ public:
      * @param a_volume      A volume to be increased.
      */
     virtual void increaseVolume(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -139,7 +139,7 @@ public:
      * @param a_volume      A volume to be decreased.
      */
     virtual void decreaseVolume(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume

@@ -76,7 +76,7 @@ public:
      * @returns The exit code.
      */
     virtual EngageHumanOperatorExitCode engageHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -94,7 +94,7 @@ private:
      * @returns True if the dependency has been fulfilled, false otherwise.
      */
     bool verifyDependencyOfEngagementOnBuilding(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -109,7 +109,7 @@ private:
      * @returns True if the human is engageable, false otherwise.
      */
     bool verifyEngageable(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Key                             const & a_key
     ) const;
 
@@ -123,7 +123,7 @@ private:
      * @returns True if there is enough jobless, false otherwise.
      */
     bool verifyJobless(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Volume                          const & a_volume
     ) const;

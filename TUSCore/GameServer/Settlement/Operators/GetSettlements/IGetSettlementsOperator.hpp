@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_IGETSETTLEMENTSOPERATOR_HPP
 #define GAMESERVER_SETTLEMENT_IGETSETTLEMENTSOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "GetSettlementsOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -60,7 +60,7 @@ public:
      * @return The exit code.
      */
     virtual GetSettlementsOperatorExitCode getSettlements(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 };

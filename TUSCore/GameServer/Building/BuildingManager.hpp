@@ -63,7 +63,7 @@ public:
      * TODO: Add @throw information.
      */
     virtual void addBuilding(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -82,7 +82,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool subtractBuilding(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -98,7 +98,7 @@ public:
      * @return The building, null if not found.
      */
     virtual BuildingWithVolumeShrPtr getBuilding(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const;
@@ -112,7 +112,7 @@ public:
      * @return A map of buildings, an empty map if not found.
      */
     virtual BuildingWithVolumeMap getBuildings(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const;
 

@@ -25,61 +25,29 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADE_HPP
-#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADE_HPP
-
-#include "IAuthenticationManagerAccessor.hpp"
-#include "IAuthenticationPersistencyFacade.hpp"
+#include "PersistenceDummy.hpp"
 
 namespace GameServer
 {
-namespace Authentication
+namespace Persistence
 {
 
-/**
- * @brief An authentication persistency facade.
- */
-class AuthenticationPersistencyFacade
-    : public IAuthenticationPersistencyFacade
+PersistenceDummy::PersistenceDummy()
+    : m_connection(new ConnectionDummy)
 {
-public:
-    /**
-     * @brief Constructs the authentication persistency facade.
-     *
-     * @param a_accessor An accessor to be injected.
-     */
-    AuthenticationPersistencyFacade(
-        IAuthenticationManagerAccessorAutPtr a_accessor
-    );
+}
 
-    /**
-     * @brief Authenticates a user.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_password    The password of the user.
-     *
-     * @return True if authenticated, false otherwise.
-     */
-    virtual bool authenticate(
-        Persistency::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login,
-        std::string                     const & a_password
-    ) const;
+IConnectionShrPtr PersistenceDummy::getConnection()
+{
+    return m_connection;
+}
 
-private:
-    /**
-     * @brief An accessor.
-     */
-    IAuthenticationManagerAccessorScpPtr m_accessor;
-};
+ITransactionShrPtr PersistenceDummy::getTransaction(
+    IConnectionShrPtr a_connection
+)
+{
+    return ITransactionShrPtr(new TransactionDummy);
+}
 
-/**
- * @brief An auto pointer of authentication persistency facade.
- */
-typedef std::auto_ptr<AuthenticationPersistencyFacade> AuthenticationPersistencyFacadeAutPtr;
-
-} // namespace Authentication
+} // namespace Persistence
 } // namespace GameServer
-
-#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCYFACADE_HPP

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_IEPOCHMANAGERACCESSOR_HPP
 #define GAMESERVER_EPOCH_IEPOCHMANAGERACCESSOR_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "EpochRecord.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/make_shared.hpp>
@@ -61,7 +61,7 @@ public:
      * @param a_epoch_name  The name of the epoch.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name,
         std::string                     const a_epoch_name
     ) const = 0;
@@ -73,7 +73,7 @@ public:
      * @param a_world_name  The name of the world.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -86,7 +86,7 @@ public:
      * @return The world record, null if not found.
      */
     virtual EpochRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -97,7 +97,7 @@ public:
      * @param a_world_name  The name of the world.
      */
     virtual void markActive(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -108,7 +108,7 @@ public:
      * @param a_world_name  The name of the world.
      */
     virtual void markUnactive(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -119,7 +119,7 @@ public:
      * @param a_world_name  The name of the world.
      */
     virtual void markFinished(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -130,7 +130,7 @@ public:
      * @param a_world_name  The name of the world.
      */
     virtual void incrementTicks(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -143,7 +143,7 @@ public:
      * @return The name of the world, an empty string if not found.
      */
     virtual std::string getWorldNameOfLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 
@@ -156,7 +156,7 @@ public:
      * @return The name of the land, an empty string if not found.
      */
     virtual std::string getLandNameOfSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 };

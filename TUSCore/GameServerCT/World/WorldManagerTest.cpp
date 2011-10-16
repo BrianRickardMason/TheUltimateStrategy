@@ -29,7 +29,7 @@
 #include "../ComponentTest.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::World;
 using namespace std;
 
@@ -92,8 +92,8 @@ protected:
  */
 TEST_F(WorldManagerTest, createWorld_WorldDoesNotExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_TRUE(m_manager->createWorld(transaction, m_world_name_1));
 
@@ -105,8 +105,8 @@ TEST_F(WorldManagerTest, createWorld_WorldDoesNotExist)
 
 TEST_F(WorldManagerTest, createWorld_WorldDoesExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_TRUE(m_manager->createWorld(transaction, m_world_name_1));
     ASSERT_FALSE(m_manager->createWorld(transaction, m_world_name_1));
@@ -117,8 +117,8 @@ TEST_F(WorldManagerTest, createWorld_WorldDoesExist)
  */
 TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IWorldShrPtr world = m_manager->getWorld(transaction, m_world_name_4);
 
@@ -127,8 +127,8 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
 
 TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     m_manager->createWorld(transaction, m_world_name_1);
     m_manager->createWorld(transaction, m_world_name_2);
@@ -151,8 +151,8 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
  */
 TEST_F(WorldManagerTest, getWorlds)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     m_manager->createWorld(transaction, m_world_name_1);
     m_manager->createWorld(transaction, m_world_name_2);

@@ -27,7 +27,7 @@
 
 #include "GetEpochBySettlementNameOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace std;
 

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_IBEHAVIOURTICKEPOCH_HPP
 #define GAMESERVER_EPOCH_IBEHAVIOURTICKEPOCH_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "../../../World/IWorld.hpp"
 #include <boost/shared_ptr.hpp>
 #include <string>
@@ -58,7 +58,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool tickEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         World::IWorldShrPtr             const a_world
     ) const = 0;
 };

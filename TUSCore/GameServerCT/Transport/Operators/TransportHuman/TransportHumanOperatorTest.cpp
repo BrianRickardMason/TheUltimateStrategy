@@ -34,7 +34,7 @@ using namespace GameServer::Common;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace GameServer::Transport;
 using namespace GameServer::User;
@@ -73,8 +73,8 @@ protected:
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2)
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
@@ -175,8 +175,8 @@ protected:
  */
 TEST_F(TransportHumanOperatorTest, transportHuman_TryingToTransportZeroHumans)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_TRANSPORT_ZERO_HUMANS,
               m_transport_human_operator->transportHuman(transaction,
@@ -188,8 +188,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_TryingToTransportZeroHumans)
 
 TEST_F(TransportHumanOperatorTest, transportHuman_SourceSettlementDoesNotExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_SOURCE_SETTLEMENT_DOES_NOT_EXIST,
               m_transport_human_operator->transportHuman(transaction,
@@ -201,8 +201,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SourceSettlementDoesNotExist)
 
 TEST_F(TransportHumanOperatorTest, transportHuman_DestinationSettlementDoesNotExist)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_DESTINATION_SETTLEMENT_DOES_NOT_EXIST,
               m_transport_human_operator->transportHuman(transaction,
@@ -214,8 +214,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_DestinationSettlementDoesNotEx
 
 TEST_F(TransportHumanOperatorTest, transportHuman_SettlementsAreNotFromTheSameLand)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND,
               m_transport_human_operator->transportHuman(transaction,
@@ -227,8 +227,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SettlementsAreNotFromTheSameLa
 
 TEST_F(TransportHumanOperatorTest, transportHuman_NotEnoughHumans)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_HUMANS,
               m_transport_human_operator->transportHuman(transaction,
@@ -241,8 +241,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_NotEnoughHumans)
 TEST_F(TransportHumanOperatorTest, transportHuman_Success_OneHuman)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_TRANSPORTED,
                   m_transport_human_operator->transportHuman(transaction,
@@ -255,8 +255,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_OneHuman)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(999, m_human_manager->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
         ASSERT_EQ(1, m_human_manager->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
@@ -266,8 +266,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_OneHuman)
 TEST_F(TransportHumanOperatorTest, transportHuman_Success_ManyHumans)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_TRANSPORTED,
                   m_transport_human_operator->transportHuman(transaction,
@@ -280,8 +280,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_ManyHumans)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(500, m_human_manager->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
         ASSERT_EQ(500, m_human_manager->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
@@ -291,8 +291,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_ManyHumans)
 TEST_F(TransportHumanOperatorTest, transportHuman_Success_AllHumans)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_TRANSPORTED,
                   m_transport_human_operator->transportHuman(transaction,
@@ -305,8 +305,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_AllHumans)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_human_manager->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE) == NULL);
         ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());

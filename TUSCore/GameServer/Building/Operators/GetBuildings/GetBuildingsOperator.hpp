@@ -61,7 +61,7 @@ public:
      * @return The exit code.
      */
     virtual GetBuildingsOperatorExitCode getBuildings(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const;
 

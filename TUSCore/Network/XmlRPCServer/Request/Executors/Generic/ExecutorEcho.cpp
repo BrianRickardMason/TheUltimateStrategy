@@ -29,7 +29,7 @@
 #include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
 using namespace Network::XmlRPCCommon::Xml;
@@ -64,42 +64,42 @@ bool ExecutorEcho::processParameters()
 }
 
 bool ExecutorEcho::authenticate(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorEcho::getActingUser(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 )
 {
     return true;
 }
 
 bool ExecutorEcho::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorEcho::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorEcho::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorEcho::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return getBasicReply(REPLY_STATUS_OK);

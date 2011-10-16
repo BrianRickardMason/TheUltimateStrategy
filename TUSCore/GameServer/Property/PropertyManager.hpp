@@ -63,7 +63,7 @@ public:
      * @return The property.
      */
     virtual PropertyBooleanShrPtr getPropertyBoolean(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
     ) const;
@@ -78,7 +78,7 @@ public:
      * @return The property.
      */
     virtual PropertyIntegerShrPtr getPropertyInteger(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
     ) const;
@@ -93,7 +93,7 @@ public:
      * @return The property.
      */
     virtual PropertyStringShrPtr getPropertyString(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
     ) const;
@@ -107,7 +107,7 @@ public:
      * @return The set of properties.
      */
     virtual PropertySet getProperties(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash
     ) const;
 

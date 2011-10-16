@@ -30,7 +30,7 @@
 
 #include "../../../Human/Key.hpp"
 #include "../../../Human/Volume.hpp"
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "TransportHumanOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -65,7 +65,7 @@ public:
      * @returns The exit code.
      */
     virtual TransportHumanOperatorExitCode transportHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
         Human::Key                      const & a_key,

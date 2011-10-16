@@ -32,7 +32,7 @@
 
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Transport;
 using namespace Network::XmlRPCCommon::Reply;
@@ -92,7 +92,7 @@ bool ExecutorTransportResource::processParameters()
 }
 
 bool ExecutorTransportResource::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToSettlementOperatorShrPtr authorize_operator =
@@ -102,8 +102,8 @@ bool ExecutorTransportResource::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name_source);
@@ -118,8 +118,8 @@ bool ExecutorTransportResource::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToSettlementOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToSettlement(transaction, m_user->getLogin(), m_settlement_name_destination);
@@ -136,7 +136,7 @@ bool ExecutorTransportResource::authorize(
 }
 
 bool ExecutorTransportResource::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
@@ -144,8 +144,8 @@ bool ExecutorTransportResource::epochIsActive(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochBySettlementNameOperatorExitCode const exit_code =
             epoch_operator->getEpochBySettlementName(transaction, m_settlement_name_source);
@@ -160,14 +160,14 @@ bool ExecutorTransportResource::epochIsActive(
 }
 
 bool ExecutorTransportResource::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorTransportResource::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     ITransportResourceOperatorShrPtr transport_resource_operator =
@@ -175,8 +175,8 @@ ReplyShrPtr ExecutorTransportResource::perform(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         TransportResourceOperatorExitCode const exit_code =
             transport_resource_operator->transportResource(transaction,

@@ -52,7 +52,7 @@ public:
      * @return The property record, null if not found.
      */
     virtual PropertyRecordShrPtr getPropertyRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                                  const & a_id_property
     ) const;
@@ -66,7 +66,7 @@ public:
      * @return A map of property records, an empty map if not found.
      */
     virtual PropertyRecordMap getPropertyRecords(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash
     ) const;
 };

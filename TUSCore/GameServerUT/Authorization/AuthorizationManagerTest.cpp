@@ -26,12 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Authorization/AuthorizationManager.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "AuthorizationManagerAccessorMock.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Authorization;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace std;
 
 using testing::Return;

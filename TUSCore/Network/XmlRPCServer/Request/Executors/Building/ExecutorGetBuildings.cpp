@@ -33,7 +33,7 @@
 using namespace GameServer::Authorization;
 using namespace GameServer::Building;
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
@@ -89,7 +89,7 @@ bool ExecutorGetBuildings::processParameters()
 }
 
 bool ExecutorGetBuildings::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToHolderOperatorShrPtr authorize_operator =
@@ -97,8 +97,8 @@ bool ExecutorGetBuildings::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToHolderOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToHolder(transaction, m_user->getLogin(), m_id_holder);
@@ -113,7 +113,7 @@ bool ExecutorGetBuildings::authorize(
 }
 
 bool ExecutorGetBuildings::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
@@ -121,8 +121,8 @@ bool ExecutorGetBuildings::epochIsActive(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochBySettlementNameOperatorExitCode const exit_code =
             epoch_operator->getEpochBySettlementName(transaction, m_holder_name);
@@ -137,22 +137,22 @@ bool ExecutorGetBuildings::epochIsActive(
 }
 
 bool ExecutorGetBuildings::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorGetBuildings::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetBuildingsOperatorShrPtr building_operator = m_operator_abstract_factory->createGetBuildingsOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetBuildingsOperatorExitCode const exit_code =
             building_operator->getBuildings(transaction, m_id_holder);

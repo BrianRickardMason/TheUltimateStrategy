@@ -25,64 +25,53 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PERSISTENCY_TRANSACTIONPOSTGRESQL_HPP
-#define GAMESERVER_PERSISTENCY_TRANSACTIONPOSTGRESQL_HPP
+#ifndef GAMESERVER_PERSISTENCE_PERSISTENCEDUMMY_HPP
+#define GAMESERVER_PERSISTENCE_PERSISTENCEDUMMY_HPP
 
-#include "ITransaction.hpp"
-#include <pqxx/connection.hxx>
-#include <pqxx/transaction.hxx>
+#include "../../GameServer/Persistence/IPersistence.hpp"
+#include "ConnectionDummy.hpp"
+#include "TransactionDummy.hpp"
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
 /**
- * @brief The PostgreSQL transaction.
+ * @brief The dummy persistence.
  */
-class TransactionPostgresql
-    : public ITransaction
+class PersistenceDummy
+    : public IPersistence
 {
 public:
     /**
-     * @brief Constructs the transaction.
-     *
-     * @param a_connection The connection that transaction bases upon.
+     * @brief Constructs the persistence.
      */
-    explicit TransactionPostgresql(
-        pqxx::connection & a_connection
+    PersistenceDummy();
+
+    /**
+     * @brief Gets the connection.
+     *
+     * @return The connection.
+     */
+    virtual IConnectionShrPtr getConnection();
+
+    /**
+     * @brief Gets a transaction.
+     *
+     * @param a_connection A connection that transaction bases upon.
+     *
+     * @return The transaction.
+     */
+    virtual ITransactionShrPtr getTransaction(
+        IConnectionShrPtr a_connection
     );
 
-    /**
-     * @brief Commits the transaction.
-     */
-    virtual void commit();
-
-    /**
-     * @brief Aborts the transaction.
-     */
-    virtual void abort();
-
-    /**
-     * @brief Gets the backbone transaction.
-     *
-     * @return The backbone transaction.
-     */
-    pqxx::transaction<> & getBackboneTransaction();
-
 private:
-    /**
-     * @brief The backbone transaction.
-     */
-    pqxx::transaction<> m_backbone_transaction;
+    ConnectionDummyShrPtr m_connection;
 };
 
-/**
- * @brief The shared pointer of the PostgreSQL transaction.
- */
-typedef boost::shared_ptr<TransactionPostgresql> TransactionPostgresqlShrPtr;
-
-} // namespace Persistency
+} // namespace Persistence
 } // namespace GameServer
 
-#endif // GAMESERVER_PERSISTENCY_TRANSACTIONPOSTGRESQL_HPP
+#endif // GAMESERVER_PERSISTENCE_PERSISTENCEDUMMY_HPP

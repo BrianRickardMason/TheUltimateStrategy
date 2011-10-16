@@ -29,7 +29,7 @@
 #include "TransportResourceOperator.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace std;

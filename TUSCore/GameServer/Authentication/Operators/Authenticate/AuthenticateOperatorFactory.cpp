@@ -39,7 +39,7 @@ AuthenticateOperatorAutPtr AuthenticateOperatorFactory::createAuthenticateOperat
 )
 {
     return AuthenticateOperatorAutPtr(
-               new AuthenticateOperator(a_manager_abstract_factory->createAuthenticationPersistencyFacade())
+               new AuthenticateOperator(a_manager_abstract_factory->createAuthenticationPersistenceFacade())
            );
 }
 

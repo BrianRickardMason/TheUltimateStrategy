@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_USER_ICREATEUSEROPERATOR_HPP
 #define GAMESERVER_USER_ICREATEUSEROPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "CreateUserOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -61,7 +61,7 @@ public:
      * @return The exit code.
      */
     virtual CreateUserOperatorExitCode createUser(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
         std::string                     const & a_password
     ) const = 0;

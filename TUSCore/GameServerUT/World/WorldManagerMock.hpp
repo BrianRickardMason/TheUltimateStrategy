@@ -54,7 +54,7 @@ public:
     MOCK_CONST_METHOD2(
         createWorld,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -70,7 +70,7 @@ public:
     MOCK_CONST_METHOD2(
         getWorld,
         IWorldShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -86,7 +86,7 @@ public:
     MOCK_CONST_METHOD2(
         getWorldByLandName,
         IWorldShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
     );
@@ -101,7 +101,7 @@ public:
     MOCK_CONST_METHOD1(
         getWorlds,
         IWorldMap(
-            Persistency::ITransactionShrPtr a_transaction
+            Persistence::ITransactionShrPtr a_transaction
         )
     );
 };

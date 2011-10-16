@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_ICREATEWORLDOPERATOR_HPP
 #define GAMESERVER_WORLD_ICREATEWORLDOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "CreateWorldOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -60,7 +60,7 @@ public:
      * @return The exit code.
      */
     virtual CreateWorldOperatorExitCode createWorld(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const & a_name
     ) const = 0;
 };

@@ -28,7 +28,7 @@
 #include "GetBuildingsOperator.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 
 namespace GameServer
 {

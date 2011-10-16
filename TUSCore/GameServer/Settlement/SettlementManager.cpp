@@ -28,7 +28,7 @@
 #include "SettlementManager.hpp"
 
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 

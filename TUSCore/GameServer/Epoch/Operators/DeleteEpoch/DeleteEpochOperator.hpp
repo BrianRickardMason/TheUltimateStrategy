@@ -64,7 +64,7 @@ public:
      * @return The exit code.
      */
     virtual DeleteEpochOperatorExitCode deleteEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const;
 

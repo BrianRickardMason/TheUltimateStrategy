@@ -91,45 +91,45 @@ class ExecutorCreateWorld
     /**
      * @brief Authenticates the user.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if user has been authenticated, false otherwise.
      */
     virtual bool authenticate(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
     /**
      * @brief Authorizes the user.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if user has been authorized, false otherwise.
      */
     virtual bool authorize(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
     /**
      * @brief Verifies whether the epoch is active.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if the epoch is active, false otherwise.
      */
     virtual bool epochIsActive(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
     /**
      * @brief Verifies whether the world configuration allows an action.
      *
-     * @param a_persistency The persistency.
+     * @param a_persistence The persistence.
      *
      * @return True if the action is allowed, false otherwise.
      */
     virtual bool verifyWorldConfiguration(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
     /**
@@ -138,7 +138,7 @@ class ExecutorCreateWorld
      * @return The reply.
      */
     virtual XmlRPCCommon::Reply::ReplyShrPtr perform(
-        GameServer::Persistency::IPersistencyShrPtr a_persistency
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
     /**

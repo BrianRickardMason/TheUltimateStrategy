@@ -25,23 +25,30 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "AuthenticationPersistencyFacadeFactory.hpp"
+#ifndef GAMESERVER_PERSISTENCE_CONNECTIONDUMMY_HPP
+#define GAMESERVER_PERSISTENCE_CONNECTIONDUMMY_HPP
 
-using namespace GameServer::Common;
+#include "../../GameServer/Persistence/IConnection.hpp"
 
 namespace GameServer
 {
-namespace Authentication
+namespace Persistence
 {
 
-AuthenticationPersistencyFacadeAutPtr AuthenticationPersistencyFacadeFactory::create(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-)
+/**
+ * @brief The dummy connection.
+ */
+class ConnectionDummy
+    : public IConnection
 {
-    return AuthenticationPersistencyFacadeAutPtr(
-               new AuthenticationPersistencyFacade(a_accessor_abstract_factory->createAuthenticationAccessor())
-           );
-}
+};
 
-} // namespace Authentication
+/**
+ * @brief The shared pointer of the dummy connection.
+ */
+typedef boost::shared_ptr<ConnectionDummy> ConnectionDummyShrPtr;
+
+} // namespace Persistence
 } // namespace GameServer
+
+#endif // GAMESERVER_PERSISTENCE_CONNECTIONDUMMY_HPP

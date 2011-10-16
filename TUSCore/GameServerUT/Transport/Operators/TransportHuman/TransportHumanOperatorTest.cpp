@@ -31,13 +31,13 @@
 #include "../../../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../../../../GameServer/Transport/Operators/TransportHuman/TransportHumanOperator.hpp"
 #include "../../../Human/HumanManagerMock.hpp"
-#include "../../../Persistency/TransactionDummy.hpp"
+#include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Settlement/SettlementManagerMock.hpp"
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace GameServer::Transport;
 using namespace boost;

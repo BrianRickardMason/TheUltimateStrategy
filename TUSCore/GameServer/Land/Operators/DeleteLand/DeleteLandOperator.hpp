@@ -61,7 +61,7 @@ public:
      * @return The exit code.
      */
     virtual DeleteLandOperatorExitCode deleteLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
 

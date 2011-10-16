@@ -61,7 +61,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool createWorld(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const;
 
@@ -74,7 +74,7 @@ public:
      * @return The world, null if not found.
      */
     virtual IWorldShrPtr getWorld(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const;
 
@@ -87,7 +87,7 @@ public:
      * @return The world, null if not found.
      */
     virtual IWorldShrPtr getWorldByLandName(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
 
@@ -99,7 +99,7 @@ public:
      * @return A map of worlds, an empty map if not found.
      */
     virtual IWorldMap getWorlds(
-        Persistency::ITransactionShrPtr a_transaction
+        Persistence::ITransactionShrPtr a_transaction
     ) const;
 
 private:

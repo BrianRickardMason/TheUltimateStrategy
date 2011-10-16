@@ -25,31 +25,53 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "PersistencyPostgresql.hpp"
+#ifndef GAMESERVER_PERSISTENCE_IPERSISTENCE_HPP
+#define GAMESERVER_PERSISTENCE_IPERSISTENCE_HPP
 
-#include "TransactionPostgresql.hpp"
+#include "IConnection.hpp"
+#include "ITransaction.hpp"
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
-PersistencyPostgresql::PersistencyPostgresql()
-    : m_connection(new ConnectionPostgresql)
+/**
+ * @brief The interface of persistence.
+ */
+class IPersistence
 {
-}
+public:
+    /**
+     * @brief Destructs the persistence.
+     */
+    virtual ~IPersistence(){};
 
-IConnectionShrPtr PersistencyPostgresql::getConnection()
-{
-    return m_connection;
-}
+    /**
+     * @brief Gets the connection.
+     *
+     * @return The connection.
+     */
+    virtual IConnectionShrPtr getConnection() = 0;
 
-ITransactionShrPtr PersistencyPostgresql::getTransaction(
-    IConnectionShrPtr a_connection
-)
-{
-    return ITransactionShrPtr(new TransactionPostgresql(m_connection->getBackboneConnection()));
-}
+    /**
+     * @brief Gets a transaction.
+     *
+     * @param a_connection The connection that transaction bases upon.
+     *
+     * @return The transaction.
+     */
+    virtual ITransactionShrPtr getTransaction(
+        IConnectionShrPtr a_connection
+    ) = 0;
+};
 
-} // namespace Persistency
+/**
+ * @brief The shared pointer of the interface of persistence.
+ */
+typedef boost::shared_ptr<IPersistence> IPersistenceShrPtr;
+
+} // namespace Persistence
 } // namespace GameServer
+
+#endif // GAMESERVER_PERSISTENCE_PERSISTENCE_HPP

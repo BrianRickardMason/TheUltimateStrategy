@@ -73,7 +73,7 @@ public:
      * @returns The exit code.
      */
     virtual DismissHumanOperatorExitCode dismissHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -89,7 +89,7 @@ private:
      * @returns True if the human is dismissable, false otherwise.
      */
     bool verifyDismissable(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Key                             const & a_key
     ) const;
 
@@ -104,7 +104,7 @@ private:
      * @returns True if there is enough engaged, false otherwise.
      */
     bool verifyEngaged(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume

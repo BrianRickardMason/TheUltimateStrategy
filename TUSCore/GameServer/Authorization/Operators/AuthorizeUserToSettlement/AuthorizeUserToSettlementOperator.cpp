@@ -27,7 +27,7 @@
 
 #include "AuthorizeUserToSettlementOperator.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace std;
 
 namespace GameServer

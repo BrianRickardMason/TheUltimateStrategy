@@ -29,7 +29,7 @@
 #define GAMESERVER_RESOURCE_IGETRESOURCEOPERATOR_HPP
 
 #include "../../../Common/IDHolder.hpp"
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "../../Key.hpp"
 #include "GetResourceOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
@@ -62,7 +62,7 @@ public:
      * @return The exit code.
      */
     virtual GetResourceOperatorExitCode getResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const = 0;

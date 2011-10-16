@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_USER_IUSERMANAGERACCESSOR_HPP
 #define GAMESERVER_USER_IUSERMANAGERACCESSOR_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "IUserRecord.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -59,7 +59,7 @@ public:
      * @param a_password    The password of the user.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_password
     ) const = 0;
@@ -71,7 +71,7 @@ public:
      * @param a_login       The login of the user.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const = 0;
 
@@ -84,7 +84,7 @@ public:
      * @return The record of the user, null if not found.
      */
     virtual IUserRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const = 0;
 };

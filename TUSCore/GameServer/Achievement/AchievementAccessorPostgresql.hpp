@@ -53,7 +53,7 @@ public:
      * @param a_achievement_name The name of the achievement.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const a_world_name,
         std::string                     const a_epoch_name,
         std::string                     const a_login,

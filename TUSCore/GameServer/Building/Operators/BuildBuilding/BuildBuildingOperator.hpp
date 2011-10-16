@@ -69,7 +69,7 @@ public:
      * @returns The exit code.
      */
     virtual BuildBuildingOperatorExitCode buildBuilding(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume

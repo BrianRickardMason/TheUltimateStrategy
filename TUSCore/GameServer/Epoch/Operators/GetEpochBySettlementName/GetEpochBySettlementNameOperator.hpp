@@ -64,7 +64,7 @@ public:
      * @return The exit code.
      */
     virtual GetEpochBySettlementNameOperatorExitCode getEpochBySettlementName(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 

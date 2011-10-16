@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistency/TransactionPostgresql.hpp"
+#include "../Persistence/TransactionPostgresql.hpp"
 #include "PropertyManagerAccessorPostgresql.hpp"
 #include <boost/make_shared.hpp>
 #include <string>
 
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 
@@ -79,7 +79,7 @@ PropertyRecordShrPtr PropertyManagerAccessorPostgresql::getPropertyRecord(
 }
 
 PropertyRecordMap PropertyManagerAccessorPostgresql::getPropertyRecords(
-    Persistency::ITransactionShrPtr         a_transaction,
+    Persistence::ITransactionShrPtr         a_transaction,
     Common::KeyHash                 const & a_key_hash
 ) const
 {

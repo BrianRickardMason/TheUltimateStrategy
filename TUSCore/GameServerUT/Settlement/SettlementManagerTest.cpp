@@ -29,12 +29,12 @@
 #include "../../GameServer/Settlement/SettlementManager.hpp"
 #include "../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../Land/LandManagerMock.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "Operators/CreateSettlement/BehaviourGiveGrantMock.hpp"
 #include "SettlementManagerAccessorMock.hpp"
 
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
 using namespace boost;
 using namespace std;

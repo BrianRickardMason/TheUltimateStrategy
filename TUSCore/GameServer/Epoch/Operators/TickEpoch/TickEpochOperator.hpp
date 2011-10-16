@@ -65,7 +65,7 @@ public:
      * @return The exit code.
      */
     virtual TickEpochOperatorExitCode tickEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     );
 

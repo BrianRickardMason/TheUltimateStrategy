@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHORIZATION_IAUTHORIZATIONMANAGERACCESSOR_HPP
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZATIONMANAGERACCESSOR_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
@@ -61,7 +61,7 @@ public:
      * @return True if the user is authorized, false otherwise.
      */
     virtual bool authorizeUserToLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_land_name
     ) const = 0;
@@ -75,7 +75,7 @@ public:
      * @return The name of the land, an empty string if not found.
      */
     virtual std::string getLandNameOfSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 };

@@ -56,7 +56,7 @@ public:
     MOCK_CONST_METHOD4(
         addBuilding,
         void(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key,
             Volume                                      const & a_volume
@@ -78,7 +78,7 @@ public:
     MOCK_CONST_METHOD4(
         subtractBuilding,
         bool(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key,
             Volume                                      const & a_volume
@@ -97,7 +97,7 @@ public:
     MOCK_CONST_METHOD3(
         getBuilding,
         BuildingWithVolumeShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key
         )
@@ -114,7 +114,7 @@ public:
     MOCK_CONST_METHOD2(
         getBuildings,
         BuildingWithVolumeMap(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder
         )
     );

@@ -35,7 +35,7 @@
 using namespace GameServer::Building;
 using namespace GameServer::Common;
 using namespace GameServer::Human;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Property;
 using namespace boost;
 using namespace std;
@@ -135,8 +135,8 @@ TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_HUMAN_DISMISSABLE)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         PropertyBooleanShrPtr property = m_property_manager->getPropertyBoolean(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_DISMISSABLE);
 
@@ -148,8 +148,8 @@ TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_HUMAN_ENGAGEABLE)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         PropertyBooleanShrPtr property = m_property_manager->getPropertyBoolean(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_ENGAGEABLE);
 
@@ -164,8 +164,8 @@ TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_BUILDING_CAPACITY)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         PropertyIntegerShrPtr property = m_property_manager->getPropertyInteger(transaction, it->getKey().toHash(), ID_PROPERTY_BUILDING_CAPACITY);
 
@@ -177,8 +177,8 @@ TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_HUMAN_PRODUCTION)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         PropertyIntegerShrPtr property = m_property_manager->getPropertyInteger(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_PRODUCTION);
 
@@ -193,8 +193,8 @@ TEST_F(PropertyManagerTest, getProperties_Buildings)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         PropertySet properties = m_property_manager->getProperties(transaction, it->getKey().toHash());
 
@@ -206,8 +206,8 @@ TEST_F(PropertyManagerTest, getProperties_Humans)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         PropertySet properties = m_property_manager->getProperties(transaction, it->getKey().toHash());
 

@@ -54,7 +54,7 @@ public:
     MOCK_CONST_METHOD4(
         addResource,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key,
             Volume                          const & a_volume
@@ -76,7 +76,7 @@ public:
     MOCK_CONST_METHOD4(
         subtractResource,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key,
             Volume                          const & a_volume
@@ -96,7 +96,7 @@ public:
     MOCK_CONST_METHOD4(
         subtractResourceSafely,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key,
             Volume                          const & a_volume
@@ -117,7 +117,7 @@ public:
     MOCK_CONST_METHOD3(
         subtractResourceSet,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             ResourceSet                     const & a_resource_set
         )
@@ -135,7 +135,7 @@ public:
     MOCK_CONST_METHOD3(
         subtractResourceSetSafely,
         void(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             ResourceSet                     const & a_resource_set
         )
@@ -153,7 +153,7 @@ public:
     MOCK_CONST_METHOD3(
         getResource,
         ResourceWithVolumeShrPtr(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
             Key                             const & a_key
         )
@@ -170,7 +170,7 @@ public:
     MOCK_CONST_METHOD2(
         getResources,
         ResourceSet(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder
         )
     );

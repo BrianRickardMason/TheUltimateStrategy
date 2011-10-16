@@ -38,7 +38,7 @@ using namespace GameServer::Cost;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
@@ -87,8 +87,8 @@ protected:
           m_engage_human_operator(EngageHumanOperatorFactory::createEngageHumanOperator(m_manager_abstract_factory))
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
@@ -137,8 +137,8 @@ protected:
         vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
             ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -261,8 +261,8 @@ protected:
 TEST_F(EngageHumanOperatorTest, engageHuman_TryingToEngageZeroHumans)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_ENGAGE_ZERO_HUMANS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 0).m_exit_code);
@@ -274,8 +274,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_TryingToEngageZeroHumans)
 TEST_F(EngageHumanOperatorTest, engageHuman_HolderDoesNotExist)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_JOBLESS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_4, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
@@ -288,8 +288,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_HumanIsNotEngageable)
 {
     for (KeyVec::const_iterator it = HUMAN_IS_NOT_ENGAGEABLE.begin(); it != HUMAN_IS_NOT_ENGAGEABLE.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_IS_NOT_ENGAGEABLE,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, *it, 1).m_exit_code);
@@ -301,8 +301,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_HumanIsNotEngageable)
 TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
@@ -314,8 +314,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
 
     for (vector<IDHolder>::const_iterator it = ids.begin(); it != ids.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_JOBLESS,
                   m_engage_human_operator->engageHuman(transaction, *it, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
@@ -325,8 +325,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
     vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -347,8 +347,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE, 999);
 
@@ -356,8 +356,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_JOBLESS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 2).m_exit_code);
@@ -367,8 +367,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
     vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -391,8 +391,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
 TEST_F(EngageHumanOperatorTest, engageHuman_ZeroResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->addHuman(transaction, m_id_holder_12, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
@@ -413,16 +413,16 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroResources)
 
     for (vector<IDHolder>::const_iterator it = ids.begin(); it != ids.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_engage_human_operator->engageHuman(transaction, *it, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
@@ -445,8 +445,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroResources)
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_AllResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // TODO: Subtract resource set. The same in build building and destroy building operators.
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
@@ -461,8 +461,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_AllResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 2).m_exit_code);
@@ -473,8 +473,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_AllResources)
     vector<R::Volume> expected_volumes_3 = assign::list_of(1)(1)(1)(1)(1)(1)(1);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -496,8 +496,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_AllResources)
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_SomeResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
@@ -507,8 +507,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_SomeResources)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 2).m_exit_code);
@@ -519,8 +519,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_SomeResources)
     vector<R::Volume> expected_volumes_3 = assign::list_of(1)(1)(10000)(1000)(1000)(1000)(1);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -542,8 +542,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_SomeResources)
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_OneResource)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
 
@@ -551,8 +551,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_OneResource)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 2).m_exit_code);
@@ -563,8 +563,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_OneResource)
     vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1)(1000);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -586,8 +586,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_OneResource)
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ZeroBuildings)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 1).m_exit_code);
@@ -599,8 +599,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ZeroBuildi
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_TooFewBuildings)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
@@ -608,8 +608,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_TooFewBuil
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 11).m_exit_code);
@@ -621,8 +621,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_TooFewBuil
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuilding_TheSameTypeOfHumanOccupying)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
@@ -632,8 +632,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -643,8 +643,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
     vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -667,8 +667,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuilding_OneTypeOfHumanOccupying)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
@@ -678,8 +678,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -689,8 +689,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
     vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -713,8 +713,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuilding_ManyTypesOfHumansOccupying)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
@@ -726,8 +726,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -737,8 +737,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
     vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -763,8 +763,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildings)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
@@ -779,8 +779,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildi
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -790,8 +790,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildi
     vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -819,8 +819,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildi
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_One)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
@@ -833,8 +833,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_One)
     vector<R::Volume> expected_volumes_3 = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -857,8 +857,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_One)
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Some)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 63).m_exit_code);
@@ -871,8 +871,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Some)
     vector<R::Volume> expected_volumes_3 = assign::list_of(370)(9370)(9370)(370)(370)(370)(370);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -895,8 +895,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Some)
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Max_OnResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 100).m_exit_code);
@@ -909,8 +909,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Max_OnRe
     vector<R::Volume> expected_volumes_3 = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -933,8 +933,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Max_OnRe
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Max_OnJobless)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE, 930);
 
@@ -942,8 +942,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Max_OnJo
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 70).m_exit_code);
@@ -956,8 +956,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Max_OnJo
     vector<R::Volume> expected_volumes_3 = assign::list_of(300)(9300)(9300)(300)(300)(300)(300);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -979,8 +979,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotRequired_Engaged_Max_OnJo
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
@@ -988,8 +988,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 1).m_exit_code);
@@ -1002,8 +1002,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
     vector<R::Volume> expected_volumes_3 = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -1026,8 +1026,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
 
@@ -1035,8 +1035,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -1049,8 +1049,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
     vector<R::Volume> expected_volumes_3 = assign::list_of(940)(9940)(9940)(940)(940)(940)(940);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -1073,8 +1073,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 11);
 
@@ -1083,8 +1083,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResou
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 100).m_exit_code);
@@ -1097,8 +1097,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResou
     vector<R::Volume> expected_volumes_3 = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -1121,8 +1121,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResou
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJobless)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE, 930);
 
@@ -1132,8 +1132,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJoble
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 70).m_exit_code);
@@ -1146,8 +1146,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJoble
     vector<R::Volume> expected_volumes_3 = assign::list_of(300)(9300)(9300)(300)(300)(300)(300);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -1169,8 +1169,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJoble
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuildings_TheSameTypeOfHumanOccupying)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
@@ -1180,8 +1180,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -1194,8 +1194,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
     vector<R::Volume> expected_volumes_3 = assign::list_of(940)(9940)(9940)(940)(940)(940)(940);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -1218,8 +1218,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuildings_OneTypeOfHumanOccupying)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
@@ -1229,8 +1229,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -1243,8 +1243,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
     vector<R::Volume> expected_volumes_3 = assign::list_of(940)(9940)(9940)(940)(940)(940)(940);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
@@ -1268,8 +1268,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuildings_ManyTypesOfHumansOccupying)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
 
@@ -1284,8 +1284,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
                   m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
@@ -1298,8 +1298,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
     vector<R::Volume> expected_volumes_3 = assign::list_of(940)(9940)(9940)(940)(940)(940)(940);
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
         ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);

@@ -56,7 +56,7 @@ public:
     MOCK_CONST_METHOD4(
         addHuman,
         void(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key,
             Volume                                      const & a_volume
@@ -78,7 +78,7 @@ public:
     MOCK_CONST_METHOD4(
         subtractHuman,
         bool(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key,
             Volume                                      const & a_volume
@@ -97,7 +97,7 @@ public:
     MOCK_CONST_METHOD3(
         getHuman,
         HumanWithVolumeShrPtr(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             Key                                         const & a_key
         )
@@ -115,7 +115,7 @@ public:
     MOCK_CONST_METHOD3(
         getHumans,
         HumanWithVolumeMap(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
             IDHuman                                     const & a_id_human
         )
@@ -132,7 +132,7 @@ public:
     MOCK_CONST_METHOD2(
         getHumans,
         HumanWithVolumeMap(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder
         )
     );

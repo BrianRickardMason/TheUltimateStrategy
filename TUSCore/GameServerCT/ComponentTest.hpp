@@ -28,7 +28,7 @@
 #ifndef COMPONENTTEST_HPP
 #define COMPONENTTEST_HPP
 
-#include "../GameServer/Persistency/PersistencyPostgresql.hpp"
+#include "../GameServer/Persistence/PersistencePostgresql.hpp"
 #include <gmock/gmock.h>
 
 /**
@@ -59,11 +59,11 @@ private:
      */
     bool resetDatabase()
     {
-        GameServer::Persistency::IConnectionShrPtr connection = m_persistency.getConnection();
-        GameServer::Persistency::ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        GameServer::Persistence::IConnectionShrPtr connection = m_persistence.getConnection();
+        GameServer::Persistence::ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        GameServer::Persistency::TransactionPostgresqlShrPtr transaction_postgresql =
-            boost::shared_dynamic_cast<GameServer::Persistency::TransactionPostgresql>(transaction);
+        GameServer::Persistence::TransactionPostgresqlShrPtr transaction_postgresql =
+            boost::shared_dynamic_cast<GameServer::Persistence::TransactionPostgresql>(transaction);
         pqxx::transaction<> & backbone_transaction = transaction_postgresql->getBackboneTransaction();
 
         try
@@ -84,9 +84,9 @@ private:
 
 protected:
     /**
-     * @brief A persistency.
+     * @brief A persistence.
      */
-    GameServer::Persistency::PersistencyPostgresql m_persistency;
+    GameServer::Persistence::PersistencePostgresql m_persistence;
 };
 
 #endif // COMPONENTTEST_HPP

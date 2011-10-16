@@ -56,7 +56,7 @@ public:
     MOCK_CONST_METHOD4(
         createLand,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_login,
             std::string                     const a_world_name,
             std::string                     const a_land_name
@@ -74,7 +74,7 @@ public:
     MOCK_CONST_METHOD2(
         deleteLand,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
     );
@@ -90,7 +90,7 @@ public:
     MOCK_CONST_METHOD2(
         getLand,
         ILandShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
     );
@@ -106,7 +106,7 @@ public:
     MOCK_CONST_METHOD2(
         getLands,
         ILandMap(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_login
         )
     );
@@ -120,7 +120,7 @@ public:
     MOCK_CONST_METHOD2(
         markGranted,
         void(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
     );

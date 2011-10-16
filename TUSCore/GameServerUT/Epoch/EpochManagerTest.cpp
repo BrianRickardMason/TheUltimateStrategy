@@ -26,11 +26,11 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Epoch/EpochManager.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "EpochManagerAccessorMock.hpp"
 
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 

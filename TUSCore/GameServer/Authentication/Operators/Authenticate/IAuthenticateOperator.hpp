@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHENTICATION_IAUTHENTICATEOPERATOR_HPP
 #define GAMESERVER_AUTHENTICATION_IAUTHENTICATEOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "AuthenticateOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -61,7 +61,7 @@ public:
      * @return The exit code.
      */
     virtual AuthenticateOperatorExitCode authenticate(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const & a_login,
         std::string                     const & a_password
     ) const = 0;

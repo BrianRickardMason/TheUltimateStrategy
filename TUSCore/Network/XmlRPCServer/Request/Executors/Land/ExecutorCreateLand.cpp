@@ -32,7 +32,7 @@
 
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
 using namespace Network::XmlRPCCommon::Xml;
@@ -78,14 +78,14 @@ bool ExecutorCreateLand::processParameters()
 }
 
 bool ExecutorCreateLand::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 bool ExecutorCreateLand::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochByWorldNameOperatorShrPtr epoch_operator =
@@ -93,8 +93,8 @@ bool ExecutorCreateLand::epochIsActive(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochByWorldNameOperatorExitCode const exit_code =
             epoch_operator->getEpochByWorldName(transaction, m_world_name);
@@ -109,22 +109,22 @@ bool ExecutorCreateLand::epochIsActive(
 }
 
 bool ExecutorCreateLand::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorCreateLand::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     ICreateLandOperatorShrPtr land_operator = m_operator_abstract_factory->createCreateLandOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         CreateLandOperatorExitCode const exit_code =
             land_operator->createLand(transaction, m_user->getLogin(), m_world_name, m_land_name);

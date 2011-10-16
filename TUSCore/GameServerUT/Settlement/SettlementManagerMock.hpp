@@ -55,7 +55,7 @@ public:
     MOCK_CONST_METHOD3(
         createSettlement,
         bool(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Land::ILandShrPtr               const a_land,
             std::string                     const a_settlement_name
         )
@@ -72,7 +72,7 @@ public:
     MOCK_CONST_METHOD2(
         deleteSettlement,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )
     );
@@ -88,7 +88,7 @@ public:
     MOCK_CONST_METHOD2(
         getSettlement,
         ISettlementShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )
     );
@@ -104,7 +104,7 @@ public:
     MOCK_CONST_METHOD2(
         getSettlements,
         ISettlementMap(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             Land::ILandShrPtr               const a_land
         )
     );

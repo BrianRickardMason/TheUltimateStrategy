@@ -28,7 +28,7 @@
 #include "ResourceManager.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 
 namespace GameServer

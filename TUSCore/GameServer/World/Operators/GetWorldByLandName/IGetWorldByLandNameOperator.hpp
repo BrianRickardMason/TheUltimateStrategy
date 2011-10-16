@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_IGETWORLDBYLANDNAMEOPERATOR_HPP
 #define GAMESERVER_WORLD_IGETWORLDBYLANDNAMEOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "GetWorldByLandNameOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -59,7 +59,7 @@ public:
      * @return The exit code.
      */
     virtual GetWorldByLandNameOperatorExitCode getWorldByLandName(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 };

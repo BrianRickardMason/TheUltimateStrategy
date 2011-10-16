@@ -32,7 +32,7 @@
 
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Turn;
 using namespace GameServer::World;
 using namespace GameServer::WorldConfiguration;
@@ -80,7 +80,7 @@ bool ExecutorTurn::processParameters()
 }
 
 bool ExecutorTurn::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToLandOperatorShrPtr authorize_operator =
@@ -88,8 +88,8 @@ bool ExecutorTurn::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToLandOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToLand(transaction, m_user->getLogin(), m_land_name);
@@ -104,15 +104,15 @@ bool ExecutorTurn::authorize(
 }
 
 bool ExecutorTurn::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochByLandNameOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByLandNameOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochByLandNameOperatorExitCode const exit_code =
             epoch_operator->getEpochByLandName(transaction, m_land_name);
@@ -127,7 +127,7 @@ bool ExecutorTurn::epochIsActive(
 }
 
 bool ExecutorTurn::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IWorldShrPtr world;
@@ -136,8 +136,8 @@ bool ExecutorTurn::verifyWorldConfiguration(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetWorldByLandNameOperatorExitCode const exit_code =
             world_operator->getWorldByLandName(transaction, m_land_name);
@@ -161,15 +161,15 @@ bool ExecutorTurn::verifyWorldConfiguration(
 }
 
 ReplyShrPtr ExecutorTurn::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     ITurnOperatorShrPtr turn_operator = m_operator_abstract_factory->createTurnOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         TurnOperatorExitCode const exit_code = turn_operator->turn(transaction, m_land_name);
 

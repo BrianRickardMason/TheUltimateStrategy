@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_IBEHAVIOURGIVEGRANT_HPP
 #define GAMESERVER_SETTLEMENT_IBEHAVIOURGIVEGRANT_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include <boost/shared_ptr.hpp>
 #include <string>
 
@@ -57,7 +57,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool giveGrant(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 };

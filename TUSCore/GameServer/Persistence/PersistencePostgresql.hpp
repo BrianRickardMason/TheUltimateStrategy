@@ -25,31 +25,53 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "AuthenticationPersistencyFacade.hpp"
+#ifndef GAMESERVER_PERSISTENCE_PERSISTENCEPOSTGRESQL_HPP
+#define GAMESERVER_PERSISTENCE_PERSISTENCEPOSTGRESQL_HPP
 
-using namespace GameServer::Persistency;
-using namespace std;
+#include "ConnectionPostgresql.hpp"
+#include "IPersistence.hpp"
+#include "TransactionPostgresql.hpp"
 
 namespace GameServer
 {
-namespace Authentication
+namespace Persistence
 {
 
-AuthenticationPersistencyFacade::AuthenticationPersistencyFacade(
-    IAuthenticationManagerAccessorAutPtr a_accessor
-)
-    : m_accessor(a_accessor)
+/**
+ * @brief The PostgreSQL persistence.
+ */
+class PersistencePostgresql
+    : public IPersistence
 {
-}
+public:
+    /**
+     * @brief Constructs the persistence.
+     */
+    PersistencePostgresql();
 
-bool AuthenticationPersistencyFacade::authenticate(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login,
-    string             const & a_password
-) const
-{
-    return m_accessor->authenticate(a_transaction, a_login, a_password);
-}
+    /**
+     * @brief Gets the connection.
+     *
+     * @return The connection.
+     */
+    virtual IConnectionShrPtr getConnection();
 
-} // namespace Authentication
+    /**
+     * @brief Gets a transaction.
+     *
+     * @param a_connection A connection that transaction bases upon.
+     *
+     * @return The transaction.
+     */
+    virtual ITransactionShrPtr getTransaction(
+        IConnectionShrPtr a_connection
+    );
+
+private:
+    ConnectionPostgresqlShrPtr m_connection;
+};
+
+} // namespace Persistence
 } // namespace GameServer
+
+#endif // GAMESERVER_PERSISTENCE_PERSISTENCEPOSTGRESQL_HPP

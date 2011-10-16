@@ -33,7 +33,7 @@
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
 using namespace Network::XmlRPCCommon::Xml;
@@ -78,7 +78,7 @@ bool ExecutorDeleteLand::processParameters()
 }
 
 bool ExecutorDeleteLand::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToLandOperatorShrPtr authorize_operator =
@@ -86,8 +86,8 @@ bool ExecutorDeleteLand::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToLandOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToLand(transaction, m_user->getLogin(), m_land_name);
@@ -102,15 +102,15 @@ bool ExecutorDeleteLand::authorize(
 }
 
 bool ExecutorDeleteLand::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochByLandNameOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByLandNameOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochByLandNameOperatorExitCode const exit_code =
             epoch_operator->getEpochByLandName(transaction, m_land_name);
@@ -125,22 +125,22 @@ bool ExecutorDeleteLand::epochIsActive(
 }
 
 bool ExecutorDeleteLand::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorDeleteLand::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IDeleteLandOperatorShrPtr land_operator = m_operator_abstract_factory->createDeleteLandOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         DeleteLandOperatorExitCode const exit_code = land_operator->deleteLand(transaction, m_land_name);
 

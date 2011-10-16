@@ -65,7 +65,7 @@ public:
      * @return The exit code.
      */
     virtual CreateEpochOperatorExitCode createEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name,
         std::string                     const a_epoch_name
     ) const;

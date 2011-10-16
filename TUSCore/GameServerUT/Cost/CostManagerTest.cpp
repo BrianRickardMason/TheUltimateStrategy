@@ -27,12 +27,12 @@
 
 #include "../../GameServer/Cost/CostManager.hpp"
 #include "../../GameServer/Resource/Resource.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "CostManagerAccessorMock.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Cost;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace boost;
 

@@ -27,10 +27,10 @@
 
 #include "../../GameServer/World/WorldManager.hpp"
 #include "../../GameServer/World/WorldRecord.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "WorldManagerAccessorMock.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::World;
 using namespace boost;
 using namespace std;

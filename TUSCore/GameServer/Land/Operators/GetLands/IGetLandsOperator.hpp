@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_IGETLANDSOPERATOR_HPP
 #define GAMESERVER_LAND_IGETLANDSOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "GetLandsOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -60,7 +60,7 @@ public:
      * @return The exit code.
      */
     virtual GetLandsOperatorExitCode getLands(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     ) const = 0;
 };

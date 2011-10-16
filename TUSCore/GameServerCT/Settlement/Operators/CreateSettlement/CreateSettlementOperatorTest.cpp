@@ -33,7 +33,7 @@ using namespace GameServer::Common;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
@@ -70,8 +70,8 @@ protected:
           m_settlement_name_2("Settlement2")
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_create_user_operator->createUser(transaction, "Login", "Password");
 
@@ -150,8 +150,8 @@ protected:
         IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             HumanWithVolumeMap humans = m_human_manager->getHumans(transaction, id_holder);
 
@@ -161,8 +161,8 @@ protected:
         }
 
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ResourceSet resource_set = m_resource_manager->getResources(transaction, id_holder);
 
@@ -192,8 +192,8 @@ protected:
         IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             HumanWithVolumeMap humans = m_human_manager->getHumans(transaction, id_holder);
 
@@ -201,8 +201,8 @@ protected:
         }
 
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ResourceSet resource_set = m_resource_manager->getResources(transaction, id_holder);
 
@@ -302,8 +302,8 @@ protected:
 TEST_F(CreateSettlementOperatorTest, createSettlement_LandDoesNotExist)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST,
                   m_create_settlement_operator->createSettlement(transaction, m_land_name_3, m_settlement_name_1).m_exit_code);
@@ -313,8 +313,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_LandDoesNotExist)
 TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
 
@@ -322,8 +322,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_EXIST,
                   m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1).m_exit_code);
@@ -333,8 +333,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
 TEST_F(CreateSettlementOperatorTest, createSettlement_FirstSettlementOfLand)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED,
                   m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1).m_exit_code);
@@ -348,8 +348,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_FirstSettlementOfLand)
 TEST_F(CreateSettlementOperatorTest, createSettlement_SecondSettlementOfLand)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
 
@@ -357,8 +357,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SecondSettlementOfLand)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED,
                   m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_2).m_exit_code);
@@ -372,8 +372,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SecondSettlementOfLand)
 TEST_F(CreateSettlementOperatorTest, createSettlement_FirstSettlmentOfAnotherLandTheSameNames)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
 
@@ -381,8 +381,8 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_FirstSettlmentOfAnotherLan
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_EXIST,
                   m_create_settlement_operator->createSettlement(transaction, m_land_name_2, m_settlement_name_1).m_exit_code);

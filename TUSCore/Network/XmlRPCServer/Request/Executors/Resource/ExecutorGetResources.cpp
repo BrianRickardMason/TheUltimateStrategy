@@ -32,7 +32,7 @@
 
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace Network::XmlRPCCommon::Reply;
@@ -89,7 +89,7 @@ bool ExecutorGetResources::processParameters()
 }
 
 bool ExecutorGetResources::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToHolderOperatorShrPtr authorize_operator =
@@ -97,8 +97,8 @@ bool ExecutorGetResources::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToHolderOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToHolder(transaction, m_user->getLogin(), m_id_holder);
@@ -113,7 +113,7 @@ bool ExecutorGetResources::authorize(
 }
 
 bool ExecutorGetResources::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochBySettlementNameOperatorShrPtr epoch_operator =
@@ -121,8 +121,8 @@ bool ExecutorGetResources::epochIsActive(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochBySettlementNameOperatorExitCode const exit_code =
             epoch_operator->getEpochBySettlementName(transaction, m_holder_name);
@@ -137,22 +137,22 @@ bool ExecutorGetResources::epochIsActive(
 }
 
 bool ExecutorGetResources::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorGetResources::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetResourcesOperatorShrPtr resource_operator = m_operator_abstract_factory->createGetResourcesOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetResourcesOperatorExitCode const exit_code = resource_operator->getResources(transaction, m_id_holder);
 

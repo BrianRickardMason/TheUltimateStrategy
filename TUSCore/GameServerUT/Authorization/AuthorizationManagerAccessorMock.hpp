@@ -55,7 +55,7 @@ public:
     MOCK_CONST_METHOD3(
         authorizeUserToLand,
         bool(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_login,
             std::string                     const a_land_name
         )
@@ -72,7 +72,7 @@ public:
     MOCK_CONST_METHOD2(
         getLandNameOfSettlement,
         std::string(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )
     );

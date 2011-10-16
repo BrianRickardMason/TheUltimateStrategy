@@ -35,7 +35,7 @@ using namespace GameServer::Common;
 using namespace GameServer::Building;
 using namespace GameServer::Common;
 using namespace GameServer::Human;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 
 /**
@@ -72,8 +72,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_BUILD)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
         ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_BUILD);
@@ -94,8 +94,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_DESTROY)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
         ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_DESTROY);
@@ -116,8 +116,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_DISMISS)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
         ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_DISMISS);
@@ -138,8 +138,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_ENGAGE)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
         ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
@@ -160,8 +160,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_LIVING)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
         ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);

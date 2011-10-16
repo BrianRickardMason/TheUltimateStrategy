@@ -52,7 +52,7 @@ public:
      * @return A map of human with volume records, an empty map if not found.
      */
     virtual CostRecordVec getCosts(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDCostType                      const & a_id_cost_type
     ) const;

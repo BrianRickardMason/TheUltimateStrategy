@@ -52,7 +52,7 @@ public:
     MOCK_CONST_METHOD2(
         insertRecord,
         void(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -68,7 +68,7 @@ public:
     MOCK_CONST_METHOD2(
         getRecord,
         IWorldRecordShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
     );
@@ -83,7 +83,7 @@ public:
     MOCK_CONST_METHOD1(
         getRecords,
         IWorldRecordMap(
-            Persistency::ITransactionShrPtr a_transaction
+            Persistence::ITransactionShrPtr a_transaction
         )
     );
 
@@ -98,7 +98,7 @@ public:
     MOCK_CONST_METHOD2(
         getWorldNameOfLand,
         std::string(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
     );

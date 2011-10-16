@@ -25,37 +25,20 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "TransactionPostgresql.hpp"
-
-using namespace pqxx;
-using namespace std;
+#include "TransactionDummy.hpp"
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
-TransactionPostgresql::TransactionPostgresql(
-    pqxx::connection & a_connection
-)
-    : m_backbone_transaction(a_connection)
+void TransactionDummy::commit()
 {
 }
 
-void TransactionPostgresql::commit()
+void TransactionDummy::abort()
 {
-    m_backbone_transaction.commit();
 }
 
-void TransactionPostgresql::abort()
-{
-    m_backbone_transaction.abort();
-}
-
-pqxx::transaction<> & TransactionPostgresql::getBackboneTransaction()
-{
-    return m_backbone_transaction;
-}
-
-} // namespace Persistency
+} // namespace Persistence
 } // namespace GameServer

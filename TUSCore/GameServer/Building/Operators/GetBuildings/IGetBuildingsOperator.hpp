@@ -29,7 +29,7 @@
 #define GAMESERVER_BUILDING_IGETBUILDINGSOPERATOR_HPP
 
 #include "../../../Common/IDHolder.hpp"
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "GetBuildingsOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -60,7 +60,7 @@ public:
      * @return The exit code.
      */
     virtual GetBuildingsOperatorExitCode getBuildings(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const = 0;
 };

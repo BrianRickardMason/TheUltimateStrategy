@@ -29,7 +29,7 @@
 #define GAMESERVER_HUMAN_IDISMISSHUMANOPERATOR_HPP
 
 #include "../../../Common/IDHolder.hpp"
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "../../Key.hpp"
 #include "../../Volume.hpp"
 #include "DismissHumanOperatorExitCode.hpp"
@@ -64,7 +64,7 @@ public:
      * @returns The exit code.
      */
     virtual DismissHumanOperatorExitCode dismissHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume

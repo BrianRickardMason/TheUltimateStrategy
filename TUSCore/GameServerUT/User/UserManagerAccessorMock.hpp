@@ -53,7 +53,7 @@ public:
     MOCK_CONST_METHOD3(
         insertRecord,
         void(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_login,
             std::string                     const a_password
         )
@@ -68,7 +68,7 @@ public:
     MOCK_CONST_METHOD2(
         deleteRecord,
         void(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_login
         )
     );
@@ -84,7 +84,7 @@ public:
     MOCK_CONST_METHOD2(
         getRecord,
         IUserRecordShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_login
         )
     );

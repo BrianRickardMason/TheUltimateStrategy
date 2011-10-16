@@ -55,7 +55,7 @@ public:
     MOCK_CONST_METHOD3(
         getCosts,
         CostRecordVec(
-            GameServer::Persistency::ITransactionShrPtr         a_transaction,
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::KeyHash                 const & a_key_hash,
             IDCostType                                  const & a_id_cost_type
         )

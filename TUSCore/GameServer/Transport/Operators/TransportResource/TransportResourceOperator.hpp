@@ -67,7 +67,7 @@ public:
      * @returns The exit code.
      */
     virtual TransportResourceOperatorExitCode transportResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
         Resource::Key                   const & a_key,

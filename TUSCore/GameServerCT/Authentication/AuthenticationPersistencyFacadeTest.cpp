@@ -30,21 +30,21 @@
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::User;
 using namespace std;
 
 /**
  * @brief A test class.
  */
-class AuthenticationPersistencyFacadeTest
+class AuthenticationPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    AuthenticationPersistencyFacadeTest()
+    AuthenticationPersistenceFacadeTest()
         : m_login_1("Login1"),
           m_login_2("Login2"),
           m_login_5("Login5"),
@@ -52,8 +52,8 @@ protected:
           m_user_manager(m_manager_abstract_factory->createUserManager())
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login1", "Password1");
             m_user_manager->createUser(transaction, "Login2", "Password2");
@@ -81,28 +81,28 @@ protected:
 };
 
 // TODO: More specific tests, more granularity.
-TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateSuccess)
+TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateSuccess)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthenticationPersistencyFacadeShrPtr persistency_facade =
-        m_manager_abstract_factory->createAuthenticationPersistencyFacade();
+    IAuthenticationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthenticationPersistenceFacade();
 
-    ASSERT_TRUE(persistency_facade->authenticate(transaction, m_login_1, "Password1"));
-    ASSERT_TRUE(persistency_facade->authenticate(transaction, m_login_2, "Password2"));
+    ASSERT_TRUE(persistence_facade->authenticate(transaction, m_login_1, "Password1"));
+    ASSERT_TRUE(persistence_facade->authenticate(transaction, m_login_2, "Password2"));
 }
 
-TEST_F(AuthenticationPersistencyFacadeTest, AuthenticateFailure)
+TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateFailure)
 {
-    IConnectionShrPtr connection = m_persistency.getConnection();
-    ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+    IConnectionShrPtr connection = m_persistence.getConnection();
+    ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthenticationPersistencyFacadeShrPtr persistency_facade =
-        m_manager_abstract_factory->createAuthenticationPersistencyFacade();
+    IAuthenticationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthenticationPersistenceFacade();
 
-    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_1, "Password2"));
-    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_2, "Password1"));
-    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_5, "Password1"));
-    ASSERT_FALSE(persistency_facade->authenticate(transaction, m_login_5, "Password2"));
+    ASSERT_FALSE(persistence_facade->authenticate(transaction, m_login_1, "Password2"));
+    ASSERT_FALSE(persistence_facade->authenticate(transaction, m_login_2, "Password1"));
+    ASSERT_FALSE(persistence_facade->authenticate(transaction, m_login_5, "Password1"));
+    ASSERT_FALSE(persistence_facade->authenticate(transaction, m_login_5, "Password2"));
 }

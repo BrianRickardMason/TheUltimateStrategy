@@ -29,7 +29,7 @@
 #define GAMESERVER_RESOURCE_IRESOURCEMANAGER_HPP
 
 #include "../Common/IDHolder.hpp"
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "ResourceSet.hpp"
 #include <boost/noncopyable.hpp>
 
@@ -59,7 +59,7 @@ public:
      * @param a_volume      A volume of the resource.
      */
     virtual void addResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -78,7 +78,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool subtractResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -95,7 +95,7 @@ public:
      * @param a_volume      A volume of the resource.
      */
     virtual void subtractResourceSafely(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -113,7 +113,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool subtractResourceSet(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceSet                     const & a_resource_set
     ) const = 0;
@@ -128,7 +128,7 @@ public:
      * @param a_resource_set A set of resources.
      */
     virtual void subtractResourceSetSafely(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceSet                     const & a_resource_set
     ) const = 0;
@@ -143,7 +143,7 @@ public:
      * @return The resource, null if not found.
      */
     virtual ResourceWithVolumeShrPtr getResource(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const = 0;
@@ -157,7 +157,7 @@ public:
      * @return A map of resources, an empty map if not found.
      */
     virtual ResourceSet getResources(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const = 0;
 };

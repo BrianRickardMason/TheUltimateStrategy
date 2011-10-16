@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_IGETEPOCHBYLANDNAMEOPERATOR_HPP
 #define GAMESERVER_EPOCH_IGETEPOCHBYLANDNAMEOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "GetEpochByLandNameOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -59,7 +59,7 @@ public:
      * @return The exit code.
      */
     virtual GetEpochByLandNameOperatorExitCode getEpochByLandName(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const & a_name
     ) const = 0;
 };

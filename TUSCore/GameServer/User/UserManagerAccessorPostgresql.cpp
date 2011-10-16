@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistency/TransactionPostgresql.hpp"
+#include "../Persistence/TransactionPostgresql.hpp"
 #include "UserManagerAccessorPostgresql.hpp"
 #include "UserRecord.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 

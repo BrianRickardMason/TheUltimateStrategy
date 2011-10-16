@@ -29,7 +29,7 @@
 #define GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGER_HPP
 
 #include "../Land/ILand.hpp"
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "Settlement.hpp"
 #include <boost/noncopyable.hpp>
 
@@ -60,7 +60,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool createSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         Land::ILandShrPtr               const a_land,
         std::string                     const a_settlement_name
     ) const = 0;
@@ -74,7 +74,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool deleteSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 
@@ -87,7 +87,7 @@ public:
      * @return The settlement, null if not found.
      */
     virtual ISettlementShrPtr getSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const = 0;
 
@@ -100,7 +100,7 @@ public:
      * @return A map of settlements, an empty map if not found.
      */
     virtual ISettlementMap getSettlements(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         Land::ILandShrPtr               const a_land
     ) const = 0;
 };

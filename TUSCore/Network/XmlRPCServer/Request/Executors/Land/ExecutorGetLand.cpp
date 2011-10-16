@@ -34,7 +34,7 @@ using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;
 using namespace Network::XmlRPCCommon::Xml;
@@ -80,7 +80,7 @@ bool ExecutorGetLand::processParameters()
 }
 
 bool ExecutorGetLand::authorize(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IAuthorizeUserToLandOperatorShrPtr authorize_operator =
@@ -88,8 +88,8 @@ bool ExecutorGetLand::authorize(
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         AuthorizeUserToLandOperatorExitCode const exit_code =
             authorize_operator->authorizeUserToLand(transaction, m_user->getLogin(), m_land_name);
@@ -104,15 +104,15 @@ bool ExecutorGetLand::authorize(
 }
 
 bool ExecutorGetLand::epochIsActive(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetEpochByLandNameOperatorShrPtr epoch_operator = m_operator_abstract_factory->createGetEpochByLandNameOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetEpochByLandNameOperatorExitCode const exit_code =
             epoch_operator->getEpochByLandName(transaction, m_land_name);
@@ -127,22 +127,22 @@ bool ExecutorGetLand::epochIsActive(
 }
 
 bool ExecutorGetLand::verifyWorldConfiguration(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     return true;
 }
 
 ReplyShrPtr ExecutorGetLand::perform(
-    IPersistencyShrPtr a_persistency
+    IPersistenceShrPtr a_persistence
 ) const
 {
     IGetLandOperatorShrPtr land_operator = m_operator_abstract_factory->createGetLandOperator();
 
     // The transaction lifetime.
     {
-        IConnectionShrPtr connection = a_persistency->getConnection();
-        ITransactionShrPtr transaction = a_persistency->getTransaction(connection);
+        IConnectionShrPtr connection = a_persistence->getConnection();
+        ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetLandOperatorExitCode const exit_code = land_operator->getLand(transaction, m_land_name);
 

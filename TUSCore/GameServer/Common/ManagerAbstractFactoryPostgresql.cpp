@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Authentication/AuthenticationPersistencyFacadeFactory.hpp"
+#include "../Authentication/AuthenticationPersistenceFacadeFactory.hpp"
 #include "../Authorization/AuthorizationManagerFactory.hpp"
 #include "../Building/BuildingManagerFactory.hpp"
 #include "../Cost/CostManagerFactory.hpp"
@@ -63,10 +63,10 @@ ManagerAbstractFactoryPostgresql::ManagerAbstractFactoryPostgresql()
 {
 }
 
-IAuthenticationPersistencyFacadeShrPtr ManagerAbstractFactoryPostgresql::createAuthenticationPersistencyFacade() const
+IAuthenticationPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createAuthenticationPersistenceFacade() const
 {
-    return IAuthenticationPersistencyFacadeShrPtr(
-               AuthenticationPersistencyFacadeFactory::create(m_accessor_abstract_factory)
+    return IAuthenticationPersistenceFacadeShrPtr(
+               AuthenticationPersistenceFacadeFactory::create(m_accessor_abstract_factory)
            );
 }
 

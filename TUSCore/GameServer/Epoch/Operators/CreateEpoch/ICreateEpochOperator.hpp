@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_ICREATEEPOCHOPERATOR_HPP
 #define GAMESERVER_EPOCH_ICREATEEPOCHOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "CreateEpochOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -61,7 +61,7 @@ public:
      * @return The exit code.
      */
     virtual CreateEpochOperatorExitCode createEpoch(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name,
         std::string                     const a_epoch_name
     ) const = 0;

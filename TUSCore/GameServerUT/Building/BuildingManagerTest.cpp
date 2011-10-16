@@ -26,12 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Building/BuildingManager.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "BuildingManagerAccessorMock.hpp"
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 

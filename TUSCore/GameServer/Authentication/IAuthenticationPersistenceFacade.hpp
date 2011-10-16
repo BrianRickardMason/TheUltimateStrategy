@@ -25,34 +25,53 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PERSISTENCY_ICONNECTION_HPP
-#define GAMESERVER_PERSISTENCY_ICONNECTION_HPP
+#ifndef GAMESERVER_AUTHENTICATION_IAUTHENTICATIONPERSISTENCEFACADE_HPP
+#define GAMESERVER_AUTHENTICATION_IAUTHENTICATIONPERSISTENCEFACADE_HPP
 
+#include "../Persistence/ITransaction.hpp"
+#include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
-namespace Persistency
+namespace Authentication
 {
 
 /**
- * @brief The interface of connection.
+ * @brief The interface of an authentication persistence facade.
  */
-class IConnection
+class IAuthenticationPersistenceFacade
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Destructs the connection.
+     * @brief Destructs the authentication persistence facade.
      */
-    virtual ~IConnection(){};
+    virtual ~IAuthenticationPersistenceFacade(){};
+
+    /**
+     * @brief Authenticates a user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     * @param a_password    The password of the user.
+     *
+     * @return True if authenticated, false otherwise.
+     */
+    virtual bool authenticate(
+        Persistence::ITransactionShrPtr         a_transaction,
+        std::string                    const & a_login,
+        std::string                    const & a_password
+    ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of connection.
+ * @brief A shared pointer of the interface of the authentication persistence facade.
  */
-typedef boost::shared_ptr<IConnection> IConnectionShrPtr;
+typedef boost::shared_ptr<IAuthenticationPersistenceFacade> IAuthenticationPersistenceFacadeShrPtr;
 
-} // namespace Persistency
+} // namespace Authentication
 } // namespace GameServer
 
-#endif // GAMESERVER_PERSISTENCY_ICONNECTION_HPP
+#endif // GAMESERVER_AUTHENTICATION_IAUTHENTICATIONPERSISTENCEFACADE_HPP

@@ -27,7 +27,7 @@
 
 #include "EpochManager.hpp"
 
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 

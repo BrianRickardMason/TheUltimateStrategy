@@ -29,7 +29,7 @@
 #define GAMESERVER_HUMAN_IHUMANMANAGER_HPP
 
 #include "../Common/IDHolder.hpp"
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "HumanWithVolume.hpp"
 #include <boost/noncopyable.hpp>
 
@@ -61,7 +61,7 @@ public:
      * TODO: Add @throw information.
      */
     virtual void addHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -80,7 +80,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool subtractHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -96,7 +96,7 @@ public:
      * @return The human, null if not found.
      */
     virtual HumanWithVolumeShrPtr getHuman(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const = 0;
@@ -111,7 +111,7 @@ public:
      * @return A map of humans, an empty map if not found.
      */
     virtual HumanWithVolumeMap getHumans(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         IDHuman                         const & a_id_human
     ) const = 0;
@@ -125,7 +125,7 @@ public:
      * @return A map of humans, an empty map if not found.
      */
     virtual HumanWithVolumeMap getHumans(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const = 0;
 };

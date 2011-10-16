@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_IWORLDMANAGER_HPP
 #define GAMESERVER_WORLD_IWORLDMANAGER_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "IWorld.hpp"
 #include <boost/noncopyable.hpp>
 
@@ -58,7 +58,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool createWorld(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -71,7 +71,7 @@ public:
      * @return The world, null if not found.
      */
     virtual IWorldShrPtr getWorld(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -84,7 +84,7 @@ public:
      * @return The world, null if not found.
      */
     virtual IWorldShrPtr getWorldByLandName(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 
@@ -96,7 +96,7 @@ public:
      * @return A map of worlds, an empty map if not found.
      */
     virtual IWorldMap getWorlds(
-        Persistency::ITransactionShrPtr a_transaction
+        Persistence::ITransactionShrPtr a_transaction
     ) const = 0;
 };
 

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGERACCESSOR_HPP
 #define GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGERACCESSOR_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
@@ -60,7 +60,7 @@ public:
      * @return True if authenticated, false otherwise.
      */
     virtual bool authenticate(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const & a_login,
         std::string                     const & a_password
     ) const = 0;

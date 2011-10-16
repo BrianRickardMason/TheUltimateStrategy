@@ -62,7 +62,7 @@ public:
      * @return The exit code.
      */
     virtual AuthorizeUserToLandOperatorExitCode authorizeUserToLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_land_name
     ) const;

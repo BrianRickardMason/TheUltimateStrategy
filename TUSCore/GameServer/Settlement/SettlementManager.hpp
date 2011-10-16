@@ -62,7 +62,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool createSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         Land::ILandShrPtr               const a_land,
         std::string                     const a_settlement_name
     ) const;
@@ -76,7 +76,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool deleteSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 
@@ -89,7 +89,7 @@ public:
      * @return The settlement, null if not found.
      */
     virtual ISettlementShrPtr getSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 
@@ -102,7 +102,7 @@ public:
      * @return A map of settlements, an empty map if not found.
      */
     virtual ISettlementMap getSettlements(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         Land::ILandShrPtr               const a_land
     ) const;
 

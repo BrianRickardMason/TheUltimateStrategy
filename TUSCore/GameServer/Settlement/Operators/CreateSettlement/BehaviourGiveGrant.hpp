@@ -64,7 +64,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool giveGrant(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
 

@@ -29,7 +29,7 @@
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
 ConnectionPostgresql::ConnectionPostgresql()
@@ -42,5 +42,5 @@ pqxx::connection & ConnectionPostgresql::getBackboneConnection()
     return m_backbone_connection;
 }
 
-} // namespace Persistency
+} // namespace Persistence
 } // namespace GameServer

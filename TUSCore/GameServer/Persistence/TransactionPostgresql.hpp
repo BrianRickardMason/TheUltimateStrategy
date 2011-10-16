@@ -25,44 +25,64 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PERSISTENCY_ITRANSACTION_HPP
-#define GAMESERVER_PERSISTENCY_ITRANSACTION_HPP
+#ifndef GAMESERVER_PERSISTENCE_TRANSACTIONPOSTGRESQL_HPP
+#define GAMESERVER_PERSISTENCE_TRANSACTIONPOSTGRESQL_HPP
 
-#include <boost/shared_ptr.hpp>
+#include "ITransaction.hpp"
+#include <pqxx/connection.hxx>
+#include <pqxx/transaction.hxx>
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
 /**
- * @brief The interface of transaction.
+ * @brief The PostgreSQL transaction.
  */
-class ITransaction
+class TransactionPostgresql
+    : public ITransaction
 {
 public:
     /**
-     * @brief Destructs the transaction.
+     * @brief Constructs the transaction.
+     *
+     * @param a_connection The connection that transaction bases upon.
      */
-    virtual ~ITransaction(){};
+    explicit TransactionPostgresql(
+        pqxx::connection & a_connection
+    );
 
     /**
      * @brief Commits the transaction.
      */
-    virtual void commit() = 0;
+    virtual void commit();
 
     /**
      * @brief Aborts the transaction.
      */
-    virtual void abort() = 0;
+    virtual void abort();
+
+    /**
+     * @brief Gets the backbone transaction.
+     *
+     * @return The backbone transaction.
+     */
+    pqxx::transaction<> & getBackboneTransaction();
+
+private:
+    /**
+     * @brief The backbone transaction.
+     */
+    pqxx::transaction<> m_backbone_transaction;
 };
 
 /**
- * @brief The shared pointer of the interface of transaction.
+ * @brief The shared pointer of the PostgreSQL transaction.
  */
-typedef boost::shared_ptr<ITransaction> ITransactionShrPtr;
+typedef boost::shared_ptr<TransactionPostgresql> TransactionPostgresqlShrPtr;
 
-} // namespace Persistency
+} // namespace Persistence
 } // namespace GameServer
 
-#endif // GAMESERVER_PERSISTENCY_ITRANSACTION_HPP
+#endif // GAMESERVER_PERSISTENCE_TRANSACTIONPOSTGRESQL_HPP

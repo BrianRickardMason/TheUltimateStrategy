@@ -28,7 +28,7 @@
 #include "../../../../GameServer/Human/Operators/DismissHuman/DismissHumanOperator.hpp"
 #include "../../../Cost/CostManagerMock.hpp"
 #include "../../../Helpers/Functions.hpp"
-#include "../../../Persistency/TransactionDummy.hpp"
+#include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Property/PropertyManagerMock.hpp"
 #include "../../../Resource/ResourceManagerMock.hpp"
 #include "../../HumanManagerMock.hpp"
@@ -37,7 +37,7 @@
 using namespace GameServer::Common;
 using namespace GameServer::Cost;
 using namespace GameServer::Human;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace boost;

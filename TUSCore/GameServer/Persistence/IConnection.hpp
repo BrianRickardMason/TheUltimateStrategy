@@ -25,30 +25,34 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PERSISTENCY_CONNECTIONDUMMY_HPP
-#define GAMESERVER_PERSISTENCY_CONNECTIONDUMMY_HPP
+#ifndef GAMESERVER_PERSISTENCE_ICONNECTION_HPP
+#define GAMESERVER_PERSISTENCE_ICONNECTION_HPP
 
-#include "../../GameServer/Persistency/IConnection.hpp"
+#include <boost/shared_ptr.hpp>
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
 /**
- * @brief The dummy connection.
+ * @brief The interface of connection.
  */
-class ConnectionDummy
-    : public IConnection
+class IConnection
 {
+public:
+    /**
+     * @brief Destructs the connection.
+     */
+    virtual ~IConnection(){};
 };
 
 /**
- * @brief The shared pointer of the dummy connection.
+ * @brief The shared pointer of the interface of connection.
  */
-typedef boost::shared_ptr<ConnectionDummy> ConnectionDummyShrPtr;
+typedef boost::shared_ptr<IConnection> IConnectionShrPtr;
 
-} // namespace Persistency
+} // namespace Persistence
 } // namespace GameServer
 
-#endif // GAMESERVER_PERSISTENCY_CONNECTIONDUMMY_HPP
+#endif // GAMESERVER_PERSISTENCE_ICONNECTION_HPP

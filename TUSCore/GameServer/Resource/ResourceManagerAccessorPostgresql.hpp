@@ -54,7 +54,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -70,7 +70,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void deleteRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const;
@@ -85,7 +85,7 @@ public:
      * @return The resource with volume record, null if not found.
      */
     virtual ResourceWithVolumeRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
     ) const;
@@ -99,7 +99,7 @@ public:
      * @return A map of resource with volume records, an empty map if not found.
      */
     virtual ResourceWithVolumeRecordMap getRecords(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const;
 
@@ -114,7 +114,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void increaseVolume(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
@@ -131,7 +131,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual void decreaseVolume(
-        Persistency::ITransactionShrPtr         a_transaction,
+        Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume

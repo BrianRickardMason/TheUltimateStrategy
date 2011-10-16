@@ -25,29 +25,31 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "PersistencyDummy.hpp"
+#include "PersistencePostgresql.hpp"
+
+#include "TransactionPostgresql.hpp"
 
 namespace GameServer
 {
-namespace Persistency
+namespace Persistence
 {
 
-PersistencyDummy::PersistencyDummy()
-    : m_connection(new ConnectionDummy)
+PersistencePostgresql::PersistencePostgresql()
+    : m_connection(new ConnectionPostgresql)
 {
 }
 
-IConnectionShrPtr PersistencyDummy::getConnection()
+IConnectionShrPtr PersistencePostgresql::getConnection()
 {
     return m_connection;
 }
 
-ITransactionShrPtr PersistencyDummy::getTransaction(
+ITransactionShrPtr PersistencePostgresql::getTransaction(
     IConnectionShrPtr a_connection
 )
 {
-    return ITransactionShrPtr(new TransactionDummy);
+    return ITransactionShrPtr(new TransactionPostgresql(m_connection->getBackboneConnection()));
 }
 
-} // namespace Persistency
+} // namespace Persistence
 } // namespace GameServer

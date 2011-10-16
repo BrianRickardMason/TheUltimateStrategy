@@ -26,12 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Human/HumanManager.hpp"
-#include "../Persistency/TransactionDummy.hpp"
+#include "../Persistence/TransactionDummy.hpp"
 #include "HumanManagerAccessorMock.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 

@@ -37,7 +37,7 @@ using namespace GameServer::Cost;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
@@ -83,8 +83,8 @@ protected:
           m_destroy_building_operator(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_manager_abstract_factory))
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
@@ -112,8 +112,8 @@ protected:
         vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
 
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ASSERT_TRUE(m_building_manager->getBuildings(transaction, m_id_holder_11).empty());
             ASSERT_TRUE(m_building_manager->getBuildings(transaction, m_id_holder_12).empty());
@@ -244,8 +244,8 @@ protected:
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -253,16 +253,16 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_TRYING_TO_DESTROY_ZERO_BUILDINGS,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 0).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -275,8 +275,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_MissingIDHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -284,16 +284,16 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_MissingIDHolder)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_THERE_ARE_NO_BUILDINGS,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_4, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -306,8 +306,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_MissingIDHolder)
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
@@ -323,16 +323,16 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
@@ -348,8 +348,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -362,8 +362,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
@@ -379,16 +379,16 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -396,15 +396,15 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1)(1)(1)(1)(1)(1)(1);
@@ -416,8 +416,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResource)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
@@ -427,16 +427,16 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -444,15 +444,15 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1);
@@ -464,8 +464,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
 
@@ -473,8 +473,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -483,16 +483,16 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_FALSE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
         ASSERT_EQ(199, m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
@@ -504,8 +504,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
 
@@ -513,8 +513,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 63).m_exit_code);
@@ -523,16 +523,16 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_FALSE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
         ASSERT_EQ(137, m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(370)(9370)(9370)(370)(370)(370)(370);
@@ -544,8 +544,8 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
 TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_OnBuildings)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 50);
 
@@ -553,8 +553,8 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 50).m_exit_code);
@@ -563,15 +563,15 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(500)(9500)(9500)(500)(500)(500)(500);
@@ -583,8 +583,8 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
 TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_OnResources)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_manager->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 200);
 
@@ -592,8 +592,8 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
                   m_destroy_building_operator->destroyBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 100).m_exit_code);
@@ -602,16 +602,16 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_FALSE(m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
         ASSERT_EQ(100, m_building_manager->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN)->getVolume());
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);

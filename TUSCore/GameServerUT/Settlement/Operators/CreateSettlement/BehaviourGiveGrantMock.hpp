@@ -53,7 +53,7 @@ public:
     MOCK_CONST_METHOD2(
         giveGrant,
         bool(
-            GameServer::Persistency::ITransactionShrPtr       a_transaction,
+            GameServer::Persistence::ITransactionShrPtr       a_transaction,
             std::string                                 const a_settlement_name
         )
     );

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHORIZATION_IAUTHORIZEUSERTOSETTLEMENTOPERATOR_HPP
 #define GAMESERVER_AUTHORIZATION_IAUTHORIZEUSERTOSETTLEMENTOPERATOR_HPP
 
-#include "../../../Persistency/ITransaction.hpp"
+#include "../../../Persistence/ITransaction.hpp"
 #include "AuthorizeUserToSettlementOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -60,7 +60,7 @@ public:
      * @return The exit code.
      */
     virtual AuthorizeUserToSettlementOperatorExitCode authorizeUserToSettlement(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_settlement_name
     ) const = 0;

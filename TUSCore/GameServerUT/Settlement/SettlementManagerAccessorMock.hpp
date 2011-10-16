@@ -53,7 +53,7 @@ public:
     MOCK_CONST_METHOD3(
         insertRecord,
         void(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name,
             std::string                     const a_settlement_name
         )
@@ -68,7 +68,7 @@ public:
     MOCK_CONST_METHOD2(
         deleteRecord,
         void(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )
     );
@@ -84,7 +84,7 @@ public:
     MOCK_CONST_METHOD2(
         getRecord,
         ISettlementRecordShrPtr(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )
     );
@@ -100,7 +100,7 @@ public:
     MOCK_CONST_METHOD2(
         getRecords,
         ISettlementRecordMap(
-            Persistency::ITransactionShrPtr       a_transaction,
+            Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
     );

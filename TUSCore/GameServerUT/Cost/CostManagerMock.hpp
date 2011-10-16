@@ -55,7 +55,7 @@ public:
     MOCK_CONST_METHOD3(
         getCost,
         Resource::ResourceSet(
-            Persistency::ITransactionShrPtr         a_transaction,
+            Persistence::ITransactionShrPtr         a_transaction,
             Common::KeyHash                 const & a_key_hash,
             IDCostType                      const & a_id_cost_type
         )

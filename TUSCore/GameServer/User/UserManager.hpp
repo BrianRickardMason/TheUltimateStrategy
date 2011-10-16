@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_USER_USERMANAGER_HPP
 #define GAMESERVER_USER_USERMANAGER_HPP
 
-#include "../Persistency/IPersistency.hpp"
+#include "../Persistence/IPersistence.hpp"
 #include "IUserManager.hpp"
 #include "IUserManagerAccessor.hpp"
 
@@ -63,7 +63,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool createUser(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_password
     );
@@ -77,7 +77,7 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool deleteUser(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     );
 
@@ -90,7 +90,7 @@ public:
      * @return The user, null if not found.
      */
     virtual IUserShrPtr getUser(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
     );
 

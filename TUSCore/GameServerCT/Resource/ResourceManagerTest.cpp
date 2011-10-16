@@ -33,7 +33,7 @@
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
-using namespace GameServer::Persistency;
+using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
@@ -73,8 +73,8 @@ protected:
           m_id_holder_3(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3)
     {
         {
-            IConnectionShrPtr connection = m_persistency.getConnection();
-            ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+            IConnectionShrPtr connection = m_persistence.getConnection();
+            ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             m_user_manager->createUser(transaction, "Login", "Password");
 
@@ -222,8 +222,8 @@ protected:
 TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -231,8 +231,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -255,8 +255,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
 TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -264,8 +264,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -273,8 +273,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -297,8 +297,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
 TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -306,8 +306,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
 
@@ -315,8 +315,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -342,8 +342,8 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
 TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOneResourceAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -352,8 +352,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOn
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22));
 
@@ -361,8 +361,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOn
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -385,8 +385,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOn
 TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 22);
 
@@ -394,8 +394,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnc
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
@@ -403,8 +403,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnc
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -427,8 +427,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnc
 TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractToMuch)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -436,15 +436,15 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractToMu
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_FALSE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 12));
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -467,8 +467,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractToMu
 TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -476,8 +476,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_TRUE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
@@ -485,8 +485,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -509,8 +509,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
 TEST_F(ResourceManagerTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_FALSE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
     }
@@ -522,8 +522,8 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
 TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractAllOfOneResourceAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -532,8 +532,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractA
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22));
 
@@ -541,8 +541,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractA
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -565,8 +565,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractA
 TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHalfAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 22);
 
@@ -574,8 +574,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHal
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
@@ -583,8 +583,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHal
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -607,8 +607,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHal
 TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToMuch)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -616,8 +616,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToM
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 12));
 
@@ -625,8 +625,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToM
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -649,8 +649,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToM
 TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZero)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -658,8 +658,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZer
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 0));
 
@@ -667,8 +667,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZer
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -691,8 +691,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZer
 TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRest)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -700,8 +700,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRes
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
@@ -709,8 +709,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRes
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -733,8 +733,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRes
 TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsNotPresent_TryToSubtract)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
@@ -748,8 +748,8 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsNotPresent_TryToSub
 TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmptySet)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 100);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
@@ -763,8 +763,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmpt
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map;
         ResourceSet resource_set(resource_map);
@@ -775,8 +775,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmpt
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -799,8 +799,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmpt
 TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllOfManyResourcesAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
@@ -814,8 +814,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllO
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -825,8 +825,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllO
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -849,8 +849,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllO
 TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalfAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -864,8 +864,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalf
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -875,8 +875,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalf
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -899,8 +899,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalf
 TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtractTooMuch)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -914,8 +914,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtrac
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -923,8 +923,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtrac
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -947,8 +947,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtrac
 TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -962,8 +962,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -973,8 +973,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -984,8 +984,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1008,8 +1008,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
 TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest_OneTransaction)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -1023,8 +1023,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1035,8 +1035,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1059,8 +1059,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
 TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubtract)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1070,8 +1070,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubt
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1097,8 +1097,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubt
 TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractEmptySet)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 100);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
@@ -1112,8 +1112,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map;
         ResourceSet resource_set(resource_map);
@@ -1124,8 +1124,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1148,8 +1148,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAllOfManyResourcesAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
@@ -1163,8 +1163,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1174,8 +1174,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1198,8 +1198,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractHalfAtOnce)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -1213,8 +1213,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1224,8 +1224,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1248,8 +1248,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractTooMuch)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -1263,8 +1263,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1274,8 +1274,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1298,8 +1298,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractRest)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -1313,8 +1313,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1324,8 +1324,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1335,8 +1335,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1359,8 +1359,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractRest_OneTransaction)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
@@ -1374,8 +1374,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1386,8 +1386,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1410,8 +1410,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_TryToSubtract)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = getResourceSet();
 
@@ -1421,8 +1421,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_Try
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1448,8 +1448,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_Try
 TEST_F(ResourceManagerTest, getResource_ResourceIsNotPresent)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL);
 
@@ -1460,8 +1460,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsNotPresent)
 TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1469,8 +1469,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfH
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL);
 
@@ -1482,8 +1482,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfH
 TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1491,8 +1491,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfD
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL);
 
@@ -1503,8 +1503,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfD
 TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1512,8 +1512,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfD
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_3, KEY_RESOURCE_COAL);
 
@@ -1524,8 +1524,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfD
 TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1533,8 +1533,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD);
 
@@ -1545,8 +1545,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
 TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1554,8 +1554,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_FOOD);
 
@@ -1566,8 +1566,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
 TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1575,8 +1575,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_3, KEY_RESOURCE_FOOD);
 
@@ -1590,8 +1590,8 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
 TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1614,8 +1614,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_ExistentHolder)
 TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
 
@@ -1638,8 +1638,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_NonExistentHolde
 TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1647,8 +1647,8 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfHolder)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1671,8 +1671,8 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfHolder)
 TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1680,8 +1680,8 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Exi
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_2);
 
@@ -1704,8 +1704,8 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Exi
 TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
@@ -1713,8 +1713,8 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Non
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
 
@@ -1737,8 +1737,8 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Non
 TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -1747,8 +1747,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfHolder)
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1771,8 +1771,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfHolder)
 TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_ExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -1781,8 +1781,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_E
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_2);
 
@@ -1805,8 +1805,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_E
 TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -1815,8 +1815,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_N
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
 
@@ -1839,8 +1839,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_N
 TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfFirstHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -1850,8 +1850,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfFirstH
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
 
@@ -1874,8 +1874,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfFirstH
 TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfSecondHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -1885,8 +1885,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfSecond
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_2);
 
@@ -1909,8 +1909,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfSecond
 TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_NonExistentHolder)
 {
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
         m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
@@ -1920,8 +1920,8 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_NonExist
     }
 
     {
-        IConnectionShrPtr connection = m_persistency.getConnection();
-        ITransactionShrPtr transaction = m_persistency.getTransaction(connection);
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
 

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_IWORLDMANAGERACCESSOR_HPP
 #define GAMESERVER_WORLD_IWORLDMANAGERACCESSOR_HPP
 
-#include "../Persistency/ITransaction.hpp"
+#include "../Persistence/ITransaction.hpp"
 #include "IWorldRecord.hpp"
 #include <boost/make_shared.hpp>
 #include <boost/noncopyable.hpp>
@@ -60,7 +60,7 @@ public:
      * @param a_world_name  The name of the world.
      */
     virtual void insertRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -73,7 +73,7 @@ public:
      * @return The world record, null if not found.
      */
     virtual IWorldRecordShrPtr getRecord(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
 
@@ -85,7 +85,7 @@ public:
      * @return A map of world records, an empty map if not found.
      */
     virtual IWorldRecordMap getRecords(
-        Persistency::ITransactionShrPtr a_transaction
+        Persistence::ITransactionShrPtr a_transaction
     ) const = 0;
 
     /**
@@ -97,7 +97,7 @@ public:
      * @return The name of the world, an empty string if not found.
      */
     virtual std::string getWorldNameOfLand(
-        Persistency::ITransactionShrPtr       a_transaction,
+        Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const = 0;
 };
