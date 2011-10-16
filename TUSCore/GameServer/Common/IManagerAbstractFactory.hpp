@@ -29,7 +29,7 @@
 #define GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
 
 #include "../Authentication/IAuthenticationPersistenceFacade.hpp"
-#include "../Authorization/IAuthorizationManager.hpp"
+#include "../Authorization/IAuthorizationPersistenceFacade.hpp"
 #include "../Building/IBuildingManager.hpp"
 #include "../Cost/ICostManager.hpp"
 #include "../Epoch/IEpochManager.hpp"
@@ -66,11 +66,11 @@ public:
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const = 0;
 
     /**
-     * @brief Creates the authorization manager.
+     * @brief Creates the authorization persistence facade.
      *
-     * @return The newly created authorization manager.
+     * @return The newly created authorization persistence facade.
      */
-    virtual Authorization::IAuthorizationManagerShrPtr createAuthorizationManager() const = 0;
+    virtual Authorization::IAuthorizationPersistenceFacadeShrPtr createAuthorizationPersistenceFacade() const = 0;
 
     /**
      * @brief Creates the building manager.

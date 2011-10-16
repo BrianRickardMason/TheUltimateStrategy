@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "AuthorizationManager.hpp"
+#include "AuthorizationPersistenceFacade.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -36,14 +36,14 @@ namespace GameServer
 namespace Authorization
 {
 
-AuthorizationManager::AuthorizationManager(
+AuthorizationPersistenceFacade::AuthorizationPersistenceFacade(
     IAuthorizationManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-bool AuthorizationManager::authorizeUserToLand(
+bool AuthorizationPersistenceFacade::authorizeUserToLand(
     ITransactionShrPtr       a_transaction,
     string             const a_login,
     string             const a_land_name
@@ -52,7 +52,7 @@ bool AuthorizationManager::authorizeUserToLand(
     return m_accessor->authorizeUserToLand(a_transaction, a_login, a_land_name);
 }
 
-bool AuthorizationManager::authorizeUserToHolder(
+bool AuthorizationPersistenceFacade::authorizeUserToHolder(
     ITransactionShrPtr         a_transaction,
     string             const   a_login,
     IDHolder           const & a_id_holder
@@ -65,7 +65,7 @@ bool AuthorizationManager::authorizeUserToHolder(
     return authorizeUserToSettlement(a_transaction, a_login, a_id_holder.getValue2());
 }
 
-bool AuthorizationManager::authorizeUserToSettlement(
+bool AuthorizationPersistenceFacade::authorizeUserToSettlement(
     ITransactionShrPtr       a_transaction,
     string             const a_login,
     string             const a_settlement_name

@@ -25,21 +25,29 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "AuthorizationManagerFactory.hpp"
+#include "../../GameServer/Authorization/AuthorizationPersistenceFacadeFactory.hpp"
+#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
+#include <gmock/gmock.h>
 
+using namespace GameServer::Authorization;
 using namespace GameServer::Common;
 
-namespace GameServer
+TEST(AuthorizationPersistenceFacadeFactoryTest, CreateDoesNotThrow)
 {
-namespace Authorization
-{
+    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-AuthorizationManagerAutPtr AuthorizationManagerFactory::createAuthorizationManager(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-)
-{
-    return AuthorizationManagerAutPtr(new AuthorizationManager(a_accessor_abstract_factory->createAuthorizationAccessor()));
+    ASSERT_NO_THROW(
+        AuthorizationPersistenceFacadeAutPtr persistence_facade
+            = AuthorizationPersistenceFacadeFactory::create(accessor_abstract_factory)
+    );
 }
 
-} // namespace Authorization
-} // namespace GameServer
+TEST(AuthorizationPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
+{
+    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
+
+    AuthorizationPersistenceFacadeAutPtr persistence_facade
+        = AuthorizationPersistenceFacadeFactory::create(accessor_abstract_factory);
+
+    ASSERT_TRUE(persistence_facade.get() != NULL);
+}

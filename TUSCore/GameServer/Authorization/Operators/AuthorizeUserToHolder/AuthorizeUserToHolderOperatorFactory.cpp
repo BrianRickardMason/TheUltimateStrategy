@@ -38,7 +38,9 @@ AuthorizeUserToHolderOperatorAutPtr AuthorizeUserToHolderOperatorFactory::create
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return AuthorizeUserToHolderOperatorAutPtr(new AuthorizeUserToHolderOperator(a_manager_abstract_factory->createAuthorizationManager()));
+    return AuthorizeUserToHolderOperatorAutPtr(
+               new AuthorizeUserToHolderOperator(a_manager_abstract_factory->createAuthorizationPersistenceFacade())
+           );
 }
 
 } // namespace Authorization

@@ -42,14 +42,14 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class AuthorizationManagerTest
+class AuthorizationPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    AuthorizationManagerTest()
+    AuthorizationPersistenceFacadeTest()
         : m_epoch_name("Epoch"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
@@ -161,92 +161,94 @@ protected:
     ISettlementManagerShrPtr m_settlement_manager;
 };
 
-/**
- * Component tests of: AuthorizationManager::authorizeUserToLand.
- */
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_Authorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandSuccess)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_1, m_land_name_1));
-    ASSERT_TRUE(manager->authorizeUserToLand(transaction, m_login_2, m_land_name_2));
+    ASSERT_TRUE(persistence_facade->authorizeUserToLand(transaction, m_login_1, m_land_name_1));
+    ASSERT_TRUE(persistence_facade->authorizeUserToLand(transaction, m_login_2, m_land_name_2));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailure)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_2, m_land_name_1));
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_land_name_2));
+    ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_2, m_land_name_1));
+    ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_1, m_land_name_2));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLogin)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailureMissingLogin)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_5, m_land_name_1));
+    ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_5, m_land_name_1));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized_MissingLandName)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailureMissingLandName)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_FALSE(manager->authorizeUserToLand(transaction, m_login_1, m_land_name_5));
+    ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_1, m_land_name_5));
 }
 
-/**
- * Component tests of: AuthorizationManager::authorizeUserToSettlement.
- */
-TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementSuccess)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_TRUE(manager->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_1));
-    ASSERT_TRUE(manager->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_2));
+    ASSERT_TRUE(persistence_facade->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_1));
+    ASSERT_TRUE(persistence_facade->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_2));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailure)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_2));
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_1));
+    ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_2));
+    ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_1));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_MissingLogin)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailureMissingLogin)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_5, m_settlement_name_1));
+    ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_5, m_settlement_name_1));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized_MissingSettlementName)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailureMissingSettlementName)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IAuthorizationManagerShrPtr manager = m_manager_abstract_factory->createAuthorizationManager();
+    IAuthorizationPersistenceFacadeShrPtr persistence_facade =
+        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
 
-    ASSERT_FALSE(manager->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_5));
+    ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_5));
 }

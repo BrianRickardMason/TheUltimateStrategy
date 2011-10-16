@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Authentication/AuthenticationPersistenceFacadeFactory.hpp"
-#include "../Authorization/AuthorizationManagerFactory.hpp"
+#include "../Authorization/AuthorizationPersistenceFacadeFactory.hpp"
 #include "../Building/BuildingManagerFactory.hpp"
 #include "../Cost/CostManagerFactory.hpp"
 #include "../Epoch/EpochManagerFactory.hpp"
@@ -70,9 +70,11 @@ IAuthenticationPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createA
            );
 }
 
-IAuthorizationManagerShrPtr ManagerAbstractFactoryPostgresql::createAuthorizationManager() const
+IAuthorizationPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createAuthorizationPersistenceFacade() const
 {
-    return IAuthorizationManagerShrPtr(AuthorizationManagerFactory::createAuthorizationManager(m_accessor_abstract_factory));
+    return IAuthorizationPersistenceFacadeShrPtr(
+               AuthorizationPersistenceFacadeFactory::create(m_accessor_abstract_factory)
+           );
 }
 
 IBuildingManagerShrPtr ManagerAbstractFactoryPostgresql::createBuildingManager() const

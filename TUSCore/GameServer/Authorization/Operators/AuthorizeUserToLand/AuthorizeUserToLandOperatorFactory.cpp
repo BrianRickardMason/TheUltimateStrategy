@@ -38,7 +38,9 @@ AuthorizeUserToLandOperatorAutPtr AuthorizeUserToLandOperatorFactory::createAuth
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return AuthorizeUserToLandOperatorAutPtr(new AuthorizeUserToLandOperator(a_manager_abstract_factory->createAuthorizationManager()));
+    return AuthorizeUserToLandOperatorAutPtr(
+               new AuthorizeUserToLandOperator(a_manager_abstract_factory->createAuthorizationPersistenceFacade())
+           );
 }
 
 } // namespace Authorization

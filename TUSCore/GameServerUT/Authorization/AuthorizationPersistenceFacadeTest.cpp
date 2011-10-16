@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Authorization/AuthorizationManager.hpp"
+#include "../../GameServer/Authorization/AuthorizationPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "AuthorizationManagerAccessorMock.hpp"
 #include <gmock/gmock.h>
@@ -39,14 +39,14 @@ using testing::Return;
 /**
  * @brief A test class.
  */
-class AuthorizationManagerTest
+class AuthorizationPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Creates a test class.
      */
-    AuthorizationManagerTest()
+    AuthorizationPersistenceFacadeTest()
         : m_login("Login"),
           m_land_name("Land"),
           m_settlement_name("Settlement")
@@ -69,20 +69,14 @@ protected:
     string m_settlement_name;
 };
 
-/**
- * Unit tests of: AuthorizationManager::AuthorizationManager.
- */
-TEST_F(AuthorizationManagerTest, AuthorizationManager)
+TEST_F(AuthorizationPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IAuthorizationManagerAccessorAutPtr accessor(new AuthorizationManagerAccessorMock);
 
-    ASSERT_NO_THROW(AuthorizationManager manager(accessor));
+    ASSERT_NO_THROW(AuthorizationPersistenceFacade persistence_facade(accessor));
 }
 
-/**
- * Unit tests of: AuthorizationManager::authorizeUserToLand.
- */
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_Authorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -92,12 +86,12 @@ TEST_F(AuthorizationManagerTest, authorizeUserToLand_Authorized)
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
-    AuthorizationManager manager(accessor);
+    AuthorizationPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.authorizeUserToLand(transaction, m_login, m_land_name));
+    ASSERT_TRUE(persistence_facade.authorizeUserToLand(transaction, m_login, m_land_name));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -107,15 +101,12 @@ TEST_F(AuthorizationManagerTest, authorizeUserToLand_NotAuthorized)
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
-    AuthorizationManager manager(accessor);
+    AuthorizationPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.authorizeUserToLand(transaction, m_login, m_land_name));
+    ASSERT_FALSE(persistence_facade.authorizeUserToLand(transaction, m_login, m_land_name));
 }
 
-/**
- * Unit tests of: AuthorizationManager::authorizeUserToSettlement.
- */
-TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -127,12 +118,12 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_Authorized)
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
-    AuthorizationManager manager(accessor);
+    AuthorizationPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.authorizeUserToSettlement(transaction, m_login, m_settlement_name));
+    ASSERT_TRUE(persistence_facade.authorizeUserToSettlement(transaction, m_login, m_settlement_name));
 }
 
-TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
+TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -144,7 +135,7 @@ TEST_F(AuthorizationManagerTest, authorizeUserToSettlement_NotAuthorized)
 
     IAuthorizationManagerAccessorAutPtr accessor(mock);
 
-    AuthorizationManager manager(accessor);
+    AuthorizationPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.authorizeUserToSettlement(transaction, m_login, m_settlement_name));
+    ASSERT_FALSE(persistence_facade.authorizeUserToSettlement(transaction, m_login, m_settlement_name));
 }

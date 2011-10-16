@@ -36,9 +36,9 @@ namespace Authorization
 {
 
 AuthorizeUserToLandOperator::AuthorizeUserToLandOperator(
-    IAuthorizationManagerShrPtr a_authorization_manager
+    IAuthorizationPersistenceFacadeShrPtr a_authorization_persistence_facade
 )
-    : m_authorization_manager(a_authorization_manager)
+    : m_authorization_persistence_facade(a_authorization_persistence_facade)
 {
 }
 
@@ -50,7 +50,8 @@ AuthorizeUserToLandOperatorExitCode AuthorizeUserToLandOperator::authorizeUserTo
 {
     try
     {
-        bool const result = m_authorization_manager->authorizeUserToLand(a_transaction, a_login, a_land_name);
+        bool const result =
+            m_authorization_persistence_facade->authorizeUserToLand(a_transaction, a_login, a_land_name);
 
         return AuthorizeUserToLandOperatorExitCode(AUTHORIZE_USER_TO_LAND_OPERATOR_EXIT_CODE_AUTHORIZATION_HAS_BEEN_PERFORMED, result);
     }

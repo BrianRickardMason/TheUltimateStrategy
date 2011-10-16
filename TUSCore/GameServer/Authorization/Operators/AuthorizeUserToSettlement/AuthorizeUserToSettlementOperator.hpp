@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHORIZATION_AUTHORIZEUSERTOSETTLEMENTOPERATOR_HPP
 #define GAMESERVER_AUTHORIZATION_AUTHORIZEUSERTOSETTLEMENTOPERATOR_HPP
 
-#include "../../IAuthorizationManager.hpp"
+#include "../../IAuthorizationPersistenceFacade.hpp"
 #include "IAuthorizeUserToSettlementOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_authorization_manager The manager of authorization.
+     * @param a_authorization_persistence_facade The persistence facade of authorization.
      */
     AuthorizeUserToSettlementOperator(
-        IAuthorizationManagerShrPtr a_authorization_manager
+        IAuthorizationPersistenceFacadeShrPtr a_authorization_persistence_facade
     );
 
     /**
@@ -69,9 +69,9 @@ public:
 
 private:
     /**
-     * @brief The manager of authorization.
+     * @brief The persistence facade of authorization.
      */
-    IAuthorizationManagerShrPtr m_authorization_manager;
+    IAuthorizationPersistenceFacadeShrPtr m_authorization_persistence_facade;
 };
 
 /**

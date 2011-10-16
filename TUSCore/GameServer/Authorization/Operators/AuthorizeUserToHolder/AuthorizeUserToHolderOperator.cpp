@@ -37,9 +37,9 @@ namespace Authorization
 {
 
 AuthorizeUserToHolderOperator::AuthorizeUserToHolderOperator(
-    IAuthorizationManagerShrPtr a_authorization_manager
+    IAuthorizationPersistenceFacadeShrPtr a_authorization_persistence_facade
 )
-    : m_authorization_manager(a_authorization_manager)
+    : m_authorization_persistence_facade(a_authorization_persistence_facade)
 {
 }
 
@@ -51,7 +51,8 @@ AuthorizeUserToHolderOperatorExitCode AuthorizeUserToHolderOperator::authorizeUs
 {
     try
     {
-        bool const result = m_authorization_manager->authorizeUserToHolder(a_transaction, a_login, a_id_holder);
+        bool const result =
+            m_authorization_persistence_facade->authorizeUserToHolder(a_transaction, a_login, a_id_holder);
 
         return AuthorizeUserToHolderOperatorExitCode(AUTHORIZE_USER_TO_HOLDER_OPERATOR_EXIT_CODE_AUTHORIZATION_HAS_BEEN_PERFORMED, result);
     }

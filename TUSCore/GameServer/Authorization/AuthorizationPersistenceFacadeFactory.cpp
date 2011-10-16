@@ -25,36 +25,23 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERFACTORY_HPP
-#define GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERFACTORY_HPP
+#include "AuthorizationPersistenceFacadeFactory.hpp"
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "AuthorizationManager.hpp"
+using namespace GameServer::Common;
 
 namespace GameServer
 {
 namespace Authorization
 {
 
-/**
- * @brief A factory of authorization manager.
- */
-class AuthorizationManagerFactory
+AuthorizationPersistenceFacadeAutPtr AuthorizationPersistenceFacadeFactory::create(
+    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+)
 {
-public:
-    /**
-     * @brief A factory method.
-     *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created authorization manager.
-     */
-    static AuthorizationManagerAutPtr createAuthorizationManager(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-    );
-};
+    return AuthorizationPersistenceFacadeAutPtr(
+               new AuthorizationPersistenceFacade(a_accessor_abstract_factory->createAuthorizationAccessor())
+           );
+}
 
 } // namespace Authorization
 } // namespace GameServer
-
-#endif // GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERFACTORY_HPP

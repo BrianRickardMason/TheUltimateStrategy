@@ -25,18 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Authorization/AuthorizationManagerFactory.hpp"
-#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
-#include <gmock/gmock.h>
+#ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_AUTHORIZATION_AUTHORIZATIONPERSISTENCEFACADEFACTORY_HPP
 
-using namespace GameServer::Authorization;
-using namespace GameServer::Common;
+#include "../Common/IAccessorAbstractFactory.hpp"
+#include "AuthorizationPersistenceFacade.hpp"
 
-TEST(AuthorizationManagerFactoryTest, createAuthorizationManager)
+namespace GameServer
 {
-    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
+namespace Authorization
+{
 
-    AuthorizationManagerAutPtr manager = AuthorizationManagerFactory::createAuthorizationManager(accessor_abstract_factory);
+/**
+ * @brief A factory of authorization persistence facade.
+ */
+class AuthorizationPersistenceFacadeFactory
+{
+public:
+    /**
+     * @brief A factory method.
+     *
+     * @param a_accessor_abstract_factory The abstract factory of accessors.
+     *
+     * @return A newly created authorization persistence facade.
+     */
+    static AuthorizationPersistenceFacadeAutPtr create(
+        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    );
+};
 
-    ASSERT_TRUE(manager.get() != NULL);
-}
+} // namespace Authorization
+} // namespace GameServer
+
+#endif // GAMESERVER_AUTHORIZATION_AUTHORIZATIONPERSISTENCEFACADEFACTORY_HPP

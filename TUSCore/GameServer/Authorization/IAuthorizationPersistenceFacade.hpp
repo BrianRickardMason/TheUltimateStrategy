@@ -25,13 +25,14 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGER_HPP
-#define GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGER_HPP
+#ifndef GAMESERVER_AUTHORIZATION_IAUTHORIZATIONPERSISTENCEFACADE_HPP
+#define GAMESERVER_AUTHORIZATION_IAUTHORIZATIONPERSISTENCEFACADE_HPP
 
 #include "../Common/IDHolder.hpp"
-#include "../Persistence/IPersistence.hpp" // TODO: Check if forward declaration is not enough.
-#include "IAuthorizationManager.hpp"
-#include "IAuthorizationManagerAccessor.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -39,27 +40,23 @@ namespace Authorization
 {
 
 /**
- * @brief An authorization manager.
+ * @brief The interface of an authorization persistence facade.
  */
-class AuthorizationManager
-    : public IAuthorizationManager
+class IAuthorizationPersistenceFacade
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the authorization manager.
-     *
-     * @param a_accessor An accessor to be injected.
+     * @brief Destructs the authorization persistence facade.
      */
-    AuthorizationManager(
-        IAuthorizationManagerAccessorAutPtr a_accessor
-    );
+    virtual ~IAuthorizationPersistenceFacade(){};
 
     /**
      * @brief Authorizes the user to the land.
      *
      * @param a_transaction The transaction.
      * @param a_login       The login of the user.
-     * @param a_name        The name of the land.
+     * @param a_land_name   The name of the land.
      *
      * @return True if authorized, false otherwise.
      */
@@ -67,7 +64,7 @@ public:
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_land_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Authorizes a user to a holder.
@@ -82,7 +79,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_login,
         Common::IDHolder                const & a_id_holder
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Authorizes the user to the settlement.
@@ -97,21 +94,15 @@ public:
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login,
         std::string                     const a_settlement_name
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    IAuthorizationManagerAccessorScpPtr m_accessor;
+    ) const = 0;
 };
 
 /**
- * @brief An auto pointer of authorization manager.
+ * @brief A shared pointer of the interface of the authorization persistence facade.
  */
-typedef std::auto_ptr<AuthorizationManager> AuthorizationManagerAutPtr;
+typedef boost::shared_ptr<IAuthorizationPersistenceFacade> IAuthorizationPersistenceFacadeShrPtr;
 
 } // namespace Authorization
 } // namespace GameServer
 
-#endif // GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGER_HPP
+#endif // GAMESERVER_AUTHORIZATION_IAUTHORIZATIONPERSISTENCEFACADE_HPP

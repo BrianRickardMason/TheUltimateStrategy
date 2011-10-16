@@ -36,9 +36,9 @@ namespace Authorization
 {
 
 AuthorizeUserToSettlementOperator::AuthorizeUserToSettlementOperator(
-    IAuthorizationManagerShrPtr a_authorization_manager
+    IAuthorizationPersistenceFacadeShrPtr a_authorization_persistence_facade
 )
-    : m_authorization_manager(a_authorization_manager)
+    : m_authorization_persistence_facade(a_authorization_persistence_facade)
 {
 }
 
@@ -50,7 +50,8 @@ AuthorizeUserToSettlementOperatorExitCode AuthorizeUserToSettlementOperator::aut
 {
     try
     {
-        bool const result = m_authorization_manager->authorizeUserToSettlement(a_transaction, a_login, a_settlement_name);
+        bool const result =
+            m_authorization_persistence_facade->authorizeUserToSettlement(a_transaction, a_login, a_settlement_name);
 
         return AuthorizeUserToSettlementOperatorExitCode(AUTHORIZE_USER_TO_SETTLEMENT_OPERATOR_EXIT_CODE_AUTHORIZATION_HAS_BEEN_PERFORMED, result);
     }

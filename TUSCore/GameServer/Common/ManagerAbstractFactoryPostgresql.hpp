@@ -56,11 +56,11 @@ public:
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const;
 
     /**
-     * @brief Creates the authorization manager.
+     * @brief Creates the authorization persistence facade.
      *
-     * @return The newly created authorization manager.
+     * @return The newly created authorization persistence facade.
      */
-    virtual Authorization::IAuthorizationManagerShrPtr createAuthorizationManager() const;
+    virtual Authorization::IAuthorizationPersistenceFacadeShrPtr createAuthorizationPersistenceFacade() const;
 
     /**
      * @brief Creates the building manager.

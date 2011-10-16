@@ -38,7 +38,9 @@ AuthorizeUserToSettlementOperatorAutPtr AuthorizeUserToSettlementOperatorFactory
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return AuthorizeUserToSettlementOperatorAutPtr(new AuthorizeUserToSettlementOperator(a_manager_abstract_factory->createAuthorizationManager()));
+    return AuthorizeUserToSettlementOperatorAutPtr(
+               new AuthorizeUserToSettlementOperator(a_manager_abstract_factory->createAuthorizationPersistenceFacade())
+           );
 }
 
 } // namespace Authorization
