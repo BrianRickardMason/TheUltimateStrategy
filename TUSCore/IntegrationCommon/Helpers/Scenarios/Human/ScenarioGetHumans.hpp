@@ -28,12 +28,12 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_HUMAN_SCENARIOGETHUMANS_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_HUMAN_SCENARIOGETHUMANS_HPP
 
+#include "../../Commands/Human/HumanCommands.hpp"
+#include <IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioAction.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioVerification.hpp>
 #include <Network/XmlRPCCommon/Xml/IXmlNode.hpp>
 #include <Network/XmlRPCServer/Request/Executors/Constants.hpp>
-#include "../../Commands/Human/HumanCommands.hpp"
-#include "../IScenario.hpp"
-#include "../IScenarioAction.hpp"
-#include "../IScenarioVerification.hpp"
 
 namespace IntegrationCommon
 {

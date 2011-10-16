@@ -100,7 +100,8 @@ def build(bld):
     integrationcommon = bld.new_task_gen(
                             features='cxx cxxstlib',
                             target='integrationcommon',
-                            source=bld.path.ant_glob('IntegrationCommon/**/*.cpp')
+                            source=bld.path.ant_glob('IntegrationCommon/**/*.cpp'),
+                            includes='.'
                         )
 
     integrationfunctional = bld.new_task_gen(

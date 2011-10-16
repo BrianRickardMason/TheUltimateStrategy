@@ -28,12 +28,12 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_EPOCH_SCENARIOTICKEPOCH_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_EPOCH_SCENARIOTICKEPOCH_HPP
 
+#include "../../Commands/Epoch/EpochCommands.hpp"
+#include <IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioAction.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioVerification.hpp>
 #include <Network/XmlRPCCommon/Xml/IXmlNode.hpp>
 #include <Network/XmlRPCServer/Request/Executors/Constants.hpp>
-#include "../../Commands/Epoch/EpochCommands.hpp"
-#include "../IScenario.hpp"
-#include "../IScenarioAction.hpp"
-#include "../IScenarioVerification.hpp"
 
 namespace IntegrationCommon
 {

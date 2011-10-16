@@ -28,12 +28,12 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_BUILDING_SCENARIOBUILDBUILDING_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_BUILDING_SCENARIOBUILDBUILDING_HPP
 
+#include <IntegrationCommon/Helpers/Commands/Building/BuildingCommands.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioAction.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioVerification.hpp>
 #include <Network/XmlRPCCommon/Xml/IXmlNode.hpp>
 #include <Network/XmlRPCServer/Request/Executors/Constants.hpp>
-#include "../../Commands/Building/BuildingCommands.hpp"
-#include "../IScenario.hpp"
-#include "../IScenarioAction.hpp"
-#include "../IScenarioVerification.hpp"
 
 namespace IntegrationCommon
 {

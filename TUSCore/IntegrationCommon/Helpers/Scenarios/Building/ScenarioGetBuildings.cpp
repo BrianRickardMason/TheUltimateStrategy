@@ -26,8 +26,8 @@
 // SUCH DAMAGE.
 
 #include "../../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
-#include "../../Commands/Building/BuildingCommands.hpp"
 #include "ScenarioGetBuildings.hpp"
+#include <IntegrationCommon/Helpers/Commands/Building/BuildingCommands.hpp>
 
 using namespace IntegrationCommon::Helpers::Commands::Building;
 using namespace Network::XmlRPCCommon::Reply;

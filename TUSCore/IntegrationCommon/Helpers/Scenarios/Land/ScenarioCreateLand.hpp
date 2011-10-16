@@ -28,9 +28,9 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOCREATELAND_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_LAND_SCENARIOCREATELAND_HPP
 
-#include "../IScenario.hpp"
-#include "../IScenarioAction.hpp"
-#include "../IScenarioVerification.hpp"
+#include <IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioAction.hpp>
+#include <IntegrationCommon/Helpers/Scenarios/IScenarioVerification.hpp>
 
 namespace IntegrationCommon
 {
