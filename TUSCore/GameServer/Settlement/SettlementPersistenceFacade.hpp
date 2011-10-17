@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_SETTLEMENTMANAGER_HPP
-#define GAMESERVER_SETTLEMENT_SETTLEMENTMANAGER_HPP
+#ifndef GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADE_HPP
+#define GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADE_HPP
 
-#include "ISettlementManager.hpp"
 #include "ISettlementManagerAccessor.hpp"
+#include "ISettlementPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,18 +37,18 @@ namespace Settlement
 {
 
 /**
- * @brief SettlementManager.
+ * @brief SettlementPersistenceFacade.
  */
-class SettlementManager
-    : public ISettlementManager
+class SettlementPersistenceFacade
+    : public ISettlementPersistenceFacade
 {
 public:
     /**
-     * @brief Constructs the settlement manager.
+     * @brief Constructs the settlement persistence facade.
      *
      * @param a_accessor An accessor to be injected.
      */
-    SettlementManager(
+    SettlementPersistenceFacade(
         ISettlementManagerAccessorAutPtr a_accessor
     );
 
@@ -136,11 +136,11 @@ private:
 };
 
 /**
- * @brief An auto pointer of settlement manager.
+ * @brief An auto pointer of settlement persistence facade.
  */
-typedef std::auto_ptr<SettlementManager> SettlementManagerAutPtr;
+typedef std::auto_ptr<SettlementPersistenceFacade> SettlementPersistenceFacadeAutPtr;
 
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_SETTLEMENTMANAGER_HPP
+#endif // GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADE_HPP

@@ -37,11 +37,11 @@ namespace Settlement
 {
 
 GetSettlementsOperator::GetSettlementsOperator(
-    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
-    ISettlementManagerShrPtr     a_settlement_manager
+    ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
+    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
     : m_land_persistence_facade(a_land_persistence_facade),
-      m_settlement_manager(a_settlement_manager)
+      m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
 
@@ -60,7 +60,7 @@ GetSettlementsOperatorExitCode GetSettlementsOperator::getSettlements(
             return GetSettlementsOperatorExitCode(GET_SETTLEMENTS_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST);
         }
 
-        ISettlementMap const settlements = m_settlement_manager->getSettlements(a_transaction, land);
+        ISettlementMap const settlements = m_settlement_persistence_facade->getSettlements(a_transaction, land);
 
         return (!settlements.empty()) ? GetSettlementsOperatorExitCode(
                                             GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_BEEN_GOT,

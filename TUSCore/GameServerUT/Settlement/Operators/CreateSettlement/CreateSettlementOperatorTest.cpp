@@ -29,7 +29,7 @@
 #include "../../../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../../../Land/LandPersistenceFacadeMock.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
-#include "../../SettlementManagerMock.hpp"
+#include "../../SettlementPersistenceFacadeMock.hpp"
 #include "BehaviourGiveGrantMock.hpp"
 #include <boost/make_shared.hpp>
 
@@ -55,7 +55,7 @@ protected:
      */
     CreateSettlementOperatorTest()
         : m_land_persistence_facade(new LandPersistenceFacadeMock),
-          m_settlement_manager(new SettlementManagerMock),
+          m_settlement_persistence_facade(new SettlementPersistenceFacadeMock),
           m_behaviour_give_grant(new BehaviourGiveGrantMock),
           m_login("Login"),
           m_world_name("World"),
@@ -70,9 +70,9 @@ protected:
     LandPersistenceFacadeMock * m_land_persistence_facade;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    SettlementManagerMock * m_settlement_manager;
+    SettlementPersistenceFacadeMock * m_settlement_persistence_facade;
 
     /**
      * @brief The behaviour "GiveGrant".
@@ -103,7 +103,7 @@ protected:
 TEST_F(CreateSettlementOperatorTest, CreateSettlementOperator)
 {
     ASSERT_NO_THROW(CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant))));
 }
 
@@ -115,7 +115,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_LandDoesNotExist)
     .WillOnce(Return(ILandShrPtr()));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_LAND_DOES_NOT_EXIST,
@@ -135,11 +135,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
     ISettlementRecordShrPtr settlement_record =
         ISettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_EXIST,
@@ -156,14 +156,14 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementHasNotBeenCreate
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(false));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_CREATED,
@@ -180,14 +180,14 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasBeenGivenSettlemen
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED,
@@ -204,15 +204,15 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGetSet
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_CREATED,
@@ -232,18 +232,18 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGiveTh
     ISettlementRecordShrPtr settlement_record =
         ISettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()))
     .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     EXPECT_CALL(*m_behaviour_give_grant, giveGrant(transaction, m_settlement_name))
     .WillOnce(Return(false));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_CREATED,
@@ -263,11 +263,11 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
     ISettlementRecordShrPtr settlement_record =
         ISettlementRecordShrPtr(new SettlementRecord(m_land_name, m_settlement_name));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name))
     .WillOnce(Return(ISettlementShrPtr()))
     .WillOnce(Return(ISettlementShrPtr(new Settlement(settlement_record))));
 
-    EXPECT_CALL(*m_settlement_manager, createSettlement(transaction, _, m_settlement_name))
+    EXPECT_CALL(*m_settlement_persistence_facade, createSettlement(transaction, _, m_settlement_name))
     .WillOnce(Return(true));
 
     EXPECT_CALL(*m_behaviour_give_grant, giveGrant(transaction, m_settlement_name))
@@ -276,7 +276,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
     EXPECT_CALL(*m_land_persistence_facade, markGranted(transaction, m_land_name));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_CREATED,
@@ -293,7 +293,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_UnexpectedError)
     .WillOnce(Throw(e));
 
     CreateSettlementOperator create_settlement_operator((ILandPersistenceFacadeShrPtr(m_land_persistence_facade)),
-                                                        (ISettlementManagerShrPtr(m_settlement_manager)),
+                                                        (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)),
                                                         (IBehaviourGiveGrantShrPtr(m_behaviour_give_grant)));
 
     ASSERT_EQ(CREATE_SETTLEMENT_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,

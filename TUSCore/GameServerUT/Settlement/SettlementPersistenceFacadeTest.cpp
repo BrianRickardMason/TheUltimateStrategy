@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Land/Land.hpp"
-#include "../../GameServer/Settlement/SettlementManager.hpp"
+#include "../../GameServer/Settlement/SettlementPersistenceFacade.hpp"
 #include "../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "Operators/CreateSettlement/BehaviourGiveGrantMock.hpp"
@@ -45,14 +45,14 @@ using testing::_;
 /**
  * @brief A test class.
  */
-class SettlementManagerTest
+class SettlementPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Constructs a test class.
      */
-    SettlementManagerTest()
+    SettlementPersistenceFacadeTest()
         : m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_settlement_name_1("Settlement1"),
@@ -106,14 +106,14 @@ protected:
                 m_land_2;
 };
 
-TEST_F(SettlementManagerTest, SettlementManager)
+TEST_F(SettlementPersistenceFacadeTest, CtorDoesNotThrow)
 {
     ISettlementManagerAccessorAutPtr accessor(new SettlementManagerAccessorMock);
 
-    SettlementManager manager(accessor);
+    ASSERT_NO_THROW(SettlementPersistenceFacade persistence_facade(accessor));
 }
 
-TEST_F(SettlementManagerTest, createSettlement_Success)
+TEST_F(SettlementPersistenceFacadeTest, createSettlement_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -123,12 +123,12 @@ TEST_F(SettlementManagerTest, createSettlement_Success)
 
     ISettlementManagerAccessorAutPtr accessor(settlement_manager_accessor_mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.createSettlement(transaction, m_land_1, m_settlement_name_1));
+    ASSERT_TRUE(persistence_facade.createSettlement(transaction, m_land_1, m_settlement_name_1));
 }
 
-TEST_F(SettlementManagerTest, createSettlement_Failure)
+TEST_F(SettlementPersistenceFacadeTest, createSettlement_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -141,12 +141,12 @@ TEST_F(SettlementManagerTest, createSettlement_Failure)
 
     ISettlementManagerAccessorAutPtr accessor(settlement_manager_accessor_mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.createSettlement(transaction, m_land_1, m_settlement_name_1));
+    ASSERT_FALSE(persistence_facade.createSettlement(transaction, m_land_1, m_settlement_name_1));
 }
 
-TEST_F(SettlementManagerTest, deleteSettlement_Success)
+TEST_F(SettlementPersistenceFacadeTest, deleteSettlement_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -156,12 +156,12 @@ TEST_F(SettlementManagerTest, deleteSettlement_Success)
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.deleteSettlement(transaction, m_settlement_name_1));
+    ASSERT_TRUE(persistence_facade.deleteSettlement(transaction, m_settlement_name_1));
 }
 
-TEST_F(SettlementManagerTest, deleteSettlement_Failure)
+TEST_F(SettlementPersistenceFacadeTest, deleteSettlement_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -174,12 +174,12 @@ TEST_F(SettlementManagerTest, deleteSettlement_Failure)
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deleteSettlement(transaction, m_settlement_name_1));
+    ASSERT_FALSE(persistence_facade.deleteSettlement(transaction, m_settlement_name_1));
 }
 
-TEST_F(SettlementManagerTest, getSettlement_SettlementDoesNotExist)
+TEST_F(SettlementPersistenceFacadeTest, getSettlement_SettlementDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -190,14 +190,14 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesNotExist)
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ISettlementShrPtr settlement = manager.getSettlement(transaction, m_settlement_name_1);
+    ISettlementShrPtr settlement = persistence_facade.getSettlement(transaction, m_settlement_name_1);
 
     ASSERT_TRUE(settlement == NULL);
 }
 
-TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist)
+TEST_F(SettlementPersistenceFacadeTest, getSettlement_SettlementDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -208,14 +208,14 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist)
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ISettlementShrPtr settlement = manager.getSettlement(transaction, m_settlement_name_1);
+    ISettlementShrPtr settlement = persistence_facade.getSettlement(transaction, m_settlement_name_1);
 
     ASSERT_TRUE(settlement != NULL);
 }
 
-TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
+TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -226,14 +226,14 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ISettlementMap settlements = manager.getSettlements(transaction, m_land_1);
+    ISettlementMap settlements = persistence_facade.getSettlements(transaction, m_land_1);
 
     ASSERT_TRUE(settlements.empty());
 }
 
-TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
+TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_OneSettlement)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -247,9 +247,9 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
 
     ISettlementManagerAccessorAutPtr accessor(mock);
 
-    SettlementManager manager(accessor);
+    SettlementPersistenceFacade persistence_facade(accessor);
 
-    ISettlementMap settlements = manager.getSettlements(transaction, m_land_1);
+    ISettlementMap settlements = persistence_facade.getSettlements(transaction, m_land_1);
 
     ASSERT_FALSE(settlements.empty());
 
@@ -258,7 +258,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_OneSettlement)
     compareSettlement(settlements[m_settlement_name_1], m_land_name_1, m_settlement_name_1);
 }
 
-TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
+TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_ManySettlements)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -274,8 +274,8 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_ManySettlements)
     ISettlementManagerAccessorAutPtr accessor(mock);
 
 
-    SettlementManager manager(accessor);
-    ISettlementMap settlements = manager.getSettlements(transaction, m_land_2);
+    SettlementPersistenceFacade persistence_facade(accessor);
+    ISettlementMap settlements = persistence_facade.getSettlements(transaction, m_land_2);
 
     ASSERT_FALSE(settlements.empty());
 

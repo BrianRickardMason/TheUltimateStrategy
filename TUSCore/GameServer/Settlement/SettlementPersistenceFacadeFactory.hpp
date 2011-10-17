@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_SETTLEMENTMANAGERFACTORY_HPP
-#define GAMESERVER_SETTLEMENT_SETTLEMENTMANAGERFACTORY_HPP
+#ifndef GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADEFACTORY_HPP
 
 #include "../Common/IAccessorAbstractFactory.hpp"
-#include "SettlementManager.hpp"
+#include "SettlementPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,9 +37,9 @@ namespace Settlement
 {
 
 /**
- * @brief A factory of settlement manager.
+ * @brief A factory of settlement persistence facade.
  */
-class SettlementManagerFactory
+class SettlementPersistenceFacadeFactory
 {
 public:
     /**
@@ -47,9 +47,9 @@ public:
      *
      * @param a_accessor_abstract_factory The abstract factory of accessors.
      *
-     * @return A newly created settlement manager.
+     * @return A newly created settlement persistence facade.
      */
-    static SettlementManagerAutPtr createSettlementManager(
+    static SettlementPersistenceFacadeAutPtr create(
         Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
     );
 };
@@ -57,4 +57,4 @@ public:
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_SETTLEMENTMANAGERFACTORY_HPP
+#endif // GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADEFACTORY_HPP

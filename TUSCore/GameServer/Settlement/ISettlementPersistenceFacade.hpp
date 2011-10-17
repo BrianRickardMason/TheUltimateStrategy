@@ -25,11 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_SETTLEMENTMANAGERMOCK_HPP
-#define GAMESERVER_SETTLEMENT_SETTLEMENTMANAGERMOCK_HPP
+#ifndef GAMESERVER_SETTLEMENT_ISETTLEMENTPERSISTENCEFACADE_HPP
+#define GAMESERVER_SETTLEMENT_ISETTLEMENTPERSISTENCEFACADE_HPP
 
-#include "../../GameServer/Settlement/ISettlementManager.hpp"
-#include <gmock/gmock.h>
+#include "../Land/ILand.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "Settlement.hpp"
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
@@ -37,12 +39,17 @@ namespace Settlement
 {
 
 /**
- * @brief The mock of SettlementManager.
+ * @brief The interface of SettlementPersistenceFacade.
  */
-class SettlementManagerMock
-    : public ISettlementManager
+class ISettlementPersistenceFacade
+    : boost::noncopyable
 {
 public:
+    /**
+     * @brief Destructs the persistence facade.
+     */
+    virtual ~ISettlementPersistenceFacade(){};
+
     /**
      * @brief Creates a settlement.
      *
@@ -52,14 +59,11 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD3(
-        createSettlement,
-        bool(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Land::ILandShrPtr               const a_land,
-            std::string                     const a_settlement_name
-        )
-    );
+    virtual bool createSettlement(
+        Persistence::ITransactionShrPtr       a_transaction,
+        Land::ILandShrPtr               const a_land,
+        std::string                     const a_settlement_name
+    ) const = 0;
 
     /**
      * @brief Deletes a settlement.
@@ -69,13 +73,10 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
-        deleteSettlement,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_settlement_name
-        )
-    );
+    virtual bool deleteSettlement(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const = 0;
 
     /**
      * @brief Gets a settlement.
@@ -85,13 +86,10 @@ public:
      *
      * @return The settlement, null if not found.
      */
-    MOCK_CONST_METHOD2(
-        getSettlement,
-        ISettlementShrPtr(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_settlement_name
-        )
-    );
+    virtual ISettlementShrPtr getSettlement(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const = 0;
 
     /**
      * @brief Gets settlements.
@@ -101,16 +99,18 @@ public:
      *
      * @return A map of settlements, an empty map if not found.
      */
-    MOCK_CONST_METHOD2(
-        getSettlements,
-        ISettlementMap(
-            Persistence::ITransactionShrPtr       a_transaction,
-            Land::ILandShrPtr               const a_land
-        )
-    );
+    virtual ISettlementMap getSettlements(
+        Persistence::ITransactionShrPtr       a_transaction,
+        Land::ILandShrPtr               const a_land
+    ) const = 0;
 };
+
+/**
+ * @brief The shared pointer of the interface of SettlementPersistenceFacade.
+ */
+typedef boost::shared_ptr<ISettlementPersistenceFacade> ISettlementPersistenceFacadeShrPtr;
 
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_SETTLEMENTMANAGERMOCK_HPP
+#endif // GAMESERVER_SETTLEMENT_ISETTLEMENTPERSISTENCEFACADE_HPP

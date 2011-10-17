@@ -37,12 +37,12 @@ namespace Settlement
 {
 
 CreateSettlementOperator::CreateSettlementOperator(
-    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
-    ISettlementManagerShrPtr     a_settlement_manager,
-    IBehaviourGiveGrantShrPtr    a_behaviour_give_grant
+    ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
+    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade,
+    IBehaviourGiveGrantShrPtr          a_behaviour_give_grant
 )
     : m_land_persistence_facade(a_land_persistence_facade),
-      m_settlement_manager(a_settlement_manager),
+      m_settlement_persistence_facade(a_settlement_persistence_facade),
       m_behaviour_give_grant(a_behaviour_give_grant)
 {
 }
@@ -65,7 +65,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
 
         // Verify if settlement of that name exists.
         ISettlementShrPtr const settlement =
-            m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
+            m_settlement_persistence_facade->getSettlement(a_transaction, a_settlement_name);
 
         if (settlement)
         {
@@ -73,7 +73,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         }
 
         // Create the settlement.
-        bool const result = m_settlement_manager->createSettlement(a_transaction, land, a_settlement_name);
+        bool const result = m_settlement_persistence_facade->createSettlement(a_transaction, land, a_settlement_name);
 
         if (!result)
         {
@@ -84,7 +84,7 @@ CreateSettlementOperatorExitCode CreateSettlementOperator::createSettlement(
         {
             // Get the settlement.
             ISettlementShrPtr const settlement =
-                m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
+                m_settlement_persistence_facade->getSettlement(a_transaction, a_settlement_name);
 
             if (!settlement)
             {

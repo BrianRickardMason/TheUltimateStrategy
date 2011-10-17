@@ -43,7 +43,7 @@ CreateSettlementOperatorAutPtr CreateSettlementOperatorFactory::createCreateSett
 
     return CreateSettlementOperatorAutPtr(
                new CreateSettlementOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
-                                            a_manager_abstract_factory->createSettlementManager(),
+                                            a_manager_abstract_factory->createSettlementPersistenceFacade(),
                                             behaviour_give_grant)
            );
 }

@@ -44,19 +44,19 @@ namespace Turn
 {
 
 TurnOperator::TurnOperator(
-    ICostManagerShrPtr           a_cost_manager,
-    IHumanManagerShrPtr          a_human_manager,
-    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
-    IPropertyManagerShrPtr       a_property_manager,
-    IResourceManagerShrPtr       a_resource_manager,
-    ISettlementManagerShrPtr     a_settlement_manager
+    ICostManagerShrPtr                 a_cost_manager,
+    IHumanManagerShrPtr                a_human_manager,
+    ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
+    IPropertyManagerShrPtr             a_property_manager,
+    IResourceManagerShrPtr             a_resource_manager,
+    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
     : m_cost_manager(a_cost_manager),
       m_human_manager(a_human_manager),
       m_land_persistence_facade(a_land_persistence_facade),
       m_property_manager(a_property_manager),
       m_resource_manager(a_resource_manager),
-      m_settlement_manager(a_settlement_manager)
+      m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
 
@@ -96,7 +96,7 @@ bool TurnOperator::executeTurn(
         return false;
     }
 
-    ISettlementMap settlements = m_settlement_manager->getSettlements(a_transaction, land);
+    ISettlementMap settlements = m_settlement_persistence_facade->getSettlements(a_transaction, land);
 
     for (ISettlementMap::iterator it = settlements.begin(); it != settlements.end(); ++it)
     {

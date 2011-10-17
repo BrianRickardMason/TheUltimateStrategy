@@ -43,7 +43,7 @@ TurnOperatorAutPtr TurnOperatorFactory::createTurnOperator(
                                                a_manager_abstract_factory->createLandPersistenceFacade(),
                                                a_manager_abstract_factory->createPropertyManager(),
                                                a_manager_abstract_factory->createResourceManager(),
-                                               a_manager_abstract_factory->createSettlementManager()));
+                                               a_manager_abstract_factory->createSettlementPersistenceFacade()));
 }
 
 } // namespace Land

@@ -26,17 +26,18 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
-#include "../../GameServer/Settlement/SettlementManagerFactory.hpp"
+#include "../../GameServer/Settlement/SettlementPersistenceFacadeFactory.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
 using namespace GameServer::Settlement;
 
-TEST(SettlementManagerFactoryTest, createSettlementManager)
+TEST(SettlementPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    SettlementManagerAutPtr manager = SettlementManagerFactory::createSettlementManager(accessor_abstract_factory);
+    SettlementPersistenceFacadeAutPtr persistence_facade =
+        SettlementPersistenceFacadeFactory::create(accessor_abstract_factory);
 
-    ASSERT_TRUE(manager.get() != NULL);
+    ASSERT_TRUE(persistence_facade.get() != NULL);
 }

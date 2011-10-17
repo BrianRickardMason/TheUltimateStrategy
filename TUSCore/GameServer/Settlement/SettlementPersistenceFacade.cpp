@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "SettlementManager.hpp"
+#include "SettlementPersistenceFacade.hpp"
 
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
@@ -37,14 +37,14 @@ namespace GameServer
 namespace Settlement
 {
 
-SettlementManager::SettlementManager(
+SettlementPersistenceFacade::SettlementPersistenceFacade(
     ISettlementManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-bool SettlementManager::createSettlement(
+bool SettlementPersistenceFacade::createSettlement(
     ITransactionShrPtr       a_transaction,
     ILandShrPtr        const a_land,
     string             const a_settlement_name
@@ -67,7 +67,7 @@ bool SettlementManager::createSettlement(
     }
 }
 
-bool SettlementManager::deleteSettlement(
+bool SettlementPersistenceFacade::deleteSettlement(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -84,7 +84,7 @@ bool SettlementManager::deleteSettlement(
     }
 }
 
-ISettlementShrPtr SettlementManager::getSettlement(
+ISettlementShrPtr SettlementPersistenceFacade::getSettlement(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -92,7 +92,7 @@ ISettlementShrPtr SettlementManager::getSettlement(
     return prepareResultGetSettlement(m_accessor->getRecord(a_transaction, a_settlement_name));
 }
 
-ISettlementMap SettlementManager::getSettlements(
+ISettlementMap SettlementPersistenceFacade::getSettlements(
     ITransactionShrPtr       a_transaction,
     ILandShrPtr        const a_land
 ) const
@@ -107,14 +107,14 @@ ISettlementMap SettlementManager::getSettlements(
     return prepareResultGetSettlements(m_accessor->getRecords(a_transaction, a_land->getLandName()));
 }
 
-ISettlementShrPtr SettlementManager::prepareResultGetSettlement(
+ISettlementShrPtr SettlementPersistenceFacade::prepareResultGetSettlement(
     ISettlementRecordShrPtr a_record
 ) const
 {
     return a_record ? ISettlementShrPtr(new Settlement(a_record)) : ISettlementShrPtr();
 }
 
-ISettlementMap SettlementManager::prepareResultGetSettlements(
+ISettlementMap SettlementPersistenceFacade::prepareResultGetSettlements(
     ISettlementRecordMap a_records
 ) const
 {

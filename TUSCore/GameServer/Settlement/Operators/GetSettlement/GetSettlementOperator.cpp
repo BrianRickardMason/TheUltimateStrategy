@@ -36,9 +36,9 @@ namespace Settlement
 {
 
 GetSettlementOperator::GetSettlementOperator(
-    ISettlementManagerShrPtr a_settlement_manager
+    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
-    : m_settlement_manager(a_settlement_manager)
+    : m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
 
@@ -49,14 +49,17 @@ GetSettlementOperatorExitCode GetSettlementOperator::getSettlement(
 {
     try
     {
-        ISettlementShrPtr const settlement = m_settlement_manager->getSettlement(a_transaction, a_settlement_name);
+        ISettlementShrPtr const settlement =
+            m_settlement_persistence_facade->getSettlement(a_transaction, a_settlement_name);
 
         return (settlement) ? GetSettlementOperatorExitCode(
                                   GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT,
-                                  settlement)
+                                  settlement
+                              )
                             : GetSettlementOperatorExitCode(
                                   GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_GOT,
-                                  settlement);
+                                  settlement
+                              );
     }
     catch (...)
     {

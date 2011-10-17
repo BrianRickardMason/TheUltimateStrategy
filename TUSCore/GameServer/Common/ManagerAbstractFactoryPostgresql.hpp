@@ -112,11 +112,11 @@ public:
     virtual Resource::IResourceManagerShrPtr createResourceManager() const;
 
     /**
-     * @brief Creates the settlement manager.
+     * @brief Creates the settlement persistence facade.
      *
-     * @return The newly created settlement manager.
+     * @return The newly created settlement persistence facade.
      */
-    virtual Settlement::ISettlementManagerShrPtr createSettlementManager() const;
+    virtual Settlement::ISettlementPersistenceFacadeShrPtr createSettlementPersistenceFacade() const;
 
     /**
      * @brief Creates the user manager.

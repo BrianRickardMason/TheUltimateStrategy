@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Common/AccessorAbstractFactoryPostgresql.hpp"
-#include "SettlementManagerFactory.hpp"
+#include "SettlementPersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
 
@@ -35,11 +35,13 @@ namespace GameServer
 namespace Settlement
 {
 
-SettlementManagerAutPtr SettlementManagerFactory::createSettlementManager(
+SettlementPersistenceFacadeAutPtr SettlementPersistenceFacadeFactory::create(
     IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
 )
 {
-    return SettlementManagerAutPtr(new SettlementManager(a_accessor_abstract_factory->createSettlementAccessor()));
+    return SettlementPersistenceFacadeAutPtr(
+               new SettlementPersistenceFacade(a_accessor_abstract_factory->createSettlementAccessor())
+           );
 }
 
 } // namespace Settlement

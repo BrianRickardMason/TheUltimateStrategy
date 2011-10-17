@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP
 #define GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATOR_HPP
 
-#include "../../../Settlement/ISettlementManager.hpp"
+#include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "../../IEpochManager.hpp"
 #include "IGetEpochBySettlementNameOperator.hpp"
 
@@ -47,12 +47,12 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_epoch_manager      The manager of epochs.
-     * @param a_settlement_manager The manager of settlements.
+     * @param a_epoch_manager                 The manager of epochs.
+     * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     GetEpochBySettlementNameOperator(
-        IEpochManagerShrPtr                  a_epoch_manager,
-        Settlement::ISettlementManagerShrPtr a_settlement_manager
+        IEpochManagerShrPtr                            a_epoch_manager,
+        Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
     /**
@@ -75,9 +75,9 @@ private:
     IEpochManagerShrPtr m_epoch_manager;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    Settlement::ISettlementManagerShrPtr m_settlement_manager;
+    Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 };
 
 /**

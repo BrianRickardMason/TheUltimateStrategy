@@ -38,8 +38,10 @@ TransportHumanOperatorAutPtr TransportHumanOperatorFactory::createTransportHuman
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return TransportHumanOperatorAutPtr(new TransportHumanOperator(a_manager_abstract_factory->createHumanManager(),
-                                                                   a_manager_abstract_factory->createSettlementManager()));
+    return TransportHumanOperatorAutPtr(
+               new TransportHumanOperator(a_manager_abstract_factory->createHumanManager(),
+                                          a_manager_abstract_factory->createSettlementPersistenceFacade())
+           );
 }
 
 } // namespace Transport

@@ -40,11 +40,11 @@ namespace Transport
 {
 
 TransportResourceOperator::TransportResourceOperator(
-    IResourceManagerShrPtr   a_resource_manager,
-    ISettlementManagerShrPtr a_settlement_manager
+    IResourceManagerShrPtr             a_resource_manager,
+    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
     : m_resource_manager(a_resource_manager),
-      m_settlement_manager(a_settlement_manager)
+      m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
 
@@ -66,7 +66,7 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
 
         // Verify if the source settlement exists.
         ISettlementShrPtr settlement_source =
-            m_settlement_manager->getSettlement(a_transaction, a_settlement_name_source);
+            m_settlement_persistence_facade->getSettlement(a_transaction, a_settlement_name_source);
 
         if (!settlement_source)
         {
@@ -75,7 +75,7 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
 
         // Verify if the destination settlement exists.
         ISettlementShrPtr settlement_destination =
-            m_settlement_manager->getSettlement(a_transaction, a_settlement_name_destination);
+            m_settlement_persistence_facade->getSettlement(a_transaction, a_settlement_name_destination);
 
         if (!settlement_destination)
         {

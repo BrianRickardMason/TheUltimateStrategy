@@ -40,14 +40,14 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class SettlementManagerTest
+class SettlementPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    SettlementManagerTest()
+    SettlementPersistenceFacadeTest()
         : m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
@@ -62,7 +62,7 @@ protected:
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_settlement_manager(m_manager_abstract_factory->createSettlementManager())
+          m_settlement_persistence_facade(m_manager_abstract_factory->createSettlementPersistenceFacade())
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -163,33 +163,33 @@ protected:
     ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    ISettlementManagerShrPtr m_settlement_manager;
+    ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 };
 
 /**
- * Component tests of: SettlementManager::createSettlement.
+ * Component tests of: SettlementPersistenceFacade::createSettlement.
  */
-TEST_F(SettlementManagerTest, createSettlement_FirstSettlement)
+TEST_F(SettlementPersistenceFacadeTest, createSettlement_FirstSettlement)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1));
+        ASSERT_TRUE(m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1));
 
         transaction->commit();
     }
 }
 
-TEST_F(SettlementManagerTest, createSettlement_SecondSettlement)
+TEST_F(SettlementPersistenceFacadeTest, createSettlement_SecondSettlement)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
 
         transaction->commit();
     }
@@ -198,19 +198,19 @@ TEST_F(SettlementManagerTest, createSettlement_SecondSettlement)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_2));
+        ASSERT_TRUE(m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_2));
 
         transaction->commit();
     }
 }
 
-TEST_F(SettlementManagerTest, createSettlement_SecondSettlementWithTheSameName)
+TEST_F(SettlementPersistenceFacadeTest, createSettlement_SecondSettlementWithTheSameName)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
 
         transaction->commit();
     }
@@ -219,17 +219,17 @@ TEST_F(SettlementManagerTest, createSettlement_SecondSettlementWithTheSameName)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1));
+        ASSERT_FALSE(m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1));
     }
 }
 
-TEST_F(SettlementManagerTest, createSettlement_TwoSettlementsOfTheSameNameInDifferentLands)
+TEST_F(SettlementPersistenceFacadeTest, createSettlement_TwoSettlementsOfTheSameNameInDifferentLands)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
 
         transaction->commit();
     }
@@ -238,30 +238,30 @@ TEST_F(SettlementManagerTest, createSettlement_TwoSettlementsOfTheSameNameInDiff
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_settlement_manager->createSettlement(transaction, m_land_2, m_settlement_name_1));
+        ASSERT_FALSE(m_settlement_persistence_facade->createSettlement(transaction, m_land_2, m_settlement_name_1));
     }
 }
 
-TEST_F(SettlementManagerTest, createSettlement_MissingLandReference)
+TEST_F(SettlementPersistenceFacadeTest, createSettlement_MissingLandReference)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_settlement_manager->createSettlement(transaction, m_land_3, m_settlement_name_1));
+        ASSERT_FALSE(m_settlement_persistence_facade->createSettlement(transaction, m_land_3, m_settlement_name_1));
     }
 }
 
 /**
- * Component tests of: SettlementManager::deleteSettlement.
+ * Component tests of: SettlementPersistenceFacade::deleteSettlement.
  */
-TEST_F(SettlementManagerTest, deleteSettlement_SettlementDoesExist)
+TEST_F(SettlementPersistenceFacadeTest, deleteSettlement_SettlementDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
 
         transaction->commit();
     }
@@ -270,34 +270,34 @@ TEST_F(SettlementManagerTest, deleteSettlement_SettlementDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_settlement_manager->deleteSettlement(transaction, m_settlement_name_1));
+        ASSERT_TRUE(m_settlement_persistence_facade->deleteSettlement(transaction, m_settlement_name_1));
 
         transaction->commit();
     }
 }
 
-TEST_F(SettlementManagerTest, deleteSettlement_SettlementDoesNotExist)
+TEST_F(SettlementPersistenceFacadeTest, deleteSettlement_SettlementDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_settlement_manager->deleteSettlement(transaction, m_settlement_name_1));
+        ASSERT_TRUE(m_settlement_persistence_facade->deleteSettlement(transaction, m_settlement_name_1));
 
         transaction->commit();
     }
 }
 
 /**
- * Component tests of: SettlementManager::getSettlement.
+ * Component tests of: SettlementPersistenceFacade::getSettlement.
  */
-TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist)
+TEST_F(SettlementPersistenceFacadeTest, getSettlement_SettlementDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
 
         transaction->commit();
     }
@@ -306,20 +306,20 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ISettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_1);
+        ISettlementShrPtr settlement = m_settlement_persistence_facade->getSettlement(transaction, m_settlement_name_1);
 
         ASSERT_TRUE(settlement != NULL);
         compareSettlement(settlement, m_land_name_1, m_settlement_name_1);
     }
 }
 
-TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist_MissingSettlementName)
+TEST_F(SettlementPersistenceFacadeTest, getSettlement_SettlementDoesExist_MissingSettlementName)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
 
         transaction->commit();
     }
@@ -328,47 +328,47 @@ TEST_F(SettlementManagerTest, getSettlement_SettlementDoesExist_MissingSettlemen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ISettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_2);
+        ISettlementShrPtr settlement = m_settlement_persistence_facade->getSettlement(transaction, m_settlement_name_2);
 
         ASSERT_TRUE(settlement == NULL);
     }
 }
 
-TEST_F(SettlementManagerTest, getSettlement_SettlementDoesNotExist)
+TEST_F(SettlementPersistenceFacadeTest, getSettlement_SettlementDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ISettlementShrPtr settlement = m_settlement_manager->getSettlement(transaction, m_settlement_name_1);
+        ISettlementShrPtr settlement = m_settlement_persistence_facade->getSettlement(transaction, m_settlement_name_1);
 
         ASSERT_TRUE(settlement == NULL);
     }
 }
 
 /**
- * Component tests of: SettlementManager::getSettlements.
+ * Component tests of: SettlementPersistenceFacade::getSettlements.
  */
-TEST_F(SettlementManagerTest, getSettlements_SettlementsDoNotExist)
+TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_1);
+        ISettlementMap settlements = m_settlement_persistence_facade->getSettlements(transaction, m_land_1);
 
         ASSERT_TRUE(settlements.empty());
     }
 }
 
-TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist)
+TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_2);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_2);
 
         transaction->commit();
     }
@@ -377,7 +377,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_1);
+        ISettlementMap settlements = m_settlement_persistence_facade->getSettlements(transaction, m_land_1);
 
         ASSERT_FALSE(settlements.empty());
         ASSERT_EQ(2, settlements.size());
@@ -388,14 +388,14 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist)
     }
 }
 
-TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_LandDoesNotHaveAnySettlements)
+TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_LandDoesNotHaveAnySettlements)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_2);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_2);
 
         transaction->commit();
     }
@@ -404,21 +404,21 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_LandDoesNotHaveA
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_2);
+        ISettlementMap settlements = m_settlement_persistence_facade->getSettlements(transaction, m_land_2);
 
         ASSERT_TRUE(settlements.empty());
     }
 }
 
-TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_MissingLandName)
+TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_MissingLandName)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
-        m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_2);
-        m_settlement_manager->createSettlement(transaction, m_land_2, m_settlement_name_3);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_2);
+        m_settlement_persistence_facade->createSettlement(transaction, m_land_2, m_settlement_name_3);
 
         transaction->commit();
     }
@@ -427,7 +427,7 @@ TEST_F(SettlementManagerTest, getSettlements_SettlementsDoExist_MissingLandName)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ISettlementMap settlements = m_settlement_manager->getSettlements(transaction, m_land_3);
+        ISettlementMap settlements = m_settlement_persistence_facade->getSettlements(transaction, m_land_3);
 
         ASSERT_TRUE(settlements.empty());
     }

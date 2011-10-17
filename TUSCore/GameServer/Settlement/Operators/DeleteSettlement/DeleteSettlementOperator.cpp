@@ -36,9 +36,9 @@ namespace Settlement
 {
 
 DeleteSettlementOperator::DeleteSettlementOperator(
-    ISettlementManagerShrPtr a_settlement_manager
+    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
-    : m_settlement_manager(a_settlement_manager)
+    : m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
 
@@ -50,15 +50,19 @@ DeleteSettlementOperatorExitCode DeleteSettlementOperator::deleteSettlement(
     try
     {
         // Verify if the settlement exists.
-        if (!m_settlement_manager->getSettlement(a_transaction, a_settlement_name))
+        if (!m_settlement_persistence_facade->getSettlement(a_transaction, a_settlement_name))
         {
             return DeleteSettlementOperatorExitCode(DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST);
         }
 
-        bool const result = m_settlement_manager->deleteSettlement(a_transaction, a_settlement_name);
+        bool const result = m_settlement_persistence_facade->deleteSettlement(a_transaction, a_settlement_name);
 
-        return (result) ? DeleteSettlementOperatorExitCode(DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_DELETED)
-                        : DeleteSettlementOperatorExitCode(DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_DELETED);
+        return (result) ? DeleteSettlementOperatorExitCode(
+                              DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_DELETED
+                          )
+                        : DeleteSettlementOperatorExitCode(
+                              DELETE_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_NOT_BEEN_DELETED
+                          );
     }
     catch (...)
     {

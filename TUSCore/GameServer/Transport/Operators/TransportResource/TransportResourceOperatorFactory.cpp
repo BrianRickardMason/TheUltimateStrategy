@@ -38,8 +38,10 @@ TransportResourceOperatorAutPtr TransportResourceOperatorFactory::createTranspor
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return TransportResourceOperatorAutPtr(new TransportResourceOperator(a_manager_abstract_factory->createResourceManager(),
-                                                                         a_manager_abstract_factory->createSettlementManager()));
+    return TransportResourceOperatorAutPtr(
+               new TransportResourceOperator(a_manager_abstract_factory->createResourceManager(),
+                                             a_manager_abstract_factory->createSettlementPersistenceFacade())
+           );
 }
 
 } // namespace Transport

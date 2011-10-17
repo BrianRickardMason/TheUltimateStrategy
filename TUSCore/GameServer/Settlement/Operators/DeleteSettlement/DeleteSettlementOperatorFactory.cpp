@@ -38,7 +38,9 @@ DeleteSettlementOperatorAutPtr DeleteSettlementOperatorFactory::createDeleteSett
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return DeleteSettlementOperatorAutPtr(new DeleteSettlementOperator(a_manager_abstract_factory->createSettlementManager()));
+    return DeleteSettlementOperatorAutPtr(
+               new DeleteSettlementOperator(a_manager_abstract_factory->createSettlementPersistenceFacade())
+           );
 }
 
 } // namespace Settlement

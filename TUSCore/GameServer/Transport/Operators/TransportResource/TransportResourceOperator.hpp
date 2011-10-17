@@ -29,7 +29,7 @@
 #define GAMESERVER_TRANSPORT_TRANSPORTRESOURCEOPERATOR_HPP
 
 #include "../../../Resource/IResourceManager.hpp"
-#include "../../../Settlement/ISettlementManager.hpp"
+#include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "ITransportResourceOperator.hpp"
 
 namespace GameServer
@@ -47,12 +47,12 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_resource_manager   The manager of resources.
-     * @param a_settlement_manager The manager of settlements.
+     * @param a_resource_manager              The manager of resources.
+     * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     TransportResourceOperator(
-        Resource::IResourceManagerShrPtr     a_resource_manager,
-        Settlement::ISettlementManagerShrPtr a_settlement_manager
+        Resource::IResourceManagerShrPtr               a_resource_manager,
+        Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
     /**
@@ -81,9 +81,9 @@ private:
     Resource::IResourceManagerShrPtr m_resource_manager;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence of settlements.
      */
-    Settlement::ISettlementManagerShrPtr m_settlement_manager;
+    Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 };
 
 /**

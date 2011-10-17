@@ -38,8 +38,10 @@ GetEpochBySettlementNameOperatorAutPtr GetEpochBySettlementNameOperatorFactory::
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetEpochBySettlementNameOperatorAutPtr(new GetEpochBySettlementNameOperator(a_manager_abstract_factory->createEpochManager(),
-                                                                                       a_manager_abstract_factory->createSettlementManager()));
+    return GetEpochBySettlementNameOperatorAutPtr(
+               new GetEpochBySettlementNameOperator(a_manager_abstract_factory->createEpochManager(),
+                                                    a_manager_abstract_factory->createSettlementPersistenceFacade())
+           );
 }
 
 } // namespace Epoch

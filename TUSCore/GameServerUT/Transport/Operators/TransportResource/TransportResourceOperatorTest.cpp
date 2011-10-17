@@ -32,7 +32,7 @@
 #include "../../../../GameServer/Transport/Operators/TransportResource/TransportResourceOperator.hpp"
 #include "../../../Resource/ResourceManagerMock.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
-#include "../../../Settlement/SettlementManagerMock.hpp"
+#include "../../../Settlement/SettlementPersistenceFacadeMock.hpp"
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Common;
@@ -58,7 +58,7 @@ protected:
      */
     TransportResourceOperatorTest()
         : m_resource_manager(new ResourceManagerMock),
-          m_settlement_manager(new SettlementManagerMock),
+          m_settlement_persistence_facade(new SettlementPersistenceFacadeMock),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_settlement_name_1("Settlement1"),
@@ -78,9 +78,9 @@ protected:
     ResourceManagerMock * m_resource_manager;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    SettlementManagerMock * m_settlement_manager;
+    SettlementPersistenceFacadeMock * m_settlement_persistence_facade;
 
     /**
      * @brief Test constants: the names of the lands.
@@ -115,7 +115,7 @@ protected:
 TEST_F(TransportResourceOperatorTest, TransportResourceOperator)
 {
     ASSERT_NO_THROW(TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                                          (ISettlementManagerShrPtr(m_settlement_manager))));
+                                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade))));
 }
 
 /**
@@ -126,7 +126,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_TryingToTransportZeroRes
     ITransactionShrPtr transaction(new TransactionDummy);
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_TRYING_TO_TRANSPORT_ZERO_RESOURCES,
               transport_resource_operator.transportResource(transaction,
@@ -140,11 +140,11 @@ TEST_F(TransportResourceOperatorTest, transportResource_SourceSettlementDoesNotE
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(ISettlementShrPtr()));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SOURCE_SETTLEMENT_DOES_NOT_EXIST,
               transport_resource_operator.transportResource(transaction,
@@ -158,14 +158,14 @@ TEST_F(TransportResourceOperatorTest, transportResource_DestinationSettlementDoe
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(ISettlementShrPtr()));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_DESTINATION_SETTLEMENT_DOES_NOT_EXIST,
               transport_resource_operator.transportResource(transaction,
@@ -179,14 +179,14 @@ TEST_F(TransportResourceOperatorTest, transportResource_SettlementsAreNotFromThe
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_3))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_3))
     .WillOnce(Return(m_settlement_3));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND,
               transport_resource_operator.transportResource(transaction,
@@ -200,17 +200,17 @@ TEST_F(TransportResourceOperatorTest, transportResource_NotEnoughResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     EXPECT_CALL(*m_resource_manager, subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 10))
     .WillOnce(Return(false));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               transport_resource_operator.transportResource(transaction,
@@ -224,10 +224,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_SubtractResourceThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     std::exception e;
@@ -235,7 +235,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_SubtractResourceThrows)
     .WillOnce(Throw(e));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               transport_resource_operator.transportResource(transaction,
@@ -249,10 +249,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_AddResourceThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     EXPECT_CALL(*m_resource_manager, subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 10))
@@ -263,7 +263,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_AddResourceThrows)
     .WillOnce(Throw(e));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               transport_resource_operator.transportResource(transaction,
@@ -277,10 +277,10 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_1))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(m_settlement_1));
 
-    EXPECT_CALL(*m_settlement_manager, getSettlement(transaction, m_settlement_name_2))
+    EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
     EXPECT_CALL(*m_resource_manager, subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 10))
@@ -289,7 +289,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success)
     EXPECT_CALL(*m_resource_manager, addResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 10));
 
     TransportResourceOperator transport_resource_operator((IResourceManagerShrPtr(m_resource_manager)),
-                                                          (ISettlementManagerShrPtr(m_settlement_manager)));
+                                                          (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED,
               transport_resource_operator.transportResource(transaction,

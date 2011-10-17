@@ -33,7 +33,7 @@
 #include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
 #include "../../../Resource/IResourceManager.hpp"
-#include "../../../Settlement/ISettlementManager.hpp"
+#include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "ITurnOperator.hpp"
 
 namespace GameServer
@@ -51,20 +51,20 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_cost_manager            The manager of costs.
-     * @param a_human_manager           The manager of humans.
-     * @param a_land_persistence_facade The persistence facade of lands.
-     * @param a_property_manager        The manager of properties.
-     * @param a_resource_manager        The manager of resources.
-     * @param a_settlement_manager      The manager of settlements.
+     * @param a_cost_manager                  The manager of costs.
+     * @param a_human_manager                 The manager of humans.
+     * @param a_land_persistence_facade       The persistence facade of lands.
+     * @param a_property_manager              The manager of properties.
+     * @param a_resource_manager              The manager of resources.
+     * @param a_settlement_persistence_facade The manager of settlements.
      */
     TurnOperator(
-        Cost::ICostManagerShrPtr             a_cost_manager,
-        Human::IHumanManagerShrPtr           a_human_manager,
-        Land::ILandPersistenceFacadeShrPtr   a_land_persistence_facade,
-        Property::IPropertyManagerShrPtr     a_property_manager,
-        Resource::IResourceManagerShrPtr     a_resource_manager,
-        Settlement::ISettlementManagerShrPtr a_settlement_manager
+        Cost::ICostManagerShrPtr                       a_cost_manager,
+        Human::IHumanManagerShrPtr                     a_human_manager,
+        Land::ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
+        Property::IPropertyManagerShrPtr               a_property_manager,
+        Resource::IResourceManagerShrPtr               a_resource_manager,
+        Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
     /**
@@ -146,9 +146,9 @@ private:
     Resource::IResourceManagerShrPtr m_resource_manager;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    Settlement::ISettlementManagerShrPtr m_settlement_manager;
+    Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 };
 
 /**

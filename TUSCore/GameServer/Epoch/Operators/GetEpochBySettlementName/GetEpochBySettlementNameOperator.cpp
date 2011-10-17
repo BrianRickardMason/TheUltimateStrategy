@@ -37,11 +37,11 @@ namespace Epoch
 {
 
 GetEpochBySettlementNameOperator::GetEpochBySettlementNameOperator(
-    IEpochManagerShrPtr      a_epoch_manager,
-    ISettlementManagerShrPtr a_settlement_manager
+    IEpochManagerShrPtr                a_epoch_manager,
+    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
     : m_epoch_manager(a_epoch_manager),
-      m_settlement_manager(a_settlement_manager)
+      m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
 
@@ -53,7 +53,7 @@ GetEpochBySettlementNameOperatorExitCode GetEpochBySettlementNameOperator::getEp
     try
     {
         // Verify if the settlement exists.
-        if (!m_settlement_manager->getSettlement(a_transaction, a_settlement_name))
+        if (!m_settlement_persistence_facade->getSettlement(a_transaction, a_settlement_name))
         {
             return GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST);
         }

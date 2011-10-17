@@ -29,7 +29,7 @@
 #define GAMESERVER_TRANSPORT_TRANSPORTHUMANOPERATOR_HPP
 
 #include "../../../Human/IHumanManager.hpp"
-#include "../../../Settlement/ISettlementManager.hpp"
+#include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "ITransportHumanOperator.hpp"
 
 namespace GameServer
@@ -47,12 +47,12 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_human_manager      The manager of humans.
-     * @param a_settlement_manager The manager of settlements.
+     * @param a_human_manager                 The manager of humans.
+     * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     TransportHumanOperator(
-        Human::IHumanManagerShrPtr           a_human_manager,
-        Settlement::ISettlementManagerShrPtr a_settlement_manager
+        Human::IHumanManagerShrPtr                     a_human_manager,
+        Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
     /**
@@ -81,9 +81,9 @@ private:
     Human::IHumanManagerShrPtr m_human_manager;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    Settlement::ISettlementManagerShrPtr m_settlement_manager;
+    Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 };
 
 /**

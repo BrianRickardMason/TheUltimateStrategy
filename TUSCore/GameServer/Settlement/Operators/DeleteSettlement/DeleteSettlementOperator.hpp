@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_DELETESETTLEMENTOPERATOR_HPP
 #define GAMESERVER_SETTLEMENT_DELETESETTLEMENTOPERATOR_HPP
 
-#include "../../ISettlementManager.hpp"
+#include "../../ISettlementPersistenceFacade.hpp"
 #include "IDeleteSettlementOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_settlement_manager The manager of settlements.
+     * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     DeleteSettlementOperator(
-        ISettlementManagerShrPtr a_settlement_manager
+        ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
     /**
@@ -67,9 +67,9 @@ public:
 
 private:
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    ISettlementManagerShrPtr m_settlement_manager;
+    ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 };
 
 /**

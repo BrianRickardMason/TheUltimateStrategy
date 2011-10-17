@@ -29,7 +29,7 @@
 #define GAMESERVER_SETTLEMENT_CREATESETTLEMENTOPERATOR_HPP
 
 #include "../../../Land/ILandPersistenceFacade.hpp"
-#include "../../ISettlementManager.hpp"
+#include "../../ISettlementPersistenceFacade.hpp"
 #include "IBehaviourGiveGrant.hpp"
 #include "ICreateSettlementOperator.hpp"
 
@@ -48,13 +48,13 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_land_persistence_facade The persistence facade of lands.
-     * @param a_settlement_manager      The manager of settlements.
-     * @param a_behaviour_give_grant    The behaviour "GiveGrant".
+     * @param a_land_persistence_facade       The persistence facade of lands.
+     * @param a_settlement_persistence_facade The persistence facade of settlements.
+     * @param a_behaviour_give_grant          The behaviour "GiveGrant".
      */
     CreateSettlementOperator(
         Land::ILandPersistenceFacadeShrPtr a_land_persistence_facade,
-        ISettlementManagerShrPtr           a_settlement_manager,
+        ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade,
         IBehaviourGiveGrantShrPtr          a_behaviour_give_grant
     );
 
@@ -80,9 +80,9 @@ private:
     Land::ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
-     * @brief The manager of settlements.
+     * @brief The persistence facade of settlements.
      */
-    ISettlementManagerShrPtr m_settlement_manager;
+    ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 
     /**
      * @brief The behaviour "GiveGrant".

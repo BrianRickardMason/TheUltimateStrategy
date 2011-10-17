@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
-#include "../../GameServer/Settlement/SettlementManagerFactory.hpp"
+#include "../../GameServer/Settlement/SettlementPersistenceFacadeFactory.hpp"
 #include "../ComponentTest.hpp"
 
 using namespace GameServer::Authorization;
@@ -66,7 +66,7 @@ protected:
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_settlement_manager(m_manager_abstract_factory->createSettlementManager())
+          m_settlement_persistence_facade(m_manager_abstract_factory->createSettlementPersistenceFacade())
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -85,8 +85,8 @@ protected:
             m_land_1 = m_land_persistence_facade->getLand(transaction, m_land_name_1);
             m_land_2 = m_land_persistence_facade->getLand(transaction, m_land_name_2);
 
-            m_settlement_manager->createSettlement(transaction, m_land_1, m_settlement_name_1);
-            m_settlement_manager->createSettlement(transaction, m_land_2, m_settlement_name_2);
+            m_settlement_persistence_facade->createSettlement(transaction, m_land_1, m_settlement_name_1);
+            m_settlement_persistence_facade->createSettlement(transaction, m_land_2, m_settlement_name_2);
 
             transaction->commit();
         }
@@ -156,9 +156,9 @@ protected:
     ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
-     * @brief A settlement manager.
+     * @brief A settlement persistence facade.
      */
-    ISettlementManagerShrPtr m_settlement_manager;
+    ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
 };
 
 TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandSuccess)

@@ -38,7 +38,9 @@ GetSettlementOperatorAutPtr GetSettlementOperatorFactory::createGetSettlementOpe
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetSettlementOperatorAutPtr(new GetSettlementOperator(a_manager_abstract_factory->createSettlementManager()));
+    return GetSettlementOperatorAutPtr(
+               new GetSettlementOperator(a_manager_abstract_factory->createSettlementPersistenceFacade())
+           );
 }
 
 } // namespace Settlement

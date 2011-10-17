@@ -40,7 +40,7 @@ GetSettlementsOperatorAutPtr GetSettlementsOperatorFactory::createGetSettlements
 {
     return GetSettlementsOperatorAutPtr(
                new GetSettlementsOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
-                                          a_manager_abstract_factory->createSettlementManager())
+                                          a_manager_abstract_factory->createSettlementPersistenceFacade())
            );
 }
 
