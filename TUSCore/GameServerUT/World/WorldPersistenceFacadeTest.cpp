@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/World/WorldManager.hpp"
+#include "../../GameServer/World/WorldPersistenceFacade.hpp"
 #include "../../GameServer/World/WorldRecord.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "WorldManagerAccessorMock.hpp"
@@ -41,14 +41,14 @@ using testing::Throw;
 /**
  * @brief A test class.
  */
-class WorldManagerTest
+class WorldPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    WorldManagerTest()
+    WorldPersistenceFacadeTest()
         : m_world_name_1("World2"),
           m_world_name_2("World1"),
           m_land_name("Land")
@@ -81,14 +81,14 @@ protected:
     string m_land_name;
 };
 
-TEST_F(WorldManagerTest, WorldManager)
+TEST_F(WorldPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IWorldManagerAccessorAutPtr accessor(new WorldManagerAccessorMock);
 
-    ASSERT_NO_THROW(WorldManager manager(accessor));
+    ASSERT_NO_THROW(WorldPersistenceFacade persistence_facade(accessor));
 }
 
-TEST_F(WorldManagerTest, createWorld_Success)
+TEST_F(WorldPersistenceFacadeTest, createWorld_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -98,12 +98,12 @@ TEST_F(WorldManagerTest, createWorld_Success)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.createWorld(transaction, "World"));
+    ASSERT_TRUE(persistence_facade.createWorld(transaction, "World"));
 }
 
-TEST_F(WorldManagerTest, createWorld_Failure)
+TEST_F(WorldPersistenceFacadeTest, createWorld_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -116,12 +116,12 @@ TEST_F(WorldManagerTest, createWorld_Failure)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.createWorld(transaction, "World"));
+    ASSERT_FALSE(persistence_facade.createWorld(transaction, "World"));
 }
 
-TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
+TEST_F(WorldPersistenceFacadeTest, getWorld_WorldDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -132,14 +132,14 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    IWorldShrPtr world = manager.getWorld(transaction, m_world_name_1);
+    IWorldShrPtr world = persistence_facade.getWorld(transaction, m_world_name_1);
 
     ASSERT_TRUE(world == NULL);
 }
 
-TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
+TEST_F(WorldPersistenceFacadeTest, getWorld_WorldDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -150,16 +150,16 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    IWorldShrPtr world = manager.getWorld(transaction, m_world_name_1);
+    IWorldShrPtr world = persistence_facade.getWorld(transaction, m_world_name_1);
 
     ASSERT_TRUE(world != NULL);
 
     compareWorld(world, m_world_name_1);
 }
 
-TEST_F(WorldManagerTest, getWorldByLandName_WorldDoesNotExist)
+TEST_F(WorldPersistenceFacadeTest, getWorldByLandName_WorldDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -173,14 +173,14 @@ TEST_F(WorldManagerTest, getWorldByLandName_WorldDoesNotExist)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    IWorldShrPtr world = manager.getWorldByLandName(transaction, m_land_name);
+    IWorldShrPtr world = persistence_facade.getWorldByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(world == NULL);
 }
 
-TEST_F(WorldManagerTest, getWorldByLandName_WorldDoesExist)
+TEST_F(WorldPersistenceFacadeTest, getWorldByLandName_WorldDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -194,16 +194,16 @@ TEST_F(WorldManagerTest, getWorldByLandName_WorldDoesExist)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    IWorldShrPtr world = manager.getWorldByLandName(transaction, m_land_name);
+    IWorldShrPtr world = persistence_facade.getWorldByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(world != NULL);
 
     compareWorld(world, m_world_name_1);
 }
 
-TEST_F(WorldManagerTest, getWorlds_WorldsDoNotExist)
+TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -216,14 +216,14 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoNotExist)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    IWorldMap worlds = manager.getWorlds(transaction);
+    IWorldMap worlds = persistence_facade.getWorlds(transaction);
 
     ASSERT_TRUE(worlds.empty());
 }
 
-TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_OneWorld)
+TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_OneWorld)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -237,9 +237,9 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_OneWorld)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    IWorldMap worlds = manager.getWorlds(transaction);
+    IWorldMap worlds = persistence_facade.getWorlds(transaction);
 
     ASSERT_FALSE(worlds.empty());
 
@@ -248,7 +248,7 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_OneWorld)
     compareWorld(worlds[m_world_name_1], m_world_name_1);
 }
 
-TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_ManyWorlds)
+TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_ManyWorlds)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -263,9 +263,9 @@ TEST_F(WorldManagerTest, getWorlds_WorldsDoExist_ManyWorlds)
 
     IWorldManagerAccessorAutPtr accessor(mock);
 
-    WorldManager manager(accessor);
+    WorldPersistenceFacade persistence_facade(accessor);
 
-    IWorldMap worlds = manager.getWorlds(transaction);
+    IWorldMap worlds = persistence_facade.getWorlds(transaction);
 
     ASSERT_FALSE(worlds.empty());
 

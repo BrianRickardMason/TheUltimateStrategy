@@ -25,36 +25,18 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_WORLD_WORLDMANAGERFACTORY_HPP
-#define GAMESERVER_WORLD_WORLDMANAGERFACTORY_HPP
+#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/World/WorldPersistenceFacadeFactory.hpp"
+#include <gmock/gmock.h>
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "WorldManager.hpp"
+using namespace GameServer::Common;
+using namespace GameServer::World;
 
-namespace GameServer
+TEST(WorldPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
-namespace World
-{
+    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-/**
- * @brief A factory of world manager.
- */
-class WorldManagerFactory
-{
-public:
-    /**
-     * @brief A factory method.
-     *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created world manager.
-     */
-    static WorldManagerAutPtr createWorldManager(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-    );
-};
+    WorldPersistenceFacadeAutPtr persistence_facade = WorldPersistenceFacadeFactory::create(accessor_abstract_factory);
 
-} // namespace World
-} // namespace GameServer
-
-#endif // GAMESERVER_WORLD_WORLDMANAGERFACTORY_HPP
+    ASSERT_TRUE(persistence_facade.get() != NULL);
+}

@@ -29,7 +29,7 @@
 #include "../../../../GameServer/World/World.hpp"
 #include "../../../../GameServer/World/WorldRecord.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
-#include "../../../World/WorldManagerMock.hpp"
+#include "../../../World/WorldPersistenceFacadeMock.hpp"
 #include "../../EpochManagerMock.hpp"
 #include <boost/make_shared.hpp>
 
@@ -54,7 +54,7 @@ protected:
      */
     CreateEpochOperatorTest()
         : m_epoch_manager(new EpochManagerMock),
-          m_world_manager(new WorldManagerMock),
+          m_world_persistence_facade(new WorldPersistenceFacadeMock),
           m_epoch_name("Epoch"),
           m_world_name("World")
     {
@@ -68,7 +68,7 @@ protected:
     /**
      * @brief The manager of worlds.
      */
-    WorldManagerMock * m_world_manager;
+    WorldPersistenceFacadeMock * m_world_persistence_facade;
 
     /**
      * @brief Test constants: the name of the epoch.
@@ -85,11 +85,11 @@ TEST_F(CreateEpochOperatorTest, createEpoch_WorldDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_world_manager, getWorld(transaction, m_world_name))
+    EXPECT_CALL(*m_world_persistence_facade, getWorld(transaction, m_world_name))
     .WillOnce(Return(IWorldShrPtr()));
 
     CreateEpochOperator create_epoch_operator((IEpochManagerShrPtr(m_epoch_manager)),
-                                              (IWorldManagerShrPtr(m_world_manager)));
+                                              (IWorldPersistenceFacadeShrPtr(m_world_persistence_facade)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST,
               create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);
@@ -103,14 +103,14 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasBeenCreated)
 
     IWorldShrPtr world = IWorldShrPtr(new World(world_record));
 
-    EXPECT_CALL(*m_world_manager, getWorld(transaction, m_world_name))
+    EXPECT_CALL(*m_world_persistence_facade, getWorld(transaction, m_world_name))
     .WillOnce(Return(world));
 
     EXPECT_CALL(*m_epoch_manager, createEpoch(transaction, m_world_name, m_epoch_name))
     .WillOnce(Return(true));
 
     CreateEpochOperator create_epoch_operator((IEpochManagerShrPtr(m_epoch_manager)),
-                                              (IWorldManagerShrPtr(m_world_manager)));
+                                              (IWorldPersistenceFacadeShrPtr(m_world_persistence_facade)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_CREATED,
               create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);
@@ -124,14 +124,14 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasNotBeenCreated)
 
     IWorldShrPtr world = IWorldShrPtr(new World(world_record));
 
-    EXPECT_CALL(*m_world_manager, getWorld(transaction, m_world_name))
+    EXPECT_CALL(*m_world_persistence_facade, getWorld(transaction, m_world_name))
     .WillOnce(Return(world));
 
     EXPECT_CALL(*m_epoch_manager, createEpoch(transaction, m_world_name, m_epoch_name))
     .WillOnce(Return(false));
 
     CreateEpochOperator create_epoch_operator((IEpochManagerShrPtr(m_epoch_manager)),
-                                              (IWorldManagerShrPtr(m_world_manager)));
+                                              (IWorldPersistenceFacadeShrPtr(m_world_persistence_facade)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_CREATED,
               create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);
@@ -143,11 +143,11 @@ TEST_F(CreateEpochOperatorTest, createEpoch_UnexpectedError)
 
     std::exception e;
 
-    EXPECT_CALL(*m_world_manager, getWorld(transaction, m_world_name))
+    EXPECT_CALL(*m_world_persistence_facade, getWorld(transaction, m_world_name))
     .WillOnce(Throw(e));
 
     CreateEpochOperator create_epoch_operator((IEpochManagerShrPtr(m_epoch_manager)),
-                                              (IWorldManagerShrPtr(m_world_manager)));
+                                              (IWorldPersistenceFacadeShrPtr(m_world_persistence_facade)));
 
     ASSERT_EQ(CREATE_EPOCH_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               create_epoch_operator.createEpoch(transaction, m_world_name, m_epoch_name).m_exit_code);

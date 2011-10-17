@@ -57,7 +57,7 @@ protected:
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_manager(m_manager_abstract_factory->createWorldManager()),
+          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_transport_human_operator(TransportHumanOperatorFactory::createTransportHumanOperator(m_manager_abstract_factory)),
           m_epoch_name("Epoch"),
@@ -78,7 +78,7 @@ protected:
 
             m_user_persitence_facade->createUser(transaction, "Login", "Password");
 
-            m_world_manager->createWorld(transaction, m_world_name);
+            m_world_persistence_facade->createWorld(transaction, m_world_name);
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
@@ -121,7 +121,7 @@ protected:
     /**
      * @brief The manager of worlds.
      */
-    IWorldManagerShrPtr m_world_manager;
+    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
      * @brief CreateSettlementOperator.

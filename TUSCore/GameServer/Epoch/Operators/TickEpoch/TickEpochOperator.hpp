@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
 #define GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
 
-#include "../../../World/IWorldManager.hpp"
+#include "../../../World/IWorldPersistenceFacade.hpp"
 #include "../../IEpochManager.hpp"
 #include "IBehaviourTickEpoch.hpp"
 #include "ITickEpochOperator.hpp"
@@ -48,12 +48,12 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_epoch_manager The manager of epochs.
-     * @param a_world_manager The manager of worlds.
+     * @param a_epoch_manager            The manager of epochs.
+     * @param a_world_persistence_facade The persistence facade of worlds.
      */
     TickEpochOperator(
-        IEpochManagerShrPtr        a_epoch_manager,
-        World::IWorldManagerShrPtr a_world_manager
+        IEpochManagerShrPtr                  a_epoch_manager,
+        World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
     );
 
     /**
@@ -76,9 +76,9 @@ private:
     IEpochManagerShrPtr m_epoch_manager;
 
     /**
-     * @brief The manager of worlds.
+     * @brief The persistence facade of worlds.
      */
-    World::IWorldManagerShrPtr m_world_manager;
+    World::IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
      * @brief The behaviour TickEpoch.

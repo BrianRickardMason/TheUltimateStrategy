@@ -38,7 +38,9 @@ CreateWorldOperatorAutPtr CreateWorldOperatorFactory::createCreateWorldOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return CreateWorldOperatorAutPtr(new CreateWorldOperator(a_manager_abstract_factory->createWorldManager()));
+    return CreateWorldOperatorAutPtr(
+               new CreateWorldOperator(a_manager_abstract_factory->createWorldPersistenceFacade())
+           );
 }
 
 } // namespace World

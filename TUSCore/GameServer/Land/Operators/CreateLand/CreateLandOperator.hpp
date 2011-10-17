@@ -29,7 +29,7 @@
 #define GAMESERVER_LAND_CREATELANDOPERATOR_HPP
 
 #include "../../../User/IUserPersistenceFacade.hpp"
-#include "../../../World/IWorldManager.hpp"
+#include "../../../World/IWorldPersistenceFacade.hpp"
 #include "../../ILandPersistenceFacade.hpp"
 #include "ICreateLandOperator.hpp"
 
@@ -50,14 +50,14 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_land_persistence_facade The persistence facade of lands.
-     * @param a_user_persistence_facade The persistence facade of users.
-     * @param a_world_manager           The manager of worlds.
+     * @param a_land_persistence_facade  The persistence facade of lands.
+     * @param a_user_persistence_facade  The persistence facade of users.
+     * @param a_world_persistence_facade The persistence facade of worlds.
      */
     CreateLandOperator(
-        ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
-        User::IUserPersistenceFacadeShrPtr a_user_persistence_facade,
-        World::IWorldManagerShrPtr         a_world_manager
+        ILandPersistenceFacadeShrPtr         a_land_persistence_facade,
+        User::IUserPersistenceFacadeShrPtr   a_user_persistence_facade,
+        World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
     );
 
     /**
@@ -89,9 +89,9 @@ private:
     User::IUserPersistenceFacadeShrPtr m_user_persistence_facade;
 
     /**
-     * @brief The manager of worlds.
+     * @brief The persistence facade of worlds.
      */
-    World::IWorldManagerShrPtr m_world_manager;
+    World::IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 };
 
 /**

@@ -25,82 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "World.hpp"
-#include "WorldManager.hpp"
+#ifndef GAMESERVER_WORLD_WORLDPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_WORLD_WORLDPERSISTENCEFACADEFACTORY_HPP
 
-using namespace GameServer::Persistence;
-using namespace boost;
-using namespace std;
+#include "../Common/IAccessorAbstractFactory.hpp"
+#include "WorldPersistenceFacade.hpp"
 
 namespace GameServer
 {
 namespace World
 {
 
-WorldManager::WorldManager(
-    IWorldManagerAccessorAutPtr a_accessor
-)
-    : m_accessor(a_accessor)
+/**
+ * @brief A factory of world persistence facade.
+ */
+class WorldPersistenceFacadeFactory
 {
-}
-
-bool WorldManager::createWorld(
-    ITransactionShrPtr       a_transaction,
-    string             const a_world_name
-) const
-{
-    try
-    {
-        m_accessor->insertRecord(a_transaction, a_world_name);
-
-        return true;
-    }
-    catch (std::exception const & e)
-    {
-        return false;
-    }
-}
-
-IWorldShrPtr WorldManager::getWorld(
-    ITransactionShrPtr       a_transaction,
-    string             const a_world_name
-) const
-{
-    IWorldRecordShrPtr record = m_accessor->getRecord(a_transaction, a_world_name);
-
-    return record ? IWorldShrPtr(new World(record)) : IWorldShrPtr();
-}
-
-IWorldShrPtr WorldManager::getWorldByLandName(
-    ITransactionShrPtr       a_transaction,
-    string             const a_land_name
-) const
-{
-    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_land_name);
-
-    return getWorld(a_transaction, world_name);
-}
-
-IWorldMap WorldManager::getWorlds(
-    ITransactionShrPtr a_transaction
-) const
-{
-    IWorldRecordMap records = m_accessor->getRecords(a_transaction);
-
-    IWorldMap worlds;
-
-    for (IWorldRecordMap::iterator it = records.begin(); it != records.end(); ++it)
-    {
-        if (it->second)
-        {
-            IWorldShrPtr world = IWorldShrPtr(new World(it->second));
-            IWorldPair pair(it->second->getWorldName(), world);
-            worlds.insert(pair);
-        }
-    }
-
-    return worlds;
-}
+public:
+    /**
+     * @brief A factory method.
+     *
+     * @param a_accessor_abstract_factory The abstract factory of accessors.
+     *
+     * @return A newly created world persistence facade.
+     */
+    static WorldPersistenceFacadeAutPtr create(
+        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    );
+};
 
 } // namespace World
 } // namespace GameServer
+
+#endif // GAMESERVER_WORLD_WORLDPERSISTENCEFACADEFACTORY_HPP

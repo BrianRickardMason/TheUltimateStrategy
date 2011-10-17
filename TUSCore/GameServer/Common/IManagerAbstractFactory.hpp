@@ -39,7 +39,7 @@
 #include "../Resource/IResourceManager.hpp"
 #include "../Settlement/ISettlementPersistenceFacade.hpp"
 #include "../User/IUserPersistenceFacade.hpp"
-#include "../World/IWorldManager.hpp"
+#include "../World/IWorldPersistenceFacade.hpp"
 #include <boost/shared_ptr.hpp>
 
 namespace GameServer
@@ -136,11 +136,11 @@ public:
     virtual User::IUserPersistenceFacadeShrPtr createUserPersistenceFacade() const = 0;
 
     /**
-     * @brief Creates the world manager.
+     * @brief Creates the world persistence facade.
      *
-     * @return The newly created world manager.
+     * @return The newly created world persistence facade.
      */
-    virtual World::IWorldManagerShrPtr createWorldManager() const = 0;
+    virtual World::IWorldPersistenceFacadeShrPtr createWorldPersistenceFacade() const = 0;
 };
 
 /**

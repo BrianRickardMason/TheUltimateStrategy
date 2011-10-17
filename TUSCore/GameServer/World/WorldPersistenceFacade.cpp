@@ -25,50 +25,82 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "CreateEpochOperator.hpp"
+#include "World.hpp"
+#include "WorldPersistenceFacade.hpp"
 
 using namespace GameServer::Persistence;
-using namespace GameServer::World;
+using namespace boost;
 using namespace std;
 
 namespace GameServer
 {
-namespace Epoch
+namespace World
 {
 
-CreateEpochOperator::CreateEpochOperator(
-    IEpochManagerShrPtr           a_epoch_manager,
-    IWorldPersistenceFacadeShrPtr a_world_persistence_facade
+WorldPersistenceFacade::WorldPersistenceFacade(
+    IWorldManagerAccessorAutPtr a_accessor
 )
-    : m_epoch_manager(a_epoch_manager),
-      m_world_persistence_facade(a_world_persistence_facade)
+    : m_accessor(a_accessor)
 {
 }
 
-CreateEpochOperatorExitCode CreateEpochOperator::createEpoch(
+bool WorldPersistenceFacade::createWorld(
     ITransactionShrPtr       a_transaction,
-    string             const a_world_name,
-    string             const a_epoch_name
+    string             const a_world_name
 ) const
 {
     try
     {
-        // Verify if the world exists.
-        if (!m_world_persistence_facade->getWorld(a_transaction, a_world_name))
-        {
-            return CreateEpochOperatorExitCode(CREATE_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
-        }
+        m_accessor->insertRecord(a_transaction, a_world_name);
 
-        bool const result = m_epoch_manager->createEpoch(a_transaction, a_world_name, a_epoch_name);
-
-        return (result) ? CreateEpochOperatorExitCode(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_CREATED)
-                        : CreateEpochOperatorExitCode(CREATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_CREATED);
+        return true;
     }
-    catch (...)
+    catch (std::exception const & e)
     {
-        return CreateEpochOperatorExitCode(CREATE_EPOCH_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
+        return false;
     }
 }
 
-} // namespace Epoch
+IWorldShrPtr WorldPersistenceFacade::getWorld(
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
+) const
+{
+    IWorldRecordShrPtr record = m_accessor->getRecord(a_transaction, a_world_name);
+
+    return record ? IWorldShrPtr(new World(record)) : IWorldShrPtr();
+}
+
+IWorldShrPtr WorldPersistenceFacade::getWorldByLandName(
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
+) const
+{
+    string world_name = m_accessor->getWorldNameOfLand(a_transaction, a_land_name);
+
+    return getWorld(a_transaction, world_name);
+}
+
+IWorldMap WorldPersistenceFacade::getWorlds(
+    ITransactionShrPtr a_transaction
+) const
+{
+    IWorldRecordMap records = m_accessor->getRecords(a_transaction);
+
+    IWorldMap worlds;
+
+    for (IWorldRecordMap::iterator it = records.begin(); it != records.end(); ++it)
+    {
+        if (it->second)
+        {
+            IWorldShrPtr world = IWorldShrPtr(new World(it->second));
+            IWorldPair pair(it->second->getWorldName(), world);
+            worlds.insert(pair);
+        }
+    }
+
+    return worlds;
+}
+
+} // namespace World
 } // namespace GameServer

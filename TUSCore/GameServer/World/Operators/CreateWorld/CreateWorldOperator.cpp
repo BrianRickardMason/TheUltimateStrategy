@@ -36,9 +36,9 @@ namespace World
 {
 
 CreateWorldOperator::CreateWorldOperator(
-    IWorldManagerShrPtr a_world_manager
+    IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
-    : m_world_manager(a_world_manager)
+    : m_world_persistence_facade(a_world_persistence_facade)
 {
 }
 
@@ -52,7 +52,7 @@ CreateWorldOperatorExitCode CreateWorldOperator::createWorld(
         // Verify if the world exists.
         // TODO: WorldManager::getWorldByName.
 
-        bool const result = m_world_manager->createWorld(a_transaction, a_name);
+        bool const result = m_world_persistence_facade->createWorld(a_transaction, a_name);
 
         return (result) ? CreateWorldOperatorExitCode(CREATE_WORLD_OPERATOR_EXIT_CODE_WORLD_HAS_BEEN_CREATED)
                         : CreateWorldOperatorExitCode(CREATE_WORLD_OPERATOR_EXIT_CODE_WORLD_HAS_NOT_BEEN_CREATED);

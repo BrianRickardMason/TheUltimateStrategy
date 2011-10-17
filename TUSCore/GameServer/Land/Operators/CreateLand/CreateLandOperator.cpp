@@ -38,13 +38,13 @@ namespace Land
 {
 
 CreateLandOperator::CreateLandOperator(
-    ILandPersistenceFacadeShrPtr a_land_persistence_facade,
-    IUserPersistenceFacadeShrPtr a_user_persistence_facade,
-    IWorldManagerShrPtr          a_world_manager
+    ILandPersistenceFacadeShrPtr  a_land_persistence_facade,
+    IUserPersistenceFacadeShrPtr  a_user_persistence_facade,
+    IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
     : m_land_persistence_facade(a_land_persistence_facade),
       m_user_persistence_facade(a_user_persistence_facade),
-      m_world_manager(a_world_manager)
+      m_world_persistence_facade(a_world_persistence_facade)
 {
 }
 
@@ -61,7 +61,7 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
         // TODO: UserManager::getUser.
 
         // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_world_name))
+        if (!m_world_persistence_facade->getWorld(a_transaction, a_world_name))
         {
             return CreateLandOperatorExitCode(CREATE_LAND_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }

@@ -40,7 +40,7 @@ CreateLandOperatorAutPtr CreateLandOperatorFactory::createCreateLandOperator(
 {
     return CreateLandOperatorAutPtr(new CreateLandOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
                                                            a_manager_abstract_factory->createUserPersistenceFacade(),
-                                                           a_manager_abstract_factory->createWorldManager()));
+                                                           a_manager_abstract_factory->createWorldPersistenceFacade()));
 }
 
 } // namespace Land

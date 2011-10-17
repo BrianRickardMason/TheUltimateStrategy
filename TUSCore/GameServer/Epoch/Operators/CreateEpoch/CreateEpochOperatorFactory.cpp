@@ -38,8 +38,10 @@ CreateEpochOperatorAutPtr CreateEpochOperatorFactory::createCreateEpochOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return CreateEpochOperatorAutPtr(new CreateEpochOperator(a_manager_abstract_factory->createEpochManager(),
-                                                             a_manager_abstract_factory->createWorldManager()));
+    return CreateEpochOperatorAutPtr(
+               new CreateEpochOperator(a_manager_abstract_factory->createEpochManager(),
+                                       a_manager_abstract_factory->createWorldPersistenceFacade())
+           );
 }
 
 } // namespace Epoch

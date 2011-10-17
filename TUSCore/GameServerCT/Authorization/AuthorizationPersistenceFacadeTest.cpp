@@ -63,7 +63,7 @@ protected:
           m_world_name("World"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_manager(m_manager_abstract_factory->createWorldManager()),
+          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_settlement_persistence_facade(m_manager_abstract_factory->createSettlementPersistenceFacade())
@@ -72,7 +72,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_world_manager->createWorld(transaction, m_world_name);
+            m_world_persistence_facade->createWorld(transaction, m_world_name);
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
@@ -143,7 +143,7 @@ protected:
     /**
      * @brief A world manager.
      */
-    IWorldManagerShrPtr m_world_manager;
+    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
      * @brief The epoch manager.

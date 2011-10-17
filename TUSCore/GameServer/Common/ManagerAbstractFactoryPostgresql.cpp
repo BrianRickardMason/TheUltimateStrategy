@@ -36,7 +36,7 @@
 #include "../Resource/ResourceManagerFactory.hpp"
 #include "../Settlement/SettlementPersistenceFacadeFactory.hpp"
 #include "../User/UserPersistenceFacadeFactory.hpp"
-#include "../World/WorldManagerFactory.hpp"
+#include "../World/WorldPersistenceFacadeFactory.hpp"
 #include "AccessorAbstractFactoryPostgresql.hpp"
 #include "ManagerAbstractFactoryPostgresql.hpp"
 
@@ -122,9 +122,9 @@ IUserPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createUserPersist
     return IUserPersistenceFacadeShrPtr(UserPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IWorldManagerShrPtr ManagerAbstractFactoryPostgresql::createWorldManager() const
+IWorldPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createWorldPersistenceFacade() const
 {
-    return IWorldManagerShrPtr(WorldManagerFactory::createWorldManager(m_accessor_abstract_factory));
+    return IWorldPersistenceFacadeShrPtr(WorldPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
 } // namespace Common

@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_WORLD_WORLDMANAGERMOCK_HPP
-#define GAMESERVER_WORLD_WORLDMANAGERMOCK_HPP
+#ifndef GAMESERVER_WORLD_WORLDPERSISTENCEFACADEMOCK_HPP
+#define GAMESERVER_WORLD_WORLDPERSISTENCEFACADEMOCK_HPP
 
-#include "../../GameServer/World/IWorldManager.hpp"
+#include "../../GameServer/World/IWorldPersistenceFacade.hpp"
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace World
 {
 
 /**
- * @brief The mock of the manager of the worlds.
+ * @brief The mock of the persistence facade of the worlds.
  */
-class WorldManagerMock
-    : public IWorldManager
+class WorldPersistenceFacadeMock
+    : public IWorldPersistenceFacade
 {
 public:
     /**
@@ -109,4 +109,4 @@ public:
 } // namespace World
 } // namespace GameServer
 
-#endif // GAMESERVER_WORLD_WORLDMANAGERMOCK_HPP
+#endif // GAMESERVER_WORLD_WORLDPERSISTENCEFACADEMOCK_HPP

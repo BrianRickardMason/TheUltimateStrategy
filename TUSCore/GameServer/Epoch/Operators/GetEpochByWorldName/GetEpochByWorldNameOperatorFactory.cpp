@@ -38,8 +38,10 @@ GetEpochByWorldNameOperatorAutPtr GetEpochByWorldNameOperatorFactory::createGetE
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetEpochByWorldNameOperatorAutPtr(new GetEpochByWorldNameOperator(a_manager_abstract_factory->createEpochManager(),
-                                                                             a_manager_abstract_factory->createWorldManager()));
+    return GetEpochByWorldNameOperatorAutPtr(
+               new GetEpochByWorldNameOperator(a_manager_abstract_factory->createEpochManager(),
+                                               a_manager_abstract_factory->createWorldPersistenceFacade())
+           );
 }
 
 } // namespace Epoch

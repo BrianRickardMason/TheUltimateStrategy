@@ -25,11 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_WORLD_WORLDMANAGER_HPP
-#define GAMESERVER_WORLD_WORLDMANAGER_HPP
+#ifndef GAMESERVER_WORLD_IWORLDPERSISTENCEFACADE_HPP
+#define GAMESERVER_WORLD_IWORLDPERSISTENCEFACADE_HPP
 
-#include "IWorldManager.hpp"
-#include "IWorldManagerAccessor.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "IWorld.hpp"
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
@@ -37,20 +38,16 @@ namespace World
 {
 
 /**
- * @brief The world manager.
+ * @brief The interface of the world persistence facade.
  */
-class WorldManager
-    : public IWorldManager
+class IWorldPersistenceFacade
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs a world manager.
-     *
-     * @param a_accessor The accessor to be injected.
+     * @brief Destructs the world persistence facade.
      */
-    WorldManager(
-        IWorldManagerAccessorAutPtr a_accessor
-    );
+    virtual ~IWorldPersistenceFacade(){}
 
     /**
      * @brief Creates a world.
@@ -63,7 +60,7 @@ public:
     virtual bool createWorld(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets the world.
@@ -76,7 +73,7 @@ public:
     virtual IWorldShrPtr getWorld(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets the world.
@@ -89,7 +86,7 @@ public:
     virtual IWorldShrPtr getWorldByLandName(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets worlds.
@@ -100,21 +97,15 @@ public:
      */
     virtual IWorldMap getWorlds(
         Persistence::ITransactionShrPtr a_transaction
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    IWorldManagerAccessorScpPtr m_accessor;
+    ) const = 0;
 };
 
 /**
- * @brief An auto pointer of world manager.
+ * @brief The shared pointer of the interface of the world persistence facade.
  */
-typedef std::auto_ptr<WorldManager> WorldManagerAutPtr;
+typedef boost::shared_ptr<IWorldPersistenceFacade> IWorldPersistenceFacadeShrPtr;
 
 } // namespace World
 } // namespace GameServer
 
-#endif // GAMESERVER_WORLD_WORLDMANAGER_HPP
+#endif // GAMESERVER_WORLD_IWORLDPERSISTENCEFACADE_HPP

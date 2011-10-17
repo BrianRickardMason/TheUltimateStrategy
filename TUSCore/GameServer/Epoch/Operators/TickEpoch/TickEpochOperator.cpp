@@ -38,11 +38,11 @@ namespace Epoch
 {
 
 TickEpochOperator::TickEpochOperator(
-    IEpochManagerShrPtr a_epoch_manager,
-    IWorldManagerShrPtr a_world_manager
+    IEpochManagerShrPtr           a_epoch_manager,
+    IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
     : m_epoch_manager(a_epoch_manager),
-      m_world_manager(a_world_manager)
+      m_world_persistence_facade(a_world_persistence_facade)
 {
 }
 
@@ -54,7 +54,7 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
     try
     {
         // Verify if the world exists.
-        IWorldShrPtr world = m_world_manager->getWorld(a_transaction, a_world_name);
+        IWorldShrPtr world = m_world_persistence_facade->getWorld(a_transaction, a_world_name);
 
         if (!world)
         {

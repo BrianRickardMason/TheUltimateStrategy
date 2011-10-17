@@ -36,20 +36,20 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class WorldManagerTest
+class WorldPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    WorldManagerTest()
+    WorldPersistenceFacadeTest()
         : m_world_name_1("World1"),
           m_world_name_2("World2"),
           m_world_name_3("World3"),
           m_world_name_4("World4"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_manager(m_manager_abstract_factory->createWorldManager())
+          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade())
     {
     }
 
@@ -82,61 +82,61 @@ protected:
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief A manager.
+     * @brief The persistence facade of worlds.
      */
-    IWorldManagerShrPtr m_manager;
+    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 };
 
 /**
- * Component tests of: WorldManager::createWorld.
+ * Component tests of: WorldPersistenceFacade::createWorld.
  */
-TEST_F(WorldManagerTest, createWorld_WorldDoesNotExist)
+TEST_F(WorldPersistenceFacadeTest, createWorld_WorldDoesNotExist)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    ASSERT_TRUE(m_manager->createWorld(transaction, m_world_name_1));
+    ASSERT_TRUE(m_world_persistence_facade->createWorld(transaction, m_world_name_1));
 
-    IWorldShrPtr world = m_manager->getWorld(transaction, m_world_name_1);
+    IWorldShrPtr world = m_world_persistence_facade->getWorld(transaction, m_world_name_1);
 
     ASSERT_TRUE(world != NULL);
     compareWorld(world, m_world_name_1);
 }
 
-TEST_F(WorldManagerTest, createWorld_WorldDoesExist)
+TEST_F(WorldPersistenceFacadeTest, createWorld_WorldDoesExist)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    ASSERT_TRUE(m_manager->createWorld(transaction, m_world_name_1));
-    ASSERT_FALSE(m_manager->createWorld(transaction, m_world_name_1));
+    ASSERT_TRUE(m_world_persistence_facade->createWorld(transaction, m_world_name_1));
+    ASSERT_FALSE(m_world_persistence_facade->createWorld(transaction, m_world_name_1));
 }
 
 /**
- * Component tests of: WorldManager::getWorld.
+ * Component tests of: WorldPersistenceFacade::getWorld.
  */
-TEST_F(WorldManagerTest, getWorld_WorldDoesNotExist)
+TEST_F(WorldPersistenceFacadeTest, getWorld_WorldDoesNotExist)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    IWorldShrPtr world = m_manager->getWorld(transaction, m_world_name_4);
+    IWorldShrPtr world = m_world_persistence_facade->getWorld(transaction, m_world_name_4);
 
     ASSERT_TRUE(world == NULL);
 }
 
-TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
+TEST_F(WorldPersistenceFacadeTest, getWorld_WorldDoesExist)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    m_manager->createWorld(transaction, m_world_name_1);
-    m_manager->createWorld(transaction, m_world_name_2);
-    m_manager->createWorld(transaction, m_world_name_3);
+    m_world_persistence_facade->createWorld(transaction, m_world_name_1);
+    m_world_persistence_facade->createWorld(transaction, m_world_name_2);
+    m_world_persistence_facade->createWorld(transaction, m_world_name_3);
 
-    IWorldShrPtr world_1 = m_manager->getWorld(transaction, m_world_name_1);
-    IWorldShrPtr world_2 = m_manager->getWorld(transaction, m_world_name_2);
-    IWorldShrPtr world_3 = m_manager->getWorld(transaction, m_world_name_3);
+    IWorldShrPtr world_1 = m_world_persistence_facade->getWorld(transaction, m_world_name_1);
+    IWorldShrPtr world_2 = m_world_persistence_facade->getWorld(transaction, m_world_name_2);
+    IWorldShrPtr world_3 = m_world_persistence_facade->getWorld(transaction, m_world_name_3);
 
     ASSERT_TRUE(world_1 != NULL);
     ASSERT_TRUE(world_2 != NULL);
@@ -147,18 +147,18 @@ TEST_F(WorldManagerTest, getWorld_WorldDoesExist)
 }
 
 /**
- * Component tests of: WorldManager::getWorlds.
+ * Component tests of: WorldPersistenceFacade::getWorlds.
  */
-TEST_F(WorldManagerTest, getWorlds)
+TEST_F(WorldPersistenceFacadeTest, getWorlds)
 {
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    m_manager->createWorld(transaction, m_world_name_1);
-    m_manager->createWorld(transaction, m_world_name_2);
-    m_manager->createWorld(transaction, m_world_name_3);
+    m_world_persistence_facade->createWorld(transaction, m_world_name_1);
+    m_world_persistence_facade->createWorld(transaction, m_world_name_2);
+    m_world_persistence_facade->createWorld(transaction, m_world_name_3);
 
-    IWorldMap worlds = m_manager->getWorlds(transaction);
+    IWorldMap worlds = m_world_persistence_facade->getWorlds(transaction);
 
     ASSERT_FALSE(worlds.empty());
     ASSERT_EQ(3, worlds.size());

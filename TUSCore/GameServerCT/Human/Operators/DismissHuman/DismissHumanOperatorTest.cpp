@@ -74,7 +74,7 @@ protected:
           m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_manager(m_manager_abstract_factory->createWorldManager()),
+          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
           m_cost_manager(m_manager_abstract_factory->createCostManager()),
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
@@ -90,7 +90,7 @@ protected:
 
             m_user_persitence_facade->createUser(transaction, "Login", "Password");
 
-            m_world_manager->createWorld(transaction, m_world_name);
+            m_world_persistence_facade->createWorld(transaction, m_world_name);
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
@@ -205,7 +205,7 @@ protected:
     /**
      * @brief A world manager.
      */
-    IWorldManagerShrPtr m_world_manager;
+    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
      * @brief The epoch manager.

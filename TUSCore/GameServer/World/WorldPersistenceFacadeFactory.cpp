@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "WorldManagerFactory.hpp"
+#include "WorldPersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
 
@@ -34,11 +34,11 @@ namespace GameServer
 namespace World
 {
 
-WorldManagerAutPtr WorldManagerFactory::createWorldManager(
+WorldPersistenceFacadeAutPtr WorldPersistenceFacadeFactory::create(
     IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
 )
 {
-    return WorldManagerAutPtr(new WorldManager(a_accessor_abstract_factory->createWorldAccessor()));
+    return WorldPersistenceFacadeAutPtr(new WorldPersistenceFacade(a_accessor_abstract_factory->createWorldAccessor()));
 }
 
 } // namespace World

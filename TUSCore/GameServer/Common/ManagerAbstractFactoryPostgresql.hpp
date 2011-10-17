@@ -126,11 +126,11 @@ public:
     virtual User::IUserPersistenceFacadeShrPtr createUserPersistenceFacade() const;
 
     /**
-     * @brief Creates the world manager.
+     * @brief Creates the world persistence facade.
      *
-     * @return The newly created world manager.
+     * @return The newly created world persistence facade.
      */
-    virtual World::IWorldManagerShrPtr createWorldManager() const;
+    virtual World::IWorldPersistenceFacadeShrPtr createWorldPersistenceFacade() const;
 
 private:
     /**

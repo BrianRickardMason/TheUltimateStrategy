@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_CREATEWORLDOPERATOR_HPP
 #define GAMESERVER_WORLD_CREATEWORLDOPERATOR_HPP
 
-#include "../../IWorldManager.hpp"
+#include "../../IWorldPersistenceFacade.hpp"
 #include "ICreateWorldOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_world_manager The manager of worlds.
+     * @param a_world_persistence_facade The persistence facade of worlds.
      */
     CreateWorldOperator(
-        IWorldManagerShrPtr a_world_manager
+        IWorldPersistenceFacadeShrPtr a_world_persistence_facade
     );
 
     /**
@@ -67,9 +67,9 @@ public:
 
 private:
     /**
-     * @brief The manager of worlds.
+     * @brief The persistence facade of worlds.
      */
-    IWorldManagerShrPtr m_world_manager;
+    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 };
 
 /**

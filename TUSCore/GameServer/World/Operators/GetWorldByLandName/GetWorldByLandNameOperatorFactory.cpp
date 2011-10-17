@@ -39,7 +39,7 @@ GetWorldByLandNameOperatorAutPtr GetWorldByLandNameOperatorFactory::createGetWor
 )
 {
     return GetWorldByLandNameOperatorAutPtr(
-               new GetWorldByLandNameOperator(a_manager_abstract_factory->createWorldManager(),
+               new GetWorldByLandNameOperator(a_manager_abstract_factory->createWorldPersistenceFacade(),
                                               a_manager_abstract_factory->createLandPersistenceFacade())
            );
 }

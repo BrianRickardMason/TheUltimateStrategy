@@ -37,11 +37,11 @@ namespace Epoch
 {
 
 DeactivateEpochOperator::DeactivateEpochOperator(
-    IEpochManagerShrPtr a_epoch_manager,
-    IWorldManagerShrPtr a_world_manager
+    IEpochManagerShrPtr           a_epoch_manager,
+    IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
     : m_epoch_manager(a_epoch_manager),
-      m_world_manager(a_world_manager)
+      m_world_persistence_facade(a_world_persistence_facade)
 {
 }
 
@@ -53,7 +53,7 @@ DeactivateEpochOperatorExitCode DeactivateEpochOperator::deactivateEpoch(
     try
     {
         // Verify if the world exists.
-        if (!m_world_manager->getWorld(a_transaction, a_world_name))
+        if (!m_world_persistence_facade->getWorld(a_transaction, a_world_name))
         {
             return DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }

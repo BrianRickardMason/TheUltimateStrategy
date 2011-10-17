@@ -39,7 +39,7 @@ TickEpochOperatorAutPtr TickEpochOperatorFactory::createTickEpochOperator(
 )
 {
     return TickEpochOperatorAutPtr(new TickEpochOperator(a_manager_abstract_factory->createEpochManager(),
-                                                         a_manager_abstract_factory->createWorldManager()));
+                                                         a_manager_abstract_factory->createWorldPersistenceFacade()));
 }
 
 } // namespace Epoch
