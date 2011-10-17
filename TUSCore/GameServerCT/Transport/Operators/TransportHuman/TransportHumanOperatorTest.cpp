@@ -56,7 +56,7 @@ protected:
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_user_manager(m_manager_abstract_factory->createUserManager()),
+          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_transport_human_operator(TransportHumanOperatorFactory::createTransportHumanOperator(m_manager_abstract_factory)),
@@ -76,7 +76,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_user_manager->createUser(transaction, "Login", "Password");
+            m_user_persitence_facade->createUser(transaction, "Login", "Password");
 
             m_world_manager->createWorld(transaction, m_world_name);
 
@@ -114,9 +114,9 @@ protected:
     ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
-     * @brief The manager of users.
+     * @brief The persistence facade of users.
      */
-    IUserManagerShrPtr m_user_manager;
+    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
 
     /**
      * @brief The manager of worlds.

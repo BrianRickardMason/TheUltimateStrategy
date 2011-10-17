@@ -48,7 +48,7 @@ protected:
           m_password("Password"),
           m_different_password("DifferentPassword"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_manager(m_manager_abstract_factory->createUserManager())
+          m_manager(m_manager_abstract_factory->createUserPersistenceFacade())
     {
     }
 
@@ -71,7 +71,7 @@ protected:
     /**
      * @brief A manager.
      */
-    IUserManagerShrPtr m_manager;
+    IUserPersistenceFacadeShrPtr m_manager;
 };
 
 /**

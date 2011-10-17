@@ -25,18 +25,21 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
-#include "../../GameServer/User/UserManagerFactory.hpp"
-#include <gmock/gmock.h>
+#include "UserPersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
-using namespace GameServer::User;
 
-TEST(UserManagerFactoryTest, createUserManager)
+namespace GameServer
 {
-    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
+namespace User
+{
 
-    UserManagerAutPtr manager = UserManagerFactory::createUserManager(accessor_abstract_factory);
-
-    ASSERT_TRUE(manager.get() != NULL);
+UserPersistenceFacadeAutPtr UserPersistenceFacadeFactory::create(
+    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+)
+{
+    return UserPersistenceFacadeAutPtr(new UserPersistenceFacade(a_accessor_abstract_factory->createUserAccessor()));
 }
+
+} // namespace User
+} // namespace GameServer

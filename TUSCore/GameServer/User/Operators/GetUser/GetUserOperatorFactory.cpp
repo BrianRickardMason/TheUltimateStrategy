@@ -38,7 +38,7 @@ GetUserOperatorAutPtr GetUserOperatorFactory::createGetUserOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetUserOperatorAutPtr(new GetUserOperator(a_manager_abstract_factory->createUserManager()));
+    return GetUserOperatorAutPtr(new GetUserOperator(a_manager_abstract_factory->createUserPersistenceFacade()));
 }
 
 } // namespace User

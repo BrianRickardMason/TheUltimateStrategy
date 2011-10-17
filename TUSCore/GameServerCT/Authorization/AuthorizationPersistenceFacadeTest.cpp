@@ -62,7 +62,7 @@ protected:
           m_login_5("Login5"),
           m_world_name("World"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_manager(m_manager_abstract_factory->createUserManager()),
+          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
@@ -76,8 +76,8 @@ protected:
 
             m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_user_manager->createUser(transaction, "Login1", "Password1");
-            m_user_manager->createUser(transaction, "Login2", "Password2");
+            m_user_persitence_facade->createUser(transaction, "Login1", "Password1");
+            m_user_persitence_facade->createUser(transaction, "Login2", "Password2");
 
             m_land_persistence_facade->createLand(transaction, m_login_1, m_world_name, m_land_name_1);
             m_land_persistence_facade->createLand(transaction, m_login_2, m_world_name, m_land_name_2);
@@ -136,9 +136,9 @@ protected:
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief A user manager.
+     * @brief The persistence facade of users.
      */
-    IUserManagerShrPtr m_user_manager;
+    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
 
     /**
      * @brief A world manager.

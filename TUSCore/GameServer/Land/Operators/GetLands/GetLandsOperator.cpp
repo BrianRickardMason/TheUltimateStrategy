@@ -38,10 +38,10 @@ namespace Land
 
 GetLandsOperator::GetLandsOperator(
     ILandPersistenceFacadeShrPtr a_land_persistence_facade,
-    IUserManagerShrPtr           a_user_manager
+    IUserPersistenceFacadeShrPtr a_user_persistence_facade
 )
     : m_land_persistence_facade(a_land_persistence_facade),
-      m_user_manager(a_user_manager)
+      m_user_persistence_facade(a_user_persistence_facade)
 {
 }
 

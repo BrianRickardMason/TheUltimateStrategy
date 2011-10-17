@@ -49,14 +49,14 @@ protected:
           m_login_2("Login2"),
           m_login_5("Login5"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_manager(m_manager_abstract_factory->createUserManager())
+          m_user_persistence_facade(m_manager_abstract_factory->createUserPersistenceFacade())
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_user_manager->createUser(transaction, "Login1", "Password1");
-            m_user_manager->createUser(transaction, "Login2", "Password2");
+            m_user_persistence_facade->createUser(transaction, "Login1", "Password1");
+            m_user_persistence_facade->createUser(transaction, "Login2", "Password2");
 
             transaction->commit();
         }
@@ -75,9 +75,9 @@ protected:
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief The manager of users.
+     * @brief The persistence facade of users.
      */
-    IUserManagerShrPtr m_user_manager;
+    IUserPersistenceFacadeShrPtr m_user_persistence_facade;
 };
 
 // TODO: More specific tests, more granularity.

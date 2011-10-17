@@ -35,7 +35,7 @@
 #include "../Property/PropertyManagerFactory.hpp"
 #include "../Resource/ResourceManagerFactory.hpp"
 #include "../Settlement/SettlementPersistenceFacadeFactory.hpp"
-#include "../User/UserManagerFactory.hpp"
+#include "../User/UserPersistenceFacadeFactory.hpp"
 #include "../World/WorldManagerFactory.hpp"
 #include "AccessorAbstractFactoryPostgresql.hpp"
 #include "ManagerAbstractFactoryPostgresql.hpp"
@@ -117,9 +117,9 @@ ISettlementPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createSettl
     return ISettlementPersistenceFacadeShrPtr(SettlementPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IUserManagerShrPtr ManagerAbstractFactoryPostgresql::createUserManager() const
+IUserPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createUserPersistenceFacade() const
 {
-    return IUserManagerShrPtr(UserManagerFactory::createUserManager(m_accessor_abstract_factory));
+    return IUserPersistenceFacadeShrPtr(UserPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
 IWorldManagerShrPtr ManagerAbstractFactoryPostgresql::createWorldManager() const

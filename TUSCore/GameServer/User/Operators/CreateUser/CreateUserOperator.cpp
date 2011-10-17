@@ -36,9 +36,9 @@ namespace User
 {
 
 CreateUserOperator::CreateUserOperator(
-    IUserManagerShrPtr a_user_manager
+    IUserPersistenceFacadeShrPtr a_user_persistence_facade
 )
-    : m_user_manager(a_user_manager)
+    : m_user_persistence_facade(a_user_persistence_facade)
 {
 }
 
@@ -51,12 +51,12 @@ CreateUserOperatorExitCode CreateUserOperator::createUser(
     try
     {
         // Verify if the user exists.
-        if (m_user_manager->getUser(a_transaction, a_login))
+        if (m_user_persistence_facade->getUser(a_transaction, a_login))
         {
             return CreateUserOperatorExitCode(CREATE_USER_OPERATOR_EXIT_CODE_USER_DOES_EXIST);
         }
 
-        bool const result = m_user_manager->createUser(a_transaction, a_login, a_password);
+        bool const result = m_user_persistence_facade->createUser(a_transaction, a_login, a_password);
 
         return (result) ? CreateUserOperatorExitCode(CREATE_USER_OPERATOR_EXIT_CODE_USER_HAS_BEEN_CREATED)
                         : CreateUserOperatorExitCode(CREATE_USER_OPERATOR_EXIT_CODE_USER_HAS_NOT_BEEN_CREATED);

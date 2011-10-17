@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_USER_GETUSEROPERATOR_HPP
 #define GAMESERVER_USER_GETUSEROPERATOR_HPP
 
-#include "../../IUserManager.hpp"
+#include "../../IUserPersistenceFacade.hpp"
 #include "IGetUserOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_user_manager The manager of users.
+     * @param a_user_persistence_facade The persistence facade of users.
      */
     GetUserOperator(
-        IUserManagerShrPtr a_user_manager
+        IUserPersistenceFacadeShrPtr a_user_persistence_facade
     );
 
     /**
@@ -67,9 +67,9 @@ public:
 
 private:
     /**
-     * @brief The manager of users.
+     * @brief The persistence facade of users.
      */
-    IUserManagerShrPtr m_user_manager;
+    IUserPersistenceFacadeShrPtr m_user_persistence_facade;
 };
 
 /**

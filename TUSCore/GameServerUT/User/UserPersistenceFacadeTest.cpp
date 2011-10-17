@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/User/UserManager.hpp"
+#include "../../GameServer/User/UserPersistenceFacade.hpp"
 #include "../../GameServer/User/UserRecord.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "UserManagerAccessorMock.hpp"
@@ -40,16 +40,16 @@ using testing::Return;
 using testing::Throw;
 
 /**
- * @brief The test class of UserManager.
+ * @brief The test class of UserPersistenceFacade.
  */
-class UserManagerTest
+class UserPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
-     * @brief Constructs the test class of UserManager.
+     * @brief Constructs the test class of UserPersistenceFacade.
      */
-    UserManagerTest()
+    UserPersistenceFacadeTest()
         : m_login("Login"),
           m_password("Password"),
           m_user_record(new UserRecord(m_login, m_password, false))
@@ -72,14 +72,14 @@ protected:
     IUserRecordShrPtr m_user_record;
 };
 
-TEST_F(UserManagerTest, ConstructorDoesNotThrow)
+TEST_F(UserPersistenceFacadeTest, ConstructorDoesNotThrow)
 {
     IUserManagerAccessorAutPtr accessor(new UserManagerAccessorMock);
 
-    ASSERT_NO_THROW(UserManager manager(accessor));
+    ASSERT_NO_THROW(UserPersistenceFacade persistence_facade(accessor));
 }
 
-TEST_F(UserManagerTest, CreateUserReturnsTrueOnSuccess)
+TEST_F(UserPersistenceFacadeTest, CreateUserReturnsTrueOnSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -89,12 +89,12 @@ TEST_F(UserManagerTest, CreateUserReturnsTrueOnSuccess)
 
     IUserManagerAccessorAutPtr accessor(mock);
 
-    UserManager manager(accessor);
+    UserPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.createUser(transaction, m_login, m_password));
+    ASSERT_TRUE(persistence_facade.createUser(transaction, m_login, m_password));
 }
 
-TEST_F(UserManagerTest, CreateUserReturnsFalseOnFailure)
+TEST_F(UserPersistenceFacadeTest, CreateUserReturnsFalseOnFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -107,12 +107,12 @@ TEST_F(UserManagerTest, CreateUserReturnsFalseOnFailure)
 
     IUserManagerAccessorAutPtr accessor(mock);
 
-    UserManager manager(accessor);
+    UserPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.createUser(transaction, m_login, m_password));
+    ASSERT_FALSE(persistence_facade.createUser(transaction, m_login, m_password));
 }
 
-TEST_F(UserManagerTest, DeleteUserReturnsTrueOnSuccess)
+TEST_F(UserPersistenceFacadeTest, DeleteUserReturnsTrueOnSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -122,12 +122,12 @@ TEST_F(UserManagerTest, DeleteUserReturnsTrueOnSuccess)
 
     IUserManagerAccessorAutPtr accessor(mock);
 
-    UserManager manager(accessor);
+    UserPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.deleteUser(transaction, m_login));
+    ASSERT_TRUE(persistence_facade.deleteUser(transaction, m_login));
 }
 
-TEST_F(UserManagerTest, DeleteUserReturnsFalseOnFailure)
+TEST_F(UserPersistenceFacadeTest, DeleteUserReturnsFalseOnFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -140,12 +140,12 @@ TEST_F(UserManagerTest, DeleteUserReturnsFalseOnFailure)
 
     IUserManagerAccessorAutPtr accessor(mock);
 
-    UserManager manager(accessor);
+    UserPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deleteUser(transaction, m_login));
+    ASSERT_FALSE(persistence_facade.deleteUser(transaction, m_login));
 }
 
-TEST_F(UserManagerTest, GetUserReturnsNullIfUserDoesNotExist)
+TEST_F(UserPersistenceFacadeTest, GetUserReturnsNullIfUserDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -156,14 +156,14 @@ TEST_F(UserManagerTest, GetUserReturnsNullIfUserDoesNotExist)
 
     IUserManagerAccessorAutPtr accessor(mock);
 
-    UserManager manager(accessor);
+    UserPersistenceFacade persistence_facade(accessor);
 
-    IUserShrPtr user = manager.getUser(transaction, m_login);
+    IUserShrPtr user = persistence_facade.getUser(transaction, m_login);
 
     ASSERT_TRUE(user == NULL);
 }
 
-TEST_F(UserManagerTest, GetUserReturnedUserHasProperLogin)
+TEST_F(UserPersistenceFacadeTest, GetUserReturnedUserHasProperLogin)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -174,14 +174,14 @@ TEST_F(UserManagerTest, GetUserReturnedUserHasProperLogin)
 
     IUserManagerAccessorAutPtr accessor(mock);
 
-    UserManager manager(accessor);
+    UserPersistenceFacade persistence_facade(accessor);
 
-    IUserShrPtr user = manager.getUser(transaction, m_login);
+    IUserShrPtr user = persistence_facade.getUser(transaction, m_login);
 
     ASSERT_STREQ(m_login.c_str(), user->getLogin().c_str());
 }
 
-TEST_F(UserManagerTest, GetUserReturnedUserHasProperPassword)
+TEST_F(UserPersistenceFacadeTest, GetUserReturnedUserHasProperPassword)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -192,9 +192,9 @@ TEST_F(UserManagerTest, GetUserReturnedUserHasProperPassword)
 
     IUserManagerAccessorAutPtr accessor(mock);
 
-    UserManager manager(accessor);
+    UserPersistenceFacade persistence_facade(accessor);
 
-    IUserShrPtr user = manager.getUser(transaction, m_login);
+    IUserShrPtr user = persistence_facade.getUser(transaction, m_login);
 
     ASSERT_STREQ(m_password.c_str(), user->getPassword().c_str());
 }

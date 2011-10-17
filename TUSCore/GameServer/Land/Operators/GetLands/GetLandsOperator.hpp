@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_GETLANDSOPERATOR_HPP
 #define GAMESERVER_LAND_GETLANDSOPERATOR_HPP
 
-#include "../../../User/IUserManager.hpp"
+#include "../../../User/IUserPersistenceFacade.hpp"
 #include "../../ILandPersistenceFacade.hpp"
 #include "IGetLandsOperator.hpp"
 
@@ -48,11 +48,11 @@ public:
      * @brief Constructs the operator.
      *
      * @param a_land_persistence_facade The persistence facade of lands.
-     * @param a_user_manager            The manager of users.
+     * @param a_user_persistence_facade The persistence facade of users.
      */
     GetLandsOperator(
-        ILandPersistenceFacadeShrPtr a_land_persistence_facade,
-        User::IUserManagerShrPtr     a_user_manager
+        ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
+        User::IUserPersistenceFacadeShrPtr a_user_persistence_facade
     );
 
     /**
@@ -75,9 +75,9 @@ private:
     ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 
     /**
-     * @brief The manager of users.
+     * @brief The persistence facade of users.
      */
-    User::IUserManagerShrPtr m_user_manager;
+    User::IUserPersistenceFacadeShrPtr m_user_persistence_facade;
 };
 
 /**

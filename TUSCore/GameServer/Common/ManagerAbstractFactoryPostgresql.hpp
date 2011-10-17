@@ -119,11 +119,11 @@ public:
     virtual Settlement::ISettlementPersistenceFacadeShrPtr createSettlementPersistenceFacade() const;
 
     /**
-     * @brief Creates the user manager.
+     * @brief Creates the user persistence facade.
      *
-     * @return The newly created user manager.
+     * @return The newly created user persistence facade.
      */
-    virtual User::IUserManagerShrPtr createUserManager() const;
+    virtual User::IUserPersistenceFacadeShrPtr createUserPersistenceFacade() const;
 
     /**
      * @brief Creates the world manager.

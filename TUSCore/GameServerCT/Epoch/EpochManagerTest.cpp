@@ -59,7 +59,7 @@ protected:
           m_land_name("Land"),
           m_settlement_name("Settlement"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_manager(m_manager_abstract_factory->createUserManager()),
+          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_manager(m_manager_abstract_factory->createWorldManager()),
           m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
@@ -139,7 +139,7 @@ protected:
     /**
      * @brief The user manager.
      */
-    IUserManagerShrPtr m_user_manager;
+    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
 
     /**
      * @brief The world manager.
@@ -382,7 +382,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_user_manager->createUser(transaction, "Login", "Password");
+        m_user_persitence_facade->createUser(transaction, "Login", "Password");
 
         transaction->commit();
     }
@@ -436,7 +436,7 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_user_manager->createUser(transaction, "Login", "Password");
+        m_user_persitence_facade->createUser(transaction, "Login", "Password");
 
         transaction->commit();
     }

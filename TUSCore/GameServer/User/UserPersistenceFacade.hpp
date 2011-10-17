@@ -25,12 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_USERMANAGER_HPP
-#define GAMESERVER_USER_USERMANAGER_HPP
+#ifndef GAMESERVER_USER_USERPERSISTENCEFACADE_HPP
+#define GAMESERVER_USER_USERPERSISTENCEFACADE_HPP
 
 #include "../Persistence/IPersistence.hpp"
-#include "IUserManager.hpp"
 #include "IUserManagerAccessor.hpp"
+#include "IUserPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -38,18 +38,18 @@ namespace User
 {
 
 /**
- * @brief A user manager.
+ * @brief A user persistence facade.
  */
-class UserManager
-    : public IUserManager
+class UserPersistenceFacade
+    : public IUserPersistenceFacade
 {
 public:
     /**
-     * @brief Constructs the user manager.
+     * @brief Constructs the user persistence facade.
      *
      * @param a_accessor An accessor to be injected.
      */
-    UserManager(
+    UserPersistenceFacade(
         IUserManagerAccessorAutPtr a_accessor
     );
 
@@ -102,11 +102,11 @@ private:
 };
 
 /**
- * @brief The auto pointer of user manager.
+ * @brief The auto pointer of user persistence facade.
  */
-typedef std::auto_ptr<UserManager> UserManagerAutPtr;
+typedef std::auto_ptr<UserPersistenceFacade> UserPersistenceFacadeAutPtr;
 
 } // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_USERMANAGER_HPP
+#endif // GAMESERVER_USER_USERPERSISTENCEFACADE_HPP

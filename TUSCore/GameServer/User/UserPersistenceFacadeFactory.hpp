@@ -25,69 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "User.hpp"
-#include "UserManager.hpp"
+#ifndef GAMESERVER_USER_USERPERSISTNCEFACADEFACTORY_HPP
+#define GAMESERVER_USER_USERPERSISTNCEFACADEFACTORY_HPP
 
-using namespace GameServer::Persistence;
-using namespace boost;
-using namespace std;
+#include "../Common/IAccessorAbstractFactory.hpp"
+#include "UserPersistenceFacade.hpp"
 
 namespace GameServer
 {
 namespace User
 {
 
-UserManager::UserManager(
-    IUserManagerAccessorAutPtr a_accessor
-)
-    : m_accessor(a_accessor)
+/**
+ * @brief A factory of user persistence facade.
+ */
+class UserPersistenceFacadeFactory
 {
-}
-
-bool UserManager::createUser(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login,
-    string             const a_password
-)
-{
-    try
-    {
-        m_accessor->insertRecord(a_transaction, a_login, a_password);
-
-        return true;
-    }
-    catch (...)
-    {
-        return false;
-    }
-}
-
-bool UserManager::deleteUser(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login
-)
-{
-    try
-    {
-        m_accessor->deleteRecord(a_transaction, a_login);
-
-        return true;
-    }
-    catch (...)
-    {
-        return false;
-    }
-}
-
-IUserShrPtr UserManager::getUser(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login
-)
-{
-    IUserRecordShrPtr user_record = m_accessor->getRecord(a_transaction, a_login);
-
-    return user_record ? IUserShrPtr(new User(user_record)) : IUserShrPtr();
-}
+public:
+    /**
+     * @brief A factory method.
+     *
+     * @param a_accessor_abstract_factory The abstract factory of accessors.
+     *
+     * @return A newly created user persistence facade.
+     */
+    static UserPersistenceFacadeAutPtr create(
+        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    );
+};
 
 } // namespace User
 } // namespace GameServer
+
+#endif // GAMESERVER_USER_USERPERSISTNCEFACADEFACTORY_HPP

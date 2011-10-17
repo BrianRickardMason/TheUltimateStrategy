@@ -38,7 +38,7 @@
 #include "../Property/IPropertyManager.hpp"
 #include "../Resource/IResourceManager.hpp"
 #include "../Settlement/ISettlementPersistenceFacade.hpp"
-#include "../User/IUserManager.hpp"
+#include "../User/IUserPersistenceFacade.hpp"
 #include "../World/IWorldManager.hpp"
 #include <boost/shared_ptr.hpp>
 
@@ -129,11 +129,11 @@ public:
     virtual Settlement::ISettlementPersistenceFacadeShrPtr createSettlementPersistenceFacade() const = 0;
 
     /**
-     * @brief Creates the user manager.
+     * @brief Creates the user persistence facade.
      *
-     * @return The newly created user manager.
+     * @return The newly created user persistence facade.
      */
-    virtual User::IUserManagerShrPtr createUserManager() const = 0;
+    virtual User::IUserPersistenceFacadeShrPtr createUserPersistenceFacade() const = 0;
 
     /**
      * @brief Creates the world manager.

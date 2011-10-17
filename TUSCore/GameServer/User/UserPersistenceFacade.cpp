@@ -25,36 +25,69 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_USERMANAGERFACTORY_HPP
-#define GAMESERVER_USER_USERMANAGERFACTORY_HPP
+#include "User.hpp"
+#include "UserPersistenceFacade.hpp"
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "UserManager.hpp"
+using namespace GameServer::Persistence;
+using namespace boost;
+using namespace std;
 
 namespace GameServer
 {
 namespace User
 {
 
-/**
- * @brief A factory of user manager.
- */
-class UserManagerFactory
+UserPersistenceFacade::UserPersistenceFacade(
+    IUserManagerAccessorAutPtr a_accessor
+)
+    : m_accessor(a_accessor)
 {
-public:
-    /**
-     * @brief A factory method.
-     *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created user manager.
-     */
-    static UserManagerAutPtr createUserManager(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-    );
-};
+}
+
+bool UserPersistenceFacade::createUser(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_password
+)
+{
+    try
+    {
+        m_accessor->insertRecord(a_transaction, a_login, a_password);
+
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
+}
+
+bool UserPersistenceFacade::deleteUser(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
+)
+{
+    try
+    {
+        m_accessor->deleteRecord(a_transaction, a_login);
+
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
+}
+
+IUserShrPtr UserPersistenceFacade::getUser(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login
+)
+{
+    IUserRecordShrPtr user_record = m_accessor->getRecord(a_transaction, a_login);
+
+    return user_record ? IUserShrPtr(new User(user_record)) : IUserShrPtr();
+}
 
 } // namespace User
 } // namespace GameServer
-
-#endif // GAMESERVER_USER_USERMANAGERFACTORY_HPP

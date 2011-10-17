@@ -36,9 +36,9 @@ namespace User
 {
 
 GetUserOperator::GetUserOperator(
-    IUserManagerShrPtr a_user_manager
+    IUserPersistenceFacadeShrPtr a_user_persistence_facade
 )
-    : m_user_manager(a_user_manager)
+    : m_user_persistence_facade(a_user_persistence_facade)
 {
 }
 
@@ -49,7 +49,7 @@ GetUserOperatorExitCode GetUserOperator::getUser(
 {
     try
     {
-        IUserShrPtr const user = m_user_manager->getUser(a_transaction, a_login);
+        IUserShrPtr const user = m_user_persistence_facade->getUser(a_transaction, a_login);
 
         return (user) ? GetUserOperatorExitCode(GET_USER_OPERATOR_EXIT_CODE_USER_HAS_BEEN_GOT, user)
                       : GetUserOperatorExitCode(GET_USER_OPERATOR_EXIT_CODE_USER_HAS_NOT_BEEN_GOT);

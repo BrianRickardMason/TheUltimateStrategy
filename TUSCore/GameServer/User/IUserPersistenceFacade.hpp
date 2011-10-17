@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_IUSERMANAGER_HPP
-#define GAMESERVER_USER_IUSERMANAGER_HPP
+#ifndef GAMESERVER_USER_IUSERPERSISTENCEFACADE_HPP
+#define GAMESERVER_USER_IUSERPERSISTENCEFACADE_HPP
 
 #include "../Persistence/ITransaction.hpp"
 #include "IUser.hpp"
@@ -38,16 +38,16 @@ namespace User
 {
 
 /**
- * @brief The interface of a user manager.
+ * @brief The interface of a user persistence facade.
  */
-class IUserManager
+class IUserPersistenceFacade
     : boost::noncopyable
 {
 public:
     /**
-     * @brief Destructs the user manager.
+     * @brief Destructs the user persistence facade.
      */
-    virtual ~IUserManager(){};
+    virtual ~IUserPersistenceFacade(){};
 
     /**
      * @brief Creates a user.
@@ -92,11 +92,11 @@ public:
 };
 
 /**
- * @brief A shared pointer of interface of user manager.
+ * @brief A shared pointer of interface of user persistence facade.
  */
-typedef boost::shared_ptr<IUserManager> IUserManagerShrPtr;
+typedef boost::shared_ptr<IUserPersistenceFacade> IUserPersistenceFacadeShrPtr;
 
 } // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_IUSERMANAGER_HPP
+#endif // GAMESERVER_USER_IUSERPERSISTENCEFACADE_HPP
