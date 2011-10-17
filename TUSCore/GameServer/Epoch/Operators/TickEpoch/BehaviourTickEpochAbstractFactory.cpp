@@ -38,17 +38,17 @@ namespace Epoch
 {
 
 IBehaviourTickEpochShrPtr BehaviourTickEpochAbstractFactory::createBehaviourTickEpoch(
-    IEpochManagerShrPtr       a_epoch_manager,
-    IWorldShrPtr        const a_world
+    IEpochPersistenceFacadeShrPtr       a_epoch_persistence_facade,
+    IWorldShrPtr                  const a_world
 )
 {
     if (a_world->getTurnAvailable())
     {
-        return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnAvailable(a_epoch_manager));
+        return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnAvailable(a_epoch_persistence_facade));
     }
     else
     {
-        return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnUnavailable(a_epoch_manager));
+        return IBehaviourTickEpochShrPtr(new BehaviourTickEpochTurnUnavailable(a_epoch_persistence_facade));
     }
 }
 

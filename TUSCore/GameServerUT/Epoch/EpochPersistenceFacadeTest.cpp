@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Epoch/EpochManager.hpp"
+#include "../../GameServer/Epoch/EpochPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "EpochManagerAccessorMock.hpp"
 
@@ -40,14 +40,14 @@ using testing::Throw;
 /**
  * @brief The test class.
  */
-class EpochManagerTest
+class EpochPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    EpochManagerTest()
+    EpochPersistenceFacadeTest()
         : m_epoch_name("Epoch"),
           m_world_name("World"),
           m_land_name("Land"),
@@ -76,14 +76,14 @@ protected:
     string m_settlement_name;
 };
 
-TEST_F(EpochManagerTest, EpochManager)
+TEST_F(EpochPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IEpochManagerAccessorAutPtr accessor(new EpochManagerAccessorMock);
 
-    ASSERT_NO_THROW(EpochManager manager(accessor));
+    ASSERT_NO_THROW(EpochPersistenceFacade persistence_facade(accessor));
 }
 
-TEST_F(EpochManagerTest, createEpoch_Success)
+TEST_F(EpochPersistenceFacadeTest, createEpoch_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -93,12 +93,12 @@ TEST_F(EpochManagerTest, createEpoch_Success)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.createEpoch(transaction, m_world_name, m_epoch_name));
+    ASSERT_TRUE(persistence_facade.createEpoch(transaction, m_world_name, m_epoch_name));
 }
 
-TEST_F(EpochManagerTest, createEpoch_Failure)
+TEST_F(EpochPersistenceFacadeTest, createEpoch_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -111,12 +111,12 @@ TEST_F(EpochManagerTest, createEpoch_Failure)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.createEpoch(transaction, m_world_name, m_epoch_name));
+    ASSERT_FALSE(persistence_facade.createEpoch(transaction, m_world_name, m_epoch_name));
 }
 
-TEST_F(EpochManagerTest, deleteEpoch_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -127,12 +127,12 @@ TEST_F(EpochManagerTest, deleteEpoch_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deleteEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.deleteEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, deleteEpoch_EpochHasNotBeenFinished)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_EpochHasNotBeenFinished)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -143,12 +143,12 @@ TEST_F(EpochManagerTest, deleteEpoch_EpochHasNotBeenFinished)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deleteEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.deleteEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, deleteEpoch_Success)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -161,12 +161,12 @@ TEST_F(EpochManagerTest, deleteEpoch_Success)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.deleteEpoch(transaction, m_world_name));
+    ASSERT_TRUE(persistence_facade.deleteEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, deleteEpoch_Failure)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -182,12 +182,12 @@ TEST_F(EpochManagerTest, deleteEpoch_Failure)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deleteEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.deleteEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, getEpoch_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, getEpoch_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -198,14 +198,14 @@ TEST_F(EpochManagerTest, getEpoch_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = manager.getEpoch(transaction, m_world_name);
+    EpochShrPtr epoch = persistence_facade.getEpoch(transaction, m_world_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
 
-TEST_F(EpochManagerTest, getEpoch_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, getEpoch_EpochDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -216,9 +216,9 @@ TEST_F(EpochManagerTest, getEpoch_EpochDoesExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = manager.getEpoch(transaction, m_world_name);
+    EpochShrPtr epoch = persistence_facade.getEpoch(transaction, m_world_name);
 
     ASSERT_TRUE(epoch != NULL);
 
@@ -229,7 +229,7 @@ TEST_F(EpochManagerTest, getEpoch_EpochDoesExist)
     ASSERT_EQ(22, epoch->getTicks());
 }
 
-TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -243,14 +243,14 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = manager.getEpochByLandName(transaction, m_land_name);
+    EpochShrPtr epoch = persistence_facade.getEpochByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
 
-TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -264,9 +264,9 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = manager.getEpochByLandName(transaction, m_land_name);
+    EpochShrPtr epoch = persistence_facade.getEpochByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(epoch != NULL);
 
@@ -277,7 +277,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
     ASSERT_EQ(22, epoch->getTicks());
 }
 
-TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -294,14 +294,14 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = manager.getEpochBySettlementName(transaction, m_settlement_name);
+    EpochShrPtr epoch = persistence_facade.getEpochBySettlementName(transaction, m_settlement_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
 
-TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -318,9 +318,9 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = manager.getEpochBySettlementName(transaction, m_settlement_name);
+    EpochShrPtr epoch = persistence_facade.getEpochBySettlementName(transaction, m_settlement_name);
 
     ASSERT_TRUE(epoch != NULL);
 
@@ -331,7 +331,7 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
     ASSERT_EQ(22, epoch->getTicks());
 }
 
-TEST_F(EpochManagerTest, activateEpoch_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -342,12 +342,12 @@ TEST_F(EpochManagerTest, activateEpoch_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.activateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenFinished)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_EpochHasBeenFinished)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -358,12 +358,12 @@ TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenFinished)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.activateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenActivated)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_EpochHasBeenActivated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -374,12 +374,12 @@ TEST_F(EpochManagerTest, activateEpoch_EpochHasBeenActivated)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.activateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, activateEpoch_Success)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -392,12 +392,12 @@ TEST_F(EpochManagerTest, activateEpoch_Success)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.activateEpoch(transaction, m_world_name));
+    ASSERT_TRUE(persistence_facade.activateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, activateEpoch_Failure)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -413,12 +413,12 @@ TEST_F(EpochManagerTest, activateEpoch_Failure)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.activateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.activateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -429,12 +429,12 @@ TEST_F(EpochManagerTest, deactivateEpoch_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.deactivateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_EpochHasBeenFinished)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_EpochHasBeenFinished)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -445,12 +445,12 @@ TEST_F(EpochManagerTest, deactivateEpoch_EpochHasBeenFinished)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.deactivateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_EpochHasNotBeenAactivated)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_EpochHasNotBeenAactivated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -461,12 +461,12 @@ TEST_F(EpochManagerTest, deactivateEpoch_EpochHasNotBeenAactivated)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.deactivateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_Success)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -479,13 +479,13 @@ TEST_F(EpochManagerTest, deactivateEpoch_Success)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.deactivateEpoch(transaction, m_world_name));
+    ASSERT_TRUE(persistence_facade.deactivateEpoch(transaction, m_world_name));
 }
 
 
-TEST_F(EpochManagerTest, deactivateEpoch_Failure)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -501,12 +501,12 @@ TEST_F(EpochManagerTest, deactivateEpoch_Failure)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.deactivateEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.deactivateEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, finishEpoch_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -517,12 +517,12 @@ TEST_F(EpochManagerTest, finishEpoch_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.finishEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenFinished)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_EpochHasBeenFinished)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -533,12 +533,12 @@ TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenFinished)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.finishEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenActivated)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_EpochHasBeenActivated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -549,12 +549,12 @@ TEST_F(EpochManagerTest, finishEpoch_EpochHasBeenActivated)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.finishEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, finishEpoch_Success)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -567,12 +567,12 @@ TEST_F(EpochManagerTest, finishEpoch_Success)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.finishEpoch(transaction, m_world_name));
+    ASSERT_TRUE(persistence_facade.finishEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, finishEpoch_Failure)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -588,12 +588,12 @@ TEST_F(EpochManagerTest, finishEpoch_Failure)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.finishEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.finishEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, tickEpoch_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_EpochDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -604,12 +604,12 @@ TEST_F(EpochManagerTest, tickEpoch_EpochDoesNotExist)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.tickEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenFinished)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_EpochHasBeenFinished)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -620,12 +620,12 @@ TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenFinished)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.tickEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenActivated)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_EpochHasBeenActivated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -636,12 +636,12 @@ TEST_F(EpochManagerTest, tickEpoch_EpochHasBeenActivated)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.tickEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, tickEpoch_Success)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -654,12 +654,12 @@ TEST_F(EpochManagerTest, tickEpoch_Success)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.tickEpoch(transaction, m_world_name));
+    ASSERT_TRUE(persistence_facade.tickEpoch(transaction, m_world_name));
 }
 
-TEST_F(EpochManagerTest, tickEpoch_Failure)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -675,7 +675,7 @@ TEST_F(EpochManagerTest, tickEpoch_Failure)
 
     IEpochManagerAccessorAutPtr accessor(mock);
 
-    EpochManager manager(accessor);
+    EpochPersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.tickEpoch(transaction, m_world_name));
+    ASSERT_FALSE(persistence_facade.tickEpoch(transaction, m_world_name));
 }

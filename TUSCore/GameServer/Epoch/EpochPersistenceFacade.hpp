@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_EPOCHMANAGERMOCK_HPP
-#define GAMESERVER_EPOCH_EPOCHMANAGERMOCK_HPP
+#ifndef GAMESERVER_EPOCH_EPOCHPERSISTENCEFACADE_HPP
+#define GAMESERVER_EPOCH_EPOCHPERSISTENCEFACADE_HPP
 
-#include "../../GameServer/Epoch/IEpochManager.hpp"
-#include <gmock/gmock.h>
+#include "IEpochManagerAccessor.hpp"
+#include "IEpochPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,12 +37,21 @@ namespace Epoch
 {
 
 /**
- * @brief The mock of the manager of the epochs.
+ * @brief The epoch persistence facade.
  */
-class EpochManagerMock
-    : public IEpochManager
+class EpochPersistenceFacade
+    : public IEpochPersistenceFacade
 {
 public:
+    /**
+     * @brief Constructs the epoch persistence facade.
+     *
+     * @param a_accessor The accessor to be injected.
+     */
+    EpochPersistenceFacade(
+        IEpochManagerAccessorAutPtr a_accessor
+    );
+
     /**
      * @brief Creates the epoch.
      *
@@ -54,14 +63,11 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD3(
-        createEpoch,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name,
-            std::string                     const a_epoch_name
-        )
-    );
+    virtual bool createEpoch(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name,
+        std::string                     const a_epoch_name
+    ) const;
 
     /**
      * @brief Deletes the epoch.
@@ -74,13 +80,10 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
-        deleteEpoch,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
-        )
-    );
+    virtual bool deleteEpoch(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const;
 
     /**
      * @brief Gets the epoch of the world.
@@ -90,13 +93,10 @@ public:
      *
      * @return The epoch, null if not found.
      */
-    MOCK_CONST_METHOD2(
-        getEpoch,
-        EpochShrPtr(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
-        )
-    );
+    virtual EpochShrPtr getEpoch(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const;
 
     /**
      * @brief Gets the epoch of the world.
@@ -106,13 +106,10 @@ public:
      *
      * @return The epoch, null if not found.
      */
-    MOCK_CONST_METHOD2(
-        getEpochByLandName,
-        EpochShrPtr(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name
-        )
-    );
+    virtual EpochShrPtr getEpochByLandName(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
+    ) const;
 
     /**
      * @brief Gets the epoch of the world.
@@ -122,13 +119,10 @@ public:
      *
      * @return The epoch, null if not found.
      */
-    MOCK_CONST_METHOD2(
-        getEpochBySettlementName,
-        EpochShrPtr(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_settlement_name
-        )
-    );
+    virtual EpochShrPtr getEpochBySettlementName(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const;
 
     /**
      * @brief Activates the epoch.
@@ -142,13 +136,10 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
-        activateEpoch,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
-        )
-    );
+    virtual bool activateEpoch(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const;
 
     /**
      * @brief Deactivates the epoch.
@@ -162,13 +153,10 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
-        deactivateEpoch,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
-        )
-    );
+    virtual bool deactivateEpoch(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const;
 
     /**
      * @brief Finishes the epoch.
@@ -182,13 +170,10 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
-        finishEpoch,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
-        )
-    );
+    virtual bool finishEpoch(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const;
 
     /**
      * @brief Ticks the epoch.
@@ -202,16 +187,24 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD2(
-        tickEpoch,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_world_name
-        )
-    );
+    virtual bool tickEpoch(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const;
+
+private:
+    /**
+     * @brief An accessor.
+     */
+    IEpochManagerAccessorScpPtr m_accessor;
 };
+
+/**
+ * @brief The auto pointer of the epoch persistence facade.
+ */
+typedef std::auto_ptr<EpochPersistenceFacade> EpochPersistenceFacadeAutPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_EPOCHMANAGERMOCK_HPP
+#endif // GAMESERVER_EPOCH_EPOCHPERSISTENCEFACADE_HPP

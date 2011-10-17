@@ -37,10 +37,10 @@ namespace Epoch
 {
 
 GetEpochByWorldNameOperator::GetEpochByWorldNameOperator(
-    IEpochManagerShrPtr           a_epoch_manager,
+    IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
     IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
-    : m_epoch_manager(a_epoch_manager),
+    : m_epoch_persistence_facade(a_epoch_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade)
 {
 }
@@ -58,10 +58,15 @@ GetEpochByWorldNameOperatorExitCode GetEpochByWorldNameOperator::getEpochByWorld
             return GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
 
-        EpochShrPtr const epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
+        EpochShrPtr const epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
 
-        return (epoch) ? GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT, epoch)
-                       : GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT);
+        return (epoch) ? GetEpochByWorldNameOperatorExitCode(
+                             GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT,
+                             epoch
+                         )
+                       : GetEpochByWorldNameOperatorExitCode(
+                             GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT
+                         );
     }
     catch (...)
     {

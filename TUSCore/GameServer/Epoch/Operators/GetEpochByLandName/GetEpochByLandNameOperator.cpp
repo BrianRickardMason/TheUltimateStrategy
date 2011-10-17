@@ -36,9 +36,9 @@ namespace Epoch
 {
 
 GetEpochByLandNameOperator::GetEpochByLandNameOperator(
-    IEpochManagerShrPtr a_epoch_manager
+    IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade
 )
-    : m_epoch_manager(a_epoch_manager)
+    : m_epoch_persistence_facade(a_epoch_persistence_facade)
 {
 }
 
@@ -49,10 +49,15 @@ GetEpochByLandNameOperatorExitCode GetEpochByLandNameOperator::getEpochByLandNam
 {
     try
     {
-        EpochShrPtr const epoch = m_epoch_manager->getEpochByLandName(a_transaction, a_name);
+        EpochShrPtr const epoch = m_epoch_persistence_facade->getEpochByLandName(a_transaction, a_name);
 
-        return (epoch) ? GetEpochByLandNameOperatorExitCode(GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT, epoch)
-                       : GetEpochByLandNameOperatorExitCode(GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT);
+        return (epoch) ? GetEpochByLandNameOperatorExitCode(
+                             GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT,
+                             epoch
+                         )
+                       : GetEpochByLandNameOperatorExitCode(
+                             GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT
+                         );
     }
     catch (...)
     {

@@ -38,7 +38,9 @@ GetEpochByLandNameOperatorAutPtr GetEpochByLandNameOperatorFactory::createGetEpo
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetEpochByLandNameOperatorAutPtr(new GetEpochByLandNameOperator(a_manager_abstract_factory->createEpochManager()));
+    return GetEpochByLandNameOperatorAutPtr(
+               new GetEpochByLandNameOperator(a_manager_abstract_factory->createEpochPersistenceFacade())
+           );
 }
 
 } // namespace Epoch

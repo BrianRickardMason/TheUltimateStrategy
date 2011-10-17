@@ -39,7 +39,7 @@ DeactivateEpochOperatorAutPtr DeactivateEpochOperatorFactory::createDeactivateEp
 )
 {
     return DeactivateEpochOperatorAutPtr(
-               new DeactivateEpochOperator(a_manager_abstract_factory->createEpochManager(),
+               new DeactivateEpochOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
                                            a_manager_abstract_factory->createWorldPersistenceFacade())
            );
 }

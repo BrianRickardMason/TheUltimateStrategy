@@ -38,10 +38,10 @@ namespace Epoch
 {
 
 TickEpochOperator::TickEpochOperator(
-    IEpochManagerShrPtr           a_epoch_manager,
+    IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
     IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
-    : m_epoch_manager(a_epoch_manager),
+    : m_epoch_persistence_facade(a_epoch_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade)
 {
 }
@@ -63,10 +63,10 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
 
         // Set the behaviour.
         m_behaviour_tick_epoch =
-            BehaviourTickEpochAbstractFactory::createBehaviourTickEpoch(m_epoch_manager, world);
+            BehaviourTickEpochAbstractFactory::createBehaviourTickEpoch(m_epoch_persistence_facade, world);
 
         // Verify if the epoch exists.
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
+        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
 
         if (!epoch)
         {

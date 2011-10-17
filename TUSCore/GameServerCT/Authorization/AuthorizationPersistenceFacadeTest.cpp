@@ -64,7 +64,7 @@ protected:
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
+          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_settlement_persistence_facade(m_manager_abstract_factory->createSettlementPersistenceFacade())
     {
@@ -74,7 +74,7 @@ protected:
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
+            m_epoch_persistence_facade->createEpoch(transaction, m_world_name, m_epoch_name);
 
             m_user_persitence_facade->createUser(transaction, "Login1", "Password1");
             m_user_persitence_facade->createUser(transaction, "Login2", "Password2");
@@ -141,17 +141,17 @@ protected:
     IUserPersistenceFacadeShrPtr m_user_persitence_facade;
 
     /**
-     * @brief A world manager.
+     * @brief The world persistence facade.
      */
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
-     * @brief The epoch manager.
+     * @brief The epoch persistence facade.
      */
-    IEpochManagerShrPtr m_epoch_manager;
+    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
 
     /**
-     * @brief A land persistence facade.
+     * @brief The land persistence facade.
      */
     ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 

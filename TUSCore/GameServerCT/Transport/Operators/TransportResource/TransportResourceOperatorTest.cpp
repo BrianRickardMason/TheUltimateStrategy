@@ -53,7 +53,7 @@ protected:
      */
     TransportResourceOperatorTest()
         : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
+          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_resource_manager(m_manager_abstract_factory->createResourceManager()),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
@@ -80,7 +80,7 @@ protected:
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
+            m_epoch_persistence_facade->createEpoch(transaction, m_world_name, m_epoch_name);
 
             m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_1);
             m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_2);
@@ -101,7 +101,7 @@ protected:
     /**
      * @brief The manager of epochs.
      */
-    IEpochManagerShrPtr m_epoch_manager;
+    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
 
     /**
      * @brief The persistence facade of lands.

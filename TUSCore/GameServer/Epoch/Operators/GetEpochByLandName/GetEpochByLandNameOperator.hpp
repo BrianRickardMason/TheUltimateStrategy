@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_GETEPOCHBYLANDNAMEOPERATOR_HPP
 #define GAMESERVER_EPOCH_GETEPOCHBYLANDNAMEOPERATOR_HPP
 
-#include "../../IEpochManager.hpp"
+#include "../../IEpochPersistenceFacade.hpp"
 #include "IGetEpochByLandNameOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_epoch_manager The manager of epochs.
+     * @param a_epoch_persistence_facade The persistence facade of epochs.
      */
     GetEpochByLandNameOperator(
-        IEpochManagerShrPtr a_epoch_manager
+        IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade
     );
 
     /**
@@ -67,9 +67,9 @@ public:
 
 private:
     /**
-     * @brief The manager of epochs.
+     * @brief The persistence facade of epochs.
      */
-    IEpochManagerShrPtr m_epoch_manager;
+    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
 };
 
 /**

@@ -58,10 +58,10 @@ protected:
           m_settlement_name_2("Settlement2"),
           m_settlement_name_3("Settlement3"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
+          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
+          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
-          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
@@ -76,7 +76,7 @@ protected:
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
+            m_epoch_persistence_facade->createEpoch(transaction, m_world_name, m_epoch_name);
 
             m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name);
 
@@ -141,29 +141,13 @@ protected:
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief The persistence facade of users.
+     * @brief Used persistence facades.
      */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
-
-    /**
-     * @brief A world manager.
-     */
+    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
+    IHumanManagerShrPtr           m_human_manager;
+    ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
+    IUserPersistenceFacadeShrPtr  m_user_persitence_facade;
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
-
-    /**
-     * @brief The epoch manager.
-     */
-    IEpochManagerShrPtr m_epoch_manager;
-
-    /**
-     * @brief A land persistence facade.
-     */
-    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
-
-    /**
-     * @brief A human manager.
-     */
-    IHumanManagerShrPtr m_human_manager;
 
     /**
      * @brief CreateSettlementOperator.

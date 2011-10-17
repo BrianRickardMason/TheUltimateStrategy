@@ -46,14 +46,14 @@ public:
     /**
      * @brief The factory method.
      *
-     * @param a_epoch_manager The manager of epoch.
-     * @param a_world         The world.
+     * @param a_epoch_persistence_facade The persistence facade of epoch.
+     * @param a_world                    The world.
      *
      * @return The newly created BehaviourTickEpoch.
      */
     static IBehaviourTickEpochShrPtr createBehaviourTickEpoch(
-        IEpochManagerShrPtr       a_epoch_manager,
-        World::IWorldShrPtr const a_world
+        IEpochPersistenceFacadeShrPtr       a_epoch_persistence_facade,
+        World::IWorldShrPtr           const a_world
     );
 };
 

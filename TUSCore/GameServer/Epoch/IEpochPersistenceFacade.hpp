@@ -25,11 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_EPOCHMANAGER_HPP
-#define GAMESERVER_EPOCH_EPOCHMANAGER_HPP
+#ifndef GAMESERVER_EPOCH_IEPOCHPERSISTENCEFACADE_HPP
+#define GAMESERVER_EPOCH_IEPOCHPERSISTENCEFACADE_HPP
 
-#include "IEpochManager.hpp"
-#include "IEpochManagerAccessor.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "Epoch.hpp"
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
@@ -37,20 +38,16 @@ namespace Epoch
 {
 
 /**
- * @brief The epoch manager.
+ * @brief The interface of the epoch persistence facade.
  */
-class EpochManager
-    : public IEpochManager
+class IEpochPersistenceFacade
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the epoch manager.
-     *
-     * @param a_accessor The accessor to be injected.
+     * @brief Destructs the persistence facade.
      */
-    EpochManager(
-        IEpochManagerAccessorAutPtr a_accessor
-    );
+    virtual ~IEpochPersistenceFacade(){}
 
     /**
      * @brief Creates the epoch.
@@ -67,7 +64,7 @@ public:
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name,
         std::string                     const a_epoch_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Deletes the epoch.
@@ -83,7 +80,7 @@ public:
     virtual bool deleteEpoch(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets the epoch of the world.
@@ -96,7 +93,7 @@ public:
     virtual EpochShrPtr getEpoch(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets the epoch of the world.
@@ -109,7 +106,7 @@ public:
     virtual EpochShrPtr getEpochByLandName(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets the epoch of the world.
@@ -122,7 +119,7 @@ public:
     virtual EpochShrPtr getEpochBySettlementName(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Activates the epoch.
@@ -139,7 +136,7 @@ public:
     virtual bool activateEpoch(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Deactivates the epoch.
@@ -156,7 +153,7 @@ public:
     virtual bool deactivateEpoch(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Finishes the epoch.
@@ -173,7 +170,7 @@ public:
     virtual bool finishEpoch(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Ticks the epoch.
@@ -190,21 +187,15 @@ public:
     virtual bool tickEpoch(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    IEpochManagerAccessorScpPtr m_accessor;
+    ) const = 0;
 };
 
 /**
- * @brief The auto pointer of the epoch manager.
+ * @brief The shared pointer of the interface of the epoch persistence facade.
  */
-typedef std::auto_ptr<EpochManager> EpochManagerAutPtr;
+typedef boost::shared_ptr<IEpochPersistenceFacade> IEpochPersistenceFacadeShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_EPOCHMANAGER_HPP
+#endif // GAMESERVER_EPOCH_IEPOCHPERSISTENCEFACADE_HPP

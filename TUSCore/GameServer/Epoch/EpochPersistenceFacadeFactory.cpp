@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "EpochManagerFactory.hpp"
+#include "EpochPersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
 
@@ -34,11 +34,11 @@ namespace GameServer
 namespace Epoch
 {
 
-EpochManagerAutPtr EpochManagerFactory::createEpochManager(
+EpochPersistenceFacadeAutPtr EpochPersistenceFacadeFactory::create(
     IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
 )
 {
-    return EpochManagerAutPtr(new EpochManager(a_accessor_abstract_factory->createEpochAccessor()));
+    return EpochPersistenceFacadeAutPtr(new EpochPersistenceFacade(a_accessor_abstract_factory->createEpochAccessor()));
 }
 
 } // namespace Epoch

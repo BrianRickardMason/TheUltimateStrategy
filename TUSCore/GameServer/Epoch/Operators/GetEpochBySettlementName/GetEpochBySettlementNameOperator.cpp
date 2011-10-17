@@ -37,10 +37,10 @@ namespace Epoch
 {
 
 GetEpochBySettlementNameOperator::GetEpochBySettlementNameOperator(
-    IEpochManagerShrPtr                a_epoch_manager,
+    IEpochPersistenceFacadeShrPtr      a_epoch_persistence_facade,
     ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
-    : m_epoch_manager(a_epoch_manager),
+    : m_epoch_persistence_facade(a_epoch_persistence_facade),
       m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
@@ -58,7 +58,7 @@ GetEpochBySettlementNameOperatorExitCode GetEpochBySettlementNameOperator::getEp
             return GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST);
         }
 
-        EpochShrPtr const epoch = m_epoch_manager->getEpochBySettlementName(a_transaction, a_settlement_name);
+        EpochShrPtr const epoch = m_epoch_persistence_facade->getEpochBySettlementName(a_transaction, a_settlement_name);
 
         return (epoch) ? GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT, epoch)
                        : GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT);

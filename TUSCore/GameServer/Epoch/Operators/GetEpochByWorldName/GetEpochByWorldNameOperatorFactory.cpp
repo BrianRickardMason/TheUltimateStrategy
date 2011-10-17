@@ -39,7 +39,7 @@ GetEpochByWorldNameOperatorAutPtr GetEpochByWorldNameOperatorFactory::createGetE
 )
 {
     return GetEpochByWorldNameOperatorAutPtr(
-               new GetEpochByWorldNameOperator(a_manager_abstract_factory->createEpochManager(),
+               new GetEpochByWorldNameOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
                                                a_manager_abstract_factory->createWorldPersistenceFacade())
            );
 }

@@ -37,10 +37,10 @@ namespace Epoch
 {
 
 DeactivateEpochOperator::DeactivateEpochOperator(
-    IEpochManagerShrPtr           a_epoch_manager,
+    IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
     IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
-    : m_epoch_manager(a_epoch_manager),
+    : m_epoch_persistence_facade(a_epoch_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade)
 {
 }
@@ -59,7 +59,7 @@ DeactivateEpochOperatorExitCode DeactivateEpochOperator::deactivateEpoch(
         }
 
         // Verify if the epoch exists.
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
+        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
 
         if (!epoch)
         {
@@ -78,7 +78,7 @@ DeactivateEpochOperatorExitCode DeactivateEpochOperator::deactivateEpoch(
             return DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_IS_NOT_ACTIVE);
         }
 
-        bool const result = m_epoch_manager->deactivateEpoch(a_transaction, a_world_name);
+        bool const result = m_epoch_persistence_facade->deactivateEpoch(a_transaction, a_world_name);
 
         return (result) ? DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_DEACTIVATED)
                         : DeactivateEpochOperatorExitCode(DEACTIVATE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_DEACTIVATED);

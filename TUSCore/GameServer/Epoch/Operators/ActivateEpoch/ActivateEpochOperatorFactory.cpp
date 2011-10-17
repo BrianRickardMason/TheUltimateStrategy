@@ -39,7 +39,7 @@ ActivateEpochOperatorAutPtr ActivateEpochOperatorFactory::createActivateEpochOpe
 )
 {
     return ActivateEpochOperatorAutPtr(
-               new ActivateEpochOperator(a_manager_abstract_factory->createEpochManager(),
+               new ActivateEpochOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
                                          a_manager_abstract_factory->createWorldPersistenceFacade())
            );
 }

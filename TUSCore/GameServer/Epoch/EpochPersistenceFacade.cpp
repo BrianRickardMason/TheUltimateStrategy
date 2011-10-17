@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "EpochManager.hpp"
+#include "EpochPersistenceFacade.hpp"
 
 using namespace GameServer::Persistence;
 using namespace boost;
@@ -36,14 +36,14 @@ namespace GameServer
 namespace Epoch
 {
 
-EpochManager::EpochManager(
+EpochPersistenceFacade::EpochPersistenceFacade(
     IEpochManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-bool EpochManager::createEpoch(
+bool EpochPersistenceFacade::createEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name,
     string             const a_epoch_name
@@ -61,7 +61,7 @@ bool EpochManager::createEpoch(
     }
 }
 
-bool EpochManager::deleteEpoch(
+bool EpochPersistenceFacade::deleteEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -90,7 +90,7 @@ bool EpochManager::deleteEpoch(
     }
 }
 
-EpochShrPtr EpochManager::getEpoch(
+EpochShrPtr EpochPersistenceFacade::getEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -100,7 +100,7 @@ EpochShrPtr EpochManager::getEpoch(
     return record ? make_shared<Epoch>(*record) : EpochShrPtr();
 }
 
-EpochShrPtr EpochManager::getEpochByLandName(
+EpochShrPtr EpochPersistenceFacade::getEpochByLandName(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -110,7 +110,7 @@ EpochShrPtr EpochManager::getEpochByLandName(
     return getEpoch(a_transaction, world_name);
 }
 
-EpochShrPtr EpochManager::getEpochBySettlementName(
+EpochShrPtr EpochPersistenceFacade::getEpochBySettlementName(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -120,7 +120,7 @@ EpochShrPtr EpochManager::getEpochBySettlementName(
     return getEpochByLandName(a_transaction, land_name);
 }
 
-bool EpochManager::activateEpoch(
+bool EpochPersistenceFacade::activateEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -154,7 +154,7 @@ bool EpochManager::activateEpoch(
     }
 }
 
-bool EpochManager::deactivateEpoch(
+bool EpochPersistenceFacade::deactivateEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -188,7 +188,7 @@ bool EpochManager::deactivateEpoch(
     }
 }
 
-bool EpochManager::finishEpoch(
+bool EpochPersistenceFacade::finishEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -222,7 +222,7 @@ bool EpochManager::finishEpoch(
     }
 }
 
-bool EpochManager::tickEpoch(
+bool EpochPersistenceFacade::tickEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const

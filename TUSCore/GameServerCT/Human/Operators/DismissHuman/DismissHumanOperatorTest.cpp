@@ -75,7 +75,7 @@ protected:
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_manager(m_manager_abstract_factory->createEpochManager()),
+          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_cost_manager(m_manager_abstract_factory->createCostManager()),
           m_human_manager(m_manager_abstract_factory->createHumanManager()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
@@ -92,7 +92,7 @@ protected:
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
-            m_epoch_manager->createEpoch(transaction, m_world_name, m_epoch_name);
+            m_epoch_persistence_facade->createEpoch(transaction, m_world_name, m_epoch_name);
 
             m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_1);
             m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name_2);
@@ -203,14 +203,14 @@ protected:
     IUserPersistenceFacadeShrPtr m_user_persitence_facade;
 
     /**
-     * @brief A world manager.
+     * @brief The world persistence facade.
      */
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
-     * @brief The epoch manager.
+     * @brief The epoch persistence facade.
      */
-    IEpochManagerShrPtr m_epoch_manager;
+    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
 
     /**
      * @brief A cost manager.
@@ -218,12 +218,12 @@ protected:
     ICostManagerShrPtr m_cost_manager;
 
     /**
-     * @brief A human manager.
+     * @brief The human persistence facade.
      */
     IHumanManagerShrPtr m_human_manager;
 
     /**
-     * @brief A land persistence facade.
+     * @brief The land persistence facade.
      */
     ILandPersistenceFacadeShrPtr m_land_persistence_facade;
 

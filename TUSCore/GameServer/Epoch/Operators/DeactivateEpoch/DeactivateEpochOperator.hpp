@@ -29,7 +29,7 @@
 #define GAMESERVER_EPOCH_DEACTIVATEEPOCHOPERATOR_HPP
 
 #include "../../../World/IWorldPersistenceFacade.hpp"
-#include "../../IEpochManager.hpp"
+#include "../../IEpochPersistenceFacade.hpp"
 #include "IDeactivateEpochOperator.hpp"
 
 namespace GameServer
@@ -47,11 +47,11 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_epoch_manager            The manager of epochs.
+     * @param a_epoch_persistence_facade The persistence facade of epochs.
      * @param a_world_persistence_facade The persistence facade of worlds.
      */
     DeactivateEpochOperator(
-        IEpochManagerShrPtr                  a_epoch_manager,
+        IEpochPersistenceFacadeShrPtr        a_epoch_persistence_facade,
         World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
     );
 
@@ -70,9 +70,9 @@ public:
 
 private:
     /**
-     * @brief The manager of epochs.
+     * @brief The persistence facade of epochs.
      */
-    IEpochManagerShrPtr m_epoch_manager;
+    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
 
     /**
      * @brief The persistence facade of worlds.

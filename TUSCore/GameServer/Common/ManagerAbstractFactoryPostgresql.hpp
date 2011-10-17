@@ -77,11 +77,11 @@ public:
     virtual Cost::ICostManagerShrPtr createCostManager() const;
 
     /**
-     * @brief Creates the epoch manager.
+     * @brief Creates the epoch persistence facade.
      *
-     * @return The newly created epoch manager.
+     * @return The newly created epoch persistence facade.
      */
-    virtual Epoch::IEpochManagerShrPtr createEpochManager() const;
+    virtual Epoch::IEpochPersistenceFacadeShrPtr createEpochPersistenceFacade() const;
 
     /**
      * @brief Creates the human manager.

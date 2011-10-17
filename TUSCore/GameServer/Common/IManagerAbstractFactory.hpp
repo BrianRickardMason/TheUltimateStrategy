@@ -32,7 +32,7 @@
 #include "../Authorization/IAuthorizationPersistenceFacade.hpp"
 #include "../Building/IBuildingPersistenceFacade.hpp"
 #include "../Cost/ICostManager.hpp"
-#include "../Epoch/IEpochManager.hpp"
+#include "../Epoch/IEpochPersistenceFacade.hpp"
 #include "../Human/IHumanManager.hpp"
 #include "../Land/ILandPersistenceFacade.hpp"
 #include "../Property/IPropertyManager.hpp"
@@ -87,11 +87,11 @@ public:
     virtual Cost::ICostManagerShrPtr createCostManager() const = 0;
 
     /**
-     * @brief Creates the epoch manager.
+     * @brief Creates the epoch persistence facade.
      *
-     * @return The newly created epoch manager.
+     * @return The newly created epoch persistence facade.
      */
-    virtual Epoch::IEpochManagerShrPtr createEpochManager() const = 0;
+    virtual Epoch::IEpochPersistenceFacadeShrPtr createEpochPersistenceFacade() const = 0;
 
     /**
      * @brief Creates the human manager.

@@ -38,7 +38,7 @@ TickEpochOperatorAutPtr TickEpochOperatorFactory::createTickEpochOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return TickEpochOperatorAutPtr(new TickEpochOperator(a_manager_abstract_factory->createEpochManager(),
+    return TickEpochOperatorAutPtr(new TickEpochOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
                                                          a_manager_abstract_factory->createWorldPersistenceFacade()));
 }
 

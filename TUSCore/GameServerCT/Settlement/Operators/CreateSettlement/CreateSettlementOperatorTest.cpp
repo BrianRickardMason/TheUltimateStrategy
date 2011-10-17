@@ -233,7 +233,7 @@ protected:
     IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
 
     /**
-     * @brief A human manager.
+     * @brief The human persistence facade.
      */
     IHumanManagerShrPtr m_human_manager;
 

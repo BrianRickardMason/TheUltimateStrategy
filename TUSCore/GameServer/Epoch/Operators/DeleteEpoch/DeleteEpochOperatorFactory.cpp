@@ -39,7 +39,7 @@ DeleteEpochOperatorAutPtr DeleteEpochOperatorFactory::createDeleteEpochOperator(
 )
 {
     return DeleteEpochOperatorAutPtr(
-               new DeleteEpochOperator(a_manager_abstract_factory->createEpochManager(),
+               new DeleteEpochOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
                                        a_manager_abstract_factory->createWorldPersistenceFacade())
            );
 }

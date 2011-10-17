@@ -25,36 +25,18 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_EPOCHMANAGERFACTORY_HPP
-#define GAMESERVER_EPOCH_EPOCHMANAGERFACTORY_HPP
+#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Epoch/EpochPersistenceFacadeFactory.hpp"
+#include <gmock/gmock.h>
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "EpochManager.hpp"
+using namespace GameServer::Common;
+using namespace GameServer::Epoch;
 
-namespace GameServer
+TEST(EpochPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
-namespace Epoch
-{
+    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-/**
- * @brief The factory of the manager of the epoch.
- */
-class EpochManagerFactory
-{
-public:
-    /**
-     * @brief The factory method.
-     *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created epoch manager.
-     */
-    static EpochManagerAutPtr createEpochManager(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-    );
-};
+    EpochPersistenceFacadeAutPtr persistence_facade = EpochPersistenceFacadeFactory::create(accessor_abstract_factory);
 
-} // namespace Epoch
-} // namespace GameServer
-
-#endif // GAMESERVER_EPOCH_EPOCHMANAGERFACTORY_HPP
+    ASSERT_TRUE(persistence_facade.get() != NULL);
+}

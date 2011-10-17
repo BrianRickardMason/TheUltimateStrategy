@@ -37,9 +37,9 @@ namespace Epoch
 {
 
 BehaviourTickEpochTurnUnavailable::BehaviourTickEpochTurnUnavailable(
-    IEpochManagerShrPtr a_epoch_manager
+    IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade
 )
-    : m_epoch_manager(a_epoch_manager)
+    : m_epoch_persistence_facade(a_epoch_persistence_facade)
 {
 }
 
@@ -50,7 +50,7 @@ bool BehaviourTickEpochTurnUnavailable::tickEpoch(
 {
     // TODO: Perform turns of all lands.
 
-    return m_epoch_manager->tickEpoch(a_transaction, a_world->getWorldName());
+    return m_epoch_persistence_facade->tickEpoch(a_transaction, a_world->getWorldName());
 }
 
 } // namespace Epoch

@@ -37,10 +37,10 @@ namespace Epoch
 {
 
 DeleteEpochOperator::DeleteEpochOperator(
-    IEpochManagerShrPtr           a_epoch_manager,
+    IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
     IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
-    : m_epoch_manager(a_epoch_manager),
+    : m_epoch_persistence_facade(a_epoch_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade)
 {
 }
@@ -59,7 +59,7 @@ DeleteEpochOperatorExitCode DeleteEpochOperator::deleteEpoch(
         }
 
         // Verify if the epoch exists.
-        EpochShrPtr epoch = m_epoch_manager->getEpoch(a_transaction, a_world_name);
+        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
 
         if (!epoch)
         {
@@ -72,7 +72,7 @@ DeleteEpochOperatorExitCode DeleteEpochOperator::deleteEpoch(
             return DeleteEpochOperatorExitCode(DELETE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_FINISHED);
         }
 
-        bool const result = m_epoch_manager->deleteEpoch(a_transaction, a_world_name);
+        bool const result = m_epoch_persistence_facade->deleteEpoch(a_transaction, a_world_name);
 
         return (result) ? DeleteEpochOperatorExitCode(DELETE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_DELETED)
                         : DeleteEpochOperatorExitCode(DELETE_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_DELETED);

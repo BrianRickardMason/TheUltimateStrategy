@@ -39,7 +39,7 @@ GetEpochBySettlementNameOperatorAutPtr GetEpochBySettlementNameOperatorFactory::
 )
 {
     return GetEpochBySettlementNameOperatorAutPtr(
-               new GetEpochBySettlementNameOperator(a_manager_abstract_factory->createEpochManager(),
+               new GetEpochBySettlementNameOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
                                                     a_manager_abstract_factory->createSettlementPersistenceFacade())
            );
 }
