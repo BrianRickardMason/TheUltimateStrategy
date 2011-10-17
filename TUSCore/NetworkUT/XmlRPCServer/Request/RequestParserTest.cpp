@@ -45,7 +45,7 @@ protected:
 };
 
 /**
- * Unit tests of: RequestManager::parse.
+ * Unit tests of: RequestParser::parse.
  */
 TEST_F(RequestParserTest, parse_ValidRequest)
 {
