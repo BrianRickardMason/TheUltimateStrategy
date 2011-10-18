@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_RESOURCEMANAGERFACTORY_HPP
-#define GAMESERVER_RESOURCE_RESOURCEMANAGERFACTORY_HPP
+#ifndef GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADEFACTORY_HPP
 
 #include "../Common/IAccessorAbstractFactory.hpp"
-#include "ResourceManager.hpp"
+#include "ResourcePersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,9 +37,9 @@ namespace Resource
 {
 
 /**
- * @brief A factory of resource manager.
+ * @brief A factory of resource persistence facade.
  */
-class ResourceManagerFactory
+class ResourcePersistenceFacadeFactory
 {
 public:
     /**
@@ -47,9 +47,9 @@ public:
      *
      * @param a_accessor_abstract_factory The abstract factory of accessors.
      *
-     * @return A newly created resource manager.
+     * @return A newly created resource persistence facade.
      */
-    static ResourceManagerAutPtr createResourceManager(
+    static ResourcePersistenceFacadeAutPtr create(
         Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
     );
 };
@@ -57,4 +57,4 @@ public:
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_RESOURCEMANAGERFACTORY_HPP
+#endif // GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADEFACTORY_HPP

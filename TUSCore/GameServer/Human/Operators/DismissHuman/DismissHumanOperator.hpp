@@ -28,12 +28,11 @@
 #ifndef GAMESERVER_HUMAN_DISMISSHUMANOPERATOR_HPP
 #define GAMESERVER_HUMAN_DISMISSHUMANOPERATOR_HPP
 
-#include "IDismissHumanOperator.hpp"
-
 #include "../../../Cost/ICostManager.hpp"
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
-#include "../../../Resource/IResourceManager.hpp"
+#include "../../../Resource/IResourcePersistenceFacade.hpp"
+#include "IDismissHumanOperator.hpp"
 
 namespace GameServer
 {
@@ -50,16 +49,16 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_cost_manager             The manager of costs.
-     * @param a_human_persistence_facade The persistence facade of humans.
-     * @param a_property_manager         The manager of properties.
-     * @param a_resource_manager         The manager of resources.
+     * @param a_cost_manager                The manager of costs.
+     * @param a_human_persistence_facade    The persistence facade of humans.
+     * @param a_property_manager            The manager of properties.
+     * @param a_resource_persistence_facade The persistence facade of resources.
      */
     DismissHumanOperator(
-        Cost::ICostManagerShrPtr         a_cost_manager,
-        IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
-        Property::IPropertyManagerShrPtr a_property_manager,
-        Resource::IResourceManagerShrPtr a_resource_manager
+        Cost::ICostManagerShrPtr                   a_cost_manager,
+        IHumanPersistenceFacadeShrPtr              a_human_persistence_facade,
+        Property::IPropertyManagerShrPtr           a_property_manager,
+        Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
     );
 
     /**
@@ -110,29 +109,19 @@ private:
         Volume                          const & a_volume
     ) const;
 
+    //@{
     /**
-     * @brief The manager of costs.
+     * @brief Persistence facades.
      */
-    Cost::ICostManagerShrPtr m_cost_manager;
-
-    /**
-     * @brief The persistence facade of humans.
-     */
-    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
-
-    /**
-     * @brief The manager of properties.
-     */
-    Property::IPropertyManagerShrPtr m_property_manager;
-
-    /**
-     * @brief The manager of resources.
-     */
-    Resource::IResourceManagerShrPtr m_resource_manager;
+    Cost::ICostManagerShrPtr                   m_cost_manager;
+    IHumanPersistenceFacadeShrPtr              m_human_persistence_facade;
+    Property::IPropertyManagerShrPtr           m_property_manager;
+    Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    //}@
 };
 
 /**
- * @brief The auto pointer of DismissHumanOperator.
+ * @brief Typedefs of auto pointers.
  */
 typedef std::auto_ptr<DismissHumanOperator> DismissHumanOperatorAutPtr;
 

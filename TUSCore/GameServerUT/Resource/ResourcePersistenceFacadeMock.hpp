@@ -25,13 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_IRESOURCEMANAGER_HPP
-#define GAMESERVER_RESOURCE_IRESOURCEMANAGER_HPP
+#ifndef GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADEMOCK_HPP
+#define GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADEMOCK_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "ResourceSet.hpp"
-#include <boost/noncopyable.hpp>
+#include "../../GameServer/Resource/IResourcePersistenceFacade.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
@@ -39,17 +37,12 @@ namespace Resource
 {
 
 /**
- * @brief An interface of resource manager.
+ * @brief A mock of resource manager.
  */
-class IResourceManager
-    : boost::noncopyable
+class ResourcePersistenceFacadeMock
+    : public IResourcePersistenceFacade
 {
 public:
-    /**
-     * @brief Destructs the resource manager.
-     */
-    virtual ~IResourceManager(){};
-
     /**
      * @brief Adds the resource.
      *
@@ -58,12 +51,15 @@ public:
      * @param a_key         A key of the resource.
      * @param a_volume      A volume of the resource.
      */
-    virtual void addResource(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const = 0;
+    MOCK_CONST_METHOD4(
+        addResource,
+        void(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Key                             const & a_key,
+            Volume                          const & a_volume
+        )
+    );
 
     /**
      * @brief Subtracts the resource.
@@ -77,12 +73,15 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual bool subtractResource(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const = 0;
+    MOCK_CONST_METHOD4(
+        subtractResource,
+        bool(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Key                             const & a_key,
+            Volume                          const & a_volume
+        )
+    );
 
     /**
      * @brief Safely subtracts the resource.
@@ -94,12 +93,15 @@ public:
      * @param a_key         A key of the resource.
      * @param a_volume      A volume of the resource.
      */
-    virtual void subtractResourceSafely(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const = 0;
+    MOCK_CONST_METHOD4(
+        subtractResourceSafely,
+        void(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Key                             const & a_key,
+            Volume                          const & a_volume
+        )
+    );
 
     /**
      * @brief Subtracts the set of resources.
@@ -112,11 +114,14 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual bool subtractResourceSet(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        ResourceSet                     const & a_resource_set
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        subtractResourceSet,
+        bool(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            ResourceSet                     const & a_resource_set
+        )
+    );
 
     /**
      * @brief Safely subtracts the set of resources.
@@ -127,11 +132,14 @@ public:
      * @param a_id_holder    An identifier of the holder.
      * @param a_resource_set A set of resources.
      */
-    virtual void subtractResourceSetSafely(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        ResourceSet                     const & a_resource_set
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        subtractResourceSetSafely,
+        void(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            ResourceSet                     const & a_resource_set
+        )
+    );
 
     /**
      * @brief Gets a resource.
@@ -142,11 +150,14 @@ public:
      *
      * @return The resource, null if not found.
      */
-    virtual ResourceWithVolumeShrPtr getResource(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        getResource,
+        ResourceWithVolumeShrPtr(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Key                             const & a_key
+        )
+    );
 
     /**
      * @brief Gets resources.
@@ -156,18 +167,16 @@ public:
      *
      * @return A map of resources, an empty map if not found.
      */
-    virtual ResourceSet getResources(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder
-    ) const = 0;
+    MOCK_CONST_METHOD2(
+        getResources,
+        ResourceSet(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder
+        )
+    );
 };
-
-/**
- * @brief A shared pointer of interface of resource manager.
- */
-typedef boost::shared_ptr<IResourceManager> IResourceManagerShrPtr;
 
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_IRESOURCEMANAGER_HPP
+#endif // GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADEMOCK_HPP

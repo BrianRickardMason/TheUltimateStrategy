@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Resource/ResourceManager.hpp"
+#include "../../GameServer/Resource/ResourcePersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "ResourceManagerAccessorMock.hpp"
 
@@ -44,14 +44,14 @@ using testing::_;
  *
  * TODO: Refactoring needed.
  */
-class ResourceManagerTest
+class ResourcePersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Creates a test class.
      */
-    ResourceManagerTest()
+    ResourcePersistenceFacadeTest()
     {
     }
 
@@ -100,26 +100,22 @@ protected:
     IDHolder m_id_holder;
 };
 
-/**
- * Unit tests of: ResourceManager::ResourceManager.
- */
-TEST_F(ResourceManagerTest, ResourceManager)
+TEST_F(ResourcePersistenceFacadeTest, CtorDoesNotThrow)
 {
     IResourceManagerAccessorAutPtr accessor(new ResourceManagerAccessorMock);
 
-    // Test commands and assertions.
-    ASSERT_NO_THROW(ResourceManager manager(accessor));
+    ASSERT_NO_THROW(ResourcePersistenceFacade persistence_facade(accessor));
 }
 
 /**
- * Unit tests of: ResourceManager::addResource.
+ * Unit tests of: ResourcePersistenceFacade::addResource.
  */
-TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
+TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, insertRecord(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
@@ -129,18 +125,18 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(manager.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
+    ASSERT_NO_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
 
-TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent_Throw)
+TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     std::exception e;
@@ -153,18 +149,18 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent_Throw)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
+    ASSERT_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
 }
 
-TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
+TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -174,18 +170,18 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(manager.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
+    ASSERT_NO_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
 
-TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_Throw)
+TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     std::exception e;
@@ -198,21 +194,21 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_Throw)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
+    ASSERT_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
 }
 
 /**
- * Unit tests of: ResourceManager::subtractResource.
+ * Unit tests of: ResourcePersistenceFacade::subtractResource.
  */
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -220,18 +216,18 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(manager.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
+    ASSERT_FALSE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractPart)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_SubtractPart)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -241,18 +237,18 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractPart)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(manager.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
+    ASSERT_TRUE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractPart_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_SubtractPart_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     std::exception e;
@@ -265,18 +261,18 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractPart_Thro
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 2), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 2), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractAll)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_SubtractAll)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_COAL));
@@ -286,18 +282,18 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractAll)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(manager.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
+    ASSERT_TRUE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractAll_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_SubtractAll_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     std::exception e;
@@ -310,18 +306,18 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractAll_Throw
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_TryToSubtractTooMuch)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -329,16 +325,16 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractTooM
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(manager.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
+    ASSERT_FALSE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
 }
 
 /**
- * Unit tests of: ResourceManager::subtractResourceSafely.
+ * Unit tests of: ResourcePersistenceFacade::subtractResourceSafely.
  */
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -349,23 +345,23 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsNotPresent_TryToSub
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZero)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractZero)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     IResourceManagerAccessorAutPtr accessor(new ResourceManagerAccessorMock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 0));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 0));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractPart)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractPart)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -378,12 +374,12 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractPar
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractPart_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractPart_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -399,12 +395,12 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractPar
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 2), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 2), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractAll)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractAll)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -417,12 +413,12 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractAll
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractAll_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractAll_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -438,12 +434,12 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractAll
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractTooMuch)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -456,15 +452,15 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToo
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
 }
 
 /**
- * Unit tests of: ResourceManager::subtractResourceSet.
+ * Unit tests of: ResourcePersistenceFacade::subtractResourceSet.
  */
-TEST_F(ResourceManagerTest, subtractResourceSet_EmptySet)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_EmptySet)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -477,12 +473,12 @@ TEST_F(ResourceManagerTest, subtractResourceSet_EmptySet)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(manager.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_TRUE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -495,19 +491,19 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubt
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(manager.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_FALSE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractPart)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractPart)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ResourceSet resource_set = getResourceSet();
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -535,20 +531,20 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractPart
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(manager.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_TRUE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractPart_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractPart_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ResourceSet resource_set = getResourceSet();
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     std::exception e;
@@ -561,20 +557,20 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractPart
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.subtractResourceSet(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAll)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractAll)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ResourceSet resource_set = getResourceSet();
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -602,20 +598,20 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAll)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(manager.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_TRUE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAll_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractAll_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ResourceSet resource_set = getResourceSet();
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     std::exception e;
@@ -631,20 +627,20 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAll_
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.subtractResourceSet(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_TryToSubtractTooMuch)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ResourceSet resource_set = getResourceSet();
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -662,16 +658,16 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtrac
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(manager.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_FALSE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
 }
 
 /**
- * Unit tests of: ResourceManager::subtractResourceSetSafely.
+ * Unit tests of: ResourcePersistenceFacade::subtractResourceSetSafely.
  */
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_EmptySet)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_EmptySet)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -684,12 +680,12 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_EmptySet)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -702,12 +698,12 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_Try
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -740,12 +736,12 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -763,12 +759,12 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.subtractResourceSetSafely(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -801,12 +797,12 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -827,12 +823,12 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(manager.subtractResourceSetSafely(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractTooMuch)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -862,20 +858,20 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(manager.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
 }
 
 /**
- * Unit tests of: ResourceManager::getResource.
+ * Unit tests of: ResourcePersistenceFacade::getResource.
  */
-TEST_F(ResourceManagerTest, getResource_ResourceIsNotPresent)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsNotPresent)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -883,21 +879,21 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsNotPresent)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    ResourceWithVolumeShrPtr resource = manager.getResource(transaction, m_id_holder, KEY_RESOURCE_COAL);
+    ResourceWithVolumeShrPtr resource = persistence_facade.getResource(transaction, m_id_holder, KEY_RESOURCE_COAL);
 
     // Test assertions.
     ASSERT_TRUE(resource == NULL);
 }
 
-TEST_F(ResourceManagerTest, getResource_ResourceIsPresent)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: ResourceManagerMock.
+    // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
@@ -905,10 +901,10 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    ResourceWithVolumeShrPtr resource = manager.getResource(transaction, m_id_holder, KEY_RESOURCE_COAL);
+    ResourceWithVolumeShrPtr resource = persistence_facade.getResource(transaction, m_id_holder, KEY_RESOURCE_COAL);
 
     // Test assertions.
     ASSERT_TRUE(resource != NULL);
@@ -917,9 +913,9 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent)
 }
 
 /**
- * Unit tests of: ResourceManager::getResources.
+ * Unit tests of: ResourcePersistenceFacade::getResources.
  */
-TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -930,9 +926,9 @@ TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ResourceSet resource_set = manager.getResources(transaction, m_id_holder);
+    ResourceSet resource_set = persistence_facade.getResources(transaction, m_id_holder);
 
     ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -949,7 +945,7 @@ TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent)
     compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OneResource)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OneResource)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -964,9 +960,9 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OneResource)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ResourceSet resource_set = manager.getResources(transaction, m_id_holder);
+    ResourceSet resource_set = persistence_facade.getResources(transaction, m_id_holder);
 
     ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -983,7 +979,7 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OneResource)
     compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoResources)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -1004,9 +1000,9 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoResources)
 
     IResourceManagerAccessorAutPtr accessor(mock);
 
-    ResourceManager manager(accessor);
+    ResourcePersistenceFacade persistence_facade(accessor);
 
-    ResourceSet resource_set = manager.getResources(transaction, m_id_holder);
+    ResourceSet resource_set = persistence_facade.getResources(transaction, m_id_holder);
 
     ResourceWithVolumeMap resource_map = resource_set.getMap();
 

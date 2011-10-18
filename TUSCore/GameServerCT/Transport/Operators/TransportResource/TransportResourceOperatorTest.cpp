@@ -55,7 +55,7 @@ protected:
         : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_resource_manager(m_manager_abstract_factory->createResourceManager()),
+          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
@@ -94,44 +94,28 @@ protected:
     }
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief Abstract factories used in tests.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
+    //@{
     /**
-     * @brief The manager of epochs.
+     * @brief Persistence facades used in tests.
      */
-    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
+    IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
+    ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
+    IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    IUserPersistenceFacadeShrPtr     m_user_persitence_facade;
+    IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;
+    //}@
 
+    //@{
     /**
-     * @brief The persistence facade of lands.
-     */
-    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
-
-    /**
-     * @brief The manager of resources.
-     */
-    IResourceManagerShrPtr m_resource_manager;
-
-    /**
-     * @brief The persistence facade of users.
-     */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
-
-    /**
-     * @brief The manager of worlds.
-     */
-    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
-
-    /**
-     * @brief CreateSettlementOperator.
+     * @brief Operators used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
-
-    /**
-     * @brief TransportResourceOperator.
-     */
     TransportResourceOperatorAutPtr m_transport_resource_operator;
+    //}@
 
     /**
      * @brief Test constants: the name of the epoch.
@@ -257,8 +241,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_OneResource)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_EQ(999, m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL)->getVolume());
-        ASSERT_EQ(1, m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
+        ASSERT_EQ(999, m_resource_persistence_facade->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL)->getVolume());
+        ASSERT_EQ(1, m_resource_persistence_facade->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
     }
 }
 
@@ -282,8 +266,8 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_ManyResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_EQ(500, m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL)->getVolume());
-        ASSERT_EQ(500, m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
+        ASSERT_EQ(500, m_resource_persistence_facade->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL)->getVolume());
+        ASSERT_EQ(500, m_resource_persistence_facade->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
     }
 }
 
@@ -307,7 +291,7 @@ TEST_F(TransportResourceOperatorTest, transportResource_Success_AllResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL) == NULL);
-        ASSERT_EQ(1000, m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
+        ASSERT_TRUE(m_resource_persistence_facade->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL) == NULL);
+        ASSERT_EQ(1000, m_resource_persistence_facade->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL)->getVolume());
     }
 }

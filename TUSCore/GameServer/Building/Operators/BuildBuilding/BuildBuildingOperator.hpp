@@ -29,7 +29,7 @@
 #define GAMESERVER_BUILDING_BUILDBUILDINGOPERATOR_HPP
 
 #include "../../../Cost/ICostManager.hpp"
-#include "../../../Resource/IResourceManager.hpp"
+#include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "../../IBuildingPersistenceFacade.hpp"
 #include "IBuildBuildingOperator.hpp"
 
@@ -50,12 +50,12 @@ public:
      *
      * @param a_building_persistence_facade The persistence facade of buildings.
      * @param a_cost_manager                The manager of costs.
-     * @param a_resource_manager            The manager of resources.
+     * @param a_resource_persitence_facade  The persistence facade of resources.
      */
     BuildBuildingOperator(
-        IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-        Cost::ICostManagerShrPtr         a_cost_manager,
-        Resource::IResourceManagerShrPtr a_resource_manager
+        IBuildingPersistenceFacadeShrPtr           a_building_persistence_facade,
+        Cost::ICostManagerShrPtr                   a_cost_manager,
+        Resource::IResourcePersistenceFacadeShrPtr a_resource_persitence_facade
     );
 
     /**
@@ -76,20 +76,14 @@ public:
     ) const;
 
 private:
+    //@{
     /**
-     * @brief The persistence facade of buildings.
+     * @brief Persistence facades.
      */
-    IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
-
-    /**
-     * @brief The manager of costs.
-     */
-    Cost::ICostManagerShrPtr m_cost_manager;
-
-    /**
-     * @brief The manager of resources.
-     */
-    Resource::IResourceManagerShrPtr m_resource_manager;
+    IBuildingPersistenceFacadeShrPtr           m_building_persistence_facade;
+    Cost::ICostManagerShrPtr                   m_cost_manager;
+    Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    //@}
 };
 
 /**

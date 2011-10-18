@@ -29,7 +29,7 @@
 #include "../../../Cost/CostManagerMock.hpp"
 #include "../../../Helpers/Functions.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
-#include "../../../Resource/ResourceManagerMock.hpp"
+#include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
 #include "../../BuildingPersistenceFacadeMock.hpp"
 #include <boost/assign.hpp>
 
@@ -58,7 +58,7 @@ protected:
     BuildBuildingOperatorTest()
         : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
           m_cost_manager(new CostManagerMock),
-          m_resource_manager(new ResourceManagerMock),
+          m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }
@@ -89,45 +89,39 @@ protected:
     }
 
     /**
-     * @brief Configures a ResourceManagerMock's responses for getResources().
+     * @brief Configures a ResourcePersistenceFacadeMock's responses for getResources().
      *
      * @param a_resource_set A resource set to be returned.
      */
-    void configureResourceManagerMockForGetResources(
+    void configureResourcePersistenceFacadeMockForGetResources(
         ResourceSet const & a_resource_set
     )
     {
-        EXPECT_CALL(*m_resource_manager, getResources(_, m_id_holder))
+        EXPECT_CALL(*m_resource_persistence_facade, getResources(_, m_id_holder))
         .WillOnce(Return(a_resource_set));
     }
 
     /**
-     * @brief Configures a ResourceManagerMock's responses for subtractResourceSet().
+     * @brief Configures a ResourcePersistenceFacadeMock's responses for subtractResourceSet().
      *
      * @param a_resource_set A resource set to be subtracted.
      */
-    void configureResourceManagerMockForSubtractResourceSet(
+    void configureResourcePersistenceFacadeMockForSubtractResourceSet(
         ResourceSet const & a_resource_set
     )
     {
-        EXPECT_CALL(*m_resource_manager, subtractResourceSet(_, m_id_holder, a_resource_set))
+        EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, a_resource_set))
         .WillOnce(Return(true));
     }
 
+    //@{
     /**
-     * @brief The persistence facade of buildings.
+     * @brief Persistence facades used in tests.
      */
     BuildingPersistenceFacadeMock * m_building_persistence_facade;
-
-    /**
-     * @brief The manager of costs.
-     */
-    CostManagerMock * m_cost_manager;
-
-    /**
-     * @brief The manager of resources.
-     */
-    ResourceManagerMock * m_resource_manager;
+    CostManagerMock               * m_cost_manager;
+    ResourcePersistenceFacadeMock * m_resource_persistence_facade;
+    //}@
 
     /**
      * @brief Test constants: identifiers of the holder.
@@ -142,7 +136,7 @@ TEST_F(BuildBuildingOperatorTest, BuildBuildingOperator)
 {
     ASSERT_NO_THROW(BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                                  (IResourceManagerShrPtr(m_resource_manager))));
+                                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))));
 }
 
 /**
@@ -154,7 +148,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_TryingToBuildZeroBuildings)
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_TRYING_TO_BUILD_ZERO_BUILDINGS,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 0).m_exit_code);
@@ -165,12 +159,12 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_GetResourcesThrows)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     std::exception e;
-    EXPECT_CALL(*m_resource_manager, getResources(_, m_id_holder))
+    EXPECT_CALL(*m_resource_persistence_facade, getResources(_, m_id_holder))
     .WillOnce(Throw(e));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -185,11 +179,11 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_GetCostThrows)
     .WillOnce(Throw(e));
 
     vector<GameServer::Resource::Volume> resource_volumes;
-    configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -202,11 +196,11 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_AllResources)
     configureCostManagerMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(9)(9)(9)(9)(9)(9)(9);
-    configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -219,11 +213,11 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
     configureCostManagerMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(9);
-    configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -237,14 +231,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceThrows)
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForGetResources(resource_set);
+    configureResourcePersistenceFacadeMockForGetResources(resource_set);
     std::exception e;
-    EXPECT_CALL(*m_resource_manager, subtractResourceSet(_, m_id_holder, resource_set))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, resource_set))
     .WillOnce(Throw(e));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -258,13 +252,13 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceReturnsFalse)
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForGetResources(resource_set);
-    EXPECT_CALL(*m_resource_manager, subtractResourceSet(_, m_id_holder, resource_set))
+    configureResourcePersistenceFacadeMockForGetResources(resource_set);
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, resource_set))
     .WillOnce(Return(false));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_RESOURCES_MISSING_IN_THE_MEANTIME,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -282,12 +276,12 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_AddBuildinghrows)
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForGetResources(resource_set);
-    configureResourceManagerMockForSubtractResourceSet(resource_set);
+    configureResourcePersistenceFacadeMockForGetResources(resource_set);
+    configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -303,14 +297,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForGetResources(resource_set);
+    configureResourcePersistenceFacadeMockForGetResources(resource_set);
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForSubtractResourceSet(resource_set);
+    configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -326,14 +320,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForGetResources(resource_set);
+    configureResourcePersistenceFacadeMockForGetResources(resource_set);
     resource_volumes = assign::list_of(40)(40)(40)(40)(40)(40)(40);
     resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForSubtractResourceSet(resource_set);
+    configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 4).m_exit_code);
@@ -349,14 +343,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForGetResources(resource_set);
+    configureResourcePersistenceFacadeMockForGetResources(resource_set);
     resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     resource_set = getResourceSet(resource_volumes);
-    configureResourceManagerMockForSubtractResourceSet(resource_set);
+    configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                   (ICostManagerShrPtr(m_cost_manager)),
-                                                  (IResourceManagerShrPtr(m_resource_manager)));
+                                                  (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
               build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10).m_exit_code);

@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "ResourceManager.hpp"
+#include "ResourcePersistenceFacade.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -36,14 +36,14 @@ namespace GameServer
 namespace Resource
 {
 
-ResourceManager::ResourceManager(
+ResourcePersistenceFacade::ResourcePersistenceFacade(
     IResourceManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-void ResourceManager::addResource(
+void ResourcePersistenceFacade::addResource(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -60,7 +60,7 @@ void ResourceManager::addResource(
     }
 }
 
-bool ResourceManager::subtractResource(
+bool ResourcePersistenceFacade::subtractResource(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -95,7 +95,7 @@ bool ResourceManager::subtractResource(
     return false;
 }
 
-void ResourceManager::subtractResourceSafely(
+void ResourcePersistenceFacade::subtractResourceSafely(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -120,7 +120,7 @@ void ResourceManager::subtractResourceSafely(
     }
 }
 
-bool ResourceManager::subtractResourceSet(
+bool ResourcePersistenceFacade::subtractResourceSet(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     ResourceSet        const & a_resource_set
@@ -142,7 +142,7 @@ bool ResourceManager::subtractResourceSet(
     return true;
 }
 
-void ResourceManager::subtractResourceSetSafely(
+void ResourcePersistenceFacade::subtractResourceSetSafely(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     ResourceSet        const & a_resource_set
@@ -156,7 +156,7 @@ void ResourceManager::subtractResourceSetSafely(
     }
 }
 
-ResourceWithVolumeShrPtr ResourceManager::getResource(
+ResourceWithVolumeShrPtr ResourcePersistenceFacade::getResource(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -167,7 +167,7 @@ ResourceWithVolumeShrPtr ResourceManager::getResource(
     return record ? make_shared<ResourceWithVolume>(*record) : ResourceWithVolumeShrPtr();
 }
 
-ResourceSet ResourceManager::getResources(
+ResourceSet ResourcePersistenceFacade::getResources(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder
 ) const

@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "ResourceManagerFactory.hpp"
+#include "ResourcePersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
 
@@ -34,11 +34,13 @@ namespace GameServer
 namespace Resource
 {
 
-ResourceManagerAutPtr ResourceManagerFactory::createResourceManager(
+ResourcePersistenceFacadeAutPtr ResourcePersistenceFacadeFactory::create(
     IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
 )
 {
-    return ResourceManagerAutPtr(new ResourceManager(a_accessor_abstract_factory->createResourceAccessor()));
+    return ResourcePersistenceFacadeAutPtr(
+               new ResourcePersistenceFacade(a_accessor_abstract_factory->createResourceAccessor())
+           );
 }
 
 } // namespace Resource

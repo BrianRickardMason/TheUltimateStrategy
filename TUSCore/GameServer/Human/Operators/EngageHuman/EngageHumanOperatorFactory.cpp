@@ -43,7 +43,7 @@ EngageHumanOperatorAutPtr EngageHumanOperatorFactory::createEngageHumanOperator(
                                        a_manager_abstract_factory->createCostManager(),
                                        a_manager_abstract_factory->createHumanPersistenceFacade(),
                                        a_manager_abstract_factory->createPropertyManager(),
-                                       a_manager_abstract_factory->createResourceManager())
+                                       a_manager_abstract_factory->createResourcePersistenceFacade())
            );
 }
 

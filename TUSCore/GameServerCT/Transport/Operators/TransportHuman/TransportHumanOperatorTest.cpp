@@ -98,6 +98,7 @@ protected:
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
+    //@{
     /**
      * @brief Persistence facades used in tests.
      */
@@ -106,12 +107,15 @@ protected:
     ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
     IUserPersistenceFacadeShrPtr  m_user_persitence_facade;
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
+    //}@
 
+    //@{
     /**
      * @brief Operators used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     TransportHumanOperatorAutPtr    m_transport_human_operator;
+    //}@
 
     /**
      * @brief Test constants: the name of the epoch.

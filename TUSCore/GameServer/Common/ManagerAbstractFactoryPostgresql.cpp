@@ -33,7 +33,7 @@
 #include "../Human/HumanPersistenceFacadeFactory.hpp"
 #include "../Land/LandPersistenceFacadeFactory.hpp"
 #include "../Property/PropertyManagerFactory.hpp"
-#include "../Resource/ResourceManagerFactory.hpp"
+#include "../Resource/ResourcePersistenceFacadeFactory.hpp"
 #include "../Settlement/SettlementPersistenceFacadeFactory.hpp"
 #include "../User/UserPersistenceFacadeFactory.hpp"
 #include "../World/WorldPersistenceFacadeFactory.hpp"
@@ -107,9 +107,9 @@ IPropertyManagerShrPtr ManagerAbstractFactoryPostgresql::createPropertyManager()
     return IPropertyManagerShrPtr(PropertyManagerFactory::createPropertyManager(m_accessor_abstract_factory));
 }
 
-IResourceManagerShrPtr ManagerAbstractFactoryPostgresql::createResourceManager() const
+IResourcePersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createResourcePersistenceFacade() const
 {
-    return IResourceManagerShrPtr(ResourceManagerFactory::createResourceManager(m_accessor_abstract_factory));
+    return IResourcePersistenceFacadeShrPtr(ResourcePersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
 ISettlementPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createSettlementPersistenceFacade() const

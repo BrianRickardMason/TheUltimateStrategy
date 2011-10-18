@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_TRANSPORT_TRANSPORTRESOURCEOPERATOR_HPP
 #define GAMESERVER_TRANSPORT_TRANSPORTRESOURCEOPERATOR_HPP
 
-#include "../../../Resource/IResourceManager.hpp"
+#include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "ITransportResourceOperator.hpp"
 
@@ -45,13 +45,13 @@ class TransportResourceOperator
 {
 public:
     /**
-     * @brief Constructs the operator.
+     * @brief Ctor.
      *
-     * @param a_resource_manager              The manager of resources.
+     * @param a_resource_persistence_facade   The persistence facade of resources.
      * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     TransportResourceOperator(
-        Resource::IResourceManagerShrPtr               a_resource_manager,
+        Resource::IResourcePersistenceFacadeShrPtr     a_resource_persistence_facade,
         Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
@@ -75,19 +75,17 @@ public:
     ) const;
 
 private:
+    //@{
     /**
-     * @brief The manager of resources.
+     * @brief Persistence facades.
      */
-    Resource::IResourceManagerShrPtr m_resource_manager;
-
-    /**
-     * @brief The persistence of settlements.
-     */
+    Resource::IResourcePersistenceFacadeShrPtr     m_resource_persistence_facade;
     Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
+    //}@
 };
 
 /**
- * @brief The auto pointer of TransportResourceOperator.
+ * @brief Typedefs of auto pointers.
  */
 typedef std::auto_ptr<TransportResourceOperator> TransportResourceOperatorAutPtr;
 

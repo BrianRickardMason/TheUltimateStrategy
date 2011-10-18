@@ -46,14 +46,14 @@ using namespace std;
  *
  * TODO: Refactoring needed.
  */
-class ResourceManagerTest
+class ResourcePersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    ResourceManagerTest()
+    ResourcePersistenceFacadeTest()
         : m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
@@ -62,11 +62,11 @@ protected:
           m_settlement_name_2("Settlement2"),
           m_settlement_name_3("Settlement3"),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_resource_manager(m_manager_abstract_factory->createResourceManager()),
+          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
+          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
@@ -88,20 +88,20 @@ protected:
             m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_2);
 
             // Remove resources which have been added.
-            m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 10000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 10000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_FOOD, 10000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_GOLD, 10000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_IRON, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_MANA, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_ROCK, 1000);
-            m_resource_manager->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_WOOD, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 10000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 10000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_FOOD, 10000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_GOLD, 10000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_IRON, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_MANA, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_ROCK, 1000);
+            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_WOOD, 1000);
 
             transaction->commit();
         }
@@ -174,37 +174,23 @@ protected:
            m_settlement_name_3;
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief Abstract factories used in tests.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
+    //@{
     /**
-     * @brief The persistence facade of users.
+     * @brief Persistence facades used in tests.
      */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
+    IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
+    ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
+    IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    IUserPersistenceFacadeShrPtr     m_user_persitence_facade;
+    IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;
+    //}@
 
     /**
-     * @brief The world persistence facade.
-     */
-    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
-
-    /**
-     * @brief The epoch persistence facade.
-     */
-    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
-
-    /**
-     * @brief The land persistence facade.
-     */
-    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
-
-    /**
-     * @brief A resource manager.
-     */
-    IResourceManagerShrPtr m_resource_manager;
-
-    /**
-     * @brief CreateSettlementOperator.
+     * @brief Operators used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
 
@@ -217,15 +203,15 @@ protected:
 };
 
 /**
- * Component tests of: ResourceManager::addResource.
+ * Component tests of: ResourcePersistenceFacade::addResource.
  */
-TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
+TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -234,7 +220,7 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -252,13 +238,13 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsNotPresent)
     }
 }
 
-TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
+TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -267,7 +253,7 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -276,7 +262,7 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -294,13 +280,13 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent)
     }
 }
 
-TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
+TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent_DifferentResource)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -309,7 +295,7 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
 
         transaction->commit();
     }
@@ -318,7 +304,7 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -337,16 +323,16 @@ TEST_F(ResourceManagerTest, addResource_ResourceIsPresent_DifferentResource)
 }
 
 /**
- * Component tests of: ResourceManager::subtractResource.
+ * Component tests of: ResourcePersistenceFacade::subtractResource.
  */
-TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOneResourceAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourcesArePresent_SubtractAllOfOneResourceAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
 
         transaction->commit();
     }
@@ -355,7 +341,7 @@ TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOn
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22));
 
         transaction->commit();
     }
@@ -364,7 +350,7 @@ TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOn
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -382,13 +368,13 @@ TEST_F(ResourceManagerTest, subtractResource_ResourcesArePresent_SubtractAllOfOn
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 22);
 
         transaction->commit();
     }
@@ -397,7 +383,7 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnc
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
         transaction->commit();
     }
@@ -406,7 +392,7 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnc
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -424,13 +410,13 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractHalfAtOnc
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractToMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_TryToSubtractToMuch)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -439,14 +425,14 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractToMu
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 12));
+        ASSERT_FALSE(m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 12));
     }
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -464,13 +450,13 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_TryToSubtractToMu
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_SubtractRest)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -479,7 +465,7 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
         transaction->commit();
     }
@@ -488,7 +474,7 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -506,27 +492,27 @@ TEST_F(ResourceManagerTest, subtractResource_ResourceIsPresent_SubtractRest)
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_resource_manager->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
+        ASSERT_FALSE(m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
     }
 }
 
 /**
- * Component tests of: ResourceManager::subtractResourceSafely.
+ * Component tests of: ResourcePersistenceFacade::subtractResourceSafely.
  */
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractAllOfOneResourceAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourcesArePresent_SubtractAllOfOneResourceAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
 
         transaction->commit();
     }
@@ -535,7 +521,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractA
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22));
 
         transaction->commit();
     }
@@ -544,7 +530,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractA
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -562,13 +548,13 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourcesArePresent_SubtractA
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHalfAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractHalfAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 22);
 
         transaction->commit();
     }
@@ -577,7 +563,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHal
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
         transaction->commit();
     }
@@ -586,7 +572,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHal
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -604,13 +590,13 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractHal
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractToMuch)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -619,7 +605,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToM
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 12));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 12));
 
         transaction->commit();
     }
@@ -628,7 +614,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToM
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -646,13 +632,13 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractToM
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZero)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractZero)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -661,7 +647,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZer
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 0));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 0));
 
         transaction->commit();
     }
@@ -670,7 +656,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZer
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -688,13 +674,13 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractZer
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRest)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_SubtractRest)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -703,7 +689,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRes
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
         transaction->commit();
     }
@@ -712,7 +698,7 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRes
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -730,34 +716,34 @@ TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsPresent_SubtractRes
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSafely_ResourceIsNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsNotPresent_TryToSubtract)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSafely(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11));
 
         transaction->commit();
     }
 }
 
 /**
- * Component tests of: ResourceManager::subtractResourceSet.
+ * Component tests of: ResourcePersistenceFacade::subtractResourceSet.
  */
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmptySet)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractEmptySet)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 100);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 100);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
         transaction->commit();
     }
@@ -769,7 +755,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmpt
         ResourceWithVolumeMap resource_map;
         ResourceSet resource_set(resource_map);
 
-        ASSERT_TRUE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -778,7 +764,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmpt
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -796,19 +782,19 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractEmpt
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllOfManyResourcesAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractAllOfManyResourcesAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
         transaction->commit();
     }
@@ -819,7 +805,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllO
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -828,7 +814,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllO
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -846,19 +832,19 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractAllO
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalfAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractHalfAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -869,7 +855,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalf
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -878,7 +864,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalf
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -896,19 +882,19 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractHalf
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_TryToSubtractTooMuch)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 299);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 299);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -919,14 +905,14 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtrac
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_FALSE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_FALSE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
     }
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -944,19 +930,19 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_TryToSubtrac
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractRest)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -967,7 +953,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -978,7 +964,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -987,7 +973,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1005,19 +991,19 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest_OneTransaction)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractRest_OneTransaction)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -1028,8 +1014,8 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
-        ASSERT_TRUE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1038,7 +1024,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1056,7 +1042,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesArePresent_SubtractRest
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubtract)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -1064,7 +1050,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubt
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_FALSE(m_resource_manager->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_FALSE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1073,7 +1059,7 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubt
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1092,21 +1078,21 @@ TEST_F(ResourceManagerTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubt
 }
 
 /**
- * Component tests of: ResourceManager::subtractResourceSetSafely.
+ * Component tests of: ResourcePersistenceFacade::subtractResourceSetSafely.
  */
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractEmptySet)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractEmptySet)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 100);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 100);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
         transaction->commit();
     }
@@ -1118,7 +1104,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
         ResourceWithVolumeMap resource_map;
         ResourceSet resource_set(resource_map);
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1127,7 +1113,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1145,19 +1131,19 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAllOfManyResourcesAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAllOfManyResourcesAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
         transaction->commit();
     }
@@ -1168,7 +1154,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1177,7 +1163,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1195,19 +1181,19 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractHalfAtOnce)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractHalfAtOnce)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -1218,7 +1204,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1227,7 +1213,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1245,19 +1231,19 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractTooMuch)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 299);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 299);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -1268,7 +1254,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1277,7 +1263,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1295,19 +1281,19 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractRest)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractRest)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -1318,7 +1304,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1329,7 +1315,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1338,7 +1324,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1356,19 +1342,19 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_SubtractRest_OneTransaction)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractRest_OneTransaction)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
         transaction->commit();
     }
@@ -1379,8 +1365,8 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1389,7 +1375,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1407,7 +1393,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesArePresent_Subtra
     }
 }
 
-TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotPresent_TryToSubtract)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -1415,7 +1401,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_Try
 
         ResourceSet resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_manager->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1424,7 +1410,7 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_Try
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1443,27 +1429,27 @@ TEST_F(ResourceManagerTest, subtractResourceSetSafely_ResourcesAreNotPresent_Try
 }
 
 /**
- * Component tests of: ResourceManager::getResource.
+ * Component tests of: ResourcePersistenceFacade::getResource.
  */
-TEST_F(ResourceManagerTest, getResource_ResourceIsNotPresent)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsNotPresent)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL);
+        ResourceWithVolumeShrPtr resource = m_resource_persistence_facade->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL);
 
         ASSERT_TRUE(resource == NULL);
     }
 }
 
-TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent_GetPresentResource_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1472,20 +1458,20 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfH
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL);
+        ResourceWithVolumeShrPtr resource = m_resource_persistence_facade->getResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL);
 
         ASSERT_FALSE(resource == NULL);
         compareResource(resource, KEY_RESOURCE_COAL, 11);
     }
 }
 
-TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfDifferentHolder_ExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent_GetPresentResource_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1494,19 +1480,19 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfD
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL);
+        ResourceWithVolumeShrPtr resource = m_resource_persistence_facade->getResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL);
 
         ASSERT_TRUE(resource == NULL);
     }
 }
 
-TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfDifferentHolder_NonExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent_GetPresentResource_OfDifferentHolder_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1515,19 +1501,19 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetPresentResource_OfD
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_3, KEY_RESOURCE_COAL);
+        ResourceWithVolumeShrPtr resource = m_resource_persistence_facade->getResource(transaction, m_id_holder_3, KEY_RESOURCE_COAL);
 
         ASSERT_TRUE(resource == NULL);
     }
 }
 
-TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_OfHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent_GetNonPresentResource_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1536,19 +1522,19 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD);
+        ResourceWithVolumeShrPtr resource = m_resource_persistence_facade->getResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD);
 
         ASSERT_TRUE(resource == NULL);
     }
 }
 
-TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_OfDifferentHolder_ExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent_GetNonPresentResource_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1557,19 +1543,19 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_2, KEY_RESOURCE_FOOD);
+        ResourceWithVolumeShrPtr resource = m_resource_persistence_facade->getResource(transaction, m_id_holder_2, KEY_RESOURCE_FOOD);
 
         ASSERT_TRUE(resource == NULL);
     }
 }
 
-TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_OfDifferentHolder_NonExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent_GetNonPresentResource_OfDifferentHolder_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1578,22 +1564,22 @@ TEST_F(ResourceManagerTest, getResource_ResourceIsPresent_GetNonPresentResource_
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeShrPtr resource = m_resource_manager->getResource(transaction, m_id_holder_3, KEY_RESOURCE_FOOD);
+        ResourceWithVolumeShrPtr resource = m_resource_persistence_facade->getResource(transaction, m_id_holder_3, KEY_RESOURCE_FOOD);
 
         ASSERT_TRUE(resource == NULL);
     }
 }
 
 /**
- * Component tests of: ResourceManager::getResources.
+ * Component tests of: ResourcePersistenceFacade::getResources.
  */
-TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_ExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesAreNotPresent_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1611,13 +1597,13 @@ TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_ExistentHolder)
     }
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_NonExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesAreNotPresent_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_3);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1635,13 +1621,13 @@ TEST_F(ResourceManagerTest, getResources_ResourcesAreNotPresent_NonExistentHolde
     }
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourceIsPresent_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1650,7 +1636,7 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1668,13 +1654,13 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfHolder)
     }
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_ExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourceIsPresent_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1683,7 +1669,7 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Exi
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_2);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_2);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1701,13 +1687,13 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Exi
     }
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_NonExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourceIsPresent_OfDifferentHolder_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
 
         transaction->commit();
     }
@@ -1716,7 +1702,7 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Non
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_3);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1734,14 +1720,14 @@ TEST_F(ResourceManagerTest, getResources_ResourceIsPresent_OfDifferentHolder_Non
     }
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OfHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
 
         transaction->commit();
     }
@@ -1750,110 +1736,7 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
-
-        ResourceWithVolumeMap resource_map = resource_set.getMap();
-
-        ASSERT_FALSE(resource_map.empty());
-
-        ASSERT_EQ(RESOURCE_VEC.size(), resource_map.size());
-
-        compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 11);
-        compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 22);
-        compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
-        compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
-        compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
-        compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
-    }
-}
-
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_ExistentHolder)
-{
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_2);
-
-        ResourceWithVolumeMap resource_map = resource_set.getMap();
-
-        ASSERT_FALSE(resource_map.empty());
-
-        ASSERT_EQ(RESOURCE_VEC.size(), resource_map.size());
-
-        compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 0);
-        compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 0);
-        compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
-        compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
-        compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
-        compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
-    }
-}
-
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_OfDifferentHolder_NonExistentHolder)
-{
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
-
-        ResourceWithVolumeMap resource_map = resource_set.getMap();
-
-        ASSERT_FALSE(resource_map.empty());
-
-        ASSERT_EQ(RESOURCE_VEC.size(), resource_map.size());
-
-        compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 0);
-        compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 0);
-        compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
-        compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
-        compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
-        compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
-    }
-}
-
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfFirstHolder)
-{
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
-        m_resource_manager->addResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 33);
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_1);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1871,15 +1754,14 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfFirstH
     }
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfSecondHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OfDifferentHolder_ExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
-        m_resource_manager->addResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 33);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
 
         transaction->commit();
     }
@@ -1888,7 +1770,111 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfSecond
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_2);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_2);
+
+        ResourceWithVolumeMap resource_map = resource_set.getMap();
+
+        ASSERT_FALSE(resource_map.empty());
+
+        ASSERT_EQ(RESOURCE_VEC.size(), resource_map.size());
+
+        compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 0);
+        compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 0);
+        compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
+        compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
+        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
+        compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
+        compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
+    }
+}
+
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OfDifferentHolder_NonExistentHolder)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_3);
+
+        ResourceWithVolumeMap resource_map = resource_set.getMap();
+
+        ASSERT_FALSE(resource_map.empty());
+
+        ASSERT_EQ(RESOURCE_VEC.size(), resource_map.size());
+
+        compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 0);
+        compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 0);
+        compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
+        compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
+        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
+        compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
+        compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
+    }
+}
+
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoHolders_OfFirstHolder)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 33);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_1);
+
+        ResourceWithVolumeMap resource_map = resource_set.getMap();
+
+        ASSERT_FALSE(resource_map.empty());
+
+        ASSERT_EQ(RESOURCE_VEC.size(), resource_map.size());
+
+        compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 11);
+        compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 22);
+        compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
+        compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
+        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
+        compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
+        compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
+    }
+}
+
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoHolders_OfSecondHolder)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 33);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_2);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -1906,15 +1892,15 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_OfSecond
     }
 }
 
-TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_NonExistentHolder)
+TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoHolders_NonExistentHolder)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
-        m_resource_manager->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
-        m_resource_manager->addResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 33);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_COAL, 11);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 22);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 33);
 
         transaction->commit();
     }
@@ -1923,7 +1909,7 @@ TEST_F(ResourceManagerTest, getResources_ResourcesArePresent_TwoHolders_NonExist
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_3);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_3);
 
         ResourceWithVolumeMap resource_map = resource_set.getMap();
 

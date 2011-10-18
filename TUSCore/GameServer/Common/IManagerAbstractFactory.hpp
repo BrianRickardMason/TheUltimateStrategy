@@ -36,7 +36,7 @@
 #include "../Human/IHumanPersistenceFacade.hpp"
 #include "../Land/ILandPersistenceFacade.hpp"
 #include "../Property/IPropertyManager.hpp"
-#include "../Resource/IResourceManager.hpp"
+#include "../Resource/IResourcePersistenceFacade.hpp"
 #include "../Settlement/ISettlementPersistenceFacade.hpp"
 #include "../User/IUserPersistenceFacade.hpp"
 #include "../World/IWorldPersistenceFacade.hpp"
@@ -53,98 +53,31 @@ namespace Common
 class IManagerAbstractFactory
 {
 public:
-    /**
-     * @brief Destructs ManagerAbstractFactory.
-     */
     virtual ~IManagerAbstractFactory(){}
 
+    //@{
     /**
-     * @brief Creates the authentication persistence facade.
+     * @brief Creates a persistence facade.
      *
-     * @return The newly created authentication persistence facade.
+     * @return The newly created persistence facade.
      */
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the authorization persistence facade.
-     *
-     * @return The newly created authorization persistence facade.
-     */
-    virtual Authorization::IAuthorizationPersistenceFacadeShrPtr createAuthorizationPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the building persistence facade.
-     *
-     * @return The newly created building persistence facade.
-     */
-    virtual Building::IBuildingPersistenceFacadeShrPtr createBuildingPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the cost manager.
-     *
-     * @return The newly created cost manager.
-     */
-    virtual Cost::ICostManagerShrPtr createCostManager() const = 0;
-
-    /**
-     * @brief Creates the epoch persistence facade.
-     *
-     * @return The newly created epoch persistence facade.
-     */
-    virtual Epoch::IEpochPersistenceFacadeShrPtr createEpochPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the human persistence facade.
-     *
-     * @return The newly created human persistence facade.
-     */
-    virtual Human::IHumanPersistenceFacadeShrPtr createHumanPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the land persistence facade.
-     *
-     * @return The newly created land persistence facade.
-     */
-    virtual Land::ILandPersistenceFacadeShrPtr createLandPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the property manager.
-     *
-     * @return The newly created property manager.
-     */
-    virtual Property::IPropertyManagerShrPtr createPropertyManager() const = 0;
-
-    /**
-     * @brief Creates the resource manager.
-     *
-     * @return The newly created resource manager.
-     */
-    virtual Resource::IResourceManagerShrPtr createResourceManager() const = 0;
-
-    /**
-     * @brief Creates the settlement persistence facade.
-     *
-     * @return The newly created settlement persistence facade.
-     */
-    virtual Settlement::ISettlementPersistenceFacadeShrPtr createSettlementPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the user persistence facade.
-     *
-     * @return The newly created user persistence facade.
-     */
-    virtual User::IUserPersistenceFacadeShrPtr createUserPersistenceFacade() const = 0;
-
-    /**
-     * @brief Creates the world persistence facade.
-     *
-     * @return The newly created world persistence facade.
-     */
-    virtual World::IWorldPersistenceFacadeShrPtr createWorldPersistenceFacade() const = 0;
+    virtual Authorization::IAuthorizationPersistenceFacadeShrPtr   createAuthorizationPersistenceFacade()  const = 0;
+    virtual Building::IBuildingPersistenceFacadeShrPtr             createBuildingPersistenceFacade()       const = 0;
+    virtual Cost::ICostManagerShrPtr                               createCostManager()                     const = 0;
+    virtual Epoch::IEpochPersistenceFacadeShrPtr                   createEpochPersistenceFacade()          const = 0;
+    virtual Human::IHumanPersistenceFacadeShrPtr                   createHumanPersistenceFacade()          const = 0;
+    virtual Land::ILandPersistenceFacadeShrPtr                     createLandPersistenceFacade()           const = 0;
+    virtual Property::IPropertyManagerShrPtr                       createPropertyManager()                 const = 0;
+    virtual Resource::IResourcePersistenceFacadeShrPtr             createResourcePersistenceFacade()       const = 0;
+    virtual Settlement::ISettlementPersistenceFacadeShrPtr         createSettlementPersistenceFacade()     const = 0;
+    virtual User::IUserPersistenceFacadeShrPtr                     createUserPersistenceFacade()           const = 0;
+    virtual World::IWorldPersistenceFacadeShrPtr                   createWorldPersistenceFacade()          const = 0;
+    //}@
 };
 
 /**
- * @brief The shared pointer of the interface of ManagerAbstractFactory.
+ * @brief Typedefs of shared pointers.
  */
 typedef boost::shared_ptr<IManagerAbstractFactory> IManagerAbstractFactoryShrPtr;
 

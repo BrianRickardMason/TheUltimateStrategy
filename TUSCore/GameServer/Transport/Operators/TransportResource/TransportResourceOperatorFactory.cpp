@@ -39,7 +39,7 @@ TransportResourceOperatorAutPtr TransportResourceOperatorFactory::createTranspor
 )
 {
     return TransportResourceOperatorAutPtr(
-               new TransportResourceOperator(a_manager_abstract_factory->createResourceManager(),
+               new TransportResourceOperator(a_manager_abstract_factory->createResourcePersistenceFacade(),
                                              a_manager_abstract_factory->createSettlementPersistenceFacade())
            );
 }

@@ -43,94 +43,27 @@ class ManagerAbstractFactoryPostgresql
     : public IManagerAbstractFactory
 {
 public:
-    /**
-     * @brief Constructs the PostgreSQL ManagerAbstractFactory.
-     */
     ManagerAbstractFactoryPostgresql();
 
+    //@{
     /**
-     * @brief Creates the authentication persistence facade.
+     * @brief Creates a persistence facade.
      *
-     * @return The newly created authentication persistence facade.
+     * @return The newly created persistence facade.
      */
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const;
-
-    /**
-     * @brief Creates the authorization persistence facade.
-     *
-     * @return The newly created authorization persistence facade.
-     */
-    virtual Authorization::IAuthorizationPersistenceFacadeShrPtr createAuthorizationPersistenceFacade() const;
-
-    /**
-     * @brief Creates the building persistence facade.
-     *
-     * @return The newly created building persistence facade.
-     */
-    virtual Building::IBuildingPersistenceFacadeShrPtr createBuildingPersistenceFacade() const;
-
-    /**
-     * @brief Creates the cost manager.
-     *
-     * @return The newly created cost manager.
-     */
-    virtual Cost::ICostManagerShrPtr createCostManager() const;
-
-    /**
-     * @brief Creates the epoch persistence facade.
-     *
-     * @return The newly created epoch persistence facade.
-     */
-    virtual Epoch::IEpochPersistenceFacadeShrPtr createEpochPersistenceFacade() const;
-
-    /**
-     * @brief Creates the human persistence facade.
-     *
-     * @return The newly created human persistence facade.
-     */
-    virtual Human::IHumanPersistenceFacadeShrPtr createHumanPersistenceFacade() const;
-
-    /**
-     * @brief Creates the land persistence facade.
-     *
-     * @return The newly created land persistence facade.
-     */
-    virtual Land::ILandPersistenceFacadeShrPtr createLandPersistenceFacade() const;
-
-    /**
-     * @brief Creates the property manager.
-     *
-     * @return The newly created property manager.
-     */
-    virtual Property::IPropertyManagerShrPtr createPropertyManager() const;
-
-    /**
-     * @brief Creates the resource manager.
-     *
-     * @return The newly created resource manager.
-     */
-    virtual Resource::IResourceManagerShrPtr createResourceManager() const;
-
-    /**
-     * @brief Creates the settlement persistence facade.
-     *
-     * @return The newly created settlement persistence facade.
-     */
-    virtual Settlement::ISettlementPersistenceFacadeShrPtr createSettlementPersistenceFacade() const;
-
-    /**
-     * @brief Creates the user persistence facade.
-     *
-     * @return The newly created user persistence facade.
-     */
-    virtual User::IUserPersistenceFacadeShrPtr createUserPersistenceFacade() const;
-
-    /**
-     * @brief Creates the world persistence facade.
-     *
-     * @return The newly created world persistence facade.
-     */
-    virtual World::IWorldPersistenceFacadeShrPtr createWorldPersistenceFacade() const;
+    virtual Authorization::IAuthorizationPersistenceFacadeShrPtr   createAuthorizationPersistenceFacade()  const;
+    virtual Building::IBuildingPersistenceFacadeShrPtr             createBuildingPersistenceFacade()       const;
+    virtual Cost::ICostManagerShrPtr                               createCostManager()                     const;
+    virtual Epoch::IEpochPersistenceFacadeShrPtr                   createEpochPersistenceFacade()          const;
+    virtual Human::IHumanPersistenceFacadeShrPtr                   createHumanPersistenceFacade()          const;
+    virtual Land::ILandPersistenceFacadeShrPtr                     createLandPersistenceFacade()           const;
+    virtual Property::IPropertyManagerShrPtr                       createPropertyManager()                 const;
+    virtual Resource::IResourcePersistenceFacadeShrPtr             createResourcePersistenceFacade()       const;
+    virtual Settlement::ISettlementPersistenceFacadeShrPtr         createSettlementPersistenceFacade()     const;
+    virtual User::IUserPersistenceFacadeShrPtr                     createUserPersistenceFacade()           const;
+    virtual World::IWorldPersistenceFacadeShrPtr                   createWorldPersistenceFacade()          const;
+    //}@
 
 private:
     /**

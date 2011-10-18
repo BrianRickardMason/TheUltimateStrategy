@@ -32,7 +32,7 @@
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
-#include "../../../Resource/IResourceManager.hpp"
+#include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "ITurnOperator.hpp"
 
@@ -49,13 +49,13 @@ class TurnOperator
 {
 public:
     /**
-     * @brief Constructs the operator.
+     * @brief Ctor.
      *
      * @param a_cost_manager                  The manager of costs.
      * @param a_human_persistence_facade      The persistence facade of humans.
      * @param a_land_persistence_facade       The persistence facade of lands.
      * @param a_property_manager              The manager of properties.
-     * @param a_resource_manager              The manager of resources.
+     * @param a_resource_persistence_facade   The persistence facade of resources.
      * @param a_settlement_persistence_facade The manager of settlements.
      */
     TurnOperator(
@@ -63,7 +63,7 @@ public:
         Human::IHumanPersistenceFacadeShrPtr           a_human_persistence_facade,
         Land::ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
         Property::IPropertyManagerShrPtr               a_property_manager,
-        Resource::IResourceManagerShrPtr               a_resource_manager,
+        Resource::IResourcePersistenceFacadeShrPtr     a_resource_persistence_facade,
         Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
@@ -120,39 +120,21 @@ private:
         std::string                     const a_settlement_name
     ) const;
 
+    //@{
     /**
-     * @brief The manager of costs.
+     * @brief Persistence facades.
      */
-    Cost::ICostManagerShrPtr m_cost_manager;
-
-    /**
-     * @brief The persistence facade of humans.
-     */
-    Human::IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
-
-    /**
-     * @brief The persistence facade of lands.
-     */
-    Land::ILandPersistenceFacadeShrPtr m_land_persistence_facade;
-
-    /**
-     * @brief The manager of properties.
-     */
-    Property::IPropertyManagerShrPtr m_property_manager;
-
-    /**
-     * @brief The manager of resources.
-     */
-    Resource::IResourceManagerShrPtr m_resource_manager;
-
-    /**
-     * @brief The persistence facade of settlements.
-     */
+    Cost::ICostManagerShrPtr                       m_cost_manager;
+    Human::IHumanPersistenceFacadeShrPtr           m_human_persistence_facade;
+    Land::ILandPersistenceFacadeShrPtr             m_land_persistence_facade;
+    Property::IPropertyManagerShrPtr               m_property_manager;
+    Resource::IResourcePersistenceFacadeShrPtr     m_resource_persistence_facade;
     Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
+    //}@
 };
 
 /**
- * @brief The auto pointer of TurnOperator.
+ * @brief Typedefs of auto pointers.
  */
 typedef std::auto_ptr<TurnOperator> TurnOperatorAutPtr;
 

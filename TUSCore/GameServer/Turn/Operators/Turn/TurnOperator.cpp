@@ -48,14 +48,14 @@ TurnOperator::TurnOperator(
     IHumanPersistenceFacadeShrPtr      a_human_persistence_facade,
     ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
     IPropertyManagerShrPtr             a_property_manager,
-    IResourceManagerShrPtr             a_resource_manager,
+    IResourcePersistenceFacadeShrPtr   a_resource_persistence_facade,
     ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
     : m_cost_manager(a_cost_manager),
       m_human_persistence_facade(a_human_persistence_facade),
       m_land_persistence_facade(a_land_persistence_facade),
       m_property_manager(a_property_manager),
-      m_resource_manager(a_resource_manager),
+      m_resource_persistence_facade(a_resource_persistence_facade),
       m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
@@ -122,7 +122,7 @@ bool TurnOperator::executeTurnSettlement(
     // TODO: Implement me!
 
     // Get the available resources.
-    ResourceSet available_resources = m_resource_manager->getResources(a_transaction, id_holder);
+    ResourceSet available_resources = m_resource_persistence_facade->getResources(a_transaction, id_holder);
 
     // Get the cost of living.
     ResourceSet cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
@@ -183,7 +183,7 @@ bool TurnOperator::executeTurnSettlement(
 
     // Expenses.
     {
-        m_resource_manager->subtractResourceSetSafely(a_transaction, id_holder, cost_of_living);
+        m_resource_persistence_facade->subtractResourceSetSafely(a_transaction, id_holder, cost_of_living);
     }
 
     // Receipts.
@@ -200,7 +200,12 @@ bool TurnOperator::executeTurnSettlement(
 
                 BOOST_ASSERT(produced->getValue() > 0);
 
-                m_resource_manager->addResource(a_transaction, id_holder, production->second, produced->getValue());
+                m_resource_persistence_facade->addResource(
+                    a_transaction,
+                    id_holder,
+                    production->second,
+                    produced->getValue()
+                );
             }
         }
     }

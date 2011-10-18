@@ -29,7 +29,7 @@
 #define GAMESERVER_SETTLEMENT_BEHAVIOURGIVEGRANT_HPP
 
 #include "../../../Human/IHumanPersistenceFacade.hpp"
-#include "../../../Resource/IResourceManager.hpp"
+#include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "IBehaviourGiveGrant.hpp"
 
 namespace GameServer
@@ -45,14 +45,14 @@ class BehaviourGiveGrant
 {
 public:
     /**
-     * @brief Constructs the behaviour.
+     * @brief Ctor.
      *
-     * @param a_human_persistence_facade The persistence facade of humans.
-     * @param a_resource_manager         The manager of resources.
+     * @param a_human_persistence_facade    The persistence facade of humans.
+     * @param a_resource_persistence_facade The persistence facade of resources.
      */
     BehaviourGiveGrant(
-        Human::IHumanPersistenceFacadeShrPtr a_human_persistence_facade,
-        Resource::IResourceManagerShrPtr     a_resource_manager
+        Human::IHumanPersistenceFacadeShrPtr       a_human_persistence_facade,
+        Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
     );
 
     /**
@@ -69,15 +69,13 @@ public:
     ) const;
 
 private:
+    //@{
     /**
-     * @brief The persistence facade of humans.
+     * @brief Persistence facades.
      */
-    Human::IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
-
-    /**
-     * @brief The manager of resources.
-     */
-    Resource::IResourceManagerShrPtr m_resource_manager;
+    Human::IHumanPersistenceFacadeShrPtr       m_human_persistence_facade;
+    Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    //}@
 };
 
 /**

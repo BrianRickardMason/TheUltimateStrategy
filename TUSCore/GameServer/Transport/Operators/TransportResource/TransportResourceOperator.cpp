@@ -40,10 +40,10 @@ namespace Transport
 {
 
 TransportResourceOperator::TransportResourceOperator(
-    IResourceManagerShrPtr             a_resource_manager,
+    IResourcePersistenceFacadeShrPtr   a_resource_persistence_facade,
     ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
-    : m_resource_manager(a_resource_manager),
+    : m_resource_persistence_facade(a_resource_persistence_facade),
       m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
@@ -91,14 +91,15 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
         IDHolder id_holder_source(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_source);
         IDHolder id_holder_destination(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_destination);
 
-        bool const result = m_resource_manager->subtractResource(a_transaction, id_holder_source, a_key, a_volume);
+        bool const result =
+            m_resource_persistence_facade->subtractResource(a_transaction, id_holder_source, a_key, a_volume);
 
         if (!result)
         {
             return TransportResourceOperatorExitCode(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES);
         }
 
-        m_resource_manager->addResource(a_transaction, id_holder_destination, a_key, a_volume);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder_destination, a_key, a_volume);
 
         return TransportResourceOperatorExitCode(TRANSPORT_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_TRANSPORTED);
     }

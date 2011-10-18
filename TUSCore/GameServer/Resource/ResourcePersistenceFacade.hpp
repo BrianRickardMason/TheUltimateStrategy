@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_RESOURCEMANAGERMOCK_HPP
-#define GAMESERVER_RESOURCE_RESOURCEMANAGERMOCK_HPP
+#ifndef GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADE_HPP
+#define GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADE_HPP
 
-#include "../../GameServer/Resource/IResourceManager.hpp"
-#include <gmock/gmock.h>
+#include "IResourceManagerAccessor.hpp"
+#include "IResourcePersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,12 +37,21 @@ namespace Resource
 {
 
 /**
- * @brief A mock of resource manager.
+ * @brief The resource persistence facade.
  */
-class ResourceManagerMock
-    : public IResourceManager
+class ResourcePersistenceFacade
+    : public IResourcePersistenceFacade
 {
 public:
+    /**
+     * @brief Constructs the resource persistence facade.
+     *
+     * @param a_accessor An accessor to be injected.
+     */
+    ResourcePersistenceFacade(
+        IResourceManagerAccessorAutPtr a_accessor
+    );
+
     /**
      * @brief Adds the resource.
      *
@@ -51,15 +60,12 @@ public:
      * @param a_key         A key of the resource.
      * @param a_volume      A volume of the resource.
      */
-    MOCK_CONST_METHOD4(
-        addResource,
-        void(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key,
-            Volume                          const & a_volume
-        )
-    );
+    virtual void addResource(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::IDHolder                const & a_id_holder,
+        Key                             const & a_key,
+        Volume                          const & a_volume
+    ) const;
 
     /**
      * @brief Subtracts the resource.
@@ -73,15 +79,12 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD4(
-        subtractResource,
-        bool(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key,
-            Volume                          const & a_volume
-        )
-    );
+    virtual bool subtractResource(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::IDHolder                const & a_id_holder,
+        Key                             const & a_key,
+        Volume                          const & a_volume
+    ) const;
 
     /**
      * @brief Safely subtracts the resource.
@@ -93,15 +96,12 @@ public:
      * @param a_key         A key of the resource.
      * @param a_volume      A volume of the resource.
      */
-    MOCK_CONST_METHOD4(
-        subtractResourceSafely,
-        void(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key,
-            Volume                          const & a_volume
-        )
-    );
+    virtual void subtractResourceSafely(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::IDHolder                const & a_id_holder,
+        Key                             const & a_key,
+        Volume                          const & a_volume
+    ) const;
 
     /**
      * @brief Subtracts the set of resources.
@@ -114,14 +114,11 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    MOCK_CONST_METHOD3(
-        subtractResourceSet,
-        bool(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder,
-            ResourceSet                     const & a_resource_set
-        )
-    );
+    virtual bool subtractResourceSet(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::IDHolder                const & a_id_holder,
+        ResourceSet                     const & a_resource_set
+    ) const;
 
     /**
      * @brief Safely subtracts the set of resources.
@@ -132,14 +129,11 @@ public:
      * @param a_id_holder    An identifier of the holder.
      * @param a_resource_set A set of resources.
      */
-    MOCK_CONST_METHOD3(
-        subtractResourceSetSafely,
-        void(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder,
-            ResourceSet                     const & a_resource_set
-        )
-    );
+    virtual void subtractResourceSetSafely(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::IDHolder                const & a_id_holder,
+        ResourceSet                     const & a_resource_set
+    ) const;
 
     /**
      * @brief Gets a resource.
@@ -150,14 +144,11 @@ public:
      *
      * @return The resource, null if not found.
      */
-    MOCK_CONST_METHOD3(
-        getResource,
-        ResourceWithVolumeShrPtr(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key
-        )
-    );
+    virtual ResourceWithVolumeShrPtr getResource(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::IDHolder                const & a_id_holder,
+        Key                             const & a_key
+    ) const;
 
     /**
      * @brief Gets resources.
@@ -167,16 +158,24 @@ public:
      *
      * @return A map of resources, an empty map if not found.
      */
-    MOCK_CONST_METHOD2(
-        getResources,
-        ResourceSet(
-            Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder
-        )
-    );
+    virtual ResourceSet getResources(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::IDHolder                const & a_id_holder
+    ) const;
+
+private:
+    /**
+     * @brief An accessor.
+     */
+    IResourceManagerAccessorScpPtr m_accessor;
 };
+
+/**
+ * @brief Typedefs of auto pointers.
+ */
+typedef std::auto_ptr<ResourcePersistenceFacade> ResourcePersistenceFacadeAutPtr;
 
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_RESOURCEMANAGERMOCK_HPP
+#endif // GAMESERVER_RESOURCE_RESOURCEMANAGER_HPP

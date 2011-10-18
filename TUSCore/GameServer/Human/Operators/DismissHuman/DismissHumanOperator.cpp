@@ -39,15 +39,15 @@ namespace Human
 {
 
 DismissHumanOperator::DismissHumanOperator(
-    ICostManagerShrPtr            a_cost_manager,
-    IHumanPersistenceFacadeShrPtr a_human_persistence_facade,
-    IPropertyManagerShrPtr        a_property_manager,
-    IResourceManagerShrPtr        a_resource_manager
+    ICostManagerShrPtr               a_cost_manager,
+    IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
+    IPropertyManagerShrPtr           a_property_manager,
+    IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_cost_manager(a_cost_manager),
       m_human_persistence_facade(a_human_persistence_facade),
       m_property_manager(a_property_manager),
-      m_resource_manager(a_resource_manager)
+      m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
 
@@ -84,7 +84,7 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
         }
 
         // Get available resources.
-        ResourceSet resource_set = m_resource_manager->getResources(a_transaction, a_id_holder);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
         ResourceSet cost = m_cost_manager->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_HUMAN_DISMISS);
@@ -99,7 +99,8 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
         }
 
         // Subtract the resources.
-        bool const result_subtract_resource = m_resource_manager->subtractResourceSet(a_transaction, a_id_holder, cost);
+        bool const result_subtract_resource =
+            m_resource_persistence_facade->subtractResourceSet(a_transaction, a_id_holder, cost);
 
         // There is a possible situation (in multithreaded application) of a race condition between checking if
         // there is enough resources and trying to subtract it.

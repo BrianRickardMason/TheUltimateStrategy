@@ -40,11 +40,11 @@ namespace Building
 BuildBuildingOperator::BuildBuildingOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
     ICostManagerShrPtr               a_cost_manager,
-    IResourceManagerShrPtr           a_resource_manager
+    IResourcePersistenceFacadeShrPtr a_resource_persitence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
       m_cost_manager(a_cost_manager),
-      m_resource_manager(a_resource_manager)
+      m_resource_persistence_facade(a_resource_persitence_facade)
 {
 }
 
@@ -64,7 +64,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         }
 
         // Get available resources.
-        ResourceSet resource_set = m_resource_manager->getResources(a_transaction, a_id_holder);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
         ResourceSet cost = m_cost_manager->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_BUILDING_BUILD);
@@ -79,7 +79,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         }
 
         // Subtract the resources.
-        bool const result = m_resource_manager->subtractResourceSet(a_transaction, a_id_holder, cost);
+        bool const result = m_resource_persistence_facade->subtractResourceSet(a_transaction, a_id_holder, cost);
 
         // There is a possible situation (in multithreaded application) of a race condition between checking if
         // there is enough resources and trying to subtract it.

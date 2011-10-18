@@ -72,13 +72,13 @@ protected:
           m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3),
           m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_building_persistence_facade(m_manager_abstract_factory->createBuildingPersistenceFacade()),
           m_cost_manager(m_manager_abstract_factory->createCostManager()),
+          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_resource_manager(m_manager_abstract_factory->createResourceManager()),
+          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
+          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_destroy_building_operator(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_manager_abstract_factory))
     {
@@ -119,9 +119,9 @@ protected:
             ASSERT_TRUE(m_building_persistence_facade->getBuildings(transaction, m_id_holder_12).empty());
             ASSERT_TRUE(m_building_persistence_facade->getBuildings(transaction, m_id_holder_21).empty());
 
-            ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
-            ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
-            ResourceSet resource_set_21 = m_resource_manager->getResources(transaction, m_id_holder_21);
+            ResourceSet resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+            ResourceSet resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12);
+            ResourceSet resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
             compareResourceSet(resource_set_11, expected_volumes_1);
             compareResourceSet(resource_set_12, expected_volumes_2);
@@ -188,54 +188,30 @@ protected:
              m_id_holder_4;
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief Abstract factories used in tests.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
+    //@{
     /**
-     * @brief The persistence facade of users.
-     */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
-
-    /**
-     * @brief The world persistence facade.
-     */
-    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
-
-    /**
-     * @brief The epoch persistence facade.
-     */
-    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
-
-    /**
-     * @brief A building persistence facade.
+     * @brief Persistence facades used in tests.
      */
     IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
+    ICostManagerShrPtr               m_cost_manager;
+    IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
+    ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
+    IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    IUserPersistenceFacadeShrPtr     m_user_persitence_facade;
+    IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;
+    //@}
 
+    //@{
     /**
-     * @brief A cost manager.
-     */
-    ICostManagerShrPtr m_cost_manager;
-
-    /**
-     * @brief The land persistence facade.
-     */
-    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
-
-    /**
-     * @brief A resource manager.
-     */
-    IResourceManagerShrPtr m_resource_manager;
-
-    /**
-     * @brief CreateSettlementOperator.
+     * @brief Operators used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
-
-    /**
-     * @brief A destroy building operator.
-     */
-    IDestroyBuildingOperatorShrPtr m_destroy_building_operator;
+    IDestroyBuildingOperatorShrPtr  m_destroy_building_operator;
+    //}@
 };
 
 /**
@@ -309,13 +285,13 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -334,13 +310,13 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_ZeroResou
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
         m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -365,13 +341,13 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -406,7 +382,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1)(1)(1)(1)(1)(1)(1);
 
         compareResourceSet(resource_set, expected);
@@ -419,7 +395,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN, 1);
 
@@ -454,7 +430,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1);
 
         compareResourceSet(resource_set, expected);
@@ -494,7 +470,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
 
         compareResourceSet(resource_set, expected);
@@ -534,7 +510,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(370)(9370)(9370)(370)(370)(370)(370);
 
         compareResourceSet(resource_set, expected);
@@ -573,7 +549,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(500)(9500)(9500)(500)(500)(500)(500);
 
         compareResourceSet(resource_set, expected);
@@ -613,7 +589,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_manager->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
 
         compareResourceSet(resource_set, expected);

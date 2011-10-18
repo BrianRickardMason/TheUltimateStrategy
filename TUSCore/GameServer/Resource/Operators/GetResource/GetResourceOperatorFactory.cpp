@@ -38,7 +38,9 @@ GetResourceOperatorAutPtr GetResourceOperatorFactory::createGetResourceOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetResourceOperatorAutPtr(new GetResourceOperator(a_manager_abstract_factory->createResourceManager()));
+    return GetResourceOperatorAutPtr(
+               new GetResourceOperator(a_manager_abstract_factory->createResourcePersistenceFacade())
+           );
 }
 
 } // namespace Resource

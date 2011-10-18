@@ -28,13 +28,12 @@
 #ifndef GAMESERVER_HUMAN_ENGAGEHUMANOPERATOR_HPP
 #define GAMESERVER_HUMAN_ENGAGEHUMANOPERATOR_HPP
 
-#include "IEngageHumanOperator.hpp"
-
 #include "../../../Building/IBuildingPersistenceFacade.hpp"
 #include "../../../Cost/ICostManager.hpp"
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
-#include "../../../Resource/IResourceManager.hpp"
+#include "../../../Resource/IResourcePersistenceFacade.hpp"
+#include "IEngageHumanOperator.hpp"
 
 namespace GameServer
 {
@@ -49,20 +48,20 @@ class EngageHumanOperator
 {
 public:
     /**
-     * @brief Constructs the operator.
+     * @brief Ctor.
      *
      * @param a_building_persistence_facade The persistence facade of buildings.
      * @param a_cost_manager                The manager of costs.
      * @param a_human_persistence_facade    The persistence facade of humans.
      * @param a_property_manager            The manager of properties.
-     * @param a_resource_manager            The manager of resources.
+     * @param a_resource_persistence_facade The persistence facade of resources.
      */
     EngageHumanOperator(
         Building::IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
         Cost::ICostManagerShrPtr                   a_cost_manager,
         IHumanPersistenceFacadeShrPtr              a_human_persistence_facade,
         Property::IPropertyManagerShrPtr           a_property_manager,
-        Resource::IResourceManagerShrPtr           a_resource_manager
+        Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
     );
 
     /**
@@ -128,34 +127,20 @@ private:
         Volume                          const & a_volume
     ) const;
 
+    //@{
     /**
-     * @brief The persistence facade of buildings.
+     * @brief Persistence facades.
      */
     Building::IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
-
-    /**
-     * @brief The manager of costs.
-     */
-    Cost::ICostManagerShrPtr m_cost_manager;
-
-    /**
-     * @brief The persistence facade of humans.
-     */
-    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
-
-    /**
-     * @brief The manager of properties.
-     */
-    Property::IPropertyManagerShrPtr m_property_manager;
-
-    /**
-     * @brief The manager of resources.
-     */
-    Resource::IResourceManagerShrPtr m_resource_manager;
+    Cost::ICostManagerShrPtr                   m_cost_manager;
+    IHumanPersistenceFacadeShrPtr              m_human_persistence_facade;
+    Property::IPropertyManagerShrPtr           m_property_manager;
+    Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    //}@
 };
 
 /**
- * @brief The auto pointer of EngageHumanOperator.
+ * @brief Typedefs of auto pointers.
  */
 typedef std::auto_ptr<EngageHumanOperator> EngageHumanOperatorAutPtr;
 

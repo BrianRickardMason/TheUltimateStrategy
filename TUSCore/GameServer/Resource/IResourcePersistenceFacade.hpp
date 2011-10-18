@@ -25,11 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_RESOURCEMANAGER_HPP
-#define GAMESERVER_RESOURCE_RESOURCEMANAGER_HPP
+#ifndef GAMESERVER_RESOURCE_IRESOURCEPERSISTENCEFACADE_HPP
+#define GAMESERVER_RESOURCE_IRESOURCEPERSISTENCEFACADE_HPP
 
-#include "IResourceManager.hpp"
-#include "IResourceManagerAccessor.hpp"
+#include "../Common/IDHolder.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "ResourceSet.hpp"
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
@@ -37,20 +39,13 @@ namespace Resource
 {
 
 /**
- * @brief The resource manager.
+ * @brief An interface of resource persistence facade.
  */
-class ResourceManager
-    : public IResourceManager
+class IResourcePersistenceFacade
+    : boost::noncopyable
 {
 public:
-    /**
-     * @brief Constructs the resource manager.
-     *
-     * @param a_accessor An accessor to be injected.
-     */
-    ResourceManager(
-        IResourceManagerAccessorAutPtr a_accessor
-    );
+    virtual ~IResourcePersistenceFacade(){};
 
     /**
      * @brief Adds the resource.
@@ -65,7 +60,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Subtracts the resource.
@@ -84,7 +79,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Safely subtracts the resource.
@@ -101,7 +96,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Subtracts the set of resources.
@@ -118,7 +113,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceSet                     const & a_resource_set
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Safely subtracts the set of resources.
@@ -133,7 +128,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceSet                     const & a_resource_set
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets a resource.
@@ -148,7 +143,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets resources.
@@ -161,21 +156,15 @@ public:
     virtual ResourceSet getResources(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    IResourceManagerAccessorScpPtr m_accessor;
+    ) const = 0;
 };
 
 /**
- * @brief An auto pointer of resource manager.
+ * @brief Typedefs of shared pointers.
  */
-typedef std::auto_ptr<ResourceManager> ResourceManagerAutPtr;
+typedef boost::shared_ptr<IResourcePersistenceFacade> IResourcePersistenceFacadeShrPtr;
 
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_RESOURCEMANAGER_HPP
+#endif // GAMESERVER_RESOURCE_IRESOURCEPERSISTENCEFACADE_HPP

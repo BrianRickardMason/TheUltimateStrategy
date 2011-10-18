@@ -78,7 +78,7 @@ protected:
           m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_property_manager(m_manager_abstract_factory->createPropertyManager()),
-          m_resource_manager(m_manager_abstract_factory->createResourceManager()),
+          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
@@ -138,9 +138,9 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
-            ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
-            ResourceSet resource_set_21 = m_resource_manager->getResources(transaction, m_id_holder_21);
+            ResourceSet resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+            ResourceSet resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12);
+            ResourceSet resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
             compareResourceSet(resource_set_11, expected_volumes_1);
             compareResourceSet(resource_set_12, expected_volumes_2);
@@ -197,23 +197,27 @@ protected:
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
+    //@{
     /**
      * @brief Persistence facades used in tests.
      */
-    ICostManagerShrPtr            m_cost_manager;
-    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
-    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
-    ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
-    IPropertyManagerShrPtr        m_property_manager;
-    IResourceManagerShrPtr        m_resource_manager;
-    IUserPersistenceFacadeShrPtr  m_user_persitence_facade;
-    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
+    ICostManagerShrPtr               m_cost_manager;
+    IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
+    IHumanPersistenceFacadeShrPtr    m_human_persistence_facade;
+    ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
+    IPropertyManagerShrPtr           m_property_manager;
+    IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    IUserPersistenceFacadeShrPtr     m_user_persitence_facade;
+    IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;
+    //}@
 
+    //@{
     /**
      * @brief Operators used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     IDismissHumanOperatorShrPtr     m_dismiss_human_operator;
+    //}@
 };
 
 /**
@@ -315,13 +319,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         m_human_persistence_facade->addHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
 
         // TODO: Subtract resource set.
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
         transaction->commit();
     }
@@ -347,13 +351,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
         m_human_persistence_facade->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
 
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
         transaction->commit();
     }
@@ -370,13 +374,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
         m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         // TODO: Subtract resource set.
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         transaction->commit();
     }
@@ -395,13 +399,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
 
         m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         transaction->commit();
     }
@@ -418,10 +422,10 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
         m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         // TODO: Subtract resource set.
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         transaction->commit();
     }
@@ -440,11 +444,11 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
 
         m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
         transaction->commit();
     }
 
@@ -459,7 +463,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
 
         m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
-        m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         transaction->commit();
     }
@@ -478,7 +482,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
 
         m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
-        m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
+        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         transaction->commit();
     }
@@ -516,9 +520,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
 
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
-        ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
-        ResourceSet resource_set_21 = m_resource_manager->getResources(transaction, m_id_holder_21);
+        ResourceSet resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12);
+        ResourceSet resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
         compareResourceSet(resource_set_11, expected_volumes_1);
         compareResourceSet(resource_set_12, expected_volumes_2);
@@ -563,9 +567,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
-        ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
-        ResourceSet resource_set_21 = m_resource_manager->getResources(transaction, m_id_holder_21);
+        ResourceSet resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12);
+        ResourceSet resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
         compareResourceSet(resource_set_11, expected_volumes_1);
         compareResourceSet(resource_set_12, expected_volumes_2);
@@ -610,9 +614,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
-        ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
-        ResourceSet resource_set_21 = m_resource_manager->getResources(transaction, m_id_holder_21);
+        ResourceSet resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12);
+        ResourceSet resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
         compareResourceSet(resource_set_11, expected_volumes_1);
         compareResourceSet(resource_set_12, expected_volumes_2);
@@ -656,9 +660,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set_11 = m_resource_manager->getResources(transaction, m_id_holder_11);
-        ResourceSet resource_set_12 = m_resource_manager->getResources(transaction, m_id_holder_12);
-        ResourceSet resource_set_21 = m_resource_manager->getResources(transaction, m_id_holder_21);
+        ResourceSet resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceSet resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12);
+        ResourceSet resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
         compareResourceSet(resource_set_11, expected_volumes_1);
         compareResourceSet(resource_set_12, expected_volumes_2);

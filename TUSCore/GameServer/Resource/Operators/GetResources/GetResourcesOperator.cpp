@@ -36,9 +36,9 @@ namespace Resource
 {
 
 GetResourcesOperator::GetResourcesOperator(
-    IResourceManagerShrPtr a_resource_manager
+    IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
-    : m_resource_manager(a_resource_manager)
+    : m_resource_persistence_facades(a_resource_persistence_facade)
 {
 }
 
@@ -49,7 +49,7 @@ GetResourcesOperatorExitCode GetResourcesOperator::getResources(
 {
     try
     {
-        ResourceSet const resources = m_resource_manager->getResources(a_transaction, a_id_holder);
+        ResourceSet const resources = m_resource_persistence_facades->getResources(a_transaction, a_id_holder);
 
         return GetResourcesOperatorExitCode(GET_RESOURCES_OPERATOR_EXIT_CODE_RESOURCES_HAVE_BEEN_GOT, resources);
     }

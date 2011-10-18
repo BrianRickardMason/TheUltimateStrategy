@@ -28,9 +28,8 @@
 #ifndef GAMESERVER_RESOURCE_GETRESOURCESOPERATOR_HPP
 #define GAMESERVER_RESOURCE_GETRESOURCESOPERATOR_HPP
 
+#include "../../IResourcePersistenceFacade.hpp"
 #include "IGetResourcesOperator.hpp"
-
-#include "../../IResourceManager.hpp"
 
 namespace GameServer
 {
@@ -45,12 +44,12 @@ class GetResourcesOperator
 {
 public:
     /**
-     * @brief Constructs the operator.
+     * @brief Ctor.
      *
-     * @param a_resource_manager The manager of resources.
+     * @param a_resource_persistence_facade The persistence facade of resources.
      */
     GetResourcesOperator(
-        IResourceManagerShrPtr a_resource_manager
+        IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
     );
 
     /**
@@ -68,13 +67,13 @@ public:
 
 private:
     /**
-     * @brief The manager of resources.
+     * @brief Persistence facades.
      */
-    IResourceManagerShrPtr m_resource_manager;
+    IResourcePersistenceFacadeShrPtr m_resource_persistence_facades;
 };
 
 /**
- * @brief The auto pointer of GetResourcesOperator.
+ * @brief Typedefs of auto pointers.
  */
 typedef std::auto_ptr<GetResourcesOperator> GetResourcesOperatorAutPtr;
 

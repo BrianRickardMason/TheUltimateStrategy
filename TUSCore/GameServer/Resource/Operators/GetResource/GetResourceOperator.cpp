@@ -36,9 +36,9 @@ namespace Resource
 {
 
 GetResourceOperator::GetResourceOperator(
-    IResourceManagerShrPtr a_resource_manager
+    IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
-    : m_resource_manager(a_resource_manager)
+    : m_resource_persistence_facades(a_resource_persistence_facade)
 {
 }
 
@@ -50,7 +50,8 @@ GetResourceOperatorExitCode GetResourceOperator::getResource(
 {
     try
     {
-        ResourceWithVolumeShrPtr const resource = m_resource_manager->getResource(a_transaction, a_id_holder, a_key);
+        ResourceWithVolumeShrPtr const resource =
+            m_resource_persistence_facades->getResource(a_transaction, a_id_holder, a_key);
 
         return GetResourceOperatorExitCode(GET_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_GOT, resource);
     }

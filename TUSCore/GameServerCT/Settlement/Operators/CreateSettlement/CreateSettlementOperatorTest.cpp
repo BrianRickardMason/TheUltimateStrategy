@@ -54,7 +54,7 @@ protected:
         : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql),
           m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
-          m_resource_manager(m_manager_abstract_factory->createResourceManager()),
+          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
           m_create_epoch_operator(m_operator_abstract_factory->createCreateEpochOperator()),
           m_create_land_operator(m_operator_abstract_factory->createCreateLandOperator()),
           m_create_settlement_operator(m_operator_abstract_factory->createCreateSettlementOperator()),
@@ -164,7 +164,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            ResourceSet resource_set = m_resource_manager->getResources(transaction, id_holder);
+            ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, id_holder);
 
             ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -204,7 +204,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            ResourceSet resource_set = m_resource_manager->getResources(transaction, id_holder);
+            ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, id_holder);
 
             ResourceWithVolumeMap resource_map = resource_set.getMap();
 
@@ -222,22 +222,23 @@ protected:
         }
     }
 
+    //@{
     /**
-     * @brief The abstract factory of managers.
+     * @brief Abstract factories used in tests.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
-
-    /**
-     * @brief The abstract factory of operators.
-     */
+    IManagerAbstractFactoryShrPtr  m_manager_abstract_factory;
     IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
+    //}@
 
+    //@{
     /**
      * @brief Persistence facades used in tests.
      */
-    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
-    IResourceManagerShrPtr        m_resource_manager;
+    IHumanPersistenceFacadeShrPtr    m_human_persistence_facade;
+    IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
+    //}@
 
+    //@{
     /**
      * @brief Operators used in tests.
      */
@@ -246,6 +247,7 @@ protected:
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     ICreateUserOperatorShrPtr       m_create_user_operator;
     ICreateWorldOperatorShrPtr      m_create_world_operator;
+    //}@
 
     /**
      * @brief Test constants: the name of the epoch.
