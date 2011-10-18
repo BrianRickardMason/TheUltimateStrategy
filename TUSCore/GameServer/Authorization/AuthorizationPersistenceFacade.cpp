@@ -37,7 +37,7 @@ namespace Authorization
 {
 
 AuthorizationPersistenceFacade::AuthorizationPersistenceFacade(
-    IAuthorizationManagerAccessorAutPtr a_accessor
+    IAuthorizationAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

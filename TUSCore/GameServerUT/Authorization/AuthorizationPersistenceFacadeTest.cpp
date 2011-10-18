@@ -27,7 +27,7 @@
 
 #include "../../GameServer/Authorization/AuthorizationPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "AuthorizationManagerAccessorMock.hpp"
+#include "AuthorizationAccessorMock.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Authorization;
@@ -71,7 +71,7 @@ protected:
 
 TEST_F(AuthorizationPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    IAuthorizationManagerAccessorAutPtr accessor(new AuthorizationManagerAccessorMock);
+    IAuthorizationAccessorAutPtr accessor(new AuthorizationAccessorMock);
 
     ASSERT_NO_THROW(AuthorizationPersistenceFacade persistence_facade(accessor));
 }
@@ -80,11 +80,11 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
+    AuthorizationAccessorMock * mock = new AuthorizationAccessorMock;
     EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_land_name))
     .WillOnce(Return(true));
 
-    IAuthorizationManagerAccessorAutPtr accessor(mock);
+    IAuthorizationAccessorAutPtr accessor(mock);
 
     AuthorizationPersistenceFacade persistence_facade(accessor);
 
@@ -95,11 +95,11 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
+    AuthorizationAccessorMock * mock = new AuthorizationAccessorMock;
     EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_land_name))
     .WillOnce(Return(false));
 
-    IAuthorizationManagerAccessorAutPtr accessor(mock);
+    IAuthorizationAccessorAutPtr accessor(mock);
 
     AuthorizationPersistenceFacade persistence_facade(accessor);
 
@@ -110,13 +110,13 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
+    AuthorizationAccessorMock * mock = new AuthorizationAccessorMock;
     EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_settlement_name))
     .WillOnce(Return(m_land_name));
     EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_land_name))
     .WillOnce(Return(true));
 
-    IAuthorizationManagerAccessorAutPtr accessor(mock);
+    IAuthorizationAccessorAutPtr accessor(mock);
 
     AuthorizationPersistenceFacade persistence_facade(accessor);
 
@@ -127,13 +127,13 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    AuthorizationManagerAccessorMock * mock = new AuthorizationManagerAccessorMock;
+    AuthorizationAccessorMock * mock = new AuthorizationAccessorMock;
     EXPECT_CALL(*mock, getLandNameOfSettlement(transaction, m_settlement_name))
     .WillOnce(Return(m_land_name));
     EXPECT_CALL(*mock, authorizeUserToLand(transaction, m_login, m_land_name))
     .WillOnce(Return(false));
 
-    IAuthorizationManagerAccessorAutPtr accessor(mock);
+    IAuthorizationAccessorAutPtr accessor(mock);
 
     AuthorizationPersistenceFacade persistence_facade(accessor);
 

@@ -25,11 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_AUTHORIZATION_AUTHORIZATIONACCESSORPOSTGRESQL_HPP
 
-#include "../../GameServer/Authorization/IAuthorizationManagerAccessor.hpp"
-#include <gmock/gmock.h>
+#include "IAuthorizationAccessor.hpp"
 
 namespace GameServer
 {
@@ -37,10 +36,10 @@ namespace Authorization
 {
 
 /**
- * @brief A mock of the interface of the authorization manager accessor.
+ * @brief An PostgreSQL authorization accessor.
  */
-class AuthorizationManagerAccessorMock
-    : public IAuthorizationManagerAccessor
+class AuthorizationAccessorPostgresql
+    : public IAuthorizationAccessor
 {
 public:
     /**
@@ -52,33 +51,27 @@ public:
      *
      * @return True if the user is authorized, false otherwise.
      */
-    MOCK_CONST_METHOD3(
-        authorizeUserToLand,
-        bool(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_login,
-            std::string                     const a_land_name
-        )
-    );
+    virtual bool authorizeUserToLand(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_land_name
+    ) const;
 
     /**
-     * @brief Gets the name of the land of the settlement.
+     * @brief Gets the name of a land of the settlement.
      *
      * @param a_transaction     The transaction.
      * @param a_settlement_name The name of the settlement
      *
      * @return The name of the land, an empty string if not found.
      */
-    MOCK_CONST_METHOD2(
-        getLandNameOfSettlement,
-        std::string(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_settlement_name
-        )
-    );
+    virtual std::string getLandNameOfSettlement(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const;
 };
 
 } // namespace Authorization
 } // namespace GameServer
 
-#endif // GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_AUTHORIZATION_AUTHORIZATIONACCESSORPOSTGRESQL_HPP

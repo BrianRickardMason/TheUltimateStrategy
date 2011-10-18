@@ -25,53 +25,58 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERACCESSORPOSTGRESQL_HPP
+#include "../Persistence/TransactionPostgresql.hpp"
+#include "AuthorizationAccessorPostgresql.hpp"
 
-#include "IAuthorizationManagerAccessor.hpp"
+using namespace GameServer::Persistence;
+using namespace boost;
+using namespace std;
 
 namespace GameServer
 {
 namespace Authorization
 {
 
-/**
- * @brief An PostgreSQL authorization manager accessor.
- */
-class AuthorizationManagerAccessorPostgresql
-    : public IAuthorizationManagerAccessor
+bool AuthorizationAccessorPostgresql::authorizeUserToLand(
+    ITransactionShrPtr       a_transaction,
+    string             const a_login,
+    string             const a_land_name
+) const
 {
-public:
-    /**
-     * @brief Authorizes a user to the land.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_land_name   The name of the land.
-     *
-     * @return True if the user is authorized, false otherwise.
-     */
-    virtual bool authorizeUserToLand(
-        Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_login,
-        std::string                     const a_land_name
-    ) const;
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    /**
-     * @brief Gets the name of a land of the settlement.
-     *
-     * @param a_transaction     The transaction.
-     * @param a_settlement_name The name of the settlement
-     *
-     * @return The name of the land, an empty string if not found.
-     */
-    virtual std::string getLandNameOfSettlement(
-        Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_settlement_name
-    ) const;
-};
+    string query = "SELECT * FROM lands WHERE login = " + backbone_transaction.quote(a_login)
+                   + " AND land_name = " + backbone_transaction.quote(a_land_name);
+
+    pqxx::result result = backbone_transaction.exec(query);
+
+    return result.size() ? true : false;
+}
+
+string AuthorizationAccessorPostgresql::getLandNameOfSettlement(
+    ITransactionShrPtr       a_transaction,
+    string             const a_settlement_name
+) const
+{
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+
+    string query = "SELECT land_name FROM settlements WHERE settlement_name = " + backbone_transaction.quote(a_settlement_name);
+
+    pqxx::result result = backbone_transaction.exec(query);
+
+    if (result.size() > 0)
+    {
+        string land_name;
+        result[0]["land_name"].to(land_name);
+        return land_name;
+    }
+    else
+    {
+        return "";
+    }
+}
 
 } // namespace Authorization
 } // namespace GameServer
-
-#endif // GAMESERVER_AUTHORIZATION_AUTHORIZATIONMANAGERACCESSORPOSTGRESQL_HPP

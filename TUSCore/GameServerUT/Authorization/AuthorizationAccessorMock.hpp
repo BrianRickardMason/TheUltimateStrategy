@@ -25,58 +25,60 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistence/TransactionPostgresql.hpp"
-#include "AuthorizationManagerAccessorPostgresql.hpp"
+#ifndef GAMESERVER_AUTHORIZATION_AUTHORIZATIONACCESSORMOCK_HPP
+#define GAMESERVER_AUTHORIZATION_AUTHORIZATIONACCESSORMOCK_HPP
 
-using namespace GameServer::Persistence;
-using namespace boost;
-using namespace std;
+#include "../../GameServer/Authorization/IAuthorizationAccessor.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
 namespace Authorization
 {
 
-bool AuthorizationManagerAccessorPostgresql::authorizeUserToLand(
-    ITransactionShrPtr       a_transaction,
-    string             const a_login,
-    string             const a_land_name
-) const
+/**
+ * @brief A mock of the interface of the authorization accessor.
+ */
+class AuthorizationAccessorMock
+    : public IAuthorizationAccessor
 {
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+public:
+    /**
+     * @brief Authorizes a user to the land.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     * @param a_land_name   The name of the land.
+     *
+     * @return True if the user is authorized, false otherwise.
+     */
+    MOCK_CONST_METHOD3(
+        authorizeUserToLand,
+        bool(
+            Persistence::ITransactionShrPtr       a_transaction,
+            std::string                     const a_login,
+            std::string                     const a_land_name
+        )
+    );
 
-    string query = "SELECT * FROM lands WHERE login = " + backbone_transaction.quote(a_login)
-                   + " AND land_name = " + backbone_transaction.quote(a_land_name);
-
-    pqxx::result result = backbone_transaction.exec(query);
-
-    return result.size() ? true : false;
-}
-
-string AuthorizationManagerAccessorPostgresql::getLandNameOfSettlement(
-    ITransactionShrPtr       a_transaction,
-    string             const a_settlement_name
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT land_name FROM settlements WHERE settlement_name = " + backbone_transaction.quote(a_settlement_name);
-
-    pqxx::result result = backbone_transaction.exec(query);
-
-    if (result.size() > 0)
-    {
-        string land_name;
-        result[0]["land_name"].to(land_name);
-        return land_name;
-    }
-    else
-    {
-        return "";
-    }
-}
+    /**
+     * @brief Gets the name of the land of the settlement.
+     *
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of the settlement
+     *
+     * @return The name of the land, an empty string if not found.
+     */
+    MOCK_CONST_METHOD2(
+        getLandNameOfSettlement,
+        std::string(
+            Persistence::ITransactionShrPtr       a_transaction,
+            std::string                     const a_settlement_name
+        )
+    );
+};
 
 } // namespace Authorization
 } // namespace GameServer
+
+#endif // GAMESERVER_AUTHORIZATION_AUTHORIZATIONACCESSORMOCK_HPP

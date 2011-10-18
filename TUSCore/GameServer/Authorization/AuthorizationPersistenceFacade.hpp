@@ -30,7 +30,7 @@
 
 #include "../Common/IDHolder.hpp"
 #include "../Persistence/IPersistence.hpp" // TODO: Check if forward declaration is not enough.
-#include "IAuthorizationManagerAccessor.hpp"
+#include "IAuthorizationAccessor.hpp"
 #include "IAuthorizationPersistenceFacade.hpp"
 
 namespace GameServer
@@ -51,7 +51,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     AuthorizationPersistenceFacade(
-        IAuthorizationManagerAccessorAutPtr a_accessor
+        IAuthorizationAccessorAutPtr a_accessor
     );
 
     /**
@@ -103,11 +103,11 @@ private:
     /**
      * @brief An accessor.
      */
-    IAuthorizationManagerAccessorScpPtr m_accessor;
+    IAuthorizationAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief An auto pointer of authorization persistence facade.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<AuthorizationPersistenceFacade> AuthorizationPersistenceFacadeAutPtr;
 

@@ -30,7 +30,7 @@
 
 #include "../Achievement/IAchievementAccessor.hpp"
 #include "../Authentication/IAuthenticationAccessor.hpp"
-#include "../Authorization/IAuthorizationManagerAccessor.hpp"
+#include "../Authorization/IAuthorizationAccessor.hpp"
 #include "../Building/IBuildingManagerAccessor.hpp"
 #include "../Cost/ICostManagerAccessor.hpp"
 #include "../Epoch/IEpochManagerAccessor.hpp"
@@ -64,7 +64,7 @@ public:
      */
     virtual Achievement::IAchievementAccessorAutPtr            createAchievementAccessor()    const = 0;
     virtual Authentication::IAuthenticationAccessorAutPtr      createAuthenticationAccessor() const = 0;
-    virtual Authorization::IAuthorizationManagerAccessorAutPtr createAuthorizationAccessor()  const = 0;
+    virtual Authorization::IAuthorizationAccessorAutPtr        createAuthorizationAccessor()  const = 0;
     virtual Building::IBuildingManagerAccessorAutPtr           createBuildingAccessor()       const = 0;
     virtual Cost::ICostManagerAccessorAutPtr                   createCostAccessor()           const = 0;
     virtual Epoch::IEpochManagerAccessorAutPtr                 createEpochAccessor()          const = 0;
