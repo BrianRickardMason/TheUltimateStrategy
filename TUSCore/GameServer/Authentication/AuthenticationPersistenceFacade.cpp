@@ -36,7 +36,7 @@ namespace Authentication
 {
 
 AuthenticationPersistenceFacade::AuthenticationPersistenceFacade(
-    IAuthenticationManagerAccessorAutPtr a_accessor
+    IAuthenticationAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

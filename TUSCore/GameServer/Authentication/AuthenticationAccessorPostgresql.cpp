@@ -25,44 +25,34 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGERACCESSORMOCK_HPP
+#include "../Persistence/TransactionPostgresql.hpp"
+#include "AuthenticationAccessorPostgresql.hpp"
 
-#include "../../GameServer/Authentication/IAuthenticationManagerAccessor.hpp"
-#include <gmock/gmock.h>
+using namespace GameServer::Persistence;
+using namespace boost;
+using namespace std;
 
 namespace GameServer
 {
 namespace Authentication
 {
 
-/**
- * @brief A mock of the interface of the authentication manager accessor.
- */
-class AuthenticationManagerAccessorMock
-    : public IAuthenticationManagerAccessor
+bool AuthenticationAccessorPostgresql::authenticate(
+    ITransactionShrPtr         a_transaction,
+    string             const & a_login,
+    string             const & a_password
+) const
 {
-public:
-    /**
-     * @brief Authenticates a user.
-     *
-     * @param a_transaction The transaction.
-     * @param a_login       The login of the user.
-     * @param a_password    The password of the user.
-     *
-     * @return True if authenticated, false otherwise.
-     */
-    MOCK_CONST_METHOD3(
-        authenticate,
-        bool(
-            Persistence::ITransactionShrPtr         a_transaction,
-            std::string                     const & a_login,
-            std::string                     const & a_password
-        )
-    );
-};
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+
+    string query = "SELECT * FROM users WHERE login = " + backbone_transaction.quote(a_login)
+                   + " AND password = " + backbone_transaction.quote(a_password);
+
+    pqxx::result result = backbone_transaction.exec(query);
+
+    return result.size() ? true : false;
+}
 
 } // namespace Authentication
 } // namespace GameServer
-
-#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGERACCESSORMOCK_HPP

@@ -42,96 +42,26 @@ class AccessorAbstractFactoryPostgresql
     : public IAccessorAbstractFactory
 {
 public:
+    //@{
     /**
-     * @brief Creates the achievement accessor.
+     * @brief Creates an accessor.
      *
-     * @return The newly created achievement accessor.
+     * @return The newly created accessor.
      */
-    virtual Achievement::IAchievementAccessorAutPtr createAchievementAccessor() const;
-
-    /**
-     * @brief Creates the authentication accessor.
-     *
-     * @return The newly created authentication accessor.
-     */
-    virtual Authentication::IAuthenticationManagerAccessorAutPtr createAuthenticationAccessor() const;
-
-    /**
-     * @brief Creates the authorization accessor.
-     *
-     * @return The newly created authorization accessor.
-     */
-    virtual Authorization::IAuthorizationManagerAccessorAutPtr createAuthorizationAccessor() const;
-
-    /**
-     * @brief Creates the building accessor.
-     *
-     * @return The newly created building accessor.
-     */
-    virtual Building::IBuildingManagerAccessorAutPtr createBuildingAccessor() const;
-
-    /**
-     * @brief Creates the cost accessor.
-     *
-     * @return The newly created cost accessor.
-     */
-    virtual Cost::ICostManagerAccessorAutPtr createCostAccessor() const;
-
-    /**
-     * @brief Creates the epoch accessor.
-     *
-     * @return The newly created epoch accessor.
-     */
-    virtual Epoch::IEpochManagerAccessorAutPtr createEpochAccessor() const;
-
-    /**
-     * @brief Creates the human accessor.
-     *
-     * @return The newly created human accessor.
-     */
-    virtual Human::IHumanManagerAccessorAutPtr createHumanAccessor() const;
-
-    /**
-     * @brief Creates the land accessor.
-     *
-     * @return The newly created land accessor.
-     */
-    virtual Land::ILandManagerAccessorAutPtr createLandAccessor() const;
-
-    /**
-     * @brief Creates the property accessor.
-     *
-     * @return The newly created property accessor.
-     */
-    virtual Property::IPropertyManagerAccessorAutPtr createPropertyAccessor() const;
-
-    /**
-     * @brief Creates the resource accessor.
-     *
-     * @return The newly created resource accessor.
-     */
-    virtual Resource::IResourceManagerAccessorAutPtr createResourceAccessor() const;
-
-    /**
-     * @brief Creates the settlement accessor.
-     *
-     * @return The newly created settlement accessor.
-     */
-    virtual Settlement::ISettlementManagerAccessorAutPtr createSettlementAccessor() const;
-
-    /**
-     * @brief Creates the user accessor.
-     *
-     * @return The newly created user accessor.
-     */
-    virtual User::IUserManagerAccessorAutPtr createUserAccessor() const;
-
-    /**
-     * @brief Creates the world accessor.
-     *
-     * @return The newly created world accessor.
-     */
-    virtual World::IWorldManagerAccessorAutPtr createWorldAccessor() const;
+    virtual Achievement::IAchievementAccessorAutPtr            createAchievementAccessor()    const;
+    virtual Authentication::IAuthenticationAccessorAutPtr      createAuthenticationAccessor() const;
+    virtual Authorization::IAuthorizationManagerAccessorAutPtr createAuthorizationAccessor()  const;
+    virtual Building::IBuildingManagerAccessorAutPtr           createBuildingAccessor()       const;
+    virtual Cost::ICostManagerAccessorAutPtr                   createCostAccessor()           const;
+    virtual Epoch::IEpochManagerAccessorAutPtr                 createEpochAccessor()          const;
+    virtual Human::IHumanManagerAccessorAutPtr                 createHumanAccessor()          const;
+    virtual Land::ILandManagerAccessorAutPtr                   createLandAccessor()           const;
+    virtual Property::IPropertyManagerAccessorAutPtr           createPropertyAccessor()       const;
+    virtual Resource::IResourceManagerAccessorAutPtr           createResourceAccessor()       const;
+    virtual Settlement::ISettlementManagerAccessorAutPtr       createSettlementAccessor()     const;
+    virtual User::IUserManagerAccessorAutPtr                   createUserAccessor()           const;
+    virtual World::IWorldManagerAccessorAutPtr                 createWorldAccessor()          const;
+    //}@
 };
 
 } // namespace Common

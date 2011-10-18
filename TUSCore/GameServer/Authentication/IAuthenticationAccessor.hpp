@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGERACCESSOR_HPP
-#define GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_AUTHENTICATION_IAUTHENTICATIONACCESSOR_HPP
+#define GAMESERVER_AUTHENTICATION_IAUTHENTICATIONACCESSOR_HPP
 
 #include "../Persistence/ITransaction.hpp"
 #include <boost/noncopyable.hpp>
@@ -39,16 +39,16 @@ namespace Authentication
 {
 
 /**
- * @brief An interface of the authentication manager accessor.
+ * @brief An interface of the authentication accessor.
  */
-class IAuthenticationManagerAccessor
+class IAuthenticationAccessor
     : boost::noncopyable
 {
 public:
     /**
      * @brief Destructs the accessor.
      */
-    virtual ~IAuthenticationManagerAccessor(){};
+    virtual ~IAuthenticationAccessor(){};
 
     /**
      * @brief Authenticates a user.
@@ -67,16 +67,16 @@ public:
 };
 
 /**
- * @brief An auto pointer of the interface of the authentication manager accessor.
+ * @brief Typedef of auto pointer.
  */
-typedef std::auto_ptr<IAuthenticationManagerAccessor> IAuthenticationManagerAccessorAutPtr;
+typedef std::auto_ptr<IAuthenticationAccessor> IAuthenticationAccessorAutPtr;
 
 /**
- * @brief A scoped pointer of the interface of the authentication manager accessor.
+ * @brief Typedef of scoped pointer.
  */
-typedef boost::scoped_ptr<IAuthenticationManagerAccessor> IAuthenticationManagerAccessorScpPtr;
+typedef boost::scoped_ptr<IAuthenticationAccessor> IAuthenticationAccessorScpPtr;
 
 } // namespace Authentication
 } // namespace GameServer
 
-#endif // GAMESERVER_AUTHENTICATION_IAUTHENTICATIONMANAGERACCESSOR_HPP
+#endif // GAMESERVER_AUTHENTICATION_IAUTHENTICATIONACCESSOR_HPP

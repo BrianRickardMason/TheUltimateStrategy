@@ -25,34 +25,40 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistence/TransactionPostgresql.hpp"
-#include "AuthenticationManagerAccessorPostgresql.hpp"
+#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONACCESSORPOSTGRESQL_HPP
 
-using namespace GameServer::Persistence;
-using namespace boost;
-using namespace std;
+#include "IAuthenticationAccessor.hpp"
 
 namespace GameServer
 {
 namespace Authentication
 {
 
-bool AuthenticationManagerAccessorPostgresql::authenticate(
-    ITransactionShrPtr         a_transaction,
-    string             const & a_login,
-    string             const & a_password
-) const
+/**
+ * @brief An PostgreSQL authentication accessor.
+ */
+class AuthenticationAccessorPostgresql
+    : public IAuthenticationAccessor
 {
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM users WHERE login = " + backbone_transaction.quote(a_login)
-                   + " AND password = " + backbone_transaction.quote(a_password);
-
-    pqxx::result result = backbone_transaction.exec(query);
-
-    return result.size() ? true : false;
-}
+public:
+    /**
+     * @brief Authenticates a user.
+     *
+     * @param a_transaction The transaction.
+     * @param a_login       The login of the user.
+     * @param a_password    The password of the user.
+     *
+     * @return True if authenticated, false otherwise.
+     */
+    virtual bool authenticate(
+        Persistence::ITransactionShrPtr         a_transaction,
+        std::string                     const & a_login,
+        std::string                     const & a_password
+    ) const;
+};
 
 } // namespace Authentication
 } // namespace GameServer
+
+#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONACCESSORPOSTGRESQL_HPP

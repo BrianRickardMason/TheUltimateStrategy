@@ -27,7 +27,7 @@
 
 #include "../../GameServer/Authentication/AuthenticationPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "AuthenticationManagerAccessorMock.hpp"
+#include "AuthenticationAccessorMock.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Authentication;
@@ -65,7 +65,7 @@ protected:
 
 TEST_F(AuthenticationPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    IAuthenticationManagerAccessorAutPtr accessor(new AuthenticationManagerAccessorMock);
+    IAuthenticationAccessorAutPtr accessor(new AuthenticationAccessorMock);
 
     ASSERT_NO_THROW(AuthenticationPersistenceFacade persistence_facade(accessor));
 }
@@ -77,11 +77,11 @@ TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateReturnsTrueOnSuccessfulA
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    AuthenticationManagerAccessorMock * mock = new AuthenticationManagerAccessorMock;
+    AuthenticationAccessorMock * mock = new AuthenticationAccessorMock;
     EXPECT_CALL(*mock, authenticate(transaction, m_login, m_password))
     .WillOnce(Return(true));
 
-    IAuthenticationManagerAccessorAutPtr accessor(mock);
+    IAuthenticationAccessorAutPtr accessor(mock);
 
     AuthenticationPersistenceFacade persistence_facade(accessor);
 
@@ -92,11 +92,11 @@ TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateReturnsFalseOnUnsuccessf
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    AuthenticationManagerAccessorMock * mock = new AuthenticationManagerAccessorMock;
+    AuthenticationAccessorMock * mock = new AuthenticationAccessorMock;
     EXPECT_CALL(*mock, authenticate(transaction, m_login, m_password))
     .WillOnce(Return(false));
 
-    IAuthenticationManagerAccessorAutPtr accessor(mock);
+    IAuthenticationAccessorAutPtr accessor(mock);
 
     AuthenticationPersistenceFacade persistence_facade(accessor);
 

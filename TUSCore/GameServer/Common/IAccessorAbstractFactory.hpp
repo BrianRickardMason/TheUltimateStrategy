@@ -29,7 +29,7 @@
 #define GAMESERVER_COMMON_IACCESSORABSTRACTFACTORY_HPP
 
 #include "../Achievement/IAchievementAccessor.hpp"
-#include "../Authentication/IAuthenticationManagerAccessor.hpp"
+#include "../Authentication/IAuthenticationAccessor.hpp"
 #include "../Authorization/IAuthorizationManagerAccessor.hpp"
 #include "../Building/IBuildingManagerAccessor.hpp"
 #include "../Cost/ICostManagerAccessor.hpp"
@@ -54,105 +54,32 @@ namespace Common
 class IAccessorAbstractFactory
 {
 public:
-    /**
-     * @brief Destructs AccessorAbstractFactory.
-     */
     virtual ~IAccessorAbstractFactory(){}
 
+    //@{
     /**
-     * @brief Creates the achievement accessor.
+     * @brief Creates an accessor.
      *
-     * @return The newly created achievement accessor.
+     * @return The newly created accessor.
      */
-    virtual Achievement::IAchievementAccessorAutPtr createAchievementAccessor() const = 0;
-
-    /**
-     * @brief Creates the authentication accessor.
-     *
-     * @return The newly created authentication accessor.
-     */
-    virtual Authentication::IAuthenticationManagerAccessorAutPtr createAuthenticationAccessor() const = 0;
-
-    /**
-     * @brief Creates the authorization accessor.
-     *
-     * @return The newly created authorization accessor.
-     */
-    virtual Authorization::IAuthorizationManagerAccessorAutPtr createAuthorizationAccessor() const = 0;
-
-    /**
-     * @brief Creates the building accessor.
-     *
-     * @return The newly created building accessor.
-     */
-    virtual Building::IBuildingManagerAccessorAutPtr createBuildingAccessor() const = 0;
-
-    /**
-     * @brief Creates the cost accessor.
-     *
-     * @return The newly created cost accessor.
-     */
-    virtual Cost::ICostManagerAccessorAutPtr createCostAccessor() const = 0;
-
-    /**
-     * @brief Creates the epoch accessor.
-     *
-     * @return The newly created epoch accessor.
-     */
-    virtual Epoch::IEpochManagerAccessorAutPtr createEpochAccessor() const = 0;
-
-    /**
-     * @brief Creates the human accessor.
-     *
-     * @return The newly created human accessor.
-     */
-    virtual Human::IHumanManagerAccessorAutPtr createHumanAccessor() const = 0;
-
-    /**
-     * @brief Creates the land accessor.
-     *
-     * @return The newly created land accessor.
-     */
-    virtual Land::ILandManagerAccessorAutPtr createLandAccessor() const = 0;
-
-    /**
-     * @brief Creates the property accessor.
-     *
-     * @return The newly created property accessor.
-     */
-    virtual Property::IPropertyManagerAccessorAutPtr createPropertyAccessor() const = 0;
-
-    /**
-     * @brief Creates the resource accessor.
-     *
-     * @return The newly created resource accessor.
-     */
-    virtual Resource::IResourceManagerAccessorAutPtr createResourceAccessor() const = 0;
-
-    /**
-     * @brief Creates the settlement accessor.
-     *
-     * @return The newly created settlement accessor.
-     */
-    virtual Settlement::ISettlementManagerAccessorAutPtr createSettlementAccessor() const = 0;
-
-    /**
-     * @brief Creates the user accessor.
-     *
-     * @return The newly created user accessor.
-     */
-    virtual User::IUserManagerAccessorAutPtr createUserAccessor() const = 0;
-
-    /**
-     * @brief Creates the world accessor.
-     *
-     * @return The newly created world accessor.
-     */
-    virtual World::IWorldManagerAccessorAutPtr createWorldAccessor() const = 0;
+    virtual Achievement::IAchievementAccessorAutPtr            createAchievementAccessor()    const = 0;
+    virtual Authentication::IAuthenticationAccessorAutPtr      createAuthenticationAccessor() const = 0;
+    virtual Authorization::IAuthorizationManagerAccessorAutPtr createAuthorizationAccessor()  const = 0;
+    virtual Building::IBuildingManagerAccessorAutPtr           createBuildingAccessor()       const = 0;
+    virtual Cost::ICostManagerAccessorAutPtr                   createCostAccessor()           const = 0;
+    virtual Epoch::IEpochManagerAccessorAutPtr                 createEpochAccessor()          const = 0;
+    virtual Human::IHumanManagerAccessorAutPtr                 createHumanAccessor()          const = 0;
+    virtual Land::ILandManagerAccessorAutPtr                   createLandAccessor()           const = 0;
+    virtual Property::IPropertyManagerAccessorAutPtr           createPropertyAccessor()       const = 0;
+    virtual Resource::IResourceManagerAccessorAutPtr           createResourceAccessor()       const = 0;
+    virtual Settlement::ISettlementManagerAccessorAutPtr       createSettlementAccessor()     const = 0;
+    virtual User::IUserManagerAccessorAutPtr                   createUserAccessor()           const = 0;
+    virtual World::IWorldManagerAccessorAutPtr                 createWorldAccessor()          const = 0;
+    //}@
 };
 
 /**
- * @brief The shared pointer of the interface of AccessorAbstractFactory.
+ * @brief Typedef of shared pointer.
  */
 typedef boost::shared_ptr<IAccessorAbstractFactory> IAccessorAbstractFactoryShrPtr;
 

@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Achievement/AchievementAccessorPostgresql.hpp"
-#include "../Authentication/AuthenticationManagerAccessorPostgresql.hpp"
+#include "../Authentication/AuthenticationAccessorPostgresql.hpp"
 #include "../Authorization/AuthorizationManagerAccessorPostgresql.hpp"
 #include "../Building/BuildingManagerAccessorPostgresql.hpp"
 #include "../Cost/CostManagerAccessorPostgresql.hpp"
@@ -64,9 +64,9 @@ IAchievementAccessorAutPtr AccessorAbstractFactoryPostgresql::createAchievementA
     return IAchievementAccessorAutPtr(new AchievementAccessorPostgresql);
 }
 
-IAuthenticationManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createAuthenticationAccessor() const
+IAuthenticationAccessorAutPtr AccessorAbstractFactoryPostgresql::createAuthenticationAccessor() const
 {
-    return IAuthenticationManagerAccessorAutPtr(new AuthenticationManagerAccessorPostgresql);
+    return IAuthenticationAccessorAutPtr(new AuthenticationAccessorPostgresql);
 }
 
 IAuthorizationManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createAuthorizationAccessor() const

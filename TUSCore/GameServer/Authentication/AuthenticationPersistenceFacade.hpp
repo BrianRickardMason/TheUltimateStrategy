@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCEFACADE_HPP
 #define GAMESERVER_AUTHENTICATION_AUTHENTICATIONPERSISTENCEFACADE_HPP
 
-#include "IAuthenticationManagerAccessor.hpp"
+#include "IAuthenticationAccessor.hpp"
 #include "IAuthenticationPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     AuthenticationPersistenceFacade(
-        IAuthenticationManagerAccessorAutPtr a_accessor
+        IAuthenticationAccessorAutPtr a_accessor
     );
 
     /**
@@ -71,11 +71,11 @@ private:
     /**
      * @brief An accessor.
      */
-    IAuthenticationManagerAccessorScpPtr m_accessor;
+    IAuthenticationAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief An auto pointer of authentication persistence facade.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<AuthenticationPersistenceFacade> AuthenticationPersistenceFacadeAutPtr;
 

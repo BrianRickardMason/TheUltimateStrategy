@@ -25,10 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGERACCESSORPOSTGRESQL_HPP
+#ifndef GAMESERVER_AUTHENTICATION_AUTHENTICATIONACCESSORMOCK_HPP
+#define GAMESERVER_AUTHENTICATION_AUTHENTICATIONACCESSORMOCK_HPP
 
-#include "IAuthenticationManagerAccessor.hpp"
+#include "../../GameServer/Authentication/IAuthenticationAccessor.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
@@ -36,10 +37,10 @@ namespace Authentication
 {
 
 /**
- * @brief An PostgreSQL authentication manager accessor.
+ * @brief A mock of the interface of the authentication accessor.
  */
-class AuthenticationManagerAccessorPostgresql
-    : public IAuthenticationManagerAccessor
+class AuthenticationAccessorMock
+    : public IAuthenticationAccessor
 {
 public:
     /**
@@ -51,14 +52,17 @@ public:
      *
      * @return True if authenticated, false otherwise.
      */
-    virtual bool authenticate(
-        Persistence::ITransactionShrPtr         a_transaction,
-        std::string                     const & a_login,
-        std::string                     const & a_password
-    ) const;
+    MOCK_CONST_METHOD3(
+        authenticate,
+        bool(
+            Persistence::ITransactionShrPtr         a_transaction,
+            std::string                     const & a_login,
+            std::string                     const & a_password
+        )
+    );
 };
 
 } // namespace Authentication
 } // namespace GameServer
 
-#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONMANAGERACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_AUTHENTICATION_AUTHENTICATIONACCESSORMOCK_HPP
