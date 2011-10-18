@@ -39,7 +39,7 @@ TransportHumanOperatorAutPtr TransportHumanOperatorFactory::createTransportHuman
 )
 {
     return TransportHumanOperatorAutPtr(
-               new TransportHumanOperator(a_manager_abstract_factory->createHumanManager(),
+               new TransportHumanOperator(a_manager_abstract_factory->createHumanPersistenceFacade(),
                                           a_manager_abstract_factory->createSettlementPersistenceFacade())
            );
 }

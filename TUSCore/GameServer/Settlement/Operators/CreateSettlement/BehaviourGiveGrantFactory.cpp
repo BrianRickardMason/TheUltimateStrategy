@@ -36,7 +36,7 @@ BehaviourGiveGrantAutPtr BehaviourGiveGrantFactory::createBehaviourGiveGrant(
     Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return BehaviourGiveGrantAutPtr(new BehaviourGiveGrant(a_manager_abstract_factory->createHumanManager(),
+    return BehaviourGiveGrantAutPtr(new BehaviourGiveGrant(a_manager_abstract_factory->createHumanPersistenceFacade(),
                                                            a_manager_abstract_factory->createResourceManager()));
 }
 

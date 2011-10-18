@@ -25,13 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_HUMAN_IHUMANMANAGER_HPP
-#define GAMESERVER_HUMAN_IHUMANMANAGER_HPP
+#ifndef GAMESERVER_HUMAN_HUMANPERSISTENCEFACADEMOCK_HPP
+#define GAMESERVER_HUMAN_HUMANPERSISTENCEFACADEMOCK_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "HumanWithVolume.hpp"
-#include <boost/noncopyable.hpp>
+#include "../../GameServer/Human/IHumanPersistenceFacade.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
@@ -39,17 +37,12 @@ namespace Human
 {
 
 /**
- * @brief An interface of human manager.
+ * @brief A mock of human persistence facade.
  */
-class IHumanManager
-    : boost::noncopyable
+class HumanPersistenceFacadeMock
+    : public IHumanPersistenceFacade
 {
 public:
-    /**
-     * @brief Destructs the human manager.
-     */
-    virtual ~IHumanManager(){};
-
     /**
      * @brief Adds the human.
      *
@@ -60,12 +53,15 @@ public:
      *
      * TODO: Add @throw information.
      */
-    virtual void addHuman(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const = 0;
+    MOCK_CONST_METHOD4(
+        addHuman,
+        void(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key,
+            Volume                                      const & a_volume
+        )
+    );
 
     /**
      * @brief Subtracts the human.
@@ -79,12 +75,15 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual bool subtractHuman(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const = 0;
+    MOCK_CONST_METHOD4(
+        subtractHuman,
+        bool(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key,
+            Volume                                      const & a_volume
+        )
+    );
 
     /**
      * @brief Gets a human.
@@ -95,14 +94,17 @@ public:
      *
      * @return The human, null if not found.
      */
-    virtual HumanWithVolumeShrPtr getHuman(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        getHuman,
+        HumanWithVolumeShrPtr(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key
+        )
+    );
 
     /**
-     * @brief Gets humans by id human.
+     * @brief Gets humans by identifier of a human.
      *
      * @param a_transaction The transaction.
      * @param a_id_holder   The identifier of a holder.
@@ -110,32 +112,33 @@ public:
      *
      * @return A map of humans, an empty map if not found.
      */
-    virtual HumanWithVolumeMap getHumans(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        IDHuman                         const & a_id_human
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        getHumans,
+        HumanWithVolumeMap(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            IDHuman                                     const & a_id_human
+        )
+    );
 
     /**
      * @brief Gets humans.
      *
      * @param a_transaction The transaction.
-     * @param a_id_holder   The identifier of a holder.
+     * @param a_id_holder   The identifier of the holder.
      *
      * @return A map of humans, an empty map if not found.
      */
-    virtual HumanWithVolumeMap getHumans(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder
-    ) const = 0;
+    MOCK_CONST_METHOD2(
+        getHumans,
+        HumanWithVolumeMap(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder
+        )
+    );
 };
-
-/**
- * @brief A shared pointer of interface of human manager.
- */
-typedef boost::shared_ptr<IHumanManager> IHumanManagerShrPtr;
 
 } // namespace Human
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_IHUMANMANAGER_HPP
+#endif // GAMESERVER_HUMAN_HUMANPERSISTENCEFACADEMOCK_HPP

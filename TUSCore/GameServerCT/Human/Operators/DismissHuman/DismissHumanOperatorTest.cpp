@@ -73,14 +73,14 @@ protected:
           m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3),
           m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_cost_manager(m_manager_abstract_factory->createCostManager()),
-          m_human_manager(m_manager_abstract_factory->createHumanManager()),
+          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
+          m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_property_manager(m_manager_abstract_factory->createPropertyManager()),
           m_resource_manager(m_manager_abstract_factory->createResourceManager()),
+          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
           m_dismiss_human_operator(DismissHumanOperatorFactory::createDismissHumanOperator(m_manager_abstract_factory))
     {
@@ -146,12 +146,12 @@ protected:
             compareResourceSet(resource_set_12, expected_volumes_2);
             compareResourceSet(resource_set_21, expected_volumes_1);
 
-            ASSERT_EQ(1, m_human_manager->getHumans(transaction, m_id_holder_11).size());
-            ASSERT_TRUE(m_human_manager->getHumans(transaction, m_id_holder_12).empty());
-            ASSERT_EQ(1, m_human_manager->getHumans(transaction, m_id_holder_21).size());
+            ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+            ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
+            ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-            ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-            ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+            ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+            ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
         }
     }
 
@@ -193,59 +193,27 @@ protected:
              m_id_holder_4;
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief Abstract factories used in tests.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief The persistence facade of users.
+     * @brief Persistence facades used in tests.
      */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
-
-    /**
-     * @brief The world persistence facade.
-     */
+    ICostManagerShrPtr            m_cost_manager;
+    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
+    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
+    ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
+    IPropertyManagerShrPtr        m_property_manager;
+    IResourceManagerShrPtr        m_resource_manager;
+    IUserPersistenceFacadeShrPtr  m_user_persitence_facade;
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
-     * @brief The epoch persistence facade.
-     */
-    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
-
-    /**
-     * @brief A cost manager.
-     */
-    ICostManagerShrPtr m_cost_manager;
-
-    /**
-     * @brief The human persistence facade.
-     */
-    IHumanManagerShrPtr m_human_manager;
-
-    /**
-     * @brief The land persistence facade.
-     */
-    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
-
-    /**
-     * @brief A property manager.
-     */
-    IPropertyManagerShrPtr m_property_manager;
-
-    /**
-     * @brief A resource manager.
-     */
-    IResourceManagerShrPtr m_resource_manager;
-
-    /**
-     * @brief CreateSettlementOperator.
+     * @brief Operators used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
-
-    /**
-     * @brief A dismiss human operator.
-     */
-    IDismissHumanOperatorShrPtr m_dismiss_human_operator;
+    IDismissHumanOperatorShrPtr     m_dismiss_human_operator;
 };
 
 /**
@@ -312,7 +280,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
 
         transaction->commit();
     }
@@ -329,7 +297,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
 
         transaction->commit();
     }
@@ -343,8 +311,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
-        m_human_manager->addHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
 
         // TODO: Subtract resource set.
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
@@ -376,8 +344,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
-        m_human_manager->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
 
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
@@ -399,7 +367,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         // TODO: Subtract resource set.
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
@@ -425,7 +393,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
@@ -447,7 +415,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         // TODO: Subtract resource set.
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
@@ -470,7 +438,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
@@ -489,7 +457,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         m_resource_manager->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
@@ -508,7 +476,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         m_resource_manager->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
@@ -524,7 +492,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         transaction->commit();
     }
@@ -556,13 +524,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
         compareResourceSet(resource_set_12, expected_volumes_2);
         compareResourceSet(resource_set_21, expected_volumes_3);
 
-        ASSERT_EQ(2, m_human_manager->getHumans(transaction, m_id_holder_11).size());
-        ASSERT_TRUE(m_human_manager->getHumans(transaction, m_id_holder_12).empty());
-        ASSERT_EQ(1, m_human_manager->getHumans(transaction, m_id_holder_21).size());
+        ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+        ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
+        ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(9, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
-        ASSERT_EQ(1001, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(9, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
+        ASSERT_EQ(1001, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
 
@@ -572,7 +540,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         transaction->commit();
     }
@@ -603,13 +571,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         compareResourceSet(resource_set_12, expected_volumes_2);
         compareResourceSet(resource_set_21, expected_volumes_3);
 
-        ASSERT_EQ(2, m_human_manager->getHumans(transaction, m_id_holder_11).size());
-        ASSERT_TRUE(m_human_manager->getHumans(transaction, m_id_holder_12).empty());
-        ASSERT_EQ(1, m_human_manager->getHumans(transaction, m_id_holder_21).size());
+        ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+        ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
+        ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(4, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
-        ASSERT_EQ(1006, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(4, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
+        ASSERT_EQ(1006, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
 
@@ -619,7 +587,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
         transaction->commit();
     }
@@ -650,12 +618,12 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
         compareResourceSet(resource_set_12, expected_volumes_2);
         compareResourceSet(resource_set_21, expected_volumes_3);
 
-        ASSERT_EQ(1, m_human_manager->getHumans(transaction, m_id_holder_11).size());
-        ASSERT_TRUE(m_human_manager->getHumans(transaction, m_id_holder_12).empty());
-        ASSERT_EQ(1, m_human_manager->getHumans(transaction, m_id_holder_21).size());
+        ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+        ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
+        ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(1010, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(1010, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
 
@@ -665,7 +633,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_manager->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 200);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 200);
 
         transaction->commit();
     }
@@ -696,12 +664,12 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         compareResourceSet(resource_set_12, expected_volumes_2);
         compareResourceSet(resource_set_21, expected_volumes_3);
 
-        ASSERT_EQ(2, m_human_manager->getHumans(transaction, m_id_holder_11).size());
-        ASSERT_TRUE(m_human_manager->getHumans(transaction, m_id_holder_12).empty());
-        ASSERT_EQ(1, m_human_manager->getHumans(transaction, m_id_holder_21).size());
+        ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+        ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
+        ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(100, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
-        ASSERT_EQ(1100, m_human_manager->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(100, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
+        ASSERT_EQ(1100, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }

@@ -38,10 +38,12 @@ DismissHumanOperatorAutPtr DismissHumanOperatorFactory::createDismissHumanOperat
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return DismissHumanOperatorAutPtr(new DismissHumanOperator(a_manager_abstract_factory->createCostManager(),
-                                                               a_manager_abstract_factory->createHumanManager(),
-                                                               a_manager_abstract_factory->createPropertyManager(),
-                                                               a_manager_abstract_factory->createResourceManager()));
+    return DismissHumanOperatorAutPtr(
+               new DismissHumanOperator(a_manager_abstract_factory->createCostManager(),
+                                        a_manager_abstract_factory->createHumanPersistenceFacade(),
+                                        a_manager_abstract_factory->createPropertyManager(),
+                                        a_manager_abstract_factory->createResourceManager())
+           );
 }
 
 } // namespace Human

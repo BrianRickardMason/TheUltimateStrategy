@@ -36,9 +36,9 @@ namespace Human
 {
 
 GetHumanOperator::GetHumanOperator(
-    IHumanManagerShrPtr a_human_manager
+    IHumanPersistenceFacadeShrPtr a_human_persistence_facade
 )
-    : m_human_manager(a_human_manager)
+    : m_human_persistence_facade(a_human_persistence_facade)
 {
 }
 
@@ -50,7 +50,7 @@ GetHumanOperatorExitCode GetHumanOperator::getHuman(
 {
     try
     {
-        HumanWithVolumeShrPtr const human = m_human_manager->getHuman(a_transaction, a_id_holder, a_key);
+        HumanWithVolumeShrPtr const human = m_human_persistence_facade->getHuman(a_transaction, a_id_holder, a_key);
 
         return GetHumanOperatorExitCode(GET_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_GOT, human);
     }

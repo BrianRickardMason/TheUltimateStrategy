@@ -31,7 +31,7 @@
 #include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Property/PropertyManagerMock.hpp"
 #include "../../../Resource/ResourceManagerMock.hpp"
-#include "../../HumanManagerMock.hpp"
+#include "../../HumanPersistenceFacadeMock.hpp"
 #include <boost/assign.hpp>
 
 using namespace GameServer::Common;
@@ -59,7 +59,7 @@ protected:
      */
     DismissHumanOperatorTest()
         : m_cost_manager(new CostManagerMock),
-          m_human_manager(new HumanManagerMock),
+          m_human_persistence_facade(new HumanPersistenceFacadeMock),
           m_property_manager(new PropertyManagerMock),
           m_resource_manager(new ResourceManagerMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
@@ -123,30 +123,30 @@ protected:
     }
 
     /**
-     * @brief Configures a HumanManagerMock's response for addHuman().
+     * @brief Configures a HumanPersistenceFacadeMock's response for addHuman().
      *
      * If volume equals 0 then null pointer is returned.
      *
      * @param a_key    A human key.
      * @param a_volume A volume of jobless.
      */
-    void configureHumanManagerMockForAddHuman(
+    void configureHumanPersistenceFacadeMockForAddHuman(
         GameServer::Human::Key    const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
-        EXPECT_CALL(*m_human_manager, addHuman(_, m_id_holder, a_key, a_volume));
+        EXPECT_CALL(*m_human_persistence_facade, addHuman(_, m_id_holder, a_key, a_volume));
     }
 
     /**
-     * @brief Configures a HumanManagerMock's response for getHuman().
+     * @brief Configures a HumanPersistenceFacadeMock's response for getHuman().
      *
      * If volume equals 0 then null pointer is returned.
      *
      * @param a_key    A key of the human.
      * @param a_volume A volume of jobless.
      */
-    void configureHumanManagerMockForGetHuman(
+    void configureHumanPersistenceFacadeMockForGetHuman(
         GameServer::Human::Key    const & a_key,
         GameServer::Human::Volume const & a_volume
     )
@@ -154,22 +154,22 @@ protected:
         HumanWithVolumeShrPtr human_with_volume =
             (a_volume) ? make_shared<HumanWithVolume>(a_key, a_volume) : HumanWithVolumeShrPtr();
 
-        EXPECT_CALL(*m_human_manager, getHuman(_, m_id_holder, a_key))
+        EXPECT_CALL(*m_human_persistence_facade, getHuman(_, m_id_holder, a_key))
         .WillOnce(Return(human_with_volume));
     }
 
     /**
-     * @brief Configures a HumanManagerMock's response for subtractHuman().
+     * @brief Configures a HumanPersistenceFacadeMock's response for subtractHuman().
      *
      * @param a_key    A key of the human.
      * @param a_volume A volume of the human.
      */
-    void configureHumanManagerMockForSubtractHuman(
+    void configureHumanPersistenceFacadeMockForSubtractHuman(
         GameServer::Human::Key    const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
-        EXPECT_CALL(*m_human_manager, subtractHuman(_, m_id_holder, a_key, a_volume))
+        EXPECT_CALL(*m_human_persistence_facade, subtractHuman(_, m_id_holder, a_key, a_volume))
         .WillOnce(Return(true));
     }
 
@@ -222,9 +222,9 @@ protected:
     CostManagerMock * m_cost_manager;
 
     /**
-     * @brief A human manager.
+     * @brief The persistence facade of humans.
      */
-    HumanManagerMock * m_human_manager;
+    HumanPersistenceFacadeMock * m_human_persistence_facade;
 
     /**
      * @brief A property manager.
@@ -269,7 +269,7 @@ TEST_F(DismissHumanOperatorTest, DismissHumanOperator)
 {
     // Test commands and assertions.
     ASSERT_NO_THROW(DismissHumanOperator dismiss_human_operator((ICostManagerShrPtr(m_cost_manager)),
-                                                                (IHumanManagerShrPtr(m_human_manager)),
+                                                                (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                                 (IPropertyManagerShrPtr(m_property_manager)),
                                                                 (IResourceManagerShrPtr(m_resource_manager))));
 }
@@ -282,7 +282,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_TryingToDismissZeroHumans)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     DismissHumanOperator dismiss_human_operator((ICostManagerShrPtr(m_cost_manager)),
-                                                (IHumanManagerShrPtr(m_human_manager)),
+                                                (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                 (IPropertyManagerShrPtr(m_property_manager)),
                                                 (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -300,7 +300,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_HumanIsNotDismissable)
     .WillOnce(Return(engageable));
 
     DismissHumanOperator dismiss_human_operator((ICostManagerShrPtr(m_cost_manager)),
-                                                (IHumanManagerShrPtr(m_human_manager)),
+                                                (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                 (IPropertyManagerShrPtr(m_property_manager)),
                                                 (IResourceManagerShrPtr(m_resource_manager)));
 
@@ -312,10 +312,10 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroEngaged)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 0);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 0);
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(m_cost_manager),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(m_resource_manager));
 
@@ -327,10 +327,10 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 5);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 5);
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(m_cost_manager),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(m_resource_manager));
 
@@ -342,13 +342,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_NoResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes_empty;
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes_empty));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(m_resource_manager));
 
@@ -360,13 +360,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_ZeroVolumes)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0)(0);
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(m_resource_manager));
 
@@ -378,13 +378,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_LowerVolumes)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1)(1);
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(m_resource_manager));
 
@@ -396,12 +396,12 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
-    configureHumanManagerMockForSubtractHuman(KEY_WORKER_BLACKSMITH_NOVICE, 1);
-    configureHumanManagerMockForAddHuman(KEY_WORKER_JOBLESS_NOVICE, 1);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForSubtractHuman(KEY_WORKER_BLACKSMITH_NOVICE, 1);
+    configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_JOBLESS_NOVICE, 1);
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(produceResourceManagerMock()));
 
@@ -413,7 +413,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
@@ -424,7 +424,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetThrows)
     .WillOnce(Throw(e));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(m_resource_manager));
 
@@ -436,7 +436,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetReturnsFalse)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     configureResourceManagerMockForGetResources(getResourceSet(resource_volumes));
@@ -446,7 +446,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetReturnsFalse)
     .WillOnce(Return(false));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(m_resource_manager));
 
@@ -458,14 +458,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractHumanThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     std::exception e;
-    EXPECT_CALL(*m_human_manager, subtractHuman(_, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(_, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1))
     .WillOnce(Throw(e));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(produceResourceManagerMock()));
 
@@ -477,14 +477,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractHumanReturnsFalse)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     std::exception e;
-    EXPECT_CALL(*m_human_manager, subtractHuman(_, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(_, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1))
     .WillOnce(Return(false));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(produceResourceManagerMock()));
 
@@ -496,15 +496,15 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_AddHumanThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanManagerMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
-    configureHumanManagerMockForSubtractHuman(KEY_WORKER_BLACKSMITH_NOVICE, 1);
+    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
+    configureHumanPersistenceFacadeMockForSubtractHuman(KEY_WORKER_BLACKSMITH_NOVICE, 1);
 
     std::exception e;
-    EXPECT_CALL(*m_human_manager, addHuman(_, m_id_holder, KEY_WORKER_JOBLESS_NOVICE, 1))
+    EXPECT_CALL(*m_human_persistence_facade, addHuman(_, m_id_holder, KEY_WORKER_JOBLESS_NOVICE, 1))
     .WillOnce(Throw(e));
 
     DismissHumanOperator dismiss_human_operator(ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
-                                                IHumanManagerShrPtr(m_human_manager),
+                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                                 IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE)),
                                                 IResourceManagerShrPtr(produceResourceManagerMock()));
 

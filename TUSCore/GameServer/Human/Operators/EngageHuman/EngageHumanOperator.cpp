@@ -45,13 +45,13 @@ namespace Human
 EngageHumanOperator::EngageHumanOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
     ICostManagerShrPtr               a_cost_manager,
-    IHumanManagerShrPtr              a_human_manager,
+    IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
     IPropertyManagerShrPtr           a_property_manager,
     IResourceManagerShrPtr           a_resource_manager
 )
     : m_building_persistence_facade(a_building_persistence_facade),
       m_cost_manager(a_cost_manager),
-      m_human_manager(a_human_manager),
+      m_human_persistence_facade(a_human_persistence_facade),
       m_property_manager(a_property_manager),
       m_resource_manager(a_resource_manager)
 {
@@ -121,7 +121,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
 
         // Subtract the jobless.
         bool const result_subtract_human =
-            m_human_manager->subtractHuman(a_transaction, a_id_holder, KEY_WORKER_JOBLESS_NOVICE, a_volume);
+            m_human_persistence_facade->subtractHuman(a_transaction, a_id_holder, KEY_WORKER_JOBLESS_NOVICE, a_volume);
 
         // There is a possible situation (in multithreaded application) of a race condition between checking if
         // there is enough jobless and trying to subtract them.
@@ -132,7 +132,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         }
 
         // Add the humans.
-        m_human_manager->addHuman(a_transaction, a_id_holder, a_key, a_volume);
+        m_human_persistence_facade->addHuman(a_transaction, a_id_holder, a_key, a_volume);
 
         // Everything went fine.
         return EngageHumanOperatorExitCode(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED);
@@ -178,7 +178,7 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
         for (IDHumanVec::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
             // Get a human by identifier of a human.
-            HumanWithVolumeMap map = m_human_manager->getHumans(a_transaction, a_id_holder, *it);
+            HumanWithVolumeMap map = m_human_persistence_facade->getHumans(a_transaction, a_id_holder, *it);
 
             // Calculate humans.
             for (HumanWithVolumeMap::const_iterator it = map.begin(); it != map.end(); ++it)
@@ -224,7 +224,8 @@ bool EngageHumanOperator::verifyJobless(
 ) const
 {
     // Get the jobless.
-    HumanWithVolumeShrPtr jobless = m_human_manager->getHuman(a_transaction, a_id_holder, KEY_WORKER_JOBLESS_NOVICE);
+    HumanWithVolumeShrPtr jobless =
+        m_human_persistence_facade->getHuman(a_transaction, a_id_holder, KEY_WORKER_JOBLESS_NOVICE);
 
     // There are no jobless.
     if (!jobless)

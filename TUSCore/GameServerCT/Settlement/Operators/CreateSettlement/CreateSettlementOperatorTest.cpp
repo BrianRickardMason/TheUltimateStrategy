@@ -53,7 +53,7 @@ protected:
     CreateSettlementOperatorTest()
         : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql),
-          m_human_manager(m_manager_abstract_factory->createHumanManager()),
+          m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
           m_resource_manager(m_manager_abstract_factory->createResourceManager()),
           m_create_epoch_operator(m_operator_abstract_factory->createCreateEpochOperator()),
           m_create_land_operator(m_operator_abstract_factory->createCreateLandOperator()),
@@ -153,7 +153,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            HumanWithVolumeMap humans = m_human_manager->getHumans(transaction, id_holder);
+            HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(transaction, id_holder);
 
             ASSERT_FALSE(humans.empty());
             ASSERT_EQ(1, humans.size());
@@ -195,7 +195,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            HumanWithVolumeMap humans = m_human_manager->getHumans(transaction, id_holder);
+            HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(transaction, id_holder);
 
             ASSERT_TRUE(humans.empty());
         }
@@ -233,39 +233,19 @@ protected:
     IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
 
     /**
-     * @brief The human persistence facade.
+     * @brief Persistence facades used in tests.
      */
-    IHumanManagerShrPtr m_human_manager;
+    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
+    IResourceManagerShrPtr        m_resource_manager;
 
     /**
-     * @brief A resource manager.
+     * @brief Operators used in tests.
      */
-    IResourceManagerShrPtr m_resource_manager;
-
-    /**
-     * @brief CreateEpochOperator.
-     */
-    ICreateEpochOperatorShrPtr m_create_epoch_operator;
-
-    /**
-     * @brief CreateLandOperator.
-     */
-    ICreateLandOperatorShrPtr m_create_land_operator;
-
-    /**
-     * @brief CreateSettlementOperator.
-     */
+    ICreateEpochOperatorShrPtr      m_create_epoch_operator;
+    ICreateLandOperatorShrPtr       m_create_land_operator;
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
-
-    /**
-     * @brief CreateUserOperator.
-     */
-    ICreateUserOperatorShrPtr m_create_user_operator;
-
-    /**
-     * @brief CreateWorldOperator.
-     */
-    ICreateWorldOperatorShrPtr m_create_world_operator;
+    ICreateUserOperatorShrPtr       m_create_user_operator;
+    ICreateWorldOperatorShrPtr      m_create_world_operator;
 
     /**
      * @brief Test constants: the name of the epoch.

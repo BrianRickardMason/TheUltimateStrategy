@@ -38,7 +38,7 @@ GetHumanOperatorAutPtr GetHumanOperatorFactory::createGetHumanOperator(
     IManagerAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
-    return GetHumanOperatorAutPtr(new GetHumanOperator(a_manager_abstract_factory->createHumanManager()));
+    return GetHumanOperatorAutPtr(new GetHumanOperator(a_manager_abstract_factory->createHumanPersistenceFacade()));
 }
 
 } // namespace Human

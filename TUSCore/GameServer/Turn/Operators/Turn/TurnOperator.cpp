@@ -45,14 +45,14 @@ namespace Turn
 
 TurnOperator::TurnOperator(
     ICostManagerShrPtr                 a_cost_manager,
-    IHumanManagerShrPtr                a_human_manager,
+    IHumanPersistenceFacadeShrPtr      a_human_persistence_facade,
     ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
     IPropertyManagerShrPtr             a_property_manager,
     IResourceManagerShrPtr             a_resource_manager,
     ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
     : m_cost_manager(a_cost_manager),
-      m_human_manager(a_human_manager),
+      m_human_persistence_facade(a_human_persistence_facade),
       m_land_persistence_facade(a_land_persistence_facade),
       m_property_manager(a_property_manager),
       m_resource_manager(a_resource_manager),
@@ -131,7 +131,7 @@ bool TurnOperator::executeTurnSettlement(
     // FIXME: Code smell: envious class.
     if (available_resources.getMap().at(KEY_RESOURCE_FOOD)->getVolume() < cost_of_living.getMap().at(KEY_RESOURCE_FOOD)->getVolume())
     {
-        HumanWithVolumeMap humans = m_human_manager->getHumans(a_transaction, id_holder);
+        HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
         for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
         {
@@ -140,7 +140,8 @@ bool TurnOperator::executeTurnSettlement(
 
             if (died)
             {
-                bool const result = m_human_manager->subtractHuman(a_transaction, id_holder, it->second->getKey(), died);
+                bool const result =
+                    m_human_persistence_facade->subtractHuman(a_transaction, id_holder, it->second->getKey(), died);
 
                 if (!result)
                 {
@@ -154,7 +155,7 @@ bool TurnOperator::executeTurnSettlement(
     // FIXME: Code smell: envious class.
     if (available_resources.getMap().at(KEY_RESOURCE_GOLD)->getVolume() < cost_of_living.getMap().at(KEY_RESOURCE_GOLD)->getVolume())
     {
-        HumanWithVolumeMap humans = m_human_manager->getHumans(a_transaction, id_holder);
+        HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
         for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
         {
@@ -163,14 +164,19 @@ bool TurnOperator::executeTurnSettlement(
 
             if (dismissed)
             {
-                bool const result = m_human_manager->subtractHuman(a_transaction, id_holder, it->second->getKey(), dismissed);
+                bool const result = m_human_persistence_facade->subtractHuman(
+                                        a_transaction,
+                                        id_holder,
+                                        it->second->getKey(),
+                                        dismissed
+                                    );
 
                 if (!result)
                 {
                     return false;
                 }
 
-                m_human_manager->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, dismissed);
+                m_human_persistence_facade->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, dismissed);
             }
         }
     }
@@ -182,7 +188,7 @@ bool TurnOperator::executeTurnSettlement(
 
     // Receipts.
     {
-        HumanWithVolumeMap const humans = m_human_manager->getHumans(a_transaction, id_holder);
+        HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
         for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
@@ -201,7 +207,7 @@ bool TurnOperator::executeTurnSettlement(
 
     // Experience.
     {
-        HumanWithVolumeMap const humans = m_human_manager->getHumans(a_transaction, id_holder);
+        HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
         for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
@@ -227,9 +233,14 @@ bool TurnOperator::executeTurnSettlement(
                 Human::Key const key_novice(id_human, EXPERIENCE_NOVICE);
                 Human::Key const key_advanced(id_human, EXPERIENCE_ADVANCED);
 
-                m_human_manager->addHuman(a_transaction, id_holder, key_advanced, experienced);
+                m_human_persistence_facade->addHuman(a_transaction, id_holder, key_advanced, experienced);
 
-                bool const result = m_human_manager->subtractHuman(a_transaction, id_holder, key_novice, experienced);
+                bool const result = m_human_persistence_facade->subtractHuman(
+                                        a_transaction,
+                                        id_holder,
+                                        key_novice,
+                                        experienced
+                                    );
 
                 if (!result)
                 {
@@ -241,7 +252,7 @@ bool TurnOperator::executeTurnSettlement(
 
     // Reproduce.
     {
-        HumanWithVolumeMap const humans = m_human_manager->getHumans(a_transaction, id_holder);
+        HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
         for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
@@ -253,7 +264,7 @@ bool TurnOperator::executeTurnSettlement(
 
             if (reproduced)
             {
-                m_human_manager->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, reproduced);
+                m_human_persistence_facade->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, reproduced);
             }
         }
     }
@@ -270,7 +281,7 @@ ResourceSet TurnOperator::getCostOfLiving(
 
     IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
-    HumanWithVolumeMap humans = m_human_manager->getHumans(a_transaction, id_holder);
+    HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
     for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
     {

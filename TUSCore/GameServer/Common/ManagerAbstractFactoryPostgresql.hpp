@@ -84,11 +84,11 @@ public:
     virtual Epoch::IEpochPersistenceFacadeShrPtr createEpochPersistenceFacade() const;
 
     /**
-     * @brief Creates the human manager.
+     * @brief Creates the human persistence facade.
      *
-     * @return The newly created human manager.
+     * @return The newly created human persistence facade.
      */
-    virtual Human::IHumanManagerShrPtr createHumanManager() const;
+    virtual Human::IHumanPersistenceFacadeShrPtr createHumanPersistenceFacade() const;
 
     /**
      * @brief Creates the land persistence facade.

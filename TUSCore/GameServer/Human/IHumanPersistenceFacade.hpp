@@ -25,11 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_HUMAN_HUMANMANAGER_HPP
-#define GAMESERVER_HUMAN_HUMANMANAGER_HPP
+#ifndef GAMESERVER_HUMAN_IHUMANPERSISTENCEFACADE_HPP
+#define GAMESERVER_HUMAN_IHUMANPERSISTENCEFACADE_HPP
 
-#include "IHumanManager.hpp"
-#include "IHumanManagerAccessor.hpp"
+#include "../Common/IDHolder.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "HumanWithVolume.hpp"
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
@@ -37,20 +39,16 @@ namespace Human
 {
 
 /**
- * @brief HumanManager.
+ * @brief An interface of human persistence facade.
  */
-class HumanManager
-    : public IHumanManager
+class IHumanPersistenceFacade
+    : boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the human manager.
-     *
-     * @param a_accessor An accessor to be injected.
+     * @brief Destructs the human persistence facade.
      */
-    HumanManager(
-        IHumanManagerAccessorAutPtr a_accessor
-    );
+    virtual ~IHumanPersistenceFacade(){};
 
     /**
      * @brief Adds the human.
@@ -67,7 +65,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Subtracts the human.
@@ -86,7 +84,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets a human.
@@ -101,7 +99,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets humans by id human.
@@ -116,45 +114,28 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         IDHuman                         const & a_id_human
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets humans.
      *
      * @param a_transaction The transaction.
-     * @param a_id_holder   The identifier of the holder.
+     * @param a_id_holder   The identifier of a holder.
      *
      * @return A map of humans, an empty map if not found.
      */
     virtual HumanWithVolumeMap getHumans(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
-    ) const;
-
-private:
-    /**
-     * @brief Prepares the result for getHumans* methods.
-     *
-     * @param a_records A map of human with volume records.
-     *
-     * @return A map of humans with volume.
-     */
-    HumanWithVolumeMap prepareResultGetHumans(
-        HumanWithVolumeRecordMap const & a_records
-    ) const;
-
-    /**
-     * @brief The accessor.
-     */
-    IHumanManagerAccessorScpPtr m_accessor;
+    ) const = 0;
 };
 
 /**
- * @brief An auto pointer of human manager.
+ * @brief A shared pointer of interface of human persistence facade.
  */
-typedef std::auto_ptr<HumanManager> HumanManagerAutPtr;
+typedef boost::shared_ptr<IHumanPersistenceFacade> IHumanPersistenceFacadeShrPtr;
 
 } // namespace Human
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_HUMANMANAGER_HPP
+#endif // GAMESERVER_HUMAN_IHUMANPERSISTENCEFACADE_HPP

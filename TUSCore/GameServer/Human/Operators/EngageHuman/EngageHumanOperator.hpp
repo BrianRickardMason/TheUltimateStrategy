@@ -32,7 +32,7 @@
 
 #include "../../../Building/IBuildingPersistenceFacade.hpp"
 #include "../../../Cost/ICostManager.hpp"
-#include "../../../Human/IHumanManager.hpp"
+#include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
 #include "../../../Resource/IResourceManager.hpp"
 
@@ -53,14 +53,14 @@ public:
      *
      * @param a_building_persistence_facade The persistence facade of buildings.
      * @param a_cost_manager                The manager of costs.
-     * @param a_human_manager               The manager of humans.
+     * @param a_human_persistence_facade    The persistence facade of humans.
      * @param a_property_manager            The manager of properties.
      * @param a_resource_manager            The manager of resources.
      */
     EngageHumanOperator(
         Building::IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
         Cost::ICostManagerShrPtr                   a_cost_manager,
-        IHumanManagerShrPtr                        a_human_manager,
+        IHumanPersistenceFacadeShrPtr              a_human_persistence_facade,
         Property::IPropertyManagerShrPtr           a_property_manager,
         Resource::IResourceManagerShrPtr           a_resource_manager
     );
@@ -139,9 +139,9 @@ private:
     Cost::ICostManagerShrPtr m_cost_manager;
 
     /**
-     * @brief The manager of humans.
+     * @brief The persistence facade of humans.
      */
-    IHumanManagerShrPtr m_human_manager;
+    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
 
     /**
      * @brief The manager of properties.

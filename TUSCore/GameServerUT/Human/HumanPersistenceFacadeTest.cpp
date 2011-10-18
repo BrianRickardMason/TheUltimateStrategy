@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Human/HumanManager.hpp"
+#include "../../GameServer/Human/HumanPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "HumanManagerAccessorMock.hpp"
 
@@ -42,14 +42,14 @@ using testing::_;
 /**
  * @brief A test class.
  */
-class HumanManagerTest
+class HumanPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Creates a test class.
      */
-    HumanManagerTest()
+    HumanPersistenceFacadeTest()
         : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }
@@ -77,22 +77,17 @@ protected:
     IDHolder m_id_holder;
 };
 
-/**
- * Unit tests of: HumanManager::HumanManager.
- */
-TEST_F(HumanManagerTest, HumanManager)
+TEST_F(HumanPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    // Preconditions.
     IHumanManagerAccessorAutPtr accessor(new HumanManagerAccessorMock);
 
-    // Test commands and assertions.
-    HumanManager manager(accessor);
+    ASSERT_NO_THROW(HumanPersistenceFacade persistence_facade(accessor));
 }
 
 /**
- * Unit tests of: HumanManager::addHuman.
+ * Unit tests of: HumanPersistenceFacade::addHuman.
  */
-TEST_F(HumanManagerTest, addHuman_HumanIsNotPresent)
+TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -108,13 +103,13 @@ TEST_F(HumanManagerTest, addHuman_HumanIsNotPresent)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(manager.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
 }
 
-TEST_F(HumanManagerTest, addHuman_HumanIsNotPresent_Throw)
+TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -133,13 +128,13 @@ TEST_F(HumanManagerTest, addHuman_HumanIsNotPresent_Throw)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-   ASSERT_THROW(manager.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
+   ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
 }
 
-TEST_F(HumanManagerTest, addHuman_HumanIsPresent)
+TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -155,13 +150,13 @@ TEST_F(HumanManagerTest, addHuman_HumanIsPresent)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(manager.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
 }
 
-TEST_F(HumanManagerTest, addHuman_HumanIsPresent_Throw)
+TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -180,16 +175,16 @@ TEST_F(HumanManagerTest, addHuman_HumanIsPresent_Throw)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
+    ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
 }
 
 /**
- * Unit tests of: HumanManager::subtractHuman.
+ * Unit tests of: HumanPersistenceFacade::subtractHuman.
  */
-TEST_F(HumanManagerTest, subtractHuman_HumanIsNotPresent_TryToSubtract)
+TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -203,13 +198,13 @@ TEST_F(HumanManagerTest, subtractHuman_HumanIsNotPresent_TryToSubtract)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(manager.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
 }
 
-TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractPart)
+TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -225,13 +220,13 @@ TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractPart)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(manager.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3));
+    ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3));
 }
 
-TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractPart_Throw)
+TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -250,13 +245,13 @@ TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractPart_Throw)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3), std::exception);
+    ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3), std::exception);
 }
 
-TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractAll)
+TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -272,13 +267,13 @@ TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractAll)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(manager.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
 }
 
-TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractAll_Throw)
+TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -297,13 +292,13 @@ TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_SubtractAll_Throw)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(manager.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
+    ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
 }
 
-TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_TryToSubtractTooMuch)
+TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_TryToSubtractTooMuch)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -317,16 +312,16 @@ TEST_F(HumanManagerTest, subtractHuman_HumanIsPresent_TryToSubtractTooMuch)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(manager.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 6));
+    ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 6));
 }
 
 /**
- * Unit tests of: HumanManager::getHuman.
+ * Unit tests of: HumanPersistenceFacade::getHuman.
  */
-TEST_F(HumanManagerTest, getHuman_HumanIsNotPresent)
+TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -340,16 +335,16 @@ TEST_F(HumanManagerTest, getHuman_HumanIsNotPresent)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeShrPtr human = manager.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
+    HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
 
     // Test assertions.
     ASSERT_TRUE(human == NULL);
 }
 
-TEST_F(HumanManagerTest, getHuman_HumanIsPresent)
+TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -363,10 +358,10 @@ TEST_F(HumanManagerTest, getHuman_HumanIsPresent)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeShrPtr human = manager.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
+    HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
 
     // Test assertions.
     ASSERT_TRUE(human != NULL);
@@ -375,9 +370,9 @@ TEST_F(HumanManagerTest, getHuman_HumanIsPresent)
 }
 
 /**
- * Unit tests of: HumanManager::getHumans by short key.
+ * Unit tests of: HumanPersistenceFacade::getHumans by short key.
  */
-TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansAreNotPresent)
+TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -391,16 +386,16 @@ TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansAreNotPresent)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeMap humans = manager.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
+    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
 
     // Test assertions.
     ASSERT_TRUE(humans.empty());
 }
 
-TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansArePresent_OneHuman)
+TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_OneHuman)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -417,10 +412,10 @@ TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansArePresent_OneHuman)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeMap humans = manager.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
+    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
 
     // Test assertions.
     ASSERT_FALSE(humans.empty());
@@ -430,7 +425,7 @@ TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansArePresent_OneHuman)
     compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 5);
 }
 
-TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansArePresent_TwoHumans)
+TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_TwoHumans)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -448,10 +443,10 @@ TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansArePresent_TwoHumans)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeMap humans = manager.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
+    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
 
     // Test assertions.
     ASSERT_FALSE(humans.empty());
@@ -463,9 +458,9 @@ TEST_F(HumanManagerTest, getHumans_ByShortKey_HumansArePresent_TwoHumans)
 }
 
 /**
- * Unit tests of: HumanManager::getHumans all humans.
+ * Unit tests of: HumanPersistenceFacade::getHumans all humans.
  */
-TEST_F(HumanManagerTest, getHumans_AllHumans_HumansAreNotPresent)
+TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -479,16 +474,16 @@ TEST_F(HumanManagerTest, getHumans_AllHumans_HumansAreNotPresent)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeMap humans = manager.getHumans(transaction, m_id_holder);
+    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder);
 
     // Test assertions.
     ASSERT_TRUE(humans.empty());
 }
 
-TEST_F(HumanManagerTest, getHumans_AllHumans_HumansArePresent_OneHuman)
+TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OneHuman)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -505,10 +500,10 @@ TEST_F(HumanManagerTest, getHumans_AllHumans_HumansArePresent_OneHuman)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeMap humans = manager.getHumans(transaction, m_id_holder);
+    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder);
 
     // Test assertions.
     ASSERT_FALSE(humans.empty());
@@ -518,7 +513,7 @@ TEST_F(HumanManagerTest, getHumans_AllHumans_HumansArePresent_OneHuman)
     compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 5);
 }
 
-TEST_F(HumanManagerTest, getHumans_AllHumans_HumansArePresent_TwoHumans)
+TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHumans)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -536,10 +531,10 @@ TEST_F(HumanManagerTest, getHumans_AllHumans_HumansArePresent_TwoHumans)
     IHumanManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanManager manager(accessor);
+    HumanPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    HumanWithVolumeMap humans = manager.getHumans(transaction, m_id_holder);
+    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder);
 
     // Test assertions.
     ASSERT_FALSE(humans.empty());

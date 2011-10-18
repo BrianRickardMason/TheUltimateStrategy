@@ -54,7 +54,7 @@ protected:
     TransportHumanOperatorTest()
         : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
-          m_human_manager(m_manager_abstract_factory->createHumanManager()),
+          m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
@@ -99,39 +99,19 @@ protected:
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief The manager of epochs.
+     * @brief Persistence facades used in tests.
      */
     IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
-
-    /**
-     * @brief The manager of humans.
-     */
-    IHumanManagerShrPtr m_human_manager;
-
-    /**
-     * @brief The persistence facade of lands.
-     */
-    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
-
-    /**
-     * @brief The persistence facade of users.
-     */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
-
-    /**
-     * @brief The manager of worlds.
-     */
+    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
+    ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
+    IUserPersistenceFacadeShrPtr  m_user_persitence_facade;
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
 
     /**
-     * @brief CreateSettlementOperator.
+     * @brief Operators used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
-
-    /**
-     * @brief TransportHumanOperator.
-     */
-    TransportHumanOperatorAutPtr m_transport_human_operator;
+    TransportHumanOperatorAutPtr    m_transport_human_operator;
 
     /**
      * @brief Test constants: the name of the epoch.
@@ -258,8 +238,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_OneHuman)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_EQ(999, m_human_manager->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(1, m_human_manager->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(999, m_human_persistence_facade->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(1, m_human_persistence_facade->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
 
@@ -283,8 +263,8 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_ManyHumans)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_EQ(500, m_human_manager->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(500, m_human_manager->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(500, m_human_persistence_facade->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(500, m_human_persistence_facade->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
 
@@ -308,7 +288,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success_AllHumans)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_human_manager->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE) == NULL);
-        ASSERT_EQ(1000, m_human_manager->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_TRUE(m_human_persistence_facade->getHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE) == NULL);
+        ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }

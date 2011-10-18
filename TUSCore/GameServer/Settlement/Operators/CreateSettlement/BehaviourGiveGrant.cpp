@@ -39,10 +39,10 @@ namespace Settlement
 {
 
 BehaviourGiveGrant::BehaviourGiveGrant(
-    IHumanManagerShrPtr    a_human_manager,
-    IResourceManagerShrPtr a_resource_manager
+    IHumanPersistenceFacadeShrPtr a_human_persistence_facade,
+    IResourceManagerShrPtr        a_resource_manager
 )
-    : m_human_manager(a_human_manager),
+    : m_human_persistence_facade(a_human_persistence_facade),
       m_resource_manager(a_resource_manager)
 {
 }
@@ -57,7 +57,7 @@ bool BehaviourGiveGrant::giveGrant(
         IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
         // Grant humans.
-        m_human_manager->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, 1000);
+        m_human_persistence_facade->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
         // Grant resources.
         m_resource_manager->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_COAL), 1000);

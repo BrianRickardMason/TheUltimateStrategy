@@ -26,17 +26,17 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
-#include "../../GameServer/Human/HumanManagerFactory.hpp"
+#include "../../GameServer/Human/HumanPersistenceFacadeFactory.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;
 
-TEST(HumanManagerFactoryTest, createHumanManager)
+TEST(HumanPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    HumanManagerAutPtr manager = HumanManagerFactory::createHumanManager(accessor_abstract_factory);
+    HumanPersistenceFacadeAutPtr persistence_facade = HumanPersistenceFacadeFactory::create(accessor_abstract_factory);
 
-    ASSERT_TRUE(manager.get() != NULL);
+    ASSERT_TRUE(persistence_facade.get() != NULL);
 }

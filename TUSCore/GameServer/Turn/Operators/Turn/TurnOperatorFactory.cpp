@@ -39,7 +39,7 @@ TurnOperatorAutPtr TurnOperatorFactory::createTurnOperator(
 )
 {
     return TurnOperatorAutPtr(new TurnOperator(a_manager_abstract_factory->createCostManager(),
-                                               a_manager_abstract_factory->createHumanManager(),
+                                               a_manager_abstract_factory->createHumanPersistenceFacade(),
                                                a_manager_abstract_factory->createLandPersistenceFacade(),
                                                a_manager_abstract_factory->createPropertyManager(),
                                                a_manager_abstract_factory->createResourceManager(),

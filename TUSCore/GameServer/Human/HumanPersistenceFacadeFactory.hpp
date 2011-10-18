@@ -25,21 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "HumanManagerFactory.hpp"
+#ifndef GAMESERVER_HUMAN_HUMANPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_HUMAN_HUMANPERSISTENCEFACADEFACTORY_HPP
 
-using namespace GameServer::Common;
+#include "../Common/IAccessorAbstractFactory.hpp"
+#include "HumanPersistenceFacade.hpp"
 
 namespace GameServer
 {
 namespace Human
 {
 
-HumanManagerAutPtr HumanManagerFactory::createHumanManager(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-)
+/**
+ * @brief A factory of human persistence facade.
+ */
+class HumanPersistenceFacadeFactory
 {
-    return HumanManagerAutPtr(new HumanManager(a_accessor_abstract_factory->createHumanAccessor()));
-}
+public:
+    /**
+     * @brief A factory method.
+     *
+     * @param a_accessor_abstract_factory The abstract factory of accessors.
+     *
+     * @return A newly created human persistence facade.
+     */
+    static HumanPersistenceFacadeAutPtr create(
+        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    );
+};
 
 } // namespace Human
 } // namespace GameServer
+
+#endif // GAMESERVER_HUMAN_HUMANPERSISTENCEFACADEFACTORY_HPP

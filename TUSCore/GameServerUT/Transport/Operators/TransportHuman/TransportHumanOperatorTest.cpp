@@ -30,7 +30,7 @@
 #include "../../../../GameServer/Human/Volume.hpp"
 #include "../../../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../../../../GameServer/Transport/Operators/TransportHuman/TransportHumanOperator.hpp"
-#include "../../../Human/HumanManagerMock.hpp"
+#include "../../../Human/HumanPersistenceFacadeMock.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Settlement/SettlementPersistenceFacadeMock.hpp"
 #include <boost/make_shared.hpp>
@@ -57,7 +57,7 @@ protected:
      * @brief Constructs the test class.
      */
     TransportHumanOperatorTest()
-        : m_human_manager(new HumanManagerMock),
+        : m_human_persistence_facade(new HumanPersistenceFacadeMock),
           m_settlement_persistence_facade(new SettlementPersistenceFacadeMock),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
@@ -73,9 +73,9 @@ protected:
     }
 
     /**
-     * @brief The manager of humans.
+     * @brief The persistence facade of humans.
      */
-    HumanManagerMock * m_human_manager;
+    HumanPersistenceFacadeMock * m_human_persistence_facade;
 
     /**
      * @brief The persistence facade of settlements.
@@ -114,7 +114,7 @@ protected:
  */
 TEST_F(TransportHumanOperatorTest, TransportHumanOperator)
 {
-    ASSERT_NO_THROW(TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    ASSERT_NO_THROW(TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade))));
 }
 
@@ -125,7 +125,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_TryingToTransportZeroHumans)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_TRANSPORT_ZERO_HUMANS,
@@ -143,7 +143,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SourceSettlementDoesNotExist)
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_1))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_SOURCE_SETTLEMENT_DOES_NOT_EXIST,
@@ -164,7 +164,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_DestinationSettlementDoesNotEx
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(ISettlementShrPtr()));
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_DESTINATION_SETTLEMENT_DOES_NOT_EXIST,
@@ -185,7 +185,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SettlementsAreNotFromTheSameLa
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_3))
     .WillOnce(Return(m_settlement_3));
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_SETTLEMENTS_ARE_NOT_FROM_THE_SAME_LAND,
@@ -206,10 +206,10 @@ TEST_F(TransportHumanOperatorTest, transportHuman_NotEnoughHumans)
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
-    EXPECT_CALL(*m_human_manager, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
     .WillOnce(Return(false));
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_HUMANS,
@@ -231,10 +231,10 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SubtractHumanThrows)
     .WillOnce(Return(m_settlement_2));
 
     std::exception e;
-    EXPECT_CALL(*m_human_manager, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
     .WillOnce(Throw(e));
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -255,14 +255,14 @@ TEST_F(TransportHumanOperatorTest, transportHuman_AddHumanThrows)
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
-    EXPECT_CALL(*m_human_manager, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
     .WillOnce(Return(true));
 
     std::exception e;
-    EXPECT_CALL(*m_human_manager, addHuman(transaction, m_id_holder_2, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, addHuman(transaction, m_id_holder_2, KEY_WORKER_BLACKSMITH_NOVICE, 10))
     .WillOnce(Throw(e));
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -283,12 +283,12 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success)
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
-    EXPECT_CALL(*m_human_manager, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
     .WillOnce(Return(true));
 
-    EXPECT_CALL(*m_human_manager, addHuman(transaction, m_id_holder_2, KEY_WORKER_BLACKSMITH_NOVICE, 10));
+    EXPECT_CALL(*m_human_persistence_facade, addHuman(transaction, m_id_holder_2, KEY_WORKER_BLACKSMITH_NOVICE, 10));
 
-    TransportHumanOperator transport_human_operator((IHumanManagerShrPtr(m_human_manager)),
+    TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
 
     ASSERT_EQ(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_TRANSPORTED,

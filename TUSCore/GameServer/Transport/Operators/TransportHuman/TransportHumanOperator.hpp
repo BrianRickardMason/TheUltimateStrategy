@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_TRANSPORT_TRANSPORTHUMANOPERATOR_HPP
 #define GAMESERVER_TRANSPORT_TRANSPORTHUMANOPERATOR_HPP
 
-#include "../../../Human/IHumanManager.hpp"
+#include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "ITransportHumanOperator.hpp"
 
@@ -47,11 +47,11 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_human_manager                 The manager of humans.
+     * @param a_human_persistence_facade      The persistence facade of humans.
      * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     TransportHumanOperator(
-        Human::IHumanManagerShrPtr                     a_human_manager,
+        Human::IHumanPersistenceFacadeShrPtr           a_human_persistence_facade,
         Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
 
@@ -76,9 +76,9 @@ public:
 
 private:
     /**
-     * @brief The manager of humans.
+     * @brief The persistence facade of humans.
      */
-    Human::IHumanManagerShrPtr m_human_manager;
+    Human::IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
 
     /**
      * @brief The persistence facade of settlements.

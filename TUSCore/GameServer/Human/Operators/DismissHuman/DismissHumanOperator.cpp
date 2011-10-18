@@ -39,13 +39,13 @@ namespace Human
 {
 
 DismissHumanOperator::DismissHumanOperator(
-    ICostManagerShrPtr     a_cost_manager,
-    IHumanManagerShrPtr    a_human_manager,
-    IPropertyManagerShrPtr a_property_manager,
-    IResourceManagerShrPtr a_resource_manager
+    ICostManagerShrPtr            a_cost_manager,
+    IHumanPersistenceFacadeShrPtr a_human_persistence_facade,
+    IPropertyManagerShrPtr        a_property_manager,
+    IResourceManagerShrPtr        a_resource_manager
 )
     : m_cost_manager(a_cost_manager),
-      m_human_manager(a_human_manager),
+      m_human_persistence_facade(a_human_persistence_facade),
       m_property_manager(a_property_manager),
       m_resource_manager(a_resource_manager)
 {
@@ -110,7 +110,8 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
         }
 
         // Subtract the engaged.
-        bool const result_subtract_human = m_human_manager->subtractHuman(a_transaction, a_id_holder, a_key, a_volume);
+        bool const result_subtract_human =
+            m_human_persistence_facade->subtractHuman(a_transaction, a_id_holder, a_key, a_volume);
 
         // There is a possible situation (in multithreaded application) of a race condition between checking if
         // there is enough engaged and trying to subtract them.
@@ -122,7 +123,7 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
 
         // Add the jobless.
         // TODO: Consider adding novice and advanced jobless.
-        m_human_manager->addHuman(a_transaction, a_id_holder, KEY_WORKER_JOBLESS_NOVICE, a_volume);
+        m_human_persistence_facade->addHuman(a_transaction, a_id_holder, KEY_WORKER_JOBLESS_NOVICE, a_volume);
 
         // Everything went fine.
         return DismissHumanOperatorExitCode(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED);
@@ -153,7 +154,7 @@ bool DismissHumanOperator::verifyEngaged(
 ) const
 {
     // Get the engaged.
-    HumanWithVolumeShrPtr engaged = m_human_manager->getHuman(a_transaction, a_id_holder, a_key);
+    HumanWithVolumeShrPtr engaged = m_human_persistence_facade->getHuman(a_transaction, a_id_holder, a_key);
 
     // There are no engaged.
     if (!engaged)

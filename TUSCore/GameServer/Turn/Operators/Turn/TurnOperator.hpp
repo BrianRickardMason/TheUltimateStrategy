@@ -29,7 +29,7 @@
 #define GAMESERVER_TURN_TURNOPERATOR_HPP
 
 #include "../../../Cost/ICostManager.hpp"
-#include "../../../Human/IHumanManager.hpp"
+#include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
 #include "../../../Resource/IResourceManager.hpp"
@@ -52,7 +52,7 @@ public:
      * @brief Constructs the operator.
      *
      * @param a_cost_manager                  The manager of costs.
-     * @param a_human_manager                 The manager of humans.
+     * @param a_human_persistence_facade      The persistence facade of humans.
      * @param a_land_persistence_facade       The persistence facade of lands.
      * @param a_property_manager              The manager of properties.
      * @param a_resource_manager              The manager of resources.
@@ -60,7 +60,7 @@ public:
      */
     TurnOperator(
         Cost::ICostManagerShrPtr                       a_cost_manager,
-        Human::IHumanManagerShrPtr                     a_human_manager,
+        Human::IHumanPersistenceFacadeShrPtr           a_human_persistence_facade,
         Land::ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
         Property::IPropertyManagerShrPtr               a_property_manager,
         Resource::IResourceManagerShrPtr               a_resource_manager,
@@ -126,9 +126,9 @@ private:
     Cost::ICostManagerShrPtr m_cost_manager;
 
     /**
-     * @brief The manager of humans.
+     * @brief The persistence facade of humans.
      */
-    Human::IHumanManagerShrPtr m_human_manager;
+    Human::IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
 
     /**
      * @brief The persistence facade of lands.

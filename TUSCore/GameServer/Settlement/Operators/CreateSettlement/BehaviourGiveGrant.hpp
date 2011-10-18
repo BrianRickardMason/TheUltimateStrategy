@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_BEHAVIOURGIVEGRANT_HPP
 #define GAMESERVER_SETTLEMENT_BEHAVIOURGIVEGRANT_HPP
 
-#include "../../../Human/IHumanManager.hpp"
+#include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Resource/IResourceManager.hpp"
 #include "IBehaviourGiveGrant.hpp"
 
@@ -47,12 +47,12 @@ public:
     /**
      * @brief Constructs the behaviour.
      *
-     * @param a_human_manager    The manager of humans.
-     * @param a_resource_manager The manager of resources.
+     * @param a_human_persistence_facade The persistence facade of humans.
+     * @param a_resource_manager         The manager of resources.
      */
     BehaviourGiveGrant(
-        Human::IHumanManagerShrPtr       a_human_manager,
-        Resource::IResourceManagerShrPtr a_resource_manager
+        Human::IHumanPersistenceFacadeShrPtr a_human_persistence_facade,
+        Resource::IResourceManagerShrPtr     a_resource_manager
     );
 
     /**
@@ -70,9 +70,9 @@ public:
 
 private:
     /**
-     * @brief The manager of humans.
+     * @brief The persistence facade of humans.
      */
-    Human::IHumanManagerShrPtr m_human_manager;
+    Human::IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
 
     /**
      * @brief The manager of resources.

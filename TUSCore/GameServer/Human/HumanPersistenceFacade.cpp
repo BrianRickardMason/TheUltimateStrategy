@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "HumanManager.hpp"
+#include "HumanPersistenceFacade.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -36,14 +36,14 @@ namespace GameServer
 namespace Human
 {
 
-HumanManager::HumanManager(
+HumanPersistenceFacade::HumanPersistenceFacade(
     IHumanManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-void HumanManager::addHuman(
+void HumanPersistenceFacade::addHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -60,7 +60,7 @@ void HumanManager::addHuman(
     }
 }
 
-bool HumanManager::subtractHuman(
+bool HumanPersistenceFacade::subtractHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -90,7 +90,7 @@ bool HumanManager::subtractHuman(
     return false;
 }
 
-HumanWithVolumeShrPtr HumanManager::getHuman(
+HumanWithVolumeShrPtr HumanPersistenceFacade::getHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -101,7 +101,7 @@ HumanWithVolumeShrPtr HumanManager::getHuman(
     return record ? make_shared<HumanWithVolume>(*record) : HumanWithVolumeShrPtr();
 }
 
-HumanWithVolumeMap HumanManager::getHumans(
+HumanWithVolumeMap HumanPersistenceFacade::getHumans(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     IDHuman            const & a_id_human
@@ -110,7 +110,7 @@ HumanWithVolumeMap HumanManager::getHumans(
     return prepareResultGetHumans(m_accessor->getRecords(a_transaction, a_id_holder, a_id_human));
 }
 
-HumanWithVolumeMap HumanManager::getHumans(
+HumanWithVolumeMap HumanPersistenceFacade::getHumans(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder
 ) const
@@ -118,7 +118,7 @@ HumanWithVolumeMap HumanManager::getHumans(
     return prepareResultGetHumans(m_accessor->getRecords(a_transaction, a_id_holder));
 }
 
-HumanWithVolumeMap HumanManager::prepareResultGetHumans(
+HumanWithVolumeMap HumanPersistenceFacade::prepareResultGetHumans(
     HumanWithVolumeRecordMap const & a_records
 ) const
 {

@@ -33,7 +33,7 @@
 #include "../Building/IBuildingPersistenceFacade.hpp"
 #include "../Cost/ICostManager.hpp"
 #include "../Epoch/IEpochPersistenceFacade.hpp"
-#include "../Human/IHumanManager.hpp"
+#include "../Human/IHumanPersistenceFacade.hpp"
 #include "../Land/ILandPersistenceFacade.hpp"
 #include "../Property/IPropertyManager.hpp"
 #include "../Resource/IResourceManager.hpp"
@@ -94,11 +94,11 @@ public:
     virtual Epoch::IEpochPersistenceFacadeShrPtr createEpochPersistenceFacade() const = 0;
 
     /**
-     * @brief Creates the human manager.
+     * @brief Creates the human persistence facade.
      *
-     * @return The newly created human manager.
+     * @return The newly created human persistence facade.
      */
-    virtual Human::IHumanManagerShrPtr createHumanManager() const = 0;
+    virtual Human::IHumanPersistenceFacadeShrPtr createHumanPersistenceFacade() const = 0;
 
     /**
      * @brief Creates the land persistence facade.

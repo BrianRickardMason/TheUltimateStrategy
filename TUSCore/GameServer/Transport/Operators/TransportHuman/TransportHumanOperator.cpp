@@ -40,10 +40,10 @@ namespace Transport
 {
 
 TransportHumanOperator::TransportHumanOperator(
-    IHumanManagerShrPtr                a_human_manager,
+    IHumanPersistenceFacadeShrPtr      a_human_persistence_facade,
     ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
-    : m_human_manager(a_human_manager),
+    : m_human_persistence_facade(a_human_persistence_facade),
       m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
 }
@@ -91,14 +91,14 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
         IDHolder id_holder_source(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_source);
         IDHolder id_holder_destination(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name_destination);
 
-        bool const result = m_human_manager->subtractHuman(a_transaction, id_holder_source, a_key, a_volume);
+        bool const result = m_human_persistence_facade->subtractHuman(a_transaction, id_holder_source, a_key, a_volume);
 
         if (!result)
         {
             return TransportHumanOperatorExitCode(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_HUMANS);
         }
 
-        m_human_manager->addHuman(a_transaction, id_holder_destination, a_key, a_volume);
+        m_human_persistence_facade->addHuman(a_transaction, id_holder_destination, a_key, a_volume);
 
         return TransportHumanOperatorExitCode(TRANSPORT_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_TRANSPORTED);
     }

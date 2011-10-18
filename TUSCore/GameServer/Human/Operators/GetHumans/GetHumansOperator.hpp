@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_HUMAN_GETHUMANSOPERATOR_HPP
 #define GAMESERVER_HUMAN_GETHUMANSOPERATOR_HPP
 
-#include "../../IHumanManager.hpp"
+#include "../../IHumanPersistenceFacade.hpp"
 #include "IGetHumansOperator.hpp"
 
 namespace GameServer
@@ -46,10 +46,10 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_human_manager The manager of humans.
+     * @param a_human_persistence_facade The persistence facade of humans.
      */
     GetHumansOperator(
-        IHumanManagerShrPtr a_human_manager
+        IHumanPersistenceFacadeShrPtr a_human_persistence_facade
     );
 
     /**
@@ -67,9 +67,9 @@ public:
 
 private:
     /**
-     * @brief The manager of humans.
+     * @brief The persistence facade of humans.
      */
-    IHumanManagerShrPtr m_human_manager;
+    IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
 };
 
 /**
