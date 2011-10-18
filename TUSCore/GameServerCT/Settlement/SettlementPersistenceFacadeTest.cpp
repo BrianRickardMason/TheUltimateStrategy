@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../ComponentTest.hpp"
 
 using namespace GameServer::Common;
@@ -57,18 +57,18 @@ protected:
           m_settlement_name_1("Settlement1"),
           m_settlement_name_2("Settlement2"),
           m_settlement_name_3("Settlement3"),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
-          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_settlement_persistence_facade(m_manager_abstract_factory->createSettlementPersistenceFacade())
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
+          m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
+          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
+          m_settlement_persistence_facade(m_persistence_facade_abstract_factory->createSettlementPersistenceFacade())
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_user_persitence_facade->createUser(transaction, "Login", "Password");
+            m_user_persistence_facade->createUser(transaction, "Login", "Password");
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
@@ -140,12 +140,12 @@ protected:
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
      * @brief The persistence facade of users.
      */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
+    IUserPersistenceFacadeShrPtr m_user_persistence_facade;
 
     /**
      * @brief The world persistence facade.

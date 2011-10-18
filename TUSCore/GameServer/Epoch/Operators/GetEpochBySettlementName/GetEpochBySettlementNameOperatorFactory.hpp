@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATORFACTORY_HPP
 #define GAMESERVER_EPOCH_GETEPOCHBYSETTLEMENTNAMEOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetEpochBySettlementNameOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetEpochBySettlementNameOperator.
      */
     static GetEpochBySettlementNameOperatorAutPtr createGetEpochBySettlementNameOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

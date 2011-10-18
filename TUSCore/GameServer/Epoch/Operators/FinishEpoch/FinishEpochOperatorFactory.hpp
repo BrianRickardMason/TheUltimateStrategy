@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_FINISHEPOCHOPERATORFACTORY_HPP
 #define GAMESERVER_EPOCH_FINISHEPOCHOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "FinishEpochOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created FinishEpochOperator.
      */
     static FinishEpochOperatorAutPtr createFinishEpochOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLDCONFIGURATION_VERIFYTURNOPERATORFACTORY_HPP
 #define GAMESERVER_WORLDCONFIGURATION_VERIFYTURNOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "VerifyTurnOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created VerifyTUrnOperator.
      */
     static VerifyTurnOperatorAutPtr createVerifyTurnOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

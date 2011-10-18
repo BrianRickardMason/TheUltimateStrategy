@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Settlement/SettlementPersistenceFacadeFactory.hpp"
 #include "../ComponentTest.hpp"
 
@@ -61,12 +61,12 @@ protected:
           m_login_2("Login2"),
           m_login_5("Login5"),
           m_world_name("World"),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
-          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_settlement_persistence_facade(m_manager_abstract_factory->createSettlementPersistenceFacade())
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
+          m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
+          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
+          m_settlement_persistence_facade(m_persistence_facade_abstract_factory->createSettlementPersistenceFacade())
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -76,8 +76,8 @@ protected:
 
             m_epoch_persistence_facade->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_user_persitence_facade->createUser(transaction, "Login1", "Password1");
-            m_user_persitence_facade->createUser(transaction, "Login2", "Password2");
+            m_user_persistence_facade->createUser(transaction, "Login1", "Password1");
+            m_user_persistence_facade->createUser(transaction, "Login2", "Password2");
 
             m_land_persistence_facade->createLand(transaction, m_login_1, m_world_name, m_land_name_1);
             m_land_persistence_facade->createLand(transaction, m_login_2, m_world_name, m_land_name_2);
@@ -133,12 +133,12 @@ protected:
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
      * @brief The persistence facade of users.
      */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
+    IUserPersistenceFacadeShrPtr m_user_persistence_facade;
 
     /**
      * @brief The world persistence facade.
@@ -167,7 +167,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandSuccess)
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_TRUE(persistence_facade->authorizeUserToLand(transaction, m_login_1, m_land_name_1));
     ASSERT_TRUE(persistence_facade->authorizeUserToLand(transaction, m_login_2, m_land_name_2));
@@ -179,7 +179,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailure)
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_2, m_land_name_1));
     ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_1, m_land_name_2));
@@ -191,7 +191,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailureMissingLogi
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_5, m_land_name_1));
 }
@@ -202,7 +202,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToLandFailureMissingLand
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_FALSE(persistence_facade->authorizeUserToLand(transaction, m_login_1, m_land_name_5));
 }
@@ -213,7 +213,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementSuccess)
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_TRUE(persistence_facade->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_1));
     ASSERT_TRUE(persistence_facade->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_2));
@@ -225,7 +225,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailure)
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_2));
     ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_2, m_settlement_name_1));
@@ -237,7 +237,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailureMissi
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_5, m_settlement_name_1));
 }
@@ -248,7 +248,7 @@ TEST_F(AuthorizationPersistenceFacadeTest, AuthorizeUserToSettlementFailureMissi
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthorizationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthorizationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade();
 
     ASSERT_FALSE(persistence_facade->authorizeUserToSettlement(transaction, m_login_1, m_settlement_name_5));
 }

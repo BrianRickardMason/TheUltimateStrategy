@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_CREATESETTLEMENTOPERATORFACTORY_HPP
 #define GAMESERVER_SETTLEMENT_CREATESETTLEMENTOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "CreateSettlementOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created CreateSettlementOperator.
      */
     static CreateSettlementOperatorAutPtr createCreateSettlementOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

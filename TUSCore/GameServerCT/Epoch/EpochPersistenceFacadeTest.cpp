@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../ComponentTest.hpp"
 
@@ -58,12 +58,12 @@ protected:
           m_world_name_3("World3"),
           m_land_name("Land"),
           m_settlement_name("Settlement"),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
-          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory))
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
+          m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
+          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
+          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory))
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -134,12 +134,12 @@ protected:
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
      * @brief The user persistence facade.
      */
-    IUserPersistenceFacadeShrPtr m_user_persitence_facade;
+    IUserPersistenceFacadeShrPtr m_user_persistence_facade;
 
     /**
      * @brief The world persistence facade.
@@ -382,7 +382,7 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_user_persitence_facade->createUser(transaction, "Login", "Password");
+        m_user_persistence_facade->createUser(transaction, "Login", "Password");
 
         transaction->commit();
     }
@@ -436,7 +436,7 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_user_persitence_facade->createUser(transaction, "Login", "Password");
+        m_user_persistence_facade->createUser(transaction, "Login", "Password");
 
         transaction->commit();
     }

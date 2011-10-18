@@ -36,7 +36,7 @@ namespace Settlement
 {
 
 CreateSettlementOperatorAutPtr CreateSettlementOperatorFactory::createCreateSettlementOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     IBehaviourGiveGrantShrPtr behaviour_give_grant(BehaviourGiveGrantFactory::createBehaviourGiveGrant(a_manager_abstract_factory));

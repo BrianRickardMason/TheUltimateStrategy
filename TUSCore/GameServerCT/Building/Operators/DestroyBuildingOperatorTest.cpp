@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../../GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorFactory.hpp"
-#include "../../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../../ComponentTest.hpp"
 #include <boost/assign.hpp>
@@ -71,22 +71,22 @@ protected:
           m_id_holder_12(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
           m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3),
           m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_building_persistence_facade(m_manager_abstract_factory->createBuildingPersistenceFacade()),
-          m_cost_persistence_facade(m_manager_abstract_factory->createCostPersistenceFacade()),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
-          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
-          m_destroy_building_operator(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_manager_abstract_factory))
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_building_persistence_facade(m_persistence_facade_abstract_factory->createBuildingPersistenceFacade()),
+          m_cost_persistence_facade(m_persistence_facade_abstract_factory->createCostPersistenceFacade()),
+          m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
+          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
+          m_resource_persistence_facade(m_persistence_facade_abstract_factory->createResourcePersistenceFacade()),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
+          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory)),
+          m_destroy_building_operator(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_persistence_facade_abstract_factory))
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_user_persitence_facade->createUser(transaction, "Login", "Password");
+            m_user_persistence_facade->createUser(transaction, "Login", "Password");
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
@@ -190,7 +190,7 @@ protected:
     /**
      * @brief An abstract factory used in tests.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     //@{
     /**
@@ -201,7 +201,7 @@ protected:
     IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
     ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
     IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
-    IUserPersistenceFacadeShrPtr     m_user_persitence_facade;
+    IUserPersistenceFacadeShrPtr     m_user_persistence_facade;
     IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;
     //@}
 

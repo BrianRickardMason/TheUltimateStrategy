@@ -50,12 +50,12 @@ public:
      *
      * @param a_building_persistence_facade The persistence facade of buildings.
      * @param a_cost_persistence_facade     The persistence facade of costs.
-     * @param a_resource_persitence_facade  The persistence facade of resources.
+     * @param a_resource_persistence_facade  The persistence facade of resources.
      */
     BuildBuildingOperator(
         IBuildingPersistenceFacadeShrPtr           a_building_persistence_facade,
         Cost::ICostPersistenceFacadeShrPtr         a_cost_persistence_facade,
-        Resource::IResourcePersistenceFacadeShrPtr a_resource_persitence_facade
+        Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
     );
 
     /**

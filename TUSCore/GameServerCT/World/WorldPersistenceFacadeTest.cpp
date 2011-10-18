@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../ComponentTest.hpp"
 
 using namespace GameServer::Common;
@@ -48,8 +48,8 @@ protected:
           m_world_name_2("World2"),
           m_world_name_3("World3"),
           m_world_name_4("World4"),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade())
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade())
     {
     }
 
@@ -79,7 +79,7 @@ protected:
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
      * @brief The persistence facade of worlds.

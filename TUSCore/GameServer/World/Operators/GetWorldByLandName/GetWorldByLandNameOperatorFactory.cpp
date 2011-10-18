@@ -35,7 +35,7 @@ namespace World
 {
 
 GetWorldByLandNameOperatorAutPtr GetWorldByLandNameOperatorFactory::createGetWorldByLandNameOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return GetWorldByLandNameOperatorAutPtr(

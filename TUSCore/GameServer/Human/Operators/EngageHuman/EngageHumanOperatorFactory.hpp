@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_HUMAN_ENGAGEHUMANOPERATORFACTORY_HPP
 #define GAMESERVER_HUMAN_ENGAGEHUMANOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "EngageHumanOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created EngageHumanOperator.
      */
     static EngageHumanOperatorAutPtr createEngageHumanOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

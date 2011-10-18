@@ -64,7 +64,7 @@
 #include "../World/Operators/CreateWorld/CreateWorldOperatorFactory.hpp"
 #include "../World/Operators/GetWorldByLandName/GetWorldByLandNameOperatorFactory.hpp"
 #include "../WorldConfiguration/Operators/VerifyTurn/VerifyTurnOperatorFactory.hpp"
-#include "ManagerAbstractFactoryPostgresql.hpp"
+#include "PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "OperatorAbstractFactoryPostgresql.hpp"
 
 using namespace GameServer::Authentication;
@@ -87,203 +87,203 @@ namespace Common
 {
 
 OperatorAbstractFactoryPostgresql::OperatorAbstractFactoryPostgresql()
-    : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql)
+    : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql)
 {
 }
 
 IAuthenticateOperatorShrPtr OperatorAbstractFactoryPostgresql::createAuthenticateOperator() const
 {
-    return IAuthenticateOperatorShrPtr(AuthenticateOperatorFactory::createAuthenticateOperator(m_manager_abstract_factory));
+    return IAuthenticateOperatorShrPtr(AuthenticateOperatorFactory::createAuthenticateOperator(m_persistence_facade_abstract_factory));
 }
 
 IAuthorizeUserToHolderOperatorShrPtr OperatorAbstractFactoryPostgresql::createAuthorizeUserToHolderOperator() const
 {
-    return IAuthorizeUserToHolderOperatorShrPtr(AuthorizeUserToHolderOperatorFactory::createAuthorizeUserToHolderOperator(m_manager_abstract_factory));
+    return IAuthorizeUserToHolderOperatorShrPtr(AuthorizeUserToHolderOperatorFactory::createAuthorizeUserToHolderOperator(m_persistence_facade_abstract_factory));
 }
 
 IAuthorizeUserToLandOperatorShrPtr OperatorAbstractFactoryPostgresql::createAuthorizeUserToLandOperator() const
 {
-    return IAuthorizeUserToLandOperatorShrPtr(AuthorizeUserToLandOperatorFactory::createAuthorizeUserToLandOperator(m_manager_abstract_factory));
+    return IAuthorizeUserToLandOperatorShrPtr(AuthorizeUserToLandOperatorFactory::createAuthorizeUserToLandOperator(m_persistence_facade_abstract_factory));
 }
 
 IAuthorizeUserToSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createAuthorizeUserToSettlementOperator() const
 {
-    return IAuthorizeUserToSettlementOperatorShrPtr(AuthorizeUserToSettlementOperatorFactory::createAuthorizeUserToSettlementOperator(m_manager_abstract_factory));
+    return IAuthorizeUserToSettlementOperatorShrPtr(AuthorizeUserToSettlementOperatorFactory::createAuthorizeUserToSettlementOperator(m_persistence_facade_abstract_factory));
 }
 
 IBuildBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createBuildBuildingOperator() const
 {
-    return IBuildBuildingOperatorShrPtr(BuildBuildingOperatorFactory::createBuildBuildingOperator(m_manager_abstract_factory));
+    return IBuildBuildingOperatorShrPtr(BuildBuildingOperatorFactory::createBuildBuildingOperator(m_persistence_facade_abstract_factory));
 }
 
 IDestroyBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createDestroyBuildingOperator() const
 {
-    return IDestroyBuildingOperatorShrPtr(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_manager_abstract_factory));
+    return IDestroyBuildingOperatorShrPtr(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetBuildingOperator() const
 {
-    return IGetBuildingOperatorShrPtr(GetBuildingOperatorFactory::createGetBuildingOperator(m_manager_abstract_factory));
+    return IGetBuildingOperatorShrPtr(GetBuildingOperatorFactory::createGetBuildingOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetBuildingsOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetBuildingsOperator() const
 {
-    return IGetBuildingsOperatorShrPtr(GetBuildingsOperatorFactory::createGetBuildingsOperator(m_manager_abstract_factory));
+    return IGetBuildingsOperatorShrPtr(GetBuildingsOperatorFactory::createGetBuildingsOperator(m_persistence_facade_abstract_factory));
 }
 
 IActivateEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createActivateEpochOperator() const
 {
-    return IActivateEpochOperatorShrPtr(ActivateEpochOperatorFactory::createActivateEpochOperator(m_manager_abstract_factory));
+    return IActivateEpochOperatorShrPtr(ActivateEpochOperatorFactory::createActivateEpochOperator(m_persistence_facade_abstract_factory));
 }
 
 ICreateEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateEpochOperator() const
 {
-    return ICreateEpochOperatorShrPtr(CreateEpochOperatorFactory::createCreateEpochOperator(m_manager_abstract_factory));
+    return ICreateEpochOperatorShrPtr(CreateEpochOperatorFactory::createCreateEpochOperator(m_persistence_facade_abstract_factory));
 }
 
 IDeactivateEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createDeactivateEpochOperator() const
 {
-    return IDeactivateEpochOperatorShrPtr(DeactivateEpochOperatorFactory::createDeactivateEpochOperator(m_manager_abstract_factory));
+    return IDeactivateEpochOperatorShrPtr(DeactivateEpochOperatorFactory::createDeactivateEpochOperator(m_persistence_facade_abstract_factory));
 }
 
 IDeleteEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createDeleteEpochOperator() const
 {
-    return IDeleteEpochOperatorShrPtr(DeleteEpochOperatorFactory::createDeleteEpochOperator(m_manager_abstract_factory));
+    return IDeleteEpochOperatorShrPtr(DeleteEpochOperatorFactory::createDeleteEpochOperator(m_persistence_facade_abstract_factory));
 }
 
 IFinishEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createFinishEpochOperator() const
 {
-    return IFinishEpochOperatorShrPtr(FinishEpochOperatorFactory::createFinishEpochOperator(m_manager_abstract_factory));
+    return IFinishEpochOperatorShrPtr(FinishEpochOperatorFactory::createFinishEpochOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetEpochByLandNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByLandNameOperator() const
 {
-    return IGetEpochByLandNameOperatorShrPtr(GetEpochByLandNameOperatorFactory::createGetEpochByLandNameOperator(m_manager_abstract_factory));
+    return IGetEpochByLandNameOperatorShrPtr(GetEpochByLandNameOperatorFactory::createGetEpochByLandNameOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetEpochBySettlementNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochBySettlementNameOperator() const
 {
-    return IGetEpochBySettlementNameOperatorShrPtr(GetEpochBySettlementNameOperatorFactory::createGetEpochBySettlementNameOperator(m_manager_abstract_factory));
+    return IGetEpochBySettlementNameOperatorShrPtr(GetEpochBySettlementNameOperatorFactory::createGetEpochBySettlementNameOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetEpochByWorldNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetEpochByWorldNameOperator() const
 {
-    return IGetEpochByWorldNameOperatorShrPtr(GetEpochByWorldNameOperatorFactory::createGetEpochByWorldNameOperator(m_manager_abstract_factory));
+    return IGetEpochByWorldNameOperatorShrPtr(GetEpochByWorldNameOperatorFactory::createGetEpochByWorldNameOperator(m_persistence_facade_abstract_factory));
 }
 
 ITickEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createTickEpochOperator() const
 {
-    return ITickEpochOperatorShrPtr(TickEpochOperatorFactory::createTickEpochOperator(m_manager_abstract_factory));
+    return ITickEpochOperatorShrPtr(TickEpochOperatorFactory::createTickEpochOperator(m_persistence_facade_abstract_factory));
 }
 
 IDismissHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createDismissHumanOperator() const
 {
-    return IDismissHumanOperatorShrPtr(DismissHumanOperatorFactory::createDismissHumanOperator(m_manager_abstract_factory));
+    return IDismissHumanOperatorShrPtr(DismissHumanOperatorFactory::createDismissHumanOperator(m_persistence_facade_abstract_factory));
 }
 
 IEngageHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createEngageHumanOperator() const
 {
-    return IEngageHumanOperatorShrPtr(EngageHumanOperatorFactory::createEngageHumanOperator(m_manager_abstract_factory));
+    return IEngageHumanOperatorShrPtr(EngageHumanOperatorFactory::createEngageHumanOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetHumanOperator() const
 {
-    return IGetHumanOperatorShrPtr(GetHumanOperatorFactory::createGetHumanOperator(m_manager_abstract_factory));
+    return IGetHumanOperatorShrPtr(GetHumanOperatorFactory::createGetHumanOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetHumansOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetHumansOperator() const
 {
-    return IGetHumansOperatorShrPtr(GetHumansOperatorFactory::createGetHumansOperator(m_manager_abstract_factory));
+    return IGetHumansOperatorShrPtr(GetHumansOperatorFactory::createGetHumansOperator(m_persistence_facade_abstract_factory));
 }
 
 ICreateLandOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateLandOperator() const
 {
-    return ICreateLandOperatorShrPtr(CreateLandOperatorFactory::createCreateLandOperator(m_manager_abstract_factory));
+    return ICreateLandOperatorShrPtr(CreateLandOperatorFactory::createCreateLandOperator(m_persistence_facade_abstract_factory));
 }
 
 IDeleteLandOperatorShrPtr OperatorAbstractFactoryPostgresql::createDeleteLandOperator() const
 {
-    return IDeleteLandOperatorShrPtr( DeleteLandOperatorFactory::createDeleteLandOperator(m_manager_abstract_factory));
+    return IDeleteLandOperatorShrPtr( DeleteLandOperatorFactory::createDeleteLandOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetLandOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandOperator() const
 {
-    return IGetLandOperatorShrPtr(GetLandOperatorFactory::createGetLandOperator(m_manager_abstract_factory));
+    return IGetLandOperatorShrPtr(GetLandOperatorFactory::createGetLandOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetLandsOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetLandsOperator() const
 {
-    return IGetLandsOperatorShrPtr(GetLandsOperatorFactory::createGetLandsOperator(m_manager_abstract_factory));
+    return IGetLandsOperatorShrPtr(GetLandsOperatorFactory::createGetLandsOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetResourceOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetResourceOperator() const
 {
-    return IGetResourceOperatorShrPtr(GetResourceOperatorFactory::createGetResourceOperator(m_manager_abstract_factory));
+    return IGetResourceOperatorShrPtr(GetResourceOperatorFactory::createGetResourceOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetResourcesOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetResourcesOperator() const
 {
-    return IGetResourcesOperatorShrPtr(GetResourcesOperatorFactory::createGetResourcesOperator(m_manager_abstract_factory));
+    return IGetResourcesOperatorShrPtr(GetResourcesOperatorFactory::createGetResourcesOperator(m_persistence_facade_abstract_factory));
 }
 
 ICreateSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateSettlementOperator() const
 {
-    return ICreateSettlementOperatorShrPtr(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory));
+    return ICreateSettlementOperatorShrPtr(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory));
 }
 
 IDeleteSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createDeleteSettlementOperator() const
 {
-    return IDeleteSettlementOperatorShrPtr(DeleteSettlementOperatorFactory::createDeleteSettlementOperator(m_manager_abstract_factory));
+    return IDeleteSettlementOperatorShrPtr(DeleteSettlementOperatorFactory::createDeleteSettlementOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetSettlementOperator() const
 {
-    return IGetSettlementOperatorShrPtr(GetSettlementOperatorFactory::createGetSettlementOperator(m_manager_abstract_factory));
+    return IGetSettlementOperatorShrPtr(GetSettlementOperatorFactory::createGetSettlementOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetSettlementsOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetSettlementsOperator() const
 {
-    return IGetSettlementsOperatorShrPtr(GetSettlementsOperatorFactory::createGetSettlementsOperator(m_manager_abstract_factory));
+    return IGetSettlementsOperatorShrPtr(GetSettlementsOperatorFactory::createGetSettlementsOperator(m_persistence_facade_abstract_factory));
 }
 
 ITransportHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createTransportHumanOperator() const
 {
-    return ITransportHumanOperatorShrPtr(TransportHumanOperatorFactory::createTransportHumanOperator(m_manager_abstract_factory));
+    return ITransportHumanOperatorShrPtr(TransportHumanOperatorFactory::createTransportHumanOperator(m_persistence_facade_abstract_factory));
 }
 
 ITransportResourceOperatorShrPtr OperatorAbstractFactoryPostgresql::createTransportResourceOperator() const
 {
-    return ITransportResourceOperatorShrPtr(TransportResourceOperatorFactory::createTransportResourceOperator(m_manager_abstract_factory));
+    return ITransportResourceOperatorShrPtr(TransportResourceOperatorFactory::createTransportResourceOperator(m_persistence_facade_abstract_factory));
 }
 
 ITurnOperatorShrPtr OperatorAbstractFactoryPostgresql::createTurnOperator() const
 {
-    return ITurnOperatorShrPtr(TurnOperatorFactory::createTurnOperator(m_manager_abstract_factory));
+    return ITurnOperatorShrPtr(TurnOperatorFactory::createTurnOperator(m_persistence_facade_abstract_factory));
 }
 
 ICreateUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateUserOperator() const
 {
-    return ICreateUserOperatorShrPtr(CreateUserOperatorFactory::createCreateUserOperator(m_manager_abstract_factory));
+    return ICreateUserOperatorShrPtr(CreateUserOperatorFactory::createCreateUserOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetUserOperator() const
 {
-    return IGetUserOperatorShrPtr(GetUserOperatorFactory::createGetUserOperator(m_manager_abstract_factory));
+    return IGetUserOperatorShrPtr(GetUserOperatorFactory::createGetUserOperator(m_persistence_facade_abstract_factory));
 }
 
 ICreateWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateWorldOperator() const
 {
-    return ICreateWorldOperatorShrPtr(CreateWorldOperatorFactory::createCreateWorldOperator(m_manager_abstract_factory));
+    return ICreateWorldOperatorShrPtr(CreateWorldOperatorFactory::createCreateWorldOperator(m_persistence_facade_abstract_factory));
 }
 
 IGetWorldByLandNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetWorldByLandNameOperator() const
 {
-    return IGetWorldByLandNameOperatorShrPtr(GetWorldByLandNameOperatorFactory::createGetWorldByLandNameOperator(m_manager_abstract_factory));
+    return IGetWorldByLandNameOperatorShrPtr(GetWorldByLandNameOperatorFactory::createGetWorldByLandNameOperator(m_persistence_facade_abstract_factory));
 }
 
 IVerifyTurnOperatorShrPtr OperatorAbstractFactoryPostgresql::createVerifyTurnOperator() const
 {
-    return IVerifyTurnOperatorShrPtr(VerifyTurnOperatorFactory::createVerifyTurnOperator(m_manager_abstract_factory));
+    return IVerifyTurnOperatorShrPtr(VerifyTurnOperatorFactory::createVerifyTurnOperator(m_persistence_facade_abstract_factory));
 }
 
 } // namespace Common

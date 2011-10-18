@@ -35,7 +35,7 @@ namespace Building
 {
 
 DestroyBuildingOperatorAutPtr DestroyBuildingOperatorFactory::createDestroyBuildingOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return DestroyBuildingOperatorAutPtr(

@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../../../GameServer/Common/OperatorAbstractFactoryPostgresql.hpp"
 #include "../../../ComponentTest.hpp"
 
@@ -51,10 +51,10 @@ protected:
      * @brief Constructs the test class.
      */
     CreateSettlementOperatorTest()
-        : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
+        : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
           m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql),
-          m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
-          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
+          m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
+          m_resource_persistence_facade(m_persistence_facade_abstract_factory->createResourcePersistenceFacade()),
           m_create_epoch_operator(m_operator_abstract_factory->createCreateEpochOperator()),
           m_create_land_operator(m_operator_abstract_factory->createCreateLandOperator()),
           m_create_settlement_operator(m_operator_abstract_factory->createCreateSettlementOperator()),
@@ -226,7 +226,7 @@ protected:
     /**
      * @brief An abstract factory used in tests.
      */
-    IManagerAbstractFactoryShrPtr  m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr  m_persistence_facade_abstract_factory;
     IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
     //}@
 

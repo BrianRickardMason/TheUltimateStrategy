@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_CREATEWORLDOPERATORFACTORY_HPP
 #define GAMESERVER_WORLD_CREATEWORLDOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "CreateWorldOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created CreateWorldOperator.
      */
     static CreateWorldOperatorAutPtr createCreateWorldOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

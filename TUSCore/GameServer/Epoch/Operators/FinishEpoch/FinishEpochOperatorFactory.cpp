@@ -35,7 +35,7 @@ namespace Epoch
 {
 
 FinishEpochOperatorAutPtr FinishEpochOperatorFactory::createFinishEpochOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return FinishEpochOperatorAutPtr(

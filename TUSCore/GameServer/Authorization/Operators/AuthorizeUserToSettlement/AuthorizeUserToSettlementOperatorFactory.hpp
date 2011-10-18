@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_AUTHORIZATION_AUTHORIZEUSERTOSETTLEMENTOPERATORFACTORY_HPP
 #define GAMESERVER_AUTHORIZATION_AUTHORIZEUSERTOSETTLEMENTOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "AuthorizeUserToSettlementOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created AutenticateOperator.
      */
     static AuthorizeUserToSettlementOperatorAutPtr createAuthorizeUserToSettlementOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

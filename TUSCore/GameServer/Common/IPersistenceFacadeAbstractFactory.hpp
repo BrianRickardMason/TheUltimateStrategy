@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
-#define GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
+#ifndef GAMESERVER_COMMON_IPERSISTENCEFACADEABSTRACTFACTORY_HPP
+#define GAMESERVER_COMMON_IPERSISTENCEFACADEABSTRACTFACTORY_HPP
 
 #include "../Authentication/IAuthenticationPersistenceFacade.hpp"
 #include "../Authorization/IAuthorizationPersistenceFacade.hpp"
@@ -48,12 +48,12 @@ namespace Common
 {
 
 /**
- * @brief The interface of ManagerAbstractFactory.
+ * @brief The interface of PersistenceFacadeAbstractFactory.
  */
-class IManagerAbstractFactory
+class IPersistenceFacadeAbstractFactory
 {
 public:
-    virtual ~IManagerAbstractFactory(){}
+    virtual ~IPersistenceFacadeAbstractFactory(){}
 
     //@{
     /**
@@ -79,9 +79,9 @@ public:
 /**
  * @brief Typedef of shared pointer.
  */
-typedef boost::shared_ptr<IManagerAbstractFactory> IManagerAbstractFactoryShrPtr;
+typedef boost::shared_ptr<IPersistenceFacadeAbstractFactory> IPersistenceFacadeAbstractFactoryShrPtr;
 
 } // namespace Common
 } // namespace GameServer
 
-#endif // GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
+#endif // GAMESERVER_COMMON_IPERSISTENCEFACADEABSTRACTFACTORY_HPP

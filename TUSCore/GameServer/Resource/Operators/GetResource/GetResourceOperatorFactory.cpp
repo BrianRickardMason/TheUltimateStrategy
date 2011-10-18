@@ -35,7 +35,7 @@ namespace Resource
 {
 
 GetResourceOperatorAutPtr GetResourceOperatorFactory::createGetResourceOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return GetResourceOperatorAutPtr(

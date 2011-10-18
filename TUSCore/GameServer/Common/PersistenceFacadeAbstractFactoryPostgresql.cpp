@@ -38,7 +38,7 @@
 #include "../User/UserPersistenceFacadeFactory.hpp"
 #include "../World/WorldPersistenceFacadeFactory.hpp"
 #include "AccessorAbstractFactoryPostgresql.hpp"
-#include "ManagerAbstractFactoryPostgresql.hpp"
+#include "PersistenceFacadeAbstractFactoryPostgresql.hpp"
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;
@@ -58,71 +58,73 @@ namespace GameServer
 namespace Common
 {
 
-ManagerAbstractFactoryPostgresql::ManagerAbstractFactoryPostgresql()
+PersistenceFacadeAbstractFactoryPostgresql::PersistenceFacadeAbstractFactoryPostgresql()
     : m_accessor_abstract_factory(new AccessorAbstractFactoryPostgresql)
 {
 }
 
-IAuthenticationPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createAuthenticationPersistenceFacade() const
+IAuthenticationPersistenceFacadeShrPtr
+PersistenceFacadeAbstractFactoryPostgresql::createAuthenticationPersistenceFacade() const
 {
     return IAuthenticationPersistenceFacadeShrPtr(
                AuthenticationPersistenceFacadeFactory::create(m_accessor_abstract_factory)
            );
 }
 
-IAuthorizationPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createAuthorizationPersistenceFacade() const
+IAuthorizationPersistenceFacadeShrPtr
+PersistenceFacadeAbstractFactoryPostgresql::createAuthorizationPersistenceFacade() const
 {
     return IAuthorizationPersistenceFacadeShrPtr(
                AuthorizationPersistenceFacadeFactory::create(m_accessor_abstract_factory)
            );
 }
 
-IBuildingPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createBuildingPersistenceFacade() const
+IBuildingPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createBuildingPersistenceFacade() const
 {
     return IBuildingPersistenceFacadeShrPtr(BuildingPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-ICostPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createCostPersistenceFacade() const
+ICostPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createCostPersistenceFacade() const
 {
     return ICostPersistenceFacadeShrPtr(CostPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IEpochPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createEpochPersistenceFacade() const
+IEpochPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createEpochPersistenceFacade() const
 {
     return IEpochPersistenceFacadeShrPtr(EpochPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IHumanPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createHumanPersistenceFacade() const
+IHumanPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createHumanPersistenceFacade() const
 {
     return IHumanPersistenceFacadeShrPtr(HumanPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-ILandPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createLandPersistenceFacade() const
+ILandPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createLandPersistenceFacade() const
 {
     return ILandPersistenceFacadeShrPtr(LandPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IPropertyPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createPropertyPersistenceFacade() const
+IPropertyPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createPropertyPersistenceFacade() const
 {
     return IPropertyPersistenceFacadeShrPtr(PropertyPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IResourcePersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createResourcePersistenceFacade() const
+IResourcePersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createResourcePersistenceFacade() const
 {
     return IResourcePersistenceFacadeShrPtr(ResourcePersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-ISettlementPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createSettlementPersistenceFacade() const
+ISettlementPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createSettlementPersistenceFacade() const
 {
     return ISettlementPersistenceFacadeShrPtr(SettlementPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IUserPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createUserPersistenceFacade() const
+IUserPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createUserPersistenceFacade() const
 {
     return IUserPersistenceFacadeShrPtr(UserPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-IWorldPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createWorldPersistenceFacade() const
+IWorldPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createWorldPersistenceFacade() const
 {
     return IWorldPersistenceFacadeShrPtr(WorldPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }

@@ -35,7 +35,7 @@ namespace Human
 {
 
 EngageHumanOperatorAutPtr EngageHumanOperatorFactory::createEngageHumanOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return EngageHumanOperatorAutPtr(

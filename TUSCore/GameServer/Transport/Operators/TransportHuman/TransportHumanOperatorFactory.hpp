@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_TRANSPORT_TRANSPORTHUMANOPERATORFACTORY_HPP
 #define GAMESERVER_TRANSPORT_TRANSPORTHUMANOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "TransportHumanOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created TransportHumanOperator.
      */
     static TransportHumanOperatorAutPtr createTransportHumanOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

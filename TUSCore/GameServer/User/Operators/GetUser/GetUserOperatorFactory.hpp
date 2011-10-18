@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_USER_GETUSEROPERATORFACTORY_HPP
 #define GAMESERVER_USER_GETUSEROPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetUserOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetUserOperator.
      */
     static GetUserOperatorAutPtr createGetUserOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

@@ -35,7 +35,7 @@ namespace Transport
 {
 
 TransportResourceOperatorAutPtr TransportResourceOperatorFactory::createTransportResourceOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return TransportResourceOperatorAutPtr(

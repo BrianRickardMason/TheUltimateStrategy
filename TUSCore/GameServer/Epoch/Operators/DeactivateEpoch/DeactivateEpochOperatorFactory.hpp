@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_DEACTIVATEEPOCHOPERATORFACTORY_HPP
 #define GAMESERVER_EPOCH_DEACTIVATEEPOCHOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "DeactivateEpochOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created DeactivateEpochOperator.
      */
     static DeactivateEpochOperatorAutPtr createDeactivateEpochOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

@@ -35,7 +35,7 @@ namespace Epoch
 {
 
 TickEpochOperatorAutPtr TickEpochOperatorFactory::createTickEpochOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return TickEpochOperatorAutPtr(new TickEpochOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),

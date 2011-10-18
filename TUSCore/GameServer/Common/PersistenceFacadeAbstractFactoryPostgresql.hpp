@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COMMON_MANAGERABSTRACTFACTORYPOSTGRESQL_HPP
-#define GAMESERVER_COMMON_MANAGERABSTRACTFACTORYPOSTGRESQL_HPP
+#ifndef GAMESERVER_COMMON_PERSISTENCEFACADEABSTRACTFACTORYPOSTGRESQL_HPP
+#define GAMESERVER_COMMON_PERSISTENCEFACADEABSTRACTFACTORYPOSTGRESQL_HPP
 
 #include "IAccessorAbstractFactory.hpp"
-#include "IManagerAbstractFactory.hpp"
+#include "IPersistenceFacadeAbstractFactory.hpp"
 
 namespace GameServer
 {
@@ -37,13 +37,13 @@ namespace Common
 {
 
 /**
- * @brief The PostgreSQL ManagerAbstractFactory.
+ * @brief The PostgreSQL PersistenceFacadeAbstractFactory.
  */
-class ManagerAbstractFactoryPostgresql
-    : public IManagerAbstractFactory
+class PersistenceFacadeAbstractFactoryPostgresql
+    : public IPersistenceFacadeAbstractFactory
 {
 public:
-    ManagerAbstractFactoryPostgresql();
+    PersistenceFacadeAbstractFactoryPostgresql();
 
     //@{
     /**
@@ -75,4 +75,4 @@ private:
 } // namespace Common
 } // namespace GameServer
 
-#endif // GAMESERVER_COMMON_MANAGERABSTRACTFACTORYPOSTGRESQL_HPP
+#endif // GAMESERVER_COMMON_PERSISTENCEFACADEABSTRACTFACTORYPOSTGRESQL_HPP

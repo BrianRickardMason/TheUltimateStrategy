@@ -35,7 +35,7 @@ namespace Land
 {
 
 GetLandOperatorAutPtr GetLandOperatorFactory::createGetLandOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return GetLandOperatorAutPtr(new GetLandOperator(a_manager_abstract_factory->createLandPersistenceFacade()));

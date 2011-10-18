@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_DESTROYBUILDINGOPERATORFACTORY_HPP
 #define GAMESERVER_BUILDING_DESTROYBUILDINGOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "DestroyBuildingOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created DestroyBuildingOperator.
      */
     static DestroyBuildingOperatorAutPtr createDestroyBuildingOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

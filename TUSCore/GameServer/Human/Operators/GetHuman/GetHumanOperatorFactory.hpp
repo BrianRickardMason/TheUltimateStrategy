@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_HUMAN_GETHUMANOPERATORFACTORY_HPP
 #define GAMESERVER_HUMAN_GETHUMANOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetHumanOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetHumanOperator.
      */
     static GetHumanOperatorAutPtr createGetHumanOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

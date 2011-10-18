@@ -35,7 +35,7 @@ namespace Epoch
 {
 
 GetEpochByLandNameOperatorAutPtr GetEpochByLandNameOperatorFactory::createGetEpochByLandNameOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return GetEpochByLandNameOperatorAutPtr(

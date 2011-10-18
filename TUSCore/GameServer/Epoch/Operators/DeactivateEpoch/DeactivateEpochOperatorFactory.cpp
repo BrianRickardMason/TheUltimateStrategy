@@ -35,7 +35,7 @@ namespace Epoch
 {
 
 DeactivateEpochOperatorAutPtr DeactivateEpochOperatorFactory::createDeactivateEpochOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return DeactivateEpochOperatorAutPtr(

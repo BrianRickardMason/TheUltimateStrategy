@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_GETLANDOPERATORFACTORY_HPP
 #define GAMESERVER_LAND_GETLANDOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetLandOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetLandOperator.
      */
     static GetLandOperatorAutPtr createGetLandOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

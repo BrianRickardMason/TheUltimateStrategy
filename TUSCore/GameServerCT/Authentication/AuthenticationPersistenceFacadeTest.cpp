@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../ComponentTest.hpp"
 
 using namespace GameServer::Authentication;
@@ -48,8 +48,8 @@ protected:
         : m_login_1("Login1"),
           m_login_2("Login2"),
           m_login_5("Login5"),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_user_persistence_facade(m_manager_abstract_factory->createUserPersistenceFacade())
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade())
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -72,7 +72,7 @@ protected:
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
      * @brief The persistence facade of users.
@@ -87,7 +87,7 @@ TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateSuccess)
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthenticationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthenticationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthenticationPersistenceFacade();
 
     ASSERT_TRUE(persistence_facade->authenticate(transaction, m_login_1, "Password1"));
     ASSERT_TRUE(persistence_facade->authenticate(transaction, m_login_2, "Password2"));
@@ -99,7 +99,7 @@ TEST_F(AuthenticationPersistenceFacadeTest, AuthenticateFailure)
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
     IAuthenticationPersistenceFacadeShrPtr persistence_facade =
-        m_manager_abstract_factory->createAuthenticationPersistenceFacade();
+        m_persistence_facade_abstract_factory->createAuthenticationPersistenceFacade();
 
     ASSERT_FALSE(persistence_facade->authenticate(transaction, m_login_1, "Password2"));
     ASSERT_FALSE(persistence_facade->authenticate(transaction, m_login_2, "Password1"));

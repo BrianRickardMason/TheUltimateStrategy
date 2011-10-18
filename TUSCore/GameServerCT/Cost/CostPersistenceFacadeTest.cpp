@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Building/Building.hpp"
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Resource/Resource.hpp"
 #include "../ComponentTest.hpp"
 
@@ -49,15 +49,15 @@ protected:
      * @brief Constructs the test class.
      */
     CostPersistenceFacadeTest()
-        : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_cost_persistence_facade(m_manager_abstract_factory->createCostPersistenceFacade())
+        : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_cost_persistence_facade(m_persistence_facade_abstract_factory->createCostPersistenceFacade())
     {
     }
 
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
      * @brief A persistence facade used in tests.

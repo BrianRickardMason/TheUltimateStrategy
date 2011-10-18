@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_BEHAVIOURTICKEPOCHABSTRACTFACTORY_HPP
 #define GAMESERVER_EPOCH_BEHAVIOURTICKEPOCHABSTRACTFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "../../../World/IWorld.hpp"
 #include "IBehaviourTickEpoch.hpp"
 

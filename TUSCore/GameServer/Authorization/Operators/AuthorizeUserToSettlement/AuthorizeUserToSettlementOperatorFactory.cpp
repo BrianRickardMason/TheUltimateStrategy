@@ -35,7 +35,7 @@ namespace Authorization
 {
 
 AuthorizeUserToSettlementOperatorAutPtr AuthorizeUserToSettlementOperatorFactory::createAuthorizeUserToSettlementOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return AuthorizeUserToSettlementOperatorAutPtr(

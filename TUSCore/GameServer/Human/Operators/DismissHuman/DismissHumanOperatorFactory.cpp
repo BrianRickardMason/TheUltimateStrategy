@@ -35,7 +35,7 @@ namespace Human
 {
 
 DismissHumanOperatorAutPtr DismissHumanOperatorFactory::createDismissHumanOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return DismissHumanOperatorAutPtr(

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 
-#include "IManagerAbstractFactory.hpp"
+#include "IPersistenceFacadeAbstractFactory.hpp"
 #include "IOperatorAbstractFactory.hpp"
 
 namespace GameServer
@@ -323,9 +323,9 @@ public:
 
 private:
     /**
-     * @brief The abstract factory of managers.
+     * @brief The abstract factory of persistence facades.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 };
 
 } // namespace Common

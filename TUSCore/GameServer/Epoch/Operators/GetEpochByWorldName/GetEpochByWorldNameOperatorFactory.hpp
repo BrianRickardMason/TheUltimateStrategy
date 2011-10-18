@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_GETEPOCHBYWORLDNAMEOPERATORFACTORY_HPP
 #define GAMESERVER_EPOCH_GETEPOCHBYWORLDNAMEOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetEpochByWorldNameOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetEpochByWorldNameOperator.
      */
     static GetEpochByWorldNameOperatorAutPtr createGetEpochByWorldNameOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

@@ -35,7 +35,7 @@ namespace Turn
 {
 
 TurnOperatorAutPtr TurnOperatorFactory::createTurnOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return TurnOperatorAutPtr(new TurnOperator(a_manager_abstract_factory->createCostPersistenceFacade(),

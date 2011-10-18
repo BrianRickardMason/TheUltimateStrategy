@@ -35,7 +35,7 @@ namespace Transport
 {
 
 TransportHumanOperatorAutPtr TransportHumanOperatorFactory::createTransportHumanOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return TransportHumanOperatorAutPtr(

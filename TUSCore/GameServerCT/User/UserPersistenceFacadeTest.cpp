@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../ComponentTest.hpp"
 
 using namespace GameServer::Common;
@@ -47,8 +47,8 @@ protected:
         : m_login("Login"),
           m_password("Password"),
           m_different_password("DifferentPassword"),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_manager(m_manager_abstract_factory->createUserPersistenceFacade())
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_manager(m_persistence_facade_abstract_factory->createUserPersistenceFacade())
     {
     }
 
@@ -66,7 +66,7 @@ protected:
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
      * @brief A manager.

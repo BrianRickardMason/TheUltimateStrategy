@@ -33,7 +33,7 @@ namespace Settlement
 {
 
 BehaviourGiveGrantAutPtr BehaviourGiveGrantFactory::createBehaviourGiveGrant(
-    Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return BehaviourGiveGrantAutPtr(

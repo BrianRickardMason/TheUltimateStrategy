@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_RESOURCE_GETRESOURCEOPERATORFACTORY_HPP
 #define GAMESERVER_RESOURCE_GETRESOURCEOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetResourceOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetResourceOperator.
      */
     static GetResourceOperatorAutPtr createGetResourceOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

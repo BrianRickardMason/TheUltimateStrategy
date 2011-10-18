@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../ComponentTest.hpp"
 
@@ -57,13 +57,13 @@ protected:
           m_settlement_name_1("Settlement1"),
           m_settlement_name_2("Settlement2"),
           m_settlement_name_3("Settlement3"),
-          m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
-          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
-          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
+          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
+          m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
+          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory)),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
           m_id_holder_3(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3)
@@ -72,7 +72,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_user_persitence_facade->createUser(transaction, "Login", "Password");
+            m_user_persistence_facade->createUser(transaction, "Login", "Password");
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
@@ -138,7 +138,7 @@ protected:
     /**
      * @brief The abstract factory of managers.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     //@{
     /**
@@ -147,7 +147,7 @@ protected:
     IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
     IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
     ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
-    IUserPersistenceFacadeShrPtr  m_user_persitence_facade;
+    IUserPersistenceFacadeShrPtr  m_user_persistence_facade;
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
     //}@
 

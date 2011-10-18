@@ -35,7 +35,7 @@ namespace WorldConfiguration
 {
 
 VerifyTurnOperatorAutPtr VerifyTurnOperatorFactory::createVerifyTurnOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return VerifyTurnOperatorAutPtr(new VerifyTurnOperator);

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_GETWORLDBYLANDNAMEOPERATORFACTORY_HPP
 #define GAMESERVER_WORLD_GETWORLDBYLANDNAMEOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetWorldByLandNameOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetWorldByLandNameOperator.
      */
     static GetWorldByLandNameOperatorAutPtr createGetWorldByLandNameOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

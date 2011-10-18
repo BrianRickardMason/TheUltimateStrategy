@@ -35,7 +35,7 @@ namespace Building
 {
 
 BuildBuildingOperatorAutPtr BuildBuildingOperatorFactory::createBuildBuildingOperator(
-    IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
 )
 {
     return BuildBuildingOperatorAutPtr(

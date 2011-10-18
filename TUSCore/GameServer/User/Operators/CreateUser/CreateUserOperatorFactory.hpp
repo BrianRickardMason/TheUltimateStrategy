@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_USER_CREATEUSEROPERATORFACTORY_HPP
 #define GAMESERVER_USER_CREATEUSEROPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "CreateUserOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created CreateUserOperator.
      */
     static CreateUserOperatorAutPtr createCreateUserOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

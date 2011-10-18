@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_DELETEEPOCHOPERATORFACTORY_HPP
 #define GAMESERVER_EPOCH_DELETEEPOCHOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "DeleteEpochOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created DeleteEpochOperator.
      */
     static DeleteEpochOperatorAutPtr createDeleteEpochOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

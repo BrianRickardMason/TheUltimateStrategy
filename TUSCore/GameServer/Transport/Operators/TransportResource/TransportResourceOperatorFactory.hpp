@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_TRANSPORT_TRANSPORTRESOURCEOPERATORFACTORY_HPP
 #define GAMESERVER_TRANSPORT_TRANSPORTRESOURCEOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "TransportResourceOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created TransportResourceOperator.
      */
     static TransportResourceOperatorAutPtr createTransportResourceOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

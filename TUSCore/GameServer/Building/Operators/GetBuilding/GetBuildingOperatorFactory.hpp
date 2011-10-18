@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_GETBUILDINGOPERATORFACTORY_HPP
 #define GAMESERVER_BUILDING_GETBUILDINGOPERATORFACTORY_HPP
 
-#include "../../../Common/IManagerAbstractFactory.hpp"
+#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "GetBuildingOperator.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @return The newly created GetBuildingOperator.
      */
     static GetBuildingOperatorAutPtr createGetBuildingOperator(
-        Common::IManagerAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
     );
 };
 

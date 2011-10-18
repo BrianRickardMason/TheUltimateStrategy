@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../../GameServer/Common/ManagerAbstractFactoryPostgresql.hpp"
+#include "../../../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../../../../GameServer/Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp"
 #include "../../../ComponentTest.hpp"
@@ -52,14 +52,14 @@ protected:
      * @brief Constructs the test class.
      */
     TransportResourceOperatorTest()
-        : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
-          m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
-          m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
-          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_manager_abstract_factory)),
-          m_transport_resource_operator(TransportResourceOperatorFactory::createTransportResourceOperator(m_manager_abstract_factory)),
+        : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
+          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
+          m_resource_persistence_facade(m_persistence_facade_abstract_factory->createResourcePersistenceFacade()),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
+          m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory)),
+          m_transport_resource_operator(TransportResourceOperatorFactory::createTransportResourceOperator(m_persistence_facade_abstract_factory)),
           m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
@@ -76,7 +76,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_user_persitence_facade->createUser(transaction, "Login", "Password");
+            m_user_persistence_facade->createUser(transaction, "Login", "Password");
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
@@ -96,7 +96,7 @@ protected:
     /**
      * @brief An abstract factory used in tests.
      */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+    IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     //@{
     /**
@@ -105,7 +105,7 @@ protected:
     IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
     ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
     IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
-    IUserPersistenceFacadeShrPtr     m_user_persitence_facade;
+    IUserPersistenceFacadeShrPtr     m_user_persistence_facade;
     IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;
     //}@
 
