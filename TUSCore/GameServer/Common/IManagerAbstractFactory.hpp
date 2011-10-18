@@ -35,7 +35,7 @@
 #include "../Epoch/IEpochPersistenceFacade.hpp"
 #include "../Human/IHumanPersistenceFacade.hpp"
 #include "../Land/ILandPersistenceFacade.hpp"
-#include "../Property/IPropertyManager.hpp"
+#include "../Property/IPropertyPersistenceFacade.hpp"
 #include "../Resource/IResourcePersistenceFacade.hpp"
 #include "../Settlement/ISettlementPersistenceFacade.hpp"
 #include "../User/IUserPersistenceFacade.hpp"
@@ -68,7 +68,7 @@ public:
     virtual Epoch::IEpochPersistenceFacadeShrPtr                   createEpochPersistenceFacade()          const = 0;
     virtual Human::IHumanPersistenceFacadeShrPtr                   createHumanPersistenceFacade()          const = 0;
     virtual Land::ILandPersistenceFacadeShrPtr                     createLandPersistenceFacade()           const = 0;
-    virtual Property::IPropertyManagerShrPtr                       createPropertyManager()                 const = 0;
+    virtual Property::IPropertyPersistenceFacadeShrPtr             createPropertyPersistenceFacade()       const = 0;
     virtual Resource::IResourcePersistenceFacadeShrPtr             createResourcePersistenceFacade()       const = 0;
     virtual Settlement::ISettlementPersistenceFacadeShrPtr         createSettlementPersistenceFacade()     const = 0;
     virtual User::IUserPersistenceFacadeShrPtr                     createUserPersistenceFacade()           const = 0;

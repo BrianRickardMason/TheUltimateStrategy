@@ -25,36 +25,19 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PROPERTY_PROPERTYMANAGERFACTORY_HPP
-#define GAMESERVER_PROPERTY_PROPERTYMANAGERFACTORY_HPP
+#include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
+#include "../../GameServer/Property/PropertyPersistenceFacadeFactory.hpp"
+#include <gmock/gmock.h>
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "PropertyManager.hpp"
+using namespace GameServer::Common;
+using namespace GameServer::Property;
 
-namespace GameServer
+TEST(PropertyPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
-namespace Property
-{
+    IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-/**
- * @brief A factory of property manager.
- */
-class PropertyManagerFactory
-{
-public:
-    /**
-     * @brief A factory method.
-     *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created property manager.
-     */
-    static PropertyManagerAutPtr createPropertyManager(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-    );
-};
+    PropertyPersistenceFacadeAutPtr persistence_facade =
+        PropertyPersistenceFacadeFactory::create(accessor_abstract_factory);
 
-} // namespace Property
-} // namespace GameServer
-
-#endif // GAMESERVER_PROPERTY_PROPERTYMANAGERFACTORY_HPP
+    ASSERT_TRUE(persistence_facade.get() != NULL);
+}

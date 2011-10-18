@@ -25,26 +25,33 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PROPERTY_PROPERTYMANAGERMOCK_HPP
-#define GAMESERVER_PROPERTY_PROPERTYMANAGERMOCK_HPP
+#ifndef GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADE_HPP
+#define GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADE_HPP
 
-#include "../../GameServer/Property/IPropertyManager.hpp"
-#include <gmock/gmock.h>
+#include "IPropertyManagerAccessor.hpp"
+#include "IPropertyPersistenceFacade.hpp"
 
 namespace GameServer
 {
 namespace Property
 {
 
-class PropertySet;
-
 /**
- * @brief A mock of property manager.
+ * @brief A property persistence facade.
  */
-class PropertyManagerMock
-    : public IPropertyManager
+class PropertyPersistenceFacade
+    : public IPropertyPersistenceFacade
 {
 public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_accessor An accessor to be injected.
+     */
+    PropertyPersistenceFacade(
+        IPropertyManagerAccessorAutPtr a_accessor
+    );
+
     /**
      * @brief Gets a property boolean.
      *
@@ -54,14 +61,11 @@ public:
      *
      * @return The property.
      */
-    MOCK_CONST_METHOD3(
-        getPropertyBoolean,
-        PropertyBooleanShrPtr(
-            Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash,
-            IDProperty                     const & a_id_property
-        )
-    );
+    virtual PropertyBooleanShrPtr getPropertyBoolean(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash,
+        IDProperty                      const & a_id_property
+    ) const;
 
     /**
      * @brief Gets a property integer.
@@ -72,14 +76,11 @@ public:
      *
      * @return The property.
      */
-    MOCK_CONST_METHOD3(
-        getPropertyInteger,
-        PropertyIntegerShrPtr(
-            Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash,
-            IDProperty                     const & a_id_property
-        )
-    );
+    virtual PropertyIntegerShrPtr getPropertyInteger(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash,
+        IDProperty                      const & a_id_property
+    ) const;
 
     /**
      * @brief Gets a property string.
@@ -90,14 +91,11 @@ public:
      *
      * @return The property.
      */
-    MOCK_CONST_METHOD3(
-        getPropertyString,
-        PropertyStringShrPtr(
-            Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash,
-            IDProperty                     const & a_id_property
-        )
-    );
+    virtual PropertyStringShrPtr getPropertyString(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash,
+        IDProperty                      const & a_id_property
+    ) const;
 
     /**
      * @brief Gets a set of properties.
@@ -107,16 +105,24 @@ public:
      *
      * @return The set of properties.
      */
-    MOCK_CONST_METHOD2(
-        getProperties,
-        PropertySet(
-            Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash
-        )
-    );
+    virtual PropertySet getProperties(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash
+    ) const;
+
+private:
+    /**
+     * @brief An accessor.
+     */
+    IPropertyManagerAccessorScpPtr m_accessor;
 };
+
+/**
+ * @brief Typedef of auto pointer.
+ */
+typedef std::auto_ptr<PropertyPersistenceFacade> PropertyPersistenceFacadeAutPtr;
 
 } // namespace Property
 } // namespace GameServer
 
-#endif // GAMESERVER_PROPERTY_PROPERTYMANAGERMOCK_HPP
+#endif // GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADE_HPP

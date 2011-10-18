@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "PropertyManagerFactory.hpp"
+#include "PropertyPersistenceFacadeFactory.hpp"
 
 using namespace GameServer::Common;
 
@@ -34,11 +34,13 @@ namespace GameServer
 namespace Property
 {
 
-PropertyManagerAutPtr PropertyManagerFactory::createPropertyManager(
+PropertyPersistenceFacadeAutPtr PropertyPersistenceFacadeFactory::create(
     IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
 )
 {
-    return PropertyManagerAutPtr(new PropertyManager(a_accessor_abstract_factory->createPropertyAccessor()));
+    return PropertyPersistenceFacadeAutPtr(
+               new PropertyPersistenceFacade(a_accessor_abstract_factory->createPropertyAccessor())
+           );
 }
 
 } // namespace Property

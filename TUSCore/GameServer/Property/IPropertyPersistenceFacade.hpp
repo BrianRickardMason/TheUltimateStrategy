@@ -25,12 +25,15 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PROPERTY_PROPERTYMANAGER_HPP
-#define GAMESERVER_PROPERTY_PROPERTYMANAGER_HPP
+#ifndef GAMESERVER_PROPERTY_IPROPERTYPERSISTENCEFACADE_HPP
+#define GAMESERVER_PROPERTY_IPROPERTYPERSISTENCEFACADE_HPP
 
-#include "IPropertyManager.hpp"
-
-#include "IPropertyManagerAccessor.hpp"
+#include "../Common/KeyHash.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "Property.hpp"
+#include "PropertySet.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace GameServer
 {
@@ -38,20 +41,13 @@ namespace Property
 {
 
 /**
- * @brief A property manager.
+ * @brief An interface of property persistence facade.
  */
-class PropertyManager
-    : public IPropertyManager
+class IPropertyPersistenceFacade
+    : boost::noncopyable
 {
 public:
-    /**
-     * @brief Constructs the property manager.
-     *
-     * @param a_accessor An accessor to be injected.
-     */
-    PropertyManager(
-        IPropertyManagerAccessorAutPtr a_accessor
-    );
+    virtual ~IPropertyPersistenceFacade(){};
 
     /**
      * @brief Gets a property boolean.
@@ -66,7 +62,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets a property integer.
@@ -81,7 +77,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets a property string.
@@ -96,7 +92,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDProperty                      const & a_id_property
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets a set of properties.
@@ -109,21 +105,15 @@ public:
     virtual PropertySet getProperties(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    IPropertyManagerAccessorScpPtr m_accessor;
+    ) const = 0;
 };
 
 /**
- * @brief An auto pointer of property manager.
+ * @brief Typedef of shared pointer.
  */
-typedef std::auto_ptr<PropertyManager> PropertyManagerAutPtr;
+typedef boost::shared_ptr<IPropertyPersistenceFacade> IPropertyPersistenceFacadeShrPtr;
 
 } // namespace Property
 } // namespace GameServer
 
-#endif // GAMESERVER_PROPERTY_PROPERTYMANAGER_HPP
+#endif // GAMESERVER_PROPERTY_IPROPERTYPERSISTENCEFACADE_HPP

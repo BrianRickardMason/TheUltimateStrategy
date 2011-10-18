@@ -25,33 +25,26 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PROPERTY_IPROPERTYMANAGER_HPP
-#define GAMESERVER_PROPERTY_IPROPERTYMANAGER_HPP
+#ifndef GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADEMOCK_HPP
+#define GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADEMOCK_HPP
 
-#include "../Common/KeyHash.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "Property.hpp"
-#include "PropertySet.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
+#include "../../GameServer/Property/IPropertyPersistenceFacade.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
 namespace Property
 {
 
+class PropertySet;
+
 /**
- * @brief An interface of property manager.
+ * @brief A mock of property persistence facade.
  */
-class IPropertyManager
-    : boost::noncopyable
+class PropertyPersistenceFacadeMock
+    : public IPropertyPersistenceFacade
 {
 public:
-    /**
-     * @brief Destructs the property manager.
-     */
-    virtual ~IPropertyManager(){};
-
     /**
      * @brief Gets a property boolean.
      *
@@ -61,11 +54,14 @@ public:
      *
      * @return The property.
      */
-    virtual PropertyBooleanShrPtr getPropertyBoolean(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
-        IDProperty                      const & a_id_property
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        getPropertyBoolean,
+        PropertyBooleanShrPtr(
+            Persistence::ITransactionShrPtr        a_transaction,
+            Common::KeyHash                const & a_key_hash,
+            IDProperty                     const & a_id_property
+        )
+    );
 
     /**
      * @brief Gets a property integer.
@@ -76,11 +72,14 @@ public:
      *
      * @return The property.
      */
-    virtual PropertyIntegerShrPtr getPropertyInteger(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
-        IDProperty                      const & a_id_property
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        getPropertyInteger,
+        PropertyIntegerShrPtr(
+            Persistence::ITransactionShrPtr        a_transaction,
+            Common::KeyHash                const & a_key_hash,
+            IDProperty                     const & a_id_property
+        )
+    );
 
     /**
      * @brief Gets a property string.
@@ -91,11 +90,14 @@ public:
      *
      * @return The property.
      */
-    virtual PropertyStringShrPtr getPropertyString(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
-        IDProperty                      const & a_id_property
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        getPropertyString,
+        PropertyStringShrPtr(
+            Persistence::ITransactionShrPtr        a_transaction,
+            Common::KeyHash                const & a_key_hash,
+            IDProperty                     const & a_id_property
+        )
+    );
 
     /**
      * @brief Gets a set of properties.
@@ -105,18 +107,16 @@ public:
      *
      * @return The set of properties.
      */
-    virtual PropertySet getProperties(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash
-    ) const = 0;
+    MOCK_CONST_METHOD2(
+        getProperties,
+        PropertySet(
+            Persistence::ITransactionShrPtr        a_transaction,
+            Common::KeyHash                const & a_key_hash
+        )
+    );
 };
-
-/**
- * @brief A shared pointer of interface of property manager.
- */
-typedef boost::shared_ptr<IPropertyManager> IPropertyManagerShrPtr;
 
 } // namespace Property
 } // namespace GameServer
 
-#endif // GAMESERVER_PROPERTY_IPROPERTYMANAGER_HPP
+#endif // GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADEMOCK_HPP

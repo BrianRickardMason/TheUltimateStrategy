@@ -45,13 +45,13 @@ EngageHumanOperator::EngageHumanOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
     ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
-    IPropertyManagerShrPtr           a_property_manager,
+    IPropertyPersistenceFacadeShrPtr a_property_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
       m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
-      m_property_manager(a_property_manager),
+      m_property_persistence_facade(a_property_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
@@ -190,9 +190,12 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
         // Check if there is enough place.
         {
             // Get building's capacity.
-            PropertyIntegerShrPtr capacity =
-                // TODO: Fast and clean getKey().toHash() improvement by a shortcut.
-                m_property_manager->getPropertyInteger(a_transaction, building->getKey().toHash(), ID_PROPERTY_BUILDING_CAPACITY);
+            // TODO: Fast and clean getKey().toHash() improvement by a shortcut.
+            PropertyIntegerShrPtr capacity = m_property_persistence_facade->getPropertyInteger(
+                                                 a_transaction,
+                                                 building->getKey().toHash(),
+                                                 ID_PROPERTY_BUILDING_CAPACITY
+                                             );
 
             // Check if there is enough capacity.
             if (building_with_volume->getVolume() * capacity->getValue() - sum < a_volume)
@@ -212,7 +215,7 @@ bool EngageHumanOperator::verifyEngageable(
 {
     // Check if human is engageable.
     PropertyBooleanShrPtr engageable =
-        m_property_manager->getPropertyBoolean(a_transaction, a_key.toHash(), ID_PROPERTY_HUMAN_ENGAGEABLE);
+        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key.toHash(), ID_PROPERTY_HUMAN_ENGAGEABLE);
 
     return engageable->getValue();
 }

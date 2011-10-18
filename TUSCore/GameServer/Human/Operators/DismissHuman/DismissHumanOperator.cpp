@@ -41,18 +41,18 @@ namespace Human
 DismissHumanOperator::DismissHumanOperator(
     ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
-    IPropertyManagerShrPtr           a_property_manager,
+    IPropertyPersistenceFacadeShrPtr a_property_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
-      m_property_manager(a_property_manager),
+      m_property_persistence_facade(a_property_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
 
 /**
- * TODO: Managers could be grouped together and passed as a one argument. Architecture change may be needed as well.
+ * TODO: Persistence facades could be grouped together and passed as a one argument. Architecture change may be needed as well.
  * TODO: Check if holder exists.
  */
 DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
@@ -143,7 +143,7 @@ bool DismissHumanOperator::verifyDismissable(
 {
     // Check if human is dismissable.
     PropertyBooleanShrPtr dismissable =
-        m_property_manager->getPropertyBoolean(a_transaction, a_key.toHash(), ID_PROPERTY_HUMAN_DISMISSABLE);
+        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key.toHash(), ID_PROPERTY_HUMAN_DISMISSABLE);
 
     return dismissable->getValue();
 }

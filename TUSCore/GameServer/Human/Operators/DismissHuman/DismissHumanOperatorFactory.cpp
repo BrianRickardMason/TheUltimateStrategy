@@ -41,7 +41,7 @@ DismissHumanOperatorAutPtr DismissHumanOperatorFactory::createDismissHumanOperat
     return DismissHumanOperatorAutPtr(
                new DismissHumanOperator(a_manager_abstract_factory->createCostPersistenceFacade(),
                                         a_manager_abstract_factory->createHumanPersistenceFacade(),
-                                        a_manager_abstract_factory->createPropertyManager(),
+                                        a_manager_abstract_factory->createPropertyPersistenceFacade(),
                                         a_manager_abstract_factory->createResourcePersistenceFacade())
            );
 }

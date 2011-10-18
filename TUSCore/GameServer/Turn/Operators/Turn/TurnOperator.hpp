@@ -31,7 +31,7 @@
 #include "../../../Cost/ICostPersistenceFacade.hpp"
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Land/ILandPersistenceFacade.hpp"
-#include "../../../Property/IPropertyManager.hpp"
+#include "../../../Property/IPropertyPersistenceFacade.hpp"
 #include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "../../../Settlement/ISettlementPersistenceFacade.hpp"
 #include "ITurnOperator.hpp"
@@ -54,7 +54,7 @@ public:
      * @param a_cost_persistence_facade       The persistence facade of costs.
      * @param a_human_persistence_facade      The persistence facade of humans.
      * @param a_land_persistence_facade       The persistence facade of lands.
-     * @param a_property_manager              The manager of properties.
+     * @param a_property_persistence_facade   The persistence facade of properties.
      * @param a_resource_persistence_facade   The persistence facade of resources.
      * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
@@ -62,7 +62,7 @@ public:
         Cost::ICostPersistenceFacadeShrPtr             a_cost_persistence_facade,
         Human::IHumanPersistenceFacadeShrPtr           a_human_persistence_facade,
         Land::ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
-        Property::IPropertyManagerShrPtr               a_property_manager,
+        Property::IPropertyPersistenceFacadeShrPtr     a_property_persistence_facade,
         Resource::IResourcePersistenceFacadeShrPtr     a_resource_persistence_facade,
         Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
     );
@@ -127,7 +127,7 @@ private:
     Cost::ICostPersistenceFacadeShrPtr             m_cost_persistence_facade;
     Human::IHumanPersistenceFacadeShrPtr           m_human_persistence_facade;
     Land::ILandPersistenceFacadeShrPtr             m_land_persistence_facade;
-    Property::IPropertyManagerShrPtr               m_property_manager;
+    Property::IPropertyPersistenceFacadeShrPtr     m_property_persistence_facade;
     Resource::IResourcePersistenceFacadeShrPtr     m_resource_persistence_facade;
     Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
     //}@

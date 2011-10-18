@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Property/PropertyManager.hpp"
+#include "../../GameServer/Property/PropertyPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "PropertyManagerAccessorMock.hpp"
 #include <boost/make_shared.hpp>
@@ -42,14 +42,14 @@ using testing::Return;
 /**
  * @brief A test class.
  */
-class PropertyManagerTest
+class PropertyPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Constructs a test class.
      */
-    PropertyManagerTest()
+    PropertyPersistenceFacadeTest()
         : m_key_hash_1(1),
           m_id_property_1(1),
           m_id_property_2(2),
@@ -70,20 +70,17 @@ protected:
                m_id_property_3;
 };
 
-/**
- * Unit tests of: PropertyManager::PropertyManager.
- */
-TEST_F(PropertyManagerTest, PropertyManager)
+TEST_F(PropertyPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IPropertyManagerAccessorAutPtr accessor(new PropertyManagerAccessorMock);
 
-    ASSERT_NO_THROW(PropertyManager manager(accessor));
+    ASSERT_NO_THROW(PropertyPersistenceFacade persistence_facade(accessor));
 }
 
 /**
- * Unit tests of: PropertyManager::getPropertyBoolean.
+ * Unit tests of: PropertyPersistenceFacade::getPropertyBoolean.
  */
-TEST_F(PropertyManagerTest, getPropertyBoolean)
+TEST_F(PropertyPersistenceFacadeTest, getPropertyBoolean)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -101,20 +98,20 @@ TEST_F(PropertyManagerTest, getPropertyBoolean)
     IPropertyManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    PropertyManager manager(accessor);
+    PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(PropertyBooleanShrPtr property = manager.getPropertyBoolean(transaction, m_key_hash_1, m_id_property_1));
+    ASSERT_NO_THROW(PropertyBooleanShrPtr property = persistence_facade.getPropertyBoolean(transaction, m_key_hash_1, m_id_property_1));
 
     // Test commands.
-    PropertyBooleanShrPtr property = manager.getPropertyBoolean(transaction, m_key_hash_1, m_id_property_1);
+    PropertyBooleanShrPtr property = persistence_facade.getPropertyBoolean(transaction, m_key_hash_1, m_id_property_1);
 
     // Test assertions.
     ASSERT_TRUE(m_id_property_1 == property->getIDProperty());
     ASSERT_EQ(true, property->getValue());
 }
 
-TEST_F(PropertyManagerTest, getPropertyInteger)
+TEST_F(PropertyPersistenceFacadeTest, getPropertyInteger)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -132,20 +129,20 @@ TEST_F(PropertyManagerTest, getPropertyInteger)
     IPropertyManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    PropertyManager manager(accessor);
+    PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(PropertyIntegerShrPtr property = manager.getPropertyInteger(transaction, m_key_hash_1, m_id_property_1));
+    ASSERT_NO_THROW(PropertyIntegerShrPtr property = persistence_facade.getPropertyInteger(transaction, m_key_hash_1, m_id_property_1));
 
     // Test commands.
-    PropertyIntegerShrPtr property = manager.getPropertyInteger(transaction, m_key_hash_1, m_id_property_1);
+    PropertyIntegerShrPtr property = persistence_facade.getPropertyInteger(transaction, m_key_hash_1, m_id_property_1);
 
     // Test assertions.
     ASSERT_TRUE(m_id_property_1 == property->getIDProperty());
     ASSERT_EQ(22, property->getValue());
 }
 
-TEST_F(PropertyManagerTest, getPropertyString)
+TEST_F(PropertyPersistenceFacadeTest, getPropertyString)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -163,13 +160,13 @@ TEST_F(PropertyManagerTest, getPropertyString)
     IPropertyManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    PropertyManager manager(accessor);
+    PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(PropertyStringShrPtr property = manager.getPropertyString(transaction, m_key_hash_1, m_id_property_1));
+    ASSERT_NO_THROW(PropertyStringShrPtr property = persistence_facade.getPropertyString(transaction, m_key_hash_1, m_id_property_1));
 
     // Test commands.
-    PropertyStringShrPtr property = manager.getPropertyString(transaction, m_key_hash_1, m_id_property_1);
+    PropertyStringShrPtr property = persistence_facade.getPropertyString(transaction, m_key_hash_1, m_id_property_1);
 
     // Test assertions.
     ASSERT_TRUE(m_id_property_1 == property->getIDProperty());
@@ -177,9 +174,9 @@ TEST_F(PropertyManagerTest, getPropertyString)
 }
 
 /**
- * Unit tests of: PropertyManager::getProperties.
+ * Unit tests of: PropertyPersistenceFacade::getProperties.
  */
-TEST_F(PropertyManagerTest, getProperties_ZeroProperties)
+TEST_F(PropertyPersistenceFacadeTest, getProperties_ZeroProperties)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -195,10 +192,10 @@ TEST_F(PropertyManagerTest, getProperties_ZeroProperties)
     IPropertyManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    PropertyManager manager(accessor);
+    PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    PropertySet properties = manager.getProperties(transaction, m_key_hash_1);
+    PropertySet properties = persistence_facade.getProperties(transaction, m_key_hash_1);
 
     // Test assertions.
     ASSERT_THROW(properties.getBooleanProperty(m_id_property_1), out_of_range);
@@ -207,7 +204,7 @@ TEST_F(PropertyManagerTest, getProperties_ZeroProperties)
 }
 
 
-TEST_F(PropertyManagerTest, getProperties_OneProperty)
+TEST_F(PropertyPersistenceFacadeTest, getProperties_OneProperty)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -228,10 +225,10 @@ TEST_F(PropertyManagerTest, getProperties_OneProperty)
     IPropertyManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    PropertyManager manager(accessor);
+    PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    PropertySet properties = manager.getProperties(transaction, m_key_hash_1);
+    PropertySet properties = persistence_facade.getProperties(transaction, m_key_hash_1);
 
     // Test assertions.
     ASSERT_NO_THROW(properties.getBooleanProperty(m_id_property_1));
@@ -244,7 +241,7 @@ TEST_F(PropertyManagerTest, getProperties_OneProperty)
     ASSERT_EQ(true, property->getValue());
 }
 
-TEST_F(PropertyManagerTest, getProperties_ManyProperties)
+TEST_F(PropertyPersistenceFacadeTest, getProperties_ManyProperties)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -271,10 +268,10 @@ TEST_F(PropertyManagerTest, getProperties_ManyProperties)
     IPropertyManagerAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    PropertyManager manager(accessor);
+    PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    PropertySet properties = manager.getProperties(transaction, m_key_hash_1);
+    PropertySet properties = persistence_facade.getProperties(transaction, m_key_hash_1);
 
     // Test assertions.
     ASSERT_NO_THROW(properties.getBooleanProperty(m_id_property_1));

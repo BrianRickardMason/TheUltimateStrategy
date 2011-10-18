@@ -77,7 +77,7 @@ TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_BUILDING_BUILD)
 
         // Test commands.
         ResourceSet cost =
-        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_BUILD);
+            m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_BUILD);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -100,7 +100,7 @@ TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_BUILDING_DESTROY)
 
         // Test commands.
         ResourceSet cost =
-        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_DESTROY);
+            m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_DESTROY);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -123,7 +123,7 @@ TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_DISMISS)
 
         // Test commands.
         ResourceSet cost =
-        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_DISMISS);
+            m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_DISMISS);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -146,7 +146,7 @@ TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_ENGAGE)
 
         // Test commands.
         ResourceSet cost =
-        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
+            m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -169,7 +169,7 @@ TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_LIVING)
 
         // Test commands.
         ResourceSet cost =
-        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);
+            m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();

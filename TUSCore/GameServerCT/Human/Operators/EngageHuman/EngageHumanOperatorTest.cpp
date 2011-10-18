@@ -79,7 +79,7 @@ protected:
           m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
-          m_property_manager(m_manager_abstract_factory->createPropertyManager()),
+          m_property_persistence_facade(m_manager_abstract_factory->createPropertyPersistenceFacade()),
           m_resource_persistence_facade(m_manager_abstract_factory->createResourcePersistenceFacade()),
           m_user_persitence_facade(m_manager_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_manager_abstract_factory->createWorldPersistenceFacade()),
@@ -195,7 +195,7 @@ protected:
              m_id_holder_4;
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief An abstract factory used in tests.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
@@ -208,7 +208,7 @@ protected:
     IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
     IHumanPersistenceFacadeShrPtr    m_human_persistence_facade;
     ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
-    IPropertyManagerShrPtr           m_property_manager;
+    IPropertyPersistenceFacadeShrPtr m_property_persistence_facade;
     IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
     IUserPersistenceFacadeShrPtr     m_user_persitence_facade;
     IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;

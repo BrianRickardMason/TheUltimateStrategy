@@ -43,16 +43,16 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class PropertyManagerTest
+class PropertyPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    PropertyManagerTest()
+    PropertyPersistenceFacadeTest()
         : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_property_manager(m_manager_abstract_factory->createPropertyManager())
+          m_property_persistence_facade(m_manager_abstract_factory->createPropertyPersistenceFacade())
     {
     }
 
@@ -118,98 +118,98 @@ protected:
     }
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief An abstract factory used in tests.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief A property manager.
+     * @brief A persistence facade used in tests.
      */
-    IPropertyManagerShrPtr m_property_manager;
+    IPropertyPersistenceFacadeShrPtr m_property_persistence_facade;
 };
 
 /**
- * Component tests of: PropertyManager::getPropertyBoolean.
+ * Component tests of: PropertyPersistenceFacade::getPropertyBoolean.
  */
-TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_HUMAN_DISMISSABLE)
+TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_DISMISSABLE)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        PropertyBooleanShrPtr property = m_property_manager->getPropertyBoolean(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_DISMISSABLE);
+        PropertyBooleanShrPtr property = m_property_persistence_facade->getPropertyBoolean(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_DISMISSABLE);
 
         check_ID_PROPERTY_HUMAN_DISMISSABLE(property, *it);
     }
 }
 
-TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_HUMAN_ENGAGEABLE)
+TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_ENGAGEABLE)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        PropertyBooleanShrPtr property = m_property_manager->getPropertyBoolean(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_ENGAGEABLE);
+        PropertyBooleanShrPtr property = m_property_persistence_facade->getPropertyBoolean(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_ENGAGEABLE);
 
         check_ID_PROPERTY_HUMAN_ENGAGEABLE(property, *it);
     }
 }
 
 /**
- * Component tests of: PropertyManager::getPropertyInteger.
+ * Component tests of: PropertyPersistenceFacade::getPropertyInteger.
  */
-TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_BUILDING_CAPACITY)
+TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_BUILDING_CAPACITY)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        PropertyIntegerShrPtr property = m_property_manager->getPropertyInteger(transaction, it->getKey().toHash(), ID_PROPERTY_BUILDING_CAPACITY);
+        PropertyIntegerShrPtr property = m_property_persistence_facade->getPropertyInteger(transaction, it->getKey().toHash(), ID_PROPERTY_BUILDING_CAPACITY);
 
         ASSERT_EQ(10, property->getValue());
     }
 }
 
-TEST_F(PropertyManagerTest, getProperty_ID_PROPERTY_HUMAN_PRODUCTION)
+TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_PRODUCTION)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        PropertyIntegerShrPtr property = m_property_manager->getPropertyInteger(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_PRODUCTION);
+        PropertyIntegerShrPtr property = m_property_persistence_facade->getPropertyInteger(transaction, it->getKey().toHash(), ID_PROPERTY_HUMAN_PRODUCTION);
 
         check_ID_PROPERTY_HUMAN_PRODUCTION(property, *it);
     }
 }
 
 /**
- * Component tests of: PropertyManager::getProperties.
+ * Component tests of: PropertyPersistenceFacade::getProperties.
  */
-TEST_F(PropertyManagerTest, getProperties_Buildings)
+TEST_F(PropertyPersistenceFacadeTest, getProperties_Buildings)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        PropertySet properties = m_property_manager->getProperties(transaction, it->getKey().toHash());
+        PropertySet properties = m_property_persistence_facade->getProperties(transaction, it->getKey().toHash());
 
         ASSERT_EQ(10, properties.getIntegerProperty(ID_PROPERTY_BUILDING_CAPACITY)->getValue());
     }
 }
 
-TEST_F(PropertyManagerTest, getProperties_Humans)
+TEST_F(PropertyPersistenceFacadeTest, getProperties_Humans)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        PropertySet properties = m_property_manager->getProperties(transaction, it->getKey().toHash());
+        PropertySet properties = m_property_persistence_facade->getProperties(transaction, it->getKey().toHash());
 
         check_ID_PROPERTY_HUMAN_DISMISSABLE(properties.getBooleanProperty(ID_PROPERTY_HUMAN_DISMISSABLE), *it);
         check_ID_PROPERTY_HUMAN_ENGAGEABLE(properties.getBooleanProperty(ID_PROPERTY_HUMAN_ENGAGEABLE), *it);

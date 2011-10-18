@@ -25,8 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "PropertyManager.hpp"
-
+#include "PropertyPersistenceFacade.hpp"
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Common;
@@ -38,14 +37,14 @@ namespace GameServer
 namespace Property
 {
 
-PropertyManager::PropertyManager(
+PropertyPersistenceFacade::PropertyPersistenceFacade(
     IPropertyManagerAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
 }
 
-PropertyBooleanShrPtr PropertyManager::getPropertyBoolean(
+PropertyBooleanShrPtr PropertyPersistenceFacade::getPropertyBoolean(
     ITransactionShrPtr         a_transaction,
     KeyHash            const & a_key_hash,
     IDProperty         const & a_id_property
@@ -65,7 +64,7 @@ PropertyBooleanShrPtr PropertyManager::getPropertyBoolean(
     }
 }
 
-PropertyIntegerShrPtr PropertyManager::getPropertyInteger(
+PropertyIntegerShrPtr PropertyPersistenceFacade::getPropertyInteger(
     ITransactionShrPtr         a_transaction,
     KeyHash            const & a_key_hash,
     IDProperty         const & a_id_property
@@ -85,7 +84,7 @@ PropertyIntegerShrPtr PropertyManager::getPropertyInteger(
     }
 }
 
-PropertyStringShrPtr PropertyManager::getPropertyString(
+PropertyStringShrPtr PropertyPersistenceFacade::getPropertyString(
     ITransactionShrPtr         a_transaction,
     KeyHash            const & a_key_hash,
     IDProperty         const & a_id_property
@@ -105,7 +104,7 @@ PropertyStringShrPtr PropertyManager::getPropertyString(
     }
 }
 
-PropertySet PropertyManager::getProperties(
+PropertySet PropertyPersistenceFacade::getProperties(
     ITransactionShrPtr         a_transaction,
     KeyHash            const & a_key_hash
 ) const
