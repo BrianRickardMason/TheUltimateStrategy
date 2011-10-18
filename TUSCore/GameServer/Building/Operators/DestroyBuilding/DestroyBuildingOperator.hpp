@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_DESTROYBUILDINGOPERATOR_HPP
 #define GAMESERVER_BUILDING_DESTROYBUILDINGOPERATOR_HPP
 
-#include "../../../Cost/ICostManager.hpp"
+#include "../../../Cost/ICostPersistenceFacade.hpp"
 #include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "../../IBuildingPersistenceFacade.hpp"
 #include "IDestroyBuildingOperator.hpp"
@@ -49,12 +49,12 @@ public:
      * @brief Ctor.
      *
      * @param a_building_persistence_facade The persistence facade of buildings.
-     * @param a_cost_manager                The manager of costs.
+     * @param a_cost_persistence_facade     The persistence facade of costs.
      * @param a_resource_persitence_facade  The persistence facade of resources.
      */
     DestroyBuildingOperator(
         IBuildingPersistenceFacadeShrPtr           a_building_persistence_facade,
-        Cost::ICostManagerShrPtr                   a_cost_manager,
+        Cost::ICostPersistenceFacadeShrPtr         a_cost_persistence_facade,
         Resource::IResourcePersistenceFacadeShrPtr a_resource_persitence_facade
     );
 
@@ -78,16 +78,16 @@ public:
 private:
     //@{
     /**
-     * @brief Persistence facades.
+     * @brief A persistence facade.
      */
     IBuildingPersistenceFacadeShrPtr           m_building_persistence_facade;
-    Cost::ICostManagerShrPtr                   m_cost_manager;
+    Cost::ICostPersistenceFacadeShrPtr         m_cost_persistence_facade;
     Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
     //@}
 };
 
 /**
- * @brief Typedefs of auto pointers.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<DestroyBuildingOperator> DestroyBuildingOperatorAutPtr;
 

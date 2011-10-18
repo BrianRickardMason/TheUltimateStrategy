@@ -75,7 +75,7 @@ protected:
           m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
           m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
           m_building_persistence_facade(m_manager_abstract_factory->createBuildingPersistenceFacade()),
-          m_cost_manager(m_manager_abstract_factory->createCostManager()),
+          m_cost_persistence_facade(m_manager_abstract_factory->createCostPersistenceFacade()),
           m_epoch_persistence_facade(m_manager_abstract_factory->createEpochPersistenceFacade()),
           m_human_persistence_facade(m_manager_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_manager_abstract_factory->createLandPersistenceFacade()),
@@ -201,10 +201,10 @@ protected:
 
     //@{
     /**
-     * @brief Persistence facades used in tests.
+     * @brief A persistence facade used in tests.
      */
     IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
-    ICostManagerShrPtr               m_cost_manager;
+    ICostPersistenceFacadeShrPtr     m_cost_persistence_facade;
     IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
     IHumanPersistenceFacadeShrPtr    m_human_persistence_facade;
     ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
@@ -215,7 +215,7 @@ protected:
     //}@
 
     /**
-     * @brief Operators used in tests.
+     * @brief An operator used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     IEngageHumanOperatorShrPtr      m_engage_human_operator;

@@ -25,53 +25,49 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COST_ICOSTMANAGER_HPP
-#define GAMESERVER_COST_ICOSTMANAGER_HPP
+#include "CostPersistenceFacade.hpp"
 
-#include "../Persistence/ITransaction.hpp"
-#include "../Resource/ResourceSet.hpp"
-#include "IDCostType.hpp"
-#include <boost/noncopyable.hpp>
+using namespace GameServer::Common;
+using namespace GameServer::Persistence;
+using namespace GameServer::Resource;
+using namespace boost;
 
 namespace GameServer
 {
 namespace Cost
 {
 
-/**
- * @brief An interface of cost manager.
- */
-class ICostManager
-    : boost::noncopyable
+CostPersistenceFacade::CostPersistenceFacade(
+    ICostManagerAccessorAutPtr a_accessor
+)
+    : m_accessor(a_accessor)
 {
-public:
-    /**
-     * @brief Destructs the cost manager.
-     */
-    virtual ~ICostManager(){};
+}
 
-    /**
-     * @brief Gets the cost.
-     *
-     * @param a_transaction  The transaction.
-     * @param a_key_hash     A key hash.
-     * @param a_id_cost_type An identifier of the cost type.
-     *
-     * @return The cost.
-     */
-    virtual Resource::ResourceSet getCost(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
-        IDCostType                      const & a_id_cost_type
-    ) const = 0;
-};
+ResourceSet CostPersistenceFacade::getCost(
+    ITransactionShrPtr         a_transaction,
+    KeyHash            const & a_key_hash,
+    IDCostType         const & a_id_cost_type
+) const
+{
+    ResourceWithVolumeMap resource_map;
 
-/**
- * @brief A shared pointer of interface of cost manager.
- */
-typedef boost::shared_ptr<ICostManager> ICostManagerShrPtr;
+    CostRecordVec cost_record_vec = m_accessor->getCosts(a_transaction, a_key_hash, a_id_cost_type);
+
+    for (CostRecordVec::const_iterator it = cost_record_vec.begin(); it != cost_record_vec.end(); ++it)
+    {
+        Key key((*it)->getIDResource());
+        ResourceWithVolumeShrPtr resource = boost::make_shared<ResourceWithVolume>(key, (*it)->getVolume());
+
+        ResourceWithVolumePair resource_pair(key, resource);
+
+        resource_map.insert(resource_pair);
+    }
+
+    ResourceSet resource_set(resource_map);
+
+    return resource_set;
+}
 
 } // namespace Cost
 } // namespace GameServer
-
-#endif // GAMESERVER_COST_ICOSTMANAGER_HPP

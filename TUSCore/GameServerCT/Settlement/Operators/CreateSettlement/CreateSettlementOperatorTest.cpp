@@ -224,7 +224,7 @@ protected:
 
     //@{
     /**
-     * @brief Abstract factories used in tests.
+     * @brief An abstract factory used in tests.
      */
     IManagerAbstractFactoryShrPtr  m_manager_abstract_factory;
     IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
@@ -232,7 +232,7 @@ protected:
 
     //@{
     /**
-     * @brief Persistence facades used in tests.
+     * @brief A persistence facade used in tests.
      */
     IHumanPersistenceFacadeShrPtr    m_human_persistence_facade;
     IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
@@ -240,7 +240,7 @@ protected:
 
     //@{
     /**
-     * @brief Operators used in tests.
+     * @brief An operator used in tests.
      */
     ICreateEpochOperatorShrPtr      m_create_epoch_operator;
     ICreateLandOperatorShrPtr       m_create_land_operator;

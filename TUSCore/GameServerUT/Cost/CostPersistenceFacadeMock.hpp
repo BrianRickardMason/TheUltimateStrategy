@@ -25,21 +25,44 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "CostManagerFactory.hpp"
+#ifndef GAMESERVER_COST_COSTPERSISTENCEFACADEMOCK_HPP
+#define GAMESERVER_COST_COSTPERSISTENCEFACADEMOCK_HPP
 
-using namespace GameServer::Common;
+#include "../../GameServer/Cost/ICostPersistenceFacade.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
 namespace Cost
 {
 
-CostManagerAutPtr CostManagerFactory::createCostManager(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
-)
+/**
+ * @brief A mock of cost manager.
+ */
+class CostPersistenceFacadeMock
+    : public ICostPersistenceFacade
 {
-    return CostManagerAutPtr(new CostManager(a_accessor_abstract_factory->createCostAccessor()));
-}
+public:
+    /**
+     * @brief Gets a cost.
+     *
+     * @param a_transaction  The transaction.
+     * @param a_key_hash     A key hash.
+     * @param a_id_cost_type An identifier of the cost type.
+     *
+     * @return The cost.
+     */
+    MOCK_CONST_METHOD3(
+        getCost,
+        Resource::ResourceSet(
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::KeyHash                 const & a_key_hash,
+            IDCostType                      const & a_id_cost_type
+        )
+    );
+};
 
 } // namespace Cost
 } // namespace GameServer
+
+#endif // GAMESERVER_COST_COSTPERSISTENCEFACADEMOCK_HPP

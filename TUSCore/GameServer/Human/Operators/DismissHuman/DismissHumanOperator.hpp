@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_HUMAN_DISMISSHUMANOPERATOR_HPP
 #define GAMESERVER_HUMAN_DISMISSHUMANOPERATOR_HPP
 
-#include "../../../Cost/ICostManager.hpp"
+#include "../../../Cost/ICostPersistenceFacade.hpp"
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
 #include "../../../Resource/IResourcePersistenceFacade.hpp"
@@ -49,13 +49,13 @@ public:
     /**
      * @brief Constructs the operator.
      *
-     * @param a_cost_manager                The manager of costs.
+     * @param a_cost_persistence_facade     The persistence facade of costs.
      * @param a_human_persistence_facade    The persistence facade of humans.
      * @param a_property_manager            The manager of properties.
      * @param a_resource_persistence_facade The persistence facade of resources.
      */
     DismissHumanOperator(
-        Cost::ICostManagerShrPtr                   a_cost_manager,
+        Cost::ICostPersistenceFacadeShrPtr         a_cost_persistence_facade,
         IHumanPersistenceFacadeShrPtr              a_human_persistence_facade,
         Property::IPropertyManagerShrPtr           a_property_manager,
         Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
@@ -111,9 +111,9 @@ private:
 
     //@{
     /**
-     * @brief Persistence facades.
+     * @brief A persistence facade.
      */
-    Cost::ICostManagerShrPtr                   m_cost_manager;
+    Cost::ICostPersistenceFacadeShrPtr         m_cost_persistence_facade;
     IHumanPersistenceFacadeShrPtr              m_human_persistence_facade;
     Property::IPropertyManagerShrPtr           m_property_manager;
     Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
@@ -121,7 +121,7 @@ private:
 };
 
 /**
- * @brief Typedefs of auto pointers.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<DismissHumanOperator> DismissHumanOperatorAutPtr;
 

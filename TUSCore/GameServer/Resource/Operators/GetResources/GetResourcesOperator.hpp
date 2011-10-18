@@ -73,7 +73,7 @@ private:
 };
 
 /**
- * @brief Typedefs of auto pointers.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<GetResourcesOperator> GetResourcesOperatorAutPtr;
 

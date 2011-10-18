@@ -142,7 +142,7 @@ protected:
 
     //@{
     /**
-     * @brief Persistence facades used in tests.
+     * @brief A persistence facade used in tests.
      */
     IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
     IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
@@ -152,7 +152,7 @@ protected:
     //}@
 
     /**
-     * @brief Operators used in tests.
+     * @brief An operator used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
 

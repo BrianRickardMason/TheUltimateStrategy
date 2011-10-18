@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COST_COSTMANAGERFACTORY_HPP
-#define GAMESERVER_COST_COSTMANAGERFACTORY_HPP
+#ifndef GAMESERVER_COST_COSTPERSISTENCEFACADE_HPP
+#define GAMESERVER_COST_COSTPERSISTENCEFACADE_HPP
 
-#include "../Common/IAccessorAbstractFactory.hpp"
-#include "CostManager.hpp"
+#include "ICostManagerAccessor.hpp"
+#include "ICostPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -37,24 +37,49 @@ namespace Cost
 {
 
 /**
- * @brief A factory of cost manager.
+ * @brief A cost persistence facade.
  */
-class CostManagerFactory
+class CostPersistenceFacade
+    : public ICostPersistenceFacade
 {
 public:
     /**
-     * @brief A factory method.
+     * @brief Ctor.
      *
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created cost manager.
+     * @param a_accessor An accessor to be injected.
      */
-    static CostManagerAutPtr createCostManager(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    CostPersistenceFacade(
+        ICostManagerAccessorAutPtr a_accessor
     );
+
+    /**
+     * @brief Gets the cost.
+     *
+     * @param a_transaction  The transaction.
+     * @param a_key_hash     A key hash.
+     * @param a_id_cost_type An identifier of the cost type.
+     *
+     * @return The cost.
+     */
+    virtual Resource::ResourceSet getCost(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash,
+        IDCostType                      const & a_id_cost_type
+    ) const;
+
+private:
+    /**
+     * @brief An accessor.
+     */
+    ICostManagerAccessorScpPtr m_accessor;
 };
+
+/**
+ * @brief Typedef of auto pointer.
+ */
+typedef std::auto_ptr<CostPersistenceFacade> CostPersistenceFacadeAutPtr;
 
 } // namespace Cost
 } // namespace GameServer
 
-#endif // GAMESERVER_COST_COSTMANAGERFACTORY_HPP
+#endif // GAMESERVER_COST_COSTPERSISTENCEFACADE_HPP

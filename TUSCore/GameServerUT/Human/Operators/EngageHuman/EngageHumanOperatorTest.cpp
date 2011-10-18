@@ -27,7 +27,7 @@
 
 #include "../../../../GameServer/Human/Operators/EngageHuman/EngageHumanOperator.hpp"
 #include "../../../Building/BuildingPersistenceFacadeMock.hpp"
-#include "../../../Cost/CostManagerMock.hpp"
+#include "../../../Cost/CostPersistenceFacadeMock.hpp"
 #include "../../../Helpers/Functions.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Property/PropertyManagerMock.hpp"
@@ -61,7 +61,7 @@ protected:
      */
     EngageHumanOperatorTest()
         : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
-          m_cost_manager(new CostManagerMock),
+          m_cost_persistence_facade(new CostPersistenceFacadeMock),
           m_human_persistence_facade(new HumanPersistenceFacadeMock),
           m_property_manager(new PropertyManagerMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
@@ -83,23 +83,23 @@ protected:
     }
 
     /**
-     * @brief Produces configured CostManagerMock.
+     * @brief Produces configured CostPersistenceFacadeMock.
      *
      * @param a_key          A human key.
      * @param a_id_cost_type An identifier of the cost type.
      *
      * @return The prepared mock.
      */
-    CostManagerMock * produceCostManagerMock(
+    CostPersistenceFacadeMock * produceCostPersistenceFacadeMock(
         GameServer::Human::Key const & a_key,
         IDCostType             const & a_id_cost_type
     )
     {
-        // Mocks setup: CostManagerMock.
+        // Mocks setup: CostPersistenceFacadeMock.
         vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-        configureCostManagerMockForGetCost(a_key, a_id_cost_type, resource_volumes);
+        configureCostPersistenceFacadeMockForGetCost(a_key, a_id_cost_type, resource_volumes);
 
-        return m_cost_manager;
+        return m_cost_persistence_facade;
     }
 
     /**
@@ -317,10 +317,10 @@ protected:
 
     //@{
     /**
-     * @brief Persistence facades used in tests.
+     * @brief A persistence facade used in tests.
      */
     BuildingPersistenceFacadeMock * m_building_persistence_facade;
-    CostManagerMock               * m_cost_manager;
+    CostPersistenceFacadeMock     * m_cost_persistence_facade;
     HumanPersistenceFacadeMock    * m_human_persistence_facade;
     PropertyManagerMock           * m_property_manager;
     ResourcePersistenceFacadeMock * m_resource_persistence_facade;
@@ -333,13 +333,13 @@ protected:
 
 private:
     /**
-     * @brief Configures a CostManagerMock's responses for getCost().
+     * @brief Configures a CostPersistenceFacadeMock's responses for getCost().
      *
      * @param a_key          The key of the human.
      * @param a_volumes      A vector of resource volumes.
      * @param a_id_cost_type An identifier of the cost type.
      */
-    void configureCostManagerMockForGetCost(
+    void configureCostPersistenceFacadeMockForGetCost(
         GameServer::Human::Key               const & a_key,
         IDCostType                           const & a_id_cost_type,
         vector<GameServer::Resource::Volume> const & a_volumes
@@ -347,7 +347,7 @@ private:
     {
         ResourceSet resource_set = getResourceSet(a_volumes);
 
-        EXPECT_CALL(*m_cost_manager, getCost(_, a_key.toHash(), a_id_cost_type))
+        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, a_key.toHash(), a_id_cost_type))
         .WillOnce(Return(resource_set));
     }
 };
@@ -358,7 +358,7 @@ private:
 TEST_F(EngageHumanOperatorTest, EngageHumanOperator)
 {
     ASSERT_NO_THROW(EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                              (ICostManagerShrPtr(m_cost_manager)),
+                                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                               (IPropertyManagerShrPtr(m_property_manager)),
                                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))));
@@ -372,7 +372,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_TryingToEngageZeroHumans)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                              (ICostManagerShrPtr(m_cost_manager)),
+                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                               (IPropertyManagerShrPtr(m_property_manager)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
@@ -390,7 +390,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_HumanIsNotEngageable)
     .WillOnce(Return(engageable));
 
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                              (ICostManagerShrPtr(m_cost_manager)),
+                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                               (IPropertyManagerShrPtr(m_property_manager)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
@@ -406,7 +406,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 0);
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(m_cost_manager),
+                                              ICostPersistenceFacadeShrPtr(m_cost_persistence_facade),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_ENGAGEABLE)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -422,7 +422,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 5);
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(m_cost_manager),
+                                              ICostPersistenceFacadeShrPtr(m_cost_persistence_facade),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_ENGAGEABLE)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -441,7 +441,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_NoResources)
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_ENGAGEABLE)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -460,7 +460,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_ZeroVolumes)
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_ENGAGEABLE)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -479,7 +479,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_LowerVolumes)
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_ENGAGEABLE)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -497,7 +497,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotNeeded)
     configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_DRUID_NOVICE, 1);
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_DRUID_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_DRUID_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_DRUID_NOVICE, ID_PROPERTY_HUMAN_ENGAGEABLE)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -518,7 +518,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMockShort(KEY_WORKER_BLACKSMITH_NOVICE, ID_PROPERTY_HUMAN_ENGAGEABLE)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -541,7 +541,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(HumanWithVolumeMap()));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, KEY_REGULAR_FORGE)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -570,7 +570,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_BLACKSMITH_NOVICE, 1);
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, KEY_REGULAR_FORGE)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -601,7 +601,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_BLACKSMITH_NOVICE, 1);
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, KEY_REGULAR_FORGE)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -630,7 +630,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_WORKER_BLACKSMITH_NOVICE, KEY_REGULAR_FORGE)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -662,7 +662,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     configureHumanPersistenceFacadeMockForAddHuman(KEY_SOLDIER_ARCHER_NOVICE, 1);
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -684,7 +684,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     configureHumanPersistenceFacadeMockForAddHuman(KEY_SOLDIER_ARCHER_NOVICE, 1);
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -711,7 +711,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Throw(e));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -737,7 +737,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(false));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
@@ -760,7 +760,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Throw(e));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -782,7 +782,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(false));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -806,7 +806,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Throw(e));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
@@ -828,7 +828,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator(IBuildingPersistenceFacadeShrPtr(produceBuildingPersistenceFacadeMock()),
-                                              ICostManagerShrPtr(produceCostManagerMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_SOLDIER_ARCHER_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
                                               IPropertyManagerShrPtr(producePropertyManagerMock(KEY_SOLDIER_ARCHER_NOVICE, KEY_REGULAR_BARRACKS)),
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));

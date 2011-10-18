@@ -28,7 +28,7 @@
 #include "../Authentication/AuthenticationPersistenceFacadeFactory.hpp"
 #include "../Authorization/AuthorizationPersistenceFacadeFactory.hpp"
 #include "../Building/BuildingPersistenceFacadeFactory.hpp"
-#include "../Cost/CostManagerFactory.hpp"
+#include "../Cost/CostPersistenceFacadeFactory.hpp"
 #include "../Epoch/EpochPersistenceFacadeFactory.hpp"
 #include "../Human/HumanPersistenceFacadeFactory.hpp"
 #include "../Land/LandPersistenceFacadeFactory.hpp"
@@ -82,9 +82,9 @@ IBuildingPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createBuildin
     return IBuildingPersistenceFacadeShrPtr(BuildingPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
-ICostManagerShrPtr ManagerAbstractFactoryPostgresql::createCostManager() const
+ICostPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createCostPersistenceFacade() const
 {
-    return ICostManagerShrPtr(CostManagerFactory::createCostManager(m_accessor_abstract_factory));
+    return ICostPersistenceFacadeShrPtr(CostPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
 IEpochPersistenceFacadeShrPtr ManagerAbstractFactoryPostgresql::createEpochPersistenceFacade() const

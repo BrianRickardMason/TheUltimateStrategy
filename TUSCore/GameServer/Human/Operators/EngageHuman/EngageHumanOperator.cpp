@@ -43,13 +43,13 @@ namespace Human
 
 EngageHumanOperator::EngageHumanOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-    ICostManagerShrPtr               a_cost_manager,
+    ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
     IPropertyManagerShrPtr           a_property_manager,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
-      m_cost_manager(a_cost_manager),
+      m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
       m_property_manager(a_property_manager),
       m_resource_persistence_facade(a_resource_persistence_facade)
@@ -90,7 +90,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = m_cost_manager->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
+        ResourceSet cost = m_cost_persistence_facade->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
 
         // Multiply total cost.
         cost *= a_volume;

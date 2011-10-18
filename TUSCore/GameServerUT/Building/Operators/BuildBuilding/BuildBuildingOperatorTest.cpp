@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp"
-#include "../../../Cost/CostManagerMock.hpp"
+#include "../../../Cost/CostPersistenceFacadeMock.hpp"
 #include "../../../Helpers/Functions.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
@@ -57,7 +57,7 @@ protected:
      */
     BuildBuildingOperatorTest()
         : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
-          m_cost_manager(new CostManagerMock),
+          m_cost_persistence_facade(new CostPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
@@ -77,14 +77,14 @@ protected:
     }
 
     /**
-     * @brief Configures a CostManagerMock's response for getCost().
+     * @brief Configures a CostPersistenceFacadeMock's response for getCost().
      */
-    void configureCostManagerMockForGetCost()
+    void configureCostPersistenceFacadeMockForGetCost()
     {
         vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
         ResourceSet resource_set = getResourceSet(resource_volumes);
 
-        EXPECT_CALL(*m_cost_manager, getCost(_, KEY_DEFENSIVE_BARBICAN.toHash(), ID_COST_TYPE_BUILDING_BUILD))
+        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN.toHash(), ID_COST_TYPE_BUILDING_BUILD))
         .WillOnce(Return(resource_set));
     }
 
@@ -116,10 +116,10 @@ protected:
 
     //@{
     /**
-     * @brief Persistence facades used in tests.
+     * @brief A persistence facade used in tests.
      */
     BuildingPersistenceFacadeMock * m_building_persistence_facade;
-    CostManagerMock               * m_cost_manager;
+    CostPersistenceFacadeMock     * m_cost_persistence_facade;
     ResourcePersistenceFacadeMock * m_resource_persistence_facade;
     //}@
 
@@ -135,7 +135,7 @@ protected:
 TEST_F(BuildBuildingOperatorTest, BuildBuildingOperator)
 {
     ASSERT_NO_THROW(BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))));
 }
 
@@ -147,7 +147,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_TryingToBuildZeroBuildings)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_TRYING_TO_BUILD_ZERO_BUILDINGS,
@@ -163,7 +163,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_GetResourcesThrows)
     .WillOnce(Throw(e));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -175,14 +175,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_GetCostThrows)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     std::exception e;
-    EXPECT_CALL(*m_cost_manager, getCost(_, KEY_DEFENSIVE_BARBICAN.toHash(), ID_COST_TYPE_BUILDING_BUILD))
+    EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN.toHash(), ID_COST_TYPE_BUILDING_BUILD))
     .WillOnce(Throw(e));
 
     vector<GameServer::Resource::Volume> resource_volumes;
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -193,13 +193,13 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_AllResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(9)(9)(9)(9)(9)(9)(9);
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -210,13 +210,13 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(9);
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -227,7 +227,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -237,7 +237,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceThrows)
     .WillOnce(Throw(e));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -248,7 +248,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceReturnsFalse)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -257,7 +257,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceReturnsFalse)
     .WillOnce(Return(false));
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_RESOURCES_MISSING_IN_THE_MEANTIME,
@@ -272,7 +272,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_AddBuildinghrows)
     EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Throw(e));
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -280,7 +280,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_AddBuildinghrows)
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -293,7 +293,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
 
     EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1));
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -303,7 +303,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
@@ -316,7 +316,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
 
     EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 4));
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -326,7 +326,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
@@ -339,7 +339,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
 
     EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10));
 
-    configureCostManagerMockForGetCost();
+    configureCostPersistenceFacadeMockForGetCost();
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -349,7 +349,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     BuildBuildingOperator build_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                  (ICostManagerShrPtr(m_cost_manager)),
+                                                  (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                   (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,

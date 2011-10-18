@@ -11,7 +11,7 @@
 //    documentation and/or other materials provided with the distribution.
 // 3. Neither the name of the project nor the names of its contributors
 //    may be used to endorse or promote products derived from this software
-//    without specific prior written permission.
+//    without specific prikor written permission.
 //
 // THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS "AS IS" AND
 // ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -40,7 +40,7 @@ EngageHumanOperatorAutPtr EngageHumanOperatorFactory::createEngageHumanOperator(
 {
     return EngageHumanOperatorAutPtr(
                new EngageHumanOperator(a_manager_abstract_factory->createBuildingPersistenceFacade(),
-                                       a_manager_abstract_factory->createCostManager(),
+                                       a_manager_abstract_factory->createCostPersistenceFacade(),
                                        a_manager_abstract_factory->createHumanPersistenceFacade(),
                                        a_manager_abstract_factory->createPropertyManager(),
                                        a_manager_abstract_factory->createResourcePersistenceFacade())

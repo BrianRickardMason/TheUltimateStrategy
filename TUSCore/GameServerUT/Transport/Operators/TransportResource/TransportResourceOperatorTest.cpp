@@ -74,7 +74,7 @@ protected:
 
     //@{
     /**
-     * @brief Persistence facades used in tests.
+     * @brief A persistence facade used in tests.
      */
     ResourcePersistenceFacadeMock   * m_resource_persistence_facade;
     SettlementPersistenceFacadeMock * m_settlement_persistence_facade;

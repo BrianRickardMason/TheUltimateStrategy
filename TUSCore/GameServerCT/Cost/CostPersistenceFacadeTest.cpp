@@ -41,16 +41,16 @@ using namespace GameServer::Resource;
 /**
  * @brief A test class.
  */
-class CostManagerTest
+class CostPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    CostManagerTest()
+    CostPersistenceFacadeTest()
         : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-          m_cost_manager(m_manager_abstract_factory->createCostManager())
+          m_cost_persistence_facade(m_manager_abstract_factory->createCostPersistenceFacade())
     {
     }
 
@@ -60,15 +60,15 @@ protected:
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     /**
-     * @brief A cost manager.
+     * @brief A persistence facade used in tests.
      */
-    ICostManagerShrPtr m_cost_manager;
+    ICostPersistenceFacadeShrPtr m_cost_persistence_facade;
 };
 
 /**
- * Component tests of: CostManager::getCosts.
+ * Component tests of: CostPersistenceFacade::getCosts.
  */
-TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_BUILD)
+TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_BUILDING_BUILD)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
@@ -76,7 +76,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_BUILD)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
-        ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_BUILD);
+        ResourceSet cost =
+        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_BUILD);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -90,7 +91,7 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_BUILD)
     }
 }
 
-TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_DESTROY)
+TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_BUILDING_DESTROY)
 {
     for (BuildingVec::const_iterator it = BUILDING_VEC.begin(); it != BUILDING_VEC.end(); ++it)
     {
@@ -98,7 +99,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_DESTROY)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
-        ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_DESTROY);
+        ResourceSet cost =
+        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_BUILDING_DESTROY);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -112,7 +114,7 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_BUILDING_DESTROY)
     }
 }
 
-TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_DISMISS)
+TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_DISMISS)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
@@ -120,7 +122,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_DISMISS)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
-        ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_DISMISS);
+        ResourceSet cost =
+        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_DISMISS);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -134,7 +137,7 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_DISMISS)
     }
 }
 
-TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_ENGAGE)
+TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_ENGAGE)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
@@ -142,7 +145,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_ENGAGE)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
-        ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
+        ResourceSet cost =
+        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();
@@ -156,7 +160,7 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_ENGAGE)
     }
 }
 
-TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_LIVING)
+TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_LIVING)
 {
     for (HumanVec::const_iterator it = HUMAN_VEC.begin(); it != HUMAN_VEC.end(); ++it)
     {
@@ -164,7 +168,8 @@ TEST_F(CostManagerTest, getCosts_ID_COST_TYPE_HUMAN_LIVING)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         // Test commands.
-        ResourceSet cost = m_cost_manager->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);
+        ResourceSet cost =
+        	m_cost_persistence_facade->getCost(transaction, it->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);
 
         // Test assertions.
         ResourceWithVolumeMap resource_map = cost.getMap();

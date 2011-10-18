@@ -160,7 +160,7 @@ public:
 };
 
 /**
- * @brief Typedefs of shared pointers.
+ * @brief Typedef of shared pointer.
  */
 typedef boost::shared_ptr<IResourcePersistenceFacade> IResourcePersistenceFacadeShrPtr;
 

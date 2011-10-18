@@ -174,13 +174,13 @@ protected:
            m_settlement_name_3;
 
     /**
-     * @brief Abstract factories used in tests.
+     * @brief An abstract factory used in tests.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
 
     //@{
     /**
-     * @brief Persistence facades used in tests.
+     * @brief A persistence facade used in tests.
      */
     IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
     ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
@@ -190,7 +190,7 @@ protected:
     //}@
 
     /**
-     * @brief Operators used in tests.
+     * @brief An operator used in tests.
      */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
 

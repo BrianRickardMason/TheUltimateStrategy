@@ -44,14 +44,14 @@ namespace Turn
 {
 
 TurnOperator::TurnOperator(
-    ICostManagerShrPtr                 a_cost_manager,
+    ICostPersistenceFacadeShrPtr       a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr      a_human_persistence_facade,
     ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
     IPropertyManagerShrPtr             a_property_manager,
     IResourcePersistenceFacadeShrPtr   a_resource_persistence_facade,
     ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
-    : m_cost_manager(a_cost_manager),
+    : m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
       m_land_persistence_facade(a_land_persistence_facade),
       m_property_manager(a_property_manager),
@@ -290,7 +290,8 @@ ResourceSet TurnOperator::getCostOfLiving(
 
     for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        ResourceSet human_cost = m_cost_manager->getCost(a_transaction, it->second->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);
+        ResourceSet human_cost =
+            m_cost_persistence_facade->getCost(a_transaction, it->second->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);
 
         human_cost *= it->second->getVolume();
 

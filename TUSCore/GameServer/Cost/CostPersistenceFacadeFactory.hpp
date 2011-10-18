@@ -25,12 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COST_COSTMANAGER_HPP
-#define GAMESERVER_COST_COSTMANAGER_HPP
+#ifndef GAMESERVER_COST_COSTPERSISTENCEFACADEFACTORY_HPP
+#define GAMESERVER_COST_COSTPERSISTENCEFACADEFACTORY_HPP
 
-#include "ICostManager.hpp"
-
-#include "ICostManagerAccessor.hpp"
+#include "../Common/IAccessorAbstractFactory.hpp"
+#include "CostPersistenceFacade.hpp"
 
 namespace GameServer
 {
@@ -38,49 +37,24 @@ namespace Cost
 {
 
 /**
- * @brief A cost manager.
+ * @brief A factory of cost persistence facade.
  */
-class CostManager
-    : public ICostManager
+class CostPersistenceFacadeFactory
 {
 public:
     /**
-     * @brief Constructs the cost manager.
+     * @brief A factory method.
      *
-     * @param a_accessor An accessor to be injected.
+     * @param a_accessor_abstract_factory The abstract factory of accessors.
+     *
+     * @return A newly created cost persistence factory.
      */
-    CostManager(
-        ICostManagerAccessorAutPtr a_accessor
+    static CostPersistenceFacadeAutPtr create(
+        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
     );
-
-    /**
-     * @brief Gets the cost.
-     *
-     * @param a_transaction  The transaction.
-     * @param a_key_hash     A key hash.
-     * @param a_id_cost_type An identifier of the cost type.
-     *
-     * @return The cost.
-     */
-    virtual Resource::ResourceSet getCost(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
-        IDCostType                      const & a_id_cost_type
-    ) const;
-
-private:
-    /**
-     * @brief An accessor.
-     */
-    ICostManagerAccessorScpPtr m_accessor;
 };
-
-/**
- * @brief An auto pointer of cost manager.
- */
-typedef std::auto_ptr<CostManager> CostManagerAutPtr;
 
 } // namespace Cost
 } // namespace GameServer
 
-#endif // GAMESERVER_COST_COSTMANAGER_HPP
+#endif // GAMESERVER_COST_COSTPERSISTENCEFACADEFACTORY_HPP

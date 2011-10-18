@@ -54,7 +54,7 @@ public:
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const;
     virtual Authorization::IAuthorizationPersistenceFacadeShrPtr   createAuthorizationPersistenceFacade()  const;
     virtual Building::IBuildingPersistenceFacadeShrPtr             createBuildingPersistenceFacade()       const;
-    virtual Cost::ICostManagerShrPtr                               createCostManager()                     const;
+    virtual Cost::ICostPersistenceFacadeShrPtr                     createCostPersistenceFacade()           const;
     virtual Epoch::IEpochPersistenceFacadeShrPtr                   createEpochPersistenceFacade()          const;
     virtual Human::IHumanPersistenceFacadeShrPtr                   createHumanPersistenceFacade()          const;
     virtual Land::ILandPersistenceFacadeShrPtr                     createLandPersistenceFacade()           const;

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_TURN_TURNOPERATOR_HPP
 #define GAMESERVER_TURN_TURNOPERATOR_HPP
 
-#include "../../../Cost/ICostManager.hpp"
+#include "../../../Cost/ICostPersistenceFacade.hpp"
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Land/ILandPersistenceFacade.hpp"
 #include "../../../Property/IPropertyManager.hpp"
@@ -51,15 +51,15 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_cost_manager                  The manager of costs.
+     * @param a_cost_persistence_facade       The persistence facade of costs.
      * @param a_human_persistence_facade      The persistence facade of humans.
      * @param a_land_persistence_facade       The persistence facade of lands.
      * @param a_property_manager              The manager of properties.
      * @param a_resource_persistence_facade   The persistence facade of resources.
-     * @param a_settlement_persistence_facade The manager of settlements.
+     * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     TurnOperator(
-        Cost::ICostManagerShrPtr                       a_cost_manager,
+        Cost::ICostPersistenceFacadeShrPtr             a_cost_persistence_facade,
         Human::IHumanPersistenceFacadeShrPtr           a_human_persistence_facade,
         Land::ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
         Property::IPropertyManagerShrPtr               a_property_manager,
@@ -122,9 +122,9 @@ private:
 
     //@{
     /**
-     * @brief Persistence facades.
+     * @brief A persistence facade.
      */
-    Cost::ICostManagerShrPtr                       m_cost_manager;
+    Cost::ICostPersistenceFacadeShrPtr             m_cost_persistence_facade;
     Human::IHumanPersistenceFacadeShrPtr           m_human_persistence_facade;
     Land::ILandPersistenceFacadeShrPtr             m_land_persistence_facade;
     Property::IPropertyManagerShrPtr               m_property_manager;
@@ -134,7 +134,7 @@ private:
 };
 
 /**
- * @brief Typedefs of auto pointers.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<TurnOperator> TurnOperatorAutPtr;
 

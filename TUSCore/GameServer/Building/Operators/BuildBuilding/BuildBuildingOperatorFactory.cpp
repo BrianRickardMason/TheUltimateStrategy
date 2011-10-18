@@ -40,7 +40,7 @@ BuildBuildingOperatorAutPtr BuildBuildingOperatorFactory::createBuildBuildingOpe
 {
     return BuildBuildingOperatorAutPtr(
                new BuildBuildingOperator(a_manager_abstract_factory->createBuildingPersistenceFacade(),
-                                         a_manager_abstract_factory->createCostManager(),
+                                         a_manager_abstract_factory->createCostPersistenceFacade(),
                                          a_manager_abstract_factory->createResourcePersistenceFacade())
            );
 }

@@ -39,11 +39,11 @@ namespace Building
 
 DestroyBuildingOperator::DestroyBuildingOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-    ICostManagerShrPtr               a_cost_manager,
+    ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persitence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
-      m_cost_manager(a_cost_manager),
+      m_cost_persistence_facade(a_cost_persistence_facade),
       m_resource_persistence_facade(a_resource_persitence_facade)
 {
 }
@@ -82,7 +82,8 @@ DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = m_cost_manager->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_BUILDING_DESTROY);
+        ResourceSet cost =
+            m_cost_persistence_facade->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_BUILDING_DESTROY);
 
         // Multiply total cost.
         cost *= a_volume;

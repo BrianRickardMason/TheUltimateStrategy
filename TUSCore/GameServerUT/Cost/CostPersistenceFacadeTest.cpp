@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Cost/CostManager.hpp"
+#include "../../GameServer/Cost/CostPersistenceFacade.hpp"
 #include "../../GameServer/Resource/Resource.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "CostManagerAccessorMock.hpp"
@@ -42,14 +42,14 @@ using testing::Throw;
 /**
  * @brief A test class.
  */
-class CostManagerTest
+class CostPersistenceFacadeTest
     : public testing::Test
 {
 protected:
     /**
      * @brief Constructs a test class.
      */
-    CostManagerTest()
+    CostPersistenceFacadeTest()
         : m_cost_record_coal(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, ID_RESOURCE_COAL, 100)),
           m_cost_record_food(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, ID_RESOURCE_FOOD, 200)),
           m_cost_record_gold(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, ID_RESOURCE_GOLD, 300)),
@@ -67,8 +67,9 @@ protected:
         m_cost_record_vector.push_back(m_cost_record_wood);
     }
 
+    //@{
     /**
-     * @brief Test constants cost record shared pointers.
+     * @brief A record of cost used in tests.
      */
     CostRecordShrPtr m_cost_record_coal,
                      m_cost_record_food,
@@ -77,6 +78,7 @@ protected:
                      m_cost_record_mana,
                      m_cost_record_rock,
                      m_cost_record_wood;
+    //}@
 
     /**
      * @brief Test constants cost record vector.
@@ -84,14 +86,14 @@ protected:
     CostRecordVec m_cost_record_vector;
 };
 
-TEST_F(CostManagerTest, CostManager)
+TEST_F(CostPersistenceFacadeTest, CtorDoesNotThrow)
 {
     ICostManagerAccessorAutPtr accessor(new CostManagerAccessorMock);
 
-    ASSERT_NO_THROW(CostManager manager(accessor));
+    ASSERT_NO_THROW(CostPersistenceFacade persistence_facade(accessor));
 }
 
-TEST_F(CostManagerTest, getCost_Success)
+TEST_F(CostPersistenceFacadeTest, getCost_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -102,10 +104,10 @@ TEST_F(CostManagerTest, getCost_Success)
 
     ICostManagerAccessorAutPtr accessor(mock);
 
-    CostManager manager(accessor);
+    CostPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    ResourceSet resource_set = manager.getCost(transaction, 1, 2);
+    ResourceSet resource_set = persistence_facade.getCost(transaction, 1, 2);
 
     // Test assertions.
     ResourceWithVolumeMap resource_map = resource_set.getMap();
@@ -118,7 +120,7 @@ TEST_F(CostManagerTest, getCost_Success)
     }
 }
 
-TEST_F(CostManagerTest, getCost_Failure_GetCostThrows)
+TEST_F(CostPersistenceFacadeTest, getCost_Failure_GetCostThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -131,8 +133,8 @@ TEST_F(CostManagerTest, getCost_Failure_GetCostThrows)
 
     ICostManagerAccessorAutPtr accessor(mock);
 
-    CostManager manager(accessor);
+    CostPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(ResourceSet resource_set = manager.getCost(transaction, 1, 2), std::exception);
+    ASSERT_THROW(ResourceSet resource_set = persistence_facade.getCost(transaction, 1, 2), std::exception);
 }
