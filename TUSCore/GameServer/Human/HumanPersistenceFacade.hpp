@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_HUMAN_HUMANPERSISTENCEFACADE_HPP
 #define GAMESERVER_HUMAN_HUMANPERSISTENCEFACADE_HPP
 
-#include "IHumanManagerAccessor.hpp"
+#include "IHumanAccessor.hpp"
 #include "IHumanPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     HumanPersistenceFacade(
-        IHumanManagerAccessorAutPtr a_accessor
+        IHumanAccessorAutPtr a_accessor
     );
 
     /**
@@ -146,11 +146,11 @@ private:
     /**
      * @brief The accessor.
      */
-    IHumanManagerAccessorScpPtr m_accessor;
+    IHumanAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief An auto pointer of human persistence facade.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<HumanPersistenceFacade> HumanPersistenceFacadeAutPtr;
 

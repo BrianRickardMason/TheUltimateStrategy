@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_HUMAN_HUMANMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_HUMAN_HUMANMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_HUMAN_HUMANACCESSORMOCK_HPP
+#define GAMESERVER_HUMAN_HUMANACCESSORMOCK_HPP
 
-#include "../../GameServer/Human/IHumanManagerAccessor.hpp"
+#include "../../GameServer/Human/IHumanAccessor.hpp"
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace Human
 {
 
 /**
- * @brief The mock of HumanManagerAccessor.
+ * @brief The mock of HumanAccessor.
  */
-class HumanManagerAccessorMock
-    : public IHumanManagerAccessor
+class HumanAccessorMock
+    : public IHumanAccessor
 {
 public:
     /**
@@ -169,4 +169,4 @@ public:
 } // namespace Human
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_HUMANMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_HUMAN_HUMANACCESSORMOCK_HPP

@@ -37,7 +37,7 @@ namespace Human
 {
 
 HumanPersistenceFacade::HumanPersistenceFacade(
-    IHumanManagerAccessorAutPtr a_accessor
+    IHumanAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

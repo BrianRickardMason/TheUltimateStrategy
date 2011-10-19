@@ -25,12 +25,16 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_HUMAN_HUMANMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_HUMAN_HUMANMANAGERACCESSORPOSTGRESQL_HPP
+#ifndef GAMESERVER_HUMAN_IHUMANACCESSOR_HPP
+#define GAMESERVER_HUMAN_IHUMANACCESSOR_HPP
 
-#include "IHumanManagerAccessor.hpp"
-#include <pqxx/result.hxx>
-#include <string>
+#include "../Common/IDHolder.hpp"
+#include "../Persistence/ITransaction.hpp"
+#include "HumanWithVolumeRecord.hpp"
+#include <boost/make_shared.hpp>
+#include <boost/noncopyable.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 namespace GameServer
 {
@@ -38,12 +42,14 @@ namespace Human
 {
 
 /**
- * @brief The PostgreSQL HumanManagerAccessor.
+ * @brief The interface of HumanAccessor.
  */
-class HumanManagerAccessorPostgresql
-    : public IHumanManagerAccessor
+class IHumanAccessor
+    : boost::noncopyable
 {
 public:
+    virtual ~IHumanAccessor(){};
+
     /**
      * @brief Inserts a human with volume record.
      *
@@ -57,7 +63,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Deletes a human with volume record.
@@ -70,7 +76,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets a human with volume record.
@@ -85,7 +91,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets human with volume records by id human.
@@ -100,7 +106,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         IDHuman                         const & a_id_human
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Gets human with volume records.
@@ -113,7 +119,7 @@ public:
     virtual HumanWithVolumeRecordMap getRecords(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Increases the volume of human with volume record.
@@ -128,7 +134,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
+    ) const = 0;
 
     /**
      * @brief Decreases the volume of human with volume record.
@@ -143,34 +149,20 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const;
-
-private:
-    /**
-     * @brief Prepares the result for getRecords* methods.
-     *
-     * @param a_result A result of the query.
-     *
-     * @return A map of human with volume records.
-     */
-    HumanWithVolumeRecordMap prepareResultGetRecords(
-        pqxx::result     const & a_result,
-        Common::IDHolder const & a_id_holder
-    ) const;
-
-    /**
-     * @brief Gets the table name dependant on identifier of a holder.
-     *
-     * @param a_id_holder The identifier of a holder.
-     *
-     * @return The table name.
-     */
-    std::string getTableName(
-        Common::IDHolder const & a_id_holder
-    ) const;
+    ) const = 0;
 };
+
+/**
+ * @brief Typedef of auto pointer.
+ */
+typedef std::auto_ptr<IHumanAccessor> IHumanAccessorAutPtr;
+
+/**
+ * @brief Typedef of scoped pointer.
+ */
+typedef boost::scoped_ptr<IHumanAccessor> IHumanAccessorScpPtr;
 
 } // namespace Human
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_HUMANMANAGERACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_HUMAN_IHUMANACCESSOR_HPP

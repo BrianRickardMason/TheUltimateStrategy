@@ -27,7 +27,7 @@
 
 #include "../../GameServer/Human/HumanPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "HumanManagerAccessorMock.hpp"
+#include "HumanAccessorMock.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;
@@ -79,7 +79,7 @@ protected:
 
 TEST_F(HumanPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    IHumanManagerAccessorAutPtr accessor(new HumanManagerAccessorMock);
+    IHumanAccessorAutPtr accessor(new HumanAccessorMock);
 
     ASSERT_NO_THROW(HumanPersistenceFacade persistence_facade(accessor));
 }
@@ -91,8 +91,8 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, insertRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
 
@@ -100,7 +100,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -113,8 +113,8 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     std::exception e;
 
@@ -125,7 +125,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent_Throw)
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -138,8 +138,8 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
     .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
@@ -147,7 +147,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
     EXPECT_CALL(*mock, increaseVolume(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -160,8 +160,8 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     std::exception e;
 
@@ -172,7 +172,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
     .WillOnce(Throw(e));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -188,14 +188,14 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsNotPresent_TryToSubtract
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -208,8 +208,8 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
     .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
@@ -217,7 +217,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart)
     EXPECT_CALL(*mock, decreaseVolume(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -230,8 +230,8 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart_Thr
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     std::exception e;
 
@@ -242,7 +242,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart_Thr
     .WillOnce(Throw(e));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -255,8 +255,8 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, deleteRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE));
 
@@ -264,7 +264,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll)
     .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -277,8 +277,8 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll_Thro
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     std::exception e;
 
@@ -289,7 +289,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll_Thro
     .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -302,14 +302,14 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_TryToSubtractToo
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
     .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -325,14 +325,14 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -348,14 +348,14 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
     .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -376,14 +376,14 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(_, m_id_holder, ID_HUMAN_SOLDIER_ARCHER))
     .WillOnce(Return(HumanWithVolumeRecordMap()));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -399,8 +399,8 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_OneHuma
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     HumanWithVolumeRecordMap map;
     map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
@@ -409,7 +409,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_OneHuma
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -429,8 +429,8 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_TwoHuma
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     HumanWithVolumeRecordMap map;
     map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
@@ -440,7 +440,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_TwoHuma
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -464,14 +464,14 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(_, m_id_holder))
     .WillOnce(Return(HumanWithVolumeRecordMap()));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -487,8 +487,8 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OneHuman
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     HumanWithVolumeRecordMap map;
     map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
@@ -497,7 +497,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OneHuman
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);
@@ -517,8 +517,8 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHuman
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: HumanManagerAccessorMock.
-    HumanManagerAccessorMock * mock = new HumanManagerAccessorMock;
+    // Mocks setup: HumanAccessorMock.
+    HumanAccessorMock * mock = new HumanAccessorMock;
 
     HumanWithVolumeRecordMap map;
     map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
@@ -528,7 +528,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHuman
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
-    IHumanManagerAccessorAutPtr accessor(mock);
+    IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
     HumanPersistenceFacade persistence_facade(accessor);

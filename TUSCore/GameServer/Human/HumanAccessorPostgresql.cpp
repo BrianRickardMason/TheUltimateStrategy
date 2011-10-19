@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "HumanManagerAccessorPostgresql.hpp"
+#include "HumanAccessorPostgresql.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -38,7 +38,7 @@ namespace GameServer
 namespace Human
 {
 
-void HumanManagerAccessorPostgresql::insertRecord(
+void HumanAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -60,7 +60,7 @@ void HumanManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void HumanManagerAccessorPostgresql::deleteRecord(
+void HumanAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -79,7 +79,7 @@ void HumanManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-HumanWithVolumeRecordShrPtr HumanManagerAccessorPostgresql::getRecord(
+HumanWithVolumeRecordShrPtr HumanAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -109,7 +109,7 @@ HumanWithVolumeRecordShrPtr HumanManagerAccessorPostgresql::getRecord(
     }
 }
 
-HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::getRecords(
+HumanWithVolumeRecordMap HumanAccessorPostgresql::getRecords(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     IDHuman            const & a_id_human
@@ -127,7 +127,7 @@ HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::getRecords(
     return prepareResultGetRecords(backbone_transaction.exec(query), a_id_holder);
 }
 
-HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::getRecords(
+HumanWithVolumeRecordMap HumanAccessorPostgresql::getRecords(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder
 ) const
@@ -142,7 +142,7 @@ HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::getRecords(
     return prepareResultGetRecords(backbone_transaction.exec(query), a_id_holder);
 }
 
-void HumanManagerAccessorPostgresql::increaseVolume(
+void HumanAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -163,7 +163,7 @@ void HumanManagerAccessorPostgresql::increaseVolume(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void HumanManagerAccessorPostgresql::decreaseVolume(
+void HumanAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -184,7 +184,7 @@ void HumanManagerAccessorPostgresql::decreaseVolume(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::prepareResultGetRecords(
+HumanWithVolumeRecordMap HumanAccessorPostgresql::prepareResultGetRecords(
     pqxx::result const & a_result,
     IDHolder     const & a_id_holder
 ) const
@@ -221,7 +221,7 @@ HumanWithVolumeRecordMap HumanManagerAccessorPostgresql::prepareResultGetRecords
     return records;
 }
 
-string HumanManagerAccessorPostgresql::getTableName(
+string HumanAccessorPostgresql::getTableName(
     IDHolder const & a_id_holder
 ) const
 {
