@@ -71,13 +71,13 @@ public:
      * @brief Performs a turn.
      *
      * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
+     * @param a_world       The world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool turn(
-        Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_land_name
+		Persistence::ITransactionShrPtr       a_transaction,
+		World::IWorldShrPtr             const a_world
     ) const;
 
 private:

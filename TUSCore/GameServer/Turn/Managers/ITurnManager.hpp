@@ -29,6 +29,7 @@
 #define GAMESERVER_TURN_ITURNMANAGER_HPP
 
 #include <GameServer/Persistence/ITransaction.hpp>
+#include <GameServer/World/IWorld.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -50,13 +51,13 @@ public:
      * @brief Performs a turn.
      *
      * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
+     * @param a_world       The world.
      *
      * @return True on success, false otherwise.
      */
     virtual bool turn(
         Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_land_name
+        World::IWorldShrPtr             const a_world
     ) const = 0;
 };
 

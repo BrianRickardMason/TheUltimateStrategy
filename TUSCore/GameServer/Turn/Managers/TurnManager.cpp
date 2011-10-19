@@ -36,6 +36,7 @@ using namespace GameServer::Persistence;
 using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
+using namespace GameServer::World;
 using namespace std;
 
 namespace GameServer
@@ -62,18 +63,15 @@ TurnManager::TurnManager(
 
 bool TurnManager::turn(
     ITransactionShrPtr       a_transaction,
-    string             const a_land_name
+    IWorldShrPtr       const a_world
 ) const
 {
     try
     {
-        // Verify if the land exists.
-        if (!m_land_persistence_facade->getLand(a_transaction, a_land_name))
-        {
-            return false;
-        }
+    	// TODO: Get lands.
+    	// TODO: Iterate through the lands and execute turn.
 
-        return executeTurn(a_transaction, a_land_name);
+    	return true;
     }
     catch (...)
     {
