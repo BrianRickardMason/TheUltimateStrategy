@@ -27,7 +27,8 @@ def build(bld):
     gameserver = bld.new_task_gen(
                          features='cxx cxxstlib',
                          target='gameserver',
-                         source=bld.path.ant_glob('GameServer/**/*.cpp')
+                         source=bld.path.ant_glob('GameServer/**/*.cpp'),
+                         includes='.'
                      )
 
     gameserverut = bld.new_task_gen(
