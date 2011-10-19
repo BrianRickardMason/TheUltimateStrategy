@@ -29,7 +29,6 @@
 #define GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
 
 #include <GameServer/Epoch/IEpochPersistenceFacade.hpp>
-#include <GameServer/Epoch/Operators/TickEpoch/IBehaviourTickEpoch.hpp>
 #include <GameServer/Epoch/Operators/TickEpoch/ITickEpochOperator.hpp>
 #include <GameServer/Turn/Managers/ITurnManager.hpp>
 #include <GameServer/World/IWorldPersistenceFacade.hpp>
@@ -82,11 +81,6 @@ private:
      * @brief The persistence facade of worlds.
      */
     World::IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
-
-    /**
-     * @brief The behaviour TickEpoch.
-     */
-    IBehaviourTickEpochShrPtr m_behaviour_tick_epoch;
 
     /**
      * @brief TurnManager.

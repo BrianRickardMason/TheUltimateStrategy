@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "TickEpochOperator.hpp"
-#include "BehaviourTickEpochAbstractFactory.hpp"
 
 using namespace GameServer::Persistence;
 using namespace GameServer::Turn;
@@ -63,10 +62,6 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
         {
             return TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
-
-        // Set the behaviour.
-        m_behaviour_tick_epoch =
-            BehaviourTickEpochAbstractFactory::createBehaviourTickEpoch(m_epoch_persistence_facade, world);
 
         // Verify if the epoch exists.
         EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);

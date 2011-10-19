@@ -68,10 +68,10 @@ bool TurnManager::turn(
 {
     try
     {
-    	// TODO: Get lands.
-    	// TODO: Iterate through the lands and execute turn.
+        // TODO: Get lands.
+        // TODO: Iterate through the lands and execute turn.
 
-    	return true;
+        return true;
     }
     catch (...)
     {

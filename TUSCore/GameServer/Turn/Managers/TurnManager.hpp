@@ -76,8 +76,8 @@ public:
      * @return True on success, false otherwise.
      */
     virtual bool turn(
-		Persistence::ITransactionShrPtr       a_transaction,
-		World::IWorldShrPtr             const a_world
+        Persistence::ITransactionShrPtr       a_transaction,
+        World::IWorldShrPtr             const a_world
     ) const;
 
 private:
