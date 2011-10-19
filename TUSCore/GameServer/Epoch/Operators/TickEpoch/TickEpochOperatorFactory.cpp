@@ -37,15 +37,14 @@ namespace Epoch
 {
 
 TickEpochOperatorAutPtr TickEpochOperatorFactory::createTickEpochOperator(
+    IManagerAbstractFactoryShrPtr           a_manager_abstract_factory,
     IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return TickEpochOperatorAutPtr(
                new TickEpochOperator(a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
                                      a_persistence_facade_abstract_factory->createWorldPersistenceFacade(),
-                                     ITurnManagerShrPtr(
-                                         TurnManagerFactory::create(a_persistence_facade_abstract_factory))
-                                     )
+                                     a_manager_abstract_factory->createTurnManager())
            );
 }
 

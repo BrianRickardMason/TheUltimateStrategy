@@ -80,9 +80,6 @@ namespace Common
 class IOperatorAbstractFactory
 {
 public:
-    /**
-     * @brief Destructs OperatorAbstractFactory.
-     */
     virtual ~IOperatorAbstractFactory(){}
 
     /**
@@ -359,10 +356,12 @@ public:
     virtual WorldConfiguration::IVerifyTurnOperatorShrPtr createVerifyTurnOperator() const = 0;
 };
 
+//@{
 /**
- * @brief The shared pointer of the interface of OperatorAbtractFactory.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IOperatorAbstractFactory> IOperatorAbstractFactoryShrPtr;
+//}@
 
 } // namespace Common
 } // namespace GameServer

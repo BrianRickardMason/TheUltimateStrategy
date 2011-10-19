@@ -36,7 +36,8 @@ def build(bld):
                        target='gameserverut',
                        source=bld.path.ant_glob('GameServerUT/**/*.cpp'),
                        use='gameserver',
-                       lib='gtest gmock pthread pqxx'
+                       lib='gtest gmock pthread pqxx',
+                       includes='.'
                    )
 
     gameserverct = bld.new_task_gen(
@@ -44,25 +45,29 @@ def build(bld):
                        target='gameserverct',
                        source=bld.path.ant_glob('GameServerCT/**/*.cpp'),
                        use='gameserver',
-                       lib='gtest gmock pthread pqxx'
+                       lib='gtest gmock pthread pqxx',
+                       includes='.'
                    )
 
     pugixml = bld.new_task_gen(
                   features='cxx cxxstlib',
                   target='pugixml',
-                  source=bld.path.ant_glob('3rdParty/**/*.cpp')
+                  source=bld.path.ant_glob('3rdParty/**/*.cpp'),
+                  includes='.'
               )
 
     xmlrpcclientasync = bld.new_task_gen(
                             features='cxx cxxstlib',
                             target='xmlrpcclientasync',
-                            source=bld.path.ant_glob('Network/XmlRPCClientAsync/Client/*.cpp')
+                            source=bld.path.ant_glob('Network/XmlRPCClientAsync/Client/*.cpp'),
+                            includes='.'
                         )
 
     xmlrpccommon = bld.new_task_gen(
                        features='cxx cxxstlib',
                        target='xmlrpccommon',
-                       source=bld.path.ant_glob('Network/XmlRPCCommon/**/*.cpp')
+                       source=bld.path.ant_glob('Network/XmlRPCCommon/**/*.cpp'),
+                       includes='.'
                    )
 
     xmlrpcserver = bld.new_task_gen(
@@ -71,7 +76,8 @@ def build(bld):
                        source=  bld.path.ant_glob('Network/XmlRPCServer/*/*.cpp')
                               + bld.path.ant_glob('Network/XmlRPCServer/*/*/*.cpp')
                               + bld.path.ant_glob('Network/XmlRPCServer/*/*/*/*.cpp'),
-                       use='gameserver'
+                       use='gameserver',
+                       includes='.'
                    )
 
     networkut = bld.new_task_gen(
@@ -79,7 +85,8 @@ def build(bld):
                     target='networkut',
                     source=bld.path.ant_glob('NetworkUT/**/*.cpp'),
                     use='gameserver xmlrpccommon xmlrpcserver',
-                    lib='boost_system boost_thread gmock gtest log4cpp pqxx pthread pugixml'
+                    lib='boost_system boost_thread gmock gtest log4cpp pqxx pthread pugixml',
+                    includes='.'
                 )
 
     server = bld.new_task_gen(
@@ -87,7 +94,8 @@ def build(bld):
                  target='server',
                  source='Network/XmlRPCServer/xml_server_main.cpp',
                  use='gameserver xmlrpccommon xmlrpcserver',
-                 lib='boost_system boost_thread log4cpp pqxx pugixml'
+                 lib='boost_system boost_thread log4cpp pqxx pugixml',
+                 includes='.'
              )
 
     client = bld.new_task_gen(
@@ -95,7 +103,8 @@ def build(bld):
                  target='client',
                  source='Network/XmlRPCClientAsync/xml_client_async_main.cpp',
                  use='xmlrpcclientasync xmlrpccommon',
-                 lib='boost_system boost_thread pthread pugixml'
+                 lib='boost_system boost_thread pthread pugixml',
+                 includes='.'
              )
 
     integrationcommon = bld.new_task_gen(

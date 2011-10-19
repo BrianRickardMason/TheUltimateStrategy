@@ -28,8 +28,9 @@
 #ifndef GAMESERVER_EPOCH_TICKEPOCHOPERATORFACTORY_HPP
 #define GAMESERVER_EPOCH_TICKEPOCHOPERATORFACTORY_HPP
 
-#include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
-#include "TickEpochOperator.hpp"
+#include <GameServer/Common/IManagerAbstractFactory.hpp>
+#include <GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <GameServer/Epoch/Operators/TickEpoch/TickEpochOperator.hpp>
 
 namespace GameServer
 {
@@ -45,11 +46,13 @@ public:
     /**
      * @brief The factory method.
      *
+     * @param a_manager_abstract_factory            The abstract factory of managers.
      * @param a_persistence_facade_abstract_factory The abstract factory of persistence facades.
      *
      * @return The newly created TickEpochOperator.
      */
     static TickEpochOperatorAutPtr createTickEpochOperator(
+        Common::IManagerAbstractFactoryShrPtr           a_manager_abstract_factory,
         Common::IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
     );
 };

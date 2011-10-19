@@ -65,6 +65,7 @@
 #include "../World/Operators/GetWorldByLandName/GetWorldByLandNameOperatorFactory.hpp"
 #include "../WorldConfiguration/Operators/VerifyTurn/VerifyTurnOperatorFactory.hpp"
 #include "PersistenceFacadeAbstractFactoryPostgresql.hpp"
+#include "ManagerAbstractFactoryPostgresql.hpp"
 #include "OperatorAbstractFactoryPostgresql.hpp"
 
 using namespace GameServer::Authentication;
@@ -87,7 +88,8 @@ namespace Common
 {
 
 OperatorAbstractFactoryPostgresql::OperatorAbstractFactoryPostgresql()
-    : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql)
+    : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
+      m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql)
 {
 }
 
@@ -173,7 +175,12 @@ IGetEpochByWorldNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetE
 
 ITickEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createTickEpochOperator() const
 {
-    return ITickEpochOperatorShrPtr(TickEpochOperatorFactory::createTickEpochOperator(m_persistence_facade_abstract_factory));
+    return ITickEpochOperatorShrPtr(
+               TickEpochOperatorFactory::createTickEpochOperator(
+                    m_manager_abstract_factory,
+                    m_persistence_facade_abstract_factory
+               )
+           );
 }
 
 IDismissHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createDismissHumanOperator() const

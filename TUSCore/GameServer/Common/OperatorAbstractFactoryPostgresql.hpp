@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 
+#include "IManagerAbstractFactory.hpp"
 #include "IPersistenceFacadeAbstractFactory.hpp"
 #include "IOperatorAbstractFactory.hpp"
 
@@ -43,9 +44,6 @@ class OperatorAbstractFactoryPostgresql
     : public IOperatorAbstractFactory
 {
 public:
-    /**
-     * @brief Constructs the PostgreSQL OperatorAbstractFactory.
-     */
     OperatorAbstractFactoryPostgresql();
 
     /**
@@ -322,6 +320,11 @@ public:
     virtual WorldConfiguration::IVerifyTurnOperatorShrPtr createVerifyTurnOperator() const;
 
 private:
+    /**
+     * @brief The abstract factory of managers.
+     */
+    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
+
     /**
      * @brief The abstract factory of persistence facades.
      */

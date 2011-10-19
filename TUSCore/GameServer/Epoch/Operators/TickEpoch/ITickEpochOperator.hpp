@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_EPOCH_ITICKEPOCHOPERATOR_HPP
 #define GAMESERVER_EPOCH_ITICKEPOCHOPERATOR_HPP
 
-#include "../../../Persistence/ITransaction.hpp"
-#include "TickEpochOperatorExitCode.hpp"
+#include <GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorExitCode.hpp>
+#include <GameServer/Persistence/ITransaction.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
