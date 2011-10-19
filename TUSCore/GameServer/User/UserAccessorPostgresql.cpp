@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "UserManagerAccessorPostgresql.hpp"
+#include "UserAccessorPostgresql.hpp"
 #include "UserRecord.hpp"
 
 using namespace GameServer::Persistence;
@@ -38,7 +38,7 @@ namespace GameServer
 namespace User
 {
 
-void UserManagerAccessorPostgresql::insertRecord(
+void UserAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_login,
     string             const a_password
@@ -54,7 +54,7 @@ void UserManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void UserManagerAccessorPostgresql::deleteRecord(
+void UserAccessorPostgresql::deleteRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
@@ -68,7 +68,7 @@ void UserManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-IUserRecordShrPtr UserManagerAccessorPostgresql::getRecord(
+IUserRecordShrPtr UserAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
@@ -82,7 +82,7 @@ IUserRecordShrPtr UserManagerAccessorPostgresql::getRecord(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-IUserRecordShrPtr UserManagerAccessorPostgresql::prepareResultGetRecord(
+IUserRecordShrPtr UserAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
 {

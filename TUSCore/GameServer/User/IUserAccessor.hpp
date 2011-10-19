@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_IUSERMANAGERACCESSOR_HPP
-#define GAMESERVER_USER_IUSERMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_USER_IUSERACCESSOR_HPP
+#define GAMESERVER_USER_IUSERACCESSOR_HPP
 
 #include "../Persistence/ITransaction.hpp"
 #include "IUserRecord.hpp"
@@ -40,16 +40,13 @@ namespace User
 {
 
 /**
- * @brief The interface of a user manager accessor.
+ * @brief The interface of a user accessor.
  */
-class IUserManagerAccessor
+class IUserAccessor
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
-    virtual ~IUserManagerAccessor(){};
+    virtual ~IUserAccessor(){};
 
     /**
      * @brief Inserts a user record.
@@ -90,16 +87,16 @@ public:
 };
 
 /**
- * @brief An auto pointer of interface of user manager accessor.
+ * @brief Typedef of auto pointer.
  */
-typedef std::auto_ptr<IUserManagerAccessor> IUserManagerAccessorAutPtr;
+typedef std::auto_ptr<IUserAccessor> IUserAccessorAutPtr;
 
 /**
- * @brief A scoped pointer of interface of user manager accessor.
+ * @brief Typedef of scoped pointer.
  */
-typedef boost::scoped_ptr<IUserManagerAccessor> IUserManagerAccessorScpPtr;
+typedef boost::scoped_ptr<IUserAccessor> IUserAccessorScpPtr;
 
 } // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_IUSERMANAGERACCESSOR_HPP
+#endif // GAMESERVER_USER_IUSERACCESSOR_HPP

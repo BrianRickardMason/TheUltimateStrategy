@@ -28,7 +28,7 @@
 #include "../../GameServer/User/UserPersistenceFacade.hpp"
 #include "../../GameServer/User/UserRecord.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "UserManagerAccessorMock.hpp"
+#include "UserAccessorMock.hpp"
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Persistence;
@@ -74,7 +74,7 @@ protected:
 
 TEST_F(UserPersistenceFacadeTest, ConstructorDoesNotThrow)
 {
-    IUserManagerAccessorAutPtr accessor(new UserManagerAccessorMock);
+    IUserAccessorAutPtr accessor(new UserAccessorMock);
 
     ASSERT_NO_THROW(UserPersistenceFacade persistence_facade(accessor));
 }
@@ -83,11 +83,11 @@ TEST_F(UserPersistenceFacadeTest, CreateUserReturnsTrueOnSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+    UserAccessorMock * mock = new UserAccessorMock;
 
     EXPECT_CALL(*mock, insertRecord(transaction, m_login, m_password));
 
-    IUserManagerAccessorAutPtr accessor(mock);
+    IUserAccessorAutPtr accessor(mock);
 
     UserPersistenceFacade persistence_facade(accessor);
 
@@ -98,14 +98,14 @@ TEST_F(UserPersistenceFacadeTest, CreateUserReturnsFalseOnFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+    UserAccessorMock * mock = new UserAccessorMock;
 
     std::exception e;
 
     EXPECT_CALL(*mock, insertRecord(transaction, m_login, m_password))
     .WillOnce(Throw(e));
 
-    IUserManagerAccessorAutPtr accessor(mock);
+    IUserAccessorAutPtr accessor(mock);
 
     UserPersistenceFacade persistence_facade(accessor);
 
@@ -116,11 +116,11 @@ TEST_F(UserPersistenceFacadeTest, DeleteUserReturnsTrueOnSuccess)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+    UserAccessorMock * mock = new UserAccessorMock;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_login));
 
-    IUserManagerAccessorAutPtr accessor(mock);
+    IUserAccessorAutPtr accessor(mock);
 
     UserPersistenceFacade persistence_facade(accessor);
 
@@ -131,14 +131,14 @@ TEST_F(UserPersistenceFacadeTest, DeleteUserReturnsFalseOnFailure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+    UserAccessorMock * mock = new UserAccessorMock;
 
     std::exception e;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_login))
     .WillOnce(Throw(e));
 
-    IUserManagerAccessorAutPtr accessor(mock);
+    IUserAccessorAutPtr accessor(mock);
 
     UserPersistenceFacade persistence_facade(accessor);
 
@@ -149,12 +149,12 @@ TEST_F(UserPersistenceFacadeTest, GetUserReturnsNullIfUserDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+    UserAccessorMock * mock = new UserAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_login))
     .WillOnce(Return(IUserRecordShrPtr()));
 
-    IUserManagerAccessorAutPtr accessor(mock);
+    IUserAccessorAutPtr accessor(mock);
 
     UserPersistenceFacade persistence_facade(accessor);
 
@@ -167,12 +167,12 @@ TEST_F(UserPersistenceFacadeTest, GetUserReturnedUserHasProperLogin)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+    UserAccessorMock * mock = new UserAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_login))
     .WillOnce(Return(m_user_record));
 
-    IUserManagerAccessorAutPtr accessor(mock);
+    IUserAccessorAutPtr accessor(mock);
 
     UserPersistenceFacade persistence_facade(accessor);
 
@@ -185,12 +185,12 @@ TEST_F(UserPersistenceFacadeTest, GetUserReturnedUserHasProperPassword)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    UserManagerAccessorMock * mock = new UserManagerAccessorMock;
+    UserAccessorMock * mock = new UserAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_login))
     .WillOnce(Return(m_user_record));
 
-    IUserManagerAccessorAutPtr accessor(mock);
+    IUserAccessorAutPtr accessor(mock);
 
     UserPersistenceFacade persistence_facade(accessor);
 

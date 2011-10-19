@@ -29,7 +29,7 @@
 #define GAMESERVER_USER_USERPERSISTENCEFACADE_HPP
 
 #include "../Persistence/IPersistence.hpp"
-#include "IUserManagerAccessor.hpp"
+#include "IUserAccessor.hpp"
 #include "IUserPersistenceFacade.hpp"
 
 namespace GameServer
@@ -50,7 +50,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     UserPersistenceFacade(
-        IUserManagerAccessorAutPtr a_accessor
+        IUserAccessorAutPtr a_accessor
     );
 
     /**
@@ -98,11 +98,11 @@ private:
     /**
      * @brief An accessor.
      */
-    IUserManagerAccessorScpPtr m_accessor;
+    IUserAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief The auto pointer of user persistence facade.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<UserPersistenceFacade> UserPersistenceFacadeAutPtr;
 

@@ -39,7 +39,7 @@
 #include "../Property/IPropertyAccessor.hpp"
 #include "../Resource/IResourceAccessor.hpp"
 #include "../Settlement/ISettlementAccessor.hpp"
-#include "../User/IUserManagerAccessor.hpp"
+#include "../User/IUserAccessor.hpp"
 #include "../World/IWorldManagerAccessor.hpp"
 #include <boost/shared_ptr.hpp>
 
@@ -73,7 +73,7 @@ public:
     virtual Property::IPropertyAccessorAutPtr             createPropertyAccessor()       const = 0;
     virtual Resource::IResourceAccessorAutPtr             createResourceAccessor()       const = 0;
     virtual Settlement::ISettlementAccessorAutPtr         createSettlementAccessor()     const = 0;
-    virtual User::IUserManagerAccessorAutPtr              createUserAccessor()           const = 0;
+    virtual User::IUserAccessorAutPtr                     createUserAccessor()           const = 0;
     virtual World::IWorldManagerAccessorAutPtr            createWorldAccessor()          const = 0;
     //}@
 };

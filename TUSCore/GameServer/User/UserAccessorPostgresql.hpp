@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_USERMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_USER_USERMANAGERACCESSORPOSTGRESQL_HPP
+#ifndef GAMESERVER_USER_USERACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_USER_USERACCESSORPOSTGRESQL_HPP
 
-#include "IUserManagerAccessor.hpp"
+#include "IUserAccessor.hpp"
 #include <pqxx/result.hxx>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace User
 {
 
 /**
- * @brief A PostgreSQL user manager accessor.
+ * @brief A PostgreSQL user accessor.
  */
-class UserManagerAccessorPostgresql
-    : public IUserManagerAccessor
+class UserAccessorPostgresql
+    : public IUserAccessor
 {
 public:
     /**
@@ -96,4 +96,4 @@ private:
 } // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_USERMANAGERACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_USER_USERACCESSORPOSTGRESQL_HPP

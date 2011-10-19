@@ -36,7 +36,7 @@
 #include "../Property/PropertyAccessorPostgresql.hpp"
 #include "../Resource/ResourceAccessorPostgresql.hpp"
 #include "../Settlement/SettlementAccessorPostgresql.hpp"
-#include "../User/UserManagerAccessorPostgresql.hpp"
+#include "../User/UserAccessorPostgresql.hpp"
 #include "../World/WorldManagerAccessorPostgresql.hpp"
 #include "AccessorAbstractFactoryPostgresql.hpp"
 
@@ -114,9 +114,9 @@ ISettlementAccessorAutPtr AccessorAbstractFactoryPostgresql::createSettlementAcc
     return ISettlementAccessorAutPtr(new SettlementAccessorPostgresql);
 }
 
-IUserManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createUserAccessor() const
+IUserAccessorAutPtr AccessorAbstractFactoryPostgresql::createUserAccessor() const
 {
-    return IUserManagerAccessorAutPtr(new UserManagerAccessorPostgresql);
+    return IUserAccessorAutPtr(new UserAccessorPostgresql);
 }
 
 IWorldManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createWorldAccessor() const

@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_USER_USERMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_USER_USERMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_USER_USERACCESSORMOCK_HPP
+#define GAMESERVER_USER_USERACCESSORMOCK_HPP
 
-#include "../../GameServer/User/IUserManagerAccessor.hpp"
+#include "../../GameServer/User/IUserAccessor.hpp"
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace User
 {
 
 /**
- * @brief A mock of user manager accessor.
+ * @brief A mock of user accessor.
  */
-class UserManagerAccessorMock
-    : public IUserManagerAccessor
+class UserAccessorMock
+    : public IUserAccessor
 {
 public:
     /**
@@ -93,4 +93,4 @@ public:
 } // namespace User
 } // namespace GameServer
 
-#endif // GAMESERVER_USER_USERMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_USER_USERACCESSORMOCK_HPP

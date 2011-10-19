@@ -38,7 +38,7 @@ namespace User
 {
 
 UserPersistenceFacade::UserPersistenceFacade(
-    IUserManagerAccessorAutPtr a_accessor
+    IUserAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
