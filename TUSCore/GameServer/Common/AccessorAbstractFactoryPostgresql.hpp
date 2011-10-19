@@ -51,7 +51,7 @@ public:
     virtual Achievement::IAchievementAccessorAutPtr            createAchievementAccessor()    const;
     virtual Authentication::IAuthenticationAccessorAutPtr      createAuthenticationAccessor() const;
     virtual Authorization::IAuthorizationAccessorAutPtr        createAuthorizationAccessor()  const;
-    virtual Building::IBuildingManagerAccessorAutPtr           createBuildingAccessor()       const;
+    virtual Building::IBuildingAccessorAutPtr                  createBuildingAccessor()       const;
     virtual Cost::ICostManagerAccessorAutPtr                   createCostAccessor()           const;
     virtual Epoch::IEpochManagerAccessorAutPtr                 createEpochAccessor()          const;
     virtual Human::IHumanManagerAccessorAutPtr                 createHumanAccessor()          const;

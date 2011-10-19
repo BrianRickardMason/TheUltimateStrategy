@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "BuildingManagerAccessorPostgresql.hpp"
+#include "BuildingAccessorPostgresql.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -38,7 +38,7 @@ namespace GameServer
 namespace Building
 {
 
-void BuildingManagerAccessorPostgresql::insertRecord(
+void BuildingAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -59,7 +59,7 @@ void BuildingManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void BuildingManagerAccessorPostgresql::deleteRecord(
+void BuildingAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -77,7 +77,7 @@ void BuildingManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-BuildingWithVolumeRecordShrPtr BuildingManagerAccessorPostgresql::getRecord(
+BuildingWithVolumeRecordShrPtr BuildingAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -106,7 +106,7 @@ BuildingWithVolumeRecordShrPtr BuildingManagerAccessorPostgresql::getRecord(
     }
 }
 
-BuildingWithVolumeRecordMap BuildingManagerAccessorPostgresql::getRecords(
+BuildingWithVolumeRecordMap BuildingAccessorPostgresql::getRecords(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder
 ) const
@@ -144,7 +144,7 @@ BuildingWithVolumeRecordMap BuildingManagerAccessorPostgresql::getRecords(
     return records;
 }
 
-void BuildingManagerAccessorPostgresql::increaseVolume(
+void BuildingAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -164,7 +164,7 @@ void BuildingManagerAccessorPostgresql::increaseVolume(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void BuildingManagerAccessorPostgresql::decreaseVolume(
+void BuildingAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -184,7 +184,7 @@ void BuildingManagerAccessorPostgresql::decreaseVolume(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-string BuildingManagerAccessorPostgresql::getTableName(
+string BuildingAccessorPostgresql::getTableName(
     IDHolder const & a_id_holder
 ) const
 {

@@ -37,7 +37,7 @@ namespace Building
 {
 
 BuildingPersistenceFacade::BuildingPersistenceFacade(
-    IBuildingManagerAccessorAutPtr a_accessor
+    IBuildingAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

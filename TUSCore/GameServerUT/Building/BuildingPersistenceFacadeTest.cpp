@@ -27,7 +27,7 @@
 
 #include "../../GameServer/Building/BuildingPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "BuildingManagerAccessorMock.hpp"
+#include "BuildingAccessorMock.hpp"
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -86,7 +86,7 @@ protected:
 
 TEST_F(BuildingPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    IBuildingManagerAccessorAutPtr accessor(new BuildingManagerAccessorMock);
+    IBuildingAccessorAutPtr accessor(new BuildingAccessorMock);
 
     ASSERT_NO_THROW(BuildingPersistenceFacade persistence_facade(accessor));
 }
@@ -95,14 +95,14 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, insertRecord(transaction, m_id_holder_1, m_key_1, 5));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(BuildingWithVolumeRecordShrPtr()));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -113,7 +113,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresentThrowFromAc
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     std::exception e;
 
@@ -123,7 +123,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresentThrowFromAc
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(BuildingWithVolumeRecordShrPtr()));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -134,14 +134,14 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
 
     EXPECT_CALL(*mock, increaseVolume(transaction, m_id_holder_1, m_key_1, 5));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -152,7 +152,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsPresentThrowFromAcces
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     std::exception e;
 
@@ -162,7 +162,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsPresentThrowFromAcces
     EXPECT_CALL(*mock, increaseVolume(transaction, m_id_holder_1, m_key_1, 5))
     .WillOnce(Throw(e));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -173,12 +173,12 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsNotPresentReturn
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(BuildingWithVolumeRecordShrPtr()));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -189,14 +189,14 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractP
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
 
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder_1, m_key_1, 3));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -207,7 +207,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractP
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     std::exception e;
 
@@ -217,7 +217,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractP
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder_1, m_key_1, 3))
     .WillOnce(Throw(e));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -228,14 +228,14 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractA
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder_1, m_key_1));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -246,7 +246,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractA
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     std::exception e;
 
@@ -256,7 +256,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractA
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -267,12 +267,12 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentReturnsFa
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -283,12 +283,12 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(BuildingWithVolumeRecordShrPtr()));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -301,12 +301,12 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder_1, m_key_1))
     .WillOnce(Return(make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -321,12 +321,12 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(transaction, m_id_holder_1))
     .WillOnce(Return(BuildingWithVolumeRecordMap()));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -339,7 +339,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OneBuildi
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     BuildingWithVolumeRecordMap map;
     map.insert(make_pair(m_key_1, make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
@@ -347,7 +347,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OneBuildi
     EXPECT_CALL(*mock, getRecords(transaction, m_id_holder_1))
     .WillOnce(Return(map));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 
@@ -364,7 +364,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoBuildi
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    BuildingManagerAccessorMock * mock = new BuildingManagerAccessorMock;
+    BuildingAccessorMock * mock = new BuildingAccessorMock;
 
     BuildingWithVolumeRecordMap map;
     map.insert(make_pair(m_key_1, make_shared<BuildingWithVolumeRecord>(m_id_holder_1, m_key_1, 5)));
@@ -373,7 +373,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoBuildi
     EXPECT_CALL(*mock, getRecords(transaction, m_id_holder_1))
     .WillOnce(Return(map));
 
-    IBuildingManagerAccessorAutPtr accessor(mock);
+    IBuildingAccessorAutPtr accessor(mock);
 
     BuildingPersistenceFacade persistence_facade(accessor);
 

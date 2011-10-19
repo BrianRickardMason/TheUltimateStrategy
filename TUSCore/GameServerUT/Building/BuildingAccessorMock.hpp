@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_BUILDING_BUILDINGMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_BUILDING_BUILDINGMANAGERACCESSORPOSTGRESQL_HPP
+#ifndef GAMESERVER_BUILDING_BUILDINGACCESSORMOCK_HPP
+#define GAMESERVER_BUILDING_BUILDINGACCESSORMOCK_HPP
 
-#include "IBuildingManagerAccessor.hpp"
-#include <string>
+#include "../../GameServer/Building/IBuildingAccessor.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
@@ -37,10 +37,10 @@ namespace Building
 {
 
 /**
- * @brief A PostgreSQL building manager accessor.
+ * @brief An mock of building accessor.
  */
-class BuildingManagerAccessorPostgresql
-    : public IBuildingManagerAccessor
+class BuildingAccessorMock
+    : public IBuildingAccessor
 {
 public:
     /**
@@ -53,12 +53,15 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual void insertRecord(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const;
+    MOCK_CONST_METHOD4(
+        insertRecord,
+        void(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key,
+            Volume                                      const & a_volume
+        )
+    );
 
     /**
      * @brief Deletes a building with volume record.
@@ -69,11 +72,14 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual void deleteRecord(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const;
+    MOCK_CONST_METHOD3(
+        deleteRecord,
+        void(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key
+        )
+    );
 
     /**
      * @brief Gets a building with volume record.
@@ -84,11 +90,14 @@ public:
      *
      * @return The building with volume record, null if not found.
      */
-    virtual BuildingWithVolumeRecordShrPtr getRecord(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const;
+    MOCK_CONST_METHOD3(
+        getRecord,
+        BuildingWithVolumeRecordShrPtr(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key
+        )
+    );
 
     /**
      * @brief Gets building with volume records.
@@ -98,10 +107,13 @@ public:
      *
      * @return A map of building with volume records, an empty map if not found.
      */
-    virtual BuildingWithVolumeRecordMap getRecords(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder
-    ) const;
+    MOCK_CONST_METHOD2(
+        getRecords,
+        BuildingWithVolumeRecordMap(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder
+        )
+    );
 
     /**
      * @brief Increases the volume of building with volume record.
@@ -113,12 +125,15 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual void increaseVolume(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const;
+    MOCK_CONST_METHOD4(
+        increaseVolume,
+        void(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key,
+            Volume                                      const & a_volume
+        )
+    );
 
     /**
      * @brief Decreases the volume of building with volume record.
@@ -130,27 +145,18 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual void decreaseVolume(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
-        Volume                          const & a_volume
-    ) const;
-
-private:
-    /**
-     * @brief Gets the table name dependant on identifier of a holder.
-     *
-     * @param a_id_holder The identifier of a holder
-     *
-     * @return The table name.
-     */
-    std::string getTableName(
-        Common::IDHolder const & a_id_holder
-    ) const;
+    MOCK_CONST_METHOD4(
+        decreaseVolume,
+        void(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::IDHolder                const & a_id_holder,
+            Key                                         const & a_key,
+            Volume                                      const & a_volume
+        )
+    );
 };
 
 } // namespace Building
 } // namespace GameServer
 
-#endif // GAMESERVER_BUILDING_BUILDINGMANAGERACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_BUILDING_BUILDINGACCESSORMOCK_HPP

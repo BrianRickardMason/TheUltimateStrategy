@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADE_HPP
 #define GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADE_HPP
 
-#include "IBuildingManagerAccessor.hpp"
+#include "IBuildingAccessor.hpp"
 #include "IBuildingPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     BuildingPersistenceFacade(
-        IBuildingManagerAccessorAutPtr a_accessor
+        IBuildingAccessorAutPtr a_accessor
     );
 
     /**
@@ -120,7 +120,7 @@ private:
     /**
      * @brief An accessor.
      */
-    IBuildingManagerAccessorScpPtr m_accessor;
+    IBuildingAccessorScpPtr m_accessor;
 };
 
 /**

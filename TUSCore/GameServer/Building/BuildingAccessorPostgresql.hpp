@@ -25,16 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_BUILDING_IBUILDINGMANAGERACCESSOR_HPP
-#define GAMESERVER_BUILDING_IBUILDINGMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_BUILDING_BUILDINGACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_BUILDING_BUILDINGACCESSORPOSTGRESQL_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "BuildingWithVolumeRecord.hpp"
-#include <boost/make_shared.hpp>
-#include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <memory>
+#include "IBuildingAccessor.hpp"
+#include <string>
 
 namespace GameServer
 {
@@ -42,17 +37,12 @@ namespace Building
 {
 
 /**
- * @brief An interface of building manager accessor.
+ * @brief A PostgreSQL building accessor.
  */
-class IBuildingManagerAccessor
-    : boost::noncopyable
+class BuildingAccessorPostgresql
+    : public IBuildingAccessor
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
-    virtual ~IBuildingManagerAccessor(){};
-
     /**
      * @brief Inserts a building with volume record.
      *
@@ -68,7 +58,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Deletes a building with volume record.
@@ -83,7 +73,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets a building with volume record.
@@ -98,7 +88,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets building with volume records.
@@ -111,7 +101,7 @@ public:
     virtual BuildingWithVolumeRecordMap getRecords(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Increases the volume of building with volume record.
@@ -128,7 +118,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Decreases the volume of building with volume record.
@@ -145,20 +135,22 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const = 0;
+    ) const;
+
+private:
+    /**
+     * @brief Gets the table name dependant on identifier of a holder.
+     *
+     * @param a_id_holder The identifier of a holder
+     *
+     * @return The table name.
+     */
+    std::string getTableName(
+        Common::IDHolder const & a_id_holder
+    ) const;
 };
-
-/**
- * @brief An auto pointer of interface of building manager accessor.
- */
-typedef std::auto_ptr<IBuildingManagerAccessor> IBuildingManagerAccessorAutPtr;
-
-/**
- * @brief A scoped pointer of interface of building manager accessor.
- */
-typedef boost::scoped_ptr<IBuildingManagerAccessor> IBuildingManagerAccessorScpPtr;
 
 } // namespace Building
 } // namespace GameServer
 
-#endif // GAMESERVER_BUILDING_IBUILDINGMANAGERACCESSOR_HPP
+#endif // GAMESERVER_BUILDING_BUILDINGACCESSORPOSTGRESQL_HPP
