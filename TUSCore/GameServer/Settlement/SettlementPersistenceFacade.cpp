@@ -38,7 +38,7 @@ namespace Settlement
 {
 
 SettlementPersistenceFacade::SettlementPersistenceFacade(
-    ISettlementManagerAccessorAutPtr a_accessor
+    ISettlementAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

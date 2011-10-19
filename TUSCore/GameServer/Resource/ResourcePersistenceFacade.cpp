@@ -37,7 +37,7 @@ namespace Resource
 {
 
 ResourcePersistenceFacade::ResourcePersistenceFacade(
-    IResourceManagerAccessorAutPtr a_accessor
+    IResourceAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

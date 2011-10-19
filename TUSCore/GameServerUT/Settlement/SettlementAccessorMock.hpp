@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_SETTLEMENTACCESSORMOCK_HPP
 #define GAMESERVER_SETTLEMENT_SETTLEMENTACCESSORMOCK_HPP
 
-#include "../../GameServer/Settlement/ISettlementManagerAccessor.hpp"
+#include "../../GameServer/Settlement/ISettlementAccessor.hpp"
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace Settlement
 {
 
 /**
- * @brief A mock of the settlement manager accessor.
+ * @brief A mock of the settlement accessor.
  */
-class SettlementManagerAccessorMock
-    : public ISettlementManagerAccessor
+class SettlementAccessorMock
+    : public ISettlementAccessor
 {
 public:
     /**
@@ -109,4 +109,4 @@ public:
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_SETTLEMENTACCESSORS_HPP
+#endif // GAMESERVER_SETTLEMENT_SETTLEMENTACCESSORMOCK_HPP

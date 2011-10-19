@@ -25,16 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_IRESOURCEMANAGERACCESSOR_HPP
-#define GAMESERVER_RESOURCE_IRESOURCEMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_RESOURCE_RESOURCEACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_RESOURCE_RESOURCEACCESSORPOSTGRESQL_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "ResourceWithVolumeRecord.hpp"
-#include <boost/make_shared.hpp>
-#include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <memory>
+#include "IResourceAccessor.hpp"
+#include <string>
 
 namespace GameServer
 {
@@ -42,17 +37,12 @@ namespace Resource
 {
 
 /**
- * @brief The interface of ResourceManagerAccessor.
+ * @brief The PostgreSQL ResourceAccessor.
  */
-class IResourceManagerAccessor
-    : boost::noncopyable
+class ResourceAccessorPostgresql
+    : public IResourceAccessor
 {
 public:
-    /**
-     * @brief Destructs ResourceManagerAccessor.
-     */
-    virtual ~IResourceManagerAccessor(){};
-
     /**
      * @brief Inserts a resource with volume record.
      *
@@ -68,7 +58,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Deletes a resource with volume record.
@@ -83,7 +73,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets a resource with volume record.
@@ -98,7 +88,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets resource with volume records.
@@ -111,7 +101,7 @@ public:
     virtual ResourceWithVolumeRecordMap getRecords(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Increases the volume of resource with volume record.
@@ -128,7 +118,7 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Decreases the volume of resource with volume record.
@@ -145,20 +135,22 @@ public:
         Common::IDHolder                const & a_id_holder,
         Key                             const & a_key,
         Volume                          const & a_volume
-    ) const = 0;
+    ) const;
+
+private:
+    /**
+     * @brief Gets the table name dependant on identifier of a holder.
+     *
+     * @param a_id_holder The identifier of a holder.
+     *
+     * @return The table name.
+     */
+    std::string getTableName(
+        Common::IDHolder const & a_id_holder
+    ) const;
 };
-
-/**
- * @brief The auto pointer of the interface of ResourceManagerAccessor.
- */
-typedef std::auto_ptr<IResourceManagerAccessor> IResourceManagerAccessorAutPtr;
-
-/**
- * @brief The scoped pointer of the interface of ResourceManagerAccessor.
- */
-typedef boost::scoped_ptr<IResourceManagerAccessor> IResourceManagerAccessorScpPtr;
 
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_IRESOURCEMANAGERACCESSOR_HPP
+#endif // GAMESERVER_HUMAN_HUMANACCESSORPOSTGRESQL_HPP

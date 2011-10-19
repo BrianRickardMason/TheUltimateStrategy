@@ -27,7 +27,7 @@
 
 #include "../../GameServer/Resource/ResourcePersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "ResourceManagerAccessorMock.hpp"
+#include "ResourceAccessorMock.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -102,7 +102,7 @@ protected:
 
 TEST_F(ResourcePersistenceFacadeTest, CtorDoesNotThrow)
 {
-    IResourceManagerAccessorAutPtr accessor(new ResourceManagerAccessorMock);
+    IResourceAccessorAutPtr accessor(new ResourceAccessorMock);
 
     ASSERT_NO_THROW(ResourcePersistenceFacade persistence_facade(accessor));
 }
@@ -116,14 +116,14 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, insertRecord(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -137,7 +137,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent_Throw)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -147,7 +147,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent_Throw)
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -161,14 +161,14 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
     EXPECT_CALL(*mock, increaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -182,7 +182,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent_Throw)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -192,7 +192,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent_Throw)
     EXPECT_CALL(*mock, increaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 3))
     .WillOnce(Throw(e));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -209,12 +209,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsNotPresent_TryT
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -228,14 +228,14 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -249,7 +249,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -259,7 +259,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 2))
     .WillOnce(Throw(e));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -273,14 +273,14 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_COAL));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -294,7 +294,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -304,7 +304,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -318,12 +318,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_TryToSu
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -338,12 +338,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsNotPresen
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -354,7 +354,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    IResourceManagerAccessorAutPtr accessor(new ResourceManagerAccessorMock);
+    IResourceAccessorAutPtr accessor(new ResourceAccessorMock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -365,14 +365,14 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -383,7 +383,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -393,7 +393,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 2))
     .WillOnce(Throw(e));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -404,14 +404,14 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_COAL));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -422,7 +422,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -432,7 +432,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -443,14 +443,14 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_COAL));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -466,12 +466,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_EmptySet)
 
     ResourceSet resource_set;
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, _))
     .WillRepeatedly(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -484,12 +484,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent
 
     ResourceSet resource_set = getResourceSet();
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, _))
     .WillRepeatedly(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -504,7 +504,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourceSet resource_set = getResourceSet();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 1000)));
@@ -529,7 +529,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_ROCK, 600));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_WOOD, 700));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -545,7 +545,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourceSet resource_set = getResourceSet();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -555,7 +555,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 100))
     .WillOnce(Throw(e));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -571,7 +571,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourceSet resource_set = getResourceSet();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 100)));
@@ -596,7 +596,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -612,7 +612,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourceSet resource_set = getResourceSet();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -625,7 +625,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_FOOD))
     .WillOnce(Throw(e));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -641,7 +641,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Tr
     ResourceSet resource_set = getResourceSet();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 100)));
@@ -656,7 +656,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Tr
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_FOOD));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_GOLD));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -673,12 +673,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_EmptySet)
 
     ResourceSet resource_set;
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, _))
     .WillRepeatedly(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -691,12 +691,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotP
 
     ResourceSet resource_set = getResourceSet();
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, _))
     .WillRepeatedly(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -709,7 +709,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourceSet resource_set = getResourceSet();
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 1000)));
@@ -734,7 +734,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_ROCK, 600));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_WOOD, 700));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -747,7 +747,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourceSet resource_set = getResourceSet();
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -757,7 +757,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_COAL, 100))
     .WillOnce(Throw(e));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -770,7 +770,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourceSet resource_set = getResourceSet();
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 100)));
@@ -795,7 +795,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -808,7 +808,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourceSet resource_set = getResourceSet();
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     std::exception e;
 
@@ -821,7 +821,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_FOOD))
     .WillOnce(Throw(e));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -834,7 +834,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourceSet resource_set = getResourceSet();
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 100)));
@@ -856,7 +856,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_GOLD));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_IRON));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -872,12 +872,12 @@ TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsNotPresent)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(ResourceWithVolumeRecordShrPtr()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -894,12 +894,12 @@ TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Mocks setup: ResourcePersistenceFacadeMock.
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_COAL))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_COAL, 3)));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -919,12 +919,12 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(transaction, m_id_holder))
     .WillOnce(Return(ResourceWithVolumeRecordMap()));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -949,7 +949,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OneResour
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     ResourceWithVolumeRecordMap map;
 
@@ -958,7 +958,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OneResour
     EXPECT_CALL(*mock, getRecords(transaction, m_id_holder))
     .WillOnce(Return(map));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
@@ -983,7 +983,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoResour
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceManagerAccessorMock * mock = new ResourceManagerAccessorMock;
+    ResourceAccessorMock * mock = new ResourceAccessorMock;
 
     ResourceWithVolumeRecordMap map;
 
@@ -998,7 +998,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoResour
     EXPECT_CALL(*mock, getRecords(transaction, m_id_holder))
     .WillOnce(Return(map));
 
-    IResourceManagerAccessorAutPtr accessor(mock);
+    IResourceAccessorAutPtr accessor(mock);
 
     ResourcePersistenceFacade persistence_facade(accessor);
 

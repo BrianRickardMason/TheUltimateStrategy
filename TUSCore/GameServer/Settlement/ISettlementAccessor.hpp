@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGERACCESSOR_HPP
-#define GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_SETTLEMENT_ISETTLEMENTACCESSOR_HPP
+#define GAMESERVER_SETTLEMENT_ISETTLEMENTACCESSOR_HPP
 
 #include "../Persistence/ITransaction.hpp"
 #include "ISettlementRecord.hpp"
@@ -42,16 +42,13 @@ namespace Settlement
 {
 
 /**
- * @brief An interface of settlement manager accessor.
+ * @brief An interface of settlement accessor.
  */
-class ISettlementManagerAccessor
+class ISettlementAccessor
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
-    virtual ~ISettlementManagerAccessor(){};
+    virtual ~ISettlementAccessor(){};
 
     /**
      * @brief Inserts a settlement record.
@@ -105,16 +102,16 @@ public:
 };
 
 /**
- * @brief The auto pointer of the interface of settlement accessor.
+ * @brief Typedef of auto pointer.
  */
-typedef std::auto_ptr<ISettlementManagerAccessor> ISettlementManagerAccessorAutPtr;
+typedef std::auto_ptr<ISettlementAccessor> ISettlementAccessorAutPtr;
 
 /**
- * @brief A scoped pointer of interface of settlement accessor.
+ * @brief Typedef of scoped pointer.
  */
-typedef boost::scoped_ptr<ISettlementManagerAccessor> ISettlementManagerAccessorScpPtr;
+typedef boost::scoped_ptr<ISettlementAccessor> ISettlementAccessorScpPtr;
 
 } // namespace Settlement
 } // namespace GameServer
 
-#endif // GAMESERVER_SETTLEMENT_ISETTLEMENTMANAGERACCESSOR_HPP
+#endif // GAMESERVER_SETTLEMENT_ISETTLEMENTACCESSOR_HPP

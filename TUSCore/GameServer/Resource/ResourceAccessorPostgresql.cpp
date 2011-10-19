@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "ResourceManagerAccessorPostgresql.hpp"
+#include "ResourceAccessorPostgresql.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -38,7 +38,7 @@ namespace GameServer
 namespace Resource
 {
 
-void ResourceManagerAccessorPostgresql::insertRecord(
+void ResourceAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -58,7 +58,7 @@ void ResourceManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void ResourceManagerAccessorPostgresql::deleteRecord(
+void ResourceAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -75,7 +75,7 @@ void ResourceManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-ResourceWithVolumeRecordShrPtr ResourceManagerAccessorPostgresql::getRecord(
+ResourceWithVolumeRecordShrPtr ResourceAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key
@@ -103,7 +103,7 @@ ResourceWithVolumeRecordShrPtr ResourceManagerAccessorPostgresql::getRecord(
     }
 }
 
-ResourceWithVolumeRecordMap ResourceManagerAccessorPostgresql::getRecords(
+ResourceWithVolumeRecordMap ResourceAccessorPostgresql::getRecords(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder
 ) const
@@ -142,7 +142,7 @@ ResourceWithVolumeRecordMap ResourceManagerAccessorPostgresql::getRecords(
     return records;
 }
 
-void ResourceManagerAccessorPostgresql::increaseVolume(
+void ResourceAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -161,7 +161,7 @@ void ResourceManagerAccessorPostgresql::increaseVolume(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void ResourceManagerAccessorPostgresql::decreaseVolume(
+void ResourceAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
     Key                const & a_key,
@@ -180,7 +180,7 @@ void ResourceManagerAccessorPostgresql::decreaseVolume(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-string ResourceManagerAccessorPostgresql::getTableName(
+string ResourceAccessorPostgresql::getTableName(
     IDHolder const & a_holder_class
 ) const
 {

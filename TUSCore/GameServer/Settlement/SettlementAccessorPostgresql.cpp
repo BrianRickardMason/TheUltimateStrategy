@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "SettlementManagerAccessorPostgresql.hpp"
+#include "SettlementAccessorPostgresql.hpp"
 #include "SettlementRecord.hpp"
 
 using namespace GameServer::Persistence;
@@ -38,7 +38,7 @@ namespace GameServer
 namespace Settlement
 {
 
-void SettlementManagerAccessorPostgresql::insertRecord(
+void SettlementAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name,
     string             const a_settlement_name
@@ -54,7 +54,7 @@ void SettlementManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void SettlementManagerAccessorPostgresql::deleteRecord(
+void SettlementAccessorPostgresql::deleteRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -68,7 +68,7 @@ void SettlementManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-ISettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
+ISettlementRecordShrPtr SettlementAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -82,7 +82,7 @@ ISettlementRecordShrPtr SettlementManagerAccessorPostgresql::getRecord(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-ISettlementRecordMap SettlementManagerAccessorPostgresql::getRecords(
+ISettlementRecordMap SettlementAccessorPostgresql::getRecords(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -95,7 +95,7 @@ ISettlementRecordMap SettlementManagerAccessorPostgresql::getRecords(
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }
 
-ISettlementRecordShrPtr SettlementManagerAccessorPostgresql::prepareResultGetRecord(
+ISettlementRecordShrPtr SettlementAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
 {
@@ -115,7 +115,7 @@ ISettlementRecordShrPtr SettlementManagerAccessorPostgresql::prepareResultGetRec
     }
 }
 
-ISettlementRecordMap SettlementManagerAccessorPostgresql::prepareResultGetRecords(
+ISettlementRecordMap SettlementAccessorPostgresql::prepareResultGetRecords(
     pqxx::result const & a_result
 ) const
 {

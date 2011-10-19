@@ -34,8 +34,8 @@
 #include "../Human/HumanAccessorPostgresql.hpp"
 #include "../Land/LandAccessorPostgresql.hpp"
 #include "../Property/PropertyAccessorPostgresql.hpp"
-#include "../Resource/ResourceManagerAccessorPostgresql.hpp"
-#include "../Settlement/SettlementManagerAccessorPostgresql.hpp"
+#include "../Resource/ResourceAccessorPostgresql.hpp"
+#include "../Settlement/SettlementAccessorPostgresql.hpp"
 #include "../User/UserManagerAccessorPostgresql.hpp"
 #include "../World/WorldManagerAccessorPostgresql.hpp"
 #include "AccessorAbstractFactoryPostgresql.hpp"
@@ -104,14 +104,14 @@ IPropertyAccessorAutPtr AccessorAbstractFactoryPostgresql::createPropertyAccesso
     return IPropertyAccessorAutPtr(new PropertyAccessorPostgresql);
 }
 
-IResourceManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createResourceAccessor() const
+IResourceAccessorAutPtr AccessorAbstractFactoryPostgresql::createResourceAccessor() const
 {
-    return IResourceManagerAccessorAutPtr(new ResourceManagerAccessorPostgresql);
+    return IResourceAccessorAutPtr(new ResourceAccessorPostgresql);
 }
 
-ISettlementManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createSettlementAccessor() const
+ISettlementAccessorAutPtr AccessorAbstractFactoryPostgresql::createSettlementAccessor() const
 {
-    return ISettlementManagerAccessorAutPtr(new SettlementManagerAccessorPostgresql);
+    return ISettlementAccessorAutPtr(new SettlementAccessorPostgresql);
 }
 
 IUserManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createUserAccessor() const

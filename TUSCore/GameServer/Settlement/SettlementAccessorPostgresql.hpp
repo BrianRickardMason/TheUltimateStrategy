@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_SETTLEMENTACCESSORPOSTGRESQL_HPP
 #define GAMESERVER_SETTLEMENT_SETTLEMENTACCESSORPOSTGRESQL_HPP
 
-#include "ISettlementManagerAccessor.hpp"
+#include "ISettlementAccessor.hpp"
 #include <pqxx/result.hxx>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace Settlement
 {
 
 /**
- * @brief A PostgreSQL settlement manager accessor.
+ * @brief A PostgreSQL settlement accessor.
  */
-class SettlementManagerAccessorPostgresql
-    : public ISettlementManagerAccessor
+class SettlementAccessorPostgresql
+    : public ISettlementAccessor
 {
 public:
     /**

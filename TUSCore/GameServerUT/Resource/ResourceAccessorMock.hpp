@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_RESOURCEMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_RESOURCE_RESOURCEMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_RESOURCE_RESOURCEACCESSORMOCK_HPP
+#define GAMESERVER_RESOURCE_RESOURCEACCESSORMOCK_HPP
 
-#include "../../GameServer/Resource/IResourceManagerAccessor.hpp"
+#include "../../GameServer/Resource/IResourceAccessor.hpp"
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace Resource
 {
 
 /**
- * @brief The mock of ResourceManagerAccessor.
+ * @brief The mock of ResourceAccessor.
  */
-class ResourceManagerAccessorMock
-    : public IResourceManagerAccessor
+class ResourceAccessorMock
+    : public IResourceAccessor
 {
 public:
     /**
@@ -159,4 +159,4 @@ public:
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_RESOURCEMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_RESOURCE_RESOURCEACCESSORMOCK_HPP

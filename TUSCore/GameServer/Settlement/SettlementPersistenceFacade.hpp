@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADE_HPP
 #define GAMESERVER_SETTLEMENT_SETTLEMENTPERSISTENCEFACADE_HPP
 
-#include "ISettlementManagerAccessor.hpp"
+#include "ISettlementAccessor.hpp"
 #include "ISettlementPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     SettlementPersistenceFacade(
-        ISettlementManagerAccessorAutPtr a_accessor
+        ISettlementAccessorAutPtr a_accessor
     );
 
     /**
@@ -132,11 +132,11 @@ private:
     /**
      * @brief An accessor.
      */
-    ISettlementManagerAccessorScpPtr m_accessor;
+    ISettlementAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief An auto pointer of settlement persistence facade.
+ * @brief Typedef of auto pointer
  */
 typedef std::auto_ptr<SettlementPersistenceFacade> SettlementPersistenceFacadeAutPtr;
 

@@ -37,8 +37,8 @@
 #include "../Human/IHumanAccessor.hpp"
 #include "../Land/ILandAccessor.hpp"
 #include "../Property/IPropertyAccessor.hpp"
-#include "../Resource/IResourceManagerAccessor.hpp"
-#include "../Settlement/ISettlementManagerAccessor.hpp"
+#include "../Resource/IResourceAccessor.hpp"
+#include "../Settlement/ISettlementAccessor.hpp"
 #include "../User/IUserManagerAccessor.hpp"
 #include "../World/IWorldManagerAccessor.hpp"
 #include <boost/shared_ptr.hpp>
@@ -71,8 +71,8 @@ public:
     virtual Human::IHumanAccessorAutPtr                   createHumanAccessor()          const = 0;
     virtual Land::ILandAccessorAutPtr                     createLandAccessor()           const = 0;
     virtual Property::IPropertyAccessorAutPtr             createPropertyAccessor()       const = 0;
-    virtual Resource::IResourceManagerAccessorAutPtr      createResourceAccessor()       const = 0;
-    virtual Settlement::ISettlementManagerAccessorAutPtr  createSettlementAccessor()     const = 0;
+    virtual Resource::IResourceAccessorAutPtr             createResourceAccessor()       const = 0;
+    virtual Settlement::ISettlementAccessorAutPtr         createSettlementAccessor()     const = 0;
     virtual User::IUserManagerAccessorAutPtr              createUserAccessor()           const = 0;
     virtual World::IWorldManagerAccessorAutPtr            createWorldAccessor()          const = 0;
     //}@

@@ -30,7 +30,7 @@
 #include "../../GameServer/Settlement/SettlementRecord.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "Operators/CreateSettlement/BehaviourGiveGrantMock.hpp"
-#include "SettlementManagerAccessorMock.hpp"
+#include "SettlementAccessorMock.hpp"
 
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
@@ -108,7 +108,7 @@ protected:
 
 TEST_F(SettlementPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    ISettlementManagerAccessorAutPtr accessor(new SettlementManagerAccessorMock);
+    ISettlementAccessorAutPtr accessor(new SettlementAccessorMock);
 
     ASSERT_NO_THROW(SettlementPersistenceFacade persistence_facade(accessor));
 }
@@ -117,11 +117,11 @@ TEST_F(SettlementPersistenceFacadeTest, createSettlement_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * settlement_manager_accessor_mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * settlement__accessor_mock = new SettlementAccessorMock;
 
-    EXPECT_CALL(*settlement_manager_accessor_mock, insertRecord(transaction, m_land_name_1, m_settlement_name_1));
+    EXPECT_CALL(*settlement__accessor_mock, insertRecord(transaction, m_land_name_1, m_settlement_name_1));
 
-    ISettlementManagerAccessorAutPtr accessor(settlement_manager_accessor_mock);
+    ISettlementAccessorAutPtr accessor(settlement__accessor_mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -132,14 +132,14 @@ TEST_F(SettlementPersistenceFacadeTest, createSettlement_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * settlement_manager_accessor_mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * settlement__accessor_mock = new SettlementAccessorMock;
 
     std::exception e;
 
-    EXPECT_CALL(*settlement_manager_accessor_mock, insertRecord(transaction, m_land_name_1, m_settlement_name_1))
+    EXPECT_CALL(*settlement__accessor_mock, insertRecord(transaction, m_land_name_1, m_settlement_name_1))
     .WillOnce(Throw(e));
 
-    ISettlementManagerAccessorAutPtr accessor(settlement_manager_accessor_mock);
+    ISettlementAccessorAutPtr accessor(settlement__accessor_mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -150,11 +150,11 @@ TEST_F(SettlementPersistenceFacadeTest, deleteSettlement_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * mock = new SettlementAccessorMock;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_settlement_name_1));
 
-    ISettlementManagerAccessorAutPtr accessor(mock);
+    ISettlementAccessorAutPtr accessor(mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -165,14 +165,14 @@ TEST_F(SettlementPersistenceFacadeTest, deleteSettlement_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * mock = new SettlementAccessorMock;
 
     std::exception e;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_settlement_name_1))
     .WillOnce(Throw(e));
 
-    ISettlementManagerAccessorAutPtr accessor(mock);
+    ISettlementAccessorAutPtr accessor(mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -183,12 +183,12 @@ TEST_F(SettlementPersistenceFacadeTest, getSettlement_SettlementDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * mock = new SettlementAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_settlement_name_1))
     .WillOnce(Return(ISettlementRecordShrPtr()));
 
-    ISettlementManagerAccessorAutPtr accessor(mock);
+    ISettlementAccessorAutPtr accessor(mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -201,12 +201,12 @@ TEST_F(SettlementPersistenceFacadeTest, getSettlement_SettlementDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * mock = new SettlementAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_settlement_name_1))
     .WillOnce(Return(ISettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_1))));
 
-    ISettlementManagerAccessorAutPtr accessor(mock);
+    ISettlementAccessorAutPtr accessor(mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -219,12 +219,12 @@ TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * mock = new SettlementAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(transaction, m_land_name_1))
     .WillOnce(Return(ISettlementRecordMap()));
 
-    ISettlementManagerAccessorAutPtr accessor(mock);
+    ISettlementAccessorAutPtr accessor(mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -237,7 +237,7 @@ TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_OneSet
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * mock = new SettlementAccessorMock;
 
     ISettlementRecordMap map;
     map.insert(make_pair(m_settlement_name_1, ISettlementRecordShrPtr(new SettlementRecord(m_land_name_1, m_settlement_name_1))));
@@ -245,7 +245,7 @@ TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_OneSet
     EXPECT_CALL(*mock, getRecords(transaction, m_land_name_1))
     .WillOnce(Return(map));
 
-    ISettlementManagerAccessorAutPtr accessor(mock);
+    ISettlementAccessorAutPtr accessor(mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
 
@@ -262,7 +262,7 @@ TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_ManySe
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    SettlementManagerAccessorMock * mock = new SettlementManagerAccessorMock;
+    SettlementAccessorMock * mock = new SettlementAccessorMock;
 
     ISettlementRecordMap map;
     map.insert(make_pair(m_settlement_name_1, ISettlementRecordShrPtr(new SettlementRecord(m_land_name_2, m_settlement_name_1))));
@@ -271,8 +271,7 @@ TEST_F(SettlementPersistenceFacadeTest, getSettlements_SettlementsDoExist_ManySe
     EXPECT_CALL(*mock, getRecords(transaction, m_land_name_2))
     .WillOnce(Return(map));
 
-    ISettlementManagerAccessorAutPtr accessor(mock);
-
+    ISettlementAccessorAutPtr accessor(mock);
 
     SettlementPersistenceFacade persistence_facade(accessor);
     ISettlementMap settlements = persistence_facade.getSettlements(transaction, m_land_2);

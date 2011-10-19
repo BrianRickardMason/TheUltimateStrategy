@@ -57,8 +57,8 @@ public:
     virtual Human::IHumanAccessorAutPtr                   createHumanAccessor()          const;
     virtual Land::ILandAccessorAutPtr                     createLandAccessor()           const;
     virtual Property::IPropertyAccessorAutPtr             createPropertyAccessor()       const;
-    virtual Resource::IResourceManagerAccessorAutPtr      createResourceAccessor()       const;
-    virtual Settlement::ISettlementManagerAccessorAutPtr  createSettlementAccessor()     const;
+    virtual Resource::IResourceAccessorAutPtr             createResourceAccessor()       const;
+    virtual Settlement::ISettlementAccessorAutPtr         createSettlementAccessor()     const;
     virtual User::IUserManagerAccessorAutPtr              createUserAccessor()           const;
     virtual World::IWorldManagerAccessorAutPtr            createWorldAccessor()          const;
     //}@

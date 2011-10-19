@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADE_HPP
 #define GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADE_HPP
 
-#include "IResourceManagerAccessor.hpp"
+#include "IResourceAccessor.hpp"
 #include "IResourcePersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     ResourcePersistenceFacade(
-        IResourceManagerAccessorAutPtr a_accessor
+        IResourceAccessorAutPtr a_accessor
     );
 
     /**
@@ -167,7 +167,7 @@ private:
     /**
      * @brief An accessor.
      */
-    IResourceManagerAccessorScpPtr m_accessor;
+    IResourceAccessorScpPtr m_accessor;
 };
 
 /**
@@ -178,4 +178,4 @@ typedef std::auto_ptr<ResourcePersistenceFacade> ResourcePersistenceFacadeAutPtr
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_RESOURCEMANAGER_HPP
+#endif // GAMESERVER_RESOURCE_RESOURCEPERSISTENCEFACADE_HPP
