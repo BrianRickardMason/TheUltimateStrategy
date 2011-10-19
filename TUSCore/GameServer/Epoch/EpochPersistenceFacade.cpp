@@ -37,7 +37,7 @@ namespace Epoch
 {
 
 EpochPersistenceFacade::EpochPersistenceFacade(
-    IEpochManagerAccessorAutPtr a_accessor
+    IEpochAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

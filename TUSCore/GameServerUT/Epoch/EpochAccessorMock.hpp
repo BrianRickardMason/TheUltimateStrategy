@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_EPOCHMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_EPOCH_EPOCHMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_EPOCH_EPOCHACCESSORMOCK_HPP
+#define GAMESERVER_EPOCH_EPOCHACCESSORMOCK_HPP
 
-#include "../../GameServer/Epoch/IEpochManagerAccessor.hpp"
+#include "../../GameServer/Epoch/IEpochAccessor.hpp"
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace Epoch
 {
 
 /**
- * @brief The mock of the accessor of the manager of the epochs.
+ * @brief The mock of the accessor of the epochs.
  */
-class EpochManagerAccessorMock
-    : public IEpochManagerAccessor
+class EpochAccessorMock
+    : public IEpochAccessor
 {
 public:
     /**
@@ -181,4 +181,4 @@ public:
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_EPOCHMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_EPOCH_EPOCHACCESSORMOCK_HPP

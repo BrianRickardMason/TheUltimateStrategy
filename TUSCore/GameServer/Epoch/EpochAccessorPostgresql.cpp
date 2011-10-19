@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "EpochManagerAccessorPostgresql.hpp"
+#include "EpochAccessorPostgresql.hpp"
 
 using namespace GameServer::Persistence;
 using namespace boost;
@@ -37,7 +37,7 @@ namespace GameServer
 namespace Epoch
 {
 
-void EpochManagerAccessorPostgresql::insertRecord(
+void EpochAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name,
     string             const a_epoch_name
@@ -53,7 +53,7 @@ void EpochManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void EpochManagerAccessorPostgresql::deleteRecord(
+void EpochAccessorPostgresql::deleteRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -67,7 +67,7 @@ void EpochManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-EpochRecordShrPtr EpochManagerAccessorPostgresql::getRecord(
+EpochRecordShrPtr EpochAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -104,7 +104,7 @@ EpochRecordShrPtr EpochManagerAccessorPostgresql::getRecord(
     }
 }
 
-void EpochManagerAccessorPostgresql::markActive(
+void EpochAccessorPostgresql::markActive(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -117,7 +117,7 @@ void EpochManagerAccessorPostgresql::markActive(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void EpochManagerAccessorPostgresql::markUnactive(
+void EpochAccessorPostgresql::markUnactive(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -130,7 +130,7 @@ void EpochManagerAccessorPostgresql::markUnactive(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void EpochManagerAccessorPostgresql::markFinished(
+void EpochAccessorPostgresql::markFinished(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -143,7 +143,7 @@ void EpochManagerAccessorPostgresql::markFinished(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void EpochManagerAccessorPostgresql::incrementTicks(
+void EpochAccessorPostgresql::incrementTicks(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -156,7 +156,7 @@ void EpochManagerAccessorPostgresql::incrementTicks(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-string EpochManagerAccessorPostgresql::getWorldNameOfLand(
+string EpochAccessorPostgresql::getWorldNameOfLand(
     Persistence::ITransactionShrPtr       a_transaction,
     string                          const a_land_name
 ) const
@@ -180,7 +180,7 @@ string EpochManagerAccessorPostgresql::getWorldNameOfLand(
     }
 }
 
-string EpochManagerAccessorPostgresql::getLandNameOfSettlement(
+string EpochAccessorPostgresql::getLandNameOfSettlement(
     Persistence::ITransactionShrPtr       a_transaction,
     string                          const a_settlement_name
 ) const

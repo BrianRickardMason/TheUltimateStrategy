@@ -25,16 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_IEPOCHMANAGERACCESSOR_HPP
-#define GAMESERVER_EPOCH_IEPOCHMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_EPOCH_EPOCHACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_EPOCH_EPOCHACCESSORPOSTGRESQL_HPP
 
-#include "../Persistence/ITransaction.hpp"
-#include "EpochRecord.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <memory>
-#include <string>
+#include "IEpochAccessor.hpp"
 
 namespace GameServer
 {
@@ -42,17 +36,12 @@ namespace Epoch
 {
 
 /**
- * @brief The interface of the accessor of the manager of the epoch.
+ * @brief The PostgreSQL accessor of the epoch.
  */
-class IEpochManagerAccessor
-    : boost::noncopyable
+class EpochAccessorPostgresql
+    : public IEpochAccessor
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
-    virtual ~IEpochManagerAccessor(){}
-
     /**
      * @brief Inserts the record of the epoch.
      *
@@ -64,7 +53,7 @@ public:
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name,
         std::string                     const a_epoch_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Deletes the record of the epoch.
@@ -75,7 +64,7 @@ public:
     virtual void deleteRecord(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets the record of the epoch of the world.
@@ -88,7 +77,7 @@ public:
     virtual EpochRecordShrPtr getRecord(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Sets the active state to true.
@@ -99,7 +88,7 @@ public:
     virtual void markActive(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Sets the active state to false.
@@ -110,7 +99,7 @@ public:
     virtual void markUnactive(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Marks the finished state to true.
@@ -121,7 +110,7 @@ public:
     virtual void markFinished(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Increments the number of ticks.
@@ -132,7 +121,7 @@ public:
     virtual void incrementTicks(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets the name of the world of the land.
@@ -145,7 +134,7 @@ public:
     virtual std::string getWorldNameOfLand(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets the name of the land of the settlement.
@@ -158,20 +147,10 @@ public:
     virtual std::string getLandNameOfSettlement(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
-    ) const = 0;
+    ) const;
 };
-
-/**
- * @brief The auto pointer of the interface of the accessor of the the manager of the epoch.
- */
-typedef std::auto_ptr<IEpochManagerAccessor> IEpochManagerAccessorAutPtr;
-
-/**
- * @brief The scoped pointer of the interface of the accessor of the the manager of the epoch.
- */
-typedef boost::scoped_ptr<IEpochManagerAccessor> IEpochManagerAccessorScpPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_IEPOCHMANAGERACCESSOR_HPP
+#endif // GAMESERVER_EPOCH_EPOCHACCESSORPOSTGRESQL_HPP

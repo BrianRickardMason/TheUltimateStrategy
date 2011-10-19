@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_EPOCH_EPOCHPERSISTENCEFACADE_HPP
 #define GAMESERVER_EPOCH_EPOCHPERSISTENCEFACADE_HPP
 
-#include "IEpochManagerAccessor.hpp"
+#include "IEpochAccessor.hpp"
 #include "IEpochPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor The accessor to be injected.
      */
     EpochPersistenceFacade(
-        IEpochManagerAccessorAutPtr a_accessor
+        IEpochAccessorAutPtr a_accessor
     );
 
     /**
@@ -196,11 +196,11 @@ private:
     /**
      * @brief An accessor.
      */
-    IEpochManagerAccessorScpPtr m_accessor;
+    IEpochAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief The auto pointer of the epoch persistence facade.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<EpochPersistenceFacade> EpochPersistenceFacadeAutPtr;
 
