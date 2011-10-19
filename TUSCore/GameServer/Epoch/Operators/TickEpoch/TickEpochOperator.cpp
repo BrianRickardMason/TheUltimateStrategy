@@ -29,6 +29,7 @@
 #include "BehaviourTickEpochAbstractFactory.hpp"
 
 using namespace GameServer::Persistence;
+using namespace GameServer::Turn;
 using namespace GameServer::World;
 using namespace std;
 
@@ -39,10 +40,12 @@ namespace Epoch
 
 TickEpochOperator::TickEpochOperator(
     IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
-    IWorldPersistenceFacadeShrPtr a_world_persistence_facade
+    IWorldPersistenceFacadeShrPtr a_world_persistence_facade,
+    ITurnManagerShrPtr            a_turn_manager
 )
     : m_epoch_persistence_facade(a_epoch_persistence_facade),
-      m_world_persistence_facade(a_world_persistence_facade)
+      m_world_persistence_facade(a_world_persistence_facade),
+      m_turn_manager(a_turn_manager)
 {
 }
 

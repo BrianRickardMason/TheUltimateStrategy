@@ -46,9 +46,6 @@ class ITickEpochOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs TickEpochOperator.
-     */
     virtual ~ITickEpochOperator(){};
 
     /**

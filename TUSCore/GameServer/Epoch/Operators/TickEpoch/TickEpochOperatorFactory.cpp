@@ -26,8 +26,10 @@
 // SUCH DAMAGE.
 
 #include "TickEpochOperatorFactory.hpp"
+#include <GameServer/Turn/Managers/TurnManagerFactory.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Turn;
 
 namespace GameServer
 {
@@ -38,8 +40,13 @@ TickEpochOperatorAutPtr TickEpochOperatorFactory::createTickEpochOperator(
     IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    return TickEpochOperatorAutPtr(new TickEpochOperator(a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
-                                                         a_persistence_facade_abstract_factory->createWorldPersistenceFacade()));
+    return TickEpochOperatorAutPtr(
+               new TickEpochOperator(a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
+                                     a_persistence_facade_abstract_factory->createWorldPersistenceFacade(),
+                                     ITurnManagerShrPtr(
+                                         TurnManagerFactory::create(a_persistence_facade_abstract_factory))
+                                     )
+           );
 }
 
 } // namespace Epoch

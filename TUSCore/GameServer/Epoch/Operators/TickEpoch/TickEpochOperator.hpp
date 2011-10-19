@@ -28,10 +28,11 @@
 #ifndef GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
 #define GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
 
-#include "../../../World/IWorldPersistenceFacade.hpp"
-#include "../../IEpochPersistenceFacade.hpp"
-#include "IBehaviourTickEpoch.hpp"
-#include "ITickEpochOperator.hpp"
+#include <GameServer/Epoch/IEpochPersistenceFacade.hpp>
+#include <GameServer/Epoch/Operators/TickEpoch/IBehaviourTickEpoch.hpp>
+#include <GameServer/Epoch/Operators/TickEpoch/ITickEpochOperator.hpp>
+#include <GameServer/Turn/Managers/ITurnManager.hpp>
+#include <GameServer/World/IWorldPersistenceFacade.hpp>
 
 namespace GameServer
 {
@@ -50,10 +51,12 @@ public:
      *
      * @param a_epoch_persistence_facade The permission facade of epochs.
      * @param a_world_persistence_facade The persistence facade of worlds.
+     * @param a_turn_manager             The manager of turns.
      */
     TickEpochOperator(
         IEpochPersistenceFacadeShrPtr        a_epoch_persistence_facade,
-        World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
+        World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade,
+        Turn::ITurnManagerShrPtr             a_turn_manager
     );
 
     /**
@@ -84,10 +87,15 @@ private:
      * @brief The behaviour TickEpoch.
      */
     IBehaviourTickEpochShrPtr m_behaviour_tick_epoch;
+
+    /**
+     * @brief TurnManager.
+     */
+    Turn::ITurnManagerShrPtr m_turn_manager;
 };
 
 /**
- * @brief The auto pointer of TickEpochOperator.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<TickEpochOperator> TickEpochOperatorAutPtr;
 
