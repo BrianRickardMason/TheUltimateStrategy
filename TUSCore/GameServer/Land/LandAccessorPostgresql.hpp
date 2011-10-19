@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_LANDMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_LAND_LANDMANAGERACCESSORPOSTGRESQL_HPP
+#ifndef GAMESERVER_LAND_LANDACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_LAND_LANDACCESSORPOSTGRESQL_HPP
 
-#include "ILandManagerAccessor.hpp"
+#include "ILandAccessor.hpp"
 #include <pqxx/result.hxx>
 
 namespace GameServer
@@ -37,10 +37,10 @@ namespace Land
 {
 
 /**
- * @brief The PostgreSQL LandManagerAccessor.
+ * @brief The PostgreSQL LandAccessor.
  */
-class LandManagerAccessorPostgresql
-    : public ILandManagerAccessor
+class LandAccessorPostgresql
+    : public ILandAccessor
 {
 public:
     /**
@@ -133,4 +133,4 @@ private:
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_LANDMANAGERACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_LAND_LANDACCESSORPOSTGRESQL_HPP

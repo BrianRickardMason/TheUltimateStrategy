@@ -28,7 +28,7 @@
 #include "../../GameServer/Land/LandPersistenceFacade.hpp"
 #include "../../GameServer/Land/LandRecord.hpp"
 #include "../Persistence/PersistenceDummy.hpp"
-#include "LandManagerAccessorMock.hpp"
+#include "LandAccessorMock.hpp"
 
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
@@ -102,7 +102,7 @@ protected:
 
 TEST_F(LandPersistenceFacadeTest, LandPersistenceFacade)
 {
-    ILandManagerAccessorAutPtr accessor(new LandManagerAccessorMock);
+    ILandAccessorAutPtr accessor(new LandAccessorMock);
 
     LandPersistenceFacade persistence_facade(accessor);
 }
@@ -111,11 +111,11 @@ TEST_F(LandPersistenceFacadeTest, createLand_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     EXPECT_CALL(*mock, insertRecord(transaction, m_login_1, m_world_name_1, m_land_name_1));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -126,14 +126,14 @@ TEST_F(LandPersistenceFacadeTest, createLand_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     std::exception e;
 
     EXPECT_CALL(*mock, insertRecord(transaction, m_login_1, m_world_name_1, m_land_name_1))
     .WillOnce(Throw(e));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -144,11 +144,11 @@ TEST_F(LandPersistenceFacadeTest, deleteLand_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_land_name_1));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -159,14 +159,14 @@ TEST_F(LandPersistenceFacadeTest, deleteLand_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     std::exception e;
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_land_name_1))
     .WillOnce(Throw(e));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -177,12 +177,12 @@ TEST_F(LandPersistenceFacadeTest, getLand_LandDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1))
     .WillOnce(Return(ILandRecordShrPtr()));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -195,12 +195,12 @@ TEST_F(LandPersistenceFacadeTest, getLand_LandDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1))
     .WillOnce(Return(ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, true))));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -215,12 +215,12 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(ILandRecordMap()));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -233,7 +233,7 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_OneLand)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     ILandRecordMap map;
     map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, false))));
@@ -241,7 +241,7 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_OneLand)
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -258,7 +258,7 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_ManyLands)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     ILandRecordMap map;
     map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, false))));
@@ -267,7 +267,7 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_ManyLands)
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 
@@ -285,11 +285,11 @@ TEST_F(LandPersistenceFacadeTest, markGranted)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    LandManagerAccessorMock * mock = new LandManagerAccessorMock;
+    LandAccessorMock * mock = new LandAccessorMock;
 
     EXPECT_CALL(*mock, markGranted(transaction, m_land_name_1));
 
-    ILandManagerAccessorAutPtr accessor(mock);
+    ILandAccessorAutPtr accessor(mock);
 
     LandPersistenceFacade persistence_facade(accessor);
 

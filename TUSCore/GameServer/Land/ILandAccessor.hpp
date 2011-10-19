@@ -25,11 +25,15 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_LAND_LANDMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_LAND_LANDMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_LAND_ILANDACCESSOR_HPP
+#define GAMESERVER_LAND_ILANDACCESSOR_HPP
 
-#include "../../GameServer/Land/ILandManagerAccessor.hpp"
-#include <gmock/gmock.h>
+#include "../Persistence/ITransaction.hpp"
+#include "ILandRecord.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 namespace GameServer
 {
@@ -37,12 +41,14 @@ namespace Land
 {
 
 /**
- * @brief The mock of LandManagerAccessor.
+ * @brief The interface of LandAccessor.
  */
-class LandManagerAccessorMock
-    : public ILandManagerAccessor
+class ILandAccessor
+    : boost::noncopyable
 {
 public:
+    virtual ~ILandAccessor(){};
+
     /**
      * @brief Inserts a record of the land.
      *
@@ -51,15 +57,12 @@ public:
      * @param a_world_name  The name of the world.
      * @param a_land_name   The name of the land.
      */
-    MOCK_CONST_METHOD4(
-        insertRecord,
-        void(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_login,
-            std::string                     const a_world_name,
-            std::string                     const a_land_name
-        )
-    );
+    virtual void insertRecord(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login,
+        std::string                     const a_world_name,
+        std::string                     const a_land_name
+    ) const = 0;
 
     /**
      * @brief Deletes a record of the land.
@@ -67,13 +70,10 @@ public:
      * @param a_transaction The transaction.
      * @param a_land_name   The name of the land.
      */
-    MOCK_CONST_METHOD2(
-        deleteRecord,
-        void(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name
-        )
-    );
+    virtual void deleteRecord(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
+    ) const = 0;
 
     /**
      * @brief Gets a record of the land.
@@ -83,13 +83,10 @@ public:
      *
      * @return The record of the land, null if not found.
      */
-    MOCK_CONST_METHOD2(
-        getRecord,
-        ILandRecordShrPtr(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name
-        )
-    );
+    virtual ILandRecordShrPtr getRecord(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
+    ) const = 0;
 
     /**
      * @brief Gets records of the land.
@@ -99,13 +96,10 @@ public:
      *
      * @return A map of records of the land, an empty map if not found.
      */
-    MOCK_CONST_METHOD2(
-        getRecords,
-        ILandRecordMap(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_login
-        )
-    );
+    virtual ILandRecordMap getRecords(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_login
+    ) const = 0;
 
     /**
      * @brief Marks that land has been given a grant.
@@ -113,16 +107,23 @@ public:
      * @param a_transaction The transaction.
      * @param a_land_name   The name of the land.
      */
-    MOCK_CONST_METHOD2(
-        markGranted,
-        void(
-            Persistence::ITransactionShrPtr       a_transaction,
-            std::string                     const a_land_name
-        )
-    );
+    virtual void markGranted(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_land_name
+    ) const = 0;
 };
+
+/**
+ * @brief Typedef of auto pointer.
+ */
+typedef std::auto_ptr<ILandAccessor> ILandAccessorAutPtr;
+
+/**
+ * @brief Typedef of scoped pointer.
+ */
+typedef boost::scoped_ptr<ILandAccessor> ILandAccessorScpPtr;
 
 } // namespace Land
 } // namespace GameServer
 
-#endif // GAMESERVER_LAND_LANDMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_LAND_ILANDACCESSOR_HPP

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_LANDPERSISTENCEFACADE_HPP
 #define GAMESERVER_LAND_LANDPERSISTENCEFACADE_HPP
 
-#include "ILandManagerAccessor.hpp"
+#include "ILandAccessor.hpp"
 #include "ILandPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     LandPersistenceFacade(
-        ILandManagerAccessorAutPtr a_accessor
+        ILandAccessorAutPtr a_accessor
     );
 
     /**
@@ -145,11 +145,11 @@ private:
     /**
      * @brief An accessor.
      */
-    ILandManagerAccessorScpPtr m_accessor;
+    ILandAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief An auto pointer of land persistence facade.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<LandPersistenceFacade> LandPersistenceFacadeAutPtr;
 

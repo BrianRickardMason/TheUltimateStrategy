@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "LandManagerAccessorPostgresql.hpp"
+#include "LandAccessorPostgresql.hpp"
 #include "LandRecord.hpp"
 
 using namespace GameServer::Persistence;
@@ -38,7 +38,7 @@ namespace GameServer
 namespace Land
 {
 
-void LandManagerAccessorPostgresql::insertRecord(
+void LandAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_login,
     string             const a_world_name,
@@ -56,7 +56,7 @@ void LandManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-void LandManagerAccessorPostgresql::deleteRecord(
+void LandAccessorPostgresql::deleteRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -70,7 +70,7 @@ void LandManagerAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-ILandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
+ILandRecordShrPtr LandAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -84,7 +84,7 @@ ILandRecordShrPtr LandManagerAccessorPostgresql::getRecord(
     return prepareResultGetRecord(backbone_transaction.exec(query));
 }
 
-ILandRecordMap LandManagerAccessorPostgresql::getRecords(
+ILandRecordMap LandAccessorPostgresql::getRecords(
     ITransactionShrPtr       a_transaction,
     string             const a_login
 ) const
@@ -98,7 +98,7 @@ ILandRecordMap LandManagerAccessorPostgresql::getRecords(
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }
 
-void LandManagerAccessorPostgresql::markGranted(
+void LandAccessorPostgresql::markGranted(
     Persistence::ITransactionShrPtr       a_transaction,
     string                          const a_land_name
 ) const
@@ -112,7 +112,7 @@ void LandManagerAccessorPostgresql::markGranted(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-ILandRecordShrPtr LandManagerAccessorPostgresql::prepareResultGetRecord(
+ILandRecordShrPtr LandAccessorPostgresql::prepareResultGetRecord(
     pqxx::result const & a_result
 ) const
 {
@@ -136,7 +136,7 @@ ILandRecordShrPtr LandManagerAccessorPostgresql::prepareResultGetRecord(
     }
 }
 
-ILandRecordMap LandManagerAccessorPostgresql::prepareResultGetRecords(
+ILandRecordMap LandAccessorPostgresql::prepareResultGetRecords(
     pqxx::result const & a_result
 ) const
 {

@@ -37,7 +37,7 @@ namespace Land
 {
 
 LandPersistenceFacade::LandPersistenceFacade(
-    ILandManagerAccessorAutPtr a_accessor
+    ILandAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {
