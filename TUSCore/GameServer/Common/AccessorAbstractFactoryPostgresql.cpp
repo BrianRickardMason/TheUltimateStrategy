@@ -33,7 +33,7 @@
 #include "../Epoch/EpochAccessorPostgresql.hpp"
 #include "../Human/HumanAccessorPostgresql.hpp"
 #include "../Land/LandAccessorPostgresql.hpp"
-#include "../Property/PropertyManagerAccessorPostgresql.hpp"
+#include "../Property/PropertyAccessorPostgresql.hpp"
 #include "../Resource/ResourceManagerAccessorPostgresql.hpp"
 #include "../Settlement/SettlementManagerAccessorPostgresql.hpp"
 #include "../User/UserManagerAccessorPostgresql.hpp"
@@ -99,9 +99,9 @@ ILandAccessorAutPtr AccessorAbstractFactoryPostgresql::createLandAccessor() cons
     return ILandAccessorAutPtr(new LandAccessorPostgresql);
 }
 
-IPropertyManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createPropertyAccessor() const
+IPropertyAccessorAutPtr AccessorAbstractFactoryPostgresql::createPropertyAccessor() const
 {
-    return IPropertyManagerAccessorAutPtr(new PropertyManagerAccessorPostgresql);
+    return IPropertyAccessorAutPtr(new PropertyAccessorPostgresql);
 }
 
 IResourceManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createResourceAccessor() const

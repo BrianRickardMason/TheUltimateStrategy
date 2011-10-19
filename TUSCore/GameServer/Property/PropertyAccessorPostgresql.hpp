@@ -25,11 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PROPERTY_PROPERTYMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_PROPERTY_PROPERTYMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_PROPERTY_PROPERTYACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_PROPERTY_PROPERTYACCESSORPOSTGRESQL_HPP
 
-#include "../../GameServer/Property/IPropertyManagerAccessor.hpp"
-#include <gmock/gmock.h>
+#include "IPropertyAccessor.hpp"
 
 namespace GameServer
 {
@@ -37,10 +36,10 @@ namespace Property
 {
 
 /**
- * @brief A mock of property manager accessor.
+ * @brief A PostgreSQL property accessor.
  */
-class PropertyManagerAccessorMock
-    : public IPropertyManagerAccessor
+class PropertyAccessorPostgresql
+    : public IPropertyAccessor
 {
 public:
     /**
@@ -52,14 +51,11 @@ public:
      *
      * @return The property record, null if not found.
      */
-    MOCK_CONST_METHOD3(
-        getPropertyRecord,
-        PropertyRecordShrPtr(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::KeyHash                 const & a_key_hash,
-            IDProperty                                  const & a_id_property
-        )
-    );
+    virtual PropertyRecordShrPtr getPropertyRecord(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash,
+        IDProperty                                  const & a_id_property
+    ) const;
 
     /**
      * @brief Gets a set of property records.
@@ -69,16 +65,13 @@ public:
      *
      * @return A map of property records, an empty map if not found.
      */
-    MOCK_CONST_METHOD2(
-        getPropertyRecords,
-        PropertyRecordMap(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::KeyHash                 const & a_key_hash
-        )
-    );
+    virtual PropertyRecordMap getPropertyRecords(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash
+    ) const;
 };
 
 } // namespace Property
 } // namespace GameServer
 
-#endif // GAMESERVER_PROPERTY_PROPERTYMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_PROPERTY_PROPERTYACCESSORPOSTGRESQL_HPP

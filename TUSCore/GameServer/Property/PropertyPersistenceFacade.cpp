@@ -38,7 +38,7 @@ namespace Property
 {
 
 PropertyPersistenceFacade::PropertyPersistenceFacade(
-    IPropertyManagerAccessorAutPtr a_accessor
+    IPropertyAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

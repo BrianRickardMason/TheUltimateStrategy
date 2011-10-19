@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "PropertyManagerAccessorPostgresql.hpp"
+#include "PropertyAccessorPostgresql.hpp"
 #include <boost/make_shared.hpp>
 #include <string>
 
@@ -40,7 +40,7 @@ namespace GameServer
 namespace Property
 {
 
-PropertyRecordShrPtr PropertyManagerAccessorPostgresql::getPropertyRecord(
+PropertyRecordShrPtr PropertyAccessorPostgresql::getPropertyRecord(
     ITransactionShrPtr         a_transaction,
     KeyHash            const & a_key_hash,
     IDProperty         const & a_id_property
@@ -78,7 +78,7 @@ PropertyRecordShrPtr PropertyManagerAccessorPostgresql::getPropertyRecord(
     }
 }
 
-PropertyRecordMap PropertyManagerAccessorPostgresql::getPropertyRecords(
+PropertyRecordMap PropertyAccessorPostgresql::getPropertyRecords(
     Persistence::ITransactionShrPtr         a_transaction,
     Common::KeyHash                 const & a_key_hash
 ) const

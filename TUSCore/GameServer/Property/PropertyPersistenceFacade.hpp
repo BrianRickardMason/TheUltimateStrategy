@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADE_HPP
 #define GAMESERVER_PROPERTY_PROPERTYPERSISTENCEFACADE_HPP
 
-#include "IPropertyManagerAccessor.hpp"
+#include "IPropertyAccessor.hpp"
 #include "IPropertyPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     PropertyPersistenceFacade(
-        IPropertyManagerAccessorAutPtr a_accessor
+        IPropertyAccessorAutPtr a_accessor
     );
 
     /**
@@ -114,7 +114,7 @@ private:
     /**
      * @brief An accessor.
      */
-    IPropertyManagerAccessorScpPtr m_accessor;
+    IPropertyAccessorScpPtr m_accessor;
 };
 
 /**

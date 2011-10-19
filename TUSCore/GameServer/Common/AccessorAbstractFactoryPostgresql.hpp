@@ -48,19 +48,19 @@ public:
      *
      * @return The newly created accessor.
      */
-    virtual Achievement::IAchievementAccessorAutPtr            createAchievementAccessor()    const;
-    virtual Authentication::IAuthenticationAccessorAutPtr      createAuthenticationAccessor() const;
-    virtual Authorization::IAuthorizationAccessorAutPtr        createAuthorizationAccessor()  const;
-    virtual Building::IBuildingAccessorAutPtr                  createBuildingAccessor()       const;
-    virtual Cost::ICostAccessorAutPtr                          createCostAccessor()           const;
-    virtual Epoch::IEpochAccessorAutPtr                        createEpochAccessor()          const;
-    virtual Human::IHumanAccessorAutPtr                        createHumanAccessor()          const;
-    virtual Land::ILandAccessorAutPtr                          createLandAccessor()           const;
-    virtual Property::IPropertyManagerAccessorAutPtr           createPropertyAccessor()       const;
-    virtual Resource::IResourceManagerAccessorAutPtr           createResourceAccessor()       const;
-    virtual Settlement::ISettlementManagerAccessorAutPtr       createSettlementAccessor()     const;
-    virtual User::IUserManagerAccessorAutPtr                   createUserAccessor()           const;
-    virtual World::IWorldManagerAccessorAutPtr                 createWorldAccessor()          const;
+    virtual Achievement::IAchievementAccessorAutPtr       createAchievementAccessor()    const;
+    virtual Authentication::IAuthenticationAccessorAutPtr createAuthenticationAccessor() const;
+    virtual Authorization::IAuthorizationAccessorAutPtr   createAuthorizationAccessor()  const;
+    virtual Building::IBuildingAccessorAutPtr             createBuildingAccessor()       const;
+    virtual Cost::ICostAccessorAutPtr                     createCostAccessor()           const;
+    virtual Epoch::IEpochAccessorAutPtr                   createEpochAccessor()          const;
+    virtual Human::IHumanAccessorAutPtr                   createHumanAccessor()          const;
+    virtual Land::ILandAccessorAutPtr                     createLandAccessor()           const;
+    virtual Property::IPropertyAccessorAutPtr             createPropertyAccessor()       const;
+    virtual Resource::IResourceManagerAccessorAutPtr      createResourceAccessor()       const;
+    virtual Settlement::ISettlementManagerAccessorAutPtr  createSettlementAccessor()     const;
+    virtual User::IUserManagerAccessorAutPtr              createUserAccessor()           const;
+    virtual World::IWorldManagerAccessorAutPtr            createWorldAccessor()          const;
     //}@
 };
 

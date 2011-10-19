@@ -27,7 +27,7 @@
 
 #include "../../GameServer/Property/PropertyPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "PropertyManagerAccessorMock.hpp"
+#include "PropertyAccessorMock.hpp"
 #include <boost/make_shared.hpp>
 #include <stdexcept>
 
@@ -72,7 +72,7 @@ protected:
 
 TEST_F(PropertyPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    IPropertyManagerAccessorAutPtr accessor(new PropertyManagerAccessorMock);
+    IPropertyAccessorAutPtr accessor(new PropertyAccessorMock);
 
     ASSERT_NO_THROW(PropertyPersistenceFacade persistence_facade(accessor));
 }
@@ -84,8 +84,8 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyBoolean)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: PropertyManagerAccessorMock.
-    PropertyManagerAccessorMock * mock = new PropertyManagerAccessorMock;
+    // Mocks setup: PropertyAccessorMock.
+    PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordShrPtr property_record =
         make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_BOOLEAN, true, 0, "");
@@ -95,7 +95,7 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyBoolean)
     .WillOnce(Return(property_record));
 
     // Mocks setup: Wrapping around.
-    IPropertyManagerAccessorAutPtr accessor(mock);
+    IPropertyAccessorAutPtr accessor(mock);
 
     // Preconditions.
     PropertyPersistenceFacade persistence_facade(accessor);
@@ -115,8 +115,8 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyInteger)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: PropertyManagerAccessorMock.
-    PropertyManagerAccessorMock * mock = new PropertyManagerAccessorMock;
+    // Mocks setup: PropertyAccessorMock.
+    PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordShrPtr property_record =
         make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_INTEGER, false, 22, "");
@@ -126,7 +126,7 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyInteger)
     .WillOnce(Return(property_record));
 
     // Mocks setup: Wrapping around.
-    IPropertyManagerAccessorAutPtr accessor(mock);
+    IPropertyAccessorAutPtr accessor(mock);
 
     // Preconditions.
     PropertyPersistenceFacade persistence_facade(accessor);
@@ -146,8 +146,8 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyString)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: PropertyManagerAccessorMock.
-    PropertyManagerAccessorMock * mock = new PropertyManagerAccessorMock;
+    // Mocks setup: PropertyAccessorMock.
+    PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordShrPtr property_record =
         make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_STRING, false, 0, "RTFM");
@@ -157,7 +157,7 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyString)
     .WillOnce(Return(property_record));
 
     // Mocks setup: Wrapping around.
-    IPropertyManagerAccessorAutPtr accessor(mock);
+    IPropertyAccessorAutPtr accessor(mock);
 
     // Preconditions.
     PropertyPersistenceFacade persistence_facade(accessor);
@@ -180,8 +180,8 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ZeroProperties)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: PropertyManagerAccessorMock.
-    PropertyManagerAccessorMock * mock = new PropertyManagerAccessorMock;
+    // Mocks setup: PropertyAccessorMock.
+    PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordMap map;
 
@@ -189,7 +189,7 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ZeroProperties)
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
-    IPropertyManagerAccessorAutPtr accessor(mock);
+    IPropertyAccessorAutPtr accessor(mock);
 
     // Preconditions.
     PropertyPersistenceFacade persistence_facade(accessor);
@@ -208,8 +208,8 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_OneProperty)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: PropertyManagerAccessorMock.
-    PropertyManagerAccessorMock * mock = new PropertyManagerAccessorMock;
+    // Mocks setup: PropertyAccessorMock.
+    PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordMap map;
 
@@ -222,7 +222,7 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_OneProperty)
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
-    IPropertyManagerAccessorAutPtr accessor(mock);
+    IPropertyAccessorAutPtr accessor(mock);
 
     // Preconditions.
     PropertyPersistenceFacade persistence_facade(accessor);
@@ -245,8 +245,8 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ManyProperties)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    // Mocks setup: PropertyManagerAccessorMock.
-    PropertyManagerAccessorMock * mock = new PropertyManagerAccessorMock;
+    // Mocks setup: PropertyAccessorMock.
+    PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordMap map;
 
@@ -265,7 +265,7 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ManyProperties)
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
-    IPropertyManagerAccessorAutPtr accessor(mock);
+    IPropertyAccessorAutPtr accessor(mock);
 
     // Preconditions.
     PropertyPersistenceFacade persistence_facade(accessor);

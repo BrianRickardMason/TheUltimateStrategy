@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_PROPERTY_IPROPERTYMANAGERACCESSOR_HPP
-#define GAMESERVER_PROPERTY_IPROPERTYMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_PROPERTY_IPROPERTYACCESSOR_HPP
+#define GAMESERVER_PROPERTY_IPROPERTYACCESSOR_HPP
 
 #include "../Common/KeyHash.hpp"
 #include "../Persistence/IPersistence.hpp"
@@ -41,16 +41,13 @@ namespace Property
 {
 
 /**
- * @brief An interface of property manager accessor.
+ * @brief An interface of property accessor.
  */
-class IPropertyManagerAccessor
+class IPropertyAccessor
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
-    virtual ~IPropertyManagerAccessor(){};
+    virtual ~IPropertyAccessor(){};
 
     /**
      * @brief Gets a property record.
@@ -82,16 +79,16 @@ public:
 };
 
 /**
- * @brief An auto pointer of the interface of property manager accessor.
+ * @brief Typedef of auto pointer.
  */
-typedef std::auto_ptr<IPropertyManagerAccessor> IPropertyManagerAccessorAutPtr;
+typedef std::auto_ptr<IPropertyAccessor> IPropertyAccessorAutPtr;
 
 /**
- * @brief A scoped pointer of the interface of property manager accessor.
+ * @brief Typedef of scoped pointer.
  */
-typedef boost::scoped_ptr<IPropertyManagerAccessor> IPropertyManagerAccessorScpPtr;
+typedef boost::scoped_ptr<IPropertyAccessor> IPropertyAccessorScpPtr;
 
 } // namespace Property
 } // namespace GameServer
 
-#endif // GAMESERVER_PROPERTY_IPROPERTYMANAGERACCESSOR_HPP
+#endif // GAMESERVER_PROPERTY_IPROPERTYACCESSOR_HPP
