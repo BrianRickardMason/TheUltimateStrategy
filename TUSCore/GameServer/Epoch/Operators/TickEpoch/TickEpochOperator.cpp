@@ -88,8 +88,7 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
             return TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_IS_ACTIVE);
         }
 
-        // TODO: A placeholder for a call to the turn manager.
-        bool const result = true;
+        bool const result = m_turn_manager->turn(a_transaction, world);
 
         return (result) ? TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_TACK)
                         : TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_TACK);
