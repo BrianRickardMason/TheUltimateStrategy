@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "CostManagerAccessorPostgresql.hpp"
+#include "CostAccessorPostgresql.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -40,7 +40,7 @@ namespace GameServer
 namespace Cost
 {
 
-CostRecordVec CostManagerAccessorPostgresql::getCosts(
+CostRecordVec CostAccessorPostgresql::getCosts(
     ITransactionShrPtr         a_transaction,
     KeyHash            const & a_key_hash,
     IDCostType         const & a_id_cost_type

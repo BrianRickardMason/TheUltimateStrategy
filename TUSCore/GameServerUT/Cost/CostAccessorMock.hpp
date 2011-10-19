@@ -25,15 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COST_ICOSTMANAGERACCESSOR_HPP
-#define GAMESERVER_COST_ICOSTMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_COST_COSTACCESSORMOCK_HPP
+#define GAMESERVER_COST_COSTACCESSORMOCK_HPP
 
-#include "../Common/KeyHash.hpp"
-#include "../Persistence/IPersistence.hpp"
-#include "CostRecord.hpp"
-#include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <memory>
+#include "../../GameServer/Cost/ICostAccessor.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
@@ -41,17 +37,12 @@ namespace Cost
 {
 
 /**
- * @brief An interface of cost manager accessor.
+ * @brief An mock of cost accessor.
  */
-class ICostManagerAccessor
-    : boost::noncopyable
+class CostAccessorMock
+    : public ICostAccessor
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
-    virtual ~ICostManagerAccessor(){};
-
     /**
      * @brief Gets cost records.
      *
@@ -61,24 +52,17 @@ public:
      *
      * @return A map of human with volume records, an empty map if not found.
      */
-    virtual CostRecordVec getCosts(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
-        IDCostType                      const & a_id_cost_type
-    ) const = 0;
+    MOCK_CONST_METHOD3(
+        getCosts,
+        CostRecordVec(
+            GameServer::Persistence::ITransactionShrPtr         a_transaction,
+            GameServer::Common::KeyHash                 const & a_key_hash,
+            IDCostType                                  const & a_id_cost_type
+        )
+    );
 };
-
-/**
- * @brief An auto pointer of interface of cost manager accessor.
- */
-typedef std::auto_ptr<ICostManagerAccessor> ICostManagerAccessorAutPtr;
-
-/**
- * @brief A scoped pointer of interface of cost manager accessor.
- */
-typedef boost::scoped_ptr<ICostManagerAccessor> ICostManagerAccessorScpPtr;
 
 } // namespace Cost
 } // namespace GameServer
 
-#endif // GAMESERVER_COST_ICOSTMANAGERACCESSOR_HPP
+#endif // GAMESERVER_COST_COSTACCESSORMOCK_HPP

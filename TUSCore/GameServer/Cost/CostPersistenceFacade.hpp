@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_COST_COSTPERSISTENCEFACADE_HPP
 #define GAMESERVER_COST_COSTPERSISTENCEFACADE_HPP
 
-#include "ICostManagerAccessor.hpp"
+#include "ICostAccessor.hpp"
 #include "ICostPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     CostPersistenceFacade(
-        ICostManagerAccessorAutPtr a_accessor
+        ICostAccessorAutPtr a_accessor
     );
 
     /**
@@ -71,7 +71,7 @@ private:
     /**
      * @brief An accessor.
      */
-    ICostManagerAccessorScpPtr m_accessor;
+    ICostAccessorScpPtr m_accessor;
 };
 
 /**

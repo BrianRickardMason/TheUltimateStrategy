@@ -29,7 +29,7 @@
 #include "../Authentication/AuthenticationAccessorPostgresql.hpp"
 #include "../Authorization/AuthorizationAccessorPostgresql.hpp"
 #include "../Building/BuildingAccessorPostgresql.hpp"
-#include "../Cost/CostManagerAccessorPostgresql.hpp"
+#include "../Cost/CostAccessorPostgresql.hpp"
 #include "../Epoch/EpochManagerAccessorPostgresql.hpp"
 #include "../Human/HumanManagerAccessorPostgresql.hpp"
 #include "../Land/LandManagerAccessorPostgresql.hpp"
@@ -79,9 +79,9 @@ IBuildingAccessorAutPtr AccessorAbstractFactoryPostgresql::createBuildingAccesso
     return IBuildingAccessorAutPtr(new BuildingAccessorPostgresql);
 }
 
-ICostManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createCostAccessor() const
+ICostAccessorAutPtr AccessorAbstractFactoryPostgresql::createCostAccessor() const
 {
-    return ICostManagerAccessorAutPtr(new CostManagerAccessorPostgresql);
+    return ICostAccessorAutPtr(new CostAccessorPostgresql);
 }
 
 IEpochManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createEpochAccessor() const

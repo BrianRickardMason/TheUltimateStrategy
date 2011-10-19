@@ -52,7 +52,7 @@ public:
     virtual Authentication::IAuthenticationAccessorAutPtr      createAuthenticationAccessor() const;
     virtual Authorization::IAuthorizationAccessorAutPtr        createAuthorizationAccessor()  const;
     virtual Building::IBuildingAccessorAutPtr                  createBuildingAccessor()       const;
-    virtual Cost::ICostManagerAccessorAutPtr                   createCostAccessor()           const;
+    virtual Cost::ICostAccessorAutPtr                          createCostAccessor()           const;
     virtual Epoch::IEpochManagerAccessorAutPtr                 createEpochAccessor()          const;
     virtual Human::IHumanManagerAccessorAutPtr                 createHumanAccessor()          const;
     virtual Land::ILandManagerAccessorAutPtr                   createLandAccessor()           const;

@@ -38,7 +38,7 @@ namespace Cost
 {
 
 CostPersistenceFacade::CostPersistenceFacade(
-    ICostManagerAccessorAutPtr a_accessor
+    ICostAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

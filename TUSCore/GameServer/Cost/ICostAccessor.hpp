@@ -25,10 +25,15 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COST_COSTMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_COST_COSTMANAGERACCESSORPOSTGRESQL_HPP
+#ifndef GAMESERVER_COST_ICOSTACCESSOR_HPP
+#define GAMESERVER_COST_ICOSTACCESSOR_HPP
 
-#include "ICostManagerAccessor.hpp"
+#include "../Common/KeyHash.hpp"
+#include "../Persistence/IPersistence.hpp"
+#include "CostRecord.hpp"
+#include <boost/noncopyable.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 namespace GameServer
 {
@@ -36,12 +41,14 @@ namespace Cost
 {
 
 /**
- * @brief A PostgreSQL cost manager accessor.
+ * @brief An interface of cost accessor.
  */
-class CostManagerAccessorPostgresql
-    : public ICostManagerAccessor
+class ICostAccessor
+    : boost::noncopyable
 {
 public:
+    virtual ~ICostAccessor(){};
+
     /**
      * @brief Gets cost records.
      *
@@ -55,10 +62,20 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         Common::KeyHash                 const & a_key_hash,
         IDCostType                      const & a_id_cost_type
-    ) const;
+    ) const = 0;
 };
+
+/**
+ * @brief Typedef of auto pointer.
+ */
+typedef std::auto_ptr<ICostAccessor> ICostAccessorAutPtr;
+
+/**
+ * @brief Typedef of scoped pointer.
+ */
+typedef boost::scoped_ptr<ICostAccessor> ICostAccessorScpPtr;
 
 } // namespace Cost
 } // namespace GameServer
 
-#endif // GAMESERVER_COST_COSTMANAGERACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_COST_ICOSTACCESSOR_HPP

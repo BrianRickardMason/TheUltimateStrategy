@@ -25,11 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_COST_COSTMANAGERACCESSORMOCK_HPP
-#define GAMESERVER_COST_COSTMANAGERACCESSORMOCK_HPP
+#ifndef GAMESERVER_COST_COSTACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_COST_COSTACCESSORPOSTGRESQL_HPP
 
-#include "../../GameServer/Cost/ICostManagerAccessor.hpp"
-#include <gmock/gmock.h>
+#include "ICostAccessor.hpp"
 
 namespace GameServer
 {
@@ -37,10 +36,10 @@ namespace Cost
 {
 
 /**
- * @brief An mock of cost manager accessor.
+ * @brief A PostgreSQL cost accessor.
  */
-class CostManagerAccessorMock
-    : public ICostManagerAccessor
+class CostAccessorPostgresql
+    : public ICostAccessor
 {
 public:
     /**
@@ -52,17 +51,14 @@ public:
      *
      * @return A map of human with volume records, an empty map if not found.
      */
-    MOCK_CONST_METHOD3(
-        getCosts,
-        CostRecordVec(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::KeyHash                 const & a_key_hash,
-            IDCostType                                  const & a_id_cost_type
-        )
-    );
+    virtual CostRecordVec getCosts(
+        Persistence::ITransactionShrPtr         a_transaction,
+        Common::KeyHash                 const & a_key_hash,
+        IDCostType                      const & a_id_cost_type
+    ) const;
 };
 
 } // namespace Cost
 } // namespace GameServer
 
-#endif // GAMESERVER_COST_COSTMANAGERACCESSORMOCK_HPP
+#endif // GAMESERVER_COST_COSTACCESSORPOSTGRESQL_HPP

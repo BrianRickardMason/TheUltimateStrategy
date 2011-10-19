@@ -28,7 +28,7 @@
 #include "../../GameServer/Cost/CostPersistenceFacade.hpp"
 #include "../../GameServer/Resource/Resource.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "CostManagerAccessorMock.hpp"
+#include "CostAccessorMock.hpp"
 
 using namespace GameServer::Common;
 using namespace GameServer::Cost;
@@ -88,7 +88,7 @@ protected:
 
 TEST_F(CostPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    ICostManagerAccessorAutPtr accessor(new CostManagerAccessorMock);
+    ICostAccessorAutPtr accessor(new CostAccessorMock);
 
     ASSERT_NO_THROW(CostPersistenceFacade persistence_facade(accessor));
 }
@@ -97,12 +97,12 @@ TEST_F(CostPersistenceFacadeTest, getCost_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    CostManagerAccessorMock * mock = new CostManagerAccessorMock;
+    CostAccessorMock * mock = new CostAccessorMock;
 
     EXPECT_CALL(*mock, getCosts(transaction, 1, 2))
     .WillOnce(Return(m_cost_record_vector));
 
-    ICostManagerAccessorAutPtr accessor(mock);
+    ICostAccessorAutPtr accessor(mock);
 
     CostPersistenceFacade persistence_facade(accessor);
 
@@ -124,14 +124,14 @@ TEST_F(CostPersistenceFacadeTest, getCost_Failure_GetCostThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    CostManagerAccessorMock * mock = new CostManagerAccessorMock;
+    CostAccessorMock * mock = new CostAccessorMock;
 
     std::exception e;
 
     EXPECT_CALL(*mock, getCosts(transaction, 1, 2))
     .WillOnce(Throw(e));
 
-    ICostManagerAccessorAutPtr accessor(mock);
+    ICostAccessorAutPtr accessor(mock);
 
     CostPersistenceFacade persistence_facade(accessor);
 
