@@ -35,11 +35,11 @@ namespace World
 {
 
 CreateWorldOperatorAutPtr CreateWorldOperatorFactory::createCreateWorldOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return CreateWorldOperatorAutPtr(
-               new CreateWorldOperator(a_manager_abstract_factory->createWorldPersistenceFacade())
+               new CreateWorldOperator(a_persistence_facade_abstract_factory->createWorldPersistenceFacade())
            );
 }
 

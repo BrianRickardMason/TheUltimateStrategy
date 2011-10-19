@@ -35,14 +35,14 @@ namespace Human
 {
 
 DismissHumanOperatorAutPtr DismissHumanOperatorFactory::createDismissHumanOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return DismissHumanOperatorAutPtr(
-               new DismissHumanOperator(a_manager_abstract_factory->createCostPersistenceFacade(),
-                                        a_manager_abstract_factory->createHumanPersistenceFacade(),
-                                        a_manager_abstract_factory->createPropertyPersistenceFacade(),
-                                        a_manager_abstract_factory->createResourcePersistenceFacade())
+               new DismissHumanOperator(a_persistence_facade_abstract_factory->createCostPersistenceFacade(),
+                                        a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
+                                        a_persistence_facade_abstract_factory->createPropertyPersistenceFacade(),
+                                        a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
            );
 }
 

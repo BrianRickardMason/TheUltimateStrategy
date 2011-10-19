@@ -50,7 +50,7 @@ CreateWorldOperatorExitCode CreateWorldOperator::createWorld(
     try
     {
         // Verify if the world exists.
-        // TODO: WorldManager::getWorldByName.
+        // TODO: WorldPersistenceFacade::getWorldByName.
 
         bool const result = m_world_persistence_facade->createWorld(a_transaction, a_name);
 

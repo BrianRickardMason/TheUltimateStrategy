@@ -35,10 +35,10 @@ namespace User
 {
 
 GetUserOperatorAutPtr GetUserOperatorFactory::createGetUserOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    return GetUserOperatorAutPtr(new GetUserOperator(a_manager_abstract_factory->createUserPersistenceFacade()));
+    return GetUserOperatorAutPtr(new GetUserOperator(a_persistence_facade_abstract_factory->createUserPersistenceFacade()));
 }
 
 } // namespace User

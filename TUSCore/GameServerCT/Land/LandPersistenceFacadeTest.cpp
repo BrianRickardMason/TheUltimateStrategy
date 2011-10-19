@@ -65,10 +65,10 @@ protected:
           m_land_name_4("Land4"),
           m_land_name_5("Land5"),
           m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
-          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
-          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
-          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade())
+          m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
+          m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
+          m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade())
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -144,29 +144,19 @@ protected:
            m_land_name_5;
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief An abstract factory used in tests.
      */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
+    //@{
     /**
-     * @brief The persistence facade of users.
-     */
-    IUserPersistenceFacadeShrPtr m_user_persistence_facade;
-
-    /**
-     * @brief The world persistence facade.
-     */
-    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
-
-    /**
-     * @brief A epoch manager.
+     * @brief A persistence facade used in tests.
      */
     IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
-
-    /**
-     * @brief The land persistence facade.
-     */
-    ILandPersistenceFacadeShrPtr m_land_persistence_facade;
+    ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
+    IUserPersistenceFacadeShrPtr  m_user_persistence_facade;
+    IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
+    //}@
 };
 
 /**

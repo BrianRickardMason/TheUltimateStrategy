@@ -35,11 +35,11 @@ namespace Epoch
 {
 
 TickEpochOperatorAutPtr TickEpochOperatorFactory::createTickEpochOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    return TickEpochOperatorAutPtr(new TickEpochOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
-                                                         a_manager_abstract_factory->createWorldPersistenceFacade()));
+    return TickEpochOperatorAutPtr(new TickEpochOperator(a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
+                                                         a_persistence_facade_abstract_factory->createWorldPersistenceFacade()));
 }
 
 } // namespace Epoch

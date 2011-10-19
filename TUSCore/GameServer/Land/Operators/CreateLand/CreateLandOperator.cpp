@@ -58,7 +58,7 @@ CreateLandOperatorExitCode CreateLandOperator::createLand(
     try
     {
         // Verify if the user exists.
-        // TODO: UserManager::getUser.
+        // TODO: UserPersistenceFacade::getUser.
 
         // Verify if the world exists.
         if (!m_world_persistence_facade->getWorld(a_transaction, a_world_name))

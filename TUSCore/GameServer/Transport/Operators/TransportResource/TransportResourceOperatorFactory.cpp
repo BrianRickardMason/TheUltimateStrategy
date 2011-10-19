@@ -35,12 +35,12 @@ namespace Transport
 {
 
 TransportResourceOperatorAutPtr TransportResourceOperatorFactory::createTransportResourceOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return TransportResourceOperatorAutPtr(
-               new TransportResourceOperator(a_manager_abstract_factory->createResourcePersistenceFacade(),
-                                             a_manager_abstract_factory->createSettlementPersistenceFacade())
+               new TransportResourceOperator(a_persistence_facade_abstract_factory->createResourcePersistenceFacade(),
+                                             a_persistence_facade_abstract_factory->createSettlementPersistenceFacade())
            );
 }
 

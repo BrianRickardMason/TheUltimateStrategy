@@ -35,15 +35,15 @@ namespace Turn
 {
 
 TurnOperatorAutPtr TurnOperatorFactory::createTurnOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    return TurnOperatorAutPtr(new TurnOperator(a_manager_abstract_factory->createCostPersistenceFacade(),
-                                               a_manager_abstract_factory->createHumanPersistenceFacade(),
-                                               a_manager_abstract_factory->createLandPersistenceFacade(),
-                                               a_manager_abstract_factory->createPropertyPersistenceFacade(),
-                                               a_manager_abstract_factory->createResourcePersistenceFacade(),
-                                               a_manager_abstract_factory->createSettlementPersistenceFacade()));
+    return TurnOperatorAutPtr(new TurnOperator(a_persistence_facade_abstract_factory->createCostPersistenceFacade(),
+                                               a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
+                                               a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
+                                               a_persistence_facade_abstract_factory->createPropertyPersistenceFacade(),
+                                               a_persistence_facade_abstract_factory->createResourcePersistenceFacade(),
+                                               a_persistence_facade_abstract_factory->createSettlementPersistenceFacade()));
 }
 
 } // namespace Land

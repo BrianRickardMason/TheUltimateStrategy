@@ -94,7 +94,7 @@ protected:
     }
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief The abstract factory of persistence facades.
      */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 

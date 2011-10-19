@@ -33,12 +33,12 @@ namespace Settlement
 {
 
 BehaviourGiveGrantAutPtr BehaviourGiveGrantFactory::createBehaviourGiveGrant(
-    Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    Common::IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return BehaviourGiveGrantAutPtr(
-               new BehaviourGiveGrant(a_manager_abstract_factory->createHumanPersistenceFacade(),
-                                      a_manager_abstract_factory->createResourcePersistenceFacade())
+               new BehaviourGiveGrant(a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
+                                      a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
            );
 }
 

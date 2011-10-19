@@ -36,19 +36,19 @@ using namespace std;
 /**
  * @brief A test class.
  */
-class UserManagerTest
+class UserPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    UserManagerTest()
+    UserPersistenceFacadeTest()
         : m_login("Login"),
           m_password("Password"),
           m_different_password("DifferentPassword"),
           m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
-          m_manager(m_persistence_facade_abstract_factory->createUserPersistenceFacade())
+          m_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade())
     {
     }
 
@@ -64,108 +64,108 @@ protected:
            m_different_password;
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief An abstract factory used in tests.
      */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
     /**
-     * @brief A manager.
+     * @brief A persistence facade used in tests.
      */
-    IUserPersistenceFacadeShrPtr m_manager;
+    IUserPersistenceFacadeShrPtr m_persistence_facade;
 };
 
 /**
- * Component tests of: UserManager::createUser.
+ * Component tests of: UserPersistenceFacade::createUser.
  */
-TEST_F(UserManagerTest, createUser_UserDoesNotExist)
+TEST_F(UserPersistenceFacadeTest, createUser_UserDoesNotExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
 
     ITransactionShrPtr transaction = persistence.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
+    ASSERT_TRUE(m_persistence_facade->createUser(transaction, m_login, m_password));
     transaction->commit();
 }
 
-TEST_F(UserManagerTest, createUser_UserDoesExist)
+TEST_F(UserPersistenceFacadeTest, createUser_UserDoesExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
 
     ITransactionShrPtr transaction = persistence.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
+    ASSERT_TRUE(m_persistence_facade->createUser(transaction, m_login, m_password));
     transaction->commit();
 
     transaction = persistence.getTransaction(connection);
-    ASSERT_FALSE(m_manager->createUser(transaction, m_login, m_password));
+    ASSERT_FALSE(m_persistence_facade->createUser(transaction, m_login, m_password));
 }
 
-TEST_F(UserManagerTest, createUser_UserDoesExistDifferentPassword)
+TEST_F(UserPersistenceFacadeTest, createUser_UserDoesExistDifferentPassword)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
 
     ITransactionShrPtr transaction = persistence.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
+    ASSERT_TRUE(m_persistence_facade->createUser(transaction, m_login, m_password));
     transaction->commit();
 
     transaction = persistence.getTransaction(connection);
-    ASSERT_FALSE(m_manager->createUser(transaction, m_login, m_different_password));
+    ASSERT_FALSE(m_persistence_facade->createUser(transaction, m_login, m_different_password));
 }
 
 /**
- * Component tests of: UserManager::deleteUser.
+ * Component tests of: UserPersistenceFacade::deleteUser.
  */
-TEST_F(UserManagerTest, deleteUser_UserDoesNotExist)
+TEST_F(UserPersistenceFacadeTest, deleteUser_UserDoesNotExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
 
     ITransactionShrPtr transaction = persistence.getTransaction(connection);
-    ASSERT_TRUE(m_manager->deleteUser(transaction, m_login));
+    ASSERT_TRUE(m_persistence_facade->deleteUser(transaction, m_login));
     transaction->commit();
 }
 
-TEST_F(UserManagerTest, deleteUser_UserDoesExist)
+TEST_F(UserPersistenceFacadeTest, deleteUser_UserDoesExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
 
     ITransactionShrPtr transaction = persistence.getTransaction(connection);
-    ASSERT_TRUE(m_manager->createUser(transaction, m_login, m_password));
+    ASSERT_TRUE(m_persistence_facade->createUser(transaction, m_login, m_password));
     transaction->commit();
 
     transaction = persistence.getTransaction(connection);
-    ASSERT_TRUE(m_manager->deleteUser(transaction, m_login));
+    ASSERT_TRUE(m_persistence_facade->deleteUser(transaction, m_login));
     transaction->commit();
 }
 
 /**
- * Component tests of: UserManager::getUser.
+ * Component tests of: UserPersistenceFacade::getUser.
  */
-TEST_F(UserManagerTest, getUser_UserDoesNotExist)
+TEST_F(UserPersistenceFacadeTest, getUser_UserDoesNotExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
 
     ITransactionShrPtr transaction = persistence.getTransaction(connection);
-    IUserShrPtr user = m_manager->getUser(transaction, m_login);
+    IUserShrPtr user = m_persistence_facade->getUser(transaction, m_login);
     transaction->commit();
 
     ASSERT_TRUE(user == NULL);
 }
 
-TEST_F(UserManagerTest, getUser_UserDoesExist)
+TEST_F(UserPersistenceFacadeTest, getUser_UserDoesExist)
 {
     PersistencePostgresql persistence;
     IConnectionShrPtr connection = persistence.getConnection();
 
     ITransactionShrPtr transaction = persistence.getTransaction(connection);
-    m_manager->createUser(transaction, m_login, "m_password");
+    m_persistence_facade->createUser(transaction, m_login, "m_password");
     transaction->commit();
 
     transaction = persistence.getTransaction(connection);
-    IUserShrPtr user = m_manager->getUser(transaction, m_login);
+    IUserShrPtr user = m_persistence_facade->getUser(transaction, m_login);
     transaction->commit();
 
     ASSERT_FALSE(user == NULL);

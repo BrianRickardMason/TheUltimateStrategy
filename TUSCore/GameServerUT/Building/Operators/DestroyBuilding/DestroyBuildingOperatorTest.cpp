@@ -64,11 +64,11 @@ protected:
     }
 
     /**
-     * @brief Configures a BuildingManagerMock's responses for getBuilding().
+     * @brief Configures a BuildingPersistenceFacadeMock's responses for getBuilding().
      *
      * @param a_volume A volume to be returned.
      */
-    void configureBuildingManagerMockForGetBuilding(
+    void configureBuildingPersistenceFacadeMockForGetBuilding(
         GameServer::Building::Volume const & a_volume
     )
     {
@@ -173,7 +173,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughBuildings)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(1);
+    configureBuildingPersistenceFacadeMockForGetBuilding(1);
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                       (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
@@ -187,7 +187,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetResourcesThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
     std::exception e;
 
@@ -206,7 +206,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetCostThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
     std::exception e;
 
@@ -228,7 +228,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
     configureCostPersistenceFacadeMockForGetCost();
 
@@ -247,7 +247,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
     configureCostPersistenceFacadeMockForGetCost();
 
@@ -266,7 +266,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
     configureCostPersistenceFacadeMockForGetCost();
 
@@ -291,7 +291,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
     configureCostPersistenceFacadeMockForGetCost();
 
@@ -313,7 +313,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
     std::exception e;
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Throw(e));
@@ -337,7 +337,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(false));
 
@@ -360,7 +360,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(true));
 
@@ -385,7 +385,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5))
     .WillOnce(Return(true));
 
@@ -410,7 +410,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(10);
+    configureBuildingPersistenceFacadeMockForGetBuilding(10);
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
 
@@ -435,7 +435,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingManagerMockForGetBuilding(20);
+    configureBuildingPersistenceFacadeMockForGetBuilding(20);
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
 

@@ -37,7 +37,7 @@ namespace Resource
 {
 
 /**
- * @brief A mock of resource manager.
+ * @brief A mock of resource persistence facade.
  */
 class ResourcePersistenceFacadeMock
     : public IResourcePersistenceFacade

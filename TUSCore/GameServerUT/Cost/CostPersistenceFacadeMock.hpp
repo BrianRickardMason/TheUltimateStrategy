@@ -37,7 +37,7 @@ namespace Cost
 {
 
 /**
- * @brief A mock of cost manager.
+ * @brief A mock of cost persistence facade.
  */
 class CostPersistenceFacadeMock
     : public ICostPersistenceFacade

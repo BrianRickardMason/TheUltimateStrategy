@@ -35,11 +35,11 @@ namespace Authentication
 {
 
 AuthenticateOperatorAutPtr AuthenticateOperatorFactory::createAuthenticateOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return AuthenticateOperatorAutPtr(
-               new AuthenticateOperator(a_manager_abstract_factory->createAuthenticationPersistenceFacade())
+               new AuthenticateOperator(a_persistence_facade_abstract_factory->createAuthenticationPersistenceFacade())
            );
 }
 

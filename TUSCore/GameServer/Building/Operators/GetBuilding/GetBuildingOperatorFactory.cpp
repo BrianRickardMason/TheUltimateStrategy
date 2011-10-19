@@ -35,11 +35,11 @@ namespace Building
 {
 
 GetBuildingOperatorAutPtr GetBuildingOperatorFactory::createGetBuildingOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return GetBuildingOperatorAutPtr(
-               new GetBuildingOperator(a_manager_abstract_factory->createBuildingPersistenceFacade())
+               new GetBuildingOperator(a_persistence_facade_abstract_factory->createBuildingPersistenceFacade())
            );
 }
 

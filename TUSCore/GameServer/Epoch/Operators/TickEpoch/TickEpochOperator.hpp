@@ -52,7 +52,7 @@ public:
      * @param a_world_persistence_facade The persistence facade of worlds.
      */
     TickEpochOperator(
-        IEpochPersistenceFacadeShrPtr        a_epoch_manager,
+        IEpochPersistenceFacadeShrPtr        a_epoch_persistence_facade,
         World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
     );
 

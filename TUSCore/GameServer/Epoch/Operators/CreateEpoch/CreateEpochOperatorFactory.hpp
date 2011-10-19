@@ -45,12 +45,12 @@ public:
     /**
      * @brief The factory method.
      *
-     * @param a_manager_abstract_factory The abstract factory of managers.
+     * @param a_persistence_facade_abstract_factory The abstract factory of persistence facades.
      *
      * @return The newly created CreateEpochOperator.
      */
     static CreateEpochOperatorAutPtr createCreateEpochOperator(
-        Common::IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+        Common::IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
     );
 };
 

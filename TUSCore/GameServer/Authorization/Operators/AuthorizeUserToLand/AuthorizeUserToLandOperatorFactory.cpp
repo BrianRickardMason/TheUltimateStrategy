@@ -35,11 +35,11 @@ namespace Authorization
 {
 
 AuthorizeUserToLandOperatorAutPtr AuthorizeUserToLandOperatorFactory::createAuthorizeUserToLandOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return AuthorizeUserToLandOperatorAutPtr(
-               new AuthorizeUserToLandOperator(a_manager_abstract_factory->createAuthorizationPersistenceFacade())
+               new AuthorizeUserToLandOperator(a_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade())
            );
 }
 

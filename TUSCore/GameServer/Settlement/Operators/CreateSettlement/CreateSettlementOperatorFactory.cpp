@@ -36,14 +36,14 @@ namespace Settlement
 {
 
 CreateSettlementOperatorAutPtr CreateSettlementOperatorFactory::createCreateSettlementOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    IBehaviourGiveGrantShrPtr behaviour_give_grant(BehaviourGiveGrantFactory::createBehaviourGiveGrant(a_manager_abstract_factory));
+    IBehaviourGiveGrantShrPtr behaviour_give_grant(BehaviourGiveGrantFactory::createBehaviourGiveGrant(a_persistence_facade_abstract_factory));
 
     return CreateSettlementOperatorAutPtr(
-               new CreateSettlementOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
-                                            a_manager_abstract_factory->createSettlementPersistenceFacade(),
+               new CreateSettlementOperator(a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
+                                            a_persistence_facade_abstract_factory->createSettlementPersistenceFacade(),
                                             behaviour_give_grant)
            );
 }

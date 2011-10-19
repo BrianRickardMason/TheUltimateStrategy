@@ -64,19 +64,6 @@ protected:
     }
 
     /**
-     * @brief Configures a BuildingManagerMock's responses for getBuilding().
-     *
-     * @param a_volume A volume to be returned.
-     */
-    void configureBuildingManagerMockForGetBuilding(
-        GameServer::Building::Volume const & a_volume
-    )
-    {
-        EXPECT_CALL(*m_building_persistence_facade, getBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN))
-        .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_DEFENSIVE_BARBICAN, a_volume)));
-    }
-
-    /**
      * @brief Configures a CostPersistenceFacadeMock's response for getCost().
      */
     void configureCostPersistenceFacadeMockForGetCost()

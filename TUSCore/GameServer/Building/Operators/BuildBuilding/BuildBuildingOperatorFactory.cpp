@@ -35,13 +35,13 @@ namespace Building
 {
 
 BuildBuildingOperatorAutPtr BuildBuildingOperatorFactory::createBuildBuildingOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return BuildBuildingOperatorAutPtr(
-               new BuildBuildingOperator(a_manager_abstract_factory->createBuildingPersistenceFacade(),
-                                         a_manager_abstract_factory->createCostPersistenceFacade(),
-                                         a_manager_abstract_factory->createResourcePersistenceFacade())
+               new BuildBuildingOperator(a_persistence_facade_abstract_factory->createBuildingPersistenceFacade(),
+                                         a_persistence_facade_abstract_factory->createCostPersistenceFacade(),
+                                         a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
            );
 }
 

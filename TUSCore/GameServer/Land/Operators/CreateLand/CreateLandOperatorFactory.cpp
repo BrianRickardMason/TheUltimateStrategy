@@ -35,12 +35,12 @@ namespace Land
 {
 
 CreateLandOperatorAutPtr CreateLandOperatorFactory::createCreateLandOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    return CreateLandOperatorAutPtr(new CreateLandOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
-                                                           a_manager_abstract_factory->createUserPersistenceFacade(),
-                                                           a_manager_abstract_factory->createWorldPersistenceFacade()));
+    return CreateLandOperatorAutPtr(new CreateLandOperator(a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
+                                                           a_persistence_facade_abstract_factory->createUserPersistenceFacade(),
+                                                           a_persistence_facade_abstract_factory->createWorldPersistenceFacade()));
 }
 
 } // namespace Land

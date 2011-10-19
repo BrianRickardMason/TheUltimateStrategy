@@ -35,11 +35,11 @@ namespace Settlement
 {
 
 DeleteSettlementOperatorAutPtr DeleteSettlementOperatorFactory::createDeleteSettlementOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return DeleteSettlementOperatorAutPtr(
-               new DeleteSettlementOperator(a_manager_abstract_factory->createSettlementPersistenceFacade())
+               new DeleteSettlementOperator(a_persistence_facade_abstract_factory->createSettlementPersistenceFacade())
            );
 }
 

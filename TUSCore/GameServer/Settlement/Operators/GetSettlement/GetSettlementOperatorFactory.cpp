@@ -35,11 +35,11 @@ namespace Settlement
 {
 
 GetSettlementOperatorAutPtr GetSettlementOperatorFactory::createGetSettlementOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return GetSettlementOperatorAutPtr(
-               new GetSettlementOperator(a_manager_abstract_factory->createSettlementPersistenceFacade())
+               new GetSettlementOperator(a_persistence_facade_abstract_factory->createSettlementPersistenceFacade())
            );
 }
 

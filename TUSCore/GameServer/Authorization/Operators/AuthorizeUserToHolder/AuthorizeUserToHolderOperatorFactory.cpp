@@ -35,11 +35,11 @@ namespace Authorization
 {
 
 AuthorizeUserToHolderOperatorAutPtr AuthorizeUserToHolderOperatorFactory::createAuthorizeUserToHolderOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return AuthorizeUserToHolderOperatorAutPtr(
-               new AuthorizeUserToHolderOperator(a_manager_abstract_factory->createAuthorizationPersistenceFacade())
+               new AuthorizeUserToHolderOperator(a_persistence_facade_abstract_factory->createAuthorizationPersistenceFacade())
            );
 }
 

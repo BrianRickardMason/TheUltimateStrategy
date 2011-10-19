@@ -35,11 +35,11 @@ namespace Resource
 {
 
 GetResourceOperatorAutPtr GetResourceOperatorFactory::createGetResourceOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return GetResourceOperatorAutPtr(
-               new GetResourceOperator(a_manager_abstract_factory->createResourcePersistenceFacade())
+               new GetResourceOperator(a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
            );
 }
 

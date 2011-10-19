@@ -35,10 +35,10 @@ namespace Human
 {
 
 GetHumanOperatorAutPtr GetHumanOperatorFactory::createGetHumanOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    return GetHumanOperatorAutPtr(new GetHumanOperator(a_manager_abstract_factory->createHumanPersistenceFacade()));
+    return GetHumanOperatorAutPtr(new GetHumanOperator(a_persistence_facade_abstract_factory->createHumanPersistenceFacade()));
 }
 
 } // namespace Human

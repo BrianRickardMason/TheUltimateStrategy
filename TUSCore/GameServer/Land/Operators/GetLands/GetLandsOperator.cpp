@@ -53,7 +53,7 @@ GetLandsOperatorExitCode GetLandsOperator::getLands(
     try
     {
         // Verify if the user exists.
-        // TODO: UserManager::getUser.
+        // TODO: UserPersistenceFacade::getUser.
 
         ILandMap const lands = m_land_persistence_facade->getLands(a_transaction, a_login);
 

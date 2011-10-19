@@ -41,14 +41,14 @@ using namespace std;
 /**
  * @brief The test class.
  */
-class EpochManagerTest
+class EpochPersistenceFacadeTest
     : public ComponentTest
 {
 protected:
     /**
      * @brief Constructs the test class.
      */
-    EpochManagerTest()
+    EpochPersistenceFacadeTest()
         : m_epoch_name_1("Epoch1"),
           m_epoch_name_2("Epoch2"),
           m_epoch_name_3("Epoch3"),
@@ -132,7 +132,7 @@ protected:
     string m_settlement_name;
 
     /**
-     * @brief The abstract factory of managers.
+     * @brief The abstract factory of persistence facades.
      */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
@@ -163,9 +163,9 @@ protected:
 };
 
 /**
- * Component tests of: EpochManager::createEpoch.
+ * Component tests of: EpochPersistenceFacade::createEpoch.
  */
-TEST_F(EpochManagerTest, createEpoch_WorldDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, createEpoch_WorldDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -175,7 +175,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, createEpoch_WorldDoesExist_EpochDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -187,7 +187,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, createEpoch_WorldDoesExist_EpochDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -206,7 +206,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist)
     }
 }
 
-TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorld_TheSameEpoch)
+TEST_F(EpochPersistenceFacadeTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorld_TheSameEpoch)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -225,7 +225,7 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorl
     }
 }
 
-TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorld_DifferentEpoch)
+TEST_F(EpochPersistenceFacadeTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorld_DifferentEpoch)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -247,9 +247,9 @@ TEST_F(EpochManagerTest, createEpoch_WorldDoesExist_EpochDoesExist_DifferentWorl
 }
 
 /**
- * Component tests of: EpochManager::deleteEpoch.
+ * Component tests of: EpochPersistenceFacade::deleteEpoch.
  */
-TEST_F(EpochManagerTest, deleteEpoch_WorldDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_WorldDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -259,7 +259,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_WorldDoesExist_EpochDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -269,7 +269,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_WorldDoesExist_EpochDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -288,7 +288,7 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist)
     }
 }
 
-TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist_Finished)
+TEST_F(EpochPersistenceFacadeTest, deleteEpoch_WorldDoesExist_EpochDoesExist_Finished)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -319,9 +319,9 @@ TEST_F(EpochManagerTest, deleteEpoch_WorldDoesExist_EpochDoesExist_Finished)
 }
 
 /**
- * Component tests of: EpochManager::getEpoch.
+ * Component tests of: EpochPersistenceFacade::getEpoch.
  */
-TEST_F(EpochManagerTest, getEpoch_WorldDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, getEpoch_WorldDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -335,7 +335,7 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, getEpoch_WorldDoesExist_EpochDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -349,7 +349,7 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, getEpoch_WorldDoesExist_EpochDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -374,9 +374,9 @@ TEST_F(EpochManagerTest, getEpoch_WorldDoesExist_EpochDoesExist)
 }
 
 /**
- * Component tests of: EpochManager::getEpochByLandName.
+ * Component tests of: EpochPersistenceFacade::getEpochByLandName.
  */
-TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -428,9 +428,9 @@ TEST_F(EpochManagerTest, getEpochByLandName_EpochDoesExist)
 }
 
 /**
- * Component tests of: EpochManager::getEpochBySettlementName.
+ * Component tests of: EpochPersistenceFacade::getEpochBySettlementName.
  */
-TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -491,9 +491,9 @@ TEST_F(EpochManagerTest, getEpochBySettlementName_EpochDoesExist)
 }
 
 /**
- * Component tests of: EpochManager::activateEpoch.
+ * Component tests of: EpochPersistenceFacade::activateEpoch.
  */
-TEST_F(EpochManagerTest, activateEpoch_WorldDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_WorldDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -503,7 +503,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_WorldDoesExist_EpochDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -513,7 +513,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Finished)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_WorldDoesExist_EpochDoesExist_Finished)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -541,7 +541,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Finished)
     }
 }
 
-TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Active)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_WorldDoesExist_EpochDoesExist_Active)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -569,7 +569,7 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Active)
     }
 }
 
-TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
+TEST_F(EpochPersistenceFacadeTest, activateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -591,9 +591,9 @@ TEST_F(EpochManagerTest, activateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
 }
 
 /**
- * Component tests of: EpochManager::deactivateEpoch.
+ * Component tests of: EpochPersistenceFacade::deactivateEpoch.
  */
-TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_WorldDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -603,7 +603,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_WorldDoesExist_EpochDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -613,7 +613,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Finished)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Finished)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -641,7 +641,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Finished)
     }
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Active)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Active)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -671,7 +671,7 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Active)
     }
 }
 
-TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
+TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -692,9 +692,9 @@ TEST_F(EpochManagerTest, deactivateEpoch_WorldDoesExist_EpochDoesExist_Unactive)
 
 
 /**
- * Component tests of: EpochManager::finishEpoch.
+ * Component tests of: EpochPersistenceFacade::finishEpoch.
  */
-TEST_F(EpochManagerTest, finishEpoch_WorldDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_WorldDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -704,7 +704,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_WorldDoesExist_EpochDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -714,7 +714,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Finished)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_WorldDoesExist_EpochDoesExist_Finished)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -742,7 +742,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Finished)
     }
 }
 
-TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Active)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_WorldDoesExist_EpochDoesExist_Active)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -770,7 +770,7 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist_Active)
     }
 }
 
-TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist)
+TEST_F(EpochPersistenceFacadeTest, finishEpoch_WorldDoesExist_EpochDoesExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -792,9 +792,9 @@ TEST_F(EpochManagerTest, finishEpoch_WorldDoesExist_EpochDoesExist)
 }
 
 /**
- * Component tests of: EpochManager::tickEpoch.
+ * Component tests of: EpochPersistenceFacade::tickEpoch.
  */
-TEST_F(EpochManagerTest, tickEpoch_WorldDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_WorldDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -804,7 +804,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesNotExist)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_WorldDoesExist_EpochDoesNotExist)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -814,7 +814,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesNotExist)
     }
 }
 
-TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Finished)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_WorldDoesExist_EpochDoesExist_Finished)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -842,7 +842,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Finished)
     }
 }
 
-TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Active)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_WorldDoesExist_EpochDoesExist_Active)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -870,7 +870,7 @@ TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Active)
     }
 }
 
-TEST_F(EpochManagerTest, tickEpoch_WorldDoesExist_EpochDoesExist_Unactive)
+TEST_F(EpochPersistenceFacadeTest, tickEpoch_WorldDoesExist_EpochDoesExist_Unactive)
 {
     {
         IConnectionShrPtr connection = m_persistence.getConnection();

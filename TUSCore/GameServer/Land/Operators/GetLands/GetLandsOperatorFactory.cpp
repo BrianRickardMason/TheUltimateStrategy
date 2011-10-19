@@ -35,11 +35,11 @@ namespace Land
 {
 
 GetLandsOperatorAutPtr GetLandsOperatorFactory::createGetLandsOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
-    return GetLandsOperatorAutPtr(new GetLandsOperator(a_manager_abstract_factory->createLandPersistenceFacade(),
-                                                       a_manager_abstract_factory->createUserPersistenceFacade()));
+    return GetLandsOperatorAutPtr(new GetLandsOperator(a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
+                                                       a_persistence_facade_abstract_factory->createUserPersistenceFacade()));
 }
 
 } // namespace Land

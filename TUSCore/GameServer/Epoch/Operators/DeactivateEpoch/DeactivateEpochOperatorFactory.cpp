@@ -35,12 +35,12 @@ namespace Epoch
 {
 
 DeactivateEpochOperatorAutPtr DeactivateEpochOperatorFactory::createDeactivateEpochOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_manager_abstract_factory
+    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
 )
 {
     return DeactivateEpochOperatorAutPtr(
-               new DeactivateEpochOperator(a_manager_abstract_factory->createEpochPersistenceFacade(),
-                                           a_manager_abstract_factory->createWorldPersistenceFacade())
+               new DeactivateEpochOperator(a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
+                                           a_persistence_facade_abstract_factory->createWorldPersistenceFacade())
            );
 }
 
