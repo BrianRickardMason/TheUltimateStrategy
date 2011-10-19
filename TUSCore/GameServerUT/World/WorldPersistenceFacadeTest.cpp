@@ -28,7 +28,7 @@
 #include "../../GameServer/World/WorldPersistenceFacade.hpp"
 #include "../../GameServer/World/WorldRecord.hpp"
 #include "../Persistence/TransactionDummy.hpp"
-#include "WorldManagerAccessorMock.hpp"
+#include "WorldAccessorMock.hpp"
 
 using namespace GameServer::Persistence;
 using namespace GameServer::World;
@@ -83,7 +83,7 @@ protected:
 
 TEST_F(WorldPersistenceFacadeTest, CtorDoesNotThrow)
 {
-    IWorldManagerAccessorAutPtr accessor(new WorldManagerAccessorMock);
+    IWorldAccessorAutPtr accessor(new WorldAccessorMock);
 
     ASSERT_NO_THROW(WorldPersistenceFacade persistence_facade(accessor));
 }
@@ -92,11 +92,11 @@ TEST_F(WorldPersistenceFacadeTest, createWorld_Success)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     EXPECT_CALL(*mock, insertRecord(transaction, "World"));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -107,14 +107,14 @@ TEST_F(WorldPersistenceFacadeTest, createWorld_Failure)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     std::exception e;
 
     EXPECT_CALL(*mock, insertRecord(transaction, "World"))
     .WillOnce(Throw(e));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -125,12 +125,12 @@ TEST_F(WorldPersistenceFacadeTest, getWorld_WorldDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
     .WillOnce(Return(IWorldRecordShrPtr()));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -143,12 +143,12 @@ TEST_F(WorldPersistenceFacadeTest, getWorld_WorldDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
     .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -163,7 +163,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorldByLandName_WorldDoesNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_land_name))
     .WillOnce(Return(m_world_name_1));
@@ -171,7 +171,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorldByLandName_WorldDoesNotExist)
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
     .WillOnce(Return(IWorldRecordShrPtr()));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -184,7 +184,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorldByLandName_WorldDoesExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     EXPECT_CALL(*mock, getWorldNameOfLand(transaction, m_land_name))
     .WillOnce(Return(m_world_name_1));
@@ -192,7 +192,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorldByLandName_WorldDoesExist)
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
     .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -207,14 +207,14 @@ TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoNotExist)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     IWorldRecordMap map;
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -227,7 +227,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_OneWorld)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     IWorldRecordMap map;
     map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
@@ -235,7 +235,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_OneWorld)
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 
@@ -252,7 +252,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_ManyWorlds)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    WorldManagerAccessorMock * mock = new WorldManagerAccessorMock;
+    WorldAccessorMock * mock = new WorldAccessorMock;
 
     IWorldRecordMap map;
     map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
@@ -261,7 +261,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_ManyWorlds)
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
 
-    IWorldManagerAccessorAutPtr accessor(mock);
+    IWorldAccessorAutPtr accessor(mock);
 
     WorldPersistenceFacade persistence_facade(accessor);
 

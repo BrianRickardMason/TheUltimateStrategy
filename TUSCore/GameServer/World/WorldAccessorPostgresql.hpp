@@ -25,16 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_WORLD_IWORLDMANAGERACCESSOR_HPP
-#define GAMESERVER_WORLD_IWORLDMANAGERACCESSOR_HPP
+#ifndef GAMESERVER_WORLD_WORLDACCESSORPOSTGRESQL_HPP
+#define GAMESERVER_WORLD_WORLDACCESSORPOSTGRESQL_HPP
 
-#include "../Persistence/ITransaction.hpp"
-#include "IWorldRecord.hpp"
-#include <boost/make_shared.hpp>
-#include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <memory>
-#include <string>
+#include "IWorldAccessor.hpp"
 
 namespace GameServer
 {
@@ -42,17 +36,12 @@ namespace World
 {
 
 /**
- * @brief The interface of the world manager accessor.
+ * @brief The PostgreSQL world accessor.
  */
-class IWorldManagerAccessor
-    : boost::noncopyable
+class WorldAccessorPostgresql
+    : public IWorldAccessor
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
-    virtual ~IWorldManagerAccessor(){};
-
     /**
      * @brief Inserts a world record.
      *
@@ -62,7 +51,7 @@ public:
     virtual void insertRecord(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets a world record.
@@ -75,7 +64,7 @@ public:
     virtual IWorldRecordShrPtr getRecord(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets world records.
@@ -86,7 +75,7 @@ public:
      */
     virtual IWorldRecordMap getRecords(
         Persistence::ITransactionShrPtr a_transaction
-    ) const = 0;
+    ) const;
 
     /**
      * @brief Gets the name of the world of the land.
@@ -99,20 +88,10 @@ public:
     virtual std::string getWorldNameOfLand(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
-    ) const = 0;
+    ) const;
 };
-
-/**
- * @brief An auto pointer of interface of world manager accessor.
- */
-typedef std::auto_ptr<IWorldManagerAccessor> IWorldManagerAccessorAutPtr;
-
-/**
- * @brief A scoped pointer of interface of world manager accessor.
- */
-typedef boost::scoped_ptr<IWorldManagerAccessor> IWorldManagerAccessorScpPtr;
 
 } // namespace World
 } // namespace GameServer
 
-#endif // GAMESERVER_WORLD_IWORLDMANAGERACCESSOR_HPP
+#endif // GAMESERVER_WORLD_WORLDACCESSORPOSTGRESQL_HPP

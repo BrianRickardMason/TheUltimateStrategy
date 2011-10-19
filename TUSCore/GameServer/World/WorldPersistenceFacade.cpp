@@ -38,7 +38,7 @@ namespace World
 {
 
 WorldPersistenceFacade::WorldPersistenceFacade(
-    IWorldManagerAccessorAutPtr a_accessor
+    IWorldAccessorAutPtr a_accessor
 )
     : m_accessor(a_accessor)
 {

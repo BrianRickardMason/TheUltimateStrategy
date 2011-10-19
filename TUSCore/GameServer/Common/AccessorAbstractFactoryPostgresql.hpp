@@ -60,7 +60,7 @@ public:
     virtual Resource::IResourceAccessorAutPtr             createResourceAccessor()       const;
     virtual Settlement::ISettlementAccessorAutPtr         createSettlementAccessor()     const;
     virtual User::IUserAccessorAutPtr                     createUserAccessor()           const;
-    virtual World::IWorldManagerAccessorAutPtr            createWorldAccessor()          const;
+    virtual World::IWorldAccessorAutPtr                   createWorldAccessor()          const;
     //}@
 };
 

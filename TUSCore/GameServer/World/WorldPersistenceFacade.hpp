@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_WORLD_WORLDPERSISTENCEFACADE_HPP
 #define GAMESERVER_WORLD_WORLDPERSISTENCEFACADE_HPP
 
-#include "IWorldManagerAccessor.hpp"
+#include "IWorldAccessor.hpp"
 #include "IWorldPersistenceFacade.hpp"
 
 namespace GameServer
@@ -49,7 +49,7 @@ public:
      * @param a_accessor The accessor to be injected.
      */
     WorldPersistenceFacade(
-        IWorldManagerAccessorAutPtr a_accessor
+        IWorldAccessorAutPtr a_accessor
     );
 
     /**
@@ -106,11 +106,11 @@ private:
     /**
      * @brief An accessor.
      */
-    IWorldManagerAccessorScpPtr m_accessor;
+    IWorldAccessorScpPtr m_accessor;
 };
 
 /**
- * @brief An auto pointer of world persistence facade.
+ * @brief Typedef of auto pointer.
  */
 typedef std::auto_ptr<WorldPersistenceFacade> WorldPersistenceFacadeAutPtr;
 

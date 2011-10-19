@@ -40,7 +40,7 @@
 #include "../Resource/IResourceAccessor.hpp"
 #include "../Settlement/ISettlementAccessor.hpp"
 #include "../User/IUserAccessor.hpp"
-#include "../World/IWorldManagerAccessor.hpp"
+#include "../World/IWorldAccessor.hpp"
 #include <boost/shared_ptr.hpp>
 
 namespace GameServer
@@ -74,7 +74,7 @@ public:
     virtual Resource::IResourceAccessorAutPtr             createResourceAccessor()       const = 0;
     virtual Settlement::ISettlementAccessorAutPtr         createSettlementAccessor()     const = 0;
     virtual User::IUserAccessorAutPtr                     createUserAccessor()           const = 0;
-    virtual World::IWorldManagerAccessorAutPtr            createWorldAccessor()          const = 0;
+    virtual World::IWorldAccessorAutPtr                   createWorldAccessor()          const = 0;
     //}@
 };
 

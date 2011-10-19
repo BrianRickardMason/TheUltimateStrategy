@@ -37,7 +37,7 @@
 #include "../Resource/ResourceAccessorPostgresql.hpp"
 #include "../Settlement/SettlementAccessorPostgresql.hpp"
 #include "../User/UserAccessorPostgresql.hpp"
-#include "../World/WorldManagerAccessorPostgresql.hpp"
+#include "../World/WorldAccessorPostgresql.hpp"
 #include "AccessorAbstractFactoryPostgresql.hpp"
 
 using namespace GameServer::Achievement;
@@ -119,9 +119,9 @@ IUserAccessorAutPtr AccessorAbstractFactoryPostgresql::createUserAccessor() cons
     return IUserAccessorAutPtr(new UserAccessorPostgresql);
 }
 
-IWorldManagerAccessorAutPtr AccessorAbstractFactoryPostgresql::createWorldAccessor() const
+IWorldAccessorAutPtr AccessorAbstractFactoryPostgresql::createWorldAccessor() const
 {
-    return IWorldManagerAccessorAutPtr(new WorldManagerAccessorPostgresql);
+    return IWorldAccessorAutPtr(new WorldAccessorPostgresql);
 }
 
 } // namespace Common

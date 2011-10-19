@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../Persistence/TransactionPostgresql.hpp"
-#include "WorldManagerAccessorPostgresql.hpp"
+#include "WorldAccessorPostgresql.hpp"
 #include "WorldRecord.hpp"
 
 using namespace GameServer::Persistence;
@@ -38,7 +38,7 @@ namespace GameServer
 namespace World
 {
 
-void WorldManagerAccessorPostgresql::insertRecord(
+void WorldAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -52,7 +52,7 @@ void WorldManagerAccessorPostgresql::insertRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-IWorldRecordShrPtr WorldManagerAccessorPostgresql::getRecord(
+IWorldRecordShrPtr WorldAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -80,7 +80,7 @@ IWorldRecordShrPtr WorldManagerAccessorPostgresql::getRecord(
     }
 }
 
-IWorldRecordMap WorldManagerAccessorPostgresql::getRecords(
+IWorldRecordMap WorldAccessorPostgresql::getRecords(
     ITransactionShrPtr a_transaction
 ) const
 {
@@ -109,7 +109,7 @@ IWorldRecordMap WorldManagerAccessorPostgresql::getRecords(
     return records;
 }
 
-string WorldManagerAccessorPostgresql::getWorldNameOfLand(
+string WorldAccessorPostgresql::getWorldNameOfLand(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const

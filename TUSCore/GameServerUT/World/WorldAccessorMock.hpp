@@ -25,10 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_WORLD_WORLDMANAGERACCESSORPOSTGRESQL_HPP
-#define GAMESERVER_WORLD_WORLDMANAGERACCESSORPOSTGRESQL_HPP
+#ifndef GAMESERVER_WORLD_WORLDACCESSORMOCK_HPP
+#define GAMESERVER_WORLD_WORLDACCESSORMOCK_HPP
 
-#include "IWorldManagerAccessor.hpp"
+#include "../../GameServer/World/IWorldAccessor.hpp"
+#include <gmock/gmock.h>
 
 namespace GameServer
 {
@@ -36,10 +37,10 @@ namespace World
 {
 
 /**
- * @brief The PostgreSQL world manager accessor.
+ * @brief A mock of world accessor.
  */
-class WorldManagerAccessorPostgresql
-    : public IWorldManagerAccessor
+class WorldAccessorMock
+    : public IWorldAccessor
 {
 public:
     /**
@@ -48,34 +49,43 @@ public:
      * @param a_transaction The transaction.
      * @param a_world_name  The name of the world.
      */
-    virtual void insertRecord(
-        Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_world_name
-    ) const;
+    MOCK_CONST_METHOD2(
+        insertRecord,
+        void(
+            Persistence::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
+        )
+    );
 
     /**
-     * @brief Gets a world record.
+     * @brief Gets the world record.
      *
-     * @param a_transaction The transaction.
+     * @param a_transaction A transaction.
      * @param a_world_name  The name of the world.
      *
      * @return The world record, null if not found.
      */
-    virtual IWorldRecordShrPtr getRecord(
-        Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_world_name
-    ) const;
+    MOCK_CONST_METHOD2(
+        getRecord,
+        IWorldRecordShrPtr(
+            Persistence::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
+        )
+    );
 
     /**
      * @brief Gets world records.
      *
-     * @param a_transaction The transaction.
+     * @param a_transaction A transaction.
      *
      * @return A map of world records, an empty map if not found.
      */
-    virtual IWorldRecordMap getRecords(
-        Persistence::ITransactionShrPtr a_transaction
-    ) const;
+    MOCK_CONST_METHOD1(
+        getRecords,
+        IWorldRecordMap(
+            Persistence::ITransactionShrPtr a_transaction
+        )
+    );
 
     /**
      * @brief Gets the name of the world of the land.
@@ -85,13 +95,16 @@ public:
      *
      * @return The name of the world, an empty string if not found.
      */
-    virtual std::string getWorldNameOfLand(
-        Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_land_name
-    ) const;
+    MOCK_CONST_METHOD2(
+        getWorldNameOfLand,
+        std::string(
+            Persistence::ITransactionShrPtr       a_transaction,
+            std::string                     const a_land_name
+        )
+    );
 };
 
 } // namespace World
 } // namespace GameServer
 
-#endif // GAMESERVER_WORLD_WORLDMANAGERACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_WORLD_WORLDACCESSORMOCK_HPP
