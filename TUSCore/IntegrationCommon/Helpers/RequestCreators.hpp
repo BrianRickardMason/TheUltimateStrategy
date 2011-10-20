@@ -504,21 +504,6 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResources(
 );
 
 /**
- * @brief Creates a request "turn".
- *
- * @param a_login     The login of the user.
- * @param a_password  The password of the user.
- * @param a_land_name The name of a land.
- *
- * @return The created request.
- */
-Network::XmlRPCCommon::Request::RequestShrPtr createRequestTurn(
-    std::string const & a_login,
-    std::string const & a_password,
-    std::string const   a_land_name
-);
-
-/**
  * @brief Creates a request "transport human".
  *
  * @param a_login                       The login of the user.

@@ -61,7 +61,6 @@
 #include "../Settlement/Operators/GetSettlements/IGetSettlementsOperator.hpp"
 #include "../Transport/Operators/TransportHuman/ITransportHumanOperator.hpp"
 #include "../Transport/Operators/TransportResource/ITransportResourceOperator.hpp"
-#include "../Turn/Operators/Turn/ITurnOperator.hpp"
 #include "../User/Operators/CreateUser/ICreateUserOperator.hpp"
 #include "../User/Operators/GetUser/IGetUserOperator.hpp"
 #include "../World/Operators/CreateWorld/ICreateWorldOperator.hpp"
@@ -312,13 +311,6 @@ public:
      * @return The newly created transport resource operator.
      */
     virtual Transport::ITransportResourceOperatorShrPtr createTransportResourceOperator() const = 0;
-
-    /**
-     * @brief Creates the turn operator.
-     *
-     * @return The newly created turn operator.
-     */
-    virtual Turn::ITurnOperatorShrPtr createTurnOperator() const = 0;
 
     /**
      * @brief Creates the create user operator.

@@ -278,13 +278,6 @@ public:
     virtual Transport::ITransportResourceOperatorShrPtr createTransportResourceOperator() const;
 
     /**
-     * @brief Creates the turn operator.
-     *
-     * @return The newly created turn operator.
-     */
-    virtual Turn::ITurnOperatorShrPtr createTurnOperator() const;
-
-    /**
      * @brief Creates the create user operator.
      *
      * @return The newly created create user operator.

@@ -54,7 +54,6 @@
 #include <Network/XmlRPCServer/Request/Executors/Settlement/ExecutorGetSettlements.hpp>
 #include <Network/XmlRPCServer/Request/Executors/Transport/ExecutorTransportHuman.hpp>
 #include <Network/XmlRPCServer/Request/Executors/Transport/ExecutorTransportResource.hpp>
-#include <Network/XmlRPCServer/Request/Executors/Turn/ExecutorTurn.hpp>
 #include <Network/XmlRPCServer/Request/Executors/User/ExecutorCreateUser.hpp>
 #include <Network/XmlRPCServer/Request/Executors/World/ExecutorCreateWorld.hpp>
 #include "RequestDispatcher.hpp"
@@ -137,8 +136,6 @@ IExecutorShrPtr RequestDispatcher::dispatchRequest(
             return shared_ptr<IExecutor>(new ExecutorTickEpoch);
         case REQUEST_ID_GET_EPOCH:
             return shared_ptr<IExecutor>(new ExecutorGetEpoch);
-        case REQUEST_ID_TURN:
-            return shared_ptr<IExecutor>(new ExecutorTurn);
         case REQUEST_ID_TRANSPORT_HUMAN:
             return shared_ptr<IExecutor>(new ExecutorTransportHuman);
         case REQUEST_ID_TRANSPORT_RESOURCE:

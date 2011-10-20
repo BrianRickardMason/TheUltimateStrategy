@@ -58,7 +58,6 @@
 #include "../Settlement/Operators/GetSettlements/GetSettlementsOperatorFactory.hpp"
 #include "../Transport/Operators/TransportHuman/TransportHumanOperatorFactory.hpp"
 #include "../Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp"
-#include "../Turn/Operators/Turn/TurnOperatorFactory.hpp"
 #include "../User/Operators/CreateUser/CreateUserOperatorFactory.hpp"
 #include "../User/Operators/GetUser/GetUserOperatorFactory.hpp"
 #include "../World/Operators/CreateWorld/CreateWorldOperatorFactory.hpp"
@@ -77,7 +76,6 @@ using namespace GameServer::Land;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::Transport;
-using namespace GameServer::Turn;
 using namespace GameServer::User;
 using namespace GameServer::World;
 using namespace GameServer::WorldConfiguration;
@@ -261,11 +259,6 @@ ITransportHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createTransport
 ITransportResourceOperatorShrPtr OperatorAbstractFactoryPostgresql::createTransportResourceOperator() const
 {
     return ITransportResourceOperatorShrPtr(TransportResourceOperatorFactory::createTransportResourceOperator(m_persistence_facade_abstract_factory));
-}
-
-ITurnOperatorShrPtr OperatorAbstractFactoryPostgresql::createTurnOperator() const
-{
-    return ITurnOperatorShrPtr(TurnOperatorFactory::createTurnOperator(m_persistence_facade_abstract_factory));
 }
 
 ICreateUserOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateUserOperator() const

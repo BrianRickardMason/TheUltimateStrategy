@@ -747,28 +747,6 @@ RequestShrPtr createRequestGetResources(
     return request;
 }
 
-RequestShrPtr createRequestTurn(
-    string const & a_login,
-    string const & a_password,
-    string const   a_land_name
-)
-{
-    RequestShrPtr request = make_shared<Request>();
-
-    request->m_xml_document->appendNode("request")->appendAttribute("id")->setValue(REQUEST_ID_TURN);
-    IXmlNodeShrPtr parameters = request->m_xml_document->getNode("request")->appendNode("parameters");
-
-    IXmlNodeShrPtr user_node = request->m_xml_document->getNode("request")->appendNode("user");
-
-    user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
-    user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
-
-    IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
-    land_name->appendAttribute("value")->setValue(a_land_name.c_str());
-
-    return request;
-}
-
 RequestShrPtr createRequestTransportHuman(
     string       const & a_login,
     string       const & a_password,

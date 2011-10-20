@@ -128,6 +128,7 @@ string ScenarioCreateEpochVerificationEpochHasBeenCreated::verify(
     I_ASSERT_EQ(REPLY_ID_CREATE_EPOCH, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
     I_ASSERT_EQ(REPLY_STATUS_OK, node_reply->getNode("status")->getAttribute("value")->asInt(), "Invalid status.");
 
+
     I_ASSERT_STREQ(CREATE_EPOCH_EPOCH_HAS_BEEN_CREATED.c_str(),
                    node_reply->getNode("parameters")->getNode("message")->getAttribute("value")->getValue(),
                    "Invalid node value.");
