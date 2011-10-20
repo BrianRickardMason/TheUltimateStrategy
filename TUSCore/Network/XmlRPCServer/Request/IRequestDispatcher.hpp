@@ -46,9 +46,6 @@ class IRequestDispatcher
     : private boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs RequestDispatcher.
-     */
     virtual ~IRequestDispatcher(){}
 
     /**
@@ -64,7 +61,7 @@ public:
 };
 
 /**
- * @brief The shared pointer of the interface of RequestDispatcher.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IRequestDispatcher> IRequestDispatcherShrPtr;
 
