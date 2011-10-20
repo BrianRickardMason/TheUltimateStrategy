@@ -68,8 +68,20 @@ bool TurnManager::turn(
 {
     try
     {
-        // TODO: Get lands.
-        // TODO: Iterate through the lands and execute turn.
+        // Get lands that belong to the world.
+        ILandMap lands = m_land_persistence_facade->getLands(a_transaction, a_world);
+
+        // Execute turn of every land.
+        for (ILandMap::const_iterator it = lands.begin(); it != lands.end(); ++it)
+        {
+        	// TODO: Improve it by passing the land instance instead of the land's name.
+            bool const result = executeTurn(a_transaction, it->second->getLandName());
+
+            if (!result)
+            {
+                return false;
+            }
+        }
 
         return true;
     }
