@@ -46,9 +46,6 @@ class IDeleteSettlementOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs DeleteSettlementOperator.
-     */
     virtual ~IDeleteSettlementOperator(){};
 
     /**

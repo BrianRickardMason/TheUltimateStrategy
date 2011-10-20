@@ -46,9 +46,6 @@ class ICreateSettlementOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs CreateSettlementOperator.
-     */
     virtual ~ICreateSettlementOperator(){};
 
     /**

@@ -41,9 +41,6 @@ namespace Persistence
 class ITransaction
 {
 public:
-    /**
-     * @brief Destructs the transaction.
-     */
     virtual ~ITransaction(){};
 
     /**

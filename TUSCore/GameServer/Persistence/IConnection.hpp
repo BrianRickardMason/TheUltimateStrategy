@@ -41,9 +41,6 @@ namespace Persistence
 class IConnection
 {
 public:
-    /**
-     * @brief Destructs the connection.
-     */
     virtual ~IConnection(){};
 };
 

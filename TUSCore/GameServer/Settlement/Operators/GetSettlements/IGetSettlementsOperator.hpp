@@ -46,9 +46,6 @@ class IGetSettlementsOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetSettlementsOperator.
-     */
     virtual ~IGetSettlementsOperator(){};
 
     /**

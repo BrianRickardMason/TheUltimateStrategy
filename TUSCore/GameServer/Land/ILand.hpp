@@ -43,9 +43,6 @@ namespace Land
 class ILand
 {
 public:
-    /**
-     * @brief Destructs the interface of the land.
-     */
     virtual ~ILand(){}
 
     /**

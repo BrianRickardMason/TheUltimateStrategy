@@ -44,9 +44,6 @@ class IEpochPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the persistence facade.
-     */
     virtual ~IEpochPersistenceFacade(){}
 
     /**

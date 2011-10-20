@@ -46,9 +46,6 @@ class IGetEpochBySettlementNameOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetEpochBySettlementNameOperator.
-     */
     virtual ~IGetEpochBySettlementNameOperator(){};
 
     /**

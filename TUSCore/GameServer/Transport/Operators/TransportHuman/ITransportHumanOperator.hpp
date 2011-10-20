@@ -48,9 +48,6 @@ class ITransportHumanOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs TransportHumanOperator.
-     */
     virtual ~ITransportHumanOperator(){};
 
     /**

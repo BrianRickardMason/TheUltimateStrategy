@@ -45,9 +45,6 @@ class IGetWorldByLandNameOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetWorldByLandNameOperator.
-     */
     virtual ~IGetWorldByLandNameOperator(){};
 
     /**

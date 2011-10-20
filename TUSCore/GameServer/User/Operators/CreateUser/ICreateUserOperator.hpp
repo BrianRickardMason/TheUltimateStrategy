@@ -46,9 +46,6 @@ class ICreateUserOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs CreateUserOperator.
-     */
     virtual ~ICreateUserOperator(){};
 
     /**

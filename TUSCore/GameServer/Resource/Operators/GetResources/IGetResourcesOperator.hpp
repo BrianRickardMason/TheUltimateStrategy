@@ -46,9 +46,6 @@ class IGetResourcesOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetResourcesOperator.
-     */
     virtual ~IGetResourcesOperator(){};
 
     /**

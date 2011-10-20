@@ -44,9 +44,6 @@ class IUserPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the user persistence facade.
-     */
     virtual ~IUserPersistenceFacade(){};
 
     /**

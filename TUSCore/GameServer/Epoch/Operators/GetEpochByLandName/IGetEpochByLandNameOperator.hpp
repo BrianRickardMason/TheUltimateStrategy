@@ -45,9 +45,6 @@ class IGetEpochByLandNameOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetEpochByLandNameOperator.
-     */
     virtual ~IGetEpochByLandNameOperator(){};
 
     /**

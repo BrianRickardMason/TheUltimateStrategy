@@ -44,9 +44,6 @@ class IWorldPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the world persistence facade.
-     */
     virtual ~IWorldPersistenceFacade(){}
 
     /**

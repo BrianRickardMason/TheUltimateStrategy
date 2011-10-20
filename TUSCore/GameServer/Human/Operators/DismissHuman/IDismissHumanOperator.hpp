@@ -48,9 +48,6 @@ class IDismissHumanOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs DismissHumanOperator.
-     */
     virtual ~IDismissHumanOperator(){};
 
     /**

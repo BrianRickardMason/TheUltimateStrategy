@@ -45,9 +45,6 @@ class IGetUserOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetUserOperator.
-     */
     virtual ~IGetUserOperator(){};
 
     /**

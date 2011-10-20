@@ -42,9 +42,6 @@ namespace User
 class IUser
 {
 public:
-    /**
-     * @brief Destructs the interface of the user.
-     */
     virtual ~IUser(){}
 
     /**

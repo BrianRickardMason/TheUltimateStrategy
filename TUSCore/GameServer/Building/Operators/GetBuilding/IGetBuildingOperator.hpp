@@ -47,9 +47,6 @@ class IGetBuildingOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetBuildingOperator.
-     */
     virtual ~IGetBuildingOperator(){};
 
     /**

@@ -43,9 +43,6 @@ namespace Settlement
 class ISettlementRecord
 {
 public:
-    /**
-     * @brief Destructs the interface of the record of the settlement.
-     */
     virtual ~ISettlementRecord(){}
 
     /**

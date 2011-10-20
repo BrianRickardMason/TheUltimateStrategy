@@ -46,9 +46,6 @@ class ICreateWorldOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs CreateWorldOperator.
-     */
     virtual ~ICreateWorldOperator(){};
 
     /**

@@ -47,9 +47,6 @@ class IGetHumanOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetHumanOperator.
-     */
     virtual ~IGetHumanOperator(){};
 
     /**

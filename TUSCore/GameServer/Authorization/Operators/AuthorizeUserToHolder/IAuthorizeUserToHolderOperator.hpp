@@ -47,9 +47,6 @@ class IAuthorizeUserToHolderOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs AuthorizeUserToHolderOperator.
-     */
     virtual ~IAuthorizeUserToHolderOperator(){};
 
     /**

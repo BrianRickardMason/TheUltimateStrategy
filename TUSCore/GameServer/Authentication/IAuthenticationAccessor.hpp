@@ -45,9 +45,6 @@ class IAuthenticationAccessor
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the accessor.
-     */
     virtual ~IAuthenticationAccessor(){};
 
     /**

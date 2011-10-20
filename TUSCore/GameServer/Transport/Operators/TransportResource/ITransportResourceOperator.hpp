@@ -48,9 +48,6 @@ class ITransportResourceOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs TransportResourceOperator.
-     */
     virtual ~ITransportResourceOperator(){};
 
     /**

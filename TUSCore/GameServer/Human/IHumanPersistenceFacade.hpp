@@ -45,9 +45,6 @@ class IHumanPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the human persistence facade.
-     */
     virtual ~IHumanPersistenceFacade(){};
 
     /**

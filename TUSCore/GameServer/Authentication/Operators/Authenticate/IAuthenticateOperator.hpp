@@ -46,9 +46,6 @@ class IAuthenticateOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs AuthenticateOperator.
-     */
     virtual ~IAuthenticateOperator(){};
 
     /**

@@ -46,9 +46,6 @@ class IDeleteLandOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs DeleteLandOperator.
-     */
     virtual ~IDeleteLandOperator(){};
 
     /**

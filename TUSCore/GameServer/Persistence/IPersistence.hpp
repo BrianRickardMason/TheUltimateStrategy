@@ -42,9 +42,6 @@ namespace Persistence
 class IPersistence
 {
 public:
-    /**
-     * @brief Destructs the persistence.
-     */
     virtual ~IPersistence(){};
 
     /**

@@ -44,7 +44,7 @@ class Property
 {
 public:
     /**
-     * @brief Constructs the property.
+     * @brief Ctor.
      *
      * @param a_id_property An identifier of the property.
      */
@@ -52,9 +52,6 @@ public:
         IDProperty const & a_id_property
     );
 
-    /**
-     * @brief Destructs the property.
-     */
     virtual ~Property(){}
 
     /**

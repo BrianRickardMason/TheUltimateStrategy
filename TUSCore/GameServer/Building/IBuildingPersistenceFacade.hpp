@@ -45,9 +45,6 @@ class IBuildingPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the building persistence facade.
-     */
     virtual ~IBuildingPersistenceFacade(){};
 
     /**

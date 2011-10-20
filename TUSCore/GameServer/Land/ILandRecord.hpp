@@ -43,9 +43,6 @@ namespace Land
 class ILandRecord
 {
 public:
-    /**
-     * @brief Destructs the interface of the record of the land.
-     */
     virtual ~ILandRecord(){}
 
     /**

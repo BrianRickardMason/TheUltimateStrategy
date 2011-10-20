@@ -46,9 +46,6 @@ class IGetEpochByWorldNameOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetEpochByWorldNameOperator.
-     */
     virtual ~IGetEpochByWorldNameOperator(){};
 
     /**

@@ -42,9 +42,6 @@ namespace User
 class IUserRecord
 {
 public:
-    /**
-     * @brief Destructs the record of the user.
-     */
     virtual ~IUserRecord(){}
 
     /**

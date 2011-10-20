@@ -46,9 +46,6 @@ class IGetSettlementOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs GetSettlementOperator.
-     */
     virtual ~IGetSettlementOperator(){};
 
     /**

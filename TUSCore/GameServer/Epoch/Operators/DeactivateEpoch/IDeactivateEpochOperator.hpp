@@ -46,9 +46,6 @@ class IDeactivateEpochOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs DeactivateEpochOperator.
-     */
     virtual ~IDeactivateEpochOperator(){};
 
     /**

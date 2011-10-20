@@ -43,9 +43,6 @@ namespace Settlement
 class IBehaviourGiveGrant
 {
 public:
-    /**
-     * @brief Destructs BehaviourGiveGrant.
-     */
     virtual ~IBehaviourGiveGrant(){};
 
     /**

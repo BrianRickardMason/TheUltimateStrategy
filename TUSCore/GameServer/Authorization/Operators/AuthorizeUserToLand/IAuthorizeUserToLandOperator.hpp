@@ -46,9 +46,6 @@ class IAuthorizeUserToLandOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs AuthorizeUserToLandOperator.
-     */
     virtual ~IAuthorizeUserToLandOperator(){};
 
     /**

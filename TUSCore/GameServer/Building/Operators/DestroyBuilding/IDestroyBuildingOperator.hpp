@@ -48,9 +48,6 @@ class IDestroyBuildingOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs DestroyBuildingOperator.
-     */
     virtual ~IDestroyBuildingOperator(){};
 
     /**

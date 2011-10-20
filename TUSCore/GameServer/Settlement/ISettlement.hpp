@@ -43,9 +43,6 @@ namespace Settlement
 class ISettlement
 {
 public:
-    /**
-     * @brief Destructs the interface of the settlement.
-     */
     virtual ~ISettlement(){}
 
     /**

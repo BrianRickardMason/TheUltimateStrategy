@@ -45,9 +45,6 @@ class ISettlementPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the persistence facade.
-     */
     virtual ~ISettlementPersistenceFacade(){};
 
     /**

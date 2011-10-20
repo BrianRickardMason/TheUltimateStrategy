@@ -46,9 +46,6 @@ class IFinishEpochOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs FinishEpochOperator.
-     */
     virtual ~IFinishEpochOperator(){};
 
     /**

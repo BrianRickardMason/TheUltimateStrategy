@@ -45,9 +45,6 @@ class IAuthorizeUserToSettlementOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs AuthorizeUserToSettlementOperator.
-     */
     virtual ~IAuthorizeUserToSettlementOperator(){};
 
     /**

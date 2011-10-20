@@ -45,9 +45,6 @@ class IAuthenticationPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs the authentication persistence facade.
-     */
     virtual ~IAuthenticationPersistenceFacade(){};
 
     /**

@@ -48,9 +48,6 @@ class IEngageHumanOperator
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs EngageHumanOperator.
-     */
     virtual ~IEngageHumanOperator(){};
 
     /**
