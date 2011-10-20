@@ -74,7 +74,7 @@ bool TurnManager::turn(
         // Execute turn of every land.
         for (ILandMap::const_iterator it = lands.begin(); it != lands.end(); ++it)
         {
-        	// TODO: Improve it by passing the land instance instead of the land's name.
+            // TODO: Improve it by passing the land instance instead of the land's name.
             bool const result = executeTurn(a_transaction, it->second->getLandName());
 
             if (!result)
