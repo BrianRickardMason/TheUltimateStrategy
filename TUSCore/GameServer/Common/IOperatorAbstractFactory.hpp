@@ -65,7 +65,6 @@
 #include "../User/Operators/GetUser/IGetUserOperator.hpp"
 #include "../World/Operators/CreateWorld/ICreateWorldOperator.hpp"
 #include "../World/Operators/GetWorldByLandName/IGetWorldByLandNameOperator.hpp"
-#include "../WorldConfiguration/Operators/VerifyTurn/IVerifyTurnOperator.hpp"
 #include <boost/shared_ptr.hpp>
 
 namespace GameServer
@@ -339,13 +338,6 @@ public:
      * @return The newly created get world by land name operator.
      */
     virtual World::IGetWorldByLandNameOperatorShrPtr createGetWorldByLandNameOperator() const = 0;
-
-    /**
-     * @brief Creates the verify turn operator.
-     *
-     * @return The newly created verify turn operator.
-     */
-    virtual WorldConfiguration::IVerifyTurnOperatorShrPtr createVerifyTurnOperator() const = 0;
 };
 
 //@{

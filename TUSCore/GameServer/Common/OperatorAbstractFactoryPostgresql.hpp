@@ -305,13 +305,6 @@ public:
      */
     virtual World::IGetWorldByLandNameOperatorShrPtr createGetWorldByLandNameOperator() const;
 
-    /**
-     * @brief Creates the verify turn operator.
-     *
-     * @return The newly created verify turn operator.
-     */
-    virtual WorldConfiguration::IVerifyTurnOperatorShrPtr createVerifyTurnOperator() const;
-
 private:
     /**
      * @brief The abstract factory of managers.

@@ -62,7 +62,6 @@
 #include "../User/Operators/GetUser/GetUserOperatorFactory.hpp"
 #include "../World/Operators/CreateWorld/CreateWorldOperatorFactory.hpp"
 #include "../World/Operators/GetWorldByLandName/GetWorldByLandNameOperatorFactory.hpp"
-#include "../WorldConfiguration/Operators/VerifyTurn/VerifyTurnOperatorFactory.hpp"
 #include "PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "ManagerAbstractFactoryPostgresql.hpp"
 #include "OperatorAbstractFactoryPostgresql.hpp"
@@ -78,7 +77,6 @@ using namespace GameServer::Settlement;
 using namespace GameServer::Transport;
 using namespace GameServer::User;
 using namespace GameServer::World;
-using namespace GameServer::WorldConfiguration;
 
 namespace GameServer
 {
@@ -279,11 +277,6 @@ ICreateWorldOperatorShrPtr OperatorAbstractFactoryPostgresql::createCreateWorldO
 IGetWorldByLandNameOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetWorldByLandNameOperator() const
 {
     return IGetWorldByLandNameOperatorShrPtr(GetWorldByLandNameOperatorFactory::createGetWorldByLandNameOperator(m_persistence_facade_abstract_factory));
-}
-
-IVerifyTurnOperatorShrPtr OperatorAbstractFactoryPostgresql::createVerifyTurnOperator() const
-{
-    return IVerifyTurnOperatorShrPtr(VerifyTurnOperatorFactory::createVerifyTurnOperator(m_persistence_facade_abstract_factory));
 }
 
 } // namespace Common
