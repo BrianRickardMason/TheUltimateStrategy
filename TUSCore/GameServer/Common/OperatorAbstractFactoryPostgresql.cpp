@@ -13,7 +13,7 @@
 //    may be used to endorse or promote products derived from this software
 //    without specific prior written permission.
 //
-// THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS "AS IS" AND
+// THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS >AS IS> AND
 // ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 // ARE DISCLAIMED. IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
@@ -25,46 +25,46 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Authentication/Operators/Authenticate/AuthenticateOperatorFactory.hpp"
-#include "../Authorization/Operators/AuthorizeUserToHolder/AuthorizeUserToHolderOperatorFactory.hpp"
-#include "../Authorization/Operators/AuthorizeUserToLand/AuthorizeUserToLandOperatorFactory.hpp"
-#include "../Authorization/Operators/AuthorizeUserToSettlement/AuthorizeUserToSettlementOperatorFactory.hpp"
-#include "../Building/Operators/BuildBuilding/BuildBuildingOperatorFactory.hpp"
-#include "../Building/Operators/DestroyBuilding/DestroyBuildingOperatorFactory.hpp"
-#include "../Building/Operators/GetBuilding/GetBuildingOperatorFactory.hpp"
-#include "../Building/Operators/GetBuildings/GetBuildingsOperatorFactory.hpp"
-#include "../Epoch/Operators/ActivateEpoch/ActivateEpochOperatorFactory.hpp"
-#include "../Epoch/Operators/CreateEpoch/CreateEpochOperatorFactory.hpp"
-#include "../Epoch/Operators/DeactivateEpoch/DeactivateEpochOperatorFactory.hpp"
-#include "../Epoch/Operators/DeleteEpoch/DeleteEpochOperatorFactory.hpp"
-#include "../Epoch/Operators/FinishEpoch/FinishEpochOperatorFactory.hpp"
-#include "../Epoch/Operators/GetEpochByLandName/GetEpochByLandNameOperatorFactory.hpp"
-#include "../Epoch/Operators/GetEpochBySettlementName/GetEpochBySettlementNameOperatorFactory.hpp"
-#include "../Epoch/Operators/GetEpochByWorldName/GetEpochByWorldNameOperatorFactory.hpp"
-#include "../Epoch/Operators/TickEpoch/TickEpochOperatorFactory.hpp"
-#include "../Human/Operators/DismissHuman/DismissHumanOperatorFactory.hpp"
-#include "../Human/Operators/EngageHuman/EngageHumanOperatorFactory.hpp"
-#include "../Human/Operators/GetHuman/GetHumanOperatorFactory.hpp"
-#include "../Human/Operators/GetHumans/GetHumansOperatorFactory.hpp"
-#include "../Land/Operators/CreateLand/CreateLandOperatorFactory.hpp"
-#include "../Land/Operators/DeleteLand/DeleteLandOperatorFactory.hpp"
-#include "../Land/Operators/GetLand/GetLandOperatorFactory.hpp"
-#include "../Land/Operators/GetLands/GetLandsOperatorFactory.hpp"
-#include "../Resource/Operators/GetResource/GetResourceOperatorFactory.hpp"
-#include "../Resource/Operators/GetResources/GetResourcesOperatorFactory.hpp"
-#include "../Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
-#include "../Settlement/Operators/DeleteSettlement/DeleteSettlementOperatorFactory.hpp"
-#include "../Settlement/Operators/GetSettlement/GetSettlementOperatorFactory.hpp"
-#include "../Settlement/Operators/GetSettlements/GetSettlementsOperatorFactory.hpp"
-#include "../Transport/Operators/TransportHuman/TransportHumanOperatorFactory.hpp"
-#include "../Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp"
-#include "../User/Operators/CreateUser/CreateUserOperatorFactory.hpp"
-#include "../User/Operators/GetUser/GetUserOperatorFactory.hpp"
-#include "../World/Operators/CreateWorld/CreateWorldOperatorFactory.hpp"
-#include "../World/Operators/GetWorldByLandName/GetWorldByLandNameOperatorFactory.hpp"
-#include "PersistenceFacadeAbstractFactoryPostgresql.hpp"
-#include "ManagerAbstractFactoryPostgresql.hpp"
-#include "OperatorAbstractFactoryPostgresql.hpp"
+#include <GameServer/Authentication/Operators/Authenticate/AuthenticateOperatorFactory.hpp>
+#include <GameServer/Authorization/Operators/AuthorizeUserToHolder/AuthorizeUserToHolderOperatorFactory.hpp>
+#include <GameServer/Authorization/Operators/AuthorizeUserToLand/AuthorizeUserToLandOperatorFactory.hpp>
+#include <GameServer/Authorization/Operators/AuthorizeUserToSettlement/AuthorizeUserToSettlementOperatorFactory.hpp>
+#include <GameServer/Building/Operators/BuildBuilding/BuildBuildingOperatorFactory.hpp>
+#include <GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorFactory.hpp>
+#include <GameServer/Building/Operators/GetBuilding/GetBuildingOperatorFactory.hpp>
+#include <GameServer/Building/Operators/GetBuildings/GetBuildingsOperatorFactory.hpp>
+#include <GameServer/Common/ManagerAbstractFactoryPostgresql.hpp>
+#include <GameServer/Common/OperatorAbstractFactoryPostgresql.hpp>
+#include <GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
+#include <GameServer/Epoch/Operators/ActivateEpoch/ActivateEpochOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/CreateEpoch/CreateEpochOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/DeactivateEpoch/DeactivateEpochOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/DeleteEpoch/DeleteEpochOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/FinishEpoch/FinishEpochOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/GetEpochByLandName/GetEpochByLandNameOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/GetEpochBySettlementName/GetEpochBySettlementNameOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/GetEpochByWorldName/GetEpochByWorldNameOperatorFactory.hpp>
+#include <GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorFactory.hpp>
+#include <GameServer/Human/Operators/DismissHuman/DismissHumanOperatorFactory.hpp>
+#include <GameServer/Human/Operators/EngageHuman/EngageHumanOperatorFactory.hpp>
+#include <GameServer/Human/Operators/GetHuman/GetHumanOperatorFactory.hpp>
+#include <GameServer/Human/Operators/GetHumans/GetHumansOperatorFactory.hpp>
+#include <GameServer/Land/Operators/CreateLand/CreateLandOperatorFactory.hpp>
+#include <GameServer/Land/Operators/DeleteLand/DeleteLandOperatorFactory.hpp>
+#include <GameServer/Land/Operators/GetLand/GetLandOperatorFactory.hpp>
+#include <GameServer/Land/Operators/GetLands/GetLandsOperatorFactory.hpp>
+#include <GameServer/Resource/Operators/GetResource/GetResourceOperatorFactory.hpp>
+#include <GameServer/Resource/Operators/GetResources/GetResourcesOperatorFactory.hpp>
+#include <GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
+#include <GameServer/Settlement/Operators/DeleteSettlement/DeleteSettlementOperatorFactory.hpp>
+#include <GameServer/Settlement/Operators/GetSettlement/GetSettlementOperatorFactory.hpp>
+#include <GameServer/Settlement/Operators/GetSettlements/GetSettlementsOperatorFactory.hpp>
+#include <GameServer/Transport/Operators/TransportHuman/TransportHumanOperatorFactory.hpp>
+#include <GameServer/Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp>
+#include <GameServer/User/Operators/CreateUser/CreateUserOperatorFactory.hpp>
+#include <GameServer/User/Operators/GetUser/GetUserOperatorFactory.hpp>
+#include <GameServer/World/Operators/CreateWorld/CreateWorldOperatorFactory.hpp>
+#include <GameServer/World/Operators/GetWorldByLandName/GetWorldByLandNameOperatorFactory.hpp>
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;

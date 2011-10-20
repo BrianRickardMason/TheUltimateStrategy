@@ -13,7 +13,7 @@
 //    may be used to endorse or promote products derived from this software
 //    without specific prior written permission.
 //
-// THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS "AS IS" AND
+// THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS >AS IS> AND
 // ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 // ARE DISCLAIMED. IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
@@ -28,43 +28,43 @@
 #ifndef GAMESERVER_COMMON_IOPERATORABSTRACTFACTORY_HPP
 #define GAMESERVER_COMMON_IOPERATORABSTRACTFACTORY_HPP
 
-#include "../Authentication/Operators/Authenticate/IAuthenticateOperator.hpp"
-#include "../Authorization/Operators/AuthorizeUserToHolder/IAuthorizeUserToHolderOperator.hpp"
-#include "../Authorization/Operators/AuthorizeUserToLand/IAuthorizeUserToLandOperator.hpp"
-#include "../Authorization/Operators/AuthorizeUserToSettlement/IAuthorizeUserToSettlementOperator.hpp"
-#include "../Building/Operators/BuildBuilding/IBuildBuildingOperator.hpp"
-#include "../Building/Operators/DestroyBuilding/IDestroyBuildingOperator.hpp"
-#include "../Building/Operators/GetBuilding/IGetBuildingOperator.hpp"
-#include "../Building/Operators/GetBuildings/IGetBuildingsOperator.hpp"
-#include "../Epoch/Operators/ActivateEpoch/IActivateEpochOperator.hpp"
-#include "../Epoch/Operators/CreateEpoch/ICreateEpochOperator.hpp"
-#include "../Epoch/Operators/DeactivateEpoch/IDeactivateEpochOperator.hpp"
-#include "../Epoch/Operators/DeleteEpoch/IDeleteEpochOperator.hpp"
-#include "../Epoch/Operators/FinishEpoch/IFinishEpochOperator.hpp"
-#include "../Epoch/Operators/GetEpochByLandName/IGetEpochByLandNameOperator.hpp"
-#include "../Epoch/Operators/GetEpochBySettlementName/IGetEpochBySettlementNameOperator.hpp"
-#include "../Epoch/Operators/GetEpochByWorldName/IGetEpochByWorldNameOperator.hpp"
-#include "../Epoch/Operators/TickEpoch/ITickEpochOperator.hpp"
-#include "../Human/Operators/DismissHuman/IDismissHumanOperator.hpp"
-#include "../Human/Operators/EngageHuman/IEngageHumanOperator.hpp"
-#include "../Human/Operators/GetHuman/IGetHumanOperator.hpp"
-#include "../Human/Operators/GetHumans/IGetHumansOperator.hpp"
-#include "../Land/Operators/CreateLand/ICreateLandOperator.hpp"
-#include "../Land/Operators/DeleteLand/IDeleteLandOperator.hpp"
-#include "../Land/Operators/GetLand/IGetLandOperator.hpp"
-#include "../Land/Operators/GetLands/IGetLandsOperator.hpp"
-#include "../Resource/Operators/GetResource/IGetResourceOperator.hpp"
-#include "../Resource/Operators/GetResources/IGetResourcesOperator.hpp"
-#include "../Settlement/Operators/CreateSettlement/ICreateSettlementOperator.hpp"
-#include "../Settlement/Operators/DeleteSettlement/IDeleteSettlementOperator.hpp"
-#include "../Settlement/Operators/GetSettlement/IGetSettlementOperator.hpp"
-#include "../Settlement/Operators/GetSettlements/IGetSettlementsOperator.hpp"
-#include "../Transport/Operators/TransportHuman/ITransportHumanOperator.hpp"
-#include "../Transport/Operators/TransportResource/ITransportResourceOperator.hpp"
-#include "../User/Operators/CreateUser/ICreateUserOperator.hpp"
-#include "../User/Operators/GetUser/IGetUserOperator.hpp"
-#include "../World/Operators/CreateWorld/ICreateWorldOperator.hpp"
-#include "../World/Operators/GetWorldByLandName/IGetWorldByLandNameOperator.hpp"
+#include <GameServer/Authentication/Operators/Authenticate/IAuthenticateOperator.hpp>
+#include <GameServer/Authorization/Operators/AuthorizeUserToHolder/IAuthorizeUserToHolderOperator.hpp>
+#include <GameServer/Authorization/Operators/AuthorizeUserToLand/IAuthorizeUserToLandOperator.hpp>
+#include <GameServer/Authorization/Operators/AuthorizeUserToSettlement/IAuthorizeUserToSettlementOperator.hpp>
+#include <GameServer/Building/Operators/BuildBuilding/IBuildBuildingOperator.hpp>
+#include <GameServer/Building/Operators/DestroyBuilding/IDestroyBuildingOperator.hpp>
+#include <GameServer/Building/Operators/GetBuilding/IGetBuildingOperator.hpp>
+#include <GameServer/Building/Operators/GetBuildings/IGetBuildingsOperator.hpp>
+#include <GameServer/Epoch/Operators/ActivateEpoch/IActivateEpochOperator.hpp>
+#include <GameServer/Epoch/Operators/CreateEpoch/ICreateEpochOperator.hpp>
+#include <GameServer/Epoch/Operators/DeactivateEpoch/IDeactivateEpochOperator.hpp>
+#include <GameServer/Epoch/Operators/DeleteEpoch/IDeleteEpochOperator.hpp>
+#include <GameServer/Epoch/Operators/FinishEpoch/IFinishEpochOperator.hpp>
+#include <GameServer/Epoch/Operators/GetEpochByLandName/IGetEpochByLandNameOperator.hpp>
+#include <GameServer/Epoch/Operators/GetEpochBySettlementName/IGetEpochBySettlementNameOperator.hpp>
+#include <GameServer/Epoch/Operators/GetEpochByWorldName/IGetEpochByWorldNameOperator.hpp>
+#include <GameServer/Epoch/Operators/TickEpoch/ITickEpochOperator.hpp>
+#include <GameServer/Human/Operators/DismissHuman/IDismissHumanOperator.hpp>
+#include <GameServer/Human/Operators/EngageHuman/IEngageHumanOperator.hpp>
+#include <GameServer/Human/Operators/GetHuman/IGetHumanOperator.hpp>
+#include <GameServer/Human/Operators/GetHumans/IGetHumansOperator.hpp>
+#include <GameServer/Land/Operators/CreateLand/ICreateLandOperator.hpp>
+#include <GameServer/Land/Operators/DeleteLand/IDeleteLandOperator.hpp>
+#include <GameServer/Land/Operators/GetLand/IGetLandOperator.hpp>
+#include <GameServer/Land/Operators/GetLands/IGetLandsOperator.hpp>
+#include <GameServer/Resource/Operators/GetResource/IGetResourceOperator.hpp>
+#include <GameServer/Resource/Operators/GetResources/IGetResourcesOperator.hpp>
+#include <GameServer/Settlement/Operators/CreateSettlement/ICreateSettlementOperator.hpp>
+#include <GameServer/Settlement/Operators/DeleteSettlement/IDeleteSettlementOperator.hpp>
+#include <GameServer/Settlement/Operators/GetSettlement/IGetSettlementOperator.hpp>
+#include <GameServer/Settlement/Operators/GetSettlements/IGetSettlementsOperator.hpp>
+#include <GameServer/Transport/Operators/TransportHuman/ITransportHumanOperator.hpp>
+#include <GameServer/Transport/Operators/TransportResource/ITransportResourceOperator.hpp>
+#include <GameServer/User/Operators/CreateUser/ICreateUserOperator.hpp>
+#include <GameServer/User/Operators/GetUser/IGetUserOperator.hpp>
+#include <GameServer/World/Operators/CreateWorld/ICreateWorldOperator.hpp>
+#include <GameServer/World/Operators/GetWorldByLandName/IGetWorldByLandNameOperator.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace GameServer
@@ -80,272 +80,56 @@ class IOperatorAbstractFactory
 public:
     virtual ~IOperatorAbstractFactory(){}
 
+    //@{
     /**
-     * @brief Creates the authentication operator.
+     * @brief Creates a operator.
      *
-     * @return The newly created authentication operator.
+     * @return The newly created operator.
      */
-    virtual Authentication::IAuthenticateOperatorShrPtr createAuthenticateOperator() const = 0;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
-    virtual Authorization::IAuthorizeUserToHolderOperatorShrPtr createAuthorizeUserToHolderOperator() const = 0;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
-    virtual Authorization::IAuthorizeUserToLandOperatorShrPtr createAuthorizeUserToLandOperator() const = 0;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
+    virtual Authentication::IAuthenticateOperatorShrPtr             createAuthenticateOperator()              const = 0;
+    virtual Authorization::IAuthorizeUserToHolderOperatorShrPtr     createAuthorizeUserToHolderOperator()     const = 0;
+    virtual Authorization::IAuthorizeUserToLandOperatorShrPtr       createAuthorizeUserToLandOperator()       const = 0;
     virtual Authorization::IAuthorizeUserToSettlementOperatorShrPtr createAuthorizeUserToSettlementOperator() const = 0;
-
-    /**
-     * @brief Creates the build building operator.
-     *
-     * @return The newly created build building operator.
-     */
-    virtual Building::IBuildBuildingOperatorShrPtr createBuildBuildingOperator() const = 0;
-
-    /**
-     * @brief Creates the destroy building operator.
-     *
-     * @return The newly created destroy building operator.
-     */
-    virtual Building::IDestroyBuildingOperatorShrPtr createDestroyBuildingOperator() const = 0;
-
-    /**
-     * @brief Creates the get building operator.
-     *
-     * @return The newly created get building operator.
-     */
-    virtual Building::IGetBuildingOperatorShrPtr createGetBuildingOperator() const = 0;
-
-    /**
-     * @brief Creates the get buildings operator.
-     *
-     * @return The newly created get buildings operator.
-     */
-    virtual Building::IGetBuildingsOperatorShrPtr createGetBuildingsOperator() const = 0;
-
-    /**
-     * @brief Creates the activate epoch operator.
-     *
-     * @return The newly created activate epoch operator.
-     */
-    virtual Epoch::IActivateEpochOperatorShrPtr createActivateEpochOperator() const = 0;
-
-    /**
-     * @brief Creates the create epoch operator.
-     *
-     * @return The newly created create epoch operator.
-     */
-    virtual Epoch::ICreateEpochOperatorShrPtr createCreateEpochOperator() const = 0;
-
-    /**
-     * @brief Creates the deactivate epoch operator.
-     *
-     * @return The newly created deactivate epoch operator.
-     */
-    virtual Epoch::IDeactivateEpochOperatorShrPtr createDeactivateEpochOperator() const = 0;
-
-    /**
-     * @brief Creates the delete epoch operator.
-     *
-     * @return The newly created delete epoch operator.
-     */
-    virtual Epoch::IDeleteEpochOperatorShrPtr createDeleteEpochOperator() const = 0;
-
-    /**
-     * @brief Creates the finish epoch operator.
-     *
-     * @return The newly created finish epoch operator.
-     */
-    virtual Epoch::IFinishEpochOperatorShrPtr createFinishEpochOperator() const = 0;
-
-    /**
-     * @brief Creates the get epoch by land name operator.
-     *
-     * @return The newly created get epoch by land name operator.
-     */
-    virtual Epoch::IGetEpochByLandNameOperatorShrPtr createGetEpochByLandNameOperator() const = 0;
-
-    /**
-     * @brief Creates the get epoch by settlement name operator.
-     *
-     * @return The newly created get epoch by settlement name operator.
-     */
-    virtual Epoch::IGetEpochBySettlementNameOperatorShrPtr createGetEpochBySettlementNameOperator() const = 0;
-
-    /**
-     * @brief Creates the get epoch by world name operator.
-     *
-     * @return The newly created get epoch by world name operator.
-     */
-    virtual Epoch::IGetEpochByWorldNameOperatorShrPtr createGetEpochByWorldNameOperator() const = 0;
-
-    /**
-     * @brief Creates the tick epoch operator.
-     *
-     * @return The newly created tick epoch operator.
-     */
-    virtual Epoch::ITickEpochOperatorShrPtr createTickEpochOperator() const = 0;
-
-    /**
-     * @brief Creates the dismiss human operator.
-     *
-     * @return The newly created dismiss human operator.
-     */
-    virtual Human::IDismissHumanOperatorShrPtr createDismissHumanOperator() const = 0;
-
-    /**
-     * @brief Creates the engage human operator.
-     *
-     * @return The newly created engage human operator.
-     */
-    virtual Human::IEngageHumanOperatorShrPtr createEngageHumanOperator() const = 0;
-
-    /**
-     * @brief Creates the get human operator.
-     *
-     * @return The newly created get human operator.
-     */
-    virtual Human::IGetHumanOperatorShrPtr createGetHumanOperator() const = 0;
-
-    /**
-     * @brief Creates the get humans operator.
-     *
-     * @return The newly created get humans operator.
-     */
-    virtual Human::IGetHumansOperatorShrPtr createGetHumansOperator() const = 0;
-
-    /**
-     * @brief Creates the create land operator.
-     *
-     * @return The newly created create land operator.
-     */
-    virtual Land::ICreateLandOperatorShrPtr createCreateLandOperator() const = 0;
-
-    /**
-     * @brief Creates the delete land operator.
-     *
-     * @return The newly created delet land operator.
-     */
-    virtual Land::IDeleteLandOperatorShrPtr createDeleteLandOperator() const = 0;
-
-    /**
-     * @brief Creates the get land operator.
-     *
-     * @return The newly created get land operator.
-     */
-    virtual Land::IGetLandOperatorShrPtr createGetLandOperator() const = 0;
-
-    /**
-     * @brief Creates the get lands operator.
-     *
-     * @return The newly created get lands operator.
-     */
-    virtual Land::IGetLandsOperatorShrPtr createGetLandsOperator() const = 0;
-
-    /**
-     * @brief Creates the get resource operator.
-     *
-     * @return The newly created get resource operator.
-     */
-    virtual Resource::IGetResourceOperatorShrPtr createGetResourceOperator() const = 0;
-
-    /**
-     * @brief Creates the get resources operator.
-     *
-     * @return The newly created get resources operator.
-     */
-    virtual Resource::IGetResourcesOperatorShrPtr createGetResourcesOperator() const = 0;
-
-    /**
-     * @brief Creates the create settlement operator.
-     *
-     * @return The newly created create settlement operator.
-     */
-    virtual Settlement::ICreateSettlementOperatorShrPtr createCreateSettlementOperator() const = 0;
-
-    /**
-     * @brief Creates the delete settlement operator.
-     *
-     * @return The newly created delete settlement operator.
-     */
-    virtual Settlement::IDeleteSettlementOperatorShrPtr createDeleteSettlementOperator() const = 0;
-
-    /**
-     * @brief Creates the get settlement operator.
-     *
-     * @return The newly created get settlement operator.
-     */
-    virtual Settlement::IGetSettlementOperatorShrPtr createGetSettlementOperator() const = 0;
-
-    /**
-     * @brief Creates the get settlements operator.
-     *
-     * @return The newly created get settlements operator.
-     */
-    virtual Settlement::IGetSettlementsOperatorShrPtr createGetSettlementsOperator() const = 0;
-
-    /**
-     * @brief Creates the transport human operator.
-     *
-     * @return The newly created transport human operator.
-     */
-    virtual Transport::ITransportHumanOperatorShrPtr createTransportHumanOperator() const = 0;
-
-    /**
-     * @brief Creates the transport resource operator.
-     *
-     * @return The newly created transport resource operator.
-     */
-    virtual Transport::ITransportResourceOperatorShrPtr createTransportResourceOperator() const = 0;
-
-    /**
-     * @brief Creates the create user operator.
-     *
-     * @return The newly created create user operator.
-     */
-    virtual User::ICreateUserOperatorShrPtr createCreateUserOperator() const = 0;
-
-    /**
-     * @brief Creates the get user operator.
-     *
-     * @return The newly created get user operator.
-     */
-    virtual User::IGetUserOperatorShrPtr createGetUserOperator() const = 0;
-
-    /**
-     * @brief Creates the create world operator.
-     *
-     * @return The newly created create world operator.
-     */
-    virtual World::ICreateWorldOperatorShrPtr createCreateWorldOperator() const = 0;
-
-    /**
-     * @brief Creates the get world by land name operator.
-     *
-     * @return The newly created get world by land name operator.
-     */
-    virtual World::IGetWorldByLandNameOperatorShrPtr createGetWorldByLandNameOperator() const = 0;
+    virtual Building::IBuildBuildingOperatorShrPtr                  createBuildBuildingOperator()             const = 0;
+    virtual Building::IDestroyBuildingOperatorShrPtr                createDestroyBuildingOperator()           const = 0;
+    virtual Building::IGetBuildingOperatorShrPtr                    createGetBuildingOperator()               const = 0;
+    virtual Building::IGetBuildingsOperatorShrPtr                   createGetBuildingsOperator()              const = 0;
+    virtual Epoch::IActivateEpochOperatorShrPtr                     createActivateEpochOperator()             const = 0;
+    virtual Epoch::ICreateEpochOperatorShrPtr                       createCreateEpochOperator()               const = 0;
+    virtual Epoch::IDeactivateEpochOperatorShrPtr                   createDeactivateEpochOperator()           const = 0;
+    virtual Epoch::IDeleteEpochOperatorShrPtr                       createDeleteEpochOperator()               const = 0;
+    virtual Epoch::IFinishEpochOperatorShrPtr                       createFinishEpochOperator()               const = 0;
+    virtual Epoch::IGetEpochByLandNameOperatorShrPtr                createGetEpochByLandNameOperator()        const = 0;
+    virtual Epoch::IGetEpochBySettlementNameOperatorShrPtr          createGetEpochBySettlementNameOperator()  const = 0;
+    virtual Epoch::IGetEpochByWorldNameOperatorShrPtr               createGetEpochByWorldNameOperator()       const = 0;
+    virtual Epoch::ITickEpochOperatorShrPtr                         createTickEpochOperator()                 const = 0;
+    virtual Human::IDismissHumanOperatorShrPtr                      createDismissHumanOperator()              const = 0;
+    virtual Human::IEngageHumanOperatorShrPtr                       createEngageHumanOperator()               const = 0;
+    virtual Human::IGetHumanOperatorShrPtr                          createGetHumanOperator()                  const = 0;
+    virtual Human::IGetHumansOperatorShrPtr                         createGetHumansOperator()                 const = 0;
+    virtual Land::ICreateLandOperatorShrPtr                         createCreateLandOperator()                const = 0;
+    virtual Land::IDeleteLandOperatorShrPtr                         createDeleteLandOperator()                const = 0;
+    virtual Land::IGetLandOperatorShrPtr                            createGetLandOperator()                   const = 0;
+    virtual Land::IGetLandsOperatorShrPtr                           createGetLandsOperator()                  const = 0;
+    virtual Resource::IGetResourceOperatorShrPtr                    createGetResourceOperator()               const = 0;
+    virtual Resource::IGetResourcesOperatorShrPtr                   createGetResourcesOperator()              const = 0;
+    virtual Settlement::ICreateSettlementOperatorShrPtr             createCreateSettlementOperator()          const = 0;
+    virtual Settlement::IDeleteSettlementOperatorShrPtr             createDeleteSettlementOperator()          const = 0;
+    virtual Settlement::IGetSettlementOperatorShrPtr                createGetSettlementOperator()             const = 0;
+    virtual Settlement::IGetSettlementsOperatorShrPtr               createGetSettlementsOperator()            const = 0;
+    virtual Transport::ITransportHumanOperatorShrPtr                createTransportHumanOperator()            const = 0;
+    virtual Transport::ITransportResourceOperatorShrPtr             createTransportResourceOperator()         const = 0;
+    virtual User::ICreateUserOperatorShrPtr                         createCreateUserOperator()                const = 0;
+    virtual User::IGetUserOperatorShrPtr                            createGetUserOperator()                   const = 0;
+    virtual World::ICreateWorldOperatorShrPtr                       createCreateWorldOperator()               const = 0;
+    virtual World::IGetWorldByLandNameOperatorShrPtr                createGetWorldByLandNameOperator()        const = 0;
+    //}@
 };
 
-//@{
 /**
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IOperatorAbstractFactory> IOperatorAbstractFactoryShrPtr;
-//}@
 
 } // namespace Common
 } // namespace GameServer

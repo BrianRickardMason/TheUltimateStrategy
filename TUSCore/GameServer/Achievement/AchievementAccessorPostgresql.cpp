@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistence/TransactionPostgresql.hpp"
-#include "AchievementAccessorPostgresql.hpp"
+#include <GameServer/Achievement/AchievementAccessorPostgresql.hpp>
+#include <GameServer/Persistence/TransactionPostgresql.hpp>
 
 using namespace GameServer::Persistence;
 using namespace boost;

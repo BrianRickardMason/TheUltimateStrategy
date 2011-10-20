@@ -28,8 +28,7 @@
 #ifndef GAMESERVER_ACHIEVEMENT_ACHIEVEMENTACCESSOR_HPP
 #define GAMESERVER_ACHIEVEMENT_ACHIEVEMENTACCESSOR_HPP
 
-#include "IAchievementAccessor.hpp"
-//#include <pqxx/result.hxx>
+#include <GameServer/Achievement/IAchievementAccessor.hpp>
 
 namespace GameServer
 {

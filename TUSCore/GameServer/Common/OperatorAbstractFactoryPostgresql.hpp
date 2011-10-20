@@ -28,9 +28,9 @@
 #ifndef GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 
-#include "IManagerAbstractFactory.hpp"
-#include "IPersistenceFacadeAbstractFactory.hpp"
-#include "IOperatorAbstractFactory.hpp"
+#include <GameServer/Common/IManagerAbstractFactory.hpp>
+#include <GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <GameServer/Common/IOperatorAbstractFactory.hpp>
 
 namespace GameServer
 {
@@ -46,264 +46,50 @@ class OperatorAbstractFactoryPostgresql
 public:
     OperatorAbstractFactoryPostgresql();
 
+    //@{
     /**
-     * @brief Creates the authentication operator.
+     * @brief Creates a operator.
      *
-     * @return The newly created authentication operator.
+     * @return The newly created operator.
      */
-    virtual Authentication::IAuthenticateOperatorShrPtr createAuthenticateOperator() const;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
-    virtual Authorization::IAuthorizeUserToHolderOperatorShrPtr createAuthorizeUserToHolderOperator() const;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
-    virtual Authorization::IAuthorizeUserToLandOperatorShrPtr createAuthorizeUserToLandOperator() const;
-
-    /**
-     * @brief Creates the authorization operator.
-     *
-     * @return The newly created authorization operator.
-     */
+    virtual Authentication::IAuthenticateOperatorShrPtr             createAuthenticateOperator()              const;
+    virtual Authorization::IAuthorizeUserToHolderOperatorShrPtr     createAuthorizeUserToHolderOperator()     const;
+    virtual Authorization::IAuthorizeUserToLandOperatorShrPtr       createAuthorizeUserToLandOperator()       const;
     virtual Authorization::IAuthorizeUserToSettlementOperatorShrPtr createAuthorizeUserToSettlementOperator() const;
-
-    /**
-     * @brief Creates the build building operator.
-     *
-     * @return The newly created build building operator.
-     */
-    virtual Building::IBuildBuildingOperatorShrPtr createBuildBuildingOperator() const;
-
-    /**
-     * @brief Creates the destroy building operator.
-     *
-     * @return The newly created destroy building operator.
-     */
-    virtual Building::IDestroyBuildingOperatorShrPtr createDestroyBuildingOperator() const;
-
-    /**
-     * @brief Creates the get building operator.
-     *
-     * @return The newly created get building operator.
-     */
-    virtual Building::IGetBuildingOperatorShrPtr createGetBuildingOperator() const;
-
-    /**
-     * @brief Creates the get buildings operator.
-     *
-     * @return The newly created get buildings operator.
-     */
-    virtual Building::IGetBuildingsOperatorShrPtr createGetBuildingsOperator() const;
-
-    /**
-     * @brief Creates the activate epoch operator.
-     *
-     * @return The newly created activate epoch operator.
-     */
-    virtual Epoch::IActivateEpochOperatorShrPtr createActivateEpochOperator() const;
-
-    /**
-     * @brief Creates the create epoch operator.
-     *
-     * @return The newly created create epoch operator.
-     */
-    virtual Epoch::ICreateEpochOperatorShrPtr createCreateEpochOperator() const;
-
-    /**
-     * @brief Creates the deactivate epoch operator.
-     *
-     * @return The newly created deactivate epoch operator.
-     */
-    virtual Epoch::IDeactivateEpochOperatorShrPtr createDeactivateEpochOperator() const;
-
-    /**
-     * @brief Creates the delete epoch operator.
-     *
-     * @return The newly created delete epoch operator.
-     */
-    virtual Epoch::IDeleteEpochOperatorShrPtr createDeleteEpochOperator() const;
-
-    /**
-     * @brief Creates the finish epoch operator.
-     *
-     * @return The newly created finish epoch operator.
-     */
-    virtual Epoch::IFinishEpochOperatorShrPtr createFinishEpochOperator() const;
-
-    /**
-     * @brief Creates the get epoch by land name operator.
-     *
-     * @return The newly created get epoch by land name operator.
-     */
-    virtual Epoch::IGetEpochByLandNameOperatorShrPtr createGetEpochByLandNameOperator() const;
-
-    /**
-     * @brief Creates the get epoch by settlement name operator.
-     *
-     * @return The newly created get epoch by settlement name operator.
-     */
-    virtual Epoch::IGetEpochBySettlementNameOperatorShrPtr createGetEpochBySettlementNameOperator() const;
-
-    /**
-     * @brief Creates the get epoch by world name operator.
-     *
-     * @return The newly created get epoch by world name operator.
-     */
-    virtual Epoch::IGetEpochByWorldNameOperatorShrPtr createGetEpochByWorldNameOperator() const;
-
-    /**
-     * @brief Creates the tick epoch operator.
-     *
-     * @return The newly created tick epoch operator.
-     */
-    virtual Epoch::ITickEpochOperatorShrPtr createTickEpochOperator() const;
-
-    /**
-     * @brief Creates the dismiss human operator.
-     *
-     * @return The newly created dismiss human operator.
-     */
-    virtual Human::IDismissHumanOperatorShrPtr createDismissHumanOperator() const;
-
-    /**
-     * @brief Creates the engage human operator.
-     *
-     * @return The newly created engage human operator.
-     */
-    virtual Human::IEngageHumanOperatorShrPtr createEngageHumanOperator() const;
-
-    /**
-     * @brief Creates the get human operator.
-     *
-     * @return The newly created get human operator.
-     */
-    virtual Human::IGetHumanOperatorShrPtr createGetHumanOperator() const;
-
-    /**
-     * @brief Creates the get humans operator.
-     *
-     * @return The newly created get humans operator.
-     */
-    virtual Human::IGetHumansOperatorShrPtr createGetHumansOperator() const;
-
-    /**
-     * @brief Creates the create land operator.
-     *
-     * @return The newly created create land operator.
-     */
-    virtual Land::ICreateLandOperatorShrPtr createCreateLandOperator() const;
-
-    /**
-     * @brief Creates the delete land operator.
-     *
-     * @return The newly created delet land operator.
-     */
-    virtual Land::IDeleteLandOperatorShrPtr createDeleteLandOperator() const;
-
-    /**
-     * @brief Creates the get land operator.
-     *
-     * @return The newly created get land operator.
-     */
-    virtual Land::IGetLandOperatorShrPtr createGetLandOperator() const;
-
-    /**
-     * @brief Creates the get lands operator.
-     *
-     * @return The newly created get lands operator.
-     */
-    virtual Land::IGetLandsOperatorShrPtr createGetLandsOperator() const;
-
-    /**
-     * @brief Creates the get resource operator.
-     *
-     * @return The newly created get resource operator.
-     */
-    virtual Resource::IGetResourceOperatorShrPtr createGetResourceOperator() const;
-
-    /**
-     * @brief Creates the get resources operator.
-     *
-     * @return The newly created get resources operator.
-     */
-    virtual Resource::IGetResourcesOperatorShrPtr createGetResourcesOperator() const;
-
-    /**
-     * @brief Creates the create settlement operator.
-     *
-     * @return The newly created create settlement operator.
-     */
-    virtual Settlement::ICreateSettlementOperatorShrPtr createCreateSettlementOperator() const;
-
-    /**
-     * @brief Creates the delete settlement operator.
-     *
-     * @return The newly created delete settlement operator.
-     */
-    virtual Settlement::IDeleteSettlementOperatorShrPtr createDeleteSettlementOperator() const;
-
-    /**
-     * @brief Creates the get settlement operator.
-     *
-     * @return The newly created get settlement operator.
-     */
-    virtual Settlement::IGetSettlementOperatorShrPtr createGetSettlementOperator() const;
-
-    /**
-     * @brief Creates the get settlements operator.
-     *
-     * @return The newly created get settlements operator.
-     */
-    virtual Settlement::IGetSettlementsOperatorShrPtr createGetSettlementsOperator() const;
-
-    /**
-     * @brief Creates the transport human operator.
-     *
-     * @return The newly created transport human operator.
-     */
-    virtual Transport::ITransportHumanOperatorShrPtr createTransportHumanOperator() const;
-
-    /**
-     * @brief Creates the transport resource operator.
-     *
-     * @return The newly created transport resource operator.
-     */
-    virtual Transport::ITransportResourceOperatorShrPtr createTransportResourceOperator() const;
-
-    /**
-     * @brief Creates the create user operator.
-     *
-     * @return The newly created create user operator.
-     */
-    virtual User::ICreateUserOperatorShrPtr createCreateUserOperator() const;
-
-    /**
-     * @brief Creates the get user operator.
-     *
-     * @return The newly created get user operator.
-     */
-    virtual User::IGetUserOperatorShrPtr createGetUserOperator() const;
-
-    /**
-     * @brief Creates the create world operator.
-     *
-     * @return The newly created create world operator.
-     */
-    virtual World::ICreateWorldOperatorShrPtr createCreateWorldOperator() const;
-
-    /**
-     * @brief Creates the get world by land name operator.
-     *
-     * @return The newly created get world by land name operator.
-     */
-    virtual World::IGetWorldByLandNameOperatorShrPtr createGetWorldByLandNameOperator() const;
+    virtual Building::IBuildBuildingOperatorShrPtr                  createBuildBuildingOperator()             const;
+    virtual Building::IDestroyBuildingOperatorShrPtr                createDestroyBuildingOperator()           const;
+    virtual Building::IGetBuildingOperatorShrPtr                    createGetBuildingOperator()               const;
+    virtual Building::IGetBuildingsOperatorShrPtr                   createGetBuildingsOperator()              const;
+    virtual Epoch::IActivateEpochOperatorShrPtr                     createActivateEpochOperator()             const;
+    virtual Epoch::ICreateEpochOperatorShrPtr                       createCreateEpochOperator()               const;
+    virtual Epoch::IDeactivateEpochOperatorShrPtr                   createDeactivateEpochOperator()           const;
+    virtual Epoch::IDeleteEpochOperatorShrPtr                       createDeleteEpochOperator()               const;
+    virtual Epoch::IFinishEpochOperatorShrPtr                       createFinishEpochOperator()               const;
+    virtual Epoch::IGetEpochByLandNameOperatorShrPtr                createGetEpochByLandNameOperator()        const;
+    virtual Epoch::IGetEpochBySettlementNameOperatorShrPtr          createGetEpochBySettlementNameOperator()  const;
+    virtual Epoch::IGetEpochByWorldNameOperatorShrPtr               createGetEpochByWorldNameOperator()       const;
+    virtual Epoch::ITickEpochOperatorShrPtr                         createTickEpochOperator()                 const;
+    virtual Human::IDismissHumanOperatorShrPtr                      createDismissHumanOperator()              const;
+    virtual Human::IEngageHumanOperatorShrPtr                       createEngageHumanOperator()               const;
+    virtual Human::IGetHumanOperatorShrPtr                          createGetHumanOperator()                  const;
+    virtual Human::IGetHumansOperatorShrPtr                         createGetHumansOperator()                 const;
+    virtual Land::ICreateLandOperatorShrPtr                         createCreateLandOperator()                const;
+    virtual Land::IDeleteLandOperatorShrPtr                         createDeleteLandOperator()                const;
+    virtual Land::IGetLandOperatorShrPtr                            createGetLandOperator()                   const;
+    virtual Land::IGetLandsOperatorShrPtr                           createGetLandsOperator()                  const;
+    virtual Resource::IGetResourceOperatorShrPtr                    createGetResourceOperator()               const;
+    virtual Resource::IGetResourcesOperatorShrPtr                   createGetResourcesOperator()              const;
+    virtual Settlement::ICreateSettlementOperatorShrPtr             createCreateSettlementOperator()          const;
+    virtual Settlement::IDeleteSettlementOperatorShrPtr             createDeleteSettlementOperator()          const;
+    virtual Settlement::IGetSettlementOperatorShrPtr                createGetSettlementOperator()             const;
+    virtual Settlement::IGetSettlementsOperatorShrPtr               createGetSettlementsOperator()            const;
+    virtual Transport::ITransportHumanOperatorShrPtr                createTransportHumanOperator()            const;
+    virtual Transport::ITransportResourceOperatorShrPtr             createTransportResourceOperator()         const;
+    virtual User::ICreateUserOperatorShrPtr                         createCreateUserOperator()                const;
+    virtual User::IGetUserOperatorShrPtr                            createGetUserOperator()                   const;
+    virtual World::ICreateWorldOperatorShrPtr                       createCreateWorldOperator()               const;
+    virtual World::IGetWorldByLandNameOperatorShrPtr                createGetWorldByLandNameOperator()        const;
+    //}@
 
 private:
     /**

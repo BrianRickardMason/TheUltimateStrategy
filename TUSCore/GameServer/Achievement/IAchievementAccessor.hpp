@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_ACHIEVEMENT_IACHIEVEMENTACCESSOR_HPP
 #define GAMESERVER_ACHIEVEMENT_IACHIEVEMENTACCESSOR_HPP
 
-#include "../Persistence/ITransaction.hpp"
+#include <GameServer/Persistence/ITransaction.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
@@ -46,9 +46,6 @@ class IAchievementAccessor
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs AchievementAccessor.
-     */
     virtual ~IAchievementAccessor(){};
 
     /**
@@ -69,15 +66,13 @@ public:
     ) const = 0;
 };
 
+//@{
 /**
- * @brief The auto pointer of the interface of AchievementAccessor.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<IAchievementAccessor> IAchievementAccessorAutPtr;
-
-/**
- * @brief The scoped pointer of the interface of AchievementAccessor.
- */
 typedef boost::scoped_ptr<IAchievementAccessor> IAchievementAccessorScpPtr;
+//}@
 
 } // namespace Achievement
 } // namespace GameServer
