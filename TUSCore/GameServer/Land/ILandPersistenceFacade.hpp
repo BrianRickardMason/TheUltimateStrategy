@@ -28,8 +28,9 @@
 #ifndef GAMESERVER_LAND_ILANDPERSISTENCEFACADE_HPP
 #define GAMESERVER_LAND_ILANDPERSISTENCEFACADE_HPP
 
-#include "../Persistence/ITransaction.hpp"
-#include "Land.hpp"
+#include <GameServer/Land/ILand.hpp>
+#include <GameServer/Persistence/ITransaction.hpp>
+#include <GameServer/World/IWorld.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace GameServer
@@ -44,9 +45,6 @@ class ILandPersistenceFacade
     : boost::noncopyable
 {
 public:
-    /**
-     * @brief Destructs ILandPersistenceFacade.
-     */
     virtual ~ILandPersistenceFacade(){};
 
     /**
@@ -106,6 +104,19 @@ public:
     ) const = 0;
 
     /**
+     * @brief Gets all lands that belong to a given world.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world       The world.
+     *
+     * @return A map of lands, an empty map if not found.
+     */
+    virtual ILandMap getLands(
+        Persistence::ITransactionShrPtr       a_transaction,
+        World::IWorldShrPtr             const a_world
+    ) const = 0;
+
+    /**
      * @brief Marks that land has been given a grant.
      *
      * @param a_transaction The transaction.
@@ -118,7 +129,7 @@ public:
 };
 
 /**
- * @brief The shared pointer of the interface of land persistence facade.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ILandPersistenceFacade> ILandPersistenceFacadeShrPtr;
 

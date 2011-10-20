@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistence/TransactionPostgresql.hpp"
-#include "LandAccessorPostgresql.hpp"
-#include "LandRecord.hpp"
+#include <GameServer/Land/LandAccessorPostgresql.hpp>
+#include <GameServer/Land/LandRecord.hpp>
+#include <GameServer/Persistence/TransactionPostgresql.hpp>
 
 using namespace GameServer::Persistence;
 using namespace boost;
@@ -94,6 +94,20 @@ ILandRecordMap LandAccessorPostgresql::getRecords(
 
     string query = "SELECT * FROM lands WHERE login = "
                    + backbone_transaction.quote(a_login);
+
+    return prepareResultGetRecords(backbone_transaction.exec(query));
+}
+
+ILandRecordMap LandAccessorPostgresql::getRecordsByWorldName(
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
+) const
+{
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+
+    string query = "SELECT * FROM lands WHERE world_name = "
+                   + backbone_transaction.quote(a_world_name);
 
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }

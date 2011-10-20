@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_LANDACCESSORPOSTGRESQL_HPP
 #define GAMESERVER_LAND_LANDACCESSORPOSTGRESQL_HPP
 
-#include "ILandAccessor.hpp"
+#include <GameServer/Land/ILandAccessor.hpp>
 #include <pqxx/result.hxx>
 
 namespace GameServer
@@ -93,6 +93,19 @@ public:
     virtual ILandRecordMap getRecords(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_login
+    ) const;
+
+    /**
+     * @brief Gets all records of the lands that belong to a given world.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world_name  The name of the world.
+     *
+     * @return A map of records of the land, an empty map if not found.
+     */
+    virtual ILandRecordMap getRecordsByWorldName(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
     ) const;
 
     /**

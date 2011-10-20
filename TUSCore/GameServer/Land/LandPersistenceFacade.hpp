@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_LAND_LANDPERSISTENCEFACADE_HPP
 #define GAMESERVER_LAND_LANDPERSISTENCEFACADE_HPP
 
-#include "ILandAccessor.hpp"
-#include "ILandPersistenceFacade.hpp"
+#include <GameServer/Land/ILandAccessor.hpp>
+#include <GameServer/Land/ILandPersistenceFacade.hpp>
 
 namespace GameServer
 {
@@ -44,7 +44,7 @@ class LandPersistenceFacade
 {
 public:
     /**
-     * @brief Constructs the persistence facade.
+     * @brief Ctor.
      *
      * @param a_accessor An accessor to be injected.
      */
@@ -109,6 +109,19 @@ public:
     ) const;
 
     /**
+     * @brief Gets all lands that belong to a given world.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world       The world.
+     *
+     * @return A map of lands, an empty map if not found.
+     */
+    virtual ILandMap getLands(
+        Persistence::ITransactionShrPtr       a_transaction,
+        World::IWorldShrPtr             const a_world
+    ) const;
+
+    /**
      * @brief Marks that land has been given a grant.
      *
      * @param a_transaction The transaction.
@@ -149,7 +162,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<LandPersistenceFacade> LandPersistenceFacadeAutPtr;
 

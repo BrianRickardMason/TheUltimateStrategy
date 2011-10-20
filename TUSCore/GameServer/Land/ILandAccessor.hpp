@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_LAND_ILANDACCESSOR_HPP
 #define GAMESERVER_LAND_ILANDACCESSOR_HPP
 
-#include "../Persistence/ITransaction.hpp"
-#include "ILandRecord.hpp"
+#include <GameServer/Land/ILandRecord.hpp>
+#include <GameServer/Persistence/ITransaction.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -102,6 +102,19 @@ public:
     ) const = 0;
 
     /**
+     * @brief Gets all records of the lands that belong to a given world.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world_name  The name of the world.
+     *
+     * @return A map of records of the land, an empty map if not found.
+     */
+    virtual ILandRecordMap getRecordsByWorldName(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const = 0;
+
+    /**
      * @brief Marks that land has been given a grant.
      *
      * @param a_transaction The transaction.
@@ -113,15 +126,13 @@ public:
     ) const = 0;
 };
 
+//@{
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
-typedef std::auto_ptr<ILandAccessor> ILandAccessorAutPtr;
-
-/**
- * @brief Typedef of scoped pointer.
- */
+typedef std::auto_ptr<ILandAccessor>     ILandAccessorAutPtr;
 typedef boost::scoped_ptr<ILandAccessor> ILandAccessorScpPtr;
+//}@
 
 } // namespace Land
 } // namespace GameServer

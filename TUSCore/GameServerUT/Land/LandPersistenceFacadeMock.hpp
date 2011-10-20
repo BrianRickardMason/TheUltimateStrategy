@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_LAND_LANDPERSISTENCEFACADEMOCK_HPP
 #define GAMESERVER_LAND_LANDPERSISTENCEFACADEMOCK_HPP
 
-#include "../../GameServer/Land/ILandPersistenceFacade.hpp"
+#include <GameServer/Land/ILandPersistenceFacade.hpp>
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -108,6 +108,22 @@ public:
         ILandMap(
             Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_login
+        )
+    );
+
+    /**
+     * @brief Gets all lands that belong to a given world.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world       The world.
+     *
+     * @return A map of lands, an empty map if not found.
+     */
+    MOCK_CONST_METHOD2(
+        getLands,
+        ILandMap(
+            Persistence::ITransactionShrPtr       a_transaction,
+            World::IWorldShrPtr             const a_world
         )
     );
 

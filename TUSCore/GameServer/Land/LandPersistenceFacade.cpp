@@ -25,9 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "LandPersistenceFacade.hpp"
+#include <GameServer/Land/Land.hpp>
+#include <GameServer/Land/LandPersistenceFacade.hpp>
 
 using namespace GameServer::Persistence;
+using namespace GameServer::World;
 using namespace boost;
 using namespace std;
 
@@ -93,6 +95,14 @@ ILandMap LandPersistenceFacade::getLands(
 ) const
 {
     return prepareResultGetLands(m_accessor->getRecords(a_transaction, a_login));
+}
+
+ILandMap LandPersistenceFacade::getLands(
+    ITransactionShrPtr       a_transaction,
+    IWorldShrPtr       const a_world
+) const
+{
+    return prepareResultGetLands(m_accessor->getRecordsByWorldName(a_transaction, a_world->getWorldName()));
 }
 
 void LandPersistenceFacade::markGranted(

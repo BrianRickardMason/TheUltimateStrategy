@@ -25,12 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperator.hpp"
-#include "../../../../GameServer/Settlement/SettlementRecord.hpp"
-#include "../../../Land/LandPersistenceFacadeMock.hpp"
-#include "../../../Persistence/TransactionDummy.hpp"
-#include "../../SettlementPersistenceFacadeMock.hpp"
-#include "BehaviourGiveGrantMock.hpp"
+#include <GameServer/Land/Land.hpp>
+#include <GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperator.hpp>
+#include <GameServer/Settlement/SettlementRecord.hpp>
+#include <GameServerUT/Land/LandPersistenceFacadeMock.hpp>
+#include <GameServerUT/Persistence/TransactionDummy.hpp>
+#include <GameServerUT/Settlement/Operators/CreateSettlement/BehaviourGiveGrantMock.hpp>
+#include <GameServerUT/Settlement/SettlementPersistenceFacadeMock.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Land;
