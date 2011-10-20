@@ -99,7 +99,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasBeenCreated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    IWorldRecordShrPtr world_record(new WorldRecord(m_world_name, false));
+    IWorldRecordShrPtr world_record(new WorldRecord(m_world_name));
 
     IWorldShrPtr world = IWorldShrPtr(new World(world_record));
 
@@ -120,7 +120,7 @@ TEST_F(CreateEpochOperatorTest, createEpoch_EpochHasNotBeenCreated)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    IWorldRecordShrPtr world_record(new WorldRecord(m_world_name, false));
+    IWorldRecordShrPtr world_record(new WorldRecord(m_world_name));
 
     IWorldShrPtr world = IWorldShrPtr(new World(world_record));
 

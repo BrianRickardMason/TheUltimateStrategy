@@ -146,7 +146,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorld_WorldDoesExist)
     WorldAccessorMock * mock = new WorldAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
-    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
+    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
 
     IWorldAccessorAutPtr accessor(mock);
 
@@ -190,7 +190,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorldByLandName_WorldDoesExist)
     .WillOnce(Return(m_world_name_1));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name_1))
-    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
+    .WillOnce(Return(IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
 
     IWorldAccessorAutPtr accessor(mock);
 
@@ -230,7 +230,7 @@ TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_OneWorld)
     WorldAccessorMock * mock = new WorldAccessorMock;
 
     IWorldRecordMap map;
-    map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
+    map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));
@@ -255,8 +255,8 @@ TEST_F(WorldPersistenceFacadeTest, getWorlds_WorldsDoExist_ManyWorlds)
     WorldAccessorMock * mock = new WorldAccessorMock;
 
     IWorldRecordMap map;
-    map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1, false))));
-    map.insert(make_pair(m_world_name_2, IWorldRecordShrPtr(new WorldRecord(m_world_name_2, false))));
+    map.insert(make_pair(m_world_name_1, IWorldRecordShrPtr(new WorldRecord(m_world_name_1))));
+    map.insert(make_pair(m_world_name_2, IWorldRecordShrPtr(new WorldRecord(m_world_name_2))));
 
     EXPECT_CALL(*mock, getRecords(transaction))
     .WillOnce(Return(map));

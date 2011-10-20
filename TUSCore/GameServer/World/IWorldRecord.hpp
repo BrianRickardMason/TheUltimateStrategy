@@ -43,9 +43,6 @@ namespace World
 class IWorldRecord
 {
 public:
-    /**
-     * @brief Destructs the record of the world.
-     */
     virtual ~IWorldRecord(){}
 
     /**
@@ -54,29 +51,16 @@ public:
      * @return The name of the world.
      */
     virtual std::string getWorldName() const = 0;
-
-    /**
-     * @brief Whether the player can execute the turn in the world.
-     *
-     * @return True if the player can execute turns in the world, false otherwise (turns are performed automatically).
-     */
-    virtual bool getTurnAvailable() const = 0;
 };
 
+//@{
 /**
- * @brief The shared pointer of the interface of the record of the world.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IWorldRecord> IWorldRecordShrPtr;
-
-/**
- * @brief The pair of the interface of the record of the world.
- */
 typedef std::pair<std::string, IWorldRecordShrPtr> IWorldRecordPair;
-
-/**
- * @brief The map of the interface of the record of the world.
- */
 typedef std::map<std::string, IWorldRecordShrPtr> IWorldRecordMap;
+//}@
 
 } // namespace World
 } // namespace GameServer

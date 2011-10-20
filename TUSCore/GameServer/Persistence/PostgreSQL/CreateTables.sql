@@ -9,8 +9,7 @@ CREATE TABLE users
 DROP TABLE IF EXISTS worlds CASCADE;
 CREATE TABLE worlds
 (
-    world_name     VARCHAR(44) PRIMARY KEY NOT NULL CHECK(world_name <> ''),
-    turn_available BOOLEAN DEFAULT TRUE
+    world_name VARCHAR(44) PRIMARY KEY NOT NULL CHECK(world_name <> '')
 );
 
 DROP TABLE IF EXISTS epochs CASCADE;

@@ -130,7 +130,7 @@ public:
 /**
  * @brief A useful typedef.
  */
-typedef std::auto_ptr<ILandAccessor>     ILandAccessorAutPtr;
+typedef std::auto_ptr<ILandAccessor> ILandAccessorAutPtr;
 typedef boost::scoped_ptr<ILandAccessor> ILandAccessorScpPtr;
 //}@
 

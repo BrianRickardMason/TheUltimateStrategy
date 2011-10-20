@@ -45,12 +45,10 @@ public:
     /**
      * @brief Constructs the record of the world.
      *
-     * @param a_world_name     The name of the world.
-     * @param a_turn_available Whether the player can execute the turn in the world.
+     * @param a_world_name The name of the world.
      */
     WorldRecord(
-        std::string const a_world_name,
-        bool        const a_turn_available
+        std::string const a_world_name
     );
 
     /**
@@ -60,23 +58,11 @@ public:
      */
     virtual std::string getWorldName() const;
 
-    /**
-     * @brief Whether the player can execute the turn in the world.
-     *
-     * @return True if the player can execute turns in the world, false otherwise (turns are performed automatically).
-     */
-    virtual bool getTurnAvailable() const;
-
 private:
     /**
      * @brief The name of the world.
      */
     std::string const m_world_name;
-
-    /**
-     * @brief Whether the player can execute the turn in the world.
-     */
-    bool const m_turn_available;
 };
 
 } // namespace World

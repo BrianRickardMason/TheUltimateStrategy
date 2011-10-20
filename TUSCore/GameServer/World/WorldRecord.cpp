@@ -35,22 +35,15 @@ namespace World
 {
 
 WorldRecord::WorldRecord(
-    string const a_world_name,
-    bool   const a_turn_available
+    string const a_world_name
 )
-    : m_world_name(a_world_name),
-      m_turn_available(a_turn_available)
+    : m_world_name(a_world_name)
 {
 }
 
 string WorldRecord::getWorldName() const
 {
     return m_world_name;
-}
-
-bool WorldRecord::getTurnAvailable() const
-{
-    return m_turn_available;
 }
 
 } // namespace World

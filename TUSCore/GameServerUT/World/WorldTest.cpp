@@ -42,7 +42,7 @@ protected:
      * @brief Constructs the test class of the world.
      */
     WorldTest()
-        : m_world(IWorldRecordShrPtr(new WorldRecord("World", true)))
+        : m_world(IWorldRecordShrPtr(new WorldRecord("World")))
     {
     }
 
@@ -54,15 +54,10 @@ protected:
 
 TEST_F(WorldTest, CtorDoesNotThrow)
 {
-    ASSERT_NO_THROW(World world(IWorldRecordShrPtr(new WorldRecord("World", true))));
+    ASSERT_NO_THROW(World world(IWorldRecordShrPtr(new WorldRecord("World"))));
 }
 
 TEST_F(WorldTest, GetWorldNameReturnsProperValue)
 {
     ASSERT_STREQ("World", m_world.getWorldName().c_str());
-}
-
-TEST_F(WorldTest, GetTurnAvailableReturnsProperValue)
-{
-    ASSERT_TRUE(m_world.getTurnAvailable());
 }

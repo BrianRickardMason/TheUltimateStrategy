@@ -59,23 +59,11 @@ public:
      */
     virtual std::string getWorldName() const;
 
-    /**
-     * @brief Whether the player can execute the turn in the world.
-     *
-     * @return True if the player can execute turns in the world, false otherwise (turns are performed automatically).
-     */
-    virtual bool getTurnAvailable() const;
-
 private:
     /**
      * @brief The name of the world.
      */
     std::string const m_world_name;
-
-    /**
-     * @brief Whether the player can execute the turn in the world.
-     */
-    bool const m_turn_available;
 };
 
 } // namespace World

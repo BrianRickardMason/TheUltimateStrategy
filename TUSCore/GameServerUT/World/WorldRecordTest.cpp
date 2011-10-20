@@ -41,7 +41,7 @@ protected:
      * @brief Constructs a test class.
      */
     WorldRecordTest()
-        : m_record(WorldRecord("World", false))
+        : m_record(WorldRecord("World"))
     {
     }
 
@@ -53,15 +53,10 @@ protected:
 
 TEST_F(WorldRecordTest, CtorDoesNotThrow)
 {
-    ASSERT_NO_THROW(WorldRecord record("World", false));
+    ASSERT_NO_THROW(WorldRecord record("World"));
 }
 
 TEST_F(WorldRecordTest, GetWorldNameReturnsProperValue)
 {
     ASSERT_STREQ("World", m_record.getWorldName().c_str());
-}
-
-TEST_F(WorldRecordTest, GetTurnAvailableReturnsProperValue)
-{
-    ASSERT_FALSE(m_record.getTurnAvailable());
 }

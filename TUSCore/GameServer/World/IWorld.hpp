@@ -43,9 +43,6 @@ namespace World
 class IWorld
 {
 public:
-    /**
-     * @brief Destructs the interface of the world.
-     */
     virtual ~IWorld(){}
 
     /**
@@ -54,29 +51,16 @@ public:
      * @return The name of the world.
      */
     virtual std::string getWorldName() const = 0;
-
-    /**
-     * @brief Whether the player can execute the turn in the world.
-     *
-     * @return True if the player can execute turns in the world, false otherwise (turns are performed automatically).
-     */
-    virtual bool getTurnAvailable() const = 0;
 };
 
+//@{
 /**
- * @brief The shared pointer of the interface of the world.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IWorld> IWorldShrPtr;
-
-/**
- * @brief The pair of the interface of the world.
- */
 typedef std::pair<std::string, IWorldShrPtr> IWorldPair;
-
-/**
- * @brief The map of the interface of the world.
- */
 typedef std::map<std::string, IWorldShrPtr> IWorldMap;
+//}@
 
 } // namespace World
 } // namespace GameServer
