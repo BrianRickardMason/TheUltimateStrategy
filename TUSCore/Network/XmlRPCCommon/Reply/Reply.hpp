@@ -28,9 +28,8 @@
 #ifndef NETWORK_XMLRPCCOMMON_REPLY_REPLY_HPP
 #define NETWORK_XMLRPCCOMMON_REPLY_REPLY_HPP
 
-#include "../Common/Message.hpp"
-
-#include "InvalidReply.hpp"
+#include <Network/XmlRPCCommon/Common/Message.hpp>
+#include <Network/XmlRPCCommon/Reply/InvalidReply.hpp>
 
 namespace Network
 {
@@ -72,17 +71,16 @@ unsigned short int const REPLY_ID_CREATE_USER        = 21;
 
 unsigned short int const REPLY_ID_CREATE_WORLD       = 22;
 
-// TODO: Check the "23" problem.
-unsigned short int const REPLY_ID_CREATE_EPOCH       = 24;
-unsigned short int const REPLY_ID_DELETE_EPOCH       = 25;
-unsigned short int const REPLY_ID_ACTIVATE_EPOCH     = 26;
-unsigned short int const REPLY_ID_DEACTIVATE_EPOCH   = 27;
-unsigned short int const REPLY_ID_FINISH_EPOCH       = 28;
-unsigned short int const REPLY_ID_TICK_EPOCH         = 29;
-unsigned short int const REPLY_ID_GET_EPOCH          = 30;
+unsigned short int const REPLY_ID_CREATE_EPOCH       = 23;
+unsigned short int const REPLY_ID_DELETE_EPOCH       = 24;
+unsigned short int const REPLY_ID_ACTIVATE_EPOCH     = 25;
+unsigned short int const REPLY_ID_DEACTIVATE_EPOCH   = 26;
+unsigned short int const REPLY_ID_FINISH_EPOCH       = 27;
+unsigned short int const REPLY_ID_TICK_EPOCH         = 28;
+unsigned short int const REPLY_ID_GET_EPOCH          = 29;
 
-unsigned short int const REPLY_ID_TRANSPORT_HUMAN    = 31;
-unsigned short int const REPLY_ID_TRANSPORT_RESOURCE = 32;
+unsigned short int const REPLY_ID_TRANSPORT_HUMAN    = 30;
+unsigned short int const REPLY_ID_TRANSPORT_RESOURCE = 31;
 
 /**
  * @brief The statuses of the replies.
@@ -212,7 +210,7 @@ private:
 };
 
 /**
- * @brief A shared pointer of reply.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<Reply> ReplyShrPtr;
 
