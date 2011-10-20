@@ -64,7 +64,7 @@ protected:
      */
     virtual ~IntegrationFunctionalTest()
     {
-        //Poco::Process::kill(m_pid);
+        Poco::Process::kill(m_pid);
     };
 
 private:
