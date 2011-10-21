@@ -40,6 +40,7 @@ Land::Land(
     : m_login(a_record->getLogin()),
       m_world_name(a_record->getWorldName()),
       m_land_name(a_record->getLandName()),
+      m_turns(a_record->getTurns()),
       m_granted(a_record->getGranted())
 {
 }
@@ -57,6 +58,11 @@ string Land::getWorldName() const
 string Land::getLandName() const
 {
     return m_land_name;
+}
+
+int Land::getTurns() const
+{
+    return m_turns;
 }
 
 bool Land::getGranted() const

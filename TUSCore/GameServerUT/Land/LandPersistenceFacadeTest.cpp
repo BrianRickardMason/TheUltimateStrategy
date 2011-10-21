@@ -65,19 +65,22 @@ protected:
      * @param a_login      The expected login of the user.
      * @param a_world_name The expected name of the world.
      * @param a_land_name  The expected name of the land.
-     * @param a_granted    An expected state of the granted of the land.
+     * @param a_turns      The expected age of the land expressed in turns.
+     * @param a_granted    The expected state of the granted of the land.
      */
     void compareLand(
         ILandShrPtr       a_land,
         string      const a_login,
         string      const a_world_name,
         string      const a_land_name,
-        bool              a_granted
+        int         const a_turns,
+        bool        const a_granted
     )
     {
         ASSERT_STREQ(a_login.c_str(), a_land->getLogin().c_str());
         ASSERT_STREQ(a_world_name.c_str(), a_land->getWorldName().c_str());
         ASSERT_STREQ(a_land_name.c_str(), a_land->getLandName().c_str());
+        ASSERT_EQ(a_turns, a_land->getTurns());
         ASSERT_EQ(a_granted, a_land->getGranted());
     }
 
@@ -198,7 +201,7 @@ TEST_F(LandPersistenceFacadeTest, getLand_LandDoesExist)
     LandAccessorMock * mock = new LandAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_land_name_1))
-    .WillOnce(Return(ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, true))));
+    .WillOnce(Return(ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, 1, true))));
 
     ILandAccessorAutPtr accessor(mock);
 
@@ -208,7 +211,7 @@ TEST_F(LandPersistenceFacadeTest, getLand_LandDoesExist)
 
     ASSERT_TRUE(land != NULL);
 
-    compareLand(land, m_login_1, m_world_name_1, m_land_name_1, true);
+    compareLand(land, m_login_1, m_world_name_1, m_land_name_1, 1, true);
 }
 
 TEST_F(LandPersistenceFacadeTest, getLands_LandsDoNotExist)
@@ -236,7 +239,7 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_OneLand)
     LandAccessorMock * mock = new LandAccessorMock;
 
     ILandRecordMap map;
-    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, false))));
+    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, 1, false))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
@@ -251,7 +254,7 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_OneLand)
 
     ASSERT_EQ(1, lands.size());
 
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_land_name_1, false);
+    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_land_name_1, 1, false);
 }
 
 TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_ManyLands)
@@ -261,8 +264,8 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_ManyLands)
     LandAccessorMock * mock = new LandAccessorMock;
 
     ILandRecordMap map;
-    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, false))));
-    map.insert(make_pair(m_land_name_2, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_2, m_land_name_2, true))));
+    map.insert(make_pair(m_land_name_1, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_1, m_land_name_1, 1, false))));
+    map.insert(make_pair(m_land_name_2, ILandRecordShrPtr(new LandRecord(m_login_1, m_world_name_2, m_land_name_2, 1, true))));
 
     EXPECT_CALL(*mock, getRecords(transaction, m_login_1))
     .WillOnce(Return(map));
@@ -277,8 +280,8 @@ TEST_F(LandPersistenceFacadeTest, getLands_LandsDoExist_ManyLands)
 
     ASSERT_EQ(2, lands.size());
 
-    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_land_name_1, false);
-    compareLand(lands[m_land_name_2], m_login_1, m_world_name_2, m_land_name_2, true);
+    compareLand(lands[m_land_name_1], m_login_1, m_world_name_1, m_land_name_1, 1, false);
+    compareLand(lands[m_land_name_2], m_login_1, m_world_name_2, m_land_name_2, 1, true);
 }
 
 TEST_F(LandPersistenceFacadeTest, markGranted)

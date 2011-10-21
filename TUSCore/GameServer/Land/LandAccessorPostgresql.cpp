@@ -135,14 +135,16 @@ ILandRecordShrPtr LandAccessorPostgresql::prepareResultGetRecord(
         string login;
         string world_name;
         string land_name;
+        int turns;
         bool granted;
 
         a_result[0]["login"].to(login);
         a_result[0]["world_name"].to(world_name);
         a_result[0]["land_name"].to(land_name);
+        a_result[0]["turns"].to(turns);
         a_result[0]["granted"].to(granted);
 
-        return ILandRecordShrPtr(new LandRecord(login, world_name, land_name, granted));
+        return ILandRecordShrPtr(new LandRecord(login, world_name, land_name, turns, granted));
     }
     else
     {
@@ -157,6 +159,7 @@ ILandRecordMap LandAccessorPostgresql::prepareResultGetRecords(
     string login;
     string world_name;
     string land_name;
+    int turns;
     bool granted;
 
     ILandRecordMap records;
@@ -166,9 +169,10 @@ ILandRecordMap LandAccessorPostgresql::prepareResultGetRecords(
         it["login"].to(login);
         it["world_name"].to(world_name);
         it["land_name"].to(land_name);
+        it["turns"].to(turns);
         it["granted"].to(granted);
 
-        ILandRecordShrPtr record = ILandRecordShrPtr(new LandRecord(login, world_name, land_name, granted));
+        ILandRecordShrPtr record = ILandRecordShrPtr(new LandRecord(login, world_name, land_name, turns, granted));
         ILandRecordPair pair(land_name, record);
         records.insert(pair);
     }

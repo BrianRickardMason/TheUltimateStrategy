@@ -48,13 +48,15 @@ public:
      * @param a_login      The login of the user.
      * @param a_world_name The name of the world.
      * @param a_land_name  The name of the land.
+     * @param a_turns      The age of the land expressed in turns.
      * @param a_granted    The state of the "granted" value, whether or not humans and resources have been granted.
      */
     LandRecord(
         std::string const a_login,
         std::string const a_world_name,
         std::string const a_land_name,
-        bool              a_granted
+        int         const a_turns,
+        bool        const a_granted
     );
 
     /**
@@ -79,6 +81,13 @@ public:
     virtual std::string getLandName() const;
 
     /**
+     * @brief Gets the age of the land expressed in the number of turns.
+     *
+     * @return The age of the land expressed in the number of turns.
+     */
+    virtual int getTurns() const;
+
+    /**
      * @brief Gets the state of the "granted" value of the land.
      *
      * @return The state of the "granted" value of the land.
@@ -100,6 +109,13 @@ private:
      * @brief The name of the land.
      */
     std::string const m_land_name;
+
+    /**
+     * @brief Stores the age of the land expressed in turns.
+     *
+     * The information on how long does land exists.
+     */
+    int const m_turns;
 
     /**
      * @brief Defines whether resources and humans has been granted to the land.

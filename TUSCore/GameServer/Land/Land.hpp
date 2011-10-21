@@ -74,6 +74,13 @@ public:
     virtual std::string getLandName() const;
 
     /**
+     * @brief Gets the age of the land expressed in the number of turns.
+     *
+     * @return The age of the land expressed in the number of turns.
+     */
+    virtual int getTurns() const;
+
+    /**
      * @brief Gets a granted of the land.
      *
      * @return The granted of the land.
@@ -95,6 +102,13 @@ private:
      * @brief The name of the land.
      */
     std::string const m_land_name;
+
+    /**
+     * @brief Stores the age of the land expressed in turns.
+     *
+     * The information on how long does land exists.
+     */
+    int const m_turns;
 
     /**
      * @brief Defines whether resources and humans has been granted to the land.

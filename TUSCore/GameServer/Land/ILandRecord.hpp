@@ -67,6 +67,13 @@ public:
     virtual std::string getLandName() const = 0;
 
     /**
+     * @brief Gets the age of the land expressed in the number of turns.
+     *
+     * @return The age of the land expressed in the number of turns.
+     */
+    virtual int getTurns() const = 0;
+
+    /**
      * @brief Gets the state of the "granted" value of the land.
      *
      * @return The state of the "granted" value of the land.
@@ -74,20 +81,14 @@ public:
     virtual bool getGranted() const = 0;
 };
 
+//@{
 /**
- * @brief The shared pointer of the interface of the record of the land.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ILandRecord> ILandRecordShrPtr;
-
-/**
- * @brief The pair of the interface of the record of the land.
- */
 typedef std::pair<std::string, ILandRecordShrPtr> ILandRecordPair;
-
-/**
- * @brief The map of the interface of the record of the land.
- */
 typedef std::map<std::string, ILandRecordShrPtr> ILandRecordMap;
+//}@
 
 } // namespace Land
 } // namespace GameServer

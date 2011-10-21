@@ -128,7 +128,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementDoesExist)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ILandRecordShrPtr land_record =
-        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, false));
+        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, 1, false));
 
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
@@ -152,7 +152,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_SettlementHasNotBeenCreate
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ILandRecordShrPtr land_record =
-        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, false));
+        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, 1, false));
 
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
@@ -176,7 +176,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasBeenGivenSettlemen
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ILandRecordShrPtr land_record =
-        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, true));
+        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, 1, true));
 
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
@@ -200,7 +200,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGetSet
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ILandRecordShrPtr land_record =
-        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, false));
+        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, 1, false));
 
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
@@ -225,7 +225,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenGiveTh
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ILandRecordShrPtr land_record =
-        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, false));
+        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, 1, false));
 
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));
@@ -256,7 +256,7 @@ TEST_F(CreateSettlementOperatorTest, createSettlement_GrantHasNotBeenGivenSettle
     ITransactionShrPtr transaction(new TransactionDummy);
 
     ILandRecordShrPtr land_record =
-        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, false));
+        ILandRecordShrPtr(new LandRecord(m_login, m_world_name, m_land_name, 1, false));
 
     EXPECT_CALL(*m_land_persistence_facade, getLand(transaction, m_land_name))
     .WillOnce(Return(ILandShrPtr(new Land(land_record))));

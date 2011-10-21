@@ -38,11 +38,13 @@ LandRecord::LandRecord(
     string const a_login,
     string const a_world_name,
     string const a_land_name,
-    bool         a_granted
+    int    const a_turns,
+    bool   const a_granted
 )
     : m_login(a_login),
       m_world_name(a_world_name),
       m_land_name(a_land_name),
+      m_turns(a_turns),
       m_granted(a_granted)
 {
 }
@@ -60,6 +62,11 @@ string LandRecord::getWorldName() const
 string LandRecord::getLandName() const
 {
     return m_land_name;
+}
+
+int LandRecord::getTurns() const
+{
+    return m_turns;
 }
 
 bool LandRecord::getGranted() const

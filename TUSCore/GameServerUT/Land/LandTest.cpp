@@ -46,7 +46,7 @@ protected:
         : m_login("Login"),
           m_world_name("World"),
           m_land_name("Land"),
-          m_land_record(new LandRecord(m_login, m_world_name, m_land_name, false)),
+          m_land_record(new LandRecord(m_login, m_world_name, m_land_name, 1, false)),
           m_land(new Land(m_land_record))
     {
     }
@@ -95,6 +95,11 @@ TEST_F(LandTest, GetWorldNameReturnsProperValue)
 TEST_F(LandTest, GetLandNameReturnsProperValue)
 {
     ASSERT_STREQ(m_land_name.c_str(), m_land->getLandName().c_str());
+}
+
+TEST_F(LandTest, GetTurnsReturnsProperValue)
+{
+    ASSERT_EQ(1, m_land->getTurns());
 }
 
 TEST_F(LandTest, GetGrantedReturnsProperValue)

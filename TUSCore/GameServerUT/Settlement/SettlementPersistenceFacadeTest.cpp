@@ -57,8 +57,8 @@ protected:
           m_land_name_2("Land2"),
           m_settlement_name_1("Settlement1"),
           m_settlement_name_2("Settlement2"),
-          m_land_record_1(new LandRecord("Login", "World", m_land_name_1, false)),
-          m_land_record_2(new LandRecord("Login", "World", m_land_name_2, false)),
+          m_land_record_1(new LandRecord("Login", "World", m_land_name_1, 1, false)),
+          m_land_record_2(new LandRecord("Login", "World", m_land_name_2, 1, false)),
           m_land_1(new Land(m_land_record_1)),
           m_land_2(new Land(m_land_record_2))
     {
