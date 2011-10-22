@@ -117,6 +117,19 @@ public:
     ) const = 0;
 
     /**
+     * @brief Increases the age of the land expressed in turns.
+     *
+     * Increases the number of turns by 1.
+     *
+     * @param a_transaction The transaction.
+     * @param a_land        The land.
+     */
+    virtual void increaseAge(
+        Persistence::ITransactionShrPtr       a_transaction,
+        ILandShrPtr                     const a_land
+    ) const = 0;
+
+    /**
      * @brief Marks that land has been given a grant.
      *
      * @param a_transaction The transaction.

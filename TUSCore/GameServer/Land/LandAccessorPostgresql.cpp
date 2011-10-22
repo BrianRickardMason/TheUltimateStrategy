@@ -112,6 +112,20 @@ ILandRecordMap LandAccessorPostgresql::getRecordsByWorldName(
     return prepareResultGetRecords(backbone_transaction.exec(query));
 }
 
+void LandAccessorPostgresql::increaseAge(
+    ITransactionShrPtr       a_transaction,
+    string             const a_land_name
+) const
+{
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+
+    string query = "UPDATE lands SET turns = turns + 1 land_name = "
+                   + backbone_transaction.quote(a_land_name);
+
+    pqxx::result result = backbone_transaction.exec(query);
+}
+
 void LandAccessorPostgresql::markGranted(
     Persistence::ITransactionShrPtr       a_transaction,
     string                          const a_land_name

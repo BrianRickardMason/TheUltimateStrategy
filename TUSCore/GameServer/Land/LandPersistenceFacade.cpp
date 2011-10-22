@@ -105,6 +105,14 @@ ILandMap LandPersistenceFacade::getLands(
     return prepareResultGetLands(m_accessor->getRecordsByWorldName(a_transaction, a_world->getWorldName()));
 }
 
+void LandPersistenceFacade::increaseAge(
+    ITransactionShrPtr       a_transaction,
+    ILandShrPtr        const a_land
+) const
+{
+    m_accessor->increaseAge(a_transaction, a_land->getLandName());
+}
+
 void LandPersistenceFacade::markGranted(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
