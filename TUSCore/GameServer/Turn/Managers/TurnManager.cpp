@@ -74,8 +74,7 @@ bool TurnManager::turn(
         // Execute turn of every land.
         for (ILandMap::const_iterator it = lands.begin(); it != lands.end(); ++it)
         {
-            // TODO: Improve it by passing the land instance instead of the land's name.
-            bool const result = executeTurn(a_transaction, it->second->getLandName());
+            bool const result = executeTurn(a_transaction, it->second);
 
             if (!result)
             {
@@ -93,17 +92,10 @@ bool TurnManager::turn(
 
 bool TurnManager::executeTurn(
     ITransactionShrPtr       a_transaction,
-    string             const a_land_name
+    ILandShrPtr        const a_land
 ) const
 {
-    ILandShrPtr land = m_land_persistence_facade->getLand(a_transaction, a_land_name);
-
-    if (!land)
-    {
-        return false;
-    }
-
-    ISettlementMap settlements = m_settlement_persistence_facade->getSettlements(a_transaction, land);
+    ISettlementMap settlements = m_settlement_persistence_facade->getSettlements(a_transaction, a_land);
 
     for (ISettlementMap::iterator it = settlements.begin(); it != settlements.end(); ++it)
     {

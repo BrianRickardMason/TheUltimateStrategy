@@ -82,16 +82,16 @@ public:
 
 private:
     /**
-     * @brief Executes a turn.
+     * @brief Executes a turn in land.
      *
      * @param a_transaction The transaction.
-     * @param a_land_name   The name of the land.
+     * @param a_land        The land.
      *
      * @return True on success, false otherwise.
      */
     bool executeTurn(
         Persistence::ITransactionShrPtr       a_transaction,
-        std::string                     const a_land_name
+        Land::ILandShrPtr               const a_land
     ) const;
 
     /**
@@ -134,7 +134,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<TurnManager> TurnManagerAutPtr;
 

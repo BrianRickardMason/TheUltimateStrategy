@@ -62,7 +62,7 @@ public:
 };
 
 /**
- * @brief Typedef of shared pointer
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ITurnManager> ITurnManagerShrPtr;
 
