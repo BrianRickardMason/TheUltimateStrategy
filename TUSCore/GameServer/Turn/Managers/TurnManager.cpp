@@ -107,6 +107,8 @@ bool TurnManager::executeTurn(
         }
     }
 
+    m_land_persistence_facade->increaseAge(a_transaction, a_land);
+
     return true;
 }
 
