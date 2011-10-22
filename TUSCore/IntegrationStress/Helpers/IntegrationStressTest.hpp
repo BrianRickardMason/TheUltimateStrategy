@@ -125,11 +125,6 @@ private:
             backbone_transaction.exec("DELETE FROM users");
             backbone_transaction.exec("DELETE FROM worlds");
 
-            // FIXME: Temporary workaround until ExecutorCreateUser is available.
-            backbone_transaction.exec("INSERT INTO users(login, password) VALUES('Login1', 'Password1')");
-            backbone_transaction.exec("INSERT INTO users(login, password) VALUES('Login2', 'Password2')");
-            backbone_transaction.exec("INSERT INTO users(login, password) VALUES('Login3', 'Password3')");
-
             // FIXME: Temporary workaround until ExecutorCreateWorld is available.
             backbone_transaction.exec("INSERT INTO worlds(world_name) VALUES('World1')");
             backbone_transaction.exec("INSERT INTO worlds(world_name) VALUES('World2')");

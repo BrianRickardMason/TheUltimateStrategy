@@ -26,10 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../../IntegrationCommon/Helpers/Scenarios/Settlement/ScenarioGetSettlement.hpp"
+#include "../../../IntegrationCommon/Helpers/Scenarios/User/ScenarioCreateUser.hpp"
 #include "../../Helpers/IntegrationStressTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
 
 using namespace IntegrationCommon::Helpers::Scenarios::Settlement;
+using namespace IntegrationCommon::Helpers::Scenarios::User;
 using namespace IntegrationCommon::Helpers::Scenarios;
 using namespace boost::assign;
 using namespace boost;
@@ -61,12 +63,20 @@ public:
 
             for (unsigned short int i = 0; i < a_thread_iterations; ++i)
             {
+                char login[14];
+                char password[17];
+
+                BOOST_ASSERT(sprintf(login, "%s%d%s%d", "Login_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(password, "%s%d%s%d", "Password_", a_thread_seq_number, "_", i) > 0);
+
                 vector<IScenarioShrPtr> scenarios = list_of
+                    (IScenarioShrPtr(new ScenarioCreateUser(
+                        client,
+                        IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess(login, password)),
+                        IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioGetSettlement(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess(
-                            "Login1", "Password1",
-                            "Settlement")),
+                        IScenarioActionShrPtr(new ScenarioGetSettlementActionSuccess(login, password, "Settlement")),
                         IScenarioVerificationShrPtr(new ScenarioGetSettlementVerificationUnauthorized))));
 
                 for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)

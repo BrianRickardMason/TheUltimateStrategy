@@ -380,44 +380,48 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, SettlementsAreNotFrom
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioCreateUser(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login2", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login1", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login1", "Password", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login1", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", "Land1")),
+            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login1", "Password", "World", "Land1")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", "Land2")),
+            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login2", "Password", "World", "Land2")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land1", "Settlement1")),
-            IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))));
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login1", "Password", "Land1", "Settlement1")),
+            IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateSettlement(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login", "Password", "Land2", "Settlement2")),
-            IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))));
+            IScenarioActionShrPtr(new ScenarioCreateSettlementActionSuccess("Login2", "Password", "Land2", "Settlement2")),
+            IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioTransportResource(
             client,
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
-                "Login", "Password",
+                "Login1", "Password",
                 "Settlement1", "Settlement2",
                 ID_RESOURCE_COAL.getValue(),
                 22)),
-            IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationSettlementsAreNotFromTheSameLand))));
+            IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {

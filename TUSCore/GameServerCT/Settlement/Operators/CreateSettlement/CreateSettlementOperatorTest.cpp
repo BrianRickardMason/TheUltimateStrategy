@@ -61,7 +61,8 @@ protected:
           m_create_user_operator(m_operator_abstract_factory->createCreateUserOperator()),
           m_create_world_operator(m_operator_abstract_factory->createCreateWorldOperator()),
           m_epoch_name("Epoch"),
-          m_login("Login"),
+          m_login_1("Login1"),
+          m_login_2("Login2"),
           m_world_name("World"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
@@ -73,14 +74,15 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_create_user_operator->createUser(transaction, "Login", "Password");
+            m_create_user_operator->createUser(transaction, "Login1", "Password");
+            m_create_user_operator->createUser(transaction, "Login2", "Password");
 
             m_create_world_operator->createWorld(transaction, m_world_name);
 
             m_create_epoch_operator->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_land_name_1);
-            m_create_land_operator->createLand(transaction, m_login, m_world_name, m_land_name_2);
+            m_create_land_operator->createLand(transaction, m_login_1, m_world_name, m_land_name_1);
+            m_create_land_operator->createLand(transaction, m_login_2, m_world_name, m_land_name_2);
 
             transaction->commit();
         }
@@ -255,9 +257,10 @@ protected:
     string m_epoch_name;
 
     /**
-     * @brief Test constants: the login of the user.
+     * @brief Test constants: the logins of the users.
      */
-    string m_login;
+    string m_login_1,
+           m_login_2;
 
     /**
      * @brief Test constants: the name of the world.

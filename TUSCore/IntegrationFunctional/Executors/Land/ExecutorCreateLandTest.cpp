@@ -76,34 +76,38 @@ TEST_F(IntegrationFunctionalTest, CreateLand)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, CreateLand_TwoLandsOfDifferentNames)
+TEST_F(IntegrationFunctionalTest, CreateLandTwoLandsOfDifferentNames)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login1", "Password")),
+            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioCreateUser(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login2", "Password")),
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login1", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login1", "Password", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login1", "Password", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", "Land1")),
+            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login1", "Password", "World", "Land1")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login", "Password", "World", "Land2")),
+            IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess("Login2", "Password", "World", "Land2")),
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

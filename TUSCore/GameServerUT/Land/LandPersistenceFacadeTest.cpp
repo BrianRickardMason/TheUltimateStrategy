@@ -103,14 +103,14 @@ protected:
            m_world_name_2;
 };
 
-TEST_F(LandPersistenceFacadeTest, LandPersistenceFacade)
+TEST_F(LandPersistenceFacadeTest, CtorDoesNotThrow)
 {
     ILandAccessorAutPtr accessor(new LandAccessorMock);
 
-    LandPersistenceFacade persistence_facade(accessor);
+    ASSERT_NO_THROW(LandPersistenceFacade persistence_facade(accessor));
 }
 
-TEST_F(LandPersistenceFacadeTest, createLand_Success)
+TEST_F(LandPersistenceFacadeTest, CreateLandReturnsTrueOnSuccessfullRecordInsertion)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -125,7 +125,7 @@ TEST_F(LandPersistenceFacadeTest, createLand_Success)
     ASSERT_TRUE(persistence_facade.createLand(transaction, m_login_1, m_world_name_1, m_land_name_1));
 }
 
-TEST_F(LandPersistenceFacadeTest, createLand_Failure)
+TEST_F(LandPersistenceFacadeTest, CreateLandReturnsFalseOnUnsuccessfulRecordInsertion)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 

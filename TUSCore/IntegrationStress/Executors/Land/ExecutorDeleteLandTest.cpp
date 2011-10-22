@@ -26,10 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../../IntegrationCommon/Helpers/Scenarios/Land/ScenarioDeleteLand.hpp"
+#include "../../../IntegrationCommon/Helpers/Scenarios/User/ScenarioCreateUser.hpp"
 #include "../../Helpers/IntegrationStressTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
 
 using namespace IntegrationCommon::Helpers::Scenarios::Land;
+using namespace IntegrationCommon::Helpers::Scenarios::User;
 using namespace IntegrationCommon::Helpers::Scenarios;
 using namespace boost::assign;
 using namespace boost;
@@ -61,15 +63,25 @@ public:
 
             for (unsigned short int i = 0; i < a_thread_iterations; ++i)
             {
+                char land_name[13];
+                char login[14];
+                char password[17];
+
+                BOOST_ASSERT(sprintf(land_name, "%s%d%s%d", "Land_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(login, "%s%d%s%d", "Login_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(password, "%s%d%s%d", "Password_", a_thread_seq_number, "_", i) > 0);
+
                 vector<IScenarioShrPtr> scenarios = list_of
+                    (IScenarioShrPtr(new ScenarioCreateUser(
+                        client,
+                        IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess(login, password)),
+                        IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioDeleteLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess("Login1", "Password1", "Land")),
+                        IScenarioActionShrPtr(new ScenarioDeleteLandActionSuccess(login, password, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationUnauthorized))));
 
-                for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
-                     it != scenarios.end();
-                     ++it)
+                for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {
                     ASSERT_STREQ("", (*it)->execute());
                 }
@@ -106,9 +118,7 @@ public:
                         IScenarioActionShrPtr(new ScenarioDeleteLandActionInvalidRequest("Login1", "Password1", "Land")),
                         IScenarioVerificationShrPtr(new ScenarioDeleteLandVerificationInvalidRequest))));
 
-                for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
-                     it != scenarios.end();
-                     ++it)
+                for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {
                     ASSERT_STREQ("", (*it)->execute());
                 }

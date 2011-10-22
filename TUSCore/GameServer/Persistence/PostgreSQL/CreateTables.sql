@@ -47,7 +47,9 @@ CREATE TABLE lands
     world_name VARCHAR(44) NOT NULL CHECK(world_name <> '') REFERENCES worlds(world_name) ON DELETE CASCADE,
     land_name  VARCHAR(44) PRIMARY KEY NOT NULL CHECK(land_name <> ''),
     turns      INTEGER NOT NULL DEFAULT 0 CHECK(turns >= 0),
-    granted    BOOLEAN DEFAULT FALSE
+    granted    BOOLEAN DEFAULT FALSE,
+
+    UNIQUE(login)
 );
 
 DROP TABLE IF EXISTS settlements CASCADE;

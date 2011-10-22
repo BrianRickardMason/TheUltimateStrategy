@@ -27,11 +27,13 @@
 
 #include "../../../IntegrationCommon/Helpers/Scenarios/Land/ScenarioCreateLand.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Land/ScenarioGetLand.hpp"
+#include "../../../IntegrationCommon/Helpers/Scenarios/User/ScenarioCreateUser.hpp"
 #include "../../../Network/XmlRPCServer/Request/Executors/Constants.hpp"
 #include "../../Helpers/IntegrationStressTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
 
 using namespace IntegrationCommon::Helpers::Scenarios::Land;
+using namespace IntegrationCommon::Helpers::Scenarios::User;
 using namespace IntegrationCommon::Helpers::Scenarios;
 using namespace boost::assign;
 using namespace boost;
@@ -64,18 +66,24 @@ public:
             for (unsigned short int i = 0; i < a_thread_iterations; ++i)
             {
                 char land_name[13];
+                char login[14];
+                char password[17];
 
                 BOOST_ASSERT(sprintf(land_name, "%s%d%s%d", "Land_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(login, "%s%d%s%d", "Login_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(password, "%s%d%s%d", "Password_", a_thread_seq_number, "_", i) > 0);
 
                 vector<IScenarioShrPtr> scenarios = list_of
+                    (IScenarioShrPtr(new ScenarioCreateUser(
+                        client,
+                        IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess(login, password)),
+                        IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioGetLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandActionSuccess("Login1", "Password1", land_name)),
+                        IScenarioActionShrPtr(new ScenarioGetLandActionSuccess(login, password, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandVerificationUnauthorized))));
 
-                for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
-                     it != scenarios.end();
-                     ++it)
+                for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {
                     ASSERT_STREQ("", (*it)->execute());
                 }
@@ -107,24 +115,38 @@ public:
             for (unsigned short int i = 0; i < a_thread_iterations; ++i)
             {
                 char land_name[13];
+                char login_1[16],
+                     login_2[16];
+                char password_1[19],
+                     password_2[19];
 
                 BOOST_ASSERT(sprintf(land_name, "%s%d%s%d", "Land_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(login_1, "%s%d%s%d", "Login_1_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(login_2, "%s%d%s%d", "Login_2_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(password_1, "%s%d%s%d", "Password_1_", a_thread_seq_number, "_", i) > 0);
+                BOOST_ASSERT(sprintf(password_2, "%s%d%s%d", "Password_2_", a_thread_seq_number, "_", i) > 0);
 
                 vector<IScenarioShrPtr> scenarios = list_of
+                    (IScenarioShrPtr(new ScenarioCreateUser(
+                        client,
+                        IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess(login_1, password_1)),
+                        IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
+                    (IScenarioShrPtr(new ScenarioCreateUser(
+                        client,
+                        IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess(login_2, password_2)),
+                        IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioCreateLand(
                         client,
                         IScenarioActionShrPtr(new ScenarioCreateLandActionSuccess(
-                            "Login1", "Password1",
+                            login_1, password_1,
                             "World1", land_name)),
                         IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
                     (IScenarioShrPtr(new ScenarioGetLand(
                         client,
-                        IScenarioActionShrPtr(new ScenarioGetLandActionSuccess("Login2", "Password2", land_name)),
+                        IScenarioActionShrPtr(new ScenarioGetLandActionSuccess(login_2, password_2, land_name)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandVerificationUnauthorized))));
 
-                for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
-                     it != scenarios.end();
-                     ++it)
+                for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {
                     ASSERT_STREQ("", (*it)->execute());
                 }
@@ -164,12 +186,10 @@ public:
                         client,
                         IScenarioActionShrPtr(new ScenarioGetLandActionInvalidRequest(
                             "Login1", "Password1",
-                            "Land")),
+                            land_name)),
                         IScenarioVerificationShrPtr(new ScenarioGetLandVerificationInvalidRequest))));
 
-                for (std::vector<IntegrationCommon::Helpers::Scenarios::IScenarioShrPtr>::iterator it = scenarios.begin();
-                     it != scenarios.end();
-                     ++it)
+                for (vector<IScenarioShrPtr>::iterator it = scenarios.begin(); it != scenarios.end(); ++it)
                 {
                     ASSERT_STREQ("", (*it)->execute());
                 }
