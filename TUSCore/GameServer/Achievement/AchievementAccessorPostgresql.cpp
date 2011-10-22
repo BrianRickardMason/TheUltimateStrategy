@@ -39,7 +39,6 @@ namespace Achievement
 
 void AchievementAccessorPostgresql::insertRecord(
     ITransactionShrPtr       a_transaction,
-    string             const a_world_name,
     string             const a_epoch_name,
     string             const a_login,
     string             const a_achievement_name
@@ -48,8 +47,7 @@ void AchievementAccessorPostgresql::insertRecord(
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "INSERT INTO achievements (world_name, epoch_name, login, achievement_name) VALUES("
-                   + backbone_transaction.quote(a_world_name.c_str()) + ", "
+    string query = "INSERT INTO achievements (epoch_name, login, achievement_name) VALUES("
                    + backbone_transaction.quote(a_epoch_name.c_str()) + ", "
                    + backbone_transaction.quote(a_login.c_str()) + ", "
                    + backbone_transaction.quote(a_achievement_name.c_str()) + ")";

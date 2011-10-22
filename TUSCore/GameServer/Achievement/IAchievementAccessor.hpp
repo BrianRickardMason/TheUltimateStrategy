@@ -52,14 +52,12 @@ public:
      * @brief Inserts a achievement record.
      *
      * @param a_transaction      The transaction.
-     * @param a_world_name       The name of the world.
      * @param a_epoch_name       The name of the epoch.
      * @param a_login            The login of the user.
      * @param a_achievement_name The name of the achievement.
      */
     virtual void insertRecord(
         Persistence::ITransactionShrPtr         a_transaction,
-        std::string                     const a_world_name,
         std::string                     const a_epoch_name,
         std::string                     const a_login,
         std::string                     const a_achievement_name

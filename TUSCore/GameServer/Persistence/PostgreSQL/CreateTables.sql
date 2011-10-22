@@ -33,7 +33,6 @@ CREATE TABLE achievements_available
 DROP TABLE IF EXISTS achievements CASCADE;
 CREATE TABLE achievements
 (
-    world_name       VARCHAR(44) NOT NULL CHECK(world_name <> '')       REFERENCES worlds(world_name)                       ON DELETE CASCADE,
     epoch_name       VARCHAR(44) NOT NULL CHECK(epoch_name <> '')       REFERENCES epochs(epoch_name)                       ON DELETE CASCADE,
     login            VARCHAR(44) NOT NULL CHECK(login <> '')            REFERENCES users(login)                             ON DELETE CASCADE,
     achievement_name VARCHAR(44) NOT NULL CHECK(achievement_name <> '') REFERENCES achievements_available(achievement_name) ON DELETE CASCADE,
