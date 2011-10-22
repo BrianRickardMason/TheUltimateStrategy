@@ -1,7 +1,9 @@
 BEGIN;
 
 -- Achievements.
-INSERT INTO achievements_available(achievement_name) VALUES ('achievement');
+INSERT INTO achievements_available(achievement_name) VALUES ('survived22');
+INSERT INTO achievements_available(achievement_name) VALUES ('survived44');
+INSERT INTO achievements_available(achievement_name) VALUES ('survived88');
 
 -- Cost type: ID_COST_TYPE_BUILDING_BUILD.
 -- Building class: ID_BUILDING_CLASS_DEFENSIVE.
