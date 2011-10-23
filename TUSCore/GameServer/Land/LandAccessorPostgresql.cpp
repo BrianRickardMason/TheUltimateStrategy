@@ -120,7 +120,7 @@ void LandAccessorPostgresql::increaseAge(
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "UPDATE lands SET turns = turns + 1 land_name = "
+    string query = "UPDATE lands SET turns = turns + 1 WHERE land_name = "
                    + backbone_transaction.quote(a_land_name);
 
     pqxx::result result = backbone_transaction.exec(query);
