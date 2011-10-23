@@ -30,6 +30,7 @@
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
+using namespace GameServer::User;
 using namespace GameServer::World;
 
 namespace GameServer
@@ -38,12 +39,16 @@ namespace Achievement
 {
 
 AchievementManager::AchievementManager(
-    IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
-    ILandPersistenceFacadeShrPtr  a_land_persistence_facade,
-    IWorldPersistenceFacadeShrPtr a_world_persistence_facade
+    IAchievementPersistenceFacadeShrPtr a_achievement_persistence_facade,
+    IEpochPersistenceFacadeShrPtr       a_epoch_persistence_facade,
+    ILandPersistenceFacadeShrPtr        a_land_persistence_facade,
+    IUserPersistenceFacadeShrPtr        a_user_persistence_facade,
+    IWorldPersistenceFacadeShrPtr       a_world_persistence_facade
 )
-    : m_epoch_persistence_facade(a_epoch_persistence_facade),
+    : m_achievement_persistence_facade(a_achievement_persistence_facade),
+      m_epoch_persistence_facade(a_epoch_persistence_facade),
       m_land_persistence_facade(a_land_persistence_facade),
+      m_user_persistence_facade(a_user_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade)
 {
 }
@@ -69,7 +74,12 @@ bool AchievementManager::grantAchievements(
         // Grant achievements to every land.
         for (ILandMap::const_iterator it = lands.begin(); it != lands.end(); ++it)
         {
-            // TODO: grantToLand().
+            bool const result = grantAchievements(a_transaction, epoch, it->second);
+
+            if (!result)
+            {
+                return false;
+            }
         }
 
         return true;
@@ -78,6 +88,39 @@ bool AchievementManager::grantAchievements(
     {
         return false;
     }
+}
+
+bool AchievementManager::grantAchievements(
+    Persistence::ITransactionShrPtr       a_transaction,
+    Epoch::EpochShrPtr              const a_epoch,
+    Land::ILandShrPtr               const a_land
+) const
+{
+    int const turns = a_land->getTurns();
+
+    if (turns == 88 or turns == 44 or turns == 22)
+    {
+        IUserShrPtr user = m_user_persistence_facade->getUser(a_transaction, a_land->getLogin());
+
+        if (!user)
+        {
+            return false;
+        }
+
+        switch (turns)
+        {
+            case 88:
+                return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived88");
+            case 44:
+                return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived44");
+            case 22:
+                return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived22");
+            default:
+                BOOST_ASSERT(false);
+        }
+    }
+
+    return true;
 }
 
 } // namespace Achievement

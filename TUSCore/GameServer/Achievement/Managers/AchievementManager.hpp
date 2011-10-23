@@ -28,9 +28,11 @@
 #ifndef GAMESERVER_ACHIEVEMENT_ACHIEVEMENTMANAGER_HPP
 #define GAMESERVER_ACHIEVEMENT_ACHIEVEMENTMANAGER_HPP
 
+#include <GameServer/Achievement/IAchievementPersistenceFacade.hpp>
 #include <GameServer/Achievement/Managers/IAchievementManager.hpp>
 #include <GameServer/Epoch/IEpochPersistenceFacade.hpp>
 #include <GameServer/Land/ILandPersistenceFacade.hpp>
+#include <GameServer/User/IUserPersistenceFacade.hpp>
 #include <GameServer/World/IWorldPersistenceFacade.hpp>
 
 namespace GameServer
@@ -48,13 +50,17 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_epoch_persistence_facade The persistence facade of epochs.
-     * @param a_land_persistence_facade  The persistence facade of lands.
-     * @param a_world_persistence_facade The persistence facade of worlds.
+     * @param a_achievement_persistence_facade The persistence facade of achievements.
+     * @param a_epoch_persistence_facade       The persistence facade of epochs.
+     * @param a_land_persistence_facade        The persistence facade of lands.
+     * @param a_user_persistence_facade        The persistence facade of users.
+     * @param a_world_persistence_facade       The persistence facade of worlds.
      */
     AchievementManager(
+        IAchievementPersistenceFacadeShrPtr  a_achievement_persistence_facade,
         Epoch::IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
         Land::ILandPersistenceFacadeShrPtr   a_land_persistence_facade,
+        User::IUserPersistenceFacadeShrPtr   a_user_persistence_facade,
         World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
     );
 
@@ -72,12 +78,29 @@ public:
     ) const;
 
 private:
+    /**
+     * @brief Grants achievements to the land.
+     *
+     * @param a_transaction The transaction.
+     * @param a_epoch       The epoch.
+     * @param a_land        The land.
+     *
+     * @return True on success, false otherwise.
+     */
+    bool grantAchievements(
+        Persistence::ITransactionShrPtr       a_transaction,
+        Epoch::EpochShrPtr              const a_epoch,
+        Land::ILandShrPtr               const a_land
+    ) const;
+
     //@{
     /**
      * @brief A persistence facade.
      */
+    IAchievementPersistenceFacadeShrPtr  m_achievement_persistence_facade;
     Epoch::IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
     Land::ILandPersistenceFacadeShrPtr   m_land_persistence_facade;
+    User::IUserPersistenceFacadeShrPtr   m_user_persistence_facade;
     World::IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
     //}@
 };
