@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_COMMON_IPERSISTENCEFACADEABSTRACTFACTORY_HPP
 #define GAMESERVER_COMMON_IPERSISTENCEFACADEABSTRACTFACTORY_HPP
 
+#include "../Achievement/IAchievementPersistenceFacade.hpp"
 #include "../Authentication/IAuthenticationPersistenceFacade.hpp"
 #include "../Authorization/IAuthorizationPersistenceFacade.hpp"
 #include "../Building/IBuildingPersistenceFacade.hpp"
@@ -61,6 +62,7 @@ public:
      *
      * @return The newly created persistence facade.
      */
+    virtual Achievement::IAchievementPersistenceFacadeShrPtr       createAchievementPersistenceFacade()    const = 0;
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const = 0;
     virtual Authorization::IAuthorizationPersistenceFacadeShrPtr   createAuthorizationPersistenceFacade()  const = 0;
     virtual Building::IBuildingPersistenceFacadeShrPtr             createBuildingPersistenceFacade()       const = 0;

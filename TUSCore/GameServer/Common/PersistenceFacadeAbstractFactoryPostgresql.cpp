@@ -25,6 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include "../Achievement/AchievementPersistenceFacadeFactory.hpp"
 #include "../Authentication/AuthenticationPersistenceFacadeFactory.hpp"
 #include "../Authorization/AuthorizationPersistenceFacadeFactory.hpp"
 #include "../Building/BuildingPersistenceFacadeFactory.hpp"
@@ -40,6 +41,7 @@
 #include "AccessorAbstractFactoryPostgresql.hpp"
 #include "PersistenceFacadeAbstractFactoryPostgresql.hpp"
 
+using namespace GameServer::Achievement;
 using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;
 using namespace GameServer::Building;
@@ -61,6 +63,14 @@ namespace Common
 PersistenceFacadeAbstractFactoryPostgresql::PersistenceFacadeAbstractFactoryPostgresql()
     : m_accessor_abstract_factory(new AccessorAbstractFactoryPostgresql)
 {
+}
+
+IAchievementPersistenceFacadeShrPtr
+PersistenceFacadeAbstractFactoryPostgresql::createAchievementPersistenceFacade() const
+{
+    return IAchievementPersistenceFacadeShrPtr(
+               AchievementPersistenceFacadeFactory::create(m_accessor_abstract_factory)
+           );
 }
 
 IAuthenticationPersistenceFacadeShrPtr

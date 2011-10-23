@@ -51,6 +51,7 @@ public:
      *
      * @return The newly created persistence facade.
      */
+    virtual Achievement::IAchievementPersistenceFacadeShrPtr       createAchievementPersistenceFacade()    const;
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const;
     virtual Authorization::IAuthorizationPersistenceFacadeShrPtr   createAuthorizationPersistenceFacade()  const;
     virtual Building::IBuildingPersistenceFacadeShrPtr             createBuildingPersistenceFacade()       const;
