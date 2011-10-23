@@ -51,7 +51,8 @@ public:
      *
      * @return The newly created manager.
      */
-    virtual Turn::ITurnManagerShrPtr createTurnManager() const;
+    virtual Achievement::IAchievementManagerShrPtr createAchievementManager() const;
+    virtual Turn::ITurnManagerShrPtr               createTurnManager()        const;
     //}@
 
 private:

@@ -25,10 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include <GameServer/Achievement/Managers/AchievementManagerFactory.hpp>
 #include <GameServer/Common/ManagerAbstractFactoryPostgresql.hpp>
 #include <GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <GameServer/Turn/Managers/TurnManagerFactory.hpp>
 
+using namespace GameServer::Achievement;
 using namespace GameServer::Turn;
 
 namespace GameServer
@@ -40,6 +42,12 @@ ManagerAbstractFactoryPostgresql::ManagerAbstractFactoryPostgresql()
     : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql)
 {
 }
+
+IAchievementManagerShrPtr ManagerAbstractFactoryPostgresql::createAchievementManager() const
+{
+    return IAchievementManagerShrPtr(AchievementManagerFactory::create(m_persistence_facade_abstract_factory));
+}
+
 ITurnManagerShrPtr ManagerAbstractFactoryPostgresql::createTurnManager() const
 {
     return ITurnManagerShrPtr(TurnManagerFactory::create(m_persistence_facade_abstract_factory));

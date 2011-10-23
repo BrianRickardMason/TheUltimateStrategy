@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
 #define GAMESERVER_COMMON_IMANAGERABSTRACTFACTORY_HPP
 
+#include <GameServer/Achievement/Managers/IAchievementManager.hpp>
 #include <GameServer/Turn/Managers/ITurnManager.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -50,7 +51,8 @@ public:
      *
      * @return The newly created manager.
      */
-    virtual Turn::ITurnManagerShrPtr createTurnManager() const = 0;
+    virtual Achievement::IAchievementManagerShrPtr createAchievementManager() const = 0;
+    virtual Turn::ITurnManagerShrPtr               createTurnManager()        const = 0;
     //}@
 };
 

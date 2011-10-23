@@ -27,6 +27,7 @@
 
 #include "TickEpochOperator.hpp"
 
+using namespace GameServer::Achievement;
 using namespace GameServer::Persistence;
 using namespace GameServer::Turn;
 using namespace GameServer::World;
@@ -40,10 +41,12 @@ namespace Epoch
 TickEpochOperator::TickEpochOperator(
     IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
     IWorldPersistenceFacadeShrPtr a_world_persistence_facade,
+    IAchievementManagerShrPtr     a_achievement_manager,
     ITurnManagerShrPtr            a_turn_manager
 )
     : m_epoch_persistence_facade(a_epoch_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade),
+      m_achievement_manager(a_achievement_manager),
       m_turn_manager(a_turn_manager)
 {
 }
@@ -83,10 +86,13 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
             return TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_IS_ACTIVE);
         }
 
-        bool const result = m_turn_manager->turn(a_transaction, world);
+        bool const result_turn = m_turn_manager->turn(a_transaction, world);
 
-        return (result) ? TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_TACK)
-                        : TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_TACK);
+        bool const result_achievement = m_achievement_manager->grantAchievements(a_transaction, world);
+
+        return (result_turn and result_achievement)
+                   ? TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_TACK)
+                   : TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_TACK);
     }
     catch (...)
     {

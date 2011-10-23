@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
 #define GAMESERVER_EPOCH_TICKEPOCHOPERATOR_HPP
 
+#include <GameServer/Achievement/Managers/IAchievementManager.hpp>
 #include <GameServer/Epoch/IEpochPersistenceFacade.hpp>
 #include <GameServer/Epoch/Operators/TickEpoch/ITickEpochOperator.hpp>
 #include <GameServer/Turn/Managers/ITurnManager.hpp>
@@ -50,12 +51,14 @@ public:
      *
      * @param a_epoch_persistence_facade The permission facade of epochs.
      * @param a_world_persistence_facade The persistence facade of worlds.
+     * @param a_achievement_manager      The manager of achievements.
      * @param a_turn_manager             The manager of turns.
      */
     TickEpochOperator(
-        IEpochPersistenceFacadeShrPtr        a_epoch_persistence_facade,
-        World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade,
-        Turn::ITurnManagerShrPtr             a_turn_manager
+        IEpochPersistenceFacadeShrPtr          a_epoch_persistence_facade,
+        World::IWorldPersistenceFacadeShrPtr   a_world_persistence_facade,
+        Achievement::IAchievementManagerShrPtr a_achievement_manager,
+        Turn::ITurnManagerShrPtr               a_turn_manager
     );
 
     /**
@@ -72,24 +75,25 @@ public:
     );
 
 private:
+    //@{
     /**
-     * @brief The persistence facade of epochs.
+     * @brief A persistence facade.
      */
-    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
-
-    /**
-     * @brief The persistence facade of worlds.
-     */
+    IEpochPersistenceFacadeShrPtr        m_epoch_persistence_facade;
     World::IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
+    //}@
 
+    //@{
     /**
-     * @brief TurnManager.
+     * @brief A manager.
      */
-    Turn::ITurnManagerShrPtr m_turn_manager;
+    Achievement::IAchievementManagerShrPtr m_achievement_manager;
+    Turn::ITurnManagerShrPtr               m_turn_manager;
+    //}@
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<TickEpochOperator> TickEpochOperatorAutPtr;
 

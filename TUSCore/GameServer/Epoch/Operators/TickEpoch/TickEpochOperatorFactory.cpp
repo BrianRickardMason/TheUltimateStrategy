@@ -44,6 +44,7 @@ TickEpochOperatorAutPtr TickEpochOperatorFactory::createTickEpochOperator(
     return TickEpochOperatorAutPtr(
                new TickEpochOperator(a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
                                      a_persistence_facade_abstract_factory->createWorldPersistenceFacade(),
+                                     a_manager_abstract_factory->createAchievementManager(),
                                      a_manager_abstract_factory->createTurnManager())
            );
 }
