@@ -64,7 +64,7 @@ public:
      */
     virtual bool grantAchievement(
         Persistence::ITransactionShrPtr       a_transaction,
-        Epoch::EpochShrPtr              const a_epoch,
+        Epoch::IEpochShrPtr             const a_epoch,
         User::IUserShrPtr               const a_user,
         std::string                     const a_achievement_name
     ) const;

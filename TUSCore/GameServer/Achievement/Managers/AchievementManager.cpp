@@ -61,7 +61,7 @@ bool AchievementManager::grantAchievements(
     try
     {
         // Get the epoch of the world.
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world->getWorldName());
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world->getWorldName());
 
         if (!epoch)
         {
@@ -92,7 +92,7 @@ bool AchievementManager::grantAchievements(
 
 bool AchievementManager::grantAchievements(
     Persistence::ITransactionShrPtr       a_transaction,
-    Epoch::EpochShrPtr              const a_epoch,
+    Epoch::IEpochShrPtr             const a_epoch,
     Land::ILandShrPtr               const a_land
 ) const
 {

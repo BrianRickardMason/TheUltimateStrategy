@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_GETEPOCHBYLANDNAMEOPERATOREXITCODE_HPP
-#define GAMESERVER_EPOCH_GETEPOCHBYLANDNAMEOPERATOREXITCODE_HPP
+#ifndef GAMESERVER_EPOCH_IEPOCH_HPP
+#define GAMESERVER_EPOCH_IEPOCH_HPP
 
-#include "../../Epoch.hpp"
+#include "EpochRecord.hpp"
 
 namespace GameServer
 {
@@ -36,68 +36,55 @@ namespace Epoch
 {
 
 /**
- * @brief Available exit codes.
+ * @brief The identifier of Epoch.
  */
-unsigned short int const GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT     = 1;
-unsigned short int const GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT = 2;
-unsigned short int const GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR       = 3;
-
-/**
- * @brief The exit code of GetEpochByLandNameOperator.
- */
-class GetEpochByLandNameOperatorExitCode
+class IEpoch
 {
 public:
+    virtual ~IEpoch(){}
+
     /**
-     * @brief Constructs the exit code.
+     * @brief Gets the name of the epoch.
      *
-     * @param a_exit_code The value of the exit code.
+     * @return The name of the epoch.
      */
-    GetEpochByLandNameOperatorExitCode(
-        unsigned short int const a_exit_code
-    )
-        : m_exit_code(a_exit_code),
-          m_epoch(IEpochShrPtr())
-    {
-    }
+    virtual std::string getEpochName() const = 0;
 
     /**
-     * @brief Constructs the exit code.
+     * @brief Gets the name of the world.
      *
-     * @param a_exit_code The value of the exit code.
-     * @param a_epoch     The epoch.
+     * @return The name of the world.
      */
-    GetEpochByLandNameOperatorExitCode(
-        unsigned short int const a_exit_code,
-        IEpochShrPtr       const a_epoch
-    )
-        : m_exit_code(a_exit_code),
-          m_epoch(a_epoch)
-    {
-    }
+    virtual std::string getWorldName() const = 0;
 
     /**
-     * @brief The "ok" method.
+     * @brief Gets the "active" status of the epoch.
      *
-     * @return False (a read-only operator).
+     * @return True if the epoch is active, false otherwise.
      */
-    bool ok() const
-    {
-        return false;
-    }
+    virtual bool getActive() const = 0;
 
     /**
-     * @brief The exit code.
+     * @brief Gets the "finished" status of the epoch.
+     *
+     * @return True if the epoch has been finished, false otherwise.
      */
-    unsigned short int const m_exit_code;
+    virtual bool getFinished() const = 0;
 
     /**
-     * @brief The epoch.
+     * @brief Gets the number of ticks of the epoch.
+     *
+     * @return The number of the ticks of the epoch.
      */
-    IEpochShrPtr const m_epoch;
+    virtual unsigned int getTicks() const = 0;
 };
+
+/**
+ * @brief A useful typedef.
+ */
+typedef boost::shared_ptr<IEpoch> IEpochShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_GETEPOCHBYLANDNAMEOPERATOREXITCODE_HPP
+#endif // GAMESERVER_EPOCH_IEPOCH_HPP

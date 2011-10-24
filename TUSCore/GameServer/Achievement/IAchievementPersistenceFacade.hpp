@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_ACHIEVEMENT_IACHIEVEMENTPERSISTENCEFACADE_HPP
 #define GAMESERVER_ACHIEVEMENT_IACHIEVEMENTPERSISTENCEFACADE_HPP
 
-#include <GameServer/Epoch/Epoch.hpp>
+#include <GameServer/Epoch/IEpoch.hpp>
 #include <GameServer/Persistence/ITransaction.hpp>
 #include <GameServer/User/IUser.hpp>
 #include <boost/noncopyable.hpp>
@@ -60,7 +60,7 @@ public:
      */
     virtual bool grantAchievement(
         Persistence::ITransactionShrPtr       a_transaction,
-        Epoch::EpochShrPtr              const a_epoch,
+        Epoch::IEpochShrPtr              const a_epoch,
         User::IUserShrPtr               const a_user,
         std::string                     const a_achievement_name
     ) const = 0;

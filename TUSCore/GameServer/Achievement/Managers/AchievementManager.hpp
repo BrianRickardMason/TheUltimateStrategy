@@ -89,7 +89,7 @@ private:
      */
     bool grantAchievements(
         Persistence::ITransactionShrPtr       a_transaction,
-        Epoch::EpochShrPtr              const a_epoch,
+        Epoch::IEpochShrPtr             const a_epoch,
         Land::ILandShrPtr               const a_land
     ) const;
 

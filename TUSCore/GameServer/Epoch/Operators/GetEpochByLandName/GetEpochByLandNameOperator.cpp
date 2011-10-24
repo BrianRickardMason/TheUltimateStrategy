@@ -49,7 +49,7 @@ GetEpochByLandNameOperatorExitCode GetEpochByLandNameOperator::getEpochByLandNam
 {
     try
     {
-        EpochShrPtr const epoch = m_epoch_persistence_facade->getEpochByLandName(a_transaction, a_name);
+        IEpochShrPtr const epoch = m_epoch_persistence_facade->getEpochByLandName(a_transaction, a_name);
 
         return (epoch) ? GetEpochByLandNameOperatorExitCode(
                              GET_EPOCH_BY_LANDNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT,

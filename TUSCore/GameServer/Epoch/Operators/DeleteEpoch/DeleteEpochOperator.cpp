@@ -59,7 +59,7 @@ DeleteEpochOperatorExitCode DeleteEpochOperator::deleteEpoch(
         }
 
         // Verify if the epoch exists.
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
 
         if (!epoch)
         {

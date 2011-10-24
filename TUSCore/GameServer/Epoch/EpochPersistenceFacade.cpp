@@ -66,7 +66,7 @@ bool EpochPersistenceFacade::deleteEpoch(
     string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
+    IEpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -90,17 +90,17 @@ bool EpochPersistenceFacade::deleteEpoch(
     }
 }
 
-EpochShrPtr EpochPersistenceFacade::getEpoch(
+IEpochShrPtr EpochPersistenceFacade::getEpoch(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
 {
     EpochRecordShrPtr record = m_accessor->getRecord(a_transaction, a_world_name);
 
-    return record ? make_shared<Epoch>(*record) : EpochShrPtr();
+    return record ? make_shared<Epoch>(*record) : IEpochShrPtr();
 }
 
-EpochShrPtr EpochPersistenceFacade::getEpochByLandName(
+IEpochShrPtr EpochPersistenceFacade::getEpochByLandName(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name
 ) const
@@ -110,7 +110,7 @@ EpochShrPtr EpochPersistenceFacade::getEpochByLandName(
     return getEpoch(a_transaction, world_name);
 }
 
-EpochShrPtr EpochPersistenceFacade::getEpochBySettlementName(
+IEpochShrPtr EpochPersistenceFacade::getEpochBySettlementName(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
@@ -125,7 +125,7 @@ bool EpochPersistenceFacade::activateEpoch(
     string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
+    IEpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -159,7 +159,7 @@ bool EpochPersistenceFacade::deactivateEpoch(
     string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
+    IEpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -193,7 +193,7 @@ bool EpochPersistenceFacade::finishEpoch(
     string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
+    IEpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {
@@ -227,7 +227,7 @@ bool EpochPersistenceFacade::tickEpoch(
     string             const a_world_name
 ) const
 {
-    EpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
+    IEpochShrPtr epoch = getEpoch(a_transaction, a_world_name);
 
     if (!epoch)
     {

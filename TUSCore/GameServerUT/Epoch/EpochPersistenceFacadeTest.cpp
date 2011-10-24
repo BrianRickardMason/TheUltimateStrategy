@@ -200,7 +200,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpoch_EpochDoesNotExist)
 
     EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = persistence_facade.getEpoch(transaction, m_world_name);
+    IEpochShrPtr epoch = persistence_facade.getEpoch(transaction, m_world_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
@@ -218,7 +218,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpoch_EpochDoesExist)
 
     EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = persistence_facade.getEpoch(transaction, m_world_name);
+    IEpochShrPtr epoch = persistence_facade.getEpoch(transaction, m_world_name);
 
     ASSERT_TRUE(epoch != NULL);
 
@@ -245,7 +245,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesNotExist)
 
     EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = persistence_facade.getEpochByLandName(transaction, m_land_name);
+    IEpochShrPtr epoch = persistence_facade.getEpochByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
@@ -266,7 +266,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesExist)
 
     EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = persistence_facade.getEpochByLandName(transaction, m_land_name);
+    IEpochShrPtr epoch = persistence_facade.getEpochByLandName(transaction, m_land_name);
 
     ASSERT_TRUE(epoch != NULL);
 
@@ -296,7 +296,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesNotExist)
 
     EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = persistence_facade.getEpochBySettlementName(transaction, m_settlement_name);
+    IEpochShrPtr epoch = persistence_facade.getEpochBySettlementName(transaction, m_settlement_name);
 
     ASSERT_TRUE(epoch == NULL);
 }
@@ -320,7 +320,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesExist)
 
     EpochPersistenceFacade persistence_facade(accessor);
 
-    EpochShrPtr epoch = persistence_facade.getEpochBySettlementName(transaction, m_settlement_name);
+    IEpochShrPtr epoch = persistence_facade.getEpochBySettlementName(transaction, m_settlement_name);
 
     ASSERT_TRUE(epoch != NULL);
 

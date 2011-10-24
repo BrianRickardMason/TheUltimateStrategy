@@ -93,7 +93,7 @@ public:
      *
      * @return The epoch, null if not found.
      */
-    virtual EpochShrPtr getEpoch(
+    virtual IEpochShrPtr getEpoch(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const;
@@ -106,7 +106,7 @@ public:
      *
      * @return The epoch, null if not found.
      */
-    virtual EpochShrPtr getEpochByLandName(
+    virtual IEpochShrPtr getEpochByLandName(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_land_name
     ) const;
@@ -119,7 +119,7 @@ public:
      *
      * @return The epoch, null if not found.
      */
-    virtual EpochShrPtr getEpochBySettlementName(
+    virtual IEpochShrPtr getEpochBySettlementName(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;

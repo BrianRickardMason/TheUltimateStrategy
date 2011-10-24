@@ -87,7 +87,7 @@ protected:
      * @parma a_ticks      The expected number of ticks.
      */
     void compareEpoch(
-        EpochShrPtr        a_epoch,
+        IEpochShrPtr       a_epoch,
         string       const a_epoch_name,
         string       const a_world_name,
         bool         const a_active,
@@ -327,7 +327,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpoch_WorldDoesNotExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_3);
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_3);
 
         transaction->commit();
 
@@ -341,7 +341,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpoch_WorldDoesExist_EpochDoesNotExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_1);
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_1);
 
         transaction->commit();
 
@@ -364,7 +364,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpoch_WorldDoesExist_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_1);
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_1);
 
         transaction->commit();
 
@@ -418,7 +418,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpochByLandName(transaction, m_land_name);
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpochByLandName(transaction, m_land_name);
 
         transaction->commit();
 
@@ -481,7 +481,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesExist)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpochBySettlementName(transaction, m_settlement_name);
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpochBySettlementName(transaction, m_settlement_name);
 
         transaction->commit();
 
@@ -894,7 +894,7 @@ TEST_F(EpochPersistenceFacadeTest, tickEpoch_WorldDoesExist_EpochDoesExist_Unact
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        EpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_1);
+        IEpochShrPtr epoch = m_epoch_persistence_facade->getEpoch(transaction, m_world_name_1);
 
         transaction->commit();
 

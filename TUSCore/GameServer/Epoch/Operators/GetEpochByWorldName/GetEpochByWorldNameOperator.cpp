@@ -58,7 +58,7 @@ GetEpochByWorldNameOperatorExitCode GetEpochByWorldNameOperator::getEpochByWorld
             return GetEpochByWorldNameOperatorExitCode(GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_WORLD_DOES_NOT_EXIST);
         }
 
-        EpochShrPtr const epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
+        IEpochShrPtr const epoch = m_epoch_persistence_facade->getEpoch(a_transaction, a_world_name);
 
         return (epoch) ? GetEpochByWorldNameOperatorExitCode(
                              GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT,

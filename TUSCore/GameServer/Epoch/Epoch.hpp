@@ -29,6 +29,7 @@
 #define GAMESERVER_EPOCH_EPOCH_HPP
 
 #include "EpochRecord.hpp"
+#include "IEpoch.hpp"
 
 namespace GameServer
 {
@@ -36,13 +37,14 @@ namespace Epoch
 {
 
 /**
- * @brief The epoch.
+ * @brief Epoch.
  */
 class Epoch
+    : public IEpoch
 {
 public:
     /**
-     * @brief Constructs the epoch.
+     * @brief Ctor.
      *
      * @param a_record A corresponding record.
      */
@@ -55,35 +57,35 @@ public:
      *
      * @return The name of the epoch.
      */
-    std::string getEpochName() const;
+    virtual std::string getEpochName() const;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    std::string getWorldName() const;
+    virtual std::string getWorldName() const;
 
     /**
      * @brief Gets the "active" status of the epoch.
      *
      * @return True if the epoch is active, false otherwise.
      */
-    bool getActive() const;
+    virtual bool getActive() const;
 
     /**
      * @brief Gets the "finished" status of the epoch.
      *
      * @return True if the epoch has been finished, false otherwise.
      */
-    bool getFinished() const;
+    virtual bool getFinished() const;
 
     /**
      * @brief Gets the number of ticks of the epoch.
      *
      * @return The number of the ticks of the epoch.
      */
-    unsigned int getTicks() const;
+    virtual unsigned int getTicks() const;
 
 private:
     /**
@@ -111,11 +113,6 @@ private:
      */
     unsigned int const m_ticks;
 };
-
-/**
- * @brief A shared pointer of epoch.
- */
-typedef boost::shared_ptr<Epoch> EpochShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer

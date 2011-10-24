@@ -58,7 +58,7 @@ public:
         unsigned short int const a_exit_code
     )
         : m_exit_code(a_exit_code),
-          m_epoch(EpochShrPtr())
+          m_epoch(IEpochShrPtr())
     {
     }
 
@@ -70,7 +70,7 @@ public:
      */
     GetEpochBySettlementNameOperatorExitCode(
         unsigned short int const a_exit_code,
-        EpochShrPtr        const a_epoch
+        IEpochShrPtr       const a_epoch
     )
         : m_exit_code(a_exit_code),
           m_epoch(a_epoch)
@@ -95,7 +95,7 @@ public:
     /**
      * @brief The epoch.
      */
-    EpochShrPtr const m_epoch;
+    IEpochShrPtr const m_epoch;
 };
 
 } // namespace Epoch

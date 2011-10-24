@@ -92,7 +92,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getEpoch,
-        EpochShrPtr(
+        IEpochShrPtr(
             Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )
@@ -108,7 +108,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getEpochByLandName,
-        EpochShrPtr(
+        IEpochShrPtr(
             Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_land_name
         )
@@ -124,7 +124,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getEpochBySettlementName,
-        EpochShrPtr(
+        IEpochShrPtr(
             Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_settlement_name
         )

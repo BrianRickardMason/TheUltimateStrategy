@@ -58,7 +58,7 @@ GetEpochBySettlementNameOperatorExitCode GetEpochBySettlementNameOperator::getEp
             return GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_SETTLEMENT_DOES_NOT_EXIST);
         }
 
-        EpochShrPtr const epoch = m_epoch_persistence_facade->getEpochBySettlementName(a_transaction, a_settlement_name);
+        IEpochShrPtr const epoch = m_epoch_persistence_facade->getEpochBySettlementName(a_transaction, a_settlement_name);
 
         return (epoch) ? GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT, epoch)
                        : GetEpochBySettlementNameOperatorExitCode(GET_EPOCH_BY_SETTLEMENTNAME_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_GOT);

@@ -46,7 +46,7 @@ AchievementPersistenceFacade::AchievementPersistenceFacade(
 
 bool AchievementPersistenceFacade::grantAchievement(
     ITransactionShrPtr       a_transaction,
-    EpochShrPtr        const a_epoch,
+    IEpochShrPtr       const a_epoch,
     IUserShrPtr        const a_user,
     string             const a_achievement_name
 ) const
