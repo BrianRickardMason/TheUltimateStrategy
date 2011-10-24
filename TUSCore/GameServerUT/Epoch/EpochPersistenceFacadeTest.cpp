@@ -123,7 +123,7 @@ TEST_F(EpochPersistenceFacadeTest, deleteEpoch_EpochDoesNotExist)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -139,7 +139,7 @@ TEST_F(EpochPersistenceFacadeTest, deleteEpoch_EpochHasNotBeenFinished)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -155,7 +155,7 @@ TEST_F(EpochPersistenceFacadeTest, deleteEpoch_Success)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, true, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, true, 22))));
 
     EXPECT_CALL(*mock, deleteRecord(transaction, m_world_name));
 
@@ -173,7 +173,7 @@ TEST_F(EpochPersistenceFacadeTest, deleteEpoch_Failure)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, true, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, true, 22))));
 
     std::exception e;
 
@@ -194,7 +194,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpoch_EpochDoesNotExist)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -212,7 +212,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpoch_EpochDoesExist)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -239,7 +239,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesNotExist)
     .WillOnce(Return(m_world_name));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -260,7 +260,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochByLandName_EpochDoesExist)
     .WillOnce(Return(m_world_name));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -290,7 +290,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesNotExist)
     .WillOnce(Return(m_world_name));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -314,7 +314,7 @@ TEST_F(EpochPersistenceFacadeTest, getEpochBySettlementName_EpochDoesExist)
     .WillOnce(Return(m_world_name));
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -338,7 +338,7 @@ TEST_F(EpochPersistenceFacadeTest, activateEpoch_EpochDoesNotExist)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -354,7 +354,7 @@ TEST_F(EpochPersistenceFacadeTest, activateEpoch_EpochHasBeenFinished)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, true, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, true, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -370,7 +370,7 @@ TEST_F(EpochPersistenceFacadeTest, activateEpoch_EpochHasBeenActivated)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -386,7 +386,7 @@ TEST_F(EpochPersistenceFacadeTest, activateEpoch_Success)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, false, 22))));
 
     EXPECT_CALL(*mock, markActive(transaction, m_world_name));
 
@@ -404,7 +404,7 @@ TEST_F(EpochPersistenceFacadeTest, activateEpoch_Failure)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, false, 22))));
 
     std::exception e;
 
@@ -425,7 +425,7 @@ TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_EpochDoesNotExist)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -441,7 +441,7 @@ TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_EpochHasBeenFinished)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, true, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, true, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -457,7 +457,7 @@ TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_EpochHasNotBeenAactivated)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -473,7 +473,7 @@ TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_Success)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     EXPECT_CALL(*mock, markUnactive(transaction, m_world_name));
 
@@ -492,7 +492,7 @@ TEST_F(EpochPersistenceFacadeTest, deactivateEpoch_Failure)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     std::exception e;
 
@@ -513,7 +513,7 @@ TEST_F(EpochPersistenceFacadeTest, finishEpoch_EpochDoesNotExist)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -529,7 +529,7 @@ TEST_F(EpochPersistenceFacadeTest, finishEpoch_EpochHasBeenFinished)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, true, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, true, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -545,7 +545,7 @@ TEST_F(EpochPersistenceFacadeTest, finishEpoch_EpochHasBeenActivated)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -561,7 +561,7 @@ TEST_F(EpochPersistenceFacadeTest, finishEpoch_Success)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, false, 22))));
 
     EXPECT_CALL(*mock, markFinished(transaction, m_world_name));
 
@@ -579,7 +579,7 @@ TEST_F(EpochPersistenceFacadeTest, finishEpoch_Failure)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, false, 22))));
 
     std::exception e;
 
@@ -600,7 +600,7 @@ TEST_F(EpochPersistenceFacadeTest, tickEpoch_EpochDoesNotExist)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(EpochRecordShrPtr()));
+    .WillOnce(Return(IEpochRecordShrPtr()));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -616,7 +616,7 @@ TEST_F(EpochPersistenceFacadeTest, tickEpoch_EpochHasBeenFinished)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, true, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, true, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -632,7 +632,7 @@ TEST_F(EpochPersistenceFacadeTest, tickEpoch_EpochHasBeenActivated)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, true, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, true, false, 22))));
 
     IEpochAccessorAutPtr accessor(mock);
 
@@ -648,7 +648,7 @@ TEST_F(EpochPersistenceFacadeTest, tickEpoch_Success)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, false, 22))));
 
     EXPECT_CALL(*mock, incrementTicks(transaction, m_world_name));
 
@@ -666,7 +666,7 @@ TEST_F(EpochPersistenceFacadeTest, tickEpoch_Failure)
     EpochAccessorMock * mock = new EpochAccessorMock;
 
     EXPECT_CALL(*mock, getRecord(transaction, m_world_name))
-    .WillOnce(Return(make_shared<EpochRecord>(m_epoch_name, m_world_name, false, false, 22)));
+    .WillOnce(Return(IEpochRecordShrPtr(new EpochRecord(m_epoch_name, m_world_name, false, false, 22))));
 
     std::exception e;
 

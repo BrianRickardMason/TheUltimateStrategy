@@ -25,10 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_EPOCH_EPOCHRECORD_HPP
-#define GAMESERVER_EPOCH_EPOCHRECORD_HPP
+#ifndef GAMESERVER_EPOCH_IEPOCHRECORD_HPP
+#define GAMESERVER_EPOCH_IEPOCHRECORD_HPP
 
-#include <GameServer/Epoch/IEpochRecord.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -36,92 +37,55 @@ namespace Epoch
 {
 
 /**
- * @brief The record of Epoch.
+ * @brief The interface of the record of Epoch.
  */
-class EpochRecord
-    : public IEpochRecord
+class IEpochRecord
 {
 public:
-    /**
-     * @brief Ctor.
-     *
-     * @param a_epoch_name The name of the epoch.
-     * @param a_world_name The name of the world.
-     * @param a_active     Indicates whether the epoch is active.
-     * @param a_finished   Indicates whether the epoch has been finished.
-     * @param a_ticks      The number of ticks of the epoch.
-     */
-    EpochRecord(
-        std::string  const a_epoch_name,
-        std::string  const a_world_name,
-        bool         const a_active,
-        bool         const a_finished,
-        unsigned int const a_ticks
-    );
+    virtual ~IEpochRecord(){}
 
     /**
      * @brief Gets the name of the epoch.
      *
      * @return The name of the epoch.
      */
-    virtual std::string getEpochName() const;
+    virtual std::string getEpochName() const = 0;
 
     /**
      * @brief Gets the name of the world.
      *
      * @return The name of the world.
      */
-    virtual std::string getWorldName() const;
+    virtual std::string getWorldName() const = 0;
 
     /**
      * @brief Gets the "active" status of the epoch.
      *
      * @return True if the epoch is active, false otherwise.
      */
-    virtual bool getActive() const;
+    virtual bool getActive() const = 0;
 
     /**
      * @brief Gets the "finished" status of the epoch.
      *
      * @return True if the epoch has been finished, false otherwise.
      */
-    virtual bool getFinished() const;
+    virtual bool getFinished() const = 0;
 
     /**
      * @brief Gets the number of ticks of the epoch.
      *
      * @return The number of the ticks of the epoch.
      */
-    virtual unsigned int getTicks() const;
-
-private:
-    /**
-     * @brief The name of the epoch.
-     */
-    std::string const m_epoch_name;
-
-    /**
-     * @brief The name of the world.
-     */
-    std::string const m_world_name;
-
-    /**
-     * @brief The "active" status of the epoch.
-     */
-    bool const m_active;
-
-    /**
-     * @brief The "finished" status of the epoch.
-     */
-    bool const m_finished;
-
-    /**
-     * @brief The number of the ticks of the epoch.
-     */
-    unsigned int const m_ticks;
+    virtual unsigned int getTicks() const = 0;
 };
+
+/**
+ * @brief A useful typedef.
+ */
+typedef boost::shared_ptr<IEpochRecord> IEpochRecordShrPtr;
 
 } // namespace Epoch
 } // namespace GameServer
 
-#endif // GAMESERVER_EPOCH_EPOCHRECORD_HPP
+#endif // GAMESERVER_EPOCH_IEPOCHRECORD_HPP

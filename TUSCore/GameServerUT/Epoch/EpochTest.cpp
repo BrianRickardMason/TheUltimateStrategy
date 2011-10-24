@@ -41,7 +41,7 @@ protected:
      * @brief Constructs a test class.
      */
     EpochTest()
-        : m_epoch(EpochRecord("Epoch", "World", true, false, 22))
+        : m_epoch(IEpochRecordShrPtr(new EpochRecord("Epoch", "World", true, false, 22)))
     {
     }
 

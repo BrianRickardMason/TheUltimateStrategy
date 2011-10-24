@@ -67,7 +67,7 @@ void EpochAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
-EpochRecordShrPtr EpochAccessorPostgresql::getRecord(
+IEpochRecordShrPtr EpochAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_world_name
 ) const
@@ -100,7 +100,7 @@ EpochRecordShrPtr EpochAccessorPostgresql::getRecord(
     }
     else
     {
-        return EpochRecordShrPtr();
+        return IEpochRecordShrPtr();
     }
 }
 

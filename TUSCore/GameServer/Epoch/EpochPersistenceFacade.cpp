@@ -95,9 +95,9 @@ IEpochShrPtr EpochPersistenceFacade::getEpoch(
     string             const a_world_name
 ) const
 {
-    EpochRecordShrPtr record = m_accessor->getRecord(a_transaction, a_world_name);
+    IEpochRecordShrPtr record = m_accessor->getRecord(a_transaction, a_world_name);
 
-    return record ? make_shared<Epoch>(*record) : IEpochShrPtr();
+    return record ? IEpochShrPtr(new Epoch(record)) : IEpochShrPtr();
 }
 
 IEpochShrPtr EpochPersistenceFacade::getEpochByLandName(

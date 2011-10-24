@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_EPOCH_EPOCH_HPP
 #define GAMESERVER_EPOCH_EPOCH_HPP
 
-#include "EpochRecord.hpp"
 #include "IEpoch.hpp"
+#include "IEpochRecord.hpp"
 
 namespace GameServer
 {
@@ -49,7 +49,7 @@ public:
      * @param a_record A corresponding record.
      */
     explicit Epoch(
-        EpochRecord const & a_record
+        IEpochRecordShrPtr const a_record
     );
 
     /**

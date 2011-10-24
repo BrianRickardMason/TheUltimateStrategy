@@ -35,13 +35,13 @@ namespace Epoch
 {
 
 Epoch::Epoch(
-    EpochRecord const & a_record
+    IEpochRecordShrPtr const a_record
 )
-    : m_epoch_name(a_record.getEpochName()),
-      m_world_name(a_record.getWorldName()),
-      m_active(a_record.getActive()),
-      m_finished(a_record.getFinished()),
-      m_ticks(a_record.getTicks())
+    : m_epoch_name(a_record->getEpochName()),
+      m_world_name(a_record->getWorldName()),
+      m_active(a_record->getActive()),
+      m_finished(a_record->getFinished()),
+      m_ticks(a_record->getTicks())
 {
 }
 

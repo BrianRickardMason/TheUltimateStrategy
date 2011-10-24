@@ -83,7 +83,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getRecord,
-        EpochRecordShrPtr(
+        IEpochRecordShrPtr(
             Persistence::ITransactionShrPtr       a_transaction,
             std::string                     const a_world_name
         )

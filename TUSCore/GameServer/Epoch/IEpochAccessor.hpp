@@ -82,7 +82,7 @@ public:
      *
      * @return The world record, null if not found.
      */
-    virtual EpochRecordShrPtr getRecord(
+    virtual IEpochRecordShrPtr getRecord(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_world_name
     ) const = 0;
