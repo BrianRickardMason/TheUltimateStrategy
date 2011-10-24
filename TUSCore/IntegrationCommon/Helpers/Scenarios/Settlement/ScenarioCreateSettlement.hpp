@@ -93,16 +93,16 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login     The login of the user.
-     * @param a_password  The password of the user.
-     * @param a_land_name The name of the land.
-     * @param a_name      The name of the settlement.
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_land_name       The name of the land.
+     * @param a_settlement_name The name of the settlement.
      */
     ScenarioCreateSettlementActionSuccess(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name,
-        std::string const a_name
+        std::string const a_settlement_name
     );
 
     /**
@@ -135,7 +135,7 @@ private:
     /**
      * @brief The name of the settlement.
      */
-    std::string const m_name;
+    std::string const m_settlement_name;
 };
 
 /**
@@ -148,16 +148,16 @@ public:
     /**
      * @brief Constructs the action.
      *
-     * @param a_login     The login of the user.
-     * @param a_password  The password of the user.
-     * @param a_land_name The name of the land.
-     * @param a_name      The name of the settlement.
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_land_name       The name of the land.
+     * @param a_settlement_name The name of the settlement.
      */
     ScenarioCreateSettlementActionInvalidRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name,
-        std::string const a_name
+        std::string const a_settlement_name
     );
 
     /**
@@ -190,7 +190,7 @@ private:
     /**
      * @brief The name of the settlement.
      */
-    std::string const m_name;
+    std::string const m_settlement_name;
 };
 
 /**

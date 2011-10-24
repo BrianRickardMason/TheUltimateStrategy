@@ -66,12 +66,12 @@ ScenarioCreateSettlementActionSuccess::ScenarioCreateSettlementActionSuccess(
     string const a_login,
     string const a_password,
     string const a_land_name,
-    string const a_name
+    string const a_settlement_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_land_name(a_land_name),
-      m_name(a_name)
+      m_settlement_name(a_settlement_name)
 {
 }
 
@@ -79,19 +79,19 @@ ReplyShrPtr ScenarioCreateSettlementActionSuccess::perform(
     IClientShrPtr a_client
 )
 {
-    return CreateSettlement(a_client, m_login, m_password, m_land_name, m_name);
+    return CreateSettlement(a_client, m_login, m_password, m_land_name, m_settlement_name);
 }
 
 ScenarioCreateSettlementActionInvalidRequest::ScenarioCreateSettlementActionInvalidRequest(
     string const a_login,
     string const a_password,
     string const a_land_name,
-    string const a_name
+    string const a_settlement_name
 )
     : m_login(a_login),
       m_password(a_password),
       m_land_name(a_land_name),
-      m_name(a_name)
+      m_settlement_name(a_settlement_name)
 {
 }
 
@@ -113,7 +113,7 @@ ReplyShrPtr ScenarioCreateSettlementActionInvalidRequest::perform(
     land_name->appendAttribute("value")->setValue(m_land_name.c_str());
 
     IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("valve")->setValue(m_name.c_str());
+    name->appendAttribute("valve")->setValue(m_settlement_name.c_str());
 
     return a_client->sendRequest(request);
 }
