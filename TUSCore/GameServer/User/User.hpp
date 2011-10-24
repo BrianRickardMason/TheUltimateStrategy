@@ -37,16 +37,14 @@ namespace User
 {
 
 /**
- * @brief The user.
- *
- * TODO: Add isModerator method.
+ * @brief User.
  */
 class User
     : public IUser
 {
 public:
     /**
-     * @brief Constructs the user.
+     * @brief Ctor.
      *
      * @param a_record The corresponding record.
      */
@@ -68,6 +66,13 @@ public:
      */
     virtual std::string getPassword() const;
 
+    /**
+     * @brief Checks if the user is a moderator.
+     *
+     * @return True if the user is the moderator, false otherwise.
+     */
+    virtual bool isModerator() const;
+
 private:
     /**
      * @brief The login of the user.
@@ -78,6 +83,11 @@ private:
      * @brief The password of the user.
      */
     std::string const m_password;
+
+    /**
+     * @brief True if the user is a moderator, false otherwise.
+     */
+    bool const m_moderator;
 };
 
 } // namespace User

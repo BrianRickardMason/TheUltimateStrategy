@@ -52,14 +52,9 @@ protected:
     User m_user;
 };
 
-TEST_F(UserTest, ConstructorSetsProperLoginValue)
+TEST_F(UserTest, CtorDoesNotThrow)
 {
-    ASSERT_STREQ("Login", m_user.getLogin().c_str());
-}
-
-TEST_F(UserTest, ConstructorSetsProperPasswordValue)
-{
-    ASSERT_STREQ("Password", m_user.getPassword().c_str());
+    ASSERT_NO_THROW(User user(IUserRecordShrPtr(new UserRecord("Login", "Password", false))));
 }
 
 TEST_F(UserTest, GetLoginReturnsProperValue)
@@ -70,4 +65,9 @@ TEST_F(UserTest, GetLoginReturnsProperValue)
 TEST_F(UserTest, GetPasswordReturnsProperValue)
 {
     ASSERT_STREQ("Password", m_user.getPassword().c_str());
+}
+
+TEST_F(UserTest, IsModeratorReturnsProperValue)
+{
+    ASSERT_FALSE(m_user.isModerator());
 }

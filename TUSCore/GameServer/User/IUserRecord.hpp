@@ -67,7 +67,7 @@ public:
 };
 
 /**
- * @brief The shared pointer of the interface of the record of the user.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IUserRecord> IUserRecordShrPtr;
 

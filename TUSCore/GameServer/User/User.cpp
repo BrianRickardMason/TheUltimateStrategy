@@ -38,7 +38,8 @@ User::User(
     IUserRecordShrPtr const a_record
 )
     : m_login(a_record->getLogin()),
-      m_password(a_record->getPassword())
+      m_password(a_record->getPassword()),
+      m_moderator(a_record->isModerator())
 {
 }
 
@@ -50,6 +51,11 @@ string User::getLogin() const
 string User::getPassword() const
 {
     return m_password;
+}
+
+bool User::isModerator() const
+{
+	return m_moderator;
 }
 
 } // namespace Land
