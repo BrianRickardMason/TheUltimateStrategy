@@ -25,10 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorFactory.hpp"
-#include "../../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
-#include "../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
-#include "../../ComponentTest.hpp"
+#include <GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorFactory.hpp>
+#include <GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
+#include <GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
+#include <GameServerCT/ComponentTest.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
