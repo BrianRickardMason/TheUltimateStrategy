@@ -4,6 +4,7 @@ build
 # Eclipse specific files.
 .cproject
 .project
+.pydevproject
 
 # Test specific files.
 *.xml
