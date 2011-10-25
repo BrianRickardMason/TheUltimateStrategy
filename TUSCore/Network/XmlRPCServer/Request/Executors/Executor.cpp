@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "Executor.hpp"
 #include <GameServer/Common/OperatorAbstractFactoryPostgresql.hpp>
 #include <GameServer/Persistence/PersistencePostgresql.hpp>
+#include <Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Common;
@@ -83,6 +83,11 @@ ReplyShrPtr Executor::execute(
     if (!getActingUser(m_persistence))
     {
         return produceReplyActingUserHasNotBeenGot();
+    }
+
+    if (!filterOutNonModerators())
+    {
+        return produceReplyNonModeratorFilteredOut();
     }
 
     if (!authorize(m_persistence))
@@ -162,6 +167,11 @@ bool Executor::getActingUser(
     }
 }
 
+bool Executor::filterOutNonModerators() const
+{
+    return true;
+}
+
 ReplyShrPtr Executor::produceReplyServerIsNotListening() const
 {
     return getBasicReply(REPLY_STATUS_SERVER_IS_NOT_LISTENING);
@@ -185,6 +195,11 @@ ReplyShrPtr Executor::produceReplyUnauthenticated() const
 ReplyShrPtr Executor::produceReplyActingUserHasNotBeenGot() const
 {
     return getBasicReply(REPLY_STATUS_ACTING_USER_HAS_NOT_BEEN_GOT);
+}
+
+ReplyShrPtr Executor::produceReplyNonModeratorFilteredOut() const
+{
+    return getBasicReply(REPLY_STATUS_NON_MODERATOR_FILTERED_OUT);
 }
 
 ReplyShrPtr Executor::produceReplyUnauthorized() const

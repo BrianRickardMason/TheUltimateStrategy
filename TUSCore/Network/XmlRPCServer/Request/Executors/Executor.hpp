@@ -28,10 +28,10 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTOR_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTOR_HPP
 
-#include "../../../../GameServer/Common/IOperatorAbstractFactory.hpp"
-#include "../../../../GameServer/Persistence/IPersistence.hpp"
-#include "../../../../GameServer/User/IUser.hpp"
-#include "IExecutor.hpp"
+#include <GameServer/Common/IOperatorAbstractFactory.hpp>
+#include <GameServer/Persistence/IPersistence.hpp>
+#include <GameServer/User/IUser.hpp>
+#include <Network/XmlRPCServer/Request/Executors/IExecutor.hpp>
 
 namespace Network
 {
@@ -119,6 +119,13 @@ private:
     );
 
     /**
+     * @brief Filters out non moderators.
+     *
+     * @return True if user is a moderator or moderator's rights are not required, false otherwise.
+     */
+    virtual bool filterOutNonModerators() const;
+
+    /**
      * @brief Authorizes the user.
      *
      * @param a_persistence The persistence.
@@ -173,61 +180,22 @@ private:
         unsigned int const a_status
     ) const = 0;
 
+    //@{
     /**
-     * @brief Produces the "server is not listening" reply.
+     * @brief Produces the reply.
      *
      * @return The reply.
      */
-    XmlRPCCommon::Reply::ReplyShrPtr produceReplyServerIsNotListening() const;
-
-    /**
-     * @brief Produces the "invalid request" reply.
-     *
-     * @return The reply.
-     */
-    XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRequest() const;
-
-    /**
-     * @brief Produces the "invalid range" reply.
-     *
-     * @return The reply.
-     */
-    XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRange() const;
-
-    /**
-     * @brief Produces the "unauthenticated" reply.
-     *
-     * @return The reply.
-     */
-    XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthenticated() const;
-
-    /**
-     * @brief Produces the "acting user has not been got" reply.
-     *
-     * @return The reply.
-     */
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyServerIsNotListening()    const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRequest()          const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyInvalidRange()            const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthenticated()         const;
     XmlRPCCommon::Reply::ReplyShrPtr produceReplyActingUserHasNotBeenGot() const;
-
-    /**
-     * @brief Produces the "unauthorized" reply.
-     *
-     * @return The reply.
-     */
-    XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthorized() const;
-
-    /**
-     * @brief Produces the "epoch is not active" reply.
-     *
-     * @return The reply.
-     */
-    XmlRPCCommon::Reply::ReplyShrPtr produceReplyEpochIsNotActive() const;
-
-    /**
-     * @brief Produces the "action unavailable" reply.
-     *
-     * @return The reply.
-     */
-    XmlRPCCommon::Reply::ReplyShrPtr produceReplyActionUnavailable() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyNonModeratorFilteredOut() const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyUnauthorized()            const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyEpochIsNotActive()        const;
+    XmlRPCCommon::Reply::ReplyShrPtr produceReplyActionUnavailable()       const;
+    //}@
 
 protected:
     /**

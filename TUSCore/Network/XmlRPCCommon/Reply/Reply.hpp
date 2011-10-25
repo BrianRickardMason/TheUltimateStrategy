@@ -38,39 +38,32 @@ namespace XmlRPCCommon
 namespace Reply
 {
 
+//@{
 /**
- * @brief The identifiers of the replies.
+ * @brief An identifier of the reply.
  */
 unsigned short int const REPLY_ID_ECHO               =  1;
 unsigned short int const REPLY_ID_ERROR              =  2;
-
 unsigned short int const REPLY_ID_CREATE_LAND        =  3;
 unsigned short int const REPLY_ID_DELETE_LAND        =  4;
 unsigned short int const REPLY_ID_GET_LAND           =  5;
 unsigned short int const REPLY_ID_GET_LANDS          =  6;
-
 unsigned short int const REPLY_ID_CREATE_SETTLEMENT  =  7;
 unsigned short int const REPLY_ID_DELETE_SETTLEMENT  =  8;
 unsigned short int const REPLY_ID_GET_SETTLEMENT     =  9;
 unsigned short int const REPLY_ID_GET_SETTLEMENTS    = 10;
-
 unsigned short int const REPLY_ID_BUILD_BUILDING     = 11;
 unsigned short int const REPLY_ID_DESTROY_BUILDING   = 12;
 unsigned short int const REPLY_ID_GET_BUILDING       = 13;
 unsigned short int const REPLY_ID_GET_BUILDINGS      = 14;
-
 unsigned short int const REPLY_ID_DISMISS_HUMAN      = 15;
 unsigned short int const REPLY_ID_ENGAGE_HUMAN       = 16;
 unsigned short int const REPLY_ID_GET_HUMAN          = 17;
 unsigned short int const REPLY_ID_GET_HUMANS         = 18;
-
 unsigned short int const REPLY_ID_GET_RESOURCE       = 19;
 unsigned short int const REPLY_ID_GET_RESOURCES      = 20;
-
 unsigned short int const REPLY_ID_CREATE_USER        = 21;
-
 unsigned short int const REPLY_ID_CREATE_WORLD       = 22;
-
 unsigned short int const REPLY_ID_CREATE_EPOCH       = 23;
 unsigned short int const REPLY_ID_DELETE_EPOCH       = 24;
 unsigned short int const REPLY_ID_ACTIVATE_EPOCH     = 25;
@@ -78,22 +71,25 @@ unsigned short int const REPLY_ID_DEACTIVATE_EPOCH   = 26;
 unsigned short int const REPLY_ID_FINISH_EPOCH       = 27;
 unsigned short int const REPLY_ID_TICK_EPOCH         = 28;
 unsigned short int const REPLY_ID_GET_EPOCH          = 29;
-
 unsigned short int const REPLY_ID_TRANSPORT_HUMAN    = 30;
 unsigned short int const REPLY_ID_TRANSPORT_RESOURCE = 31;
+//}@
 
+//@{
 /**
- * @brief The statuses of the replies.
+ * @brief A status of the reply.
  */
-unsigned short int const REPLY_STATUS_SERVER_IS_NOT_LISTENING      = 1;
-unsigned short int const REPLY_STATUS_INVALID_REQUEST              = 2;
-unsigned short int const REPLY_STATUS_INVALID_RANGE                = 3;
-unsigned short int const REPLY_STATUS_UNAUTHENTICATED              = 4;
-unsigned short int const REPLY_STATUS_ACTING_USER_HAS_NOT_BEEN_GOT = 5;
-unsigned short int const REPLY_STATUS_UNAUTHORIZED                 = 6;
-unsigned short int const REPLY_STATUS_EPOCH_IS_NOT_ACTIVE          = 7;
-unsigned short int const REPLY_STATUS_ACTION_UNAVAILABLE           = 8;
-unsigned short int const REPLY_STATUS_OK                           = 9;
+unsigned short int const REPLY_STATUS_SERVER_IS_NOT_LISTENING      =  1;
+unsigned short int const REPLY_STATUS_INVALID_REQUEST              =  2;
+unsigned short int const REPLY_STATUS_INVALID_RANGE                =  3;
+unsigned short int const REPLY_STATUS_UNAUTHENTICATED              =  4;
+unsigned short int const REPLY_STATUS_ACTING_USER_HAS_NOT_BEEN_GOT =  5;
+unsigned short int const REPLY_STATUS_NON_MODERATOR_FILTERED_OUT   =  6;
+unsigned short int const REPLY_STATUS_UNAUTHORIZED                 =  7;
+unsigned short int const REPLY_STATUS_EPOCH_IS_NOT_ACTIVE          =  8;
+unsigned short int const REPLY_STATUS_ACTION_UNAVAILABLE           =  9;
+unsigned short int const REPLY_STATUS_OK                           = 10;
+//}@
 
 /**
  * @brief A reply class.

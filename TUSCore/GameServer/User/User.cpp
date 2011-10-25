@@ -55,7 +55,7 @@ string User::getPassword() const
 
 bool User::isModerator() const
 {
-	return m_moderator;
+    return m_moderator;
 }
 
 } // namespace Land
