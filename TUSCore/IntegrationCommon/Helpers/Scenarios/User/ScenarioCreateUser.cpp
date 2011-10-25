@@ -60,7 +60,7 @@ char const * ScenarioCreateUser::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioCreateUserActionSuccess::ScenarioCreateUserActionSuccess(
@@ -106,7 +106,7 @@ ReplyShrPtr ScenarioCreateUserActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioCreateUserVerificationUnexpectedError::verify(
+const char * ScenarioCreateUserVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -122,7 +122,7 @@ string ScenarioCreateUserVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationUserDoesExist::verify(
+const char * ScenarioCreateUserVerificationUserDoesExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -138,7 +138,7 @@ string ScenarioCreateUserVerificationUserDoesExist::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationUserHasBeenCreated::verify(
+const char * ScenarioCreateUserVerificationUserHasBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -154,7 +154,7 @@ string ScenarioCreateUserVerificationUserHasBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationUserHasNotBeenCreated::verify(
+const char * ScenarioCreateUserVerificationUserHasNotBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -170,7 +170,7 @@ string ScenarioCreateUserVerificationUserHasNotBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationInvalidRequest::verify(
+const char * ScenarioCreateUserVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -184,7 +184,7 @@ string ScenarioCreateUserVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationInvalidRange::verify(
+const char * ScenarioCreateUserVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -198,7 +198,7 @@ string ScenarioCreateUserVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationUnauthenticated::verify(
+const char * ScenarioCreateUserVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -212,7 +212,7 @@ string ScenarioCreateUserVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationUnauthorized::verify(
+const char * ScenarioCreateUserVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -226,7 +226,7 @@ string ScenarioCreateUserVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioCreateUserVerificationEpochIsNotActive::verify(
+const char * ScenarioCreateUserVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

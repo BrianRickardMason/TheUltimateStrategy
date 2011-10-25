@@ -60,7 +60,7 @@ char const * ScenarioGetLands::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioGetLandsActionSuccess::ScenarioGetLandsActionSuccess(
@@ -105,7 +105,7 @@ ReplyShrPtr ScenarioGetLandsActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioGetLandsVerificationLandsHaveBeenGot::verify(
+const char * ScenarioGetLandsVerificationLandsHaveBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -121,7 +121,7 @@ string ScenarioGetLandsVerificationLandsHaveBeenGot::verify(
     return "";
 }
 
-string ScenarioGetLandsVerificationLandsHaveNotBeenGot::verify(
+const char * ScenarioGetLandsVerificationLandsHaveNotBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -137,7 +137,7 @@ string ScenarioGetLandsVerificationLandsHaveNotBeenGot::verify(
     return "";
 }
 
-string ScenarioGetLandsVerificationUnexpectedError::verify(
+const char * ScenarioGetLandsVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -153,7 +153,7 @@ string ScenarioGetLandsVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioGetLandsVerificationInvalidRequest::verify(
+const char * ScenarioGetLandsVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -167,7 +167,7 @@ string ScenarioGetLandsVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioGetLandsVerificationInvalidRange::verify(
+const char * ScenarioGetLandsVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -181,7 +181,7 @@ string ScenarioGetLandsVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioGetLandsVerificationUnauthenticated::verify(
+const char * ScenarioGetLandsVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -195,7 +195,7 @@ string ScenarioGetLandsVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioGetLandsVerificationUnauthorized::verify(
+const char * ScenarioGetLandsVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {

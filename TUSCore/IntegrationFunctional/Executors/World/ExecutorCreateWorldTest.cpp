@@ -36,21 +36,14 @@ using namespace IntegrationCommon::Helpers::Scenarios;
 using namespace boost::assign;
 using namespace std;
 
-/**
- * Integration functional tests of: ExecutorCreateWorld.
- */
 TEST_F(IntegrationFunctionalTest, CreateWorld)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioCreateUser(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
-            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -59,33 +52,11 @@ TEST_F(IntegrationFunctionalTest, CreateWorld)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, CreateWorld_TwoWorldsOfDifferentNames)
+TEST_F(IntegrationFunctionalTest, CreateWorldNonModeratorFilteredOut)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
-    m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioCreateUser(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
-            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioCreateWorld(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World1")),
-            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
-        (IScenarioShrPtr(new ScenarioCreateWorld(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World2")),
-            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))));
-
-    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
-    {
-        ASSERT_STREQ("", (*it)->execute());
-    }
-}
-
-TEST_F(IntegrationFunctionalTest, CreateWorld_TwoWorldsOfTheSameName)
-{
-    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
+    m_scenarios.clear();
 
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioCreateUser(
@@ -95,10 +66,46 @@ TEST_F(IntegrationFunctionalTest, CreateWorld_TwoWorldsOfTheSameName)
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
             IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
+            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationNonModeratorFilteredOut))));
+
+    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
+    {
+        ASSERT_STREQ("", (*it)->execute());
+    }
+}
+
+TEST_F(IntegrationFunctionalTest, CreateWorldTwoWorldsOfDifferentNames)
+{
+    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
+
+    m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateWorld(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("modbot", "modbotpass", "World1")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("modbot", "modbotpass", "World2")),
+            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))));
+
+    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
+    {
+        ASSERT_STREQ("", (*it)->execute());
+    }
+}
+
+TEST_F(IntegrationFunctionalTest, CreateWorldTwoWorldsOfTheSameName)
+{
+    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
+
+    m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateWorld(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("modbot", "modbotpass", "World")),
+            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
+        (IScenarioShrPtr(new ScenarioCreateWorld(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("modbot", "modbotpass", "World")),
             // TODO: Change to ScenarioCreateWorldVerificationWorldDoesExist
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasNotBeenCreated))));
 
@@ -108,19 +115,47 @@ TEST_F(IntegrationFunctionalTest, CreateWorld_TwoWorldsOfTheSameName)
     }
 }
 
-TEST_F(IntegrationFunctionalTest, CreateWorld_InvalidRequest)
+TEST_F(IntegrationFunctionalTest, CreateWorldInvalidRequest)
 {
     IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
 
     m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioCreateUser(
-            client,
-            IScenarioActionShrPtr(new ScenarioCreateUserActionSuccess("Login", "Password")),
-            IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateWorld(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateWorldActionInvalidRequest("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionInvalidRequest("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationInvalidRequest))));
+
+    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
+    {
+        ASSERT_STREQ("", (*it)->execute());
+    }
+}
+
+TEST_F(IntegrationFunctionalTest, CreateWorldUnauthenticatedInvalidPassword)
+{
+    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
+
+    m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateWorld(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("modbot", "modbotpass2", "World")),
+            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationUnauthenticated))));
+
+    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
+    {
+        ASSERT_STREQ("", (*it)->execute());
+    }
+}
+
+TEST_F(IntegrationFunctionalTest, CreateWorldUnauthenticatedNonexistentUser)
+{
+    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
+
+    m_scenarios = list_of
+        (IScenarioShrPtr(new ScenarioCreateWorld(
+            client,
+            IScenarioActionShrPtr(new ScenarioCreateWorldActionSuccess("modbot2", "modbotpass", "World")),
+            IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationUnauthenticated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {

@@ -193,7 +193,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -212,7 +212,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -231,7 +231,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -250,7 +250,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -269,7 +269,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -288,7 +288,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -307,7 +307,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -326,7 +326,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };

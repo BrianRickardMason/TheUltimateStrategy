@@ -60,7 +60,7 @@ char const * ScenarioDismissHuman::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioDismissHumanActionSuccess::ScenarioDismissHumanActionSuccess(
@@ -155,7 +155,7 @@ ReplyShrPtr ScenarioDismissHumanActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioDismissHumanVerificationHumanMissingInTheMeantime::verify(
+const char * ScenarioDismissHumanVerificationHumanMissingInTheMeantime::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -171,7 +171,7 @@ string ScenarioDismissHumanVerificationHumanMissingInTheMeantime::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationHumanHasBeenDismissed::verify(
+const char * ScenarioDismissHumanVerificationHumanHasBeenDismissed::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -187,7 +187,7 @@ string ScenarioDismissHumanVerificationHumanHasBeenDismissed::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationHumanIsNotDismissable::verify(
+const char * ScenarioDismissHumanVerificationHumanIsNotDismissable::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -203,7 +203,7 @@ string ScenarioDismissHumanVerificationHumanIsNotDismissable::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationNotEnoughEngaged::verify(
+const char * ScenarioDismissHumanVerificationNotEnoughEngaged::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -219,7 +219,7 @@ string ScenarioDismissHumanVerificationNotEnoughEngaged::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationNotEnoughResources::verify(
+const char * ScenarioDismissHumanVerificationNotEnoughResources::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -235,7 +235,7 @@ string ScenarioDismissHumanVerificationNotEnoughResources::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationResourcesMissingInTheMeantime::verify(
+const char * ScenarioDismissHumanVerificationResourcesMissingInTheMeantime::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -251,7 +251,7 @@ string ScenarioDismissHumanVerificationResourcesMissingInTheMeantime::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationTryingToDismissZeroHumans::verify(
+const char * ScenarioDismissHumanVerificationTryingToDismissZeroHumans::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -267,7 +267,7 @@ string ScenarioDismissHumanVerificationTryingToDismissZeroHumans::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationUnexpectedError::verify(
+const char * ScenarioDismissHumanVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -283,7 +283,7 @@ string ScenarioDismissHumanVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationInvalidRequest::verify(
+const char * ScenarioDismissHumanVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -297,7 +297,7 @@ string ScenarioDismissHumanVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationInvalidRange::verify(
+const char * ScenarioDismissHumanVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -309,7 +309,7 @@ string ScenarioDismissHumanVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationUnauthenticated::verify(
+const char * ScenarioDismissHumanVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -323,7 +323,7 @@ string ScenarioDismissHumanVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationUnauthorized::verify(
+const char * ScenarioDismissHumanVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -335,7 +335,7 @@ string ScenarioDismissHumanVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioDismissHumanVerificationEpochIsNotActive::verify(
+const char * ScenarioDismissHumanVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

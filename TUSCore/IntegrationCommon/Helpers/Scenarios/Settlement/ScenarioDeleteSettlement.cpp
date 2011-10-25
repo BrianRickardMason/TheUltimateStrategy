@@ -60,7 +60,7 @@ char const * ScenarioDeleteSettlement::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioDeleteSettlementActionSuccess::ScenarioDeleteSettlementActionSuccess(
@@ -112,7 +112,7 @@ ReplyShrPtr ScenarioDeleteSettlementActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioDeleteSettlementVerificationSettlementDoesNotExist::verify(
+const char * ScenarioDeleteSettlementVerificationSettlementDoesNotExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -128,7 +128,7 @@ string ScenarioDeleteSettlementVerificationSettlementDoesNotExist::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationSettlementHasBeenDeleted::verify(
+const char * ScenarioDeleteSettlementVerificationSettlementHasBeenDeleted::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -144,7 +144,7 @@ string ScenarioDeleteSettlementVerificationSettlementHasBeenDeleted::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationSettlementHasNotBeenDeleted::verify(
+const char * ScenarioDeleteSettlementVerificationSettlementHasNotBeenDeleted::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -160,7 +160,7 @@ string ScenarioDeleteSettlementVerificationSettlementHasNotBeenDeleted::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationUnexpectedError::verify(
+const char * ScenarioDeleteSettlementVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -176,7 +176,7 @@ string ScenarioDeleteSettlementVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationInvalidRequest::verify(
+const char * ScenarioDeleteSettlementVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -190,7 +190,7 @@ string ScenarioDeleteSettlementVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationInvalidRange::verify(
+const char * ScenarioDeleteSettlementVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -204,7 +204,7 @@ string ScenarioDeleteSettlementVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationUnauthenticated::verify(
+const char * ScenarioDeleteSettlementVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -218,7 +218,7 @@ string ScenarioDeleteSettlementVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationUnauthorized::verify(
+const char * ScenarioDeleteSettlementVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -232,7 +232,7 @@ string ScenarioDeleteSettlementVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioDeleteSettlementVerificationEpochIsNotActive::verify(
+const char * ScenarioDeleteSettlementVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

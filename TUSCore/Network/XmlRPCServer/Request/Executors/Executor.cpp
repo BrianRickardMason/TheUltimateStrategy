@@ -85,7 +85,7 @@ ReplyShrPtr Executor::execute(
         return produceReplyActingUserHasNotBeenGot();
     }
 
-    if (!filterOutNonModerators())
+    if (!filterOutNonModerator())
     {
         return produceReplyNonModeratorFilteredOut();
     }
@@ -167,7 +167,7 @@ bool Executor::getActingUser(
     }
 }
 
-bool Executor::filterOutNonModerators() const
+bool Executor::filterOutNonModerator() const
 {
     return true;
 }

@@ -119,11 +119,11 @@ private:
     );
 
     /**
-     * @brief Filters out non moderators.
+     * @brief Filters out non moderator.
      *
      * @return True if user is a moderator or moderator's rights are not required, false otherwise.
      */
-    virtual bool filterOutNonModerators() const;
+    virtual bool filterOutNonModerator() const;
 
     /**
      * @brief Authorizes the user.

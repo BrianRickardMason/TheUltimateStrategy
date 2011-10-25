@@ -59,7 +59,7 @@ char const * ScenarioCreateSettlement::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioCreateSettlementActionSuccess::ScenarioCreateSettlementActionSuccess(
@@ -118,7 +118,7 @@ ReplyShrPtr ScenarioCreateSettlementActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioCreateSettlementVerificationLandDoesNotExist::verify(
+const char * ScenarioCreateSettlementVerificationLandDoesNotExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -134,7 +134,7 @@ string ScenarioCreateSettlementVerificationLandDoesNotExist::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationSettlementDoesExist::verify(
+const char * ScenarioCreateSettlementVerificationSettlementDoesExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -150,7 +150,7 @@ string ScenarioCreateSettlementVerificationSettlementDoesExist::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationSettlementHasBeenCreated::verify(
+const char * ScenarioCreateSettlementVerificationSettlementHasBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -166,7 +166,7 @@ string ScenarioCreateSettlementVerificationSettlementHasBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationSettlementHasNotBeenCreated::verify(
+const char * ScenarioCreateSettlementVerificationSettlementHasNotBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -182,7 +182,7 @@ string ScenarioCreateSettlementVerificationSettlementHasNotBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationUnexpectedError::verify(
+const char * ScenarioCreateSettlementVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -198,7 +198,7 @@ string ScenarioCreateSettlementVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationInvalidRequest::verify(
+const char * ScenarioCreateSettlementVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -212,7 +212,7 @@ string ScenarioCreateSettlementVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationInvalidRange::verify(
+const char * ScenarioCreateSettlementVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -226,7 +226,7 @@ string ScenarioCreateSettlementVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationUnauthenticated::verify(
+const char * ScenarioCreateSettlementVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -240,7 +240,7 @@ string ScenarioCreateSettlementVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationUnauthorized::verify(
+const char * ScenarioCreateSettlementVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -254,7 +254,7 @@ string ScenarioCreateSettlementVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioCreateSettlementVerificationEpochIsNotActive::verify(
+const char * ScenarioCreateSettlementVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

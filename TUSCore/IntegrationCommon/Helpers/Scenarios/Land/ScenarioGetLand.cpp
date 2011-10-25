@@ -60,7 +60,7 @@ char const * ScenarioGetLand::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioGetLandActionSuccess::ScenarioGetLandActionSuccess(
@@ -112,7 +112,7 @@ ReplyShrPtr ScenarioGetLandActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioGetLandVerificationLandHasBeenGot::verify(
+const char * ScenarioGetLandVerificationLandHasBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -128,7 +128,7 @@ string ScenarioGetLandVerificationLandHasBeenGot::verify(
     return "";
 }
 
-string ScenarioGetLandVerificationLandHasNotBeenGot::verify(
+const char * ScenarioGetLandVerificationLandHasNotBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -144,7 +144,7 @@ string ScenarioGetLandVerificationLandHasNotBeenGot::verify(
     return "";
 }
 
-string ScenarioGetLandVerificationUnexpectedError::verify(
+const char * ScenarioGetLandVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -160,7 +160,7 @@ string ScenarioGetLandVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioGetLandVerificationInvalidRequest::verify(
+const char * ScenarioGetLandVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -174,7 +174,7 @@ string ScenarioGetLandVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioGetLandVerificationInvalidRange::verify(
+const char * ScenarioGetLandVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -188,7 +188,7 @@ string ScenarioGetLandVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioGetLandVerificationUnauthenticated::verify(
+const char * ScenarioGetLandVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -202,7 +202,7 @@ string ScenarioGetLandVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioGetLandVerificationUnauthorized::verify(
+const char * ScenarioGetLandVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -216,7 +216,7 @@ string ScenarioGetLandVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioGetLandVerificationEpochIsNotActive::verify(
+const char * ScenarioGetLandVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

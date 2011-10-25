@@ -89,6 +89,13 @@ class ExecutorCreateWorld
     virtual bool processParameters();
 
     /**
+     * @brief Filters out non moderators.
+     *
+     * @return True if user is a moderator or moderator's rights are not required, false otherwise.
+     */
+    virtual bool filterOutNonModerator() const;
+
+    /**
      * @brief Authorizes the user.
      *
      * @param a_persistence The persistence.

@@ -60,7 +60,7 @@ char const * ScenarioDeleteLand::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioDeleteLandActionSuccess::ScenarioDeleteLandActionSuccess(
@@ -112,7 +112,7 @@ ReplyShrPtr ScenarioDeleteLandActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioDeleteLandVerificationLandDoesNotExist::verify(
+const char * ScenarioDeleteLandVerificationLandDoesNotExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -128,7 +128,7 @@ string ScenarioDeleteLandVerificationLandDoesNotExist::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationLandHasBeenDeleted::verify(
+const char * ScenarioDeleteLandVerificationLandHasBeenDeleted::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -144,7 +144,7 @@ string ScenarioDeleteLandVerificationLandHasBeenDeleted::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationLandHasNotBeenDeleted::verify(
+const char * ScenarioDeleteLandVerificationLandHasNotBeenDeleted::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -160,7 +160,7 @@ string ScenarioDeleteLandVerificationLandHasNotBeenDeleted::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationUnexpectedError::verify(
+const char * ScenarioDeleteLandVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -176,7 +176,7 @@ string ScenarioDeleteLandVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationInvalidRequest::verify(
+const char * ScenarioDeleteLandVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -190,7 +190,7 @@ string ScenarioDeleteLandVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationInvalidRange::verify(
+const char * ScenarioDeleteLandVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -204,7 +204,7 @@ string ScenarioDeleteLandVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationUnauthenticated::verify(
+const char * ScenarioDeleteLandVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -218,7 +218,7 @@ string ScenarioDeleteLandVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationUnauthorized::verify(
+const char * ScenarioDeleteLandVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -232,7 +232,7 @@ string ScenarioDeleteLandVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioDeleteLandVerificationEpochIsNotActive::verify(
+const char * ScenarioDeleteLandVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

@@ -193,7 +193,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -212,7 +212,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -231,7 +231,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -250,7 +250,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -269,7 +269,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -288,7 +288,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -307,10 +307,30 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
+
+/**
+ * @brief The "ScenarioCreateWorldVerificationNonModeratorFilteredOut" verification.
+ */
+class ScenarioCreateWorldVerificationNonModeratorFilteredOut
+    : public IScenarioVerification
+{
+public:
+    /**
+     * @brief Performs the verification.
+     *
+     * @param a_reply The reply to be verified.
+     *
+     * @return An empty "string" on success, a message otherwise.
+     */
+    virtual char const * verify(
+        Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
+    );
+};
+
 
 /**
  * @brief The "ScenarioCreateWorldVerificationUnauthorized" verification.
@@ -326,7 +346,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };
@@ -345,7 +365,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     );
 };

@@ -60,7 +60,7 @@ char const * ScenarioGetResources::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioGetResourcesActionSuccess::ScenarioGetResourcesActionSuccess(
@@ -123,7 +123,7 @@ ReplyShrPtr ScenarioGetResourcesActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioGetResourcesVerificationResourcesHaveBeenGot::verify(
+const char * ScenarioGetResourcesVerificationResourcesHaveBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -139,7 +139,7 @@ string ScenarioGetResourcesVerificationResourcesHaveBeenGot::verify(
     return "";
 }
 
-string ScenarioGetResourcesVerificationUnexpectedError::verify(
+const char * ScenarioGetResourcesVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -155,7 +155,7 @@ string ScenarioGetResourcesVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioGetResourcesVerificationInvalidRequest::verify(
+const char * ScenarioGetResourcesVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -169,7 +169,7 @@ string ScenarioGetResourcesVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioGetResourcesVerificationInvalidRange::verify(
+const char * ScenarioGetResourcesVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -181,7 +181,7 @@ string ScenarioGetResourcesVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioGetResourcesVerificationUnauthenticated::verify(
+const char * ScenarioGetResourcesVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -195,7 +195,7 @@ string ScenarioGetResourcesVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioGetResourcesVerificationUnauthorized::verify(
+const char * ScenarioGetResourcesVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -207,7 +207,7 @@ string ScenarioGetResourcesVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioGetResourcesVerificationEpochIsNotActive::verify(
+const char * ScenarioGetResourcesVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

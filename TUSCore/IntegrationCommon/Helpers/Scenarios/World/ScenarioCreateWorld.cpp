@@ -60,7 +60,7 @@ char const * ScenarioCreateWorld::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioCreateWorldActionSuccess::ScenarioCreateWorldActionSuccess(
@@ -112,7 +112,7 @@ ReplyShrPtr ScenarioCreateWorldActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioCreateWorldVerificationUnexpectedError::verify(
+const char * ScenarioCreateWorldVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -128,7 +128,7 @@ string ScenarioCreateWorldVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationWorldDoesExist::verify(
+const char * ScenarioCreateWorldVerificationWorldDoesExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -144,7 +144,7 @@ string ScenarioCreateWorldVerificationWorldDoesExist::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationWorldHasBeenCreated::verify(
+const char * ScenarioCreateWorldVerificationWorldHasBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -160,7 +160,7 @@ string ScenarioCreateWorldVerificationWorldHasBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationWorldHasNotBeenCreated::verify(
+const char * ScenarioCreateWorldVerificationWorldHasNotBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -176,7 +176,7 @@ string ScenarioCreateWorldVerificationWorldHasNotBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationInvalidRequest::verify(
+const char * ScenarioCreateWorldVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -190,7 +190,7 @@ string ScenarioCreateWorldVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationInvalidRange::verify(
+const char * ScenarioCreateWorldVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -204,7 +204,7 @@ string ScenarioCreateWorldVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationUnauthenticated::verify(
+const char * ScenarioCreateWorldVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -218,7 +218,21 @@ string ScenarioCreateWorldVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationUnauthorized::verify(
+const char * ScenarioCreateWorldVerificationNonModeratorFilteredOut::verify(
+    ReplyShrPtr a_reply
+)
+{
+    IXmlNodeShrPtr node_reply = a_reply->m_xml_document->getNode("reply");
+
+    I_ASSERT_EQ(REPLY_ID_CREATE_WORLD, node_reply->getAttribute("id")->asInt(), "Invalid reply ID.");
+    I_ASSERT_EQ(REPLY_STATUS_NON_MODERATOR_FILTERED_OUT,
+                node_reply->getNode("status")->getAttribute("value")->asInt(),
+                "Invalid status.");
+
+    return "";
+}
+
+const char * ScenarioCreateWorldVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -232,7 +246,7 @@ string ScenarioCreateWorldVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioCreateWorldVerificationEpochIsNotActive::verify(
+const char * ScenarioCreateWorldVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

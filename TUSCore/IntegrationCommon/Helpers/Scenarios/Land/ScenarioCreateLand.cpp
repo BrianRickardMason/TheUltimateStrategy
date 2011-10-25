@@ -60,7 +60,7 @@ char const * ScenarioCreateLand::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioCreateLandActionSuccess::ScenarioCreateLandActionSuccess(
@@ -119,7 +119,7 @@ ReplyShrPtr ScenarioCreateLandActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists::verify(
+const char * ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -135,7 +135,7 @@ string ScenarioCreateLandVerificationAnotherLandOfTheGivenNameExists::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationLandHasBeenCreated::verify(
+const char * ScenarioCreateLandVerificationLandHasBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -151,7 +151,7 @@ string ScenarioCreateLandVerificationLandHasBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationLandHasNotBeenCreated::verify(
+const char * ScenarioCreateLandVerificationLandHasNotBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -167,7 +167,7 @@ string ScenarioCreateLandVerificationLandHasNotBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationUnexpectedError::verify(
+const char * ScenarioCreateLandVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -183,7 +183,7 @@ string ScenarioCreateLandVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationWorldDoesNotExist::verify(
+const char * ScenarioCreateLandVerificationWorldDoesNotExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -199,7 +199,7 @@ string ScenarioCreateLandVerificationWorldDoesNotExist::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationInvalidRequest::verify(
+const char * ScenarioCreateLandVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -213,7 +213,7 @@ string ScenarioCreateLandVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationInvalidRange::verify(
+const char * ScenarioCreateLandVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -227,7 +227,7 @@ string ScenarioCreateLandVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationUnauthenticated::verify(
+const char * ScenarioCreateLandVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -241,7 +241,7 @@ string ScenarioCreateLandVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationUnauthorized::verify(
+const char * ScenarioCreateLandVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -255,7 +255,7 @@ string ScenarioCreateLandVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioCreateLandVerificationEpochIsNotActive::verify(
+const char * ScenarioCreateLandVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

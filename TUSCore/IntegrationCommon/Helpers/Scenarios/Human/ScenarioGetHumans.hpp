@@ -76,7 +76,7 @@ public:
     {
         Network::XmlRPCCommon::Reply::ReplyShrPtr reply = m_action->perform(m_client);
 
-        return m_verification->verify(reply).c_str();
+        return m_verification->verify(reply);
     }
 
 private:
@@ -258,7 +258,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     )
     {
@@ -293,7 +293,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     )
     {
@@ -328,7 +328,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     )
     {
@@ -359,7 +359,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     )
     {
@@ -390,7 +390,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     )
     {
@@ -421,7 +421,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     )
     {
@@ -452,7 +452,7 @@ public:
      *
      * @return An empty "string" on success, a message otherwise.
      */
-    virtual std::string verify(
+    virtual char const * verify(
         Network::XmlRPCCommon::Reply::ReplyShrPtr a_reply
     )
     {

@@ -60,7 +60,7 @@ char const * ScenarioCreateEpoch::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioCreateEpochActionSuccess::ScenarioCreateEpochActionSuccess(
@@ -119,7 +119,7 @@ ReplyShrPtr ScenarioCreateEpochActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioCreateEpochVerificationEpochHasBeenCreated::verify(
+const char * ScenarioCreateEpochVerificationEpochHasBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -136,7 +136,7 @@ string ScenarioCreateEpochVerificationEpochHasBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationEpochHasNotBeenCreated::verify(
+const char * ScenarioCreateEpochVerificationEpochHasNotBeenCreated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -152,7 +152,7 @@ string ScenarioCreateEpochVerificationEpochHasNotBeenCreated::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationUnexpectedError::verify(
+const char * ScenarioCreateEpochVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -168,7 +168,7 @@ string ScenarioCreateEpochVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationWorldDoesNotExist::verify(
+const char * ScenarioCreateEpochVerificationWorldDoesNotExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -184,7 +184,7 @@ string ScenarioCreateEpochVerificationWorldDoesNotExist::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationInvalidRequest::verify(
+const char * ScenarioCreateEpochVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -198,7 +198,7 @@ string ScenarioCreateEpochVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationInvalidRange::verify(
+const char * ScenarioCreateEpochVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -212,7 +212,7 @@ string ScenarioCreateEpochVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationUnauthenticated::verify(
+const char * ScenarioCreateEpochVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -226,7 +226,7 @@ string ScenarioCreateEpochVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationUnauthorized::verify(
+const char * ScenarioCreateEpochVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -240,7 +240,7 @@ string ScenarioCreateEpochVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioCreateEpochVerificationEpochIsNotActive::verify(
+const char * ScenarioCreateEpochVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

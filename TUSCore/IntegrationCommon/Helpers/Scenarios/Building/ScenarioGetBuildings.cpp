@@ -60,7 +60,7 @@ char const * ScenarioGetBuildings::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioGetBuildingsActionSuccess::ScenarioGetBuildingsActionSuccess(
@@ -123,7 +123,7 @@ ReplyShrPtr ScenarioGetBuildingsActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioGetBuildingsVerificationBuildingsHaveBeenGot::verify(
+const char * ScenarioGetBuildingsVerificationBuildingsHaveBeenGot::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -139,7 +139,7 @@ string ScenarioGetBuildingsVerificationBuildingsHaveBeenGot::verify(
     return "";
 }
 
-string ScenarioGetBuildingsVerificationUnexpectedError::verify(
+const char * ScenarioGetBuildingsVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -155,7 +155,7 @@ string ScenarioGetBuildingsVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioGetBuildingsVerificationInvalidRequest::verify(
+const char * ScenarioGetBuildingsVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -169,7 +169,7 @@ string ScenarioGetBuildingsVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioGetBuildingsVerificationInvalidRange::verify(
+const char * ScenarioGetBuildingsVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -181,7 +181,7 @@ string ScenarioGetBuildingsVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioGetBuildingsVerificationUnauthenticated::verify(
+const char * ScenarioGetBuildingsVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -195,7 +195,7 @@ string ScenarioGetBuildingsVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioGetBuildingsVerificationUnauthorized::verify(
+const char * ScenarioGetBuildingsVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -207,7 +207,7 @@ string ScenarioGetBuildingsVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioGetBuildingsVerificationEpochIsNotActive::verify(
+const char * ScenarioGetBuildingsVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {

@@ -60,7 +60,7 @@ char const * ScenarioActivateEpoch::execute()
 {
     ReplyShrPtr reply = m_action->perform(m_client);
 
-    return m_verification->verify(reply).c_str();
+    return m_verification->verify(reply);
 }
 
 ScenarioActivateEpochActionSuccess::ScenarioActivateEpochActionSuccess(
@@ -112,7 +112,7 @@ ReplyShrPtr ScenarioActivateEpochActionInvalidRequest::perform(
     return a_client->sendRequest(request);
 }
 
-string ScenarioActivateEpochVerificationEpochDoesNotExist::verify(
+const char * ScenarioActivateEpochVerificationEpochDoesNotExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -128,7 +128,7 @@ string ScenarioActivateEpochVerificationEpochDoesNotExist::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationEpochHasBeenActivated::verify(
+const char * ScenarioActivateEpochVerificationEpochHasBeenActivated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -144,7 +144,7 @@ string ScenarioActivateEpochVerificationEpochHasBeenActivated::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationEpochHasBeenFinished::verify(
+const char * ScenarioActivateEpochVerificationEpochHasBeenFinished::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -160,7 +160,7 @@ string ScenarioActivateEpochVerificationEpochHasBeenFinished::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationEpochHasNotBeenActivated::verify(
+const char * ScenarioActivateEpochVerificationEpochHasNotBeenActivated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -176,7 +176,7 @@ string ScenarioActivateEpochVerificationEpochHasNotBeenActivated::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationEpochIsActive::verify(
+const char * ScenarioActivateEpochVerificationEpochIsActive::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -192,7 +192,7 @@ string ScenarioActivateEpochVerificationEpochIsActive::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationUnexpectedError::verify(
+const char * ScenarioActivateEpochVerificationUnexpectedError::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -208,7 +208,7 @@ string ScenarioActivateEpochVerificationUnexpectedError::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationWorldDoesNotExist::verify(
+const char * ScenarioActivateEpochVerificationWorldDoesNotExist::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -224,7 +224,7 @@ string ScenarioActivateEpochVerificationWorldDoesNotExist::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationInvalidRequest::verify(
+const char * ScenarioActivateEpochVerificationInvalidRequest::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -238,7 +238,7 @@ string ScenarioActivateEpochVerificationInvalidRequest::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationInvalidRange::verify(
+const char * ScenarioActivateEpochVerificationInvalidRange::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -252,7 +252,7 @@ string ScenarioActivateEpochVerificationInvalidRange::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationUnauthenticated::verify(
+const char * ScenarioActivateEpochVerificationUnauthenticated::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -266,7 +266,7 @@ string ScenarioActivateEpochVerificationUnauthenticated::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationUnauthorized::verify(
+const char * ScenarioActivateEpochVerificationUnauthorized::verify(
     ReplyShrPtr a_reply
 )
 {
@@ -280,7 +280,7 @@ string ScenarioActivateEpochVerificationUnauthorized::verify(
     return "";
 }
 
-string ScenarioActivateEpochVerificationEpochIsNotActive::verify(
+const char * ScenarioActivateEpochVerificationEpochIsNotActive::verify(
     ReplyShrPtr a_reply
 )
 {
