@@ -140,7 +140,13 @@ private:
             backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World2'");
             backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World3'");
 
+            // Insert the modbot.
+            backbone_transaction.exec(
+                "INSERT INTO users(login, password, moderator) VALUES('modbot', 'modbotpass', true)"
+            );
+
             transaction->commit();
+
             return true;
         }
         catch (std::exception const &)

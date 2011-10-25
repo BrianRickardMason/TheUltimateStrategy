@@ -88,7 +88,13 @@ private:
             backbone_transaction.exec("DELETE FROM users");
             backbone_transaction.exec("DELETE FROM worlds");
 
+            // Insert the modbot.
+            backbone_transaction.exec(
+                "INSERT INTO users(login, password, moderator) VALUES('modbot', 'modbotpass', true)"
+            );
+
             transaction->commit();
+
             return true;
         }
         catch (std::exception const & e)
