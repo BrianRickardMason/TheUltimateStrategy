@@ -89,17 +89,6 @@ class ExecutorCreateWorld
     virtual bool processParameters();
 
     /**
-     * @brief Authenticates the user.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if user has been authenticated, false otherwise.
-     */
-    virtual bool authenticate(
-        GameServer::Persistence::IPersistenceShrPtr a_persistence
-    ) const;
-
-    /**
      * @brief Authorizes the user.
      *
      * @param a_persistence The persistence.

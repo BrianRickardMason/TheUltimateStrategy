@@ -75,13 +75,6 @@ bool ExecutorCreateWorld::processParameters()
     return true;
 }
 
-bool ExecutorCreateWorld::authenticate(
-    IPersistenceShrPtr a_persistence
-) const
-{
-    return true;
-}
-
 bool ExecutorCreateWorld::authorize(
     IPersistenceShrPtr a_persistence
 ) const
