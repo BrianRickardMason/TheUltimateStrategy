@@ -70,7 +70,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_SettlementDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("modbot", "modbotpass", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -109,7 +109,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_Unauthorized)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login1", "Password1", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("modbot", "modbotpass", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -154,7 +154,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_ManyHumansExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("modbot", "modbotpass", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -205,7 +205,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_OneHumanExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("modbot", "modbotpass", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -248,7 +248,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_ZeroHumansExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("modbot", "modbotpass", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -333,7 +333,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("modbot", "modbotpass", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
@@ -376,7 +376,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioCreateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("Login", "Password", "World", "Epoch")),
+            IScenarioActionShrPtr(new ScenarioCreateEpochActionSuccess("modbot", "modbotpass", "World", "Epoch")),
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,

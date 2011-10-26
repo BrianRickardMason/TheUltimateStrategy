@@ -77,11 +77,9 @@ bool ExecutorCreateEpoch::processParameters()
     return true;
 }
 
-bool ExecutorCreateEpoch::authenticate(
-    IPersistenceShrPtr a_persistence
-) const
+bool ExecutorCreateEpoch::filterOutNonModerator() const
 {
-    return true;
+    return m_user->isModerator();
 }
 
 bool ExecutorCreateEpoch::authorize(
