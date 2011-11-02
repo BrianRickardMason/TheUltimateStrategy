@@ -6,6 +6,9 @@ build
 .project
 .pydevproject
 
+# Python specific files.
+*.pyc
+
 # Test specific files.
 *.xml
 
