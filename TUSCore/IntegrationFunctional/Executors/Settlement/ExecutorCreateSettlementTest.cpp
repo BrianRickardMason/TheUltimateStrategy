@@ -66,7 +66,7 @@ TEST_F(IntegrationFunctionalTest, CreateSettlement)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -102,7 +102,7 @@ TEST_F(IntegrationFunctionalTest, CreateSettlement_SettlementDoesExist)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -146,7 +146,7 @@ TEST_F(IntegrationFunctionalTest, CreateSettlement_SettlementDoesExistInAnotherL
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login1", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -190,7 +190,7 @@ TEST_F(IntegrationFunctionalTest, CreateSettlement_Unauthenticated)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
@@ -228,7 +228,7 @@ TEST_F(IntegrationFunctionalTest, CreateSettlement_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioActivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioActivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioCreateLand(
             client,
