@@ -76,11 +76,9 @@ bool ExecutorDeleteEpoch::processParameters()
     return true;
 }
 
-bool ExecutorDeleteEpoch::authenticate(
-    IPersistenceShrPtr a_persistence
-) const
+bool ExecutorDeleteEpoch::filterOutNonModerator() const
 {
-    return true;
+    return m_user->isModerator();
 }
 
 bool ExecutorDeleteEpoch::authorize(
