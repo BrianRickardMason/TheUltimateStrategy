@@ -110,7 +110,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_Finish
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioFinishEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioFinishEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioFinishEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioFinishEpochVerificationEpochHasBeenFinished))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
