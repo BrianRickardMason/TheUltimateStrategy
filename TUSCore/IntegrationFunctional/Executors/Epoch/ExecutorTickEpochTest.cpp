@@ -58,7 +58,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateUserVerificationUserHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationWorldDoesNotExist))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -82,7 +82,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesNotExist)
             IScenarioVerificationShrPtr(new ScenarioCreateWorldVerificationWorldHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationEpochDoesNotExist))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -114,7 +114,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_Finish
             IScenarioVerificationShrPtr(new ScenarioFinishEpochVerificationEpochHasBeenFinished))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationEpochHasBeenFinished))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -146,7 +146,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_Active
             IScenarioVerificationShrPtr(new ScenarioActivateEpochVerificationEpochHasBeenActivated))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationEpochIsActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -174,7 +174,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_NotAct
             IScenarioVerificationShrPtr(new ScenarioCreateEpochVerificationEpochHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationEpochHasBeenTack))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -214,7 +214,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_NotAct
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationEpochHasBeenTack))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -255,7 +255,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_NotAct
         .repeat(10,
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationEpochHasBeenTack)))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -296,7 +296,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_NotAct
         .repeat(100,
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioTickEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioTickEpochVerificationEpochHasBeenTack)))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

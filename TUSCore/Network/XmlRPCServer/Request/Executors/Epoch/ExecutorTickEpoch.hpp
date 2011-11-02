@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTICKEPOCH_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTICKEPOCH_HPP
 
-#include "../../../../../GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorExitCode.hpp"
-#include "../Executor.hpp"
+#include <GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorExitCode.hpp>
+#include <Network/XmlRPCServer/Request/Executors/Executor.hpp>
 #include <string>
 
 namespace Network
@@ -90,15 +90,11 @@ class ExecutorTickEpoch
     virtual bool processParameters();
 
     /**
-     * @brief Authenticates the user.
+     * @brief Filters out non moderators.
      *
-     * @param a_persistence The persistence.
-     *
-     * @return True if user has been authenticated, false otherwise.
+     * @return True if user is a moderator or moderator's rights are not required, false otherwise.
      */
-    virtual bool authenticate(
-        GameServer::Persistence::IPersistenceShrPtr a_persistence
-    ) const;
+    virtual bool filterOutNonModerator() const;
 
     /**
      * @brief Authorizes the user.
