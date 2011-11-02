@@ -112,7 +112,7 @@ ReplyShrPtr ScenarioCreateSettlementActionInvalidRequest::perform(
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
     land_name->appendAttribute("value")->setValue(m_land_name.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("name");
+    IXmlNodeShrPtr name = parameters->appendNode("settlement_name");
     name->appendAttribute("valve")->setValue(m_settlement_name.c_str());
 
     return a_client->sendRequest(request);

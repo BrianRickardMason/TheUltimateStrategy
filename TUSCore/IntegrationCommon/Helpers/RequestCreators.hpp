@@ -236,18 +236,18 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetLands(
 /**
  * @brief Creates a request "create settlement".
  *
- * @param a_login     The login of the user.
- * @param a_password  The password of the user.
- * @param a_land_name The name of a land.
- * @param a_name      The name of the settlement.
+ * @param a_login           The login of the user.
+ * @param a_password        The password of the user.
+ * @param a_land_name       The name of a land.
+ * @param a_settlement_name The name of the settlement.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestCreateSettlement(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    std::string  const   a_land_name,
-    std::string  const & a_name
+    std::string  const a_login,
+    std::string  const a_password,
+    std::string  const a_land_name,
+    std::string  const a_settlement_name
 );
 
 /**

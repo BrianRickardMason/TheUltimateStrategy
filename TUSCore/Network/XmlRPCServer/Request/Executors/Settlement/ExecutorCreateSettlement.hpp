@@ -50,8 +50,8 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <land_name value=\"#\" />
- *         <name      value=\"#\" />
+ *         <land_name       value=\"#\" />
+ *         <settlement_name value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -161,7 +161,7 @@ class ExecutorCreateSettlement
     /**
      * @brief The name of the settlement.
      */
-    std::string m_name;
+    std::string m_settlement_name;
 };
 
 } // namespace Executors

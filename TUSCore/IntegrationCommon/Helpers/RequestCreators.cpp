@@ -370,10 +370,10 @@ RequestShrPtr createRequestGetLands(
 }
 
 RequestShrPtr createRequestCreateSettlement(
-    string const & a_login,
-    string const & a_password,
-    string const   a_land_name,
-    string const & a_name
+    string const a_login,
+    string const a_password,
+    string const a_land_name,
+    string const a_settlement_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -389,8 +389,8 @@ RequestShrPtr createRequestCreateSettlement(
     IXmlNodeShrPtr land_name = parameters->appendNode("land_name");
     land_name->appendAttribute("value")->setValue(a_land_name.c_str());
 
-    IXmlNodeShrPtr name = parameters->appendNode("name");
-    name->appendAttribute("value")->setValue(a_name.c_str());
+    IXmlNodeShrPtr name = parameters->appendNode("settlement_name");
+    name->appendAttribute("value")->setValue(a_settlement_name.c_str());
 
     return request;
 }

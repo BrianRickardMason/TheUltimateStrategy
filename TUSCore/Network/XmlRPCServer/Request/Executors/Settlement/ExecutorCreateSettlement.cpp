@@ -60,10 +60,10 @@ bool ExecutorCreateSettlement::getParameters(
 {
     try
     {
-        m_login     = a_request->getLoginValue();
-        m_password  = a_request->getPasswordValue();
-        m_land_name = a_request->getParameterValueString("land_name");
-        m_name      = a_request->getParameterValueString("name");
+        m_login           = a_request->getLoginValue();
+        m_password        = a_request->getPasswordValue();
+        m_land_name       = a_request->getParameterValueString("land_name");
+        m_settlement_name = a_request->getParameterValueString("settlement_name");
 
         return true;
     }
@@ -145,7 +145,7 @@ ReplyShrPtr ExecutorCreateSettlement::perform(
         ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         CreateSettlementOperatorExitCode const exit_code =
-            create_settlement_operator->createSettlement(transaction, m_land_name, m_name);
+            create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name);
 
         if (exit_code.ok())
         {
