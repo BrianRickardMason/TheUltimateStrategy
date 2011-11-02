@@ -229,7 +229,7 @@ TEST_F(IntegrationFunctionalTest, GetLand_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioGetLand(
             client,

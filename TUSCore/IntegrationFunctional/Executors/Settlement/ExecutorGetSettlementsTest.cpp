@@ -307,7 +307,7 @@ TEST_F(IntegrationFunctionalTest, GetSettlements_EpochIsNotActive)
             IScenarioVerificationShrPtr(new ScenarioCreateSettlementVerificationSettlementHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioGetSettlements(
             client,

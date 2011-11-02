@@ -210,7 +210,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_NotAct
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         (IScenarioShrPtr(new ScenarioTickEpoch(
             client,
@@ -250,7 +250,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_NotAct
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         .repeat(10,
         (IScenarioShrPtr(new ScenarioTickEpoch(
@@ -291,7 +291,7 @@ TEST_F(IntegrationFunctionalTest, TickEpoch_WorldDoesExist_EpochDoesExist_NotAct
             IScenarioVerificationShrPtr(new ScenarioCreateLandVerificationLandHasBeenCreated))))
         (IScenarioShrPtr(new ScenarioDeactivateEpoch(
             client,
-            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("Login", "Password", "World")),
+            IScenarioActionShrPtr(new ScenarioDeactivateEpochActionSuccess("modbot", "modbotpass", "World")),
             IScenarioVerificationShrPtr(new ScenarioDeactivateEpochVerificationEpochHasBeenDeactivated))))
         .repeat(100,
         (IScenarioShrPtr(new ScenarioTickEpoch(
