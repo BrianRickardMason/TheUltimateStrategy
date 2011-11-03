@@ -3,7 +3,7 @@
     <port>2222</port>
     <threads>1</threads>
     <logger>
-        <!-- debug
+        <!-- priority
              EMERG  = 0
              FATAL  = 0
              ALERT  = 100
