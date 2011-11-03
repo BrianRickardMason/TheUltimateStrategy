@@ -52,7 +52,7 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <holderclass value=\"#\" />
+ *         <idholderclass value=\"#\" />
  *         <holder_name value=\"#\" />
  *         <idresource  value=\"#\" />
  *     </parameters>

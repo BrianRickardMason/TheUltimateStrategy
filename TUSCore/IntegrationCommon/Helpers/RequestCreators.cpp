@@ -692,11 +692,11 @@ RequestShrPtr createRequestGetHumans(
 }
 
 RequestShrPtr createRequestGetResource(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name,
-    unsigned int const   a_id_resource
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    unsigned int const a_id_resource
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -709,7 +709,7 @@ RequestShrPtr createRequestGetResource(
     user_node->appendNode("login")->appendAttribute("value")->setValue(a_login.c_str());
     user_node->appendNode("password")->appendAttribute("value")->setValue(a_password.c_str());
 
-    IXmlNodeShrPtr holderclass = parameters->appendNode("holderclass");
+    IXmlNodeShrPtr holderclass = parameters->appendNode("idholderclass");
     holderclass->appendAttribute("value")->setValue(a_id_holder_class);
 
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");

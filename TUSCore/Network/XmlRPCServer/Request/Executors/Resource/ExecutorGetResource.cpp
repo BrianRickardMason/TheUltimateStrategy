@@ -63,7 +63,7 @@ bool ExecutorGetResource::getParameters(
     {
         m_login                 = a_request->getLoginValue();
         m_password              = a_request->getPasswordValue();
-        m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("holderclass"); // TODO: Rename.
+        m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
         m_holder_name           = a_request->getParameterValueString("holder_name");
         m_value_id_resource     = a_request->getParameterValueUnsignedInteger("idresource");
 

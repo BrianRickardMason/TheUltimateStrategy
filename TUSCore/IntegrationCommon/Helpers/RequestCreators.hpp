@@ -479,11 +479,11 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHumans(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResource(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name,
-    unsigned int const   a_id_resource
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name,
+    unsigned int const a_id_resource
 );
 
 /**
