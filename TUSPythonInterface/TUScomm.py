@@ -36,7 +36,7 @@ class CommLink:
 
     def _send(self, message):
         """Private method for sending a single request - DOES NOT INITIALIZE NOR CLOSE THE SOCKET
-        
+
         Requires one argument:
         message - string with the message. Message will be encoded with UTF-8 prior to sending
         Returns the number of sent bytes.
@@ -52,7 +52,7 @@ class CommLink:
 
     def _receive(self):
         """Private method for recieving a single heap of data - DOES NOT INITIALIZE NOR CLOSE THE SOCKET
-    
+
         Returns a string that was decoded from the socket (assuming it was UTF-8 encoded).
 
         """
@@ -61,10 +61,10 @@ class CommLink:
             reply += self._socket.recv(2048)
         reply = str(reply, 'UTF-8')
         try:
-            document = xml.dom.minidom.parseString(message)
+            document = xml.dom.minidom.parseString(reply)
         except xml.parsers.expat.ExpatError:
-            raise CommLinkFailure('validation_reply', message)
-        return 
+            raise CommLinkFailure('validation_reply', reply)
+        return
 
     def exchange_xmls(self, message):
         """Public method responsible for connecting, sending, recieving and closing the socket.

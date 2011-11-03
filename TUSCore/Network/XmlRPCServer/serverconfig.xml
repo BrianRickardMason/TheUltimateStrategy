@@ -1,0 +1,20 @@
+<server>
+    <host>localhost</host>
+    <port>2222</port>
+    <threads>1</threads>
+    <logger>
+        <!-- debug
+             EMERG  = 0
+             FATAL  = 0
+             ALERT  = 100
+             CRIT   = 200
+             ERROR  = 300
+             WARN   = 400
+             NOTICE = 500
+             INFO   = 600
+             DEBUG  = 700
+             NOTSET = 800
+        -->
+        <priority>100</priority>
+    </logger>
+</server>

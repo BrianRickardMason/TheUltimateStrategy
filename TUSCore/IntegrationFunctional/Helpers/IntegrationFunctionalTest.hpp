@@ -50,7 +50,7 @@ protected:
         BOOST_ASSERT(resetDatabase());
 
         std::string command("./server");
-        Poco::Process::Args args = boost::assign::list_of("localhost")("2222")("1");
+        Poco::Process::Args args;
 
         Poco::ProcessHandle process_handle = Poco::Process::launch(command, args);
 

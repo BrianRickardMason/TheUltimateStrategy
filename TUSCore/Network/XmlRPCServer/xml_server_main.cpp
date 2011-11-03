@@ -25,20 +25,23 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "Server/Server.hpp"
+#include <Network/XmlRPCServer/Server/Server.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 #include <boost/thread.hpp>
 #include <log4cpp/Category.hh>
 #include <log4cpp/OstreamAppender.hh>
 #include <log4cpp/PatternLayout.hh>
 
 using namespace Network::XmlRPCServer::Server;
+using namespace boost::property_tree;
 using namespace boost;
 using namespace log4cpp;
 using namespace std;
 
 /**
- * @brief A main entry to the XmlRPCServer.
+ * @brief The server itself.
  *
  * TODO: Review the way io_services are being run (I'd rather go for synchronous calls).
  * FIXME: Handle the incoming requests if there are not enough "executors" (queueing, denying, dropping).
@@ -50,39 +53,73 @@ int main(
 {
     try
     {
-        // Check command line arguments.
-        if (argc != 4)
+        // Default values of properties.
+        string             host     = "localhost";
+        string             port     = "2222";
+        unsigned short int threads  = 1;
+        Priority::Value    priority = Priority::ALERT;
+
+        // Try to get the properties from the command line.
+        if (argc > 1)
         {
-            cerr << "Usage: XmlRPCServer <address> <port> <threads>\n";
-            cerr << "  For IPv4, try:\n";
-            cerr << "    XmlRPCServer 0.0.0.0 2222 1\n";
-            cerr << "  For IPv6, try:\n";
-            cerr << "    XmlRPCServer 0::0 2222 1\n";
-            return 1;
+            // Check command line arguments.
+            if (argc != 4)
+            {
+                cerr << "Usage with parameters: server <host> <port> <threads>" << endl;
+                cerr << "  For IPv4, try:" << endl;
+                cerr << "    XmlRPCServer 0.0.0.0 2222 1" << endl;
+                cerr << "  For IPv6, try:" << endl;
+                cerr << "    XmlRPCServer 0::0 2222 1" << endl;
+                return 1;
+            }
+
+            // Get the properties.
+            host     = argv[1];
+            port     = argv[2];
+            threads  = lexical_cast<unsigned short int>(argv[3]);
+        }
+        // Try to get the properties from the configuration file.
+        else
+        {
+            // Read properties from a file.
+            // TODO: The server expects to be run from build directory (waf specific).
+            //       The location of a configuration file should be specified.
+            // TODO: Add exception handling here.
+            ptree property_tree;
+            read_xml("../Network/XmlRPCServer/serverconfig.xml", property_tree);
+
+            // Get the properties.
+            // TODO: Add exception handling here.
+            host     = property_tree.get<string>("server.host");
+            port     = property_tree.get<string>("server.port");
+            threads  = property_tree.get<unsigned short int>("server.threads");
+            priority = property_tree.get<Priority::Value>("server.logger.priority");
         }
 
-        // Setting up Appender, Layout and Category.
+        // Set up Appender, Layout and Category.
         Appender * appender = new OstreamAppender("OstreamAppender", &cout);
         PatternLayout * layout = new log4cpp::PatternLayout();
         layout->setConversionPattern("[%p\t][%d{%Y-%d-%m %H:%M:%S,%l}][%r] - %m%n");
         Category & category = Category::getInstance("Category");
-
         appender->setLayout(layout);
         category.setAppender(appender);
-        category.setPriority(Priority::ALERT);
+        category.setPriority(priority);
 
-        // Run server in background thread.
-        size_t num_threads = lexical_cast<size_t>(argv[3]);
-        Server server(argv[1], argv[2], num_threads);
+        // Run the server in a background thread.
+        Server server(host, port, threads);
         thread thread_1(bind(&Server::run, &server));
 
         // Stop the server.
         thread_1.join();
         server.stop();
     }
-    catch (std::exception &e)
+    catch (std::exception & e)
     {
-        Category::getInstance("Category").errorStream() << "Exception: " << e.what();
+        cerr << "Exception: " << e.what() << endl;
+    }
+    catch (...)
+    {
+        cerr << "This should never happen." << endl;
     }
 
     return 0;
