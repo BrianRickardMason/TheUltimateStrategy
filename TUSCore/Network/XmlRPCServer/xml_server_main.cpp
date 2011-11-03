@@ -54,10 +54,11 @@ int main(
     try
     {
         // Default values of properties.
-        string             host     = "localhost";
-        string             port     = "2222";
-        unsigned short int threads  = 1;
-        Priority::Value    priority = Priority::ALERT;
+        string             host        = "localhost";
+        string             port        = "2222";
+        unsigned short int threads     = 1;
+        Priority::Value    priority    = Priority::ALERT;
+        string             persistence = "postgresql";
 
         // Try to get the properties from the command line.
         if (argc > 1)
@@ -90,10 +91,11 @@ int main(
 
             // Get the properties.
             // TODO: Add exception handling here.
-            host     = property_tree.get<string>("server.host");
-            port     = property_tree.get<string>("server.port");
-            threads  = property_tree.get<unsigned short int>("server.threads");
-            priority = property_tree.get<Priority::Value>("server.logger.priority");
+            host        = property_tree.get<string>("server.host");
+            port        = property_tree.get<string>("server.port");
+            threads     = property_tree.get<unsigned short int>("server.threads");
+            priority    = property_tree.get<Priority::Value>("server.logger.priority");
+            persistence = property_tree.get<string>("server.persistence");
         }
 
         // Set up Appender, Layout and Category.

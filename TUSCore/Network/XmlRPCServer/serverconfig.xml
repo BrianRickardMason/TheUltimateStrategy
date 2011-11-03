@@ -17,4 +17,8 @@
         -->
         <priority>100</priority>
     </logger>
+    <!-- persistence
+         postgresql
+    --->
+    <persistence>postgresql</persistence>
 </server>
