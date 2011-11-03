@@ -10,7 +10,7 @@ build
 *.pyc
 
 # Test specific files.
-*.xml
+test_details_*.xml
 
 # Waf specific files.
 .lock*
