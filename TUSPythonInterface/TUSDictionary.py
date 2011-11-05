@@ -6,84 +6,84 @@
 # Command: (REQUEST_ID, {<user></user>}, {<parameters></parameters>}).
 COMMAND_SCHEMAS = {
 # Generic.
-'ECHO'               : ( 1, {                   }, {}),
-'ERROR'              : ( 2, {                   }, {}),
+'ECHO'               : ( 1, [                   ], []),
+'ERROR'              : ( 2, [                   ], []),
 
 # Land.
-'CREATE_LAND'        : ( 3, {'login', 'password'}, {'world_name', 'land_name'}),
-'DELETE_LAND'        : ( 4, {'login', 'password'}, {'land_name'}),
-'GET_LAND'           : ( 5, {'login', 'password'}, {'land_name'}),
-'GET_LANDS'          : ( 6, {'login', 'password'}, {}),
+'CREATE_LAND'        : ( 3, ['login', 'password'], ['world_name', 'land_name']),
+'DELETE_LAND'        : ( 4, ['login', 'password'], ['land_name']),
+'GET_LAND'           : ( 5, ['login', 'password'], ['land_name']),
+'GET_LANDS'          : ( 6, ['login', 'password'], []),
 
 # Settlement.
-'CREATE_SETTLEMENT'  : ( 7, {'login', 'password'}, {'land_name', 'settlement_name'}),
-'DELETE_SETTLEMENT'  : ( 8, {'login', 'password'}, {'settlement_name'}),
-'GET_SETTLEMENT'     : ( 9, {'login', 'password'}, {'settlement_name'}),
-'GET_SETTLEMENTS'    : (10, {'login', 'password'}, {'land_name'}),
+'CREATE_SETTLEMENT'  : ( 7, ['login', 'password'], ['land_name', 'settlement_name']),
+'DELETE_SETTLEMENT'  : ( 8, ['login', 'password'], ['settlement_name']),
+'GET_SETTLEMENT'     : ( 9, ['login', 'password'], ['settlement_name']),
+'GET_SETTLEMENTS'    : (10, ['login', 'password'], ['land_name']),
 
 # Building.
-'BUILD_BUILDING'     : (11, {'login', 'password'}, {'idholderclass',
+'BUILD_BUILDING'     : (11, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
                                                     'idbuildingclass',
                                                     'idbuilding',
-                                                    'volume'}),
-'DESTROY_BUILDING'   : (12, {'login', 'password'}, {'idholderclass',
+                                                    'volume']),
+'DESTROY_BUILDING'   : (12, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
                                                     'idbuildingclass',
                                                     'idbuilding',
-                                                    'volume'}),
-'GET_BUILDING'       : (13, {'login', 'password'}, {'idholderclass', 'holder_name', 'idbuildingclass', 'idbuilding'}),
-'GET_BUILDINGS'      : (14, {'login', 'password'}, {'idholderclass', 'holder_name'}),
+                                                    'volume']),
+'GET_BUILDING'       : (13, ['login', 'password'], ['idholderclass', 'holder_name', 'idbuildingclass', 'idbuilding']),
+'GET_BUILDINGS'      : (14, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # Human.
-'DISMISS_HUMAN'      : (15, {'login', 'password'}, {'idholderclass',
+'DISMISS_HUMAN'      : (15, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
                                                     'idhumanclass',
                                                     'idhuman',
                                                     'experience',
-                                                    'volume'}),
-'ENGAGE_HUMAN'       : (16, {'login', 'password'}, {'idholderclass',
+                                                    'volume']),
+'ENGAGE_HUMAN'       : (16, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
                                                     'idhumanclass',
                                                     'idhuman',
-                                                    'volume'}),
-'GET_HUMAN'          : (17, {'login', 'password'}, {'idholderclass',
+                                                    'volume']),
+'GET_HUMAN'          : (17, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
                                                     'idhumanclass',
                                                     'idhuman',
-                                                    'experience'}),
-'GET_HUMANS'         : (18, {'login', 'password'}, {'idholderclass', 'holder_name'}),
+                                                    'experience']),
+'GET_HUMANS'         : (18, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # Resource.
-'GET_RESOURCE'       : (19, {'login', 'password'}, {'idholderclass', 'holder_name', 'idresource'}),
-'GET_RESOURCES'      : (20, {'login', 'password'}, {'idholderclass', 'holder_name'}),
+'GET_RESOURCE'       : (19, ['login', 'password'], ['idholderclass', 'holder_name', 'idresource']),
+'GET_RESOURCES'      : (20, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # User.
-'CREATE_USER'        : (21, {                   }, {'login', 'password'}),
+'CREATE_USER'        : (21, [                   ], ['login', 'password']),
 
 # World.
-'CREATE_WORLD'       : (22, {'login', 'password'}, {'world_name'}),
+'CREATE_WORLD'       : (22, ['login', 'password'], ['world_name']),
 
 # Epoch
-'CREATE_EPOCH'       : (23, {'login', 'password'}, {'world_name'}),
-'DELETE_EPOCH'       : (24, {'login', 'password'}, {'world_name'}),
-'ACTIVATE_EPOCH'     : (25, {'login', 'password'}, {'world_name'}),
-'DEACTIVATE_EPOCH'   : (26, {'login', 'password'}, {'world_name'}),
-'FINISH_EPOCH'       : (27, {'login', 'password'}, {'world_name'}),
-'TICK_EPOCH'         : (28, {'login', 'password'}, {'world_name'}),
-'GET_EPOCH'          : (29, {'login', 'password'}, {'world_name'}),
+'CREATE_EPOCH'       : (23, ['login', 'password'], ['world_name']),
+'DELETE_EPOCH'       : (24, ['login', 'password'], ['world_name']),
+'ACTIVATE_EPOCH'     : (25, ['login', 'password'], ['world_name']),
+'DEACTIVATE_EPOCH'   : (26, ['login', 'password'], ['world_name']),
+'FINISH_EPOCH'       : (27, ['login', 'password'], ['world_name']),
+'TICK_EPOCH'         : (28, ['login', 'password'], ['world_name']),
+'GET_EPOCH'          : (29, ['login', 'password'], ['world_name']),
 
 # Transport.
-'TRANSPORT_HUMAN'    : (30, {'login', 'password'}, {'settlement_name_source',
+'TRANSPORT_HUMAN'    : (30, ['login', 'password'], ['settlement_name_source',
                                                     'settlement_name_destination',
                                                     'idhumanclass',
                                                     'idhuman',
                                                     'experience',
-                                                    'volume'}),
-'TRANSPORT_RESOURCE' : (31, {'login', 'password'}, {'settlement_name_source',
+                                                    'volume']),
+'TRANSPORT_RESOURCE' : (31, ['login', 'password'], ['settlement_name_source',
                                                     'settlement_name_destination',
                                                     'idresource',
-                                                    'volume'}),
+                                                    'volume']),
 }
 
 # A complete list of available statuses with their identifiers.
