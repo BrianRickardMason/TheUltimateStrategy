@@ -1,10 +1,10 @@
-# Name: TUSlang.py
-# Description: Holds the language specification - dictionaries of available commands.
+# Name: TUSDictionary.py
+# Description: Holds the language dictionary.
 # Author: Lukasz Czarnecki, Marcin Skrobiranda.
 
 # A complete list of available commands with their identifiers and a description of <user> and <parameter> blocks.
 # Command: (REQUEST_ID, {<user></user>}, {<parameters></parameters>}).
-commands = {
+COMMAND_SCHEMAS = {
 # Generic.
 'ECHO'               : ( 1, {                   }, {}),
 'ERROR'              : ( 2, {                   }, {}),
@@ -87,7 +87,8 @@ commands = {
 }
 
 # A complete list of available statuses with their identifiers.
-statuses = {
+# TODO: Consider moving away from here.
+REPLY_STATUSES = {
  1 : 'REPLY_STATUS_SERVER_IS_NOT_LISTENING',
  2 : 'REPLY_STATUS_INVALID_REQUEST',
  3 : 'REPLY_STATUS_INVALID_RANGE',
