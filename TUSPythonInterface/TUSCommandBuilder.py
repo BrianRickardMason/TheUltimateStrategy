@@ -46,6 +46,10 @@ class CommandBuilder:
             command.appendChild(request)
             request.setAttribute("id", repr(command_schema[0]))
 
+            # TODO: Temporary here, until ExecutorEcho will not need parameters.
+            parameters = command.createElement("parameters")
+            request.appendChild(parameters)
+
             if command_schema[1]:
                 if len(command_schema[1]) != len(a_user_values):
                     raise CommandBuilderException()
@@ -64,9 +68,6 @@ class CommandBuilder:
             if command_schema[2]:
                 if len(command_schema[2]) != len(a_parameters_values):
                     raise CommandBuilderException()
-
-                parameters = command.createElement("parameters")
-                request.appendChild(parameters)
 
                 for (name, value) in zip(command_schema[2], a_parameters_values):
                     element = command.createElement(name)
