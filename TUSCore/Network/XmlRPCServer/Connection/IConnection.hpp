@@ -44,6 +44,8 @@ class IConnection
     : boost::noncopyable
 {
 public:
+    virtual ~IConnection(){}
+
     /**
      * @brief Gets the socket associated with the connection.
      *
@@ -55,16 +57,10 @@ public:
      * @brief Starts the first asynchronous operation for the connection.
      */
     virtual void start() = 0;
-
-protected:
-     /**
-      * @brief Destructs the connection.
-      */
-    virtual ~IConnection(){}
 };
 
 /**
- * @brief A shared pointer of the interface of a connection.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IConnection> IConnectionShrPtr;
 
