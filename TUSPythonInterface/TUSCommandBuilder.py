@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name: TUSCommandBuilder.py
 # Description: Holds the command builder - the provider of xml formatted commands.
 # Author: Marcin Skrobiranda.

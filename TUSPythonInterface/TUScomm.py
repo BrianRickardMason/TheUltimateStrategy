@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 #Name: TUScomm.py
 #Description: Handles communication between UI/BI and The Ultimate Strategy
 #Author: Lukasz Czarnecki
