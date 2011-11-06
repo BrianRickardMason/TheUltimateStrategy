@@ -69,7 +69,7 @@ private:
         try
         {
             // Clean tables.
-            backbone_transaction.exec("DELETE FROM users");
+            backbone_transaction.exec("DELETE FROM users WHERE moderator = false");
             backbone_transaction.exec("DELETE FROM worlds");
 
             transaction->commit();

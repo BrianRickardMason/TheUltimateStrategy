@@ -85,13 +85,8 @@ private:
         try
         {
             // Clean tables.
-            backbone_transaction.exec("DELETE FROM users");
+            backbone_transaction.exec("DELETE FROM users WHERE moderator = false");
             backbone_transaction.exec("DELETE FROM worlds");
-
-            // Insert the modbot.
-            backbone_transaction.exec(
-                "INSERT INTO users(login, password, moderator) VALUES('modbot', 'modbotpass', true)"
-            );
 
             transaction->commit();
 

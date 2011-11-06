@@ -122,7 +122,7 @@ private:
         try
         {
             // Clean tables.
-            backbone_transaction.exec("DELETE FROM users");
+            backbone_transaction.exec("DELETE FROM users WHERE moderator = false");
             backbone_transaction.exec("DELETE FROM worlds");
 
             // FIXME: Temporary workaround until ExecutorCreateWorld is available.
@@ -139,11 +139,6 @@ private:
             backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World1'");
             backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World2'");
             backbone_transaction.exec("UPDATE epochs set active = true WHERE world_name = 'World3'");
-
-            // Insert the modbot.
-            backbone_transaction.exec(
-                "INSERT INTO users(login, password, moderator) VALUES('modbot', 'modbotpass', true)"
-            );
 
             transaction->commit();
 
