@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name: TUSDictionary.py
 # Description: Holds the language dictionary.
 # Author: Lukasz Czarnecki, Marcin Skrobiranda.
@@ -65,7 +67,7 @@ COMMAND_SCHEMAS = {
 'CREATE_WORLD'       : (22, ['login', 'password'], ['world_name']),
 
 # Epoch
-'CREATE_EPOCH'       : (23, ['login', 'password'], ['world_name']),
+'CREATE_EPOCH'       : (23, ['login', 'password'], ['world_name', 'epoch_name']),
 'DELETE_EPOCH'       : (24, ['login', 'password'], ['world_name']),
 'ACTIVATE_EPOCH'     : (25, ['login', 'password'], ['world_name']),
 'DEACTIVATE_EPOCH'   : (26, ['login', 'password'], ['world_name']),
