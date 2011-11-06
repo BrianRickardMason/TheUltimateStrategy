@@ -90,7 +90,10 @@ TickEpochOperatorExitCode TickEpochOperator::tickEpoch(
 
         bool const result_achievement = m_achievement_manager->grantAchievements(a_transaction, world);
 
-        return (result_turn and result_achievement)
+        // TODO: Change the interface (transaction, world).
+        bool const result_tick = m_epoch_persistence_facade->tickEpoch(a_transaction, world->getWorldName());
+
+        return (result_turn and result_achievement and result_tick)
                    ? TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_TACK)
                    : TickEpochOperatorExitCode(TICK_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_TACK);
     }
