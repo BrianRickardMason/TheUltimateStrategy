@@ -216,6 +216,7 @@ bool TurnManager::executeTurnSettlement(
     }
 
     // Experience.
+    // TODO: Only if not poverty.
     {
         HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
@@ -261,6 +262,8 @@ bool TurnManager::executeTurnSettlement(
     }
 
     // Reproduce.
+    // TODO: Before experience.
+    // TODO: Only if not famine.
     {
         HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
