@@ -11,20 +11,37 @@ import TUSInterface
 
 from time import sleep
 
-# Define "constants".
+# Define bot specific "constants".
 MODBOT_LOGIN = "modbot"
 MODBOT_PASSWORD = "modbotpass"
+
+# Define tournament specific "constants".
+NUMBER_OF_EPOCHS = 10
+NUMBER_OF_TICKS = 10
+SLEEP_BETWEEN_TICKS = 20
+
+# Define names.
 WORLD_NAME = "World"
 EPOCH_NAME = "Epoch"
 
 interface = TUSInterface.TUSInterface()
 
+# Create the world.
 interface.createWorld(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-interface.createEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME, EPOCH_NAME)
-interface.activateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
 
-while 1:
-    sleep(60)
-    interface.deactivateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-    interface.tickEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+# Control the tournament of X epochs.
+for epoch in range(NUMBER_OF_EPOCHS):
+    epoch_name = EPOCH_NAME + repr(epoch)
+    interface.createEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME, epoch_name)
     interface.activateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+
+    # Control the epoch of X ticks.
+    for tick in range(NUMBER_OF_TICKS):
+        sleep(SLEEP_BETWEEN_TICKS)
+        interface.deactivateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+        interface.tickEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+        interface.activateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+
+    interface.deactivateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+    interface.finishEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+    interface.deleteEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
