@@ -77,7 +77,7 @@ class CommandBuilder:
                     element.setAttribute("value", value)
 
             # Return a newly created command in human readable format.
-            return command.toprettyxml(indent="    ")
+            return command.toprettyxml(indent = "    ")
 
         except:
             raise CommandBuilderException()
