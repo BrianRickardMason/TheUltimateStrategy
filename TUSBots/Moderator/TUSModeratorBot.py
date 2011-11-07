@@ -11,14 +11,20 @@ import TUSInterface
 
 from time import sleep
 
+# Define "constants".
+MODBOT_LOGIN = "modbot"
+MODBOT_PASSWORD = "modbotpass"
+WORLD_NAME = "World"
+EPOCH_NAME = "Epoch"
+
 interface = TUSInterface.TUSInterface()
 
-interface.createWorld("modbot", "modbotpass", "World")
-interface.createEpoch("modbot", "modbotpass", "World", "Epoch")
-interface.activateEpoch("modbot", "modbotpass", "World")
+interface.createWorld(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+interface.createEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME, EPOCH_NAME)
+interface.activateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
 
 while 1:
     sleep(60)
-    interface.deactivateEpoch("modbot", "modbotpass", "World")
-    interface.tickEpoch("modbot", "modbotpass", "World")
-    interface.activateEpoch("modbot", "modbotpass", "World")
+    interface.deactivateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+    interface.tickEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+    interface.activateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
