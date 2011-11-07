@@ -18,34 +18,42 @@ class TUSInterface():
 
     def createWorld(self, a_login, a_password, a_world_name):
         command = self.m_command_builder.build("CREATE_WORLD", [a_login, a_password], [a_world_name])
+        print("CREATE_WORLD(" + a_login + ", " + a_password + ", " + a_world_name + ")")
         self.__send(command)
 
     def createEpoch(self, a_login, a_password, a_world_name, a_epoch_name):
         command = self.m_command_builder.build("CREATE_EPOCH", [a_login, a_password], [a_world_name, a_epoch_name])
+        print("CREATE_EPOCH(" + a_login + ", " + a_password + ", " + a_world_name + ", " + a_epoch_name + ")")
         self.__send(command)
 
     def deleteEpoch(self, a_login, a_password, a_world_name):
         command = self.m_command_builder.build("DELETE_EPOCH", [a_login, a_password], [a_world_name])
+        print("DELETE_EPOCH(" + a_login + ", " + a_password + ", " + a_world_name + ")")
         self.__send(command)
 
     def activateEpoch(self, a_login, a_password, a_world_name):
         command = self.m_command_builder.build("ACTIVATE_EPOCH", [a_login, a_password], [a_world_name])
+        print("ACTIVATE_EPOCH(" + a_login + ", " + a_password + ", " + a_world_name + ")")
         self.__send(command)
 
     def deactivateEpoch(self, a_login, a_password, a_world_name):
         command = self.m_command_builder.build("DEACTIVATE_EPOCH", [a_login, a_password], [a_world_name])
+        print("DEACTIVATE_EPOCH(" + a_login + ", " + a_password + ", " + a_world_name + ")")
         self.__send(command)
 
     def finishEpoch(self, a_login, a_password, a_world_name):
         command = self.m_command_builder.build("FINISH_EPOCH", [a_login, a_password], [a_world_name])
+        print("FINISH_EPOCH(" + a_login + ", " + a_password + ", " + a_world_name + ")")
         self.__send(command)
 
     def tickEpoch(self, a_login, a_password, a_world_name):
         command = self.m_command_builder.build("TICK_EPOCH", [a_login, a_password], [a_world_name])
+        print("TICK_EPOCH(" + a_login + ", " + a_password + ", " + a_world_name + ")")
         self.__send(command)
 
     def getEpoch(self, a_login, a_password, a_world_name):
         command = self.m_command_builder.build("GET_EPOCH", [a_login, a_password], [a_world_name])
+        print("GET_EPOCH(" + a_login + ", " + a_password + ", " + a_world_name + ")")
         self.__send(command)
 
     def __send(self, a_command):
