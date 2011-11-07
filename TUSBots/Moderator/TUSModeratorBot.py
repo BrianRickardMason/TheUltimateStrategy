@@ -27,6 +27,7 @@ EPOCH_NAME = "Epoch"
 interface = TUSInterface.TUSInterface()
 
 # Create the world.
+# TODO: Delete the world is needed to be bullet proof.
 interface.createWorld(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
 
 # Control the tournament of X epochs.
