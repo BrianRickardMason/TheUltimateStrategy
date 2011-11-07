@@ -9,7 +9,7 @@
 COMMAND_SCHEMAS = {
 # Generic.
 'ECHO'               : ( 1, [                   ], []),
-'ERROR'              : ( 2, [                   ], []),
+'ERROR'              : ( 2, [                   ], []), # Well... actually this one should never be executed.
 
 # Land.
 'CREATE_LAND'        : ( 3, ['login', 'password'], ['world_name', 'land_name']),

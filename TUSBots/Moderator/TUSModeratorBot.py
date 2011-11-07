@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Name: TUSModeratorBot.py
-# Description: A moderator bot.
+# Description: "Moderator" bot.
 # Author: Marcin Skrobiranda.
 
 import sys
@@ -17,7 +17,7 @@ MODBOT_PASSWORD = "modbotpass"
 
 # Define tournament specific "constants".
 NUMBER_OF_EPOCHS = 10
-NUMBER_OF_TICKS = 10
+NUMBER_OF_TICKS = 100
 SLEEP_BETWEEN_TICKS = 20
 
 # Define names.
