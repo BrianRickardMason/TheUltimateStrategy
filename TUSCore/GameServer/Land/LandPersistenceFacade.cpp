@@ -81,6 +81,23 @@ bool LandPersistenceFacade::deleteLand(
     }
 }
 
+bool LandPersistenceFacade::deleteLands(
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
+) const
+{
+    try
+    {
+        m_accessor->deleteRecords(a_transaction, a_world_name);
+
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
+}
+
 ILandShrPtr LandPersistenceFacade::getLand(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name

@@ -78,6 +78,19 @@ public:
     ) const = 0;
 
     /**
+     * @brief Deletes lands.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world_name  The name of the world.
+     *
+     * @return True on success, false otherwise.
+     */
+    virtual bool deleteLands(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_world_name
+    ) const = 0;
+
+    /**
      * @brief Gets a land.
      *
      * @param a_transaction The transaction.
