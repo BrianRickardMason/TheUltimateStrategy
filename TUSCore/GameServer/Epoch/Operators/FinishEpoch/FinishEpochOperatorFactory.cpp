@@ -40,6 +40,7 @@ FinishEpochOperatorAutPtr FinishEpochOperatorFactory::createFinishEpochOperator(
 {
     return FinishEpochOperatorAutPtr(
                new FinishEpochOperator(a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
+                                       a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
                                        a_persistence_facade_abstract_factory->createWorldPersistenceFacade())
            );
 }

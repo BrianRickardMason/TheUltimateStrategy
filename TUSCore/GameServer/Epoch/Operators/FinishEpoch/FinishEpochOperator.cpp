@@ -27,6 +27,7 @@
 
 #include "FinishEpochOperator.hpp"
 
+using namespace GameServer::Land;
 using namespace GameServer::Persistence;
 using namespace GameServer::World;
 using namespace std;
@@ -38,9 +39,11 @@ namespace Epoch
 
 FinishEpochOperator::FinishEpochOperator(
     IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
+    ILandPersistenceFacadeShrPtr  a_land_persistence_facade,
     IWorldPersistenceFacadeShrPtr a_world_persistence_facade
 )
     : m_epoch_persistence_facade(a_epoch_persistence_facade),
+      m_land_persistence_facade(a_land_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade)
 {
 }
@@ -78,10 +81,13 @@ FinishEpochOperatorExitCode FinishEpochOperator::finishEpoch(
             return FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_IS_ACTIVE);
         }
 
-        bool const result = m_epoch_persistence_facade->finishEpoch(a_transaction, a_world_name);
+        bool const result_delete_lands = m_land_persistence_facade->deleteLands(a_transaction, a_world_name);
 
-        return (result) ? FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_FINISHED)
-                        : FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_FINISHED);
+        bool const result_finish_epoch = m_epoch_persistence_facade->finishEpoch(a_transaction, a_world_name);
+
+        return (result_delete_lands and result_finish_epoch)
+               ? FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_FINISHED)
+               : FinishEpochOperatorExitCode(FINISH_EPOCH_OPERATOR_EXIT_CODE_EPOCH_HAS_NOT_BEEN_FINISHED);
     }
     catch (...)
     {

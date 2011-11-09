@@ -28,9 +28,10 @@
 #ifndef GAMESERVER_EPOCH_FINISHEPOCHOPERATOR_HPP
 #define GAMESERVER_EPOCH_FINISHEPOCHOPERATOR_HPP
 
-#include "../../../World/IWorldPersistenceFacade.hpp"
-#include "../../IEpochPersistenceFacade.hpp"
-#include "IFinishEpochOperator.hpp"
+#include <GameServer/Epoch/IEpochPersistenceFacade.hpp>
+#include <GameServer/Epoch/Operators/FinishEpoch/IFinishEpochOperator.hpp>
+#include <GameServer/Land/ILandPersistenceFacade.hpp>
+#include <GameServer/World/IWorldPersistenceFacade.hpp>
 
 namespace GameServer
 {
@@ -48,10 +49,12 @@ public:
      * @brief Constructs the operator.
      *
      * @param a_epoch_persistence_facade The persistence facade of epochs.
+     * @param a_land_persistence_facade  The persistence facade of lands.
      * @param a_world_persistence_facade The persistence facade of worlds.
      */
     FinishEpochOperator(
         IEpochPersistenceFacadeShrPtr        a_epoch_persistence_facade,
+        Land::ILandPersistenceFacadeShrPtr   a_land_persistence_facade,
         World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
     );
 
@@ -69,19 +72,19 @@ public:
     ) const;
 
 private:
-    /**
-     * @brief The persistence facade of epochs.
-     */
-    IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
 
+    //@{
     /**
-     * @brief The persistence facade of worlds.
+     * @brief A persistence facade.
      */
+    IEpochPersistenceFacadeShrPtr        m_epoch_persistence_facade;
+    Land::ILandPersistenceFacadeShrPtr   m_land_persistence_facade;
     World::IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
+    //}@
 };
 
 /**
- * @brief The auto pointer of FinishEpochOperator.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<FinishEpochOperator> FinishEpochOperatorAutPtr;
 
