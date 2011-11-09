@@ -70,6 +70,20 @@ void LandAccessorPostgresql::deleteRecord(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
+void LandAccessorPostgresql::deleteRecords(
+    ITransactionShrPtr       a_transaction,
+    string             const a_world_name
+) const
+{
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+
+    string query = "DELETE FROM lands WHERE world_name = "
+                   + backbone_transaction.quote(a_world_name);
+
+    pqxx::result result = backbone_transaction.exec(query);
+}
+
 ILandRecordShrPtr LandAccessorPostgresql::getRecord(
     ITransactionShrPtr       a_transaction,
     string             const a_land_name

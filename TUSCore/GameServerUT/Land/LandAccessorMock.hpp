@@ -76,6 +76,20 @@ public:
     );
 
     /**
+     * @brief Deletes records of the lands.
+     *
+     * @param a_transaction The transaction.
+     * @param a_world_name  The name of the world.
+     */
+    MOCK_CONST_METHOD2(
+        deleteRecords,
+        void(
+            Persistence::ITransactionShrPtr       a_transaction,
+            std::string                     const a_world_name
+        )
+    );
+
+    /**
      * @brief Gets a record of the land.
      *
      * @param a_transaction The transaction.
