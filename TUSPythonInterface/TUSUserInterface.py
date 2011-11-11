@@ -63,8 +63,8 @@ class TUSUserInterface(TUSInterface):
     def getSettlement(self, aSettlementName):
         return TUSInterface.getSettlement( self, self.mUser, self.mPassword, aSettlementName)
 
-    def getSettlements(self, aLandName, aSettlementName):
-        return TUSInterface.getSettlements( self, self.mUser, self.mPassword, aLandName, aSettlementName)
+    def getSettlements(self, aLandName):
+        return TUSInterface.getSettlements( self, self.mUser, self.mPassword, aLandName)
 
     def buildBuilding(self,
             aIdHolderClass, aHolderName, aIdBuildingClass, aIdBuilding, aVolume):
@@ -95,15 +95,15 @@ class TUSUserInterface(TUSInterface):
             aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aVolume)
 
     def getHuman(self,
-            aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman):
+            aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aExperience):
         return TUSInterface.getHuman( self, self.mUser, self.mPassword, 
-            aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman)
+            aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aExperience)
 
     def getHumans(self, aIdHolderClass, aHolderName):
         return TUSInterface.getHumans( self, self.mUser, self.mPassword, aIdHolderClass, aHolderName)
 
     def getResource(self, aIdHolderClass, aHolderName, aIdResource):
-        return TUSInterface.getResource( self, self.mUser, self.mPassword, aHolderName, aIdResource)
+        return TUSInterface.getResource( self, self.mUser, self.mPassword, aIdHolderClass, aHolderName, aIdResource)
 
     def getResources(self, aIdHolderClass, aHolderName):
         return TUSInterface.getResources( self, self.mUser, self.mPassword, aIdHolderClass, aHolderName)

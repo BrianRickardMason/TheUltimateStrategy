@@ -92,7 +92,7 @@ class TUSInterface():
         command = self.m_command_builder.build("GET_SETTLEMENT", [a_login, a_password], [a_settlement_name])
         return self.__send(command)
 
-    def getSettlements(self, a_login, a_password, a_land_name, a_settlement_name):
+    def getSettlements(self, a_login, a_password, a_land_name):
         command = self.m_command_builder.build("GET_SETTLEMENTS", [a_login, a_password], [a_land_name])
         return self.__send(command)
 
@@ -194,10 +194,11 @@ class TUSInterface():
                  a_id_holder_class,
                  a_holder_name,
                  a_id_human_class,
-                 a_id_human):
+                 a_id_human,
+                 a_experience):
         command = self.m_command_builder.build("GET_HUMAN",
                                                [a_login, a_password],
-                                               [a_id_holder_class, a_holder_name, a_id_human_class, a_id_human])
+                                               [a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_experience])
         return self.__send(command)
 
     def getHumans(self,
