@@ -64,7 +64,7 @@ class CommLink:
         reply = str(reply, 'UTF-8')
         try:
             document = xml.dom.minidom.parseString(reply)
-            return document.toprettyxml(indent="    ")
+            return document
         except xml.parsers.expat.ExpatError:
             raise CommLinkFailure('validation_reply', reply)
 

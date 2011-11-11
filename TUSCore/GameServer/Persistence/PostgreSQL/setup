@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DB_USR=$1
+DB_NAME='stronghold'
+
+if [ "$DB_USR" == "" ] ; then
+	DB_USR=${USER}
+fi
+
+psql -U "${DB_USR}" -f CreateDatabase.sql
+psql -U "${DB_USR}" -d "${DB_NAME}" -f CreateTables.sql 
+psql -U "${DB_USR}" -d "${DB_NAME}" -f InsertInitialData.sql
+
