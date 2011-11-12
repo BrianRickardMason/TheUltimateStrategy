@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SLOC=`readlink -f $0`
+SDIR=`dirname $SLOC`
+
 DB_USR=$1
 DB_NAME='stronghold'
 
@@ -7,7 +10,7 @@ if [ "$DB_USR" == "" ] ; then
 	DB_USR=${USER}
 fi
 
-psql -U "${DB_USR}" -f CreateDatabase.sql
-psql -U "${DB_USR}" -d "${DB_NAME}" -f CreateTables.sql 
-psql -U "${DB_USR}" -d "${DB_NAME}" -f InsertInitialData.sql
+psql -U "${DB_USR}" -f "${SDIR}/CreateDatabase.sql"
+psql -U "${DB_USR}" -d "${DB_NAME}" -f "${SDIR}/CreateTables.sql"
+psql -U "${DB_USR}" -d "${DB_NAME}" -f "${SDIR}/InsertInitialData.sql"
 

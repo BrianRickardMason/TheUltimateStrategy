@@ -16,9 +16,9 @@ MODBOT_LOGIN = "modbot"
 MODBOT_PASSWORD = "modbotpass"
 
 # Define tournament specific "constants".
-NUMBER_OF_EPOCHS = 10
-NUMBER_OF_TICKS = 100
-SLEEP_BETWEEN_TICKS = 20
+NUMBER_OF_EPOCHS = 1
+NUMBER_OF_TICKS = 20
+SLEEP_BETWEEN_TICKS = 3
 
 # Define names.
 WORLD_NAME = "World"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export PATH=${PATH}:"../TUSPythonInterface:./Moderator"
+export PYTHONPATH=${PATH}
+
+./Moderator/TUSModeratorBot.py &
+sleep 1
+./BTeeBot/BTeeBot.py
+

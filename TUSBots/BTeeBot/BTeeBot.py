@@ -6,9 +6,11 @@
 
 import sys
 sys.path.append("../../TUSPythonInterface")
+sys.path.append("../Moderator")
 
 from TUSUserInterface import *
 from TUSDictionary import *
+
 from time import sleep
 
 def removeWsNodes(dom):
@@ -46,6 +48,11 @@ def extract(tags, elements):
             item[tag] = obj.getElementsByTagName(tag)[0].getAttribute('value')
         ret.append(item)
     return ret
+
+# synchronize with modbot, TODO better way
+NUMBER_OF_EPOCHS = 1
+NUMBER_OF_TICKS = 20
+SLEEP_BETWEEN_TICKS = 3
     
 # Define bot specific "constants".
 LOGIN = "btee"
@@ -55,7 +62,9 @@ interface = TUSUserInterface(LOGIN, PASSWORD)
 # Define names.
 WORLD_NAME = "World"
 LAND_NAME = "BTee Land"
+TICK_LEN = 20
 SETTLEMENT_NAME = "BTee Settlement"
+SETTLEMENT_CLASS = "1" # ????
 
 print ("Creating user") 
 
@@ -72,7 +81,7 @@ printResponse(ret)
 
 print ("Engaging human?") 
 # aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aVolume
-ret = interface.engageHuman("1", SETTLEMENT_NAME, "4", "2", "10")
+ret = interface.engageHuman("1", SETTLEMENT_NAME, "1", "1", "10")
 printResponse(ret)
 
 print( "Building...")
@@ -102,12 +111,11 @@ for land in lands:
     
     land['_sites'] = sites
     
-    site_class = "1" # ????
     for site in sites:
         ret = interface.getSettlement( site['settlement_name'] )
         printResponse(ret)
         
-        ret = interface.getHumans( site_class, site['settlement_name'])
+        ret = interface.getHumans( SETTLEMENT_CLASS, site['settlement_name'])
         printResponse(ret);
         humans = extract(HUMAN, ret.getElementsByTagName('object'))
         
@@ -115,10 +123,10 @@ for land in lands:
         
         for h in humans:
             ret = interface.getHuman( 
-                site_class, site['settlement_name'], h['idhumanclass'], h['idhuman'], h['experience'] )
+                SETTLEMENT_CLASS, site['settlement_name'], h['idhumanclass'], h['idhuman'], h['experience'] )
             printResponse(ret)
         
-        ret = interface.getBuildings( site_class, site['settlement_name'])
+        ret = interface.getBuildings( SETTLEMENT_CLASS, site['settlement_name'])
         printResponse(ret)
         buildings = extract(BUILDING, ret.getElementsByTagName('object'));
         
@@ -126,10 +134,10 @@ for land in lands:
         
         for b in buildings:
             ret = interface.getBuilding( 
-                site_class, site['settlement_name'], b['idbuildingclass'], b['idbuilding'] )
+                SETTLEMENT_CLASS, site['settlement_name'], b['idbuildingclass'], b['idbuilding'] )
             printResponse(ret)
         
-        ret = interface.getResources( site_class, site['settlement_name'] )
+        ret = interface.getResources( SETTLEMENT_CLASS, site['settlement_name'] )
         printResponse(ret)
         resources = extract(RESOURCE, ret.getElementsByTagName('object'))
         
@@ -137,7 +145,7 @@ for land in lands:
         
         for r in resources:
             ret = interface.getResource( 
-                site_class, site['settlement_name'], r['idresource'] )
+                SETTLEMENT_CLASS, site['settlement_name'], r['idresource'] )
             printResponse(ret)
 
 
@@ -147,3 +155,47 @@ pprint( lands, indent=4)
 
 print( "What now?") 
 
+def pRVec(aList,aName):
+    s = ""
+    s += aName + " <- c("
+    first = True
+    for el in aList:
+        if not first:
+            s += ", "
+        else :
+            first = False
+        s += str(el)
+    s += ")"
+    return s
+
+print( pRVec([1,2,3],"test"))
+
+rSize = 7
+rList = []
+for i in range(rSize):
+    rList.append([])
+
+hExp = []
+hVol = []
+
+for iEpoch in range(NUMBER_OF_EPOCHS):
+    for iTick in range(NUMBER_OF_TICKS):
+        print(iTick)
+        ret = interface.getResources( SETTLEMENT_CLASS, SETTLEMENT_NAME )
+        res = extract(RESOURCE, ret.getElementsByTagName('object'));
+        for r in res:
+            rList[( int(r['idresource']) -1)].append( int(r['volume']) )
+        print( res)
+        
+        ret = interface.getHumans( SETTLEMENT_CLASS, SETTLEMENT_NAME)
+        hum = extract(HUMAN, ret.getElementsByTagName('object'))
+        if(hum):
+            hVol.append( int( hum[0]['volume']) )
+            hExp.append( int( hum[0]['experience']) )
+        
+        sleep(SLEEP_BETWEEN_TICKS)
+
+for r in range(rSize):
+    print( pRVec( rList[r], "res"+str(r)) + ";")
+print(pRVec( hExp, "hExp") + ";")
+print(pRVec( hVol, "hVol") + ";")
