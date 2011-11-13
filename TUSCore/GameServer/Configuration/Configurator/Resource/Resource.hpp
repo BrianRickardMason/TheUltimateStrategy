@@ -25,47 +25,61 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_IDRESOURCE_HPP
-#define GAMESERVER_RESOURCE_IDRESOURCE_HPP
+#ifndef GAMESERVER_CONFIGURATION_RESOURCE_HPP
+#define GAMESERVER_CONFIGURATION_RESOURCE_HPP
 
-#include "../Common/ConstrainedValue.hpp"
+#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 
 namespace GameServer
 {
-namespace Resource
+namespace Configuration
 {
 
 /**
- * @brief The fake type class to declare IDResource.
+ * @brief Resource.
  */
-class TIDResource
+class Resource
+    : public IResource
 {
+public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_key  The key of the resource.
+     * @param a_name The name of the resource.
+     */
+    Resource(
+        IResourceKey const a_key,
+        std::string  const a_name
+    );
+
+    /**
+     * @brief Gets the key of the resource.
+     *
+     * @return The key of the resource.
+     */
+    virtual IResourceKey getKey() const;
+
+    /**
+     * @brief Gets the name of the resource.
+     *
+     * @return The name of the resource.
+     */
+    virtual std::string getName() const;
+
+private:
+    /**
+     * @brief The key of the resource.
+     */
+    IResourceKey const m_key;
+
+    /**
+     * @brief The name of the resource.
+     */
+    std::string const m_name;
 };
 
-/**
- * @brief The identifier of a resource.
- */
-typedef Common::ConstrainedValue<TIDResource, Common::RangedUnsignedShortIntPolicy<1, 7> > IDResource;
-
-/**
- * @brief Available identifiers of a resource.
- */
-const IDResource ID_RESOURCE_COAL(1);
-const IDResource ID_RESOURCE_FOOD(2);
-const IDResource ID_RESOURCE_GOLD(3);
-const IDResource ID_RESOURCE_IRON(4);
-const IDResource ID_RESOURCE_MANA(5);
-const IDResource ID_RESOURCE_ROCK(6);
-const IDResource ID_RESOURCE_WOOD(7);
-
-/**
- * @brief The number of resource types.
- *
- * TODO: Will be replaced by RESOURCE_VEC.sizeof.
- */
-const unsigned short int NUMBER_OF_RESOURCE_TYPES = 7;
-
-} // namespace Resource
+} // namespace Configuration
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_IDRESOURCE_HPP
+#endif // GAMESERVER_CONFIGURATION_RESOURCE_HPP

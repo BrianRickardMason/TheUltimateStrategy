@@ -26,8 +26,11 @@
 // SUCH DAMAGE.
 
 #include "ResourceSet.hpp"
-
+#include <GameServer/Configuration/Configurator/Resource/ConfiguratorResource.hpp>
+#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <boost/make_shared.hpp>
+
+//extern GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
 
 using namespace boost;
 using namespace std;
@@ -39,12 +42,18 @@ namespace Resource
 
 ResourceSet::ResourceSet()
 {
-    for (ResourceVec::const_iterator it = RESOURCE_VEC.begin(); it != RESOURCE_VEC.end(); ++it)
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    for (std::map<std::string, GameServer::Configuration::IResourceShrPtr>::const_iterator it = resources.begin();
+         it != resources.end();
+         ++it)
     {
-        m_map.insert(make_pair((*it).getKey(), make_shared<ResourceWithVolume>((*it).getKey(), 0)));
+        m_map.insert(make_pair(it->second->getKey(), make_shared<ResourceWithVolume>(it->second->getKey(), 0)));
     }
 
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    BOOST_ASSERT(m_map.size() == resources.size());
 }
 
 ResourceSet::ResourceSet(
@@ -52,19 +61,25 @@ ResourceSet::ResourceSet(
 )
     : m_map(a_resource_with_volume_map)
 {
-    for (ResourceVec::const_iterator it = RESOURCE_VEC.begin(); it != RESOURCE_VEC.end(); ++it)
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    for (std::map<std::string, GameServer::Configuration::IResourceShrPtr>::const_iterator it = resources.begin();
+         it != resources.end();
+         ++it)
     {
         try
         {
-            m_map.at((*it).getKey());
+            m_map.at(it->second->getKey());
         }
         catch (out_of_range const &)
         {
-            m_map.insert(make_pair((*it).getKey(), make_shared<ResourceWithVolume>((*it).getKey(), 0)));
+            m_map.insert(make_pair(it->second->getKey(), make_shared<ResourceWithVolume>(it->second->getKey(), 0)));
         }
     }
 
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    BOOST_ASSERT(m_map.size() == resources.size());
 }
 
 ResourceSet::ResourceSet(
@@ -72,14 +87,22 @@ ResourceSet::ResourceSet(
 )
     : m_map(a_rhs.m_map)
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 }
 
 ResourceSet const ResourceSet::operator +(
     ResourceSet const & a_rhs
 ) const
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 
     return ResourceSet(*this) += a_rhs;
 }
@@ -88,7 +111,11 @@ ResourceSet const ResourceSet::operator *(
     unsigned int const a_factor
 ) const
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 
     return ResourceSet(*this) *= a_factor;
 }
@@ -97,7 +124,11 @@ bool ResourceSet::operator ==(
     ResourceSet const & a_rhs
 ) const
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 
     for (ResourceWithVolumeMap::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
     {
@@ -114,7 +145,11 @@ bool ResourceSet::operator >=(
     ResourceSet const & a_rhs
 ) const
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 
     for (ResourceWithVolumeMap::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
     {
@@ -131,13 +166,17 @@ ResourceSet ResourceSet::operator +=(
     ResourceSet const & a_rhs
 )
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 
     ResourceWithVolumeMap new_map;
 
     for (ResourceWithVolumeMap::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
     {
-        Key key(it->second->getIDResource());
+        string key = it->second->getResource()->getKey();
 
         Volume volume = it->second->getVolume() + a_rhs.m_map.at(it->first)->getVolume();
 
@@ -157,13 +196,17 @@ ResourceSet ResourceSet::operator *=(
     unsigned int const a_factor
 )
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 
     ResourceWithVolumeMap new_map;
 
     for (ResourceWithVolumeMap::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
     {
-        Key key(it->second->getIDResource());
+        string key = it->second->getResource()->getKey();
 
         Volume volume = it->second->getVolume() * a_factor;
 
@@ -181,7 +224,11 @@ ResourceSet ResourceSet::operator *=(
 
 ResourceWithVolumeMap const & ResourceSet::getMap() const
 {
-    BOOST_ASSERT(m_map.size() == RESOURCE_VEC.size());
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+
+    BOOST_ASSERT(m_map.size() == resources.size());
 
     return m_map;
 }

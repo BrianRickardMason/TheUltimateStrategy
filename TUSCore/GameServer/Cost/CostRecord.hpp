@@ -29,10 +29,10 @@
 #define GAMESERVER_COST_COSTRECORD_HPP
 
 #include "../Common/KeyHash.hpp"
-#include "../Resource/Key.hpp"
 #include "IDCostType.hpp"
 #include "Volume.hpp"
 #include <boost/make_shared.hpp>
+#include <string>
 #include <vector>
 
 namespace GameServer
@@ -51,14 +51,14 @@ public:
      *
      * @param a_key_hash     The key hash.
      * @param a_id_cost_type The identifier of the cost type.
-     * @param a_id_resource  The identifier of the resource.
+     * @param a_key          The key of the resource.
      * @param a_volume       The volume of the resource.
      */
     CostRecord(
-        Common::KeyHash      const & a_key_hash,
-        IDCostType           const & a_id_cost_type,
-        Resource::IDResource const & a_id_resource,
-        Volume               const & a_volume
+        Common::KeyHash const & a_key_hash,
+        IDCostType      const & a_id_cost_type,
+        std::string     const & a_key,
+        Volume          const & a_volume
     );
 
     /**
@@ -70,7 +70,7 @@ public:
     {
         return (    m_key_hash     == a_rhs.m_key_hash
                  && m_id_cost_type == a_rhs.m_id_cost_type
-                 && m_id_resource  == a_rhs.m_id_resource
+                 && m_key          == a_rhs.m_key
                  && m_volume       == a_rhs.m_volume);
     }
 
@@ -89,11 +89,11 @@ public:
     IDCostType const & getIDCostType() const;
 
     /**
-     * @brief Gets the identifier of the resource.
+     * @brief Gets the key of the resource.
      *
-     * @return The identifier of the resource.
+     * @return The key of the resource.
      */
-    Resource::IDResource const & getIDResource() const;
+    std::string getKey() const;
 
     /**
      * @brief Gets the volume of the resource.
@@ -114,9 +114,9 @@ private:
     IDCostType m_id_cost_type;
 
     /**
-     * @brief The identifier of the resource.
+     * @brief The key of the resource.
      */
-    Resource::IDResource m_id_resource;
+    std::string m_key;
 
     /**
      * @brief The volume of the resource.
@@ -124,15 +124,13 @@ private:
     Volume m_volume;
 };
 
+//@{
 /**
- * @brief A shared pointer of cost record.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<CostRecord> CostRecordShrPtr;
-
-/**
- * @brief A vector of cost record.
- */
 typedef std::vector<CostRecordShrPtr> CostRecordVec;
+//}@
 
 } // namespace Cost
 } // namespace GameServer

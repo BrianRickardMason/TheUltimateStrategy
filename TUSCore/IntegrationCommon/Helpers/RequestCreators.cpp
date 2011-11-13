@@ -696,7 +696,7 @@ RequestShrPtr createRequestGetResource(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_resource
+    string       const a_key
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -715,8 +715,8 @@ RequestShrPtr createRequestGetResource(
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
-    IXmlNodeShrPtr idresource = parameters->appendNode("idresource");
-    idresource->appendAttribute("value")->setValue(a_id_resource);
+    IXmlNodeShrPtr key = parameters->appendNode("idresource");
+    key->appendAttribute("value")->setValue(a_key.c_str());
 
     return request;
 }
@@ -794,7 +794,7 @@ RequestShrPtr createRequestTransportResource(
     string       const & a_password,
     string       const   a_settlement_name_source,
     string       const   a_settlement_name_destination,
-    unsigned int const   a_id_resource,
+    string       const   a_key,
     unsigned int const   a_volume
 )
 {
@@ -815,7 +815,7 @@ RequestShrPtr createRequestTransportResource(
     settlement_name_destination->appendAttribute("value")->setValue(a_settlement_name_destination.c_str());
 
     IXmlNodeShrPtr idresource = parameters->appendNode("idresource");
-    idresource->appendAttribute("value")->setValue(a_id_resource);
+    idresource->appendAttribute("value")->setValue(a_key.c_str());
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
     volume->appendAttribute("value")->setValue(a_volume);

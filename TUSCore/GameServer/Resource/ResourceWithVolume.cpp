@@ -25,7 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "ResourceWithVolume.hpp"
+#include <GameServer/Configuration/Configurator/Resource/ConfiguratorResource.hpp>
+#include <GameServer/Resource/ResourceWithVolume.hpp>
+
+using namespace GameServer::Configuration;
+using namespace std;
 
 namespace GameServer
 {
@@ -33,33 +37,33 @@ namespace Resource
 {
 
 ResourceWithVolume::ResourceWithVolume(
-    Key    const & a_key,
-    Volume const & a_volume
+    string const a_key,
+    Volume const a_volume
 )
-    : m_resource(a_key),
-      m_volume(a_volume)
+    : m_volume(a_volume)
 {
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+
+    m_resource = CONFIGURATOR_RESOURCE.getResource(a_key);
 }
 
 ResourceWithVolume::ResourceWithVolume(
     ResourceWithVolumeRecord const & a_record
 )
-    : m_resource(a_record.getKey()),
-      m_volume(a_record.getVolume())
+    : m_volume(a_record.getVolume())
 {
+    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
+    CONFIGURATOR_RESOURCE.configure();
+    m_resource = CONFIGURATOR_RESOURCE.getResource(a_record.getKey());
 }
 
-Key const & ResourceWithVolume::getKey() const
+IResourceShrPtr ResourceWithVolume::getResource() const
 {
-    return m_resource.getKey();
+    return m_resource;
 }
 
-IDResource const & ResourceWithVolume::getIDResource() const
-{
-    return m_resource.getIDResource();
-}
-
-Volume const & ResourceWithVolume::getVolume() const
+Volume ResourceWithVolume::getVolume() const
 {
     return m_volume;
 }

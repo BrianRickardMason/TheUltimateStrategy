@@ -193,7 +193,7 @@ bool TurnManager::executeTurnSettlement(
 
         for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
-            map<IDHuman, Resource::Key>::const_iterator production = HUMAN_MAP_PRODUCTION.find(it->second->getIDHuman());
+            map<IDHuman, std::string>::const_iterator production = HUMAN_MAP_PRODUCTION.find(it->second->getIDHuman());
 
             if (production != HUMAN_MAP_PRODUCTION.end())
             {

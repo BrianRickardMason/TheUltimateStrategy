@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETRESOURCE_HPP
 
 #include "../../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../../GameServer/Resource/IDResource.hpp"
 #include "../../../../../GameServer/Resource/Operators/GetResource/GetResourceOperatorExitCode.hpp"
 #include "../Executor.hpp"
 
@@ -173,19 +172,14 @@ class ExecutorGetResource
     std::string m_holder_name;
 
     /**
-     * @brief The value of the identifier of a resource.
+     * @brief The key of the resource.
      */
-    unsigned int m_value_id_resource;
+    std::string m_key;
 
     /**
      * @brief The identifier of a holder.
      */
     GameServer::Common::IDHolder m_id_holder;
-
-    /**
-     * @brief The identifier of a resource.
-     */
-    GameServer::Resource::IDResource m_id_resource;
 };
 
 } // namespace Executors

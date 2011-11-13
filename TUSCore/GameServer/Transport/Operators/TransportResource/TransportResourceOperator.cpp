@@ -52,7 +52,7 @@ TransportResourceOperatorExitCode TransportResourceOperator::transportResource(
     ITransactionShrPtr         a_transaction,
     string             const   a_settlement_name_source,
     string             const   a_settlement_name_destination,
-    Key                const & a_key,
+    string             const   a_key,
     Volume             const & a_volume
 ) const
 {

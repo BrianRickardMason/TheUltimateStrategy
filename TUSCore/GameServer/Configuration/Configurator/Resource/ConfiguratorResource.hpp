@@ -25,94 +25,82 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_RESOURCE_RESOURCE_HPP
-#define GAMESERVER_RESOURCE_RESOURCE_HPP
+#ifndef GAMESERVER_CONFIGURATION_CONFIGURATORRESOURCE_HPP
+#define GAMESERVER_CONFIGURATION_CONFIGURATORRESOURCE_HPP
 
-#include "Key.hpp"
-#include <vector>
+#include <3rdParty/pugixml/src/pugixml.hpp>
+#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
-namespace Resource
+namespace Configuration
 {
 
 /**
- * @brief A resource.
+ * @brief ConfiguratorResource.
  */
-class Resource
+class ConfiguratorResource
+    : private boost::noncopyable
 {
 public:
     /**
-     * @brief Constructs the resource.
+     * @brief Gets the configuration.
+     *
+     * @return True on success, false otherwise.
+     */
+    bool configure();
+
+    /**
+     * @brief Gets the resource.
      *
      * @param a_key The key of the resource.
+     *
+     * @return The resource, null if not found.
      */
-    explicit Resource(
-        Key const & a_key
-    );
+    IResourceShrPtr getResource(
+        IResourceKey const a_key
+    ) const;
 
     /**
-     * @brief Gets the key of the resource.
+     * @brief Gets the map of resources.
      *
-     * @return The key of the resource.
+     * @return The map of resources.
      */
-    Key const & getKey() const;
-
-    /**
-     * @brief Gets the identifier of the resource.
-     *
-     * @return The identifier of the resource.
-     */
-    IDResource const & getIDResource() const;
+    IResourceMap getResources() const;
 
 private:
     /**
-     * @brief The key of the resource.
+     * @brief Loads the data from an xml configuration file into the xml document.
+     *
+     * return True on success, false otherwise.
      */
-    Key m_key;
+    bool loadXml();
+
+    /**
+     * @brief Loads the data from an xml document into the map.
+     *
+     * @return true on success false otherwise.
+     */
+    bool parseXml();
+
+    /**
+     * @brief The xml document.
+     *
+     * TODO: Add the abstraction.
+     */
+    pugi::xml_document m_resources_xml;
+
+    /**
+     * @brief The map of available resources.
+     *
+     * TODO: Resources are constant.
+     * TODO: Map is given as a const reference.
+     */
+    IResourceMap m_resources;
 };
 
-
-/**
- * @brief The available resources.
- */
-const Resource RESOURCE_COAL (KEY_RESOURCE_COAL);
-const Resource RESOURCE_FOOD (KEY_RESOURCE_FOOD);
-const Resource RESOURCE_GOLD (KEY_RESOURCE_GOLD);
-const Resource RESOURCE_IRON (KEY_RESOURCE_IRON);
-const Resource RESOURCE_MANA (KEY_RESOURCE_MANA);
-const Resource RESOURCE_ROCK (KEY_RESOURCE_ROCK);
-const Resource RESOURCE_WOOD (KEY_RESOURCE_WOOD);
-
-/**
- * @brief The array of available resources.
- */
-const Resource RESOURCE_ARR [] = {
-    RESOURCE_COAL,
-    RESOURCE_FOOD,
-    RESOURCE_GOLD,
-    RESOURCE_IRON,
-    RESOURCE_MANA,
-    RESOURCE_ROCK,
-    RESOURCE_WOOD
-};
-
-/**
- * @brief The vector of resources.
- */
-typedef std::vector<Resource> ResourceVec;
-
-/**
- * @brief The vector of available resources.
- *
- * TODO: Use in UT and CT.
- */
-const ResourceVec RESOURCE_VEC(
-    RESOURCE_ARR,
-    RESOURCE_ARR + sizeof(RESOURCE_ARR) / sizeof(RESOURCE_ARR[0])
-);
-
-} // namespace Resource
+} // namespace Configuration
 } // namespace GameServer
 
-#endif // GAMESERVER_RESOURCE_RESOURCE_HPP
+#endif // GAMESERVER_CONFIGURATION_CONFIGURATORRESOURCE_HPP

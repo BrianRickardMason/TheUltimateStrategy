@@ -76,6 +76,15 @@ bool XmlDocumentPugi::loadDocument(
     return (result) ? true : false;
 }
 
+bool XmlDocumentPugi::loadDocumentFromFile(
+    string const a_path
+)
+{
+    xml_parse_result result = m_xml_document.load_file(a_path.c_str());
+
+    return (result) ? true : false;
+}
+
 void XmlDocumentPugi::resetDocument()
 {
     m_xml_document.reset();

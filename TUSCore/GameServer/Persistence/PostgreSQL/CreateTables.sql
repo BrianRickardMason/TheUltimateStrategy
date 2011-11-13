@@ -85,11 +85,11 @@ CREATE TABLE humans_settlement
 DROP TABLE IF EXISTS resources_settlement CASCADE;
 CREATE TABLE resources_settlement
 (
-    holder_name VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
-    id_resource SMALLINT NOT NULL CHECK(id_resource IN (1, 2, 3, 4, 5, 6, 7)), -- TODO: Mapping to source code needed.
-    volume      INTEGER NOT NULL CHECK(volume > 0),
+    holder_name  VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
+    resource_key VARCHAR(44) NOT NULL CHECK(resource_key <> ''),
+    volume       INTEGER NOT NULL CHECK(volume > 0),
 
-    UNIQUE(holder_name, id_resource)
+    UNIQUE(holder_name, resource_key)
 );
 
 DROP TABLE IF EXISTS costs CASCADE;
@@ -97,10 +97,10 @@ CREATE TABLE costs
 (
     key_hash     INTEGER NOT NULL CHECK(key_hash > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
     id_cost_type SMALLINT NOT NULL CHECK(id_cost_type > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-    id_resource  SMALLINT NOT NULL CHECK(id_resource IN (1, 2, 3, 4, 5, 6, 7)), -- TODO: Mapping to source code needed.
+    resource_key VARCHAR(44) NOT NULL CHECK(resource_key <> ''),
     volume       SMALLINT NOT NULL CHECK(volume > 0),
 
-    UNIQUE(key_hash, id_cost_type, id_resource)
+    UNIQUE(key_hash, id_cost_type, resource_key)
 );
 
 DROP TABLE IF EXISTS properties CASCADE;

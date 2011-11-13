@@ -25,42 +25,71 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Resource/Key.hpp"
-#include <gmock/gmock.h>
+#include <GameServer/Configuration/Configurator/Resource/ConfiguratorResource.hpp>
+#include <GameServer/Configuration/Configurator/Resource/Resource.hpp>
 
-using namespace GameServer::Resource;
+using namespace pugi;
+using namespace std;
 
-TEST(KeyResourceTest, Key_ConstructorsAreEquivalent)
+namespace GameServer
 {
-    IDResource id_resource(ID_RESOURCE_COAL);
+namespace Configuration
+{
 
-    Key key_1(id_resource);
-    Key key_2(1000001);
+bool ConfiguratorResource::configure()
+{
+    if (!loadXml())
+    {
+        return false;
+    }
 
-    ASSERT_TRUE(key_1 == key_2);
+    if (!parseXml())
+    {
+        return false;
+    }
+
+    return true;
 }
 
-TEST(KeyResourceTest, toHash_BasedOnParameters)
+IResourceShrPtr ConfiguratorResource::getResource(
+    IResourceKey const a_key
+) const
 {
-    IDResource id_resource(ID_RESOURCE_COAL);
-
-    Key key(id_resource);
-
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_RESOURCE * 1000000 + 1 == key.toHash());
+    return m_resources.at(a_key);
 }
 
-TEST(KeyResourceTest, toHash_BasedOnHash)
+IResourceMap ConfiguratorResource::getResources() const
 {
-    Key key(1000001);
-
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_RESOURCE * 1000000 + 1 == key.toHash());
+    return m_resources;
 }
 
-TEST(KeyResourceTest, toHash_MaxValues)
+bool ConfiguratorResource::loadXml()
 {
-    IDResource id_resource(7);
+    // TODO: Get the path from the basic configuration.
+    char const * path =
+        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Resource/resources.xml";
 
-    Key key(id_resource);
-
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_RESOURCE * 1000000 + 7 == key.toHash());
+    return m_resources_xml.load_file(path);
 }
+
+bool ConfiguratorResource::parseXml()
+{
+    // TODO: Add verification here.
+
+    xml_node resources = m_resources_xml.child("resources");
+
+    for (xml_node_iterator it = resources.begin(); it != resources.end(); ++it)
+    {
+        IResourceKey const key  = it->child_value("key");
+        string       const name = it->child_value("name");
+
+        IResourceShrPtr resource(new Resource(key, name));
+
+        m_resources.insert(make_pair(key, resource));
+    }
+
+    return true;
+}
+
+} // namespace Configuration
+} // namespace GameServer

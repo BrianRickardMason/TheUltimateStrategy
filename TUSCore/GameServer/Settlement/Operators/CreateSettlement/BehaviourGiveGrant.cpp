@@ -60,13 +60,13 @@ bool BehaviourGiveGrant::giveGrant(
         m_human_persistence_facade->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
         // Grant resources.
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_COAL), 1000);
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_FOOD), 10000);
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_GOLD), 10000);
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_IRON), 1000);
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_MANA), 1000);
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_ROCK), 1000);
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::Key(ID_RESOURCE_WOOD), 1000);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_COAL, 1000);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_FOOD, 10000);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_GOLD, 10000);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_IRON, 1000);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_MANA, 1000);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_ROCK, 1000);
+        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_WOOD, 1000);
 
         return true;
     }

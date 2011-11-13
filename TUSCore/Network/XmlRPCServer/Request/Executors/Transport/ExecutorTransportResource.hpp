@@ -28,7 +28,6 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTRANSPORTRESOURCE_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTRANSPORTRESOURCE_HPP
 
-#include "../../../../../GameServer/Resource/IDResource.hpp"
 #include "../../../../../GameServer/Resource/Volume.hpp"
 #include "../../../../../GameServer/Transport/Operators/TransportResource/TransportResourceOperatorExitCode.hpp"
 #include "../Executor.hpp"
@@ -158,9 +157,9 @@ class ExecutorTransportResource
     ) const;
 
     /**
-     * @brief The value of the identifier of the resource.
+     * @brief The key of the resource.
      */
-    unsigned int m_value_id_resource;
+    std::string m_key;
 
     /**
      * @brief The value of the volume.
@@ -176,11 +175,6 @@ class ExecutorTransportResource
      * @brief The name of the destination settlement.
      */
     std::string m_settlement_name_destination;
-
-    /**
-     * @brief The identifier of the resource.
-     */
-    GameServer::Resource::IDResource m_id_resource;
 
     /**
      * @brief The volume.

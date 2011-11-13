@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_RESOURCE_RESOURCEWITHVOLUME_HPP
 #define GAMESERVER_RESOURCE_RESOURCEWITHVOLUME_HPP
 
-#include "Resource.hpp"
-#include "ResourceWithVolumeRecord.hpp"
+#include <GameServer/Configuration/Configurator/Resource/Resource.hpp>
+#include <GameServer/Resource/ResourceWithVolumeRecord.hpp>
 
 namespace GameServer
 {
@@ -37,7 +37,9 @@ namespace Resource
 {
 
 /**
- * @brief A resource with volume.
+ * @brief ResourceWithVolume.
+ *
+ * TODO: This class is "broken" now. Need to pass the configuration as a context.
  */
 class ResourceWithVolume
 {
@@ -49,8 +51,8 @@ public:
      * @param a_volume The volume of the resource.
      */
     ResourceWithVolume(
-        Key    const & a_key,
-        Volume const & a_volume
+        std::string const a_key,
+        Volume      const a_volume
     );
 
     /**
@@ -63,31 +65,24 @@ public:
     );
 
     /**
-     * @brief Gets the key of the resource.
+     * @brief Gets the resource.
      *
-     * @return The key of the resource.
+     * @return The resource.
      */
-    Key const & getKey() const;
-
-    /**
-     * @brief Gets the identifier of the resource.
-     *
-     * @return The identifier of the resource.
-     */
-    IDResource const & getIDResource() const;
+    Configuration::IResourceShrPtr getResource() const;
 
     /**
      * @brief Gets the volume of the resource.
      *
      * @return The volume of the resource.
      */
-    Volume const & getVolume() const;
+    Volume getVolume() const;
 
 private:
     /**
      * @brief The resource.
      */
-    Resource m_resource;
+    Configuration::IResourceShrPtr m_resource;
 
     /**
      * @brief The volume of the resource.
@@ -95,20 +90,14 @@ private:
     Volume m_volume;
 };
 
+//@{
 /**
- * @brief A shared pointer of resource with volume.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ResourceWithVolume> ResourceWithVolumeShrPtr;
-
-/**
- * @brief A pair of resource with volume.
- */
-typedef std::pair<Key, ResourceWithVolumeShrPtr> ResourceWithVolumePair;
-
-/**
- * @brief A map of resource with volume.
- */
-typedef std::map<Key, ResourceWithVolumeShrPtr> ResourceWithVolumeMap;
+typedef std::pair<std::string, ResourceWithVolumeShrPtr> ResourceWithVolumePair;
+typedef std::map<std::string, ResourceWithVolumeShrPtr> ResourceWithVolumeMap;
+//}@
 
 } // namespace Resource
 } // namespace GameServer

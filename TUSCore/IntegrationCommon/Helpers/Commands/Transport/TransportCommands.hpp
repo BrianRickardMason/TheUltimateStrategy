@@ -75,7 +75,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr TransportHuman(
  * @param a_password                    The password of the user.
  * @param a_settlement_name_source      The name of the source settlement.
  * @param a_settlement_name_destination The name of the destination settlement.
- * @param a_id_resource                 The identifier of the resource.
+ * @param a_key                         The key of the resource.
  * @param a_volume                      The volume.
  *
  * @return The reply.
@@ -86,7 +86,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr TransportResource(
     std::string  const a_password,
     std::string  const a_settlement_name_source,
     std::string  const a_settlement_name_destination,
-    unsigned int const a_id_resource,
+    std::string  const a_key,
     unsigned int const a_volume
 );
 

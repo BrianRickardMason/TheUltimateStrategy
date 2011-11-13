@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../GameServer/Resource/IDResource.hpp"
+#include "../../../GameServer/Resource/Key.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioActivateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioDeactivateEpoch.hpp"
@@ -69,29 +69,9 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, InvalidRequest)
             IScenarioActionShrPtr(new ScenarioTransportResourceActionInvalidRequest(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationInvalidRequest))));
-
-    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
-    {
-        ASSERT_STREQ("", (*it)->execute());
-    }
-}
-
-TEST_F(IntegrationFunctionalExecutorTransportResourceTest, InvalidRange)
-{
-    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
-
-    m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioTransportResource(
-            client,
-            IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
-                "Login", "Password",
-                "Settlement1", "Settlement2",
-                ID_RESOURCE_WOOD.getValue() + 1,
-                1)),
-            IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationInvalidRange))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -133,7 +113,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, Unauthenticated)
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login", "Password2",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_WOOD.getValue(),
+                KEY_RESOURCE_WOOD,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationUnauthenticated))));
 
@@ -193,7 +173,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, UnauthorizedToTheSour
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login2", "Password2",
                 "Settlement1", "Settlement3",
-                ID_RESOURCE_WOOD.getValue(),
+                KEY_RESOURCE_WOOD,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationUnauthorized))));
 
@@ -253,7 +233,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, UnauthorizedToTheDest
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login2", "Password2",
                 "Settlement3", "Settlement1",
-                ID_RESOURCE_WOOD.getValue(),
+                KEY_RESOURCE_WOOD,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationUnauthorized))));
 
@@ -305,7 +285,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationEpochIsNotActive))));
 
@@ -353,7 +333,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, TryingToTransportZero
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 0)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationTryingToTransportZeroResources))));
 
@@ -419,7 +399,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, SettlementsAreNotFrom
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login1", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationUnauthorized))));
 
@@ -467,7 +447,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 1001)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationNotEnoughResources))));
 
@@ -515,7 +495,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, ResourceHasBeenTransp
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationResourceHasBeenTransported))));
 
@@ -563,7 +543,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, ResourceHasBeenTransp
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 501)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationResourceHasBeenTransported))));
 
@@ -611,7 +591,7 @@ TEST_F(IntegrationFunctionalExecutorTransportResourceTest, ResourceHasBeenTransp
             IScenarioActionShrPtr(new ScenarioTransportResourceActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_RESOURCE_COAL.getValue(),
+                KEY_RESOURCE_COAL,
                 1000)),
             IScenarioVerificationShrPtr(new ScenarioTransportResourceVerificationResourceHasBeenTransported))));
 

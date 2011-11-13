@@ -25,51 +25,55 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Resource/Resource.hpp"
-#include <gmock/gmock.h>
+#ifndef GAMESERVER_CONFIGURATION_IRESOURCE_HPP
+#define GAMESERVER_CONFIGURATION_IRESOURCE_HPP
 
-using namespace GameServer::Resource;
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
+
+namespace GameServer
+{
+namespace Configuration
+{
 
 /**
- * @brief A test class.
+ * @brief A useful typedef.
  */
-class ResourceTest
-    : public testing::Test
+typedef std::string IResourceKey;
+
+/**
+ * @brief The interface of Resource.
+ */
+class IResource
 {
-protected:
-    /**
-     * @brief Constructs a test class.
-     */
-    ResourceTest()
-        : m_resource(Key(ID_RESOURCE_COAL)),
-          m_model_key(ID_RESOURCE_COAL)
-    {
-    }
+public:
+    virtual ~IResource(){}
 
     /**
-     * @brief A resource to be tested.
+     * @brief Gets the key of the resource.
+     *
+     * @return The key of the resource.
      */
-    Resource m_resource;
+    virtual IResourceKey getKey() const = 0;
 
     /**
-     * @brief A model key.
+     * @brief Gets the name of the resource.
+     *
+     * @return The name of the resource.
      */
-    Key m_model_key;
+    virtual std::string getName() const = 0;
 };
 
-TEST_F(ResourceTest, Resource)
-{
-    Resource resource((Key(ID_RESOURCE_COAL)));
+//@{
+/**
+ * @brief A useful typedef.
+ */
+typedef boost::shared_ptr<IResource> IResourceShrPtr;
+typedef std::map<IResourceKey, IResourceShrPtr> IResourceMap;
+//}@
 
-    ASSERT_TRUE(m_model_key == resource.getKey());
-}
+} // namespace Configuration
+} // namespace GameServer
 
-TEST_F(ResourceTest, getKey)
-{
-    ASSERT_TRUE(m_model_key == m_resource.getKey());
-}
-
-TEST_F(ResourceTest, getIDResource)
-{
-    ASSERT_TRUE(ID_RESOURCE_COAL == m_resource.getIDResource());
-}
+#endif // GAMESERVER_CONFIGURATION_IRESOURCE_HPP

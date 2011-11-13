@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Cost/Cost.hpp"
+#include "../../GameServer/Resource/Key.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Cost;
@@ -42,7 +43,7 @@ protected:
      * @brief Constructs a test class.
      */
     CostTest()
-        : m_cost(CostRecord(1001, 1, ID_RESOURCE_COAL, 100))
+        : m_cost(CostRecord(1001, 1, KEY_RESOURCE_COAL, 100))
     {
     }
 
@@ -58,7 +59,7 @@ protected:
 TEST_F(CostTest, Cost)
 {
     // Preconditions.
-    CostRecord record(1001, 1, ID_RESOURCE_COAL, 100);
+    CostRecord record(1001, 1, KEY_RESOURCE_COAL, 100);
 
     // Test commands.
     Cost cost(record);
@@ -66,7 +67,7 @@ TEST_F(CostTest, Cost)
     // Test assertions.
     ASSERT_EQ(1001, cost.getKeyHash());
     ASSERT_EQ(1, cost.getIDCostType());
-    ASSERT_TRUE(ID_RESOURCE_COAL == cost.getIDResource());
+    ASSERT_TRUE(KEY_RESOURCE_COAL == cost.getKey());
     ASSERT_EQ(100, cost.getVolume());
 }
 
@@ -76,7 +77,7 @@ TEST_F(CostTest, Cost)
 TEST_F(CostTest, operator_mul)
 {
     // Preconditions.
-    CostRecord record(1001, 1, ID_RESOURCE_COAL, 100);
+    CostRecord record(1001, 1, KEY_RESOURCE_COAL, 100);
 
     Cost cost_0(record),
          cost_1(record),
@@ -109,7 +110,7 @@ TEST_F(CostTest, operator_mul)
 TEST_F(CostTest, operator_mul_assign)
 {
     // Preconditions.
-    CostRecord record(1001, 1, ID_RESOURCE_COAL, 100);
+    CostRecord record(1001, 1, KEY_RESOURCE_COAL, 100);
 
     Cost cost_0(record),
          cost_1(record),
@@ -149,12 +150,12 @@ TEST_F(CostTest, getIDCostType)
 }
 
 /**
- * Unit tests of: Cost::getIDResource.
+ * Unit tests of: Cost::getKey.
  */
-TEST_F(CostTest, getIDResource)
+TEST_F(CostTest, getKey)
 {
     // Test commands and assertions.
-    ASSERT_TRUE(ID_RESOURCE_COAL == m_cost.getIDResource());
+    ASSERT_TRUE(KEY_RESOURCE_COAL == m_cost.getKey());
 }
 
 /**
@@ -166,23 +167,12 @@ TEST_F(CostTest, getVolume)
     ASSERT_EQ(100, m_cost.getVolume());
 }
 
-/**
- * Unit tests of: Cost::getKey.
- */
 TEST_F(CostTest, getKey_Equal)
 {
-    // Preconditions.
-    Key model_key(ID_RESOURCE_COAL);
-
-    // Test commands and assertions.
-    ASSERT_TRUE(model_key == m_cost.toKey());
+    ASSERT_TRUE(KEY_RESOURCE_COAL == m_cost.toKey());
 }
 
 TEST_F(CostTest, getKey_NotEqual)
 {
-    // Preconditions.
-    Key model_key(ID_RESOURCE_FOOD);
-
-    // Test commands and assertions.
-    ASSERT_FALSE(model_key == m_cost.toKey());
+    ASSERT_FALSE(KEY_RESOURCE_FOOD == m_cost.toKey());
 }

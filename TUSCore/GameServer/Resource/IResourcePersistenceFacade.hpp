@@ -58,7 +58,7 @@ public:
     virtual void addResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        std::string                     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -77,7 +77,7 @@ public:
     virtual bool subtractResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        std::string                     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -94,7 +94,7 @@ public:
     virtual void subtractResourceSafely(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        std::string                     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -142,7 +142,7 @@ public:
     virtual ResourceWithVolumeShrPtr getResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        std::string                     const & a_key
     ) const = 0;
 
     /**
@@ -160,7 +160,7 @@ public:
 };
 
 /**
- * @brief Typedef of shared pointer.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IResourcePersistenceFacade> IResourcePersistenceFacadeShrPtr;
 

@@ -31,6 +31,7 @@ using namespace GameServer::Common;
 using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace boost;
+using namespace std;
 
 namespace GameServer
 {
@@ -56,8 +57,9 @@ ResourceSet CostPersistenceFacade::getCost(
 
     for (CostRecordVec::const_iterator it = cost_record_vec.begin(); it != cost_record_vec.end(); ++it)
     {
-        Key key((*it)->getIDResource());
-        ResourceWithVolumeShrPtr resource = boost::make_shared<ResourceWithVolume>(key, (*it)->getVolume());
+        string key = (*it)->getKey();
+
+        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(key, (*it)->getVolume()));
 
         ResourceWithVolumePair resource_pair(key, resource);
 

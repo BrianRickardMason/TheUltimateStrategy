@@ -65,7 +65,7 @@ bool ExecutorTransportResource::getParameters(
         m_password                    = a_request->getPasswordValue();
         m_settlement_name_source      = a_request->getParameterValueString("settlement_name_source");
         m_settlement_name_destination = a_request->getParameterValueString("settlement_name_destination");
-        m_value_id_resource           = a_request->getParameterValueUnsignedInteger("idresource");
+        m_key                         = a_request->getParameterValueString("idresource");
         m_value_volume                = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;
@@ -80,7 +80,6 @@ bool ExecutorTransportResource::processParameters()
 {
     try
     {
-        m_id_resource = m_value_id_resource;
         m_volume = m_value_volume;
 
         return true;
@@ -182,7 +181,7 @@ ReplyShrPtr ExecutorTransportResource::perform(
             transport_resource_operator->transportResource(transaction,
                                                            m_settlement_name_source,
                                                            m_settlement_name_destination,
-                                                           Key(m_id_resource),
+                                                           m_key,
                                                            m_volume);
 
         if (exit_code.ok())

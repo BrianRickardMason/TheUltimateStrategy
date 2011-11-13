@@ -27,8 +27,9 @@
 
 #include "CostRecord.hpp"
 
+using namespace std;
+
 using GameServer::Common::KeyHash;
-using GameServer::Resource::IDResource;
 
 namespace GameServer
 {
@@ -38,12 +39,12 @@ namespace Cost
 CostRecord::CostRecord(
     KeyHash    const & a_key_hash,
     IDCostType const & a_id_cost_type,
-    IDResource const & a_id_resource,
+    string     const & a_key,
     Volume     const & a_volume
 )
     : m_key_hash(a_key_hash),
       m_id_cost_type(a_id_cost_type),
-      m_id_resource(a_id_resource),
+      m_key(a_key),
       m_volume(a_volume)
 {
 }
@@ -58,9 +59,9 @@ IDCostType const & CostRecord::getIDCostType() const
     return m_id_cost_type;
 }
 
-IDResource const & CostRecord::getIDResource() const
+string CostRecord::getKey() const
 {
-    return m_id_resource;
+    return m_key;
 }
 
 Volume const & CostRecord::getVolume() const

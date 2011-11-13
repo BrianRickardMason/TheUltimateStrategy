@@ -30,6 +30,7 @@
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
 using namespace boost;
+using namespace std;
 
 namespace GameServer
 {
@@ -46,7 +47,7 @@ ResourcePersistenceFacade::ResourcePersistenceFacade(
 void ResourcePersistenceFacade::addResource(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    string             const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -63,7 +64,7 @@ void ResourcePersistenceFacade::addResource(
 bool ResourcePersistenceFacade::subtractResource(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    string             const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -98,7 +99,7 @@ bool ResourcePersistenceFacade::subtractResource(
 void ResourcePersistenceFacade::subtractResourceSafely(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    string             const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -130,8 +131,9 @@ bool ResourcePersistenceFacade::subtractResourceSet(
 
     for (ResourceWithVolumeMap::const_iterator it = map.begin(); it != map.end(); ++it)
     {
+        // TODO: Envious class.
         bool result =
-            subtractResource(a_transaction, a_id_holder, it->second->getKey(), it->second->getVolume());
+            subtractResource(a_transaction, a_id_holder, it->second->getResource()->getKey(), it->second->getVolume());
 
         if (!result)
         {
@@ -152,14 +154,15 @@ void ResourcePersistenceFacade::subtractResourceSetSafely(
 
     for (ResourceWithVolumeMap::const_iterator it = map.begin(); it != map.end(); ++it)
     {
-        subtractResourceSafely(a_transaction, a_id_holder, it->second->getKey(), it->second->getVolume());
+        // TODO: Envious class.
+        subtractResourceSafely(a_transaction, a_id_holder, it->second->getResource()->getKey(), it->second->getVolume());
     }
 }
 
 ResourceWithVolumeShrPtr ResourcePersistenceFacade::getResource(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    string             const & a_key
 ) const
 {
     ResourceWithVolumeRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_holder, a_key);
