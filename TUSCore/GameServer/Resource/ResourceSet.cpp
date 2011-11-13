@@ -30,8 +30,6 @@
 #include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <boost/make_shared.hpp>
 
-//extern GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-
 using namespace boost;
 using namespace std;
 
