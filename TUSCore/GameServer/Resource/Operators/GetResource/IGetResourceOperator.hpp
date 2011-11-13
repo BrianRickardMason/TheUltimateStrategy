@@ -30,10 +30,11 @@
 
 #include "../../../Common/IDHolder.hpp"
 #include "../../../Persistence/ITransaction.hpp"
-#include "../../Key.hpp"
+//#include "../../Key.hpp"
 #include "GetResourceOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -61,12 +62,12 @@ public:
     virtual GetResourceOperatorExitCode getResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        std::string                     const   a_key
     ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of GetResourceOperator.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IGetResourceOperator> IGetResourceOperatorShrPtr;
 

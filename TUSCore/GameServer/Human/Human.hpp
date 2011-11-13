@@ -211,7 +211,7 @@ const HumanVec HUMAN_VEC(
 /**
  * @brief The map of human production.
  */
-const std::map<IDHuman, Resource::Key> HUMAN_MAP_PRODUCTION = boost::assign::map_list_of
+const std::map<IDHuman, std::string> HUMAN_MAP_PRODUCTION = boost::assign::map_list_of
     (ID_HUMAN_WORKER_BREEDER,     Resource::KEY_RESOURCE_FOOD)
     (ID_HUMAN_WORKER_DRUID,       Resource::KEY_RESOURCE_MANA)
     (ID_HUMAN_WORKER_FARMER,      Resource::KEY_RESOURCE_FOOD)

@@ -110,7 +110,7 @@ public:
      * @param a_password                    The password of the user.
      * @param a_settlement_name_source      The name of the source settlement.
      * @param a_settlement_name_destination The name of the destination settlement.
-     * @param a_id_resource                 The identifier of the resource.
+     * @param a_key                         The key of the resource.
      * @param a_volume                      The volume of the resource.
      */
     ScenarioTransportResourceActionSuccess(
@@ -118,14 +118,14 @@ public:
         std::string  const a_password,
         std::string  const a_settlement_name_source,
         std::string  const a_settlement_name_destination,
-        unsigned int const a_id_resource,
+        std::string  const a_key,
         unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
           m_settlement_name_source(a_settlement_name_source),
           m_settlement_name_destination(a_settlement_name_destination),
-          m_id_resource(a_id_resource),
+          m_key(a_key),
           m_volume(a_volume)
     {
     }
@@ -146,7 +146,7 @@ public:
                                                       m_password,
                                                       m_settlement_name_source,
                                                       m_settlement_name_destination,
-                                                      m_id_resource,
+                                                      m_key,
                                                       m_volume);
     }
 
@@ -172,9 +172,9 @@ private:
     std::string const m_settlement_name_destination;
 
     /**
-     * @brief The identifier of the resource.
+     * @brief The key of the resource.
      */
-    unsigned int const m_id_resource;
+    std::string const m_key;
 
     /**
      * @brief The volume of the resource.
@@ -196,7 +196,7 @@ public:
      * @param a_password                    The password of the user.
      * @param a_settlement_name_source      The name of the source settlement.
      * @param a_settlement_name_destination The name of the destination settlement.
-     * @param a_id_resource                 The identifier of the resource.
+     * @param a_key                         The key of the resource.
      * @param a_volume                      The volume of the resource.
      */
     ScenarioTransportResourceActionInvalidRequest(
@@ -204,14 +204,14 @@ public:
         std::string  const a_password,
         std::string  const a_settlement_name_source,
         std::string  const a_settlement_name_destination,
-        unsigned int const a_id_resource,
+        std::string  const a_key,
         unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
           m_settlement_name_source(a_settlement_name_source),
           m_settlement_name_destination(a_settlement_name_destination),
-          m_id_resource(a_id_resource),
+          m_key(a_key),
           m_volume(a_volume)
     {
     }
@@ -244,7 +244,7 @@ public:
         settlement_name_destination->appendAttribute("value")->setValue(m_settlement_name_destination.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idresource = parameters->appendNode("idresource");
-        idresource->appendAttribute("value")->setValue(m_id_resource);
+        idresource->appendAttribute("value")->setValue(m_key.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr volume = parameters->appendNode("volume");
         volume->appendAttribute("valve")->setValue(m_volume);
@@ -274,9 +274,9 @@ private:
     std::string const m_settlement_name_destination;
 
     /**
-     * @brief The identifier of the resource.
+     * @brief The key of the resource.
      */
-    unsigned int const m_id_resource;
+    std::string const m_key;
 
     /**
      * @brief The volume of the resource.

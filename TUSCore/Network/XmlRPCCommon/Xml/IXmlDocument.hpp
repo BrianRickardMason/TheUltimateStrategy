@@ -62,6 +62,17 @@ public:
     ) = 0;
 
     /**
+     * @brief Loads the document from a file.
+     *
+     * @param a_path The path to the file.
+     *
+     * @return True on success, false otherwise.
+     */
+    virtual bool loadDocumentFromFile(
+        std::string const a_path
+    ) = 0;
+
+    /**
      * @brief Resets the document.
      */
     virtual void resetDocument() = 0;

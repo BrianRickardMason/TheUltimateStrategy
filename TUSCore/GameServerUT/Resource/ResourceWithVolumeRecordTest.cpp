@@ -25,11 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include "../../GameServer/Resource/Key.hpp"
 #include "../../GameServer/Resource/ResourceWithVolumeRecord.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
 using namespace GameServer::Resource;
+using namespace std;
 
 /**
  * @brief A test class.
@@ -43,8 +45,8 @@ protected:
      */
     ResourceWithVolumeRecordTest()
         : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
-          m_record(m_id_holder, Key(ID_RESOURCE_FOOD), 3),
-          m_model_key(ID_RESOURCE_FOOD)
+          m_record(m_id_holder, KEY_RESOURCE_FOOD, 3),
+          m_model_key(KEY_RESOURCE_FOOD)
     {
     }
 
@@ -61,12 +63,12 @@ protected:
     /**
      * @brief A model key.
      */
-    Key m_model_key;
+    string m_model_key;
 };
 
 TEST_F(ResourceWithVolumeRecordTest, ResourceWithVolumeRecord)
 {
-    ResourceWithVolumeRecord record(m_id_holder, Key(ID_RESOURCE_FOOD), 3);
+    ResourceWithVolumeRecord record(m_id_holder, KEY_RESOURCE_FOOD, 3);
 
     ASSERT_TRUE(m_id_holder == record.getIDHolder());
     ASSERT_TRUE(m_model_key == record.getKey());

@@ -41,7 +41,7 @@ namespace Resource
 void ResourceAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    string             const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -50,9 +50,9 @@ void ResourceAccessorPostgresql::insertRecord(
 
     string query = "INSERT INTO "
                    + getTableName(a_id_holder)
-                   + "(holder_name, id_resource, volume) VALUES("
+                   + "(holder_name, resource_key, volume) VALUES("
                    + backbone_transaction.quote(a_id_holder.getValue2()) + ", "
-                   + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue()) + ", "
+                   + backbone_transaction.quote(a_key.c_str()) + ", "
                    + backbone_transaction.quote(a_volume) + ")";
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -61,7 +61,7 @@ void ResourceAccessorPostgresql::insertRecord(
 void ResourceAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    string             const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -70,7 +70,7 @@ void ResourceAccessorPostgresql::deleteRecord(
     string query = "DELETE FROM "
                    + getTableName(a_id_holder)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
+                   + " AND resource_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }
@@ -78,7 +78,7 @@ void ResourceAccessorPostgresql::deleteRecord(
 ResourceWithVolumeRecordShrPtr ResourceAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    string             const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -87,7 +87,7 @@ ResourceWithVolumeRecordShrPtr ResourceAccessorPostgresql::getRecord(
     string query = "SELECT volume FROM "
                    + getTableName(a_id_holder)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
+                   + " AND resource_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 
@@ -122,15 +122,13 @@ ResourceWithVolumeRecordMap ResourceAccessorPostgresql::getRecords(
     // Fake types for libpqxx.
     int integer;
 
-    IDResource id_resource;
+    string key;
     Volume volume;
 
     for (pqxx::result::const_iterator it = result.begin(); it != result.end(); ++it)
     {
-        id_resource = it["id_resource"].as(integer);
+        it["resource_key"].to(key);
         volume = it["volume"].as(integer);
-
-        Key key(id_resource);
 
         ResourceWithVolumeRecordShrPtr record = make_shared<ResourceWithVolumeRecord>(a_id_holder, key, volume);
 
@@ -145,7 +143,7 @@ ResourceWithVolumeRecordMap ResourceAccessorPostgresql::getRecords(
 void ResourceAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    string             const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -156,7 +154,7 @@ void ResourceAccessorPostgresql::increaseVolume(
                    + getTableName(a_id_holder)
                    + " SET volume = volume + " + backbone_transaction.quote(a_volume)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
+                   + " AND resource_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }
@@ -164,7 +162,7 @@ void ResourceAccessorPostgresql::increaseVolume(
 void ResourceAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    string             const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -175,7 +173,7 @@ void ResourceAccessorPostgresql::decreaseVolume(
                    + getTableName(a_id_holder)
                    + " SET volume = volume - " + backbone_transaction.quote(a_volume)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_resource = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue());
+                   + " AND resource_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }

@@ -25,29 +25,33 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "Resource.hpp"
+#include <GameServer/Configuration/Configurator/Resource/Resource.hpp>
+
+using namespace std;
 
 namespace GameServer
 {
-namespace Resource
+namespace Configuration
 {
 
 Resource::Resource(
-    Key const & a_key
+    IResourceKey const a_key,
+    string       const a_name
 )
-    : m_key(a_key)
+    : m_key(a_key),
+      m_name(a_name)
 {
 }
 
-Key const & Resource::getKey() const
+IResourceKey Resource::getKey() const
 {
     return m_key;
 }
 
-IDResource const & Resource::getIDResource() const
+string Resource::getName() const
 {
-    return m_key.getInternalKey().get<0>();
+    return m_name;
 }
 
-} // namespace Resource
+} // namespace Configuration
 } // namespace GameServer

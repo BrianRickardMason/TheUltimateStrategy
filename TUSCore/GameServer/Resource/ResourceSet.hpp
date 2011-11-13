@@ -37,6 +37,8 @@ namespace Resource
 
 /**
  * @brief A resource set.
+ *
+ * FIXME: This implementation is fatal now.
  */
 class ResourceSet
 {

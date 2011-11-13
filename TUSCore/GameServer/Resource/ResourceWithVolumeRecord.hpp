@@ -29,10 +29,11 @@
 #define GAMESERVER_RESOURCE_RESOURCEWITHVOLUMERECORD_HPP
 
 #include "../Common/IDHolder.hpp"
-#include "Key.hpp"
-#include "Volume.hpp"
+//#include "Key.hpp"
+#include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
+#include <string>
 
 namespace GameServer
 {
@@ -53,9 +54,9 @@ public:
      * @param a_volume    The volume of the resource.
      */
     ResourceWithVolumeRecord(
-        Common::IDHolder const & a_id_holder,
-        Key              const & a_key,
-        Volume           const & a_volume
+        Common::IDHolder const a_id_holder,
+        std::string      const a_key,
+        Volume           const a_volume
     );
 
     /**
@@ -66,18 +67,18 @@ public:
     Common::IDHolder const & getIDHolder() const;
 
     /**
-     * @brief Gets the key of the resource.
+     * @brief Gets the key the resource.
      *
      * @return The key of the resource.
      */
-    Key const & getKey() const;
+    std::string getKey() const;
 
     /**
      * @brief Gets the volume of the resource.
      *
      * @return The volume of the resource.
      */
-    Volume const & getVolume() const;
+    Volume getVolume() const;
 
 private:
     /**
@@ -88,7 +89,7 @@ private:
     /**
      * @brief The key of the resource.
      */
-    Key m_key;
+    std::string m_key;
 
     /**
      * @brief The volume of the resource.
@@ -96,20 +97,14 @@ private:
     Volume m_volume;
 };
 
+//@{
 /**
- * @brief A shared pointer of resource with volume record.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ResourceWithVolumeRecord> ResourceWithVolumeRecordShrPtr;
-
-/**
- * @brief A pair of resource with volume record.
- */
-typedef std::pair<Key, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordPair;
-
-/**
- * @brief A map of resource with volume record.
- */
-typedef std::map<Key, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordMap;
+typedef std::pair<std::string, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordPair;
+typedef std::map<std::string, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordMap;
+//}@
 
 } // namespace Resource
 } // namespace GameServer

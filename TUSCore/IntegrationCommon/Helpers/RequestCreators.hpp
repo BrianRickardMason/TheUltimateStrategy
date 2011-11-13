@@ -474,7 +474,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHumans(
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_holder_name     The name of the holder.
- * @parma a_id_resource     The identifier of a resource.
+ * @parma a_key             The identifier of a resource.
  *
  * @return The created request.
  */
@@ -483,7 +483,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResource(
     std::string  const a_password,
     unsigned int const a_id_holder_class,
     std::string  const a_holder_name,
-    unsigned int const a_id_resource
+    std::string  const a_key
 );
 
 /**
@@ -535,7 +535,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportHuman(
  * @param a_password                    The password of the user.
  * @param a_settlement_name_source      The name of the source settlement.
  * @param a_settlement_name_destination The name of the destination settlement.
- * @param a_id_resource                 The identifier of the resource.
+ * @param a_key                         The key of the resource.
  * @param a_volume                      The volume.
  *
  * @return The created request.
@@ -545,7 +545,7 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportResource(
     std::string  const & a_password,
     std::string  const   a_settlement_name_source,
     std::string  const   a_settlement_name_destination,
-    unsigned int const   a_id_resource,
+    std::string  const   a_key,
     unsigned int const   a_volume
 );
 

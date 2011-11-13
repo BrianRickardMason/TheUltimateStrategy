@@ -34,11 +34,18 @@
 #include <log4cpp/OstreamAppender.hh>
 #include <log4cpp/PatternLayout.hh>
 
+#include <GameServer/Configuration/Configurator/Resource/ConfiguratorResource.hpp>
+
 using namespace Network::XmlRPCServer::Server;
 using namespace boost::property_tree;
 using namespace boost;
 using namespace log4cpp;
 using namespace std;
+
+/**
+ * @brief Global configuration.
+ */
+GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
 
 /**
  * @brief The server itself.
@@ -97,6 +104,10 @@ int main(
             priority    = property_tree.get<Priority::Value>("server.logger.priority");
             persistence = property_tree.get<string>("server.persistence");
         }
+
+        // TODO: Get the rest of configurators.
+        // TODO: Handle potential problems.
+        CONFIGURATOR_RESOURCE.configure();
 
         // Set up Appender, Layout and Category.
         Appender * appender = new OstreamAppender("OstreamAppender", &cout);

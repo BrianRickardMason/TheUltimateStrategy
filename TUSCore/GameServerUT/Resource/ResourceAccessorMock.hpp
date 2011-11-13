@@ -58,7 +58,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key,
+            std::string                     const & a_key,
             Volume                          const & a_volume
         )
     );
@@ -77,7 +77,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key
+            std::string                     const & a_key
         )
     );
 
@@ -95,7 +95,7 @@ public:
         ResourceWithVolumeRecordShrPtr(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key
+            std::string                     const & a_key
         )
     );
 
@@ -130,7 +130,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key,
+            std::string                     const & a_key,
             Volume                          const & a_volume
         )
     );
@@ -150,7 +150,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key,
+            std::string                     const & a_key,
             Volume                          const & a_volume
         )
     );

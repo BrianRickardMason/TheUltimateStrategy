@@ -70,14 +70,14 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
-        Resource::Key                   const & a_key,
+        std::string                     const   a_key,
         Resource::Volume                const & a_volume
     ) const;
 
 private:
     //@{
     /**
-     * @brief Persistence facades.
+     * @brief A persistence facade.
      */
     Resource::IResourcePersistenceFacadeShrPtr     m_resource_persistence_facade;
     Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
@@ -85,7 +85,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<TransportResourceOperator> TransportResourceOperatorAutPtr;
 

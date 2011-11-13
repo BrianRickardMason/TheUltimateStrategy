@@ -63,7 +63,7 @@ public:
     virtual void addResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        std::string                     const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -82,7 +82,7 @@ public:
     virtual bool subtractResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        std::string                     const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -99,7 +99,7 @@ public:
     virtual void subtractResourceSafely(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        std::string                     const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -147,7 +147,7 @@ public:
     virtual ResourceWithVolumeShrPtr getResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        std::string                     const & a_key
     ) const;
 
     /**
@@ -171,7 +171,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<ResourcePersistenceFacade> ResourcePersistenceFacadeAutPtr;
 

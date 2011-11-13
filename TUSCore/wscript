@@ -24,6 +24,13 @@ def configure(conf):
     conf.check_cxx(lib='pthread')
 
 def build(bld):
+    pugixml = bld.new_task_gen(
+                  features='cxx cxxstlib',
+                  target='pugixml',
+                  source=bld.path.ant_glob('3rdParty/**/*.cpp'),
+                  includes='.'
+              )
+
     gameserver = bld.new_task_gen(
                          features='cxx cxxstlib',
                          target='gameserver',
@@ -36,7 +43,7 @@ def build(bld):
                        target='gameserverut',
                        source=bld.path.ant_glob('GameServerUT/**/*.cpp'),
                        use='gameserver',
-                       lib='gtest gmock pthread pqxx',
+                       lib='gtest gmock pthread pqxx pugixml',
                        includes='.'
                    )
 
@@ -45,16 +52,9 @@ def build(bld):
                        target='gameserverct',
                        source=bld.path.ant_glob('GameServerCT/**/*.cpp'),
                        use='gameserver',
-                       lib='gtest gmock pthread pqxx',
+                       lib='gtest gmock pthread pqxx pugixml',
                        includes='.'
                    )
-
-    pugixml = bld.new_task_gen(
-                  features='cxx cxxstlib',
-                  target='pugixml',
-                  source=bld.path.ant_glob('3rdParty/**/*.cpp'),
-                  includes='.'
-              )
 
     xmlrpcclientasync = bld.new_task_gen(
                             features='cxx cxxstlib',

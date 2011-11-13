@@ -29,7 +29,7 @@
 #define GAMESERVER_TRANSPORT_ITRANSPORTRESOURCEOPERATOR_HPP
 
 #include "../../../Persistence/ITransaction.hpp"
-#include "../../../Resource/Key.hpp"
+//#include "../../../Resource/Key.hpp"
 #include "../../../Resource/Volume.hpp"
 #include "TransportResourceOperatorExitCode.hpp"
 #include <boost/noncopyable.hpp>
@@ -65,13 +65,13 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
-        Resource::Key                   const & a_key,
+        std::string                     const   a_key,
         Resource::Volume                const & a_volume
     ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of TransportResourceOperator.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ITransportResourceOperator> ITransportResourceOperatorShrPtr;
 

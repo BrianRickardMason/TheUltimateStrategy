@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_COST_COST_HPP
 #define GAMESERVER_COST_COST_HPP
 
-#include "../Resource/Key.hpp"
+//#include "../Resource/Key.hpp"
 #include "CostRecord.hpp"
 #include "Volume.hpp"
 #include <map>
@@ -92,11 +92,11 @@ public:
     IDCostType const & getIDCostType() const;
 
     /**
-     * @brief Gets the identifier of the resource.
+     * @brief Gets the key of the resource.
      *
-     * @return The identifier of the resource.
+     * @return The key of the resource.
      */
-    Resource::IDResource const & getIDResource() const;
+    std::string getKey() const;
 
     /**
      * @brief Gets the volume of the resource.
@@ -109,8 +109,10 @@ public:
      * @brief Returns a key associated with the cost.
      *
      * @return The key associated with the cost.
+     *
+     * TODO: To be removed.
      */
-    Resource::Key toKey() const;
+    std::string toKey() const;
 
 private:
     /**
@@ -124,9 +126,9 @@ private:
     IDCostType m_id_cost_type;
 
     /**
-     * @brief The identifier of the resource.
+     * @brief The key of the resource.
      */
-    Resource::IDResource m_id_resource;
+    std::string m_key;
 
     /**
      * @brief The volume of the resource.
@@ -134,20 +136,14 @@ private:
     Volume m_volume;
 };
 
+//@{
 /**
- * @brief A shared pointer of cost.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<Cost> CostShrPtr;
-
-/**
- * @brief A pair of costs.
- */
-typedef std::pair<Resource::IDResource, CostShrPtr> CostPair;
-
-/**
- * @brief A map of costs.
- */
-typedef std::map<Resource::IDResource, CostShrPtr> CostMap;
+typedef std::pair<std::string, CostShrPtr> CostPair;
+typedef std::map<std::string, CostShrPtr> CostMap;
+//}@
 
 } // namespace Cost
 } // namespace GameServer

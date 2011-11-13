@@ -29,6 +29,7 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
+using namespace std;
 
 namespace GameServer
 {
@@ -45,7 +46,7 @@ GetResourceOperator::GetResourceOperator(
 GetResourceOperatorExitCode GetResourceOperator::getResource(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    string             const   a_key
 ) const
 {
     try

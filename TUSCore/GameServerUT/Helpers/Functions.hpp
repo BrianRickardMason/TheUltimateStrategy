@@ -30,6 +30,7 @@
 
 #include "../../GameServer/Resource/ResourceSet.hpp"
 #include <boost/make_shared.hpp>
+#include <vector>
 
 /**
  * @brief Gets a resource set of a given volume per resource.

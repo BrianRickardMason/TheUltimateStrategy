@@ -25,11 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include "../../GameServer/Resource/Key.hpp"
 #include "../../GameServer/Resource/ResourceWithVolume.hpp"
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
 using namespace GameServer::Resource;
+using namespace std;
 
 /**
  * @brief A test class.
@@ -42,8 +44,8 @@ protected:
      * @brief Constructs a test class.
      */
     ResourceWithVolumeTest()
-        : m_resource_with_volume(Key(ID_RESOURCE_COAL), 2),
-          m_model_key(ID_RESOURCE_COAL)
+        : m_resource_with_volume(KEY_RESOURCE_COAL, 2),
+          m_model_key(KEY_RESOURCE_COAL)
     {
     }
 
@@ -55,35 +57,30 @@ protected:
     /**
      * @brief A model key.
      */
-    Key m_model_key;
+    string m_model_key;
 };
 
 TEST_F(ResourceWithVolumeTest, ResourceWithVolume_BasedOnArguments)
 {
-    ResourceWithVolume resource_with_volume(Key(ID_RESOURCE_COAL), 2);
+    ResourceWithVolume resource_with_volume(KEY_RESOURCE_COAL, 2);
 
-    ASSERT_TRUE(m_model_key == resource_with_volume.getKey());
+    ASSERT_TRUE(m_model_key == resource_with_volume.getResource()->getKey());
     ASSERT_EQ(2, resource_with_volume.getVolume());
 }
 
 TEST_F(ResourceWithVolumeTest, ResourceWithVolume_BasedOnRecord)
 {
-    ResourceWithVolumeRecord resource_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), Key(ID_RESOURCE_COAL), 2);
+    ResourceWithVolumeRecord resource_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_RESOURCE_COAL, 2);
 
     ResourceWithVolume resource_with_volume(resource_with_volume_record);
 
-    ASSERT_TRUE(m_model_key == resource_with_volume.getKey());
+    ASSERT_TRUE(m_model_key == resource_with_volume.getResource()->getKey());
     ASSERT_EQ(2, resource_with_volume.getVolume());
 }
 
-TEST_F(ResourceWithVolumeTest, getKey)
+TEST_F(ResourceWithVolumeTest, GetResourceResourceIsNotEmpty)
 {
-    ASSERT_TRUE(m_model_key == m_resource_with_volume.getKey());
-}
-
-TEST_F(ResourceWithVolumeTest, getIDResource)
-{
-    ASSERT_TRUE(ID_RESOURCE_COAL == m_resource_with_volume.getIDResource());
+    ASSERT_TRUE(m_resource_with_volume.getResource());
 }
 
 TEST_F(ResourceWithVolumeTest, getVolume)

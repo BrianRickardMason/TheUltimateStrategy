@@ -65,15 +65,13 @@ public:
     ) const = 0;
 };
 
+//@{
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<ICostAccessor> ICostAccessorAutPtr;
-
-/**
- * @brief Typedef of scoped pointer.
- */
 typedef boost::scoped_ptr<ICostAccessor> ICostAccessorScpPtr;
+//}@
 
 } // namespace Cost
 } // namespace GameServer

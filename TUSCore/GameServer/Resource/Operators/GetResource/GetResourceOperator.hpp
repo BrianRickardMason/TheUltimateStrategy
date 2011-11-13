@@ -64,7 +64,7 @@ public:
     virtual GetResourceOperatorExitCode getResource(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        std::string                     const   a_key
     ) const;
 
 private:
@@ -75,7 +75,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<GetResourceOperator> GetResourceOperatorAutPtr;
 

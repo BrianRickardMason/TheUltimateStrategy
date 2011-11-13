@@ -33,8 +33,6 @@ using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
 
-using GameServer::Resource::IDResource;
-
 namespace GameServer
 {
 namespace Cost
@@ -59,15 +57,15 @@ CostRecordVec CostAccessorPostgresql::getCosts(
     // Fake types for libpqxx.
     int integer;
 
-    IDResource id_resource;
+    string key;
     Volume volume;
 
     for (pqxx::result::const_iterator it = result.begin(); it != result.end(); ++it)
     {
-        id_resource = it["id_resource"].as(integer); // TODO: Verify "as" method handling.
+        it["resource_key"].to(key);
         volume = it["volume"].as(integer);
 
-        CostRecordShrPtr cost_record_shr_ptr = make_shared<CostRecord>(a_key_hash, a_id_cost_type, id_resource, volume);
+        CostRecordShrPtr cost_record_shr_ptr = make_shared<CostRecord>(a_key_hash, a_id_cost_type, key, volume);
 
         records.push_back(cost_record_shr_ptr);
     }

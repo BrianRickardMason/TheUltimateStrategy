@@ -25,9 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "ResourceWithVolumeRecord.hpp"
+#include <GameServer/Resource/ResourceWithVolumeRecord.hpp>
 
 using namespace GameServer::Common;
+using namespace std;
 
 namespace GameServer
 {
@@ -35,9 +36,9 @@ namespace Resource
 {
 
 ResourceWithVolumeRecord::ResourceWithVolumeRecord(
-    IDHolder const & a_id_holder,
-    Key      const & a_key,
-    Volume   const & a_volume
+    IDHolder const a_id_holder,
+    string   const a_key,
+    Volume   const a_volume
 )
     : m_id_holder(a_id_holder),
       m_key(a_key),
@@ -50,12 +51,12 @@ IDHolder const & ResourceWithVolumeRecord::getIDHolder() const
     return m_id_holder;
 }
 
-Key const & ResourceWithVolumeRecord::getKey() const
+string ResourceWithVolumeRecord::getKey() const
 {
     return m_key;
 }
 
-Volume const & ResourceWithVolumeRecord::getVolume() const
+Volume ResourceWithVolumeRecord::getVolume() const
 {
     return m_volume;
 }

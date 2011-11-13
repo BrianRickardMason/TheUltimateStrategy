@@ -75,7 +75,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<CostPersistenceFacade> CostPersistenceFacadeAutPtr;
 

@@ -28,103 +28,25 @@
 #ifndef GAMESERVER_RESOURCE_KEY_HPP
 #define GAMESERVER_RESOURCE_KEY_HPP
 
-#include "../Common/KeyHash.hpp"
-#include "IDResource.hpp"
-#include <boost/tuple/tuple_comparison.hpp>
-#include <boost/tuple/tuple.hpp>
+#include <string>
 
 namespace GameServer
 {
 namespace Resource
 {
 
+//@{
 /**
- * @brief The key.
- *
- * Uniquely identifies a resource object.
- *
- * TODO: Use boost::operators.
- * TODO: Consider facilitators/stabilizators of the interface (getIdResource).
- *       First step to unification (base and derived classes/specialization).
+ * @brief The available key.
  */
-class Key
-{
-public:
-    /**
-     * @brief The internal key.
-     */
-    typedef boost::tuple<IDResource> InternalKey;
-
-    /**
-     * @brief Constructs the key.
-     *
-     * @param a_id_resource The identifier of the resource.
-     */
-    explicit Key(
-        IDResource const & a_id_resource
-    )
-        : m_internal_key(a_id_resource)
-    {
-    }
-
-    /**
-     * @brief Constructs the key.
-     *
-     * @param a_key_hash A key hash.
-     */
-    explicit Key(
-        Common::KeyHash const & a_key_hash
-    )
-        : m_internal_key(IDResource(a_key_hash % 100))
-    {
-    }
-
-    /**
-     * @brief Relational operators.
-     */
-    bool operator==(Key const & a_rhs) const { return m_internal_key == a_rhs.m_internal_key; }
-    bool operator< (Key const & a_rhs) const { return m_internal_key <  a_rhs.m_internal_key; }
-
-    /**
-     * @brief Gets the internal key.
-     *
-     * @return The internal key.
-     */
-    InternalKey const & getInternalKey() const
-    {
-        return m_internal_key;
-    }
-
-    /**
-     * @brief Translates the key to "hash" value.
-     *
-     * @return The "hash" value.
-     */
-    Common::KeyHash toHash() const
-    {
-        return   Common::KEY_HASH_MAGIC_VALUE_RESOURCE * 1000000
-               + 0                                     * 10000
-               + 0                                     * 100
-               + m_internal_key.get<0>().getValue()    * 1;
-    }
-
-private:
-    /**
-     * @brief The internal key.
-     */
-    InternalKey m_internal_key;
-};
-
-/**
- * @brief The available keys.
- */
-const Key KEY_RESOURCE_COAL (ID_RESOURCE_COAL);
-const Key KEY_RESOURCE_FOOD (ID_RESOURCE_FOOD);
-const Key KEY_RESOURCE_GOLD (ID_RESOURCE_GOLD);
-const Key KEY_RESOURCE_IRON (ID_RESOURCE_IRON);
-const Key KEY_RESOURCE_MANA (ID_RESOURCE_MANA);
-const Key KEY_RESOURCE_ROCK (ID_RESOURCE_ROCK);
-const Key KEY_RESOURCE_WOOD (ID_RESOURCE_WOOD);
+std::string const KEY_RESOURCE_COAL("coal");
+std::string const KEY_RESOURCE_FOOD("food");
+std::string const KEY_RESOURCE_GOLD("gold");
+std::string const KEY_RESOURCE_IRON("iron");
+std::string const KEY_RESOURCE_MANA("mana");
+std::string const KEY_RESOURCE_ROCK("rock");
+std::string const KEY_RESOURCE_WOOD("wood");
+//}@
 
 } // namespace Resource
 } // namespace GameServer

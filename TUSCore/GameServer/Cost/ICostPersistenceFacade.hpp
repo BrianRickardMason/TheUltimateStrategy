@@ -31,6 +31,7 @@
 #include "../Persistence/ITransaction.hpp"
 #include "../Resource/ResourceSet.hpp"
 #include "IDCostType.hpp"
+#include <GameServer/Common/KeyHash.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace GameServer
@@ -64,7 +65,7 @@ public:
 };
 
 /**
- * @brief Typedef of shared pointer.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ICostPersistenceFacade> ICostPersistenceFacadeShrPtr;
 

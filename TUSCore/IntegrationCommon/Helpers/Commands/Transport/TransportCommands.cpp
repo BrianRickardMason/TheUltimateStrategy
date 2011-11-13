@@ -71,7 +71,7 @@ ReplyShrPtr TransportResource(
     string        const a_password,
     string        const a_settlement_name_source,
     string        const a_settlement_name_destination,
-    unsigned int  const a_id_resource,
+    string        const a_key,
     unsigned int  const a_volume
 )
 {
@@ -79,7 +79,7 @@ ReplyShrPtr TransportResource(
                                                            a_password,
                                                            a_settlement_name_source,
                                                            a_settlement_name_destination,
-                                                           a_id_resource,
+                                                           a_key,
                                                            a_volume);
 
     return a_client->sendRequest(request);
