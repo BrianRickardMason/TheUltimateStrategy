@@ -1,0 +1,7 @@
+#!/bin/bash
+
+../TUSCore/GameServer/Persistence/PostgreSQL/setup postgres
+cd ../TUSCore/build
+./server
+cd -
+

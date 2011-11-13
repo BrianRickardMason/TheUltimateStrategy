@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 # Name: TUSUserInterface.py
-# Description: Thr callable interface with some facilities.
+# Description: The callable interface with some facilities.
 # Author: Bajron.
 
 from TUSInterface import TUSInterface
+from TUSIds import *
 
 class TUSUserInterface(TUSInterface):
     """ TODO """
@@ -71,6 +72,11 @@ class TUSUserInterface(TUSInterface):
         return TUSInterface.buildBuilding( self, self.mUser, self.mPassword, 
             aIdHolderClass, aHolderName, aIdBuildingClass, aIdBuilding, aVolume)
 
+    def buildOn( self, aSettlementName, aBuilding, aVolume):
+        return self.buildBuilding( 
+            str(ID_HOLDER_CLASS_SETTLEMENT), aSettlementName, 
+            str(aBuilding[0]), str(aBuilding[1]), str(aVolume) );
+
     def destroyBuilding(self,
             aIdHolderClass, aHolderName, aIdBuildingClass, aIdBuilding, aVolume):
         return TUSInterface.destroyBuilding( self, self.mUser, self.mPassword, 
@@ -89,10 +95,20 @@ class TUSUserInterface(TUSInterface):
         return TUSInterface.dismissHuman( self, self.mUser, self.mPassword, 
             aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aExperience, aVolume)
 
+    def dismissFrom(self, aSettlementName, aHuman, aExperience, aVolume):
+        return self.dismissHuman( 
+            str(ID_HOLDER_CLASS_SETTLEMENT), aSettlementName,
+            str(aHuman[0]), str(aHuman[1]), str(aExperience), str(aVolume));
+            
     def engageHuman(self,
             aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aVolume):
         return TUSInterface.engageHuman( self, self.mUser, self.mPassword, 
             aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aVolume)
+
+    def humanTo( self, aSettlementName, aHuman, aVolume):
+        return self.engageHuman( 
+            str(ID_HOLDER_CLASS_SETTLEMENT), aSettlementName,
+            str(aHuman[0]), str(aHuman[1]), str(aVolume) );
 
     def getHuman(self,
             aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aExperience):
