@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "ResourceSet.hpp"
 #include <GameServer/Configuration/Configurator/Resource/ConfiguratorResource.hpp>
+#include <GameServer/Resource/ResourceSet.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace boost;
