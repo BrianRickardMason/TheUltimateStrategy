@@ -29,6 +29,7 @@
 #include <GameServer/Resource/ResourceSet.hpp>
 #include <boost/make_shared.hpp>
 
+using namespace GameServer::Configuration;
 using namespace boost;
 using namespace std;
 
@@ -39,13 +40,9 @@ namespace Resource
 
 ResourceSet::ResourceSet()
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
-    for (std::map<std::string, GameServer::Configuration::IResourceShrPtr>::const_iterator it = resources.begin();
-         it != resources.end();
-         ++it)
+    for (IResourceMap::const_iterator it = resources.begin(); it != resources.end(); ++it)
     {
         m_map.insert(make_pair(it->second->getKey(), make_shared<ResourceWithVolume>(it->second->getKey(), 0)));
     }
@@ -58,13 +55,9 @@ ResourceSet::ResourceSet(
 )
     : m_map(a_resource_with_volume_map)
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
-    for (std::map<std::string, GameServer::Configuration::IResourceShrPtr>::const_iterator it = resources.begin();
-         it != resources.end();
-         ++it)
+    for (IResourceMap::const_iterator it = resources.begin(); it != resources.end(); ++it)
     {
         try
         {
@@ -84,9 +77,7 @@ ResourceSet::ResourceSet(
 )
     : m_map(a_rhs.m_map)
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 }
@@ -95,9 +86,7 @@ ResourceSet const ResourceSet::operator +(
     ResourceSet const & a_rhs
 ) const
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 
@@ -108,9 +97,7 @@ ResourceSet const ResourceSet::operator *(
     unsigned int const a_factor
 ) const
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 
@@ -121,9 +108,7 @@ bool ResourceSet::operator ==(
     ResourceSet const & a_rhs
 ) const
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 
@@ -142,9 +127,7 @@ bool ResourceSet::operator >=(
     ResourceSet const & a_rhs
 ) const
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 
@@ -163,9 +146,7 @@ ResourceSet ResourceSet::operator +=(
     ResourceSet const & a_rhs
 )
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 
@@ -193,9 +174,7 @@ ResourceSet ResourceSet::operator *=(
     unsigned int const a_factor
 )
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 
@@ -221,9 +200,7 @@ ResourceSet ResourceSet::operator *=(
 
 ResourceWithVolumeMap const & ResourceSet::getMap() const
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-    std::map<std::string, GameServer::Configuration::IResourceShrPtr> resources = CONFIGURATOR_RESOURCE.getResources();
+    IResourceMap const & resources = CONFIGURATOR_RESOURCE.getResources();
 
     BOOST_ASSERT(m_map.size() == resources.size());
 
