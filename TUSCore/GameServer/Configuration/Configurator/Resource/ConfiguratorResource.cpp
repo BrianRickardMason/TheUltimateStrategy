@@ -58,7 +58,7 @@ IResourceShrPtr ConfiguratorResource::getResource(
     return m_resources.at(a_key);
 }
 
-IResourceMap ConfiguratorResource::getResources() const
+IResourceMap const & ConfiguratorResource::getResources() const
 {
     return m_resources;
 }
