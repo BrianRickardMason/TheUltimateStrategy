@@ -69,7 +69,7 @@ public:
 /**
  * @brief A useful typedef.
  */
-typedef boost::shared_ptr<IResource> IResourceShrPtr;
+typedef boost::shared_ptr<IResource const> IResourceShrPtr;
 typedef std::map<IResourceKey, IResourceShrPtr> IResourceMap;
 //}@
 
