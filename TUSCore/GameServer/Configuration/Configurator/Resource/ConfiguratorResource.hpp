@@ -94,7 +94,6 @@ private:
     /**
      * @brief The map of available resources.
      *
-     * TODO: Resources are constant.
      * TODO: Map is given as a const reference.
      */
     IResourceMap m_resources;
