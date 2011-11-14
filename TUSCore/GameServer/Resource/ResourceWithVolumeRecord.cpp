@@ -37,7 +37,7 @@ namespace Resource
 
 ResourceWithVolumeRecord::ResourceWithVolumeRecord(
     IDHolder const a_id_holder,
-    string   const a_key,
+    string   const a_key, // TODO: A key.
     Volume   const a_volume
 )
     : m_id_holder(a_id_holder),
@@ -51,7 +51,7 @@ IDHolder const & ResourceWithVolumeRecord::getIDHolder() const
     return m_id_holder;
 }
 
-string ResourceWithVolumeRecord::getKey() const
+string ResourceWithVolumeRecord::getKey() const // TODO: A key.
 {
     return m_key;
 }
