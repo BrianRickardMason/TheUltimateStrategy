@@ -165,11 +165,6 @@
         <name>temple</name>
     </building>
     <building>
-        <key>specialaaa</key>
-        <class>gold</class>
-        <name>aaa</name>
-    </building>
-    <building>
         <key>specialaqueduct</key>
         <class>gold</class>
         <name>aqueduct</name>
@@ -183,6 +178,11 @@
         <key>specialcommercialport</key>
         <class>gold</class>
         <name>commercial port</name>
+    </building>
+    <building>
+        <key>specialcourt</key>
+        <class>gold</class>
+        <name>court</name>
     </building>
     <building>
         <key>specialgranary</key>
