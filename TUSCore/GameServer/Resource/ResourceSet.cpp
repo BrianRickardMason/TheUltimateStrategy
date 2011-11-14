@@ -27,7 +27,6 @@
 
 #include "ResourceSet.hpp"
 #include <GameServer/Configuration/Configurator/Resource/ConfiguratorResource.hpp>
-#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace boost;
