@@ -42,9 +42,6 @@ ResourceWithVolume::ResourceWithVolume(
 )
     : m_volume(a_volume)
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
-
     m_resource = CONFIGURATOR_RESOURCE.getResource(a_key);
 }
 
@@ -53,8 +50,6 @@ ResourceWithVolume::ResourceWithVolume(
 )
     : m_volume(a_record.getVolume())
 {
-    GameServer::Configuration::ConfiguratorResource CONFIGURATOR_RESOURCE;
-    CONFIGURATOR_RESOURCE.configure();
     m_resource = CONFIGURATOR_RESOURCE.getResource(a_record.getKey());
 }
 
