@@ -36,6 +36,11 @@ namespace GameServer
 namespace Configuration
 {
 
+ConfiguratorResource::ConfiguratorResource()
+{
+	configure();
+}
+
 bool ConfiguratorResource::configure()
 {
     if (!loadXml())

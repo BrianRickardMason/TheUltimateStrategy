@@ -44,6 +44,8 @@ class ConfiguratorResource
     : private boost::noncopyable
 {
 public:
+    ConfiguratorResource();
+
     /**
      * @brief Gets the configuration.
      *
@@ -96,6 +98,8 @@ private:
      */
     IResourceMap m_resources;
 };
+
+static ConfiguratorResource const CONFIGURATOR_RESOURCE;
 
 } // namespace Configuration
 } // namespace GameServer
