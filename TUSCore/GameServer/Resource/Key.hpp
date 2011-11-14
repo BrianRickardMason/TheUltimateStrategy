@@ -39,7 +39,7 @@ namespace Resource
 /**
  * @brief The available key.
  */
-std::string const KEY_RESOURCE_COAL("coal");
+std::string const KEY_RESOURCE_COAL("coal"); // TODO: A key.
 std::string const KEY_RESOURCE_FOOD("food");
 std::string const KEY_RESOURCE_GOLD("gold");
 std::string const KEY_RESOURCE_IRON("iron");
