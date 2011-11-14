@@ -29,7 +29,6 @@
 #define GAMESERVER_RESOURCE_RESOURCEWITHVOLUMERECORD_HPP
 
 #include "../Common/IDHolder.hpp"
-//#include "Key.hpp"
 #include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
