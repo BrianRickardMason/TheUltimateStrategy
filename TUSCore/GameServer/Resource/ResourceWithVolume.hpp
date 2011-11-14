@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_RESOURCE_RESOURCEWITHVOLUME_HPP
 #define GAMESERVER_RESOURCE_RESOURCEWITHVOLUME_HPP
 
-#include <GameServer/Configuration/Configurator/Resource/Resource.hpp>
+#include <GameServer/Configuration/Configurator/Resource/Resource.hpp> // TODO: The interface.
 #include <GameServer/Resource/ResourceWithVolumeRecord.hpp>
 
 namespace GameServer
@@ -51,7 +51,7 @@ public:
      * @param a_volume The volume of the resource.
      */
     ResourceWithVolume(
-        std::string const a_key,
+        std::string const a_key, // TODO: A key.
         Volume      const a_volume
     );
 
@@ -95,8 +95,8 @@ private:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ResourceWithVolume> ResourceWithVolumeShrPtr;
-typedef std::pair<std::string, ResourceWithVolumeShrPtr> ResourceWithVolumePair;
-typedef std::map<std::string, ResourceWithVolumeShrPtr> ResourceWithVolumeMap;
+typedef std::pair<std::string, ResourceWithVolumeShrPtr> ResourceWithVolumePair; // TODO: A key.
+typedef std::map<std::string, ResourceWithVolumeShrPtr> ResourceWithVolumeMap; // TODO: A key.
 //}@
 
 } // namespace Resource
