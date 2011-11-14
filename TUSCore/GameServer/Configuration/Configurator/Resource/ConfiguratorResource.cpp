@@ -38,7 +38,7 @@ namespace Configuration
 
 ConfiguratorResource::ConfiguratorResource()
 {
-	configure();
+    configure();
 }
 
 bool ConfiguratorResource::configure()
