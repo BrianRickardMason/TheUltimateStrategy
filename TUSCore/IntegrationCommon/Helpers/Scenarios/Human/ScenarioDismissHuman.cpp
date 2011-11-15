@@ -68,18 +68,14 @@ ScenarioDismissHumanActionSuccess::ScenarioDismissHumanActionSuccess(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_human_class,
-    unsigned int const a_id_human,
-    unsigned int const a_experience,
+    string       const a_key,
     unsigned int const a_volume
 )
     : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
       m_holder_name(a_holder_name),
-      m_id_human_class(a_id_human_class),
-      m_id_human(a_id_human),
-      m_experience(a_experience),
+      m_key(a_key),
       m_volume(a_volume)
 {
 }
@@ -93,9 +89,7 @@ ReplyShrPtr ScenarioDismissHumanActionSuccess::perform(
                         m_password,
                         m_id_holder_class,
                         m_holder_name,
-                        m_id_human_class,
-                        m_id_human,
-                        m_experience,
+                        m_key,
                         m_volume);
 }
 
@@ -104,18 +98,14 @@ ScenarioDismissHumanActionInvalidRequest::ScenarioDismissHumanActionInvalidReque
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_human_class,
-    unsigned int const a_id_human,
-    unsigned int const a_experience,
+    string       const a_key,
     unsigned int const a_volume
 )
     : m_login(a_login),
       m_password(a_password),
       m_id_holder_class(a_id_holder_class),
       m_holder_name(a_holder_name),
-      m_id_human_class(a_id_human_class),
-      m_id_human(a_id_human),
-      m_experience(a_experience),
+      m_key(a_key),
       m_volume(a_volume)
 {
 }
@@ -140,14 +130,8 @@ ReplyShrPtr ScenarioDismissHumanActionInvalidRequest::perform(
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
     holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
-    IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("value")->setValue(m_id_human_class);
-
-    IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("value")->setValue(m_id_human);
-
-    IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("value")->setValue(m_experience);
+    IXmlNodeShrPtr idhuman = parameters->appendNode("humankey");
+    idhuman->appendAttribute("value")->setValue(m_key.c_str());
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
     volume->appendAttribute("valve")->setValue(m_volume);

@@ -46,14 +46,14 @@ public:
      * @brief Gets cost records.
      *
      * @param a_transaction  A transaction.
-     * @param a_key_hash     A key hash.
+     * @param a_key          A key.
      * @param a_id_cost_type An identifier of the type of the cost.
      *
      * @return A map of human with volume records, an empty map if not found.
      */
     virtual CostRecordVec getCosts(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
+        std::string                     const & a_key,
         IDCostType                      const & a_id_cost_type
     ) const;
 };

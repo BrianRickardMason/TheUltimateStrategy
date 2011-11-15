@@ -28,11 +28,12 @@
 #ifndef GAMESERVER_HUMAN_HUMANWITHVOLUMERECORD_HPP
 #define GAMESERVER_HUMAN_HUMANWITHVOLUMERECORD_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "Key.hpp"
-#include "Volume.hpp"
+#include <GameServer/Common/IDHolder.hpp>
+#include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
+#include <GameServer/Human/Volume.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
+#include <string>
 
 namespace GameServer
 {
@@ -40,7 +41,7 @@ namespace Human
 {
 
 /**
- * @brief A human with volume record.
+ * @brief HumanWithVolumeRecord.
  */
 class HumanWithVolumeRecord
 {
@@ -53,9 +54,9 @@ public:
      * @param a_volume    The volume of the human.
      */
     HumanWithVolumeRecord(
-        Common::IDHolder const & a_id_holder,
-        Key              const & a_key,
-        Volume           const & a_volume
+        Common::IDHolder         const a_id_holder,
+        Configuration::IHumanKey const a_key,
+        Volume                   const a_volume
     );
 
     /**
@@ -70,14 +71,14 @@ public:
      *
      * @return The key of the human.
      */
-    Key const & getKey() const;
+    Configuration::IHumanKey getKey() const;
 
     /**
      * @brief Gets the volume of the human.
      *
      * @return The volume of the human.
      */
-    Volume const & getVolume() const;
+    Volume getVolume() const;
 
 private:
     /**
@@ -88,7 +89,7 @@ private:
     /**
      * @brief The key of the human.
      */
-    Key m_key;
+    Configuration::IHumanKey m_key;
 
     /**
      * @brief The volume of the human.
@@ -96,20 +97,14 @@ private:
     Volume m_volume;
 };
 
+//@{
 /**
- * @brief A shared pointer of human with volume record.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<HumanWithVolumeRecord> HumanWithVolumeRecordShrPtr;
-
-/**
- * @brief A pair of human with volume record.
- */
-typedef std::pair<Key, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordPair;
-
-/**
- * @brief A map of human with volume record.
- */
-typedef std::map<Key, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordMap;
+typedef std::pair<Configuration::IHumanKey, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordPair;
+typedef std::map<Configuration::IHumanKey, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordMap;
+//}@
 
 } // namespace Human
 } // namespace GameServer

@@ -25,42 +25,78 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <GameServer/Building/BuildingWithVolume.hpp>
-#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
+#include <GameServer/Configuration/Configurator/Human/ConfiguratorHuman.hpp>
+#include <GameServer/Configuration/Configurator/Human/Human.hpp>
 
-using namespace GameServer::Configuration;
+using namespace pugi;
+using namespace std;
 
 namespace GameServer
 {
-namespace Building
+namespace Configuration
 {
 
-BuildingWithVolume::BuildingWithVolume(
-    IBuildingKey const a_key,
-    Volume       const a_volume
-)
-    : m_volume(a_volume)
+ConfiguratorHuman::ConfiguratorHuman()
 {
-    m_building = CONFIGURATOR_BUILDING.getBuilding(a_key);
+    configure();
 }
 
-BuildingWithVolume::BuildingWithVolume(
-    BuildingWithVolumeRecord const & a_record
-)
-    : m_volume(a_record.getVolume())
+bool ConfiguratorHuman::configure()
 {
-    m_building = CONFIGURATOR_BUILDING.getBuilding(a_record.getKey());
+    if (!loadXml())
+    {
+        return false;
+    }
+
+    if (!parseXml())
+    {
+        return false;
+    }
+
+    return true;
 }
 
-IBuildingShrPtr BuildingWithVolume::getBuilding() const
+IHumanShrPtr ConfiguratorHuman::getHuman(
+    IHumanKey const a_key
+) const
 {
-    return m_building;
+    return m_humans.at(a_key);
 }
 
-Volume BuildingWithVolume::getVolume() const
+IHumanMap const & ConfiguratorHuman::getHumans() const
 {
-    return m_volume;
+    return m_humans;
 }
 
-} // namespace Building
+bool ConfiguratorHuman::loadXml()
+{
+    // TODO: Get the path from the basic configuration.
+    char const * path =
+        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Human/humans.xml";
+
+    return m_humans_xml.load_file(path);
+}
+
+bool ConfiguratorHuman::parseXml()
+{
+    // TODO: Add verification here.
+
+    xml_node humans = m_humans_xml.child("humans");
+
+    for (xml_node_iterator it = humans.begin(); it != humans.end(); ++it)
+    {
+        IHumanKey const value_key        = it->child_value("key");
+        string    const value_class      = it->child_value("class");
+        string    const value_name       = it->child_value("name");
+        string    const value_experience = it->child_value("experience");
+
+        IHumanShrPtr human(new Human(value_key, value_class, value_name, value_experience));
+
+        m_humans.insert(make_pair(value_key, human));
+    }
+
+    return true;
+}
+
+} // namespace Configuration
 } // namespace GameServer

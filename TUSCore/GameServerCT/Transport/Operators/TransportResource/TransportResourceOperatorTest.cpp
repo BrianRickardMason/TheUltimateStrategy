@@ -29,6 +29,7 @@
 #include "../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../../../../GameServer/Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp"
 #include "../../../ComponentTest.hpp"
+#include <GameServer/Resource/Key.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;

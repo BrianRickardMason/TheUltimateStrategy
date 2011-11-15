@@ -42,7 +42,7 @@ namespace Building
 {
 
 /**
- * @brief An interface of building accessor.
+ * @brief The interface of BuildingAccessor.
  */
 class IBuildingAccessor
     : boost::noncopyable
@@ -63,7 +63,7 @@ public:
     virtual void insertRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -79,7 +79,7 @@ public:
     virtual void deleteRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IBuildingKey     const & a_key
     ) const = 0;
 
     /**
@@ -94,7 +94,7 @@ public:
     virtual BuildingWithVolumeRecordShrPtr getRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IBuildingKey     const & a_key
     ) const = 0;
 
     /**
@@ -123,7 +123,7 @@ public:
     virtual void increaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -140,20 +140,18 @@ public:
     virtual void decreaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 };
 
+//@{
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<IBuildingAccessor> IBuildingAccessorAutPtr;
-
-/**
- * @brief Typedef of scoped pointer.
- */
 typedef boost::scoped_ptr<IBuildingAccessor> IBuildingAccessorScpPtr;
+//}@
 
 } // namespace Building
 } // namespace GameServer

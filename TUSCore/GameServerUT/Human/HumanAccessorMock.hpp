@@ -56,7 +56,7 @@ public:
         void(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
+            Configuration::IHumanKey                    const & a_key,
             Volume                                      const & a_volume
         )
     );
@@ -73,7 +73,7 @@ public:
         void(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key
+            Configuration::IHumanKey                    const & a_key
         )
     );
 
@@ -91,25 +91,7 @@ public:
         HumanWithVolumeRecordShrPtr(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key
-        )
-    );
-
-    /**
-     * @brief Gets human with volume records by identifier of a human.
-     *
-     * @param a_transaction A transaction.
-     * @param a_id_holder   An identifier of a holder.
-     * @param a_id_human    An identifier of a human.
-     *
-     * @return A map of human with volume records, an empty map if not found.
-     */
-    MOCK_CONST_METHOD3(
-        getRecords,
-        HumanWithVolumeRecordMap(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            IDHuman                                     const & a_id_human
+            Configuration::IHumanKey                    const & a_key
         )
     );
 
@@ -142,7 +124,7 @@ public:
         void(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
+            Configuration::IHumanKey                    const & a_key,
             Volume                                      const & a_volume
         )
     );
@@ -160,7 +142,7 @@ public:
         void(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
+            Configuration::IHumanKey                    const & a_key,
             Volume                                      const & a_volume
         )
     );

@@ -64,7 +64,7 @@ public:
     virtual GetBuildingOperatorExitCode getBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IBuildingKey     const & a_key
     ) const;
 
 private:
@@ -75,7 +75,7 @@ private:
 };
 
 /**
- * @brief The auto pointer of GetBuildingOperator.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<GetBuildingOperator> GetBuildingOperatorAutPtr;
 

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGACCESSORMOCK_HPP
 #define GAMESERVER_BUILDING_BUILDINGACCESSORMOCK_HPP
 
-#include "../../GameServer/Building/IBuildingAccessor.hpp"
+#include <GameServer/Building/IBuildingAccessor.hpp>
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -56,10 +56,10 @@ public:
     MOCK_CONST_METHOD4(
         insertRecord,
         void(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
-            Volume                                      const & a_volume
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Configuration::IBuildingKey     const & a_key,
+            Volume                          const & a_volume
         )
     );
 
@@ -75,9 +75,9 @@ public:
     MOCK_CONST_METHOD3(
         deleteRecord,
         void(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Configuration::IBuildingKey     const & a_key
         )
     );
 
@@ -93,9 +93,9 @@ public:
     MOCK_CONST_METHOD3(
         getRecord,
         BuildingWithVolumeRecordShrPtr(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Configuration::IBuildingKey     const & a_key
         )
     );
 
@@ -110,8 +110,8 @@ public:
     MOCK_CONST_METHOD2(
         getRecords,
         BuildingWithVolumeRecordMap(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder
         )
     );
 
@@ -128,10 +128,10 @@ public:
     MOCK_CONST_METHOD4(
         increaseVolume,
         void(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
-            Volume                                      const & a_volume
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Configuration::IBuildingKey     const & a_key,
+            Volume                          const & a_volume
         )
     );
 
@@ -148,10 +148,10 @@ public:
     MOCK_CONST_METHOD4(
         decreaseVolume,
         void(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
-            Volume                                      const & a_volume
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Configuration::IBuildingKey     const & a_key,
+            Volume                          const & a_volume
         )
     );
 };

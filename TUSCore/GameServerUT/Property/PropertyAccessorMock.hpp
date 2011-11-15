@@ -47,7 +47,7 @@ public:
      * @brief Gets a property record.
      *
      * @param a_transaction A transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property record, null if not found.
@@ -55,9 +55,9 @@ public:
     MOCK_CONST_METHOD3(
         getPropertyRecord,
         PropertyRecordShrPtr(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::KeyHash                 const & a_key_hash,
-            IDProperty                                  const & a_id_property
+            Persistence::ITransactionShrPtr         a_transaction,
+            std::string                     const & a_key,
+            IDProperty                      const & a_id_property
         )
     );
 
@@ -65,15 +65,15 @@ public:
      * @brief Gets a set of property records.
      *
      * @param a_transaction A transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      *
      * @return A map of property records, an empty map if not found.
      */
     MOCK_CONST_METHOD2(
         getPropertyRecords,
         PropertyRecordMap(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::KeyHash                 const & a_key_hash
+            Persistence::ITransactionShrPtr         a_transaction,
+            std::string                     const & a_key
         )
     );
 };

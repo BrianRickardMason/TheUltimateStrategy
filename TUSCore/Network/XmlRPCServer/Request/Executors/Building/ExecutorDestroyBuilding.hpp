@@ -28,7 +28,6 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDESTROYBUILDING_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDESTROYBUILDING_HPP
 
-#include "../../../../../GameServer/Building/IDBuilding.hpp"
 #include "../../../../../GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorExitCode.hpp"
 #include "../../../../../GameServer/Building/Volume.hpp"
 #include "../../../../../GameServer/Common/IDHolder.hpp"
@@ -56,8 +55,7 @@ namespace Executors
  *     <parameters>
  *         <idholderclass   value=\"#\" />
  *         <holder_name     value=\"#\" />
- *         <idbuildingclass value=\"#\" />
- *         <idbuilding      value=\"#\" />
+ *         <buildingkey   value=\"#\" />
  *         <volume          value=\"#\" />
  *     </parameters>
  * </request>
@@ -171,14 +169,9 @@ class ExecutorDestroyBuilding
     std::string m_holder_name;
 
     /**
-     * @brief The value of the identifier of the class of a building.
+     * @brief The key of the building.
      */
-    unsigned int m_value_id_building_class;
-
-    /**
-     * @brief The value of the identifier of a building.
-     */
-    unsigned int m_value_id_building;
+    std::string m_key;
 
     /**
      * @brief The value of the volume.
@@ -189,11 +182,6 @@ class ExecutorDestroyBuilding
      * @brief The identifier of a holder.
      */
     GameServer::Common::IDHolder m_id_holder;
-
-    /**
-     * @brief The identifier of a building.
-     */
-    GameServer::Building::IDBuilding m_id_building;
 
     /**
      * @brief The volume.

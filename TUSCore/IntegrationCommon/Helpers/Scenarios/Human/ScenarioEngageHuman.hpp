@@ -110,8 +110,7 @@ public:
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_holder_name     The name of the holder.
-     * @param a_id_human_class  The identifier of the class of the human.
-     * @param a_id_human        The identifier of the human.
+     * @param a_key             The key of the human.
      * @param a_volume          The volume.
      */
     ScenarioEngageHumanActionSuccess(
@@ -119,16 +118,14 @@ public:
         std::string  const a_password,
         unsigned int const a_id_holder_class,
         std::string  const a_holder_name,
-        unsigned int const a_id_human_class,
-        unsigned int const a_id_human,
+        std::string  const a_key,
         unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
           m_id_holder_class(a_id_holder_class),
           m_holder_name(a_holder_name),
-          m_id_human_class(a_id_human_class),
-          m_id_human(a_id_human),
+          m_key(a_key),
           m_volume(a_volume)
     {
     }
@@ -149,8 +146,7 @@ public:
                                             m_password,
                                             m_id_holder_class,
                                             m_holder_name,
-                                            m_id_human_class,
-                                            m_id_human,
+                                            m_key,
                                             m_volume);
     }
 
@@ -176,14 +172,9 @@ private:
     std::string const m_holder_name;
 
     /**
-     * @brief The identifier of the class of the human.
+     * @brief The key of the human.
      */
-    unsigned int const m_id_human_class;
-
-    /**
-     * @brief The identifier of the human.
-     */
-    unsigned int const m_id_human;
+    std::string const m_key;
 
     /**
      * @brief The volume.
@@ -205,8 +196,7 @@ public:
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_holder_name     The name of the holder.
-     * @param a_id_human_class  The identifier of the class of the human.
-     * @param a_id_human        The identifier of the human.
+     * @param a_key             The key of the human.
      * @param a_volume          The volume.
      */
     ScenarioEngageHumanActionInvalidRequest(
@@ -214,16 +204,14 @@ public:
         std::string  const a_password,
         unsigned int const a_id_holder_class,
         std::string  const a_holder_name,
-        unsigned int const a_id_human_class,
-        unsigned int const a_id_human,
+        std::string  const a_key,
         unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
           m_id_holder_class(a_id_holder_class),
           m_holder_name(a_holder_name),
-          m_id_human_class(a_id_human_class),
-          m_id_human(a_id_human),
+          m_key(a_key),
           m_volume(a_volume)
     {
     }
@@ -255,11 +243,8 @@ public:
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
         holder_name->appendAttribute("value")->setValue(m_holder_name.c_str());
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-        idhumanclass->appendAttribute("value")->setValue(m_id_human_class);
-
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-        idhuman->appendAttribute("value")->setValue(m_id_human);
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr humankey = parameters->appendNode("humankey");
+        humankey->appendAttribute("value")->setValue(m_key.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr volume = parameters->appendNode("volume");
         volume->appendAttribute("valve")->setValue(m_volume);
@@ -289,14 +274,9 @@ private:
     std::string const m_holder_name;
 
     /**
-     * @brief The identifier of the class of the human.
+     * @brief The key of the human.
      */
-    unsigned int const m_id_human_class;
-
-    /**
-     * @brief The identifier of the human.
-     */
-    unsigned int const m_id_human;
+    std::string const m_key;
 
     /**
      * @brief The volume.

@@ -210,11 +210,11 @@ ReplyShrPtr ExecutorGetBuildings::produceReply(
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
-        IXmlNodeShrPtr node_idbuildingclass = node_object->appendNode("idbuildingclass");
-        node_idbuildingclass->appendAttribute("value")->setValue(it->second->getIDBuilding().getValue1());
+        IXmlNodeShrPtr node_idbuildingclass = node_object->appendNode("buildingclass");
+        node_idbuildingclass->appendAttribute("value")->setValue(it->second->getBuilding()->getClass().c_str());
 
-        IXmlNodeShrPtr node_idbuilding = node_object->appendNode("idbuilding");
-        node_idbuilding->appendAttribute("value")->setValue(it->second->getIDBuilding().getValue2());
+        IXmlNodeShrPtr node_idbuilding = node_object->appendNode("buildingname");
+        node_idbuilding->appendAttribute("value")->setValue(it->second->getBuilding()->getName().c_str());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
         node_volume->appendAttribute("value")->setValue(it->second->getVolume());

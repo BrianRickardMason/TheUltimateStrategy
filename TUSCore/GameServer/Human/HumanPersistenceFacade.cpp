@@ -25,9 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "HumanPersistenceFacade.hpp"
+#include <GameServer/Human/HumanPersistenceFacade.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Persistence;
 using namespace boost;
 
@@ -46,7 +47,7 @@ HumanPersistenceFacade::HumanPersistenceFacade(
 void HumanPersistenceFacade::addHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -63,7 +64,7 @@ void HumanPersistenceFacade::addHuman(
 bool HumanPersistenceFacade::subtractHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -93,21 +94,12 @@ bool HumanPersistenceFacade::subtractHuman(
 HumanWithVolumeShrPtr HumanPersistenceFacade::getHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    IHumanKey          const & a_key
 ) const
 {
     HumanWithVolumeRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_holder, a_key);
 
     return record ? make_shared<HumanWithVolume>(*record) : HumanWithVolumeShrPtr();
-}
-
-HumanWithVolumeMap HumanPersistenceFacade::getHumans(
-    ITransactionShrPtr         a_transaction,
-    IDHolder           const & a_id_holder,
-    IDHuman            const & a_id_human
-) const
-{
-    return prepareResultGetHumans(m_accessor->getRecords(a_transaction, a_id_holder, a_id_human));
 }
 
 HumanWithVolumeMap HumanPersistenceFacade::getHumans(

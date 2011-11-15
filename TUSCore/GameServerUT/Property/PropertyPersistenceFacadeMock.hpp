@@ -49,7 +49,7 @@ public:
      * @brief Gets a property boolean.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property.
@@ -58,8 +58,8 @@ public:
         getPropertyBoolean,
         PropertyBooleanShrPtr(
             Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash,
-            IDProperty                     const & a_id_property
+            std::string                     const & a_key,
+            IDProperty                      const & a_id_property
         )
     );
 
@@ -67,7 +67,7 @@ public:
      * @brief Gets a property integer.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property.
@@ -75,9 +75,9 @@ public:
     MOCK_CONST_METHOD3(
         getPropertyInteger,
         PropertyIntegerShrPtr(
-            Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash,
-            IDProperty                     const & a_id_property
+            Persistence::ITransactionShrPtr         a_transaction,
+            std::string                     const & a_key,
+            IDProperty                      const & a_id_property
         )
     );
 
@@ -85,7 +85,7 @@ public:
      * @brief Gets a property string.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property.
@@ -93,9 +93,9 @@ public:
     MOCK_CONST_METHOD3(
         getPropertyString,
         PropertyStringShrPtr(
-            Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash,
-            IDProperty                     const & a_id_property
+            Persistence::ITransactionShrPtr         a_transaction,
+            std::string                     const & a_key,
+            IDProperty                      const & a_id_property
         )
     );
 
@@ -103,15 +103,15 @@ public:
      * @brief Gets a set of properties.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      *
      * @return The set of properties.
      */
     MOCK_CONST_METHOD2(
         getProperties,
         PropertySet(
-            Persistence::ITransactionShrPtr        a_transaction,
-            Common::KeyHash                const & a_key_hash
+            Persistence::ITransactionShrPtr         a_transaction,
+            std::string                     const & a_key
         )
     );
 };

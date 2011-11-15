@@ -25,10 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistence/TransactionPostgresql.hpp"
-#include "BuildingAccessorPostgresql.hpp"
+#include <GameServer/Building/BuildingAccessorPostgresql.hpp>
+#include <GameServer/Persistence/TransactionPostgresql.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
@@ -41,7 +42,7 @@ namespace Building
 void BuildingAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IBuildingKey       const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -50,10 +51,9 @@ void BuildingAccessorPostgresql::insertRecord(
 
     string query = "INSERT INTO "
                    + getTableName(a_id_holder)
-                   + "(holder_name, id_building_class, id_building, volume) VALUES("
+                   + "(holder_name, building_key, volume) VALUES("
                    + backbone_transaction.quote(a_id_holder.getValue2()) + ", "
-                   + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1()) + ", "
-                   + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2()) + ", "
+                   + backbone_transaction.quote(a_key.c_str()) + ", "
                    + backbone_transaction.quote(a_volume) + ")";
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -62,7 +62,7 @@ void BuildingAccessorPostgresql::insertRecord(
 void BuildingAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    IBuildingKey       const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -71,8 +71,7 @@ void BuildingAccessorPostgresql::deleteRecord(
     string query = "DELETE FROM "
                    + getTableName(a_id_holder)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
+                   + " AND building_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }
@@ -80,7 +79,7 @@ void BuildingAccessorPostgresql::deleteRecord(
 BuildingWithVolumeRecordShrPtr BuildingAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    IBuildingKey       const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -89,8 +88,7 @@ BuildingWithVolumeRecordShrPtr BuildingAccessorPostgresql::getRecord(
     string query = "SELECT volume FROM "
                    + getTableName(a_id_holder)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
+                   + " AND building_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 
@@ -111,9 +109,6 @@ BuildingWithVolumeRecordMap BuildingAccessorPostgresql::getRecords(
     IDHolder           const & a_id_holder
 ) const
 {
-    // Fake types for libpqxx.
-    unsigned int unsigned_integer;
-
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
@@ -125,14 +120,13 @@ BuildingWithVolumeRecordMap BuildingAccessorPostgresql::getRecords(
 
     BuildingWithVolumeRecordMap records;
 
+    string key;
     Volume volume;
 
     for (pqxx::result::const_iterator it = result.begin(); it != result.end(); ++it)
     {
-        IDBuilding id_building(it["id_building_class"].as(unsigned_integer), it["id_building"].as(unsigned_integer));
+        it["building_key"].to(key);
         it["volume"].to(volume);
-
-        Key key(id_building);
 
         BuildingWithVolumeRecordShrPtr record = make_shared<BuildingWithVolumeRecord>(a_id_holder, key, volume);
 
@@ -147,7 +141,7 @@ BuildingWithVolumeRecordMap BuildingAccessorPostgresql::getRecords(
 void BuildingAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IBuildingKey       const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -158,8 +152,7 @@ void BuildingAccessorPostgresql::increaseVolume(
                    + getTableName(a_id_holder)
                    + " SET volume = volume + " + backbone_transaction.quote(a_volume)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
+                   + " AND building_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }
@@ -167,7 +160,7 @@ void BuildingAccessorPostgresql::increaseVolume(
 void BuildingAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IBuildingKey       const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -178,8 +171,7 @@ void BuildingAccessorPostgresql::decreaseVolume(
                    + getTableName(a_id_holder)
                    + " SET volume = volume - " + backbone_transaction.quote(a_volume)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_building_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_building = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2());
+                   + " AND building_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }

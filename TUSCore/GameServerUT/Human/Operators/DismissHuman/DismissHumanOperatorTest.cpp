@@ -32,9 +32,11 @@
 #include "../../../Property/PropertyPersistenceFacadeMock.hpp"
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
 #include "../../HumanPersistenceFacadeMock.hpp"
+#include <GameServer/Human/Key.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Human;
 using namespace GameServer::Persistence;
@@ -75,8 +77,8 @@ protected:
      * @return The prepared mock.
      */
     CostPersistenceFacadeMock * produceCostPersistenceFacadeMock(
-        GameServer::Human::Key const & a_key,
-        IDCostType             const & a_id_cost_type
+        IHumanKey  const & a_key,
+        IDCostType const & a_id_cost_type
     )
     {
         // Mocks setup: CostPersistenceFacadeMock.
@@ -95,8 +97,8 @@ protected:
      * @return The prepared mock.
      */
     PropertyPersistenceFacadeMock * producePropertyPersistenceFacadeMockShort(
-        GameServer::Human::Key const & a_key,
-        IDProperty             const & a_id_property
+        IHumanKey  const & a_key,
+        IDProperty const & a_id_property
     )
     {
         // Mocks setup: PropertyPersistenceFacadeMock.
@@ -131,7 +133,7 @@ protected:
      * @param a_volume A volume of jobless.
      */
     void configureHumanPersistenceFacadeMockForAddHuman(
-        GameServer::Human::Key    const & a_key,
+        IHumanKey                 const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
@@ -147,7 +149,7 @@ protected:
      * @param a_volume A volume of jobless.
      */
     void configureHumanPersistenceFacadeMockForGetHuman(
-        GameServer::Human::Key    const & a_key,
+        IHumanKey                 const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
@@ -165,7 +167,7 @@ protected:
      * @param a_volume A volume of the human.
      */
     void configureHumanPersistenceFacadeMockForSubtractHuman(
-        GameServer::Human::Key    const & a_key,
+        IHumanKey                 const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
@@ -180,13 +182,13 @@ protected:
      * @param a_id_cost_type The identifier of the cost type.
      */
     void configurePropertyPersistenceFacadeMockForGetPropertyBoolean(
-        GameServer::Human::Key           const & a_key,
+        IHumanKey                        const & a_key,
         GameServer::Property::IDProperty const & a_id_property
     )
     {
         PropertyBooleanShrPtr engageable = make_shared<PropertyBoolean>(a_id_property, true);
 
-        EXPECT_CALL(*m_property_persistence_facade, getPropertyBoolean(_, a_key.toHash(), a_id_property))
+        EXPECT_CALL(*m_property_persistence_facade, getPropertyBoolean(_, a_key, a_id_property))
         .WillOnce(Return(engageable));
     }
 
@@ -240,14 +242,14 @@ private:
      * @param a_id_cost_type An identifier of the cost type.
      */
     void configureCostPersistenceFacadeMockForGetCost(
-        GameServer::Human::Key               const & a_key,
+        IHumanKey                            const & a_key,
         IDCostType                           const & a_id_cost_type,
         vector<GameServer::Resource::Volume> const & a_volumes
     )
     {
         ResourceSet resource_set = getResourceSet(a_volumes);
 
-        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, a_key.toHash(), a_id_cost_type))
+        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, a_key, a_id_cost_type))
         .WillOnce(Return(resource_set));
     }
 };
@@ -286,7 +288,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_HumanIsNotDismissable)
 
     PropertyBooleanShrPtr engageable = make_shared<PropertyBoolean>(ID_PROPERTY_HUMAN_DISMISSABLE, false);
 
-    EXPECT_CALL(*m_property_persistence_facade, getPropertyBoolean(transaction, KEY_WORKER_JOBLESS_NOVICE.toHash(), ID_PROPERTY_HUMAN_DISMISSABLE))
+    EXPECT_CALL(*m_property_persistence_facade, getPropertyBoolean(transaction, KEY_WORKER_JOBLESS_NOVICE, ID_PROPERTY_HUMAN_DISMISSABLE))
     .WillOnce(Return(engageable));
 
     DismissHumanOperator dismiss_human_operator((ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),

@@ -28,7 +28,7 @@
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
-#include "../../GameServer/Human/Key.hpp"
+#include <GameServer/Human/Key.hpp>
 
 namespace H = GameServer::Human;
 

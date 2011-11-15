@@ -65,9 +65,7 @@ bool ExecutorGetHuman::getParameters(
         m_password              = a_request->getPasswordValue();
         m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
         m_holder_name           = a_request->getParameterValueString("holder_name");
-        m_value_id_human_class  = a_request->getParameterValueUnsignedInteger("idhumanclass");
-        m_value_id_human        = a_request->getParameterValueUnsignedInteger("idhuman");
-        m_value_experience      = a_request->getParameterValueUnsignedInteger("experience");
+        m_key                   = a_request->getParameterValueString("humankey");
 
         return true;
     }
@@ -82,8 +80,6 @@ bool ExecutorGetHuman::processParameters()
     try
     {
         m_id_holder.assign(m_value_id_holder_class, m_holder_name);
-        m_id_human.assign(m_value_id_human_class, m_value_id_human);
-        m_experience = m_value_experience;
 
         return true;
     }
@@ -159,8 +155,7 @@ ReplyShrPtr ExecutorGetHuman::perform(
         IConnectionShrPtr connection = a_persistence->getConnection();
         ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
-        GetHumanOperatorExitCode const exit_code =
-            get_human_operator->getHuman(transaction, m_id_holder, GameServer::Human::Key(m_id_human, m_experience));
+        GetHumanOperatorExitCode const exit_code = get_human_operator->getHuman(transaction, m_id_holder, m_key);
 
         if (exit_code.ok())
         {
@@ -213,14 +208,14 @@ ReplyShrPtr ExecutorGetHuman::produceReply(
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
-        IXmlNodeShrPtr node_idhumanclass = node_object->appendNode("idhumanclass");
-        node_idhumanclass->appendAttribute("value")->setValue(a_exit_code.m_human->getIDHuman().getValue1());
+        IXmlNodeShrPtr node_idhumanclass = node_object->appendNode("humanclass");
+        node_idhumanclass->appendAttribute("value")->setValue(a_exit_code.m_human->getHuman()->getClass().c_str());
 
-        IXmlNodeShrPtr node_idhuman = node_object->appendNode("idhuman");
-        node_idhuman->appendAttribute("value")->setValue(a_exit_code.m_human->getIDHuman().getValue2());
+        IXmlNodeShrPtr node_idhuman = node_object->appendNode("humanname");
+        node_idhuman->appendAttribute("value")->setValue(a_exit_code.m_human->getHuman()->getName().c_str());
 
         IXmlNodeShrPtr node_experience = node_object->appendNode("experience");
-        node_experience->appendAttribute("value")->setValue(a_exit_code.m_human->getExperience().getValue());
+        node_experience->appendAttribute("value")->setValue(a_exit_code.m_human->getHuman()->getExperience().c_str());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
         node_volume->appendAttribute("value")->setValue(a_exit_code.m_human->getVolume());

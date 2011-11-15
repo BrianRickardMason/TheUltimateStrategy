@@ -28,9 +28,8 @@
 #ifndef GAMESERVER_COST_COST_HPP
 #define GAMESERVER_COST_COST_HPP
 
-//#include "../Resource/Key.hpp"
-#include "CostRecord.hpp"
-#include "Volume.hpp"
+#include <GameServer/Cost/CostRecord.hpp>
+#include <GameServer/Cost/Volume.hpp>
 #include <map>
 
 namespace GameServer
@@ -78,11 +77,11 @@ public:
     };
 
     /**
-     * @brief Gets the key hash.
+     * @brief Gets the key.
      *
-     * @return The key hash.
+     * @return The key.
      */
-    Common::KeyHash const & getKeyHash() const;
+    std::string const & getKey() const;
 
     /**
      * @brief Gets the identifier of the cost type.
@@ -96,7 +95,7 @@ public:
      *
      * @return The key of the resource.
      */
-    std::string getKey() const;
+    std::string getResourceKey() const;
 
     /**
      * @brief Gets the volume of the resource.
@@ -112,13 +111,13 @@ public:
      *
      * TODO: To be removed.
      */
-    std::string toKey() const;
+    std::string toResourceKey() const;
 
 private:
     /**
-     * @brief The key hash.
+     * @brief The key.
      */
-    Common::KeyHash m_key_hash;
+    std::string m_key;
 
     /**
      * @brief The identifier of the cost type.
@@ -128,7 +127,7 @@ private:
     /**
      * @brief The key of the resource.
      */
-    std::string m_key;
+    std::string m_resource_key;
 
     /**
      * @brief The volume of the resource.

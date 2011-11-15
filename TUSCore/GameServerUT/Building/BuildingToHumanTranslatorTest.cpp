@@ -38,7 +38,7 @@ using namespace GameServer::Human;
 TEST(BuildingToHumanTranslatorTest, getHumansHostedForWork)
 {
     // Test commands and assertions.
-    IDHumanVec humans = BuildingToHumanTranslator::getHumansHostedForWork(KEY_DEFENSIVE_BARBICAN);
+    KeyVec humans = BuildingToHumanTranslator::getHumansHostedForWork(KEY_DEFENSIVE_BARBICAN);
     ASSERT_TRUE(humans.empty());
 
     humans = BuildingToHumanTranslator::getHumansHostedForWork(KEY_DEFENSIVE_BATTLEMENTS);

@@ -28,9 +28,9 @@
 #ifndef GAMESERVER_HUMAN_IHUMANACCESSOR_HPP
 #define GAMESERVER_HUMAN_IHUMANACCESSOR_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "HumanWithVolumeRecord.hpp"
+#include <GameServer/Common/IDHolder.hpp>
+#include <GameServer/Human/HumanWithVolumeRecord.hpp>
+#include <GameServer/Persistence/ITransaction.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -61,7 +61,7 @@ public:
     virtual void insertRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -75,7 +75,7 @@ public:
     virtual void deleteRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IHumanKey        const & a_key
     ) const = 0;
 
     /**
@@ -90,22 +90,7 @@ public:
     virtual HumanWithVolumeRecordShrPtr getRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const = 0;
-
-    /**
-     * @brief Gets human with volume records by id human.
-     *
-     * @param a_transaction A transaction.
-     * @param a_id_holder   An identifier of the holder.
-     * @param a_id_human    An identifier of the human.
-     *
-     * @return A map of human with volume records, an empty map if not found.
-     */
-    virtual HumanWithVolumeRecordMap getRecords(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        IDHuman                         const & a_id_human
+        Configuration::IHumanKey        const & a_key
     ) const = 0;
 
     /**
@@ -132,7 +117,7 @@ public:
     virtual void increaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -147,20 +132,18 @@ public:
     virtual void decreaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 };
 
+//@{
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<IHumanAccessor> IHumanAccessorAutPtr;
-
-/**
- * @brief Typedef of scoped pointer.
- */
 typedef boost::scoped_ptr<IHumanAccessor> IHumanAccessorScpPtr;
+//}@
 
 } // namespace Human
 } // namespace GameServer

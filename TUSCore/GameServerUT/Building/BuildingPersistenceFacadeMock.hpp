@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEMOCK_HPP
 #define GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEMOCK_HPP
 
-#include "../../GameServer/Building/IBuildingPersistenceFacade.hpp"
+#include <GameServer/Building/IBuildingPersistenceFacade.hpp>
 #include <gmock/gmock.h>
 
 namespace GameServer
@@ -56,10 +56,10 @@ public:
     MOCK_CONST_METHOD4(
         addBuilding,
         void(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
-            Volume                                      const & a_volume
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Configuration::IBuildingKey     const & a_key,
+            Volume                          const & a_volume
         )
     );
 
@@ -78,10 +78,10 @@ public:
     MOCK_CONST_METHOD4(
         subtractBuilding,
         bool(
-            GameServer::Persistence::ITransactionShrPtr         a_transaction,
-            GameServer::Common::IDHolder                const & a_id_holder,
-            Key                                         const & a_key,
-            Volume                                      const & a_volume
+            Persistence::ITransactionShrPtr         a_transaction,
+            Common::IDHolder                const & a_id_holder,
+            Configuration::IBuildingKey     const & a_key,
+            Volume                          const & a_volume
         )
     );
 
@@ -99,7 +99,7 @@ public:
         BuildingWithVolumeShrPtr(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Key                             const & a_key
+            Configuration::IBuildingKey     const & a_key
         )
     );
 

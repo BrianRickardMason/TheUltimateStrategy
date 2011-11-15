@@ -298,13 +298,12 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetSettlements(
 /**
  * @brief Creates a request "build building".
  *
- * @param a_login             The login of the user.
- * @param a_password          The password of the user.
- * @param a_id_holder_class   The identifier of the class of a holder.
- * @param a_holder_name       The name of the holder.
- * @param a_id_building_class The identifier of the class of a building.
- * @param a_id_building       The identifier of a building.
- * @param a_volume            The volume.
+ * @param a_login           The login of the user.
+ * @param a_password        The password of the user.
+ * @param a_id_holder_class The identifier of the class of a holder.
+ * @param a_holder_name     The name of the holder.
+ * @param a_key             The key of the building.
+ * @param a_volume          The volume.
  *
  * @return The created request.
  */
@@ -313,53 +312,48 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestBuildBuilding(
     std::string  const a_password,
     unsigned int const a_id_holder_class,
     std::string  const a_holder_name,
-    unsigned int const a_id_building_class,
-    unsigned int const a_id_building,
+    std::string  const a_key,
     unsigned int const a_volume
 );
 
 /**
  * @brief Creates a request "destroy building".
  *
- * @param a_login             The login of the user.
- * @param a_password          The password of the user.
- * @param a_id_holder_class   The identifier of the class of a holder.
- * @param a_holder_name       The name of the holder.
- * @param a_id_building_class The identifier of the class of a building.
- * @param a_id_building       The identifier of a building.
- * @param a_volume            The volume.
+ * @param a_login           The login of the user.
+ * @param a_password        The password of the user.
+ * @param a_id_holder_class The identifier of the class of a holder.
+ * @param a_holder_name     The name of the holder.
+ * @param a_key             The key of the building.
+ * @param a_volume          The volume.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDestroyBuilding(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building,
-    unsigned int const   a_volume
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name,
+    std::string  const a_key,
+    unsigned int const a_volume
 );
 
 /**
  * @brief Creates a request "get building".
  *
- * @param a_login             The login of the user.
- * @param a_password          The password of the user.
- * @param a_id_holder_class   The identifier of the class of a holder.
- * @param a_holder_name       The name of the holder.
- * @param a_id_building_class The identifier of the class of a building.
- * @param a_id_building       The identifier of a building.
+ * @param a_login           The login of the user.
+ * @param a_password        The password of the user.
+ * @param a_id_holder_class The identifier of the class of a holder.
+ * @param a_holder_name     The name of the holder.
+ * @param a_key             The key of the building.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuilding(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name,
+    std::string  const a_key
 );
 
 /**
@@ -373,10 +367,10 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuilding(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuildings(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name
 );
 
 /**
@@ -386,20 +380,18 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetBuildings(
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_holder_name     The name of the holder.
- * @param a_id_human_class  The identifier of the class of a human.
- * @param a_id_human        The identifier of a human.
+ * @param a_key             The key of the human.
  * @param a_volume          The volume.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestEngageHuman(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_volume
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name,
+    std::string  const a_key,
+    unsigned int const a_volume
 );
 
 /**
@@ -409,22 +401,19 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestEngageHuman(
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_holder_name     The name of the holder.
- * @param a_id_human_class  The identifier of the class of a human.
- * @param a_id_human        The identifier of a human.
+ * @param a_key             The key of the human.
  * @param a_experience      The experience of a human.
  * @param a_volume          The volume.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestDismissHuman(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name,
+    std::string  const a_key,
+    unsigned int const a_volume
 );
 
 /**
@@ -434,20 +423,16 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestDismissHuman(
  * @param a_password        The password of the user.
  * @param a_id_holder_class The identifier of the class of a holder.
  * @param a_holder_name     The name of the holder.
- * @param a_id_human_class  The identifier of the class of a human.
- * @param a_id_human        The identifier of a human.
- * @param a_experience      The experience of a human.
+ * @param a_key             The key of the human.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHuman(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name,
+    std::string  const a_key
 );
 
 /**
@@ -461,10 +446,10 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHuman(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetHumans(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    unsigned int const   a_id_holder_class,
-    std::string  const   a_holder_name
+    std::string  const a_login,
+    std::string  const a_password,
+    unsigned int const a_id_holder_class,
+    std::string  const a_holder_name
 );
 
 /**
@@ -510,22 +495,18 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestGetResources(
  * @param a_password                    The password of the user.
  * @param a_settlement_name_source      The name of the source settlement.
  * @param a_settlement_name_destination The name of the destination settlement.
- * @param a_id_human_class              The identifier of the class of the human.
- * @param a_id_human                    The identifier of the human.
- * @param a_experience                  The experience of the human.
+ * @param a_key                         The key of the human.
  * @param a_volume                      The volume.
  *
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportHuman(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    std::string  const   a_settlement_name_source,
-    std::string  const   a_settlement_name_destination,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    std::string  const a_login,
+    std::string  const a_password,
+    std::string  const a_settlement_name_source,
+    std::string  const a_settlement_name_destination,
+    std::string  const a_key,
+    unsigned int const a_volume
 );
 
 /**
@@ -541,12 +522,12 @@ Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportHuman(
  * @return The created request.
  */
 Network::XmlRPCCommon::Request::RequestShrPtr createRequestTransportResource(
-    std::string  const & a_login,
-    std::string  const & a_password,
-    std::string  const   a_settlement_name_source,
-    std::string  const   a_settlement_name_destination,
-    std::string  const   a_key,
-    unsigned int const   a_volume
+    std::string  const a_login,
+    std::string  const a_password,
+    std::string  const a_settlement_name_source,
+    std::string  const a_settlement_name_destination,
+    std::string  const a_key,
+    unsigned int const a_volume
 );
 
 #endif // REQUESTCREATORS_HPP

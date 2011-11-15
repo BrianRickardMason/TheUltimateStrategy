@@ -28,6 +28,7 @@
 #include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../ComponentTest.hpp"
+#include <GameServer/Resource/Key.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Common;

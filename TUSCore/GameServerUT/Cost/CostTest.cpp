@@ -43,7 +43,7 @@ protected:
      * @brief Constructs a test class.
      */
     CostTest()
-        : m_cost(CostRecord(1001, 1, KEY_RESOURCE_COAL, 100))
+        : m_cost(CostRecord("Brandy", 1, KEY_RESOURCE_COAL, 100))
     {
     }
 
@@ -53,22 +53,11 @@ protected:
     Cost m_cost;
 };
 
-/**
- * Unit tests of: Cost::Cost.
- */
-TEST_F(CostTest, Cost)
+TEST_F(CostTest, CtorDoesNotThrow)
 {
-    // Preconditions.
-    CostRecord record(1001, 1, KEY_RESOURCE_COAL, 100);
+    CostRecord record("Brandy", 1, KEY_RESOURCE_COAL, 100);
 
-    // Test commands.
-    Cost cost(record);
-
-    // Test assertions.
-    ASSERT_EQ(1001, cost.getKeyHash());
-    ASSERT_EQ(1, cost.getIDCostType());
-    ASSERT_TRUE(KEY_RESOURCE_COAL == cost.getKey());
-    ASSERT_EQ(100, cost.getVolume());
+    ASSERT_NO_THROW(Cost cost(record));
 }
 
 /**
@@ -77,7 +66,7 @@ TEST_F(CostTest, Cost)
 TEST_F(CostTest, operator_mul)
 {
     // Preconditions.
-    CostRecord record(1001, 1, KEY_RESOURCE_COAL, 100);
+    CostRecord record("Brandy", 1, KEY_RESOURCE_COAL, 100);
 
     Cost cost_0(record),
          cost_1(record),
@@ -110,7 +99,7 @@ TEST_F(CostTest, operator_mul)
 TEST_F(CostTest, operator_mul_assign)
 {
     // Preconditions.
-    CostRecord record(1001, 1, KEY_RESOURCE_COAL, 100);
+    CostRecord record("Brandy", 1, KEY_RESOURCE_COAL, 100);
 
     Cost cost_0(record),
          cost_1(record),
@@ -132,12 +121,12 @@ TEST_F(CostTest, operator_mul_assign)
 }
 
 /**
- * Unit tests of: Cost::getKeyHash.
+ * Unit tests of: Cost::getKey.
  */
-TEST_F(CostTest, getKeyHash)
+TEST_F(CostTest, getKey)
 {
     // Test commands and assertions.
-    ASSERT_EQ(1001, m_cost.getKeyHash());
+    ASSERT_EQ("Brandy", m_cost.getKey());
 }
 
 /**
@@ -149,13 +138,9 @@ TEST_F(CostTest, getIDCostType)
     ASSERT_EQ(1, m_cost.getIDCostType());
 }
 
-/**
- * Unit tests of: Cost::getKey.
- */
-TEST_F(CostTest, getKey)
+TEST_F(CostTest, GetResourceKeyReturnsProperValue)
 {
-    // Test commands and assertions.
-    ASSERT_TRUE(KEY_RESOURCE_COAL == m_cost.getKey());
+    ASSERT_TRUE(KEY_RESOURCE_COAL == m_cost.getResourceKey());
 }
 
 /**
@@ -169,10 +154,10 @@ TEST_F(CostTest, getVolume)
 
 TEST_F(CostTest, getKey_Equal)
 {
-    ASSERT_TRUE(KEY_RESOURCE_COAL == m_cost.toKey());
+    ASSERT_TRUE(KEY_RESOURCE_COAL == m_cost.toResourceKey());
 }
 
 TEST_F(CostTest, getKey_NotEqual)
 {
-    ASSERT_FALSE(KEY_RESOURCE_FOOD == m_cost.toKey());
+    ASSERT_FALSE(KEY_RESOURCE_FOOD == m_cost.toResourceKey());
 }

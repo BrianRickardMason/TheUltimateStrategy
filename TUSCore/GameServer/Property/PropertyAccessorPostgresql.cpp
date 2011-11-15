@@ -42,7 +42,7 @@ namespace Property
 
 PropertyRecordShrPtr PropertyAccessorPostgresql::getPropertyRecord(
     ITransactionShrPtr         a_transaction,
-    KeyHash            const & a_key_hash,
+    string             const & a_key,
     IDProperty         const & a_id_property
 ) const
 {
@@ -52,7 +52,7 @@ PropertyRecordShrPtr PropertyAccessorPostgresql::getPropertyRecord(
     TransactionPostgresqlShrPtr transaction = shared_polymorphic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM properties WHERE key_hash = " + backbone_transaction.quote(a_key_hash)
+    string query = "SELECT * FROM properties WHERE key = " + backbone_transaction.quote(a_key.c_str())
                    + " AND id_property = " + backbone_transaction.quote(a_id_property.getValue());
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -70,7 +70,7 @@ PropertyRecordShrPtr PropertyAccessorPostgresql::getPropertyRecord(
         result[0]["value_integer"].to(value_integer);
         result[0]["value_string"].to(value_string);
 
-        return make_shared<PropertyRecord>(a_key_hash, id_property, value_discriminator, value_boolean, value_integer, value_string);
+        return make_shared<PropertyRecord>(a_key, id_property, value_discriminator, value_boolean, value_integer, value_string);
     }
     else
     {
@@ -80,7 +80,7 @@ PropertyRecordShrPtr PropertyAccessorPostgresql::getPropertyRecord(
 
 PropertyRecordMap PropertyAccessorPostgresql::getPropertyRecords(
     Persistence::ITransactionShrPtr         a_transaction,
-    Common::KeyHash                 const & a_key_hash
+    string                          const & a_key
 ) const
 {
     // Fake types for libpqxx.
@@ -89,7 +89,7 @@ PropertyRecordMap PropertyAccessorPostgresql::getPropertyRecords(
     TransactionPostgresqlShrPtr transaction = shared_polymorphic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM properties WHERE key_hash = " + backbone_transaction.quote(a_key_hash);
+    string query = "SELECT * FROM properties WHERE key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 
@@ -109,7 +109,7 @@ PropertyRecordMap PropertyAccessorPostgresql::getPropertyRecords(
         it["value_string"].to(value_string);
 
         PropertyRecordShrPtr property_record_shr_ptr =
-            make_shared<PropertyRecord>(a_key_hash, id_property, value_discriminator, value_boolean, value_integer, value_string);
+            make_shared<PropertyRecord>(a_key, id_property, value_discriminator, value_boolean, value_integer, value_string);
 
         records.insert(PropertyRecordPair(id_property, property_record_shr_ptr));
     }

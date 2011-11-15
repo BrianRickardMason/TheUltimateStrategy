@@ -74,7 +74,7 @@ public:
     virtual DismissHumanOperatorExitCode dismissHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -89,7 +89,7 @@ private:
      */
     bool verifyDismissable(
         Persistence::ITransactionShrPtr         a_transaction,
-        Key                             const & a_key
+        Configuration::IHumanKey        const & a_key
     ) const;
 
     /**
@@ -105,7 +105,7 @@ private:
     bool verifyEngaged(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -121,7 +121,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<DismissHumanOperator> DismissHumanOperatorAutPtr;
 

@@ -25,79 +25,89 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_HUMAN_HUMANWITHVOLUME_HPP
-#define GAMESERVER_HUMAN_HUMANWITHVOLUME_HPP
+#ifndef GAMESERVER_CONFIGURATION_HUMAN_HPP
+#define GAMESERVER_CONFIGURATION_HUMAN_HPP
 
 #include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
-#include <GameServer/Human/HumanWithVolumeRecord.hpp>
 
 namespace GameServer
 {
-namespace Human
+namespace Configuration
 {
 
 /**
- * @brief HumanWithVolume.
+ * @brief Human.
  */
-class HumanWithVolume
+class Human
+    : public IHuman
 {
 public:
     /**
-     * @brief Constructs the human with volume.
+     * @brief Ctor.
      *
-     * @param a_key    The key of the human.
-     * @param a_volume The volume of the human.
+     * @param a_key        The key of the human.
+     * @param a_class      The class of the human.
+     * @param a_experience The experience of the human.
+     * @param a_name       The name of the human.
      */
-    HumanWithVolume(
-        Configuration::IHumanKey const a_key,
-        Volume                   const a_volume
+    Human(
+        IHumanKey   const a_key,
+        std::string const a_class,
+        std::string const a_name,
+        std::string const a_experience
     );
 
     /**
-     * @brief Constructs the human with volume.
+     * @brief Gets the key of the human.
      *
-     * @param a_record The record of human with volume.
+     * @return The key of the human.
      */
-    explicit HumanWithVolume(
-        HumanWithVolumeRecord const & a_record
-    );
+    virtual IHumanKey getKey() const;
 
     /**
-     * @brief Gets the human.
+     * @brief Gets the class of the human.
      *
-     * @return The human.
+     * @return The class of the human.
      */
-    Configuration::IHumanShrPtr getHuman() const;
+    virtual std::string getClass() const;
 
     /**
-     * @brief Gets the volume of the human.
+     * @brief Gets the name of the human.
      *
-     * @return The volume of the human.
+     * @return The name of the human.
      */
-    Volume getVolume() const;
+    virtual std::string getName() const;
+
+    /**
+     * @brief Gets the experience of the human.
+     *
+     * @return The experience of the human.
+     */
+    virtual std::string getExperience() const;
 
 private:
     /**
-     * @brief The human.
+     * @brief The key of the human.
      */
-    Configuration::IHumanShrPtr m_human;
+    IHumanKey const m_key;
 
     /**
-     * @brief The volume of the human.
+     * @brief The class of the human.
      */
-    Volume m_volume;
+    std::string const m_class;
+
+    /**
+     * @brief The name of the human.
+     */
+    std::string const m_name;
+
+    /**
+     * @brief The experience of the human.
+     */
+    std::string const m_experience;
 };
 
-//@{
-/**
- * @brief A useful typedef.
- */
-typedef boost::shared_ptr<HumanWithVolume> HumanWithVolumeShrPtr;
-typedef std::pair<Configuration::IHumanKey, HumanWithVolumeShrPtr> HumanWithVolumePair;
-typedef std::map<Configuration::IHumanKey, HumanWithVolumeShrPtr> HumanWithVolumeMap;
-//}@
-
-} // namespace Human
+} // namespace Configuration
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_HUMANWITHVOLUME_HPP
+#endif // GAMESERVER_CONFIGURATION_HUMAN_HPP

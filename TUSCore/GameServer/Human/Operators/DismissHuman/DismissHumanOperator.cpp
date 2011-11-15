@@ -28,6 +28,7 @@
 #include "DismissHumanOperator.hpp"
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Property;
@@ -58,7 +59,7 @@ DismissHumanOperator::DismissHumanOperator(
 DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -88,7 +89,7 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
 
         // Get total cost.
         ResourceSet cost =
-            m_cost_persistence_facade->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_HUMAN_DISMISS);
+            m_cost_persistence_facade->getCost(a_transaction, a_key, ID_COST_TYPE_HUMAN_DISMISS);
 
         // Multiply total cost.
         cost *= a_volume;
@@ -138,12 +139,12 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
 
 bool DismissHumanOperator::verifyDismissable(
     ITransactionShrPtr         a_transaction,
-    Key                const & a_key
+    IHumanKey          const & a_key
 ) const
 {
     // Check if human is dismissable.
     PropertyBooleanShrPtr dismissable =
-        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key.toHash(), ID_PROPERTY_HUMAN_DISMISSABLE);
+        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key, ID_PROPERTY_HUMAN_DISMISSABLE);
 
     return dismissable->getValue();
 }
@@ -151,7 +152,7 @@ bool DismissHumanOperator::verifyDismissable(
 bool DismissHumanOperator::verifyEngaged(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {

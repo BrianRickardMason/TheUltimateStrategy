@@ -28,7 +28,6 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETBUILDING_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETBUILDING_HPP
 
-#include "../../../../../GameServer/Building/IDBuilding.hpp"
 #include "../../../../../GameServer/Building/Operators/GetBuilding/GetBuildingOperatorExitCode.hpp"
 #include "../../../../../GameServer/Common/IDHolder.hpp"
 #include "../Executor.hpp"
@@ -52,10 +51,9 @@ namespace Executors
  *         <password value=\"#\" />
  *     </user>
  *     <parameters>
- *         <idholderclass   value=\"#\" />
- *         <holder_name     value=\"#\" />
- *         <idbuildingclass value=\"#\" />
- *         <idbuilding      value=\"#\" />
+ *         <idholderclass value=\"#\" />
+ *         <holder_name   value=\"#\" />
+ *         <buildingkey   value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -67,9 +65,9 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <idbuildingclass value=\"#\" />
- *             <idbuilding      value=\"#\" />
- *             <volume          value=\"#\" />
+ *             <buildingclass value=\"#\" />
+ *             <buildingname  value=\"#\" />
+ *             <volume        value=\"#\" />
  *         </object>
  *     </objects>
  * </reply>
@@ -175,24 +173,14 @@ class ExecutorGetBuilding
     std::string m_holder_name;
 
     /**
-     * @brief The value of the identifier of the class of a building.
+     * @brief The key of the building.
      */
-    unsigned int m_value_id_building_class;
-
-    /**
-     * @brief The value of the identifier of a building.
-     */
-    unsigned int m_value_id_building;
+    std::string m_key;
 
     /**
      * @brief The identifier of a holder.
      */
     GameServer::Common::IDHolder m_id_holder;
-
-    /**
-     * @brief The identifier of a building.
-     */
-    GameServer::Building::IDBuilding m_id_building;
 };
 
 } // namespace Executors

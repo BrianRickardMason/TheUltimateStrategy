@@ -209,14 +209,14 @@ ReplyShrPtr ExecutorGetHumans::produceReply(
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
-        IXmlNodeShrPtr node_idhumanclass = node_object->appendNode("idhumanclass");
-        node_idhumanclass->appendAttribute("value")->setValue(it->second->getIDHuman().getValue1());
+        IXmlNodeShrPtr node_idhumanclass = node_object->appendNode("humanclass");
+        node_idhumanclass->appendAttribute("value")->setValue(it->second->getHuman()->getClass().c_str());
 
-        IXmlNodeShrPtr node_idhuman = node_object->appendNode("idhuman");
-        node_idhuman->appendAttribute("value")->setValue(it->second->getIDHuman().getValue2());
+        IXmlNodeShrPtr node_idhuman = node_object->appendNode("humanname");
+        node_idhuman->appendAttribute("value")->setValue(it->second->getHuman()->getName().c_str());
 
         IXmlNodeShrPtr node_experience = node_object->appendNode("experience");
-        node_experience->appendAttribute("value")->setValue(it->second->getExperience().getValue());
+        node_experience->appendAttribute("value")->setValue(it->second->getHuman()->getExperience().c_str());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
         node_volume->appendAttribute("value")->setValue(it->second->getVolume());

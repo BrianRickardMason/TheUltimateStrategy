@@ -32,6 +32,7 @@
 #include "../../../Persistence/ITransaction.hpp"
 #include "../../Key.hpp"
 #include "GetBuildingOperatorExitCode.hpp"
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -61,12 +62,12 @@ public:
     virtual GetBuildingOperatorExitCode getBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IBuildingKey     const & a_key
     ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of GetBuildingOperator.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IGetBuildingOperator> IGetBuildingOperatorShrPtr;
 

@@ -65,9 +65,7 @@ bool ExecutorDismissHuman::getParameters(
         m_password              = a_request->getPasswordValue();
         m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
         m_holder_name           = a_request->getParameterValueString("holder_name");
-        m_value_id_human_class  = a_request->getParameterValueUnsignedInteger("idhumanclass");
-        m_value_id_human        = a_request->getParameterValueUnsignedInteger("idhuman");
-        m_value_experience      = a_request->getParameterValueUnsignedInteger("experience");
+        m_key                   = a_request->getParameterValueString("humankey");
         m_value_volume          = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;
@@ -83,8 +81,6 @@ bool ExecutorDismissHuman::processParameters()
     try
     {
         m_id_holder.assign(m_value_id_holder_class, m_holder_name);
-        m_id_human.assign(m_value_id_human_class, m_value_id_human);
-        m_experience = m_value_experience;
         m_volume = m_value_volume;
 
         return true;
@@ -162,7 +158,7 @@ ReplyShrPtr ExecutorDismissHuman::perform(
         ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         DismissHumanOperatorExitCode const exit_code =
-            dismiss_human_operator->dismissHuman(transaction, m_id_holder, GameServer::Human::Key(m_id_human, m_experience), m_volume);
+            dismiss_human_operator->dismissHuman(transaction, m_id_holder, m_key, m_volume);
 
         if (exit_code.ok())
         {

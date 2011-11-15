@@ -26,10 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Building/BuildingWithVolume.hpp"
+#include <GameServer/Building/Key.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 
 /**
  * @brief A test class.
@@ -42,8 +44,8 @@ protected:
      * @brief Constructs a test class.
      */
     BuildingWithVolumeTest()
-        : m_building_with_volume(Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4),
-          m_model_key(ID_BUILDING_DEFENSIVE_BARBICAN)
+        : m_building_with_volume(KEY_DEFENSIVE_BARBICAN, 4),
+          m_model_key(KEY_DEFENSIVE_BARBICAN)
     {
     }
 
@@ -55,35 +57,30 @@ protected:
     /**
      * @brief A model key.
      */
-    Key m_model_key;
+    IBuildingKey m_model_key;
 };
 
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnArguments)
 {
-    BuildingWithVolume building_with_volume(Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4);
+    BuildingWithVolume building_with_volume(KEY_DEFENSIVE_BARBICAN, 4);
 
-    ASSERT_TRUE(m_model_key == building_with_volume.getKey());
+    ASSERT_TRUE(m_model_key == building_with_volume.getBuilding()->getKey());
     ASSERT_EQ(4, building_with_volume.getVolume());
 }
 
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnRecord)
 {
-    BuildingWithVolumeRecord building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4);
+    BuildingWithVolumeRecord building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_DEFENSIVE_BARBICAN, 4);
 
     BuildingWithVolume building_with_volume(building_with_volume_record);
 
-    ASSERT_TRUE(m_model_key == building_with_volume.getKey());
+    ASSERT_TRUE(m_model_key == building_with_volume.getBuilding()->getKey());
     ASSERT_EQ(4, building_with_volume.getVolume());
 }
 
 TEST_F(BuildingWithVolumeTest, getKey)
 {
-    ASSERT_TRUE(m_model_key == m_building_with_volume.getKey());
-}
-
-TEST_F(BuildingWithVolumeTest, getIDBuilding)
-{
-    ASSERT_TRUE(ID_BUILDING_DEFENSIVE_BARBICAN == m_building_with_volume.getIDBuilding());
+    ASSERT_TRUE(m_model_key == m_building_with_volume.getBuilding()->getKey());
 }
 
 TEST_F(BuildingWithVolumeTest, getVolume)

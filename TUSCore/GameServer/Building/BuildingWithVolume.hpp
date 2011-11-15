@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGWITHVOLUME_HPP
 #define GAMESERVER_BUILDING_BUILDINGWITHVOLUME_HPP
 
-#include "Building.hpp"
-#include "BuildingWithVolumeRecord.hpp"
+#include <GameServer/Building/BuildingWithVolumeRecord.hpp>
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 
 namespace GameServer
 {
@@ -37,7 +37,7 @@ namespace Building
 {
 
 /**
- * @brief A building with volume.
+ * @brief BuildingWithVolume.
  */
 class BuildingWithVolume
 {
@@ -49,8 +49,8 @@ public:
      * @param a_volume The volume of the building.
      */
     BuildingWithVolume(
-        Key    const & a_key,
-        Volume const & a_volume
+        Configuration::IBuildingKey const a_key,
+        Volume                      const a_volume
     );
 
     /**
@@ -63,31 +63,24 @@ public:
     );
 
     /**
-     * @brief Gets the key of the building.
+     * @brief Gets the building.
      *
-     * @return The key of the building.
+     * @return The building.
      */
-    Key const & getKey() const;
-
-    /**
-     * @brief Gets the identifier of the building.
-     *
-     * @return The identifier of the building.
-     */
-    IDBuilding const & getIDBuilding() const;
+    Configuration::IBuildingShrPtr getBuilding() const;
 
     /**
      * @brief Gets the volume of the building.
      *
      * @return The volume of the building.
      */
-    Volume const & getVolume() const;
+    Volume getVolume() const;
 
 private:
     /**
      * @brief The building.
      */
-    Building m_building;
+    Configuration::IBuildingShrPtr m_building;
 
     /**
      * @brief The volume of the building.
@@ -95,20 +88,14 @@ private:
     Volume m_volume;
 };
 
+//@{
 /**
- * @brief A shared pointer of building with volume.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<BuildingWithVolume> BuildingWithVolumeShrPtr;
-
-/**
- * @brief A pair of building with volume.
- */
-typedef std::pair<Key, BuildingWithVolumeShrPtr> BuildingWithVolumePair;
-
-/**
- * @brief A map of building with volume.
- */
-typedef std::map<Key, BuildingWithVolumeShrPtr> BuildingWithVolumeMap;
+typedef std::pair<Configuration::IBuildingKey, BuildingWithVolumeShrPtr> BuildingWithVolumePair;
+typedef std::map<Configuration::IBuildingKey, BuildingWithVolumeShrPtr> BuildingWithVolumeMap;
+//}@
 
 } // namespace Building
 } // namespace GameServer

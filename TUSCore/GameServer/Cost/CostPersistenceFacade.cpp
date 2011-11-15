@@ -47,21 +47,21 @@ CostPersistenceFacade::CostPersistenceFacade(
 
 ResourceSet CostPersistenceFacade::getCost(
     ITransactionShrPtr         a_transaction,
-    KeyHash            const & a_key_hash,
+    string             const & a_key,
     IDCostType         const & a_id_cost_type
 ) const
 {
     ResourceWithVolumeMap resource_map;
 
-    CostRecordVec cost_record_vec = m_accessor->getCosts(a_transaction, a_key_hash, a_id_cost_type);
+    CostRecordVec cost_record_vec = m_accessor->getCosts(a_transaction, a_key, a_id_cost_type);
 
     for (CostRecordVec::const_iterator it = cost_record_vec.begin(); it != cost_record_vec.end(); ++it)
     {
-        string key = (*it)->getKey();
+        string resource_key = (*it)->getResourceKey();
 
-        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(key, (*it)->getVolume()));
+        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(resource_key, (*it)->getVolume()));
 
-        ResourceWithVolumePair resource_pair(key, resource);
+        ResourceWithVolumePair resource_pair(resource_key, resource);
 
         resource_map.insert(resource_pair);
     }

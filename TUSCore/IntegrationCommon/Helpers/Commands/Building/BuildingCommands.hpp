@@ -43,14 +43,13 @@ namespace Building
 /**
  * @brief Builds a building.
  *
- * @param a_client            The client.
- * @param a_login             The login of the user.
- * @param a_password          The password of the user.
- * @param a_holder_class      The identifier of the class of a holder.
- * @param a_holder_name       The name of the holder.
- * @param a_id_building_class The identifier of the class of a building.
- * @param a_id_building       The identifier of a building.
- * @param a_volume            The volume.
+ * @param a_client       The client.
+ * @param a_login        The login of the user.
+ * @param a_password     The password of the user.
+ * @param a_holder_class The identifier of the class of a holder.
+ * @param a_holder_name  The name of the holder.
+ * @param a_key          The key of the building.
+ * @param a_volume       The volume.
  *
  * @return The reply.
  */
@@ -60,22 +59,20 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr BuildBuilding(
     std::string   const a_password,
     unsigned int  const a_id_holder_class,
     std::string   const a_holder_name,
-    unsigned int  const a_id_building_class,
-    unsigned int  const a_id_building,
+    std::string   const a_key,
     unsigned int  const a_volume
 );
 
 /**
  * @brief Destroys a building.
  *
- * @param a_client            The client.
- * @param a_login             The login of the user.
- * @param a_password          The password of the user.
- * @param a_holder_class      The identifier of the class of a holder.
- * @param a_holder_name       The name of the holder.
- * @param a_id_building_class The identifier of the class of a building.
- * @param a_id_building       The identifier of a building.
- * @param a_volume            The volume.
+ * @param a_client       The client.
+ * @param a_login        The login of the user.
+ * @param a_password     The password of the user.
+ * @param a_holder_class The identifier of the class of a holder.
+ * @param a_holder_name  The name of the holder.
+ * @param a_key          The key of the building.
+ * @param a_volume       The volume.
  *
  * @return The reply.
  */
@@ -85,21 +82,19 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DestroyBuilding(
     std::string   const a_password,
     unsigned int  const a_id_holder_class,
     std::string   const a_holder_name,
-    unsigned int  const a_id_building_class,
-    unsigned int  const a_id_building,
+    std::string   const a_key,
     unsigned int  const a_volume
 );
 
 /**
  * @brief Gets a building.
  *
- * @param a_client         The client.
- * @param a_login          The login of the user.
- * @param a_password       The password of the user.
- * @param a_holder_class   The identifier of the class of a holder.
- * @param a_holder_name    The name of the holder.
- * @param a_building_class The identifier of the class of a building.
- * @param a_id_building    The identifier of a building.
+ * @param a_client       The client.
+ * @param a_login        The login of the user.
+ * @param a_password     The password of the user.
+ * @param a_holder_class The identifier of the class of a holder.
+ * @param a_holder_name  The name of the holder.
+ * @param a_key          The key of the building.
  *
  * @return The reply.
  */
@@ -109,8 +104,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetBuilding(
     std::string   const a_password,
     unsigned int  const a_id_holder_class,
     std::string   const a_holder_name,
-    unsigned int  const a_id_building_class,
-    unsigned int  const a_id_building
+    std::string   const a_key
 );
 
 /**

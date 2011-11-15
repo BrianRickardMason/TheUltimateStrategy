@@ -65,15 +65,13 @@ protected:
     {
     }
 
+    //@{
     /**
-     * @brief The persistence facade of lands.
+     * @brief A persistence facade used in tests.
      */
-    LandPersistenceFacadeMock * m_land_persistence_facade;
-
-    /**
-     * @brief The persistence facade of settlements.
-     */
+    LandPersistenceFacadeMock       * m_land_persistence_facade;
     SettlementPersistenceFacadeMock * m_settlement_persistence_facade;
+    //}@
 
     /**
      * @brief The behaviour "GiveGrant".

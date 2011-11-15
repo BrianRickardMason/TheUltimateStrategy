@@ -64,10 +64,10 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <idhumanclass value=\"#\" />
- *             <idhuman      value=\"#\" />
- *             <experience   value=\"#\" />
- *             <volume       value=\"#\" />
+ *             <humanclass value=\"#\" />
+ *             <humanname  value=\"#\" />
+ *             <experience value=\"#\" />
+ *             <volume     value=\"#\" />
  *         </object>
  *         <object>
  *             ...

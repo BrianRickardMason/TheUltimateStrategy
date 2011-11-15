@@ -25,35 +25,83 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_HUMAN_EXPERIENCE_HPP
-#define GAMESERVER_HUMAN_EXPERIENCE_HPP
+#ifndef GAMESERVER_CONFIGURATION_CONFIGURATORHUMAN_HPP
+#define GAMESERVER_CONFIGURATION_CONFIGURATORHUMAN_HPP
 
-#include "../Common/ConstrainedValue.hpp"
+#include <3rdParty/pugixml/src/pugixml.hpp>
+#include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace GameServer
 {
-namespace Human
+namespace Configuration
 {
 
 /**
- * @brief The fake type class to declare Experience.
+ * @brief ConfiguratorHuman.
  */
-class TExperience
+class ConfiguratorHuman
+    : private boost::noncopyable
 {
+public:
+    ConfiguratorHuman();
+
+    /**
+     * @brief Gets the configuration.
+     *
+     * @return True on success, false otherwise.
+     */
+    bool configure();
+
+    /**
+     * @brief Gets the human.
+     *
+     * @param a_key The key of the human.
+     *
+     * @return The human, null if not found.
+     */
+    IHumanShrPtr getHuman(
+        IHumanKey const a_key
+    ) const;
+
+    /**
+     * @brief Gets the map of humans.
+     *
+     * @return The map of humans.
+     */
+    IHumanMap const & getHumans() const;
+
+private:
+    /**
+     * @brief Loads the data from an xml configuration file into the xml document.
+     *
+     * return True on success, false otherwise.
+     */
+    bool loadXml();
+
+    /**
+     * @brief Loads the data from an xml document into the map.
+     *
+     * @return true on success false otherwise.
+     */
+    bool parseXml();
+
+    /**
+     * @brief The xml document.
+     *
+     * TODO: Add the abstraction.
+     */
+    pugi::xml_document m_humans_xml;
+
+    /**
+     * @brief The map of available humans.
+     */
+    IHumanMap m_humans;
 };
 
-/**
- * @brief The experience of a human.
- */
-typedef Common::ConstrainedValue<TExperience, Common::RangedUnsignedShortIntPolicy<1, 2> > Experience;
+static ConfiguratorHuman const CONFIGURATOR_HUMAN;
 
-/**
- * @brief Available experiences.
- */
-Experience const EXPERIENCE_NOVICE  (1);
-Experience const EXPERIENCE_ADVANCED(2);
-
-} // namespace Human
+} // namespace Configuration
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_EXPERIENCE_HPP
+#endif // GAMESERVER_CONFIGURATION_CONFIGURATORHUMAN_HPP

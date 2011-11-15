@@ -47,7 +47,7 @@ public:
      * @brief Gets a cost.
      *
      * @param a_transaction  The transaction.
-     * @param a_key_hash     A key hash.
+     * @param a_key          A key.
      * @param a_id_cost_type An identifier of the cost type.
      *
      * @return The cost.
@@ -56,7 +56,7 @@ public:
         getCost,
         Resource::ResourceSet(
             Persistence::ITransactionShrPtr         a_transaction,
-            Common::KeyHash                 const & a_key_hash,
+            std::string                     const & a_key,
             IDCostType                      const & a_id_cost_type
         )
     );

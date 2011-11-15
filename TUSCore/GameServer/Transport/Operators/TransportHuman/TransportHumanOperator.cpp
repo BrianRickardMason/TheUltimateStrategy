@@ -29,6 +29,7 @@
 #include "TransportHumanOperator.hpp"
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Human;
 using namespace GameServer::Persistence;
 using namespace GameServer::Settlement;
@@ -52,7 +53,7 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
     ITransactionShrPtr          a_transaction,
     string              const   a_settlement_name_source,
     string              const   a_settlement_name_destination,
-    Key                 const & a_key,
+    IHumanKey           const & a_key,
     Volume              const & a_volume
 ) const
 {

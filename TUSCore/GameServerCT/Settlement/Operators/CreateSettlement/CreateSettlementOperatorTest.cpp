@@ -28,8 +28,11 @@
 #include "../../../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../../../GameServer/Common/OperatorAbstractFactoryPostgresql.hpp"
 #include "../../../ComponentTest.hpp"
+#include <GameServer/Human/Key.hpp>
+#include <GameServer/Resource/Key.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
@@ -97,11 +100,11 @@ protected:
      */
     void compareHuman(
         HumanWithVolumeShrPtr             a_human,
-        GameServer::Human::Key    const & a_key,
+        IHumanKey                 const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
-        ASSERT_TRUE(a_key == a_human->getKey());
+        ASSERT_TRUE(a_key == a_human->getHuman()->getKey());
         ASSERT_EQ(a_volume, a_human->getVolume());
     }
 
@@ -114,7 +117,7 @@ protected:
      */
     void compareResource(
         ResourceWithVolumeShrPtr             a_resource,
-        string                       const & a_key,
+        IResourceKey                 const & a_key,
         GameServer::Resource::Volume const & a_volume
     )
     {
@@ -131,8 +134,6 @@ protected:
         string a_settlement_name
     )
     {
-        GameServer::Human::Key key(ID_HUMAN_WORKER_JOBLESS, EXPERIENCE_NOVICE);
-
         IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
         {
@@ -143,7 +144,7 @@ protected:
 
             ASSERT_FALSE(humans.empty());
             ASSERT_EQ(1, humans.size());
-            compareHuman(humans[key], key, 1000);
+            compareHuman(humans[KEY_WORKER_JOBLESS_NOVICE], KEY_WORKER_JOBLESS_NOVICE, 1000);
         }
 
         {

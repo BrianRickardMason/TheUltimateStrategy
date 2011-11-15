@@ -64,7 +64,7 @@ public:
     virtual GetHumanOperatorExitCode getHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IHumanKey        const & a_key
     ) const;
 
 private:
@@ -75,7 +75,7 @@ private:
 };
 
 /**
- * @brief The auto pointer of GetHumanOperator.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<GetHumanOperator> GetHumanOperatorAutPtr;
 

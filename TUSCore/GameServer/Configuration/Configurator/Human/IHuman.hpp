@@ -25,51 +25,69 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Human/Key.hpp"
-#include <gmock/gmock.h>
+#ifndef GAMESERVER_CONFIGURATION_IHUMAN_HPP
+#define GAMESERVER_CONFIGURATION_IHUMAN_HPP
 
-using namespace GameServer::Human;
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
+
+namespace GameServer
+{
+namespace Configuration
+{
 
 /**
- * Unit tests of: Key::Key.
+ * @brief A useful typedef.
  */
-TEST(KeyHumanTest, Key_ConstructorsAreEquivalent)
-{
-    // Test commands.
-    Key key_1(ID_HUMAN_SOLDIER_ARCHER, EXPERIENCE_NOVICE);
-    Key key_2(1010101);
-
-    // Test assertions.
-    ASSERT_TRUE(key_1 == key_2);
-}
+typedef std::string IHumanKey;
 
 /**
- * Unit tests of: Key::toHash.
+ * @brief The interface of Human.
  */
-TEST(KeyHumanTest, toHash_BasedOnParameters)
+class IHuman
 {
-    // Test commands.
-    Key key(ID_HUMAN_SOLDIER_ARCHER, EXPERIENCE_NOVICE);
+public:
+    virtual ~IHuman(){}
 
-    // Test assertions.
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_HUMAN * 1000000 + 10101 == key.toHash());
-}
+    /**
+     * @brief Gets the key of the human.
+     *
+     * @return The key of the human.
+     */
+    virtual IHumanKey getKey() const = 0;
 
-TEST(KeyHumanTest, toHash_BasedOnHash)
-{
-    // Preconditions.
-    Key key(1010101);
+    /**
+     * @brief Gets the class of the human.
+     *
+     * @return The class of the human.
+     */
+    virtual std::string getClass() const = 0;
 
-    // Test assertions.
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_HUMAN * 1000000 + 10101 == key.toHash());
-}
+    /**
+     * @brief Gets the name of the human.
+     *
+     * @return The name of the human.
+     */
+    virtual std::string getName() const = 0;
 
-TEST(KeyHumanTest, toHash_MaxValues)
-{
-    IDHuman id_human(4, 14);
-    Experience experience(2);
+    /**
+     * @brief Gets the experience of the human.
+     *
+     * @return The experience of the human.
+     */
+    virtual std::string getExperience() const = 0;
+};
 
-    Key key(id_human, experience);
+//@{
+/**
+ * @brief A useful typedef.
+ */
+typedef boost::shared_ptr<IHuman const> IHumanShrPtr;
+typedef std::map<IHumanKey, IHumanShrPtr> IHumanMap;
+//}@
 
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_HUMAN * 1000000 + 41402 == key.toHash());
-}
+} // namespace Configuration
+} // namespace GameServer
+
+#endif // GAMESERVER_CONFIGURATION_IHUMAN_HPP

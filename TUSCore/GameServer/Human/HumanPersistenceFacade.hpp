@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_HUMAN_HUMANPERSISTENCEFACADE_HPP
 #define GAMESERVER_HUMAN_HUMANPERSISTENCEFACADE_HPP
 
-#include "IHumanAccessor.hpp"
-#include "IHumanPersistenceFacade.hpp"
+#include <GameServer/Human/IHumanAccessor.hpp>
+#include <GameServer/Human/IHumanPersistenceFacade.hpp>
 
 namespace GameServer
 {
@@ -65,7 +65,7 @@ public:
     virtual void addHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -84,7 +84,7 @@ public:
     virtual bool subtractHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -100,22 +100,7 @@ public:
     virtual HumanWithVolumeShrPtr getHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const;
-
-    /**
-     * @brief Gets humans by id human.
-     *
-     * @param a_transaction The transaction.
-     * @param a_id_holder   The identifier of a holder.
-     * @param a_id_human    The identifier of a human
-     *
-     * @return A map of humans, an empty map if not found.
-     */
-    virtual HumanWithVolumeMap getHumans(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        IDHuman                         const & a_id_human
+        Configuration::IHumanKey        const & a_key
     ) const;
 
     /**
@@ -150,7 +135,7 @@ private:
 };
 
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<HumanPersistenceFacade> HumanPersistenceFacadeAutPtr;
 

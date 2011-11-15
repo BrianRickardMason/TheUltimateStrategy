@@ -49,16 +49,16 @@ public:
     /**
      * @brief Constructs the cost record.
      *
-     * @param a_key_hash     The key hash.
+     * @param a_key          The key.
      * @param a_id_cost_type The identifier of the cost type.
-     * @param a_key          The key of the resource.
+     * @param a_resource_key The key of the resource.
      * @param a_volume       The volume of the resource.
      */
     CostRecord(
-        Common::KeyHash const & a_key_hash,
-        IDCostType      const & a_id_cost_type,
-        std::string     const & a_key,
-        Volume          const & a_volume
+        std::string const & a_key,
+        IDCostType  const & a_id_cost_type,
+        std::string const & a_resource_key,
+        Volume      const & a_volume
     );
 
     /**
@@ -68,18 +68,18 @@ public:
         CostRecord const & a_rhs
     ) const
     {
-        return (    m_key_hash     == a_rhs.m_key_hash
+        return (    m_key          == a_rhs.m_key
                  && m_id_cost_type == a_rhs.m_id_cost_type
-                 && m_key          == a_rhs.m_key
+                 && m_resource_key == a_rhs.m_resource_key
                  && m_volume       == a_rhs.m_volume);
     }
 
     /**
-     * @brief Gets the key hash.
+     * @brief Gets the key.
      *
-     * @return The key hash.
+     * @return The key.
      */
-    Common::KeyHash const & getKeyHash() const;
+    std::string const & getKey() const;
 
     /**
      * @brief Gets the identifier of the cost type.
@@ -93,7 +93,7 @@ public:
      *
      * @return The key of the resource.
      */
-    std::string getKey() const;
+    std::string getResourceKey() const;
 
     /**
      * @brief Gets the volume of the resource.
@@ -104,9 +104,9 @@ public:
 
 private:
     /**
-     * @brief The key hash.
+     * @brief The key.
      */
-    Common::KeyHash m_key_hash;
+    std::string m_key;
 
     /**
      * @brief The identifier of the cost type.
@@ -116,7 +116,7 @@ private:
     /**
      * @brief The key of the resource.
      */
-    std::string m_key;
+    std::string m_resource_key;
 
     /**
      * @brief The volume of the resource.

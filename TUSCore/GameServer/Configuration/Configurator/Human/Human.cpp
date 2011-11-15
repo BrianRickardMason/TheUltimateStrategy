@@ -25,51 +25,47 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Building/Building.hpp"
-#include <gmock/gmock.h>
+#include <GameServer/Configuration/Configurator/Human/Human.hpp>
 
-using namespace GameServer::Building;
+using namespace std;
 
-/**
- * @brief A test class.
- */
-class BuildingTest
-    : public testing::Test
+namespace GameServer
 {
-protected:
-    /**
-     * @brief Constructs a test class.
-     */
-    BuildingTest()
-        : m_building(Key(ID_BUILDING_DEFENSIVE_BARBICAN)),
-          m_model_key(ID_BUILDING_DEFENSIVE_BARBICAN)
-    {
-    }
-
-    /**
-     * @brief A building to be tested.
-     */
-    Building m_building;
-
-    /**
-     * @brief A model key.
-     */
-    Key m_model_key;
-};
-
-TEST_F(BuildingTest, Building)
+namespace Configuration
 {
-    Building building((Key(ID_BUILDING_DEFENSIVE_BARBICAN)));
 
-    ASSERT_TRUE(m_model_key == building.getKey());
+Human::Human(
+    IHumanKey const a_key,
+    string    const a_class,
+    string    const a_name,
+    string    const a_experience
+)
+    : m_key(a_key),
+      m_class(a_class),
+      m_name(a_name),
+      m_experience(a_experience)
+{
 }
 
-TEST_F(BuildingTest, getKey)
+IHumanKey Human::getKey() const
 {
-    ASSERT_TRUE(m_model_key == m_building.getKey());
+    return m_key;
 }
 
-TEST_F(BuildingTest, getIDBuilding)
+string Human::getClass() const
 {
-    ASSERT_TRUE(ID_BUILDING_DEFENSIVE_BARBICAN == m_building.getIDBuilding());
+    return m_class;
 }
+
+string Human::getName() const
+{
+    return m_name;
+}
+
+string Human::getExperience() const
+{
+    return m_experience;
+}
+
+} // namespace Configuration
+} // namespace GameServer

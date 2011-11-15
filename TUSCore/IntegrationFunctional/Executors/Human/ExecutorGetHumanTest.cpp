@@ -26,8 +26,6 @@
 // SUCH DAMAGE.
 
 #include "../../../GameServer/Common/IDHolder.hpp"
-#include "../../../GameServer/Human/Experience.hpp"
-#include "../../../GameServer/Human/IDHuman.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioActivateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioDeactivateEpoch.hpp"
@@ -39,6 +37,7 @@
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
+#include <GameServer/Human/Key.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;
@@ -81,7 +80,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_SettlementDoesNotExist)
             IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -130,7 +129,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_Unauthorized)
             IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
                 "Login2", "Password2",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -173,7 +172,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_ManyHumansExist)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioGetHuman(
@@ -181,7 +180,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_ManyHumansExist)
             IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationHumanHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -224,7 +223,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_OneHumanExist)
             IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationHumanHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -271,7 +270,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_ZeroHumansExist)
             IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationHumanHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -290,27 +289,8 @@ TEST_F(IntegrationFunctionalTest, GetHuman_InvalidRequest)
             IScenarioActionShrPtr(new ScenarioGetHumanActionInvalidRequest(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationInvalidRequest))));
-
-    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
-    {
-        ASSERT_STREQ("", (*it)->execute());
-    }
-}
-
-TEST_F(IntegrationFunctionalTest, GetHuman_InvalidRange)
-{
-    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
-
-    m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioGetHuman(
-            client,
-            IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
-                "Login", "Password",
-                ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_ADVANCED.getValue() + 1)),
-            IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationInvalidRange))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -352,7 +332,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_Unauthenticated)
             IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
                 "Login", "BadPassword",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationUnauthenticated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -399,7 +379,7 @@ TEST_F(IntegrationFunctionalTest, GetHuman_EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioGetHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue())),
+                KEY_WORKER_JOBLESS_NOVICE)),
             IScenarioVerificationShrPtr(new ScenarioGetHumanVerificationEpochIsNotActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
