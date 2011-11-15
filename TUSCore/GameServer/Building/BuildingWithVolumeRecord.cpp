@@ -25,9 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "BuildingWithVolumeRecord.hpp"
+#include <GameServer/Building/BuildingWithVolumeRecord.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 
 namespace GameServer
 {
@@ -35,9 +36,9 @@ namespace Building
 {
 
 BuildingWithVolumeRecord::BuildingWithVolumeRecord(
-    IDHolder const & a_id_holder,
-    Key      const & a_key,
-    Volume   const & a_volume
+    IDHolder     const a_id_holder,
+    IBuildingKey const a_key,
+    Volume       const a_volume
 )
     : m_id_holder(a_id_holder),
       m_key(a_key),
@@ -50,12 +51,12 @@ IDHolder const & BuildingWithVolumeRecord::getIDHolder() const
     return m_id_holder;
 }
 
-Key const & BuildingWithVolumeRecord::getKey() const
+IBuildingKey BuildingWithVolumeRecord::getKey() const
 {
     return m_key;
 }
 
-Volume const & BuildingWithVolumeRecord::getVolume() const
+Volume BuildingWithVolumeRecord::getVolume() const
 {
     return m_volume;
 }

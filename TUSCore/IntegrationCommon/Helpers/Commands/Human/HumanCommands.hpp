@@ -48,8 +48,7 @@ namespace Human
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
  * @param a_holder_name    The name of the holder.
- * @param a_id_human_class The identifier of the class of a human.
- * @param a_id_human       The identifier of a human.
+ * @param a_key            The key of a human.
  * @param a_volume         The volume.
  *
  * @return The reply.
@@ -60,8 +59,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
     std::string   const a_password,
     unsigned int  const a_id_holder_class,
     std::string   const a_holder_name,
-    unsigned int  const a_id_human_class,
-    unsigned int  const a_id_human,
+    std::string   const a_key,
     unsigned int  const a_volume
 );
 
@@ -73,9 +71,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr EngageHuman(
  * @param a_password       The password of the user.
  * @param a_holder_class   The identifier of the class of a holder.
  * @param a_holder_name    The name of the holder.
- * @param a_id_human_class The identifier of the class of a human.
- * @param a_id_human       The identifier of a human.
- * @param a_experience     The experience of a human.
+ * @param a_key            The key of a human.
  * @param a_volume         The volume.
  *
  * @return The reply.
@@ -86,9 +82,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
     std::string   const a_password,
     unsigned int  const a_id_holder_class,
     std::string   const a_holder_name,
-    unsigned int  const a_id_human_class,
-    unsigned int  const a_id_human,
-    unsigned int  const a_experience,
+    std::string   const a_key,
     unsigned int  const a_volume
 );
 
@@ -100,9 +94,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr DismissHuman(
  * @param a_password     The password of the user.
  * @param a_holder_class The identifier of the class of a holder.
  * @param a_holder_name  The name of the holder.
- * @param a_human_class  The identifier of the class of a human.
- * @param a_id_human     The identifier of a human.
- * @param a_experience   The experience of a human.
+ * @param a_key            The key of a human.
  *
  * @return The reply.
  */
@@ -112,9 +104,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr GetHuman(
     std::string   const a_password,
     unsigned int  const a_id_holder_class,
     std::string   const a_holder_name,
-    unsigned int  const a_id_human_class,
-    unsigned int  const a_id_human,
-    unsigned int  const a_experience
+    std::string   const a_key
 );
 
 /**

@@ -25,10 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "HumanToBuildingTranslator.hpp"
+#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
+#include <GameServer/Human/HumanToBuildingTranslator.hpp>
 #include <stdexcept>
 
-using namespace GameServer::Building;
+using namespace GameServer::Configuration;
 using namespace boost;
 
 namespace GameServer
@@ -36,48 +37,22 @@ namespace GameServer
 namespace Human
 {
 
-Building::BuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
-    Key const & a_key
-) const
-{
-    return doGetPlaceOfWork(a_key.getInternalKey().get<0>());
-}
-
-Building::BuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
-    IDHuman const & a_id_human
-) const
-{
-    return doGetPlaceOfWork(a_id_human);
-}
-
-Building::BuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
-    Common::KeyHash const & a_key_hash
-) const
-{
-    // Create the human key.
-    Key key(a_key_hash);
-
-    // Get the place of work.
-    return doGetPlaceOfWork(key.getInternalKey().get<0>());
-}
-
-Building::BuildingShrPtr HumanToBuildingTranslator::doGetPlaceOfWork(
-    IDHuman const & a_id_human
+IBuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
+    IHumanKey const & a_key
 ) const
 {
     // Get corresponding building.
-    std::vector<Building::Key> buildings = PLACES_OF_WORK.at(a_id_human);
+    std::vector<IBuildingKey> buildings = PLACES_OF_WORK.at(a_key);
 
     // Check if the human has a place of work.
     if (buildings.size())
     {
-        // The human does have the place of work.
-        return make_shared<Building::Building>(buildings.front());
+        return CONFIGURATOR_BUILDING.getBuilding(buildings.front());
     }
     else
     {
         // The human does not have the place of work.
-        return BuildingShrPtr();
+        return IBuildingShrPtr();
     }
 }
 

@@ -27,6 +27,7 @@
 
 #include "../Constants.hpp"
 #include "ExecutorDestroyBuilding.hpp"
+#include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
 using namespace GameServer::Authorization;
@@ -60,13 +61,12 @@ bool ExecutorDestroyBuilding::getParameters(
 {
     try
     {
-        m_login                   = a_request->getLoginValue();
-        m_password                = a_request->getPasswordValue();
-        m_value_id_holder_class   = a_request->getParameterValueUnsignedInteger("idholderclass");
-        m_holder_name             = a_request->getParameterValueString("holder_name");
-        m_value_id_building_class = a_request->getParameterValueUnsignedInteger("idbuildingclass");
-        m_value_id_building       = a_request->getParameterValueUnsignedInteger("idbuilding");
-        m_value_volume            = a_request->getParameterValueUnsignedInteger("volume");
+        m_login                 = a_request->getLoginValue();
+        m_password              = a_request->getPasswordValue();
+        m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
+        m_holder_name           = a_request->getParameterValueString("holder_name");
+        m_key                   = a_request->getParameterValueString("buildingkey");
+        m_value_volume          = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;
     }
@@ -81,7 +81,6 @@ bool ExecutorDestroyBuilding::processParameters()
     try
     {
         m_id_holder.assign(m_value_id_holder_class, m_holder_name);
-        m_id_building.assign(m_value_id_building_class, m_value_id_building);
         m_volume = m_value_volume;
 
         return true;
@@ -160,7 +159,7 @@ ReplyShrPtr ExecutorDestroyBuilding::perform(
         ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         DestroyBuildingOperatorExitCode const exit_code =
-            destroy_building_operator->destroyBuilding(transaction, m_id_holder, GameServer::Building::Key(m_id_building), m_volume);
+            destroy_building_operator->destroyBuilding(transaction, m_id_holder, m_key, m_volume);
 
         if (exit_code.ok())
         {

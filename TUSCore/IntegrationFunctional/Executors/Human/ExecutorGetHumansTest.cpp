@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "../../../GameServer/Common/IDHolder.hpp"
-#include "../../../GameServer/Human/IDHuman.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioActivateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioDeactivateEpoch.hpp"
@@ -38,6 +37,7 @@
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
+#include <GameServer/Human/Key.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;
@@ -168,7 +168,7 @@ TEST_F(IntegrationFunctionalTest, GetHumans_ManyHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioGetHumans(

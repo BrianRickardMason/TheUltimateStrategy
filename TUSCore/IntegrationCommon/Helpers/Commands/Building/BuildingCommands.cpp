@@ -47,13 +47,12 @@ ReplyShrPtr BuildBuilding(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_building_class,
-    unsigned int const a_id_building,
+    string       const a_key,
     unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestBuildBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building, a_volume);
+        createRequestBuildBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_key, a_volume);
 
     return a_client->sendRequest(request);
 }
@@ -64,13 +63,12 @@ ReplyShrPtr DestroyBuilding(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_building_class,
-    unsigned int const a_id_building,
+    string       const a_key,
     unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestDestroyBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building, a_volume);
+        createRequestDestroyBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_key, a_volume);
 
     return a_client->sendRequest(request);
 }
@@ -81,12 +79,11 @@ ReplyShrPtr GetBuilding(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_building_class,
-    unsigned int const a_id_building
+    string       const a_key
 )
 {
     RequestShrPtr request =
-        createRequestGetBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building);
+        createRequestGetBuilding(a_login, a_password, a_id_holder_class, a_holder_name, a_key);
 
     return a_client->sendRequest(request);
 }

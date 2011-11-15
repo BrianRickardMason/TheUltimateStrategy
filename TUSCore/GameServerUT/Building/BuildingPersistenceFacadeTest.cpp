@@ -28,9 +28,11 @@
 #include "../../GameServer/Building/BuildingPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "BuildingAccessorMock.hpp"
+#include <GameServer/Building/Key.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
@@ -50,8 +52,8 @@ protected:
      */
     BuildingPersistenceFacadeTest()
         : m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
-          m_key_1(ID_BUILDING_DEFENSIVE_BARBICAN),
-          m_key_2(ID_BUILDING_GOLD_ALTAR_OF_WISHES)
+          m_key_1(KEY_DEFENSIVE_BARBICAN),
+          m_key_2(KEY_GOLD_ALTAR_OF_WISHES)
     {
     }
 
@@ -64,11 +66,11 @@ protected:
      */
     void compareBuilding(
         BuildingWithVolumeShrPtr         a_building,
-        Key                      const & a_key,
+        IBuildingKey             const & a_key,
         Volume                   const & a_volume
     )
     {
-        ASSERT_TRUE(a_key == a_building->getKey());
+        ASSERT_TRUE(a_key == a_building->getBuilding()->getKey());
         ASSERT_EQ(a_volume, a_building->getVolume());
     }
 
@@ -80,8 +82,8 @@ protected:
     /**
      * @brief Test constants keys.
      */
-    Key m_key_1;
-    Key m_key_2;
+     IBuildingKey m_key_1,
+                  m_key_2;
 };
 
 TEST_F(BuildingPersistenceFacadeTest, CtorDoesNotThrow)

@@ -25,35 +25,75 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef GAMESERVER_HUMAN_EXPERIENCE_HPP
-#define GAMESERVER_HUMAN_EXPERIENCE_HPP
+#ifndef GAMESERVER_CONFIGURATION_BUILDING_HPP
+#define GAMESERVER_CONFIGURATION_BUILDING_HPP
 
-#include "../Common/ConstrainedValue.hpp"
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 
 namespace GameServer
 {
-namespace Human
+namespace Configuration
 {
 
 /**
- * @brief The fake type class to declare Experience.
+ * @brief Building.
  */
-class TExperience
+class Building
+    : public IBuilding
 {
+public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_key   The key of the building.
+     * @param a_class The class of the building.
+     * @param a_name  The name of the building.
+     */
+    Building(
+        IBuildingKey const a_key,
+        std::string  const a_class,
+        std::string  const a_name
+    );
+
+    /**
+     * @brief Gets the key of the building.
+     *
+     * @return The key of the building.
+     */
+    virtual IBuildingKey getKey() const;
+
+    /**
+     * @brief Gets the class of the building.
+     *
+     * @return The class of the building.
+     */
+    virtual std::string getClass() const;
+
+    /**
+     * @brief Gets the name of the building.
+     *
+     * @return The name of the building.
+     */
+    virtual std::string getName() const;
+
+private:
+    /**
+     * @brief The key of the building.
+     */
+    IBuildingKey const m_key;
+
+    /**
+     * @brief The class of the building.
+     */
+    std::string const m_class;
+
+    /**
+     * @brief The name of the building.
+     */
+    std::string const m_name;
 };
 
-/**
- * @brief The experience of a human.
- */
-typedef Common::ConstrainedValue<TExperience, Common::RangedUnsignedShortIntPolicy<1, 2> > Experience;
-
-/**
- * @brief Available experiences.
- */
-Experience const EXPERIENCE_NOVICE  (1);
-Experience const EXPERIENCE_ADVANCED(2);
-
-} // namespace Human
+} // namespace Configuration
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_EXPERIENCE_HPP
+#endif // GAMESERVER_CONFIGURATION_BUILDING_HPP

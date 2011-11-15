@@ -1,4 +1,4 @@
-// Copyright (C) 2010 and 2011 Marcin Arkadiusz Skrobiranda.
+// Copyright ("C") 2010 and 2011 Marcin Arkadiusz Skrobiranda.
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -18,148 +18,70 @@
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 // ARE DISCLAIMED. IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
 // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-// OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// DAMAGES ("INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+// OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION")
 // HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-// LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+// LIABILITY, OR TORT ("INCLUDING NEGLIGENCE OR OTHERWISE") ARISING IN ANY WAY
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
 #ifndef GAMESERVER_BUILDING_KEY_HPP
 #define GAMESERVER_BUILDING_KEY_HPP
 
-#include "../Common/KeyHash.hpp"
-#include "IDBuilding.hpp"
-#include <boost/tuple/tuple.hpp>
-#include <boost/tuple/tuple_comparison.hpp>
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 
 namespace GameServer
 {
 namespace Building
 {
 
+//@{
 /**
- * @brief The key.
- *
- * Uniquely identifies a building object.
- *
- * TODO: Use boost::operators.
- * TODO: Consider facilitators/stabilizators of the interface (getIdBuildingClass, getIdBuilding).
- *       First step to unification (base and derived classes/specialization).
+ * @brief The available key.
  */
-class Key
-{
-public:
-    /**
-     * @brief The internal key.
-     */
-    typedef boost::tuple<IDBuilding> InternalKey;
+Configuration::IBuildingKey const KEY_DEFENSIVE_BARBICAN       ("defensivebarbican");
+Configuration::IBuildingKey const KEY_DEFENSIVE_BATTLEMENTS    ("defensivebattlements");
+Configuration::IBuildingKey const KEY_DEFENSIVE_CASEMATE       ("defensivecasemate");
+Configuration::IBuildingKey const KEY_DEFENSIVE_CIRCUMVALLATION("defensivecircumvallation");
+Configuration::IBuildingKey const KEY_DEFENSIVE_DONJON         ("defensivedonjon");
+Configuration::IBuildingKey const KEY_DEFENSIVE_MACHICOLATION  ("defensivemachicolation");
+Configuration::IBuildingKey const KEY_DEFENSIVE_PORTCULLIS     ("defensiveportcullis");
+Configuration::IBuildingKey const KEY_DEFENSIVE_POSTERN        ("defensivepostern");
+Configuration::IBuildingKey const KEY_DEFENSIVE_VIEWING_TOWER  ("defensiveviewingtower");
 
-    /**
-     * @brief Constructs the key.
-     *
-     * @param a_id_building The identifier of the building.
-     */
-    Key(
-        IDBuilding const & a_id_building
-    )
-        : m_internal_key(a_id_building)
-    {
-    }
+Configuration::IBuildingKey const KEY_GOLD_ALTAR_OF_WISHES     ("goldaltarofwishes");
+Configuration::IBuildingKey const KEY_GOLD_COMMUNICATION_TOWERS("goldcommunicationtowers");
+Configuration::IBuildingKey const KEY_GOLD_ETERNAL_CALENDAR    ("goldeternalcalendar");
+Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_METEORS   ("goldhunterofmeteors");
+Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_RAINS     ("goldhuterofrains");
+Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_STORMS    ("goldhunterofstorms");
+Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_WINDS     ("goldhunterofwinds");
+Configuration::IBuildingKey const KEY_GOLD_NECROPOLIS          ("goldnecropolis");
+Configuration::IBuildingKey const KEY_GOLD_ORACLE              ("goldoracle");
+Configuration::IBuildingKey const KEY_GOLD_PORTAL_OF_ELEMENTS  ("goldportalofelements");
+Configuration::IBuildingKey const KEY_GOLD_PSIONIC_ACADEMY     ("goldpsionicacademy");
+Configuration::IBuildingKey const KEY_GOLD_TOWER_OF_CHAOS      ("goldtowerofchaos");
 
-    /**
-     * @brief Constructs the key.
-     *
-     * @param a_key_hash A key hash.
-     */
-    explicit Key(
-        Common::KeyHash const & a_key_hash
-    )
-        : m_internal_key(IDBuilding((a_key_hash % 10000) / 100, a_key_hash % 100))
-    {
-    }
+Configuration::IBuildingKey const KEY_REGULAR_BARRACKS         ("regularbarracks");
+Configuration::IBuildingKey const KEY_REGULAR_FARM             ("regularfarm");
+Configuration::IBuildingKey const KEY_REGULAR_FORGE            ("regularforge");
+Configuration::IBuildingKey const KEY_REGULAR_GUILD            ("regularguild");
+Configuration::IBuildingKey const KEY_REGULAR_HOUSE            ("regularhouse");
+Configuration::IBuildingKey const KEY_REGULAR_MARKETPLACE      ("regularmarketplace");
+Configuration::IBuildingKey const KEY_REGULAR_MINE             ("regularmine");
+Configuration::IBuildingKey const KEY_REGULAR_QUARRY           ("regularquarry");
+Configuration::IBuildingKey const KEY_REGULAR_SAWMILL          ("regularsawmill");
+Configuration::IBuildingKey const KEY_REGULAR_SCHOOL           ("regularschool");
+Configuration::IBuildingKey const KEY_REGULAR_STEELWORKS       ("regularsteelworks");
+Configuration::IBuildingKey const KEY_REGULAR_TEMPLE           ("regulartemple");
 
-    /**
-     * @brief Operators.
-     */
-    bool operator==(Key const & a_rhs) const { return m_internal_key == a_rhs.m_internal_key; }
-    bool operator< (Key const & a_rhs) const { return m_internal_key <  a_rhs.m_internal_key; }
-
-    /**
-     * @brief Gets the internal key.
-     *
-     * @return The internal key.
-     */
-    InternalKey const & getInternalKey() const
-    {
-        return m_internal_key;
-    }
-
-    /**
-     * @brief Translates the key to "hash" value.
-     *
-     * @return The "hash" value.
-     */
-    Common::KeyHash toHash() const
-    {
-        return   Common::KEY_HASH_MAGIC_VALUE_BUILDING * 1000000
-               + 0                                     * 10000
-               + m_internal_key.get<0>().getValue1()   * 100
-               + m_internal_key.get<0>().getValue2()   * 1;
-    }
-
-private:
-    /**
-     * @brief The internal key.
-     */
-    InternalKey m_internal_key;
-};
-
-/**
- * @brief The available keys.
- */
-const Key KEY_DEFENSIVE_BARBICAN        (ID_BUILDING_DEFENSIVE_BARBICAN       );
-const Key KEY_DEFENSIVE_BATTLEMENTS     (ID_BUILDING_DEFENSIVE_BATTLEMENTS    );
-const Key KEY_DEFENSIVE_CASEMATE        (ID_BUILDING_DEFENSIVE_CASEMATE       );
-const Key KEY_DEFENSIVE_CIRCUMVALLATION (ID_BUILDING_DEFENSIVE_CIRCUMVALLATION);
-const Key KEY_DEFENSIVE_DONJON          (ID_BUILDING_DEFENSIVE_DONJON         );
-const Key KEY_DEFENSIVE_MACHICOLATION   (ID_BUILDING_DEFENSIVE_MACHICOLATION  );
-const Key KEY_DEFENSIVE_PORTCULLIS      (ID_BUILDING_DEFENSIVE_PORTCULLIS     );
-const Key KEY_DEFENSIVE_POSTERN         (ID_BUILDING_DEFENSIVE_POSTERN        );
-const Key KEY_DEFENSIVE_VIEWING_TOWER   (ID_BUILDING_DEFENSIVE_VIEWING_TOWER  );
-
-const Key KEY_GOLD_ALTAR_OF_WISHES      (ID_BUILDING_GOLD_ALTAR_OF_WISHES     );
-const Key KEY_GOLD_COMMUNICATION_TOWERS (ID_BUILDING_GOLD_COMMUNICATION_TOWERS);
-const Key KEY_GOLD_ETERNAL_CALENDAR     (ID_BUILDING_GOLD_ETERNAL_CALENDAR    );
-const Key KEY_GOLD_HUNTER_OF_METEORS    (ID_BUILDING_GOLD_HUNTER_OF_METEORS   );
-const Key KEY_GOLD_HUNTER_OF_RAINS      (ID_BUILDING_GOLD_HUNTER_OF_RAINS     );
-const Key KEY_GOLD_HUNTER_OF_STORMS     (ID_BUILDING_GOLD_HUNTER_OF_STORMS    );
-const Key KEY_GOLD_HUNTER_OF_WINDS      (ID_BUILDING_GOLD_HUNTER_OF_WINDS     );
-const Key KEY_GOLD_NECROPOLIS           (ID_BUILDING_GOLD_NECROPOLIS          );
-const Key KEY_GOLD_ORACLE               (ID_BUILDING_GOLD_ORACLE              );
-const Key KEY_GOLD_PORTAL_OF_ELEMENTS   (ID_BUILDING_GOLD_PORTAL_OF_ELEMENTS  );
-const Key KEY_GOLD_PSIONIC_ACADEMY      (ID_BUILDING_GOLD_PSIONIC_ACADEMY     );
-const Key KEY_GOLD_TOWER_OF_CHAOS       (ID_BUILDING_GOLD_TOWER_OF_CHAOS      );
-
-const Key KEY_REGULAR_BARRACKS          (ID_BUILDING_REGULAR_BARRACKS         );
-const Key KEY_REGULAR_FARM              (ID_BUILDING_REGULAR_FARM             );
-const Key KEY_REGULAR_FORGE             (ID_BUILDING_REGULAR_FORGE            );
-const Key KEY_REGULAR_GUILD             (ID_BUILDING_REGULAR_GUILD            );
-const Key KEY_REGULAR_HOUSE             (ID_BUILDING_REGULAR_HOUSE            );
-const Key KEY_REGULAR_MARKETPLACE       (ID_BUILDING_REGULAR_MARKETPLACE      );
-const Key KEY_REGULAR_MINE              (ID_BUILDING_REGULAR_MINE             );
-const Key KEY_REGULAR_QUARRY            (ID_BUILDING_REGULAR_QUARRY           );
-const Key KEY_REGULAR_SAWMILL           (ID_BUILDING_REGULAR_SAWMILL          );
-const Key KEY_REGULAR_SCHOOL            (ID_BUILDING_REGULAR_SCHOOL           );
-const Key KEY_REGULAR_STEELWORKS        (ID_BUILDING_REGULAR_STEELWORKS       );
-const Key KEY_REGULAR_TEMPLE            (ID_BUILDING_REGULAR_TEMPLE           );
-
-const Key KEY_SPECIAL_AQUEDUCT          (ID_BUILDING_SPECIAL_AQUEDUCT         );
-const Key KEY_SPECIAL_BAWDY_HOUSE       (ID_BUILDING_SPECIAL_BAWDY_HOUSE      );
-const Key KEY_SPECIAL_COMMERCIAL_PORT   (ID_BUILDING_SPECIAL_COMMERCIAL_PORT  );
-const Key KEY_SPECIAL_COURT             (ID_BUILDING_SPECIAL_COURT            );
-const Key KEY_SPECIAL_GRANARY           (ID_BUILDING_SPECIAL_GRANARY          );
-const Key KEY_SPECIAL_SEWERAGE          (ID_BUILDING_SPECIAL_SEWERAGE         );
+Configuration::IBuildingKey const KEY_SPECIAL_AQUEDUCT         ("specialaqueduct");
+Configuration::IBuildingKey const KEY_SPECIAL_BAWDY_HOUSE      ("specialbawdyhouse");
+Configuration::IBuildingKey const KEY_SPECIAL_COMMERCIAL_PORT  ("specialcommercialport");
+Configuration::IBuildingKey const KEY_SPECIAL_COURT            ("specialcourt");
+Configuration::IBuildingKey const KEY_SPECIAL_GRANARY          ("specialgranary");
+Configuration::IBuildingKey const KEY_SPECIAL_SEWERAGE         ("specialsewerage");
+//}@
 
 } // namespace Building
 } // namespace GameServer

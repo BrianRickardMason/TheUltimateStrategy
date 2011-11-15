@@ -25,7 +25,6 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../GameServer/Building/IDBuilding.hpp"
 #include "../../../GameServer/Common/IDHolder.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Building/ScenarioBuildBuilding.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Building/ScenarioGetBuildings.hpp"
@@ -38,6 +37,7 @@
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
+#include <GameServer/Building/Key.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -168,7 +168,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_ManyBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_BUILDING_CLASS_DEFENSIVE, 1,
+                KEY_DEFENSIVE_BARBICAN,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioBuildBuilding(
@@ -176,7 +176,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_ManyBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_BUILDING_CLASS_DEFENSIVE, 2,
+                KEY_DEFENSIVE_BATTLEMENTS,
                 2)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
@@ -226,7 +226,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_SettlementDoesExist_Authorized_On
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_BUILDING_CLASS_DEFENSIVE, 1,
+                KEY_DEFENSIVE_BARBICAN,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuildings(

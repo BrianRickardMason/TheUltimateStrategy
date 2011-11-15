@@ -48,9 +48,7 @@ namespace Transport
  * @param a_password                    The password of the user.
  * @param a_settlement_name_source      The name of the source settlement.
  * @param a_settlement_name_destination The name of the destination settlement.
- * @param a_id_human_class              The identifier of the class of the human.
- * @param a_id_human                    The identifier of the human.
- * @param a_experience                  The experience of the human.
+ * @param a_key                         The key of the human.
  * @param a_volume                      The volume.
  *
  * @return The reply.
@@ -61,9 +59,7 @@ Network::XmlRPCCommon::Reply::ReplyShrPtr TransportHuman(
     std::string  const a_password,
     std::string  const a_settlement_name_source,
     std::string  const a_settlement_name_destination,
-    unsigned int const a_id_human_class,
-    unsigned int const a_id_human,
-    unsigned int const a_experience,
+    std::string  const a_key,
     unsigned int const a_volume
 );
 

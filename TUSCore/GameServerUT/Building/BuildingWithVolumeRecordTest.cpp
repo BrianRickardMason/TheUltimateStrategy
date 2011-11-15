@@ -26,10 +26,12 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Building/BuildingWithVolumeRecord.hpp"
+#include <GameServer/Building/Key.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 
 /**
  * @brief A test class.
@@ -43,8 +45,8 @@ protected:
      */
     BuildingWithVolumeRecordTest()
         : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
-          m_record(m_id_holder, Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4),
-          m_model_key(ID_BUILDING_DEFENSIVE_BARBICAN)
+          m_record(m_id_holder, KEY_DEFENSIVE_BARBICAN, 4),
+          m_model_key(KEY_DEFENSIVE_BARBICAN)
     {
     }
 
@@ -61,12 +63,12 @@ protected:
     /**
      * @brief A model key.
      */
-    Key m_model_key;
+    IBuildingKey m_model_key;
 };
 
 TEST_F(BuildingWithVolumeRecordTest, BuildingWithVolumeRecord)
 {
-    BuildingWithVolumeRecord record(m_id_holder, Key(ID_BUILDING_DEFENSIVE_BARBICAN), 4);
+    BuildingWithVolumeRecord record(m_id_holder, KEY_DEFENSIVE_BARBICAN, 4);
 
     ASSERT_TRUE(m_id_holder == record.getIDHolder());
     ASSERT_TRUE(m_model_key == record.getKey());

@@ -27,6 +27,7 @@
 
 #include "../Constants.hpp"
 #include "ExecutorEngageHuman.hpp"
+#include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
 using namespace GameServer::Authorization;
@@ -58,14 +59,14 @@ bool ExecutorEngageHuman::getParameters(
     RequestShrPtr a_request
 )
 {
+    // TODO: One should not need to introduce key _NOVICE. It must be guessed that only novices can be engaged.
     try
     {
         m_login                 = a_request->getLoginValue();
         m_password              = a_request->getPasswordValue();
         m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
         m_holder_name           = a_request->getParameterValueString("holder_name");
-        m_value_id_human_class  = a_request->getParameterValueUnsignedInteger("idhumanclass");
-        m_value_id_human        = a_request->getParameterValueUnsignedInteger("idhuman");
+        m_key                   = a_request->getParameterValueString("humankey");
         m_value_volume          = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;
@@ -81,7 +82,6 @@ bool ExecutorEngageHuman::processParameters()
     try
     {
         m_id_holder.assign(m_value_id_holder_class, m_holder_name);
-        m_id_human.assign(m_value_id_human_class, m_value_id_human);
         m_volume = m_value_volume;
 
         return true;
@@ -159,7 +159,7 @@ ReplyShrPtr ExecutorEngageHuman::perform(
         ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         EngageHumanOperatorExitCode const exit_code =
-            engage_human_operator->engageHuman(transaction, m_id_holder, GameServer::Human::Key(m_id_human, EXPERIENCE_NOVICE), m_volume);
+            engage_human_operator->engageHuman(transaction, m_id_holder, m_key, m_volume);
 
         if (exit_code.ok())
         {

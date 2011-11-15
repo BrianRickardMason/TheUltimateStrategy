@@ -28,8 +28,6 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTRANSPORTHUMAN_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTRANSPORTHUMAN_HPP
 
-#include "../../../../../GameServer/Human/Experience.hpp"
-#include "../../../../../GameServer/Human/IDHuman.hpp"
 #include "../../../../../GameServer/Human/Volume.hpp"
 #include "../../../../../GameServer/Transport/Operators/TransportHuman/TransportHumanOperatorExitCode.hpp"
 #include "../Executor.hpp"
@@ -55,9 +53,7 @@ namespace Executors
  *     <parameters>
  *         <settlement_name_source      value=\"#\" />
  *         <settlement_name_destination value=\"#\" />
- *         <idhumanclass                value=\"#\" />
- *         <idhuman                     value=\"#\" />
- *         <experience                  value=\"#\" />
+ *         <humankey                    value=\"#\" />
  *         <volume                      value=\"#\" />
  *     </parameters>
  * </request>
@@ -161,19 +157,9 @@ class ExecutorTransportHuman
     ) const;
 
     /**
-     * @brief The value of the identifier of the class of a human.
+     * @brief The key of the human.
      */
-    unsigned int m_value_id_human_class;
-
-    /**
-     * @brief The value of the identifier of a human.
-     */
-    unsigned int m_value_id_human;
-
-    /**
-     * @brief The value of the experience of a human.
-     */
-    unsigned int m_value_experience;
+    std::string m_key;
 
     /**
      * @brief The value of the volume.
@@ -189,16 +175,6 @@ class ExecutorTransportHuman
      * @brief The name of the destination settlement.
      */
     std::string m_settlement_name_destination;
-
-    /**
-     * @brief The identifier of a human.
-     */
-    GameServer::Human::IDHuman m_id_human;
-
-    /**
-     * @brief The experience of a human.
-     */
-    GameServer::Human::Experience m_experience;
 
     /**
      * @brief The volume.

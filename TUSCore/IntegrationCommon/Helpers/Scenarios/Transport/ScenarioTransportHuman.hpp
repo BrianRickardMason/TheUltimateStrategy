@@ -110,9 +110,7 @@ public:
      * @param a_password                    The password of the user.
      * @param a_settlement_name_source      The name of the source settlement.
      * @param a_settlement_name_destination The name of the destination settlement.
-     * @param a_id_human_class              The identifier of the class of the human.
-     * @param a_id_human                    The identifier of the human.
-     * @param a_experience                  The experience of the human.
+     * @param a_key                         The key of the human.
      * @param a_volume                      The volume of the human.
      */
     ScenarioTransportHumanActionSuccess(
@@ -120,18 +118,14 @@ public:
         std::string  const a_password,
         std::string  const a_settlement_name_source,
         std::string  const a_settlement_name_destination,
-        unsigned int const a_id_human_class,
-        unsigned int const a_id_human,
-        unsigned int const a_experience,
+        std::string  const a_key,
         unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
           m_settlement_name_source(a_settlement_name_source),
           m_settlement_name_destination(a_settlement_name_destination),
-          m_id_human_class(a_id_human_class),
-          m_id_human(a_id_human),
-          m_experience(a_experience),
+          m_key(a_key),
           m_volume(a_volume)
     {
     }
@@ -152,9 +146,7 @@ public:
                                                    m_password,
                                                    m_settlement_name_source,
                                                    m_settlement_name_destination,
-                                                   m_id_human_class,
-                                                   m_id_human,
-                                                   m_experience,
+                                                   m_key,
                                                    m_volume);
     }
 
@@ -180,19 +172,9 @@ private:
     std::string const m_settlement_name_destination;
 
     /**
-     * @brief The identifier of the class of the human.
+     * @brief The key of the human.
      */
-    unsigned int const m_id_human_class;
-
-    /**
-     * @brief The identifier of the human.
-     */
-    unsigned int const m_id_human;
-
-    /**
-     * @brief The experience of the human.
-     */
-    unsigned int const m_experience;
+    std::string const m_key;
 
     /**
      * @brief The volume of the human.
@@ -214,9 +196,7 @@ public:
      * @param a_password                    The password of the user.
      * @param a_settlement_name_source      The name of the source settlement.
      * @param a_settlement_name_destination The name of the destination settlement.
-     * @param a_id_human_class              The identifier of the class of the human.
-     * @param a_id_human                    The identifier of the human.
-     * @param a_experience                  The experience of the human.
+     * @param a_key                         The key of the human.
      * @param a_volume                      The volume of the human.
      */
     ScenarioTransportHumanActionInvalidRequest(
@@ -224,18 +204,14 @@ public:
         std::string  const a_password,
         std::string  const a_settlement_name_source,
         std::string  const a_settlement_name_destination,
-        unsigned int const a_id_human_class,
-        unsigned int const a_id_human,
-        unsigned int const a_experience,
+        std::string  const a_key,
         unsigned int const a_volume
     )
         : m_login(a_login),
           m_password(a_password),
           m_settlement_name_source(a_settlement_name_source),
           m_settlement_name_destination(a_settlement_name_destination),
-          m_id_human_class(a_id_human_class),
-          m_id_human(a_id_human),
-          m_experience(a_experience),
+          m_key(a_key),
           m_volume(a_volume)
     {
     }
@@ -267,14 +243,8 @@ public:
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
         settlement_name_destination->appendAttribute("value")->setValue(m_settlement_name_destination.c_str());
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-        idhumanclass->appendAttribute("value")->setValue(m_id_human_class);
-
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-        idhuman->appendAttribute("value")->setValue(m_id_human);
-
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr experience = parameters->appendNode("experience");
-        experience->appendAttribute("value")->setValue(m_experience);
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr humankey = parameters->appendNode("humankey");
+        humankey->appendAttribute("value")->setValue(m_key.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr volume = parameters->appendNode("volume");
         volume->appendAttribute("valve")->setValue(m_volume);
@@ -304,19 +274,9 @@ private:
     std::string const m_settlement_name_destination;
 
     /**
-     * @brief The identifier of the class of the human.
+     * @brief The key of the human.
      */
-    unsigned int const m_id_human_class;
-
-    /**
-     * @brief The identifier of the human.
-     */
-    unsigned int const m_id_human;
-
-    /**
-     * @brief The experience of the human.
-     */
-    unsigned int const m_experience;
+    std::string const m_key;
 
     /**
      * @brief The volume of the human.

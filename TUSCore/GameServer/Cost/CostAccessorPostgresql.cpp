@@ -40,14 +40,14 @@ namespace Cost
 
 CostRecordVec CostAccessorPostgresql::getCosts(
     ITransactionShrPtr         a_transaction,
-    KeyHash            const & a_key_hash,
+    string             const & a_key,
     IDCostType         const & a_id_cost_type
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
     pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
 
-    string query = "SELECT * FROM costs WHERE key_hash = " + backbone_transaction.quote(a_key_hash)
+    string query = "SELECT * FROM costs WHERE key = " + backbone_transaction.quote(a_key.c_str())
                    + " AND id_cost_type = " + backbone_transaction.quote(a_id_cost_type);
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -65,7 +65,7 @@ CostRecordVec CostAccessorPostgresql::getCosts(
         it["resource_key"].to(key);
         volume = it["volume"].as(integer);
 
-        CostRecordShrPtr cost_record_shr_ptr = make_shared<CostRecord>(a_key_hash, a_id_cost_type, key, volume);
+        CostRecordShrPtr cost_record_shr_ptr = make_shared<CostRecord>(a_key, a_id_cost_type, key, volume);
 
         records.push_back(cost_record_shr_ptr);
     }

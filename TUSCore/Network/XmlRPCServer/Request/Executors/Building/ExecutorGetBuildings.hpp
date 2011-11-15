@@ -64,9 +64,9 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <idbuildingclass value=\"#\" />
- *             <idbuilding      value=\"#\" />
- *             <volume          value=\"#\" />
+ *             <buildingclass value=\"#\" />
+ *             <buildingname  value=\"#\" />
+ *             <volume        value=\"#\" />
  *         </object>
  *         <object>
  *             ...

@@ -32,6 +32,7 @@
 #include "../../../Persistence/ITransaction.hpp"
 #include "../../Key.hpp"
 #include "GetHumanOperatorExitCode.hpp"
+#include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -61,12 +62,12 @@ public:
     virtual GetHumanOperatorExitCode getHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IHumanKey        const & a_key
     ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of GetHumanOperator.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IGetHumanOperator> IGetHumanOperatorShrPtr;
 

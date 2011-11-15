@@ -31,10 +31,12 @@
 #include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
 #include "../../BuildingPersistenceFacadeMock.hpp"
+#include <GameServer/Building/Key.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
@@ -84,7 +86,7 @@ protected:
         std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
         ResourceSet resource_set = getResourceSet(resource_volumes);
 
-        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN.toHash(), ID_COST_TYPE_BUILDING_DESTROY))
+        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN, ID_COST_TYPE_BUILDING_DESTROY))
         .WillOnce(Return(resource_set));
     }
 
@@ -210,7 +212,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetCostThrows)
 
     std::exception e;
 
-    EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN.toHash(), ID_COST_TYPE_BUILDING_DESTROY))
+    EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN, ID_COST_TYPE_BUILDING_DESTROY))
     .WillOnce(Throw(e));
 
     std::vector<GameServer::Resource::Volume> resource_volumes;

@@ -5,6 +5,7 @@ build
 .cproject
 .project
 .pydevproject
+.settings
 
 # Python specific files.
 *.pyc

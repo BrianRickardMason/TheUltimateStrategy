@@ -62,24 +62,21 @@ CREATE TABLE settlements
 DROP TABLE IF EXISTS buildings_settlement CASCADE;
 CREATE TABLE buildings_settlement
 (
-    holder_name       VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
-    id_building_class SMALLINT NOT NULL CHECK(id_building_class IN (1, 2, 3, 4)), -- TODO: Mapping to source code needed.
-    id_building       SMALLINT NOT NULL CHECK(id_building > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-    volume            INTEGER NOT NULL CHECK(volume > 0),
+    holder_name  VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
+    building_key VARCHAR(44) NOT NULL CHECK(building_key <> ''),
+    volume       INTEGER NOT NULL CHECK(volume > 0),
 
-    UNIQUE(holder_name, id_building_class, id_building)
+    UNIQUE(holder_name, building_key)
 );
 
 DROP TABLE IF EXISTS humans_settlement CASCADE;
 CREATE TABLE humans_settlement
 (
-    holder_name    VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
-    id_human_class SMALLINT NOT NULL CHECK(id_human_class IN (1, 2, 3, 4)), -- TODO: Mapping to source code needed.
-    id_human       SMALLINT NOT NULL CHECK(id_human > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-    experience     SMALLINT NOT NULL CHECK(experience IN (1, 2)), -- TODO: Mapping to source code needed.
-    volume         INTEGER NOT NULL CHECK(volume > 0),
+    holder_name VARCHAR(44) NOT NULL CHECK(holder_name <> '') REFERENCES settlements(settlement_name) ON DELETE CASCADE,
+    human_key   VARCHAR(44) NOT NULL CHECK(human_key <> ''),
+    volume      INTEGER NOT NULL CHECK(volume > 0),
 
-    UNIQUE(holder_name, id_human_class, id_human, experience)
+    UNIQUE(holder_name, human_key)
 );
 
 DROP TABLE IF EXISTS resources_settlement CASCADE;
@@ -95,23 +92,23 @@ CREATE TABLE resources_settlement
 DROP TABLE IF EXISTS costs CASCADE;
 CREATE TABLE costs
 (
-    key_hash     INTEGER NOT NULL CHECK(key_hash > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
+    key          VARCHAR(44) NOT NULL CHECK(key <> ''),
     id_cost_type SMALLINT NOT NULL CHECK(id_cost_type > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
     resource_key VARCHAR(44) NOT NULL CHECK(resource_key <> ''),
     volume       SMALLINT NOT NULL CHECK(volume > 0),
 
-    UNIQUE(key_hash, id_cost_type, resource_key)
+    UNIQUE(key, id_cost_type, resource_key)
 );
 
 DROP TABLE IF EXISTS properties CASCADE;
 CREATE TABLE properties
 (
-    key_hash            INTEGER NOT NULL CHECK(key_hash > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
+    key                 VARCHAR(44) NOT NULL CHECK(key <> ''),
     id_property         SMALLINT NOT NULL CHECK(id_property > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
     value_discriminator SMALLINT NOT NULL CHECK(value_discriminator IN (1, 2, 3)), -- TODO: Mapping to source code needed.
     value_boolean       BOOLEAN DEFAULT NULL, -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
     value_integer       SMALLINT DEFAULT NULL, -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
     value_string        VARCHAR(44) DEFAULT NULL, -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
 
-    UNIQUE(key_hash, id_property)
+    UNIQUE(key, id_property)
 );

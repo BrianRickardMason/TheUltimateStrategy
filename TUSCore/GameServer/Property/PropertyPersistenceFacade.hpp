@@ -56,14 +56,14 @@ public:
      * @brief Gets a property boolean.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property.
      */
     virtual PropertyBooleanShrPtr getPropertyBoolean(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
+        std::string                     const & a_key,
         IDProperty                      const & a_id_property
     ) const;
 
@@ -71,14 +71,14 @@ public:
      * @brief Gets a property integer.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property.
      */
     virtual PropertyIntegerShrPtr getPropertyInteger(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
+        std::string                     const & a_key,
         IDProperty                      const & a_id_property
     ) const;
 
@@ -86,14 +86,14 @@ public:
      * @brief Gets a property string.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property.
      */
     virtual PropertyStringShrPtr getPropertyString(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
+        std::string                     const & a_key,
         IDProperty                      const & a_id_property
     ) const;
 
@@ -101,13 +101,13 @@ public:
      * @brief Gets a set of properties.
      *
      * @param a_transaction The transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      *
      * @return The set of properties.
      */
     virtual PropertySet getProperties(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash
+        std::string                     const & a_key
     ) const;
 
 private:

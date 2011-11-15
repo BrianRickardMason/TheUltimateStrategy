@@ -68,20 +68,14 @@ private:
     IDProperty m_id_property;
 };
 
+//@{
 /**
- * @brief A shared pointer of property.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<Property> PropertyShrPtr;
-
-/**
- * @brief A pair of property.
- */
 typedef std::pair<IDProperty, PropertyShrPtr> PropertyPair;
-
-/**
- * @brief A map of property.
- */
 typedef std::map<IDProperty, PropertyShrPtr> PropertyMap;
+//}@
 
 /**
  * @brief The boolean property.

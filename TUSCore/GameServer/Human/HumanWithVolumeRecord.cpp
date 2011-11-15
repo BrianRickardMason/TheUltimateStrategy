@@ -25,9 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "HumanWithVolumeRecord.hpp"
+#include <GameServer/Human/HumanWithVolumeRecord.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 
 namespace GameServer
 {
@@ -35,9 +36,9 @@ namespace Human
 {
 
 HumanWithVolumeRecord::HumanWithVolumeRecord(
-    IDHolder const & a_id_holder,
-    Key      const & a_key,
-    Volume   const & a_volume
+    IDHolder  const a_id_holder,
+    IHumanKey const a_key,
+    Volume    const a_volume
 )
     : m_id_holder(a_id_holder),
       m_key(a_key),
@@ -50,12 +51,12 @@ IDHolder const & HumanWithVolumeRecord::getIDHolder() const
     return m_id_holder;
 }
 
-Key const & HumanWithVolumeRecord::getKey() const
+IHumanKey HumanWithVolumeRecord::getKey() const
 {
     return m_key;
 }
 
-Volume const & HumanWithVolumeRecord::getVolume() const
+Volume HumanWithVolumeRecord::getVolume() const
 {
     return m_volume;
 }

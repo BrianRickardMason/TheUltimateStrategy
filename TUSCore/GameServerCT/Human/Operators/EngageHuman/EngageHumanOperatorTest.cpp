@@ -30,6 +30,9 @@
 #include "../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../../../ComponentTest.hpp"
 #include "../../../Helpers/Constants.hpp"
+#include <GameServer/Building/Key.hpp>
+#include <GameServer/Human/Key.hpp>
+#include <GameServer/Resource/Key.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;

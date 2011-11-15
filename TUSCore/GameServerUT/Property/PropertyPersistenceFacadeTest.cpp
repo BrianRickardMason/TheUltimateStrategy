@@ -50,7 +50,7 @@ protected:
      * @brief Constructs a test class.
      */
     PropertyPersistenceFacadeTest()
-        : m_key_hash_1(1),
+        : m_key("Dodge"),
           m_id_property_1(1),
           m_id_property_2(2),
           m_id_property_3(3)
@@ -58,9 +58,9 @@ protected:
     }
 
     /**
-     * @brief Test constants: key hashes.
+     * @brief Test constants: the key used in tests.
      */
-    KeyHash m_key_hash_1;
+    string m_key;
 
     /**
      * @brief Test constants: identifiers of properties.
@@ -88,9 +88,9 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyBoolean)
     PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordShrPtr property_record =
-        make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_BOOLEAN, true, 0, "");
+        make_shared<PropertyRecord>(m_key, m_id_property_1, DISCRIMINATOR_BOOLEAN, true, 0, "");
 
-    EXPECT_CALL(*mock, getPropertyRecord(transaction, m_key_hash_1, m_id_property_1))
+    EXPECT_CALL(*mock, getPropertyRecord(transaction, m_key, m_id_property_1))
     .WillOnce(Return(property_record))
     .WillOnce(Return(property_record));
 
@@ -101,10 +101,10 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyBoolean)
     PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(PropertyBooleanShrPtr property = persistence_facade.getPropertyBoolean(transaction, m_key_hash_1, m_id_property_1));
+    ASSERT_NO_THROW(PropertyBooleanShrPtr property = persistence_facade.getPropertyBoolean(transaction, m_key, m_id_property_1));
 
     // Test commands.
-    PropertyBooleanShrPtr property = persistence_facade.getPropertyBoolean(transaction, m_key_hash_1, m_id_property_1);
+    PropertyBooleanShrPtr property = persistence_facade.getPropertyBoolean(transaction, m_key, m_id_property_1);
 
     // Test assertions.
     ASSERT_TRUE(m_id_property_1 == property->getIDProperty());
@@ -119,9 +119,9 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyInteger)
     PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordShrPtr property_record =
-        make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_INTEGER, false, 22, "");
+        make_shared<PropertyRecord>(m_key, m_id_property_1, DISCRIMINATOR_INTEGER, false, 22, "");
 
-    EXPECT_CALL(*mock, getPropertyRecord(transaction, m_key_hash_1, m_id_property_1))
+    EXPECT_CALL(*mock, getPropertyRecord(transaction, m_key, m_id_property_1))
     .WillOnce(Return(property_record))
     .WillOnce(Return(property_record));
 
@@ -132,10 +132,10 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyInteger)
     PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(PropertyIntegerShrPtr property = persistence_facade.getPropertyInteger(transaction, m_key_hash_1, m_id_property_1));
+    ASSERT_NO_THROW(PropertyIntegerShrPtr property = persistence_facade.getPropertyInteger(transaction, m_key, m_id_property_1));
 
     // Test commands.
-    PropertyIntegerShrPtr property = persistence_facade.getPropertyInteger(transaction, m_key_hash_1, m_id_property_1);
+    PropertyIntegerShrPtr property = persistence_facade.getPropertyInteger(transaction, m_key, m_id_property_1);
 
     // Test assertions.
     ASSERT_TRUE(m_id_property_1 == property->getIDProperty());
@@ -150,9 +150,9 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyString)
     PropertyAccessorMock * mock = new PropertyAccessorMock;
 
     PropertyRecordShrPtr property_record =
-        make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_STRING, false, 0, "RTFM");
+        make_shared<PropertyRecord>(m_key, m_id_property_1, DISCRIMINATOR_STRING, false, 0, "RTFM");
 
-    EXPECT_CALL(*mock, getPropertyRecord(transaction, m_key_hash_1, m_id_property_1))
+    EXPECT_CALL(*mock, getPropertyRecord(transaction, m_key, m_id_property_1))
     .WillOnce(Return(property_record))
     .WillOnce(Return(property_record));
 
@@ -163,10 +163,10 @@ TEST_F(PropertyPersistenceFacadeTest, getPropertyString)
     PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(PropertyStringShrPtr property = persistence_facade.getPropertyString(transaction, m_key_hash_1, m_id_property_1));
+    ASSERT_NO_THROW(PropertyStringShrPtr property = persistence_facade.getPropertyString(transaction, m_key, m_id_property_1));
 
     // Test commands.
-    PropertyStringShrPtr property = persistence_facade.getPropertyString(transaction, m_key_hash_1, m_id_property_1);
+    PropertyStringShrPtr property = persistence_facade.getPropertyString(transaction, m_key, m_id_property_1);
 
     // Test assertions.
     ASSERT_TRUE(m_id_property_1 == property->getIDProperty());
@@ -185,7 +185,7 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ZeroProperties)
 
     PropertyRecordMap map;
 
-    EXPECT_CALL(*mock, getPropertyRecords(transaction, m_key_hash_1))
+    EXPECT_CALL(*mock, getPropertyRecords(transaction, m_key))
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
@@ -195,7 +195,7 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ZeroProperties)
     PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    PropertySet properties = persistence_facade.getProperties(transaction, m_key_hash_1);
+    PropertySet properties = persistence_facade.getProperties(transaction, m_key);
 
     // Test assertions.
     ASSERT_THROW(properties.getBooleanProperty(m_id_property_1), out_of_range);
@@ -214,11 +214,11 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_OneProperty)
     PropertyRecordMap map;
 
     PropertyRecordShrPtr property_record =
-        make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_BOOLEAN, true, 0, "");
+        make_shared<PropertyRecord>(m_key, m_id_property_1, DISCRIMINATOR_BOOLEAN, true, 0, "");
 
     map.insert(PropertyRecordPair(m_id_property_1, property_record));
 
-    EXPECT_CALL(*mock, getPropertyRecords(transaction, m_key_hash_1))
+    EXPECT_CALL(*mock, getPropertyRecords(transaction, m_key))
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
@@ -228,7 +228,7 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_OneProperty)
     PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    PropertySet properties = persistence_facade.getProperties(transaction, m_key_hash_1);
+    PropertySet properties = persistence_facade.getProperties(transaction, m_key);
 
     // Test assertions.
     ASSERT_NO_THROW(properties.getBooleanProperty(m_id_property_1));
@@ -251,17 +251,17 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ManyProperties)
     PropertyRecordMap map;
 
     PropertyRecordShrPtr property_record_boolean =
-        make_shared<PropertyRecord>(m_key_hash_1, m_id_property_1, DISCRIMINATOR_BOOLEAN, true, 0, "");
+        make_shared<PropertyRecord>(m_key, m_id_property_1, DISCRIMINATOR_BOOLEAN, true, 0, "");
     PropertyRecordShrPtr property_record_integer =
-        make_shared<PropertyRecord>(m_key_hash_1, m_id_property_2, DISCRIMINATOR_INTEGER, false, 22, "");
+        make_shared<PropertyRecord>(m_key, m_id_property_2, DISCRIMINATOR_INTEGER, false, 22, "");
     PropertyRecordShrPtr property_record_string =
-        make_shared<PropertyRecord>(m_key_hash_1, m_id_property_3, DISCRIMINATOR_STRING, false, 0, "RTFM");
+        make_shared<PropertyRecord>(m_key, m_id_property_3, DISCRIMINATOR_STRING, false, 0, "RTFM");
 
     map.insert(PropertyRecordPair(m_id_property_1, property_record_boolean));
     map.insert(PropertyRecordPair(m_id_property_2, property_record_integer));
     map.insert(PropertyRecordPair(m_id_property_3, property_record_string));
 
-    EXPECT_CALL(*mock, getPropertyRecords(transaction, m_key_hash_1))
+    EXPECT_CALL(*mock, getPropertyRecords(transaction, m_key))
     .WillOnce(Return(map));
 
     // Mocks setup: Wrapping around.
@@ -271,7 +271,7 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_ManyProperties)
     PropertyPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    PropertySet properties = persistence_facade.getProperties(transaction, m_key_hash_1);
+    PropertySet properties = persistence_facade.getProperties(transaction, m_key);
 
     // Test assertions.
     ASSERT_NO_THROW(properties.getBooleanProperty(m_id_property_1));

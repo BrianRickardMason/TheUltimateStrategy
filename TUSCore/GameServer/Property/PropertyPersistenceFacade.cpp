@@ -31,6 +31,7 @@
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
 using namespace boost;
+using namespace std;
 
 namespace GameServer
 {
@@ -46,11 +47,11 @@ PropertyPersistenceFacade::PropertyPersistenceFacade(
 
 PropertyBooleanShrPtr PropertyPersistenceFacade::getPropertyBoolean(
     ITransactionShrPtr         a_transaction,
-    KeyHash            const & a_key_hash,
+    string             const & a_key,
     IDProperty         const & a_id_property
 ) const
 {
-    PropertyRecordShrPtr property_record_shr_ptr = m_accessor->getPropertyRecord(a_transaction, a_key_hash, a_id_property);
+    PropertyRecordShrPtr property_record_shr_ptr = m_accessor->getPropertyRecord(a_transaction, a_key, a_id_property);
 
     BOOST_ASSERT(DISCRIMINATOR_BOOLEAN == property_record_shr_ptr->getDiscriminator());
 
@@ -66,11 +67,11 @@ PropertyBooleanShrPtr PropertyPersistenceFacade::getPropertyBoolean(
 
 PropertyIntegerShrPtr PropertyPersistenceFacade::getPropertyInteger(
     ITransactionShrPtr         a_transaction,
-    KeyHash            const & a_key_hash,
+    string             const & a_key,
     IDProperty         const & a_id_property
 ) const
 {
-    PropertyRecordShrPtr property_record_shr_ptr = m_accessor->getPropertyRecord(a_transaction, a_key_hash, a_id_property);
+    PropertyRecordShrPtr property_record_shr_ptr = m_accessor->getPropertyRecord(a_transaction, a_key, a_id_property);
 
     BOOST_ASSERT(DISCRIMINATOR_INTEGER == property_record_shr_ptr->getDiscriminator());
 
@@ -86,11 +87,11 @@ PropertyIntegerShrPtr PropertyPersistenceFacade::getPropertyInteger(
 
 PropertyStringShrPtr PropertyPersistenceFacade::getPropertyString(
     ITransactionShrPtr         a_transaction,
-    KeyHash            const & a_key_hash,
+    string             const & a_key,
     IDProperty         const & a_id_property
 ) const
 {
-    PropertyRecordShrPtr property_record_shr_ptr = m_accessor->getPropertyRecord(a_transaction, a_key_hash, a_id_property);
+    PropertyRecordShrPtr property_record_shr_ptr = m_accessor->getPropertyRecord(a_transaction, a_key, a_id_property);
 
     BOOST_ASSERT(DISCRIMINATOR_STRING == property_record_shr_ptr->getDiscriminator());
 
@@ -106,10 +107,10 @@ PropertyStringShrPtr PropertyPersistenceFacade::getPropertyString(
 
 PropertySet PropertyPersistenceFacade::getProperties(
     ITransactionShrPtr         a_transaction,
-    KeyHash            const & a_key_hash
+    string             const & a_key
 ) const
 {
-    PropertyRecordMap records = m_accessor->getPropertyRecords(a_transaction, a_key_hash);
+    PropertyRecordMap records = m_accessor->getPropertyRecords(a_transaction, a_key);
 
     PropertyMap result;
 

@@ -29,22 +29,20 @@
 
 using namespace std;
 
-using GameServer::Common::KeyHash;
-
 namespace GameServer
 {
 namespace Property
 {
 
 PropertyRecord::PropertyRecord(
-    KeyHash       const & a_key_hash,
+    string        const & a_key,
     IDProperty    const & a_id_property,
     Discriminator const & a_discriminator,
     bool          const   a_value_boolean,
     int           const   a_value_integer,
     string        const & a_value_string
 )
-    : m_key_hash(a_key_hash),
+    : m_key(a_key),
       m_id_property(a_id_property),
       m_discriminator(a_discriminator),
       m_value_boolean(a_value_boolean),
@@ -53,9 +51,9 @@ PropertyRecord::PropertyRecord(
 {
 }
 
-KeyHash const & PropertyRecord::getKeyHash() const
+string const & PropertyRecord::getKey() const
 {
-    return m_key_hash;
+    return m_key;
 }
 
 IDProperty const & PropertyRecord::getIDProperty() const

@@ -41,7 +41,7 @@ protected:
      * @brief Constructs a test class.
      */
     PropertyRecordTest()
-        : m_record(1001, ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_BOOLEAN, false, 42, "dummy")
+        : m_record("Ron", ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_BOOLEAN, false, 42, "dummy")
     {
     }
 
@@ -51,29 +51,16 @@ protected:
     PropertyRecord m_record;
 };
 
-/**
- * Unit tests of: PropertyRecord::PropertyRecord.
- */
-TEST_F(PropertyRecordTest, PropertyRecord)
+TEST_F(PropertyRecordTest, CtorDoesNotThrow)
 {
     IDProperty id_property(ID_PROPERTY_HUMAN_ENGAGEABLE);
 
-    PropertyRecord record(1001, id_property, DISCRIMINATOR_BOOLEAN, false, 42, "dummy");
-
-    ASSERT_EQ(1001, record.getKeyHash());
-    ASSERT_TRUE(id_property == record.getIDProperty());
-    ASSERT_EQ(DISCRIMINATOR_BOOLEAN, record.getDiscriminator());
-    ASSERT_FALSE(record.getValueBoolean());
-    ASSERT_EQ(42, record.getValueInteger());
-    ASSERT_EQ("dummy", record.getValueString());
+    ASSERT_NO_THROW(PropertyRecord record("Ron", id_property, DISCRIMINATOR_BOOLEAN, false, 42, "dummy"));
 }
 
-/**
- * Unit tests of: PropertyRecord::getKeyHash.
- */
-TEST_F(PropertyRecordTest, getKeyHash)
+TEST_F(PropertyRecordTest, GetKeyReturnsProperValue)
 {
-    ASSERT_EQ(1001, m_record.getKeyHash());
+    ASSERT_STREQ("Ron", m_record.getKey().c_str());
 }
 
 /**

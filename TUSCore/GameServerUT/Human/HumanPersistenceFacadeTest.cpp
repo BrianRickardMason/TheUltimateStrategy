@@ -28,8 +28,10 @@
 #include "../../GameServer/Human/HumanPersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "HumanAccessorMock.hpp"
+#include <GameServer/Human/Key.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Human;
 using namespace GameServer::Persistence;
 using namespace boost;
@@ -63,11 +65,11 @@ protected:
      */
     void compareHuman(
         HumanWithVolumeShrPtr         a_human,
-        Key                   const & a_key,
+        IHumanKey             const & a_key,
         Volume                const & a_volume
     )
     {
-        ASSERT_TRUE(a_key == a_human->getKey());
+        ASSERT_TRUE(a_key == a_human->getHuman()->getKey());
         ASSERT_EQ(a_volume, a_human->getVolume());
     }
 
@@ -84,9 +86,6 @@ TEST_F(HumanPersistenceFacadeTest, CtorDoesNotThrow)
     ASSERT_NO_THROW(HumanPersistenceFacade persistence_facade(accessor));
 }
 
-/**
- * Unit tests of: HumanPersistenceFacade::addHuman.
- */
 TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
@@ -181,9 +180,6 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
     ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
 }
 
-/**
- * Unit tests of: HumanPersistenceFacade::subtractHuman.
- */
 TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
@@ -318,9 +314,6 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_TryToSubtractToo
     ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 6));
 }
 
-/**
- * Unit tests of: HumanPersistenceFacade::getHuman.
- */
 TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
@@ -369,97 +362,6 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent)
     compareHuman(human, KEY_SOLDIER_ARCHER_NOVICE, 5);
 }
 
-/**
- * Unit tests of: HumanPersistenceFacade::getHumans by short key.
- */
-TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansAreNotPresent)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    // Mocks setup: HumanAccessorMock.
-    HumanAccessorMock * mock = new HumanAccessorMock;
-
-    EXPECT_CALL(*mock, getRecords(_, m_id_holder, ID_HUMAN_SOLDIER_ARCHER))
-    .WillOnce(Return(HumanWithVolumeRecordMap()));
-
-    // Mocks setup: Wrapping around.
-    IHumanAccessorAutPtr accessor(mock);
-
-    // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
-
-    // Test commands.
-    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
-
-    // Test assertions.
-    ASSERT_TRUE(humans.empty());
-}
-
-TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_OneHuman)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    // Mocks setup: HumanAccessorMock.
-    HumanAccessorMock * mock = new HumanAccessorMock;
-
-    HumanWithVolumeRecordMap map;
-    map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
-
-    EXPECT_CALL(*mock, getRecords(_, m_id_holder, ID_HUMAN_SOLDIER_ARCHER))
-    .WillOnce(Return(map));
-
-    // Mocks setup: Wrapping around.
-    IHumanAccessorAutPtr accessor(mock);
-
-    // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
-
-    // Test commands.
-    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
-
-    // Test assertions.
-    ASSERT_FALSE(humans.empty());
-
-    ASSERT_EQ(1, humans.size());
-
-    compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 5);
-}
-
-TEST_F(HumanPersistenceFacadeTest, getHumans_ByShortKey_HumansArePresent_TwoHumans)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    // Mocks setup: HumanAccessorMock.
-    HumanAccessorMock * mock = new HumanAccessorMock;
-
-    HumanWithVolumeRecordMap map;
-    map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
-    map.insert(make_pair(KEY_SOLDIER_ARCHER_ADVANCED, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_ADVANCED, 9)));
-
-    EXPECT_CALL(*mock, getRecords(_, m_id_holder, ID_HUMAN_SOLDIER_ARCHER))
-    .WillOnce(Return(map));
-
-    // Mocks setup: Wrapping around.
-    IHumanAccessorAutPtr accessor(mock);
-
-    // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
-
-    // Test commands.
-    HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder, ID_HUMAN_SOLDIER_ARCHER);
-
-    // Test assertions.
-    ASSERT_FALSE(humans.empty());
-
-    ASSERT_EQ(2, humans.size());
-
-    compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 5);
-    compareHuman(humans[KEY_SOLDIER_ARCHER_ADVANCED], KEY_SOLDIER_ARCHER_ADVANCED, 9);
-}
-
-/**
- * Unit tests of: HumanPersistenceFacade::getHumans all humans.
- */
 TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);

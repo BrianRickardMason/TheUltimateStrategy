@@ -65,9 +65,7 @@ bool ExecutorTransportHuman::getParameters(
         m_password                    = a_request->getPasswordValue();
         m_settlement_name_source      = a_request->getParameterValueString("settlement_name_source");
         m_settlement_name_destination = a_request->getParameterValueString("settlement_name_destination");
-        m_value_id_human_class        = a_request->getParameterValueUnsignedInteger("idhumanclass");
-        m_value_id_human              = a_request->getParameterValueUnsignedInteger("idhuman");
-        m_value_experience            = a_request->getParameterValueUnsignedInteger("experience");
+        m_key                         = a_request->getParameterValueString("humankey");
         m_value_volume                = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;
@@ -82,8 +80,6 @@ bool ExecutorTransportHuman::processParameters()
 {
     try
     {
-        m_id_human.assign(m_value_id_human_class, m_value_id_human);
-        m_experience = m_value_experience;
         m_volume = m_value_volume;
 
         return true;
@@ -185,7 +181,7 @@ ReplyShrPtr ExecutorTransportHuman::perform(
             transport_human_operator->transportHuman(transaction,
                                                      m_settlement_name_source,
                                                      m_settlement_name_destination,
-                                                     Key(m_id_human, m_experience),
+                                                     m_key,
                                                      m_volume);
 
         if (exit_code.ok())

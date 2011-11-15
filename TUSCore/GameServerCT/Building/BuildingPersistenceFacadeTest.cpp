@@ -28,9 +28,11 @@
 #include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../ComponentTest.hpp"
+#include <GameServer/Building/Key.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Epoch;
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
@@ -96,11 +98,11 @@ protected:
      */
     void compareBuilding(
         BuildingWithVolumeShrPtr         a_building,
-        Key                      const & a_key,
+        IBuildingKey             const & a_key,
         Volume                   const & a_volume
     )
     {
-        ASSERT_TRUE(a_key == a_building->getKey());
+        ASSERT_TRUE(a_key == a_building->getBuilding()->getKey());
         ASSERT_EQ(a_volume, a_building->getVolume());
     }
 

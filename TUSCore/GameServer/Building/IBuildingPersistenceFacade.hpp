@@ -28,9 +28,9 @@
 #ifndef GAMESERVER_BUILDING_IBUILDINGPERSISTENCEFACADE_HPP
 #define GAMESERVER_BUILDING_IBUILDINGPERSISTENCEFACADE_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "BuildingWithVolume.hpp"
+#include <GameServer/Building/BuildingWithVolume.hpp>
+#include <GameServer/Common/IDHolder.hpp>
+#include <GameServer/Persistence/ITransaction.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace GameServer
@@ -39,7 +39,7 @@ namespace Building
 {
 
 /**
- * @brief An interface of building persistence facade.
+ * @brief The interface of BuildingPersistenceFacade.
  */
 class IBuildingPersistenceFacade
     : boost::noncopyable
@@ -60,7 +60,7 @@ public:
     virtual void addBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -79,7 +79,7 @@ public:
     virtual bool subtractBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -95,7 +95,7 @@ public:
     virtual BuildingWithVolumeShrPtr getBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IBuildingKey     const & a_key
     ) const = 0;
 
     /**
@@ -113,7 +113,7 @@ public:
 };
 
 /**
- * @brief A shared pointer of interface of building persistence facade.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IBuildingPersistenceFacade> IBuildingPersistenceFacadeShrPtr;
 

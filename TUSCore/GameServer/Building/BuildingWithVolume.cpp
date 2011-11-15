@@ -25,7 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "BuildingWithVolume.hpp"
+#include <GameServer/Building/BuildingWithVolume.hpp>
+#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
+
+using namespace GameServer::Configuration;
 
 namespace GameServer
 {
@@ -33,33 +36,28 @@ namespace Building
 {
 
 BuildingWithVolume::BuildingWithVolume(
-    Key    const & a_key,
-    Volume const & a_volume
+    IBuildingKey const a_key,
+    Volume       const a_volume
 )
-    : m_building(a_key),
-      m_volume(a_volume)
+    : m_volume(a_volume)
 {
+    m_building = CONFIGURATOR_BUILDING.getBuilding(a_key);
 }
 
 BuildingWithVolume::BuildingWithVolume(
     BuildingWithVolumeRecord const & a_record
 )
-    : m_building(a_record.getKey()),
-      m_volume(a_record.getVolume())
+    : m_volume(a_record.getVolume())
 {
+    m_building = CONFIGURATOR_BUILDING.getBuilding(a_record.getKey());
 }
 
-Key const & BuildingWithVolume::getKey() const
+IBuildingShrPtr BuildingWithVolume::getBuilding() const
 {
-    return m_building.getKey();
+    return m_building;
 }
 
-IDBuilding const & BuildingWithVolume::getIDBuilding() const
-{
-    return m_building.getIDBuilding();
-}
-
-Volume const & BuildingWithVolume::getVolume() const
+Volume BuildingWithVolume::getVolume() const
 {
     return m_volume;
 }

@@ -26,6 +26,8 @@
 // SUCH DAMAGE.
 
 #include "BehaviourGiveGrant.hpp"
+#include <GameServer/Human/Key.hpp>
+#include <GameServer/Resource/Key.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Human;

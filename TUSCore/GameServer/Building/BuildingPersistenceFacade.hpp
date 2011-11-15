@@ -28,8 +28,8 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADE_HPP
 #define GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADE_HPP
 
-#include "IBuildingAccessor.hpp"
-#include "IBuildingPersistenceFacade.hpp"
+#include <GameServer/Building/IBuildingAccessor.hpp>
+#include <GameServer/Building/IBuildingPersistenceFacade.hpp>
 
 namespace GameServer
 {
@@ -65,7 +65,7 @@ public:
     virtual void addBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -84,7 +84,7 @@ public:
     virtual bool subtractBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -100,7 +100,7 @@ public:
     virtual BuildingWithVolumeShrPtr getBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IBuildingKey     const & a_key
     ) const;
 
     /**
@@ -124,7 +124,7 @@ private:
 };
 
 /**
- * @brief An auto pointer of building persistence facade.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<BuildingPersistenceFacade> BuildingPersistenceFacadeAutPtr;
 

@@ -28,6 +28,7 @@
 #include "GetHumanOperator.hpp"
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Persistence;
 
 namespace GameServer
@@ -45,7 +46,7 @@ GetHumanOperator::GetHumanOperator(
 GetHumanOperatorExitCode GetHumanOperator::getHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    IHumanKey          const & a_key
 ) const
 {
     try

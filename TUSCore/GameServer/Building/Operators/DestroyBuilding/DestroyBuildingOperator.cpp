@@ -25,9 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "DestroyBuildingOperator.hpp"
+#include <GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperator.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
@@ -51,7 +52,7 @@ DestroyBuildingOperator::DestroyBuildingOperator(
 DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IBuildingKey       const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -83,7 +84,7 @@ DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
 
         // Get total cost.
         ResourceSet cost =
-            m_cost_persistence_facade->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_BUILDING_DESTROY);
+            m_cost_persistence_facade->getCost(a_transaction, a_key, ID_COST_TYPE_BUILDING_DESTROY);
 
         // Multiply total cost.
         cost *= a_volume;

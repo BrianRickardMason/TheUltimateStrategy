@@ -26,9 +26,11 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Human/HumanWithVolumeRecord.hpp"
+#include <GameServer/Human/Key.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Human;
 
 /**
@@ -43,8 +45,8 @@ protected:
      */
     HumanWithVolumeRecordTest()
         : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
-          m_record(m_id_holder, Key(ID_HUMAN_SORCERER_WATER, EXPERIENCE_NOVICE), 5),
-          m_model_key(ID_HUMAN_SORCERER_WATER, EXPERIENCE_NOVICE)
+          m_record(m_id_holder, KEY_SORCERER_WATER_NOVICE, 5),
+          m_model_key(KEY_SORCERER_WATER_NOVICE)
     {
     }
 
@@ -61,12 +63,12 @@ protected:
     /**
      * @brief A model key.
      */
-    Key m_model_key;
+    IHumanKey m_model_key;
 };
 
 TEST_F(HumanWithVolumeRecordTest, HumanWithVolumeRecord)
 {
-    HumanWithVolumeRecord record(m_id_holder, Key(ID_HUMAN_SORCERER_WATER, EXPERIENCE_NOVICE), 5);
+    HumanWithVolumeRecord record(m_id_holder, KEY_SORCERER_WATER_NOVICE, 5);
 
     ASSERT_TRUE(m_id_holder == record.getIDHolder());
     ASSERT_TRUE(m_model_key == record.getKey());

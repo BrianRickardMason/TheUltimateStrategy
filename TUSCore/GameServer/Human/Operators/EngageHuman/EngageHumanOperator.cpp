@@ -31,6 +31,7 @@
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Property;
@@ -62,7 +63,7 @@ EngageHumanOperator::EngageHumanOperator(
 EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -90,7 +91,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = m_cost_persistence_facade->getCost(a_transaction, a_key.toHash(), ID_COST_TYPE_HUMAN_ENGAGE);
+        ResourceSet cost = m_cost_persistence_facade->getCost(a_transaction, a_key, ID_COST_TYPE_HUMAN_ENGAGE);
 
         // Multiply total cost.
         cost *= a_volume;
@@ -146,13 +147,13 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
 bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
     // Verify space in buildings.
     HumanToBuildingTranslator translator;
-    BuildingShrPtr building = translator.getPlaceOfWork(a_key);
+    IBuildingShrPtr building = translator.getPlaceOfWork(a_key);
     if (building)
     {
         // Get available buildings.
@@ -166,7 +167,7 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
         }
 
         // Get a vector of identifiers of a human to check if building is a place of work for some humans.
-        IDHumanVec humans = BuildingToHumanTranslator::getHumansHostedForWork(building->getKey());
+        KeyVec humans = BuildingToHumanTranslator::getHumansHostedForWork(building->getKey());
 
         // The building is a place of work for at least one human.
         BOOST_ASSERT(!humans.empty());
@@ -175,15 +176,14 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
         Volume sum(0);
 
         // Get humans engaged in buildings.
-        for (IDHumanVec::const_iterator it = humans.begin(); it != humans.end(); ++it)
+        for (KeyVec::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
             // Get a human by identifier of a human.
-            HumanWithVolumeMap map = m_human_persistence_facade->getHumans(a_transaction, a_id_holder, *it);
+            HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(a_transaction, a_id_holder, *it);
 
-            // Calculate humans.
-            for (HumanWithVolumeMap::const_iterator it = map.begin(); it != map.end(); ++it)
+            if (human)
             {
-                sum += it->second->getVolume();
+                sum += human->getVolume();
             }
         }
 
@@ -193,7 +193,7 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
             // TODO: Fast and clean getKey().toHash() improvement by a shortcut.
             PropertyIntegerShrPtr capacity = m_property_persistence_facade->getPropertyInteger(
                                                  a_transaction,
-                                                 building->getKey().toHash(),
+                                                 building->getKey(),
                                                  ID_PROPERTY_BUILDING_CAPACITY
                                              );
 
@@ -210,12 +210,12 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
 
 bool EngageHumanOperator::verifyEngageable(
     ITransactionShrPtr         a_transaction,
-    Key                const & a_key
+    IHumanKey          const & a_key
 ) const
 {
     // Check if human is engageable.
     PropertyBooleanShrPtr engageable =
-        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key.toHash(), ID_PROPERTY_HUMAN_ENGAGEABLE);
+        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key, ID_PROPERTY_HUMAN_ENGAGEABLE);
 
     return engageable->getValue();
 }

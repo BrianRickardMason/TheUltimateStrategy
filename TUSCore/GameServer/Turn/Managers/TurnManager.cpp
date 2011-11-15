@@ -26,6 +26,9 @@
 // SUCH DAMAGE.
 
 #include <GameServer/Common/IDHolder.hpp>
+#include <GameServer/Human/Key.hpp>
+#include <GameServer/Human/Human.hpp>
+#include <GameServer/Resource/Key.hpp>
 #include <GameServer/Turn/Managers/TurnManager.hpp>
 
 using namespace GameServer::Common;
@@ -142,7 +145,7 @@ bool TurnManager::executeTurnSettlement(
             if (died)
             {
                 bool const result =
-                    m_human_persistence_facade->subtractHuman(a_transaction, id_holder, it->second->getKey(), died);
+                    m_human_persistence_facade->subtractHuman(a_transaction, id_holder, it->second->getHuman()->getKey(), died);
 
                 if (!result)
                 {
@@ -168,7 +171,7 @@ bool TurnManager::executeTurnSettlement(
                 bool const result = m_human_persistence_facade->subtractHuman(
                                         a_transaction,
                                         id_holder,
-                                        it->second->getKey(),
+                                        it->second->getHuman()->getKey(),
                                         dismissed
                                     );
 
@@ -193,13 +196,13 @@ bool TurnManager::executeTurnSettlement(
 
         for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
-            map<IDHuman, std::string>::const_iterator production = HUMAN_MAP_PRODUCTION.find(it->second->getIDHuman());
+            map<Configuration::IHumanKey, std::string>::const_iterator production = HUMAN_MAP_PRODUCTION.find(it->second->getHuman()->getKey());
 
             if (production != HUMAN_MAP_PRODUCTION.end())
             {
                 PropertyIntegerShrPtr const produced = m_property_persistence_facade->getPropertyInteger(
                                                            a_transaction,
-                                                           it->first.toHash(),
+                                                           it->first,
                                                            ID_PROPERTY_HUMAN_PRODUCTION
                                                        );
 
@@ -224,14 +227,14 @@ bool TurnManager::executeTurnSettlement(
         {
             // TODO: Use property experienceable.
 
-            IDHuman const id_human = it->second->getIDHuman();
+            Configuration::IHumanKey const key = it->second->getHuman()->getKey();
 
-            if (id_human == ID_HUMAN_WORKER_JOBLESS)
+            if (key == Human::KEY_WORKER_JOBLESS_NOVICE or key == Human::KEY_WORKER_JOBLESS_ADVANCED)
             {
                 continue;
             }
 
-            if (it->second->getExperience() == EXPERIENCE_ADVANCED)
+            if (it->second->getHuman()->getExperience() == "advanced") // TODO: A nasty hardcode. Fixme!
             {
                 continue;
             }
@@ -241,22 +244,23 @@ bool TurnManager::executeTurnSettlement(
 
             if (experienced)
             {
-                Human::Key const key_novice(id_human, EXPERIENCE_NOVICE);
-                Human::Key const key_advanced(id_human, EXPERIENCE_ADVANCED);
-
-                m_human_persistence_facade->addHuman(a_transaction, id_holder, key_advanced, experienced);
-
-                bool const result = m_human_persistence_facade->subtractHuman(
-                                        a_transaction,
-                                        id_holder,
-                                        key_novice,
-                                        experienced
-                                    );
-
-                if (!result)
-                {
-                    return false;
-                }
+                // TODO: Experiencing is temporarily disabled. FIXME!
+//                Human::Key const key_novice(id_human, EXPERIENCE_NOVICE);
+//                Human::Key const key_advanced(id_human, EXPERIENCE_ADVANCED);
+//
+//                m_human_persistence_facade->addHuman(a_transaction, id_holder, key_advanced, experienced);
+//
+//                bool const result = m_human_persistence_facade->subtractHuman(
+//                                        a_transaction,
+//                                        id_holder,
+//                                        key_novice,
+//                                        experienced
+//                                    );
+//
+//                if (!result)
+//                {
+//                    return false;
+//                }
             }
         }
     }
@@ -299,7 +303,7 @@ ResourceSet TurnManager::getCostOfLiving(
     for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
     {
         ResourceSet human_cost =
-            m_cost_persistence_facade->getCost(a_transaction, it->second->getKey().toHash(), ID_COST_TYPE_HUMAN_LIVING);
+            m_cost_persistence_facade->getCost(a_transaction, it->second->getHuman()->getKey(), ID_COST_TYPE_HUMAN_LIVING);
 
         human_cost *= it->second->getVolume();
 

@@ -39,8 +39,7 @@ RequestShrPtr createRequestBuildOrDestroyBuilding(
     string             const a_password,
     unsigned int       const a_id_holder_class,
     string             const a_holder_name,
-    unsigned int       const a_id_building_class,
-    unsigned int       const a_id_building,
+    string             const a_key,
     unsigned int       const a_volume
 )
 {
@@ -60,11 +59,8 @@ RequestShrPtr createRequestBuildOrDestroyBuilding(
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
-    IXmlNodeShrPtr idbuildingclass = parameters->appendNode("idbuildingclass");
-    idbuildingclass->appendAttribute("value")->setValue(a_id_building_class);
-
-    IXmlNodeShrPtr idbuilding = parameters->appendNode("idbuilding");
-    idbuilding->appendAttribute("value")->setValue(a_id_building);
+    IXmlNodeShrPtr buildingkey = parameters->appendNode("buildingkey");
+    buildingkey->appendAttribute("value")->setValue(a_key.c_str());
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
     volume->appendAttribute("value")->setValue(a_volume);
@@ -466,34 +462,31 @@ RequestShrPtr createRequestBuildBuilding(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_building_class,
-    unsigned int const a_id_building,
+    string       const a_key,
     unsigned int const a_volume
 )
 {
-    return createRequestBuildOrDestroyBuilding(REQUEST_ID_BUILD_BUILDING, a_login, a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building, a_volume);
+    return createRequestBuildOrDestroyBuilding(REQUEST_ID_BUILD_BUILDING, a_login, a_password, a_id_holder_class, a_holder_name, a_key, a_volume);
 }
 
 RequestShrPtr createRequestDestroyBuilding(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building,
-    unsigned int const   a_volume
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    string       const a_key,
+    unsigned int const a_volume
 )
 {
-    return createRequestBuildOrDestroyBuilding(REQUEST_ID_DESTROY_BUILDING, a_login.c_str(), a_password, a_id_holder_class, a_holder_name, a_id_building_class, a_id_building, a_volume);
+    return createRequestBuildOrDestroyBuilding(REQUEST_ID_DESTROY_BUILDING, a_login.c_str(), a_password, a_id_holder_class, a_holder_name, a_key, a_volume);
 }
 
 RequestShrPtr createRequestGetBuilding(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name,
-    unsigned int const   a_id_building_class,
-    unsigned int const   a_id_building
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    string       const a_key
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -512,20 +505,17 @@ RequestShrPtr createRequestGetBuilding(
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
-    IXmlNodeShrPtr idbuildingclass = parameters->appendNode("idbuildingclass");
-    idbuildingclass->appendAttribute("value")->setValue(a_id_building_class);
-
-    IXmlNodeShrPtr idbuilding = parameters->appendNode("idbuilding");
-    idbuilding->appendAttribute("value")->setValue(a_id_building);
+    IXmlNodeShrPtr buildingkey = parameters->appendNode("buildingkey");
+    buildingkey->appendAttribute("value")->setValue(a_key.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestGetBuildings(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -548,13 +538,12 @@ RequestShrPtr createRequestGetBuildings(
 }
 
 RequestShrPtr createRequestEngageHuman(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_volume
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    string       const a_key,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -573,11 +562,8 @@ RequestShrPtr createRequestEngageHuman(
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
-    IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
-
-    IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("value")->setValue(a_id_human);
+    IXmlNodeShrPtr humankey = parameters->appendNode("humankey");
+    humankey->appendAttribute("value")->setValue(a_key.c_str());
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
     volume->appendAttribute("value")->setValue(a_volume);
@@ -586,14 +572,12 @@ RequestShrPtr createRequestEngageHuman(
 }
 
 RequestShrPtr createRequestDismissHuman(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    string       const a_key,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -612,14 +596,8 @@ RequestShrPtr createRequestDismissHuman(
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
-    IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
-
-    IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("value")->setValue(a_id_human);
-
-    IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("value")->setValue(a_experience);
+    IXmlNodeShrPtr humankey = parameters->appendNode("humankey");
+    humankey->appendAttribute("value")->setValue(a_key.c_str());
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
     volume->appendAttribute("value")->setValue(a_volume);
@@ -628,13 +606,11 @@ RequestShrPtr createRequestDismissHuman(
 }
 
 RequestShrPtr createRequestGetHuman(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name,
+    string       const a_key
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -653,23 +629,17 @@ RequestShrPtr createRequestGetHuman(
     IXmlNodeShrPtr holder_name = parameters->appendNode("holder_name");
     holder_name->appendAttribute("value")->setValue(a_holder_name.c_str());
 
-    IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
-
-    IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("value")->setValue(a_id_human);
-
-    IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("value")->setValue(a_experience);
+    IXmlNodeShrPtr humankey = parameters->appendNode("humankey");
+    humankey->appendAttribute("value")->setValue(a_key.c_str());
 
     return request;
 }
 
 RequestShrPtr createRequestGetHumans(
-    string       const & a_login,
-    string       const & a_password,
-    unsigned int const   a_id_holder_class,
-    string       const   a_holder_name
+    string       const a_login,
+    string       const a_password,
+    unsigned int const a_id_holder_class,
+    string       const a_holder_name
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -748,14 +718,12 @@ RequestShrPtr createRequestGetResources(
 }
 
 RequestShrPtr createRequestTransportHuman(
-    string       const & a_login,
-    string       const & a_password,
-    string       const   a_settlement_name_source,
-    string       const   a_settlement_name_destination,
-    unsigned int const   a_id_human_class,
-    unsigned int const   a_id_human,
-    unsigned int const   a_experience,
-    unsigned int const   a_volume
+    string       const a_login,
+    string       const a_password,
+    string       const a_settlement_name_source,
+    string       const a_settlement_name_destination,
+    string       const a_key,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request = make_shared<Request>();
@@ -774,14 +742,8 @@ RequestShrPtr createRequestTransportHuman(
     IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
     settlement_name_destination->appendAttribute("value")->setValue(a_settlement_name_destination.c_str());
 
-    IXmlNodeShrPtr idhumanclass = parameters->appendNode("idhumanclass");
-    idhumanclass->appendAttribute("value")->setValue(a_id_human_class);
-
-    IXmlNodeShrPtr idhuman = parameters->appendNode("idhuman");
-    idhuman->appendAttribute("value")->setValue(a_id_human);
-
-    IXmlNodeShrPtr experience = parameters->appendNode("experience");
-    experience->appendAttribute("value")->setValue(a_experience);
+    IXmlNodeShrPtr humankey = parameters->appendNode("humankey");
+    humankey->appendAttribute("value")->setValue(a_key.c_str());
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
     volume->appendAttribute("value")->setValue(a_volume);
@@ -790,12 +752,12 @@ RequestShrPtr createRequestTransportHuman(
 }
 
 RequestShrPtr createRequestTransportResource(
-    string       const & a_login,
-    string       const & a_password,
-    string       const   a_settlement_name_source,
-    string       const   a_settlement_name_destination,
-    string       const   a_key,
-    unsigned int const   a_volume
+    string       const a_login,
+    string       const a_password,
+    string       const a_settlement_name_source,
+    string       const a_settlement_name_destination,
+    string       const a_key,
+    unsigned int const a_volume
 )
 {
     RequestShrPtr request = make_shared<Request>();

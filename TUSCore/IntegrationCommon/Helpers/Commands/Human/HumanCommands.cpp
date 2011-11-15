@@ -47,13 +47,12 @@ ReplyShrPtr EngageHuman(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_human_class,
-    unsigned int const a_id_human,
+    string       const a_key,
     unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestEngageHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_volume);
+        createRequestEngageHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_key, a_volume);
 
     return a_client->sendRequest(request);
 }
@@ -64,14 +63,12 @@ ReplyShrPtr DismissHuman(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_human_class,
-    unsigned int const a_id_human,
-    unsigned int const a_experience,
+    string       const a_key,
     unsigned int const a_volume
 )
 {
     RequestShrPtr request =
-        createRequestDismissHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_experience, a_volume);
+        createRequestDismissHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_key, a_volume);
 
     return a_client->sendRequest(request);
 }
@@ -82,13 +79,11 @@ ReplyShrPtr GetHuman(
     string       const a_password,
     unsigned int const a_id_holder_class,
     string       const a_holder_name,
-    unsigned int const a_id_human_class,
-    unsigned int const a_id_human,
-    unsigned int const a_experience
+    string       const a_key
 )
 {
     RequestShrPtr request =
-        createRequestGetHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_experience);
+        createRequestGetHuman(a_login, a_password, a_id_holder_class, a_holder_name, a_key);
 
     return a_client->sendRequest(request);
 }

@@ -25,56 +25,83 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Human/Human.hpp"
-#include <gmock/gmock.h>
+#ifndef GAMESERVER_CONFIGURATION_CONFIGURATORHUMAN_HPP
+#define GAMESERVER_CONFIGURATION_CONFIGURATORHUMAN_HPP
 
-using namespace GameServer::Human;
+#include <3rdParty/pugixml/src/pugixml.hpp>
+#include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
+#include <boost/noncopyable.hpp>
+
+namespace GameServer
+{
+namespace Configuration
+{
 
 /**
- * @brief A test class.
+ * @brief ConfiguratorHuman.
  */
-class HumanTest
-    : public testing::Test
+class ConfiguratorHuman
+    : private boost::noncopyable
 {
-protected:
-    /**
-     * @brief Constructs a test class.
-     */
-    HumanTest()
-        : m_human(Key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED)),
-          m_model_key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED)
-    {
-    }
+public:
+    ConfiguratorHuman();
 
     /**
-     * @brief A human to be tested.
+     * @brief Gets the configuration.
+     *
+     * @return True on success, false otherwise.
      */
-    Human m_human;
+    bool configure();
 
     /**
-     * @brief A model key.
+     * @brief Gets the human.
+     *
+     * @param a_key The key of the human.
+     *
+     * @return The human, null if not found.
      */
-    Key m_model_key;
+    IHumanShrPtr getHuman(
+        IHumanKey const a_key
+    ) const;
+
+    /**
+     * @brief Gets the map of humans.
+     *
+     * @return The map of humans.
+     */
+    IHumanMap const & getHumans() const;
+
+private:
+    /**
+     * @brief Loads the data from an xml configuration file into the xml document.
+     *
+     * return True on success, false otherwise.
+     */
+    bool loadXml();
+
+    /**
+     * @brief Loads the data from an xml document into the map.
+     *
+     * @return true on success false otherwise.
+     */
+    bool parseXml();
+
+    /**
+     * @brief The xml document.
+     *
+     * TODO: Add the abstraction.
+     */
+    pugi::xml_document m_humans_xml;
+
+    /**
+     * @brief The map of available humans.
+     */
+    IHumanMap m_humans;
 };
 
-TEST_F(HumanTest, Human)
-{
-    Human human(Key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED));
+static ConfiguratorHuman const CONFIGURATOR_HUMAN;
 
-    ASSERT_TRUE(m_model_key == human.getKey());
-}
+} // namespace Configuration
+} // namespace GameServer
 
-TEST_F(HumanTest, getKey)
-{
-    ASSERT_TRUE(m_model_key == m_human.getKey());
-}
-
-TEST_F(HumanTest, getIDHuman)
-{
-    ASSERT_TRUE(ID_HUMAN_SOLDIER_HORSEMAN == m_human.getIDHuman());
-}
-
-TEST_F(HumanTest, getExperience)
-{
-    ASSERT_TRUE(EXPERIENCE_ADVANCED == m_human.getExperience());
-}
+#endif // GAMESERVER_CONFIGURATION_CONFIGURATORHUMAN_HPP

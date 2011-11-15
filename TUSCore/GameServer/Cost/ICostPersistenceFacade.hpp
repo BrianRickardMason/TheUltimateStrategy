@@ -33,6 +33,7 @@
 #include "IDCostType.hpp"
 #include <GameServer/Common/KeyHash.hpp>
 #include <boost/noncopyable.hpp>
+#include <string>
 
 namespace GameServer
 {
@@ -52,14 +53,14 @@ public:
      * @brief Gets the cost.
      *
      * @param a_transaction  The transaction.
-     * @param a_key_hash     A key hash.
+     * @param a_key          A key.
      * @param a_id_cost_type An identifier of the cost type.
      *
      * @return The cost.
      */
     virtual Resource::ResourceSet getCost(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
+        std::string                     const & a_key,
         IDCostType                      const & a_id_cost_type
     ) const = 0;
 };

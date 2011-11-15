@@ -97,9 +97,7 @@ public:
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_holder_name     The name of the holder.
-     * @param a_id_human_class  The identifier of the class of the human.
-     * @param a_id_human        The identifier of the human.
-     * @param a_experience      The experience of the human.
+     * @param a_key             The key of the human.
      * @param a_volume          The volume.
      */
     ScenarioDismissHumanActionSuccess(
@@ -107,9 +105,7 @@ public:
         std::string  const a_password,
         unsigned int const a_id_holder_class,
         std::string  const a_holder_name,
-        unsigned int const a_id_human_class,
-        unsigned int const a_id_human,
-        unsigned int const a_experience,
+        std::string  const a_key,
         unsigned int const a_volume
     );
 
@@ -146,19 +142,9 @@ private:
     std::string const m_holder_name;
 
     /**
-     * @brief The identifier of the class of the human.
+     * @brief The key of the human.
      */
-    unsigned int const m_id_human_class;
-
-    /**
-     * @brief The identifier of the human.
-     */
-    unsigned int const m_id_human;
-
-    /**
-     * @brief The experience of the human.
-     */
-    unsigned int const m_experience;
+    std::string const m_key;
 
     /**
      * @brief The volume.
@@ -180,9 +166,7 @@ public:
      * @param a_password        The password of the user.
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_holder_name     The name of the holder.
-     * @param a_id_human_class  The identifier of the class of the human.
-     * @param a_id_human        The identifier of the human.
-     * @param a_experience      The experience of the human.
+     * @param a_key             The key of the human.
      * @param a_volume          The volume.
      */
     ScenarioDismissHumanActionInvalidRequest(
@@ -190,9 +174,7 @@ public:
         std::string  const a_password,
         unsigned int const a_id_holder_class,
         std::string  const a_holder_name,
-        unsigned int const a_id_human_class,
-        unsigned int const a_id_human,
-        unsigned int const a_experience,
+        std::string  const a_key,
         unsigned int const a_volume
     );
 
@@ -229,19 +211,9 @@ private:
     std::string const m_holder_name;
 
     /**
-     * @brief The identifier of the class of the human.
+     * @brief The key of the human.
      */
-    unsigned int const m_id_human_class;
-
-    /**
-     * @brief The identifier of the human.
-     */
-    unsigned int const m_id_human;
-
-    /**
-     * @brief The experience of the human.
-     */
-    unsigned int const m_experience;
+    std::string const m_key;
 
     /**
      * @brief The volume.

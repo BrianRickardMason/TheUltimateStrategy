@@ -25,42 +25,40 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Building/Key.hpp"
-#include <gmock/gmock.h>
+#include <GameServer/Configuration/Configurator/Building/Building.hpp>
 
-using namespace GameServer::Building;
+using namespace std;
 
-TEST(KeyBuildingTest, Key_ConstructorsAreEquivalent)
+namespace GameServer
 {
-    IDBuilding id_building(ID_BUILDING_DEFENSIVE_BARBICAN);
+namespace Configuration
+{
 
-    Key key_1(id_building);
-    Key key_2(1000101);
-
-    ASSERT_TRUE(key_1 == key_2);
+Building::Building(
+    IBuildingKey const a_key,
+    string       const a_class,
+    string       const a_name
+)
+    : m_key(a_key),
+      m_class(a_class),
+      m_name(a_name)
+{
 }
 
-TEST(KeyBuildingTest, toHash_BasedOnParameters)
+IBuildingKey Building::getKey() const
 {
-    IDBuilding id_building (ID_BUILDING_DEFENSIVE_BARBICAN);
-
-    Key key(id_building);
-
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_BUILDING * 1000000 + 101 == key.toHash());
+    return m_key;
 }
 
-TEST(KeyBuildingTest, toHash_BasedOnHash)
+string Building::getClass() const
 {
-    Key key(1000101);
-
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_BUILDING * 1000000 + 101 == key.toHash());
+    return m_class;
 }
 
-TEST(KeyBuildingTest, toHash_MaxValues)
+string Building::getName() const
 {
-    IDBuilding id_building(2, 12);
-
-    Key key(id_building);
-
-    ASSERT_TRUE(GameServer::Common::KEY_HASH_MAGIC_VALUE_BUILDING * 1000000 + 212 == key.toHash());
+    return m_name;
 }
+
+} // namespace Configuration
+} // namespace GameServer

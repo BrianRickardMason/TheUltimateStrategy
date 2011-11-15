@@ -28,11 +28,12 @@
 #ifndef GAMESERVER_BUILDING_IDESTROYBUILDINGOPERATOR_HPP
 #define GAMESERVER_BUILDING_IDESTROYBUILDINGOPERATOR_HPP
 
-#include "../../../Common/IDHolder.hpp"
-#include "../../../Persistence/ITransaction.hpp"
-#include "../../Key.hpp"
-#include "../../Volume.hpp"
-#include "DestroyBuildingOperatorExitCode.hpp"
+#include <GameServer/Building/Key.hpp>
+#include <GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorExitCode.hpp>
+#include <GameServer/Building/Volume.hpp>
+#include <GameServer/Common/IDHolder.hpp>
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
+#include <GameServer/Persistence/ITransaction.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -63,13 +64,13 @@ public:
     virtual DestroyBuildingOperatorExitCode destroyBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of DestroyBuildingOperator.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IDestroyBuildingOperator> IDestroyBuildingOperatorShrPtr;
 

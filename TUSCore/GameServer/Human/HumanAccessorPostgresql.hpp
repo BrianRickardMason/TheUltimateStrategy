@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_HUMAN_HUMANACCESSORPOSTGRESQL_HPP
 #define GAMESERVER_HUMAN_HUMANACCESSORPOSTGRESQL_HPP
 
-#include "IHumanAccessor.hpp"
+#include <GameServer/Human/IHumanAccessor.hpp>
 #include <pqxx/result.hxx>
 #include <string>
 
@@ -55,7 +55,7 @@ public:
     virtual void insertRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -69,7 +69,7 @@ public:
     virtual void deleteRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
+        Configuration::IHumanKey        const & a_key
     ) const;
 
     /**
@@ -84,22 +84,7 @@ public:
     virtual HumanWithVolumeRecordShrPtr getRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const;
-
-    /**
-     * @brief Gets human with volume records by id human.
-     *
-     * @param a_transaction A transaction.
-     * @param a_id_holder   An identifier of the holder.
-     * @param a_id_human    An identifier of the human.
-     *
-     * @return A map of human with volume records, an empty map if not found.
-     */
-    virtual HumanWithVolumeRecordMap getRecords(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        IDHuman                         const & a_id_human
+        Configuration::IHumanKey        const & a_key
     ) const;
 
     /**
@@ -126,7 +111,7 @@ public:
     virtual void increaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -141,7 +126,7 @@ public:
     virtual void decreaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
 

@@ -28,9 +28,10 @@
 #ifndef GAMESERVER_HUMAN_IHUMANPERSISTENCEFACADE_HPP
 #define GAMESERVER_HUMAN_IHUMANPERSISTENCEFACADE_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "../Persistence/ITransaction.hpp"
-#include "HumanWithVolume.hpp"
+#include <GameServer/Common/IDHolder.hpp>
+#include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
+#include <GameServer/Human/HumanWithVolume.hpp>
+#include <GameServer/Persistence/ITransaction.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace GameServer
@@ -39,7 +40,7 @@ namespace Human
 {
 
 /**
- * @brief An interface of human persistence facade.
+ * @brief The interface of HumanPersistenceFacade.
  */
 class IHumanPersistenceFacade
     : boost::noncopyable
@@ -60,7 +61,7 @@ public:
     virtual void addHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -79,7 +80,7 @@ public:
     virtual bool subtractHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -95,22 +96,7 @@ public:
     virtual HumanWithVolumeShrPtr getHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key
-    ) const = 0;
-
-    /**
-     * @brief Gets humans by id human.
-     *
-     * @param a_transaction The transaction.
-     * @param a_id_holder   The identifier of a holder.
-     * @param a_id_human    The identifier of a human
-     *
-     * @return A map of humans, an empty map if not found.
-     */
-    virtual HumanWithVolumeMap getHumans(
-        Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        IDHuman                         const & a_id_human
+        Configuration::IHumanKey        const & a_key
     ) const = 0;
 
     /**
@@ -128,7 +114,7 @@ public:
 };
 
 /**
- * @brief A shared pointer of interface of human persistence facade.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IHumanPersistenceFacade> IHumanPersistenceFacadeShrPtr;
 

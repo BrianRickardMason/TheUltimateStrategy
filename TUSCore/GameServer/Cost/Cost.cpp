@@ -39,16 +39,16 @@ namespace Cost
 Cost::Cost(
     CostRecord const & a_record
 )
-    : m_key_hash(a_record.getKeyHash()),
+    : m_key(a_record.getKey()),
       m_id_cost_type(a_record.getIDCostType()),
-      m_key(a_record.getKey()),
+      m_resource_key(a_record.getResourceKey()),
       m_volume(a_record.getVolume())
 {
 }
 
-KeyHash const & Cost::getKeyHash() const
+string const & Cost::getKey() const
 {
-    return m_key_hash;
+    return m_key;
 }
 
 IDCostType const & Cost::getIDCostType() const
@@ -56,9 +56,9 @@ IDCostType const & Cost::getIDCostType() const
     return m_id_cost_type;
 }
 
-string Cost::getKey() const
+string Cost::getResourceKey() const
 {
-    return m_key;
+    return m_resource_key;
 }
 
 Volume const & Cost::getVolume() const
@@ -66,9 +66,9 @@ Volume const & Cost::getVolume() const
     return m_volume;
 }
 
-string Cost::toKey() const
+string Cost::toResourceKey() const
 {
-    return m_key;
+    return m_resource_key;
 }
 
 } // namespace Cost

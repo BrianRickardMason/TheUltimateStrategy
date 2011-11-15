@@ -50,13 +50,13 @@ protected:
      * @brief Constructs a test class.
      */
     CostPersistenceFacadeTest()
-        : m_cost_record_coal(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_COAL, 100)),
-          m_cost_record_food(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_FOOD, 200)),
-          m_cost_record_gold(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_GOLD, 300)),
-          m_cost_record_iron(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_IRON, 400)),
-          m_cost_record_mana(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_MANA, 500)),
-          m_cost_record_rock(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_ROCK, 600)),
-          m_cost_record_wood(make_shared<CostRecord>(1, ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_WOOD, 700))
+        : m_cost_record_coal(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_COAL, 100)),
+          m_cost_record_food(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_FOOD, 200)),
+          m_cost_record_gold(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_GOLD, 300)),
+          m_cost_record_iron(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_IRON, 400)),
+          m_cost_record_mana(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_MANA, 500)),
+          m_cost_record_rock(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_ROCK, 600)),
+          m_cost_record_wood(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_WOOD, 700))
     {
         m_cost_record_vector.push_back(m_cost_record_coal);
         m_cost_record_vector.push_back(m_cost_record_food);
@@ -99,7 +99,7 @@ TEST_F(CostPersistenceFacadeTest, getCost_Success)
 
     CostAccessorMock * mock = new CostAccessorMock;
 
-    EXPECT_CALL(*mock, getCosts(transaction, 1, 2))
+    EXPECT_CALL(*mock, getCosts(transaction, "Chivas", 1))
     .WillOnce(Return(m_cost_record_vector));
 
     ICostAccessorAutPtr accessor(mock);
@@ -107,7 +107,7 @@ TEST_F(CostPersistenceFacadeTest, getCost_Success)
     CostPersistenceFacade persistence_facade(accessor);
 
     // Test commands.
-    ResourceSet resource_set = persistence_facade.getCost(transaction, 1, 2);
+    ResourceSet resource_set = persistence_facade.getCost(transaction, "Chivas", 1);
 
     // Test assertions.
     ResourceWithVolumeMap resource_map = resource_set.getMap();
@@ -129,7 +129,7 @@ TEST_F(CostPersistenceFacadeTest, getCost_Failure_GetCostThrows)
 
     std::exception e;
 
-    EXPECT_CALL(*mock, getCosts(transaction, 1, 2))
+    EXPECT_CALL(*mock, getCosts(transaction, "Regal", 2))
     .WillOnce(Throw(e));
 
     ICostAccessorAutPtr accessor(mock);
@@ -137,5 +137,5 @@ TEST_F(CostPersistenceFacadeTest, getCost_Failure_GetCostThrows)
     CostPersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(ResourceSet resource_set = persistence_facade.getCost(transaction, 1, 2), std::exception);
+    ASSERT_THROW(ResourceSet resource_set = persistence_facade.getCost(transaction, "Regal", 2), std::exception);
 }

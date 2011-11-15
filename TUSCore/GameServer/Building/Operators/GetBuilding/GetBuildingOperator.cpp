@@ -28,6 +28,7 @@
 #include "GetBuildingOperator.hpp"
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Persistence;
 
 namespace GameServer
@@ -45,7 +46,7 @@ GetBuildingOperator::GetBuildingOperator(
 GetBuildingOperatorExitCode GetBuildingOperator::getBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    IBuildingKey       const & a_key
 ) const
 {
     try

@@ -32,6 +32,7 @@
 #include "../../../Human/Volume.hpp"
 #include "../../../Persistence/ITransaction.hpp"
 #include "TransportHumanOperatorExitCode.hpp"
+#include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
@@ -65,13 +66,13 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
-        Human::Key                      const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Human::Volume                   const & a_volume
     ) const = 0;
 };
 
 /**
- * @brief The shared pointer of the interface of TransportHumanOperator.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ITransportHumanOperator> ITransportHumanOperatorShrPtr;
 

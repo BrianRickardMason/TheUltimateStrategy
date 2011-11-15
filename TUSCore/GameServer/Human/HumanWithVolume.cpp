@@ -25,7 +25,10 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "HumanWithVolume.hpp"
+#include <GameServer/Configuration/Configurator/Human/ConfiguratorHuman.hpp>
+#include <GameServer/Human/HumanWithVolume.hpp>
+
+using namespace GameServer::Configuration;
 
 namespace GameServer
 {
@@ -33,38 +36,28 @@ namespace Human
 {
 
 HumanWithVolume::HumanWithVolume(
-    Key    const & a_key,
-    Volume const & a_volume
+    IHumanKey const a_key,
+    Volume    const a_volume
 )
-    : m_human(a_key),
-      m_volume(a_volume)
+    : m_volume(a_volume)
 {
+    m_human = CONFIGURATOR_HUMAN.getHuman(a_key);
 }
 
 HumanWithVolume::HumanWithVolume(
     HumanWithVolumeRecord const & a_record
 )
-    : m_human(a_record.getKey()),
-      m_volume(a_record.getVolume())
+    : m_volume(a_record.getVolume())
 {
+    m_human = CONFIGURATOR_HUMAN.getHuman(a_record.getKey());
 }
 
-Key const & HumanWithVolume::getKey() const
+IHumanShrPtr HumanWithVolume::getHuman() const
 {
-    return m_human.getKey();
+    return m_human;
 }
 
-IDHuman const & HumanWithVolume::getIDHuman() const
-{
-    return m_human.getIDHuman();
-}
-
-Experience const & HumanWithVolume::getExperience() const
-{
-    return m_human.getExperience();
-}
-
-Volume const & HumanWithVolume::getVolume() const
+Volume HumanWithVolume::getVolume() const
 {
     return m_volume;
 }

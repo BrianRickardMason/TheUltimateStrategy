@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_PROPERTY_PROPERTYRECORD_HPP
 #define GAMESERVER_PROPERTY_PROPERTYRECORD_HPP
 
-#include "../Common/KeyHash.hpp"
 #include "IDProperty.hpp"
 #include <boost/shared_ptr.hpp>
 #include <map>
@@ -60,7 +59,7 @@ public:
     /**
      * @brief Constructs a property record.
      *
-     * @param a_key_hash      A key hash.
+     * @param a_key           A key.
      * @param a_id_property   An identifier of the property.
      * @param a_discriminator A discriminator of the property.
      * @param a_value_boolean A boolean value.
@@ -68,7 +67,7 @@ public:
      * @param a_value_string  A string value.
      */
     PropertyRecord(
-        Common::KeyHash const & a_key_hash,
+        std::string     const & a_key,
         IDProperty      const & a_id_property,
         Discriminator   const & a_discriminator,
         bool            const   a_value_boolean,
@@ -77,11 +76,11 @@ public:
     );
 
     /**
-     * @brief Gets the key hash.
+     * @brief Gets the key.
      *
-     * @return The key hash.
+     * @return The key.
      */
-    Common::KeyHash const & getKeyHash() const;
+    std::string const & getKey() const;
 
     /**
      * @brief Gets the identifier of the property.
@@ -120,9 +119,9 @@ public:
 
 private:
     /**
-     * @brief The key hash.
+     * @brief The key.
      */
-    Common::KeyHash m_key_hash;
+    std::string m_key;
 
     /**
      * @brief The identifier of the property.
@@ -150,20 +149,14 @@ private:
     std::string m_value_string;
 };
 
+//@{
 /**
- * @brief A shared pointer of property record.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<PropertyRecord> PropertyRecordShrPtr;
-
-/**
- * @brief A pair of property record.
- */
 typedef std::pair<IDProperty, PropertyRecordShrPtr> PropertyRecordPair;
-
-/**
- * @brief A map of property record.
- */
 typedef std::map<IDProperty, PropertyRecordShrPtr> PropertyRecordMap;
+//}@
 
 } // namespace Property
 } // namespace GameServer

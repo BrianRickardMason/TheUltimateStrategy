@@ -70,24 +70,22 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
-        Human::Key                      const & a_key,
+        Configuration::IHumanKey        const & a_key,
         Human::Volume                   const & a_volume
     ) const;
 
 private:
+    //@{
     /**
-     * @brief The persistence facade of humans.
+     * @brief A persistence facade.
      */
-    Human::IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
-
-    /**
-     * @brief The persistence facade of settlements.
-     */
+    Human::IHumanPersistenceFacadeShrPtr           m_human_persistence_facade;
     Settlement::ISettlementPersistenceFacadeShrPtr m_settlement_persistence_facade;
+    //}@
 };
 
 /**
- * @brief The auto pointer of TransportHumanOperator.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<TransportHumanOperator> TransportHumanOperatorAutPtr;
 

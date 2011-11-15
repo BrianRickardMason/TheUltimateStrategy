@@ -28,10 +28,10 @@
 #ifndef GAMESERVER_BUILDING_BUILDBUILDINGOPERATOR_HPP
 #define GAMESERVER_BUILDING_BUILDBUILDINGOPERATOR_HPP
 
-#include "../../../Cost/ICostPersistenceFacade.hpp"
-#include "../../../Resource/IResourcePersistenceFacade.hpp"
-#include "../../IBuildingPersistenceFacade.hpp"
-#include "IBuildBuildingOperator.hpp"
+#include <GameServer/Building/IBuildingPersistenceFacade.hpp>
+#include <GameServer/Building/Operators/BuildBuilding/IBuildBuildingOperator.hpp>
+#include <GameServer/Cost/ICostPersistenceFacade.hpp>
+#include <GameServer/Resource/IResourcePersistenceFacade.hpp>
 
 namespace GameServer
 {
@@ -71,7 +71,7 @@ public:
     virtual BuildBuildingOperatorExitCode buildBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Key                             const & a_key,
+        Configuration::IBuildingKey     const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -87,7 +87,7 @@ private:
 };
 
 /**
- * @brief The auto pointer of BuildBuildingOperator.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<BuildBuildingOperator> BuildBuildingOperatorAutPtr;
 

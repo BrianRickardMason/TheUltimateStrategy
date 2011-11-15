@@ -47,9 +47,7 @@ ReplyShrPtr TransportHuman(
     string        const a_password,
     string        const a_settlement_name_source,
     string        const a_settlement_name_destination,
-    unsigned int  const a_id_human_class,
-    unsigned int  const a_id_human,
-    unsigned int  const a_experience,
+    string        const a_key,
     unsigned int  const a_volume
 )
 {
@@ -57,9 +55,7 @@ ReplyShrPtr TransportHuman(
                                                         a_password,
                                                         a_settlement_name_source,
                                                         a_settlement_name_destination,
-                                                        a_id_human_class,
-                                                        a_id_human,
-                                                        a_experience,
+                                                        a_key,
                                                         a_volume);
 
     return a_client->sendRequest(request);

@@ -29,7 +29,6 @@
 #define GAMESERVER_RESOURCE_RESOURCEWITHVOLUMERECORD_HPP
 
 #include "../Common/IDHolder.hpp"
-//#include "Key.hpp"
 #include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
@@ -55,7 +54,7 @@ public:
      */
     ResourceWithVolumeRecord(
         Common::IDHolder const a_id_holder,
-        std::string      const a_key,
+        std::string      const a_key, // TODO: A key.
         Volume           const a_volume
     );
 
@@ -71,7 +70,7 @@ public:
      *
      * @return The key of the resource.
      */
-    std::string getKey() const;
+    std::string getKey() const; // TODO: A key.
 
     /**
      * @brief Gets the volume of the resource.
@@ -89,7 +88,7 @@ private:
     /**
      * @brief The key of the resource.
      */
-    std::string m_key;
+    std::string m_key; // TODO: A key.
 
     /**
      * @brief The volume of the resource.
@@ -102,8 +101,8 @@ private:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<ResourceWithVolumeRecord> ResourceWithVolumeRecordShrPtr;
-typedef std::pair<std::string, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordPair;
-typedef std::map<std::string, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordMap;
+typedef std::pair<std::string, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordPair; // TODO: A key.
+typedef std::map<std::string, ResourceWithVolumeRecordShrPtr> ResourceWithVolumeRecordMap; // TODO: A key.
 //}@
 
 } // namespace Resource

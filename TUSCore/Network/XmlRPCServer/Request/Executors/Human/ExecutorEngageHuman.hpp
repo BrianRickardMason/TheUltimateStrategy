@@ -29,7 +29,6 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORENGAGEHUMAN_HPP
 
 #include "../../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../../GameServer/Human/IDHuman.hpp"
 #include "../../../../../GameServer/Human/Operators/EngageHuman/EngageHumanOperatorExitCode.hpp"
 #include "../../../../../GameServer/Human/Volume.hpp"
 #include "../Executor.hpp"
@@ -55,8 +54,7 @@ namespace Executors
  *     <parameters>
  *         <idholderclass value=\"#\" />
  *         <holder_name   value=\"#\" />
- *         <idhumanclass  value=\"#\" />
- *         <idhuman       value=\"#\" />
+ *         <humankey      value=\"#\" />
  *         <volume        value=\"#\" />
  *     </parameters>
  * </request>
@@ -170,14 +168,9 @@ class ExecutorEngageHuman
     std::string m_holder_name;
 
     /**
-     * @brief The value of the identifier of the class of a human.
+     * @brief The key of the human.
      */
-    unsigned int m_value_id_human_class;
-
-    /**
-     * @brief The value of the identifier of a human.
-     */
-    unsigned int m_value_id_human;
+    std::string m_key;
 
     /**
      * @brief The value of the volume.
@@ -188,11 +181,6 @@ class ExecutorEngageHuman
      * @brief The identifier of a holder.
      */
     GameServer::Common::IDHolder m_id_holder;
-
-    /**
-     * @brief The identifier of a human.
-     */
-    GameServer::Human::IDHuman m_id_human;
 
     /**
      * @brief The volume.

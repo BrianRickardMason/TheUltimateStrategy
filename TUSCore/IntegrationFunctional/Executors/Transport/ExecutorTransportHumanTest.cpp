@@ -25,8 +25,6 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../GameServer/Human/Experience.hpp"
-#include "../../../GameServer/Human/IDHuman.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioActivateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioDeactivateEpoch.hpp"
@@ -37,6 +35,7 @@
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
+#include <GameServer/Human/Key.hpp>
 
 using namespace GameServer::Human;
 using namespace IntegrationCommon::Helpers::Scenarios::Epoch;
@@ -64,22 +63,15 @@ protected:
             new ScenarioTransportHumanActionInvalidRequest(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 22)),
-          m_scenario_action_invalid_range(
-              new ScenarioTransportHumanActionSuccess(
-                  "Login", "Password",
-                  "Settlement1", "Settlement2",
-                  ID_HUMAN_WORKER_TEACHER.getValue1() + 1, ID_HUMAN_WORKER_TEACHER.getValue2() + 1, EXPERIENCE_ADVANCED.getValue() + 1,
-                  22)),
           m_scenario_action_unauthenticated(
               new ScenarioTransportHumanActionSuccess(
                   "Login", "BadPassword",
                   "Settlement1", "Settlement2",
-                  ID_HUMAN_WORKER_TEACHER.getValue1(), ID_HUMAN_WORKER_TEACHER.getValue2(), EXPERIENCE_ADVANCED.getValue(),
+                  KEY_WORKER_TEACHER_ADVANCED,
                   22)),
           m_scenario_verification_invalid_request(new ScenarioTransportHumanVerificationInvalidRequest),
-          m_scenario_verification_invalid_range(new ScenarioTransportHumanVerificationInvalidRange),
           m_scenario_verification_unauthenticted(new ScenarioTransportHumanVerificationUnauthenticated)
     {
     }
@@ -88,14 +80,12 @@ protected:
      * @brief Test constants: scenario actions.
      */
     IScenarioActionShrPtr m_scenario_action_invalid_request,
-                          m_scenario_action_invalid_range,
                           m_scenario_action_unauthenticated;
 
     /**
      * @brief Test constants: scenario verifications.
      */
     IScenarioVerificationShrPtr m_scenario_verification_invalid_request,
-                                m_scenario_verification_invalid_range,
                                 m_scenario_verification_unauthenticted;
 };
 
@@ -108,19 +98,6 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, InvalidRequest)
 
     m_scenarios = list_of
         (IScenarioShrPtr(new ScenarioTransportHuman(client, m_scenario_action_invalid_request, m_scenario_verification_invalid_request)));
-
-    for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
-    {
-        ASSERT_STREQ("", (*it)->execute());
-    }
-}
-
-TEST_F(IntegrationFunctionalExecutorTransportHumanTest, InvalidRange)
-{
-    IClientShrPtr client(new Client(m_io_service, "localhost", "2222"));
-
-    m_scenarios = list_of
-        (IScenarioShrPtr(new ScenarioTransportHuman(client, m_scenario_action_invalid_range, m_scenario_verification_invalid_range)));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
     {
@@ -215,7 +192,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, UnauthorizedToTheSourceS
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login2", "Password2",
                 "Settlement1", "Settlement3",
-                ID_HUMAN_WORKER_TEACHER.getValue1(), ID_HUMAN_WORKER_TEACHER.getValue2(), EXPERIENCE_ADVANCED.getValue(),
+                KEY_WORKER_TEACHER_ADVANCED,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationUnauthorized))));
 
@@ -275,7 +252,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, UnauthorizedToTheDestina
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login2", "Password2",
                 "Settlement3", "Settlement1",
-                ID_HUMAN_WORKER_TEACHER.getValue1(), ID_HUMAN_WORKER_TEACHER.getValue2(), EXPERIENCE_ADVANCED.getValue(),
+                KEY_WORKER_TEACHER_ADVANCED,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationUnauthorized))));
 
@@ -327,7 +304,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationEpochIsNotActive))));
 
@@ -375,7 +352,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, TryingToTransportZeroHum
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 0)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationTryingToTransportZeroHumans))));
 
@@ -441,7 +418,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, SettlementsAreNotFromThe
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login1", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationUnauthorized))));
 
@@ -489,7 +466,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, NotEnoughHumans)
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 1001)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationNotEnoughHumans))));
 
@@ -537,7 +514,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, HumanHasBeenTransportedO
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationHumanHasBeenTransported))));
 
@@ -585,7 +562,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, HumanHasBeenTransportedM
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 501)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationHumanHasBeenTransported))));
 
@@ -633,7 +610,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, HumanHasBeenTransportedM
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login", "Password",
                 "Settlement1", "Settlement2",
-                ID_HUMAN_WORKER_JOBLESS.getValue1(), ID_HUMAN_WORKER_JOBLESS.getValue2(), EXPERIENCE_NOVICE.getValue(),
+                KEY_WORKER_JOBLESS_NOVICE,
                 1000)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationHumanHasBeenTransported))));
 

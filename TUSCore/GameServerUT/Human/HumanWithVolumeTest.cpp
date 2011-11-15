@@ -26,9 +26,11 @@
 // SUCH DAMAGE.
 
 #include "../../GameServer/Human/HumanWithVolume.hpp"
+#include <GameServer/Human/Key.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Human;
 
 /**
@@ -42,8 +44,8 @@ protected:
      * @brief Constructs a test class.
      */
     HumanWithVolumeTest()
-        : m_human_with_volume(Key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED), 4),
-          m_model_key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED)
+        : m_human_with_volume(KEY_SOLDIER_HORSEMAN_ADVANCED, 4),
+          m_model_key(KEY_SOLDIER_HORSEMAN_ADVANCED)
     {
     }
 
@@ -55,40 +57,36 @@ protected:
     /**
      * @brief A model key.
      */
-    Key m_model_key;
+    IHumanKey m_model_key;
 };
 
 TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnArguments)
 {
-    HumanWithVolume human_with_volume(Key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED), 4);
+    HumanWithVolume human_with_volume(KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
 
-    ASSERT_TRUE(m_model_key == human_with_volume.getKey());
+    ASSERT_TRUE(m_model_key == human_with_volume.getHuman()->getKey());
     ASSERT_EQ(4, human_with_volume.getVolume());
 }
 
 TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnRecord)
 {
-    HumanWithVolumeRecord human_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), Key(ID_HUMAN_SOLDIER_HORSEMAN, EXPERIENCE_ADVANCED), 4);
+    HumanWithVolumeRecord human_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
 
     HumanWithVolume human_with_volume(human_with_volume_record);
 
-    ASSERT_TRUE(m_model_key == human_with_volume.getKey());
+    ASSERT_TRUE(m_model_key == human_with_volume.getHuman()->getKey());
     ASSERT_EQ(4, human_with_volume.getVolume());
 }
 
 TEST_F(HumanWithVolumeTest, getKey)
 {
-    ASSERT_TRUE(m_model_key == m_human_with_volume.getKey());
-}
-
-TEST_F(HumanWithVolumeTest, getIDHuman)
-{
-    ASSERT_TRUE(ID_HUMAN_SOLDIER_HORSEMAN == m_human_with_volume.getIDHuman());
+    ASSERT_TRUE(m_model_key == m_human_with_volume.getHuman()->getKey());
 }
 
 TEST_F(HumanWithVolumeTest, getExperience)
 {
-    ASSERT_TRUE(EXPERIENCE_ADVANCED == m_human_with_volume.getExperience());
+    // TODO: A hardcode. FIXME!
+    ASSERT_TRUE("advanced" == m_human_with_volume.getHuman()->getExperience());
 }
 
 TEST_F(HumanWithVolumeTest, getVolume)

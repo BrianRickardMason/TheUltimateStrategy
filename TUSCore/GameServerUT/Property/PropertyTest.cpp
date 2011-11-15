@@ -25,87 +25,64 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Property/Property.hpp"
+#include <GameServer/Property/Property.hpp>
 #include <boost/make_shared.hpp>
 #include <gmock/gmock.h>
 
-using namespace boost;
 using namespace GameServer::Property;
+using namespace boost;
 
 /**
- * @brief A test class.
+ * @brief The test class of Property.
  */
 class PropertyTest
     : public testing::Test
 {
 protected:
-    /**
-     * @brief Constructs a test class.
-     */
     PropertyTest()
         : m_property(ID_PROPERTY_HUMAN_ENGAGEABLE)
     {
     }
 
     /**
-     * @brief A property to be tested.
+     * @brief Test constants: the property to be tested.
      */
     Property m_property;
 };
 
-/**
- * Unit tests of: Property::Property.
- */
-TEST_F(PropertyTest, Property)
+TEST_F(PropertyTest, CtorDoesNotThrow)
 {
-    // Test commands and assertions.
     ASSERT_NO_THROW(Property property(ID_PROPERTY_HUMAN_ENGAGEABLE));
-
-    // Test commands.
-    Property property(ID_PROPERTY_HUMAN_ENGAGEABLE);
-
-    // Test assertions.
-    ASSERT_TRUE(ID_PROPERTY_HUMAN_ENGAGEABLE == property.getIDProperty());
 }
 
-/**
- * Unit tests of: Property::getIDProperty.
- */
-TEST_F(PropertyTest, getIDProperty)
+TEST_F(PropertyTest, getIDPropertyReturnsProperValue)
 {
-    // Test commands and assertions.
     ASSERT_TRUE(ID_PROPERTY_HUMAN_ENGAGEABLE == m_property.getIDProperty());
 }
 
 /**
- * @brief A test class.
+ * @brief The test class of PropertyBoolean.
  */
 class PropertyBooleanTest
     : public testing::Test
 {
 protected:
-    /**
-     * @brief Constructs a test class.
-     */
     PropertyBooleanTest()
         : m_property(ID_PROPERTY_HUMAN_ENGAGEABLE, true)
     {
     }
 
     /**
-     * @brief A property to be tested.
+     * @brief Test constants: the property to be tested.
      */
     PropertyBoolean m_property;
 };
 
-/**
- * Unit tests of: PropertyBoolean::PropertyBoolean based on record.
- */
 TEST_F(PropertyBooleanTest, PropertyBoolean_BasedOnRecord)
 {
     // Preconditions.
     PropertyRecordShrPtr property_record_shr_ptr =
-        make_shared<PropertyRecord>(1, ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_BOOLEAN, true, 0, "");
+        make_shared<PropertyRecord>("Ron", ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_BOOLEAN, true, 0, "");
 
     // Test commands and assertions.
     ASSERT_NO_THROW(PropertyBoolean property(property_record_shr_ptr));
@@ -118,9 +95,6 @@ TEST_F(PropertyBooleanTest, PropertyBoolean_BasedOnRecord)
     ASSERT_EQ(true, property.getValue());
 }
 
-/**
- * Unit tests of: PropertyBoolean::PropertyBoolean based on arguments.
- */
 TEST_F(PropertyBooleanTest, PropertyBoolean_BasedOnArguments)
 {
     // Test commands and assertions.
@@ -180,7 +154,7 @@ TEST_F(PropertyIntegerTest, PropertyInteger_BasedOnRecord)
 {
     // Preconditions.
     PropertyRecordShrPtr property_record_shr_ptr =
-        make_shared<PropertyRecord>(1, ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_INTEGER, false, 22, "");
+        make_shared<PropertyRecord>("Ron", ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_INTEGER, false, 22, "");
 
     // Test commands and assertions.
     ASSERT_NO_THROW(PropertyInteger property(property_record_shr_ptr));
@@ -255,7 +229,7 @@ TEST_F(PropertyStringTest, PropertyString_BasedOnRecord)
 {
     // Preconditions.
     PropertyRecordShrPtr property_record_shr_ptr =
-        make_shared<PropertyRecord>(1, ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_STRING, false, 0, "AN.US");
+        make_shared<PropertyRecord>("Ron", ID_PROPERTY_HUMAN_ENGAGEABLE, DISCRIMINATOR_STRING, false, 0, "AN.US");
 
     // Test commands and assertions.
     ASSERT_NO_THROW(PropertyString property(property_record_shr_ptr));

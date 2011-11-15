@@ -43,7 +43,7 @@ protected:
      * @brief Constructs a test class.
      */
     CostRecordTest()
-        : m_record(1001, 1, KEY_RESOURCE_COAL, 100)
+        : m_record("Brandy", 1, KEY_RESOURCE_COAL, 100)
     {
     }
 
@@ -53,19 +53,9 @@ protected:
     CostRecord m_record;
 };
 
-/**
- * Unit tests of: CostRecord::CostRecord.
- */
-TEST_F(CostRecordTest, CostRecord)
+TEST_F(CostRecordTest, CtorDoesNotThrow)
 {
-    // Test commands.
-    CostRecord record(1001, 1, KEY_RESOURCE_COAL, 100);
-
-    // Test assertions.
-    ASSERT_EQ(1001, record.getKeyHash());
-    ASSERT_EQ(1, record.getIDCostType());
-    ASSERT_TRUE(KEY_RESOURCE_COAL == record.getKey());
-    ASSERT_EQ(100, record.getVolume());
+    ASSERT_NO_THROW(CostRecord record("Brandy", 1, KEY_RESOURCE_COAL, 100));
 }
 
 /**
@@ -74,12 +64,12 @@ TEST_F(CostRecordTest, CostRecord)
 TEST_F(CostRecordTest, operator_cmp)
 {
     // Preconditions.
-    CostRecord cost_record_1(1001, 1, KEY_RESOURCE_COAL, 100),
-               cost_record_2(1001, 1, KEY_RESOURCE_COAL, 100),
-               cost_record_3(1002, 1, KEY_RESOURCE_COAL, 100),
-               cost_record_4(1001, 2, KEY_RESOURCE_COAL, 100),
-               cost_record_5(1001, 1, KEY_RESOURCE_FOOD, 100),
-               cost_record_6(1001, 1, KEY_RESOURCE_COAL, 101);
+    CostRecord cost_record_1("Brandy", 1, KEY_RESOURCE_COAL, 100),
+               cost_record_2("Brandy", 1, KEY_RESOURCE_COAL, 100),
+               cost_record_3("Whisky", 1, KEY_RESOURCE_COAL, 100),
+               cost_record_4("Brandy", 2, KEY_RESOURCE_COAL, 100),
+               cost_record_5("Brandy", 1, KEY_RESOURCE_FOOD, 100),
+               cost_record_6("Brandy", 1, KEY_RESOURCE_COAL, 101);
 
     // Test commands and assertions.
     ASSERT_TRUE (cost_record_1 == cost_record_2);
@@ -92,10 +82,10 @@ TEST_F(CostRecordTest, operator_cmp)
 /**
  * Unit tests of: CostRecord::getKeyHash.
  */
-TEST_F(CostRecordTest, getKeyHash)
+TEST_F(CostRecordTest, getKey)
 {
     // Test commands and assertions.
-    ASSERT_EQ(1001, m_record.getKeyHash());
+    ASSERT_EQ("Brandy", m_record.getKey());
 }
 
 /**
@@ -107,13 +97,9 @@ TEST_F(CostRecordTest, getIDCostType)
     ASSERT_EQ(1, m_record.getIDCostType());
 }
 
-/**
- * Unit tests of: CostRecord::getKey.
- */
-TEST_F(CostRecordTest, getKey)
+TEST_F(CostRecordTest, GetResourceKeyReturnsProperValue)
 {
-    // Test commands and assertions.
-    ASSERT_TRUE(KEY_RESOURCE_COAL == m_record.getKey());
+    ASSERT_TRUE(KEY_RESOURCE_COAL == m_record.getResourceKey());
 }
 
 /**

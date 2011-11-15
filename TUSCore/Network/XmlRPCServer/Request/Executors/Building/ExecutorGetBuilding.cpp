@@ -27,6 +27,7 @@
 
 #include "../Constants.hpp"
 #include "ExecutorGetBuilding.hpp"
+#include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
 using namespace GameServer::Authorization;
@@ -60,12 +61,11 @@ bool ExecutorGetBuilding::getParameters(
 {
     try
     {
-        m_login                   = a_request->getLoginValue();
-        m_password                = a_request->getPasswordValue();
-        m_value_id_holder_class   = a_request->getParameterValueUnsignedInteger("idholderclass");
-        m_holder_name             = a_request->getParameterValueString("holder_name");
-        m_value_id_building_class = a_request->getParameterValueUnsignedInteger("idbuildingclass");
-        m_value_id_building       = a_request->getParameterValueUnsignedInteger("idbuilding");
+        m_login                 = a_request->getLoginValue();
+        m_password              = a_request->getPasswordValue();
+        m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
+        m_holder_name           = a_request->getParameterValueString("holder_name");
+        m_key                   = a_request->getParameterValueString("buildingkey");
 
         return true;
     }
@@ -80,7 +80,6 @@ bool ExecutorGetBuilding::processParameters()
     try
     {
         m_id_holder.assign(m_value_id_holder_class, m_holder_name);
-        m_id_building.assign(m_value_id_building_class, m_value_id_building);
 
         return true;
     }
@@ -157,7 +156,7 @@ ReplyShrPtr ExecutorGetBuilding::perform(
         ITransactionShrPtr transaction = a_persistence->getTransaction(connection);
 
         GetBuildingOperatorExitCode const exit_code =
-            get_building_operator->getBuilding(transaction, m_id_holder, GameServer::Building::Key(m_id_building));
+            get_building_operator->getBuilding(transaction, m_id_holder, m_key);
 
         if (exit_code.ok())
         {
@@ -210,11 +209,11 @@ ReplyShrPtr ExecutorGetBuilding::produceReply(
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
-        IXmlNodeShrPtr node_idbuildingclass = node_object->appendNode("idbuildingclass");
-        node_idbuildingclass->appendAttribute("value")->setValue(a_exit_code.m_building->getIDBuilding().getValue1());
+        IXmlNodeShrPtr node_idbuildingclass = node_object->appendNode("buildingclass");
+        node_idbuildingclass->appendAttribute("value")->setValue(a_exit_code.m_building->getBuilding()->getClass().c_str());
 
-        IXmlNodeShrPtr node_idbuilding = node_object->appendNode("idbuilding");
-        node_idbuilding->appendAttribute("value")->setValue(a_exit_code.m_building->getIDBuilding().getValue2());
+        IXmlNodeShrPtr node_idbuilding = node_object->appendNode("buildingname");
+        node_idbuilding->appendAttribute("value")->setValue(a_exit_code.m_building->getBuilding()->getName().c_str());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
         node_volume->appendAttribute("value")->setValue(a_exit_code.m_building->getVolume());

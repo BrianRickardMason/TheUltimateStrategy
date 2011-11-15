@@ -28,11 +28,12 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGWITHVOLUMERECORD_HPP
 #define GAMESERVER_BUILDING_BUILDINGWITHVOLUMERECORD_HPP
 
-#include "../Common/IDHolder.hpp"
-#include "Key.hpp"
-#include "Volume.hpp"
+#include <GameServer/Building/Volume.hpp>
+#include <GameServer/Common/IDHolder.hpp>
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
+#include <string>
 
 namespace GameServer
 {
@@ -40,7 +41,7 @@ namespace Building
 {
 
 /**
- * @brief A building with volume record.
+ * @brief BuildingWithVolumeRecord.
  */
 class BuildingWithVolumeRecord
 {
@@ -53,9 +54,9 @@ public:
      * @param a_volume    The volume of the building.
      */
     BuildingWithVolumeRecord(
-        Common::IDHolder const & a_id_holder,
-        Key              const & a_key,
-        Volume           const & a_volume
+        Common::IDHolder            const a_id_holder,
+        Configuration::IBuildingKey const a_key,
+        Volume                      const a_volume
     );
 
     /**
@@ -70,14 +71,14 @@ public:
      *
      * @return The key of the building.
      */
-    Key const & getKey() const;
+    Configuration::IBuildingKey getKey() const;
 
     /**
      * @brief Gets the volume of the building.
      *
      * @return The volume of the building.
      */
-    Volume const & getVolume() const;
+    Volume getVolume() const;
 
 private:
     /**
@@ -88,7 +89,7 @@ private:
     /**
      * @brief The key of the building.
      */
-    Key m_key;
+    Configuration::IBuildingKey m_key;
 
     /**
      * @brief The volume of the building.
@@ -96,20 +97,14 @@ private:
     Volume m_volume;
 };
 
+//@{
 /**
- * @brief A shared pointer of building with volume record.
+ * @brief A useful typedef.
  */
 typedef boost::shared_ptr<BuildingWithVolumeRecord> BuildingWithVolumeRecordShrPtr;
-
-/**
- * @brief A pair of building with volume record.
- */
-typedef std::pair<Key, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordPair;
-
-/**
- * @brief A map of building with volume record.
- */
-typedef std::map<Key, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordMap;
+typedef std::pair<Configuration::IBuildingKey, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordPair;
+typedef std::map<Configuration::IBuildingKey, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordMap;
+//}@
 
 } // namespace Building
 } // namespace GameServer

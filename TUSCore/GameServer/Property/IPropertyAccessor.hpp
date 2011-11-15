@@ -34,6 +34,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <memory>
+#include <string>
 
 namespace GameServer
 {
@@ -53,14 +54,14 @@ public:
      * @brief Gets a property record.
      *
      * @param a_transaction A transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property record, null if not found.
      */
     virtual PropertyRecordShrPtr getPropertyRecord(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
+        std::string                     const & a_key,
         IDProperty                      const & a_id_property
     ) const = 0;
 
@@ -68,25 +69,23 @@ public:
      * @brief Gets a set of property records.
      *
      * @param a_transaction A transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      *
      * @return A map of property records, an empty map if not found.
      */
     virtual PropertyRecordMap getPropertyRecords(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash
+        std::string                     const & a_key
     ) const = 0;
 };
 
+//@{
 /**
- * @brief Typedef of auto pointer.
+ * @brief A useful typedef.
  */
 typedef std::auto_ptr<IPropertyAccessor> IPropertyAccessorAutPtr;
-
-/**
- * @brief Typedef of scoped pointer.
- */
 typedef boost::scoped_ptr<IPropertyAccessor> IPropertyAccessorScpPtr;
+//}@
 
 } // namespace Property
 } // namespace GameServer

@@ -25,10 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Persistence/TransactionPostgresql.hpp"
-#include "HumanAccessorPostgresql.hpp"
+#include <GameServer/Human/HumanAccessorPostgresql.hpp>
+#include <GameServer/Persistence/TransactionPostgresql.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Persistence;
 using namespace boost;
 using namespace std;
@@ -41,7 +42,7 @@ namespace Human
 void HumanAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -50,11 +51,9 @@ void HumanAccessorPostgresql::insertRecord(
 
     string query = "INSERT INTO "
                    + getTableName(a_id_holder)
-                   + "(holder_name, id_human_class, id_human, experience, volume) VALUES("
+                   + "(holder_name, human_key, volume) VALUES("
                    + backbone_transaction.quote(a_id_holder.getValue2()) + ", "
-                   + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1()) + ", "
-                   + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2()) + ", "
-                   + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue()) + ", "
+                   + backbone_transaction.quote(a_key.c_str()) + ", "
                    + backbone_transaction.quote(a_volume) + ")";
 
     pqxx::result result = backbone_transaction.exec(query);
@@ -63,7 +62,7 @@ void HumanAccessorPostgresql::insertRecord(
 void HumanAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    IHumanKey          const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -72,9 +71,7 @@ void HumanAccessorPostgresql::deleteRecord(
     string query = "DELETE FROM "
                    + getTableName(a_id_holder)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
-                   + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());
+                   + " AND human_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }
@@ -82,7 +79,7 @@ void HumanAccessorPostgresql::deleteRecord(
 HumanWithVolumeRecordShrPtr HumanAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key
+    IHumanKey          const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -91,9 +88,7 @@ HumanWithVolumeRecordShrPtr HumanAccessorPostgresql::getRecord(
     string query = "SELECT volume FROM "
                    + getTableName(a_id_holder)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
-                   + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());
+                   + " AND human_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 
@@ -107,24 +102,6 @@ HumanWithVolumeRecordShrPtr HumanAccessorPostgresql::getRecord(
     {
         return HumanWithVolumeRecordShrPtr();
     }
-}
-
-HumanWithVolumeRecordMap HumanAccessorPostgresql::getRecords(
-    ITransactionShrPtr         a_transaction,
-    IDHolder           const & a_id_holder,
-    IDHuman            const & a_id_human
-) const
-{
-    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
-    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
-
-    string query = "SELECT * FROM "
-                   + getTableName(a_id_holder)
-                   + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_human_class = " + backbone_transaction.quote(a_id_human.getValue1())
-                   + " AND id_human = " + backbone_transaction.quote(a_id_human.getValue2());
-
-    return prepareResultGetRecords(backbone_transaction.exec(query), a_id_holder);
 }
 
 HumanWithVolumeRecordMap HumanAccessorPostgresql::getRecords(
@@ -145,7 +122,7 @@ HumanWithVolumeRecordMap HumanAccessorPostgresql::getRecords(
 void HumanAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -156,9 +133,7 @@ void HumanAccessorPostgresql::increaseVolume(
                    + getTableName(a_id_holder)
                    + " SET volume = volume + " + backbone_transaction.quote(a_volume)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
-                   + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());
+                   + " AND human_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }
@@ -166,7 +141,7 @@ void HumanAccessorPostgresql::increaseVolume(
 void HumanAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    Key                const & a_key,
+    IHumanKey          const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -177,9 +152,7 @@ void HumanAccessorPostgresql::decreaseVolume(
                    + getTableName(a_id_holder)
                    + " SET volume = volume - " + backbone_transaction.quote(a_volume)
                    + " WHERE holder_name = " + backbone_transaction.quote(a_id_holder.getValue2())
-                   + " AND id_human_class = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue1())
-                   + " AND id_human = " + backbone_transaction.quote(a_key.getInternalKey().get<0>().getValue2())
-                   + " AND experience = " + backbone_transaction.quote(a_key.getInternalKey().get<1>().getValue());
+                   + " AND human_key = " + backbone_transaction.quote(a_key.c_str());
 
     pqxx::result result = backbone_transaction.exec(query);
 }
@@ -189,24 +162,18 @@ HumanWithVolumeRecordMap HumanAccessorPostgresql::prepareResultGetRecords(
     IDHolder     const & a_id_holder
 ) const
 {
-    // Fake types for libpqxx.
-    unsigned short int unsigned_short_integer;
-
     // Create a result map.
     HumanWithVolumeRecordMap records;
 
     // Prepare types for the values to be written to.
+    string key;
     Volume volume;
 
     for (pqxx::result::const_iterator it = a_result.begin(); it != a_result.end(); ++it)
     {
         // Get the values.
-        IDHuman id_human(it["id_human_class"].as(unsigned_short_integer), it["id_human"].as(unsigned_short_integer));
-        Experience experience(it["experience"].as(unsigned_short_integer));
+        it["human_key"].to(key);
         it["volume"].to(volume);
-
-        // Create a human key.
-        Key key(id_human, experience);
 
         // Create a corresponding record.
         HumanWithVolumeRecordShrPtr record = make_shared<HumanWithVolumeRecord>(a_id_holder, key, volume);

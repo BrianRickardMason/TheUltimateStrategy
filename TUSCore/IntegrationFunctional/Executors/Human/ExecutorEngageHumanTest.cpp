@@ -25,9 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../GameServer/Building/IDBuilding.hpp"
 #include "../../../GameServer/Common/IDHolder.hpp"
-#include "../../../GameServer/Human/IDHuman.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Building/ScenarioBuildBuilding.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioActivateEpoch.hpp"
 #include "../../../IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp"
@@ -39,6 +37,8 @@
 #include "../../../IntegrationCommon/Helpers/Scenarios/World/ScenarioCreateWorld.hpp"
 #include "../../Helpers/IntegrationFunctionalTest.hpp"
 #include "../../Helpers/XmlRPCClient/ClientSynchronous/ClientSynchronous.hpp"
+#include <GameServer/Building/Key.hpp>
+#include <GameServer/Human/Key.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -83,7 +83,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_SettlementDoesNotExist)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_SOLDIER_ARCHER.getValue1(), ID_HUMAN_SOLDIER_ARCHER.getValue2(),
+                KEY_SOLDIER_ARCHER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthorized))));
 
@@ -132,7 +132,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_BUILDING_DEFENSIVE_BARBICAN.getValue1(), ID_BUILDING_DEFENSIVE_BARBICAN.getValue2(),
+                KEY_DEFENSIVE_BARBICAN,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
@@ -140,7 +140,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 90)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationNotEnoughResources))));
 
@@ -184,7 +184,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_BUILDING_DEFENSIVE_BARBICAN.getValue1(), ID_BUILDING_DEFENSIVE_BARBICAN.getValue2(),
+                KEY_DEFENSIVE_BARBICAN,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
@@ -192,7 +192,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughBuildings)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_SOLDIER_ARCHER.getValue1(), ID_HUMAN_SOLDIER_ARCHER.getValue2(),
+                KEY_SOLDIER_ARCHER_NOVICE,
                 11)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationNotEnoughBuildings))));
 
@@ -236,7 +236,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_MaxHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 100)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
 
@@ -280,7 +280,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_ManyHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 80)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
 
@@ -324,7 +324,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_OneHuman)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
 
@@ -368,7 +368,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_ZeroHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 0)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationTryingToEngageZeroHumans))));
 
@@ -388,7 +388,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_InvalidRequest)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionInvalidRequest(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationInvalidRequest))));
 
@@ -408,7 +408,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_InvalidRange)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_TROOP + 1, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationInvalidRange))));
 
@@ -452,7 +452,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_Unauthenticated)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "BadPassword",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthenticated))));
 
@@ -500,7 +500,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_Unauthorized)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login2", "Password2",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_SOLDIER_ARCHER.getValue1(), ID_HUMAN_SOLDIER_ARCHER.getValue2(),
+                KEY_SOLDIER_ARCHER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthorized))));
 
@@ -548,7 +548,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                ID_HUMAN_WORKER_DRUID.getValue1(), ID_HUMAN_WORKER_DRUID.getValue2(),
+                KEY_WORKER_DRUID_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationEpochIsNotActive))));
 

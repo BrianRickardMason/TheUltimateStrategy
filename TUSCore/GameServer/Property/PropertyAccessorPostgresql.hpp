@@ -46,28 +46,28 @@ public:
      * @brief Gets a property record.
      *
      * @param a_transaction A transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      * @param a_id_property An identifier of the property
      *
      * @return The property record, null if not found.
      */
     virtual PropertyRecordShrPtr getPropertyRecord(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash,
-        IDProperty                                  const & a_id_property
+        std::string                     const & a_key,
+        IDProperty                      const & a_id_property
     ) const;
 
     /**
      * @brief Gets a set of property records.
      *
      * @param a_transaction A transaction.
-     * @param a_key_hash    A key hash.
+     * @param a_key         A key.
      *
      * @return A map of property records, an empty map if not found.
      */
     virtual PropertyRecordMap getPropertyRecords(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::KeyHash                 const & a_key_hash
+        std::string                     const & a_key
     ) const;
 };
 

@@ -25,20 +25,19 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "BuildingToHumanTranslator.hpp"
-
+#include <GameServer/Building/BuildingToHumanTranslator.hpp>
 #include <boost/assert.hpp>
 #include <stdexcept>
 
-using GameServer::Human::IDHumanVec;
+using GameServer::Human::KeyVec;
 
 namespace GameServer
 {
 namespace Building
 {
 
-IDHumanVec BuildingToHumanTranslator::getHumansHostedForWork(
-    Key const & a_key
+KeyVec BuildingToHumanTranslator::getHumansHostedForWork(
+    Configuration::IBuildingKey const & a_key
 )
 {
     // Get corresponding building.
