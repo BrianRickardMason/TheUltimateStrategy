@@ -71,10 +71,18 @@ IBuildingMap const & ConfiguratorBuilding::getBuildings() const
 bool ConfiguratorBuilding::loadXml()
 {
     // TODO: Get the path from the basic configuration.
-    char const * path =
+    char const * path_buildings_xml =
         "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Building/buildings.xml";
 
-    return m_buildings_xml.load_file(path);
+    bool const result_buildings_xml = m_buildings_xml.load_file(path_buildings_xml);
+
+    // TODO: Get the path from the basic configuration.
+    char const * path_properties_xml =
+        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Building/properties.xml";
+
+    bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml);
+
+    return (result_buildings_xml and true);
 }
 
 bool ConfiguratorBuilding::parseXml()
