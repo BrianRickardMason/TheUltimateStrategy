@@ -1,430 +1,118 @@
 <buildings>
-    <building>
-        <key>defensivebarbican</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensivebarbican">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensivebattlements</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensivebattlements">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensivecasemate</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensivecasemate">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensivecircumvallation</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensivecircumvallation">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensivedonjon</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensivedonjon">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensivemachicolation</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensivemachicolation">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensiveportcullis</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensiveportcullis">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensivepostern</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensivepostern">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>defensiveviewingtower</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="defensiveviewingtower">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldaltarofwishes</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldaltarofwishes">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldcommunicationtowers</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldcommunicationtowers">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldeternalcalendar</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldeternalcalendar">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldhunterofmeteors</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldhunterofmeteors">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldhunterofrains</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldhunterofrains">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldhunterofstorms</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldhunterofstorms">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldhunterofwinds</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldhunterofwinds">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldnecropolis</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldnecropolis">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldoracle</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldoracle">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldportalofelements</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldportalofelements">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldpsionicacademy</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldpsionicacademy">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>goldtowerofchaos</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="goldtowerofchaos">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularbarracks</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularbarracks">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularfarm</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularfarm">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularforge</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularforge">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularguild</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularguild">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularhouse</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularhouse">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularmarketplace</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularmarketplace">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularmine</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularmine">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularquarry</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularquarry">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularsawmill</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularsawmill">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularschool</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularschool">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regularsteelworks</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regularsteelworks">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>regulartemple</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="regulartemple">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>specialaqueduct</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="specialaqueduct">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>specialbawdyhouse</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="specialbawdyhouse">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>specialcommercialport</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="specialcommercialport">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>specialcourt</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="specialcourt">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>specialgranary</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="specialgranary">
+        <capacity value="10" />
     </building>
-    <building>
-        <key>specialsewerage</key>
-        <properties>
-            <integer>
-                <property>
-                    <name>capacity</name>
-                    <value>10</value>
-                </property>
-            </integer>
-        </properties>
+    <building key="specialsewerage">
+        <capacity value="10" />
     </building>
