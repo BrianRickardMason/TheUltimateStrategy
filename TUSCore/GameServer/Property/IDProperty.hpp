@@ -48,11 +48,6 @@ class TIDProperty
 typedef Common::ConstrainedValue<TIDProperty, Common::RangedUnsignedShortIntPolicy<1, 4> > IDProperty;
 
 /**
- * @brief Available identifiers of building properties.
- */
-const IDProperty ID_PROPERTY_BUILDING_CAPACITY(1);
-
-/**
  * @brief Available identifiers of human properties.
  */
 const IDProperty ID_PROPERTY_HUMAN_DISMISSABLE(2);

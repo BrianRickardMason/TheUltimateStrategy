@@ -32,6 +32,7 @@
 #include <GameServer/Turn/Managers/TurnManager.hpp>
 
 using namespace GameServer::Common;
+using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
@@ -244,23 +245,51 @@ bool TurnManager::executeTurnSettlement(
 
             if (experienced)
             {
-                // TODO: Experiencing is temporarily disabled. FIXME!
-//                Human::Key const key_novice(id_human, EXPERIENCE_NOVICE);
-//                Human::Key const key_advanced(id_human, EXPERIENCE_ADVANCED);
-//
-//                m_human_persistence_facade->addHuman(a_transaction, id_holder, key_advanced, experienced);
-//
-//                bool const result = m_human_persistence_facade->subtractHuman(
-//                                        a_transaction,
-//                                        id_holder,
-//                                        key_novice,
-//                                        experienced
-//                                    );
-//
-//                if (!result)
-//                {
-//                    return false;
-//                }
+                IHumanKey key_novice = it->first;
+                IHumanKey key_advanced;
+
+                // TODO: A nasty workaround.
+                if (key_novice ==  KEY_SOLDIER_ARCHER_NOVICE     ) key_advanced = KEY_SOLDIER_ARCHER_ADVANCED;
+                if (key_novice ==  KEY_SOLDIER_HORSEMAN_NOVICE   ) key_advanced = KEY_SOLDIER_HORSEMAN_ADVANCED;
+                if (key_novice ==  KEY_SOLDIER_INFANTRYMAN_NOVICE) key_advanced = KEY_SOLDIER_INFANTRYMAN_ADVANCED;
+
+                if (key_novice ==  KEY_SORCERER_EARTH_NOVICE     ) key_advanced = KEY_SORCERER_EARTH_ADVANCED;
+                if (key_novice ==  KEY_SORCERER_FIRE_NOVICE      ) key_advanced = KEY_SORCERER_FIRE_ADVANCED;
+                if (key_novice ==  KEY_SORCERER_WATER_NOVICE     ) key_advanced = KEY_SORCERER_WATER_ADVANCED;
+                if (key_novice ==  KEY_SORCERER_WIND_NOVICE      ) key_advanced = KEY_SORCERER_WIND_ADVANCED;
+
+                if (key_novice ==  KEY_SPY_AGENT_NOVICE          ) key_advanced = KEY_SPY_AGENT_ADVANCED;
+                if (key_novice ==  KEY_SPY_SPY_NOVICE            ) key_advanced = KEY_SPY_SPY_ADVANCED;
+                if (key_novice ==  KEY_SPY_THUG_NOVICE           ) key_advanced = KEY_SPY_THUG_ADVANCED;
+
+                if (key_novice ==  KEY_WORKER_BLACKSMITH_NOVICE  ) key_advanced = KEY_WORKER_BLACKSMITH_ADVANCED;
+                if (key_novice ==  KEY_WORKER_BREEDER_NOVICE     ) key_advanced = KEY_WORKER_BREEDER_ADVANCED;
+                if (key_novice ==  KEY_WORKER_DRUID_NOVICE       ) key_advanced = KEY_WORKER_DRUID_ADVANCED;
+                if (key_novice ==  KEY_WORKER_FARMER_NOVICE      ) key_advanced = KEY_WORKER_FARMER_ADVANCED;
+                if (key_novice ==  KEY_WORKER_FISHERMAN_NOVICE   ) key_advanced = KEY_WORKER_FISHERMAN_ADVANCED;
+                if (key_novice ==  KEY_WORKER_JOBLESS_NOVICE     ) key_advanced = KEY_WORKER_JOBLESS_ADVANCED;
+                if (key_novice ==  KEY_WORKER_LUMBERJACK_NOVICE  ) key_advanced = KEY_WORKER_LUMBERJACK_ADVANCED;
+                if (key_novice ==  KEY_WORKER_MERCHANT_NOVICE    ) key_advanced = KEY_WORKER_MERCHANT_ADVANCED;
+                if (key_novice ==  KEY_WORKER_MINER_NOVICE       ) key_advanced = KEY_WORKER_MINER_ADVANCED;
+                if (key_novice ==  KEY_WORKER_OFFICIAL_NOVICE    ) key_advanced = KEY_WORKER_OFFICIAL_ADVANCED;
+                if (key_novice ==  KEY_WORKER_PRIEST_NOVICE      ) key_advanced = KEY_WORKER_PRIEST_ADVANCED;
+                if (key_novice ==  KEY_WORKER_STEELWORKER_NOVICE ) key_advanced = KEY_WORKER_STEELWORKER_ADVANCED;
+                if (key_novice ==  KEY_WORKER_STONE_MASON_NOVICE ) key_advanced = KEY_WORKER_STONE_MASON_ADVANCED;
+                if (key_novice ==  KEY_WORKER_TEACHER_NOVICE     ) key_advanced = KEY_WORKER_TEACHER_ADVANCED;
+
+                m_human_persistence_facade->addHuman(a_transaction, id_holder, key_advanced, experienced);
+
+                bool const result = m_human_persistence_facade->subtractHuman(
+                                        a_transaction,
+                                        id_holder,
+                                        key_novice,
+                                        experienced
+                                    );
+
+                if (!result)
+                {
+                    return false;
+                }
             }
         }
     }

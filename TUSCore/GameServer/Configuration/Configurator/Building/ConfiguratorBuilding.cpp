@@ -71,10 +71,18 @@ IBuildingMap const & ConfiguratorBuilding::getBuildings() const
 bool ConfiguratorBuilding::loadXml()
 {
     // TODO: Get the path from the basic configuration.
-    char const * path =
+    char const * path_buildings_xml =
         "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Building/buildings.xml";
 
-    return m_buildings_xml.load_file(path);
+    bool const result_buildings_xml = m_buildings_xml.load_file(path_buildings_xml);
+
+    // TODO: Get the path from the basic configuration.
+    char const * path_properties_xml =
+        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Building/properties.xml";
+
+    bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml);
+
+    return (result_buildings_xml and true);
 }
 
 bool ConfiguratorBuilding::parseXml()
@@ -85,13 +93,23 @@ bool ConfiguratorBuilding::parseXml()
 
     for (xml_node_iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
-        IBuildingKey const value_key   = it->child_value("key");
-        string       const value_class = it->child_value("class");
-        string       const value_name  = it->child_value("name");
+        IBuildingKey const building_key      = it->child_value("key");
+        string       const building_class    = it->child_value("class");
+        string       const building_name     = it->child_value("name");
+        unsigned int       building_capacity = 0;
 
-        IBuildingShrPtr building(new Building(value_key, value_class, value_name));
+        // Find the building.
+        xml_node properties_building =
+            m_properties_xml.child("buildings").find_child_by_attribute("key", building_key.c_str());
 
-        m_buildings.insert(make_pair(value_key, building));
+        if (properties_building)
+        {
+            building_capacity = properties_building.child("capacity").attribute("value").as_uint();
+        }
+
+        IBuildingShrPtr building(new Building(building_key, building_class, building_name, building_capacity));
+
+        m_buildings.insert(make_pair(building_key, building));
     }
 
     return true;

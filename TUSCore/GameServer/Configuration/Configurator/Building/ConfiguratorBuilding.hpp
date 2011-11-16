@@ -86,12 +86,15 @@ private:
      */
     bool parseXml();
 
+    //@{
     /**
      * @brief The xml document.
      *
      * TODO: Add the abstraction.
      */
     pugi::xml_document m_buildings_xml;
+    pugi::xml_document m_properties_xml;
+    //}@
 
     /**
      * @brief The map of available buildings.

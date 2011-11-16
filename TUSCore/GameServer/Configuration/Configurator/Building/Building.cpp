@@ -37,11 +37,13 @@ namespace Configuration
 Building::Building(
     IBuildingKey const a_key,
     string       const a_class,
-    string       const a_name
+    string       const a_name,
+    unsigned int const a_capacity
 )
     : m_key(a_key),
       m_class(a_class),
-      m_name(a_name)
+      m_name(a_name),
+      m_capacity(a_capacity)
 {
 }
 
@@ -58,6 +60,11 @@ string Building::getClass() const
 string Building::getName() const
 {
     return m_name;
+}
+
+unsigned int Building::getCapacity() const
+{
+    return m_capacity;
 }
 
 } // namespace Configuration

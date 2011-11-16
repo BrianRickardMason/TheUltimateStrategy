@@ -189,16 +189,8 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
 
         // Check if there is enough place.
         {
-            // Get building's capacity.
-            // TODO: Fast and clean getKey().toHash() improvement by a shortcut.
-            PropertyIntegerShrPtr capacity = m_property_persistence_facade->getPropertyInteger(
-                                                 a_transaction,
-                                                 building->getKey(),
-                                                 ID_PROPERTY_BUILDING_CAPACITY
-                                             );
-
             // Check if there is enough capacity.
-            if (building_with_volume->getVolume() * capacity->getValue() - sum < a_volume)
+            if (building_with_volume->getVolume() * building_with_volume->getBuilding()->getCapacity() - sum < a_volume)
             {
                 return false;
             }

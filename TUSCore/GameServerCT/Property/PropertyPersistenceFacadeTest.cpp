@@ -172,22 +172,6 @@ TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_ENGAGEABLE)
 /**
  * Component tests of: PropertyPersistenceFacade::getPropertyInteger.
  */
-TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_BUILDING_CAPACITY)
-{
-    IBuildingMap const & buildings = CONFIGURATOR_BUILDING.getBuildings();
-
-    for (IBuildingMap::const_iterator it = buildings.begin(); it != buildings.end(); ++it)
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        PropertyIntegerShrPtr property =
-                m_property_persistence_facade->getPropertyInteger(transaction, it->first, ID_PROPERTY_BUILDING_CAPACITY);
-
-        ASSERT_EQ(10, property->getValue());
-    }
-}
-
 TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_PRODUCTION)
 {
     IHumanMap const & humans = CONFIGURATOR_HUMAN.getHumans();
@@ -201,21 +185,6 @@ TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_PRODUCTION)
                 m_property_persistence_facade->getPropertyInteger(transaction, it->first, ID_PROPERTY_HUMAN_PRODUCTION);
 
         check_ID_PROPERTY_HUMAN_PRODUCTION(property, it->second);
-    }
-}
-
-TEST_F(PropertyPersistenceFacadeTest, getProperties_Buildings)
-{
-    IBuildingMap const & buildings = CONFIGURATOR_BUILDING.getBuildings();
-
-    for (IBuildingMap::const_iterator it = buildings.begin(); it != buildings.end(); ++it)
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        PropertySet properties = m_property_persistence_facade->getProperties(transaction, it->first);
-
-        ASSERT_EQ(10, properties.getIntegerProperty(ID_PROPERTY_BUILDING_CAPACITY)->getValue());
     }
 }
 

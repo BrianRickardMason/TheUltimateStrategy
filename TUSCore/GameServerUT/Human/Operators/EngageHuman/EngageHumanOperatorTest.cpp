@@ -120,11 +120,6 @@ protected:
         // Mocks setup: PropertyPersistenceFacadeMock.
         configurePropertyPersistenceFacadeMockForGetPropertyBoolean(a_human_key, ID_PROPERTY_HUMAN_ENGAGEABLE);
 
-        PropertyIntegerShrPtr capacity = make_shared<PropertyInteger>(ID_PROPERTY_BUILDING_CAPACITY, 10);
-
-        EXPECT_CALL(*m_property_persistence_facade, getPropertyInteger(_, a_building_key, ID_PROPERTY_BUILDING_CAPACITY))
-        .WillOnce(Return(capacity));
-
         return m_property_persistence_facade;
     }
 
@@ -529,10 +524,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
-    // Get the building capacity.
-    EXPECT_CALL(*m_property_persistence_facade, getPropertyInteger(transaction, KEY_REGULAR_FORGE, ID_PROPERTY_BUILDING_CAPACITY))
-    .WillOnce(Return(make_shared<PropertyInteger>(ID_PROPERTY_BUILDING_CAPACITY, 10)));
-
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, getResourceSet(resource_volumes)))
@@ -597,10 +588,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
-
-    // Get the building capacity.
-    EXPECT_CALL(*m_property_persistence_facade, getPropertyInteger(transaction, KEY_REGULAR_FORGE, ID_PROPERTY_BUILDING_CAPACITY))
-    .WillOnce(Return(make_shared<PropertyInteger>(ID_PROPERTY_BUILDING_CAPACITY, 10)));
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
@@ -667,10 +654,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
     .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_BLACKSMITH_NOVICE, 9)));
 
-    // Get the building capacity.
-    EXPECT_CALL(*m_property_persistence_facade, getPropertyInteger(transaction, KEY_REGULAR_FORGE, ID_PROPERTY_BUILDING_CAPACITY))
-    .WillOnce(Return(make_shared<PropertyInteger>(ID_PROPERTY_BUILDING_CAPACITY, 10)));
-
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, getResourceSet(resource_volumes)))
@@ -736,10 +719,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
-    // Get the building capacity.
-    EXPECT_CALL(*m_property_persistence_facade, getPropertyInteger(transaction, KEY_REGULAR_FORGE, ID_PROPERTY_BUILDING_CAPACITY))
-    .WillOnce(Return(make_shared<PropertyInteger>(ID_PROPERTY_BUILDING_CAPACITY, 10)));
-
     // Most vexing parse workaround.
     IResourcePersistenceFacadeShrPtr resource_persistence_facade_shr_ptr =
         IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade);
@@ -792,10 +771,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
-
-    // Get the building capacity.
-    EXPECT_CALL(*m_property_persistence_facade, getPropertyInteger(transaction, KEY_REGULAR_FORGE, ID_PROPERTY_BUILDING_CAPACITY))
-    .WillOnce(Return(make_shared<PropertyInteger>(ID_PROPERTY_BUILDING_CAPACITY, 10)));
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);

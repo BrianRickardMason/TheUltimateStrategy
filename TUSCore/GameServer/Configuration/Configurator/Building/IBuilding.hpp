@@ -70,6 +70,13 @@ public:
      * @return The name of the building.
      */
     virtual std::string getName() const = 0;
+
+    /**
+     * @brief Gets the capacity.
+     *
+     * @return The capacity of the building.
+     */
+    virtual unsigned int getCapacity() const = 0;
 };
 
 //@{

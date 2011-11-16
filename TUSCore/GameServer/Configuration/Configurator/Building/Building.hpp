@@ -45,14 +45,16 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_key   The key of the building.
-     * @param a_class The class of the building.
-     * @param a_name  The name of the building.
+     * @param a_key      The key of the building.
+     * @param a_class    The class of the building.
+     * @param a_name     The name of the building.
+     * @param a_capacity The capacity of the building.
      */
     Building(
         IBuildingKey const a_key,
         std::string  const a_class,
-        std::string  const a_name
+        std::string  const a_name,
+        unsigned int const a_capacity
     );
 
     /**
@@ -76,6 +78,13 @@ public:
      */
     virtual std::string getName() const;
 
+    /**
+     * @brief Gets the capacity.
+     *
+     * @return The capacity of the building.
+     */
+    virtual unsigned int getCapacity() const;
+
 private:
     /**
      * @brief The key of the building.
@@ -91,6 +100,11 @@ private:
      * @brief The name of the building.
      */
     std::string const m_name;
+
+    /**
+     * @brief The capacity of the building.
+     */
+    unsigned int const m_capacity;
 };
 
 } // namespace Configuration

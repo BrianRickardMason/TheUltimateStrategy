@@ -1,0 +1,118 @@
+<buildings>
+    <building key="defensivebarbican">
+        <capacity value="10" />
+    </building>
+    <building key="defensivebattlements">
+        <capacity value="10" />
+    </building>
+    <building key="defensivecasemate">
+        <capacity value="10" />
+    </building>
+    <building key="defensivecircumvallation">
+        <capacity value="10" />
+    </building>
+    <building key="defensivedonjon">
+        <capacity value="10" />
+    </building>
+    <building key="defensivemachicolation">
+        <capacity value="10" />
+    </building>
+    <building key="defensiveportcullis">
+        <capacity value="10" />
+    </building>
+    <building key="defensivepostern">
+        <capacity value="10" />
+    </building>
+    <building key="defensiveviewingtower">
+        <capacity value="10" />
+    </building>
+    <building key="goldaltarofwishes">
+        <capacity value="10" />
+    </building>
+    <building key="goldcommunicationtowers">
+        <capacity value="10" />
+    </building>
+    <building key="goldeternalcalendar">
+        <capacity value="10" />
+    </building>
+    <building key="goldhunterofmeteors">
+        <capacity value="10" />
+    </building>
+    <building key="goldhunterofrains">
+        <capacity value="10" />
+    </building>
+    <building key="goldhunterofstorms">
+        <capacity value="10" />
+    </building>
+    <building key="goldhunterofwinds">
+        <capacity value="10" />
+    </building>
+    <building key="goldnecropolis">
+        <capacity value="10" />
+    </building>
+    <building key="goldoracle">
+        <capacity value="10" />
+    </building>
+    <building key="goldportalofelements">
+        <capacity value="10" />
+    </building>
+    <building key="goldpsionicacademy">
+        <capacity value="10" />
+    </building>
+    <building key="goldtowerofchaos">
+        <capacity value="10" />
+    </building>
+    <building key="regularbarracks">
+        <capacity value="10" />
+    </building>
+    <building key="regularfarm">
+        <capacity value="10" />
+    </building>
+    <building key="regularforge">
+        <capacity value="10" />
+    </building>
+    <building key="regularguild">
+        <capacity value="10" />
+    </building>
+    <building key="regularhouse">
+        <capacity value="10" />
+    </building>
+    <building key="regularmarketplace">
+        <capacity value="10" />
+    </building>
+    <building key="regularmine">
+        <capacity value="10" />
+    </building>
+    <building key="regularquarry">
+        <capacity value="10" />
+    </building>
+    <building key="regularsawmill">
+        <capacity value="10" />
+    </building>
+    <building key="regularschool">
+        <capacity value="10" />
+    </building>
+    <building key="regularsteelworks">
+        <capacity value="10" />
+    </building>
+    <building key="regulartemple">
+        <capacity value="10" />
+    </building>
+    <building key="specialaqueduct">
+        <capacity value="10" />
+    </building>
+    <building key="specialbawdyhouse">
+        <capacity value="10" />
+    </building>
+    <building key="specialcommercialport">
+        <capacity value="10" />
+    </building>
+    <building key="specialcourt">
+        <capacity value="10" />
+    </building>
+    <building key="specialgranary">
+        <capacity value="10" />
+    </building>
+    <building key="specialsewerage">
+        <capacity value="10" />
+    </building>
