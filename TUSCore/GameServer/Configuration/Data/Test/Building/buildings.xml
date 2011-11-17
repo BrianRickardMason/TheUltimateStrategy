@@ -106,92 +106,92 @@
     </building>
     <building>
         <key>regularbarracks</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>barracks</name>
     </building>
     <building>
         <key>regularfarm</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>farm</name>
     </building>
     <building>
         <key>regularforge</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>forge</name>
     </building>
     <building>
         <key>regularguild</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>guild</name>
     </building>
     <building>
         <key>regularhouse</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>house</name>
     </building>
     <building>
         <key>regularmarketplace</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>marketplace</name>
     </building>
     <building>
         <key>regularmine</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>mine</name>
     </building>
     <building>
         <key>regularquarry</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>quarry</name>
     </building>
     <building>
         <key>regularsawmill</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>sawmill</name>
     </building>
     <building>
         <key>regularschool</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>school</name>
     </building>
     <building>
         <key>regularsteelworks</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>steelworks</name>
     </building>
     <building>
         <key>regulartemple</key>
-        <class>gold</class>
+        <class>regular</class>
         <name>temple</name>
     </building>
     <building>
         <key>specialaqueduct</key>
-        <class>gold</class>
+        <class>special</class>
         <name>aqueduct</name>
     </building>
     <building>
         <key>specialbawdyhouse</key>
-        <class>gold</class>
+        <class>special</class>
         <name>bawdy house</name>
     </building>
     <building>
         <key>specialcommercialport</key>
-        <class>gold</class>
+        <class>special</class>
         <name>commercial port</name>
     </building>
     <building>
         <key>specialcourt</key>
-        <class>gold</class>
+        <class>special</class>
         <name>court</name>
     </building>
     <building>
         <key>specialgranary</key>
-        <class>gold</class>
+        <class>special</class>
         <name>granary</name>
     </building>
     <building>
         <key>specialsewerage</key>
-        <class>gold</class>
+        <class>special</class>
         <name>sewerage</name>
     </building>
 </buildings>
