@@ -30,7 +30,7 @@ def printResponse( ret, full = False ):
     
     print ( "Reply is: " + REPLY_STATUSES[st] + " / " + msg)
     # print the whole message
-    if(full):
+    if(full or st != 10):
         removeWsNodes(ret)
         ret.normalize();
         print(ret.toprettyxml(indent="    ", newl="\n"));
@@ -78,82 +78,82 @@ printResponse(ret)
 
 print ("Creating settlement") 
 ret = interface.createSettlement(LAND_NAME, SETTLEMENT_NAME)
-printResponse(ret)
+printResponse(ret, True)
 
 print( "Building...")
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_FARM, 2)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","farm"], 2)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_SAWMILL, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","sawmill"], 1)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_MARKETPLACE, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","marketplace"], 1)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_MINE, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","mine"], 1)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_QUARRY, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","quarry"], 1)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_SCHOOL, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","school"], 1)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_TEMPLE, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","temple"], 1)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_HOUSE, 20)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","house"], 20)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_FORGE, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","forge"], 1)
 printResponse(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ID_BUILDING_REGULAR_STEELWORKS, 1)
+ret = interface.buildOn(SETTLEMENT_NAME, ["regular","steelworks"], 1)
 printResponse(ret)
 
 print ("Engaging human") 
 # aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aVolume
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_FARMER , 10)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","farmer"] , 10)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_LUMBERJACK , 5)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","lumberjack"] , 5)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_MERCHANT, 5)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","merchant"], 5)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_MINER, 5)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","miner"], 5)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_STONE_MASON, 5)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","stone mason"], 5)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_TEACHER, 5)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","teacher"], 5)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_PRIEST, 1)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","priest"], 1)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_DRUID, 1)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","druid"], 1)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_OFFICIAL, 1)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","official"], 1)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_BREEDER, 5)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","breeder"], 5)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_BLACKSMITH, 1)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","blacksmith"], 1)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_STEELWORKER, 1)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","steelworker"], 1)
 printResponse(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ID_HUMAN_WORKER_FISHERMAN, 3)
+ret = interface.humanTo(SETTLEMENT_NAME, ["worker","fishermane"], 3)
 printResponse(ret)
 
 print ("Dismissing jobless") 
-ret = interface.dismissFrom(SETTLEMENT_NAME, ID_HUMAN_WORKER_JOBLESS, 1, 750)
+ret = interface.dismissFrom(SETTLEMENT_NAME, ["worker","jobless"], 1, 750)
 printResponse(ret)
 
 # Take a look around
