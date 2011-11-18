@@ -45,16 +45,18 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_key        The key of the human.
-     * @param a_class      The class of the human.
-     * @param a_experience The experience of the human.
-     * @param a_name       The name of the human.
+     * @param a_key         The key of the human.
+     * @param a_class       The class of the human.
+     * @param a_experience  The experience of the human.
+     * @param a_name        The name of the human.
+     * @param a_dismissable Defines whether human can be dismissed.
      */
     Human(
         IHumanKey   const a_key,
         std::string const a_class,
         std::string const a_name,
-        std::string const a_experience
+        std::string const a_experience,
+        bool        const a_dismissable
     );
 
     /**
@@ -85,6 +87,13 @@ public:
      */
     virtual std::string getExperience() const;
 
+    /**
+     * @brief Checks whether a human can be dismissed.
+     *
+     * @return True if human can be dismissed, false otherwise.
+     */
+    virtual bool isDismissable() const;
+
 private:
     /**
      * @brief The key of the human.
@@ -105,6 +114,11 @@ private:
      * @brief The experience of the human.
      */
     std::string const m_experience;
+
+    /**
+     * @brief Defines whether a human can be dismissed.
+     */
+    bool const m_dismissable;
 };
 
 } // namespace Configuration
