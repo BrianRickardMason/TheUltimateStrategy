@@ -213,7 +213,7 @@ bool TurnManager::executeTurnSettlement(
                     a_transaction,
                     id_holder,
                     production->second,
-                    produced->getValue()
+                    produced->getValue() * it->second->getVolume()
                 );
             }
         }
