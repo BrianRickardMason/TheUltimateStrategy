@@ -93,12 +93,13 @@ bool ConfiguratorHuman::parseXml()
 
     for (xml_node_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        IHumanKey const human_key         = it->child_value("key");
-        string    const human_class       = it->child_value("class");
-        string    const human_name        = it->child_value("name");
-        string    const human_experience  = it->child_value("experience");
-        bool            human_dismissable = false;
-        bool            human_engageable  = false;
+        IHumanKey    const human_key         = it->child_value("key");
+        string       const human_class       = it->child_value("class");
+        string       const human_name        = it->child_value("name");
+        string       const human_experience  = it->child_value("experience");
+        bool               human_dismissable = false;
+        bool               human_engageable  = false;
+        unsigned int       human_production  = 0;
 
         // Find the human.
         xml_node properties_human =
@@ -108,10 +109,17 @@ bool ConfiguratorHuman::parseXml()
         {
             human_dismissable = properties_human.child("dismissable").attribute("value").as_bool();
             human_engageable  = properties_human.child("engageable").attribute("value").as_bool();
+            human_production  = properties_human.child("production").attribute("value").as_uint();
         }
 
         IHumanShrPtr human(
-            new Human(human_key, human_class, human_name, human_experience, human_dismissable, human_engageable)
+            new Human(human_key,
+                      human_class,
+                      human_name,
+                      human_experience,
+                      human_dismissable,
+                      human_engageable,
+                      human_production)
         );
 
         m_humans.insert(make_pair(human_key, human));
