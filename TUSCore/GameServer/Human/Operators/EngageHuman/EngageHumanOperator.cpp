@@ -206,11 +206,11 @@ bool EngageHumanOperator::verifyEngageable(
     IHumanKey          const & a_key
 ) const
 {
-	IHumanShrPtr human = CONFIGURATOR_HUMAN.getHuman(a_key);
+    IHumanShrPtr human = CONFIGURATOR_HUMAN.getHuman(a_key);
 
-	BOOST_ASSERT(human);
+    BOOST_ASSERT(human);
 
-	return human->isEngageable();
+    return human->isEngageable();
 }
 
 bool EngageHumanOperator::verifyJobless(
