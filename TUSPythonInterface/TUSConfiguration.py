@@ -85,15 +85,16 @@ def printPossibleResources(aResourceDict):
     for i, r in aResourceDict.items():
         print( r['name'])
 
-def printPossibleHumans(aHumansDict):
+def printPossibleHumans(aHumansDict, aEngageableOnly = True):
     """Prints engageable humans' definitions from given file in one line format."""
     # humans.human.{key|class|name|experience} 
-    print( "{0:>10}{1:>16}{2:>6}{3:>6}#".format('class', 'name', 'dism.','prod.'))
-    print( "{0:->10}{1:->16}{2:->6}{3:->6}#".format('', '', '',''))
+    print( "{:>10}{:>16}{:>9}{:>6}{:>6}#".format('class', 'name', 'exp.', 'dism.','prod.'))
+    print( "{:->10}{:->16}{:>9}{:->6}{:->6}#".format('', '', '', '',''))
     for i, h in aHumansDict.items():
-        if h['engageable'] == 'true':
-            print( "{0:>10}{1:>16}{2:>6}{3:>6}".format(
-                h['class'], h['name'], h['dismissable'], h['production']))
+        if aEngageableOnly and h['engageable'] != 'true':
+            continue
+        print( "{:>10}{:>16}{:>9}{:>6}{:>6}".format(
+            h['class'], h['name'], h['experience'], h['dismissable'], h['production']))
 
 def printPossibleBuildings(aBuildingsDict):
     """Prints buildings' definitions from given files in one line format."""
@@ -134,6 +135,8 @@ def main(argv=None):
     
     if type == 'humans' :
         printPossibleHumans(humans)
+    elif type == 'allhumans' :
+        printPossibleHumans(humans, False)
     elif type == 'buildings':
         printPossibleBuildings(buildings)
     elif type == 'resources':
