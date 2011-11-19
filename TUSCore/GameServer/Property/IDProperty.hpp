@@ -50,7 +50,6 @@ typedef Common::ConstrainedValue<TIDProperty, Common::RangedUnsignedShortIntPoli
 /**
  * @brief Available identifiers of human properties.
  */
-const IDProperty ID_PROPERTY_HUMAN_DISMISSABLE(2);
 const IDProperty ID_PROPERTY_HUMAN_ENGAGEABLE (3);
 const IDProperty ID_PROPERTY_HUMAN_PRODUCTION (4);
 
