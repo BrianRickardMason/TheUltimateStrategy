@@ -66,31 +66,6 @@ protected:
     ICostPersistenceFacadeShrPtr m_cost_persistence_facade;
 };
 
-TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_BUILDING_BUILD)
-{
-    IBuildingMap const & buildings = CONFIGURATOR_BUILDING.getBuildings();
-
-    for (IBuildingMap::const_iterator it = buildings.begin(); it != buildings.end(); ++it)
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        ResourceSet cost =
-            m_cost_persistence_facade->getCost(transaction, it->second->getKey(), ID_COST_TYPE_BUILDING_BUILD);
-
-        // Test assertions.
-        ResourceWithVolumeMap resource_map = cost.getMap();
-        // TODO: Enable this assertion.
-        // ASSERT_EQ(NUMBER_OF_RESOURCE_TYPES, resource_map.size());
-
-        unsigned short int i(0);
-        for (ResourceWithVolumeMap::iterator it = resource_map.begin(); it != resource_map.end(); ++it, ++i)
-        {
-            ASSERT_EQ(10, it->second->getVolume());
-        }
-    }
-}
-
 TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_BUILDING_DESTROY)
 {
     IBuildingMap const & buildings = CONFIGURATOR_BUILDING.getBuildings();

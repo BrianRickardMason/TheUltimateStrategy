@@ -50,13 +50,13 @@ protected:
      * @brief Constructs a test class.
      */
     CostPersistenceFacadeTest()
-        : m_cost_record_coal(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_COAL, 100)),
-          m_cost_record_food(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_FOOD, 200)),
-          m_cost_record_gold(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_GOLD, 300)),
-          m_cost_record_iron(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_IRON, 400)),
-          m_cost_record_mana(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_MANA, 500)),
-          m_cost_record_rock(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_ROCK, 600)),
-          m_cost_record_wood(make_shared<CostRecord>("Chivas", ID_COST_TYPE_BUILDING_BUILD, KEY_RESOURCE_WOOD, 700))
+        : m_cost_record_coal(make_shared<CostRecord>("Chivas", 1, KEY_RESOURCE_COAL, 100)),
+          m_cost_record_food(make_shared<CostRecord>("Chivas", 1, KEY_RESOURCE_FOOD, 200)),
+          m_cost_record_gold(make_shared<CostRecord>("Chivas", 1, KEY_RESOURCE_GOLD, 300)),
+          m_cost_record_iron(make_shared<CostRecord>("Chivas", 1, KEY_RESOURCE_IRON, 400)),
+          m_cost_record_mana(make_shared<CostRecord>("Chivas", 1, KEY_RESOURCE_MANA, 500)),
+          m_cost_record_rock(make_shared<CostRecord>("Chivas", 1, KEY_RESOURCE_ROCK, 600)),
+          m_cost_record_wood(make_shared<CostRecord>("Chivas", 1, KEY_RESOURCE_WOOD, 700))
     {
         m_cost_record_vector.push_back(m_cost_record_coal);
         m_cost_record_vector.push_back(m_cost_record_food);

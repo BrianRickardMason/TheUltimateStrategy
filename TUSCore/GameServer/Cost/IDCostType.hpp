@@ -41,7 +41,6 @@ typedef unsigned short int IDCostType;
 /**
  * @brief The identifiers of the cost types for buildings.
  */
-const unsigned short int ID_COST_TYPE_BUILDING_BUILD   = 1;
 const unsigned short int ID_COST_TYPE_BUILDING_DESTROY = 2;
 
 /**
