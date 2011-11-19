@@ -1,146 +1,194 @@
 <humans>
     <human key="soldierarchernovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="soldierarcheradvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="soldierhorsemannovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="soldierhorsemanadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="soldierinfantrymannovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="soldierinfantrymanadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="sorcerersorcererearthnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="sorcerersorcererearthadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="sorcerersorcererfirenovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="sorcerersorcererfireadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="sorcerersorcererwaternovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="sorcerersorcererwateradvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="sorcerersorcererwindnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="sorcerersorcererwindadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="spyagentnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="spyagentadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="spyspynovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="spyspyadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="spythugnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="spythugadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerblacksmithnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerblacksmithadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerbreedernovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerbreederadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerdruidnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerdruidadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerfarmernovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerfarmeradvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerfishermannovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerfishermanadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerjoblessnovice">
         <dismissable value="false" />
+        <engageable value="false" />
     </human>
     <human key="workerjoblessadvanced">
         <dismissable value="false" />
+        <engageable value="false" />
     </human>
     <human key="workerlumberjacknovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerlumberjackadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workermerchantnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workermerchantadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerminernovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workermineradvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerofficialnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerofficialadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerpriestnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerpriestadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workersteelworkernovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workersteelworkeradvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerstonemasonnovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerstonemasonadvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
     <human key="workerteachernovice">
         <dismissable value="true" />
+        <engageable value="true" />
     </human>
     <human key="workerteacheradvanced">
         <dismissable value="true" />
+        <engageable value="false" />
     </human>
 </humans>
