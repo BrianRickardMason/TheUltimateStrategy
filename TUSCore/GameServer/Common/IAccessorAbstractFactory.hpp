@@ -36,7 +36,6 @@
 #include "../Epoch/IEpochAccessor.hpp"
 #include "../Human/IHumanAccessor.hpp"
 #include "../Land/ILandAccessor.hpp"
-#include "../Property/IPropertyAccessor.hpp"
 #include "../Resource/IResourceAccessor.hpp"
 #include "../Settlement/ISettlementAccessor.hpp"
 #include "../User/IUserAccessor.hpp"
@@ -70,7 +69,6 @@ public:
     virtual Epoch::IEpochAccessorAutPtr                   createEpochAccessor()          const = 0;
     virtual Human::IHumanAccessorAutPtr                   createHumanAccessor()          const = 0;
     virtual Land::ILandAccessorAutPtr                     createLandAccessor()           const = 0;
-    virtual Property::IPropertyAccessorAutPtr             createPropertyAccessor()       const = 0;
     virtual Resource::IResourceAccessorAutPtr             createResourceAccessor()       const = 0;
     virtual Settlement::ISettlementAccessorAutPtr         createSettlementAccessor()     const = 0;
     virtual User::IUserAccessorAutPtr                     createUserAccessor()           const = 0;

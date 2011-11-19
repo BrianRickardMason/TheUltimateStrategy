@@ -33,7 +33,6 @@
 #include "../Epoch/EpochPersistenceFacadeFactory.hpp"
 #include "../Human/HumanPersistenceFacadeFactory.hpp"
 #include "../Land/LandPersistenceFacadeFactory.hpp"
-#include "../Property/PropertyPersistenceFacadeFactory.hpp"
 #include "../Resource/ResourcePersistenceFacadeFactory.hpp"
 #include "../Settlement/SettlementPersistenceFacadeFactory.hpp"
 #include "../User/UserPersistenceFacadeFactory.hpp"
@@ -49,7 +48,6 @@ using namespace GameServer::Cost;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
@@ -112,11 +110,6 @@ IHumanPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::create
 ILandPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createLandPersistenceFacade() const
 {
     return ILandPersistenceFacadeShrPtr(LandPersistenceFacadeFactory::create(m_accessor_abstract_factory));
-}
-
-IPropertyPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createPropertyPersistenceFacade() const
-{
-    return IPropertyPersistenceFacadeShrPtr(PropertyPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
 IResourcePersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createResourcePersistenceFacade() const

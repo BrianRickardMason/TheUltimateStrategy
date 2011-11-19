@@ -99,16 +99,3 @@ CREATE TABLE costs
 
     UNIQUE(key, id_cost_type, resource_key)
 );
-
-DROP TABLE IF EXISTS properties CASCADE;
-CREATE TABLE properties
-(
-    key                 VARCHAR(44) NOT NULL CHECK(key <> ''),
-    id_property         SMALLINT NOT NULL CHECK(id_property > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-    value_discriminator SMALLINT NOT NULL CHECK(value_discriminator IN (1, 2, 3)), -- TODO: Mapping to source code needed.
-    value_boolean       BOOLEAN DEFAULT NULL, -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-    value_integer       SMALLINT DEFAULT NULL, -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-    value_string        VARCHAR(44) DEFAULT NULL, -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-
-    UNIQUE(key, id_property)
-);

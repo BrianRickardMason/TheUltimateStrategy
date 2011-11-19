@@ -33,7 +33,6 @@
 #include "../Epoch/EpochAccessorPostgresql.hpp"
 #include "../Human/HumanAccessorPostgresql.hpp"
 #include "../Land/LandAccessorPostgresql.hpp"
-#include "../Property/PropertyAccessorPostgresql.hpp"
 #include "../Resource/ResourceAccessorPostgresql.hpp"
 #include "../Settlement/SettlementAccessorPostgresql.hpp"
 #include "../User/UserAccessorPostgresql.hpp"
@@ -48,7 +47,6 @@ using namespace GameServer::Cost;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
@@ -97,11 +95,6 @@ IHumanAccessorAutPtr AccessorAbstractFactoryPostgresql::createHumanAccessor() co
 ILandAccessorAutPtr AccessorAbstractFactoryPostgresql::createLandAccessor() const
 {
     return ILandAccessorAutPtr(new LandAccessorPostgresql);
-}
-
-IPropertyAccessorAutPtr AccessorAbstractFactoryPostgresql::createPropertyAccessor() const
-{
-    return IPropertyAccessorAutPtr(new PropertyAccessorPostgresql);
 }
 
 IResourceAccessorAutPtr AccessorAbstractFactoryPostgresql::createResourceAccessor() const

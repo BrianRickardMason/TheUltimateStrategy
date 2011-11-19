@@ -40,7 +40,6 @@ using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::User;
@@ -80,7 +79,6 @@ protected:
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
-          m_property_persistence_facade(m_persistence_facade_abstract_factory->createPropertyPersistenceFacade()),
           m_resource_persistence_facade(m_persistence_facade_abstract_factory->createResourcePersistenceFacade()),
           m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
@@ -211,7 +209,6 @@ protected:
     IEpochPersistenceFacadeShrPtr    m_epoch_persistence_facade;
     IHumanPersistenceFacadeShrPtr    m_human_persistence_facade;
     ILandPersistenceFacadeShrPtr     m_land_persistence_facade;
-    IPropertyPersistenceFacadeShrPtr m_property_persistence_facade;
     IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
     IUserPersistenceFacadeShrPtr     m_user_persistence_facade;
     IWorldPersistenceFacadeShrPtr    m_world_persistence_facade;

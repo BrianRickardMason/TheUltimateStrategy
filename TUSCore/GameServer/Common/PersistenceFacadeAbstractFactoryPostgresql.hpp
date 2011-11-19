@@ -59,7 +59,6 @@ public:
     virtual Epoch::IEpochPersistenceFacadeShrPtr                   createEpochPersistenceFacade()          const;
     virtual Human::IHumanPersistenceFacadeShrPtr                   createHumanPersistenceFacade()          const;
     virtual Land::ILandPersistenceFacadeShrPtr                     createLandPersistenceFacade()           const;
-    virtual Property::IPropertyPersistenceFacadeShrPtr             createPropertyPersistenceFacade()       const;
     virtual Resource::IResourcePersistenceFacadeShrPtr             createResourcePersistenceFacade()       const;
     virtual Settlement::ISettlementPersistenceFacadeShrPtr         createSettlementPersistenceFacade()     const;
     virtual User::IUserPersistenceFacadeShrPtr                     createUserPersistenceFacade()           const;
