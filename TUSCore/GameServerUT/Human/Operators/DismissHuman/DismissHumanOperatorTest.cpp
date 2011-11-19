@@ -29,7 +29,6 @@
 #include "../../../Cost/CostPersistenceFacadeMock.hpp"
 #include "../../../Helpers/Functions.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
-#include "../../../Property/PropertyPersistenceFacadeMock.hpp"
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
 #include "../../HumanPersistenceFacadeMock.hpp"
 #include <GameServer/Human/Key.hpp>
@@ -40,7 +39,6 @@ using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Human;
 using namespace GameServer::Persistence;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace boost;
 using namespace std;
@@ -62,7 +60,6 @@ protected:
     DismissHumanOperatorTest()
         : m_cost_persistence_facade(new CostPersistenceFacadeMock),
           m_human_persistence_facade(new HumanPersistenceFacadeMock),
-          m_property_persistence_facade(new PropertyPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
@@ -188,7 +185,6 @@ protected:
      */
     CostPersistenceFacadeMock     * m_cost_persistence_facade;
     HumanPersistenceFacadeMock    * m_human_persistence_facade;
-    PropertyPersistenceFacadeMock * m_property_persistence_facade;
     ResourcePersistenceFacadeMock * m_resource_persistence_facade;
     //}@
 
@@ -226,7 +222,6 @@ TEST_F(DismissHumanOperatorTest, DismissHumanOperator)
     // Test commands and assertions.
     ASSERT_NO_THROW(DismissHumanOperator dismiss_human_operator((ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                                 (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                                                (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                                                 (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))));
 }
 
@@ -239,7 +234,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_TryingToDismissZeroHumans)
 
     DismissHumanOperator dismiss_human_operator((ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                 (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                                (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                                 (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_DISMISS_ZERO_HUMANS,
@@ -252,7 +246,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_HumanIsNotDismissable)
 
     DismissHumanOperator dismiss_human_operator((ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                 (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                                (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                                 (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_IS_NOT_DISMISSABLE,
@@ -265,12 +258,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroEngaged)
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 0);
 
-    IPropertyPersistenceFacadeShrPtr property_persistence_facade_shr_ptr(m_property_persistence_facade);
-
-    DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(m_cost_persistence_facade),
-                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                property_persistence_facade_shr_ptr,
-                                                IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
+    DismissHumanOperator dismiss_human_operator((ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
+                                                (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
+                                                (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
               dismiss_human_operator.dismissHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1).m_exit_code);
@@ -282,12 +272,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 5);
 
-    IPropertyPersistenceFacadeShrPtr property_persistence_facade_shr_ptr(m_property_persistence_facade);
-
-    DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(m_cost_persistence_facade),
-                                                IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                property_persistence_facade_shr_ptr,
-                                                IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
+    DismissHumanOperator dismiss_human_operator((ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
+                                                (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
+                                                (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
               dismiss_human_operator.dismissHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 10).m_exit_code);
@@ -304,7 +291,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_NoResources)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -322,7 +308,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_ZeroVolumes)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -340,7 +325,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_LowerVolumes)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -357,7 +341,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Success)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
@@ -380,7 +363,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetThrows)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -402,7 +384,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetReturnsFalse)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_RESOURCES_MISSING_IN_THE_MEANTIME,
@@ -421,7 +402,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractHumanThrows)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -440,7 +420,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractHumanReturnsFalse)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMANS_MISSING_IN_THE_MEANTIME,
@@ -460,7 +439,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_AddHumanThrows)
 
     DismissHumanOperator dismiss_human_operator(ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_DISMISS)),
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
-                                                IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade),
                                                 IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
 
     ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
