@@ -6,7 +6,29 @@
 
 from TUSInterface import TUSInterface
 from TUSIds import *
+import TUSConfiguration
 
+def set_up_consts(aDataRoot, outResource, outBuildings, outHumans):
+    """Fills in the given maps with easy to use key:data"""
+    hFile =  aDataRoot + '/Human/humans.xml'
+    hpFile =  aDataRoot + '/Human/properties.xml'
+    bFile =  aDataRoot + '/Building/buildings.xml'
+    bpFile = aDataRoot + '/Building/properties.xml'
+    rFile =  aDataRoot + '/Resource/resources.xml'
+    
+    b = TUSConfiguration.prepareBuildings(bFile, bpFile)
+    h = TUSConfiguration.prepareHumans(hFile, hpFile);
+    r = TUSConfiguration.prepareResources(rFile);
+    
+    for i in r.values():
+        outResource[i['name']] = i
+    for i in b.values():
+        outBuildings[i['name']] = i
+    for i in h.values():
+        if i['experience'] == 'novice':
+            outHumans[i['name']] = i
+    
+    
 class TUSUserInterface(TUSInterface):
     """ TODO """
 
@@ -15,6 +37,8 @@ class TUSUserInterface(TUSInterface):
         TUSInterface.__init__(self)
         self.mUser = aUser
         self.mPassword = aPassword
+        
+        self.mCurrentSettlement = None
 
     def createWorld(self, aWorldName):
         return TUSInterface.createWorld(self, self.mUser, self.mPassword, aWorldName)
@@ -77,6 +101,9 @@ class TUSUserInterface(TUSInterface):
             str(ID_HOLDER_CLASS_SETTLEMENT), aSettlementName, 
             str(aBuilding[0]), str(aBuilding[1]), str(aVolume) );
 
+    def build(self, aBuilding, aVolume):
+        return buildOn(self.mCurrentSettlement, aBuilding, aVolume);
+            
     def destroyBuilding(self,
             aIdHolderClass, aHolderName, aIdBuildingClass, aIdBuilding, aVolume):
         return TUSInterface.destroyBuilding( self, self.mUser, self.mPassword, 

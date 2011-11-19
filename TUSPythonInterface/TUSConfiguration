@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# Wraps TUSConfiguration.py with a default configuration files location
+#
+# For easy browsing you can use such expressions
+# ./TUSConfiguration buildings | grep -E '(#|special)'
+#
+# The '#' sign is placed in the header for easy filtering
+#
+
+MDIR=`dirname ${0}`
+CDIR="${MDIR}/../TUSCore/GameServer/Configuration/Data/Test/"
+
+echo "Getting configuration data from ${CDIR}"
+"${MDIR}/TUSConfiguration.py" "${CDIR}" $@

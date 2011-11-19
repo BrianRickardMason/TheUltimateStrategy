@@ -41,6 +41,11 @@ BUILDING =['idbuildingclass','idbuilding','volume']
 HUMAN = ['idhumanclass','idhuman','experience','volume']
 RESOURCE =['idresource','volume']
 
+B,H,R = {},{},{}
+set_up_consts('../../TUSCore/GameServer/Configuration/Data/Test',R,B,H)
+# now use short name to get the object map
+# B['farm'] == {'name':'farm', 'class':'regular', ... }
+
 def extract(tags, elements):
     ret = []
     for obj in elements:
