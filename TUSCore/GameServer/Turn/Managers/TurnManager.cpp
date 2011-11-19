@@ -201,19 +201,12 @@ bool TurnManager::executeTurnSettlement(
 
             if (production != HUMAN_MAP_PRODUCTION.end())
             {
-                PropertyIntegerShrPtr const produced = m_property_persistence_facade->getPropertyInteger(
-                                                           a_transaction,
-                                                           it->first,
-                                                           ID_PROPERTY_HUMAN_PRODUCTION
-                                                       );
-
-                BOOST_ASSERT(produced->getValue() > 0);
-
+                // TODO: Define whether and how to check if volume is greater than 0.
                 m_resource_persistence_facade->addResource(
                     a_transaction,
                     id_holder,
                     production->second,
-                    produced->getValue() * it->second->getVolume()
+                    it->second->getHuman()->getProduction() * it->second->getVolume()
                 );
             }
         }
