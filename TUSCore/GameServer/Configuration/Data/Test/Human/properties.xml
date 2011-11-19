@@ -1,146 +1,146 @@
 <humans>
     <human key="soldierarchernovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="soldierarcheradvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="soldierhorsemannovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="soldierhorsemanadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="soldierinfantrymannovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="soldierinfantrymanadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererearthnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererearthadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererfirenovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererfireadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererwaternovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererwateradvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererwindnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="sorcerersorcererwindadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="spyagentnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="spyagentadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="spyspynovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="spyspyadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="spythugnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="spythugadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerblacksmithnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerblacksmithadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerbreedernovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerbreederadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerdruidnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerdruidadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerfarmernovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerfarmeradvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerfishermannovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerfishermanadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerjoblessnovice">
-        <class dismissable="false" />
+        <dismissable value="false" />
     </human>
     <human key="workerjoblessadvanced">
-        <class dismissable="false" />
+        <dismissable value="false" />
     </human>
     <human key="workerlumberjacknovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerlumberjackadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workermerchantnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workermerchantadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerminernovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workermineradvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerofficialnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerofficialadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerpriestnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerpriestadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workersteelworkernovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workersteelworkeradvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerstonemasonnovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerstonemasonadvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerteachernovice">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
     <human key="workerteacheradvanced">
-        <class dismissable="true" />
+        <dismissable value="true" />
     </human>
 </humans>
