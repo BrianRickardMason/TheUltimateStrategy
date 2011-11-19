@@ -28,6 +28,8 @@
 #ifndef GAMESERVER_CONFIGURATION_IBUILDING_HPP
 #define GAMESERVER_CONFIGURATION_IBUILDING_HPP
 
+#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
+#include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -77,6 +79,15 @@ public:
      * @return The capacity of the building.
      */
     virtual unsigned int getCapacity() const = 0;
+
+    /**
+     * @brief Gets the costs of building the building.
+     *
+     * @return The costs of building the building.
+     *
+     * TODO: Add typedef.
+     */
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsBuilding() const = 0;
 };
 
 //@{

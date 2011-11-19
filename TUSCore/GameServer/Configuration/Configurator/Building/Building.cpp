@@ -35,15 +35,17 @@ namespace Configuration
 {
 
 Building::Building(
-    IBuildingKey const a_key,
-    string       const a_class,
-    string       const a_name,
-    unsigned int const a_capacity
+    IBuildingKey                                         const   a_key,
+    string                                               const   a_class,
+    string                                               const   a_name,
+    unsigned int                                         const   a_capacity,
+    std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_building
 )
     : m_key(a_key),
       m_class(a_class),
       m_name(a_name),
-      m_capacity(a_capacity)
+      m_capacity(a_capacity),
+      m_costs_building(a_costs_building)
 {
 }
 
@@ -65,6 +67,11 @@ string Building::getName() const
 unsigned int Building::getCapacity() const
 {
     return m_capacity;
+}
+
+std::map<IResourceKey, GameServer::Resource::Volume> const & Building::getCostsBuilding() const
+{
+    return m_costs_building;
 }
 
 } // namespace Configuration

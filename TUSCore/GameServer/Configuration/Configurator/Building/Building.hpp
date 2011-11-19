@@ -45,16 +45,18 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_key      The key of the building.
-     * @param a_class    The class of the building.
-     * @param a_name     The name of the building.
-     * @param a_capacity The capacity of the building.
+     * @param a_key            The key of the building.
+     * @param a_class          The class of the building.
+     * @param a_name           The name of the building.
+     * @param a_capacity       The capacity of the building.
+     * @param a_costs_building The costs of building the building.
      */
     Building(
-        IBuildingKey const a_key,
-        std::string  const a_class,
-        std::string  const a_name,
-        unsigned int const a_capacity
+        IBuildingKey                                         const   a_key,
+        std::string                                          const   a_class,
+        std::string                                          const   a_name,
+        unsigned int                                         const   a_capacity,
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_building
     );
 
     /**
@@ -85,6 +87,13 @@ public:
      */
     virtual unsigned int getCapacity() const;
 
+    /**
+     * @brief Gets the costs of building the building.
+     *
+     * @return The costs of building.
+     */
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsBuilding() const;
+
 private:
     /**
      * @brief The key of the building.
@@ -105,6 +114,11 @@ private:
      * @brief The capacity of the building.
      */
     unsigned int const m_capacity;
+
+    /**
+     * @brief The costs of building the building.
+     */
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_building;
 };
 
 } // namespace Configuration

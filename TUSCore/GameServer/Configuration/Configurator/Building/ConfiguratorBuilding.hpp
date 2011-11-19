@@ -93,6 +93,7 @@ private:
      * TODO: Add the abstraction.
      */
     pugi::xml_document m_buildings_xml;
+    pugi::xml_document m_costs_xml;
     pugi::xml_document m_properties_xml;
     //}@
 
