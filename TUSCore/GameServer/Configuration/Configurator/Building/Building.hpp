@@ -92,7 +92,7 @@ public:
      *
      * @return The costs of building.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsBuilding() const;
+    virtual GameServer::Resource::ResourceSet getCostsBuilding() const;
 
 private:
     /**

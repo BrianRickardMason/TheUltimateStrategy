@@ -27,6 +27,7 @@
 
 #include <GameServer/Configuration/Configurator/Building/Building.hpp>
 
+using namespace GameServer::Resource;
 using namespace std;
 
 namespace GameServer
@@ -69,9 +70,20 @@ unsigned int Building::getCapacity() const
     return m_capacity;
 }
 
-std::map<IResourceKey, GameServer::Resource::Volume> const & Building::getCostsBuilding() const
+ResourceSet Building::getCostsBuilding() const
 {
-    return m_costs_building;
+    ResourceWithVolumeMap map;
+
+    for (std::map<IResourceKey, Volume>::const_iterator it = m_costs_building.begin();
+         it != m_costs_building.end();
+         ++it)
+    {
+        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
+
+        map[it->first] = resource;
+    }
+
+    return ResourceSet(map);
 }
 
 } // namespace Configuration
