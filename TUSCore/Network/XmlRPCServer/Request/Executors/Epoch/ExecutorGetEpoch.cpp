@@ -78,7 +78,7 @@ bool ExecutorGetEpoch::processParameters()
 
 bool ExecutorGetEpoch::filterOutNonModerator() const
 {
-    return m_user->isModerator();
+    return true;
 }
 
 bool ExecutorGetEpoch::authorize(
