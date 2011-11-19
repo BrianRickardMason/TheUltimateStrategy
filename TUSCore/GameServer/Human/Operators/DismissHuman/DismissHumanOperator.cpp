@@ -26,12 +26,12 @@
 // SUCH DAMAGE.
 
 #include "DismissHumanOperator.hpp"
+#include <GameServer/Configuration/Configurator/Human/ConfiguratorHuman.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 
 namespace GameServer
@@ -42,12 +42,10 @@ namespace Human
 DismissHumanOperator::DismissHumanOperator(
     ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
-    IPropertyPersistenceFacadeShrPtr a_property_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
-      m_property_persistence_facade(a_property_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
@@ -142,11 +140,11 @@ bool DismissHumanOperator::verifyDismissable(
     IHumanKey          const & a_key
 ) const
 {
-    // Check if human is dismissable.
-    PropertyBooleanShrPtr dismissable =
-        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key, ID_PROPERTY_HUMAN_DISMISSABLE);
+    IHumanShrPtr human = CONFIGURATOR_HUMAN.getHuman(a_key);
 
-    return dismissable->getValue();
+    BOOST_ASSERT(human);
+
+    return human->isDismissable();
 }
 
 bool DismissHumanOperator::verifyEngaged(

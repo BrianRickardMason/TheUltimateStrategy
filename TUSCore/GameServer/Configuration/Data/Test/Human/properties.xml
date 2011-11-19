@@ -1,0 +1,146 @@
+<humans>
+    <human key="soldierarchernovice">
+        <dismissable value="true" />
+    </human>
+    <human key="soldierarcheradvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="soldierhorsemannovice">
+        <dismissable value="true" />
+    </human>
+    <human key="soldierhorsemanadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="soldierinfantrymannovice">
+        <dismissable value="true" />
+    </human>
+    <human key="soldierinfantrymanadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererearthnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererearthadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererfirenovice">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererfireadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererwaternovice">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererwateradvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererwindnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="sorcerersorcererwindadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="spyagentnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="spyagentadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="spyspynovice">
+        <dismissable value="true" />
+    </human>
+    <human key="spyspyadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="spythugnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="spythugadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerblacksmithnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerblacksmithadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerbreedernovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerbreederadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerdruidnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerdruidadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerfarmernovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerfarmeradvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerfishermannovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerfishermanadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerjoblessnovice">
+        <dismissable value="false" />
+    </human>
+    <human key="workerjoblessadvanced">
+        <dismissable value="false" />
+    </human>
+    <human key="workerlumberjacknovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerlumberjackadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workermerchantnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workermerchantadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerminernovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workermineradvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerofficialnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerofficialadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerpriestnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerpriestadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workersteelworkernovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workersteelworkeradvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerstonemasonnovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerstonemasonadvanced">
+        <dismissable value="true" />
+    </human>
+    <human key="workerteachernovice">
+        <dismissable value="true" />
+    </human>
+    <human key="workerteacheradvanced">
+        <dismissable value="true" />
+    </human>
+</humans>

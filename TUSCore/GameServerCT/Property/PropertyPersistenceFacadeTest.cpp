@@ -60,25 +60,6 @@ protected:
     }
 
     /**
-     * @brief Checks the ID_PROPERTY_HUMAN_DISMISSABLE property with expected results.
-     *
-     * @param a_property A property to be tested.
-     * @param a_human    A human.
-     */
-    void check_ID_PROPERTY_HUMAN_DISMISSABLE(
-        PropertyBooleanShrPtr       a_property,
-        IHumanShrPtr          const a_human
-    )
-    {
-        ASSERT_TRUE(ID_PROPERTY_HUMAN_DISMISSABLE == a_property->getIDProperty());
-
-        KeyVec::const_iterator found =
-            find(HUMAN_IS_NOT_DISMISSABLE.begin(), HUMAN_IS_NOT_DISMISSABLE.end(), a_human->getKey());
-
-        ASSERT_EQ(found == HUMAN_IS_NOT_DISMISSABLE.end(), a_property->getValue());
-    }
-
-    /**
      * @brief Checks the ID_PROPERTY_HUMAN_ENGAGEABLE property with expected results.
      *
      * @param a_property A property to be tested.
@@ -137,22 +118,6 @@ protected:
 /**
  * Component tests of: PropertyPersistenceFacade::getPropertyBoolean.
  */
-TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_DISMISSABLE)
-{
-    IHumanMap const & humans = CONFIGURATOR_HUMAN.getHumans();
-
-    for (IHumanMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        PropertyBooleanShrPtr property =
-            m_property_persistence_facade->getPropertyBoolean(transaction, it->first, ID_PROPERTY_HUMAN_DISMISSABLE);
-
-        check_ID_PROPERTY_HUMAN_DISMISSABLE(property, it->second);
-    }
-}
-
 TEST_F(PropertyPersistenceFacadeTest, getProperty_ID_PROPERTY_HUMAN_ENGAGEABLE)
 {
     IHumanMap const & humans = CONFIGURATOR_HUMAN.getHumans();
@@ -199,7 +164,6 @@ TEST_F(PropertyPersistenceFacadeTest, getProperties_Humans)
 
         PropertySet properties = m_property_persistence_facade->getProperties(transaction, it->first);
 
-        check_ID_PROPERTY_HUMAN_DISMISSABLE(properties.getBooleanProperty(ID_PROPERTY_HUMAN_DISMISSABLE), it->second);
         check_ID_PROPERTY_HUMAN_ENGAGEABLE(properties.getBooleanProperty(ID_PROPERTY_HUMAN_ENGAGEABLE), it->second);
         check_ID_PROPERTY_HUMAN_PRODUCTION(properties.getIntegerProperty(ID_PROPERTY_HUMAN_PRODUCTION), it->second);
     }

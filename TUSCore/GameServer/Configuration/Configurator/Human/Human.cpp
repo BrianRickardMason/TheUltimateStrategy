@@ -38,12 +38,14 @@ Human::Human(
     IHumanKey const a_key,
     string    const a_class,
     string    const a_name,
-    string    const a_experience
+    string    const a_experience,
+    bool      const a_dismissable
 )
     : m_key(a_key),
       m_class(a_class),
       m_name(a_name),
-      m_experience(a_experience)
+      m_experience(a_experience),
+      m_dismissable(a_dismissable)
 {
 }
 
@@ -65,6 +67,11 @@ string Human::getName() const
 string Human::getExperience() const
 {
     return m_experience;
+}
+
+bool Human::isDismissable() const
+{
+    return m_dismissable;
 }
 
 } // namespace Configuration

@@ -71,10 +71,18 @@ IHumanMap const & ConfiguratorHuman::getHumans() const
 bool ConfiguratorHuman::loadXml()
 {
     // TODO: Get the path from the basic configuration.
-    char const * path =
+    char const * path_humans_xml =
         "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Human/humans.xml";
 
-    return m_humans_xml.load_file(path);
+    bool const result_humans_xml = m_humans_xml.load_file(path_humans_xml);
+
+    // TODO: Get the path from the basic configuration.
+    char const * path_properties_xml =
+        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Human/properties.xml";
+
+    bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml);
+
+    return (result_humans_xml and result_properties_xml);
 }
 
 bool ConfiguratorHuman::parseXml()
@@ -85,14 +93,24 @@ bool ConfiguratorHuman::parseXml()
 
     for (xml_node_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        IHumanKey const value_key        = it->child_value("key");
-        string    const value_class      = it->child_value("class");
-        string    const value_name       = it->child_value("name");
-        string    const value_experience = it->child_value("experience");
+        IHumanKey const human_key         = it->child_value("key");
+        string    const human_class       = it->child_value("class");
+        string    const human_name        = it->child_value("name");
+        string    const human_experience  = it->child_value("experience");
+        bool            human_dismissable = false;
 
-        IHumanShrPtr human(new Human(value_key, value_class, value_name, value_experience));
+        // Find the human.
+        xml_node properties_human =
+            m_properties_xml.child("humans").find_child_by_attribute("key", human_key.c_str());
 
-        m_humans.insert(make_pair(value_key, human));
+        if (properties_human)
+        {
+            human_dismissable = properties_human.child("dismissable").attribute("value").as_bool();
+        }
+
+        IHumanShrPtr human(new Human(human_key, human_class, human_name, human_experience, human_dismissable));
+
+        m_humans.insert(make_pair(human_key, human));
     }
 
     return true;

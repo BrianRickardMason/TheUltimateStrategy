@@ -77,6 +77,13 @@ public:
      * @return The experience of the human.
      */
     virtual std::string getExperience() const = 0;
+
+    /**
+     * @brief Defines whether a human can be dismissed.
+     *
+     * @return True if human can be dismissed, false otherwise.
+     */
+    virtual bool isDismissable() const = 0;
 };
 
 //@{
