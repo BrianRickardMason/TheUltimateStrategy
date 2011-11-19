@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include "DismissHumanOperator.hpp"
+#include <GameServer/Configuration/Configurator/Human/ConfiguratorHuman.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -142,11 +143,11 @@ bool DismissHumanOperator::verifyDismissable(
     IHumanKey          const & a_key
 ) const
 {
-    // Check if human is dismissable.
-    PropertyBooleanShrPtr dismissable =
-        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key, ID_PROPERTY_HUMAN_DISMISSABLE);
+    IHumanShrPtr human = CONFIGURATOR_HUMAN.getHuman(a_key);
 
-    return dismissable->getValue();
+    BOOST_ASSERT(human);
+
+    return human->isDismissable();
 }
 
 bool DismissHumanOperator::verifyEngaged(
