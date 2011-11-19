@@ -79,11 +79,18 @@ public:
     virtual std::string getExperience() const = 0;
 
     /**
-     * @brief Defines whether a human can be dismissed.
+     * @brief Checks whether a human can be dismissed.
      *
      * @return True if human can be dismissed, false otherwise.
      */
     virtual bool isDismissable() const = 0;
+
+    /**
+     * @brief Checks whether a human can be engaged.
+     *
+     * @return True if human can be engaged, false otherwise.
+     */
+    virtual bool isEngageable() const = 0;
 };
 
 //@{

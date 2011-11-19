@@ -39,13 +39,15 @@ Human::Human(
     string    const a_class,
     string    const a_name,
     string    const a_experience,
-    bool      const a_dismissable
+    bool      const a_dismissable,
+    bool      const a_engageable
 )
     : m_key(a_key),
       m_class(a_class),
       m_name(a_name),
       m_experience(a_experience),
-      m_dismissable(a_dismissable)
+      m_dismissable(a_dismissable),
+      m_engageable(a_engageable)
 {
 }
 
@@ -72,6 +74,11 @@ string Human::getExperience() const
 bool Human::isDismissable() const
 {
     return m_dismissable;
+}
+
+bool Human::isEngageable() const
+{
+    return m_engageable;
 }
 
 } // namespace Configuration

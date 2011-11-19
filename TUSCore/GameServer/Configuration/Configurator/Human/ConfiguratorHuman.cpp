@@ -98,6 +98,7 @@ bool ConfiguratorHuman::parseXml()
         string    const human_name        = it->child_value("name");
         string    const human_experience  = it->child_value("experience");
         bool            human_dismissable = false;
+        bool            human_engageable  = false;
 
         // Find the human.
         xml_node properties_human =
@@ -106,9 +107,12 @@ bool ConfiguratorHuman::parseXml()
         if (properties_human)
         {
             human_dismissable = properties_human.child("dismissable").attribute("value").as_bool();
+            human_engageable  = properties_human.child("engageable").attribute("value").as_bool();
         }
 
-        IHumanShrPtr human(new Human(human_key, human_class, human_name, human_experience, human_dismissable));
+        IHumanShrPtr human(
+            new Human(human_key, human_class, human_name, human_experience, human_dismissable, human_engageable)
+        );
 
         m_humans.insert(make_pair(human_key, human));
     }

@@ -28,6 +28,7 @@
 #include "../../../Building/BuildingToHumanTranslator.hpp"
 #include "../../HumanToBuildingTranslator.hpp"
 #include "EngageHumanOperator.hpp"
+#include <GameServer/Configuration/Configurator/Human/ConfiguratorHuman.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -205,11 +206,11 @@ bool EngageHumanOperator::verifyEngageable(
     IHumanKey          const & a_key
 ) const
 {
-    // Check if human is engageable.
-    PropertyBooleanShrPtr engageable =
-        m_property_persistence_facade->getPropertyBoolean(a_transaction, a_key, ID_PROPERTY_HUMAN_ENGAGEABLE);
+	IHumanShrPtr human = CONFIGURATOR_HUMAN.getHuman(a_key);
 
-    return engageable->getValue();
+	BOOST_ASSERT(human);
+
+	return human->isEngageable();
 }
 
 bool EngageHumanOperator::verifyJobless(
