@@ -37,7 +37,6 @@ using namespace GameServer::Cost;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::World;
@@ -52,14 +51,12 @@ TurnManager::TurnManager(
     ICostPersistenceFacadeShrPtr       a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr      a_human_persistence_facade,
     ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
-    IPropertyPersistenceFacadeShrPtr   a_property_persistence_facade,
     IResourcePersistenceFacadeShrPtr   a_resource_persistence_facade,
     ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
 )
     : m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
       m_land_persistence_facade(a_land_persistence_facade),
-      m_property_persistence_facade(a_property_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade),
       m_settlement_persistence_facade(a_settlement_persistence_facade)
 {
