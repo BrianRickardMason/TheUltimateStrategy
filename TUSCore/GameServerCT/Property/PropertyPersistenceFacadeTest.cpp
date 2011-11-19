@@ -25,7 +25,6 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../GameServer/Building/Building.hpp"
 #include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Human/Human.hpp"
 #include "../ComponentTest.hpp"

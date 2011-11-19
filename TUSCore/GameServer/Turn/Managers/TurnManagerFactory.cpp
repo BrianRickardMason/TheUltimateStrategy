@@ -42,7 +42,6 @@ TurnManagerAutPtr TurnManagerFactory::create(
                new TurnManager(a_persistence_facade_abstract_factory->createCostPersistenceFacade(),
                                a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
                                a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
-                               a_persistence_facade_abstract_factory->createPropertyPersistenceFacade(),
                                a_persistence_facade_abstract_factory->createResourcePersistenceFacade(),
                                a_persistence_facade_abstract_factory->createSettlementPersistenceFacade())
            );

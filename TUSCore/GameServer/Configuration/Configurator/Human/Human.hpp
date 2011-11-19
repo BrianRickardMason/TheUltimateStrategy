@@ -50,13 +50,17 @@ public:
      * @param a_experience  The experience of the human.
      * @param a_name        The name of the human.
      * @param a_dismissable Defines whether human can be dismissed.
+     * @param a_engageable  Defines whether human can be engaged.
+     * @param a_production  The number of units of a resource produced per turn.
      */
     Human(
-        IHumanKey   const a_key,
-        std::string const a_class,
-        std::string const a_name,
-        std::string const a_experience,
-        bool        const a_dismissable
+        IHumanKey    const a_key,
+        std::string  const a_class,
+        std::string  const a_name,
+        std::string  const a_experience,
+        bool         const a_dismissable,
+        bool         const a_engageable,
+        unsigned int const a_production
     );
 
     /**
@@ -94,6 +98,20 @@ public:
      */
     virtual bool isDismissable() const;
 
+    /**
+     * @brief Checks whether a human can be engaged.
+     *
+     * @return True if human can be engaged, false otherwise.
+     */
+    virtual bool isEngageable() const;
+
+    /**
+     * @brief Defines the number of units of a resource produced per turn.
+     *
+     * @return The number of units of a resource produced per turn.
+     */
+    virtual unsigned int getProduction() const;
+
 private:
     /**
      * @brief The key of the human.
@@ -119,6 +137,16 @@ private:
      * @brief Defines whether a human can be dismissed.
      */
     bool const m_dismissable;
+
+    /**
+     * @brief Defines whether a human can be engaged.
+     */
+    bool const m_engageable;
+
+    /**
+     * @brief The number of units of a resource produced per turn.
+     */
+    unsigned int const m_production;
 };
 
 } // namespace Configuration

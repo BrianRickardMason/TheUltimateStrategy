@@ -35,17 +35,21 @@ namespace Configuration
 {
 
 Human::Human(
-    IHumanKey const a_key,
-    string    const a_class,
-    string    const a_name,
-    string    const a_experience,
-    bool      const a_dismissable
+    IHumanKey    const a_key,
+    string       const a_class,
+    string       const a_name,
+    string       const a_experience,
+    bool         const a_dismissable,
+    bool         const a_engageable,
+    unsigned int const a_production
 )
     : m_key(a_key),
       m_class(a_class),
       m_name(a_name),
       m_experience(a_experience),
-      m_dismissable(a_dismissable)
+      m_dismissable(a_dismissable),
+      m_engageable(a_engageable),
+      m_production(a_production)
 {
 }
 
@@ -72,6 +76,16 @@ string Human::getExperience() const
 bool Human::isDismissable() const
 {
     return m_dismissable;
+}
+
+bool Human::isEngageable() const
+{
+    return m_engageable;
+}
+
+unsigned int Human::getProduction() const
+{
+    return m_production;
 }
 
 } // namespace Configuration
