@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include <GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp>
+#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -68,8 +69,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost =
-            m_cost_persistence_facade->getCost(a_transaction, a_key, ID_COST_TYPE_BUILDING_BUILD);
+        ResourceSet cost = CONFIGURATOR_BUILDING.getBuilding(a_key)->getCostsBuilding();
 
         // Multiply total cost.
         cost *= a_volume;
