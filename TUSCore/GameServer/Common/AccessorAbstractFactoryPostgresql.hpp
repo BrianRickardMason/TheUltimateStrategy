@@ -56,7 +56,6 @@ public:
     virtual Epoch::IEpochAccessorAutPtr                   createEpochAccessor()          const;
     virtual Human::IHumanAccessorAutPtr                   createHumanAccessor()          const;
     virtual Land::ILandAccessorAutPtr                     createLandAccessor()           const;
-    virtual Property::IPropertyAccessorAutPtr             createPropertyAccessor()       const;
     virtual Resource::IResourceAccessorAutPtr             createResourceAccessor()       const;
     virtual Settlement::ISettlementAccessorAutPtr         createSettlementAccessor()     const;
     virtual User::IUserAccessorAutPtr                     createUserAccessor()           const;

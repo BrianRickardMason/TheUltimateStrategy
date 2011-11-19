@@ -30,7 +30,6 @@
 #include "../../../Cost/CostPersistenceFacadeMock.hpp"
 #include "../../../Helpers/Functions.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
-#include "../../../Property/PropertyPersistenceFacadeMock.hpp"
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
 #include "../../HumanPersistenceFacadeMock.hpp"
 #include <GameServer/Building/Key.hpp>
@@ -42,7 +41,6 @@ using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Human;
 using namespace GameServer::Persistence;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 using namespace boost;
 using namespace std;
@@ -65,7 +63,6 @@ protected:
         : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
           m_cost_persistence_facade(new CostPersistenceFacadeMock),
           m_human_persistence_facade(new HumanPersistenceFacadeMock),
-          m_property_persistence_facade(new PropertyPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
@@ -102,44 +99,6 @@ protected:
         configureCostPersistenceFacadeMockForGetCost(a_key, a_id_cost_type, resource_volumes);
 
         return m_cost_persistence_facade;
-    }
-
-    /**
-     * @brief Produces configured PropertyPersistenceFacadeMock.
-     *
-     * @param a_human_key    A human key.
-     * @param a_building_key A building key.
-     *
-     * @return The prepared mock.
-     */
-    PropertyPersistenceFacadeMock * producePropertyPersistenceFacadeMock(
-        IHumanKey    const & a_human_key,
-        IBuildingKey const & a_building_key
-    )
-    {
-        // Mocks setup: PropertyPersistenceFacadeMock.
-        configurePropertyPersistenceFacadeMockForGetPropertyBoolean(a_human_key, ID_PROPERTY_HUMAN_ENGAGEABLE);
-
-        return m_property_persistence_facade;
-    }
-
-    /**
-     * @brief Produces configured PropertyPersistenceFacadeMock.
-     *
-     * @param a_key         A human key.
-     * @param a_id_property An identifier of the property.
-     *
-     * @return The prepared mock.
-     */
-    PropertyPersistenceFacadeMock * producePropertyPersistenceFacadeMockShort(
-        IHumanKey  const & a_key,
-        IDProperty const & a_id_property
-    )
-    {
-        // Mocks setup: PropertyPersistenceFacadeMock.
-        configurePropertyPersistenceFacadeMockForGetPropertyBoolean(a_key, a_id_property);
-
-        return m_property_persistence_facade;
     }
 
     /**
@@ -231,23 +190,6 @@ protected:
     }
 
     /**
-     * @brief Configures a PropertyPersistenceFacadeMock's response for getPropertyBoolean().
-     *
-     * @param a_key          The key of the human.
-     * @param a_id_cost_type The identifier of the cost type.
-     */
-    void configurePropertyPersistenceFacadeMockForGetPropertyBoolean(
-        IHumanKey  const & a_key,
-        IDProperty const & a_id_property
-    )
-    {
-        PropertyBooleanShrPtr engageable = make_shared<PropertyBoolean>(a_id_property, true);
-
-        EXPECT_CALL(*m_property_persistence_facade, getPropertyBoolean(_, a_key, a_id_property))
-        .WillOnce(Return(engageable));
-    }
-
-    /**
      * @brief Configures a ResourcePersistenceFacadeMock's responses for getResources().
      *
      * @param a_resource_set A resource set to be returned.
@@ -280,7 +222,6 @@ protected:
     BuildingPersistenceFacadeMock * m_building_persistence_facade;
     CostPersistenceFacadeMock     * m_cost_persistence_facade;
     HumanPersistenceFacadeMock    * m_human_persistence_facade;
-    PropertyPersistenceFacadeMock * m_property_persistence_facade;
     ResourcePersistenceFacadeMock * m_resource_persistence_facade;
     //}@
 
@@ -318,7 +259,6 @@ TEST_F(EngageHumanOperatorTest, EngageHumanOperator)
     ASSERT_NO_THROW(EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))));
 }
 
@@ -332,7 +272,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_TryingToEngageZeroHumans)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_ENGAGE_ZERO_HUMANS,
@@ -346,7 +285,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_HumanIsNotEngageable)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_IS_NOT_ENGAGEABLE,
@@ -362,7 +300,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_JOBLESS,
@@ -378,7 +315,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_JOBLESS,
@@ -397,7 +333,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_NoResources)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -416,7 +351,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_ZeroVolumes)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -435,7 +369,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_LowerVolumes)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -453,7 +386,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotNeeded)
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_DRUID_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
@@ -474,7 +406,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
@@ -531,7 +462,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
@@ -588,7 +518,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
@@ -645,7 +574,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
@@ -690,7 +618,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
@@ -747,7 +674,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
                                               (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
-                                              (IPropertyPersistenceFacadeShrPtr(m_property_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
