@@ -35,7 +35,6 @@ using namespace GameServer::Common;
 using namespace GameServer::Configuration;
 using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
-using namespace GameServer::Property;
 using namespace GameServer::Resource;
 
 namespace GameServer
@@ -47,13 +46,11 @@ EngageHumanOperator::EngageHumanOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
     ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
-    IPropertyPersistenceFacadeShrPtr a_property_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
       m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
-      m_property_persistence_facade(a_property_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
