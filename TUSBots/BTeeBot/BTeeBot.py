@@ -4,9 +4,11 @@
 # Description: moredullboyjack.
 # Author: Bajron
 
-import sys
-sys.path.append("../../TUSPythonInterface")
-sys.path.append("../Moderator")
+import sys, os
+MDIR = os.path.dirname(sys.argv[0])
+
+sys.path.append(MDIR + "/../../TUSPythonInterface")
+sys.path.append(MDIR + "/../Moderator")
 
 from TUSUserInterface import *
 from TUSDictionary import *
@@ -38,11 +40,11 @@ def printResponse( ret, full = False ):
 LAND = ['login','world_name','land_name','granted']
 SITE = ['land_name', 'settlement_name']
 BUILDING =['idbuildingclass','idbuilding','volume']
-HUMAN = ['idhumanclass','idhuman','experience','volume']
+HUMAN = ['humanclass','humanname','experience','volume']
 RESOURCE =['idresource','volume']
 
 B,H,R = {},{},{}
-set_up_consts('../../TUSCore/GameServer/Configuration/Data/Test',R,B,H)
+set_up_consts(MDIR + '/../../TUSCore/GameServer/Configuration/Data/Test',R,B,H)
 # now use short name to get the object map
 # B['farm'] == {'name':'farm', 'class':'regular', ... }
 
@@ -117,7 +119,7 @@ ret = interface.buildOn(SETTLEMENT_NAME, ["regular","steelworks"], 1)
 printResponse(ret)
 
 print ("Engaging human") 
-# aIdHolderClass, aHolderName, aIdHumandClass, aIdHuman, aVolume
+# aIdHolderClass, aHolderName, ahumannamedClass, ahumanname, aVolume
 ret = interface.humanTo(SETTLEMENT_NAME, ["worker","farmer"] , 10)
 printResponse(ret)
 
@@ -188,14 +190,14 @@ for land in lands:
         printResponse(ret)
         
         ret = interface.getHumans( ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'])
-        printResponse(ret);
+        printResponse(ret,True);
         humans = extract(HUMAN, ret.getElementsByTagName('object'))
         
         site['_humans'] = humans
         
         for h in humans:
             ret = interface.getHuman( 
-                ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'], h['idhumanclass'], h['idhuman'], h['experience'] )
+                ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'], h['humanclass'], h['humanname'], h['experience'] )
             printResponse(ret)
         
         ret = interface.getBuildings( ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'])
@@ -243,10 +245,9 @@ def pRVec(aList,aName):
 print( pRVec([1,2,3],"test"))
 
 rSize = 7
-rList = []
-for i in range(rSize):
-    rList.append([])
-
+rDict = {}
+for i,r in R.items():
+    rDict[r['name']] = []
 hList = []
 
 for iEpoch in range(NUMBER_OF_EPOCHS):
@@ -255,7 +256,7 @@ for iEpoch in range(NUMBER_OF_EPOCHS):
         ret = interface.getResources( ID_HOLDER_CLASS_SETTLEMENT, SETTLEMENT_NAME )
         res = extract(RESOURCE, ret.getElementsByTagName('object'));
         for r in res:
-            rList[( int(r['idresource']) -1)].append( int(r['volume']) )
+            rDict[r['idresource']].append( int(r['volume']) )
         print( res)
         
         ret = interface.getHumans( ID_HOLDER_CLASS_SETTLEMENT, SETTLEMENT_NAME)
@@ -272,8 +273,8 @@ for iEpoch in range(NUMBER_OF_EPOCHS):
         
         sleep(SLEEP_BETWEEN_TICKS)
 
-for r in range(rSize):
-    print( pRVec( rList[r], "res"+str(r)) + ";")
+for i,r in rDict.items():
+    print( pRVec( r, "res_"+str(i)) + ";")
 for h in range(len(hList)):
     print( pRVec( hList[h], "hum"+str(h)) + ";")
 #print(pRVec( hExp, "hExp") + ";")
