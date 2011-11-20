@@ -26,15 +26,13 @@ COMMAND_SCHEMAS = {
 # Building.
 'BUILD_BUILDING'     : (11, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
-                                                    'idbuildingclass',
-                                                    'idbuilding',
+                                                    'buildingkey',
                                                     'volume']),
 'DESTROY_BUILDING'   : (12, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
-                                                    'idbuildingclass',
-                                                    'idbuilding',
+                                                    'buildingkey',
                                                     'volume']),
-'GET_BUILDING'       : (13, ['login', 'password'], ['idholderclass', 'holder_name', 'idbuildingclass', 'idbuilding']),
+'GET_BUILDING'       : (13, ['login', 'password'], ['idholderclass', 'holder_name', 'buildingkey']),
 'GET_BUILDINGS'      : (14, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # Human.
