@@ -36,12 +36,12 @@ namespace Configuration
 {
 
 Building::Building(
-    IBuildingKey                                         const   a_key,
-    string                                               const   a_class,
-    string                                               const   a_name,
-    unsigned int                                         const   a_capacity,
-    std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_build,
-    std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_destroy
+    IBuildingKey                                    const   a_key,
+    string                                          const   a_class,
+    string                                          const   a_name,
+    unsigned int                                    const   a_capacity,
+    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_build,
+    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_destroy
 )
     : m_key(a_key),
       m_class(a_class),
@@ -74,34 +74,30 @@ unsigned int Building::getCapacity() const
 
 ResourceSet Building::getCostsToBuild() const
 {
-    ResourceWithVolumeMap map;
+    ResourceWithVolumeMap resources;
 
-    for (std::map<IResourceKey, Volume>::const_iterator it = m_costs_to_build.begin();
-         it != m_costs_to_build.end();
-         ++it)
+    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_build.begin(); it != m_costs_to_build.end(); ++it)
     {
         ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
 
-        map[it->first] = resource;
+        resources[it->first] = resource;
     }
 
-    return ResourceSet(map);
+    return ResourceSet(resources);
 }
 
 ResourceSet Building::getCostsToDestroy() const
 {
-    ResourceWithVolumeMap map;
+    ResourceWithVolumeMap resources;
 
-    for (std::map<IResourceKey, Volume>::const_iterator it = m_costs_to_destroy.begin();
-         it != m_costs_to_destroy.end();
-         ++it)
+    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_destroy.begin();it != m_costs_to_destroy.end(); ++it)
     {
         ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
 
-        map[it->first] = resource;
+        resources[it->first] = resource;
     }
 
-    return ResourceSet(map);
+    return ResourceSet(resources);
 }
 
 } // namespace Configuration

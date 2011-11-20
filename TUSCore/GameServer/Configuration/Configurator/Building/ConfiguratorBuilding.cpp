@@ -99,12 +99,12 @@ bool ConfiguratorBuilding::parseXml()
 
     for (xml_node_iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
-        IBuildingKey                                         const building_key              = it->child_value("key");
-        string                                               const building_class            = it->child_value("class");
-        string                                               const building_name             = it->child_value("name");
-        unsigned int                                               building_capacity         = 0;
-        std::map<IResourceKey, GameServer::Resource::Volume>       building_costs_to_build;
-        std::map<IResourceKey, GameServer::Resource::Volume>       building_costs_to_destroy;
+        IBuildingKey                                    const building_key              = it->child_value("key");
+        string                                          const building_class            = it->child_value("class");
+        string                                          const building_name             = it->child_value("name");
+        unsigned int                                          building_capacity         = 0;
+        map<IResourceKey, GameServer::Resource::Volume>       building_costs_to_build;
+        map<IResourceKey, GameServer::Resource::Volume>       building_costs_to_destroy;
 
         // Get the costs.
         xml_node costs =

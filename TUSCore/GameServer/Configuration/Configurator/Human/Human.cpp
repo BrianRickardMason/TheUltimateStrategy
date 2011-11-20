@@ -27,6 +27,7 @@
 
 #include <GameServer/Configuration/Configurator/Human/Human.hpp>
 
+using namespace GameServer::Resource;
 using namespace std;
 
 namespace GameServer
@@ -35,13 +36,14 @@ namespace Configuration
 {
 
 Human::Human(
-    IHumanKey    const a_key,
-    string       const a_class,
-    string       const a_name,
-    string       const a_experience,
-    bool         const a_dismissable,
-    bool         const a_engageable,
-    unsigned int const a_production
+    IHumanKey                                       const   a_key,
+    string                                          const   a_class,
+    string                                          const   a_name,
+    string                                          const   a_experience,
+    bool                                            const   a_dismissable,
+    bool                                            const   a_engageable,
+    unsigned int                                    const   a_production,
+    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_dismiss
 )
     : m_key(a_key),
       m_class(a_class),
@@ -49,7 +51,8 @@ Human::Human(
       m_experience(a_experience),
       m_dismissable(a_dismissable),
       m_engageable(a_engageable),
-      m_production(a_production)
+      m_production(a_production),
+      m_costs_to_dismiss(a_costs_to_dismiss)
 {
 }
 
@@ -86,6 +89,22 @@ bool Human::isEngageable() const
 unsigned int Human::getProduction() const
 {
     return m_production;
+}
+
+ResourceSet Human::getCostsToDismiss() const
+{
+    ResourceWithVolumeMap resources;
+
+    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_dismiss.begin();
+         it != m_costs_to_dismiss.end();
+         ++it)
+    {
+        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
+
+        resources[it->first] = resource;
+    }
+
+    return ResourceSet(resources);
 }
 
 } // namespace Configuration
