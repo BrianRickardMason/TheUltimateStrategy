@@ -41,9 +41,8 @@ typedef unsigned short int IDCostType;
 /**
  * @brief The identifiers of the cost types for humans.
  */
-const unsigned short int ID_COST_TYPE_HUMAN_DISMISS = 3;
-const unsigned short int ID_COST_TYPE_HUMAN_ENGAGE  = 4;
-const unsigned short int ID_COST_TYPE_HUMAN_LIVING  = 5;
+const unsigned short int ID_COST_TYPE_HUMAN_ENGAGE = 4;
+const unsigned short int ID_COST_TYPE_HUMAN_LIVING = 5;
 
 } // namespace Cost
 } // namespace GameServer

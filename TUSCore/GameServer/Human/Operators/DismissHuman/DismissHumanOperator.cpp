@@ -86,8 +86,7 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost =
-            m_cost_persistence_facade->getCost(a_transaction, a_key, ID_COST_TYPE_HUMAN_DISMISS);
+        ResourceSet cost = CONFIGURATOR_HUMAN.getHuman(a_key)->getCostsToDismiss();
 
         // Multiply total cost.
         cost *= a_volume;
