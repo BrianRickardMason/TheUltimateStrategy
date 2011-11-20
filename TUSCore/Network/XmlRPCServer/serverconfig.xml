@@ -19,6 +19,6 @@
     </logger>
     <!-- persistence
          postgresql
-    --->
+    -->
     <persistence>postgresql</persistence>
 </server>
