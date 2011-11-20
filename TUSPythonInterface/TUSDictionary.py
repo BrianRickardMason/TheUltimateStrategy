@@ -38,9 +38,7 @@ COMMAND_SCHEMAS = {
 # Human.
 'DISMISS_HUMAN'      : (15, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
-                                                    'idhumanclass',
-                                                    'idhuman',
-                                                    'experience',
+                                                    'humankey',
                                                     'volume']),
 'ENGAGE_HUMAN'       : (16, ['login', 'password'], ['idholderclass',
                                                     'holder_name',
