@@ -36,7 +36,7 @@ COMMAND_SCHEMAS = {
 'GET_HUMANS'         : (18, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # Resource.
-'GET_RESOURCE'       : (19, ['login', 'password'], ['idholderclass', 'holder_name', 'idresource']),
+'GET_RESOURCE'       : (19, ['login', 'password'], ['idholderclass', 'holder_name', 'resourcekey']),
 'GET_RESOURCES'      : (20, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # User.

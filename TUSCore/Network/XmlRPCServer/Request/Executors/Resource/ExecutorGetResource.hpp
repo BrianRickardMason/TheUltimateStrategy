@@ -52,8 +52,8 @@ namespace Executors
  *     </user>
  *     <parameters>
  *         <idholderclass value=\"#\" />
- *         <holder_name value=\"#\" />
- *         <idresource  value=\"#\" />
+ *         <holder_name   value=\"#\" />
+ *         <resourcekey   value=\"#\" />
  *     </parameters>
  * </request>
  *
@@ -65,8 +65,8 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <idresource value=\"#\" />
- *             <volume     value=\"#\" />
+ *             <resourcename value=\"#\" />
+ *             <volume       value=\"#\" />
  *         </object>
  *     </objects>
  * </reply>

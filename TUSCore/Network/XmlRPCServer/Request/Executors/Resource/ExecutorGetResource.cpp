@@ -65,7 +65,7 @@ bool ExecutorGetResource::getParameters(
         m_password              = a_request->getPasswordValue();
         m_value_id_holder_class = a_request->getParameterValueUnsignedInteger("idholderclass");
         m_holder_name           = a_request->getParameterValueString("holder_name");
-        m_key                   = a_request->getParameterValueString("idresource");
+        m_key                   = a_request->getParameterValueString("resourcekey");
 
         return true;
     }
@@ -209,8 +209,8 @@ ReplyShrPtr ExecutorGetResource::produceReply(
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
-        IXmlNodeShrPtr node_idresource = node_object->appendNode("idresource");
-        node_idresource->appendAttribute("value")->setValue(a_exit_code.m_resource->getResource()->getKey().c_str());
+        IXmlNodeShrPtr node_idresource = node_object->appendNode("resourcename");
+        node_idresource->appendAttribute("value")->setValue(a_exit_code.m_resource->getResource()->getName().c_str());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
         node_volume->appendAttribute("value")->setValue(a_exit_code.m_resource->getVolume());
