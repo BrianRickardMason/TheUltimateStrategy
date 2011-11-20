@@ -321,8 +321,7 @@ ResourceSet TurnManager::getCostOfLiving(
 
     for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        ResourceSet human_cost =
-            m_cost_persistence_facade->getCost(a_transaction, it->second->getHuman()->getKey(), ID_COST_TYPE_HUMAN_LIVING);
+        ResourceSet human_cost = it->second->getHuman()->getCostsToLive();
 
         human_cost *= it->second->getVolume();
 

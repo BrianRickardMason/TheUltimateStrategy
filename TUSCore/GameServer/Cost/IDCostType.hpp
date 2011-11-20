@@ -38,11 +38,6 @@ namespace Cost
  */
 typedef unsigned short int IDCostType;
 
-/**
- * @brief The identifiers of the cost types for humans.
- */
-const unsigned short int ID_COST_TYPE_HUMAN_LIVING = 5;
-
 } // namespace Cost
 } // namespace GameServer
 
