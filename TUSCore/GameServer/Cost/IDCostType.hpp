@@ -39,11 +39,6 @@ namespace Cost
 typedef unsigned short int IDCostType;
 
 /**
- * @brief The identifiers of the cost types for buildings.
- */
-const unsigned short int ID_COST_TYPE_BUILDING_DESTROY = 2;
-
-/**
  * @brief The identifiers of the cost types for humans.
  */
 const unsigned short int ID_COST_TYPE_HUMAN_DISMISS = 3;

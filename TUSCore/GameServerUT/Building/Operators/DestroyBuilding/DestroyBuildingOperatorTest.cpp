@@ -79,18 +79,6 @@ protected:
     }
 
     /**
-     * @brief Configures a CostPersistenceFacadeMock's response for getCost().
-     */
-    void configureCostPersistenceFacadeMockForGetCost()
-    {
-        std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-        ResourceSet resource_set = getResourceSet(resource_volumes);
-
-        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN, ID_COST_TYPE_BUILDING_DESTROY))
-        .WillOnce(Return(resource_set));
-    }
-
-    /**
      * @brief Configures a ResourcePersistenceFacadeMock's responses for getResources().
      *
      * @param a_resource_set A resource set to be returned.
@@ -204,35 +192,11 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetResourcesThrows)
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
 }
 
-TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetCostThrows)
-{
-    ITransactionShrPtr transaction(new TransactionDummy);
-
-    configureBuildingPersistenceFacadeMockForGetBuilding(10);
-
-    std::exception e;
-
-    EXPECT_CALL(*m_cost_persistence_facade, getCost(_, KEY_DEFENSIVE_BARBICAN, ID_COST_TYPE_BUILDING_DESTROY))
-    .WillOnce(Throw(e));
-
-    std::vector<GameServer::Resource::Volume> resource_volumes;
-    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
-
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
-
-    ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
-}
-
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
-
-    configureCostPersistenceFacadeMockForGetCost();
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(9)(9)(9)(9)(9)(9)(9);
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
@@ -251,8 +215,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
-    configureCostPersistenceFacadeMockForGetCost();
-
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(9)(10)(10);
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
@@ -269,8 +231,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
-
-    configureCostPersistenceFacadeMockForGetCost();
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -295,8 +255,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
-    configureCostPersistenceFacadeMockForGetCost();
-
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set =     getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
@@ -320,8 +278,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Throw(e));
 
-    configureCostPersistenceFacadeMockForGetCost();
-
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
@@ -343,8 +299,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(false));
 
-    configureCostPersistenceFacadeMockForGetCost();
-
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceSet resource_set = getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
@@ -365,8 +319,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(true));
-
-    configureCostPersistenceFacadeMockForGetCost();
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
@@ -391,8 +343,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5))
     .WillOnce(Return(true));
 
-    configureCostPersistenceFacadeMockForGetCost();
-
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
@@ -416,8 +366,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
 
-    configureCostPersistenceFacadeMockForGetCost();
-
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1000)(1000)(1000)(1000)(1000)(1000)(1000);
     ResourceSet resource_set = getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
@@ -440,8 +388,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
     configureBuildingPersistenceFacadeMockForGetBuilding(20);
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
-
-    configureCostPersistenceFacadeMockForGetCost();
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     ResourceSet resource_set = getResourceSet(resource_volumes);
