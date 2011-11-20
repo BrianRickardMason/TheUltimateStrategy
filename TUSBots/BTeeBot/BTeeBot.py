@@ -15,38 +15,52 @@ from TUSDictionary import *
 
 from time import sleep
 
-def removeWsNodes(dom):
+def remove_whitespace_nodes(dom):
     from xml.dom.minidom import Node
     if dom.hasChildNodes() :
         for ch in dom.childNodes:
-            removeWsNodes(ch)
+            remove_whitespace_nodes(ch)
     elif dom.nodeType == Node.TEXT_NODE and dom.data.strip(" \t\n\r") == '' :
         dom.data = ''
-    
-def printResponse( ret, full = False ):
+
+def clean_up_reply(dom):
+    remove_whitespace_nodes(dom)
+    dom.normalize();
+    return dom
+        
+def print_response( ret, full = False ):
     # get status and message
     st = int(ret.getElementsByTagName('status')[0].getAttribute('value') );
-    
+
     msgs = ret.getElementsByTagName('message');
     msg = "" if not msgs else msgs[0].getAttribute('value');
-    
+
     print ( "Reply is: " + REPLY_STATUSES[st] + " / " + msg)
     # print the whole message
     if(full or st != 10):
-        removeWsNodes(ret)
+        remove_whitespace_nodes(ret)
         ret.normalize();
         print(ret.toprettyxml(indent="    ", newl="\n"));
-    
+
+def extract_items(aItemTagName, aReply):
+    clean_up_reply(aReply)
+    ret = []
+    for obj in aReply.getElementsByTagName(aItemTagName):
+        item = {}
+        for ch in obj.childNodes:
+            # 'value' attribute variant
+            item[ch._get_localName()] = ch.getAttribute('value')
+            # Tag contents variant below
+            #item[ch._get_localName()]  = ch.firstChild.nodeValue
+        
+        ret.append(item)
+    return ret
+        
 LAND = ['login','world_name','land_name','granted']
 SITE = ['land_name', 'settlement_name']
-BUILDING =['idbuildingclass','idbuilding','volume']
+BUILDING =['buildingclass','buildingname','volume']
 HUMAN = ['humanclass','humanname','experience','volume']
-RESOURCE =['idresource','volume']
-
-B,H,R = {},{},{}
-set_up_consts(MDIR + '/../../TUSCore/GameServer/Configuration/Data/Test',R,B,H)
-# now use short name to get the object map
-# B['farm'] == {'name':'farm', 'class':'regular', ... }
+RESOURCE =['resourcename','volume']
 
 def extract(tags, elements):
     ret = []
@@ -57,11 +71,20 @@ def extract(tags, elements):
         ret.append(item)
     return ret
 
+################################################################################
+
+B,H,R = {},{},{}
+set_up_consts(MDIR + '/../../TUSCore/GameServer/Configuration/Data/Test',R,B,H)
+#
+# now use short name to get the object map
+# B['farm'] == {'name':'farm', 'class':'regular', ... }
+#
+
 # synchronize with modbot, TODO better way
 NUMBER_OF_EPOCHS = 1
 NUMBER_OF_TICKS = 20
 SLEEP_BETWEEN_TICKS = 3
-    
+
 # Define bot specific "constants".
 LOGIN = "btee"
 PASSWORD = "bteepasswd"
@@ -70,164 +93,165 @@ interface = TUSUserInterface(LOGIN, PASSWORD)
 # Define names.
 WORLD_NAME = "World"
 LAND_NAME = "BTee Land"
-TICK_LEN = 20
+TICK_LEN = 3
 SETTLEMENT_NAME = "BTee Settlement"
 ID_HOLDER_CLASS_SETTLEMENT = "1" # ????
 
-print ("Creating user") 
+print ("Creating user")
 
 ret = interface.createUser()
-printResponse(ret)
+print_response(ret)
 
 print ("Creating land" )
 ret = interface.createLand(WORLD_NAME, LAND_NAME)
-printResponse(ret)
+print_response(ret)
 
-print ("Creating settlement") 
+print ("Creating settlement")
 ret = interface.createSettlement(LAND_NAME, SETTLEMENT_NAME)
-printResponse(ret)
+print_response(ret)
 
 print( "Building...")
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","farm"], 2)
-printResponse(ret)
+interface.setCurrentHolder(ID_HOLDER_CLASS_SETTLEMENT, SETTLEMENT_NAME)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","sawmill"], 1)
-printResponse(ret)
+ret = interface.build(B['farm'], 2)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","marketplace"], 1)
-printResponse(ret)
+ret = interface.build(B["sawmill"], 1)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","mine"], 1)
-printResponse(ret)
+ret = interface.build(B["marketplace"], 1)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","quarry"], 1)
-printResponse(ret)
+ret = interface.build(B["mine"], 1)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","school"], 1)
-printResponse(ret)
+ret = interface.build(B["quarry"], 1)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","temple"], 1)
-printResponse(ret)
+ret = interface.build(B["school"], 1)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","house"], 20)
-printResponse(ret)
+ret = interface.build(B["temple"], 1)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","forge"], 1)
-printResponse(ret)
+ret = interface.build(B["house"], 20)
+print_response(ret)
 
-ret = interface.buildOn(SETTLEMENT_NAME, ["regular","steelworks"], 1)
-printResponse(ret)
+ret = interface.build(B["forge"], 1)
+print_response(ret)
 
-print ("Engaging human") 
-# aIdHolderClass, aHolderName, ahumannamedClass, ahumanname, aVolume
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","farmer"] , 10)
-printResponse(ret)
+ret = interface.build(B["steelworks"], 1)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","lumberjack"] , 5)
-printResponse(ret)
+print ("Engaging human")
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","merchant"], 5)
-printResponse(ret)
+ret = interface.engage(H["farmer"] , 10)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","miner"], 5)
-printResponse(ret)
+ret = interface.engage(H["lumberjack"] , 5)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","stone mason"], 5)
-printResponse(ret)
+ret = interface.engage(H["merchant"], 5)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","teacher"], 5)
-printResponse(ret)
+ret = interface.engage(H["miner"], 5)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","priest"], 1)
-printResponse(ret)
+ret = interface.engage(H["stone mason"], 5)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","druid"], 1)
-printResponse(ret)
+ret = interface.engage(H["teacher"], 5)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","official"], 1)
-printResponse(ret)
+ret = interface.engage(H["priest"], 1)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","breeder"], 5)
-printResponse(ret)
+ret = interface.engage(H["druid"], 1)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","blacksmith"], 1)
-printResponse(ret)
+ret = interface.engage(H["official"], 1)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","steelworker"], 1)
-printResponse(ret)
+ret = interface.engage(H["breeder"], 5)
+print_response(ret)
 
-ret = interface.humanTo(SETTLEMENT_NAME, ["worker","fishermane"], 3)
-printResponse(ret)
+ret = interface.engage(H["blacksmith"], 1)
+print_response(ret)
 
-print ("Dismissing jobless") 
-ret = interface.dismissFrom(SETTLEMENT_NAME, ["worker","jobless"], 1, 750)
-printResponse(ret)
+ret = interface.engage(H["steelworker"], 1)
+print_response(ret)
+
+ret = interface.engage(H["fisherman"], 3)
+print_response(ret)
+
+print ("Dismissing jobless")
+ret = interface.dismiss( {'key':'workerjoblessnovice'}, 750)
+print_response(ret)
 
 # Take a look around
 
 print ("Getting epoch")
 ret = interface.getEpoch(WORLD_NAME)
-printResponse(ret, True)
+print_response(ret, True)
 
 print ("Getting lands")
 ret = interface.getLands()
-printResponse(ret)
+print_response(ret)
 
 lands = extract(LAND, ret.getElementsByTagName('object'));
-    
+
 for land in lands:
     ret = interface.getLand(land['land_name']);
-    printResponse(ret)
-    
+    print_response(ret)
+
     ret = interface.getSettlements(land['land_name']);
-    printResponse(ret)
+    print_response(ret)
     sites = extract(SITE, ret.getElementsByTagName('object'))
-    
+
     land['_sites'] = sites
-    
+
     for site in sites:
         ret = interface.getSettlement( site['settlement_name'] )
-        printResponse(ret)
+        print_response(ret)
+
+        interface.setCurrentHolder( ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'])
         
-        ret = interface.getHumans( ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'])
-        printResponse(ret,True);
-        humans = extract(HUMAN, ret.getElementsByTagName('object'))
-        
+        ret = interface.listHumans()
+        print_response(ret,True);
+        humans = extract_items('object', ret)
+
         site['_humans'] = humans
-        
+
         for h in humans:
-            ret = interface.getHuman( 
-                ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'], h['humanclass'], h['humanname'], h['experience'] )
-            printResponse(ret)
-        
-        ret = interface.getBuildings( ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'])
-        printResponse(ret)
-        buildings = extract(BUILDING, ret.getElementsByTagName('object'));
-        
+            ret = interface.humanDetails(h)
+            print_response(ret)
+
+        ret = interface.listBuildings()
+        print_response(ret)
+        buildings = extract_items('object', ret);
+
         site['_buildings'] = buildings
-        
+
         for b in buildings:
-            ret = interface.getBuilding( 
-                ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'], b['idbuildingclass'], b['idbuilding'] )
-            printResponse(ret)
-        
-        ret = interface.getResources( ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'] )
-        printResponse(ret)
-        resources = extract(RESOURCE, ret.getElementsByTagName('object'))
-        
+            ret = interface.buildingDetails(b)
+            print_response(ret)
+
+        ret = interface.listResources()
+        print_response(ret, True)
+        resources = extract_items('object',ret)
+
         site['_resources'] = resources
-        
+
         for r in resources:
-            ret = interface.getResource( 
-                ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'], r['idresource'] )
-            printResponse(ret)
+            ret = interface.resourceDetails(r)
+            print_response(ret)
 
 
 from pprint import pprint
 
 pprint( lands, indent=4)
 
-print( "What now?") 
+print( "What now?")
 
 def pRVec(aList,aName):
     s = ""
@@ -244,38 +268,39 @@ def pRVec(aList,aName):
 
 print( pRVec([1,2,3],"test"))
 
-rSize = 7
 rDict = {}
 for i,r in R.items():
     rDict[r['name']] = []
-hList = []
+
+hDict = {}
+
+interface.setCurrentHolder( ID_HOLDER_CLASS_SETTLEMENT, SETTLEMENT_NAME)
 
 for iEpoch in range(NUMBER_OF_EPOCHS):
     for iTick in range(NUMBER_OF_TICKS):
         print(iTick)
-        ret = interface.getResources( ID_HOLDER_CLASS_SETTLEMENT, SETTLEMENT_NAME )
-        res = extract(RESOURCE, ret.getElementsByTagName('object'));
+        ret = interface.listResources()
+        res = extract_items('object', ret);
         for r in res:
-            rDict[r['idresource']].append( int(r['volume']) )
+            rDict[r['resourcename']].append( int(r['volume']) )
         print( res)
-        
-        ret = interface.getHumans( ID_HOLDER_CLASS_SETTLEMENT, SETTLEMENT_NAME)
-        hum = extract(HUMAN, ret.getElementsByTagName('object'))
-        if(hum):
-            if not hList :
-                for i in range(len(hum)):
-                    hList.append([])
-            for i in range(len(hList)):
-                hList[i].append(hum[i]['volume'])
+
+        ret = interface.listHumans()
+        hum = extract_items('object', ret)
+        for h in hum:
+            assert_human_key(h)
+            if not h['key'] in hDict :
+                hDict[h['key']] = iEpoch * [0]
+            hDict[h['key']].append( int(h['volume']) )
 
             #hVol.append( int( hum[0]['volume']) )
             #hExp.append( int( hum[0]['experience']) )
-        
+
         sleep(SLEEP_BETWEEN_TICKS)
 
 for i,r in rDict.items():
     print( pRVec( r, "res_"+str(i)) + ";")
-for h in range(len(hList)):
-    print( pRVec( hList[h], "hum"+str(h)) + ";")
+for i,h in hDict.items():
+    print( pRVec( h, "hum_"+str(i)) + ";")
 #print(pRVec( hExp, "hExp") + ";")
 #print(pRVec( hVol, "hVol") + ";")

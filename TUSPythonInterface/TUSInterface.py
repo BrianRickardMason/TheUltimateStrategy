@@ -96,125 +96,56 @@ class TUSInterface():
         command = self.m_command_builder.build("GET_SETTLEMENTS", [a_login, a_password], [a_land_name])
         return self.__send(command)
 
-    def buildBuilding(self,
-                      a_login,
-                      a_password,
-                      a_id_holder_class,
-                      a_holder_name,
-                      a_id_building_class,
-                      a_id_building,
-                      a_volume):
+    def buildBuilding(self, a_login, a_password, a_id_holder_class, a_holder_name, a_building_key, a_volume):
         command = self.m_command_builder.build("BUILD_BUILDING",
                                                [a_login, a_password],
-                                               [a_id_holder_class,
-                                                a_holder_name,
-                                                a_id_building_class,
-                                                a_id_building,
-                                                a_volume])
+                                               [a_id_holder_class, a_holder_name, a_building_key, a_volume])
         return self.__send(command)
 
-    def destroyBuilding(self,
-                        a_login,
-                        a_password,
-                        a_id_holder_class,
-                        a_holder_name,
-                        a_id_building_class,
-                        a_id_building,
-                        a_volume):
+    def destroyBuilding(self, a_login, a_password, a_id_holder_class, a_holder_name, a_building_key, a_volume):
         command = self.m_command_builder.build("DESTROY_BUILDING",
                                                [a_login, a_password],
-                                               [a_id_holder_class,
-                                                a_holder_name,
-                                                a_id_building_class,
-                                                a_id_building,
-                                                a_volume])
+                                               [a_id_holder_class, a_holder_name, a_building_key, a_volume])
         return self.__send(command)
 
-    def getBuilding(self,
-                    a_login,
-                    a_password,
-                    a_id_holder_class,
-                    a_holder_name,
-                    a_id_building_class,
-                    a_id_building):
+    def getBuilding(self, a_login, a_password, a_id_holder_class, a_holder_name, a_building_key):
         command = self.m_command_builder.build("GET_BUILDING",
                                                [a_login, a_password],
-                                               [a_id_holder_class, a_holder_name, a_id_building_class, a_id_building])
+                                               [a_id_holder_class, a_holder_name, a_building_key])
         return self.__send(command)
 
-    def getBuildings(self,
-                    a_login,
-                    a_password,
-                    a_id_holder_class,
-                    a_holder_name):
+    def getBuildings(self, a_login, a_password, a_id_holder_class, a_holder_name):
         command = self.m_command_builder.build("GET_BUILDINGS",
                                                [a_login, a_password],
                                                [a_id_holder_class, a_holder_name])
         return self.__send(command)
 
-    def dismissHuman(self,
-                     a_login,
-                     a_password,
-                     a_id_holder_class,
-                     a_holder_name,
-                     a_id_human_class,
-                     a_id_human,
-                     a_experience,
-                     a_volume):
+    def dismissHuman(self, a_login, a_password, a_id_holder_class, a_holder_name, a_human_key, a_volume):
         command = self.m_command_builder.build("DISMISS_HUMAN",
                                                [a_login, a_password],
-                                               [a_id_holder_class,
-                                                a_holder_name,
-                                                a_id_human_class,
-                                                a_id_human,
-                                                a_experience,
-                                                a_volume])
+                                               [a_id_holder_class, a_holder_name, a_human_key, a_volume])
         return self.__send(command)
 
-    def engageHuman(self,
-                    a_login,
-                    a_password,
-                    a_id_holder_class,
-                    a_holder_name,
-                    a_id_human_class,
-                    a_id_human,
-                    a_volume):
+    def engageHuman(self, a_login, a_password, a_id_holder_class, a_holder_name, a_human_key, a_volume):
         command = self.m_command_builder.build("ENGAGE_HUMAN",
                                                [a_login, a_password],
-                                               [a_id_holder_class,
-                                                a_holder_name,
-                                                a_id_human_class,
-                                                a_id_human,
-                                                a_volume])
+                                               [a_id_holder_class, a_holder_name, a_human_key, a_volume])
         return self.__send(command)
 
-    def getHuman(self,
-                 a_login,
-                 a_password,
-                 a_id_holder_class,
-                 a_holder_name,
-                 a_id_human_class,
-                 a_id_human,
-                 a_experience):
+    def getHuman(self, a_login, a_password, a_id_holder_class, a_holder_name, a_human_key):
         command = self.m_command_builder.build("GET_HUMAN",
                                                [a_login, a_password],
-                                               [a_id_holder_class, a_holder_name, a_id_human_class, a_id_human, a_experience])
+                                               [a_id_holder_class, a_holder_name, a_human_key])
         return self.__send(command)
 
-    def getHumans(self,
-                  a_login,
-                  a_password,
-                  a_id_holder_class,
-                  a_holder_name):
-        command = self.m_command_builder.build("GET_HUMANS",
-                                               [a_login, a_password],
-                                               [a_id_holder_class, a_holder_name])
+    def getHumans(self, a_login, a_password, a_id_holder_class, a_holder_name):
+        command = self.m_command_builder.build("GET_HUMANS", [a_login, a_password], [a_id_holder_class, a_holder_name])
         return self.__send(command)
 
-    def getResource(self, a_login, a_password, a_id_holder_class, a_holder_name, a_id_resource):
+    def getResource(self, a_login, a_password, a_id_holder_class, a_holder_name, a_resource_key):
         command = self.m_command_builder.build("GET_RESOURCE",
                                                [a_login, a_password],
-                                               [a_id_holder_class, a_holder_name, a_id_resource])
+                                               [a_id_holder_class, a_holder_name, a_resource_key])
         return self.__send(command)
 
     def getResources(self, a_login, a_password, a_id_holder_class, a_holder_name):
@@ -228,17 +159,13 @@ class TUSInterface():
                        a_password,
                        a_settlement_name_source,
                        a_settlement_name_destination,
-                       a_id_human_class,
-                       a_id_human,
-                       a_experience,
+                       a_human_key,
                        a_volume):
         command = self.m_command_builder.build("TRANSPORT_HUMAN",
                                                [a_login, a_password],
                                                [a_settlement_name_source,
                                                 a_settlement_name_destination,
-                                                a_id_human_class,
-                                                a_id_human,
-                                                a_experience,
+                                                a_human_key,
                                                 a_volume])
         return self.__send(command)
 
@@ -247,13 +174,13 @@ class TUSInterface():
                           a_password,
                           a_settlement_name_source,
                           a_settlement_name_destination,
-                          a_id_resource,
+                          a_resource_key,
                           a_volume):
         command = self.m_command_builder.build("TRANSPORT_RESOURCE",
                                                [a_login, a_password],
                                                [a_settlement_name_source,
                                                 a_settlement_name_destination,
-                                                a_id_resource,
+                                                a_resource_key,
                                                 a_volume])
         return self.__send(command)
 
