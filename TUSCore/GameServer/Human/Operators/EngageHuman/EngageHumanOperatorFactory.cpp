@@ -40,7 +40,6 @@ EngageHumanOperatorAutPtr EngageHumanOperatorFactory::createEngageHumanOperator(
 {
     return EngageHumanOperatorAutPtr(
                new EngageHumanOperator(a_persistence_facade_abstract_factory->createBuildingPersistenceFacade(),
-                                       a_persistence_facade_abstract_factory->createCostPersistenceFacade(),
                                        a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
                                        a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
            );

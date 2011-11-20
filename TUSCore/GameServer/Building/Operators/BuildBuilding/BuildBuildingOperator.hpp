@@ -30,7 +30,6 @@
 
 #include <GameServer/Building/IBuildingPersistenceFacade.hpp>
 #include <GameServer/Building/Operators/BuildBuilding/IBuildBuildingOperator.hpp>
-#include <GameServer/Cost/ICostPersistenceFacade.hpp>
 #include <GameServer/Resource/IResourcePersistenceFacade.hpp>
 
 namespace GameServer
@@ -49,12 +48,10 @@ public:
      * @brief Constructs the operator.
      *
      * @param a_building_persistence_facade The persistence facade of buildings.
-     * @param a_cost_persistence_facade     The persistence facade of costs.
      * @param a_resource_persistence_facade  The persistence facade of resources.
      */
     BuildBuildingOperator(
         IBuildingPersistenceFacadeShrPtr           a_building_persistence_facade,
-        Cost::ICostPersistenceFacadeShrPtr         a_cost_persistence_facade,
         Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
     );
 
@@ -81,7 +78,6 @@ private:
      * @brief A persistence facade.
      */
     IBuildingPersistenceFacadeShrPtr           m_building_persistence_facade;
-    Cost::ICostPersistenceFacadeShrPtr         m_cost_persistence_facade;
     Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
     //@}
 };

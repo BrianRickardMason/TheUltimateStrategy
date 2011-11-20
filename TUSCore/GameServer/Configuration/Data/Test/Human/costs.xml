@@ -1,0 +1,1394 @@
+<humans>
+    <human key="soldierarchernovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="soldierarcheradvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="soldierhorsemannovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="soldierhorsemanadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="soldierinfantrymannovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="soldierinfantrymanadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererearthnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererearthadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererfirenovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererfireadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererwaternovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererwateradvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererwindnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="sorcerersorcererwindadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="spyagentnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="spyagentadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="spyspynovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="spyspyadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="spythugnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="spythugadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerblacksmithnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerblacksmithadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerbreedernovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerbreederadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerdruidnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerdruidadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerfarmernovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerfarmeradvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerfishermannovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerfishermanadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerjoblessnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerjoblessadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerlumberjacknovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerlumberjackadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workermerchantnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workermerchantadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerminernovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workermineradvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerofficialnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerofficialadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerpriestnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerpriestadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workersteelworkernovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workersteelworkeradvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerstonemasonnovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerstonemasonadvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerteachernovice">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+    <human key="workerteacheradvanced">
+        <dismiss>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </dismiss>
+        <engage>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </engage>
+        <live>
+            <coal value="1" />
+            <food value="1" />
+            <gold value="1" />
+            <iron value="1" />
+            <mana value="1" />
+            <rock value="1" />
+            <wood value="1" />
+        </live>
+    </human>
+</humans>

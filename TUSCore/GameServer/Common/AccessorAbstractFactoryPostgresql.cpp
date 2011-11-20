@@ -29,7 +29,6 @@
 #include "../Authentication/AuthenticationAccessorPostgresql.hpp"
 #include "../Authorization/AuthorizationAccessorPostgresql.hpp"
 #include "../Building/BuildingAccessorPostgresql.hpp"
-#include "../Cost/CostAccessorPostgresql.hpp"
 #include "../Epoch/EpochAccessorPostgresql.hpp"
 #include "../Human/HumanAccessorPostgresql.hpp"
 #include "../Land/LandAccessorPostgresql.hpp"
@@ -43,7 +42,6 @@ using namespace GameServer::Achievement;
 using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;
 using namespace GameServer::Building;
-using namespace GameServer::Cost;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
@@ -75,11 +73,6 @@ IAuthorizationAccessorAutPtr AccessorAbstractFactoryPostgresql::createAuthorizat
 IBuildingAccessorAutPtr AccessorAbstractFactoryPostgresql::createBuildingAccessor() const
 {
     return IBuildingAccessorAutPtr(new BuildingAccessorPostgresql);
-}
-
-ICostAccessorAutPtr AccessorAbstractFactoryPostgresql::createCostAccessor() const
-{
-    return ICostAccessorAutPtr(new CostAccessorPostgresql);
 }
 
 IEpochAccessorAutPtr AccessorAbstractFactoryPostgresql::createEpochAccessor() const

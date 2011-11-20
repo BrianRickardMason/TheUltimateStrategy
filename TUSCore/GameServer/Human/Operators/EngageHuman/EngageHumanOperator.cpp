@@ -33,7 +33,6 @@
 using namespace GameServer::Building;
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
-using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 
@@ -44,12 +43,10 @@ namespace Human
 
 EngageHumanOperator::EngageHumanOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-    ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
-      m_cost_persistence_facade(a_cost_persistence_facade),
       m_human_persistence_facade(a_human_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
@@ -89,7 +86,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = m_cost_persistence_facade->getCost(a_transaction, a_key, ID_COST_TYPE_HUMAN_ENGAGE);
+        ResourceSet cost = CONFIGURATOR_HUMAN.getHuman(a_key)->getCostsToEngage();
 
         // Multiply total cost.
         cost *= a_volume;

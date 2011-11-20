@@ -28,7 +28,6 @@
 #ifndef GAMESERVER_TURN_TURNMANAGER_HPP
 #define GAMESERVER_TURN_TURNMANAGER_HPP
 
-#include <GameServer/Cost/ICostPersistenceFacade.hpp>
 #include <GameServer/Human/IHumanPersistenceFacade.hpp>
 #include <GameServer/Land/ILandPersistenceFacade.hpp>
 #include <GameServer/Resource/IResourcePersistenceFacade.hpp>
@@ -50,14 +49,12 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_cost_persistence_facade       The persistence facade of costs.
      * @param a_human_persistence_facade      The persistence facade of humans.
      * @param a_land_persistence_facade       The persistence facade of lands.
      * @param a_resource_persistence_facade   The persistence facade of resources.
      * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     TurnManager(
-        Cost::ICostPersistenceFacadeShrPtr             a_cost_persistence_facade,
         Human::IHumanPersistenceFacadeShrPtr           a_human_persistence_facade,
         Land::ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
         Resource::IResourcePersistenceFacadeShrPtr     a_resource_persistence_facade,
@@ -121,7 +118,6 @@ private:
     /**
      * @brief A persistence facade.
      */
-    Cost::ICostPersistenceFacadeShrPtr             m_cost_persistence_facade;
     Human::IHumanPersistenceFacadeShrPtr           m_human_persistence_facade;
     Land::ILandPersistenceFacadeShrPtr             m_land_persistence_facade;
     Resource::IResourcePersistenceFacadeShrPtr     m_resource_persistence_facade;

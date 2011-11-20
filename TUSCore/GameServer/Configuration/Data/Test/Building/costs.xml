@@ -9,6 +9,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensivebattlements">
         <build>
@@ -20,6 +29,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensivecasemate">
         <build>
@@ -31,6 +49,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensivecircumvallation">
         <build>
@@ -42,6 +69,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensivedonjon">
         <build>
@@ -53,6 +89,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensivemachicolation">
         <build>
@@ -64,6 +109,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensiveportcullis">
         <build>
@@ -75,6 +129,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensivepostern">
         <build>
@@ -86,6 +149,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="defensiveviewingtower">
         <build>
@@ -97,6 +169,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldaltarofwishes">
         <build>
@@ -108,6 +189,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldcommunicationtowers">
         <build>
@@ -119,6 +209,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldeternalcalendar">
         <build>
@@ -130,6 +229,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldhunterofmeteors">
         <build>
@@ -141,6 +249,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldhunterofrains">
         <build>
@@ -152,6 +269,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldhunterofstorms">
         <build>
@@ -163,6 +289,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldhunterofwinds">
         <build>
@@ -174,6 +309,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldnecropolis">
         <build>
@@ -185,6 +329,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldoracle">
         <build>
@@ -196,6 +349,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldportalofelements">
         <build>
@@ -207,6 +369,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldpsionicacademy">
         <build>
@@ -218,6 +389,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="goldtowerofchaos">
         <build>
@@ -229,6 +409,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularbarracks">
         <build>
@@ -240,6 +429,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularfarm">
         <build>
@@ -251,6 +449,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularforge">
         <build>
@@ -262,6 +469,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularguild">
         <build>
@@ -273,6 +489,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularhouse">
         <build>
@@ -284,6 +509,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularmarketplace">
         <build>
@@ -295,6 +529,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularmine">
         <build>
@@ -306,6 +549,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularquarry">
         <build>
@@ -317,6 +569,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularsawmill">
         <build>
@@ -328,6 +589,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularschool">
         <build>
@@ -339,6 +609,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regularsteelworks">
         <build>
@@ -350,6 +629,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="regulartemple">
         <build>
@@ -361,6 +649,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="specialaqueduct">
         <build>
@@ -372,6 +669,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="specialbawdyhouse">
         <build>
@@ -383,6 +689,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="specialcommercialport">
         <build>
@@ -394,6 +709,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="specialcourt">
         <build>
@@ -405,6 +729,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="specialgranary">
         <build>
@@ -416,6 +749,15 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
     <building key="specialsewerage">
         <build>
@@ -427,5 +769,14 @@
             <rock value="10" />
             <wood value="10" />
         </build>
+        <destroy>
+            <coal value="10" />
+            <food value="10" />
+            <gold value="10" />
+            <iron value="10" />
+            <mana value="10" />
+            <rock value="10" />
+            <wood value="10" />
+        </destroy>
     </building>
 </buildings>

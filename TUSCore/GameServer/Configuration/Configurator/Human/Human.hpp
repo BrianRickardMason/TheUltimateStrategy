@@ -45,22 +45,28 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_key         The key of the human.
-     * @param a_class       The class of the human.
-     * @param a_experience  The experience of the human.
-     * @param a_name        The name of the human.
-     * @param a_dismissable Defines whether human can be dismissed.
-     * @param a_engageable  Defines whether human can be engaged.
-     * @param a_production  The number of units of a resource produced per turn.
+     * @param a_key              The key of the human.
+     * @param a_class            The class of the human.
+     * @param a_experience       The experience of the human.
+     * @param a_name             The name of the human.
+     * @param a_dismissable      Defines whether human can be dismissed.
+     * @param a_engageable       Defines whether human can be engaged.
+     * @param a_production       The number of units of a resource produced per turn.
+     * @param a_costs_to_dismiss The costs to dismiss the human.
+     * @param a_costs_to_engage  The costs to engage the human.
+     * @param a_costs_to_live    The costs for the human to live.
      */
     Human(
-        IHumanKey    const a_key,
-        std::string  const a_class,
-        std::string  const a_name,
-        std::string  const a_experience,
-        bool         const a_dismissable,
-        bool         const a_engageable,
-        unsigned int const a_production
+        IHumanKey                                            const   a_key,
+        std::string                                          const   a_class,
+        std::string                                          const   a_name,
+        std::string                                          const   a_experience,
+        bool                                                 const   a_dismissable,
+        bool                                                 const   a_engageable,
+        unsigned int                                         const   a_production,
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_engage,
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_live
     );
 
     /**
@@ -112,6 +118,27 @@ public:
      */
     virtual unsigned int getProduction() const;
 
+    /**
+     * @brief Gets the costs to dismiss the human.
+     *
+     * @return The costs to dismiss the human.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToDismiss() const;
+
+    /**
+     * @brief Gets the costs to engage the human.
+     *
+     * @return The costs to engage the human.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToEngage() const;
+
+    /**
+     * @brief Gets the costs for human to live.
+     *
+     * @return The costs for human to live.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToLive() const;
+
 private:
     /**
      * @brief The key of the human.
@@ -147,6 +174,21 @@ private:
      * @brief The number of units of a resource produced per turn.
      */
     unsigned int const m_production;
+
+    /**
+     * @brief The costs to dismiss the human.
+     */
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_dismiss;
+
+    /**
+     * @brief The costs to engage the human.
+     */
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_engage;
+
+    /**
+     * @brief The costs for human to live.
+     */
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_live;
 };
 
 } // namespace Configuration

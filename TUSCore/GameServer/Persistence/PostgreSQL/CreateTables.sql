@@ -88,14 +88,3 @@ CREATE TABLE resources_settlement
 
     UNIQUE(holder_name, resource_key)
 );
-
-DROP TABLE IF EXISTS costs CASCADE;
-CREATE TABLE costs
-(
-    key          VARCHAR(44) NOT NULL CHECK(key <> ''),
-    id_cost_type SMALLINT NOT NULL CHECK(id_cost_type > 0), -- TODO: Needed more specific constraint. TODO: Mapping to source code needed.
-    resource_key VARCHAR(44) NOT NULL CHECK(resource_key <> ''),
-    volume       SMALLINT NOT NULL CHECK(volume > 0),
-
-    UNIQUE(key, id_cost_type, resource_key)
-);

@@ -32,7 +32,6 @@
 #include "../Authentication/IAuthenticationPersistenceFacade.hpp"
 #include "../Authorization/IAuthorizationPersistenceFacade.hpp"
 #include "../Building/IBuildingPersistenceFacade.hpp"
-#include "../Cost/ICostPersistenceFacade.hpp"
 #include "../Epoch/IEpochPersistenceFacade.hpp"
 #include "../Human/IHumanPersistenceFacade.hpp"
 #include "../Land/ILandPersistenceFacade.hpp"
@@ -65,7 +64,6 @@ public:
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const = 0;
     virtual Authorization::IAuthorizationPersistenceFacadeShrPtr   createAuthorizationPersistenceFacade()  const = 0;
     virtual Building::IBuildingPersistenceFacadeShrPtr             createBuildingPersistenceFacade()       const = 0;
-    virtual Cost::ICostPersistenceFacadeShrPtr                     createCostPersistenceFacade()           const = 0;
     virtual Epoch::IEpochPersistenceFacadeShrPtr                   createEpochPersistenceFacade()          const = 0;
     virtual Human::IHumanPersistenceFacadeShrPtr                   createHumanPersistenceFacade()          const = 0;
     virtual Land::ILandPersistenceFacadeShrPtr                     createLandPersistenceFacade()           const = 0;

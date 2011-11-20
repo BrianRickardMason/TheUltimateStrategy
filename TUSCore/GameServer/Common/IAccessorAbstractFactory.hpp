@@ -32,7 +32,6 @@
 #include "../Authentication/IAuthenticationAccessor.hpp"
 #include "../Authorization/IAuthorizationAccessor.hpp"
 #include "../Building/IBuildingAccessor.hpp"
-#include "../Cost/ICostAccessor.hpp"
 #include "../Epoch/IEpochAccessor.hpp"
 #include "../Human/IHumanAccessor.hpp"
 #include "../Land/ILandAccessor.hpp"
@@ -65,7 +64,6 @@ public:
     virtual Authentication::IAuthenticationAccessorAutPtr createAuthenticationAccessor() const = 0;
     virtual Authorization::IAuthorizationAccessorAutPtr   createAuthorizationAccessor()  const = 0;
     virtual Building::IBuildingAccessorAutPtr             createBuildingAccessor()       const = 0;
-    virtual Cost::ICostAccessorAutPtr                     createCostAccessor()           const = 0;
     virtual Epoch::IEpochAccessorAutPtr                   createEpochAccessor()          const = 0;
     virtual Human::IHumanAccessorAutPtr                   createHumanAccessor()          const = 0;
     virtual Land::ILandAccessorAutPtr                     createLandAccessor()           const = 0;

@@ -99,11 +99,12 @@ bool ConfiguratorBuilding::parseXml()
 
     for (xml_node_iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
-        IBuildingKey                                         const building_key            = it->child_value("key");
-        string                                               const building_class          = it->child_value("class");
-        string                                               const building_name           = it->child_value("name");
-        unsigned int                                               building_capacity       = 0;
-        std::map<IResourceKey, GameServer::Resource::Volume>       building_costs_building;
+        IBuildingKey                                    const building_key              = it->child_value("key");
+        string                                          const building_class            = it->child_value("class");
+        string                                          const building_name             = it->child_value("name");
+        unsigned int                                          building_capacity         = 0;
+        map<IResourceKey, GameServer::Resource::Volume>       building_costs_to_build;
+        map<IResourceKey, GameServer::Resource::Volume>       building_costs_to_destroy;
 
         // Get the costs.
         xml_node costs =
@@ -111,11 +112,18 @@ bool ConfiguratorBuilding::parseXml()
 
         if (costs)
         {
-            xml_node costs_building = costs.child("build");
+            xml_node costs_to_build = costs.child("build");
 
-            for (xml_node::iterator it = costs_building.begin(); it != costs_building.end(); ++it)
+            for (xml_node::iterator it = costs_to_build.begin(); it != costs_to_build.end(); ++it)
             {
-                building_costs_building[it->name()] = it->attribute("value").as_uint();
+                building_costs_to_build[it->name()] = it->attribute("value").as_uint();
+            }
+
+            xml_node costs_to_destroy = costs.child("destroy");
+
+            for (xml_node::iterator it = costs_to_destroy.begin(); it != costs_to_destroy.end(); ++it)
+            {
+                building_costs_to_destroy[it->name()] = it->attribute("value").as_uint();
             }
         }
 
@@ -129,7 +137,12 @@ bool ConfiguratorBuilding::parseXml()
         }
 
         IBuildingShrPtr building(
-            new Building(building_key, building_class, building_name, building_capacity, building_costs_building)
+            new Building(building_key,
+                         building_class,
+                         building_name,
+                         building_capacity,
+                         building_costs_to_build,
+                         building_costs_to_destroy)
         );
 
         m_buildings.insert(make_pair(building_key, building));

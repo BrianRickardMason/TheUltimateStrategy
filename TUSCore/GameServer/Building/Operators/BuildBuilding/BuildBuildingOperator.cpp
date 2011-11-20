@@ -30,7 +30,6 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
-using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 
@@ -41,11 +40,9 @@ namespace Building
 
 BuildBuildingOperator::BuildBuildingOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-    ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
-      m_cost_persistence_facade(a_cost_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
@@ -69,7 +66,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = CONFIGURATOR_BUILDING.getBuilding(a_key)->getCostsBuilding();
+        ResourceSet cost = CONFIGURATOR_BUILDING.getBuilding(a_key)->getCostsToBuild();
 
         // Multiply total cost.
         cost *= a_volume;

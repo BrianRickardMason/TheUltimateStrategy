@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_CONFIGURATION_IHUMAN_HPP
 #define GAMESERVER_CONFIGURATION_IHUMAN_HPP
 
+#include <GameServer/Resource/ResourceSet.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -100,6 +101,27 @@ public:
      * TODO: To be extended: define what resource(s) is (are) produced.
      */
     virtual unsigned int getProduction() const = 0;
+
+    /**
+     * @brief Gets the costs to dismiss the human.
+     *
+     * @return The costs to dismiss the human.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToDismiss() const = 0;
+
+    /**
+     * @brief Gets the costs to engage the human.
+     *
+     * @return The costs to engage the human.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToEngage() const = 0;
+
+    /**
+     * @brief Gets the costs for human to live.
+     *
+     * @return The costs for human to live.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToLive() const = 0;
 };
 
 //@{

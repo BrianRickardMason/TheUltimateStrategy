@@ -29,7 +29,6 @@
 #include "../Authentication/AuthenticationPersistenceFacadeFactory.hpp"
 #include "../Authorization/AuthorizationPersistenceFacadeFactory.hpp"
 #include "../Building/BuildingPersistenceFacadeFactory.hpp"
-#include "../Cost/CostPersistenceFacadeFactory.hpp"
 #include "../Epoch/EpochPersistenceFacadeFactory.hpp"
 #include "../Human/HumanPersistenceFacadeFactory.hpp"
 #include "../Land/LandPersistenceFacadeFactory.hpp"
@@ -44,7 +43,6 @@ using namespace GameServer::Achievement;
 using namespace GameServer::Authentication;
 using namespace GameServer::Authorization;
 using namespace GameServer::Building;
-using namespace GameServer::Cost;
 using namespace GameServer::Epoch;
 using namespace GameServer::Human;
 using namespace GameServer::Land;
@@ -90,11 +88,6 @@ PersistenceFacadeAbstractFactoryPostgresql::createAuthorizationPersistenceFacade
 IBuildingPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createBuildingPersistenceFacade() const
 {
     return IBuildingPersistenceFacadeShrPtr(BuildingPersistenceFacadeFactory::create(m_accessor_abstract_factory));
-}
-
-ICostPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createCostPersistenceFacade() const
-{
-    return ICostPersistenceFacadeShrPtr(CostPersistenceFacadeFactory::create(m_accessor_abstract_factory));
 }
 
 IEpochPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createEpochPersistenceFacade() const

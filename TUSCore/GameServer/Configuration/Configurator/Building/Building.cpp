@@ -36,17 +36,19 @@ namespace Configuration
 {
 
 Building::Building(
-    IBuildingKey                                         const   a_key,
-    string                                               const   a_class,
-    string                                               const   a_name,
-    unsigned int                                         const   a_capacity,
-    std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_building
+    IBuildingKey                                    const   a_key,
+    string                                          const   a_class,
+    string                                          const   a_name,
+    unsigned int                                    const   a_capacity,
+    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_build,
+    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_destroy
 )
     : m_key(a_key),
       m_class(a_class),
       m_name(a_name),
       m_capacity(a_capacity),
-      m_costs_building(a_costs_building)
+      m_costs_to_build(a_costs_to_build),
+      m_costs_to_destroy(a_costs_to_destroy)
 {
 }
 
@@ -70,20 +72,32 @@ unsigned int Building::getCapacity() const
     return m_capacity;
 }
 
-ResourceSet Building::getCostsBuilding() const
+ResourceSet Building::getCostsToBuild() const
 {
-    ResourceWithVolumeMap map;
+    ResourceWithVolumeMap resources;
 
-    for (std::map<IResourceKey, Volume>::const_iterator it = m_costs_building.begin();
-         it != m_costs_building.end();
-         ++it)
+    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_build.begin(); it != m_costs_to_build.end(); ++it)
     {
         ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
 
-        map[it->first] = resource;
+        resources[it->first] = resource;
     }
 
-    return ResourceSet(map);
+    return ResourceSet(resources);
+}
+
+ResourceSet Building::getCostsToDestroy() const
+{
+    ResourceWithVolumeMap resources;
+
+    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_destroy.begin();it != m_costs_to_destroy.end(); ++it)
+    {
+        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
+
+        resources[it->first] = resource;
+    }
+
+    return ResourceSet(resources);
 }
 
 } // namespace Configuration
