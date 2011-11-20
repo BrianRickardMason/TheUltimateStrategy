@@ -64,8 +64,8 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <idresource value=\"#\" />
- *             <volume     value=\"#\" />
+ *             <resourcename value=\"#\" />
+ *             <volume       value=\"#\" />
  *         </object>
  *         <object>
  *             ...

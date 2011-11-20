@@ -209,8 +209,8 @@ ReplyShrPtr ExecutorGetResources::produceReply(
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");
 
-        IXmlNodeShrPtr node_idresource = node_object->appendNode("idresource");
-        node_idresource->appendAttribute("value")->setValue(it->second->getResource()->getKey().c_str());
+        IXmlNodeShrPtr node_idresource = node_object->appendNode("resourcename");
+        node_idresource->appendAttribute("value")->setValue(it->second->getResource()->getName().c_str());
 
         IXmlNodeShrPtr node_volume = node_object->appendNode("volume");
         node_volume->appendAttribute("value")->setValue(it->second->getVolume());
