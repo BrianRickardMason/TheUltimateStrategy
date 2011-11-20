@@ -82,26 +82,6 @@ protected:
     }
 
     /**
-     * @brief Produces configured CostPersistenceFacadeMock.
-     *
-     * @param a_key          A human key.
-     * @param a_id_cost_type An identifier of the cost type.
-     *
-     * @return The prepared mock.
-     */
-    CostPersistenceFacadeMock * produceCostPersistenceFacadeMock(
-        IHumanKey  const & a_key,
-        IDCostType const & a_id_cost_type
-    )
-    {
-        // Mocks setup: CostPersistenceFacadeMock.
-        vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-        configureCostPersistenceFacadeMockForGetCost(a_key, a_id_cost_type, resource_volumes);
-
-        return m_cost_persistence_facade;
-    }
-
-    /**
      * @brief Produces configured ResourcePersistenceFacadeMock.
      *
      * @return The prepared mock.
@@ -229,26 +209,6 @@ protected:
      * @brief An exemplary id holder.
      */
     IDHolder m_id_holder;
-
-private:
-    /**
-     * @brief Configures a CostPersistenceFacadeMock's responses for getCost().
-     *
-     * @param a_key          The key of the human.
-     * @param a_volumes      A vector of resource volumes.
-     * @param a_id_cost_type An identifier of the cost type.
-     */
-    void configureCostPersistenceFacadeMockForGetCost(
-        IHumanKey                            const & a_key,
-        IDCostType                           const & a_id_cost_type,
-        vector<GameServer::Resource::Volume> const & a_volumes
-    )
-    {
-        ResourceSet resource_set = getResourceSet(a_volumes);
-
-        EXPECT_CALL(*m_cost_persistence_facade, getCost(_, a_key, a_id_cost_type))
-        .WillOnce(Return(resource_set));
-    }
 };
 
 /**
@@ -331,7 +291,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_NoResources)
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
@@ -349,7 +309,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_ZeroVolumes)
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
@@ -367,7 +327,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_LowerVolumes)
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
@@ -384,7 +344,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotNeeded)
     configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_DRUID_NOVICE, 1);
 
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_DRUID_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
 
@@ -404,7 +364,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     EngageHumanOperator engage_human_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                              ICostPersistenceFacadeShrPtr(produceCostPersistenceFacadeMock(KEY_WORKER_BLACKSMITH_NOVICE, ID_COST_TYPE_HUMAN_ENGAGE)),
+                                              (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                               (IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                               (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
@@ -429,11 +389,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceSet(resource_volumes)));
-
-    // Get the cost.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_cost_persistence_facade, getCost(transaction, engage_human_key, ID_COST_TYPE_HUMAN_ENGAGE))
     .WillOnce(Return(getResourceSet(resource_volumes)));
 
     // Get the building.
@@ -487,11 +442,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
     .WillOnce(Return(getResourceSet(resource_volumes)));
 
-    // Get the cost.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_cost_persistence_facade, getCost(transaction, engage_human_key, ID_COST_TYPE_HUMAN_ENGAGE))
-    .WillOnce(Return(getResourceSet(resource_volumes)));
-
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
     .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_REGULAR_FORGE, building_volume)));
@@ -541,11 +491,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceSet(resource_volumes)));
-
-    // Get the cost.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_cost_persistence_facade, getCost(transaction, engage_human_key, ID_COST_TYPE_HUMAN_ENGAGE))
     .WillOnce(Return(getResourceSet(resource_volumes)));
 
     // Get the building.
@@ -599,11 +544,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
     .WillOnce(Return(getResourceSet(resource_volumes)));
 
-    // Get the cost.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_cost_persistence_facade, getCost(transaction, engage_human_key, ID_COST_TYPE_HUMAN_ENGAGE))
-    .WillOnce(Return(getResourceSet(resource_volumes)));
-
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
     .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_REGULAR_FORGE, building_volume)));
@@ -641,11 +581,6 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceSet(resource_volumes)));
-
-    // Get the cost.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_cost_persistence_facade, getCost(transaction, engage_human_key, ID_COST_TYPE_HUMAN_ENGAGE))
     .WillOnce(Return(getResourceSet(resource_volumes)));
 
     // Get the building.

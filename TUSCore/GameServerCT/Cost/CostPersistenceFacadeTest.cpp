@@ -66,31 +66,6 @@ protected:
     ICostPersistenceFacadeShrPtr m_cost_persistence_facade;
 };
 
-TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_ENGAGE)
-{
-    IHumanMap const & humans = CONFIGURATOR_HUMAN.getHumans();
-
-    for (IHumanMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        ResourceSet cost =
-            m_cost_persistence_facade->getCost(transaction, it->second->getKey(), ID_COST_TYPE_HUMAN_ENGAGE);
-
-        // Test assertions.
-        ResourceWithVolumeMap resource_map = cost.getMap();
-        // TODO: Enable this assertion.
-        // ASSERT_EQ(NUMBER_OF_RESOURCE_TYPES, resource_map.size());
-
-        unsigned short int i(0);
-        for (ResourceWithVolumeMap::iterator it = resource_map.begin(); it != resource_map.end(); ++it, ++i)
-        {
-            ASSERT_EQ(10, it->second->getVolume());
-        }
-    }
-}
-
 TEST_F(CostPersistenceFacadeTest, getCosts_ID_COST_TYPE_HUMAN_LIVING)
 {
     IHumanMap const & humans = CONFIGURATOR_HUMAN.getHumans();
