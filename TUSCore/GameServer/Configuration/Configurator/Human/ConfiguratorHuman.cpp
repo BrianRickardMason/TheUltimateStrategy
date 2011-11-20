@@ -107,6 +107,8 @@ bool ConfiguratorHuman::parseXml()
         bool                                                  human_engageable       = false;
         unsigned int                                          human_production       = 0;
         map<IResourceKey, GameServer::Resource::Volume>       human_costs_to_dismiss;
+        map<IResourceKey, GameServer::Resource::Volume>       human_costs_to_engage;
+        map<IResourceKey, GameServer::Resource::Volume>       human_costs_to_live;
 
         // Get the costs.
         xml_node costs =
@@ -119,6 +121,20 @@ bool ConfiguratorHuman::parseXml()
             for (xml_node::iterator it = costs_to_dismiss.begin(); it != costs_to_dismiss.end(); ++it)
             {
                 human_costs_to_dismiss[it->name()] = it->attribute("value").as_uint();
+            }
+
+            xml_node costs_to_engage = costs.child("engage");
+
+            for (xml_node::iterator it = costs_to_engage.begin(); it != costs_to_engage.end(); ++it)
+            {
+                human_costs_to_engage[it->name()] = it->attribute("value").as_uint();
+            }
+
+            xml_node costs_to_live = costs.child("live");
+
+            for (xml_node::iterator it = costs_to_live.begin(); it != costs_to_live.end(); ++it)
+            {
+                human_costs_to_live[it->name()] = it->attribute("value").as_uint();
             }
         }
 
@@ -141,7 +157,9 @@ bool ConfiguratorHuman::parseXml()
                       human_dismissable,
                       human_engageable,
                       human_production,
-                      human_costs_to_dismiss)
+                      human_costs_to_dismiss,
+                      human_costs_to_engage,
+                      human_costs_to_live)
         );
 
         m_humans.insert(make_pair(human_key, human));

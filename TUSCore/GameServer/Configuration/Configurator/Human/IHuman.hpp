@@ -108,6 +108,20 @@ public:
      * @return The costs to dismiss the human.
      */
     virtual GameServer::Resource::ResourceSet getCostsToDismiss() const = 0;
+
+    /**
+     * @brief Gets the costs to engage the human.
+     *
+     * @return The costs to engage the human.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToEngage() const = 0;
+
+    /**
+     * @brief Gets the costs for human to live.
+     *
+     * @return The costs for human to live.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToLive() const = 0;
 };
 
 //@{

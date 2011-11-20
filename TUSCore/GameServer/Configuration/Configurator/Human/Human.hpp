@@ -53,6 +53,8 @@ public:
      * @param a_engageable       Defines whether human can be engaged.
      * @param a_production       The number of units of a resource produced per turn.
      * @param a_costs_to_dismiss The costs to dismiss the human.
+     * @param a_costs_to_engage  The costs to engage the human.
+     * @param a_costs_to_live    The costs for the human to live.
      */
     Human(
         IHumanKey                                            const   a_key,
@@ -62,7 +64,9 @@ public:
         bool                                                 const   a_dismissable,
         bool                                                 const   a_engageable,
         unsigned int                                         const   a_production,
-        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_dismiss
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_engage,
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_live
     );
 
     /**
@@ -121,6 +125,20 @@ public:
      */
     virtual GameServer::Resource::ResourceSet getCostsToDismiss() const;
 
+    /**
+     * @brief Gets the costs to engage the human.
+     *
+     * @return The costs to engage the human.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToEngage() const;
+
+    /**
+     * @brief Gets the costs for human to live.
+     *
+     * @return The costs for human to live.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToLive() const;
+
 private:
     /**
      * @brief The key of the human.
@@ -161,6 +179,16 @@ private:
      * @brief The costs to dismiss the human.
      */
     std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_dismiss;
+
+    /**
+     * @brief The costs to engage the human.
+     */
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_engage;
+
+    /**
+     * @brief The costs for human to live.
+     */
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_live;
 };
 
 } // namespace Configuration
