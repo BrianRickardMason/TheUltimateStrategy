@@ -29,7 +29,6 @@
 #define GAMESERVER_HUMAN_ENGAGEHUMANOPERATOR_HPP
 
 #include "../../../Building/IBuildingPersistenceFacade.hpp"
-#include "../../../Cost/ICostPersistenceFacade.hpp"
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "IEngageHumanOperator.hpp"
@@ -50,13 +49,11 @@ public:
      * @brief Ctor.
      *
      * @param a_building_persistence_facade The persistence facade of buildings.
-     * @param a_cost_persistence_facade     The persistence facade of costs.
      * @param a_human_persistence_facade    The persistence facade of humans.
      * @param a_resource_persistence_facade The persistence facade of resources.
      */
     EngageHumanOperator(
         Building::IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-        Cost::ICostPersistenceFacadeShrPtr         a_cost_persistence_facade,
         IHumanPersistenceFacadeShrPtr              a_human_persistence_facade,
         Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
     );
@@ -129,7 +126,6 @@ private:
      * @brief A persistence facade.
      */
     Building::IBuildingPersistenceFacadeShrPtr m_building_persistence_facade;
-    Cost::ICostPersistenceFacadeShrPtr         m_cost_persistence_facade;
     IHumanPersistenceFacadeShrPtr              m_human_persistence_facade;
     Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
     //}@
