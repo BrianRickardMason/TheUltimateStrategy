@@ -40,7 +40,6 @@ DestroyBuildingOperatorAutPtr DestroyBuildingOperatorFactory::createDestroyBuild
 {
     return DestroyBuildingOperatorAutPtr(
                new DestroyBuildingOperator(a_persistence_facade_abstract_factory->createBuildingPersistenceFacade(),
-                                           a_persistence_facade_abstract_factory->createCostPersistenceFacade(),
                                            a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
            );
 }

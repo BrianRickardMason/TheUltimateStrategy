@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "../../../../GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperator.hpp"
-#include "../../../Cost/CostPersistenceFacadeMock.hpp"
 #include "../../../Helpers/Functions.hpp"
 #include "../../../Persistence/TransactionDummy.hpp"
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
@@ -37,7 +36,6 @@
 using namespace GameServer::Building;
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
-using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace boost;
@@ -59,7 +57,6 @@ protected:
      */
     DestroyBuildingOperatorTest()
         : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
-          m_cost_persistence_facade(new CostPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
@@ -109,7 +106,6 @@ protected:
      * @brief A persistence facade used in tests.
      */
     BuildingPersistenceFacadeMock * m_building_persistence_facade;
-    CostPersistenceFacadeMock     * m_cost_persistence_facade;
     ResourcePersistenceFacadeMock * m_resource_persistence_facade;
     //}@
 
@@ -125,7 +121,6 @@ protected:
 TEST_F(DestroyBuildingOperatorTest, DestroyBuildingOperator)
 {
     ASSERT_NO_THROW(DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))));
 }
 
@@ -137,7 +132,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
     ITransactionShrPtr transaction(new TransactionDummy);
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_TRYING_TO_DESTROY_ZERO_BUILDINGS,
@@ -152,7 +146,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_ZeroBuildings)
     .WillOnce(Return(BuildingWithVolumeShrPtr()));
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_THERE_ARE_NO_BUILDINGS,
@@ -166,7 +159,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughBuildings)
     configureBuildingPersistenceFacadeMockForGetBuilding(1);
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
@@ -185,7 +177,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetResourcesThrows)
     .WillOnce(Throw(e));
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -202,7 +193,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -219,7 +209,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
@@ -242,7 +231,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
     .WillOnce(Throw(e));
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -262,7 +250,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse
     .WillOnce(Return(false));
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_RESOURCES_MISSING_IN_THE_MEANTIME,
@@ -284,7 +271,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
@@ -305,7 +291,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDINGS_MISSING_IN_THE_MEANTIME,
@@ -328,7 +313,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
@@ -351,7 +335,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
 
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
@@ -374,7 +357,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
 
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
@@ -397,7 +379,6 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
 
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
     DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (ICostPersistenceFacadeShrPtr(m_cost_persistence_facade)),
                                                       (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,

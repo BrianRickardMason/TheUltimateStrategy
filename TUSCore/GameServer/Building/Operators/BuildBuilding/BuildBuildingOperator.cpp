@@ -30,7 +30,6 @@
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
-using namespace GameServer::Cost;
 using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 
@@ -41,11 +40,9 @@ namespace Building
 
 BuildBuildingOperator::BuildBuildingOperator(
     IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-    ICostPersistenceFacadeShrPtr     a_cost_persistence_facade,
     IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
 )
     : m_building_persistence_facade(a_building_persistence_facade),
-      m_cost_persistence_facade(a_cost_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
