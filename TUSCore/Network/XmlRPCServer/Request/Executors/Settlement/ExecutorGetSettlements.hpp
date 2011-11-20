@@ -62,10 +62,8 @@ namespace Executors
  *     </parameters>
  *     <objects>
  *         <object>
- *             <message         value=\"#\" />
  *             <land_name       value=\"#\" />
  *             <settlement_name value=\"#\" />
- *             <name            value=\"#\" />
  *         </object>
  *         <object>
  *             ...
