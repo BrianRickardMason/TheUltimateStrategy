@@ -81,11 +81,18 @@ public:
     virtual unsigned int getCapacity() const = 0;
 
     /**
-     * @brief Gets the costs of building the building.
+     * @brief Gets the costs to build the building.
      *
-     * @return The costs of building the building.
+     * @return The costs to build the building.
      */
-    virtual GameServer::Resource::ResourceSet getCostsBuilding() const = 0;
+    virtual GameServer::Resource::ResourceSet getCostsToBuild() const = 0;
+
+    /**
+     * @brief Gets the costs to destroy the building.
+     *
+     * @return The costs to destroy the building.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToDestroy() const = 0;
 };
 
 //@{

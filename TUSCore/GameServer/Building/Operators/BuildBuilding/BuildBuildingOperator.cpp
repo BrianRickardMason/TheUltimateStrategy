@@ -69,7 +69,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = CONFIGURATOR_BUILDING.getBuilding(a_key)->getCostsBuilding();
+        ResourceSet cost = CONFIGURATOR_BUILDING.getBuilding(a_key)->getCostsToBuild();
 
         // Multiply total cost.
         cost *= a_volume;

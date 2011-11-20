@@ -45,18 +45,20 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_key            The key of the building.
-     * @param a_class          The class of the building.
-     * @param a_name           The name of the building.
-     * @param a_capacity       The capacity of the building.
-     * @param a_costs_building The costs of building the building.
+     * @param a_key              The key of the building.
+     * @param a_class            The class of the building.
+     * @param a_name             The name of the building.
+     * @param a_capacity         The capacity of the building.
+     * @param a_costs_to_build   The costs to build the building.
+     * @param a_costs_to_destroy The costs to destroy the building.
      */
     Building(
         IBuildingKey                                         const   a_key,
         std::string                                          const   a_class,
         std::string                                          const   a_name,
         unsigned int                                         const   a_capacity,
-        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_building
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_build,
+        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_destroy
     );
 
     /**
@@ -88,11 +90,18 @@ public:
     virtual unsigned int getCapacity() const;
 
     /**
-     * @brief Gets the costs of building the building.
+     * @brief Gets the costs to build the building.
      *
      * @return The costs of building.
      */
-    virtual GameServer::Resource::ResourceSet getCostsBuilding() const;
+    virtual GameServer::Resource::ResourceSet getCostsToBuild() const;
+
+    /**
+     * @brief Gets the costs to destroy the building.
+     *
+     * @return The costs to destroy the building.
+     */
+    virtual GameServer::Resource::ResourceSet getCostsToDestroy() const;
 
 private:
     /**
@@ -116,9 +125,14 @@ private:
     unsigned int const m_capacity;
 
     /**
-     * @brief The costs of building the building.
+     * @brief The costs to build the building.
      */
-    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_building;
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_build;
+
+    /**
+     * @brief The costs to destroy the building.
+     */
+    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_destroy;
 };
 
 } // namespace Configuration
