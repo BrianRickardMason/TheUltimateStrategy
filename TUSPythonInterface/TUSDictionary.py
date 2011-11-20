@@ -24,31 +24,15 @@ COMMAND_SCHEMAS = {
 'GET_SETTLEMENTS'    : (10, ['login', 'password'], ['land_name']),
 
 # Building.
-'BUILD_BUILDING'     : (11, ['login', 'password'], ['idholderclass',
-                                                    'holder_name',
-                                                    'buildingkey',
-                                                    'volume']),
-'DESTROY_BUILDING'   : (12, ['login', 'password'], ['idholderclass',
-                                                    'holder_name',
-                                                    'buildingkey',
-                                                    'volume']),
+'BUILD_BUILDING'     : (11, ['login', 'password'], ['idholderclass', 'holder_name', 'buildingkey', 'volume']),
+'DESTROY_BUILDING'   : (12, ['login', 'password'], ['idholderclass', 'holder_name', 'buildingkey', 'volume']),
 'GET_BUILDING'       : (13, ['login', 'password'], ['idholderclass', 'holder_name', 'buildingkey']),
 'GET_BUILDINGS'      : (14, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # Human.
-'DISMISS_HUMAN'      : (15, ['login', 'password'], ['idholderclass',
-                                                    'holder_name',
-                                                    'humankey',
-                                                    'volume']),
-'ENGAGE_HUMAN'       : (16, ['login', 'password'], ['idholderclass',
-                                                    'holder_name',
-                                                    'humankey',
-                                                    'volume']),
-'GET_HUMAN'          : (17, ['login', 'password'], ['idholderclass',
-                                                    'holder_name',
-                                                    'idhumanclass',
-                                                    'idhuman',
-                                                    'experience']),
+'DISMISS_HUMAN'      : (15, ['login', 'password'], ['idholderclass', 'holder_name', 'humankey', 'volume']),
+'ENGAGE_HUMAN'       : (16, ['login', 'password'], ['idholderclass', 'holder_name', 'humankey', 'volume']),
+'GET_HUMAN'          : (17, ['login', 'password'], ['idholderclass', 'holder_name', 'humankey']),
 'GET_HUMANS'         : (18, ['login', 'password'], ['idholderclass', 'holder_name']),
 
 # Resource.
