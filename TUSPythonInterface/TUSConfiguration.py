@@ -93,9 +93,9 @@ def prepareBuildings(aFileName, aPropFileName, aCostFileName):
     """Extracts buildings and its properties from given files"""
     return getObjectsWithProperties('building', aFileName, aPropFileName, aCostFileName)
  
-def prepareHumans(aFileName, aPropFileName):
+def prepareHumans(aFileName, aPropFileName, aCostFileName):
     """Extracts humans from given file"""
-    return getObjectsWithProperties('human', aFileName, aPropFileName)
+    return getObjectsWithProperties('human', aFileName, aPropFileName, aCostFileName)
  
 def prepareResources(aFileName):
     """Extracts resources from given file"""
@@ -121,29 +121,56 @@ def printPossibleHumans(aHumansDict, aEngageableOnly = True):
         print( "{:>10}{:>16}{:>9}{:>6}{:>6}".format(
             h['class'], h['name'], h['experience'], h['dismissable'], h['production']))
 
-# TODO consider different set of resources            
-def costString(cost):
+def costString(aCost, aResSet = None, aWidth = 3):
     """Returns cost strings for presenting in one line."""
-    fullCost = {'food':0,'gold':0,'wood':0,'iron':0,'rock':0,'mana':0,'coal':0}
-    for c,v in cost.items():
-        fullCost[c] = v
-    return "{food:>3}{gold:>3}{wood:>3}{iron:>3}{rock:>3}{mana:>3}{coal:>3}".format(**fullCost)
-
-def costHead():
-    """Returns cost header string."""
-    fullCost = {'food':0,'gold':0,'wood':0,'iron':0,'rock':0,'mana':0,'coal':0}
+    fullCost = {}
+    if not aResSet:
+        aResSet = ['food','gold','wood','iron','rock','mana','coal']
+    
+    # Prepare values
+    for i in aResSet:
+        fullCost[i] = 0
+    for c,v in aCost.items():
+        fullCost[c] += int(v)
+        #^^ indirect check of resource consistency
+    
+    # Prepare format string
+    fs = ""
     for c,v in fullCost.items():
-        fullCost[c] = c[0]
-    return "{food:>3}{gold:>3}{wood:>3}{iron:>3}{rock:>3}{mana:>3}{coal:>3}".format(**fullCost)
+        fs += "{" + c + ":>"+ str(aWidth) +"}"
+        
+    return fs.format(**fullCost)
+
+def costHead(aResSet = None, aWidth = 3):
+    """Returns cost header string."""
+    if not aResSet:
+        aResSet = ['food','gold','wood','iron','rock','mana','coal']
+    
+    resSet = {}
+    # Setup header names
+    for c in aResSet:
+        resSet[c] = c[0]
+        
+    # Prepare format string
+    fs = ""
+    for c,v in resSet.items():
+        fs += "{" + c + ":>"+ str(aWidth) +"}"
+    
+    return fs.format(**resSet)            
     
 def printPossibleBuildings(aBuildingsDict):
     """Prints buildings' definitions from given files in one line format."""
     # buildings.building.{key|class|name} 
-    print( "{0:>10}{1:>20}{2:>6} b:{3:->21}#".format('class', 'name', 'cap.', costHead()))
-    print( "{0:->10}{1:->20}{2:->6}---{3:->21}#".format('', '', '', ''))
+    print( "{0:>10}{1:>20}{2:>6}| b:{3:->21}| d:{3:->21}#".format(
+        'class', 'name', 'cap.', costHead(), costHead()))
+    print( "{0:->10}{1:->20}{2:->6}|---{3:->21}|---{3:->21}#".format(
+        '', '', '', '',''))
     for i, b in aBuildingsDict.items():
-        print( "{0:>10}{1:>20}{2:>6} b:{3}".format(
-            b['class'], b['name'], b['capacity'], costString(b['costs']['build']) ))
+        print( "{0:>10}{1:>20}{2:>6}|   {3}|   {4}".format(
+            b['class'], b['name'], b['capacity'], 
+            costString(b['costs']['build']),  
+            costString(b['costs']['destroy']) 
+        ))
 
 
 # Handling usage as script
@@ -165,12 +192,13 @@ def main(argv=None):
     
     hFile =  dataRoot + '/Human/humans.xml'
     hpFile = dataRoot + '/Human/properties.xml'
+    hcFile = dataRoot + '/Human/costs.xml'
     bFile =  dataRoot + '/Building/buildings.xml'
     bpFile = dataRoot + '/Building/properties.xml'
     bcFile = dataRoot + '/Building/costs.xml'
     rFile =  dataRoot + '/Resource/resources.xml'
     
-    humans = prepareHumans(hFile, hpFile) 
+    humans = prepareHumans(hFile, hpFile, hcFile) 
     buildings = prepareBuildings(bFile, bpFile, bcFile) 
     resources = prepareResources(rFile) 
     
