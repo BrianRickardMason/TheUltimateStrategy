@@ -104,22 +104,12 @@ def prepareResources(aFileName):
 
 # Functions for presenting the data
 
-def printPossibleResources(aResourceDict):
-    """Prints resources' definitions from given file in one line format."""
-    # resources.resource.{key|name} 
-    for i, r in aResourceDict.items():
-        print( r['name'])
-
-def printPossibleHumans(aHumansDict, aEngageableOnly = True):
-    """Prints engageable humans' definitions from given file in one line format."""
-    # humans.human.{key|class|name|experience} 
-    print( "{:>10}{:>16}{:>9}{:>6}{:>6}#".format('class', 'name', 'exp.', 'dism.','prod.'))
-    print( "{:->10}{:->16}{:->9}{:->6}{:->6}#".format('', '', '', '',''))
-    for i, h in aHumansDict.items():
-        if aEngageableOnly and h['engageable'] != 'true':
-            continue
-        print( "{:>10}{:>16}{:>9}{:>6}{:>6}".format(
-            h['class'], h['name'], h['experience'], h['dismissable'], h['production']))
+def costFormatString(aCostDict, aWidth = 3):
+    """Prepares map indexed format string for cost displaying"""
+    fs = ""
+    for c,v in aCostDict.items():
+        fs += "{" + c + ":>"+ str(aWidth) +"}"
+    return fs
 
 def costString(aCost, aResSet = None, aWidth = 3):
     """Returns cost strings for presenting in one line."""
@@ -134,11 +124,7 @@ def costString(aCost, aResSet = None, aWidth = 3):
         fullCost[c] += int(v)
         #^^ indirect check of resource consistency
     
-    # Prepare format string
-    fs = ""
-    for c,v in fullCost.items():
-        fs += "{" + c + ":>"+ str(aWidth) +"}"
-        
+    fs = costFormatString(fullCost, aWidth)
     return fs.format(**fullCost)
 
 def costHead(aResSet = None, aWidth = 3):
@@ -151,12 +137,33 @@ def costHead(aResSet = None, aWidth = 3):
     for c in aResSet:
         resSet[c] = c[0]
         
-    # Prepare format string
-    fs = ""
-    for c,v in resSet.items():
-        fs += "{" + c + ":>"+ str(aWidth) +"}"
-    
-    return fs.format(**resSet)            
+    fs = costFormatString(resSet, aWidth)
+    return fs.format(**resSet)    
+
+def printPossibleResources(aResourceDict):
+    """Prints resources' definitions from given file in one line format."""
+    # resources.resource.{key|name} 
+    for i, r in aResourceDict.items():
+        print( r['name'])
+
+# TODO: tidy up the format strings mess
+        
+def printPossibleHumans(aHumansDict, aEngageableOnly = True):
+    """Prints engageable humans' definitions from given file in one line format."""
+    # humans.human.{key|class|name|experience} 
+    print( "{:>10}{:>16}{:>9}{:>6}{:>6}| e:{:->21}| d:{:->21}| l:{:->21}#".format(
+        'class', 'name', 'exp.', 'dism.','prod.', costHead(), costHead(), costHead()))
+    print( "{:->10}{:->16}{:->9}{:->6}{:->6}|---{:->21}|---{:->21}|---{:->21}#".format(
+        '', '', '', '','','','',''))
+    for i, h in aHumansDict.items():
+        if aEngageableOnly and h['engageable'] != 'true':
+            continue
+        print( "{:>10}{:>16}{:>9}{:>6}{:>6}|   {}|   {}|   {}".format(
+            h['class'], h['name'], h['experience'], h['dismissable'], h['production'],
+            costString(h['costs']['engage']),
+            costString(h['costs']['dismiss']),
+            costString(h['costs']['live'])
+        ))        
     
 def printPossibleBuildings(aBuildingsDict):
     """Prints buildings' definitions from given files in one line format."""
@@ -173,6 +180,23 @@ def printPossibleBuildings(aBuildingsDict):
         ))
 
 
+# Common actions
+def read_configuration(aDataRoot):
+    """Reads all configuration data. Returns (resources, buildings, humans)."""
+    hFile =  aDataRoot + '/Human/humans.xml'
+    hpFile = aDataRoot + '/Human/properties.xml'
+    hcFile = aDataRoot + '/Human/costs.xml'
+    bFile =  aDataRoot + '/Building/buildings.xml'
+    bpFile = aDataRoot + '/Building/properties.xml'
+    bcFile = aDataRoot + '/Building/costs.xml'
+    rFile =  aDataRoot + '/Resource/resources.xml'
+    
+    humans = prepareHumans(hFile, hpFile, hcFile) 
+    buildings = prepareBuildings(bFile, bpFile, bcFile) 
+    resources = prepareResources(rFile) 
+    
+    return resources, buildings, humans
+        
 # Handling usage as script
 
 import sys
@@ -190,17 +214,7 @@ def main(argv=None):
     dataRoot =  argv[1]
     type =      argv[2] if len(argv) > 2 else ''
     
-    hFile =  dataRoot + '/Human/humans.xml'
-    hpFile = dataRoot + '/Human/properties.xml'
-    hcFile = dataRoot + '/Human/costs.xml'
-    bFile =  dataRoot + '/Building/buildings.xml'
-    bpFile = dataRoot + '/Building/properties.xml'
-    bcFile = dataRoot + '/Building/costs.xml'
-    rFile =  dataRoot + '/Resource/resources.xml'
-    
-    humans = prepareHumans(hFile, hpFile, hcFile) 
-    buildings = prepareBuildings(bFile, bpFile, bcFile) 
-    resources = prepareResources(rFile) 
+    resources, buildings, humans = read_configuration(dataRoot)
     
     if type == 'humans' :
         printPossibleHumans(humans)
@@ -210,10 +224,20 @@ def main(argv=None):
         printPossibleBuildings(buildings)
     elif type == 'resources':
         printPossibleResources(resources)
-    else:
+    elif type == 'all' or type == 'raw':
         pprint( humans )
         pprint( buildings )
         pprint( resources )
+    else: 
+        print("""
+*** Use second parameter to choose data to print.
+    Possible targets:
+        humans      -- prints engageable humans
+        allhumans   -- prints all defined humans
+        buildings   -- prints buildings
+        resources   -- prints resources
+        all|raw     -- prints all data collected by pprint
+""") 
     
     return 0
     

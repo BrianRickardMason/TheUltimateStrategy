@@ -85,7 +85,7 @@ printResponse(ret)
 
 print ("Creating settlement") 
 ret = interface.createSettlement(LAND_NAME, SETTLEMENT_NAME)
-printResponse(ret, True)
+printResponse(ret)
 
 print( "Building...")
 ret = interface.buildOn(SETTLEMENT_NAME, ["regular","farm"], 2)
@@ -167,7 +167,7 @@ printResponse(ret)
 
 print ("Getting epoch")
 ret = interface.getEpoch(WORLD_NAME)
-printResponse(ret)
+printResponse(ret, True)
 
 print ("Getting lands")
 ret = interface.getLands()

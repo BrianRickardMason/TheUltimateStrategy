@@ -4,6 +4,7 @@
 #
 # For easy browsing you can use such expressions
 # ./TUSConfiguration buildings | grep -E '(#|special)'
+# ./TUSConfiguration humans | grep -e \# -e worker
 #
 # The '#' sign is placed in the header for easy filtering
 #
@@ -13,3 +14,4 @@ CDIR="${MDIR}/../TUSCore/GameServer/Configuration/Data/Test/"
 
 echo "Getting configuration data from ${CDIR}"
 "${MDIR}/TUSConfiguration.py" "${CDIR}" $@
+

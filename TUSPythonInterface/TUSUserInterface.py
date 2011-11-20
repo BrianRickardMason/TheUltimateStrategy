@@ -10,22 +10,15 @@ import TUSConfiguration
 
 def set_up_consts(aDataRoot, outResource, outBuildings, outHumans):
     """Fills in the given maps with easy to use key:data"""
-    hFile =  aDataRoot + '/Human/humans.xml'
-    hpFile =  aDataRoot + '/Human/properties.xml'
-    bFile =  aDataRoot + '/Building/buildings.xml'
-    bpFile = aDataRoot + '/Building/properties.xml'
-    rFile =  aDataRoot + '/Resource/resources.xml'
     
-    b = TUSConfiguration.prepareBuildings(bFile, bpFile)
-    h = TUSConfiguration.prepareHumans(hFile, hpFile);
-    r = TUSConfiguration.prepareResources(rFile);
+    r, b, h = TUSConfiguration.read_configuration(aDataRoot)
     
     for i in r.values():
         outResource[i['name']] = i
     for i in b.values():
         outBuildings[i['name']] = i
     for i in h.values():
-        if i['experience'] == 'novice':
+        if i['engageable'] == 'true':
             outHumans[i['name']] = i
     
     
