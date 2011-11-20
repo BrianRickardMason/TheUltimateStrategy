@@ -243,8 +243,8 @@ public:
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
         settlement_name_destination->appendAttribute("value")->setValue(m_settlement_name_destination.c_str());
 
-        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr idresource = parameters->appendNode("idresource");
-        idresource->appendAttribute("value")->setValue(m_key.c_str());
+        Network::XmlRPCCommon::Xml::IXmlNodeShrPtr resourcekey = parameters->appendNode("resourcekey");
+        resourcekey->appendAttribute("value")->setValue(m_key.c_str());
 
         Network::XmlRPCCommon::Xml::IXmlNodeShrPtr volume = parameters->appendNode("volume");
         volume->appendAttribute("valve")->setValue(m_volume);

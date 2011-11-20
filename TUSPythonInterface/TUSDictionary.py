@@ -57,13 +57,11 @@ COMMAND_SCHEMAS = {
 # Transport.
 'TRANSPORT_HUMAN'    : (30, ['login', 'password'], ['settlement_name_source',
                                                     'settlement_name_destination',
-                                                    'idhumanclass',
-                                                    'idhuman',
-                                                    'experience',
+                                                    'humankey',
                                                     'volume']),
 'TRANSPORT_RESOURCE' : (31, ['login', 'password'], ['settlement_name_source',
                                                     'settlement_name_destination',
-                                                    'idresource',
+                                                    'resourcekey',
                                                     'volume']),
 }
 

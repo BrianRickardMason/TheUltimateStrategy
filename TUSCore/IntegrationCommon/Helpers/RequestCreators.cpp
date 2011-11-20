@@ -776,8 +776,8 @@ RequestShrPtr createRequestTransportResource(
     IXmlNodeShrPtr settlement_name_destination = parameters->appendNode("settlement_name_destination");
     settlement_name_destination->appendAttribute("value")->setValue(a_settlement_name_destination.c_str());
 
-    IXmlNodeShrPtr idresource = parameters->appendNode("idresource");
-    idresource->appendAttribute("value")->setValue(a_key.c_str());
+    IXmlNodeShrPtr resourcekey = parameters->appendNode("resourcekey");
+    resourcekey->appendAttribute("value")->setValue(a_key.c_str());
 
     IXmlNodeShrPtr volume = parameters->appendNode("volume");
     volume->appendAttribute("value")->setValue(a_volume);

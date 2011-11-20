@@ -65,7 +65,7 @@ bool ExecutorTransportResource::getParameters(
         m_password                    = a_request->getPasswordValue();
         m_settlement_name_source      = a_request->getParameterValueString("settlement_name_source");
         m_settlement_name_destination = a_request->getParameterValueString("settlement_name_destination");
-        m_key                         = a_request->getParameterValueString("idresource");
+        m_key                         = a_request->getParameterValueString("resourcekey");
         m_value_volume                = a_request->getParameterValueUnsignedInteger("volume");
 
         return true;

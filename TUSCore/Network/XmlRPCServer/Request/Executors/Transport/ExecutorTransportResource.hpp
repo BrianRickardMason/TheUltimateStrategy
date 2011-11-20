@@ -53,7 +53,7 @@ namespace Executors
  *     <parameters>
  *         <settlement_name_source      value=\"#\" />
  *         <settlement_name_destination value=\"#\" />
- *         <idresource                  value=\"#\" />
+ *         <resourcekey                 value=\"#\" />
  *         <volume                      value=\"#\" />
  *     </parameters>
  * </request>
