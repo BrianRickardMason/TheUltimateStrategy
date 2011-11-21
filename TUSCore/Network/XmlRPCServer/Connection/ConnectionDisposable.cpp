@@ -58,7 +58,7 @@ boost::asio::ip::tcp::socket & ConnectionDisposable::getSocket()
 
 void ConnectionDisposable::start()
 {
-    Category::getInstance("Category").infoStream() << "Starting the connection.";
+    Category::getInstance("Category").debugStream() << "Starting the connection.";
 
     try
     {
@@ -75,7 +75,7 @@ void ConnectionDisposable::start()
 
 void ConnectionDisposable::processRequest()
 {
-    Category::getInstance("Category").infoStream() << "Processing the request.";
+    Category::getInstance("Category").debugStream() << "Processing the request.";
 
     try
     {
@@ -96,7 +96,7 @@ void ConnectionDisposable::handleRequest(
     XmlRPCCommon::Request::RequestShrPtr a_request
 )
 {
-    Category::getInstance("Category").infoStream() << "Handling the request.";
+    Category::getInstance("Category").debugStream() << "Handling the request.";
 
     // Handle the request.
     XmlRPCCommon::Reply::ReplyShrPtr reply = m_request_handler.handleRequest(a_request);
@@ -115,7 +115,7 @@ void ConnectionDisposable::sendReply(
     XmlRPCCommon::Reply::ReplyShrPtr a_reply
 )
 {
-    Category::getInstance("Category").infoStream() << "Sending the reply.";
+    Category::getInstance("Category").debugStream() << "Sending the reply.";
 
     try
     {
@@ -132,7 +132,7 @@ void ConnectionDisposable::sendReply(
 
 void ConnectionDisposable::finishHandling()
 {
-    Category::getInstance("Category").infoStream() << "Closing the connection.";
+    Category::getInstance("Category").debugStream() << "Closing the connection.";
 
     // Initiate graceful connection closure.
     boost::system::error_code ignored_ec;

@@ -62,7 +62,7 @@ Server::Server(
     m_acceptor.listen();
 
     // Start accept asynchronously.
-    Category::getInstance("Category").infoStream() << "Starting to accept asynchronously.";
+    Category::getInstance("Category").debugStream() << "Starting to accept asynchronously.";
 
     // TODO: Should start to accept after all the threads (from Server::run()) are running.
     m_acceptor.async_accept(
@@ -83,28 +83,28 @@ void Server::run()
     vector<ThreadShrPtr> threads;
 
     // Start the threads.
-    Category::getInstance("Category").infoStream() << "Starting the threads.";
+    Category::getInstance("Category").debugStream() << "Starting the threads.";
 
     for (unsigned short int i = 0; i < m_thread_pool_size; ++i)
     {
-        Category::getInstance("Category").infoStream() << "Thread #" << i << " started.";
+        Category::getInstance("Category").debugStream() << "Thread #" << i << " started.";
         ThreadShrPtr thread(new boost::thread(boost::bind(&boost::asio::io_service::run, &m_io_service)));
         threads.push_back(thread);
     }
 
     // Wait for all threads in the pool to exit.
-    Category::getInstance("Category").infoStream() << "Waiting for all threads in the pool to exit.";
+    Category::getInstance("Category").debugStream() << "Waiting for all threads in the pool to exit.";
 
     for (unsigned short int i = 0; i < threads.size(); ++i)
     {
         threads[i]->join();
-        Category::getInstance("Category").infoStream() << "Thread #" << i << " exited.";
+        Category::getInstance("Category").debugStream() << "Thread #" << i << " exited.";
     }
 }
 
 void Server::stop()
 {
-    Category::getInstance("Category").infoStream() << "Stopping the server.";
+    Category::getInstance("Category").debugStream() << "Stopping the server.";
 
     m_io_service.stop();
 }
@@ -115,7 +115,7 @@ void Server::handleAccept(
 {
     m_served++;
 
-    Category::getInstance("Category").infoStream() << "Handling accept #" << m_served << ".";
+    Category::getInstance("Category").debugStream() << "Handling accept #" << m_served << ".";
 
     if (!a_error)
     {
