@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include <Network/XmlRPCServer/Configurator.hpp>
+#include <string>
 
 using namespace pugi;
 using namespace std;
@@ -61,5 +62,13 @@ bool Configurator::loadXml()
 
 bool Configurator::parseXml()
 {
+    xml_node server = m_serverconfig_xml.child("server");
+
+    std::string const host            = server.child_value("host");
+    std::string const port            = server.child_value("port");
+    std::string const threads         = server.child_value("threads");
+    std::string const logger_priority = server.child("logger").child_value("priority");
+    std::string const persistence     = server.child_value("persistence");
+
     return true;
 }
