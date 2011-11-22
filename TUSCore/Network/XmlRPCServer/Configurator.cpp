@@ -54,7 +54,7 @@ bool Configurator::loadXml()
 {
     // TODO: Guess the path.
     char const * path_serverconfig_xml =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/Network/XmlRPCServer/serversonfig.xml";
+        "/home/brian/workspace/theultimatestrategy/TUSCore/Network/XmlRPCServer/serverconfig.xml";
 
     return m_serverconfig_xml.load_file(path_serverconfig_xml);
 }
