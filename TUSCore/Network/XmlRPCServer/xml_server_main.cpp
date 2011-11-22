@@ -28,15 +28,12 @@
 #include <Network/XmlRPCServer/Configurator.hpp>
 #include <Network/XmlRPCServer/Server/Server.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 #include <boost/thread.hpp>
 #include <log4cpp/Category.hh>
 #include <log4cpp/OstreamAppender.hh>
 #include <log4cpp/PatternLayout.hh>
 
 using namespace Network::XmlRPCServer::Server;
-using namespace boost::property_tree;
 using namespace boost;
 using namespace log4cpp;
 using namespace std;
@@ -58,7 +55,7 @@ int main(
         string             host        = "localhost";
         string             port        = "2222";
         unsigned short int threads     = 1;
-        Priority::Value    priority    = Priority::ALERT;
+        int                priority    = Priority::ALERT;
         string             persistence = "postgresql";
 
         // Try to get the properties from the command line.
@@ -83,20 +80,12 @@ int main(
         // Try to get the properties from the configuration file.
         else
         {
-            // Read properties from a file.
-            // TODO: The server expects to be run from build directory (waf specific).
-            //       The location of a configuration file should be specified.
-            // TODO: Add exception handling here.
-            ptree property_tree;
-            read_xml("../Network/XmlRPCServer/serverconfig.xml", property_tree);
-
             // Get the properties.
-            // TODO: Add exception handling here.
-            host        = property_tree.get<string>("server.host");
-            port        = property_tree.get<string>("server.port");
-            threads     = property_tree.get<unsigned short int>("server.threads");
-            priority    = property_tree.get<Priority::Value>("server.logger.priority");
-            persistence = property_tree.get<string>("server.persistence");
+            host        = CONFIGURATOR.getHost();
+            port        = CONFIGURATOR.getPort();
+            threads     = CONFIGURATOR.getThreads();
+            priority    = CONFIGURATOR.getLoggerPriority();
+            persistence = CONFIGURATOR.getPersistence();
         }
 
         // Set up Appender, Layout and Category.
