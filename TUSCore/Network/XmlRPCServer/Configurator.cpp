@@ -26,8 +26,10 @@
 // SUCH DAMAGE.
 
 #include <Network/XmlRPCServer/Configurator.hpp>
+#include <boost/lexical_cast.hpp>
 #include <string>
 
+using namespace boost;
 using namespace pugi;
 using namespace std;
 
@@ -51,6 +53,31 @@ bool Configurator::configure()
     return true;
 }
 
+string Configurator::getHost() const
+{
+    return m_host;
+}
+
+string Configurator::getPort() const
+{
+    return m_port;
+}
+
+unsigned short int Configurator::getThreads() const
+{
+    return m_threads;
+}
+
+int Configurator::getLoggerPriority() const
+{
+    return m_logger_priority;
+}
+
+string Configurator::getPersistence() const
+{
+    return m_persistence;
+}
+
 bool Configurator::loadXml()
 {
     // TODO: Guess the path.
@@ -64,11 +91,11 @@ bool Configurator::parseXml()
 {
     xml_node server = m_serverconfig_xml.child("server");
 
-    std::string const host            = server.child_value("host");
-    std::string const port            = server.child_value("port");
-    std::string const threads         = server.child_value("threads");
-    std::string const logger_priority = server.child("logger").child_value("priority");
-    std::string const persistence     = server.child_value("persistence");
+    m_host            = server.child_value("host");
+    m_port            = server.child_value("port");
+    m_threads         = lexical_cast<unsigned short int>(server.child_value("threads"));
+    m_logger_priority = lexical_cast<int>(server.child("logger").child_value("priority"));
+    m_persistence     = server.child_value("persistence");
 
     return true;
 }

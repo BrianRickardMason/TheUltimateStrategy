@@ -30,6 +30,7 @@
 
 #include <3rdParty/pugixml/src/pugixml.hpp>
 #include <boost/noncopyable.hpp>
+#include <string>
 
 /**
  * @brief Configurator.
@@ -43,22 +44,57 @@ public:
     /**
      * @brief Gets the configuration.
      *
-     * @return True on success, false otherwise.
+     * @brief True on success, false otherwise.
      */
     bool configure();
+
+    /**
+     * @brief Gets the host's address.
+     *
+     * @brief The host's address.
+     */
+    std::string getHost() const;
+
+    /**
+     * @brief Gets the host's port.
+     *
+     * @brief The host's port.
+     */
+    std::string getPort() const;
+
+    /**
+     * @brief Gets the number of threads.
+     *
+     * @brief The number of threads.
+     */
+    unsigned short int getThreads() const;
+
+    /**
+     * @brief Gets the logger's priority.
+     *
+     * @brief The logger's priority.
+     */
+    int getLoggerPriority() const;
+
+    /**
+     * @brief Gets the name of the persistence.
+     *
+     * @brief The name of the persistence.
+     */
+    std::string getPersistence() const;
 
 private:
     /**
      * @brief Loads the data from an xml configuration file into the xml document.
      *
-     * return True on success, false otherwise.
+     * brief True on success, false otherwise.
      */
     bool loadXml();
 
     /**
      * @brief Loads the data from an xml document into the map.
      *
-     * @return true on success false otherwise.
+     * @brief true on success false otherwise.
      */
     bool parseXml();
 
@@ -68,6 +104,31 @@ private:
      * TODO: Add the abstraction.
      */
     pugi::xml_document m_serverconfig_xml;
+
+    /**
+     * @brief The host's address.
+     */
+    std::string m_host;
+
+    /**
+     * @brief The host's port.
+     */
+    std::string m_port;
+
+    /**
+     * @brief The number of threads.
+     */
+    unsigned short int m_threads;
+
+    /**
+     * @brief The logger's priority.
+     */
+    int m_logger_priority;
+
+    /**
+     * @brief The name of the persistence.
+     */
+    std::string m_persistence;
 };
 
 static Configurator const CONFIGURATOR;
