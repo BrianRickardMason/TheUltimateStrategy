@@ -92,7 +92,7 @@ def build(bld):
     server = bld.new_task_gen(
                  features='cxx cxxprogram',
                  target='server',
-                 source='Network/XmlRPCServer/xml_server_main.cpp',
+                 source=bld.path.ant_glob('Network/XmlRPCServer/*.cpp'),
                  use='gameserver xmlrpccommon xmlrpcserver',
                  lib='boost_system boost_thread log4cpp pqxx pugixml',
                  includes='.'
