@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "Server.hpp"
-
 #include "../Connection/ConnectionDisposable.hpp"
+#include "Server.hpp"
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 #include <log4cpp/Category.hh>
@@ -43,15 +42,17 @@ namespace Server
 {
 
 Server::Server(
-    std::string        const & a_address,
-    std::string        const & a_port,
-    unsigned short int const   a_thread_pool_size
+    string             const a_address,
+    string             const a_port,
+    unsigned short int const a_thread_pool_size,
+    IContextShrPtr     const a_context
 )
     : m_thread_pool_size(a_thread_pool_size),
       m_io_service(a_thread_pool_size),
       m_acceptor(m_io_service),
       m_new_connection(new Connection::ConnectionDisposable(m_io_service)),
-      m_served(0)
+      m_served(0),
+      m_context(a_context)
 {
     boost::asio::ip::tcp::resolver resolver(m_io_service);
     boost::asio::ip::tcp::resolver::query query(a_address, a_port);

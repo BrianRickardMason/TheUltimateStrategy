@@ -102,7 +102,7 @@ int main(
         IContextShrPtr context(new Context);
 
         // Run the server in a background thread.
-        Server server(host, port, threads);
+        Server server(host, port, threads, context);
         thread thread_1(bind(&Server::run, &server));
 
         // Stop the server.

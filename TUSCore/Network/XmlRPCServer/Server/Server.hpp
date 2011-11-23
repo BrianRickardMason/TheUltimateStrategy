@@ -29,6 +29,7 @@
 #define NETWORK_XMLRPCSERVER_SERVER_SERVER_HPP
 
 #include "../Connection/IConnection.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 #include <boost/asio.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -53,11 +54,13 @@ public:
      * @param a_address          A TCP address of the server.
      * @param a_port             A port of the server.
      * @param a_thread_pool_size A size of the thread pool.
+     * @param a_context          The context of the server.
      */
     Server(
-        std::string        const & a_address,
-        std::string        const & a_port,
-        unsigned short int const   a_thread_pool_size
+        std::string        const a_address,
+        std::string        const a_port,
+        unsigned short int const a_thread_pool_size,
+        IContextShrPtr     const a_context
     );
 
     /**
@@ -104,6 +107,11 @@ private:
      * @brief The total number of served connections.
      */
     unsigned long long int m_served;
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 };
 
 } // namespace Server
