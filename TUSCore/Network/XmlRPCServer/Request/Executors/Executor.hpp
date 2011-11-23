@@ -31,6 +31,7 @@
 #include <GameServer/Common/IOperatorAbstractFactory.hpp>
 #include <GameServer/Persistence/IPersistence.hpp>
 #include <GameServer/User/IUser.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 #include <Network/XmlRPCServer/Request/Executors/IExecutor.hpp>
 
 namespace Network
@@ -50,9 +51,13 @@ class Executor
 {
 public:
     /**
-     * @brief Constructs the executor.
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
      */
-    Executor();
+    Executor(
+        IContextShrPtr const a_context
+    );
 
     /**
      * @brief Executes the action.
@@ -226,6 +231,11 @@ protected:
      * @brief The acting user.
      */
     GameServer::User::IUserShrPtr m_user;
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 };
 
 } // namespace Executors

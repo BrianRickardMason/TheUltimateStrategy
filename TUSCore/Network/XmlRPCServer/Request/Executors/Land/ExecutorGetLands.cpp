@@ -48,6 +48,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorGetLands::ExecutorGetLands(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorGetLands::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorGetLands.";

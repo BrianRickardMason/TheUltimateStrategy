@@ -66,6 +66,17 @@ namespace Executors
 class ExecutorFinishEpoch
     : public Executor
 {
+public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
+     */
+    ExecutorFinishEpoch(
+        IContextShrPtr const a_context
+    );
+
+private:
     /**
      * @brief Logs the start of the executor.
      */

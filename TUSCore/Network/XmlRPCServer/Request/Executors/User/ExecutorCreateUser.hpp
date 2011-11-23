@@ -62,6 +62,17 @@ namespace Executors
 class ExecutorCreateUser
     : public Executor
 {
+public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
+     */
+    ExecutorCreateUser(
+        IContextShrPtr const a_context
+    );
+
+private:
     /**
      * @brief Logs the start of the executor.
      */

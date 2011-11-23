@@ -50,6 +50,12 @@ namespace Request
 namespace Executors
 {
 
+ExecutorGetLand::ExecutorGetLand(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
 
 void ExecutorGetLand::logExecutorStart() const
 {

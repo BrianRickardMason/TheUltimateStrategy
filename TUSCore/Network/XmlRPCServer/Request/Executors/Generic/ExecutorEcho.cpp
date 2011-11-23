@@ -46,6 +46,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorEcho::ExecutorEcho(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorEcho::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorEcho.";

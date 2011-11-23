@@ -50,6 +50,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorTransportResource::ExecutorTransportResource(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorTransportResource::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorTransportResource.";

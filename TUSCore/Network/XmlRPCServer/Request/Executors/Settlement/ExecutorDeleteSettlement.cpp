@@ -49,6 +49,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorDeleteSettlement::ExecutorDeleteSettlement(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorDeleteSettlement::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteSettlement.";

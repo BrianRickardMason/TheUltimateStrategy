@@ -48,6 +48,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorGetEpoch::ExecutorGetEpoch(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorGetEpoch::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorGetEpoch.";

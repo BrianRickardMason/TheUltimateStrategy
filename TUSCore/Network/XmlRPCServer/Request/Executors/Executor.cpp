@@ -48,9 +48,12 @@ namespace Executors
 
 // TODO: Remove hardcoded persistence.
 // TODO: Remove hardcoded operator factory.
-Executor::Executor()
+Executor::Executor(
+    IContextShrPtr a_context
+)
     : m_persistence(new PersistencePostgresql),
-      m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql)
+      m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql),
+      m_context(a_context)
 {
 }
 

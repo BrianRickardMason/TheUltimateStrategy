@@ -76,73 +76,73 @@ IExecutorShrPtr RequestDispatcher::dispatchRequest(
 {
     if (!a_request)
     {
-        return shared_ptr<IExecutor>(new ExecutorError);
+        return shared_ptr<IExecutor>(new ExecutorError(a_context));
     }
 
     switch (a_request->getIdRequest())
     {
         case REQUEST_ID_ECHO:
-            return shared_ptr<IExecutor>(new ExecutorEcho);
+            return shared_ptr<IExecutor>(new ExecutorEcho(a_context));
         case REQUEST_ID_CREATE_LAND:
-            return shared_ptr<IExecutor>(new ExecutorCreateLand);
+            return shared_ptr<IExecutor>(new ExecutorCreateLand(a_context));
         case REQUEST_ID_DELETE_LAND:
-            return shared_ptr<IExecutor>(new ExecutorDeleteLand);
+            return shared_ptr<IExecutor>(new ExecutorDeleteLand(a_context));
         case REQUEST_ID_GET_LAND:
-            return shared_ptr<IExecutor>(new ExecutorGetLand);
+            return shared_ptr<IExecutor>(new ExecutorGetLand(a_context));
         case REQUEST_ID_GET_LANDS:
-            return shared_ptr<IExecutor>(new ExecutorGetLands);
+            return shared_ptr<IExecutor>(new ExecutorGetLands(a_context));
         case REQUEST_ID_CREATE_SETTLEMENT:
-            return shared_ptr<IExecutor>(new ExecutorCreateSettlement);
+            return shared_ptr<IExecutor>(new ExecutorCreateSettlement(a_context));
         case REQUEST_ID_DELETE_SETTLEMENT:
-            return shared_ptr<IExecutor>(new ExecutorDeleteSettlement);
+            return shared_ptr<IExecutor>(new ExecutorDeleteSettlement(a_context));
         case REQUEST_ID_GET_SETTLEMENT:
-            return shared_ptr<IExecutor>(new ExecutorGetSettlement);
+            return shared_ptr<IExecutor>(new ExecutorGetSettlement(a_context));
         case REQUEST_ID_GET_SETTLEMENTS:
-            return shared_ptr<IExecutor>(new ExecutorGetSettlements);
+            return shared_ptr<IExecutor>(new ExecutorGetSettlements(a_context));
         case REQUEST_ID_BUILD_BUILDING:
-            return shared_ptr<IExecutor>(new ExecutorBuildBuilding);
+            return shared_ptr<IExecutor>(new ExecutorBuildBuilding(a_context));
         case REQUEST_ID_DESTROY_BUILDING:
-            return shared_ptr<IExecutor>(new ExecutorDestroyBuilding);
+            return shared_ptr<IExecutor>(new ExecutorDestroyBuilding(a_context));
         case REQUEST_ID_GET_BUILDING:
-            return shared_ptr<IExecutor>(new ExecutorGetBuilding);
+            return shared_ptr<IExecutor>(new ExecutorGetBuilding(a_context));
         case REQUEST_ID_GET_BUILDINGS:
-            return shared_ptr<IExecutor>(new ExecutorGetBuildings);
+            return shared_ptr<IExecutor>(new ExecutorGetBuildings(a_context));
         case REQUEST_ID_DISMISS_HUMAN:
-            return shared_ptr<IExecutor>(new ExecutorDismissHuman);
+            return shared_ptr<IExecutor>(new ExecutorDismissHuman(a_context));
         case REQUEST_ID_ENGAGE_HUMAN:
-            return shared_ptr<IExecutor>(new ExecutorEngageHuman);
+            return shared_ptr<IExecutor>(new ExecutorEngageHuman(a_context));
         case REQUEST_ID_GET_HUMAN:
-            return shared_ptr<IExecutor>(new ExecutorGetHuman);
+            return shared_ptr<IExecutor>(new ExecutorGetHuman(a_context));
         case REQUEST_ID_GET_HUMANS:
-            return shared_ptr<IExecutor>(new ExecutorGetHumans);
+            return shared_ptr<IExecutor>(new ExecutorGetHumans(a_context));
         case REQUEST_ID_GET_RESOURCE:
-            return shared_ptr<IExecutor>(new ExecutorGetResource);
+            return shared_ptr<IExecutor>(new ExecutorGetResource(a_context));
         case REQUEST_ID_GET_RESOURCES:
-            return shared_ptr<IExecutor>(new ExecutorGetResources);
+            return shared_ptr<IExecutor>(new ExecutorGetResources(a_context));
         case REQUEST_ID_CREATE_USER:
-            return shared_ptr<IExecutor>(new ExecutorCreateUser);
+            return shared_ptr<IExecutor>(new ExecutorCreateUser(a_context));
         case REQUEST_ID_CREATE_WORLD:
-            return shared_ptr<IExecutor>(new ExecutorCreateWorld);
+            return shared_ptr<IExecutor>(new ExecutorCreateWorld(a_context));
         case REQUEST_ID_ACTIVATE_EPOCH:
-            return shared_ptr<IExecutor>(new ExecutorActivateEpoch);
+            return shared_ptr<IExecutor>(new ExecutorActivateEpoch(a_context));
         case REQUEST_ID_CREATE_EPOCH:
-            return shared_ptr<IExecutor>(new ExecutorCreateEpoch);
+            return shared_ptr<IExecutor>(new ExecutorCreateEpoch(a_context));
         case REQUEST_ID_DELETE_EPOCH:
-            return shared_ptr<IExecutor>(new ExecutorDeleteEpoch);
+            return shared_ptr<IExecutor>(new ExecutorDeleteEpoch(a_context));
         case REQUEST_ID_DEACTIVATE_EPOCH:
-            return shared_ptr<IExecutor>(new ExecutorDeactivateEpoch);
+            return shared_ptr<IExecutor>(new ExecutorDeactivateEpoch(a_context));
         case REQUEST_ID_FINISH_EPOCH:
-            return shared_ptr<IExecutor>(new ExecutorFinishEpoch);
+            return shared_ptr<IExecutor>(new ExecutorFinishEpoch(a_context));
         case REQUEST_ID_TICK_EPOCH:
-            return shared_ptr<IExecutor>(new ExecutorTickEpoch);
+            return shared_ptr<IExecutor>(new ExecutorTickEpoch(a_context));
         case REQUEST_ID_GET_EPOCH:
-            return shared_ptr<IExecutor>(new ExecutorGetEpoch);
+            return shared_ptr<IExecutor>(new ExecutorGetEpoch(a_context));
         case REQUEST_ID_TRANSPORT_HUMAN:
-            return shared_ptr<IExecutor>(new ExecutorTransportHuman);
+            return shared_ptr<IExecutor>(new ExecutorTransportHuman(a_context));
         case REQUEST_ID_TRANSPORT_RESOURCE:
-            return shared_ptr<IExecutor>(new ExecutorTransportResource);
+            return shared_ptr<IExecutor>(new ExecutorTransportResource(a_context));
         default:
-            return shared_ptr<IExecutor>(new ExecutorError);
+            return shared_ptr<IExecutor>(new ExecutorError(a_context));
     }
 }
 

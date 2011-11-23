@@ -47,6 +47,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorCreateWorld::ExecutorCreateWorld(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorCreateWorld::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorCreateWorld.";

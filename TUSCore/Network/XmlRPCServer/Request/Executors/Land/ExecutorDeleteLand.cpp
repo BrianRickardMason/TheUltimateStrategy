@@ -49,6 +49,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorDeleteLand::ExecutorDeleteLand(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorDeleteLand::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteLand.";

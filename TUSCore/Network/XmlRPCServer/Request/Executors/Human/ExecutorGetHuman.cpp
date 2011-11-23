@@ -50,6 +50,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorGetHuman::ExecutorGetHuman(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorGetHuman::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorGetHuman.";

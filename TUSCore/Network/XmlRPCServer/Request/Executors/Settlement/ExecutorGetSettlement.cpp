@@ -49,6 +49,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorGetSettlement::ExecutorGetSettlement(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorGetSettlement::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorGetSettlement.";

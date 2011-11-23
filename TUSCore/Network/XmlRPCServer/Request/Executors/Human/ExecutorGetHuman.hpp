@@ -76,6 +76,17 @@ namespace Executors
 class ExecutorGetHuman
     : public Executor
 {
+public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
+     */
+    ExecutorGetHuman(
+        IContextShrPtr const a_context
+    );
+
+private:
     /**
      * @brief Logs the start of the executor.
      */

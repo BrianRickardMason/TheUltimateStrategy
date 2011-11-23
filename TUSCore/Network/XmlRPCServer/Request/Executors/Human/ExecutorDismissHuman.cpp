@@ -50,6 +50,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorDismissHuman::ExecutorDismissHuman(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorDismissHuman::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorDismissHuman.";

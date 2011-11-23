@@ -46,6 +46,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorError::ExecutorError(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorError::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorError.";

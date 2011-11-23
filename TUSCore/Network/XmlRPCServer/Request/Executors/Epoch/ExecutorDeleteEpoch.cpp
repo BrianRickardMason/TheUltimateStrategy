@@ -48,6 +48,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorDeleteEpoch::ExecutorDeleteEpoch(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorDeleteEpoch::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteEpoch.";

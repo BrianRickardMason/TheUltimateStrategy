@@ -77,6 +77,17 @@ namespace Executors
 class ExecutorGetBuildings
     : public Executor
 {
+public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
+     */
+    ExecutorGetBuildings(
+        IContextShrPtr const a_context
+    );
+
+private:
     /**
      * @brief Logs the start of the executor.
      */

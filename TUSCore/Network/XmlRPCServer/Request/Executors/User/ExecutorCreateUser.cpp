@@ -47,6 +47,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorCreateUser::ExecutorCreateUser(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorCreateUser::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorCreateUser.";

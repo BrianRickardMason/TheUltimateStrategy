@@ -50,6 +50,13 @@ namespace Request
 namespace Executors
 {
 
+ExecutorDestroyBuilding::ExecutorDestroyBuilding(
+    IContextShrPtr a_context
+)
+    : Executor(a_context)
+{
+}
+
 void ExecutorDestroyBuilding::logExecutorStart() const
 {
     Category::getInstance("Category").infoStream() << "Starting the ExecutorDestroyBuilding.";
