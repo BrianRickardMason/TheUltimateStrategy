@@ -30,6 +30,7 @@
 
 #include "../../XmlRPCCommon/Request/Request.hpp"
 #include "IRequestDispatcher.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace Network
 {
@@ -54,9 +55,11 @@ public:
      * @brief Handles the request.
      *
      * @param a_request A request to be handled.
+     * @param a_context The context of the server.
      */
     XmlRPCCommon::Reply::ReplyShrPtr handleRequest(
-        XmlRPCCommon::Request::RequestShrPtr a_request
+        XmlRPCCommon::Request::RequestShrPtr       a_request,
+        IContextShrPtr                       const a_context
     );
 
 private:

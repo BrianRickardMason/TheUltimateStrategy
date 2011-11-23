@@ -100,7 +100,7 @@ void ConnectionDisposable::handleRequest(
     Category::getInstance("Category").debugStream() << "Handling the request.";
 
     // Handle the request.
-    XmlRPCCommon::Reply::ReplyShrPtr reply = m_request_handler.handleRequest(a_request);
+    XmlRPCCommon::Reply::ReplyShrPtr reply = m_request_handler.handleRequest(a_request, m_context);
 
     if (reply)
     {
