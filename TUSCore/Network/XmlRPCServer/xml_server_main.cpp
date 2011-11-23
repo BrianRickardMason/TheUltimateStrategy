@@ -27,6 +27,7 @@
 
 #include <Network/XmlRPCServer/Configurator.hpp>
 #include <Network/XmlRPCServer/Server/Server.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/thread.hpp>
 #include <log4cpp/Category.hh>
@@ -96,6 +97,9 @@ int main(
         appender->setLayout(layout);
         category.setAppender(appender);
         category.setPriority(priority);
+
+        // Create the context.
+        IContextShrPtr context(new Context);
 
         // Run the server in a background thread.
         Server server(host, port, threads);
