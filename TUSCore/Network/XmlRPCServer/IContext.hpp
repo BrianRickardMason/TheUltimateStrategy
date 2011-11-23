@@ -29,6 +29,7 @@
 #define ICONTEXT_HPP
 
 #include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 
 /**
  * @brief The interface of Context.
