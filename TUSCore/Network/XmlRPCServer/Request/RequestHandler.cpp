@@ -50,7 +50,7 @@ ReplyShrPtr RequestHandler::handleRequest(
     IContextShrPtr const a_context
 )
 {
-    IExecutorShrPtr executor = m_request_dispatcher->dispatchRequest(a_request);
+    IExecutorShrPtr executor = m_request_dispatcher->dispatchRequest(a_request, a_context);
 
     return executor->execute(a_request);
 }

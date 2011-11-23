@@ -30,6 +30,7 @@
 
 #include "../../XmlRPCCommon/Request/Request.hpp"
 #include "Executors/IExecutor.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace Network
@@ -52,11 +53,13 @@ public:
      * @brief Dispatches the request.
      *
      * @param a_request The request to be dispatched.
+     * @param a_context The context of the server.
      *
      * @return The concrete executor.
      */
     virtual Executors::IExecutorShrPtr dispatchRequest(
-        XmlRPCCommon::Request::RequestShrPtr a_request
+        XmlRPCCommon::Request::RequestShrPtr       a_request,
+        IContextShrPtr                       const a_context
     ) const = 0;
 };
 

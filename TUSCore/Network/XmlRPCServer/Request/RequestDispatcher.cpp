@@ -70,7 +70,8 @@ namespace Request
 {
 
 IExecutorShrPtr RequestDispatcher::dispatchRequest(
-    RequestShrPtr a_request
+    RequestShrPtr        a_request,
+    IContextShrPtr const a_context
 ) const
 {
     if (!a_request)
