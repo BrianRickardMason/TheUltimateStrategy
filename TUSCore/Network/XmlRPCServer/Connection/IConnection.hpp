@@ -39,6 +39,9 @@ namespace Connection
 
 /**
  * @brief The interface of a connection.
+ *
+ * TODO: Dear future me... Please consider how are you going to handle the context of the server in the interface.
+ *       BTW: Good luck!
  */
 class IConnection
     : boost::noncopyable

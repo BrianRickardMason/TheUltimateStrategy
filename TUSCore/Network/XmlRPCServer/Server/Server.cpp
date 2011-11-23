@@ -50,7 +50,7 @@ Server::Server(
     : m_thread_pool_size(a_thread_pool_size),
       m_io_service(a_thread_pool_size),
       m_acceptor(m_io_service),
-      m_new_connection(new Connection::ConnectionDisposable(m_io_service)),
+      m_new_connection(new Connection::ConnectionDisposable(m_io_service, m_context)),
       m_served(0),
       m_context(a_context)
 {
@@ -121,7 +121,7 @@ void Server::handleAccept(
     if (!a_error)
     {
         m_new_connection->start();
-        m_new_connection.reset(new Connection::ConnectionDisposable(m_io_service));
+        m_new_connection.reset(new Connection::ConnectionDisposable(m_io_service, m_context));
         m_acceptor.async_accept(
             m_new_connection->getSocket(),
             boost::bind(

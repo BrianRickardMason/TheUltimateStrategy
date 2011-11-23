@@ -25,10 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "ConnectionDisposable.hpp"
-
 #include "../../XmlRPCCommon/Request/Request.hpp"
 #include "../Request/RequestParser.hpp"
+#include "ConnectionDisposable.hpp"
 #include <boost/bind.hpp>
 #include <log4cpp/Category.hh>
 
@@ -43,11 +42,13 @@ namespace Connection
 {
 
 ConnectionDisposable::ConnectionDisposable(
-    boost::asio::io_service & a_io_service
+    boost::asio::io_service       & a_io_service,
+    IContextShrPtr          const   a_context
 )
     : m_socket(a_io_service),
       m_request_parser(new Request::RequestParser),
-      m_request_wrapper(new XmlRPCCommon::Common::MessageWrapper)
+      m_request_wrapper(new XmlRPCCommon::Common::MessageWrapper),
+      m_context(a_context)
 {
 }
 

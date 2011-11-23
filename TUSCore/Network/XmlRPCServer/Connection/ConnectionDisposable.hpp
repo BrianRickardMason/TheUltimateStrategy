@@ -32,6 +32,7 @@
 #include "../Request/RequestHandler.hpp"
 #include "../Request/IRequestParser.hpp"
 #include "IConnection.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
 namespace Network
@@ -55,9 +56,11 @@ public:
      * @brief Constructs a connection with the given io_service.
      *
      * @param a_io_service The given io_service.
+     * @param a_context    The context of the server.
      */
     ConnectionDisposable(
-        boost::asio::io_service & a_io_service
+        boost::asio::io_service       & a_io_service,
+        IContextShrPtr          const   a_context
     );
 
     /**
@@ -121,6 +124,11 @@ private:
      * @brief The message wrapper of the request.
      */
     XmlRPCCommon::Common::MessageWrapperShrPtr m_request_wrapper;
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 };
 
 } // namespace Connection
