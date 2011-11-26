@@ -32,6 +32,7 @@
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "IEngageHumanOperator.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -48,14 +49,16 @@ public:
     /**
      * @brief Ctor.
      *
+     * @param a_context                     The context of the server.
      * @param a_building_persistence_facade The persistence facade of buildings.
      * @param a_human_persistence_facade    The persistence facade of humans.
      * @param a_resource_persistence_facade The persistence facade of resources.
      */
     EngageHumanOperator(
-        Building::IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-        IHumanPersistenceFacadeShrPtr              a_human_persistence_facade,
-        Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
+        IContextShrPtr                             const a_context,
+        Building::IBuildingPersistenceFacadeShrPtr       a_building_persistence_facade,
+        IHumanPersistenceFacadeShrPtr                    a_human_persistence_facade,
+        Resource::IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
     );
 
     /**
@@ -120,6 +123,11 @@ private:
         Common::IDHolder                const & a_id_holder,
         Volume                          const & a_volume
     ) const;
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     //@{
     /**

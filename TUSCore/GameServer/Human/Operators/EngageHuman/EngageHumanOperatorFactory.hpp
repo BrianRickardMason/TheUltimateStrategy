@@ -30,6 +30,7 @@
 
 #include "../../../Common/IPersistenceFacadeAbstractFactory.hpp"
 #include "EngageHumanOperator.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -45,12 +46,14 @@ public:
     /**
      * @brief The factory method.
      *
+     * @param a_context                             The context of the server.
      * @param a_persistence_facade_abstract_factory The abstract factory of persistence facades.
      *
      * @return The newly created EngageHumanOperator.
      */
     static EngageHumanOperatorAutPtr createEngageHumanOperator(
-        Common::IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
+        IContextShrPtr                                  const a_context,
+        Common::IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
     );
 };
 

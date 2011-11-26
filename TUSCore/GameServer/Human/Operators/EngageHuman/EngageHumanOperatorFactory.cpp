@@ -35,13 +35,17 @@ namespace Human
 {
 
 EngageHumanOperatorAutPtr EngageHumanOperatorFactory::createEngageHumanOperator(
-    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
+        IContextShrPtr                          const a_context,
+        IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
 )
 {
     return EngageHumanOperatorAutPtr(
-               new EngageHumanOperator(a_persistence_facade_abstract_factory->createBuildingPersistenceFacade(),
-                                       a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
-                                       a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
+               new EngageHumanOperator(
+                       a_context,
+                       a_persistence_facade_abstract_factory->createBuildingPersistenceFacade(),
+                       a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
+                       a_persistence_facade_abstract_factory->createResourcePersistenceFacade()
+                   )
            );
 }
 

@@ -199,7 +199,12 @@ IDismissHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createDismissHuma
 
 IEngageHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createEngageHumanOperator() const
 {
-    return IEngageHumanOperatorShrPtr(EngageHumanOperatorFactory::createEngageHumanOperator(m_persistence_facade_abstract_factory));
+    return IEngageHumanOperatorShrPtr(
+               EngageHumanOperatorFactory::createEngageHumanOperator(
+                   m_context,
+                   m_persistence_facade_abstract_factory
+               )
+           );
 }
 
 IGetHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetHumanOperator() const
