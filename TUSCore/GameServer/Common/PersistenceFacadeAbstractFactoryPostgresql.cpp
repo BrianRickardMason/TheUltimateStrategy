@@ -56,8 +56,11 @@ namespace GameServer
 namespace Common
 {
 
-PersistenceFacadeAbstractFactoryPostgresql::PersistenceFacadeAbstractFactoryPostgresql()
-    : m_accessor_abstract_factory(new AccessorAbstractFactoryPostgresql)
+PersistenceFacadeAbstractFactoryPostgresql::PersistenceFacadeAbstractFactoryPostgresql(
+    IContextShrPtr const a_context
+)
+    : m_context(a_context),
+      m_accessor_abstract_factory(new AccessorAbstractFactoryPostgresql)
 {
 }
 
@@ -87,7 +90,9 @@ PersistenceFacadeAbstractFactoryPostgresql::createAuthorizationPersistenceFacade
 
 IBuildingPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createBuildingPersistenceFacade() const
 {
-    return IBuildingPersistenceFacadeShrPtr(BuildingPersistenceFacadeFactory::create(m_accessor_abstract_factory));
+    return IBuildingPersistenceFacadeShrPtr(
+                BuildingPersistenceFacadeFactory::create(m_context, m_accessor_abstract_factory)
+           );
 }
 
 IEpochPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createEpochPersistenceFacade() const

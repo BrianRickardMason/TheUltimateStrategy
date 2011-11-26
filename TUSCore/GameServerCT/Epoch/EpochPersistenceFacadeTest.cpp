@@ -28,6 +28,7 @@
 #include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../ComponentTest.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
@@ -49,7 +50,8 @@ protected:
      * @brief Constructs the test class.
      */
     EpochPersistenceFacadeTest()
-        : m_epoch_name_1("Epoch1"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_epoch_name_1("Epoch1"),
           m_epoch_name_2("Epoch2"),
           m_epoch_name_3("Epoch3"),
           m_login("Login"),
@@ -58,7 +60,7 @@ protected:
           m_world_name_3("World3"),
           m_land_name("Land"),
           m_settlement_name("Settlement"),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
@@ -101,6 +103,11 @@ protected:
         ASSERT_TRUE(a_finished == a_epoch->getFinished());
         ASSERT_EQ(a_ticks, a_epoch->getTicks());
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the names of the epochs.

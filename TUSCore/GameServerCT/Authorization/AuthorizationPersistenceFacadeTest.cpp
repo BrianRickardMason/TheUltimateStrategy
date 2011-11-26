@@ -28,6 +28,7 @@
 #include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Settlement/SettlementPersistenceFacadeFactory.hpp"
 #include "../ComponentTest.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Authorization;
 using namespace GameServer::Common;
@@ -50,7 +51,8 @@ protected:
      * @brief Constructs the test class.
      */
     AuthorizationPersistenceFacadeTest()
-        : m_epoch_name("Epoch"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_epoch_name("Epoch"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
           m_land_name_5("Land5"),
@@ -61,7 +63,7 @@ protected:
           m_login_2("Login2"),
           m_login_5("Login5"),
           m_world_name("World"),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
@@ -91,6 +93,11 @@ protected:
             transaction->commit();
         }
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

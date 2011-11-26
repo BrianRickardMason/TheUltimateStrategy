@@ -29,6 +29,7 @@
 #include "../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../ComponentTest.hpp"
 #include <GameServer/Resource/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Common;
@@ -55,14 +56,15 @@ protected:
      * @brief Constructs the test class.
      */
     ResourcePersistenceFacadeTest()
-        : m_epoch_name("Epoch"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
           m_land_name("Land"),
           m_settlement_name_1("Settlement1"),
           m_settlement_name_2("Settlement2"),
           m_settlement_name_3("Settlement3"),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
           m_resource_persistence_facade(m_persistence_facade_abstract_factory->createResourcePersistenceFacade()),
@@ -146,6 +148,11 @@ protected:
         ASSERT_TRUE(a_key == a_resource->getResource()->getKey());
         ASSERT_EQ(a_volume, a_resource->getVolume());
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

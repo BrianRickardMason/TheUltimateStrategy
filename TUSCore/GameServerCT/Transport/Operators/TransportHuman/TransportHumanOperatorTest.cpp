@@ -29,6 +29,7 @@
 #include "../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp"
 #include "../../../../GameServer/Transport/Operators/TransportHuman/TransportHumanOperatorFactory.hpp"
 #include "../../../ComponentTest.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
@@ -52,7 +53,8 @@ protected:
      * @brief Constructs the test class.
      */
     TransportHumanOperatorTest()
-        : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
@@ -118,6 +120,11 @@ protected:
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     TransportHumanOperatorAutPtr    m_transport_human_operator;
     //}@
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

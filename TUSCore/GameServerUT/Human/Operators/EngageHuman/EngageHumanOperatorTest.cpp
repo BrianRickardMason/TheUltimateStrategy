@@ -32,6 +32,7 @@
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
 #include "../../HumanPersistenceFacadeMock.hpp"
 #include <GameServer/Building/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
@@ -58,7 +59,8 @@ protected:
      * @brief Creates a test class.
      */
     EngageHumanOperatorTest()
-        : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_building_persistence_facade(new BuildingPersistenceFacadeMock),
           m_human_persistence_facade(new HumanPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
@@ -109,7 +111,7 @@ protected:
     )
     {
         BuildingWithVolumeShrPtr building_with_volume =
-            (a_volume) ? make_shared<BuildingWithVolume>(a_key, a_volume) : BuildingWithVolumeShrPtr();
+            (a_volume) ? make_shared<BuildingWithVolume>(m_context, a_key, a_volume) : BuildingWithVolumeShrPtr();
 
         EXPECT_CALL(*m_building_persistence_facade, getBuilding(_, m_id_holder, a_key))
         .WillOnce(Return(building_with_volume));
@@ -191,6 +193,11 @@ protected:
         EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, a_resource_set))
         .WillOnce(Return(true));
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     //@{
     /**
@@ -379,7 +386,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_REGULAR_FORGE, building_volume)));
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
@@ -429,7 +436,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_REGULAR_FORGE, building_volume)));
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
@@ -479,7 +486,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_REGULAR_FORGE, building_volume)));
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
@@ -529,7 +536,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_REGULAR_FORGE, building_volume)));
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
@@ -567,7 +574,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_REGULAR_FORGE, building_volume)));
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))

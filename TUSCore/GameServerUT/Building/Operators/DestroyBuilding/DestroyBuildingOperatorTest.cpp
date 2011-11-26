@@ -74,7 +74,7 @@ protected:
     )
     {
         EXPECT_CALL(*m_building_persistence_facade, getBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN))
-        .WillOnce(Return(make_shared<BuildingWithVolume>(KEY_DEFENSIVE_BARBICAN, a_volume)));
+        .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_DEFENSIVE_BARBICAN, a_volume)));
     }
 
     /**

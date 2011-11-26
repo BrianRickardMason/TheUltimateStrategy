@@ -32,6 +32,7 @@
 #include "../../../Helpers/Constants.hpp"
 #include <GameServer/Human/Key.hpp>
 #include <GameServer/Resource/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Common;
@@ -59,7 +60,8 @@ protected:
      * @brief Constructs the test class.
      */
     DismissHumanOperatorTest()
-        : m_epoch_name("Epoch"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_epoch_name("Epoch"),
           m_login_1("Login1"),
           m_login_2("Login2"),
           m_world_name("World"),
@@ -73,7 +75,7 @@ protected:
           m_id_holder_12(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
           m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3),
           m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
           m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
@@ -155,6 +157,11 @@ protected:
             ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
         }
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

@@ -30,6 +30,7 @@
 
 #include <GameServer/Building/IBuildingAccessor.hpp>
 #include <GameServer/Building/IBuildingPersistenceFacade.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -44,12 +45,14 @@ class BuildingPersistenceFacade
 {
 public:
     /**
-     * @brief Constructs the building persistence facade.
+     * @brief Ctor.
      *
+     * @param a_context  The context of the server.
      * @param a_accessor An accessor to be injected.
      */
     BuildingPersistenceFacade(
-        IBuildingAccessorAutPtr a_accessor
+        IContextShrPtr          const a_context,
+        IBuildingAccessorAutPtr       a_accessor
     );
 
     /**
@@ -121,6 +124,11 @@ private:
      * @brief An accessor.
      */
     IBuildingAccessorScpPtr m_accessor;
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 };
 
 /**

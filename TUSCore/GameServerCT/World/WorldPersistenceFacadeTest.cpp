@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../ComponentTest.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -44,11 +45,12 @@ protected:
      * @brief Constructs the test class.
      */
     WorldPersistenceFacadeTest()
-        : m_world_name_1("World1"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_world_name_1("World1"),
           m_world_name_2("World2"),
           m_world_name_3("World3"),
           m_world_name_4("World4"),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade())
     {
     }
@@ -68,13 +70,17 @@ protected:
     }
 
     /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
+    /**
      * @brief Test constants: the names of the worlds.
      */
     string m_world_name_1,
            m_world_name_2,
            m_world_name_3,
            m_world_name_4;
-
 
     /**
      * @brief The abstract factory of persistence facades.

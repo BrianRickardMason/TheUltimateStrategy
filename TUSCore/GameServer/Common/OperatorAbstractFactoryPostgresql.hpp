@@ -101,6 +101,11 @@ public:
 
 private:
     /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
+    /**
      * @brief The abstract factory of managers.
      */
     IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
@@ -109,11 +114,6 @@ private:
      * @brief The abstract factory of persistence facades.
      */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
-
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
 };
 
 } // namespace Common

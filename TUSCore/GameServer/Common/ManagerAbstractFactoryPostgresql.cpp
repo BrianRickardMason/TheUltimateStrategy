@@ -38,8 +38,11 @@ namespace GameServer
 namespace Common
 {
 
-ManagerAbstractFactoryPostgresql::ManagerAbstractFactoryPostgresql()
-    : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql)
+ManagerAbstractFactoryPostgresql::ManagerAbstractFactoryPostgresql(
+    IContextShrPtr const a_context
+)
+    : m_context(a_context),
+      m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context))
 {
 }
 

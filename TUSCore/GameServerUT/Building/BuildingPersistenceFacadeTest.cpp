@@ -29,6 +29,7 @@
 #include "../Persistence/TransactionDummy.hpp"
 #include "BuildingAccessorMock.hpp"
 #include <GameServer/Building/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -51,7 +52,8 @@ protected:
      * @brief Creates a test class.
      */
     BuildingPersistenceFacadeTest()
-        : m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
           m_key_1(KEY_DEFENSIVE_BARBICAN),
           m_key_2(KEY_GOLD_ALTAR_OF_WISHES)
     {
@@ -75,6 +77,11 @@ protected:
     }
 
     /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
+    /**
      * @brief Test constants id holders.
      */
     IDHolder m_id_holder_1;
@@ -90,7 +97,7 @@ TEST_F(BuildingPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IBuildingAccessorAutPtr accessor(new BuildingAccessorMock);
 
-    ASSERT_NO_THROW(BuildingPersistenceFacade persistence_facade(accessor));
+    ASSERT_NO_THROW(BuildingPersistenceFacade persistence_facade(m_context, accessor));
 }
 
 TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresent)
@@ -106,7 +113,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresent)
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5);
 }
@@ -127,7 +134,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsNotPresentThrowFromAc
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
 }
@@ -145,7 +152,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsPresent)
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5);
 }
@@ -166,7 +173,7 @@ TEST_F(BuildingPersistenceFacadeTest, AddBuildingBuildingIsPresentThrowFromAcces
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.addBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
 }
@@ -182,7 +189,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsNotPresentReturn
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_FALSE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5));
 }
@@ -200,7 +207,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractP
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_TRUE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 3));
 }
@@ -221,7 +228,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractP
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 3), std::exception);
 }
@@ -239,7 +246,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractA
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_TRUE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5));
 }
@@ -260,7 +267,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentSubtractA
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 5), std::exception);
 }
@@ -276,7 +283,7 @@ TEST_F(BuildingPersistenceFacadeTest, SubtractBuildingBuildingIsPresentReturnsFa
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_FALSE(persistence_facade.subtractBuilding(transaction, m_id_holder_1, m_key_1, 6));
 }
@@ -292,7 +299,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsNotPresent)
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     BuildingWithVolumeShrPtr building = persistence_facade.getBuilding(transaction, m_id_holder_1, m_key_1);
 
@@ -310,7 +317,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent)
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     BuildingWithVolumeShrPtr building = persistence_facade.getBuilding(transaction, m_id_holder_1, m_key_1);
 
@@ -330,7 +337,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsAreNotPresent)
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     BuildingWithVolumeMap buildings = persistence_facade.getBuildings(transaction, m_id_holder_1);
 
@@ -351,7 +358,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OneBuildi
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     BuildingWithVolumeMap buildings = persistence_facade.getBuildings(transaction, m_id_holder_1);
 
@@ -377,7 +384,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoBuildi
 
     IBuildingAccessorAutPtr accessor(mock);
 
-    BuildingPersistenceFacade persistence_facade(accessor);
+    BuildingPersistenceFacade persistence_facade(m_context, accessor);
 
     BuildingWithVolumeMap buildings = persistence_facade.getBuildings(transaction, m_id_holder_1);
 

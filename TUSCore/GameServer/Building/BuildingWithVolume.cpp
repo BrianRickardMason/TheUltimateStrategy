@@ -36,20 +36,22 @@ namespace Building
 {
 
 BuildingWithVolume::BuildingWithVolume(
-    IBuildingKey const a_key,
-    Volume       const a_volume
+    IContextShrPtr const a_context,
+    IBuildingKey   const a_key,
+    Volume         const a_volume
 )
     : m_volume(a_volume)
 {
-    m_building = CONFIGURATOR_BUILDING.getBuilding(a_key);
+    m_building = a_context->getConfiguratorBuilding()->getBuilding(a_key);
 }
 
 BuildingWithVolume::BuildingWithVolume(
+    IContextShrPtr           const   a_context,
     BuildingWithVolumeRecord const & a_record
 )
     : m_volume(a_record.getVolume())
 {
-    m_building = CONFIGURATOR_BUILDING.getBuilding(a_record.getKey());
+    m_building = a_context->getConfiguratorBuilding()->getBuilding(a_record.getKey());
 }
 
 IBuildingShrPtr BuildingWithVolume::getBuilding() const

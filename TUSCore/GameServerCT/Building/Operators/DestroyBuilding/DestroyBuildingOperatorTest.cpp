@@ -75,7 +75,7 @@ protected:
           m_id_holder_12(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
           m_id_holder_21(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3),
           m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_building_persistence_facade(m_persistence_facade_abstract_factory->createBuildingPersistenceFacade()),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),

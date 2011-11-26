@@ -27,6 +27,7 @@
 
 #include <GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <GameServerCT/ComponentTest.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
@@ -47,7 +48,8 @@ protected:
      * @brief Constructs the test class.
      */
     LandPersistenceFacadeTest()
-        : m_epoch_name_1("Epoch1"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_epoch_name_1("Epoch1"),
           m_epoch_name_2("Epoch2"),
           m_epoch_name_3("Epoch3"),
           m_epoch_name_5("Epoch5"),
@@ -64,7 +66,7 @@ protected:
           m_land_name_3("Land3"),
           m_land_name_4("Land4"),
           m_land_name_5("Land5"),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
           m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
@@ -109,6 +111,11 @@ protected:
         ASSERT_STREQ(a_world_name.c_str(), a_land->getWorldName().c_str());
         ASSERT_STREQ(a_land_name.c_str(), a_land->getLandName().c_str());
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the names of the epochs.

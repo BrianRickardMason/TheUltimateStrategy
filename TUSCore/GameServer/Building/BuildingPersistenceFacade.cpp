@@ -38,9 +38,11 @@ namespace Building
 {
 
 BuildingPersistenceFacade::BuildingPersistenceFacade(
-    IBuildingAccessorAutPtr a_accessor
+    IContextShrPtr          const a_context,
+    IBuildingAccessorAutPtr       a_accessor
 )
-    : m_accessor(a_accessor)
+    : m_context(a_context),
+      m_accessor(a_accessor)
 {
 }
 
@@ -99,7 +101,7 @@ BuildingWithVolumeShrPtr BuildingPersistenceFacade::getBuilding(
 {
     BuildingWithVolumeRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_holder, a_key);
 
-    return record ? make_shared<BuildingWithVolume>(*record) : BuildingWithVolumeShrPtr();
+    return record ? make_shared<BuildingWithVolume>(m_context, *record) : BuildingWithVolumeShrPtr();
 }
 
 BuildingWithVolumeMap BuildingPersistenceFacade::getBuildings(
@@ -115,7 +117,7 @@ BuildingWithVolumeMap BuildingPersistenceFacade::getBuildings(
     {
         if (it->second)
         {
-            BuildingWithVolumeShrPtr building = make_shared<BuildingWithVolume>(*it->second);
+            BuildingWithVolumeShrPtr building = make_shared<BuildingWithVolume>(m_context, *it->second);
             BuildingWithVolumePair pair(it->first, building);
             result.insert(pair);
         }

@@ -35,11 +35,12 @@ namespace Building
 {
 
 BuildingPersistenceFacadeAutPtr BuildingPersistenceFacadeFactory::create(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    IContextShrPtr                 const a_context,
+    IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
 )
 {
     return BuildingPersistenceFacadeAutPtr(
-               new BuildingPersistenceFacade(a_accessor_abstract_factory->createBuildingAccessor())
+               new BuildingPersistenceFacade(a_context, a_accessor_abstract_factory->createBuildingAccessor())
            );
 }
 

@@ -30,6 +30,7 @@
 
 #include <GameServer/Common/IManagerAbstractFactory.hpp>
 #include <GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -43,7 +44,14 @@ class ManagerAbstractFactoryPostgresql
     : public IManagerAbstractFactory
 {
 public:
-    ManagerAbstractFactoryPostgresql();
+    /**
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
+     */
+    ManagerAbstractFactoryPostgresql(
+        IContextShrPtr const a_context
+    );
 
     //@{
     /**
@@ -56,6 +64,11 @@ public:
     //}@
 
 private:
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
     /**
      * @brief The abstract factory of persistence facades.
      */

@@ -30,6 +30,7 @@
 
 #include <GameServer/Building/BuildingWithVolumeRecord.hpp>
 #include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -45,10 +46,12 @@ public:
     /**
      * @brief Constructs the building with volume.
      *
-     * @param a_key    The key of the building.
-     * @param a_volume The volume of the building.
+     * @param a_context The context of the server.
+     * @param a_key     The key of the building.
+     * @param a_volume  The volume of the building.
      */
     BuildingWithVolume(
+        IContextShrPtr              const a_context,
         Configuration::IBuildingKey const a_key,
         Volume                      const a_volume
     );
@@ -56,9 +59,11 @@ public:
     /**
      * @brief Constructs the build with volume.
      *
-     * @param a_record The record of building with volume.
+     * @param a_context The context of the server.
+     * @param a_record  The record of building with volume.
      */
     explicit BuildingWithVolume(
+        IContextShrPtr           const   a_context,
         BuildingWithVolumeRecord const & a_record
     );
 

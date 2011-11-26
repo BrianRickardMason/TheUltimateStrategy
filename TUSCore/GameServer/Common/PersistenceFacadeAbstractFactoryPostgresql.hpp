@@ -30,6 +30,7 @@
 
 #include "IAccessorAbstractFactory.hpp"
 #include "IPersistenceFacadeAbstractFactory.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -43,7 +44,14 @@ class PersistenceFacadeAbstractFactoryPostgresql
     : public IPersistenceFacadeAbstractFactory
 {
 public:
-    PersistenceFacadeAbstractFactoryPostgresql();
+    /**
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
+     */
+    PersistenceFacadeAbstractFactoryPostgresql(
+        IContextShrPtr const a_context
+    );
 
     //@{
     /**
@@ -65,6 +73,11 @@ public:
     //}@
 
 private:
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
     /**
      * @brief The abstract factory of accessors.
      */

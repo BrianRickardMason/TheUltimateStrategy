@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp"
 #include "../ComponentTest.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -44,13 +45,19 @@ protected:
      * @brief Constructs the test class.
      */
     UserPersistenceFacadeTest()
-        : m_login("Login"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_login("Login"),
           m_password("Password"),
           m_different_password("DifferentPassword"),
-          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade())
     {
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the login of the user.

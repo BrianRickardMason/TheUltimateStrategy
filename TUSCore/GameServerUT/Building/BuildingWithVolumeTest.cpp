@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Building/BuildingWithVolume.hpp"
 #include <GameServer/Building/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
@@ -44,10 +45,16 @@ protected:
      * @brief Constructs a test class.
      */
     BuildingWithVolumeTest()
-        : m_building_with_volume(KEY_DEFENSIVE_BARBICAN, 4),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_building_with_volume(m_context, KEY_DEFENSIVE_BARBICAN, 4),
           m_model_key(KEY_DEFENSIVE_BARBICAN)
     {
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief A building with volume to be tested.
@@ -62,7 +69,7 @@ protected:
 
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnArguments)
 {
-    BuildingWithVolume building_with_volume(KEY_DEFENSIVE_BARBICAN, 4);
+    BuildingWithVolume building_with_volume(m_context, KEY_DEFENSIVE_BARBICAN, 4);
 
     ASSERT_TRUE(m_model_key == building_with_volume.getBuilding()->getKey());
     ASSERT_EQ(4, building_with_volume.getVolume());
@@ -70,9 +77,10 @@ TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnArguments)
 
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnRecord)
 {
-    BuildingWithVolumeRecord building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_DEFENSIVE_BARBICAN, 4);
+    BuildingWithVolumeRecord
+        building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_DEFENSIVE_BARBICAN, 4);
 
-    BuildingWithVolume building_with_volume(building_with_volume_record);
+    BuildingWithVolume building_with_volume(m_context, building_with_volume_record);
 
     ASSERT_TRUE(m_model_key == building_with_volume.getBuilding()->getKey());
     ASSERT_EQ(4, building_with_volume.getVolume());

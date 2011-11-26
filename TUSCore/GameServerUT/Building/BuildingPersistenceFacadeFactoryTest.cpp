@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Building/BuildingPersistenceFacadeFactory.hpp"
 #include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
@@ -36,9 +37,11 @@ TEST(BuildingagerFactoryTest, CreateDoesNotThrow)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
+    IContextShrPtr context(new Context("localhost", "2222", 1, 100, "postgresql"));
+
     ASSERT_NO_THROW(
         BuildingPersistenceFacadeAutPtr persistence_facade =
-            BuildingPersistenceFacadeFactory::create(accessor_abstract_factory)
+            BuildingPersistenceFacadeFactory::create(context, accessor_abstract_factory)
     );
 }
 
@@ -46,8 +49,10 @@ TEST(BuildingagerFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
+    IContextShrPtr context(new Context("localhost", "2222", 1, 100, "postgresql"));
+
     BuildingPersistenceFacadeAutPtr persistence_facade =
-        BuildingPersistenceFacadeFactory::create(accessor_abstract_factory);
+        BuildingPersistenceFacadeFactory::create(context, accessor_abstract_factory);
 
     ASSERT_TRUE(persistence_facade.get() != NULL);
 }
