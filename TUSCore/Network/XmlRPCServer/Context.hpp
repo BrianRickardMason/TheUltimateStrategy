@@ -36,6 +36,84 @@
 class Context
     : public IContext
 {
+public:
+    /**
+     * @brief Ctor.
+     *
+     * @param a_host            The host's address.
+     * @param a_port            The host's port.
+     * @param a_threads         The number of threads.
+     * @param a_logger_priority The logger's priority.
+     * @param a_persistence     The name of the persistence.
+     */
+    Context(
+        std::string        const a_host,
+        std::string        const a_port,
+        unsigned short int const a_threads,
+        int                const a_logger_priority,
+        std::string        const a_persistence
+    );
+
+    /**
+     * @brief Gets the host's address.
+     *
+     * @brief The host's address.
+     */
+    virtual std::string getHost() const;
+
+    /**
+     * @brief Gets the host's port.
+     *
+     * @brief The host's port.
+     */
+    virtual std::string getPort() const;
+
+    /**
+     * @brief Gets the number of threads.
+     *
+     * @brief The number of threads.
+     */
+    virtual unsigned short int getThreads() const;
+
+    /**
+     * @brief Gets the logger's priority.
+     *
+     * @brief The logger's priority.
+     */
+    virtual int getLoggerPriority() const;
+
+    /**
+     * @brief Gets the name of the persistence.
+     *
+     * @brief The name of the persistence.
+     */
+    virtual std::string getPersistence() const;
+
+private:
+    /**
+     * @brief The host's address.
+     */
+    std::string m_host;
+
+    /**
+     * @brief The host's port.
+     */
+    std::string m_port;
+
+    /**
+     * @brief The number of threads.
+     */
+    unsigned short int m_threads;
+
+    /**
+     * @brief The logger's priority.
+     */
+    int m_logger_priority;
+
+    /**
+     * @brief The name of the persistence.
+     */
+    std::string m_persistence;
 };
 
 #endif // CONTEXT_HPP

@@ -24,3 +24,45 @@
 // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
+
+#include <Network/XmlRPCServer/Context.hpp>
+
+Context::Context(
+    std::string        const a_host,
+    std::string        const a_port,
+    unsigned short int const a_threads,
+    int                const a_logger_priority,
+    std::string        const a_persistence
+)
+    : m_host(a_host),
+      m_port(a_port),
+      m_threads(a_threads),
+      m_logger_priority(a_logger_priority),
+      m_persistence(a_persistence)
+{
+}
+
+std::string Context::getHost() const
+{
+    return m_host;
+}
+
+std::string Context::getPort() const
+{
+    return m_port;
+}
+
+unsigned short int Context::getThreads() const
+{
+    return m_threads;
+}
+
+int Context::getLoggerPriority() const
+{
+    return m_logger_priority;
+}
+
+std::string Context::getPersistence() const
+{
+    return m_persistence;
+}

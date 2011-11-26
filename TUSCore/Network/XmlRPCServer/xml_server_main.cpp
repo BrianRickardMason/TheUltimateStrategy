@@ -99,7 +99,7 @@ int main(
         category.setPriority(priority);
 
         // Create the context.
-        IContextShrPtr context(new Context);
+        IContextShrPtr context(new Context(host, port, threads, priority, persistence));
 
         // Run the server in a background thread.
         Server server(host, port, threads, context);
