@@ -57,35 +57,35 @@ public:
     /**
      * @brief Gets the host's address.
      *
-     * @brief The host's address.
+     * @return The host's address.
      */
     virtual std::string getHost() const;
 
     /**
      * @brief Gets the host's port.
      *
-     * @brief The host's port.
+     * @return The host's port.
      */
     virtual std::string getPort() const;
 
     /**
      * @brief Gets the number of threads.
      *
-     * @brief The number of threads.
+     * @return The number of threads.
      */
     virtual unsigned short int getThreads() const;
 
     /**
      * @brief Gets the logger's priority.
      *
-     * @brief The logger's priority.
+     * @return The logger's priority.
      */
     virtual int getLoggerPriority() const;
 
     /**
      * @brief Gets the name of the persistence.
      *
-     * @brief The name of the persistence.
+     * @return The name of the persistence.
      */
     virtual std::string getPersistence() const;
 
