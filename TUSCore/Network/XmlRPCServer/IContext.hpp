@@ -28,6 +28,7 @@
 #ifndef ICONTEXT_HPP
 #define ICONTEXT_HPP
 
+#include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -74,6 +75,13 @@ public:
      * @return The name of the persistence.
      */
     virtual std::string getPersistence() const = 0;
+
+    /**
+     * @brief Gets ConfiguratorBuilding.
+     *
+     * @return ConfiguratorBuilding.
+     */
+    virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const = 0;
 };
 
 /**

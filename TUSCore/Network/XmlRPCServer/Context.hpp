@@ -89,6 +89,13 @@ public:
      */
     virtual std::string getPersistence() const;
 
+    /**
+     * @brief Gets ConfiguratorBuilding.
+     *
+     * @return ConfiguratorBuilding.
+     */
+    virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const;
+
 private:
     /**
      * @brief The host's address.
@@ -114,6 +121,11 @@ private:
      * @brief The name of the persistence.
      */
     std::string m_persistence;
+
+    /**
+     * @brief ConfiguratorBuilding.
+     */
+    IConfiguratorBuildingShrPtr m_configurator_building;
 };
 
 #endif // CONTEXT_HPP

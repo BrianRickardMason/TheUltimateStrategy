@@ -66,3 +66,8 @@ std::string Context::getPersistence() const
 {
     return m_persistence;
 }
+
+IConfiguratorBuildingShrPtr Context::getConfiguratorBuilding() const
+{
+    return m_configurator_building;
+}
