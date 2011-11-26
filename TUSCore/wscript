@@ -38,15 +38,6 @@ def build(bld):
                          includes='.'
                      )
 
-    gameserverut = bld.new_task_gen(
-                       features='cxx cxxprogram',
-                       target='gameserverut',
-                       source=bld.path.ant_glob('GameServerUT/**/*.cpp'),
-                       use='gameserver',
-                       lib='gtest gmock pthread pqxx pugixml',
-                       includes='.'
-                   )
-
     xmlrpcserver = bld.new_task_gen(
                        features='cxx cxxstlib',
                        target='xmlrpcserver',
@@ -55,6 +46,15 @@ def build(bld):
                               + bld.path.ant_glob('Network/XmlRPCServer/*/*/*.cpp')
                               + bld.path.ant_glob('Network/XmlRPCServer/*/*/*/*.cpp'),
                        use='gameserver',
+                       includes='.'
+                   )
+
+    gameserverut = bld.new_task_gen(
+                       features='cxx cxxprogram',
+                       target='gameserverut',
+                       source=bld.path.ant_glob('GameServerUT/**/*.cpp'),
+                       use='gameserver xmlrpcserver',
+                       lib='gtest gmock pthread pqxx pugixml',
                        includes='.'
                    )
 

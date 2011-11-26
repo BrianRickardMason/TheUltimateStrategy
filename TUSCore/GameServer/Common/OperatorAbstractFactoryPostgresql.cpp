@@ -114,7 +114,12 @@ IAuthorizeUserToSettlementOperatorShrPtr OperatorAbstractFactoryPostgresql::crea
 
 IBuildBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createBuildBuildingOperator() const
 {
-    return IBuildBuildingOperatorShrPtr(BuildBuildingOperatorFactory::createBuildBuildingOperator(m_persistence_facade_abstract_factory));
+    return IBuildBuildingOperatorShrPtr(
+               BuildBuildingOperatorFactory::createBuildBuildingOperator(
+                   m_context,
+                   m_persistence_facade_abstract_factory
+               )
+           );
 }
 
 IDestroyBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createDestroyBuildingOperator() const

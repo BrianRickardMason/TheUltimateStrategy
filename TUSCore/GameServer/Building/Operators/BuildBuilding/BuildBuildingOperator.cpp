@@ -39,10 +39,12 @@ namespace Building
 {
 
 BuildBuildingOperator::BuildBuildingOperator(
-    IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-    IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
+    IContextShrPtr                   const a_context,
+    IBuildingPersistenceFacadeShrPtr       a_building_persistence_facade,
+    IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
 )
-    : m_building_persistence_facade(a_building_persistence_facade),
+    : m_context(a_context),
+      m_building_persistence_facade(a_building_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }

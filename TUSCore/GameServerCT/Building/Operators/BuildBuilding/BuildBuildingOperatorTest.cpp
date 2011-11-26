@@ -31,6 +31,7 @@
 #include <GameServer/Resource/Key.hpp>
 #include <GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <GameServerCT/ComponentTest.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
@@ -56,7 +57,8 @@ protected:
      * @brief Constructs the test class.
      */
     BuildBuildingOperatorTest()
-        : m_epoch_name("Epoch"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_epoch_name("Epoch"),
           m_login_1("Login1"),
           m_login_2("Login2"),
           m_world_name("World"),
@@ -77,7 +79,12 @@ protected:
           m_resource_persistence_facade(m_persistence_facade_abstract_factory->createResourcePersistenceFacade()),
           m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
-          m_build_building_operator(BuildBuildingOperatorFactory::createBuildBuildingOperator(m_persistence_facade_abstract_factory)),
+          m_build_building_operator(
+              BuildBuildingOperatorFactory::createBuildBuildingOperator(
+                  m_context,
+                  m_persistence_facade_abstract_factory
+              )
+          ),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory))
     {
         {
@@ -123,6 +130,11 @@ protected:
             // ASSERT_EQ(a_vector.at(it->second->getResource()->getKey() - 1), it->second->getVolume());
         }
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the name of the epoch.
