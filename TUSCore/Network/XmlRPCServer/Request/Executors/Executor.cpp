@@ -46,15 +46,20 @@ namespace Request
 namespace Executors
 {
 
-// TODO: Remove hardcoded persistence.
-// TODO: Remove hardcoded operator factory.
 Executor::Executor(
     IContextShrPtr a_context
 )
-    : m_persistence(new PersistencePostgresql),
-      m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql),
-      m_context(a_context)
+    : m_context(a_context)
 {
+    if (m_context->getPersistence() == "postgresql")
+    {
+        m_persistence.reset(new PersistencePostgresql);
+        m_operator_abstract_factory.reset(new OperatorAbstractFactoryPostgresql);
+    }
+    else
+    {
+        BOOST_ASSERT(false);
+    }
 }
 
 ReplyShrPtr Executor::execute(

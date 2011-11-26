@@ -205,13 +205,17 @@ private:
 protected:
     /**
      * @brief Persistence.
+     *
+     * TODO: Should be constant again someday.
      */
-    GameServer::Persistence::IPersistenceShrPtr const m_persistence;
+    GameServer::Persistence::IPersistenceShrPtr m_persistence;
 
     /**
      * @brief OperatorAbstractFactory.
+     *
+     * TODO: Should be constant again someday.
      */
-    GameServer::Common::IOperatorAbstractFactoryShrPtr const m_operator_abstract_factory;
+    GameServer::Common::IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
 
     /**
      * @brief The login of the user.
