@@ -30,6 +30,7 @@
 #include "../../../ComponentTest.hpp"
 #include <GameServer/Human/Key.hpp>
 #include <GameServer/Resource/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -54,8 +55,9 @@ protected:
      * @brief Constructs the test class.
      */
     CreateSettlementOperatorTest()
-        : m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
-          m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+          m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql(m_context)),
           m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
           m_resource_persistence_facade(m_persistence_facade_abstract_factory->createResourcePersistenceFacade()),
           m_create_epoch_operator(m_operator_abstract_factory->createCreateEpochOperator()),
@@ -209,6 +211,11 @@ protected:
             compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
         }
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     //@{
     /**

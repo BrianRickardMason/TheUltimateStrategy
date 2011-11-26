@@ -47,12 +47,30 @@ def build(bld):
                        includes='.'
                    )
 
+    xmlrpcserver = bld.new_task_gen(
+                       features='cxx cxxstlib',
+                       target='xmlrpcserver',
+                       source=  bld.path.ant_glob('Network/XmlRPCServer/Context.cpp'    )
+                              + bld.path.ant_glob('Network/XmlRPCServer/*/*.cpp')
+                              + bld.path.ant_glob('Network/XmlRPCServer/*/*/*.cpp')
+                              + bld.path.ant_glob('Network/XmlRPCServer/*/*/*/*.cpp'),
+                       use='gameserver',
+                       includes='.'
+                   )
+
     gameserverct = bld.new_task_gen(
                        features='cxx cxxprogram',
                        target='gameserverct',
                        source=bld.path.ant_glob('GameServerCT/**/*.cpp'),
-                       use='gameserver',
+                       use='gameserver xmlrpcserver',
                        lib='gtest gmock pthread pqxx pugixml',
+                       includes='.'
+                   )
+
+    xmlrpccommon = bld.new_task_gen(
+                       features='cxx cxxstlib',
+                       target='xmlrpccommon',
+                       source=bld.path.ant_glob('Network/XmlRPCCommon/**/*.cpp'),
                        includes='.'
                    )
 
@@ -62,23 +80,6 @@ def build(bld):
                             source=bld.path.ant_glob('Network/XmlRPCClientAsync/Client/*.cpp'),
                             includes='.'
                         )
-
-    xmlrpccommon = bld.new_task_gen(
-                       features='cxx cxxstlib',
-                       target='xmlrpccommon',
-                       source=bld.path.ant_glob('Network/XmlRPCCommon/**/*.cpp'),
-                       includes='.'
-                   )
-
-    xmlrpcserver = bld.new_task_gen(
-                       features='cxx cxxstlib',
-                       target='xmlrpcserver',
-                       source=  bld.path.ant_glob('Network/XmlRPCServer/*/*.cpp')
-                              + bld.path.ant_glob('Network/XmlRPCServer/*/*/*.cpp')
-                              + bld.path.ant_glob('Network/XmlRPCServer/*/*/*/*.cpp'),
-                       use='gameserver',
-                       includes='.'
-                   )
 
     networkut = bld.new_task_gen(
                     features='cxx cxxprogram',
@@ -92,7 +93,8 @@ def build(bld):
     server = bld.new_task_gen(
                  features='cxx cxxprogram',
                  target='server',
-                 source=bld.path.ant_glob('Network/XmlRPCServer/*.cpp'),
+                 source=  bld.path.ant_glob('Network/XmlRPCServer/xml_server_main.cpp')
+                        + bld.path.ant_glob('Network/XmlRPCServer/Configurator.cpp'),
                  use='gameserver xmlrpccommon xmlrpcserver',
                  lib='boost_system boost_thread log4cpp pqxx pugixml',
                  includes='.'

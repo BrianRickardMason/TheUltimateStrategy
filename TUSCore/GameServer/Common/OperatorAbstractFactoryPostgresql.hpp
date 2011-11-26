@@ -31,6 +31,7 @@
 #include <GameServer/Common/IManagerAbstractFactory.hpp>
 #include <GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 #include <GameServer/Common/IOperatorAbstractFactory.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -44,7 +45,14 @@ class OperatorAbstractFactoryPostgresql
     : public IOperatorAbstractFactory
 {
 public:
-    OperatorAbstractFactoryPostgresql();
+    /**
+     * @brief Ctor.
+     *
+     * @param a_context The context of the server.
+     */
+    OperatorAbstractFactoryPostgresql(
+        IContextShrPtr const a_context
+    );
 
     //@{
     /**
@@ -101,6 +109,11 @@ private:
      * @brief The abstract factory of persistence facades.
      */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 };
 
 } // namespace Common

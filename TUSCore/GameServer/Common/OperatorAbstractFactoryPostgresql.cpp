@@ -83,9 +83,12 @@ namespace GameServer
 namespace Common
 {
 
-OperatorAbstractFactoryPostgresql::OperatorAbstractFactoryPostgresql()
+OperatorAbstractFactoryPostgresql::OperatorAbstractFactoryPostgresql(
+    IContextShrPtr const a_context
+)
     : m_manager_abstract_factory(new ManagerAbstractFactoryPostgresql),
-      m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql)
+      m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql),
+      m_context(a_context)
 {
 }
 
