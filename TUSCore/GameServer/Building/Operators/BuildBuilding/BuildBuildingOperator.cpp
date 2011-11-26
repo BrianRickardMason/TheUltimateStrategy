@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include <GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp>
-#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
