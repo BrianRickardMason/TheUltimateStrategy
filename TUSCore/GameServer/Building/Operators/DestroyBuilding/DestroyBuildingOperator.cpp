@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include <GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperator.hpp>
-#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
+#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -39,10 +39,12 @@ namespace Building
 {
 
 DestroyBuildingOperator::DestroyBuildingOperator(
-    IBuildingPersistenceFacadeShrPtr a_building_persistence_facade,
-    IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
+    IContextShrPtr                   const a_context,
+    IBuildingPersistenceFacadeShrPtr       a_building_persistence_facade,
+    IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
 )
-    : m_building_persistence_facade(a_building_persistence_facade),
+    : m_context(a_context),
+      m_building_persistence_facade(a_building_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
@@ -81,7 +83,7 @@ DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = CONFIGURATOR_BUILDING.getBuilding(a_key)->getCostsToDestroy();
+        ResourceSet cost = m_context->getConfiguratorBuilding()->getBuilding(a_key)->getCostsToDestroy();
 
         // Multiply total cost.
         cost *= a_volume;

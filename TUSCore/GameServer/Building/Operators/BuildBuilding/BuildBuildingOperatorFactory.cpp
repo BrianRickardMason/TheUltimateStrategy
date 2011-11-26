@@ -40,9 +40,11 @@ BuildBuildingOperatorAutPtr BuildBuildingOperatorFactory::createBuildBuildingOpe
 )
 {
     return BuildBuildingOperatorAutPtr(
-               new BuildBuildingOperator(a_context,
-                                         a_persistence_facade_abstract_factory->createBuildingPersistenceFacade(),
-                                         a_persistence_facade_abstract_factory->createResourcePersistenceFacade())
+               new BuildBuildingOperator(
+                       a_context,
+                       a_persistence_facade_abstract_factory->createBuildingPersistenceFacade(),
+                       a_persistence_facade_abstract_factory->createResourcePersistenceFacade()
+                   )
            );
 }
 

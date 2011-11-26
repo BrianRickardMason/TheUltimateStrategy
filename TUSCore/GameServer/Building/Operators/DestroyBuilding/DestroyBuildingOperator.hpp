@@ -31,6 +31,7 @@
 #include <GameServer/Building/IBuildingPersistenceFacade.hpp>
 #include <GameServer/Building/Operators/DestroyBuilding/IDestroyBuildingOperator.hpp>
 #include <GameServer/Resource/IResourcePersistenceFacade.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -47,12 +48,14 @@ public:
     /**
      * @brief Ctor.
      *
+     * @param a_context                     The context of the server.
      * @param a_building_persistence_facade The persistence facade of buildings.
-     * @param a_resource_persistence_facade  The persistence facade of resources.
+     * @param a_resource_persistence_facade The persistence facade of resources.
      */
     DestroyBuildingOperator(
-        IBuildingPersistenceFacadeShrPtr           a_building_persistence_facade,
-        Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
+        IContextShrPtr                             const a_context,
+        IBuildingPersistenceFacadeShrPtr                 a_building_persistence_facade,
+        Resource::IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
     );
 
     /**
@@ -73,6 +76,11 @@ public:
     ) const;
 
 private:
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
     //@{
     /**
      * @brief A persistence facade.

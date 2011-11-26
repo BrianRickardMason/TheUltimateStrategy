@@ -31,6 +31,7 @@
 #include "../../../Resource/ResourcePersistenceFacadeMock.hpp"
 #include "../../BuildingPersistenceFacadeMock.hpp"
 #include <GameServer/Building/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
@@ -56,7 +57,8 @@ protected:
      * @brief Constructs the test class.
      */
     DestroyBuildingOperatorTest()
-        : m_building_persistence_facade(new BuildingPersistenceFacadeMock),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_building_persistence_facade(new BuildingPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
@@ -101,6 +103,11 @@ protected:
         .WillOnce(Return(true));
     }
 
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
     //@{
     /**
      * @brief A persistence facade used in tests.
@@ -120,8 +127,13 @@ protected:
  */
 TEST_F(DestroyBuildingOperatorTest, DestroyBuildingOperator)
 {
-    ASSERT_NO_THROW(DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))));
+    ASSERT_NO_THROW(
+        DestroyBuildingOperator destroy_building_operator(
+            m_context,
+            IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+            IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)
+        )
+    );
 }
 
 /**
@@ -131,8 +143,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_TRYING_TO_DESTROY_ZERO_BUILDINGS,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 0).m_exit_code);
@@ -145,8 +158,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_ZeroBuildings)
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN))
     .WillOnce(Return(BuildingWithVolumeShrPtr()));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_THERE_ARE_NO_BUILDINGS,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -158,8 +172,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughBuildings)
 
     configureBuildingPersistenceFacadeMockForGetBuilding(1);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 2).m_exit_code);
@@ -176,8 +191,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetResourcesThrows)
     EXPECT_CALL(*m_resource_persistence_facade, getResources(_, m_id_holder))
     .WillOnce(Throw(e));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -192,8 +208,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(9)(9)(9)(9)(9)(9)(9);
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -208,8 +225,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(9)(10)(10);
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -230,8 +248,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
     EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, resource_set))
     .WillOnce(Throw(e));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -249,8 +268,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse
     EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, resource_set))
     .WillOnce(Return(false));
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_RESOURCES_MISSING_IN_THE_MEANTIME,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -270,8 +290,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -290,8 +311,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDINGS_MISSING_IN_THE_MEANTIME,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -312,8 +334,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     resource_set = getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
 
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
@@ -334,8 +357,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     resource_set = getResourceSet(resource_volumes);
 
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5).m_exit_code);
@@ -356,8 +380,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
     resource_set = getResourceSet(resource_volumes);
 
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10).m_exit_code);
@@ -378,8 +403,9 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
     resource_set = getResourceSet(resource_volumes);
 
     configureResourcePersistenceFacadeMockForSubtractResourceSet(resource_set);
-    DestroyBuildingOperator destroy_building_operator((IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade)),
-                                                      (IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)));
+    DestroyBuildingOperator destroy_building_operator(m_context,
+                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
               destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10).m_exit_code);

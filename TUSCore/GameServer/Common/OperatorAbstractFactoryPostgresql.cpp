@@ -124,7 +124,12 @@ IBuildBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createBuildBuild
 
 IDestroyBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createDestroyBuildingOperator() const
 {
-    return IDestroyBuildingOperatorShrPtr(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_persistence_facade_abstract_factory));
+    return IDestroyBuildingOperatorShrPtr(
+               DestroyBuildingOperatorFactory::createDestroyBuildingOperator(
+                   m_context,
+                   m_persistence_facade_abstract_factory
+               )
+           );
 }
 
 IGetBuildingOperatorShrPtr OperatorAbstractFactoryPostgresql::createGetBuildingOperator() const

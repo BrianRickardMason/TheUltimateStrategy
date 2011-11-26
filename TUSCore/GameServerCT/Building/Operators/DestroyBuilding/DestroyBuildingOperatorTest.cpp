@@ -31,6 +31,7 @@
 #include <GameServer/Resource/Key.hpp>
 #include <GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <GameServerCT/ComponentTest.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
@@ -59,7 +60,8 @@ protected:
      * @brief Constructs the test class.
      */
     DestroyBuildingOperatorTest()
-        : m_epoch_name("Epoch"),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_epoch_name("Epoch"),
           m_login_1("Login1"),
           m_login_2("Login2"),
           m_world_name("World"),
@@ -81,7 +83,12 @@ protected:
           m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory)),
-          m_destroy_building_operator(DestroyBuildingOperatorFactory::createDestroyBuildingOperator(m_persistence_facade_abstract_factory))
+          m_destroy_building_operator(
+              DestroyBuildingOperatorFactory::createDestroyBuildingOperator(
+                  m_context,
+                  m_persistence_facade_abstract_factory
+              )
+          )
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -152,6 +159,11 @@ protected:
             // ASSERT_EQ(a_vector.at(it->second->getResource()->getKey() - 1), it->second->getVolume());
         }
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

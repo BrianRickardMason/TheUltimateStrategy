@@ -112,9 +112,11 @@ protected:
 TEST_F(BuildBuildingOperatorTest, CtorDoesNotThrow)
 {
     ASSERT_NO_THROW(
-        BuildBuildingOperator build_building_operator(m_context,
-                                                      IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
-                                                      IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade))
+        BuildBuildingOperator build_building_operator(
+            m_context,
+            IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
+            IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade)
+        )
     );
 }
 
