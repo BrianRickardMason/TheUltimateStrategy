@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "DismissHumanOperator.hpp"
-#include <GameServer/Configuration/Configurator/Human/ConfiguratorHuman.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -85,7 +84,7 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = CONFIGURATOR_HUMAN.getHuman(a_key)->getCostsToDismiss();
+        ResourceSet cost = m_context->getConfiguratorHuman()->getHuman(a_key)->getCostsToDismiss();
 
         // Multiply total cost.
         cost *= a_volume;
@@ -138,7 +137,7 @@ bool DismissHumanOperator::verifyDismissable(
     IHumanKey          const & a_key
 ) const
 {
-    IHumanShrPtr human = CONFIGURATOR_HUMAN.getHuman(a_key);
+    IHumanShrPtr human = m_context->getConfiguratorHuman()->getHuman(a_key);
 
     BOOST_ASSERT(human);
 
