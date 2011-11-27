@@ -29,6 +29,7 @@
 #define ICONTEXT_HPP
 
 #include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
+#include <Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -82,6 +83,13 @@ public:
      * @return ConfiguratorBuilding.
      */
     virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const = 0;
+
+    /**
+     * @brief Gets ConfiguratorHuman.
+     *
+     * @return ConfiguratorHuman.
+     */
+    virtual IConfiguratorHumanShrPtr getConfiguratorHuman() const = 0;
 };
 
 /**

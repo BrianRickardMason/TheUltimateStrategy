@@ -96,6 +96,13 @@ public:
      */
     virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const;
 
+    /**
+     * @brief Gets ConfiguratorHuman.
+     *
+     * @return ConfiguratorHuman.
+     */
+    virtual IConfiguratorHumanShrPtr getConfiguratorHuman() const;
+
 private:
     /**
      * @brief The host's address.
@@ -126,6 +133,11 @@ private:
      * @brief ConfiguratorBuilding.
      */
     IConfiguratorBuildingShrPtr m_configurator_building;
+
+    /**
+     * @brief ConfiguratorHuman.
+     */
+    IConfiguratorHumanShrPtr m_configurator_human;
 };
 
 #endif // CONTEXT_HPP
