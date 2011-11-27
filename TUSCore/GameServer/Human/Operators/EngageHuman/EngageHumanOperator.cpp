@@ -150,7 +150,7 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
 {
     // Verify space in buildings.
     HumanToBuildingTranslator translator;
-    IBuildingShrPtr building = translator.getPlaceOfWork(a_key);
+    IBuildingShrPtr building = translator.getPlaceOfWork(m_context, a_key);
     if (building)
     {
         // Get available buildings.

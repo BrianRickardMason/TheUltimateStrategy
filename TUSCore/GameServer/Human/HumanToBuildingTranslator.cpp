@@ -38,7 +38,8 @@ namespace Human
 {
 
 IBuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
-    IHumanKey const & a_key
+    IContextShrPtr const   a_context,
+    IHumanKey      const & a_key
 ) const
 {
     // Get corresponding building.
@@ -47,7 +48,7 @@ IBuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
     // Check if the human has a place of work.
     if (buildings.size())
     {
-        return CONFIGURATOR_BUILDING.getBuilding(buildings.front());
+        return a_context->getConfiguratorBuilding()->getBuilding(buildings.front());
     }
     else
     {

@@ -32,6 +32,7 @@
 #include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 #include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
 #include <GameServer/Human/Key.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 #include <map>
 #include <vector>
 
@@ -49,11 +50,13 @@ public:
     /**
      * @brief Gets a building which is a place of work of a given human.
      *
-     * @param a_key A key of the human.
+     * @param a_context The context of the server.
+     * @param a_key     A key of the human.
      *
      * @return The building, null if human does not have the place of work.
      */
     Configuration::IBuildingShrPtr getPlaceOfWork(
+        IContextShrPtr           const   a_context,
         Configuration::IHumanKey const & a_key
     ) const;
 };

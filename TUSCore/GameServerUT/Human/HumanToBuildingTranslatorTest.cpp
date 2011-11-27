@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include <GameServer/Human/HumanToBuildingTranslator.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
@@ -40,6 +41,19 @@ class HumanToBuildingTranslatorTest
 {
 protected:
     /**
+     * @brief Ctor.
+     */
+    HumanToBuildingTranslatorTest()
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql"))
+    {
+    }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
+    /**
      * @brief Test constants: the translator used in tests.
      */
     HumanToBuildingTranslator m_translator;
@@ -47,177 +61,177 @@ protected:
 
 TEST_F(HumanToBuildingTranslatorTest, GetPlaceOfWorkReturnsProperValues)
 {
-    IBuildingShrPtr building = m_translator.getPlaceOfWork(KEY_SOLDIER_ARCHER_ADVANCED);
+    IBuildingShrPtr building = m_translator.getPlaceOfWork(m_context, KEY_SOLDIER_ARCHER_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_BARRACKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SOLDIER_ARCHER_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SOLDIER_ARCHER_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_BARRACKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SOLDIER_HORSEMAN_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SOLDIER_HORSEMAN_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_BARRACKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SOLDIER_HORSEMAN_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SOLDIER_HORSEMAN_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_BARRACKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SOLDIER_INFANTRYMAN_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SOLDIER_INFANTRYMAN_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_BARRACKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SOLDIER_INFANTRYMAN_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SOLDIER_INFANTRYMAN_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_BARRACKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_EARTH_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_EARTH_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_EARTH_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_EARTH_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_FIRE_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_FIRE_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_FIRE_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_FIRE_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_WATER_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_WATER_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_WATER_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_WATER_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_WIND_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_WIND_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SORCERER_WIND_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SORCERER_WIND_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_GUILD == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_SPY_AGENT_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SPY_AGENT_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_SPY_AGENT_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SPY_AGENT_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_SPY_SPY_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SPY_SPY_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_SPY_SPY_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SPY_SPY_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_SPY_THUG_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SPY_THUG_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_SPY_THUG_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_SPY_THUG_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_BLACKSMITH_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_BLACKSMITH_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_FORGE == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_BLACKSMITH_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_BLACKSMITH_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_FORGE == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_BREEDER_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_BREEDER_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_BREEDER_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_BREEDER_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_DRUID_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_DRUID_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_DRUID_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_DRUID_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_FARMER_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_FARMER_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_FARM == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_FARMER_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_FARMER_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_FARM == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_FISHERMAN_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_FISHERMAN_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_FISHERMAN_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_FISHERMAN_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_JOBLESS_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_JOBLESS_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_JOBLESS_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_JOBLESS_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_LUMBERJACK_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_LUMBERJACK_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_SAWMILL == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_LUMBERJACK_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_LUMBERJACK_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_SAWMILL == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_MERCHANT_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_MERCHANT_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_MARKETPLACE == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_MERCHANT_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_MERCHANT_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_MARKETPLACE == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_MINER_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_MINER_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_MINE == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_MINER_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_MINER_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_MINE == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_OFFICIAL_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_OFFICIAL_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_OFFICIAL_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_OFFICIAL_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_PRIEST_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_PRIEST_ADVANCED);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_PRIEST_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_PRIEST_NOVICE);
     ASSERT_FALSE(building);
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_STEELWORKER_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_STEELWORKER_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_STEELWORKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_STEELWORKER_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_STEELWORKER_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_STEELWORKS == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_STONE_MASON_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_STONE_MASON_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_QUARRY == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_STONE_MASON_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_STONE_MASON_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_QUARRY == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_TEACHER_ADVANCED);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_TEACHER_ADVANCED);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_SCHOOL == building->getKey());
 
-    building = m_translator.getPlaceOfWork(KEY_WORKER_TEACHER_NOVICE);
+    building = m_translator.getPlaceOfWork(m_context, KEY_WORKER_TEACHER_NOVICE);
     ASSERT_TRUE(building);
     ASSERT_TRUE(KEY_REGULAR_SCHOOL == building->getKey());
 }
