@@ -30,6 +30,7 @@
 
 #include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
 #include <GameServer/Human/HumanWithVolumeRecord.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -45,10 +46,12 @@ public:
     /**
      * @brief Constructs the human with volume.
      *
-     * @param a_key    The key of the human.
-     * @param a_volume The volume of the human.
+     * @param a_context The context of the server.
+     * @param a_key     The key of the human.
+     * @param a_volume  The volume of the human.
      */
     HumanWithVolume(
+        IContextShrPtr           const a_context,
         Configuration::IHumanKey const a_key,
         Volume                   const a_volume
     );
@@ -56,9 +59,11 @@ public:
     /**
      * @brief Constructs the human with volume.
      *
-     * @param a_record The record of human with volume.
+     * @param a_context The context of the server.
+     * @param a_record  The record of human with volume.
      */
-    explicit HumanWithVolume(
+    HumanWithVolume(
+        IContextShrPtr        const   a_context,
         HumanWithVolumeRecord const & a_record
     );
 

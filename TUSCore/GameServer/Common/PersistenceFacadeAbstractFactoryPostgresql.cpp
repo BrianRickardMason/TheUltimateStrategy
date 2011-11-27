@@ -102,7 +102,9 @@ IEpochPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::create
 
 IHumanPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createHumanPersistenceFacade() const
 {
-    return IHumanPersistenceFacadeShrPtr(HumanPersistenceFacadeFactory::create(m_accessor_abstract_factory));
+    return IHumanPersistenceFacadeShrPtr(
+               HumanPersistenceFacadeFactory::create(m_context, m_accessor_abstract_factory)
+           );
 }
 
 ILandPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createLandPersistenceFacade() const

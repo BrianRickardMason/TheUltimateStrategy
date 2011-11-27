@@ -98,6 +98,11 @@ protected:
     }
 
     /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
+    /**
      * @brief The abstract factory of persistence facades.
      */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
@@ -120,11 +125,6 @@ protected:
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     TransportHumanOperatorAutPtr    m_transport_human_operator;
     //}@
-
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

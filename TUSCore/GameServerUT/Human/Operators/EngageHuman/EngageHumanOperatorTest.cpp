@@ -147,7 +147,7 @@ protected:
     )
     {
         HumanWithVolumeShrPtr human_with_volume =
-            (a_volume) ? make_shared<HumanWithVolume>(a_key, a_volume) : HumanWithVolumeShrPtr();
+            (a_volume) ? make_shared<HumanWithVolume>(m_context, a_key, a_volume) : HumanWithVolumeShrPtr();
 
         EXPECT_CALL(*m_human_persistence_facade, getHuman(_, m_id_holder, a_key))
         .WillOnce(Return(human_with_volume));
@@ -391,7 +391,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Verify if there is enough jobless.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_JOBLESS_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
@@ -442,7 +442,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Verify if there is enough jobless.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_JOBLESS_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
@@ -455,7 +455,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_BLACKSMITH_NOVICE, 19)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 19)));
 
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
@@ -493,7 +493,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Verify if there is enough jobless.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_JOBLESS_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
@@ -506,10 +506,10 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_BLACKSMITH_NOVICE, 10)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 10)));
 
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_BLACKSMITH_NOVICE, 9)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 9)));
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
@@ -544,7 +544,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Verify if there is enough jobless.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_JOBLESS_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
@@ -557,7 +557,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_BLACKSMITH_NOVICE, 20)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 20)));
 
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
@@ -583,7 +583,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Verify if there is enough jobless.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_JOBLESS_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolume>(KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);

@@ -121,14 +121,14 @@ public:
 
 private:
     /**
-     * @brief An accessor.
-     */
-    IBuildingAccessorScpPtr m_accessor;
-
-    /**
      * @brief The context of the server.
      */
     IContextShrPtr m_context;
+
+    /**
+     * @brief An accessor.
+     */
+    IBuildingAccessorScpPtr m_accessor;
 };
 
 /**

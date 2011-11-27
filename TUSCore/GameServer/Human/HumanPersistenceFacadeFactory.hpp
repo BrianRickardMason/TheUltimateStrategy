@@ -30,6 +30,7 @@
 
 #include "../Common/IAccessorAbstractFactory.hpp"
 #include "HumanPersistenceFacade.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -45,12 +46,14 @@ public:
     /**
      * @brief A factory method.
      *
+     * @param a_context                   The content of the server.
      * @param a_accessor_abstract_factory The abstract factory of accessors.
      *
      * @return A newly created human persistence facade.
      */
     static HumanPersistenceFacadeAutPtr create(
-        Common::IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+        IContextShrPtr                         const a_context,
+        Common::IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
     );
 };
 

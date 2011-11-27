@@ -111,7 +111,7 @@ protected:
     )
     {
         HumanWithVolumeShrPtr human_with_volume =
-            (a_volume) ? make_shared<HumanWithVolume>(a_key, a_volume) : HumanWithVolumeShrPtr();
+            (a_volume) ? make_shared<HumanWithVolume>(m_context, a_key, a_volume) : HumanWithVolumeShrPtr();
 
         EXPECT_CALL(*m_human_persistence_facade, getHuman(_, m_id_holder, a_key))
         .WillOnce(Return(human_with_volume));

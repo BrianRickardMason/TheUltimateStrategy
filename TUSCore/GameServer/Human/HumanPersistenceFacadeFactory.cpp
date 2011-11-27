@@ -35,10 +35,13 @@ namespace Human
 {
 
 HumanPersistenceFacadeAutPtr HumanPersistenceFacadeFactory::create(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    IContextShrPtr                 const a_context,
+    IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
 )
 {
-    return HumanPersistenceFacadeAutPtr(new HumanPersistenceFacade(a_accessor_abstract_factory->createHumanAccessor()));
+    return HumanPersistenceFacadeAutPtr(
+               new HumanPersistenceFacade(a_context, a_accessor_abstract_factory->createHumanAccessor())
+           );
 }
 
 } // namespace Human

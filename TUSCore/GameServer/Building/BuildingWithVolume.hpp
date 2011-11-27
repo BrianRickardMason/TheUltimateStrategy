@@ -62,7 +62,7 @@ public:
      * @param a_context The context of the server.
      * @param a_record  The record of building with volume.
      */
-    explicit BuildingWithVolume(
+    BuildingWithVolume(
         IContextShrPtr           const   a_context,
         BuildingWithVolumeRecord const & a_record
     );

@@ -29,6 +29,7 @@
 #include "../Persistence/TransactionDummy.hpp"
 #include "HumanAccessorMock.hpp"
 #include <GameServer/Human/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -52,7 +53,8 @@ protected:
      * @brief Creates a test class.
      */
     HumanPersistenceFacadeTest()
-        : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }
 
@@ -74,6 +76,11 @@ protected:
     }
 
     /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
+    /**
      * @brief An exemplary id holder.
      */
     IDHolder m_id_holder;
@@ -83,7 +90,7 @@ TEST_F(HumanPersistenceFacadeTest, CtorDoesNotThrow)
 {
     IHumanAccessorAutPtr accessor(new HumanAccessorMock);
 
-    ASSERT_NO_THROW(HumanPersistenceFacade persistence_facade(accessor));
+    ASSERT_NO_THROW(HumanPersistenceFacade persistence_facade(m_context, accessor));
 }
 
 TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
@@ -102,7 +109,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
@@ -127,7 +134,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent_Throw)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
    ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
@@ -149,7 +156,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
@@ -174,7 +181,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
@@ -194,7 +201,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsNotPresent_TryToSubtract
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
@@ -216,7 +223,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3));
@@ -241,7 +248,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart_Thr
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3), std::exception);
@@ -263,7 +270,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
@@ -288,7 +295,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll_Thro
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
@@ -308,7 +315,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_TryToSubtractToo
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 6));
@@ -328,7 +335,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
     HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
@@ -351,7 +358,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
     HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
@@ -376,7 +383,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansAreNotPresent)
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
     HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder);
@@ -402,7 +409,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OneHuman
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
     HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder);
@@ -433,7 +440,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHuman
     IHumanAccessorAutPtr accessor(mock);
 
     // Preconditions.
-    HumanPersistenceFacade persistence_facade(accessor);
+    HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
     HumanWithVolumeMap humans = persistence_facade.getHumans(transaction, m_id_holder);

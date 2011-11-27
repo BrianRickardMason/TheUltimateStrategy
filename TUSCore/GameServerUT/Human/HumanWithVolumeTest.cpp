@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Human/HumanWithVolume.hpp"
 #include <GameServer/Human/Key.hpp>
+#include <Network/XmlRPCServer/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
@@ -44,10 +45,16 @@ protected:
      * @brief Constructs a test class.
      */
     HumanWithVolumeTest()
-        : m_human_with_volume(KEY_SOLDIER_HORSEMAN_ADVANCED, 4),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_human_with_volume(m_context, KEY_SOLDIER_HORSEMAN_ADVANCED, 4),
           m_model_key(KEY_SOLDIER_HORSEMAN_ADVANCED)
     {
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief A human with volume to be tested.
@@ -62,7 +69,7 @@ protected:
 
 TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnArguments)
 {
-    HumanWithVolume human_with_volume(KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
+    HumanWithVolume human_with_volume(m_context, KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
 
     ASSERT_TRUE(m_model_key == human_with_volume.getHuman()->getKey());
     ASSERT_EQ(4, human_with_volume.getVolume());
@@ -72,7 +79,7 @@ TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnRecord)
 {
     HumanWithVolumeRecord human_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
 
-    HumanWithVolume human_with_volume(human_with_volume_record);
+    HumanWithVolume human_with_volume(m_context, human_with_volume_record);
 
     ASSERT_TRUE(m_model_key == human_with_volume.getHuman()->getKey());
     ASSERT_EQ(4, human_with_volume.getVolume());

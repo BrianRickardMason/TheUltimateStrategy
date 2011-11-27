@@ -38,9 +38,11 @@ namespace Human
 {
 
 HumanPersistenceFacade::HumanPersistenceFacade(
-    IHumanAccessorAutPtr a_accessor
+    IContextShrPtr       const a_context,
+    IHumanAccessorAutPtr       a_accessor
 )
-    : m_accessor(a_accessor)
+    : m_context(a_context),
+      m_accessor(a_accessor)
 {
 }
 
@@ -99,7 +101,7 @@ HumanWithVolumeShrPtr HumanPersistenceFacade::getHuman(
 {
     HumanWithVolumeRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_holder, a_key);
 
-    return record ? make_shared<HumanWithVolume>(*record) : HumanWithVolumeShrPtr();
+    return record ? make_shared<HumanWithVolume>(m_context, *record) : HumanWithVolumeShrPtr();
 }
 
 HumanWithVolumeMap HumanPersistenceFacade::getHumans(
@@ -121,7 +123,7 @@ HumanWithVolumeMap HumanPersistenceFacade::prepareResultGetHumans(
         // Verify if pointer is not null.
         if (it->second)
         {
-            HumanWithVolumeShrPtr human = make_shared<HumanWithVolume>(*it->second);
+            HumanWithVolumeShrPtr human = make_shared<HumanWithVolume>(m_context, *it->second);
             HumanWithVolumePair pair(it->first, human);
             result.insert(pair);
         }
