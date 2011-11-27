@@ -194,7 +194,12 @@ ITickEpochOperatorShrPtr OperatorAbstractFactoryPostgresql::createTickEpochOpera
 
 IDismissHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createDismissHumanOperator() const
 {
-    return IDismissHumanOperatorShrPtr(DismissHumanOperatorFactory::createDismissHumanOperator(m_persistence_facade_abstract_factory));
+    return IDismissHumanOperatorShrPtr(
+               DismissHumanOperatorFactory::createDismissHumanOperator(
+                   m_context,
+                   m_persistence_facade_abstract_factory
+               )
+           );
 }
 
 IEngageHumanOperatorShrPtr OperatorAbstractFactoryPostgresql::createEngageHumanOperator() const

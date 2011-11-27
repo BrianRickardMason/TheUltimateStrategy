@@ -31,6 +31,7 @@
 #include "../../../Human/IHumanPersistenceFacade.hpp"
 #include "../../../Resource/IResourcePersistenceFacade.hpp"
 #include "IDismissHumanOperator.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -47,12 +48,14 @@ public:
     /**
      * @brief Constructs the operator.
      *
+     * @param a_context                     The context of the server.
      * @param a_human_persistence_facade    The persistence facade of humans.
      * @param a_resource_persistence_facade The persistence facade of resources.
      */
     DismissHumanOperator(
-        IHumanPersistenceFacadeShrPtr              a_human_persistence_facade,
-        Resource::IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
+        IContextShrPtr                             const a_context,
+        IHumanPersistenceFacadeShrPtr                    a_human_persistence_facade,
+        Resource::IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
     );
 
     /**
@@ -102,6 +105,11 @@ private:
         Configuration::IHumanKey        const & a_key,
         Volume                          const & a_volume
     ) const;
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     //@{
     /**

@@ -83,7 +83,9 @@ protected:
           m_user_persistence_facade(m_persistence_facade_abstract_factory->createUserPersistenceFacade()),
           m_world_persistence_facade(m_persistence_facade_abstract_factory->createWorldPersistenceFacade()),
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory)),
-          m_dismiss_human_operator(DismissHumanOperatorFactory::createDismissHumanOperator(m_persistence_facade_abstract_factory))
+          m_dismiss_human_operator(
+              DismissHumanOperatorFactory::createDismissHumanOperator(m_context, m_persistence_facade_abstract_factory)
+          )
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();

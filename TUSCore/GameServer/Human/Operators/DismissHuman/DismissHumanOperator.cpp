@@ -39,10 +39,12 @@ namespace Human
 {
 
 DismissHumanOperator::DismissHumanOperator(
-    IHumanPersistenceFacadeShrPtr    a_human_persistence_facade,
-    IResourcePersistenceFacadeShrPtr a_resource_persistence_facade
+    IContextShrPtr                   const a_context,
+    IHumanPersistenceFacadeShrPtr          a_human_persistence_facade,
+    IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
 )
-    : m_human_persistence_facade(a_human_persistence_facade),
+    : m_context(a_context),
+      m_human_persistence_facade(a_human_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade)
 {
 }
