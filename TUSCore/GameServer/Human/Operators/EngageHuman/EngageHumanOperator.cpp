@@ -28,7 +28,6 @@
 #include "../../../Building/BuildingToHumanTranslator.hpp"
 #include "../../HumanToBuildingTranslator.hpp"
 #include "EngageHumanOperator.hpp"
-#include <GameServer/Configuration/Configurator/Human/ConfiguratorHuman.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -88,7 +87,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = CONFIGURATOR_HUMAN.getHuman(a_key)->getCostsToEngage();
+        ResourceSet cost = m_context->getConfiguratorHuman()->getHuman(a_key)->getCostsToEngage();
 
         // Multiply total cost.
         cost *= a_volume;
@@ -202,7 +201,7 @@ bool EngageHumanOperator::verifyEngageable(
     IHumanKey          const & a_key
 ) const
 {
-    IHumanShrPtr human = CONFIGURATOR_HUMAN.getHuman(a_key);
+    IHumanShrPtr human = m_context->getConfiguratorHuman()->getHuman(a_key);
 
     BOOST_ASSERT(human);
 
