@@ -28,9 +28,6 @@
 #include <GameServer/Configuration/Configurator/Building/Building.hpp>
 #include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
 
-using namespace pugi;
-using namespace std;
-
 ConfiguratorBuilding::ConfiguratorBuilding()
 {
     configure();
@@ -89,6 +86,8 @@ bool ConfiguratorBuilding::loadXml()
 bool ConfiguratorBuilding::parseXml()
 {
     using namespace GameServer::Configuration;
+    using namespace std;
+    using namespace pugi;
 
     // TODO: Add verification here.
 

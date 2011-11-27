@@ -28,6 +28,7 @@
 #ifndef CONFIGURATORBUILDING_HPP
 #define CONFIGURATORBUILDING_HPP
 
+#include <3rdParty/pugixml/src/pugixml.hpp>
 #include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
 
 /**

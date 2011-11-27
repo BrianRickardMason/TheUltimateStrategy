@@ -28,7 +28,6 @@
 #ifndef ICONFIGURATORBUILDING_HPP
 #define ICONFIGURATORBUILDING_HPP
 
-#include <3rdParty/pugixml/src/pugixml.hpp>
 #include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
