@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include <GameServer/Building/BuildingWithVolume.hpp>
-#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
 
 using namespace GameServer::Configuration;
 

@@ -25,7 +25,6 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <GameServer/Configuration/Configurator/Building/ConfiguratorBuilding.hpp>
 #include <GameServer/Human/HumanToBuildingTranslator.hpp>
 #include <stdexcept>
 
