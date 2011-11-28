@@ -83,7 +83,20 @@ DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
         ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        ResourceSet cost = m_context->getConfiguratorBuilding()->getBuilding(a_key)->getCostsToDestroy();
+        std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
+            m_context->getConfiguratorBuilding()->getBuilding(a_key)->getCostsToDestroy();
+
+        // FIXME: Workaround to get the ResourceSet.
+        ResourceWithVolumeMap resources;
+
+        for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin();it != cost_map.end(); ++it)
+        {
+            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
+
+            resources[it->first] = resource;
+        }
+
+        ResourceSet cost(resources);
 
         // Multiply total cost.
         cost *= a_volume;

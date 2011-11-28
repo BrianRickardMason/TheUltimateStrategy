@@ -318,7 +318,20 @@ ResourceSet TurnManager::getCostOfLiving(
 
     for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        ResourceSet human_cost = it->second->getHuman()->getCostsToLive();
+        std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
+            it->second->getHuman()->getCostsToLive();
+
+        // FIXME: Workaround to get the ResourceSet.
+        ResourceWithVolumeMap resources;
+
+        for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
+        {
+            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
+
+            resources[it->first] = resource;
+        }
+
+        ResourceSet human_cost(resources);
 
         human_cost *= it->second->getVolume();
 

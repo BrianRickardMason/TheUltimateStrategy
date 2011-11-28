@@ -28,7 +28,8 @@
 #ifndef GAMESERVER_CONFIGURATION_IHUMAN_HPP
 #define GAMESERVER_CONFIGURATION_IHUMAN_HPP
 
-#include <GameServer/Resource/ResourceSet.hpp>
+#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
+#include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -107,21 +108,21 @@ public:
      *
      * @return The costs to dismiss the human.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToDismiss() const = 0;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToDismiss() const = 0;
 
     /**
      * @brief Gets the costs to engage the human.
      *
      * @return The costs to engage the human.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToEngage() const = 0;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToEngage() const = 0;
 
     /**
      * @brief Gets the costs for human to live.
      *
      * @return The costs for human to live.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToLive() const = 0;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToLive() const = 0;
 };
 
 //@{

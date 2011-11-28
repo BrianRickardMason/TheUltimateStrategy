@@ -72,32 +72,14 @@ unsigned int Building::getCapacity() const
     return m_capacity;
 }
 
-ResourceSet Building::getCostsToBuild() const
+std::map<IResourceKey, GameServer::Resource::Volume> const & Building::getCostsToBuild() const
 {
-    ResourceWithVolumeMap resources;
-
-    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_build.begin(); it != m_costs_to_build.end(); ++it)
-    {
-        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
-
-        resources[it->first] = resource;
-    }
-
-    return ResourceSet(resources);
+    return m_costs_to_build;
 }
 
-ResourceSet Building::getCostsToDestroy() const
+std::map<IResourceKey, GameServer::Resource::Volume> const & Building::getCostsToDestroy() const
 {
-    ResourceWithVolumeMap resources;
-
-    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_destroy.begin();it != m_costs_to_destroy.end(); ++it)
-    {
-        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
-
-        resources[it->first] = resource;
-    }
-
-    return ResourceSet(resources);
+    return m_costs_to_destroy;
 }
 
 } // namespace Configuration

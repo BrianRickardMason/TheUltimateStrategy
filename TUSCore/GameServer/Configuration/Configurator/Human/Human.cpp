@@ -95,54 +95,19 @@ unsigned int Human::getProduction() const
     return m_production;
 }
 
-ResourceSet Human::getCostsToDismiss() const
+std::map<IResourceKey, GameServer::Resource::Volume> const & Human::getCostsToDismiss() const
 {
-    // TODO: Generate the resource set once dependent on the map passed as an argument.
-
-    ResourceWithVolumeMap resources;
-
-    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_dismiss.begin();
-         it != m_costs_to_dismiss.end();
-         ++it)
-    {
-        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
-
-        resources[it->first] = resource;
-    }
-
-    return ResourceSet(resources);
+    return m_costs_to_dismiss;
 }
 
-ResourceSet Human::getCostsToEngage() const
+std::map<IResourceKey, GameServer::Resource::Volume> const & Human::getCostsToEngage() const
 {
-    ResourceWithVolumeMap resources;
-
-    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_engage.begin();
-         it != m_costs_to_engage.end();
-         ++it)
-    {
-        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
-
-        resources[it->first] = resource;
-    }
-
-    return ResourceSet(resources);
+    return m_costs_to_engage;
 }
 
-ResourceSet Human::getCostsToLive() const
+std::map<IResourceKey, GameServer::Resource::Volume> const & Human::getCostsToLive() const
 {
-    ResourceWithVolumeMap resources;
-
-    for (map<IResourceKey, Volume>::const_iterator it = m_costs_to_live.begin();
-         it != m_costs_to_live.end();
-         ++it)
-    {
-        ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
-
-        resources[it->first] = resource;
-    }
-
-    return ResourceSet(resources);
+    return m_costs_to_live;
 }
 
 } // namespace Configuration

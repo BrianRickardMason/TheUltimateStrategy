@@ -28,7 +28,8 @@
 #ifndef GAMESERVER_CONFIGURATION_IBUILDING_HPP
 #define GAMESERVER_CONFIGURATION_IBUILDING_HPP
 
-#include <GameServer/Resource/ResourceSet.hpp>
+#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
+#include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -84,14 +85,14 @@ public:
      *
      * @return The costs to build the building.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToBuild() const = 0;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToBuild() const = 0;
 
     /**
      * @brief Gets the costs to destroy the building.
      *
      * @return The costs to destroy the building.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToDestroy() const = 0;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToDestroy() const = 0;
 };
 
 //@{

@@ -94,14 +94,14 @@ public:
      *
      * @return The costs of building.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToBuild() const;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToBuild() const;
 
     /**
      * @brief Gets the costs to destroy the building.
      *
      * @return The costs to destroy the building.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToDestroy() const;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToDestroy() const;
 
 private:
     /**

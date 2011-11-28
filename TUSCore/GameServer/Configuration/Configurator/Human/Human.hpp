@@ -123,21 +123,21 @@ public:
      *
      * @return The costs to dismiss the human.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToDismiss() const;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToDismiss() const;
 
     /**
      * @brief Gets the costs to engage the human.
      *
      * @return The costs to engage the human.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToEngage() const;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToEngage() const;
 
     /**
      * @brief Gets the costs for human to live.
      *
      * @return The costs for human to live.
      */
-    virtual GameServer::Resource::ResourceSet getCostsToLive() const;
+    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToLive() const;
 
 private:
     /**
