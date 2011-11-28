@@ -27,6 +27,7 @@
 
 #include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
 #include <Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
+#include <Network/XmlRPCServer/Configurator/Resource/ConfiguratorResource.hpp>
 #include <Network/XmlRPCServer/Context.hpp>
 
 Context::Context(
@@ -42,7 +43,8 @@ Context::Context(
       m_logger_priority(a_logger_priority),
       m_persistence(a_persistence),
       m_configurator_building(new ConfiguratorBuilding),
-      m_configurator_human(new ConfiguratorHuman)
+      m_configurator_human(new ConfiguratorHuman),
+      m_configurator_resource(new ConfiguratorResource)
 {
 }
 
@@ -79,4 +81,9 @@ IConfiguratorBuildingShrPtr Context::getConfiguratorBuilding() const
 IConfiguratorHumanShrPtr Context::getConfiguratorHuman() const
 {
     return m_configurator_human;
+}
+
+IConfiguratorResourceShrPtr Context::getConfiguratorResource() const
+{
+    return m_configurator_resource;
 }

@@ -30,6 +30,7 @@
 
 #include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
 #include <Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
+#include <Network/XmlRPCServer/Configurator/Resource/IConfiguratorResource.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -90,6 +91,13 @@ public:
      * @return ConfiguratorHuman.
      */
     virtual IConfiguratorHumanShrPtr getConfiguratorHuman() const = 0;
+
+    /**
+     * @brief Gets ConfiguratorResource.
+     *
+     * @return ConfiguratorResource.
+     */
+    virtual IConfiguratorResourceShrPtr getConfiguratorResource() const = 0;
 };
 
 /**
