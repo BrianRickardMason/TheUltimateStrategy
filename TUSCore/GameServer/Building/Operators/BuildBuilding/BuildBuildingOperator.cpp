@@ -66,7 +66,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         }
 
         // Get available resources.
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
         // TODO: Consider handling invalid key: coding by contract / verification.
@@ -87,7 +87,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         cost = multiply(cost, a_volume);
 
         // Verify if there is enough resources.
-        if (!isFirstGreaterOrEqual(resource_set, cost))
+        if (!isFirstGreaterOrEqual(resource_map, cost))
         {
             return BuildBuildingOperatorExitCode(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES);
         }

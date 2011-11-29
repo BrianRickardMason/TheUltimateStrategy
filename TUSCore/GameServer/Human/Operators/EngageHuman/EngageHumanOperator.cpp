@@ -85,7 +85,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         }
 
         // Get available resources.
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
         std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
@@ -105,7 +105,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         cost = multiply(cost, a_volume);
 
         // Check if there is enough resources.
-        if (!isFirstGreaterOrEqual(resource_set, cost))
+        if (!isFirstGreaterOrEqual(resource_map, cost))
         {
             return EngageHumanOperatorExitCode(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES);
         }

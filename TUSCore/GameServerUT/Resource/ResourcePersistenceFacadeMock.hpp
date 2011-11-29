@@ -110,7 +110,7 @@ public:
      *
      * @param a_transaction  The transaction.
      * @param a_id_holder    An identifier of the holder.
-     * @param a_resource_set A set of resources.
+     * @param a_resource_map A set of resources.
      *
      * @return True on success, false otherwise.
      */
@@ -119,7 +119,7 @@ public:
         bool(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            ResourceWithVolumeMap           const & a_resource_set
+            ResourceWithVolumeMap           const & a_resource_map
         )
     );
 
@@ -130,14 +130,14 @@ public:
      *
      * @param a_transaction  The transaction.
      * @param a_id_holder    An identifier of the holder.
-     * @param a_resource_set A set of resources.
+     * @param a_resource_map A set of resources.
      */
     MOCK_CONST_METHOD3(
         subtractResourcesSafely,
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            ResourceWithVolumeMap           const & a_resource_set
+            ResourceWithVolumeMap           const & a_resource_map
         )
     );
 

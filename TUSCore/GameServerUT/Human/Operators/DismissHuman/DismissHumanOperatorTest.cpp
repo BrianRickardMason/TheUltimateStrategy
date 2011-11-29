@@ -135,23 +135,23 @@ protected:
     /**
      * @brief Configures a ResourcePersistenceFacadeMock's responses for getResources().
      *
-     * @param a_resource_set A resource set to be returned.
+     * @param a_resource_map A resource set to be returned.
      */
     void configureResourcePersistenceFacadeMockForGetResources(
-        ResourceWithVolumeMap const & a_resource_set
+        ResourceWithVolumeMap const & a_resource_map
     )
     {
         EXPECT_CALL(*m_resource_persistence_facade, getResources(_, m_id_holder))
-        .WillOnce(Return(a_resource_set));
+        .WillOnce(Return(a_resource_map));
     }
 
     /**
      * @brief Configures a ResourcePersistenceFacadeMock's responses for subtractResourceMap().
      *
-     * @param a_resource_set A resource set to be returned.
+     * @param a_resource_map A resource set to be returned.
      */
     void configureResourcePersistenceFacadeMockForSubtractResourceMap(
-        ResourceWithVolumeMap const & a_resource_set
+        ResourceWithVolumeMap const & a_resource_map
     )
     {
         EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))

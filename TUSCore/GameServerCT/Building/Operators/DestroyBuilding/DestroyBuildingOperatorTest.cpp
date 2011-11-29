@@ -129,30 +129,30 @@ protected:
             ASSERT_TRUE(m_building_persistence_facade->getBuildings(transaction, m_id_holder_21).empty());
 
             ResourceWithVolumeMap
-                resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
-                resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
-                resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
+                resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
+                resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
+                resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-            compareResourceMap(resource_set_11, expected_volumes_1);
-            compareResourceMap(resource_set_12, expected_volumes_2);
-            compareResourceMap(resource_set_21, expected_volumes_1);
+            compareResourceMap(resource_map_11, expected_volumes_1);
+            compareResourceMap(resource_map_12, expected_volumes_2);
+            compareResourceMap(resource_map_21, expected_volumes_1);
         }
     }
 
     /**
      * @brief Compares a resource set with expected volumes.
      *
-     * @param a_resource_set The resource set to be compared.
+     * @param a_resource_map The resource set to be compared.
      * @param a_volumes      A vector of expected volumes.
      *
      * TODO: Consider moving to helpers.
      */
     void compareResourceMap(
-        ResourceWithVolumeMap const & a_resource_set,
+        ResourceWithVolumeMap const & a_resource_map,
         vector<R::Volume>     const & a_vector
     )
     {
-        for (ResourceWithVolumeMap::const_iterator it = a_resource_set.begin(); it != a_resource_set.end(); ++it)
+        for (ResourceWithVolumeMap::const_iterator it = a_resource_map.begin(); it != a_resource_map.end(); ++it)
         {
             // TODO: Enable this assertion.
             // ASSERT_EQ(a_vector.at(it->second->getResource()->getKey() - 1), it->second->getVolume());
@@ -396,10 +396,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1)(1)(1)(1)(1)(1)(1);
 
-        compareResourceMap(resource_set, expected);
+        compareResourceMap(resource_map, expected);
     }
 }
 
@@ -444,10 +444,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1);
 
-        compareResourceMap(resource_set, expected);
+        compareResourceMap(resource_map, expected);
     }
 }
 
@@ -484,10 +484,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
 
-        compareResourceMap(resource_set, expected);
+        compareResourceMap(resource_map, expected);
     }
 }
 
@@ -524,10 +524,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(370)(9370)(9370)(370)(370)(370)(370);
 
-        compareResourceMap(resource_set, expected);
+        compareResourceMap(resource_map, expected);
     }
 }
 
@@ -563,10 +563,10 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(500)(9500)(9500)(500)(500)(500)(500);
 
-        compareResourceMap(resource_set, expected);
+        compareResourceMap(resource_map, expected);
     }
 }
 
@@ -603,9 +603,9 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
 
-        compareResourceMap(resource_set, expected);
+        compareResourceMap(resource_map, expected);
     }
 }

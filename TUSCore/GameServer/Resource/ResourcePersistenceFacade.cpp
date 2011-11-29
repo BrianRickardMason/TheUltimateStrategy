@@ -124,10 +124,10 @@ void ResourcePersistenceFacade::subtractResourceSafely(
 bool ResourcePersistenceFacade::subtractResources(
     ITransactionShrPtr            a_transaction,
     IDHolder              const & a_id_holder,
-    ResourceWithVolumeMap const & a_resource_set
+    ResourceWithVolumeMap const & a_resource_map
 ) const
 {
-    for (ResourceWithVolumeMap::const_iterator it = a_resource_set.begin(); it != a_resource_set.end(); ++it)
+    for (ResourceWithVolumeMap::const_iterator it = a_resource_map.begin(); it != a_resource_map.end(); ++it)
     {
         // TODO: Envious class.
         bool result =
@@ -145,10 +145,10 @@ bool ResourcePersistenceFacade::subtractResources(
 void ResourcePersistenceFacade::subtractResourcesSafely(
     ITransactionShrPtr            a_transaction,
     IDHolder              const & a_id_holder,
-    ResourceWithVolumeMap const & a_resource_set
+    ResourceWithVolumeMap const & a_resource_map
 ) const
 {
-    for (ResourceWithVolumeMap::const_iterator it = a_resource_set.begin(); it != a_resource_set.end(); ++it)
+    for (ResourceWithVolumeMap::const_iterator it = a_resource_map.begin(); it != a_resource_map.end(); ++it)
     {
         // TODO: Envious class.
         subtractResourceSafely(a_transaction, a_id_holder, it->second->getResource()->getKey(), it->second->getVolume());

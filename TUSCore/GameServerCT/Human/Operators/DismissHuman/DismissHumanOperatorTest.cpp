@@ -112,17 +112,17 @@ protected:
     /**
      * @brief Compares a resource set with expected volumes.
      *
-     * @param a_resource_set The resource set to be compared.
+     * @param a_resource_map The resource set to be compared.
      * @param a_volumes      A vector of expected volumes.
      *
      * TODO: Consider moving to helpers.
      */
     void compareResourceMap(
-        ResourceWithVolumeMap const & a_resource_set,
+        ResourceWithVolumeMap const & a_resource_map,
         vector<R::Volume>     const & a_vector
     )
     {
-        for (ResourceWithVolumeMap::const_iterator it = a_resource_set.begin(); it != a_resource_set.end(); ++it)
+        for (ResourceWithVolumeMap::const_iterator it = a_resource_map.begin(); it != a_resource_map.end(); ++it)
         {
             // TODO: Enable this assertion.
             // ASSERT_EQ(a_vector.at(it->second->getResource()->getKey() - 1), it->second->getVolume());
@@ -142,13 +142,13 @@ protected:
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ResourceWithVolumeMap
-                resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
-                resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
-                resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
+                resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
+                resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
+                resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-            compareResourceMap(resource_set_11, expected_volumes_1);
-            compareResourceMap(resource_set_12, expected_volumes_2);
-            compareResourceMap(resource_set_21, expected_volumes_1);
+            compareResourceMap(resource_map_11, expected_volumes_1);
+            compareResourceMap(resource_map_12, expected_volumes_2);
+            compareResourceMap(resource_map_21, expected_volumes_1);
 
             ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
             ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -529,13 +529,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap
-            resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
-            resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
-            resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
+            resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
+            resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
+            resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceMap(resource_set_11, expected_volumes_1);
-        compareResourceMap(resource_set_12, expected_volumes_2);
-        compareResourceMap(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_map_11, expected_volumes_1);
+        compareResourceMap(resource_map_12, expected_volumes_2);
+        compareResourceMap(resource_map_21, expected_volumes_3);
 
         ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -577,13 +577,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap
-            resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
-            resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
-            resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
+            resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
+            resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
+            resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceMap(resource_set_11, expected_volumes_1);
-        compareResourceMap(resource_set_12, expected_volumes_2);
-        compareResourceMap(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_map_11, expected_volumes_1);
+        compareResourceMap(resource_map_12, expected_volumes_2);
+        compareResourceMap(resource_map_21, expected_volumes_3);
 
         ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -625,13 +625,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap
-            resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
-            resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
-            resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
+            resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
+            resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
+            resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceMap(resource_set_11, expected_volumes_1);
-        compareResourceMap(resource_set_12, expected_volumes_2);
-        compareResourceMap(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_map_11, expected_volumes_1);
+        compareResourceMap(resource_map_12, expected_volumes_2);
+        compareResourceMap(resource_map_21, expected_volumes_3);
 
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -672,13 +672,13 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap
-            resource_set_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
-            resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
-            resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
+            resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
+            resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
+            resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceMap(resource_set_11, expected_volumes_1);
-        compareResourceMap(resource_set_12, expected_volumes_2);
-        compareResourceMap(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_map_11, expected_volumes_1);
+        compareResourceMap(resource_map_12, expected_volumes_2);
+        compareResourceMap(resource_map_21, expected_volumes_3);
 
         ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
