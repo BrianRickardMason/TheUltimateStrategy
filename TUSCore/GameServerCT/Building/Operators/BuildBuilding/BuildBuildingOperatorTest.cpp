@@ -110,9 +110,9 @@ protected:
     }
 
     /**
-     * @brief Compares a resource set with expected volumes.
+     * @brief Compares a map of resources with expected volumes.
      *
-     * @param a_resource_map The resource set to be compared.
+     * @param a_resource_map The map of resources to be compared.
      * @param a_volumes      A vector of expected volumes.
      *
      * TODO: Consider moving to helpers.

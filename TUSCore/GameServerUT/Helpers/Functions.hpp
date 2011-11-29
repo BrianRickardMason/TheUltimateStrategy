@@ -33,11 +33,11 @@
 #include <vector>
 
 /**
- * @brief Gets a resource set of a given volume per resource.
+ * @brief Gets a map of resources.
  *
  * @param a_volumes A vector of resource volumes.
  *
- * @return The resource set.
+ * @return The map of resources.
  */
 GameServer::Resource::ResourceWithVolumeMap getResourceMap(
     std::vector<GameServer::Resource::Volume> const & a_volumes

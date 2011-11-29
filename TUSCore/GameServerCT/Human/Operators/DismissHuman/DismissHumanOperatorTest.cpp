@@ -110,9 +110,9 @@ protected:
     }
 
     /**
-     * @brief Compares a resource set with expected volumes.
+     * @brief Compares a map of resources with expected volumes.
      *
-     * @param a_resource_map The resource set to be compared.
+     * @param a_resource_map The map of resources to be compared.
      * @param a_volumes      A vector of expected volumes.
      *
      * TODO: Consider moving to helpers.
@@ -326,7 +326,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
 
-        // TODO: Subtract resource set.
+        // TODO: Subtract map of resources.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
@@ -381,7 +381,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
 
         m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
-        // TODO: Subtract resource set.
+        // TODO: Subtract map of resources.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
@@ -429,7 +429,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
 
         m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
 
-        // TODO: Subtract resource set.
+        // TODO: Subtract map of resources.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);

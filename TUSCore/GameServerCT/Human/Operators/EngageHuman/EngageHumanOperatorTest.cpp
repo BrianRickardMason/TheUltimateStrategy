@@ -113,9 +113,9 @@ protected:
     }
 
     /**
-     * @brief Compares a resource set with expected volumes.
+     * @brief Compares a map of resources with expected volumes.
      *
-     * @param a_resource_map The resource set to be compared.
+     * @param a_resource_map The map of resources to be compared.
      * @param a_volumes      A vector of expected volumes.
      *
      * TODO: Consider moving to helpers.
@@ -373,7 +373,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroResources)
 
         m_human_persistence_facade->addHuman(transaction, m_id_holder_12, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
-        // TODO: Subtract resource set. The same in build building and destroy building operators.
+        // TODO: Subtract map of resources. The same in build building and destroy building operators.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
@@ -403,7 +403,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroResources)
 
         m_human_persistence_facade->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
-        // TODO: Subtract resource set. The same in build building and destroy building operators.
+        // TODO: Subtract map of resources. The same in build building and destroy building operators.
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
@@ -425,7 +425,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_AllResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        // TODO: Subtract resource set. The same in build building and destroy building operators.
+        // TODO: Subtract map of resources. The same in build building and destroy building operators.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);

@@ -171,7 +171,7 @@ protected:
     /**
      * @brief Configures a ResourcePersistenceFacadeMock's responses for getResources().
      *
-     * @param a_resource_map A resource set to be returned.
+     * @param a_resource_map A map of resources to be returned.
      */
     void configureResourcePersistenceFacadeMockForGetResources(
         ResourceWithVolumeMap const & a_resource_map
@@ -184,7 +184,7 @@ protected:
     /**
      * @brief Configures a ResourcePersistenceFacadeMock's responses for subtractResourceMap().
      *
-     * @param a_resource_map A resource set to be returned.
+     * @param a_resource_map A map of resources to be returned.
      */
     void configureResourcePersistenceFacadeMockForSubtractResourceMap(
         ResourceWithVolumeMap const & a_resource_map

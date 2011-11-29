@@ -63,7 +63,7 @@ public:
      * @brief Constructs the exit code.
      *
      * @param a_exit_code The value of the exit code.
-     * @param a_resources The resource set.
+     * @param a_resources The map of resources.
      */
     GetResourcesOperatorExitCode(
         unsigned short int    const a_exit_code,
@@ -90,7 +90,7 @@ public:
     unsigned short int const m_exit_code;
 
     /**
-     * @brief The resource set.
+     * @brief The map of resources.
      */
     ResourceWithVolumeMap const m_resources;
 };

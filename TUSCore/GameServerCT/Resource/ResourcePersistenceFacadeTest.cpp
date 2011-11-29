@@ -111,9 +111,9 @@ protected:
     }
 
     /**
-     * @brief Gets a prepared resource set.
+     * @brief Gets a prepared map of resources.
      *
-     * @return The prepared resource set.
+     * @return The prepared map of resources.
      */
     ResourceWithVolumeMap getResourceMap()
     {
