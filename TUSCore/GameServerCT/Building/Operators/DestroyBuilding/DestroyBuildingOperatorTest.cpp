@@ -133,9 +133,9 @@ protected:
                 resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
                 resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-            compareResourceSet(resource_set_11, expected_volumes_1);
-            compareResourceSet(resource_set_12, expected_volumes_2);
-            compareResourceSet(resource_set_21, expected_volumes_1);
+            compareResourceMap(resource_set_11, expected_volumes_1);
+            compareResourceMap(resource_set_12, expected_volumes_2);
+            compareResourceMap(resource_set_21, expected_volumes_1);
         }
     }
 
@@ -147,7 +147,7 @@ protected:
      *
      * TODO: Consider moving to helpers.
      */
-    void compareResourceSet(
+    void compareResourceMap(
         ResourceWithVolumeMap const & a_resource_set,
         vector<R::Volume>     const & a_vector
     )
@@ -399,7 +399,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1)(1)(1)(1)(1)(1)(1);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -447,7 +447,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -487,7 +487,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -527,7 +527,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(370)(9370)(9370)(370)(370)(370)(370);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -566,7 +566,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(500)(9500)(9500)(500)(500)(500)(500);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -606,6 +606,6 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         vector<R::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }

@@ -78,7 +78,7 @@ protected:
      *
      * @return The prepared resource set.
      */
-    ResourceWithVolumeMap getResourceSet()
+    ResourceWithVolumeMap getResourceMap()
     {
         ResourceWithVolumeMap map;
 
@@ -106,9 +106,6 @@ TEST_F(ResourcePersistenceFacadeTest, CtorDoesNotThrow)
     ASSERT_NO_THROW(ResourcePersistenceFacade persistence_facade(accessor));
 }
 
-/**
- * Unit tests of: ResourcePersistenceFacade::addResource.
- */
 TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent)
 {
     // Preconditions.
@@ -199,9 +196,6 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent_Throw)
     ASSERT_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
 }
 
-/**
- * Unit tests of: ResourcePersistenceFacade::subtractResource.
- */
 TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsNotPresent_TryToSubtract)
 {
     // Preconditions.
@@ -330,9 +324,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_TryToSu
     ASSERT_FALSE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
 }
 
-/**
- * Unit tests of: ResourcePersistenceFacade::subtractResourceSafely.
- */
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
@@ -456,10 +447,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
     ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
 }
 
-/**
- * Unit tests of: ResourcePersistenceFacade::subtractResourceSet.
- */
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_EmptySet)
+TEST_F(ResourcePersistenceFacadeTest, subtractResources_EmptySet)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -477,11 +465,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_EmptySet)
     ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesAreNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     ResourceAccessorMock * mock = new ResourceAccessorMock;
 
@@ -495,12 +483,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent
     ASSERT_FALSE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractPart)
+TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_SubtractPart)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceAccessorMock * mock = new ResourceAccessorMock;
@@ -536,12 +524,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractPart_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_SubtractPart_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceAccessorMock * mock = new ResourceAccessorMock;
@@ -562,12 +550,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ASSERT_THROW(persistence_facade.subtractResources(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractAll)
+TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_SubtractAll)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceAccessorMock * mock = new ResourceAccessorMock;
@@ -603,12 +591,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractAll_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_SubtractAll_Throw)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceAccessorMock * mock = new ResourceAccessorMock;
@@ -632,12 +620,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ASSERT_THROW(persistence_facade.subtractResources(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_TryToSubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_TryToSubtractTooMuch)
 {
     // Preconditions.
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     // Mocks setup: ResourcePersistenceFacadeMock.
     ResourceAccessorMock * mock = new ResourceAccessorMock;
@@ -663,10 +651,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Tr
     ASSERT_FALSE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
-/**
- * Unit tests of: ResourcePersistenceFacade::subtractResourceSetSafely.
- */
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_EmptySet)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_EmptySet)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
@@ -684,11 +669,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_EmptySet)
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotPresent_TryToSubtract)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesAreNotPresent_TryToSubtract)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     ResourceAccessorMock * mock = new ResourceAccessorMock;
 
@@ -702,11 +687,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotP
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresent_SubtractPart)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     ResourceAccessorMock * mock = new ResourceAccessorMock;
 
@@ -740,11 +725,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresent_SubtractPart_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     ResourceAccessorMock * mock = new ResourceAccessorMock;
 
@@ -763,11 +748,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     ASSERT_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresent_SubtractAll)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     ResourceAccessorMock * mock = new ResourceAccessorMock;
 
@@ -801,11 +786,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll_Throw)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresent_SubtractAll_Throw)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     ResourceAccessorMock * mock = new ResourceAccessorMock;
 
@@ -827,11 +812,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     ASSERT_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set), std::exception);
 }
 
-TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractTooMuch)
+TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresent_SubtractTooMuch)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    ResourceWithVolumeMap resource_set = getResourceSet();
+    ResourceWithVolumeMap resource_set = getResourceMap();
 
     ResourceAccessorMock * mock = new ResourceAccessorMock;
 
@@ -862,9 +847,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
-/**
- * Unit tests of: ResourcePersistenceFacade::getResource.
- */
 TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsNotPresent)
 {
     // Preconditions.
@@ -911,9 +893,6 @@ TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent)
     compareResource(resource, KEY_RESOURCE_COAL, 3);
 }
 
-/**
- * Unit tests of: ResourcePersistenceFacade::getResources.
- */
 TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesAreNotPresent)
 {
     ITransactionShrPtr transaction(new TransactionDummy);

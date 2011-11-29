@@ -73,10 +73,10 @@ protected:
     {
         // Mocks setup: ResourcePersistenceFacadeMock.
         std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-        configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
+        configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
 
         resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-        configureResourcePersistenceFacadeMockForSubtractResourceSet(getResourceSet(resource_volumes));
+        configureResourcePersistenceFacadeMockForSubtractResourceMap(getResourceMap(resource_volumes));
 
         return m_resource_persistence_facade;
     }
@@ -146,11 +146,11 @@ protected:
     }
 
     /**
-     * @brief Configures a ResourcePersistenceFacadeMock's responses for subtractResourceSet().
+     * @brief Configures a ResourcePersistenceFacadeMock's responses for subtractResourceMap().
      *
      * @param a_resource_set A resource set to be returned.
      */
-    void configureResourcePersistenceFacadeMockForSubtractResourceSet(
+    void configureResourcePersistenceFacadeMockForSubtractResourceMap(
         ResourceWithVolumeMap const & a_resource_set
     )
     {
@@ -254,7 +254,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_NoResources)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes_empty;
-    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes_empty));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes_empty));
 
     DismissHumanOperator dismiss_human_operator(m_context,
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
@@ -271,7 +271,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_ZeroVolumes)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
 
     DismissHumanOperator dismiss_human_operator(m_context,
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
@@ -288,7 +288,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_LowerVolumes)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1)(1);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
 
     DismissHumanOperator dismiss_human_operator(m_context,
                                                 IHumanPersistenceFacadeShrPtr(m_human_persistence_facade),
@@ -316,14 +316,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Success)
               dismiss_human_operator.dismissHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1).m_exit_code);
 }
 
-TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetThrows)
+TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceMapThrows)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
 
     std::exception e;
     resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
@@ -338,14 +338,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetThrows)
               dismiss_human_operator.dismissHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 10).m_exit_code);
 }
 
-TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetReturnsFalse)
+TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceMapReturnsFalse)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BLACKSMITH_NOVICE, 10);
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
 
     resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))

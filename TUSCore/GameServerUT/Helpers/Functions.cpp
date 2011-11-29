@@ -37,7 +37,7 @@ using namespace std;
 
 namespace R = GameServer::Resource;
 
-ResourceWithVolumeMap getResourceSet(
+ResourceWithVolumeMap getResourceMap(
     vector<R::Volume> const & a_volumes
 )
 {

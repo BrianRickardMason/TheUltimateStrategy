@@ -117,7 +117,7 @@ protected:
      *
      * TODO: Consider moving to helpers.
      */
-    void compareResourceSet(
+    void compareResourceMap(
         ResourceWithVolumeMap const & a_resource_set,
         vector<R::Volume>     const & a_vector
     )
@@ -146,9 +146,9 @@ protected:
                 resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
                 resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-            compareResourceSet(resource_set_11, expected_volumes_1);
-            compareResourceSet(resource_set_12, expected_volumes_2);
-            compareResourceSet(resource_set_21, expected_volumes_1);
+            compareResourceMap(resource_set_11, expected_volumes_1);
+            compareResourceMap(resource_set_12, expected_volumes_2);
+            compareResourceMap(resource_set_21, expected_volumes_1);
 
             ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
             ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -533,9 +533,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
             resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
             resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceSet(resource_set_11, expected_volumes_1);
-        compareResourceSet(resource_set_12, expected_volumes_2);
-        compareResourceSet(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_set_11, expected_volumes_1);
+        compareResourceMap(resource_set_12, expected_volumes_2);
+        compareResourceMap(resource_set_21, expected_volumes_3);
 
         ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -581,9 +581,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
             resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
             resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceSet(resource_set_11, expected_volumes_1);
-        compareResourceSet(resource_set_12, expected_volumes_2);
-        compareResourceSet(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_set_11, expected_volumes_1);
+        compareResourceMap(resource_set_12, expected_volumes_2);
+        compareResourceMap(resource_set_21, expected_volumes_3);
 
         ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -629,9 +629,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
             resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
             resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceSet(resource_set_11, expected_volumes_1);
-        compareResourceSet(resource_set_12, expected_volumes_2);
-        compareResourceSet(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_set_11, expected_volumes_1);
+        compareResourceMap(resource_set_12, expected_volumes_2);
+        compareResourceMap(resource_set_21, expected_volumes_3);
 
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
@@ -676,9 +676,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
             resource_set_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
             resource_set_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
 
-        compareResourceSet(resource_set_11, expected_volumes_1);
-        compareResourceSet(resource_set_12, expected_volumes_2);
-        compareResourceSet(resource_set_21, expected_volumes_3);
+        compareResourceMap(resource_set_11, expected_volumes_1);
+        compareResourceMap(resource_set_12, expected_volumes_2);
+        compareResourceMap(resource_set_21, expected_volumes_3);
 
         ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());

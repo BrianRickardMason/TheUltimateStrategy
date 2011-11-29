@@ -39,7 +39,7 @@
  *
  * @return The resource set.
  */
-GameServer::Resource::ResourceWithVolumeMap getResourceSet(
+GameServer::Resource::ResourceWithVolumeMap getResourceMap(
     std::vector<GameServer::Resource::Volume> const & a_volumes
 );
 

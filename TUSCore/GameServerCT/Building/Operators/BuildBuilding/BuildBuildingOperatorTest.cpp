@@ -117,7 +117,7 @@ protected:
      *
      * TODO: Consider moving to helpers.
      */
-    void compareResourceSet(
+    void compareResourceMap(
         ResourceWithVolumeMap                     const & a_resource_set,
         std::vector<GameServer::Resource::Volume> const & a_vector
     )
@@ -220,7 +220,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_TryingToBuildZeroBuildings)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -248,7 +248,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_MissingIDHolder)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -276,7 +276,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_AllResources)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -313,7 +313,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(999)(10000)(10000)(1000)(1000)(1000)(1000);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -344,7 +344,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -375,7 +375,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(930)(9930)(9930)(930)(930)(930)(930);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
 
@@ -406,6 +406,6 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
         ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
 
-        compareResourceSet(resource_set, expected);
+        compareResourceMap(resource_set, expected);
     }
 }
