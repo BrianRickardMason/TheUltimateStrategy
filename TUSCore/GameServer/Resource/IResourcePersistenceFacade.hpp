@@ -124,7 +124,7 @@ public:
      * @param a_id_holder    An identifier of the holder.
      * @param a_resource_set A set of resources.
      */
-    virtual void subtractResourceSetSafely(
+    virtual void subtractResourcesSafely(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceWithVolumeMap           const & a_resource_set

@@ -183,7 +183,7 @@ bool TurnManager::executeTurnSettlement(
 
     // Expenses.
     {
-        m_resource_persistence_facade->subtractResourceSetSafely(a_transaction, id_holder, cost_of_living);
+        m_resource_persistence_facade->subtractResourcesSafely(a_transaction, id_holder, cost_of_living);
     }
 
     // Receipts.

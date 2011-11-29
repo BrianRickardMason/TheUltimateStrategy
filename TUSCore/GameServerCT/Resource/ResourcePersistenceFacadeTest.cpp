@@ -951,7 +951,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
         ResourceWithVolumeMap resource_map;
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_map));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_map));
 
         transaction->commit();
     }
@@ -997,7 +997,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1037,7 +1037,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1083,7 +1083,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1130,7 +1130,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1141,7 +1141,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1179,8 +1179,8 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -1203,7 +1203,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotP
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourceSetSafely(transaction, m_id_holder_1, resource_set));
+        ASSERT_NO_THROW(m_resource_persistence_facade->subtractResourcesSafely(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }

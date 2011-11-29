@@ -133,7 +133,7 @@ public:
      * @param a_resource_set A set of resources.
      */
     MOCK_CONST_METHOD3(
-        subtractResourceSetSafely,
+        subtractResourcesSafely,
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,

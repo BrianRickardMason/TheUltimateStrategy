@@ -681,7 +681,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_EmptySet)
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotPresent_TryToSubtract)
@@ -699,7 +699,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesAreNotP
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart)
@@ -737,7 +737,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractPart_Throw)
@@ -760,7 +760,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set), std::exception);
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll)
@@ -798,7 +798,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractAll_Throw)
@@ -824,7 +824,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set), std::exception);
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePresent_SubtractTooMuch)
@@ -859,7 +859,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSetSafely_ResourcesArePres
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_NO_THROW(persistence_facade.subtractResourceSetSafely(transaction, m_id_holder, resource_set));
+    ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_set));
 }
 
 /**

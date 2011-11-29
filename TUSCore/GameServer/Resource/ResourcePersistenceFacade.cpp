@@ -142,7 +142,7 @@ bool ResourcePersistenceFacade::subtractResources(
     return true;
 }
 
-void ResourcePersistenceFacade::subtractResourceSetSafely(
+void ResourcePersistenceFacade::subtractResourcesSafely(
     ITransactionShrPtr            a_transaction,
     IDHolder              const & a_id_holder,
     ResourceWithVolumeMap const & a_resource_set
