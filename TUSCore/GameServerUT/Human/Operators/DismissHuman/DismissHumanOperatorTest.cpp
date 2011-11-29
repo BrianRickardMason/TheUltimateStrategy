@@ -154,7 +154,7 @@ protected:
         ResourceWithVolumeMap const & a_resource_set
     )
     {
-        EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, _))
+        EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
         .WillOnce(Return(true));
     }
 
@@ -327,7 +327,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetThrows)
 
     std::exception e;
     resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, _))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
     .WillOnce(Throw(e));
 
     DismissHumanOperator dismiss_human_operator(m_context,
@@ -348,7 +348,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceSetReturnsFalse)
     configureResourcePersistenceFacadeMockForGetResources(getResourceSet(resource_volumes));
 
     resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, _))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
     .WillOnce(Return(false));
 
     DismissHumanOperator dismiss_human_operator(m_context,

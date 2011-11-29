@@ -653,7 +653,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
 
         ResourceWithVolumeMap resource_map;
 
-        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_map));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_map));
 
         transaction->commit();
     }
@@ -701,7 +701,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -743,7 +743,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -791,7 +791,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Tr
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_FALSE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_FALSE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
     }
 
     {
@@ -837,7 +837,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -848,7 +848,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -886,8 +886,8 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
-        ASSERT_TRUE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
+        ASSERT_TRUE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }
@@ -910,7 +910,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent
 
         ResourceWithVolumeMap resource_set = getResourceSet();
 
-        ASSERT_FALSE(m_resource_persistence_facade->subtractResourceSet(transaction, m_id_holder_1, resource_set));
+        ASSERT_FALSE(m_resource_persistence_facade->subtractResources(transaction, m_id_holder_1, resource_set));
 
         transaction->commit();
     }

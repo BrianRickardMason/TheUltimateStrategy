@@ -121,7 +121,7 @@ void ResourcePersistenceFacade::subtractResourceSafely(
     }
 }
 
-bool ResourcePersistenceFacade::subtractResourceSet(
+bool ResourcePersistenceFacade::subtractResources(
     ITransactionShrPtr            a_transaction,
     IDHolder              const & a_id_holder,
     ResourceWithVolumeMap const & a_resource_set

@@ -93,7 +93,7 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         }
 
         // Subtract the resources.
-        bool const result = m_resource_persistence_facade->subtractResourceSet(a_transaction, a_id_holder, cost);
+        bool const result = m_resource_persistence_facade->subtractResources(a_transaction, a_id_holder, cost);
 
         // There is a possible situation (in multithreaded application) of a race condition between checking if
         // there is enough resources and trying to subtract it.

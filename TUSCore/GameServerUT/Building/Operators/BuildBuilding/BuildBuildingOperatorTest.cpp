@@ -86,7 +86,7 @@ protected:
         ResourceWithVolumeMap const & a_resource_set
     )
     {
-        EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, _))
+        EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
         .WillOnce(Return(true));
     }
 
@@ -186,7 +186,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceThrows)
     ResourceWithVolumeMap resource_set = getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
     std::exception e;
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, _))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
     .WillOnce(Throw(e));
 
     BuildBuildingOperator build_building_operator(m_context,
@@ -204,7 +204,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceReturnsFalse)
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
     ResourceWithVolumeMap resource_set = getResourceSet(resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_set);
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, _))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
     .WillOnce(Return(false));
 
     BuildBuildingOperator build_building_operator(m_context,

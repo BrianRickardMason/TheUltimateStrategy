@@ -109,7 +109,7 @@ public:
      *
      * @return True on success, false otherwise.
      */
-    virtual bool subtractResourceSet(
+    virtual bool subtractResources(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
         ResourceWithVolumeMap           const & a_resource_set

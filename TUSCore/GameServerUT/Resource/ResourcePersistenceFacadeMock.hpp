@@ -115,7 +115,7 @@ public:
      * @return True on success, false otherwise.
      */
     MOCK_CONST_METHOD3(
-        subtractResourceSet,
+        subtractResources,
         bool(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,

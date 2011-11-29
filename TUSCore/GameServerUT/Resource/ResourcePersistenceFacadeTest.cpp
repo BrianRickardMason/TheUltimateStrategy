@@ -474,7 +474,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_EmptySet)
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_TRUE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent_TryToSubtract)
@@ -492,7 +492,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesAreNotPresent
 
     ResourcePersistenceFacade persistence_facade(accessor);
 
-    ASSERT_FALSE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_FALSE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractPart)
@@ -533,7 +533,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractPart_Throw)
@@ -559,7 +559,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResources(transaction, m_id_holder, resource_set), std::exception);
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractAll)
@@ -600,7 +600,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_SubtractAll_Throw)
@@ -629,7 +629,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Su
     ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set), std::exception);
+    ASSERT_THROW(persistence_facade.subtractResources(transaction, m_id_holder, resource_set), std::exception);
 }
 
 TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_TryToSubtractTooMuch)
@@ -660,7 +660,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSet_ResourcesArePresent_Tr
     ResourcePersistenceFacade persistence_facade(accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(persistence_facade.subtractResourceSet(transaction, m_id_holder, resource_set));
+    ASSERT_FALSE(persistence_facade.subtractResources(transaction, m_id_holder, resource_set));
 }
 
 /**
