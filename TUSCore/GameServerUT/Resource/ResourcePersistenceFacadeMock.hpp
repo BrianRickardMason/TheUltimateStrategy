@@ -104,13 +104,13 @@ public:
     );
 
     /**
-     * @brief Subtracts the set of resources.
+     * @brief Subtracts the map of resources.
      *
-     * Returns true only if the set of resources was really subtracted.
+     * Returns true only if the map of resources was really subtracted.
      *
      * @param a_transaction  The transaction.
      * @param a_id_holder    An identifier of the holder.
-     * @param a_resource_map A set of resources.
+     * @param a_resource_map A map of resources.
      *
      * @return True on success, false otherwise.
      */
@@ -124,13 +124,13 @@ public:
     );
 
     /**
-     * @brief Safely subtracts the set of resources.
+     * @brief Safely subtracts the map of resources.
      *
      * If the volume of the resource is lower than the volume to be subtracted then the resource is deleted.
      *
      * @param a_transaction  The transaction.
      * @param a_id_holder    An identifier of the holder.
-     * @param a_resource_map A set of resources.
+     * @param a_resource_map A map of resources.
      */
     MOCK_CONST_METHOD3(
         subtractResourcesSafely,
