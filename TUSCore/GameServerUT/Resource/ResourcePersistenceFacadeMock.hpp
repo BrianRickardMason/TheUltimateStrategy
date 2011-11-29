@@ -119,7 +119,7 @@ public:
         bool(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            ResourceSet                     const & a_resource_set
+            ResourceWithVolumeMap           const & a_resource_set
         )
     );
 
@@ -137,7 +137,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            ResourceSet                     const & a_resource_set
+            ResourceWithVolumeMap           const & a_resource_set
         )
     );
 
@@ -169,7 +169,7 @@ public:
      */
     MOCK_CONST_METHOD2(
         getResources,
-        ResourceSet(
+        ResourceWithVolumeMap(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder
         )

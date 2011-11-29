@@ -27,6 +27,7 @@
 
 #include <GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp>
 #include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
+#include <GameServer/Resource/Helpers.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -65,30 +66,28 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
         }
 
         // Get available resources.
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
         // TODO: Consider handling invalid key: coding by contract / verification.
         std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
             m_context->getConfiguratorBuilding()->getBuilding(a_key)->getCostsToBuild();
 
-        // FIXME: Workaround to get the ResourceSet.
-        ResourceWithVolumeMap resources;
+        // FIXME: Workaround to get the ResourceWithVolumeMap.
+        ResourceWithVolumeMap cost;
 
         for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
         {
             ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
 
-            resources[it->first] = resource;
+            cost[it->first] = resource;
         }
 
-        ResourceSet cost(resources);
-
         // Multiply total cost.
-        cost *= a_volume;
+        cost = multiply(cost, a_volume);
 
         // Verify if there is enough resources.
-        if (!(resource_set >= cost))
+        if (!isFirstGreaterOrEqual(resource_set, cost))
         {
             return BuildBuildingOperatorExitCode(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES);
         }

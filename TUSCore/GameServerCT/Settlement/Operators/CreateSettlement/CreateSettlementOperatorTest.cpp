@@ -153,9 +153,7 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, id_holder);
-
-            ResourceWithVolumeMap resource_map = resource_set.getMap();
+            ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, id_holder);
 
             ASSERT_FALSE(resource_map.empty());
             ASSERT_EQ(7, resource_map.size());
@@ -193,22 +191,9 @@ protected:
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, id_holder);
+            ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, id_holder);
 
-            ResourceWithVolumeMap resource_map = resource_set.getMap();
-
-            ASSERT_FALSE(resource_map.empty());
-
-            // TODO: Enable this assertion.
-            // ASSERT_EQ(RESOURCE_VEC.size(), resource_map.size());
-
-            compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 0);
-            compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 0);
-            compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
-            compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
-            compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
-            compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
-            compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
+            ASSERT_TRUE(resource_map.empty());
         }
     }
 

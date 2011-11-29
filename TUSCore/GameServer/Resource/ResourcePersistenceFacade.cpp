@@ -122,14 +122,12 @@ void ResourcePersistenceFacade::subtractResourceSafely(
 }
 
 bool ResourcePersistenceFacade::subtractResourceSet(
-    ITransactionShrPtr         a_transaction,
-    IDHolder           const & a_id_holder,
-    ResourceSet        const & a_resource_set
+    ITransactionShrPtr            a_transaction,
+    IDHolder              const & a_id_holder,
+    ResourceWithVolumeMap const & a_resource_set
 ) const
 {
-    ResourceWithVolumeMap map = a_resource_set.getMap();
-
-    for (ResourceWithVolumeMap::const_iterator it = map.begin(); it != map.end(); ++it)
+    for (ResourceWithVolumeMap::const_iterator it = a_resource_set.begin(); it != a_resource_set.end(); ++it)
     {
         // TODO: Envious class.
         bool result =
@@ -145,14 +143,12 @@ bool ResourcePersistenceFacade::subtractResourceSet(
 }
 
 void ResourcePersistenceFacade::subtractResourceSetSafely(
-    ITransactionShrPtr         a_transaction,
-    IDHolder           const & a_id_holder,
-    ResourceSet        const & a_resource_set
+    ITransactionShrPtr            a_transaction,
+    IDHolder              const & a_id_holder,
+    ResourceWithVolumeMap const & a_resource_set
 ) const
 {
-    ResourceWithVolumeMap map = a_resource_set.getMap();
-
-    for (ResourceWithVolumeMap::const_iterator it = map.begin(); it != map.end(); ++it)
+    for (ResourceWithVolumeMap::const_iterator it = a_resource_set.begin(); it != a_resource_set.end(); ++it)
     {
         // TODO: Envious class.
         subtractResourceSafely(a_transaction, a_id_holder, it->second->getResource()->getKey(), it->second->getVolume());
@@ -170,7 +166,7 @@ ResourceWithVolumeShrPtr ResourcePersistenceFacade::getResource(
     return record ? make_shared<ResourceWithVolume>(*record) : ResourceWithVolumeShrPtr();
 }
 
-ResourceSet ResourcePersistenceFacade::getResources(
+ResourceWithVolumeMap ResourcePersistenceFacade::getResources(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder
 ) const
@@ -189,7 +185,7 @@ ResourceSet ResourcePersistenceFacade::getResources(
         }
     }
 
-    return ResourceSet(resource_map);
+    return resource_map;
 }
 
 } // namespace Resource

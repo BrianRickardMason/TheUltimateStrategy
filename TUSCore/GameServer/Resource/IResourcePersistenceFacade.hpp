@@ -30,7 +30,7 @@
 
 #include "../Common/IDHolder.hpp"
 #include "../Persistence/ITransaction.hpp"
-#include "ResourceSet.hpp"
+#include "ResourceWithVolume.hpp"
 #include <boost/noncopyable.hpp>
 
 namespace GameServer
@@ -112,7 +112,7 @@ public:
     virtual bool subtractResourceSet(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        ResourceSet                     const & a_resource_set
+        ResourceWithVolumeMap           const & a_resource_set
     ) const = 0;
 
     /**
@@ -127,7 +127,7 @@ public:
     virtual void subtractResourceSetSafely(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        ResourceSet                     const & a_resource_set
+        ResourceWithVolumeMap           const & a_resource_set
     ) const = 0;
 
     /**
@@ -153,7 +153,7 @@ public:
      *
      * @return A map of resources, an empty map if not found.
      */
-    virtual ResourceSet getResources(
+    virtual ResourceWithVolumeMap getResources(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const = 0;

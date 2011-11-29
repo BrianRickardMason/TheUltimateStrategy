@@ -28,6 +28,7 @@
 #include <GameServer/Common/IDHolder.hpp>
 #include <GameServer/Human/Key.hpp>
 #include <GameServer/Human/Human.hpp>
+#include <GameServer/Resource/Helpers.hpp>
 #include <GameServer/Resource/Key.hpp>
 #include <GameServer/Turn/Managers/TurnManager.hpp>
 
@@ -121,14 +122,14 @@ bool TurnManager::executeTurnSettlement(
     // TODO: Implement me!
 
     // Get the available resources.
-    ResourceSet available_resources = m_resource_persistence_facade->getResources(a_transaction, id_holder);
+    ResourceWithVolumeMap available_resources = m_resource_persistence_facade->getResources(a_transaction, id_holder);
 
     // Get the cost of living.
-    ResourceSet cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
+    ResourceWithVolumeMap cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
 
     // Verify famine.
     // FIXME: Code smell: envious class.
-    if (available_resources.getMap().at(KEY_RESOURCE_FOOD)->getVolume() < cost_of_living.getMap().at(KEY_RESOURCE_FOOD)->getVolume())
+    if (available_resources.at(KEY_RESOURCE_FOOD)->getVolume() < cost_of_living.at(KEY_RESOURCE_FOOD)->getVolume())
     {
         HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
@@ -152,7 +153,7 @@ bool TurnManager::executeTurnSettlement(
 
     // Verify poverty.
     // FIXME: Code smell: envious class.
-    if (available_resources.getMap().at(KEY_RESOURCE_GOLD)->getVolume() < cost_of_living.getMap().at(KEY_RESOURCE_GOLD)->getVolume())
+    if (available_resources.at(KEY_RESOURCE_GOLD)->getVolume() < cost_of_living.at(KEY_RESOURCE_GOLD)->getVolume())
     {
         HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
@@ -305,18 +306,18 @@ bool TurnManager::executeTurnSettlement(
     return true;
 }
 
-ResourceSet TurnManager::getCostOfLiving(
+ResourceWithVolumeMap TurnManager::getCostOfLiving(
     ITransactionShrPtr       a_transaction,
     string             const a_settlement_name
 ) const
 {
-    ResourceSet total_cost;
+    ResourceWithVolumeMap total_cost;
 
     IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
 
     HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
-    for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
+    for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
         std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
             it->second->getHuman()->getCostsToLive();
@@ -324,18 +325,16 @@ ResourceSet TurnManager::getCostOfLiving(
         // FIXME: Workaround to get the ResourceSet.
         ResourceWithVolumeMap resources;
 
-        for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
+        for (std::map<IResourceKey, Volume>::const_iterator itr = cost_map.begin(); itr != cost_map.end(); ++itr)
         {
-            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
+            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(itr->first, itr->second));
 
-            resources[it->first] = resource;
+            resources[itr->first] = resource;
         }
 
-        ResourceSet human_cost(resources);
+        resources = multiply(resources, it->second->getVolume());
 
-        human_cost *= it->second->getVolume();
-
-        total_cost += human_cost;
+        total_cost = add(total_cost, resources);
     }
 
     return total_cost;

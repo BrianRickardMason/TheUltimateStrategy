@@ -174,7 +174,7 @@ protected:
      * @param a_resource_set A resource set to be returned.
      */
     void configureResourcePersistenceFacadeMockForGetResources(
-        ResourceSet const & a_resource_set
+        ResourceWithVolumeMap const & a_resource_set
     )
     {
         EXPECT_CALL(*m_resource_persistence_facade, getResources(_, m_id_holder))
@@ -187,10 +187,10 @@ protected:
      * @param a_resource_set A resource set to be returned.
      */
     void configureResourcePersistenceFacadeMockForSubtractResourceSet(
-        ResourceSet const & a_resource_set
+        ResourceWithVolumeMap const & a_resource_set
     )
     {
-        EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, a_resource_set))
+        EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(_, m_id_holder, _))
         .WillOnce(Return(true));
     }
 
@@ -411,7 +411,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, getResourceSet(resource_volumes)))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 
     // Subtract human.
@@ -462,7 +462,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, getResourceSet(resource_volumes)))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 
     // Subtract human.
@@ -513,7 +513,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, getResourceSet(resource_volumes)))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 
     // Subtract human.
@@ -603,7 +603,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, getResourceSet(resource_volumes)))
+    EXPECT_CALL(*m_resource_persistence_facade, subtractResourceSet(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 
     // Subtract human.

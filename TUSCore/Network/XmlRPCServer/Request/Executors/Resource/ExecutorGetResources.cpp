@@ -210,8 +210,8 @@ ReplyShrPtr ExecutorGetResources::produceReply(
 
     IXmlNodeShrPtr node_objects = node_reply->appendNode("objects");
 
-    for (ResourceWithVolumeMap::const_iterator it = a_exit_code.m_resources.getMap().begin();
-         it != a_exit_code.m_resources.getMap().end();
+    for (ResourceWithVolumeMap::const_iterator it = a_exit_code.m_resources.begin();
+         it != a_exit_code.m_resources.end();
          ++it)
     {
         IXmlNodeShrPtr node_object = node_objects->appendNode("object");

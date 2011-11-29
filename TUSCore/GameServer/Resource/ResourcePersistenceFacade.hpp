@@ -117,7 +117,7 @@ public:
     virtual bool subtractResourceSet(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        ResourceSet                     const & a_resource_set
+        ResourceWithVolumeMap           const & a_resource_set
     ) const;
 
     /**
@@ -132,7 +132,7 @@ public:
     virtual void subtractResourceSetSafely(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        ResourceSet                     const & a_resource_set
+        ResourceWithVolumeMap           const & a_resource_set
     ) const;
 
     /**
@@ -158,7 +158,7 @@ public:
      *
      * @return A map of resources, an empty map if not found.
      */
-    virtual ResourceSet getResources(
+    virtual ResourceWithVolumeMap getResources(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder
     ) const;

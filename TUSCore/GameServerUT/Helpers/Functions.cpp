@@ -37,7 +37,7 @@ using namespace std;
 
 namespace R = GameServer::Resource;
 
-ResourceSet getResourceSet(
+ResourceWithVolumeMap getResourceSet(
     vector<R::Volume> const & a_volumes
 )
 {
@@ -63,7 +63,5 @@ ResourceSet getResourceSet(
         resource_map.insert(make_pair(KEY_RESOURCE_WOOD, resource_with_volume_wood));
     }
 
-    ResourceSet resource_set(resource_map);
-
-    return resource_set;
+    return resource_map;
 }

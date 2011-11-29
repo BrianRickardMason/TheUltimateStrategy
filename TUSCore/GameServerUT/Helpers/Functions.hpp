@@ -28,7 +28,7 @@
 #ifndef FUNCTIONS_HPP
 #define FUNCTIONS_HPP
 
-#include "../../GameServer/Resource/ResourceSet.hpp"
+#include <GameServer/Resource/ResourceWithVolume.hpp>
 #include <boost/make_shared.hpp>
 #include <vector>
 
@@ -39,7 +39,7 @@
  *
  * @return The resource set.
  */
-GameServer::Resource::ResourceSet getResourceSet(
+GameServer::Resource::ResourceWithVolumeMap getResourceSet(
     std::vector<GameServer::Resource::Volume> const & a_volumes
 );
 

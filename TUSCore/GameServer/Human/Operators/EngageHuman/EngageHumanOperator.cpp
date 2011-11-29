@@ -28,6 +28,7 @@
 #include "../../../Building/BuildingToHumanTranslator.hpp"
 #include "../../HumanToBuildingTranslator.hpp"
 #include "EngageHumanOperator.hpp"
+#include <GameServer/Resource/Helpers.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -84,29 +85,27 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         }
 
         // Get available resources.
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
         std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
             m_context->getConfiguratorHuman()->getHuman(a_key)->getCostsToEngage();
 
-        // FIXME: Workaround to get the ResourceSet.
-        ResourceWithVolumeMap resources;
+        // FIXME: Workaround to get the ResourceWithVolume.
+        ResourceWithVolumeMap cost;
 
         for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
         {
             ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
 
-            resources[it->first] = resource;
+            cost[it->first] = resource;
         }
 
-        ResourceSet cost(resources);
-
         // Multiply total cost.
-        cost *= a_volume;
+        cost = multiply(cost, a_volume);
 
         // Check if there is enough resources.
-        if (!(resource_set >= cost))
+        if (!isFirstGreaterOrEqual(resource_set, cost))
         {
             return EngageHumanOperatorExitCode(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES);
         }

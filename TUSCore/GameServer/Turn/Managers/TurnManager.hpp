@@ -109,7 +109,7 @@ private:
      *
      * @return The total cost of living humans in the settlement.
      */
-    Resource::ResourceSet getCostOfLiving(
+    Resource::ResourceWithVolumeMap getCostOfLiving(
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;

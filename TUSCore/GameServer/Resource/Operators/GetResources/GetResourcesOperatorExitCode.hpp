@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_RESOURCE_GETRESOURCESOPERATOREXITCODE_HPP
 #define GAMESERVER_RESOURCE_GETRESOURCESOPERATOREXITCODE_HPP
 
-#include "../../ResourceSet.hpp"
+#include <GameServer/Resource/ResourceWithVolume.hpp>
 
 namespace GameServer
 {
@@ -66,8 +66,8 @@ public:
      * @param a_resources The resource set.
      */
     GetResourcesOperatorExitCode(
-        unsigned short int const a_exit_code,
-        ResourceSet        const a_resources
+        unsigned short int    const a_exit_code,
+        ResourceWithVolumeMap const a_resources
     )
         : m_exit_code(a_exit_code),
           m_resources(a_resources)
@@ -92,7 +92,7 @@ public:
     /**
      * @brief The resource set.
      */
-    ResourceSet const m_resources;
+    ResourceWithVolumeMap const m_resources;
 };
 
 } // namespace Resource

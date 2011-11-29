@@ -118,13 +118,11 @@ protected:
      * TODO: Consider moving to helpers.
      */
     void compareResourceSet(
-        ResourceSet                               const & a_resource_set,
+        ResourceWithVolumeMap                     const & a_resource_set,
         std::vector<GameServer::Resource::Volume> const & a_vector
     )
     {
-        ResourceWithVolumeMap resources_map = a_resource_set.getMap();
-
-        for (ResourceWithVolumeMap::iterator it = resources_map.begin(); it != resources_map.end(); ++it)
+        for (ResourceWithVolumeMap::const_iterator it = a_resource_set.begin(); it != a_resource_set.end(); ++it)
         {
             // TODO: Enable this assertion.
             // ASSERT_EQ(a_vector.at(it->second->getResource()->getKey() - 1), it->second->getVolume());
@@ -219,7 +217,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_TryingToBuildZeroBuildings)
 
         ASSERT_TRUE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
 
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
         compareResourceSet(resource_set, expected);
@@ -247,7 +245,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_MissingIDHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
         compareResourceSet(resource_set, expected);
@@ -275,7 +273,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_AllResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
 
         compareResourceSet(resource_set, expected);
@@ -312,7 +310,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(999)(10000)(10000)(1000)(1000)(1000)(1000);
 
         compareResourceSet(resource_set, expected);
@@ -343,7 +341,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
 
         compareResourceSet(resource_set, expected);
@@ -374,7 +372,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(930)(9930)(9930)(930)(930)(930)(930);
 
         compareResourceSet(resource_set, expected);
@@ -405,7 +403,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ResourceSet resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
+        ResourceWithVolumeMap resource_set = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
         std::vector<GameServer::Resource::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
 
         compareResourceSet(resource_set, expected);
