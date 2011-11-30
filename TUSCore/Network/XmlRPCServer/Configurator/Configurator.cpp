@@ -77,6 +77,16 @@ string Configurator::getPersistence() const
     return m_persistence;
 }
 
+string Configurator::getConfigurationPath() const
+{
+    return m_configuration_path;
+}
+
+string Configurator::getConfigurationSelected() const
+{
+    return m_configuration_selected;
+}
+
 bool Configurator::loadXml()
 {
     // TODO: Guess the path.
@@ -90,11 +100,13 @@ bool Configurator::parseXml()
 {
     xml_node server = m_serverconfig_xml.child("server");
 
-    m_host            = server.child_value("host");
-    m_port            = server.child_value("port");
-    m_threads         = lexical_cast<unsigned short int>(server.child_value("threads"));
-    m_logger_priority = lexical_cast<int>(server.child("logger").child_value("priority"));
-    m_persistence     = server.child_value("persistence");
+    m_host                   = server.child_value("host");
+    m_port                   = server.child_value("port");
+    m_threads                = lexical_cast<unsigned short int>(server.child_value("threads"));
+    m_logger_priority        = lexical_cast<int>(server.child("logger").child_value("priority"));
+    m_persistence            = server.child_value("persistence");
+    m_configuration_path     = server.child("configuration").child_value("path");
+    m_configuration_selected = server.child("configuration").child_value("selected");
 
     return true;
 }

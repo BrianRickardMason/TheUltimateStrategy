@@ -82,6 +82,20 @@ public:
      * @brief The name of the persistence.
      */
     virtual std::string getPersistence() const = 0;
+
+    /**
+     * @brief Gets the path to the configuration files.
+     *
+     * @brief The path to the configuration files.
+     */
+    virtual std::string getConfigurationPath() const = 0;
+
+    /**
+     * @brief Gets the name of the selected configuration.
+     *
+     * @brief The name of the selected configuration.
+     */
+    virtual std::string getConfigurationSelected() const = 0;
 };
 
 /**

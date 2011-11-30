@@ -82,6 +82,20 @@ public:
      */
     virtual std::string getPersistence() const;
 
+    /**
+     * @brief Gets the path to the configuration files.
+     *
+     * @brief The path to the configuration files.
+     */
+    virtual std::string getConfigurationPath() const;
+
+    /**
+     * @brief Gets the name of the selected configuration.
+     *
+     * @brief The name of the selected configuration.
+     */
+    virtual std::string getConfigurationSelected() const;
+
 private:
     /**
      * @brief Loads the data from an xml configuration file into the xml document.
@@ -128,6 +142,16 @@ private:
      * @brief The name of the persistence.
      */
     std::string m_persistence;
+
+    /**
+     * @brief The path to the configuration files.
+     */
+    std::string m_configuration_path;
+
+    /**
+     * @brief The name of the selected configuration.
+     */
+    std::string m_configuration_selected;
 };
 
 #endif // CONFIGURATOR_HPP
