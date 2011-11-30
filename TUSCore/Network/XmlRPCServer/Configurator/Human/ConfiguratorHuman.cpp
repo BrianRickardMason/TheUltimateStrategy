@@ -65,23 +65,17 @@ GameServer::Configuration::IHumanMap const & ConfiguratorHuman::getHumans() cons
 
 bool ConfiguratorHuman::loadXml()
 {
-    // TODO: Get the path from the basic configuration.
-    char const * path_humans_xml =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Human/humans.xml";
+    std::string path_humans_xml =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/humans.xml";
+    bool const result_humans_xml = m_humans_xml.load_file(path_humans_xml.c_str());
 
-    bool const result_humans_xml = m_humans_xml.load_file(path_humans_xml);
+    std::string path_costs_xml =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/costs.xml";
+    bool const result_costs_xml = m_costs_xml.load_file(path_costs_xml.c_str());
 
-    // TODO: Get the path from the basic configuration.
-    char const * path_costs_xml =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Human/costs.xml";
-
-    bool const result_costs_xml = m_costs_xml.load_file(path_costs_xml);
-
-    // TODO: Get the path from the basic configuration.
-    char const * path_properties_xml =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Human/properties.xml";
-
-    bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml);
+    std::string path_properties_xml =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/properties.xml";
+    bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml.c_str());
 
     return (result_humans_xml and result_costs_xml and result_properties_xml);
 }

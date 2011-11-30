@@ -65,11 +65,10 @@ GameServer::Configuration::IResourceMap const & ConfiguratorResource::getResourc
 
 bool ConfiguratorResource::loadXml()
 {
-    // TODO: Get the path from the basic configuration.
-    char const * path =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Resource/resources.xml";
+    std::string path =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Resource/resources.xml";
 
-    return m_resources_xml.load_file(path);
+    return m_resources_xml.load_file(path.c_str());
 }
 
 bool ConfiguratorResource::parseXml()

@@ -27,6 +27,7 @@
 
 #include <GameServer/Configuration/Configurator/Building/Building.hpp>
 #include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
+#include <string>
 
 ConfiguratorBuilding::ConfiguratorBuilding(
     IConfiguratorShrPtr const a_configurator
@@ -65,23 +66,19 @@ GameServer::Configuration::IBuildingMap const & ConfiguratorBuilding::getBuildin
 
 bool ConfiguratorBuilding::loadXml()
 {
-    // TODO: Get the path from the basic configuration.
-    char const * path_buildings_xml =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Building/buildings.xml";
+    std::string path_buildings_xml =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Building/buildings.xml";
+    bool const result_buildings_xml = m_buildings_xml.load_file(path_buildings_xml.c_str());
 
-    bool const result_buildings_xml = m_buildings_xml.load_file(path_buildings_xml);
+    std::string path_costs_xml =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Building/costs.xml";
+    bool const result_costs_xml = m_costs_xml.load_file(path_costs_xml.c_str());
 
-    // TODO: Get the path from the basic configuration.
-    char const * path_costs_xml =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Building/costs.xml";
-
-    bool const result_costs_xml = m_costs_xml.load_file(path_costs_xml);
-
-    // TODO: Get the path from the basic configuration.
-    char const * path_properties_xml =
-        "/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/Test/Building/properties.xml";
-
-    bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml);
+    std::string path_properties_xml =
+          m_configurator->getConfigurationPath()
+        + m_configurator->getConfigurationSelected()
+        + "/Building/properties.xml";
+    bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml.c_str());
 
     return (result_buildings_xml and result_costs_xml and result_properties_xml);
 }
