@@ -50,13 +50,42 @@ ResourceWithVolumeMap add(
     {
         Configuration::IResourceKey key = it->second->getResource()->getKey();
 
-        Volume volume = it->second->getVolume() + a_map_2.at(it->first)->getVolume();
+        ResourceWithVolumeMap::const_iterator found = a_map_2.find(key);
+
+        Volume volume(0);
+
+        if (found != a_map_2.end())
+        {
+            volume = it->second->getVolume() + a_map_2.at(it->first)->getVolume();
+        }
+        else
+        {
+            volume = it->second->getVolume();
+        }
 
         ResourceWithVolumeShrPtr resource = boost::make_shared<ResourceWithVolume>(a_context, key, volume);
 
         ResourceWithVolumePair resource_pair(key, resource);
 
         new_map.insert(resource_pair);
+    }
+
+    for (ResourceWithVolumeMap::const_iterator it = a_map_2.begin(); it != a_map_2.end(); ++it)
+    {
+        Configuration::IResourceKey key = it->second->getResource()->getKey();
+
+        ResourceWithVolumeMap::const_iterator found = a_map_1.find(key);
+
+        if (found == a_map_1.end())
+        {
+            ResourceWithVolumeShrPtr resource =
+                boost::make_shared<ResourceWithVolume>(a_context, key, it->second->getVolume());
+
+            ResourceWithVolumePair resource_pair(key, resource);
+
+            new_map.insert(resource_pair);
+        }
+
     }
 
     return new_map;
@@ -93,7 +122,26 @@ bool areEqual(
 {
     for (ResourceWithVolumeMap::const_iterator it = a_map_1.begin(); it != a_map_1.end(); ++it)
     {
-        if (it->second->getVolume() != a_map_2.at(it->first)->getVolume())
+        ResourceWithVolumeMap::const_iterator found = a_map_2.find(it->first);
+
+        if (found != a_map_2.end())
+        {
+            if (it->second->getVolume() != a_map_2.at(it->first)->getVolume())
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    for (ResourceWithVolumeMap::const_iterator it = a_map_2.begin(); it != a_map_2.end(); ++it)
+    {
+        ResourceWithVolumeMap::const_iterator found = a_map_1.find(it->first);
+
+        if (found == a_map_1.end())
         {
             return false;
         }
@@ -110,17 +158,38 @@ bool isFirstGreaterOrEqual(
     // FIXME: A nasty workaround! This will not work fine for long.
     // TODO: Please make sure that ResourcePersistency returns non-empty maps (maps with 0).
     // TODO: Add assertions on size of the maps here.
+    // TODO: This should not be a case anymore.
+    // An empty map should be treated as follows: return a_map_2.empty() ? true : false;
     if (a_map_1.empty())
     {
+//    	return a_map_2.empty() ? true : false;
         return false;
     }
 
     for (ResourceWithVolumeMap::const_iterator it = a_map_1.begin(); it != a_map_1.end(); ++it)
     {
-        if (it->second->getVolume() < a_map_2.at(it->first)->getVolume())
+        ResourceWithVolumeMap::const_iterator found = a_map_2.find(it->first);
+
+        if (found != a_map_2.end())
         {
-            return false;
+            if (it->second->getVolume() < found->second->getVolume())
+            {
+                return false;
+            }
         }
+    }
+
+    for (ResourceWithVolumeMap::const_iterator it = a_map_2.begin(); it != a_map_2.end(); ++it)
+    {
+//        ResourceWithVolumeMap::const_iterator found = a_map_1.find(it->first);
+//
+//        if (found != a_map_1.end())
+//        {
+//            if (it->second->getVolume() > 0)
+//            {
+//                return false;
+//            }
+//        }
     }
 
     return true;
