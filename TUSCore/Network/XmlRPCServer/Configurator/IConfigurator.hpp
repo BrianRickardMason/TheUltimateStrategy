@@ -29,7 +29,7 @@
 #define ICONFIGURATOR_HPP
 
 #include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp> // TODO: Could be the scoped pointer.
+#include <boost/shared_ptr.hpp>
 #include <string>
 
 /**
