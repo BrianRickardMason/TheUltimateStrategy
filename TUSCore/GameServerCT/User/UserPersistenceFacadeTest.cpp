@@ -45,7 +45,7 @@ protected:
      * @brief Constructs the test class.
      */
     UserPersistenceFacadeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_login("Login"),
           m_password("Password"),
           m_different_password("DifferentPassword"),

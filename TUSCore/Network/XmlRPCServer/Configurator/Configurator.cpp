@@ -25,9 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Network/XmlRPCServer/Configurator.hpp>
+#include <Network/XmlRPCServer/Configurator/Configurator.hpp>
 #include <boost/lexical_cast.hpp>
-#include <string>
 
 using namespace boost;
 using namespace pugi;

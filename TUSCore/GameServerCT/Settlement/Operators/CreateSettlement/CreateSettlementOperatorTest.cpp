@@ -55,7 +55,7 @@ protected:
      * @brief Constructs the test class.
      */
     CreateSettlementOperatorTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql(m_context)),
           m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),

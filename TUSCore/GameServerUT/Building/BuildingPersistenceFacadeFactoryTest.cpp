@@ -37,7 +37,7 @@ TEST(BuildingagerFactoryTest, CreateDoesNotThrow)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    IContextShrPtr context(new Context("localhost", "2222", 1, 100, "postgresql"));
+    IContextShrPtr context(new Context);
 
     ASSERT_NO_THROW(
         BuildingPersistenceFacadeAutPtr persistence_facade =
@@ -49,7 +49,7 @@ TEST(BuildingagerFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    IContextShrPtr context(new Context("localhost", "2222", 1, 100, "postgresql"));
+    IContextShrPtr context(new Context);
 
     BuildingPersistenceFacadeAutPtr persistence_facade =
         BuildingPersistenceFacadeFactory::create(context, accessor_abstract_factory);

@@ -30,6 +30,7 @@
 
 #include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
 #include <Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
+#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
 #include <Network/XmlRPCServer/Configurator/Resource/IConfiguratorResource.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
@@ -44,39 +45,11 @@ public:
     virtual ~IContext(){}
 
     /**
-     * @brief Gets the host's address.
+     * @brief Gets Configurator.
      *
-     * @return The host's address.
+     * @return Configurator.
      */
-    virtual std::string getHost() const = 0;
-
-    /**
-     * @brief Gets the host's port.
-     *
-     * @return The host's port.
-     */
-    virtual std::string getPort() const = 0;
-
-    /**
-     * @brief Gets the number of threads.
-     *
-     * @return The number of threads.
-     */
-    virtual unsigned short int getThreads() const = 0;
-
-    /**
-     * @brief Gets the logger's priority.
-     *
-     * @return The logger's priority.
-     */
-    virtual int getLoggerPriority() const = 0;
-
-    /**
-     * @brief Gets the name of the persistence.
-     *
-     * @return The name of the persistence.
-     */
-    virtual std::string getPersistence() const = 0;
+    virtual IConfiguratorShrPtr getConfigurator() const = 0;
 
     /**
      * @brief Gets ConfiguratorBuilding.

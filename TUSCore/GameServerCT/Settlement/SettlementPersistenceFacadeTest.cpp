@@ -49,7 +49,7 @@ protected:
      * @brief Constructs the test class.
      */
     SettlementPersistenceFacadeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_epoch_name("Epoch"),
           m_login_1("Login1"),
           m_login_2("Login2"),

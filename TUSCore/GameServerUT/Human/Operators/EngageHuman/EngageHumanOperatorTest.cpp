@@ -59,7 +59,7 @@ protected:
      * @brief Creates a test class.
      */
     EngageHumanOperatorTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_building_persistence_facade(new BuildingPersistenceFacadeMock),
           m_human_persistence_facade(new HumanPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),

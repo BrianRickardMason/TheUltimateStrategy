@@ -51,7 +51,7 @@ Executor::Executor(
 )
     : m_context(a_context)
 {
-    if (m_context->getPersistence() == "postgresql")
+    if (m_context->getConfigurator()->getPersistence() == "postgresql")
     {
         m_persistence.reset(new PersistencePostgresql);
         m_operator_abstract_factory.reset(new OperatorAbstractFactoryPostgresql(m_context));

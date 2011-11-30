@@ -37,7 +37,7 @@ TEST(HumanPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    IContextShrPtr context(new Context("localhost", "2222", 1, 100, "postgresql"));
+    IContextShrPtr context(new Context);
 
     HumanPersistenceFacadeAutPtr persistence_facade =
         HumanPersistenceFacadeFactory::create(context, accessor_abstract_factory);

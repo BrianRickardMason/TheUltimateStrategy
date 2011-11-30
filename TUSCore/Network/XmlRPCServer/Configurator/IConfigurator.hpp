@@ -25,36 +25,68 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
-#include <Network/XmlRPCServer/Configurator/Configurator.hpp>
-#include <Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
-#include <Network/XmlRPCServer/Configurator/Resource/ConfiguratorResource.hpp>
-#include <Network/XmlRPCServer/Context.hpp>
+#ifndef ICONFIGURATOR_HPP
+#define ICONFIGURATOR_HPP
 
-Context::Context()
-    : m_configurator(new Configurator),
-      m_configurator_building(new ConfiguratorBuilding),
-      m_configurator_human(new ConfiguratorHuman),
-      m_configurator_resource(new ConfiguratorResource)
-{
-}
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp> // TODO: Could be the scoped pointer.
+#include <string>
 
-IConfiguratorShrPtr Context::getConfigurator() const
+/**
+ * @brief The interface of Configurator.
+ */
+class IConfigurator
+    : private boost::noncopyable
 {
-    return m_configurator;
-}
+public:
+    virtual ~IConfigurator(){};
 
-IConfiguratorBuildingShrPtr Context::getConfiguratorBuilding() const
-{
-    return m_configurator_building;
-}
+    /**
+     * @brief Gets the configuration.
+     *
+     * @brief True on success, false otherwise.
+     */
+    virtual bool configure() = 0;
 
-IConfiguratorHumanShrPtr Context::getConfiguratorHuman() const
-{
-    return m_configurator_human;
-}
+    /**
+     * @brief Gets the host's address.
+     *
+     * @brief The host's address.
+     */
+    virtual std::string getHost() const = 0;
 
-IConfiguratorResourceShrPtr Context::getConfiguratorResource() const
-{
-    return m_configurator_resource;
-}
+    /**
+     * @brief Gets the host's port.
+     *
+     * @brief The host's port.
+     */
+    virtual std::string getPort() const = 0;
+
+    /**
+     * @brief Gets the number of threads.
+     *
+     * @brief The number of threads.
+     */
+    virtual unsigned short int getThreads() const = 0;
+
+    /**
+     * @brief Gets the logger's priority.
+     *
+     * @brief The logger's priority.
+     */
+    virtual int getLoggerPriority() const = 0;
+
+    /**
+     * @brief Gets the name of the persistence.
+     *
+     * @brief The name of the persistence.
+     */
+    virtual std::string getPersistence() const = 0;
+};
+
+/**
+ * @brief A useful typedef.
+ */
+typedef boost::shared_ptr<IConfigurator> IConfiguratorShrPtr;
+
+#endif // ICONFIGURATOR_HPP

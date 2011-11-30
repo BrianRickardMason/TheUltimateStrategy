@@ -45,7 +45,7 @@ protected:
      * @brief Constructs a test class.
      */
     HumanWithVolumeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_human_with_volume(m_context, KEY_SOLDIER_HORSEMAN_ADVANCED, 4),
           m_model_key(KEY_SOLDIER_HORSEMAN_ADVANCED)
     {

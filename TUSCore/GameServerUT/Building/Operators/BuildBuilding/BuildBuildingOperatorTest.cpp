@@ -57,7 +57,7 @@ protected:
      * @brief Constructs the test class.
      */
     BuildBuildingOperatorTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_building_persistence_facade(new BuildingPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")

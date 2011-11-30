@@ -29,14 +29,13 @@
 #define CONFIGURATOR_HPP
 
 #include <3rdParty/pugixml/src/pugixml.hpp>
-#include <boost/noncopyable.hpp>
-#include <string>
+#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
 
 /**
  * @brief Configurator.
  */
 class Configurator
-    : private boost::noncopyable
+    : public IConfigurator
 {
 public:
     Configurator();
@@ -46,42 +45,42 @@ public:
      *
      * @brief True on success, false otherwise.
      */
-    bool configure();
+    virtual bool configure();
 
     /**
      * @brief Gets the host's address.
      *
      * @brief The host's address.
      */
-    std::string getHost() const;
+    virtual std::string getHost() const;
 
     /**
      * @brief Gets the host's port.
      *
      * @brief The host's port.
      */
-    std::string getPort() const;
+    virtual std::string getPort() const;
 
     /**
      * @brief Gets the number of threads.
      *
      * @brief The number of threads.
      */
-    unsigned short int getThreads() const;
+    virtual unsigned short int getThreads() const;
 
     /**
      * @brief Gets the logger's priority.
      *
      * @brief The logger's priority.
      */
-    int getLoggerPriority() const;
+    virtual int getLoggerPriority() const;
 
     /**
      * @brief Gets the name of the persistence.
      *
      * @brief The name of the persistence.
      */
-    std::string getPersistence() const;
+    virtual std::string getPersistence() const;
 
 private:
     /**
@@ -130,7 +129,5 @@ private:
      */
     std::string m_persistence;
 };
-
-static Configurator const CONFIGURATOR;
 
 #endif // CONFIGURATOR_HPP

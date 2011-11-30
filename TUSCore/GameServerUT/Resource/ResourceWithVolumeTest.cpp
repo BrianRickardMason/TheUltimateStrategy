@@ -45,7 +45,7 @@ protected:
      * @brief Constructs a test class.
      */
     ResourceWithVolumeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_resource_with_volume(m_context, KEY_RESOURCE_COAL, 2),
           m_model_key(KEY_RESOURCE_COAL)
     {

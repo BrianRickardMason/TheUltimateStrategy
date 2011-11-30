@@ -45,7 +45,7 @@ protected:
      * @brief Constructs a test class.
      */
     BuildingWithVolumeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_building_with_volume(m_context, KEY_DEFENSIVE_BARBICAN, 4),
           m_model_key(KEY_DEFENSIVE_BARBICAN)
     {

@@ -45,7 +45,7 @@ protected:
      * @brief Constructs the test class.
      */
     WorldPersistenceFacadeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_world_name_1("World1"),
           m_world_name_2("World2"),
           m_world_name_3("World3"),

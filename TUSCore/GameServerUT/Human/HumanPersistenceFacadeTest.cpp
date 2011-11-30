@@ -53,7 +53,7 @@ protected:
      * @brief Creates a test class.
      */
     HumanPersistenceFacadeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }

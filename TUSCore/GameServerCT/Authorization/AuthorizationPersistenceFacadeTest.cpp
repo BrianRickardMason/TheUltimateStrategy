@@ -51,7 +51,7 @@ protected:
      * @brief Constructs the test class.
      */
     AuthorizationPersistenceFacadeTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_epoch_name("Epoch"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),

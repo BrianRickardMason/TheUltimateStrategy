@@ -25,7 +25,6 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Network/XmlRPCServer/Configurator.hpp>
 #include <Network/XmlRPCServer/Server/Server.hpp>
 #include <Network/XmlRPCServer/Context.hpp>
 #include <boost/lexical_cast.hpp>
@@ -59,6 +58,9 @@ int main(
         int                priority    = Priority::ALERT;
         string             persistence = "postgresql";
 
+        // Create the context.
+        IContextShrPtr context(new Context);
+
         // Try to get the properties from the command line.
         if (argc > 1)
         {
@@ -78,15 +80,14 @@ int main(
             port     = argv[2];
             threads  = lexical_cast<unsigned short int>(argv[3]);
         }
-        // Try to get the properties from the configuration file.
         else
         {
             // Get the properties.
-            host        = CONFIGURATOR.getHost();
-            port        = CONFIGURATOR.getPort();
-            threads     = CONFIGURATOR.getThreads();
-            priority    = CONFIGURATOR.getLoggerPriority();
-            persistence = CONFIGURATOR.getPersistence();
+            host        = context->getConfigurator()->getHost();
+            port        = context->getConfigurator()->getPort();
+            threads     = context->getConfigurator()->getThreads();
+            priority    = context->getConfigurator()->getLoggerPriority();
+            persistence = context->getConfigurator()->getPersistence();
         }
 
         // Set up Appender, Layout and Category.
@@ -97,9 +98,6 @@ int main(
         appender->setLayout(layout);
         category.setAppender(appender);
         category.setPriority(priority);
-
-        // Create the context.
-        IContextShrPtr context(new Context(host, port, threads, priority, persistence));
 
         // Run the server in a background thread.
         Server server(host, port, threads, context);

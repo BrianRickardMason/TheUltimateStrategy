@@ -57,7 +57,7 @@ protected:
      * @brief Creates a test class.
      */
     DismissHumanOperatorTest()
-        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+        : m_context(new Context),
           m_human_persistence_facade(new HumanPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
