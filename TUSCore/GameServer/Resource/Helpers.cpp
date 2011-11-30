@@ -155,15 +155,9 @@ bool isFirstGreaterOrEqual(
     ResourceWithVolumeMap const & a_map_2
 )
 {
-    // FIXME: A nasty workaround! This will not work fine for long.
-    // TODO: Please make sure that ResourcePersistency returns non-empty maps (maps with 0).
-    // TODO: Add assertions on size of the maps here.
-    // TODO: This should not be a case anymore.
-    // An empty map should be treated as follows: return a_map_2.empty() ? true : false;
     if (a_map_1.empty())
     {
-//    	return a_map_2.empty() ? true : false;
-        return false;
+        return a_map_2.empty() ? true : false;
     }
 
     for (ResourceWithVolumeMap::const_iterator it = a_map_1.begin(); it != a_map_1.end(); ++it)
@@ -181,15 +175,15 @@ bool isFirstGreaterOrEqual(
 
     for (ResourceWithVolumeMap::const_iterator it = a_map_2.begin(); it != a_map_2.end(); ++it)
     {
-//        ResourceWithVolumeMap::const_iterator found = a_map_1.find(it->first);
-//
-//        if (found != a_map_1.end())
-//        {
-//            if (it->second->getVolume() > 0)
-//            {
-//                return false;
-//            }
-//        }
+        ResourceWithVolumeMap::const_iterator found = a_map_1.find(it->first);
+
+        if (found == a_map_1.end())
+        {
+            if (it->second->getVolume() > 0)
+            {
+                return false;
+            }
+        }
     }
 
     return true;
