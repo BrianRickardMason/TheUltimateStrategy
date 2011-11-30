@@ -73,25 +73,23 @@ public:
 private:
 	/**
 	 * @brief Configuator.
-	 *
-	 * TODO: Should be const.
 	 */
-    IConfiguratorShrPtr m_configurator;
+    IConfiguratorShrPtr const m_configurator;
 
     /**
      * @brief ConfiguratorBuilding.
      */
-    IConfiguratorBuildingShrPtr m_configurator_building;
+    IConfiguratorBuildingShrPtr const m_configurator_building;
 
     /**
      * @brief ConfiguratorHuman.
      */
-    IConfiguratorHumanShrPtr m_configurator_human;
+    IConfiguratorHumanShrPtr const m_configurator_human;
 
     /**
      * @brief ConfiguratorResource.
      */
-    IConfiguratorResourceShrPtr m_configurator_resource;
+    IConfiguratorResourceShrPtr const m_configurator_resource;
 };
 
 #endif // CONTEXT_HPP
