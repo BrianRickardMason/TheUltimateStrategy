@@ -21,4 +21,8 @@
          postgresql
     -->
     <persistence>postgresql</persistence>
+    <configuration>
+        <path>/home/brian/workspace/theultimatestrategy/TUSCore/GameServer/Configuration/Data/</path>
+        <selected>Test</selected>
+    </configuration>
 </server>
