@@ -28,7 +28,10 @@
 #include <GameServer/Configuration/Configurator/Resource/Resource.hpp>
 #include <Network/XmlRPCServer/Configurator/Resource/ConfiguratorResource.hpp>
 
-ConfiguratorResource::ConfiguratorResource()
+ConfiguratorResource::ConfiguratorResource(
+    IConfiguratorShrPtr const a_configurator
+)
+    : m_configurator(a_configurator)
 {
     configure();
 }

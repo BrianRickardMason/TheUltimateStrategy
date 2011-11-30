@@ -30,6 +30,7 @@
 
 #include <3rdParty/pugixml/src/pugixml.hpp>
 #include <Network/XmlRPCServer/Configurator/Resource/IConfiguratorResource.hpp>
+#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
 
 /**
  * @brief ConfiguratorResource.
@@ -38,7 +39,14 @@ class ConfiguratorResource
     : public IConfiguratorResource
 {
 public:
-    ConfiguratorResource();
+    /**
+     * @brief Ctor.
+     *
+     * @param a_configurator Configurator.
+     */
+    ConfiguratorResource(
+        IConfiguratorShrPtr const a_configurator
+    );
 
     /**
      * @brief Gets the configuration.
@@ -79,6 +87,11 @@ private:
      * @return true on success false otherwise.
      */
     bool parseXml();
+
+    /**
+     * @brief Configurator.
+     */
+    IConfiguratorShrPtr const m_configurator;
 
     /**
      * @brief The xml document.

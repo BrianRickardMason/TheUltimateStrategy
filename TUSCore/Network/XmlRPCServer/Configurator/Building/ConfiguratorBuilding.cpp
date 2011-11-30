@@ -28,7 +28,10 @@
 #include <GameServer/Configuration/Configurator/Building/Building.hpp>
 #include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
 
-ConfiguratorBuilding::ConfiguratorBuilding()
+ConfiguratorBuilding::ConfiguratorBuilding(
+    IConfiguratorShrPtr const a_configurator
+)
+    : m_configurator(a_configurator)
 {
     configure();
 }

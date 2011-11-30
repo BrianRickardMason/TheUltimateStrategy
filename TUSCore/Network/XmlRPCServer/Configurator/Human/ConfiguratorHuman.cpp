@@ -28,7 +28,10 @@
 #include <GameServer/Configuration/Configurator/Human/Human.hpp>
 #include <Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
 
-ConfiguratorHuman::ConfiguratorHuman()
+ConfiguratorHuman::ConfiguratorHuman(
+    IConfiguratorShrPtr const a_configurator
+)
+    : m_configurator(a_configurator)
 {
     configure();
 }

@@ -30,6 +30,7 @@
 
 #include <3rdParty/pugixml/src/pugixml.hpp>
 #include <Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
+#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
 
 /**
  * @brief ConfiguratorHuman.
@@ -38,7 +39,14 @@ class ConfiguratorHuman
     : public IConfiguratorHuman
 {
 public:
-    ConfiguratorHuman();
+    /**
+     * @brief Ctor.
+     *
+     * @param a_configurator Configurator.
+     */
+    ConfiguratorHuman(
+        IConfiguratorShrPtr const a_configurator
+    );
 
     /**
      * @brief Gets the configuration.
@@ -79,6 +87,11 @@ private:
      * @return true on success false otherwise.
      */
     bool parseXml();
+
+    /**
+     * @brief Configurator.
+     */
+    IConfiguratorShrPtr const m_configurator;
 
     //@{
     /**

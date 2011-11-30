@@ -33,9 +33,9 @@
 
 Context::Context()
     : m_configurator(new Configurator),
-      m_configurator_building(new ConfiguratorBuilding),
-      m_configurator_human(new ConfiguratorHuman),
-      m_configurator_resource(new ConfiguratorResource)
+      m_configurator_building(new ConfiguratorBuilding(m_configurator)),
+      m_configurator_human(new ConfiguratorHuman(m_configurator)),
+      m_configurator_resource(new ConfiguratorResource(m_configurator))
 {
 }
 
