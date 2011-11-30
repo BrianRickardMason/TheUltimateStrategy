@@ -71,9 +71,9 @@ public:
     virtual IConfiguratorResourceShrPtr getConfiguratorResource() const;
 
 private:
-	/**
-	 * @brief Configuator.
-	 */
+    /**
+     * @brief Configurator.
+     */
     IConfiguratorShrPtr const m_configurator;
 
     /**
