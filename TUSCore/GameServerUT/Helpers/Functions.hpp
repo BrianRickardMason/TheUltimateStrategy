@@ -29,17 +29,20 @@
 #define FUNCTIONS_HPP
 
 #include <GameServer/Resource/ResourceWithVolume.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 #include <boost/make_shared.hpp>
 #include <vector>
 
 /**
  * @brief Gets a map of resources.
  *
+ * @param a_context The context of the server.
  * @param a_volumes A vector of resource volumes.
  *
  * @return The map of resources.
  */
 GameServer::Resource::ResourceWithVolumeMap getResourceMap(
+    IContextShrPtr                            const   a_context,
     std::vector<GameServer::Resource::Volume> const & a_volumes
 );
 

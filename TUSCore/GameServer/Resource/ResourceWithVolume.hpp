@@ -28,8 +28,9 @@
 #ifndef GAMESERVER_RESOURCE_RESOURCEWITHVOLUME_HPP
 #define GAMESERVER_RESOURCE_RESOURCEWITHVOLUME_HPP
 
-#include <GameServer/Configuration/Configurator/Resource/Resource.hpp> // TODO: The interface.
+#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <GameServer/Resource/ResourceWithVolumeRecord.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -38,8 +39,6 @@ namespace Resource
 
 /**
  * @brief ResourceWithVolume.
- *
- * TODO: This class is "broken" now. Need to pass the configuration as a context.
  */
 class ResourceWithVolume
 {
@@ -47,20 +46,24 @@ public:
     /**
      * @brief Constructs the resource with volume.
      *
-     * @param a_key    The key of the resource.
-     * @param a_volume The volume of the resource.
+     * @param a_context The context of the server.
+     * @param a_key     The key of the human.
+     * @param a_volume  The volume of the resource.
      */
     ResourceWithVolume(
-        std::string const a_key, // TODO: A key.
-        Volume      const a_volume
+        IContextShrPtr           const a_context,
+        Configuration::IHumanKey const a_key,
+        Volume                   const a_volume
     );
 
     /**
      * @brief Constructs the resource with volume.
      *
-     * @param a_record The record of resource with volume.
+     * @param a_context The context of the server.
+     * @param a_record  The record of resource with volume.
      */
     explicit ResourceWithVolume(
+        IContextShrPtr           const   a_context,
         ResourceWithVolumeRecord const & a_record
     );
 

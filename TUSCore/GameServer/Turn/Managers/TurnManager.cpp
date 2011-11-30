@@ -48,12 +48,14 @@ namespace Turn
 {
 
 TurnManager::TurnManager(
-    IHumanPersistenceFacadeShrPtr      a_human_persistence_facade,
-    ILandPersistenceFacadeShrPtr       a_land_persistence_facade,
-    IResourcePersistenceFacadeShrPtr   a_resource_persistence_facade,
-    ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
+    IContextShrPtr                     const a_context,
+    IHumanPersistenceFacadeShrPtr            a_human_persistence_facade,
+    ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
+    IResourcePersistenceFacadeShrPtr         a_resource_persistence_facade,
+    ISettlementPersistenceFacadeShrPtr       a_settlement_persistence_facade
 )
-    : m_human_persistence_facade(a_human_persistence_facade),
+    : m_context(a_context),
+      m_human_persistence_facade(a_human_persistence_facade),
       m_land_persistence_facade(a_land_persistence_facade),
       m_resource_persistence_facade(a_resource_persistence_facade),
       m_settlement_persistence_facade(a_settlement_persistence_facade)
@@ -327,14 +329,14 @@ ResourceWithVolumeMap TurnManager::getCostOfLiving(
 
         for (std::map<IResourceKey, Volume>::const_iterator itr = cost_map.begin(); itr != cost_map.end(); ++itr)
         {
-            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(itr->first, itr->second));
+            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(m_context, itr->first, itr->second));
 
             resources[itr->first] = resource;
         }
 
-        resources = multiply(resources, it->second->getVolume());
+        resources = multiply(m_context, resources, it->second->getVolume());
 
-        total_cost = add(total_cost, resources);
+        total_cost = add(m_context, total_cost, resources);
     }
 
     return total_cost;

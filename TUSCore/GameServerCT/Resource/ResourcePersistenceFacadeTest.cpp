@@ -119,13 +119,13 @@ protected:
     {
         ResourceWithVolumeMap map;
 
-        map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolume>(KEY_RESOURCE_COAL, 100)));
-        map.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(KEY_RESOURCE_FOOD, 200)));
-        map.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(KEY_RESOURCE_GOLD, 300)));
-        map.insert(make_pair(KEY_RESOURCE_IRON, make_shared<ResourceWithVolume>(KEY_RESOURCE_IRON, 400)));
-        map.insert(make_pair(KEY_RESOURCE_MANA, make_shared<ResourceWithVolume>(KEY_RESOURCE_MANA, 500)));
-        map.insert(make_pair(KEY_RESOURCE_ROCK, make_shared<ResourceWithVolume>(KEY_RESOURCE_ROCK, 600)));
-        map.insert(make_pair(KEY_RESOURCE_WOOD, make_shared<ResourceWithVolume>(KEY_RESOURCE_WOOD, 700)));
+        map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_COAL, 100)));
+        map.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+        map.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_GOLD, 300)));
+        map.insert(make_pair(KEY_RESOURCE_IRON, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_IRON, 400)));
+        map.insert(make_pair(KEY_RESOURCE_MANA, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_MANA, 500)));
+        map.insert(make_pair(KEY_RESOURCE_ROCK, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_ROCK, 600)));
+        map.insert(make_pair(KEY_RESOURCE_WOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_WOOD, 700)));
 
         return map;
     }

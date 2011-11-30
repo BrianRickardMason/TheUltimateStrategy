@@ -27,6 +27,7 @@
 
 #include <GameServer/Resource/Helpers.hpp>
 #include <boost/make_shared.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -37,17 +38,8 @@ namespace Resource
  * FIXME: Dear future me. This is as ugly as it gets... Please invent the time machine and slap me.
  */
 
-/**
- * @brief Adds two maps of resources.
- *
- * @param a_map_1 The map to be added.
- * @param a_map_2 The map to be added.
- *
- * @return The sum of two maps.
- *
- * @note Use for two maps with the same indexes!
- */
 ResourceWithVolumeMap add(
+    IContextShrPtr        const   a_context,
     ResourceWithVolumeMap const & a_map_1,
     ResourceWithVolumeMap const & a_map_2
 )
@@ -60,7 +52,7 @@ ResourceWithVolumeMap add(
 
         Volume volume = it->second->getVolume() + a_map_2.at(it->first)->getVolume();
 
-        ResourceWithVolumeShrPtr resource = boost::make_shared<ResourceWithVolume>(key, volume);
+        ResourceWithVolumeShrPtr resource = boost::make_shared<ResourceWithVolume>(a_context, key, volume);
 
         ResourceWithVolumePair resource_pair(key, resource);
 
@@ -70,17 +62,8 @@ ResourceWithVolumeMap add(
     return new_map;
 }
 
-/**
- * @brief Multiplies the map by a given factor.
- *
- * @param a_map    The map to be multiplied.
- * @param a_factor The factor.
- *
- * @return The sum of two maps.
- *
- * @note Use for two maps with the same indexes!
- */
 ResourceWithVolumeMap multiply(
+    IContextShrPtr        const   a_context,
     ResourceWithVolumeMap const & a_map,
     unsigned int          const   a_factor
 )
@@ -93,7 +76,7 @@ ResourceWithVolumeMap multiply(
 
         Volume volume = it->second->getVolume() * a_factor;
 
-        ResourceWithVolumeShrPtr resource = boost::make_shared<ResourceWithVolume>(key, volume);
+        ResourceWithVolumeShrPtr resource = boost::make_shared<ResourceWithVolume>(a_context, key, volume);
 
         ResourceWithVolumePair resource_pair(key, resource);
 
@@ -103,16 +86,6 @@ ResourceWithVolumeMap multiply(
     return new_map;
 }
 
-/**
- * @brief Checks if two maps are the same.
- *
- * @param a_map_1 The map to be compared.
- * @param a_map_2 The map to be compared.
- *
- * @return True if two maps are the same, false otherwise.
- *
- * @note Use for two maps with the same indexes!
- */
 bool areEqual(
     ResourceWithVolumeMap const & a_map_1,
     ResourceWithVolumeMap const & a_map_2
@@ -129,16 +102,6 @@ bool areEqual(
     return true;
 }
 
-/**
- * @brief Checks if the first map is greater than the second one.
- *
- * @param a_map_1 The map to be compared.
- * @param a_map_2 The map to be compared.
- *
- * @return True if the first map is greater, false otherwise.
- *
- * @note Use for two maps with the same indexes!
- */
 bool isFirstGreaterOrEqual(
     ResourceWithVolumeMap const & a_map_1,
     ResourceWithVolumeMap const & a_map_2

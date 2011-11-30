@@ -38,6 +38,7 @@ using namespace std;
 namespace R = GameServer::Resource;
 
 ResourceWithVolumeMap getResourceMap(
+    IContextShrPtr    const   a_context,
     vector<R::Volume> const & a_volumes
 )
 {
@@ -46,13 +47,13 @@ ResourceWithVolumeMap getResourceMap(
     if (!a_volumes.empty())
     {
         ResourceWithVolumeShrPtr
-            resource_with_volume_coal = make_shared<ResourceWithVolume>(KEY_RESOURCE_COAL, a_volumes[0]),
-            resource_with_volume_food = make_shared<ResourceWithVolume>(KEY_RESOURCE_FOOD, a_volumes[1]),
-            resource_with_volume_gold = make_shared<ResourceWithVolume>(KEY_RESOURCE_GOLD, a_volumes[2]),
-            resource_with_volume_iron = make_shared<ResourceWithVolume>(KEY_RESOURCE_IRON, a_volumes[3]),
-            resource_with_volume_mana = make_shared<ResourceWithVolume>(KEY_RESOURCE_MANA, a_volumes[4]),
-            resource_with_volume_rock = make_shared<ResourceWithVolume>(KEY_RESOURCE_ROCK, a_volumes[5]),
-            resource_with_volume_wood = make_shared<ResourceWithVolume>(KEY_RESOURCE_WOOD, a_volumes[6]);
+            resource_with_volume_coal = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_COAL, a_volumes[0]),
+            resource_with_volume_food = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_FOOD, a_volumes[1]),
+            resource_with_volume_gold = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_GOLD, a_volumes[2]),
+            resource_with_volume_iron = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_IRON, a_volumes[3]),
+            resource_with_volume_mana = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_MANA, a_volumes[4]),
+            resource_with_volume_rock = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_ROCK, a_volumes[5]),
+            resource_with_volume_wood = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_WOOD, a_volumes[6]);
 
         resource_map.insert(make_pair(KEY_RESOURCE_COAL, resource_with_volume_coal));
         resource_map.insert(make_pair(KEY_RESOURCE_FOOD, resource_with_volume_food));

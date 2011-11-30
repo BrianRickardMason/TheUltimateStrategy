@@ -92,13 +92,13 @@ DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
 
         for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin();it != cost_map.end(); ++it)
         {
-            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(it->first, it->second));
+            ResourceWithVolumeShrPtr resource(new ResourceWithVolume(m_context, it->first, it->second));
 
             cost[it->first] = resource;
         }
 
         // Multiply total cost.
-        cost = multiply(cost, a_volume);
+        cost = multiply(m_context, cost, a_volume);
 
         // Verify if there is enough resources.
         if (!isFirstGreaterOrEqual(resource_map, cost))

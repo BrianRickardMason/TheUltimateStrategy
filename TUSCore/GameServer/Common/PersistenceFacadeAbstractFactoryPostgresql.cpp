@@ -114,7 +114,9 @@ ILandPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createL
 
 IResourcePersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createResourcePersistenceFacade() const
 {
-    return IResourcePersistenceFacadeShrPtr(ResourcePersistenceFacadeFactory::create(m_accessor_abstract_factory));
+    return IResourcePersistenceFacadeShrPtr(
+               ResourcePersistenceFacadeFactory::create(m_context, m_accessor_abstract_factory)
+           );
 }
 
 ISettlementPersistenceFacadeShrPtr PersistenceFacadeAbstractFactoryPostgresql::createSettlementPersistenceFacade() const

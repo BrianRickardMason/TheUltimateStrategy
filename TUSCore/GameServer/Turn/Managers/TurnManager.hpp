@@ -33,6 +33,7 @@
 #include <GameServer/Resource/IResourcePersistenceFacade.hpp>
 #include <GameServer/Settlement/ISettlementPersistenceFacade.hpp>
 #include <GameServer/Turn/Managers/ITurnManager.hpp>
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -49,16 +50,18 @@ public:
     /**
      * @brief Ctor.
      *
+     * @param a_context                       The context of the server.
      * @param a_human_persistence_facade      The persistence facade of humans.
      * @param a_land_persistence_facade       The persistence facade of lands.
      * @param a_resource_persistence_facade   The persistence facade of resources.
      * @param a_settlement_persistence_facade The persistence facade of settlements.
      */
     TurnManager(
-        Human::IHumanPersistenceFacadeShrPtr           a_human_persistence_facade,
-        Land::ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
-        Resource::IResourcePersistenceFacadeShrPtr     a_resource_persistence_facade,
-        Settlement::ISettlementPersistenceFacadeShrPtr a_settlement_persistence_facade
+        IContextShrPtr                                 const a_context,
+        Human::IHumanPersistenceFacadeShrPtr                 a_human_persistence_facade,
+        Land::ILandPersistenceFacadeShrPtr                   a_land_persistence_facade,
+        Resource::IResourcePersistenceFacadeShrPtr           a_resource_persistence_facade,
+        Settlement::ISettlementPersistenceFacadeShrPtr       a_settlement_persistence_facade
     );
 
     /**
@@ -113,6 +116,13 @@ private:
         Persistence::ITransactionShrPtr       a_transaction,
         std::string                     const a_settlement_name
     ) const;
+
+    /**
+     * @brief The context of the server.
+     *
+     * TODO: Should be const everywhere.
+     */
+    IContextShrPtr const m_context;
 
     //@{
     /**

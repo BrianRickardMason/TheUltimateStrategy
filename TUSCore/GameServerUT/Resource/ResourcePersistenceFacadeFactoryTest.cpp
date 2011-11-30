@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Common/AccessorAbstractFactoryPostgresql.hpp"
 #include "../../GameServer/Resource/ResourcePersistenceFacadeFactory.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
@@ -36,8 +37,10 @@ TEST(ResourcePersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
+    IContextShrPtr context(new Context("localhost", "2222", 1, 100, "postgresql"));
+
     ResourcePersistenceFacadeAutPtr persistence_facade =
-        ResourcePersistenceFacadeFactory::create(accessor_abstract_factory);
+        ResourcePersistenceFacadeFactory::create(context, accessor_abstract_factory);
 
     ASSERT_TRUE(persistence_facade.get() != NULL);
 }

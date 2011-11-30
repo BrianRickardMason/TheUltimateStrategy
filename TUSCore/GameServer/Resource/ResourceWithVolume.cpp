@@ -25,11 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <GameServer/Configuration/Configurator/Resource/ConfiguratorResource.hpp>
 #include <GameServer/Resource/ResourceWithVolume.hpp>
 
 using namespace GameServer::Configuration;
-using namespace std;
 
 namespace GameServer
 {
@@ -37,20 +35,22 @@ namespace Resource
 {
 
 ResourceWithVolume::ResourceWithVolume(
-    string const a_key,
-    Volume const a_volume
+    IContextShrPtr const a_context,
+    IResourceKey   const a_key,
+    Volume         const a_volume
 )
     : m_volume(a_volume)
 {
-    m_resource = CONFIGURATOR_RESOURCE.getResource(a_key);
+    m_resource = a_context->getConfiguratorResource()->getResource(a_key);
 }
 
 ResourceWithVolume::ResourceWithVolume(
+    IContextShrPtr           const   a_context,
     ResourceWithVolumeRecord const & a_record
 )
     : m_volume(a_record.getVolume())
 {
-    m_resource = CONFIGURATOR_RESOURCE.getResource(a_record.getKey());
+    m_resource = a_context->getConfiguratorResource()->getResource(a_record.getKey());
 }
 
 IResourceShrPtr ResourceWithVolume::getResource() const

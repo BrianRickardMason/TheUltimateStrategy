@@ -38,9 +38,11 @@ namespace Resource
 {
 
 ResourcePersistenceFacade::ResourcePersistenceFacade(
-    IResourceAccessorAutPtr a_accessor
+    IContextShrPtr          const a_context,
+    IResourceAccessorAutPtr       a_accessor
 )
-    : m_accessor(a_accessor)
+    : m_context(a_context),
+      m_accessor(a_accessor)
 {
 }
 
@@ -163,7 +165,7 @@ ResourceWithVolumeShrPtr ResourcePersistenceFacade::getResource(
 {
     ResourceWithVolumeRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_holder, a_key);
 
-    return record ? make_shared<ResourceWithVolume>(*record) : ResourceWithVolumeShrPtr();
+    return record ? make_shared<ResourceWithVolume>(m_context, *record) : ResourceWithVolumeShrPtr();
 }
 
 ResourceWithVolumeMap ResourcePersistenceFacade::getResources(
@@ -179,7 +181,7 @@ ResourceWithVolumeMap ResourcePersistenceFacade::getResources(
     {
         if (it->second)
         {
-            ResourceWithVolumeShrPtr resource = make_shared<ResourceWithVolume>(*it->second);
+            ResourceWithVolumeShrPtr resource = make_shared<ResourceWithVolume>(m_context, *it->second);
             ResourceWithVolumePair pair(it->first, resource);
             resource_map.insert(pair);
         }

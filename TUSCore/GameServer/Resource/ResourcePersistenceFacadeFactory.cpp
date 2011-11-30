@@ -35,11 +35,12 @@ namespace Resource
 {
 
 ResourcePersistenceFacadeAutPtr ResourcePersistenceFacadeFactory::create(
-    IAccessorAbstractFactoryShrPtr a_accessor_abstract_factory
+    IContextShrPtr                 const a_context,
+    IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
 )
 {
     return ResourcePersistenceFacadeAutPtr(
-               new ResourcePersistenceFacade(a_accessor_abstract_factory->createResourceAccessor())
+               new ResourcePersistenceFacade(a_context, a_accessor_abstract_factory->createResourceAccessor())
            );
 }
 

@@ -35,14 +35,18 @@ namespace Turn
 {
 
 TurnManagerAutPtr TurnManagerFactory::create(
-    IPersistenceFacadeAbstractFactoryShrPtr a_persistence_facade_abstract_factory
+    IContextShrPtr                          const a_context,
+    IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
 )
 {
     return TurnManagerAutPtr(
-               new TurnManager(a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
-                               a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
-                               a_persistence_facade_abstract_factory->createResourcePersistenceFacade(),
-                               a_persistence_facade_abstract_factory->createSettlementPersistenceFacade())
+               new TurnManager(
+                       a_context,
+                       a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
+                       a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
+                       a_persistence_facade_abstract_factory->createResourcePersistenceFacade(),
+                       a_persistence_facade_abstract_factory->createSettlementPersistenceFacade()
+                   )
            );
 }
 

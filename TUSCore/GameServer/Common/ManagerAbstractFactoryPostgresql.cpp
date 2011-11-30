@@ -53,7 +53,7 @@ IAchievementManagerShrPtr ManagerAbstractFactoryPostgresql::createAchievementMan
 
 ITurnManagerShrPtr ManagerAbstractFactoryPostgresql::createTurnManager() const
 {
-    return ITurnManagerShrPtr(TurnManagerFactory::create(m_persistence_facade_abstract_factory));
+    return ITurnManagerShrPtr(TurnManagerFactory::create(m_context, m_persistence_facade_abstract_factory));
 }
 
 } // namespace Common

@@ -30,6 +30,7 @@
 
 #include "IResourceAccessor.hpp"
 #include "IResourcePersistenceFacade.hpp"
+#include <Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {
@@ -46,10 +47,12 @@ public:
     /**
      * @brief Constructs the resource persistence facade.
      *
+     * @param a_context  The context of the server.
      * @param a_accessor An accessor to be injected.
      */
     ResourcePersistenceFacade(
-        IResourceAccessorAutPtr a_accessor
+        IContextShrPtr          const a_context,
+        IResourceAccessorAutPtr       a_accessor
     );
 
     /**
@@ -164,6 +167,11 @@ public:
     ) const;
 
 private:
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
+
     /**
      * @brief An accessor.
      */

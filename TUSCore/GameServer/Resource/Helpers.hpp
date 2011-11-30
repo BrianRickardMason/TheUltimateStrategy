@@ -42,12 +42,14 @@ namespace Resource
 /**
  * @brief Adds two maps of resources.
  *
- * @param a_map_1 The map to be added.
- * @param a_map_2 The map to be added.
+ * @param a_context The context of the server.
+ * @param a_map_1   The map to be added.
+ * @param a_map_2   The map to be added.
  *
  * @return The sum of two maps.
  */
 ResourceWithVolumeMap add(
+    IContextShrPtr        const   a_context,
     ResourceWithVolumeMap const & a_map_1,
     ResourceWithVolumeMap const & a_map_2
 );
@@ -55,12 +57,14 @@ ResourceWithVolumeMap add(
 /**
  * @brief Multiplies the map by a given factor.
  *
- * @param a_map    The map to be multiplied.
- * @param a_factor The factor.
+ * @param a_context The context of the server.
+ * @param a_map     The map to be multiplied.
+ * @param a_factor  The factor.
  *
  * @return The sum of two maps.
  */
 ResourceWithVolumeMap multiply(
+    IContextShrPtr        const   a_context,
     ResourceWithVolumeMap const & a_map,
     unsigned int          const   a_factor
 );

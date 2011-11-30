@@ -29,6 +29,7 @@
 #include "../../GameServer/Resource/ResourcePersistenceFacade.hpp"
 #include "../Persistence/TransactionDummy.hpp"
 #include "ResourceAccessorMock.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -53,6 +54,7 @@ protected:
      * @brief Creates a test class.
      */
     ResourcePersistenceFacadeTest()
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql"))
     {
     }
 
@@ -82,16 +84,21 @@ protected:
     {
         ResourceWithVolumeMap map;
 
-        map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolume>(KEY_RESOURCE_COAL, 100)));
-        map.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(KEY_RESOURCE_FOOD, 200)));
-        map.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(KEY_RESOURCE_GOLD, 300)));
-        map.insert(make_pair(KEY_RESOURCE_IRON, make_shared<ResourceWithVolume>(KEY_RESOURCE_IRON, 400)));
-        map.insert(make_pair(KEY_RESOURCE_MANA, make_shared<ResourceWithVolume>(KEY_RESOURCE_MANA, 500)));
-        map.insert(make_pair(KEY_RESOURCE_ROCK, make_shared<ResourceWithVolume>(KEY_RESOURCE_ROCK, 600)));
-        map.insert(make_pair(KEY_RESOURCE_WOOD, make_shared<ResourceWithVolume>(KEY_RESOURCE_WOOD, 700)));
+        map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_COAL, 100)));
+        map.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+        map.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_GOLD, 300)));
+        map.insert(make_pair(KEY_RESOURCE_IRON, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_IRON, 400)));
+        map.insert(make_pair(KEY_RESOURCE_MANA, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_MANA, 500)));
+        map.insert(make_pair(KEY_RESOURCE_ROCK, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_ROCK, 600)));
+        map.insert(make_pair(KEY_RESOURCE_WOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_WOOD, 700)));
 
         return map;
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief An exemplary id holder.
@@ -103,7 +110,7 @@ TEST_F(ResourcePersistenceFacadeTest, CtorDoesNotThrow)
 {
     IResourceAccessorAutPtr accessor(new ResourceAccessorMock);
 
-    ASSERT_NO_THROW(ResourcePersistenceFacade persistence_facade(accessor));
+    ASSERT_NO_THROW(ResourcePersistenceFacade persistence_facade(m_context, accessor));
 }
 
 TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent)
@@ -121,7 +128,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_NO_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
@@ -145,7 +152,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsNotPresent_Throw)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
@@ -166,7 +173,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_NO_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
@@ -190,7 +197,7 @@ TEST_F(ResourcePersistenceFacadeTest, addResource_ResourceIsPresent_Throw)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.addResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
@@ -209,7 +216,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsNotPresent_TryT
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_FALSE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
@@ -230,7 +237,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_TRUE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
@@ -254,7 +261,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 2), std::exception);
@@ -275,7 +282,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_TRUE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
@@ -299,7 +306,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_Subtrac
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
@@ -318,7 +325,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResource_ResourceIsPresent_TryToSu
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_FALSE(persistence_facade.subtractResource(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
@@ -335,7 +342,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsNotPresen
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
@@ -346,7 +353,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 
     IResourceAccessorAutPtr accessor(new ResourceAccessorMock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 0));
 }
@@ -364,7 +371,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 2));
 }
@@ -385,7 +392,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 2), std::exception);
 }
@@ -403,7 +410,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3));
 }
@@ -424,7 +431,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 3), std::exception);
 }
@@ -442,7 +449,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourceSafely_ResourceIsPresent_S
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourceSafely(transaction, m_id_holder, KEY_RESOURCE_COAL, 6));
 }
@@ -460,7 +467,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_EmptySet)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_map));
 }
@@ -478,7 +485,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesAreNotPresent_T
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_FALSE(persistence_facade.subtractResources(transaction, m_id_holder, resource_map));
 }
@@ -518,7 +525,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_map));
@@ -544,7 +551,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.subtractResources(transaction, m_id_holder, resource_map), std::exception);
@@ -585,7 +592,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_TRUE(persistence_facade.subtractResources(transaction, m_id_holder, resource_map));
@@ -614,7 +621,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_THROW(persistence_facade.subtractResources(transaction, m_id_holder, resource_map), std::exception);
@@ -645,7 +652,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_TryT
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
     ASSERT_FALSE(persistence_facade.subtractResources(transaction, m_id_holder, resource_map));
@@ -664,7 +671,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_EmptySet)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_map));
 }
@@ -682,7 +689,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesAreNotPre
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_map));
 }
@@ -720,7 +727,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_map));
 }
@@ -743,7 +750,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_map), std::exception);
 }
@@ -781,7 +788,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_map));
 }
@@ -807,7 +814,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_map), std::exception);
 }
@@ -842,7 +849,7 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ASSERT_NO_THROW(persistence_facade.subtractResourcesSafely(transaction, m_id_holder, resource_map));
 }
@@ -860,7 +867,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsNotPresent)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
     ResourceWithVolumeShrPtr resource = persistence_facade.getResource(transaction, m_id_holder, KEY_RESOURCE_COAL);
@@ -882,7 +889,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResource_ResourceIsPresent)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
     ResourceWithVolumeShrPtr resource = persistence_facade.getResource(transaction, m_id_holder, KEY_RESOURCE_COAL);
@@ -904,7 +911,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesAreNotPresent)
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ResourceWithVolumeMap resource_map = persistence_facade.getResources(transaction, m_id_holder);
 
@@ -939,7 +946,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OneResour
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ResourceWithVolumeMap resource_map = persistence_facade.getResources(transaction, m_id_holder);
 
@@ -979,7 +986,7 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoResour
 
     IResourceAccessorAutPtr accessor(mock);
 
-    ResourcePersistenceFacade persistence_facade(accessor);
+    ResourcePersistenceFacade persistence_facade(m_context, accessor);
 
     ResourceWithVolumeMap resource_map = persistence_facade.getResources(transaction, m_id_holder);
 

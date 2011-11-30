@@ -89,10 +89,10 @@ protected:
     {
         // Mocks setup: ResourcePersistenceFacadeMock.
         std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-        configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
+        configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
         resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
-        configureResourcePersistenceFacadeMockForSubtractResourceMap(getResourceMap(resource_volumes));
+        configureResourcePersistenceFacadeMockForSubtractResourceMap(getResourceMap(m_context, resource_volumes));
 
         return m_resource_persistence_facade;
     }
@@ -295,7 +295,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_NoResources)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes;
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -313,7 +313,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_ZeroVolumes)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -331,7 +331,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_LowerVolumes)
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1)(1);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -368,7 +368,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(resource_volumes));
+    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -396,7 +396,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceMap(resource_volumes)));
+    .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
@@ -447,7 +447,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceMap(resource_volumes)));
+    .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
@@ -498,7 +498,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceMap(resource_volumes)));
+    .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
@@ -549,7 +549,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceMap(resource_volumes)));
+    .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
@@ -588,7 +588,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     // Get resources.
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
-    .WillOnce(Return(getResourceMap(resource_volumes)));
+    .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
     EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))

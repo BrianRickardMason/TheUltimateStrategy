@@ -27,6 +27,7 @@
 
 #include "../../GameServer/Resource/Key.hpp"
 #include "../../GameServer/Resource/ResourceWithVolume.hpp"
+#include <Network/XmlRPCServer/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
@@ -44,10 +45,16 @@ protected:
      * @brief Constructs a test class.
      */
     ResourceWithVolumeTest()
-        : m_resource_with_volume(KEY_RESOURCE_COAL, 2),
+        : m_context(new Context("localhost", "2222", 1, 100, "postgresql")),
+          m_resource_with_volume(m_context, KEY_RESOURCE_COAL, 2),
           m_model_key(KEY_RESOURCE_COAL)
     {
     }
+
+    /**
+     * @brief The context of the server.
+     */
+    IContextShrPtr m_context;
 
     /**
      * @brief A resource with volume to be tested.
@@ -62,7 +69,7 @@ protected:
 
 TEST_F(ResourceWithVolumeTest, ResourceWithVolume_BasedOnArguments)
 {
-    ResourceWithVolume resource_with_volume(KEY_RESOURCE_COAL, 2);
+    ResourceWithVolume resource_with_volume(m_context, KEY_RESOURCE_COAL, 2);
 
     ASSERT_TRUE(m_model_key == resource_with_volume.getResource()->getKey());
     ASSERT_EQ(2, resource_with_volume.getVolume());
@@ -72,7 +79,7 @@ TEST_F(ResourceWithVolumeTest, ResourceWithVolume_BasedOnRecord)
 {
     ResourceWithVolumeRecord resource_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_RESOURCE_COAL, 2);
 
-    ResourceWithVolume resource_with_volume(resource_with_volume_record);
+    ResourceWithVolume resource_with_volume(m_context, resource_with_volume_record);
 
     ASSERT_TRUE(m_model_key == resource_with_volume.getResource()->getKey());
     ASSERT_EQ(2, resource_with_volume.getVolume());
