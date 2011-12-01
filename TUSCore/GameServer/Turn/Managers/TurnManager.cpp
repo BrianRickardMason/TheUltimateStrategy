@@ -180,7 +180,7 @@ bool TurnManager::executeTurnSettlement(
     }
 
     // Experience.
-    // TODO: Only if not poverty.
+    if (!poverty_happened)
     {
         HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
 
