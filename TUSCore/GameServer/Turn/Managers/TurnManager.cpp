@@ -135,37 +135,18 @@ bool TurnManager::executeTurnSettlement(
 
         if (!result)
         {
-        	return false;
+            return false;
         }
     }
 
-    // Verify poverty.
-    // FIXME: Code smell: envious class.
-    if (available_resources.at(KEY_RESOURCE_GOLD)->getVolume() < cost_of_living.at(KEY_RESOURCE_GOLD)->getVolume())
+    // Verify if poverty happened.
+    if (verifyPoverty(available_resources, cost_of_living))
     {
-        HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
+        bool const result = poverty(a_transaction, a_settlement_name);
 
-        for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
+        if (!result)
         {
-            // TODO: Hardcoded POVERTY_DISMISS_FACTOR.
-            Human::Volume dismissed = it->second->getVolume() * 0.1;
-
-            if (dismissed)
-            {
-                bool const result = m_human_persistence_facade->subtractHuman(
-                                        a_transaction,
-                                        id_holder,
-                                        it->second->getHuman()->getKey(),
-                                        dismissed
-                                    );
-
-                if (!result)
-                {
-                    return false;
-                }
-
-                m_human_persistence_facade->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, dismissed);
-            }
+            return false;
         }
     }
 
@@ -365,6 +346,53 @@ bool TurnManager::famine(
             {
                 return false;
             }
+        }
+    }
+
+    return true;
+}
+
+bool TurnManager::verifyPoverty(
+    Resource::ResourceWithVolumeMap const & a_available_resources,
+    Resource::ResourceWithVolumeMap const & a_used_resources
+) const
+{
+    // FIXME: Code smell - envious class.
+    Resource::Volume const available = a_available_resources.at(KEY_RESOURCE_GOLD)->getVolume(),
+                           used      = a_used_resources.at(KEY_RESOURCE_GOLD)->getVolume();
+
+    return (available < used) ? true : false;
+}
+
+bool TurnManager::poverty(
+    ITransactionShrPtr       a_transaction,
+    std::string        const a_settlement_name
+) const
+{
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
+
+    HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
+
+    for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
+    {
+        // TODO: Hardcoded POVERTY_DISMISS_FACTOR.
+        Human::Volume dismissed = it->second->getVolume() * 0.1;
+
+        if (dismissed)
+        {
+            bool const result = m_human_persistence_facade->subtractHuman(
+                                    a_transaction,
+                                    id_holder,
+                                    it->second->getHuman()->getKey(),
+                                    dismissed
+                                );
+
+            if (!result)
+            {
+                return false;
+            }
+
+            m_human_persistence_facade->addHuman(a_transaction, id_holder, KEY_WORKER_JOBLESS_NOVICE, dismissed);
         }
     }
 
