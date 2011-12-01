@@ -40,7 +40,6 @@ using namespace GameServer::Persistence;
 using namespace GameServer::Resource;
 using namespace GameServer::Settlement;
 using namespace GameServer::World;
-using namespace std;
 
 namespace GameServer
 {
@@ -115,7 +114,7 @@ bool TurnManager::executeTurn(
 
 bool TurnManager::executeTurnSettlement(
     ITransactionShrPtr       a_transaction,
-    string             const a_settlement_name
+    std::string        const a_settlement_name
 ) const
 {
     IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
@@ -129,27 +128,14 @@ bool TurnManager::executeTurnSettlement(
     // Get the cost of living.
     ResourceWithVolumeMap cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
 
-    // Verify famine.
-    // FIXME: Code smell: envious class.
-    if (available_resources.at(KEY_RESOURCE_FOOD)->getVolume() < cost_of_living.at(KEY_RESOURCE_FOOD)->getVolume())
+    // Verify if famine happened.
+    if (verifyFamine(available_resources, cost_of_living))
     {
-        HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
+        bool const result = famine(a_transaction, a_settlement_name);
 
-        for (HumanWithVolumeMap::iterator it = humans.begin(); it != humans.end(); ++it)
+        if (!result)
         {
-            // TODO: Hardcoded FAMINE_DEATH_FACTOR.
-            Human::Volume died = it->second->getVolume() * 0.1;
-
-            if (died)
-            {
-                bool const result =
-                    m_human_persistence_facade->subtractHuman(a_transaction, id_holder, it->second->getHuman()->getKey(), died);
-
-                if (!result)
-                {
-                    return false;
-                }
-            }
+        	return false;
         }
     }
 
@@ -194,7 +180,8 @@ bool TurnManager::executeTurnSettlement(
 
         for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
         {
-            map<Configuration::IHumanKey, std::string>::const_iterator production = HUMAN_MAP_PRODUCTION.find(it->second->getHuman()->getKey());
+            std::map<Configuration::IHumanKey, std::string>::const_iterator production =
+                HUMAN_MAP_PRODUCTION.find(it->second->getHuman()->getKey());
 
             if (production != HUMAN_MAP_PRODUCTION.end())
             {
@@ -310,7 +297,7 @@ bool TurnManager::executeTurnSettlement(
 
 ResourceWithVolumeMap TurnManager::getCostOfLiving(
     ITransactionShrPtr       a_transaction,
-    string             const a_settlement_name
+    std::string        const a_settlement_name
 ) const
 {
     ResourceWithVolumeMap total_cost;
@@ -340,6 +327,48 @@ ResourceWithVolumeMap TurnManager::getCostOfLiving(
     }
 
     return total_cost;
+}
+
+bool TurnManager::verifyFamine(
+    Resource::ResourceWithVolumeMap const & a_available_resources,
+    Resource::ResourceWithVolumeMap const & a_used_resources
+) const
+{
+    // FIXME: Code smell - envious class.
+    Resource::Volume const available = a_available_resources.at(KEY_RESOURCE_FOOD)->getVolume(),
+                           used      = a_used_resources.at(KEY_RESOURCE_FOOD)->getVolume();
+
+    return (available < used) ? true : false;
+}
+
+bool TurnManager::famine(
+    ITransactionShrPtr       a_transaction,
+    std::string        const a_settlement_name
+) const
+{
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
+
+    HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
+
+    for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
+    {
+        // TODO: Hardcoded FAMINE_DEATH_FACTOR.
+        Human::Volume died = it->second->getVolume() * 0.1;
+
+        if (died)
+        {
+            bool const result =
+                m_human_persistence_facade->subtractHuman(
+                    a_transaction, id_holder, it->second->getHuman()->getKey(), died);
+
+            if (!result)
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
 } // namespace Turn

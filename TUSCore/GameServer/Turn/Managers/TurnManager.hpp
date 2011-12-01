@@ -118,6 +118,32 @@ private:
     ) const;
 
     /**
+     * @brief Verifies whether famine happened.
+     *
+     * @param a_available_resources The map of available resources.
+     * @param a_used_resources      The map of used resources.
+     *
+     * @return True if famine happened, false otherwise.
+     */
+    bool verifyFamine(
+        Resource::ResourceWithVolumeMap const & a_available_resources,
+        Resource::ResourceWithVolumeMap const & a_used_resources
+    ) const;
+
+    /**
+     * @brief Performs famine specific action.
+     *
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of a settlement.
+
+     * @return True on success, false otherwise.
+     */
+    bool famine(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const;
+
+    /**
      * @brief The context of the server.
      *
      * TODO: Should be const everywhere.
