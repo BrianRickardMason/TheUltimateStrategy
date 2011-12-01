@@ -53,6 +53,84 @@ protected:
     IContextShrPtr m_context;
 };
 
+
+TEST_F(HelpersTest, AreEqualReturnsTrueTwoEmptyMaps)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	ASSERT_TRUE(areEqual(map_1, map_2));
+}
+
+TEST_F(HelpersTest, AreEqualReturnsFalseTheFirstMapEmptyTheSecondMapNonEmpty)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	map_2.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+
+	ASSERT_FALSE(areEqual(map_1, map_2));
+}
+
+TEST_F(HelpersTest, AreEqualReturnsFalseTheFirstMapNonEmptyTheSecondMapEmpty)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	map_1.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+
+	ASSERT_FALSE(areEqual(map_1, map_2));
+}
+
+TEST_F(HelpersTest, AreEqualReturnsFalseTwoMapsOfDifferentSizesTheSecondMapIsBigger)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	map_1.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+	map_2.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+	map_2.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_GOLD, 200)));
+
+	ASSERT_FALSE(areEqual(map_1, map_2));
+}
+
+TEST_F(HelpersTest, AreEqualReturnsFalseTwoMapsOfDifferentSizesTheFirstMapIsBigger)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	map_1.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+	map_1.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_GOLD, 200)));
+	map_2.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+
+	ASSERT_FALSE(areEqual(map_1, map_2));
+}
+
+TEST_F(HelpersTest, AreEqualReturnsTrueTwoMapsOfSameSizesBothMapsHaveEqualResources)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	map_1.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+	map_2.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+
+	ASSERT_TRUE(areEqual(map_1, map_2));
+}
+
+TEST_F(HelpersTest, AreEqualReturnsFalseTwoMapsOfSameSizesTheFirstMapHasMoreResources)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	map_1.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 201)));
+	map_2.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+
+	ASSERT_FALSE(areEqual(map_1, map_2));
+}
+
+TEST_F(HelpersTest, AreEqualReturnsFalseTwoMapsOfSameSizesTheSecondMapHasMoreResources)
+{
+	ResourceWithVolumeMap map_1, map_2;
+
+	map_1.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
+	map_2.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 201)));
+
+	ASSERT_FALSE(areEqual(map_1, map_2));
+}
+
 TEST_F(HelpersTest, IsFirstGreaterThanEqualReturnsTrueTwoEmptyMaps)
 {
     ResourceWithVolumeMap map_1, map_2;
@@ -60,7 +138,7 @@ TEST_F(HelpersTest, IsFirstGreaterThanEqualReturnsTrueTwoEmptyMaps)
     ASSERT_TRUE(isFirstGreaterOrEqual(map_1, map_2));
 }
 
-TEST_F(HelpersTest, IsFirstGreaterThanEqualReturnsFalseTheFirstMapEmptyTheSecondNonEmpty)
+TEST_F(HelpersTest, IsFirstGreaterThanEqualReturnsFalseTheFirstMapEmptyTheSecondMapNonEmpty)
 {
     ResourceWithVolumeMap map_1, map_2;
 
@@ -69,7 +147,7 @@ TEST_F(HelpersTest, IsFirstGreaterThanEqualReturnsFalseTheFirstMapEmptyTheSecond
     ASSERT_FALSE(isFirstGreaterOrEqual(map_1, map_2));
 }
 
-TEST_F(HelpersTest, IsFirstGreaterThanEqualReturnsTrueTheFirstMapNonEmptyTheSecondEmpty)
+TEST_F(HelpersTest, IsFirstGreaterThanEqualReturnsTrueTheFirstMapNonEmptyTheSecondMapEmpty)
 {
     ResourceWithVolumeMap map_1, map_2;
 
