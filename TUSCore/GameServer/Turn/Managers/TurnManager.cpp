@@ -129,7 +129,8 @@ bool TurnManager::executeTurnSettlement(
     ResourceWithVolumeMap cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
 
     // Verify if famine happened.
-    if (verifyFamine(available_resources, cost_of_living))
+    bool const famine_happened = verifyFamine(available_resources, cost_of_living);
+    if (famine_happened)
     {
         bool const result = famine(a_transaction, a_settlement_name);
 
@@ -140,7 +141,8 @@ bool TurnManager::executeTurnSettlement(
     }
 
     // Verify if poverty happened.
-    if (verifyPoverty(available_resources, cost_of_living))
+    bool const poverty_happened = verifyPoverty(available_resources, cost_of_living);
+    if (poverty_happened)
     {
         bool const result = poverty(a_transaction, a_settlement_name);
 
@@ -340,7 +342,11 @@ bool TurnManager::famine(
         {
             bool const result =
                 m_human_persistence_facade->subtractHuman(
-                    a_transaction, id_holder, it->second->getHuman()->getKey(), died);
+                    a_transaction,
+                    id_holder,
+                    it->second->getHuman()->getKey(),
+                    died
+                );
 
             if (!result)
             {
@@ -380,12 +386,13 @@ bool TurnManager::poverty(
 
         if (dismissed)
         {
-            bool const result = m_human_persistence_facade->subtractHuman(
-                                    a_transaction,
-                                    id_holder,
-                                    it->second->getHuman()->getKey(),
-                                    dismissed
-                                );
+            bool const result =
+                m_human_persistence_facade->subtractHuman(
+                    a_transaction,
+                    id_holder,
+                    it->second->getHuman()->getKey(),
+                    dismissed
+                );
 
             if (!result)
             {
