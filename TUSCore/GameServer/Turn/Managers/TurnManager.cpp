@@ -316,9 +316,25 @@ bool TurnManager::verifyFamine(
     Resource::ResourceWithVolumeMap const & a_used_resources
 ) const
 {
-    // FIXME: Code smell - envious class.
-    Resource::Volume const available = a_available_resources.at(KEY_RESOURCE_FOOD)->getVolume(),
-                           used      = a_used_resources.at(KEY_RESOURCE_FOOD)->getVolume();
+    Resource::Volume available(0), used(0);
+
+    try
+    {
+        // FIXME: Code smell - envious class.
+        available = a_available_resources.at(KEY_RESOURCE_FOOD)->getVolume();
+    }
+    catch (...)
+    {
+    }
+
+    try
+    {
+        // FIXME: Code smell - envious class.
+        used = a_used_resources.at(KEY_RESOURCE_FOOD)->getVolume();
+    }
+    catch (...)
+    {
+    }
 
     return (available < used) ? true : false;
 }
@@ -362,9 +378,25 @@ bool TurnManager::verifyPoverty(
     Resource::ResourceWithVolumeMap const & a_used_resources
 ) const
 {
-    // FIXME: Code smell - envious class.
-    Resource::Volume const available = a_available_resources.at(KEY_RESOURCE_GOLD)->getVolume(),
-                           used      = a_used_resources.at(KEY_RESOURCE_GOLD)->getVolume();
+    Resource::Volume available(0), used(0);
+
+    try
+    {
+        // FIXME: Code smell - envious class.
+        available = a_available_resources.at(KEY_RESOURCE_GOLD)->getVolume();
+    }
+    catch (...)
+    {
+    }
+
+    try
+    {
+        // FIXME: Code smell - envious class.
+        used = a_used_resources.at(KEY_RESOURCE_GOLD)->getVolume();
+    }
+    catch (...)
+    {
+    }
 
     return (available < used) ? true : false;
 }
