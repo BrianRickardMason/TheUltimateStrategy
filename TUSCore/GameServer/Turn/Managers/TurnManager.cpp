@@ -31,6 +31,7 @@
 #include <GameServer/Resource/Helpers.hpp>
 #include <GameServer/Resource/Key.hpp>
 #include <GameServer/Turn/Managers/TurnManager.hpp>
+#include <math.h>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -351,7 +352,7 @@ bool TurnManager::famine(
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
         // TODO: Hardcoded FAMINE_DEATH_FACTOR.
-        Human::Volume died = it->second->getVolume() * 0.1;
+        Human::Volume died = ceil(it->second->getVolume() * 0.1);
 
         if (died)
         {
@@ -413,7 +414,7 @@ bool TurnManager::poverty(
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
         // TODO: Hardcoded POVERTY_DISMISS_FACTOR.
-        Human::Volume dismissed = it->second->getVolume() * 0.1;
+        Human::Volume dismissed = ceil(it->second->getVolume() * 0.1);
 
         if (dismissed)
         {
