@@ -159,25 +159,9 @@ bool TurnManager::executeTurnSettlement(
     }
 
     // Receipts.
+    if (verifyReceipts())
     {
-        HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
-
-        for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
-        {
-            std::map<Configuration::IHumanKey, std::string>::const_iterator production =
-                HUMAN_MAP_PRODUCTION.find(it->second->getHuman()->getKey());
-
-            if (production != HUMAN_MAP_PRODUCTION.end())
-            {
-                // TODO: Define whether and how to check if volume is greater than 0.
-                m_resource_persistence_facade->addResource(
-                    a_transaction,
-                    id_holder,
-                    production->second,
-                    it->second->getHuman()->getProduction() * it->second->getVolume()
-                );
-            }
-        }
+        receipts(a_transaction, a_settlement_name);
     }
 
     // Experience.
@@ -436,6 +420,38 @@ bool TurnManager::poverty(
     }
 
     return true;
+}
+
+bool TurnManager::verifyReceipts() const
+{
+    return true;
+}
+
+void TurnManager::receipts(
+    ITransactionShrPtr       a_transaction,
+    std::string        const a_settlement_name
+) const
+{
+    IDHolder id_holder(ID_HOLDER_CLASS_SETTLEMENT, a_settlement_name);
+
+    HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, id_holder);
+
+    for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
+    {
+        std::map<Configuration::IHumanKey, std::string>::const_iterator production =
+            HUMAN_MAP_PRODUCTION.find(it->second->getHuman()->getKey());
+
+        if (production != HUMAN_MAP_PRODUCTION.end())
+        {
+            // TODO: Define whether and how to check if volume is greater than 0.
+            m_resource_persistence_facade->addResource(
+                a_transaction,
+                id_holder,
+                production->second,
+                it->second->getHuman()->getProduction() * it->second->getVolume()
+            );
+        }
+    }
 }
 
 } // namespace Turn

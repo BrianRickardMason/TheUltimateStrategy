@@ -170,6 +170,26 @@ private:
     ) const;
 
     /**
+     * @brief Verifies whether receipts are calculated.
+     *
+     * @return True if receipts are calculated, false otherwise.
+     */
+    bool verifyReceipts() const;
+
+    /**
+     * @brief Performs calculation of receipts.
+     *
+     * @param a_transaction     The transaction.
+     * @param a_settlement_name The name of a settlement.
+
+     * @return True on success, false otherwise.
+     */
+    void receipts(
+        Persistence::ITransactionShrPtr       a_transaction,
+        std::string                     const a_settlement_name
+    ) const;
+
+    /**
      * @brief The context of the server.
      *
      * TODO: Should be const everywhere.
