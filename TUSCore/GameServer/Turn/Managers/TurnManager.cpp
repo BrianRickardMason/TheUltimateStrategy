@@ -124,10 +124,10 @@ bool TurnManager::executeTurnSettlement(
     // TODO: Implement me!
 
     // Get the available resources.
-    ResourceWithVolumeMap available_resources = m_resource_persistence_facade->getResources(a_transaction, id_holder);
+    ResourceWithVolumeMap const available_resources = m_resource_persistence_facade->getResources(a_transaction, id_holder);
 
     // Get the cost of living.
-    ResourceWithVolumeMap cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
+    ResourceWithVolumeMap const cost_of_living = getCostOfLiving(a_transaction, a_settlement_name);
 
     // Verify if famine happened.
     bool const famine_happened = verifyFamine(available_resources, cost_of_living);
