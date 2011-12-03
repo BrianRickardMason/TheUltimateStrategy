@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_CONFIGURATION_IRESOURCE_HPP
 #define GAMESERVER_CONFIGURATION_IRESOURCE_HPP
 
-#include <GameServer/Configuration/Configurator/Key.hpp>
+#include <GameServer/Configuration/Configurator/IKey.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>

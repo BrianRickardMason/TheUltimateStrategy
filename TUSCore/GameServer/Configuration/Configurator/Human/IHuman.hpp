@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_CONFIGURATION_IHUMAN_HPP
 #define GAMESERVER_CONFIGURATION_IHUMAN_HPP
 
-#include <GameServer/Configuration/Configurator/Key.hpp>
+#include <GameServer/Configuration/Configurator/IKey.hpp>
 #include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
