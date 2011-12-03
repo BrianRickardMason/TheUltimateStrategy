@@ -37,7 +37,7 @@ namespace Building
 {
 
 KeyVec BuildingToHumanTranslator::getHumansHostedForWork(
-    Configuration::IBuildingKey const & a_key
+    Configuration::IKey const & a_key
 )
 {
     // Get corresponding building.

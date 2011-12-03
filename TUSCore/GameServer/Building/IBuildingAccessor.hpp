@@ -62,9 +62,9 @@ public:
      */
     virtual void insertRecord(
         Persistence::ITransactionShrPtr         a_transaction,
-        Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key,
-        Volume                          const & a_volume
+        Common::IDHolder    const & a_id_holder,
+        Configuration::IKey const & a_key,
+        Volume              const & a_volume
     ) const = 0;
 
     /**
@@ -79,7 +79,7 @@ public:
     virtual void deleteRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key
+        Configuration::IKey             const & a_key
     ) const = 0;
 
     /**
@@ -94,7 +94,7 @@ public:
     virtual BuildingWithVolumeRecordShrPtr getRecord(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key
+        Configuration::IKey             const & a_key
     ) const = 0;
 
     /**
@@ -123,7 +123,7 @@ public:
     virtual void increaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -140,7 +140,7 @@ public:
     virtual void decreaseVolume(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 };

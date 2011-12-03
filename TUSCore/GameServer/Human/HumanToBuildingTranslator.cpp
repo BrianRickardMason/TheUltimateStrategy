@@ -42,7 +42,7 @@ IBuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
 ) const
 {
     // Get corresponding building.
-    std::vector<IBuildingKey> buildings = PLACES_OF_WORK.at(a_key);
+    std::vector<IKey> buildings = PLACES_OF_WORK.at(a_key);
 
     // Check if the human has a place of work.
     if (buildings.size())

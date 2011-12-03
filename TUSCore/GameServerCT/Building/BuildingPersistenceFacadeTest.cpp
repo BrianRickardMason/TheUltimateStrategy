@@ -100,7 +100,7 @@ protected:
      */
     void compareBuilding(
         BuildingWithVolumeShrPtr         a_building,
-        IBuildingKey             const & a_key,
+        IKey                     const & a_key,
         Volume                   const & a_volume
     )
     {

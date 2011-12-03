@@ -53,7 +53,7 @@ DestroyBuildingOperator::DestroyBuildingOperator(
 DestroyBuildingOperatorExitCode DestroyBuildingOperator::destroyBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {

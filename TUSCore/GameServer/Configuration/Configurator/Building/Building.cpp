@@ -36,7 +36,7 @@ namespace Configuration
 {
 
 Building::Building(
-    IBuildingKey                                    const   a_key,
+    IKey                                            const   a_key,
     string                                          const   a_class,
     string                                          const   a_name,
     unsigned int                                    const   a_capacity,
@@ -52,7 +52,7 @@ Building::Building(
 {
 }
 
-IBuildingKey Building::getKey() const
+IKey Building::getKey() const
 {
     return m_key;
 }

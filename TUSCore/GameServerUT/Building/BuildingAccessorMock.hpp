@@ -57,9 +57,9 @@ public:
         insertRecord,
         void(
             Persistence::ITransactionShrPtr         a_transaction,
-            Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key,
-            Volume                          const & a_volume
+            Common::IDHolder    const & a_id_holder,
+            Configuration::IKey const & a_key,
+            Volume              const & a_volume
         )
     );
 
@@ -77,7 +77,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key
+            Configuration::IKey             const & a_key
         )
     );
 
@@ -95,7 +95,7 @@ public:
         BuildingWithVolumeRecordShrPtr(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key
+            Configuration::IKey             const & a_key
         )
     );
 
@@ -130,7 +130,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key,
+            Configuration::IKey             const & a_key,
             Volume                          const & a_volume
         )
     );
@@ -150,7 +150,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key,
+            Configuration::IKey             const & a_key,
             Volume                          const & a_volume
         )
     );

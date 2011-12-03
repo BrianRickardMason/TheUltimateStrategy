@@ -46,7 +46,7 @@ GetBuildingOperator::GetBuildingOperator(
 GetBuildingOperatorExitCode GetBuildingOperator::getBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key
+    IKey               const & a_key
 ) const
 {
     try

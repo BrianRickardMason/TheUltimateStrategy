@@ -53,7 +53,7 @@ public:
      * @param a_costs_to_destroy The costs to destroy the building.
      */
     Building(
-        IBuildingKey                                         const   a_key,
+        IKey                                                 const   a_key,
         std::string                                          const   a_class,
         std::string                                          const   a_name,
         unsigned int                                         const   a_capacity,
@@ -66,7 +66,7 @@ public:
      *
      * @return The key of the building.
      */
-    virtual IBuildingKey getKey() const;
+    virtual IKey getKey() const;
 
     /**
      * @brief Gets the class of the building.
@@ -107,7 +107,7 @@ private:
     /**
      * @brief The key of the building.
      */
-    IBuildingKey const m_key;
+    IKey const m_key;
 
     /**
      * @brief The class of the building.

@@ -64,7 +64,7 @@ protected:
     /**
      * @brief A model key.
      */
-    IBuildingKey m_model_key;
+    IKey m_model_key;
 };
 
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnArguments)

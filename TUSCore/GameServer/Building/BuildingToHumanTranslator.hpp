@@ -54,7 +54,7 @@ public:
      * @return The vector of human short keys, an empty vector if building is not a place for anyone to work.
      */
     static Human::KeyVec getHumansHostedForWork(
-        Configuration::IBuildingKey const & a_key
+        Configuration::IKey const & a_key
     );
 };
 
@@ -183,48 +183,48 @@ Human::KeyVec const SPECIAL_SEWERAGE_HOSTING_VEC          (SPECIAL_SEWERAGE_HOST
  *
  * @note Do not edit unless buildings are added or removed.
  */
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_BARBICAN_HOSTING_PAIR        (KEY_DEFENSIVE_BARBICAN       , DEFENSIVE_BARBICAN_HOSTING_VEC       );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_BATTLEMENTS_HOSTING_PAIR     (KEY_DEFENSIVE_BATTLEMENTS    , DEFENSIVE_BATTLEMENTS_HOSTING_VEC    );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_CASEMATE_HOSTING_PAIR        (KEY_DEFENSIVE_CASEMATE       , DEFENSIVE_CASEMATE_HOSTING_VEC       );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_CIRCUMVALLATION_HOSTING_PAIR (KEY_DEFENSIVE_CIRCUMVALLATION, DEFENSIVE_CIRCUMVALLATION_HOSTING_VEC);
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_DONJON_HOSTING_PAIR          (KEY_DEFENSIVE_DONJON         , DEFENSIVE_DONJON_HOSTING_VEC         );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_MACHICOLATION_HOSTING_PAIR   (KEY_DEFENSIVE_MACHICOLATION  , DEFENSIVE_MACHICOLATION_HOSTING_VEC  );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_PORTCULLIS_HOSTING_PAIR      (KEY_DEFENSIVE_PORTCULLIS     , DEFENSIVE_PORTCULLIS_HOSTING_VEC     );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_POSTERN_HOSTING_PAIR         (KEY_DEFENSIVE_POSTERN        , DEFENSIVE_POSTERN_HOSTING_VEC        );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> DEFENSIVE_VIEWING_TOWER_HOSTING_PAIR   (KEY_DEFENSIVE_VIEWING_TOWER  , DEFENSIVE_VIEWING_TOWER_HOSTING_VEC  );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_BARBICAN_HOSTING_PAIR        (KEY_DEFENSIVE_BARBICAN       , DEFENSIVE_BARBICAN_HOSTING_VEC       );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_BATTLEMENTS_HOSTING_PAIR     (KEY_DEFENSIVE_BATTLEMENTS    , DEFENSIVE_BATTLEMENTS_HOSTING_VEC    );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_CASEMATE_HOSTING_PAIR        (KEY_DEFENSIVE_CASEMATE       , DEFENSIVE_CASEMATE_HOSTING_VEC       );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_CIRCUMVALLATION_HOSTING_PAIR (KEY_DEFENSIVE_CIRCUMVALLATION, DEFENSIVE_CIRCUMVALLATION_HOSTING_VEC);
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_DONJON_HOSTING_PAIR          (KEY_DEFENSIVE_DONJON         , DEFENSIVE_DONJON_HOSTING_VEC         );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_MACHICOLATION_HOSTING_PAIR   (KEY_DEFENSIVE_MACHICOLATION  , DEFENSIVE_MACHICOLATION_HOSTING_VEC  );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_PORTCULLIS_HOSTING_PAIR      (KEY_DEFENSIVE_PORTCULLIS     , DEFENSIVE_PORTCULLIS_HOSTING_VEC     );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_POSTERN_HOSTING_PAIR         (KEY_DEFENSIVE_POSTERN        , DEFENSIVE_POSTERN_HOSTING_VEC        );
+const std::pair<Configuration::IKey, Human::KeyVec> DEFENSIVE_VIEWING_TOWER_HOSTING_PAIR   (KEY_DEFENSIVE_VIEWING_TOWER  , DEFENSIVE_VIEWING_TOWER_HOSTING_VEC  );
 
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_ALTAR_OF_WISHES_HOSTING_PAIR      (KEY_GOLD_ALTAR_OF_WISHES     , GOLD_ALTAR_OF_WISHES_HOSTING_VEC     );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_COMMUNICATION_TOWERS_HOSTING_PAIR (KEY_GOLD_COMMUNICATION_TOWERS, GOLD_COMMUNICATION_TOWERS_HOSTING_VEC);
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_ETERNAL_CALENDAR_HOSTING_PAIR     (KEY_GOLD_ETERNAL_CALENDAR    , GOLD_ETERNAL_CALENDAR_HOSTING_VEC    );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_HUNTER_OF_METEORS_HOSTING_PAIR    (KEY_GOLD_HUNTER_OF_METEORS   , GOLD_HUNTER_OF_METEORS_HOSTING_VEC   );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_HUNTER_OF_RAINS_HOSTING_PAIR      (KEY_GOLD_HUNTER_OF_RAINS     , GOLD_HUNTER_OF_RAINS_HOSTING_VEC     );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_HUNTER_OF_STORMS_HOSTING_PAIR     (KEY_GOLD_HUNTER_OF_STORMS    , GOLD_HUNTER_OF_STORMS_HOSTING_VEC    );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_HUNTER_OF_WINDS_HOSTING_PAIR      (KEY_GOLD_HUNTER_OF_WINDS     , GOLD_HUNTER_OF_WINDS_HOSTING_VEC     );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_NECROPOLIS_HOSTING_PAIR           (KEY_GOLD_NECROPOLIS          , GOLD_NECROPOLIS_HOSTING_VEC          );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_ORACLE_HOSTING_PAIR               (KEY_GOLD_ORACLE              , GOLD_ORACLE_HOSTING_VEC              );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_PORTAL_OF_ELEMENTS_HOSTING_PAIR   (KEY_GOLD_PORTAL_OF_ELEMENTS  , GOLD_PORTAL_OF_ELEMENTS_HOSTING_VEC  );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_PSIONIC_ACADEMY_HOSTING_PAIR      (KEY_GOLD_PSIONIC_ACADEMY     , GOLD_PSIONIC_ACADEMY_HOSTING_VEC     );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> GOLD_TOWER_OF_CHAOS_HOSTING_PAIR       (KEY_GOLD_TOWER_OF_CHAOS      , GOLD_TOWER_OF_CHAOS_HOSTING_VEC      );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_ALTAR_OF_WISHES_HOSTING_PAIR      (KEY_GOLD_ALTAR_OF_WISHES     , GOLD_ALTAR_OF_WISHES_HOSTING_VEC     );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_COMMUNICATION_TOWERS_HOSTING_PAIR (KEY_GOLD_COMMUNICATION_TOWERS, GOLD_COMMUNICATION_TOWERS_HOSTING_VEC);
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_ETERNAL_CALENDAR_HOSTING_PAIR     (KEY_GOLD_ETERNAL_CALENDAR    , GOLD_ETERNAL_CALENDAR_HOSTING_VEC    );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_HUNTER_OF_METEORS_HOSTING_PAIR    (KEY_GOLD_HUNTER_OF_METEORS   , GOLD_HUNTER_OF_METEORS_HOSTING_VEC   );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_HUNTER_OF_RAINS_HOSTING_PAIR      (KEY_GOLD_HUNTER_OF_RAINS     , GOLD_HUNTER_OF_RAINS_HOSTING_VEC     );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_HUNTER_OF_STORMS_HOSTING_PAIR     (KEY_GOLD_HUNTER_OF_STORMS    , GOLD_HUNTER_OF_STORMS_HOSTING_VEC    );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_HUNTER_OF_WINDS_HOSTING_PAIR      (KEY_GOLD_HUNTER_OF_WINDS     , GOLD_HUNTER_OF_WINDS_HOSTING_VEC     );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_NECROPOLIS_HOSTING_PAIR           (KEY_GOLD_NECROPOLIS          , GOLD_NECROPOLIS_HOSTING_VEC          );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_ORACLE_HOSTING_PAIR               (KEY_GOLD_ORACLE              , GOLD_ORACLE_HOSTING_VEC              );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_PORTAL_OF_ELEMENTS_HOSTING_PAIR   (KEY_GOLD_PORTAL_OF_ELEMENTS  , GOLD_PORTAL_OF_ELEMENTS_HOSTING_VEC  );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_PSIONIC_ACADEMY_HOSTING_PAIR      (KEY_GOLD_PSIONIC_ACADEMY     , GOLD_PSIONIC_ACADEMY_HOSTING_VEC     );
+const std::pair<Configuration::IKey, Human::KeyVec> GOLD_TOWER_OF_CHAOS_HOSTING_PAIR       (KEY_GOLD_TOWER_OF_CHAOS      , GOLD_TOWER_OF_CHAOS_HOSTING_VEC      );
 
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_BARRACKS_HOSTING_PAIR          (KEY_REGULAR_BARRACKS         , REGULAR_BARRACKS_HOSTING_VEC         );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_FARM_HOSTING_PAIR              (KEY_REGULAR_FARM             , REGULAR_FARM_HOSTING_VEC             );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_FORGE_HOSTING_PAIR             (KEY_REGULAR_FORGE            , REGULAR_FORGE_HOSTING_VEC            );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_GUILD_HOSTING_PAIR             (KEY_REGULAR_GUILD            , REGULAR_GUILD_HOSTING_VEC            );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_HOUSE_HOSTING_PAIR             (KEY_REGULAR_HOUSE            , REGULAR_HOUSE_HOSTING_VEC            );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_MARKETPLACE_HOSTING_PAIR       (KEY_REGULAR_MARKETPLACE      , REGULAR_MARKETPLACE_HOSTING_VEC      );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_MINE_HOSTING_PAIR              (KEY_REGULAR_MINE             , REGULAR_MINE_HOSTING_VEC             );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_QUARRY_HOSTING_PAIR            (KEY_REGULAR_QUARRY           , REGULAR_QUARRY_HOSTING_VEC           );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_SAWMILL_HOSTING_PAIR           (KEY_REGULAR_SAWMILL          , REGULAR_SAWMILL_HOSTING_VEC          );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_SCHOOL_HOSTING_PAIR            (KEY_REGULAR_SCHOOL           , REGULAR_SCHOOL_HOSTING_VEC           );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_STEELWORKS_HOSTING_PAIR        (KEY_REGULAR_STEELWORKS       , REGULAR_STEELWORKS_HOSTING_VEC       );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> REGULAR_TEMPLE_HOSTING_PAIR            (KEY_REGULAR_TEMPLE           , REGULAR_TEMPLE_HOSTING_VEC           );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_BARRACKS_HOSTING_PAIR          (KEY_REGULAR_BARRACKS         , REGULAR_BARRACKS_HOSTING_VEC         );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_FARM_HOSTING_PAIR              (KEY_REGULAR_FARM             , REGULAR_FARM_HOSTING_VEC             );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_FORGE_HOSTING_PAIR             (KEY_REGULAR_FORGE            , REGULAR_FORGE_HOSTING_VEC            );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_GUILD_HOSTING_PAIR             (KEY_REGULAR_GUILD            , REGULAR_GUILD_HOSTING_VEC            );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_HOUSE_HOSTING_PAIR             (KEY_REGULAR_HOUSE            , REGULAR_HOUSE_HOSTING_VEC            );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_MARKETPLACE_HOSTING_PAIR       (KEY_REGULAR_MARKETPLACE      , REGULAR_MARKETPLACE_HOSTING_VEC      );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_MINE_HOSTING_PAIR              (KEY_REGULAR_MINE             , REGULAR_MINE_HOSTING_VEC             );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_QUARRY_HOSTING_PAIR            (KEY_REGULAR_QUARRY           , REGULAR_QUARRY_HOSTING_VEC           );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_SAWMILL_HOSTING_PAIR           (KEY_REGULAR_SAWMILL          , REGULAR_SAWMILL_HOSTING_VEC          );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_SCHOOL_HOSTING_PAIR            (KEY_REGULAR_SCHOOL           , REGULAR_SCHOOL_HOSTING_VEC           );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_STEELWORKS_HOSTING_PAIR        (KEY_REGULAR_STEELWORKS       , REGULAR_STEELWORKS_HOSTING_VEC       );
+const std::pair<Configuration::IKey, Human::KeyVec> REGULAR_TEMPLE_HOSTING_PAIR            (KEY_REGULAR_TEMPLE           , REGULAR_TEMPLE_HOSTING_VEC           );
 
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> SPECIAL_AQUEDUCT_HOSTING_PAIR          (KEY_SPECIAL_AQUEDUCT         , SPECIAL_AQUEDUCT_HOSTING_VEC         );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> SPECIAL_BAWDY_HOUSE_HOSTING_PAIR       (KEY_SPECIAL_BAWDY_HOUSE      , SPECIAL_BAWDY_HOUSE_HOSTING_VEC      );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> SPECIAL_COMMERCIAL_PORT_HOSTING_PAIR   (KEY_SPECIAL_COMMERCIAL_PORT  , SPECIAL_COMMERCIAL_PORT_HOSTING_VEC  );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> SPECIAL_COURT_HOSTING_PAIR             (KEY_SPECIAL_COURT            , SPECIAL_COURT_HOSTING_VEC            );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> SPECIAL_GRANARY_HOSTING_PAIR           (KEY_SPECIAL_GRANARY          , SPECIAL_GRANARY_HOSTING_VEC          );
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> SPECIAL_SEWERAGE_HOSTING_PAIR          (KEY_SPECIAL_SEWERAGE         , SPECIAL_SEWERAGE_HOSTING_VEC         );
+const std::pair<Configuration::IKey, Human::KeyVec> SPECIAL_AQUEDUCT_HOSTING_PAIR          (KEY_SPECIAL_AQUEDUCT         , SPECIAL_AQUEDUCT_HOSTING_VEC         );
+const std::pair<Configuration::IKey, Human::KeyVec> SPECIAL_BAWDY_HOUSE_HOSTING_PAIR       (KEY_SPECIAL_BAWDY_HOUSE      , SPECIAL_BAWDY_HOUSE_HOSTING_VEC      );
+const std::pair<Configuration::IKey, Human::KeyVec> SPECIAL_COMMERCIAL_PORT_HOSTING_PAIR   (KEY_SPECIAL_COMMERCIAL_PORT  , SPECIAL_COMMERCIAL_PORT_HOSTING_VEC  );
+const std::pair<Configuration::IKey, Human::KeyVec> SPECIAL_COURT_HOSTING_PAIR             (KEY_SPECIAL_COURT            , SPECIAL_COURT_HOSTING_VEC            );
+const std::pair<Configuration::IKey, Human::KeyVec> SPECIAL_GRANARY_HOSTING_PAIR           (KEY_SPECIAL_GRANARY          , SPECIAL_GRANARY_HOSTING_VEC          );
+const std::pair<Configuration::IKey, Human::KeyVec> SPECIAL_SEWERAGE_HOSTING_PAIR          (KEY_SPECIAL_SEWERAGE         , SPECIAL_SEWERAGE_HOSTING_VEC         );
 
 /**
  * @brief An array mapping humans to buildings.
@@ -233,7 +233,7 @@ const std::pair<Configuration::IBuildingKey, Human::KeyVec> SPECIAL_SEWERAGE_HOS
  *
  * @note Do not edit unless buildings are added or removed.
  */
-const std::pair<Configuration::IBuildingKey, Human::KeyVec> BUILDING_IS_A_PLACE_OF_WORK_FOR_ARRAY [] = {
+const std::pair<Configuration::IKey, Human::KeyVec> BUILDING_IS_A_PLACE_OF_WORK_FOR_ARRAY [] = {
     DEFENSIVE_BARBICAN_HOSTING_PAIR,
     DEFENSIVE_BATTLEMENTS_HOSTING_PAIR,
     DEFENSIVE_CASEMATE_HOSTING_PAIR,
@@ -285,7 +285,7 @@ const std::pair<Configuration::IBuildingKey, Human::KeyVec> BUILDING_IS_A_PLACE_
  *
  * @note Do not edit.
  */
-const std::map<Configuration::IBuildingKey, Human::KeyVec> BUILDING_IS_A_PLACE_OF_WORK_FOR(
+const std::map<Configuration::IKey, Human::KeyVec> BUILDING_IS_A_PLACE_OF_WORK_FOR(
     BUILDING_IS_A_PLACE_OF_WORK_FOR_ARRAY,
     BUILDING_IS_A_PLACE_OF_WORK_FOR_ARRAY + sizeof(BUILDING_IS_A_PLACE_OF_WORK_FOR_ARRAY) / sizeof(BUILDING_IS_A_PLACE_OF_WORK_FOR_ARRAY[0])
 );

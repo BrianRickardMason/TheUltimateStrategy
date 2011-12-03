@@ -63,7 +63,7 @@ public:
      * @return The building, null if not found.
      */
     virtual GameServer::Configuration::IBuildingShrPtr getBuilding(
-        GameServer::Configuration::IBuildingKey const a_key
+        GameServer::Configuration::IKey const a_key
     ) const;
 
     /**

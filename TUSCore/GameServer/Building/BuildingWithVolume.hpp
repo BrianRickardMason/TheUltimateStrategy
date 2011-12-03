@@ -51,9 +51,9 @@ public:
      * @param a_volume  The volume of the building.
      */
     BuildingWithVolume(
-        IContextShrPtr              const a_context,
-        Configuration::IBuildingKey const a_key,
-        Volume                      const a_volume
+        IContextShrPtr      const a_context,
+        Configuration::IKey const a_key,
+        Volume              const a_volume
     );
 
     /**
@@ -98,8 +98,8 @@ private:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<BuildingWithVolume> BuildingWithVolumeShrPtr;
-typedef std::pair<Configuration::IBuildingKey, BuildingWithVolumeShrPtr> BuildingWithVolumePair;
-typedef std::map<Configuration::IBuildingKey, BuildingWithVolumeShrPtr> BuildingWithVolumeMap;
+typedef std::pair<Configuration::IKey, BuildingWithVolumeShrPtr> BuildingWithVolumePair;
+typedef std::map<Configuration::IKey, BuildingWithVolumeShrPtr> BuildingWithVolumeMap;
 //}@
 
 } // namespace Building

@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_CONFIGURATION_IBUILDING_HPP
 #define GAMESERVER_CONFIGURATION_IBUILDING_HPP
 
+#include <GameServer/Configuration/Configurator/Key.hpp>
 #include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
@@ -38,11 +39,6 @@ namespace GameServer
 {
 namespace Configuration
 {
-
-/**
- * @brief A useful typedef.
- */
-typedef std::string IBuildingKey;
 
 /**
  * @brief The interface of Building.
@@ -57,7 +53,7 @@ public:
      *
      * @return The key of the building.
      */
-    virtual IBuildingKey getKey() const = 0;
+    virtual IKey getKey() const = 0;
 
     /**
      * @brief Gets the class of the building.
@@ -100,7 +96,7 @@ public:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IBuilding const> IBuildingShrPtr;
-typedef std::map<IBuildingKey, IBuildingShrPtr> IBuildingMap;
+typedef std::map<IKey, IBuildingShrPtr> IBuildingMap;
 //}@
 
 } // namespace Configuration

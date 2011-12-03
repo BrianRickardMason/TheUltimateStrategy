@@ -58,7 +58,7 @@ public:
         void(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key,
+            Configuration::IKey             const & a_key,
             Volume                          const & a_volume
         )
     );
@@ -80,7 +80,7 @@ public:
         bool(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key,
+            Configuration::IKey             const & a_key,
             Volume                          const & a_volume
         )
     );
@@ -99,7 +99,7 @@ public:
         BuildingWithVolumeShrPtr(
             Persistence::ITransactionShrPtr         a_transaction,
             Common::IDHolder                const & a_id_holder,
-            Configuration::IBuildingKey     const & a_key
+            Configuration::IKey             const & a_key
         )
     );
 

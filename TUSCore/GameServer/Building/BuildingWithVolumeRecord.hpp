@@ -54,9 +54,9 @@ public:
      * @param a_volume    The volume of the building.
      */
     BuildingWithVolumeRecord(
-        Common::IDHolder            const a_id_holder,
-        Configuration::IBuildingKey const a_key,
-        Volume                      const a_volume
+        Common::IDHolder    const a_id_holder,
+        Configuration::IKey const a_key,
+        Volume              const a_volume
     );
 
     /**
@@ -71,7 +71,7 @@ public:
      *
      * @return The key of the building.
      */
-    Configuration::IBuildingKey getKey() const;
+    Configuration::IKey getKey() const;
 
     /**
      * @brief Gets the volume of the building.
@@ -89,7 +89,7 @@ private:
     /**
      * @brief The key of the building.
      */
-    Configuration::IBuildingKey m_key;
+    Configuration::IKey m_key;
 
     /**
      * @brief The volume of the building.
@@ -102,8 +102,8 @@ private:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<BuildingWithVolumeRecord> BuildingWithVolumeRecordShrPtr;
-typedef std::pair<Configuration::IBuildingKey, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordPair;
-typedef std::map<Configuration::IBuildingKey, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordMap;
+typedef std::pair<Configuration::IKey, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordPair;
+typedef std::map<Configuration::IKey, BuildingWithVolumeRecordShrPtr> BuildingWithVolumeRecordMap;
 //}@
 
 } // namespace Building

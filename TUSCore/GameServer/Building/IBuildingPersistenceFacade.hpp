@@ -60,7 +60,7 @@ public:
     virtual void addBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -79,7 +79,7 @@ public:
     virtual bool subtractBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const = 0;
 
@@ -95,7 +95,7 @@ public:
     virtual BuildingWithVolumeShrPtr getBuilding(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IBuildingKey     const & a_key
+        Configuration::IKey             const & a_key
     ) const = 0;
 
     /**

@@ -42,7 +42,7 @@ namespace Building
 void BuildingAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -62,7 +62,7 @@ void BuildingAccessorPostgresql::insertRecord(
 void BuildingAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key
+    IKey               const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -79,7 +79,7 @@ void BuildingAccessorPostgresql::deleteRecord(
 BuildingWithVolumeRecordShrPtr BuildingAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key
+    IKey               const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -141,7 +141,7 @@ BuildingWithVolumeRecordMap BuildingAccessorPostgresql::getRecords(
 void BuildingAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -160,7 +160,7 @@ void BuildingAccessorPostgresql::increaseVolume(
 void BuildingAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {

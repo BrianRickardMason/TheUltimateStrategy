@@ -66,55 +66,55 @@ public:
  *
  * TODO: Change the name of prefix.
  */
-Configuration::IBuildingKey const PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE_ARRAY          [] = { Building::KEY_REGULAR_BARRACKS    };
-Configuration::IBuildingKey const PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE_ARRAY        [] = { Building::KEY_REGULAR_BARRACKS    };
-Configuration::IBuildingKey const PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE_ARRAY     [] = { Building::KEY_REGULAR_BARRACKS    };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_FIRE_NOVICE_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_EARTH_NOVICE_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_WATER_NOVICE_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_WIND_NOVICE_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SPY_AGENT_NOVICE_ARRAY               [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_SPY_SPY_NOVICE_ARRAY                 [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_SPY_THUG_NOVICE_ARRAY                [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE_ARRAY       [] = { Building::KEY_REGULAR_FORGE       };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_BREEDER_NOVICE_ARRAY          [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_DRUID_NOVICE_ARRAY            [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_FARMER_NOVICE_ARRAY           [] = { Building::KEY_REGULAR_FARM        };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE_ARRAY        [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_JOBLESS_NOVICE_ARRAY          [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE_ARRAY       [] = { Building::KEY_REGULAR_SAWMILL     };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_MERCHANT_NOVICE_ARRAY         [] = { Building::KEY_REGULAR_MARKETPLACE };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_MINER_NOVICE_ARRAY            [] = { Building::KEY_REGULAR_MINE        };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE_ARRAY         [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_PRIEST_NOVICE_ARRAY           [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE_ARRAY      [] = { Building::KEY_REGULAR_STEELWORKS  };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE_ARRAY      [] = { Building::KEY_REGULAR_QUARRY      };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_TEACHER_NOVICE_ARRAY          [] = { Building::KEY_REGULAR_SCHOOL      };
+Configuration::IKey const PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE_ARRAY          [] = { Building::KEY_REGULAR_BARRACKS    };
+Configuration::IKey const PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE_ARRAY        [] = { Building::KEY_REGULAR_BARRACKS    };
+Configuration::IKey const PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE_ARRAY     [] = { Building::KEY_REGULAR_BARRACKS    };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_FIRE_NOVICE_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_EARTH_NOVICE_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_WATER_NOVICE_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_WIND_NOVICE_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SPY_AGENT_NOVICE_ARRAY               [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_SPY_SPY_NOVICE_ARRAY                 [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_SPY_THUG_NOVICE_ARRAY                [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE_ARRAY       [] = { Building::KEY_REGULAR_FORGE       };
+Configuration::IKey const PLACES_OF_WORK_WORKER_BREEDER_NOVICE_ARRAY          [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_DRUID_NOVICE_ARRAY            [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_FARMER_NOVICE_ARRAY           [] = { Building::KEY_REGULAR_FARM        };
+Configuration::IKey const PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE_ARRAY        [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_JOBLESS_NOVICE_ARRAY          [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE_ARRAY       [] = { Building::KEY_REGULAR_SAWMILL     };
+Configuration::IKey const PLACES_OF_WORK_WORKER_MERCHANT_NOVICE_ARRAY         [] = { Building::KEY_REGULAR_MARKETPLACE };
+Configuration::IKey const PLACES_OF_WORK_WORKER_MINER_NOVICE_ARRAY            [] = { Building::KEY_REGULAR_MINE        };
+Configuration::IKey const PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE_ARRAY         [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_PRIEST_NOVICE_ARRAY           [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE_ARRAY      [] = { Building::KEY_REGULAR_STEELWORKS  };
+Configuration::IKey const PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE_ARRAY      [] = { Building::KEY_REGULAR_QUARRY      };
+Configuration::IKey const PLACES_OF_WORK_WORKER_TEACHER_NOVICE_ARRAY          [] = { Building::KEY_REGULAR_SCHOOL      };
 
-Configuration::IBuildingKey const PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED_ARRAY          [] = { Building::KEY_REGULAR_BARRACKS    };
-Configuration::IBuildingKey const PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED_ARRAY        [] = { Building::KEY_REGULAR_BARRACKS    };
-Configuration::IBuildingKey const PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED_ARRAY     [] = { Building::KEY_REGULAR_BARRACKS    };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_EARTH_ADVANCED_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_FIRE_ADVANCED_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_WATER_ADVANCED_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SORCERER_SORCERER_WIND_ADVANCED_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
-Configuration::IBuildingKey const PLACES_OF_WORK_SPY_AGENT_ADVANCED_ARRAY               [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_SPY_SPY_ADVANCED_ARRAY                 [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_SPY_THUG_ADVANCED_ARRAY                [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED_ARRAY       [] = { Building::KEY_REGULAR_FORGE       };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_BREEDER_ADVANCED_ARRAY          [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_DRUID_ADVANCED_ARRAY            [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_FARMER_ADVANCED_ARRAY           [] = { Building::KEY_REGULAR_FARM        };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED_ARRAY        [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED_ARRAY          [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED_ARRAY       [] = { Building::KEY_REGULAR_SAWMILL     };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED_ARRAY         [] = { Building::KEY_REGULAR_MARKETPLACE };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_MINER_ADVANCED_ARRAY            [] = { Building::KEY_REGULAR_MINE        };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED_ARRAY         [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_PRIEST_ADVANCED_ARRAY           [] = {                                   };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED_ARRAY      [] = { Building::KEY_REGULAR_STEELWORKS  };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED_ARRAY      [] = { Building::KEY_REGULAR_QUARRY      };
-Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_TEACHER_ADVANCED_ARRAY          [] = { Building::KEY_REGULAR_SCHOOL      };
+Configuration::IKey const PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED_ARRAY          [] = { Building::KEY_REGULAR_BARRACKS    };
+Configuration::IKey const PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED_ARRAY        [] = { Building::KEY_REGULAR_BARRACKS    };
+Configuration::IKey const PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED_ARRAY     [] = { Building::KEY_REGULAR_BARRACKS    };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_EARTH_ADVANCED_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_FIRE_ADVANCED_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_WATER_ADVANCED_ARRAY [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SORCERER_SORCERER_WIND_ADVANCED_ARRAY  [] = { Building::KEY_REGULAR_GUILD       };
+Configuration::IKey const PLACES_OF_WORK_SPY_AGENT_ADVANCED_ARRAY               [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_SPY_SPY_ADVANCED_ARRAY                 [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_SPY_THUG_ADVANCED_ARRAY                [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED_ARRAY       [] = { Building::KEY_REGULAR_FORGE       };
+Configuration::IKey const PLACES_OF_WORK_WORKER_BREEDER_ADVANCED_ARRAY          [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_DRUID_ADVANCED_ARRAY            [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_FARMER_ADVANCED_ARRAY           [] = { Building::KEY_REGULAR_FARM        };
+Configuration::IKey const PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED_ARRAY        [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED_ARRAY          [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED_ARRAY       [] = { Building::KEY_REGULAR_SAWMILL     };
+Configuration::IKey const PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED_ARRAY         [] = { Building::KEY_REGULAR_MARKETPLACE };
+Configuration::IKey const PLACES_OF_WORK_WORKER_MINER_ADVANCED_ARRAY            [] = { Building::KEY_REGULAR_MINE        };
+Configuration::IKey const PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED_ARRAY         [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_PRIEST_ADVANCED_ARRAY           [] = {                                   };
+Configuration::IKey const PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED_ARRAY      [] = { Building::KEY_REGULAR_STEELWORKS  };
+Configuration::IKey const PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED_ARRAY      [] = { Building::KEY_REGULAR_QUARRY      };
+Configuration::IKey const PLACES_OF_WORK_WORKER_TEACHER_ADVANCED_ARRAY          [] = { Building::KEY_REGULAR_SCHOOL      };
 
 /**
  * @brief The places of work of humans.
@@ -122,60 +122,60 @@ Configuration::IBuildingKey const PLACES_OF_WORK_WORKER_TEACHER_ADVANCED_ARRAY  
  * TODO: Add typedef.
  * TODO: Instead of + x use sizeof() / sizeof([0]).
  */
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE     (PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE_ARRAY         , PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE_ARRAY          + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE   (PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE_ARRAY       , PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE_ARRAY        + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE(PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE_ARRAY    , PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE_ARRAY     + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_EARTH_NOVICE     (PLACES_OF_WORK_SORCERER_SORCERER_EARTH_NOVICE_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_EARTH_NOVICE_ARRAY + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_FIRE_NOVICE      (PLACES_OF_WORK_SORCERER_SORCERER_FIRE_NOVICE_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_FIRE_NOVICE_ARRAY  + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_WATER_NOVICE     (PLACES_OF_WORK_SORCERER_SORCERER_WATER_NOVICE_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_WATER_NOVICE_ARRAY + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_WIND_NOVICE      (PLACES_OF_WORK_SORCERER_SORCERER_WIND_NOVICE_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_WIND_NOVICE_ARRAY  + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SPY_AGENT_NOVICE          (PLACES_OF_WORK_SPY_AGENT_NOVICE_ARRAY              , PLACES_OF_WORK_SPY_AGENT_NOVICE_ARRAY               + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SPY_SPY_NOVICE            (PLACES_OF_WORK_SPY_SPY_NOVICE_ARRAY                , PLACES_OF_WORK_SPY_SPY_NOVICE_ARRAY                 + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SPY_THUG_NOVICE           (PLACES_OF_WORK_SPY_THUG_NOVICE_ARRAY               , PLACES_OF_WORK_SPY_THUG_NOVICE_ARRAY                + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE  (PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE_ARRAY      , PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE_ARRAY       + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_BREEDER_NOVICE     (PLACES_OF_WORK_WORKER_BREEDER_NOVICE_ARRAY         , PLACES_OF_WORK_WORKER_BREEDER_NOVICE_ARRAY          + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_DRUID_NOVICE       (PLACES_OF_WORK_WORKER_DRUID_NOVICE_ARRAY           , PLACES_OF_WORK_WORKER_DRUID_NOVICE_ARRAY            + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_FARMER_NOVICE      (PLACES_OF_WORK_WORKER_FARMER_NOVICE_ARRAY          , PLACES_OF_WORK_WORKER_FARMER_NOVICE_ARRAY           + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE   (PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE_ARRAY       , PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE_ARRAY        + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_JOBLESS_NOVICE     (PLACES_OF_WORK_WORKER_JOBLESS_NOVICE_ARRAY         , PLACES_OF_WORK_WORKER_JOBLESS_NOVICE_ARRAY          + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE  (PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE_ARRAY      , PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE_ARRAY       + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_MERCHANT_NOVICE    (PLACES_OF_WORK_WORKER_MERCHANT_NOVICE_ARRAY        , PLACES_OF_WORK_WORKER_MERCHANT_NOVICE_ARRAY         + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_MINER_NOVICE       (PLACES_OF_WORK_WORKER_MINER_NOVICE_ARRAY           , PLACES_OF_WORK_WORKER_MINER_NOVICE_ARRAY            + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE    (PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE_ARRAY        , PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE_ARRAY         + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_PRIEST_NOVICE      (PLACES_OF_WORK_WORKER_PRIEST_NOVICE_ARRAY          , PLACES_OF_WORK_WORKER_PRIEST_NOVICE_ARRAY           + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE (PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE_ARRAY     , PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE_ARRAY      + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE (PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE_ARRAY     , PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE_ARRAY      + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_TEACHER_NOVICE     (PLACES_OF_WORK_WORKER_TEACHER_NOVICE_ARRAY         , PLACES_OF_WORK_WORKER_TEACHER_NOVICE_ARRAY          + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE     (PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE_ARRAY         , PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE_ARRAY          + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE   (PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE_ARRAY       , PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE_ARRAY        + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE(PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE_ARRAY    , PLACES_OF_WORK_SOLDIER_INFANTRYMAN_NOVICE_ARRAY     + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_EARTH_NOVICE     (PLACES_OF_WORK_SORCERER_SORCERER_EARTH_NOVICE_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_EARTH_NOVICE_ARRAY + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_FIRE_NOVICE      (PLACES_OF_WORK_SORCERER_SORCERER_FIRE_NOVICE_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_FIRE_NOVICE_ARRAY  + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_WATER_NOVICE     (PLACES_OF_WORK_SORCERER_SORCERER_WATER_NOVICE_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_WATER_NOVICE_ARRAY + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_WIND_NOVICE      (PLACES_OF_WORK_SORCERER_SORCERER_WIND_NOVICE_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_WIND_NOVICE_ARRAY  + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SPY_AGENT_NOVICE          (PLACES_OF_WORK_SPY_AGENT_NOVICE_ARRAY              , PLACES_OF_WORK_SPY_AGENT_NOVICE_ARRAY               + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SPY_SPY_NOVICE            (PLACES_OF_WORK_SPY_SPY_NOVICE_ARRAY                , PLACES_OF_WORK_SPY_SPY_NOVICE_ARRAY                 + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SPY_THUG_NOVICE           (PLACES_OF_WORK_SPY_THUG_NOVICE_ARRAY               , PLACES_OF_WORK_SPY_THUG_NOVICE_ARRAY                + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE  (PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE_ARRAY      , PLACES_OF_WORK_WORKER_BLACKSMITH_NOVICE_ARRAY       + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_BREEDER_NOVICE     (PLACES_OF_WORK_WORKER_BREEDER_NOVICE_ARRAY         , PLACES_OF_WORK_WORKER_BREEDER_NOVICE_ARRAY          + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_DRUID_NOVICE       (PLACES_OF_WORK_WORKER_DRUID_NOVICE_ARRAY           , PLACES_OF_WORK_WORKER_DRUID_NOVICE_ARRAY            + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_FARMER_NOVICE      (PLACES_OF_WORK_WORKER_FARMER_NOVICE_ARRAY          , PLACES_OF_WORK_WORKER_FARMER_NOVICE_ARRAY           + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE   (PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE_ARRAY       , PLACES_OF_WORK_WORKER_FISHERMAN_NOVICE_ARRAY        + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_JOBLESS_NOVICE     (PLACES_OF_WORK_WORKER_JOBLESS_NOVICE_ARRAY         , PLACES_OF_WORK_WORKER_JOBLESS_NOVICE_ARRAY          + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE  (PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE_ARRAY      , PLACES_OF_WORK_WORKER_LUMBERJACK_NOVICE_ARRAY       + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_MERCHANT_NOVICE    (PLACES_OF_WORK_WORKER_MERCHANT_NOVICE_ARRAY        , PLACES_OF_WORK_WORKER_MERCHANT_NOVICE_ARRAY         + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_MINER_NOVICE       (PLACES_OF_WORK_WORKER_MINER_NOVICE_ARRAY           , PLACES_OF_WORK_WORKER_MINER_NOVICE_ARRAY            + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE    (PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE_ARRAY        , PLACES_OF_WORK_WORKER_OFFICIAL_NOVICE_ARRAY         + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_PRIEST_NOVICE      (PLACES_OF_WORK_WORKER_PRIEST_NOVICE_ARRAY          , PLACES_OF_WORK_WORKER_PRIEST_NOVICE_ARRAY           + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE (PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE_ARRAY     , PLACES_OF_WORK_WORKER_STEELWORKER_NOVICE_ARRAY      + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE (PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE_ARRAY     , PLACES_OF_WORK_WORKER_STONE_MASON_NOVICE_ARRAY      + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_TEACHER_NOVICE     (PLACES_OF_WORK_WORKER_TEACHER_NOVICE_ARRAY         , PLACES_OF_WORK_WORKER_TEACHER_NOVICE_ARRAY          + 1);
 
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED     (PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED_ARRAY         , PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED_ARRAY          + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED   (PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED_ARRAY       , PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED_ARRAY        + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED(PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED_ARRAY    , PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED_ARRAY     + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_EARTH_ADVANCED     (PLACES_OF_WORK_SORCERER_SORCERER_EARTH_ADVANCED_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_EARTH_ADVANCED_ARRAY + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_FIRE_ADVANCED      (PLACES_OF_WORK_SORCERER_SORCERER_FIRE_ADVANCED_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_FIRE_ADVANCED_ARRAY  + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_WATER_ADVANCED     (PLACES_OF_WORK_SORCERER_SORCERER_WATER_ADVANCED_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_WATER_ADVANCED_ARRAY + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SORCERER_WIND_ADVANCED      (PLACES_OF_WORK_SORCERER_SORCERER_WIND_ADVANCED_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_WIND_ADVANCED_ARRAY  + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SPY_AGENT_ADVANCED          (PLACES_OF_WORK_SPY_AGENT_ADVANCED_ARRAY              , PLACES_OF_WORK_SPY_AGENT_ADVANCED_ARRAY               + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SPY_SPY_ADVANCED            (PLACES_OF_WORK_SPY_SPY_ADVANCED_ARRAY                , PLACES_OF_WORK_SPY_SPY_ADVANCED_ARRAY                 + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_SPY_THUG_ADVANCED           (PLACES_OF_WORK_SPY_THUG_ADVANCED_ARRAY               , PLACES_OF_WORK_SPY_THUG_ADVANCED_ARRAY                + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED  (PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED_ARRAY      , PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED_ARRAY       + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_BREEDER_ADVANCED     (PLACES_OF_WORK_WORKER_BREEDER_ADVANCED_ARRAY         , PLACES_OF_WORK_WORKER_BREEDER_ADVANCED_ARRAY          + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_DRUID_ADVANCED       (PLACES_OF_WORK_WORKER_DRUID_ADVANCED_ARRAY           , PLACES_OF_WORK_WORKER_DRUID_ADVANCED_ARRAY            + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_FARMER_ADVANCED      (PLACES_OF_WORK_WORKER_FARMER_ADVANCED_ARRAY          , PLACES_OF_WORK_WORKER_FARMER_ADVANCED_ARRAY           + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED   (PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED_ARRAY       , PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED_ARRAY        + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED     (PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED_ARRAY         , PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED_ARRAY          + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED  (PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED_ARRAY      , PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED_ARRAY       + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED    (PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED_ARRAY        , PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED_ARRAY         + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_MINER_ADVANCED       (PLACES_OF_WORK_WORKER_MINER_ADVANCED_ARRAY           , PLACES_OF_WORK_WORKER_MINER_ADVANCED_ARRAY            + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED    (PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED_ARRAY        , PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED_ARRAY         + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_PRIEST_ADVANCED      (PLACES_OF_WORK_WORKER_PRIEST_ADVANCED_ARRAY          , PLACES_OF_WORK_WORKER_PRIEST_ADVANCED_ARRAY           + 0);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED (PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED_ARRAY     , PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED_ARRAY      + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED (PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED_ARRAY     , PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED_ARRAY      + 1);
-const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_TEACHER_ADVANCED     (PLACES_OF_WORK_WORKER_TEACHER_ADVANCED_ARRAY         , PLACES_OF_WORK_WORKER_TEACHER_ADVANCED_ARRAY          + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED     (PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED_ARRAY         , PLACES_OF_WORK_SOLDIER_ARCHER_ADVANCED_ARRAY          + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED   (PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED_ARRAY       , PLACES_OF_WORK_SOLDIER_HORSEMAN_ADVANCED_ARRAY        + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED(PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED_ARRAY    , PLACES_OF_WORK_SOLDIER_INFANTRYMAN_ADVANCED_ARRAY     + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_EARTH_ADVANCED     (PLACES_OF_WORK_SORCERER_SORCERER_EARTH_ADVANCED_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_EARTH_ADVANCED_ARRAY + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_FIRE_ADVANCED      (PLACES_OF_WORK_SORCERER_SORCERER_FIRE_ADVANCED_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_FIRE_ADVANCED_ARRAY  + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_WATER_ADVANCED     (PLACES_OF_WORK_SORCERER_SORCERER_WATER_ADVANCED_ARRAY, PLACES_OF_WORK_SORCERER_SORCERER_WATER_ADVANCED_ARRAY + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SORCERER_WIND_ADVANCED      (PLACES_OF_WORK_SORCERER_SORCERER_WIND_ADVANCED_ARRAY , PLACES_OF_WORK_SORCERER_SORCERER_WIND_ADVANCED_ARRAY  + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SPY_AGENT_ADVANCED          (PLACES_OF_WORK_SPY_AGENT_ADVANCED_ARRAY              , PLACES_OF_WORK_SPY_AGENT_ADVANCED_ARRAY               + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SPY_SPY_ADVANCED            (PLACES_OF_WORK_SPY_SPY_ADVANCED_ARRAY                , PLACES_OF_WORK_SPY_SPY_ADVANCED_ARRAY                 + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_SPY_THUG_ADVANCED           (PLACES_OF_WORK_SPY_THUG_ADVANCED_ARRAY               , PLACES_OF_WORK_SPY_THUG_ADVANCED_ARRAY                + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED  (PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED_ARRAY      , PLACES_OF_WORK_WORKER_BLACKSMITH_ADVANCED_ARRAY       + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_BREEDER_ADVANCED     (PLACES_OF_WORK_WORKER_BREEDER_ADVANCED_ARRAY         , PLACES_OF_WORK_WORKER_BREEDER_ADVANCED_ARRAY          + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_DRUID_ADVANCED       (PLACES_OF_WORK_WORKER_DRUID_ADVANCED_ARRAY           , PLACES_OF_WORK_WORKER_DRUID_ADVANCED_ARRAY            + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_FARMER_ADVANCED      (PLACES_OF_WORK_WORKER_FARMER_ADVANCED_ARRAY          , PLACES_OF_WORK_WORKER_FARMER_ADVANCED_ARRAY           + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED   (PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED_ARRAY       , PLACES_OF_WORK_WORKER_FISHERMAN_ADVANCED_ARRAY        + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED     (PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED_ARRAY         , PLACES_OF_WORK_WORKER_JOBLESS_ADVANCED_ARRAY          + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED  (PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED_ARRAY      , PLACES_OF_WORK_WORKER_LUMBERJACK_ADVANCED_ARRAY       + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED    (PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED_ARRAY        , PLACES_OF_WORK_WORKER_MERCHANT_ADVANCED_ARRAY         + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_MINER_ADVANCED       (PLACES_OF_WORK_WORKER_MINER_ADVANCED_ARRAY           , PLACES_OF_WORK_WORKER_MINER_ADVANCED_ARRAY            + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED    (PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED_ARRAY        , PLACES_OF_WORK_WORKER_OFFICIAL_ADVANCED_ARRAY         + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_PRIEST_ADVANCED      (PLACES_OF_WORK_WORKER_PRIEST_ADVANCED_ARRAY          , PLACES_OF_WORK_WORKER_PRIEST_ADVANCED_ARRAY           + 0);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED (PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED_ARRAY     , PLACES_OF_WORK_WORKER_STEELWORKER_ADVANCED_ARRAY      + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED (PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED_ARRAY     , PLACES_OF_WORK_WORKER_STONE_MASON_ADVANCED_ARRAY      + 1);
+const std::vector<Configuration::IKey> PLACES_OF_WORK_WORKER_TEACHER_ADVANCED     (PLACES_OF_WORK_WORKER_TEACHER_ADVANCED_ARRAY         , PLACES_OF_WORK_WORKER_TEACHER_ADVANCED_ARRAY          + 1);
 
 /**
  * @brief An identifier of a human and a vector of building keys pair.
  */
-typedef std::pair<Configuration::IKey, std::vector<Configuration::IBuildingKey> > PlaceOfWork;
+typedef std::pair<Configuration::IKey, std::vector<Configuration::IKey> > PlaceOfWork;
 
 const PlaceOfWork POW_SOLDIER_ARCHER_NOVICE     (KEY_SOLDIER_ARCHER_NOVICE     , PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE     );
 const PlaceOfWork POW_SOLDIER_HORSEMAN_NOVICE   (KEY_SOLDIER_HORSEMAN_NOVICE   , PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE   );
@@ -282,7 +282,7 @@ const PlaceOfWork PLACES_OF_WORK_ARRAY [] = {
         POW_WORKER_TEACHER_ADVANCED
 };
 
-const std::map<Configuration::IKey, std::vector<Configuration::IBuildingKey> > PLACES_OF_WORK(
+const std::map<Configuration::IKey, std::vector<Configuration::IKey> > PLACES_OF_WORK(
     PLACES_OF_WORK_ARRAY,
     PLACES_OF_WORK_ARRAY + sizeof(PLACES_OF_WORK_ARRAY) / sizeof(PLACES_OF_WORK_ARRAY[0])
 );

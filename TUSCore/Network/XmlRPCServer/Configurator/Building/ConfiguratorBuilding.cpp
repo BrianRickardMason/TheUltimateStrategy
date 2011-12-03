@@ -53,7 +53,7 @@ bool ConfiguratorBuilding::configure()
 }
 
 GameServer::Configuration::IBuildingShrPtr ConfiguratorBuilding::getBuilding(
-    GameServer::Configuration::IBuildingKey const a_key
+    GameServer::Configuration::IKey const a_key
 ) const
 {
     return m_buildings.at(a_key);
@@ -95,7 +95,7 @@ bool ConfiguratorBuilding::parseXml()
 
     for (xml_node_iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
-        IBuildingKey                                    const building_key              = it->child_value("key");
+        IKey                                            const building_key              = it->child_value("key");
         string                                          const building_class            = it->child_value("class");
         string                                          const building_name             = it->child_value("name");
         unsigned int                                          building_capacity         = 0;

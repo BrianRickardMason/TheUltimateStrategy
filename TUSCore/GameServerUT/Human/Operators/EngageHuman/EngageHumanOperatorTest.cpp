@@ -106,8 +106,8 @@ protected:
      * @param a_volume A volume of the building.
      */
     void configureBuildingPersistenceFacadeMockForGetBuilding(
-        IBuildingKey const & a_key,
-        Volume       const & a_volume
+        IKey   const & a_key,
+        Volume const & a_volume
     )
     {
         BuildingWithVolumeShrPtr building_with_volume =

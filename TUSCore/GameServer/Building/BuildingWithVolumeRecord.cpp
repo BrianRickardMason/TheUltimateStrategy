@@ -36,9 +36,9 @@ namespace Building
 {
 
 BuildingWithVolumeRecord::BuildingWithVolumeRecord(
-    IDHolder     const a_id_holder,
-    IBuildingKey const a_key,
-    Volume       const a_volume
+    IDHolder const a_id_holder,
+    IKey     const a_key,
+    Volume   const a_volume
 )
     : m_id_holder(a_id_holder),
       m_key(a_key),
@@ -51,7 +51,7 @@ IDHolder const & BuildingWithVolumeRecord::getIDHolder() const
     return m_id_holder;
 }
 
-IBuildingKey BuildingWithVolumeRecord::getKey() const
+IKey BuildingWithVolumeRecord::getKey() const
 {
     return m_key;
 }

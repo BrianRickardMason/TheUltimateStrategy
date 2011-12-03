@@ -49,7 +49,7 @@ BuildingPersistenceFacade::BuildingPersistenceFacade(
 void BuildingPersistenceFacade::addBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -66,7 +66,7 @@ void BuildingPersistenceFacade::addBuilding(
 bool BuildingPersistenceFacade::subtractBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -96,7 +96,7 @@ bool BuildingPersistenceFacade::subtractBuilding(
 BuildingWithVolumeShrPtr BuildingPersistenceFacade::getBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IBuildingKey       const & a_key
+    IKey               const & a_key
 ) const
 {
     BuildingWithVolumeRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_holder, a_key);

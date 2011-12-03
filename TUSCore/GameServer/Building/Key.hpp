@@ -39,48 +39,48 @@ namespace Building
 /**
  * @brief The available key.
  */
-Configuration::IBuildingKey const KEY_DEFENSIVE_BARBICAN       ("defensivebarbican");
-Configuration::IBuildingKey const KEY_DEFENSIVE_BATTLEMENTS    ("defensivebattlements");
-Configuration::IBuildingKey const KEY_DEFENSIVE_CASEMATE       ("defensivecasemate");
-Configuration::IBuildingKey const KEY_DEFENSIVE_CIRCUMVALLATION("defensivecircumvallation");
-Configuration::IBuildingKey const KEY_DEFENSIVE_DONJON         ("defensivedonjon");
-Configuration::IBuildingKey const KEY_DEFENSIVE_MACHICOLATION  ("defensivemachicolation");
-Configuration::IBuildingKey const KEY_DEFENSIVE_PORTCULLIS     ("defensiveportcullis");
-Configuration::IBuildingKey const KEY_DEFENSIVE_POSTERN        ("defensivepostern");
-Configuration::IBuildingKey const KEY_DEFENSIVE_VIEWING_TOWER  ("defensiveviewingtower");
+Configuration::IKey const KEY_DEFENSIVE_BARBICAN       ("defensivebarbican");
+Configuration::IKey const KEY_DEFENSIVE_BATTLEMENTS    ("defensivebattlements");
+Configuration::IKey const KEY_DEFENSIVE_CASEMATE       ("defensivecasemate");
+Configuration::IKey const KEY_DEFENSIVE_CIRCUMVALLATION("defensivecircumvallation");
+Configuration::IKey const KEY_DEFENSIVE_DONJON         ("defensivedonjon");
+Configuration::IKey const KEY_DEFENSIVE_MACHICOLATION  ("defensivemachicolation");
+Configuration::IKey const KEY_DEFENSIVE_PORTCULLIS     ("defensiveportcullis");
+Configuration::IKey const KEY_DEFENSIVE_POSTERN        ("defensivepostern");
+Configuration::IKey const KEY_DEFENSIVE_VIEWING_TOWER  ("defensiveviewingtower");
 
-Configuration::IBuildingKey const KEY_GOLD_ALTAR_OF_WISHES     ("goldaltarofwishes");
-Configuration::IBuildingKey const KEY_GOLD_COMMUNICATION_TOWERS("goldcommunicationtowers");
-Configuration::IBuildingKey const KEY_GOLD_ETERNAL_CALENDAR    ("goldeternalcalendar");
-Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_METEORS   ("goldhunterofmeteors");
-Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_RAINS     ("goldhuterofrains");
-Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_STORMS    ("goldhunterofstorms");
-Configuration::IBuildingKey const KEY_GOLD_HUNTER_OF_WINDS     ("goldhunterofwinds");
-Configuration::IBuildingKey const KEY_GOLD_NECROPOLIS          ("goldnecropolis");
-Configuration::IBuildingKey const KEY_GOLD_ORACLE              ("goldoracle");
-Configuration::IBuildingKey const KEY_GOLD_PORTAL_OF_ELEMENTS  ("goldportalofelements");
-Configuration::IBuildingKey const KEY_GOLD_PSIONIC_ACADEMY     ("goldpsionicacademy");
-Configuration::IBuildingKey const KEY_GOLD_TOWER_OF_CHAOS      ("goldtowerofchaos");
+Configuration::IKey const KEY_GOLD_ALTAR_OF_WISHES     ("goldaltarofwishes");
+Configuration::IKey const KEY_GOLD_COMMUNICATION_TOWERS("goldcommunicationtowers");
+Configuration::IKey const KEY_GOLD_ETERNAL_CALENDAR    ("goldeternalcalendar");
+Configuration::IKey const KEY_GOLD_HUNTER_OF_METEORS   ("goldhunterofmeteors");
+Configuration::IKey const KEY_GOLD_HUNTER_OF_RAINS     ("goldhuterofrains");
+Configuration::IKey const KEY_GOLD_HUNTER_OF_STORMS    ("goldhunterofstorms");
+Configuration::IKey const KEY_GOLD_HUNTER_OF_WINDS     ("goldhunterofwinds");
+Configuration::IKey const KEY_GOLD_NECROPOLIS          ("goldnecropolis");
+Configuration::IKey const KEY_GOLD_ORACLE              ("goldoracle");
+Configuration::IKey const KEY_GOLD_PORTAL_OF_ELEMENTS  ("goldportalofelements");
+Configuration::IKey const KEY_GOLD_PSIONIC_ACADEMY     ("goldpsionicacademy");
+Configuration::IKey const KEY_GOLD_TOWER_OF_CHAOS      ("goldtowerofchaos");
 
-Configuration::IBuildingKey const KEY_REGULAR_BARRACKS         ("regularbarracks");
-Configuration::IBuildingKey const KEY_REGULAR_FARM             ("regularfarm");
-Configuration::IBuildingKey const KEY_REGULAR_FORGE            ("regularforge");
-Configuration::IBuildingKey const KEY_REGULAR_GUILD            ("regularguild");
-Configuration::IBuildingKey const KEY_REGULAR_HOUSE            ("regularhouse");
-Configuration::IBuildingKey const KEY_REGULAR_MARKETPLACE      ("regularmarketplace");
-Configuration::IBuildingKey const KEY_REGULAR_MINE             ("regularmine");
-Configuration::IBuildingKey const KEY_REGULAR_QUARRY           ("regularquarry");
-Configuration::IBuildingKey const KEY_REGULAR_SAWMILL          ("regularsawmill");
-Configuration::IBuildingKey const KEY_REGULAR_SCHOOL           ("regularschool");
-Configuration::IBuildingKey const KEY_REGULAR_STEELWORKS       ("regularsteelworks");
-Configuration::IBuildingKey const KEY_REGULAR_TEMPLE           ("regulartemple");
+Configuration::IKey const KEY_REGULAR_BARRACKS         ("regularbarracks");
+Configuration::IKey const KEY_REGULAR_FARM             ("regularfarm");
+Configuration::IKey const KEY_REGULAR_FORGE            ("regularforge");
+Configuration::IKey const KEY_REGULAR_GUILD            ("regularguild");
+Configuration::IKey const KEY_REGULAR_HOUSE            ("regularhouse");
+Configuration::IKey const KEY_REGULAR_MARKETPLACE      ("regularmarketplace");
+Configuration::IKey const KEY_REGULAR_MINE             ("regularmine");
+Configuration::IKey const KEY_REGULAR_QUARRY           ("regularquarry");
+Configuration::IKey const KEY_REGULAR_SAWMILL          ("regularsawmill");
+Configuration::IKey const KEY_REGULAR_SCHOOL           ("regularschool");
+Configuration::IKey const KEY_REGULAR_STEELWORKS       ("regularsteelworks");
+Configuration::IKey const KEY_REGULAR_TEMPLE           ("regulartemple");
 
-Configuration::IBuildingKey const KEY_SPECIAL_AQUEDUCT         ("specialaqueduct");
-Configuration::IBuildingKey const KEY_SPECIAL_BAWDY_HOUSE      ("specialbawdyhouse");
-Configuration::IBuildingKey const KEY_SPECIAL_COMMERCIAL_PORT  ("specialcommercialport");
-Configuration::IBuildingKey const KEY_SPECIAL_COURT            ("specialcourt");
-Configuration::IBuildingKey const KEY_SPECIAL_GRANARY          ("specialgranary");
-Configuration::IBuildingKey const KEY_SPECIAL_SEWERAGE         ("specialsewerage");
+Configuration::IKey const KEY_SPECIAL_AQUEDUCT         ("specialaqueduct");
+Configuration::IKey const KEY_SPECIAL_BAWDY_HOUSE      ("specialbawdyhouse");
+Configuration::IKey const KEY_SPECIAL_COMMERCIAL_PORT  ("specialcommercialport");
+Configuration::IKey const KEY_SPECIAL_COURT            ("specialcourt");
+Configuration::IKey const KEY_SPECIAL_GRANARY          ("specialgranary");
+Configuration::IKey const KEY_SPECIAL_SEWERAGE         ("specialsewerage");
 //}@
 
 } // namespace Building

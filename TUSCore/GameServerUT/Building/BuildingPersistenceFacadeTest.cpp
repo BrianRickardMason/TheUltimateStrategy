@@ -68,7 +68,7 @@ protected:
      */
     void compareBuilding(
         BuildingWithVolumeShrPtr         a_building,
-        IBuildingKey             const & a_key,
+        IKey                     const & a_key,
         Volume                   const & a_volume
     )
     {
@@ -89,8 +89,8 @@ protected:
     /**
      * @brief Test constants keys.
      */
-     IBuildingKey m_key_1,
-                  m_key_2;
+    IKey m_key_1,
+         m_key_2;
 };
 
 TEST_F(BuildingPersistenceFacadeTest, CtorDoesNotThrow)
