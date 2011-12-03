@@ -49,8 +49,8 @@ public:
      * @param a_name The name of the resource.
      */
     Resource(
-        IResourceKey const a_key,
-        std::string  const a_name
+        IKey        const a_key,
+        std::string const a_name
     );
 
     /**
@@ -58,7 +58,7 @@ public:
      *
      * @return The key of the resource.
      */
-    virtual IResourceKey getKey() const;
+    virtual IKey getKey() const;
 
     /**
      * @brief Gets the name of the resource.
@@ -71,7 +71,7 @@ private:
     /**
      * @brief The key of the resource.
      */
-    IResourceKey const m_key;
+    IKey const m_key;
 
     /**
      * @brief The name of the resource.

@@ -36,12 +36,12 @@ namespace Configuration
 {
 
 Building::Building(
-    IKey                                            const   a_key,
-    string                                          const   a_class,
-    string                                          const   a_name,
-    unsigned int                                    const   a_capacity,
-    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_build,
-    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_destroy
+    IKey                                    const   a_key,
+    string                                  const   a_class,
+    string                                  const   a_name,
+    unsigned int                            const   a_capacity,
+    map<IKey, GameServer::Resource::Volume> const & a_costs_to_build,
+    map<IKey, GameServer::Resource::Volume> const & a_costs_to_destroy
 )
     : m_key(a_key),
       m_class(a_class),
@@ -72,12 +72,12 @@ unsigned int Building::getCapacity() const
     return m_capacity;
 }
 
-std::map<IResourceKey, GameServer::Resource::Volume> const & Building::getCostsToBuild() const
+std::map<IKey, GameServer::Resource::Volume> const & Building::getCostsToBuild() const
 {
     return m_costs_to_build;
 }
 
-std::map<IResourceKey, GameServer::Resource::Volume> const & Building::getCostsToDestroy() const
+std::map<IKey, GameServer::Resource::Volume> const & Building::getCostsToDestroy() const
 {
     return m_costs_to_destroy;
 }

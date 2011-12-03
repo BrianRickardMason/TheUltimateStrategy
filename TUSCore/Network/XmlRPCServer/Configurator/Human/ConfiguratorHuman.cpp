@@ -92,16 +92,16 @@ bool ConfiguratorHuman::parseXml()
 
     for (xml_node_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        IKey                                            const human_key              = it->child_value("key");
-        string                                          const human_class            = it->child_value("class");
-        string                                          const human_name             = it->child_value("name");
-        string                                          const human_experience       = it->child_value("experience");
-        bool                                                  human_dismissable      = false;
-        bool                                                  human_engageable       = false;
-        unsigned int                                          human_production       = 0;
-        map<IResourceKey, GameServer::Resource::Volume>       human_costs_to_dismiss;
-        map<IResourceKey, GameServer::Resource::Volume>       human_costs_to_engage;
-        map<IResourceKey, GameServer::Resource::Volume>       human_costs_to_live;
+        IKey                                    const human_key              = it->child_value("key");
+        string                                  const human_class            = it->child_value("class");
+        string                                  const human_name             = it->child_value("name");
+        string                                  const human_experience       = it->child_value("experience");
+        bool                                          human_dismissable      = false;
+        bool                                          human_engageable       = false;
+        unsigned int                                  human_production       = 0;
+        map<IKey, GameServer::Resource::Volume>       human_costs_to_dismiss;
+        map<IKey, GameServer::Resource::Volume>       human_costs_to_engage;
+        map<IKey, GameServer::Resource::Volume>       human_costs_to_live;
 
         // Get the costs.
         xml_node costs =

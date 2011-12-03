@@ -57,7 +57,7 @@ public:
      * @return The resource, null if not found.
      */
     virtual GameServer::Configuration::IResourceShrPtr getResource(
-        GameServer::Configuration::IResourceKey const a_key
+        GameServer::Configuration::IKey const a_key
     ) const = 0;
 
     /**

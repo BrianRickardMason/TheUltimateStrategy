@@ -81,14 +81,14 @@ public:
      *
      * @return The costs to build the building.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToBuild() const = 0;
+    virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToBuild() const = 0;
 
     /**
      * @brief Gets the costs to destroy the building.
      *
      * @return The costs to destroy the building.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToDestroy() const = 0;
+    virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToDestroy() const = 0;
 };
 
 //@{

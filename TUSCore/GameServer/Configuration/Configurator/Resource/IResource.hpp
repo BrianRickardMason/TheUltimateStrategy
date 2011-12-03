@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_CONFIGURATION_IRESOURCE_HPP
 #define GAMESERVER_CONFIGURATION_IRESOURCE_HPP
 
+#include <GameServer/Configuration/Configurator/Key.hpp>
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
@@ -36,11 +37,6 @@ namespace GameServer
 {
 namespace Configuration
 {
-
-/**
- * @brief A useful typedef.
- */
-typedef std::string IResourceKey;
 
 /**
  * @brief The interface of Resource.
@@ -55,7 +51,7 @@ public:
      *
      * @return The key of the resource.
      */
-    virtual IResourceKey getKey() const = 0;
+    virtual IKey getKey() const = 0;
 
     /**
      * @brief Gets the name of the resource.
@@ -70,7 +66,7 @@ public:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IResource const> IResourceShrPtr;
-typedef std::map<IResourceKey, IResourceShrPtr> IResourceMap;
+typedef std::map<IKey, IResourceShrPtr> IResourceMap;
 //}@
 
 } // namespace Configuration

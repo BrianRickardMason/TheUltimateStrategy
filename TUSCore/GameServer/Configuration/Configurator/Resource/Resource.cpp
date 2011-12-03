@@ -35,15 +35,15 @@ namespace Configuration
 {
 
 Resource::Resource(
-    IResourceKey const a_key,
-    string       const a_name
+    IKey   const a_key,
+    string const a_name
 )
     : m_key(a_key),
       m_name(a_name)
 {
 }
 
-IResourceKey Resource::getKey() const
+IKey Resource::getKey() const
 {
     return m_key;
 }

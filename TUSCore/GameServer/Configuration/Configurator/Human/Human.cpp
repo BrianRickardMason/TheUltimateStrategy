@@ -36,16 +36,16 @@ namespace Configuration
 {
 
 Human::Human(
-    IKey                                            const   a_key,
-    string                                          const   a_class,
-    string                                          const   a_name,
-    string                                          const   a_experience,
-    bool                                            const   a_dismissable,
-    bool                                            const   a_engageable,
-    unsigned int                                    const   a_production,
-    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
-    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_engage,
-    map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_live
+    IKey                                    const   a_key,
+    string                                  const   a_class,
+    string                                  const   a_name,
+    string                                  const   a_experience,
+    bool                                    const   a_dismissable,
+    bool                                    const   a_engageable,
+    unsigned int                            const   a_production,
+    map<IKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
+    map<IKey, GameServer::Resource::Volume> const & a_costs_to_engage,
+    map<IKey, GameServer::Resource::Volume> const & a_costs_to_live
 )
     : m_key(a_key),
       m_class(a_class),
@@ -95,17 +95,17 @@ unsigned int Human::getProduction() const
     return m_production;
 }
 
-std::map<IResourceKey, GameServer::Resource::Volume> const & Human::getCostsToDismiss() const
+std::map<IKey, GameServer::Resource::Volume> const & Human::getCostsToDismiss() const
 {
     return m_costs_to_dismiss;
 }
 
-std::map<IResourceKey, GameServer::Resource::Volume> const & Human::getCostsToEngage() const
+std::map<IKey, GameServer::Resource::Volume> const & Human::getCostsToEngage() const
 {
     return m_costs_to_engage;
 }
 
-std::map<IResourceKey, GameServer::Resource::Volume> const & Human::getCostsToLive() const
+std::map<IKey, GameServer::Resource::Volume> const & Human::getCostsToLive() const
 {
     return m_costs_to_live;
 }

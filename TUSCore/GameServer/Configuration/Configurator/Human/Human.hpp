@@ -57,16 +57,16 @@ public:
      * @param a_costs_to_live    The costs for the human to live.
      */
     Human(
-        IKey                                                const   a_key,
-        std::string                                          const   a_class,
-        std::string                                          const   a_name,
-        std::string                                          const   a_experience,
-        bool                                                 const   a_dismissable,
-        bool                                                 const   a_engageable,
-        unsigned int                                         const   a_production,
-        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
-        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_engage,
-        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_live
+        IKey                                         const   a_key,
+        std::string                                  const   a_class,
+        std::string                                  const   a_name,
+        std::string                                  const   a_experience,
+        bool                                         const   a_dismissable,
+        bool                                         const   a_engageable,
+        unsigned int                                 const   a_production,
+        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
+        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_engage,
+        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_live
     );
 
     /**
@@ -123,21 +123,21 @@ public:
      *
      * @return The costs to dismiss the human.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToDismiss() const;
+    virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToDismiss() const;
 
     /**
      * @brief Gets the costs to engage the human.
      *
      * @return The costs to engage the human.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToEngage() const;
+    virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToEngage() const;
 
     /**
      * @brief Gets the costs for human to live.
      *
      * @return The costs for human to live.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToLive() const;
+    virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToLive() const;
 
 private:
     /**
@@ -178,17 +178,17 @@ private:
     /**
      * @brief The costs to dismiss the human.
      */
-    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_dismiss;
+    std::map<IKey, GameServer::Resource::Volume> const m_costs_to_dismiss;
 
     /**
      * @brief The costs to engage the human.
      */
-    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_engage;
+    std::map<IKey, GameServer::Resource::Volume> const m_costs_to_engage;
 
     /**
      * @brief The costs for human to live.
      */
-    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_live;
+    std::map<IKey, GameServer::Resource::Volume> const m_costs_to_live;
 };
 
 } // namespace Configuration

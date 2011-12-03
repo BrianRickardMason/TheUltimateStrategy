@@ -119,7 +119,7 @@ protected:
      */
     void compareResource(
         ResourceWithVolumeShrPtr             a_resource,
-        IResourceKey                 const & a_key,
+        IKey                         const & a_key,
         GameServer::Resource::Volume const & a_volume
     )
     {

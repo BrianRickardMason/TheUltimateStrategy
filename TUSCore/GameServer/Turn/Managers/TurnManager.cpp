@@ -275,13 +275,13 @@ ResourceWithVolumeMap TurnManager::getCostOfLiving(
 
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
+        std::map<IKey, GameServer::Resource::Volume> const & cost_map =
             it->second->getHuman()->getCostsToLive();
 
         // FIXME: Workaround to get the ResourceWithVolumeMap.
         ResourceWithVolumeMap resources;
 
-        for (std::map<IResourceKey, Volume>::const_iterator itr = cost_map.begin(); itr != cost_map.end(); ++itr)
+        for (std::map<IKey, Volume>::const_iterator itr = cost_map.begin(); itr != cost_map.end(); ++itr)
         {
             ResourceWithVolumeShrPtr resource(new ResourceWithVolume(m_context, itr->first, itr->second));
 

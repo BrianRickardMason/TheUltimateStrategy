@@ -53,12 +53,12 @@ public:
      * @param a_costs_to_destroy The costs to destroy the building.
      */
     Building(
-        IKey                                                 const   a_key,
-        std::string                                          const   a_class,
-        std::string                                          const   a_name,
-        unsigned int                                         const   a_capacity,
-        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_build,
-        std::map<IResourceKey, GameServer::Resource::Volume> const & a_costs_to_destroy
+        IKey                                         const   a_key,
+        std::string                                  const   a_class,
+        std::string                                  const   a_name,
+        unsigned int                                 const   a_capacity,
+        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_build,
+        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_destroy
     );
 
     /**
@@ -94,14 +94,14 @@ public:
      *
      * @return The costs of building.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToBuild() const;
+    virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToBuild() const;
 
     /**
      * @brief Gets the costs to destroy the building.
      *
      * @return The costs to destroy the building.
      */
-    virtual std::map<IResourceKey, GameServer::Resource::Volume> const & getCostsToDestroy() const;
+    virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToDestroy() const;
 
 private:
     /**
@@ -127,12 +127,12 @@ private:
     /**
      * @brief The costs to build the building.
      */
-    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_build;
+    std::map<IKey, GameServer::Resource::Volume> const m_costs_to_build;
 
     /**
      * @brief The costs to destroy the building.
      */
-    std::map<IResourceKey, GameServer::Resource::Volume> const m_costs_to_destroy;
+    std::map<IKey, GameServer::Resource::Volume> const m_costs_to_destroy;
 };
 
 } // namespace Configuration

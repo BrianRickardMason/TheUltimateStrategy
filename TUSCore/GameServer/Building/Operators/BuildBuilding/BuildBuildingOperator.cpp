@@ -70,13 +70,13 @@ BuildBuildingOperatorExitCode BuildBuildingOperator::buildBuilding(
 
         // Get total cost.
         // TODO: Consider handling invalid key: coding by contract / verification.
-        std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
+        std::map<IKey, GameServer::Resource::Volume> const & cost_map =
             m_context->getConfiguratorBuilding()->getBuilding(a_key)->getCostsToBuild();
 
         // FIXME: Workaround to get the ResourceWithVolumeMap.
         ResourceWithVolumeMap cost;
 
-        for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
+        for (std::map<IKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
         {
             ResourceWithVolumeShrPtr resource(new ResourceWithVolume(m_context, it->first, it->second));
 

@@ -36,7 +36,7 @@ namespace Resource
 
 ResourceWithVolume::ResourceWithVolume(
     IContextShrPtr const a_context,
-    IResourceKey   const a_key,
+    IKey           const a_key,
     Volume         const a_volume
 )
     : m_volume(a_volume)

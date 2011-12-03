@@ -48,7 +48,7 @@ ResourceWithVolumeMap add(
 
     for (ResourceWithVolumeMap::const_iterator it = a_map_1.begin(); it != a_map_1.end(); ++it)
     {
-        Configuration::IResourceKey key = it->second->getResource()->getKey();
+        Configuration::IKey key = it->second->getResource()->getKey();
 
         ResourceWithVolumeMap::const_iterator found = a_map_2.find(key);
 
@@ -72,7 +72,7 @@ ResourceWithVolumeMap add(
 
     for (ResourceWithVolumeMap::const_iterator it = a_map_2.begin(); it != a_map_2.end(); ++it)
     {
-        Configuration::IResourceKey key = it->second->getResource()->getKey();
+        Configuration::IKey key = it->second->getResource()->getKey();
 
         ResourceWithVolumeMap::const_iterator found = a_map_1.find(key);
 
@@ -101,7 +101,7 @@ ResourceWithVolumeMap multiply(
 
     for (ResourceWithVolumeMap::const_iterator it = a_map.begin(); it != a_map.end(); ++it)
     {
-        Configuration::IResourceKey key = it->second->getResource()->getKey();
+        Configuration::IKey key = it->second->getResource()->getKey();
 
         Volume volume = it->second->getVolume() * a_factor;
 

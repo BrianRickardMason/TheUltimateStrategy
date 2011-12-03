@@ -88,13 +88,13 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(a_transaction, a_id_holder);
 
         // Get total cost.
-        std::map<IResourceKey, GameServer::Resource::Volume> const & cost_map =
+        std::map<IKey, GameServer::Resource::Volume> const & cost_map =
             m_context->getConfiguratorHuman()->getHuman(a_key)->getCostsToEngage();
 
         // FIXME: Workaround to get the ResourceWithVolume.
         ResourceWithVolumeMap cost;
 
-        for (std::map<IResourceKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
+        for (std::map<IKey, Volume>::const_iterator it = cost_map.begin(); it != cost_map.end(); ++it)
         {
             ResourceWithVolumeShrPtr resource(new ResourceWithVolume(m_context, it->first, it->second));
 

@@ -52,7 +52,7 @@ bool ConfiguratorResource::configure()
 }
 
 GameServer::Configuration::IResourceShrPtr ConfiguratorResource::getResource(
-    GameServer::Configuration::IResourceKey const a_key
+    GameServer::Configuration::IKey const a_key
 ) const
 {
     return m_resources.at(a_key);
@@ -83,8 +83,8 @@ bool ConfiguratorResource::parseXml()
 
     for (xml_node_iterator it = resources.begin(); it != resources.end(); ++it)
     {
-        IResourceKey const key  = it->child_value("key");
-        string       const name = it->child_value("name");
+        IKey   const key  = it->child_value("key");
+        string const name = it->child_value("name");
 
         IResourceShrPtr resource(new Resource(key, name));
 
