@@ -28,6 +28,7 @@
 #ifndef GAMESERVER_CONFIGURATION_IHUMAN_HPP
 #define GAMESERVER_CONFIGURATION_IHUMAN_HPP
 
+#include <GameServer/Configuration/Configurator/Key.hpp>
 #include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <GameServer/Resource/Volume.hpp>
 #include <boost/shared_ptr.hpp>
@@ -38,11 +39,6 @@ namespace GameServer
 {
 namespace Configuration
 {
-
-/**
- * @brief A useful typedef.
- */
-typedef std::string IHumanKey;
 
 /**
  * @brief The interface of Human.
@@ -57,7 +53,7 @@ public:
      *
      * @return The key of the human.
      */
-    virtual IHumanKey getKey() const = 0;
+    virtual IKey getKey() const = 0;
 
     /**
      * @brief Gets the class of the human.
@@ -130,7 +126,7 @@ public:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<IHuman const> IHumanShrPtr;
-typedef std::map<IHumanKey, IHumanShrPtr> IHumanMap;
+typedef std::map<IKey, IHumanShrPtr> IHumanMap;
 //}@
 
 } // namespace Configuration

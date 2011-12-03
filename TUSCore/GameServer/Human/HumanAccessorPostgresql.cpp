@@ -42,7 +42,7 @@ namespace Human
 void HumanAccessorPostgresql::insertRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -62,7 +62,7 @@ void HumanAccessorPostgresql::insertRecord(
 void HumanAccessorPostgresql::deleteRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key
+    IKey               const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -79,7 +79,7 @@ void HumanAccessorPostgresql::deleteRecord(
 HumanWithVolumeRecordShrPtr HumanAccessorPostgresql::getRecord(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key
+    IKey               const & a_key
 ) const
 {
     TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
@@ -122,7 +122,7 @@ HumanWithVolumeRecordMap HumanAccessorPostgresql::getRecords(
 void HumanAccessorPostgresql::increaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -141,7 +141,7 @@ void HumanAccessorPostgresql::increaseVolume(
 void HumanAccessorPostgresql::decreaseVolume(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {

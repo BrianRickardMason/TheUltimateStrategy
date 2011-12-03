@@ -56,7 +56,7 @@ DismissHumanOperator::DismissHumanOperator(
 DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -146,7 +146,7 @@ DismissHumanOperatorExitCode DismissHumanOperator::dismissHuman(
 
 bool DismissHumanOperator::verifyDismissable(
     ITransactionShrPtr         a_transaction,
-    IHumanKey          const & a_key
+    IKey               const & a_key
 ) const
 {
     IHumanShrPtr human = m_context->getConfiguratorHuman()->getHuman(a_key);
@@ -159,7 +159,7 @@ bool DismissHumanOperator::verifyDismissable(
 bool DismissHumanOperator::verifyEngaged(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {

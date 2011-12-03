@@ -66,7 +66,7 @@ public:
         Persistence::ITransactionShrPtr         a_transaction,
         std::string                     const   a_settlement_name_source,
         std::string                     const   a_settlement_name_destination,
-        Configuration::IHumanKey        const & a_key,
+        Configuration::IKey             const & a_key,
         Human::Volume                   const & a_volume
     ) const = 0;
 };

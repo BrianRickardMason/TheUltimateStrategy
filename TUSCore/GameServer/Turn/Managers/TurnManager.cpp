@@ -173,7 +173,7 @@ bool TurnManager::executeTurnSettlement(
         {
             // TODO: Use property experienceable.
 
-            Configuration::IHumanKey const key = it->second->getHuman()->getKey();
+            Configuration::IKey const key = it->second->getHuman()->getKey();
 
             if (key == Human::KEY_WORKER_JOBLESS_NOVICE or key == Human::KEY_WORKER_JOBLESS_ADVANCED)
             {
@@ -190,8 +190,8 @@ bool TurnManager::executeTurnSettlement(
 
             if (experienced)
             {
-                IHumanKey key_novice = it->first;
-                IHumanKey key_advanced;
+                IKey key_novice = it->first;
+                IKey key_advanced;
 
                 // TODO: A nasty workaround.
                 if (key_novice ==  KEY_SOLDIER_ARCHER_NOVICE     ) key_advanced = KEY_SOLDIER_ARCHER_ADVANCED;
@@ -438,7 +438,7 @@ void TurnManager::receipts(
 
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        std::map<Configuration::IHumanKey, std::string>::const_iterator production =
+        std::map<Configuration::IKey, std::string>::const_iterator production =
             HUMAN_MAP_PRODUCTION.find(it->second->getHuman()->getKey());
 
         if (production != HUMAN_MAP_PRODUCTION.end())

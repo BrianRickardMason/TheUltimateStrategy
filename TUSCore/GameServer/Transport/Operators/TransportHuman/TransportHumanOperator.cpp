@@ -53,7 +53,7 @@ TransportHumanOperatorExitCode TransportHumanOperator::transportHuman(
     ITransactionShrPtr          a_transaction,
     string              const   a_settlement_name_source,
     string              const   a_settlement_name_destination,
-    IHumanKey           const & a_key,
+    IKey                const & a_key,
     Volume              const & a_volume
 ) const
 {

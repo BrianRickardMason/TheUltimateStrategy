@@ -51,9 +51,9 @@ public:
      * @param a_volume  The volume of the resource.
      */
     ResourceWithVolume(
-        IContextShrPtr           const a_context,
-        Configuration::IHumanKey const a_key,
-        Volume                   const a_volume
+        IContextShrPtr      const a_context,
+        Configuration::IKey const a_key,
+        Volume              const a_volume
     );
 
     /**

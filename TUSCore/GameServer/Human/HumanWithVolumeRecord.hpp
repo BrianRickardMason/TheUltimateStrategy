@@ -54,9 +54,9 @@ public:
      * @param a_volume    The volume of the human.
      */
     HumanWithVolumeRecord(
-        Common::IDHolder         const a_id_holder,
-        Configuration::IHumanKey const a_key,
-        Volume                   const a_volume
+        Common::IDHolder    const a_id_holder,
+        Configuration::IKey const a_key,
+        Volume              const a_volume
     );
 
     /**
@@ -71,7 +71,7 @@ public:
      *
      * @return The key of the human.
      */
-    Configuration::IHumanKey getKey() const;
+    Configuration::IKey getKey() const;
 
     /**
      * @brief Gets the volume of the human.
@@ -89,7 +89,7 @@ private:
     /**
      * @brief The key of the human.
      */
-    Configuration::IHumanKey m_key;
+    Configuration::IKey m_key;
 
     /**
      * @brief The volume of the human.
@@ -102,8 +102,8 @@ private:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<HumanWithVolumeRecord> HumanWithVolumeRecordShrPtr;
-typedef std::pair<Configuration::IHumanKey, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordPair;
-typedef std::map<Configuration::IHumanKey, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordMap;
+typedef std::pair<Configuration::IKey, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordPair;
+typedef std::map<Configuration::IKey, HumanWithVolumeRecordShrPtr> HumanWithVolumeRecordMap;
 //}@
 
 } // namespace Human

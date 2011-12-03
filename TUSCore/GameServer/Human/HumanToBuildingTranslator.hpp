@@ -57,7 +57,7 @@ public:
      */
     Configuration::IBuildingShrPtr getPlaceOfWork(
         IContextShrPtr           const   a_context,
-        Configuration::IHumanKey const & a_key
+        Configuration::IKey      const & a_key
     ) const;
 };
 
@@ -175,7 +175,7 @@ const std::vector<Configuration::IBuildingKey> PLACES_OF_WORK_WORKER_TEACHER_ADV
 /**
  * @brief An identifier of a human and a vector of building keys pair.
  */
-typedef std::pair<Configuration::IHumanKey, std::vector<Configuration::IBuildingKey> > PlaceOfWork;
+typedef std::pair<Configuration::IKey, std::vector<Configuration::IBuildingKey> > PlaceOfWork;
 
 const PlaceOfWork POW_SOLDIER_ARCHER_NOVICE     (KEY_SOLDIER_ARCHER_NOVICE     , PLACES_OF_WORK_SOLDIER_ARCHER_NOVICE     );
 const PlaceOfWork POW_SOLDIER_HORSEMAN_NOVICE   (KEY_SOLDIER_HORSEMAN_NOVICE   , PLACES_OF_WORK_SOLDIER_HORSEMAN_NOVICE   );
@@ -282,7 +282,7 @@ const PlaceOfWork PLACES_OF_WORK_ARRAY [] = {
         POW_WORKER_TEACHER_ADVANCED
 };
 
-const std::map<Configuration::IHumanKey, std::vector<Configuration::IBuildingKey> > PLACES_OF_WORK(
+const std::map<Configuration::IKey, std::vector<Configuration::IBuildingKey> > PLACES_OF_WORK(
     PLACES_OF_WORK_ARRAY,
     PLACES_OF_WORK_ARRAY + sizeof(PLACES_OF_WORK_ARRAY) / sizeof(PLACES_OF_WORK_ARRAY[0])
 );

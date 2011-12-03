@@ -40,63 +40,63 @@ namespace Human
 /**
  * @brief The available key.
  */
-Configuration::IHumanKey const KEY_SOLDIER_ARCHER_NOVICE       ("soldierarchernovice");
-Configuration::IHumanKey const KEY_SOLDIER_ARCHER_ADVANCED     ("soldierarcheradvanced");
-Configuration::IHumanKey const KEY_SOLDIER_HORSEMAN_NOVICE     ("soldierhorsemannovice");
-Configuration::IHumanKey const KEY_SOLDIER_HORSEMAN_ADVANCED   ("soldierhorsemanadvanced");
-Configuration::IHumanKey const KEY_SOLDIER_INFANTRYMAN_NOVICE  ("soldierinfantrymannovice");
-Configuration::IHumanKey const KEY_SOLDIER_INFANTRYMAN_ADVANCED("soldierinfantrymanadvanced");
+Configuration::IKey const KEY_SOLDIER_ARCHER_NOVICE       ("soldierarchernovice");
+Configuration::IKey const KEY_SOLDIER_ARCHER_ADVANCED     ("soldierarcheradvanced");
+Configuration::IKey const KEY_SOLDIER_HORSEMAN_NOVICE     ("soldierhorsemannovice");
+Configuration::IKey const KEY_SOLDIER_HORSEMAN_ADVANCED   ("soldierhorsemanadvanced");
+Configuration::IKey const KEY_SOLDIER_INFANTRYMAN_NOVICE  ("soldierinfantrymannovice");
+Configuration::IKey const KEY_SOLDIER_INFANTRYMAN_ADVANCED("soldierinfantrymanadvanced");
 
-Configuration::IHumanKey const KEY_SORCERER_EARTH_NOVICE       ("sorcerersorcererearthnovice");
-Configuration::IHumanKey const KEY_SORCERER_EARTH_ADVANCED     ("sorcerersorcererearthadvanced");
-Configuration::IHumanKey const KEY_SORCERER_FIRE_NOVICE        ("sorcerersorcererfirenovice");
-Configuration::IHumanKey const KEY_SORCERER_FIRE_ADVANCED      ("sorcerersorcererfireadvanced");
-Configuration::IHumanKey const KEY_SORCERER_WATER_NOVICE       ("sorcerersorcererwaternovice");
-Configuration::IHumanKey const KEY_SORCERER_WATER_ADVANCED     ("sorcerersorcererwateradvanced");
-Configuration::IHumanKey const KEY_SORCERER_WIND_NOVICE        ("sorcerersorcererwindnovice");
-Configuration::IHumanKey const KEY_SORCERER_WIND_ADVANCED      ("sorcerersorcererwindadvanced");
+Configuration::IKey const KEY_SORCERER_EARTH_NOVICE       ("sorcerersorcererearthnovice");
+Configuration::IKey const KEY_SORCERER_EARTH_ADVANCED     ("sorcerersorcererearthadvanced");
+Configuration::IKey const KEY_SORCERER_FIRE_NOVICE        ("sorcerersorcererfirenovice");
+Configuration::IKey const KEY_SORCERER_FIRE_ADVANCED      ("sorcerersorcererfireadvanced");
+Configuration::IKey const KEY_SORCERER_WATER_NOVICE       ("sorcerersorcererwaternovice");
+Configuration::IKey const KEY_SORCERER_WATER_ADVANCED     ("sorcerersorcererwateradvanced");
+Configuration::IKey const KEY_SORCERER_WIND_NOVICE        ("sorcerersorcererwindnovice");
+Configuration::IKey const KEY_SORCERER_WIND_ADVANCED      ("sorcerersorcererwindadvanced");
 
-Configuration::IHumanKey const KEY_SPY_AGENT_NOVICE            ("spyagentnovice");
-Configuration::IHumanKey const KEY_SPY_AGENT_ADVANCED          ("spyagentadvanced");
-Configuration::IHumanKey const KEY_SPY_SPY_NOVICE              ("spyspynovice");
-Configuration::IHumanKey const KEY_SPY_SPY_ADVANCED            ("spyspyadvanced");
-Configuration::IHumanKey const KEY_SPY_THUG_NOVICE             ("spythugnovice");
-Configuration::IHumanKey const KEY_SPY_THUG_ADVANCED           ("spythugadvanced");
+Configuration::IKey const KEY_SPY_AGENT_NOVICE            ("spyagentnovice");
+Configuration::IKey const KEY_SPY_AGENT_ADVANCED          ("spyagentadvanced");
+Configuration::IKey const KEY_SPY_SPY_NOVICE              ("spyspynovice");
+Configuration::IKey const KEY_SPY_SPY_ADVANCED            ("spyspyadvanced");
+Configuration::IKey const KEY_SPY_THUG_NOVICE             ("spythugnovice");
+Configuration::IKey const KEY_SPY_THUG_ADVANCED           ("spythugadvanced");
 
-Configuration::IHumanKey const KEY_WORKER_BLACKSMITH_NOVICE    ("workerblacksmithnovice");
-Configuration::IHumanKey const KEY_WORKER_BLACKSMITH_ADVANCED  ("workerblacksmithadvanced");
-Configuration::IHumanKey const KEY_WORKER_BREEDER_NOVICE       ("workerbreedernovice");
-Configuration::IHumanKey const KEY_WORKER_BREEDER_ADVANCED     ("workerbreederadvanced");
-Configuration::IHumanKey const KEY_WORKER_DRUID_NOVICE         ("workerdruidnovice");
-Configuration::IHumanKey const KEY_WORKER_DRUID_ADVANCED       ("workerdruidadvanced");
-Configuration::IHumanKey const KEY_WORKER_FARMER_NOVICE        ("workerfarmernovice");
-Configuration::IHumanKey const KEY_WORKER_FARMER_ADVANCED      ("workerfarmeradvanced");
-Configuration::IHumanKey const KEY_WORKER_FISHERMAN_NOVICE     ("workerfishermannovice");
-Configuration::IHumanKey const KEY_WORKER_FISHERMAN_ADVANCED   ("workerfishermanadvanced");
-Configuration::IHumanKey const KEY_WORKER_JOBLESS_NOVICE       ("workerjoblessnovice");
-Configuration::IHumanKey const KEY_WORKER_JOBLESS_ADVANCED     ("workerjoblessadvanced");
-Configuration::IHumanKey const KEY_WORKER_LUMBERJACK_NOVICE    ("workerlumberjacknovice");
-Configuration::IHumanKey const KEY_WORKER_LUMBERJACK_ADVANCED  ("workerlumberjackadvanced");
-Configuration::IHumanKey const KEY_WORKER_MERCHANT_NOVICE      ("workermerchantnovice");
-Configuration::IHumanKey const KEY_WORKER_MERCHANT_ADVANCED    ("workermerchantadvanced");
-Configuration::IHumanKey const KEY_WORKER_MINER_NOVICE         ("workerminernovice");
-Configuration::IHumanKey const KEY_WORKER_MINER_ADVANCED       ("workermineradvanced");
-Configuration::IHumanKey const KEY_WORKER_OFFICIAL_NOVICE      ("workerofficialnovice");
-Configuration::IHumanKey const KEY_WORKER_OFFICIAL_ADVANCED    ("workerofficialadvanced");
-Configuration::IHumanKey const KEY_WORKER_PRIEST_NOVICE        ("workerpriestnovice");
-Configuration::IHumanKey const KEY_WORKER_PRIEST_ADVANCED      ("workerpriestadvanced");
-Configuration::IHumanKey const KEY_WORKER_STEELWORKER_NOVICE   ("workersteelworkernovice");
-Configuration::IHumanKey const KEY_WORKER_STEELWORKER_ADVANCED ("workersteelworkeradvanced");
-Configuration::IHumanKey const KEY_WORKER_STONE_MASON_NOVICE   ("workerstonemasonnovice");
-Configuration::IHumanKey const KEY_WORKER_STONE_MASON_ADVANCED ("workerstonemasonadvanced");
-Configuration::IHumanKey const KEY_WORKER_TEACHER_NOVICE       ("workerteachernovice");
-Configuration::IHumanKey const KEY_WORKER_TEACHER_ADVANCED     ("workerteacheradvanced");
+Configuration::IKey const KEY_WORKER_BLACKSMITH_NOVICE    ("workerblacksmithnovice");
+Configuration::IKey const KEY_WORKER_BLACKSMITH_ADVANCED  ("workerblacksmithadvanced");
+Configuration::IKey const KEY_WORKER_BREEDER_NOVICE       ("workerbreedernovice");
+Configuration::IKey const KEY_WORKER_BREEDER_ADVANCED     ("workerbreederadvanced");
+Configuration::IKey const KEY_WORKER_DRUID_NOVICE         ("workerdruidnovice");
+Configuration::IKey const KEY_WORKER_DRUID_ADVANCED       ("workerdruidadvanced");
+Configuration::IKey const KEY_WORKER_FARMER_NOVICE        ("workerfarmernovice");
+Configuration::IKey const KEY_WORKER_FARMER_ADVANCED      ("workerfarmeradvanced");
+Configuration::IKey const KEY_WORKER_FISHERMAN_NOVICE     ("workerfishermannovice");
+Configuration::IKey const KEY_WORKER_FISHERMAN_ADVANCED   ("workerfishermanadvanced");
+Configuration::IKey const KEY_WORKER_JOBLESS_NOVICE       ("workerjoblessnovice");
+Configuration::IKey const KEY_WORKER_JOBLESS_ADVANCED     ("workerjoblessadvanced");
+Configuration::IKey const KEY_WORKER_LUMBERJACK_NOVICE    ("workerlumberjacknovice");
+Configuration::IKey const KEY_WORKER_LUMBERJACK_ADVANCED  ("workerlumberjackadvanced");
+Configuration::IKey const KEY_WORKER_MERCHANT_NOVICE      ("workermerchantnovice");
+Configuration::IKey const KEY_WORKER_MERCHANT_ADVANCED    ("workermerchantadvanced");
+Configuration::IKey const KEY_WORKER_MINER_NOVICE         ("workerminernovice");
+Configuration::IKey const KEY_WORKER_MINER_ADVANCED       ("workermineradvanced");
+Configuration::IKey const KEY_WORKER_OFFICIAL_NOVICE      ("workerofficialnovice");
+Configuration::IKey const KEY_WORKER_OFFICIAL_ADVANCED    ("workerofficialadvanced");
+Configuration::IKey const KEY_WORKER_PRIEST_NOVICE        ("workerpriestnovice");
+Configuration::IKey const KEY_WORKER_PRIEST_ADVANCED      ("workerpriestadvanced");
+Configuration::IKey const KEY_WORKER_STEELWORKER_NOVICE   ("workersteelworkernovice");
+Configuration::IKey const KEY_WORKER_STEELWORKER_ADVANCED ("workersteelworkeradvanced");
+Configuration::IKey const KEY_WORKER_STONE_MASON_NOVICE   ("workerstonemasonnovice");
+Configuration::IKey const KEY_WORKER_STONE_MASON_ADVANCED ("workerstonemasonadvanced");
+Configuration::IKey const KEY_WORKER_TEACHER_NOVICE       ("workerteachernovice");
+Configuration::IKey const KEY_WORKER_TEACHER_ADVANCED     ("workerteacheradvanced");
 //}@
 
 /**
  * @brief The vector of keys.
  */
-typedef std::vector<Configuration::IHumanKey> KeyVec;
+typedef std::vector<Configuration::IKey> KeyVec;
 
 } // namespace Human
 } // namespace GameServer

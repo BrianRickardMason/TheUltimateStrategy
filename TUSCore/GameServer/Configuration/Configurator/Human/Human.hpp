@@ -57,7 +57,7 @@ public:
      * @param a_costs_to_live    The costs for the human to live.
      */
     Human(
-        IHumanKey                                            const   a_key,
+        IKey                                                const   a_key,
         std::string                                          const   a_class,
         std::string                                          const   a_name,
         std::string                                          const   a_experience,
@@ -74,7 +74,7 @@ public:
      *
      * @return The key of the human.
      */
-    virtual IHumanKey getKey() const;
+    virtual IKey getKey() const;
 
     /**
      * @brief Gets the class of the human.
@@ -143,7 +143,7 @@ private:
     /**
      * @brief The key of the human.
      */
-    IHumanKey const m_key;
+    IKey const m_key;
 
     /**
      * @brief The class of the human.

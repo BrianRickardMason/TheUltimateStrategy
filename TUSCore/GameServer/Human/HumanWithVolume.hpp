@@ -51,9 +51,9 @@ public:
      * @param a_volume  The volume of the human.
      */
     HumanWithVolume(
-        IContextShrPtr           const a_context,
-        Configuration::IHumanKey const a_key,
-        Volume                   const a_volume
+        IContextShrPtr      const a_context,
+        Configuration::IKey const a_key,
+        Volume              const a_volume
     );
 
     /**
@@ -98,8 +98,8 @@ private:
  * @brief A useful typedef.
  */
 typedef boost::shared_ptr<HumanWithVolume> HumanWithVolumeShrPtr;
-typedef std::pair<Configuration::IHumanKey, HumanWithVolumeShrPtr> HumanWithVolumePair;
-typedef std::map<Configuration::IHumanKey, HumanWithVolumeShrPtr> HumanWithVolumeMap;
+typedef std::pair<Configuration::IKey, HumanWithVolumeShrPtr> HumanWithVolumePair;
+typedef std::map<Configuration::IKey, HumanWithVolumeShrPtr> HumanWithVolumeMap;
 //}@
 
 } // namespace Human

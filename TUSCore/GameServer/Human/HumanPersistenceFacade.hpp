@@ -68,7 +68,7 @@ public:
     virtual void addHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IHumanKey        const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -87,7 +87,7 @@ public:
     virtual bool subtractHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IHumanKey        const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -103,7 +103,7 @@ public:
     virtual HumanWithVolumeShrPtr getHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IHumanKey        const & a_key
+        Configuration::IKey             const & a_key
     ) const;
 
     /**

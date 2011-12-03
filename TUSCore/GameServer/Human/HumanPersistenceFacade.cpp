@@ -49,7 +49,7 @@ HumanPersistenceFacade::HumanPersistenceFacade(
 void HumanPersistenceFacade::addHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -66,7 +66,7 @@ void HumanPersistenceFacade::addHuman(
 bool HumanPersistenceFacade::subtractHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -96,7 +96,7 @@ bool HumanPersistenceFacade::subtractHuman(
 HumanWithVolumeShrPtr HumanPersistenceFacade::getHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key
+    IKey               const & a_key
 ) const
 {
     HumanWithVolumeRecordShrPtr record = m_accessor->getRecord(a_transaction, a_id_holder, a_key);

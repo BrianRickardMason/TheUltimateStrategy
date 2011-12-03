@@ -67,7 +67,7 @@ protected:
      */
     void compareHuman(
         HumanWithVolumeShrPtr         a_human,
-        IHumanKey             const & a_key,
+        IKey                  const & a_key,
         Volume                const & a_volume
     )
     {

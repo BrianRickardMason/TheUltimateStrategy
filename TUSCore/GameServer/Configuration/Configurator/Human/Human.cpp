@@ -36,7 +36,7 @@ namespace Configuration
 {
 
 Human::Human(
-    IHumanKey                                       const   a_key,
+    IKey                                            const   a_key,
     string                                          const   a_class,
     string                                          const   a_name,
     string                                          const   a_experience,
@@ -60,7 +60,7 @@ Human::Human(
 {
 }
 
-IHumanKey Human::getKey() const
+IKey Human::getKey() const
 {
     return m_key;
 }

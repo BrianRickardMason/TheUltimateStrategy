@@ -52,7 +52,7 @@ bool ConfiguratorHuman::configure()
 }
 
 GameServer::Configuration::IHumanShrPtr ConfiguratorHuman::getHuman(
-    GameServer::Configuration::IHumanKey const a_key
+    GameServer::Configuration::IKey const a_key
 ) const
 {
     return m_humans.at(a_key);
@@ -92,7 +92,7 @@ bool ConfiguratorHuman::parseXml()
 
     for (xml_node_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        IHumanKey                                       const human_key              = it->child_value("key");
+        IKey                                            const human_key              = it->child_value("key");
         string                                          const human_class            = it->child_value("class");
         string                                          const human_name             = it->child_value("name");
         string                                          const human_experience       = it->child_value("experience");

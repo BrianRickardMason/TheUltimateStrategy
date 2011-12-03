@@ -126,8 +126,8 @@ protected:
      * @param a_volume A volume of jobless.
      */
     void configureHumanPersistenceFacadeMockForAddHuman(
-        IHumanKey const & a_key,
-        Volume    const & a_volume
+        IKey   const & a_key,
+        Volume const & a_volume
     )
     {
         EXPECT_CALL(*m_human_persistence_facade, addHuman(_, m_id_holder, a_key, a_volume));
@@ -142,8 +142,8 @@ protected:
      * @param a_volume A volume of jobless.
      */
     void configureHumanPersistenceFacadeMockForGetHuman(
-        IHumanKey const & a_key,
-        Volume    const & a_volume
+        IKey   const & a_key,
+        Volume const & a_volume
     )
     {
         HumanWithVolumeShrPtr human_with_volume =
@@ -160,8 +160,8 @@ protected:
      * @param a_volume A volume of the human.
      */
     void configureHumanPersistenceFacadeMockForSubtractHuman(
-        IHumanKey const & a_key,
-        Volume    const & a_volume
+        IKey   const & a_key,
+        Volume const & a_volume
     )
     {
         EXPECT_CALL(*m_human_persistence_facade, subtractHuman(_, m_id_holder, a_key, a_volume))

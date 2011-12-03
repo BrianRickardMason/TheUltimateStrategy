@@ -60,7 +60,7 @@ EngageHumanOperator::EngageHumanOperator(
 EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -155,7 +155,7 @@ EngageHumanOperatorExitCode EngageHumanOperator::engageHuman(
 bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key,
+    IKey               const & a_key,
     Volume             const & a_volume
 ) const
 {
@@ -210,7 +210,7 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
 
 bool EngageHumanOperator::verifyEngageable(
     ITransactionShrPtr         a_transaction,
-    IHumanKey          const & a_key
+    IKey               const & a_key
 ) const
 {
     IHumanShrPtr human = m_context->getConfiguratorHuman()->getHuman(a_key);

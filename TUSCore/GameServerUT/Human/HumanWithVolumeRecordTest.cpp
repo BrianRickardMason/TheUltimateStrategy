@@ -63,7 +63,7 @@ protected:
     /**
      * @brief A model key.
      */
-    IHumanKey m_model_key;
+    IKey m_model_key;
 };
 
 TEST_F(HumanWithVolumeRecordTest, HumanWithVolumeRecord)

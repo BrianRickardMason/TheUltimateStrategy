@@ -58,7 +58,7 @@ public:
         void(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Configuration::IHumanKey                    const & a_key,
+            Configuration::IKey                         const & a_key,
             Volume                                      const & a_volume
         )
     );
@@ -80,7 +80,7 @@ public:
         bool(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Configuration::IHumanKey                    const & a_key,
+            Configuration::IKey                         const & a_key,
             Volume                                      const & a_volume
         )
     );
@@ -99,7 +99,7 @@ public:
         HumanWithVolumeShrPtr(
             GameServer::Persistence::ITransactionShrPtr         a_transaction,
             GameServer::Common::IDHolder                const & a_id_holder,
-            Configuration::IHumanKey                    const & a_key
+            Configuration::IKey                         const & a_key
         )
     );
 

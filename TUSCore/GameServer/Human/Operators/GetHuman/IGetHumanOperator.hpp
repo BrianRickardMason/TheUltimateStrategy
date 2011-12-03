@@ -62,7 +62,7 @@ public:
     virtual GetHumanOperatorExitCode getHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IHumanKey        const & a_key
+        Configuration::IKey             const & a_key
     ) const = 0;
 };
 

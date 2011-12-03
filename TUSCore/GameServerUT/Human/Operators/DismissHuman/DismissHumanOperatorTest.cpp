@@ -90,7 +90,7 @@ protected:
      * @param a_volume A volume of jobless.
      */
     void configureHumanPersistenceFacadeMockForAddHuman(
-        IHumanKey                 const & a_key,
+        IKey                      const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
@@ -106,7 +106,7 @@ protected:
      * @param a_volume A volume of jobless.
      */
     void configureHumanPersistenceFacadeMockForGetHuman(
-        IHumanKey                 const & a_key,
+        IKey                      const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {
@@ -124,7 +124,7 @@ protected:
      * @param a_volume A volume of the human.
      */
     void configureHumanPersistenceFacadeMockForSubtractHuman(
-        IHumanKey                 const & a_key,
+        IKey                      const & a_key,
         GameServer::Human::Volume const & a_volume
     )
     {

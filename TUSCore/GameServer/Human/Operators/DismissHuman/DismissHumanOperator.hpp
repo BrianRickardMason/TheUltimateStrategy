@@ -71,7 +71,7 @@ public:
     virtual DismissHumanOperatorExitCode dismissHuman(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IHumanKey        const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const;
 
@@ -86,7 +86,7 @@ private:
      */
     bool verifyDismissable(
         Persistence::ITransactionShrPtr         a_transaction,
-        Configuration::IHumanKey        const & a_key
+        Configuration::IKey             const & a_key
     ) const;
 
     /**
@@ -102,7 +102,7 @@ private:
     bool verifyEngaged(
         Persistence::ITransactionShrPtr         a_transaction,
         Common::IDHolder                const & a_id_holder,
-        Configuration::IHumanKey        const & a_key,
+        Configuration::IKey             const & a_key,
         Volume                          const & a_volume
     ) const;
 

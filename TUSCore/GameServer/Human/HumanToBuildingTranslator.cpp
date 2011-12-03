@@ -38,7 +38,7 @@ namespace Human
 
 IBuildingShrPtr HumanToBuildingTranslator::getPlaceOfWork(
     IContextShrPtr const   a_context,
-    IHumanKey      const & a_key
+    IKey           const & a_key
 ) const
 {
     // Get corresponding building.

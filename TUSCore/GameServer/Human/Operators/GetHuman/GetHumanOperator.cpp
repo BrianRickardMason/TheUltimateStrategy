@@ -46,7 +46,7 @@ GetHumanOperator::GetHumanOperator(
 GetHumanOperatorExitCode GetHumanOperator::getHuman(
     ITransactionShrPtr         a_transaction,
     IDHolder           const & a_id_holder,
-    IHumanKey          const & a_key
+    IKey               const & a_key
 ) const
 {
     try

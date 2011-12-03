@@ -36,9 +36,9 @@ namespace Human
 {
 
 HumanWithVolumeRecord::HumanWithVolumeRecord(
-    IDHolder  const a_id_holder,
-    IHumanKey const a_key,
-    Volume    const a_volume
+    IDHolder const a_id_holder,
+    IKey     const a_key,
+    Volume   const a_volume
 )
     : m_id_holder(a_id_holder),
       m_key(a_key),
@@ -51,7 +51,7 @@ IDHolder const & HumanWithVolumeRecord::getIDHolder() const
     return m_id_holder;
 }
 
-IHumanKey HumanWithVolumeRecord::getKey() const
+IKey HumanWithVolumeRecord::getKey() const
 {
     return m_key;
 }
