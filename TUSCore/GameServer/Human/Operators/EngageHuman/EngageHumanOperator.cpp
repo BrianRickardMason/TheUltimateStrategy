@@ -26,7 +26,6 @@
 // SUCH DAMAGE.
 
 #include "../../../Building/BuildingToHumanTranslator.hpp"
-#include "../../HumanToBuildingTranslator.hpp"
 #include "EngageHumanOperator.hpp"
 #include <GameServer/Resource/Helpers.hpp>
 
