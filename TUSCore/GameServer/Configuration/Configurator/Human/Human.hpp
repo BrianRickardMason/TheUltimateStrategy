@@ -45,16 +45,17 @@ public:
     /**
      * @brief Ctor.
      *
-     * @param a_key              The key of the human.
-     * @param a_class            The class of the human.
-     * @param a_experience       The experience of the human.
-     * @param a_name             The name of the human.
-     * @param a_dismissable      Defines whether human can be dismissed.
-     * @param a_engageable       Defines whether human can be engaged.
-     * @param a_production       The number of units of a resource produced per turn.
-     * @param a_costs_to_dismiss The costs to dismiss the human.
-     * @param a_costs_to_engage  The costs to engage the human.
-     * @param a_costs_to_live    The costs for the human to live.
+     * @param a_key               The key of the human.
+     * @param a_class             The class of the human.
+     * @param a_experience        The experience of the human.
+     * @param a_name              The name of the human.
+     * @param a_dismissable       Defines whether human can be dismissed.
+     * @param a_engageable        Defines whether human can be engaged.
+     * @param a_production        The number of units of a resource produced per turn.
+     * @param a_costs_to_dismiss  The costs to dismiss the human.
+     * @param a_costs_to_engage   The costs to engage the human.
+     * @param a_costs_to_live     The costs for the human to live.
+     * @param a_resource_produced The key of the resource that is produced by the human.
      */
     Human(
         IKey                                         const   a_key,
@@ -66,7 +67,8 @@ public:
         unsigned int                                 const   a_production,
         std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
         std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_engage,
-        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_live
+        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_live,
+        IKey                                         const   a_resource_produced
     );
 
     /**
@@ -139,6 +141,13 @@ public:
      */
     virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToLive() const;
 
+    /**
+     * @brief Gets the key of the resource that is produced by human.
+     *
+     * @return The key of the resource that is produced by human, an empty string if not found.
+     */
+    virtual IKey getResourceProduced() const;
+
 private:
     /**
      * @brief The key of the human.
@@ -189,6 +198,11 @@ private:
      * @brief The costs for human to live.
      */
     std::map<IKey, GameServer::Resource::Volume> const m_costs_to_live;
+
+    /**
+     * @brief The key of the resource that is produced by the human, an empty string if human does not produce anything.
+     */
+    IKey const m_resource_produced;
 };
 
 } // namespace Configuration

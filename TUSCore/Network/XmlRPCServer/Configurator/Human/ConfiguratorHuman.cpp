@@ -73,11 +73,15 @@ bool ConfiguratorHuman::loadXml()
         m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/costs.xml";
     bool const result_costs_xml = m_costs_xml.load_file(path_costs_xml.c_str());
 
+    std::string path_production_xml =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/production.xml";
+    bool const result_production_xml = m_production_xml.load_file(path_production_xml.c_str());
+
     std::string path_properties_xml =
         m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/properties.xml";
     bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml.c_str());
 
-    return (result_humans_xml and result_costs_xml and result_properties_xml);
+    return (result_humans_xml and result_costs_xml and result_production_xml and result_properties_xml);
 }
 
 bool ConfiguratorHuman::parseXml()
@@ -102,6 +106,7 @@ bool ConfiguratorHuman::parseXml()
         map<IKey, GameServer::Resource::Volume>       human_costs_to_dismiss;
         map<IKey, GameServer::Resource::Volume>       human_costs_to_engage;
         map<IKey, GameServer::Resource::Volume>       human_costs_to_live;
+        IKey                                          resource_produced;
 
         // Get the costs.
         xml_node costs =
@@ -131,6 +136,15 @@ bool ConfiguratorHuman::parseXml()
             }
         }
 
+        // Get the production.
+        xml_node production =
+            m_production_xml.child("humans").find_child_by_attribute("key", human_key.c_str());
+
+        if (production)
+        {
+            resource_produced = production.child("resource").attribute("value").value();
+        }
+
         // Get the properties.
         xml_node properties =
             m_properties_xml.child("humans").find_child_by_attribute("key", human_key.c_str());
@@ -152,7 +166,8 @@ bool ConfiguratorHuman::parseXml()
                       human_production,
                       human_costs_to_dismiss,
                       human_costs_to_engage,
-                      human_costs_to_live)
+                      human_costs_to_live,
+                      resource_produced)
         );
 
         m_humans.insert(make_pair(human_key, human));

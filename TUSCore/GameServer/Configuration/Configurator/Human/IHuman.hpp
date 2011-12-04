@@ -119,6 +119,13 @@ public:
      * @return The costs for human to live.
      */
     virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToLive() const = 0;
+
+    /**
+     * @brief Gets the key of the resource that is produced by the human.
+     *
+     * @return The key of the resource that is produced by the human, an empty string if not found.
+     */
+    virtual IKey getResourceProduced() const = 0;
 };
 
 //@{

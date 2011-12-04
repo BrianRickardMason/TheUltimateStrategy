@@ -101,6 +101,7 @@ private:
      */
     pugi::xml_document m_humans_xml;
     pugi::xml_document m_costs_xml;
+    pugi::xml_document m_production_xml;
     pugi::xml_document m_properties_xml;
     //}@
 
