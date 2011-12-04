@@ -73,6 +73,10 @@ bool ConfiguratorHuman::loadXml()
         m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/costs.xml";
     bool const result_costs_xml = m_costs_xml.load_file(path_costs_xml.c_str());
 
+    std::string path_placesofwork_xml =
+        m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/placesofwork.xml";
+    bool const result_placesofwork_xml = m_placesofwork_xml.load_file(path_placesofwork_xml.c_str());
+
     std::string path_production_xml =
         m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Human/production.xml";
     bool const result_production_xml = m_production_xml.load_file(path_production_xml.c_str());
@@ -107,6 +111,7 @@ bool ConfiguratorHuman::parseXml()
         map<IKey, GameServer::Resource::Volume>       human_costs_to_engage;
         map<IKey, GameServer::Resource::Volume>       human_costs_to_live;
         IKey                                          resource_produced;
+        IKey                                          placeofwork;
 
         // Get the costs.
         xml_node costs =
@@ -134,6 +139,15 @@ bool ConfiguratorHuman::parseXml()
             {
                 human_costs_to_live[it->name()] = it->attribute("value").as_uint();
             }
+        }
+
+        // Get the places of work.
+        xml_node placesofwork =
+            m_placesofwork_xml.child("humans").find_child_by_attribute("key", human_key.c_str());
+
+        if (placesofwork)
+        {
+            placeofwork = placesofwork.child("building").attribute("value").value();
         }
 
         // Get the production.
