@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<buildings>
+    <building key="regularbarracks">
+        <humans>
+            <human>
+                <key>soldierarchernovice</key>
+            </human>
+            <human>
+                <key>soldierarcheradvanced</key>
+            </human>
+            <human>
+                <key>soldierhorsemannovice</key>
+            </human>
+            <human>
+                <key>soldierhorsemanadvanced</key>
+            </human>
+            <human>
+                <key>soldierinfantrymannovice</key>
+            </human>
+            <human>
+                <key>soldierinfantrymanadvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularfarm">
+        <humans>
+            <human>
+                <key>workerfarmernovice</key>
+            </human>
+            <human>
+                <key>workerfarmeradvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularforge">
+        <humans>
+            <human>
+                <key>workerblacksmithnovice</key>
+            </human>
+            <human>
+                <key>workerblacksmithadvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularguild">
+        <humans>
+            <human>
+                <key>sorcerersorcererearthnovice</key>
+            </human>
+            <human>
+                <key>sorcerersorcererearthadvanced</key>
+            </human>
+            <human>
+                <key>sorcerersorcererfirenovice</key>
+            </human>
+            <human>
+                <key>sorcerersorcererfireadvanced</key>
+            </human>
+            <human>
+                <key>sorcerersorcererwaternovice</key>
+            </human>
+            <human>
+                <key>sorcerersorcererwateradvanced</key>
+            </human>
+            <human>
+                <key>sorcerersorcererwindnovice</key>
+            </human>
+            <human>
+                <key>sorcerersorcererwindadvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularmarketplace">
+        <humans>
+            <human>
+                <key>workermerchantnovice</key>
+            </human>
+            <human>
+                <key>workermerchantadvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularmine">
+        <humans>
+            <human>
+                <key>workerminernovice</key>
+            </human>
+            <human>
+                <key>workermineradvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularquarry">
+        <humans>
+            <human>
+                <key>workerstonemasonnovice</key>
+            </human>
+            <human>
+                <key>workerstonemasonadvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularsawmill">
+        <humans>
+            <human>
+                <key>workerlumberjacknovice</key>
+            </human>
+            <human>
+                <key>workerlumberjackadvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularschool">
+        <humans>
+            <human>
+                <key>workerteachernovice</key>
+            </human>
+            <human>
+                <key>workerteacheradvanced</key>
+            </human>
+        </humans>
+    </building>
+    <building key="regularsteelworks">
+        <humans>
+            <human>
+                <key>workersteelworkernovice</key>
+            </human>
+            <human>
+                <key>workersteelworkeradvanced</key>
+            </human>
+        </humans>
+    </building>
+</buildings>
