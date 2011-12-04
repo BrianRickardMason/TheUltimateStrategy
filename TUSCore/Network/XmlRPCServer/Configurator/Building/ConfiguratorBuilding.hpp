@@ -101,6 +101,7 @@ private:
      */
     pugi::xml_document m_buildings_xml;
     pugi::xml_document m_costs_xml;
+    pugi::xml_document m_humanshosted_xml;
     pugi::xml_document m_properties_xml;
     //}@
 

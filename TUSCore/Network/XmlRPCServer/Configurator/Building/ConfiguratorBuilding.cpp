@@ -28,6 +28,7 @@
 #include <GameServer/Configuration/Configurator/Building/Building.hpp>
 #include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
 #include <string>
+#include <vector>
 
 ConfiguratorBuilding::ConfiguratorBuilding(
     IConfiguratorShrPtr const a_configurator
@@ -56,6 +57,7 @@ GameServer::Configuration::IBuildingShrPtr ConfiguratorBuilding::getBuilding(
     GameServer::Configuration::IKey const a_key
 ) const
 {
+    // FIXME: find + handling.
     return m_buildings.at(a_key);
 }
 
@@ -74,13 +76,19 @@ bool ConfiguratorBuilding::loadXml()
         m_configurator->getConfigurationPath() + m_configurator->getConfigurationSelected() + "/Building/costs.xml";
     bool const result_costs_xml = m_costs_xml.load_file(path_costs_xml.c_str());
 
+    std::string path_humanshosted_xml =
+          m_configurator->getConfigurationPath()
+        + m_configurator->getConfigurationSelected()
+        + "/Building/humanshosted.xml";
+    bool const result_humanshosted_xml = m_humanshosted_xml.load_file(path_humanshosted_xml.c_str());
+
     std::string path_properties_xml =
           m_configurator->getConfigurationPath()
         + m_configurator->getConfigurationSelected()
         + "/Building/properties.xml";
     bool const result_properties_xml = m_properties_xml.load_file(path_properties_xml.c_str());
 
-    return (result_buildings_xml and result_costs_xml and result_properties_xml);
+    return (result_buildings_xml and result_costs_xml and result_humanshosted_xml and result_properties_xml);
 }
 
 bool ConfiguratorBuilding::parseXml()
@@ -120,6 +128,22 @@ bool ConfiguratorBuilding::parseXml()
             for (xml_node::iterator it = costs_to_destroy.begin(); it != costs_to_destroy.end(); ++it)
             {
                 building_costs_to_destroy[it->name()] = it->attribute("value").as_uint();
+            }
+        }
+
+        // Get the humans hosted.
+        xml_node humanshosted =
+            m_humanshosted_xml.child("buildings").find_child_by_attribute("key", building_key.c_str());
+
+        std::vector<IKey> hosted_humans;
+
+        if (humanshosted)
+        {
+            xml_node list_of_humans = humanshosted.child("humans");
+
+            for (xml_node_iterator it = list_of_humans.begin(); it != list_of_humans.end(); ++it)
+            {
+                hosted_humans.push_back(it->child_value("key"));
             }
         }
 
