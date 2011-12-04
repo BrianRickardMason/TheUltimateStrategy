@@ -1,93 +1,93 @@
 <?xml version=\"1.0\"?>
 <humans>
     <human key="soldierarchernovice">
-        <buidling value="regularbarracks" />
+        <building value="regularbarracks" />
     </human>
     <human key="soldierarcheradvanced">
-        <buidling value="regularbarracks" />
+        <building value="regularbarracks" />
     </human>
     <human key="soldierhorsemannovice">
-        <buidling value="regularbarracks" />
+        <building value="regularbarracks" />
     </human>
     <human key="soldierhorsemanadvanced">
-        <buidling value="regularbarracks" />
+        <building value="regularbarracks" />
     </human>
     <human key="soldierinfantrymannovice">
-        <buidling value="regularbarracks" />
+        <building value="regularbarracks" />
     </human>
     <human key="soldierinfantrymanadvanced">
-        <buidling value="regularbarracks" />
+        <building value="regularbarracks" />
     </human>
     <human key="sorcerersorcererearthnovice">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="sorcerersorcererearthadvanced">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="sorcerersorcererfirenovice">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="sorcerersorcererfireadvanced">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="sorcerersorcererwaternovice">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="sorcerersorcererwateradvanced">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="sorcerersorcererwindnovice">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="sorcerersorcererwindadvanced">
-        <buidling value="regularguild" />
+        <building value="regularguild" />
     </human>
     <human key="workerblacksmithnovice">
-        <buidling value="regularforge" />
+        <building value="regularforge" />
     </human>
     <human key="workerblacksmithadvanced">
-        <buidling value="regularforge" />
+        <building value="regularforge" />
     </human>
     <human key="workerfarmernovice">
-        <buidling value="regularfarm" />
+        <building value="regularfarm" />
     </human>
     <human key="workerfarmeradvanced">
-        <buidling value="regularfarm" />
+        <building value="regularfarm" />
     </human>
     <human key="workerlumberjacknovice">
-        <buidling value="regularsawmill" />
+        <building value="regularsawmill" />
     </human>
     <human key="workerlumberjackadvanced">
-        <buidling value="regularsawmill" />
+        <building value="regularsawmill" />
     </human>
     <human key="workermerchantnovice">
-        <buidling value="regularmarketplace" />
+        <building value="regularmarketplace" />
     </human>
     <human key="workermerchantadvanced">
-        <buidling value="regularmarketplace" />
+        <building value="regularmarketplace" />
     </human>
     <human key="workerminernovice">
-        <buidling value="regularmine" />
+        <building value="regularmine" />
     </human>
     <human key="workermineradvanced">
-        <buidling value="regularmine" />
+        <building value="regularmine" />
     </human>
     <human key="workersteelworkernovice">
-        <buidling value="regularsteelworks" />
+        <building value="regularsteelworks" />
     </human>
     <human key="workersteelworkeradvanced">
-        <buidling value="regularsteelworks" />
+        <building value="regularsteelworks" />
     </human>
     <human key="workerstonemasonnovice">
-        <buidling value="regularquarry" />
+        <building value="regularquarry" />
     </human>
     <human key="workerstonemasonadvanced">
-        <buidling value="regularquarry" />
+        <building value="regularquarry" />
     </human>
     <human key="workerteachernovice">
-        <buidling value="regularschool" />
+        <building value="regularschool" />
     </human>
     <human key="workerteacheradvanced">
-        <buidling value="regularschool" />
+        <building value="regularschool" />
     </human>
 </humans>
