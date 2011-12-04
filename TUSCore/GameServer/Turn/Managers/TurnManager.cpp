@@ -438,16 +438,13 @@ void TurnManager::receipts(
 
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        std::map<Configuration::IKey, std::string>::const_iterator production =
-            HUMAN_MAP_PRODUCTION.find(it->second->getHuman()->getKey());
-
-        if (production != HUMAN_MAP_PRODUCTION.end())
+        if (!it->second->getHuman()->getResourceProduced().empty())
         {
             // TODO: Define whether and how to check if volume is greater than 0.
             m_resource_persistence_facade->addResource(
                 a_transaction,
                 id_holder,
-                production->second,
+                it->second->getHuman()->getResourceProduced(),
                 it->second->getHuman()->getProduction() * it->second->getVolume()
             );
         }

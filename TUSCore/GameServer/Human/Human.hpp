@@ -37,29 +37,6 @@ namespace GameServer
 namespace Human
 {
 
-/**
- * @brief The map of human production.
- */
-const std::map<Configuration::IKey, std::string> HUMAN_MAP_PRODUCTION = boost::assign::map_list_of
-    (Human::KEY_WORKER_BREEDER_NOVICE,       Resource::KEY_RESOURCE_FOOD)
-    (Human::KEY_WORKER_DRUID_NOVICE,         Resource::KEY_RESOURCE_MANA)
-    (Human::KEY_WORKER_FARMER_NOVICE,        Resource::KEY_RESOURCE_FOOD)
-    (Human::KEY_WORKER_FISHERMAN_NOVICE,     Resource::KEY_RESOURCE_FOOD)
-    (Human::KEY_WORKER_LUMBERJACK_NOVICE,    Resource::KEY_RESOURCE_WOOD)
-    (Human::KEY_WORKER_MERCHANT_NOVICE,      Resource::KEY_RESOURCE_GOLD)
-    (Human::KEY_WORKER_MINER_NOVICE,         Resource::KEY_RESOURCE_COAL)
-    (Human::KEY_WORKER_STEELWORKER_NOVICE,   Resource::KEY_RESOURCE_IRON)
-    (Human::KEY_WORKER_STONE_MASON_NOVICE,   Resource::KEY_RESOURCE_ROCK)
-    (Human::KEY_WORKER_BREEDER_ADVANCED,     Resource::KEY_RESOURCE_FOOD)
-    (Human::KEY_WORKER_DRUID_ADVANCED,       Resource::KEY_RESOURCE_MANA)
-    (Human::KEY_WORKER_FARMER_ADVANCED,      Resource::KEY_RESOURCE_FOOD)
-    (Human::KEY_WORKER_FISHERMAN_ADVANCED,   Resource::KEY_RESOURCE_FOOD)
-    (Human::KEY_WORKER_LUMBERJACK_ADVANCED,  Resource::KEY_RESOURCE_WOOD)
-    (Human::KEY_WORKER_MERCHANT_ADVANCED,    Resource::KEY_RESOURCE_GOLD)
-    (Human::KEY_WORKER_MINER_ADVANCED,       Resource::KEY_RESOURCE_COAL)
-    (Human::KEY_WORKER_STEELWORKER_ADVANCED, Resource::KEY_RESOURCE_IRON)
-    (Human::KEY_WORKER_STONE_MASON_ADVANCED, Resource::KEY_RESOURCE_ROCK);
-
 } // namespace Human
 } // namespace GameServer
 
