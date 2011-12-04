@@ -25,8 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../Building/BuildingToHumanTranslator.hpp"
-#include "EngageHumanOperator.hpp"
+#include <GameServer/Human/Operators/EngageHuman/EngageHumanOperator.hpp>
 #include <GameServer/Resource/Helpers.hpp>
 
 using namespace GameServer::Building;
@@ -172,7 +171,7 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
         // Building does not exist.
         if (!building_with_volume)
         {
-        	// TODO: Add logging and reconsider exceptions.
+            // TODO: Add logging and reconsider exceptions.
             return false;
         }
 
