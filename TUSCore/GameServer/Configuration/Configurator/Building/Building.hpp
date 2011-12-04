@@ -51,6 +51,7 @@ public:
      * @param a_capacity         The capacity of the building.
      * @param a_costs_to_build   The costs to build the building.
      * @param a_costs_to_destroy The costs to destroy the building.
+     * @param a_hosted_humans    The hosted humans.
      */
     Building(
         IKey                                         const   a_key,
@@ -58,7 +59,8 @@ public:
         std::string                                  const   a_name,
         unsigned int                                 const   a_capacity,
         std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_build,
-        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_destroy
+        std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_destroy,
+        std::vector<IKey>                            const & a_hosted_humans
     );
 
     /**
@@ -103,6 +105,13 @@ public:
      */
     virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToDestroy() const;
 
+    /**
+     * @brief Gets the hosted humans.
+     *
+     * @return The hosted humans.
+     */
+    virtual std::vector<IKey> const & getHostedHumans() const;
+
 private:
     /**
      * @brief The key of the building.
@@ -133,6 +142,11 @@ private:
      * @brief The costs to destroy the building.
      */
     std::map<IKey, GameServer::Resource::Volume> const m_costs_to_destroy;
+
+    /**
+     * @brief The hosted humans.
+     */
+    std::vector<IKey> const m_hosted_humans;
 };
 
 } // namespace Configuration

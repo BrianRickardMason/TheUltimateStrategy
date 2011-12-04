@@ -162,7 +162,8 @@ bool ConfiguratorBuilding::parseXml()
                          building_name,
                          building_capacity,
                          building_costs_to_build,
-                         building_costs_to_destroy)
+                         building_costs_to_destroy,
+                         hosted_humans)
         );
 
         m_buildings.insert(make_pair(building_key, building));

@@ -34,6 +34,7 @@
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
+#include <vector>
 
 namespace GameServer
 {
@@ -89,6 +90,13 @@ public:
      * @return The costs to destroy the building.
      */
     virtual std::map<IKey, GameServer::Resource::Volume> const & getCostsToDestroy() const = 0;
+
+    /**
+     * @brief Gets the hosted humans.
+     *
+     * @return The hosted humans.
+     */
+    virtual std::vector<IKey> const & getHostedHumans() const = 0;
 };
 
 //@{

@@ -41,14 +41,16 @@ Building::Building(
     string                                  const   a_name,
     unsigned int                            const   a_capacity,
     map<IKey, GameServer::Resource::Volume> const & a_costs_to_build,
-    map<IKey, GameServer::Resource::Volume> const & a_costs_to_destroy
+    map<IKey, GameServer::Resource::Volume> const & a_costs_to_destroy,
+    std::vector<IKey>                       const & a_hosted_humans
 )
     : m_key(a_key),
       m_class(a_class),
       m_name(a_name),
       m_capacity(a_capacity),
       m_costs_to_build(a_costs_to_build),
-      m_costs_to_destroy(a_costs_to_destroy)
+      m_costs_to_destroy(a_costs_to_destroy),
+      m_hosted_humans(a_hosted_humans)
 {
 }
 
@@ -80,6 +82,11 @@ std::map<IKey, GameServer::Resource::Volume> const & Building::getCostsToBuild()
 std::map<IKey, GameServer::Resource::Volume> const & Building::getCostsToDestroy() const
 {
     return m_costs_to_destroy;
+}
+
+std::vector<IKey> const & Building::getHostedHumans() const
+{
+    return m_hosted_humans;
 }
 
 } // namespace Configuration
