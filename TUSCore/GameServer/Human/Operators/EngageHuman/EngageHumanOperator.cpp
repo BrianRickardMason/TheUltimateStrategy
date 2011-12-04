@@ -172,11 +172,12 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
         // Building does not exist.
         if (!building_with_volume)
         {
+        	// TODO: Add logging and reconsider exceptions.
             return false;
         }
 
-        // Get a vector of identifiers of a human to check if building is a place of work for some humans.
-        KeyVec humans = BuildingToHumanTranslator::getHumansHostedForWork(building_key);
+        // Get a vector of keys of humans to check if building is a place of work for some humans.
+        KeyVec humans = building_with_volume->getBuilding()->getHostedHumans();
 
         // The building is a place of work for at least one human.
         BOOST_ASSERT(!humans.empty());
