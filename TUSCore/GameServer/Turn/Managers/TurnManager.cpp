@@ -27,7 +27,6 @@
 
 #include <GameServer/Common/IDHolder.hpp>
 #include <GameServer/Human/Key.hpp>
-#include <GameServer/Human/Human.hpp>
 #include <GameServer/Resource/Helpers.hpp>
 #include <GameServer/Resource/Key.hpp>
 #include <GameServer/Turn/Managers/TurnManager.hpp>
