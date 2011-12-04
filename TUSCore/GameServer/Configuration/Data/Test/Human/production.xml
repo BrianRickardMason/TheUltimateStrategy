@@ -1,49 +1,5 @@
 <?xml version=\"1.0\"?>
 <humans>
-    <human key="soldierarchernovice">
-    </human>
-    <human key="soldierarcheradvanced">
-    </human>
-    <human key="soldierhorsemannovice">
-    </human>
-    <human key="soldierhorsemanadvanced">
-    </human>
-    <human key="soldierinfantrymannovice">
-    </human>
-    <human key="soldierinfantrymanadvanced">
-    </human>
-    <human key="sorcerersorcererearthnovice">
-    </human>
-    <human key="sorcerersorcererearthadvanced">
-    </human>
-    <human key="sorcerersorcererfirenovice">
-    </human>
-    <human key="sorcerersorcererfireadvanced">
-    </human>
-    <human key="sorcerersorcererwaternovice">
-    </human>
-    <human key="sorcerersorcererwateradvanced">
-    </human>
-    <human key="sorcerersorcererwindnovice">
-    </human>
-    <human key="sorcerersorcererwindadvanced">
-    </human>
-    <human key="spyagentnovice">
-    </human>
-    <human key="spyagentadvanced">
-    </human>
-    <human key="spyspynovice">
-    </human>
-    <human key="spyspyadvanced">
-    </human>
-    <human key="spythugnovice">
-    </human>
-    <human key="spythugadvanced">
-    </human>
-    <human key="workerblacksmithnovice">
-    </human>
-    <human key="workerblacksmithadvanced">
-    </human>
     <human key="workerbreedernovice">
         <resource value="food" />
     </human>
@@ -68,10 +24,6 @@
     <human key="workerfishermanadvanced">
         <resource value="food" />
     </human>
-    <human key="workerjoblessnovice">
-    </human>
-    <human key="workerjoblessadvanced">
-    </human>
     <human key="workerlumberjacknovice">
         <resource value="wood" />
     </human>
@@ -90,14 +42,6 @@
     <human key="workermineradvanced">
         <resource value="coal" />
     </human>
-    <human key="workerofficialnovice">
-    </human>
-    <human key="workerofficialadvanced">
-    </human>
-    <human key="workerpriestnovice">
-    </human>
-    <human key="workerpriestadvanced">
-    </human>
     <human key="workersteelworkernovice">
         <resource value="iron" />
     </human>
@@ -109,9 +53,5 @@
     </human>
     <human key="workerstonemasonadvanced">
         <resource value="rock" />
-    </human>
-    <human key="workerteachernovice">
-    </human>
-    <human key="workerteacheradvanced">
     </human>
 </humans>
