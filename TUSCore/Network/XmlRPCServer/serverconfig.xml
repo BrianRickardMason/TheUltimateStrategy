@@ -1,4 +1,4 @@
-<?xml version=\"1.0\"?>
+<?xml version="1.0" ?>
 <server>
     <host>localhost</host>
     <port>2222</port>
