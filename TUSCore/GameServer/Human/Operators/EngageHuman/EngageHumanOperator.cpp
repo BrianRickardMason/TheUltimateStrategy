@@ -160,13 +160,15 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
 ) const
 {
     // Verify space in buildings.
-    HumanToBuildingTranslator translator;
-    IBuildingShrPtr building = translator.getPlaceOfWork(m_context, a_key);
-    if (building)
+    IHumanShrPtr human = m_context->getConfiguratorHuman()->getHuman(a_key);
+
+    IKey building_key = human->getPlaceOfWork();
+
+    if (not building_key.empty())
     {
         // Get available buildings.
         BuildingWithVolumeShrPtr building_with_volume =
-            m_building_persistence_facade->getBuilding(a_transaction, a_id_holder, building->getKey());
+            m_building_persistence_facade->getBuilding(a_transaction, a_id_holder, building_key);
 
         // Building does not exist.
         if (!building_with_volume)
@@ -175,7 +177,7 @@ bool EngageHumanOperator::verifyDependencyOfEngagementOnBuilding(
         }
 
         // Get a vector of identifiers of a human to check if building is a place of work for some humans.
-        KeyVec humans = BuildingToHumanTranslator::getHumansHostedForWork(building->getKey());
+        KeyVec humans = BuildingToHumanTranslator::getHumansHostedForWork(building_key);
 
         // The building is a place of work for at least one human.
         BOOST_ASSERT(!humans.empty());
