@@ -56,6 +56,7 @@ public:
      * @param a_costs_to_engage   The costs to engage the human.
      * @param a_costs_to_live     The costs for the human to live.
      * @param a_resource_produced The key of the resource that is produced by the human.
+     * @param a_place_of_work     The key of the building that the human works in.
      */
     Human(
         IKey                                         const   a_key,
@@ -68,7 +69,8 @@ public:
         std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
         std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_engage,
         std::map<IKey, GameServer::Resource::Volume> const & a_costs_to_live,
-        IKey                                         const   a_resource_produced
+        IKey                                         const   a_resource_produced,
+        IKey                                         const   a_place_of_work
     );
 
     /**
@@ -148,6 +150,13 @@ public:
      */
     virtual IKey getResourceProduced() const;
 
+    /**
+     * @brief Gets the key of the building that the human works in.
+     *
+     * @return The key of the building that the human works in, an empty string if not found.
+     */
+    virtual IKey getPlaceOfWork() const;
+
 private:
     /**
      * @brief The key of the human.
@@ -203,6 +212,11 @@ private:
      * @brief The key of the resource that is produced by the human, an empty string if human does not produce anything.
      */
     IKey const m_resource_produced;
+
+    /**
+     * @brief The key of the building that the human works in, an empty string if human does not work anywhere.
+     */
+    IKey const m_place_of_work;
 };
 
 } // namespace Configuration

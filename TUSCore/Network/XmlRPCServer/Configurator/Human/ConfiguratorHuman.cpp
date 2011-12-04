@@ -181,7 +181,8 @@ bool ConfiguratorHuman::parseXml()
                       human_costs_to_dismiss,
                       human_costs_to_engage,
                       human_costs_to_live,
-                      resource_produced)
+                      resource_produced,
+                      placeofwork)
         );
 
         m_humans.insert(make_pair(human_key, human));

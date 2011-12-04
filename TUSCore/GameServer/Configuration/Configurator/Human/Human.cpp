@@ -46,7 +46,8 @@ Human::Human(
     map<IKey, GameServer::Resource::Volume> const & a_costs_to_dismiss,
     map<IKey, GameServer::Resource::Volume> const & a_costs_to_engage,
     map<IKey, GameServer::Resource::Volume> const & a_costs_to_live,
-    IKey                                    const   a_resource_produced
+    IKey                                    const   a_resource_produced,
+    IKey                                    const   a_place_of_work
 )
     : m_key(a_key),
       m_class(a_class),
@@ -58,7 +59,8 @@ Human::Human(
       m_costs_to_dismiss(a_costs_to_dismiss),
       m_costs_to_engage(a_costs_to_engage),
       m_costs_to_live(a_costs_to_live),
-      m_resource_produced(a_resource_produced)
+      m_resource_produced(a_resource_produced),
+      m_place_of_work(a_place_of_work)
 {
 }
 
@@ -115,6 +117,11 @@ std::map<IKey, GameServer::Resource::Volume> const & Human::getCostsToLive() con
 IKey Human::getResourceProduced() const
 {
     return m_resource_produced;
+}
+
+IKey Human::getPlaceOfWork() const
+{
+    return m_place_of_work;
 }
 
 } // namespace Configuration

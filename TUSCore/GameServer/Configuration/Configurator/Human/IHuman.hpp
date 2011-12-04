@@ -126,6 +126,13 @@ public:
      * @return The key of the resource that is produced by the human, an empty string if not found.
      */
     virtual IKey getResourceProduced() const = 0;
+
+    /**
+     * @brief Gets the key of the building that the human works in.
+     *
+     * @return The key of the building that the human works in, an empty string if not found.
+     */
+    virtual IKey getPlaceOfWork() const = 0;
 };
 
 //@{
