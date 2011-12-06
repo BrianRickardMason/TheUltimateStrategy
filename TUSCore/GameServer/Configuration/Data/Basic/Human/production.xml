@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<humans>
+    <human key="workerbreedernovice">
+        <resource value="food" />
+    </human>
+    <human key="workerbreederadvanced">
+        <resource value="food" />
+    </human>
+    <human key="workerfarmernovice">
+        <resource value="food" />
+    </human>
+    <human key="workerfarmeradvanced">
+        <resource value="food" />
+    </human>
+    <human key="workerfishermannovice">
+        <resource value="food" />
+    </human>
+    <human key="workerfishermanadvanced">
+        <resource value="food" />
+    </human>
+    <human key="workerlumberjacknovice">
+        <resource value="wood" />
+    </human>
+    <human key="workerlumberjackadvanced">
+        <resource value="wood" />
+    </human>
+    <human key="workermerchantnovice">
+        <resource value="gold" />
+    </human>
+    <human key="workermerchantadvanced">
+        <resource value="gold" />
+    </human>
+    <human key="workerminernovice">
+        <resource value="coal" />
+    </human>
+    <human key="workermineradvanced">
+        <resource value="coal" />
+    </human>
+    <human key="workersteelworkernovice">
+        <resource value="iron" />
+    </human>
+    <human key="workersteelworkeradvanced">
+        <resource value="iron" />
+    </human>
+    <human key="workerstonemasonnovice">
+        <resource value="rock" />
+    </human>
+    <human key="workerstonemasonadvanced">
+        <resource value="rock" />
+    </human>
+</humans>

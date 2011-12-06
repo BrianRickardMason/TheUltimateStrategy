@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<humans>
+    <human key="workerbreedernovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workerbreederadvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+    <human key="workerfarmernovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workerfarmeradvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+    <human key="workerfishermannovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workerfishermanadvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+    <human key="workerjoblessnovice">
+        <dismissable value="false" />
+        <engageable value="false" />
+        <production value="0" />
+    </human>
+    <human key="workerjoblessadvanced">
+        <dismissable value="false" />
+        <engageable value="false" />
+        <production value="0" />
+    </human>
+    <human key="workerlumberjacknovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workerlumberjackadvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+    <human key="workermerchantnovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workermerchantadvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+    <human key="workerminernovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workermineradvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+    <human key="workersteelworkernovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workersteelworkeradvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+    <human key="workerstonemasonnovice">
+        <dismissable value="true" />
+        <engageable value="true" />
+        <production value="10" />
+    </human>
+    <human key="workerstonemasonadvanced">
+        <dismissable value="true" />
+        <engageable value="false" />
+        <production value="10" />
+    </human>
+</humans>
