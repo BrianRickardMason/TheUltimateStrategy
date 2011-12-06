@@ -42,34 +42,6 @@
             </human>
         </humans>
     </building>
-    <building key="regularguild">
-        <humans>
-            <human>
-                <key>sorcerersorcererearthnovice</key>
-            </human>
-            <human>
-                <key>sorcerersorcererearthadvanced</key>
-            </human>
-            <human>
-                <key>sorcerersorcererfirenovice</key>
-            </human>
-            <human>
-                <key>sorcerersorcererfireadvanced</key>
-            </human>
-            <human>
-                <key>sorcerersorcererwaternovice</key>
-            </human>
-            <human>
-                <key>sorcerersorcererwateradvanced</key>
-            </human>
-            <human>
-                <key>sorcerersorcererwindnovice</key>
-            </human>
-            <human>
-                <key>sorcerersorcererwindadvanced</key>
-            </human>
-        </humans>
-    </building>
     <building key="regularmarketplace">
         <humans>
             <human>
