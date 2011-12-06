@@ -202,7 +202,6 @@ bool TurnManager::executeTurnSettlement(
                 if (key_novice ==  KEY_WORKER_MINER_NOVICE       ) key_advanced = KEY_WORKER_MINER_ADVANCED;
                 if (key_novice ==  KEY_WORKER_STEELWORKER_NOVICE ) key_advanced = KEY_WORKER_STEELWORKER_ADVANCED;
                 if (key_novice ==  KEY_WORKER_STONE_MASON_NOVICE ) key_advanced = KEY_WORKER_STONE_MASON_ADVANCED;
-                if (key_novice ==  KEY_WORKER_TEACHER_NOVICE     ) key_advanced = KEY_WORKER_TEACHER_ADVANCED;
 
                 m_human_persistence_facade->addHuman(a_transaction, id_holder, key_advanced, experienced);
 

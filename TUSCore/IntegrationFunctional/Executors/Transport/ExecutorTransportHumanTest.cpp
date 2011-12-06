@@ -69,7 +69,7 @@ protected:
               new ScenarioTransportHumanActionSuccess(
                   "Login", "BadPassword",
                   "Settlement1", "Settlement2",
-                  KEY_WORKER_TEACHER_ADVANCED,
+                  KEY_WORKER_FARMER_ADVANCED,
                   22)),
           m_scenario_verification_invalid_request(new ScenarioTransportHumanVerificationInvalidRequest),
           m_scenario_verification_unauthenticted(new ScenarioTransportHumanVerificationUnauthenticated)
@@ -192,7 +192,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, UnauthorizedToTheSourceS
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login2", "Password2",
                 "Settlement1", "Settlement3",
-                KEY_WORKER_TEACHER_ADVANCED,
+                KEY_WORKER_FARMER_ADVANCED,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationUnauthorized))));
 
@@ -252,7 +252,7 @@ TEST_F(IntegrationFunctionalExecutorTransportHumanTest, UnauthorizedToTheDestina
             IScenarioActionShrPtr(new ScenarioTransportHumanActionSuccess(
                 "Login2", "Password2",
                 "Settlement3", "Settlement1",
-                KEY_WORKER_TEACHER_ADVANCED,
+                KEY_WORKER_FARMER_ADVANCED,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioTransportHumanVerificationUnauthorized))));
 

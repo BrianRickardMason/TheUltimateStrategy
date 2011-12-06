@@ -36,10 +36,4 @@
     <human key="workerstonemasonadvanced">
         <building value="regularquarry" />
     </human>
-    <human key="workerteachernovice">
-        <building value="regularschool" />
-    </human>
-    <human key="workerteacheradvanced">
-        <building value="regularschool" />
-    </human>
 </humans>

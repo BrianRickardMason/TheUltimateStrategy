@@ -58,8 +58,6 @@ Configuration::IKey const KEY_WORKER_STEELWORKER_NOVICE   ("workersteelworkernov
 Configuration::IKey const KEY_WORKER_STEELWORKER_ADVANCED ("workersteelworkeradvanced");
 Configuration::IKey const KEY_WORKER_STONE_MASON_NOVICE   ("workerstonemasonnovice");
 Configuration::IKey const KEY_WORKER_STONE_MASON_ADVANCED ("workerstonemasonadvanced");
-Configuration::IKey const KEY_WORKER_TEACHER_NOVICE       ("workerteachernovice");
-Configuration::IKey const KEY_WORKER_TEACHER_ADVANCED     ("workerteacheradvanced");
 //}@
 
 /**

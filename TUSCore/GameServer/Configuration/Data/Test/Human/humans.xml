@@ -108,16 +108,4 @@
         <name>stone mason</name>
         <experience>advanced</experience>
     </human>
-    <human>
-        <key>workerteachernovice</key>
-        <class>worker</class>
-        <name>teacher</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>workerteacheradvanced</key>
-        <class>worker</class>
-        <name>teacher</name>
-        <experience>advanced</experience>
-    </human>
 </humans>

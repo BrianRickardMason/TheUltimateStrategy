@@ -50,16 +50,6 @@
             </human>
         </humans>
     </building>
-    <building key="regularschool">
-        <humans>
-            <human>
-                <key>workerteachernovice</key>
-            </human>
-            <human>
-                <key>workerteacheradvanced</key>
-            </human>
-        </humans>
-    </building>
     <building key="regularsteelworks">
         <humans>
             <human>

@@ -90,14 +90,4 @@
         <engageable value="false" />
         <production value="10" />
     </human>
-    <human key="workerteachernovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="workerteacheradvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
 </humans>
