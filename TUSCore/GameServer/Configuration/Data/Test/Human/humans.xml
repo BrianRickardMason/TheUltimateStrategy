@@ -37,54 +37,6 @@
         <experience>advanced</experience>
     </human>
     <human>
-        <key>sorcerersorcererearthnovice</key>
-        <class>sorcerer</class>
-        <name>sorcerer earth</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>sorcerersorcererearthadvanced</key>
-        <class>sorcerer</class>
-        <name>sorcerer earth</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
-        <key>sorcerersorcererfirenovice</key>
-        <class>sorcerer</class>
-        <name>sorcerer fire</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>sorcerersorcererfireadvanced</key>
-        <class>sorcerer</class>
-        <name>sorcerer fire</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
-        <key>sorcerersorcererwaternovice</key>
-        <class>sorcerer</class>
-        <name>sorcerer water</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>sorcerersorcererwateradvanced</key>
-        <class>sorcerer</class>
-        <name>sorcerer water</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
-        <key>sorcerersorcererwindnovice</key>
-        <class>sorcerer</class>
-        <name>sorcerer wind</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>sorcerersorcererwindadvanced</key>
-        <class>sorcerer</class>
-        <name>sorcerer wind</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
         <key>workerblacksmithnovice</key>
         <class>worker</class>
         <name>blacksmith</name>

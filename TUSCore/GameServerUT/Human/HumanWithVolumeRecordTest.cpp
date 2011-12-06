@@ -45,8 +45,8 @@ protected:
      */
     HumanWithVolumeRecordTest()
         : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
-          m_record(m_id_holder, KEY_SORCERER_WATER_NOVICE, 5),
-          m_model_key(KEY_SORCERER_WATER_NOVICE)
+          m_record(m_id_holder, KEY_WORKER_FARMER_ADVANCED, 5),
+          m_model_key(KEY_WORKER_FARMER_ADVANCED)
     {
     }
 
@@ -68,7 +68,7 @@ protected:
 
 TEST_F(HumanWithVolumeRecordTest, HumanWithVolumeRecord)
 {
-    HumanWithVolumeRecord record(m_id_holder, KEY_SORCERER_WATER_NOVICE, 5);
+    HumanWithVolumeRecord record(m_id_holder, KEY_WORKER_FARMER_ADVANCED, 5);
 
     ASSERT_TRUE(m_id_holder == record.getIDHolder());
     ASSERT_TRUE(m_model_key == record.getKey());

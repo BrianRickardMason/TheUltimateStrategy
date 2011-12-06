@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>    
+<?xml version="1.0" ?>
 <humans>
     <human key="soldierarchernovice">
         <building value="regularbarracks" />
@@ -17,30 +17,6 @@
     </human>
     <human key="soldierinfantrymanadvanced">
         <building value="regularbarracks" />
-    </human>
-    <human key="sorcerersorcererearthnovice">
-        <building value="regularguild" />
-    </human>
-    <human key="sorcerersorcererearthadvanced">
-        <building value="regularguild" />
-    </human>
-    <human key="sorcerersorcererfirenovice">
-        <building value="regularguild" />
-    </human>
-    <human key="sorcerersorcererfireadvanced">
-        <building value="regularguild" />
-    </human>
-    <human key="sorcerersorcererwaternovice">
-        <building value="regularguild" />
-    </human>
-    <human key="sorcerersorcererwateradvanced">
-        <building value="regularguild" />
-    </human>
-    <human key="sorcerersorcererwindnovice">
-        <building value="regularguild" />
-    </human>
-    <human key="sorcerersorcererwindadvanced">
-        <building value="regularguild" />
     </human>
     <human key="workerblacksmithnovice">
         <building value="regularforge" />

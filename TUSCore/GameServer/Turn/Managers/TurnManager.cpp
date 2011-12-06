@@ -197,11 +197,6 @@ bool TurnManager::executeTurnSettlement(
                 if (key_novice ==  KEY_SOLDIER_HORSEMAN_NOVICE   ) key_advanced = KEY_SOLDIER_HORSEMAN_ADVANCED;
                 if (key_novice ==  KEY_SOLDIER_INFANTRYMAN_NOVICE) key_advanced = KEY_SOLDIER_INFANTRYMAN_ADVANCED;
 
-                if (key_novice ==  KEY_SORCERER_EARTH_NOVICE     ) key_advanced = KEY_SORCERER_EARTH_ADVANCED;
-                if (key_novice ==  KEY_SORCERER_FIRE_NOVICE      ) key_advanced = KEY_SORCERER_FIRE_ADVANCED;
-                if (key_novice ==  KEY_SORCERER_WATER_NOVICE     ) key_advanced = KEY_SORCERER_WATER_ADVANCED;
-                if (key_novice ==  KEY_SORCERER_WIND_NOVICE      ) key_advanced = KEY_SORCERER_WIND_ADVANCED;
-
                 if (key_novice ==  KEY_WORKER_BLACKSMITH_NOVICE  ) key_advanced = KEY_WORKER_BLACKSMITH_ADVANCED;
                 if (key_novice ==  KEY_WORKER_BREEDER_NOVICE     ) key_advanced = KEY_WORKER_BREEDER_ADVANCED;
                 if (key_novice ==  KEY_WORKER_DRUID_NOVICE       ) key_advanced = KEY_WORKER_DRUID_ADVANCED;

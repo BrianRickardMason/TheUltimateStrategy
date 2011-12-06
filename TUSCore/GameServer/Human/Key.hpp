@@ -47,15 +47,6 @@ Configuration::IKey const KEY_SOLDIER_HORSEMAN_ADVANCED   ("soldierhorsemanadvan
 Configuration::IKey const KEY_SOLDIER_INFANTRYMAN_NOVICE  ("soldierinfantrymannovice");
 Configuration::IKey const KEY_SOLDIER_INFANTRYMAN_ADVANCED("soldierinfantrymanadvanced");
 
-Configuration::IKey const KEY_SORCERER_EARTH_NOVICE       ("sorcerersorcererearthnovice");
-Configuration::IKey const KEY_SORCERER_EARTH_ADVANCED     ("sorcerersorcererearthadvanced");
-Configuration::IKey const KEY_SORCERER_FIRE_NOVICE        ("sorcerersorcererfirenovice");
-Configuration::IKey const KEY_SORCERER_FIRE_ADVANCED      ("sorcerersorcererfireadvanced");
-Configuration::IKey const KEY_SORCERER_WATER_NOVICE       ("sorcerersorcererwaternovice");
-Configuration::IKey const KEY_SORCERER_WATER_ADVANCED     ("sorcerersorcererwateradvanced");
-Configuration::IKey const KEY_SORCERER_WIND_NOVICE        ("sorcerersorcererwindnovice");
-Configuration::IKey const KEY_SORCERER_WIND_ADVANCED      ("sorcerersorcererwindadvanced");
-
 Configuration::IKey const KEY_WORKER_BLACKSMITH_NOVICE    ("workerblacksmithnovice");
 Configuration::IKey const KEY_WORKER_BLACKSMITH_ADVANCED  ("workerblacksmithadvanced");
 Configuration::IKey const KEY_WORKER_BREEDER_NOVICE       ("workerbreedernovice");

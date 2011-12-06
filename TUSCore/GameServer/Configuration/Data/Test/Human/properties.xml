@@ -30,46 +30,6 @@
         <engageable value="false" />
         <production value="0" />
     </human>
-    <human key="sorcerersorcererearthnovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="sorcerersorcererearthadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="sorcerersorcererfirenovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="sorcerersorcererfireadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="sorcerersorcererwaternovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="sorcerersorcererwateradvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="sorcerersorcererwindnovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="sorcerersorcererwindadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
     <human key="workerblacksmithnovice">
         <dismissable value="true" />
         <engageable value="true" />

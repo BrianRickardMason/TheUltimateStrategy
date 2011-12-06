@@ -431,7 +431,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHuman
 
     HumanWithVolumeRecordMap map;
     map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
-    map.insert(make_pair(KEY_SORCERER_EARTH_ADVANCED, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SORCERER_EARTH_ADVANCED, 9)));
+    map.insert(make_pair(KEY_WORKER_FARMER_ADVANCED, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_FARMER_ADVANCED, 9)));
 
     EXPECT_CALL(*mock, getRecords(_, m_id_holder))
     .WillOnce(Return(map));
@@ -451,5 +451,5 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHuman
     ASSERT_EQ(2, humans.size());
 
     compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 5);
-    compareHuman(humans[KEY_SORCERER_EARTH_ADVANCED], KEY_SORCERER_EARTH_ADVANCED, 9);
+    compareHuman(humans[KEY_WORKER_FARMER_ADVANCED], KEY_WORKER_FARMER_ADVANCED, 9);
 }
