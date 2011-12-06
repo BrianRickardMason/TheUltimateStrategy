@@ -238,7 +238,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_TryingToDismissZeroHumans)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_DISMISS_ZERO_HUMANS,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 0).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 0).m_exit_code);
     }
 
     assertDatabaseUntouched();
@@ -251,7 +251,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_HolderDoesNotExist)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_4, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_4, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
     }
 
     assertDatabaseUntouched();
@@ -280,7 +280,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroEngaged)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
     }
 
     assertDatabaseUntouched();
@@ -292,7 +292,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 1);
 
         transaction->commit();
     }
@@ -302,14 +302,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughEngaged)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_ENGAGED,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 2).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 2).m_exit_code);
     }
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 1);
 
         transaction->commit();
     }
@@ -323,8 +323,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_12, KEY_WORKER_BREEDER_NOVICE, 10);
 
         // TODO: Subtract map of resources.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
@@ -348,7 +348,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
             ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-                      m_dismiss_human_operator->dismissHuman(transaction, *it, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+                      m_dismiss_human_operator->dismissHuman(transaction, *it, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
         }
     }
 
@@ -356,8 +356,8 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
-        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_12, KEY_WORKER_BREEDER_NOVICE, 10);
 
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
@@ -379,7 +379,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         // TODO: Subtract map of resources.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
@@ -398,14 +398,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
     }
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
@@ -427,7 +427,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         // TODO: Subtract map of resources.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
@@ -443,14 +443,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
     }
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
@@ -469,7 +469,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
@@ -481,14 +481,14 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_OneResource)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
     }
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
@@ -504,7 +504,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         transaction->commit();
     }
@@ -514,7 +514,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
 
         transaction->commit();
     }
@@ -541,7 +541,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(9, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
+        ASSERT_EQ(9, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE)->getVolume());
         ASSERT_EQ(1001, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
@@ -553,7 +553,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         transaction->commit();
     }
@@ -563,7 +563,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 6).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 6).m_exit_code);
 
         transaction->commit();
     }
@@ -589,7 +589,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(4, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
+        ASSERT_EQ(4, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE)->getVolume());
         ASSERT_EQ(1006, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
@@ -601,7 +601,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10);
 
         transaction->commit();
     }
@@ -611,7 +611,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 10).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 10).m_exit_code);
 
         transaction->commit();
     }
@@ -648,7 +648,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 200);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 200);
 
         transaction->commit();
     }
@@ -658,7 +658,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(DISMISS_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_DISMISSED,
-                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE, 100).m_exit_code);
+                  m_dismiss_human_operator->dismissHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE, 100).m_exit_code);
 
         transaction->commit();
     }
@@ -684,7 +684,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(100, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_DRUID_NOVICE)->getVolume());
+        ASSERT_EQ(100, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_BREEDER_NOVICE)->getVolume());
         ASSERT_EQ(1100, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }

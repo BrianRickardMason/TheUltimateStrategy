@@ -128,7 +128,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_Unauthorized)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login1", "Password1",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -136,7 +136,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_Unauthorized)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login2", "Password2",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationUnauthorized))));
 
@@ -180,7 +180,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_NotEnoughEngaged)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 10)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -188,7 +188,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_NotEnoughEngaged)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 11)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationNotEnoughEngaged))));
 
@@ -232,7 +232,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 60)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -240,7 +240,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationNotEnoughResources))));
 
@@ -284,7 +284,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_MaxHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -292,7 +292,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_MaxHumans)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationHumanHasBeenDismissed))));
 
@@ -336,7 +336,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_ManyHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -344,7 +344,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_ManyHumans)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 40)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationHumanHasBeenDismissed))));
 
@@ -388,7 +388,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_OneHuman)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -396,7 +396,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_OneHuman)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationHumanHasBeenDismissed))));
 
@@ -440,7 +440,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_LastOneHuman)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -448,7 +448,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_LastOneHuman)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationHumanHasBeenDismissed))));
 
@@ -492,7 +492,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_LastOneHumanDoubleDismiss)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -500,7 +500,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_LastOneHumanDoubleDismiss)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationHumanHasBeenDismissed))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -508,7 +508,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_LastOneHumanDoubleDismiss)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationNotEnoughEngaged))));
 
@@ -552,7 +552,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_ZeroHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -560,7 +560,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_ZeroHumans)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 0)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationTryingToDismissZeroHumans))));
 
@@ -604,7 +604,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_NotDismissable)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioDismissHuman(
@@ -632,7 +632,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_InvalidRequest)
                 IScenarioActionShrPtr(new ScenarioDismissHumanActionInvalidRequest(
                     "Login", "Password",
                     ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                    KEY_WORKER_DRUID_NOVICE,
+                    KEY_WORKER_BREEDER_NOVICE,
                     1)),
                 IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationInvalidRequest))));
 
@@ -652,7 +652,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_InvalidRange)
                 IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                     "Login", "Password",
                     ID_HOLDER_CLASS_TROOP + 1, "Settlement",
-                    KEY_WORKER_DRUID_NOVICE,
+                    KEY_WORKER_BREEDER_NOVICE,
                     1)),
                 IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationInvalidRange))));
 
@@ -696,7 +696,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_Unauthenticated)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "BadPassword",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationUnauthenticated))));
 
@@ -744,7 +744,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationEpochIsNotActive))));
 

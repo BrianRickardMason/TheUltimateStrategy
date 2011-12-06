@@ -1,16 +1,10 @@
-<?xml version="1.0" ?>    
+<?xml version="1.0" ?>
 <humans>
     <human key="workerbreedernovice">
         <resource value="food" />
     </human>
     <human key="workerbreederadvanced">
         <resource value="food" />
-    </human>
-    <human key="workerdruidnovice">
-        <resource value="mana" />
-    </human>
-    <human key="workerdruidadvanced">
-        <resource value="mana" />
     </human>
     <human key="workerfarmernovice">
         <resource value="food" />

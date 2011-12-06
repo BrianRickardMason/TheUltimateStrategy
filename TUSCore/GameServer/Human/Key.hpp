@@ -42,8 +42,6 @@ namespace Human
  */
 Configuration::IKey const KEY_WORKER_BREEDER_NOVICE       ("workerbreedernovice");
 Configuration::IKey const KEY_WORKER_BREEDER_ADVANCED     ("workerbreederadvanced");
-Configuration::IKey const KEY_WORKER_DRUID_NOVICE         ("workerdruidnovice");
-Configuration::IKey const KEY_WORKER_DRUID_ADVANCED       ("workerdruidadvanced");
 Configuration::IKey const KEY_WORKER_FARMER_NOVICE        ("workerfarmernovice");
 Configuration::IKey const KEY_WORKER_FARMER_ADVANCED      ("workerfarmeradvanced");
 Configuration::IKey const KEY_WORKER_FISHERMAN_NOVICE     ("workerfishermannovice");

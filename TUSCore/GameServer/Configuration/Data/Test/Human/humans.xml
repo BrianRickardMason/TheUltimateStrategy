@@ -13,18 +13,6 @@
         <experience>advanced</experience>
     </human>
     <human>
-        <key>workerdruidnovice</key>
-        <class>worker</class>
-        <name>druid</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>workerdruidadvanced</key>
-        <class>worker</class>
-        <name>druid</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
         <key>workerfarmernovice</key>
         <class>worker</class>
         <name>farmer</name>

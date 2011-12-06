@@ -168,7 +168,7 @@ TEST_F(IntegrationFunctionalTest, GetHumans_ManyHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))))
         (IScenarioShrPtr(new ScenarioGetHumans(

@@ -348,7 +348,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotNeeded)
 
     configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
     configureHumanPersistenceFacadeMockForSubtractHuman(KEY_WORKER_JOBLESS_NOVICE, 1);
-    configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_DRUID_NOVICE, 1);
+    configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_BREEDER_NOVICE, 1);
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -356,7 +356,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotNeeded)
                                               IResourcePersistenceFacadeShrPtr(produceResourcePersistenceFacadeMock()));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_DRUID_NOVICE, 1).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BREEDER_NOVICE, 1).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_HostingOneHuman)

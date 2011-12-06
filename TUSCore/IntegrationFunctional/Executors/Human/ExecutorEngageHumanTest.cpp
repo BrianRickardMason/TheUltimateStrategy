@@ -140,7 +140,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 90)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationNotEnoughResources))));
 
@@ -236,7 +236,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_MaxHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 100)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
 
@@ -280,7 +280,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_ManyHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 80)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
 
@@ -324,7 +324,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_OneHuman)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationHumanHasBeenEngaged))));
 
@@ -368,7 +368,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_ZeroHumans)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 0)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationTryingToEngageZeroHumans))));
 
@@ -388,7 +388,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_InvalidRequest)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionInvalidRequest(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationInvalidRequest))));
 
@@ -408,7 +408,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_InvalidRange)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_TROOP + 1, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationInvalidRange))));
 
@@ -452,7 +452,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_Unauthenticated)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "BadPassword",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthenticated))));
 
@@ -548,7 +548,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_WORKER_DRUID_NOVICE,
+                KEY_WORKER_BREEDER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationEpochIsNotActive))));
 

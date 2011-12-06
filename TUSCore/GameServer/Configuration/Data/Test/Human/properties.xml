@@ -10,16 +10,6 @@
         <engageable value="false" />
         <production value="10" />
     </human>
-    <human key="workerdruidnovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="10" />
-    </human>
-    <human key="workerdruidadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="10" />
-    </human>
     <human key="workerfarmernovice">
         <dismissable value="true" />
         <engageable value="true" />

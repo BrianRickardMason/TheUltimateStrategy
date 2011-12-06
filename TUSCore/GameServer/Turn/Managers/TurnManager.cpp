@@ -194,7 +194,6 @@ bool TurnManager::executeTurnSettlement(
 
                 // TODO: A nasty workaround.
                 if (key_novice ==  KEY_WORKER_BREEDER_NOVICE     ) key_advanced = KEY_WORKER_BREEDER_ADVANCED;
-                if (key_novice ==  KEY_WORKER_DRUID_NOVICE       ) key_advanced = KEY_WORKER_DRUID_ADVANCED;
                 if (key_novice ==  KEY_WORKER_FARMER_NOVICE      ) key_advanced = KEY_WORKER_FARMER_ADVANCED;
                 if (key_novice ==  KEY_WORKER_FISHERMAN_NOVICE   ) key_advanced = KEY_WORKER_FISHERMAN_ADVANCED;
                 if (key_novice ==  KEY_WORKER_JOBLESS_NOVICE     ) key_advanced = KEY_WORKER_JOBLESS_ADVANCED;
