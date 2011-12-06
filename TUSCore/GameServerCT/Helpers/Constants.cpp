@@ -29,7 +29,6 @@
 #include <boost/assign.hpp>
 
 H::KeyVec HUMAN_IS_NOT_ENGAGEABLE = boost::assign::list_of
-    (H::KEY_WORKER_BLACKSMITH_ADVANCED  )
     (H::KEY_WORKER_BREEDER_ADVANCED     )
     (H::KEY_WORKER_DRUID_ADVANCED       )
     (H::KEY_WORKER_FARMER_ADVANCED      )
@@ -50,8 +49,6 @@ H::KeyVec HUMAN_IS_NOT_DISMISSABLE = boost::assign::list_of
     (H::KEY_WORKER_JOBLESS_ADVANCED);
 
 H::KeyVec HUMAN_DOES_NOT_PRODUCE = boost::assign::list_of
-    (H::KEY_WORKER_BLACKSMITH_NOVICE    )
-    (H::KEY_WORKER_BLACKSMITH_ADVANCED  )
     (H::KEY_WORKER_JOBLESS_NOVICE       )
     (H::KEY_WORKER_JOBLESS_ADVANCED     )
     (H::KEY_WORKER_OFFICIAL_NOVICE      )

@@ -1,18 +1,6 @@
 <?xml version="1.0" ?>
 <humans>
     <human>
-        <key>workerblacksmithnovice</key>
-        <class>worker</class>
-        <name>blacksmith</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>workerblacksmithadvanced</key>
-        <class>worker</class>
-        <name>blacksmith</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
         <key>workerbreedernovice</key>
         <class>worker</class>
         <name>breeder</name>

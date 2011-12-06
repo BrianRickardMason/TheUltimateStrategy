@@ -132,7 +132,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_TryingToTransportZeroHumans)
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_2,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       0).m_exit_code);
 }
 
@@ -150,7 +150,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SourceSettlementDoesNotExist)
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_2,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       10).m_exit_code);
 }
 
@@ -171,7 +171,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_DestinationSettlementDoesNotEx
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_2,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       10).m_exit_code);
 }
 
@@ -192,7 +192,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SettlementsAreNotFromTheSameLa
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_3,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       10).m_exit_code);
 }
 
@@ -206,7 +206,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_NotEnoughHumans)
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
-    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BREEDER_NOVICE, 10))
     .WillOnce(Return(false));
 
     TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
@@ -216,7 +216,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_NotEnoughHumans)
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_2,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       10).m_exit_code);
 }
 
@@ -231,7 +231,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SubtractHumanThrows)
     .WillOnce(Return(m_settlement_2));
 
     std::exception e;
-    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BREEDER_NOVICE, 10))
     .WillOnce(Throw(e));
 
     TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
@@ -241,7 +241,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_SubtractHumanThrows)
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_2,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       10).m_exit_code);
 }
 
@@ -255,11 +255,11 @@ TEST_F(TransportHumanOperatorTest, transportHuman_AddHumanThrows)
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
-    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BREEDER_NOVICE, 10))
     .WillOnce(Return(true));
 
     std::exception e;
-    EXPECT_CALL(*m_human_persistence_facade, addHuman(transaction, m_id_holder_2, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, addHuman(transaction, m_id_holder_2, KEY_WORKER_BREEDER_NOVICE, 10))
     .WillOnce(Throw(e));
 
     TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
@@ -269,7 +269,7 @@ TEST_F(TransportHumanOperatorTest, transportHuman_AddHumanThrows)
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_2,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       10).m_exit_code);
 }
 
@@ -283,10 +283,10 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success)
     EXPECT_CALL(*m_settlement_persistence_facade, getSettlement(transaction, m_settlement_name_2))
     .WillOnce(Return(m_settlement_2));
 
-    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BLACKSMITH_NOVICE, 10))
+    EXPECT_CALL(*m_human_persistence_facade, subtractHuman(transaction, m_id_holder_1, KEY_WORKER_BREEDER_NOVICE, 10))
     .WillOnce(Return(true));
 
-    EXPECT_CALL(*m_human_persistence_facade, addHuman(transaction, m_id_holder_2, KEY_WORKER_BLACKSMITH_NOVICE, 10));
+    EXPECT_CALL(*m_human_persistence_facade, addHuman(transaction, m_id_holder_2, KEY_WORKER_BREEDER_NOVICE, 10));
 
     TransportHumanOperator transport_human_operator((IHumanPersistenceFacadeShrPtr(m_human_persistence_facade)),
                                                     (ISettlementPersistenceFacadeShrPtr(m_settlement_persistence_facade)));
@@ -295,6 +295,6 @@ TEST_F(TransportHumanOperatorTest, transportHuman_Success)
               transport_human_operator.transportHuman(transaction,
                                                       m_settlement_name_1,
                                                       m_settlement_name_2,
-                                                      KEY_WORKER_BLACKSMITH_NOVICE,
+                                                      KEY_WORKER_BREEDER_NOVICE,
                                                       10).m_exit_code);
 }

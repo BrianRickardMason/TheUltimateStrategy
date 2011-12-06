@@ -75,7 +75,7 @@ protected:
     BuildingPersistenceFacadeMock * produceBuildingPersistenceFacadeMock()
     {
         // Mocks setup: BuildingPersistenceFacadeMock.
-        configureBuildingPersistenceFacadeMockForGetBuilding(KEY_REGULAR_BARRACKS, 2);
+        configureBuildingPersistenceFacadeMockFARMtBuilding(KEY_REGULAR_BARRACKS, 2);
 
         return m_building_persistence_facade;
     }
@@ -89,7 +89,7 @@ protected:
     {
         // Mocks setup: ResourcePersistenceFacadeMock.
         std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-        configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
+        configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
         resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
         configureResourcePersistenceFacadeMockForSubtractResourceMap(getResourceMap(m_context, resource_volumes));
@@ -105,7 +105,7 @@ protected:
      * @param a_key    A key of the building.
      * @param a_volume A volume of the building.
      */
-    void configureBuildingPersistenceFacadeMockForGetBuilding(
+    void configureBuildingPersistenceFacadeMockFARMtBuilding(
         IKey   const & a_key,
         Volume const & a_volume
     )
@@ -141,7 +141,7 @@ protected:
      * @param a_key    A key of the human.
      * @param a_volume A volume of jobless.
      */
-    void configureHumanPersistenceFacadeMockForGetHuman(
+    void configureHumanPersistenceFacadeMockFARMtHuman(
         IKey   const & a_key,
         Volume const & a_volume
     )
@@ -173,7 +173,7 @@ protected:
      *
      * @param a_resource_map A map of resources to be returned.
      */
-    void configureResourcePersistenceFacadeMockForGetResources(
+    void configureResourcePersistenceFacadeMockFARMtResources(
         ResourceWithVolumeMap const & a_resource_map
     )
     {
@@ -242,7 +242,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_TryingToEngageZeroHumans)
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_TRYING_TO_ENGAGE_ZERO_HUMANS,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 0).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_NOVICE, 0).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_HumanIsNotEngageable)
@@ -255,14 +255,14 @@ TEST_F(EngageHumanOperatorTest, engageHuman_HumanIsNotEngageable)
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_IS_NOT_ENGAGEABLE,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED, 1).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_ADVANCED, 1).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 0);
+    configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 0);
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -270,14 +270,14 @@ TEST_F(EngageHumanOperatorTest, engageHuman_ZeroJobless)
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_JOBLESS,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_NOVICE, 1).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 5);
+    configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 5);
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -285,17 +285,17 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughJobless)
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_JOBLESS,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 10).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_NOVICE, 10).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_NoResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
+    configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes;
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
+    configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -303,17 +303,17 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_NoResources)
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 10).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_NOVICE, 10).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_ZeroVolumes)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
+    configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
+    configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -321,17 +321,17 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_ZeroVolumes)
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 10).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_NOVICE, 10).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_LowerVolumes)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
+    configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1)(1);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
+    configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -339,14 +339,14 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_LowerVolumes)
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 10).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_NOVICE, 10).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNotNeeded)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
+    configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
     configureHumanPersistenceFacadeMockForSubtractHuman(KEY_WORKER_JOBLESS_NOVICE, 1);
     configureHumanPersistenceFacadeMockForAddHuman(KEY_WORKER_DRUID_NOVICE, 1);
 
@@ -363,12 +363,12 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    configureBuildingPersistenceFacadeMockForGetBuilding(KEY_REGULAR_FORGE, 0);
+    configureBuildingPersistenceFacadeMockFARMtBuilding(KEY_REGULAR_FARM, 0);
 
-    configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
+    configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
-    configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
+    configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
                                               IBuildingPersistenceFacadeShrPtr(m_building_persistence_facade),
@@ -376,7 +376,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_
                                               IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_NOVICE, 1).m_exit_code);
+              engage_human_operator.engageHuman(transaction, m_id_holder, KEY_WORKER_FARMER_NOVICE, 1).m_exit_code);
 }
 
 TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_HostingOneHuman_ZeroHumans)
@@ -384,7 +384,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Test constants.
-    string engage_human_key = KEY_WORKER_BLACKSMITH_NOVICE;
+    string engage_human_key = KEY_WORKER_FARMER_NOVICE;
     unsigned int engage_human_volume = 1;
     unsigned int building_volume = 1;
     unsigned int jobless_available = 10;
@@ -399,14 +399,14 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
-    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
+    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FARM))
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FARM, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
-    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
+    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_FARMER_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
     // Subtract resources.
@@ -435,7 +435,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Test constants.
-    string engage_human_key = KEY_WORKER_BLACKSMITH_NOVICE;
+    string engage_human_key = KEY_WORKER_FARMER_NOVICE;
     unsigned int engage_human_volume = 1;
     unsigned int building_volume = 2;
     unsigned int jobless_available = 10;
@@ -450,14 +450,14 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
-    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
+    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FARM))
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FARM, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
-    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 19)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_FARMER_NOVICE, 19)));
 
-    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
+    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_FARMER_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
     // Subtract resources.
@@ -486,7 +486,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Test constants.
-    string engage_human_key = KEY_WORKER_BLACKSMITH_NOVICE;
+    string engage_human_key = KEY_WORKER_FARMER_NOVICE;
     unsigned int engage_human_volume = 1;
     unsigned int building_volume = 2;
     unsigned int jobless_available = 10;
@@ -501,15 +501,15 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
-    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
+    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FARM))
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FARM, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
-    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 10)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_FARMER_NOVICE, 10)));
 
-    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
-    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 9)));
+    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_FARMER_ADVANCED))
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_FARMER_NOVICE, 9)));
 
     // Subtract resources.
     resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
@@ -537,7 +537,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Test constants.
-    string engage_human_key = KEY_WORKER_BLACKSMITH_NOVICE;
+    string engage_human_key = KEY_WORKER_FARMER_NOVICE;
     unsigned int engage_human_volume = 1;
     unsigned int building_volume = 2;
     unsigned int jobless_available = 10;
@@ -552,14 +552,14 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
-    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
+    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FARM))
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FARM, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
-    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_BLACKSMITH_NOVICE, 20)));
+    .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_FARMER_NOVICE, 20)));
 
-    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
+    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_FARMER_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
     EngageHumanOperator engage_human_operator(m_context,
@@ -576,7 +576,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     ITransactionShrPtr transaction(new TransactionDummy);
 
     // Test constants.
-    string engage_human_key = KEY_WORKER_BLACKSMITH_NOVICE;
+    string engage_human_key = KEY_WORKER_FARMER_NOVICE;
     unsigned int engage_human_volume = 1;
     unsigned int building_volume = 2;
     unsigned int jobless_available = 10;
@@ -591,14 +591,14 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
     // Get the building.
-    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FORGE))
-    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FORGE, building_volume)));
+    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FARM))
+    .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FARM, building_volume)));
 
     // Get the humans occupying the building.
     EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, engage_human_key))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
-    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_BLACKSMITH_ADVANCED))
+    EXPECT_CALL(*m_human_persistence_facade, getHuman(transaction, m_id_holder, KEY_WORKER_FARMER_ADVANCED))
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
     // Subtract resources.

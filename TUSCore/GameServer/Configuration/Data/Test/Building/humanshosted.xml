@@ -10,16 +10,6 @@
             </human>
         </humans>
     </building>
-    <building key="regularforge">
-        <humans>
-            <human>
-                <key>workerblacksmithnovice</key>
-            </human>
-            <human>
-                <key>workerblacksmithadvanced</key>
-            </human>
-        </humans>
-    </building>
     <building key="regularmarketplace">
         <humans>
             <human>

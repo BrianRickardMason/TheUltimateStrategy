@@ -1,11 +1,5 @@
 <?xml version="1.0" ?>
 <humans>
-    <human key="workerblacksmithnovice">
-        <building value="regularforge" />
-    </human>
-    <human key="workerblacksmithadvanced">
-        <building value="regularforge" />
-    </human>
     <human key="workerfarmernovice">
         <building value="regularfarm" />
     </human>
