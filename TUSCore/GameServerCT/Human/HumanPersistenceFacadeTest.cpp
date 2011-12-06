@@ -182,7 +182,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -195,7 +195,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(1, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
     }
 }
 
@@ -205,7 +205,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -214,7 +214,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -227,7 +227,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(1, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 22);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 22);
     }
 }
 
@@ -237,7 +237,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_DifferentHuman)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -259,7 +259,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_DifferentHuman)
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(2, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
         compareHuman(humans[KEY_WORKER_FARMER_ADVANCED], KEY_WORKER_FARMER_ADVANCED, 22);
     }
 }
@@ -273,7 +273,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansArePresent_SubtractAllOfO
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_ADVANCED, 22);
 
         transaction->commit();
@@ -296,7 +296,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansArePresent_SubtractAllOfO
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(1, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
     }
 }
 
@@ -306,7 +306,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractHalfAtOn
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 22);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 22);
 
         transaction->commit();
     }
@@ -315,7 +315,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractHalfAtOn
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11));
+        ASSERT_TRUE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11));
 
         transaction->commit();
     }
@@ -328,7 +328,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractHalfAtOn
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(1, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
     }
 }
 
@@ -338,7 +338,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansIsPresent_TryToSubtractTo
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -347,7 +347,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansIsPresent_TryToSubtractTo
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 12));
+        ASSERT_FALSE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 12));
     }
 
     {
@@ -358,7 +358,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansIsPresent_TryToSubtractTo
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(1, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
     }
 }
 
@@ -368,7 +368,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansIsPresent_SubtractRest)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -377,7 +377,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansIsPresent_SubtractRest)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11));
+        ASSERT_TRUE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11));
 
         transaction->commit();
     }
@@ -398,7 +398,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumansIsNotPresent_TryToSubtrac
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11));
+        ASSERT_FALSE(m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11));
     }
 }
 
@@ -411,7 +411,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE);
+        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE);
 
         ASSERT_TRUE(human == NULL);
     }
@@ -423,7 +423,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetPresentHuman_OfHol
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -432,10 +432,10 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetPresentHuman_OfHol
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE);
+        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE);
 
         ASSERT_FALSE(human == NULL);
-        compareHuman(human, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(human, KEY_WORKER_MINER_NOVICE, 11);
     }
 }
 
@@ -445,7 +445,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetPresentHuman_OfDif
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -454,7 +454,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetPresentHuman_OfDif
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_2, KEY_SOLDIER_ARCHER_NOVICE);
+        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_2, KEY_WORKER_MINER_NOVICE);
 
         ASSERT_TRUE(human == NULL);
     }
@@ -466,7 +466,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetPresentHuman_OfDif
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -475,7 +475,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetPresentHuman_OfDif
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_3, KEY_SOLDIER_ARCHER_NOVICE);
+        HumanWithVolumeShrPtr human = m_human_persistence_facade->getHuman(transaction, m_id_holder_3, KEY_WORKER_MINER_NOVICE);
 
         ASSERT_TRUE(human == NULL);
     }
@@ -487,7 +487,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetNonPresentHuman_Of
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -508,7 +508,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetNonPresentHuman_Of
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -529,7 +529,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent_GetNonPresentHuman_Of
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -577,7 +577,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumanIsPresent_OfHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -590,7 +590,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumanIsPresent_OfHolder)
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(1, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
     }
 }
 
@@ -600,7 +600,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumanIsPresent_OfDifferen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -621,7 +621,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumanIsPresent_OfDifferen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
 
         transaction->commit();
     }
@@ -642,7 +642,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OfHolder
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_ADVANCED, 22);
 
         transaction->commit();
@@ -656,7 +656,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OfHolder
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(2, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
         compareHuman(humans[KEY_WORKER_FARMER_ADVANCED], KEY_WORKER_FARMER_ADVANCED, 22);
     }
 }
@@ -667,7 +667,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OfDiffer
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_ADVANCED, 22);
 
         transaction->commit();
@@ -689,7 +689,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OfDiffer
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_ADVANCED, 22);
 
         transaction->commit();
@@ -711,9 +711,9 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHolde
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_ADVANCED, 22);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_SOLDIER_ARCHER_NOVICE, 33);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_WORKER_MINER_NOVICE, 33);
 
         transaction->commit();
     }
@@ -726,7 +726,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHolde
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(2, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 11);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 11);
         compareHuman(humans[KEY_WORKER_FARMER_ADVANCED], KEY_WORKER_FARMER_ADVANCED, 22);
     }
 }
@@ -737,9 +737,9 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHolde
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_ADVANCED, 22);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_SOLDIER_ARCHER_NOVICE, 33);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_WORKER_MINER_NOVICE, 33);
 
         transaction->commit();
     }
@@ -752,7 +752,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHolde
 
         ASSERT_FALSE(humans.empty());
         ASSERT_EQ(1, humans.size());
-        compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 33);
+        compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 33);
     }
 }
 
@@ -762,9 +762,9 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHolde
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_SOLDIER_ARCHER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
         m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_ADVANCED, 22);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_SOLDIER_ARCHER_NOVICE, 33);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_WORKER_MINER_NOVICE, 33);
 
         transaction->commit();
     }

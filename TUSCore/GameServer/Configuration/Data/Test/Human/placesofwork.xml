@@ -1,23 +1,5 @@
 <?xml version="1.0" ?>
 <humans>
-    <human key="soldierarchernovice">
-        <building value="regularbarracks" />
-    </human>
-    <human key="soldierarcheradvanced">
-        <building value="regularbarracks" />
-    </human>
-    <human key="soldierhorsemannovice">
-        <building value="regularbarracks" />
-    </human>
-    <human key="soldierhorsemanadvanced">
-        <building value="regularbarracks" />
-    </human>
-    <human key="soldierinfantrymannovice">
-        <building value="regularbarracks" />
-    </human>
-    <human key="soldierinfantrymanadvanced">
-        <building value="regularbarracks" />
-    </human>
     <human key="workerblacksmithnovice">
         <building value="regularforge" />
     </human>

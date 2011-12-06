@@ -40,13 +40,6 @@ namespace Human
 /**
  * @brief The available key.
  */
-Configuration::IKey const KEY_SOLDIER_ARCHER_NOVICE       ("soldierarchernovice");
-Configuration::IKey const KEY_SOLDIER_ARCHER_ADVANCED     ("soldierarcheradvanced");
-Configuration::IKey const KEY_SOLDIER_HORSEMAN_NOVICE     ("soldierhorsemannovice");
-Configuration::IKey const KEY_SOLDIER_HORSEMAN_ADVANCED   ("soldierhorsemanadvanced");
-Configuration::IKey const KEY_SOLDIER_INFANTRYMAN_NOVICE  ("soldierinfantrymannovice");
-Configuration::IKey const KEY_SOLDIER_INFANTRYMAN_ADVANCED("soldierinfantrymanadvanced");
-
 Configuration::IKey const KEY_WORKER_BLACKSMITH_NOVICE    ("workerblacksmithnovice");
 Configuration::IKey const KEY_WORKER_BLACKSMITH_ADVANCED  ("workerblacksmithadvanced");
 Configuration::IKey const KEY_WORKER_BREEDER_NOVICE       ("workerbreedernovice");

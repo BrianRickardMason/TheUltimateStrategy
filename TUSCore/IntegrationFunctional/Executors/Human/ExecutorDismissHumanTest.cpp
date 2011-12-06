@@ -80,7 +80,7 @@ TEST_F(IntegrationFunctionalTest, DismissHuman_SettlementDoesNotExist)
             IScenarioActionShrPtr(new ScenarioDismissHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_SOLDIER_ARCHER_NOVICE,
+                KEY_WORKER_MINER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDismissHumanVerificationUnauthorized))));
 

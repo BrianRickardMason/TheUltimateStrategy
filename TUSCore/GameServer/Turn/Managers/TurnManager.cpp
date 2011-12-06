@@ -193,10 +193,6 @@ bool TurnManager::executeTurnSettlement(
                 IKey key_advanced;
 
                 // TODO: A nasty workaround.
-                if (key_novice ==  KEY_SOLDIER_ARCHER_NOVICE     ) key_advanced = KEY_SOLDIER_ARCHER_ADVANCED;
-                if (key_novice ==  KEY_SOLDIER_HORSEMAN_NOVICE   ) key_advanced = KEY_SOLDIER_HORSEMAN_ADVANCED;
-                if (key_novice ==  KEY_SOLDIER_INFANTRYMAN_NOVICE) key_advanced = KEY_SOLDIER_INFANTRYMAN_ADVANCED;
-
                 if (key_novice ==  KEY_WORKER_BLACKSMITH_NOVICE  ) key_advanced = KEY_WORKER_BLACKSMITH_ADVANCED;
                 if (key_novice ==  KEY_WORKER_BREEDER_NOVICE     ) key_advanced = KEY_WORKER_BREEDER_ADVANCED;
                 if (key_novice ==  KEY_WORKER_DRUID_NOVICE       ) key_advanced = KEY_WORKER_DRUID_ADVANCED;

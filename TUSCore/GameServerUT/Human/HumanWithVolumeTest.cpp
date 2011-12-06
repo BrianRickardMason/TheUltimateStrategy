@@ -46,8 +46,8 @@ protected:
      */
     HumanWithVolumeTest()
         : m_context(new Context),
-          m_human_with_volume(m_context, KEY_SOLDIER_HORSEMAN_ADVANCED, 4),
-          m_model_key(KEY_SOLDIER_HORSEMAN_ADVANCED)
+          m_human_with_volume(m_context, KEY_WORKER_MINER_NOVICE, 4),
+          m_model_key(KEY_WORKER_MINER_NOVICE)
     {
     }
 
@@ -69,7 +69,7 @@ protected:
 
 TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnArguments)
 {
-    HumanWithVolume human_with_volume(m_context, KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
+    HumanWithVolume human_with_volume(m_context, KEY_WORKER_MINER_NOVICE, 4);
 
     ASSERT_TRUE(m_model_key == human_with_volume.getHuman()->getKey());
     ASSERT_EQ(4, human_with_volume.getVolume());
@@ -77,7 +77,7 @@ TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnArguments)
 
 TEST_F(HumanWithVolumeTest, HumanWithVolume_BasedOnRecord)
 {
-    HumanWithVolumeRecord human_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
+    HumanWithVolumeRecord human_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_WORKER_MINER_NOVICE, 4);
 
     HumanWithVolume human_with_volume(m_context, human_with_volume_record);
 
@@ -93,7 +93,7 @@ TEST_F(HumanWithVolumeTest, getKey)
 TEST_F(HumanWithVolumeTest, getExperience)
 {
     // TODO: A hardcode. FIXME!
-    ASSERT_TRUE("advanced" == m_human_with_volume.getHuman()->getExperience());
+    ASSERT_TRUE("novice" == m_human_with_volume.getHuman()->getExperience());
 }
 
 TEST_F(HumanWithVolumeTest, getVolume)

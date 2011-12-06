@@ -1,42 +1,6 @@
 <?xml version="1.0" ?>
 <humans>
     <human>
-        <key>soldierarchernovice</key>
-        <class>soldier</class>
-        <name>archer</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>soldierarcheradvanced</key>
-        <class>soldier</class>
-        <name>archer</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
-        <key>soldierhorsemannovice</key>
-        <class>soldier</class>
-        <name>horseman</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>soldierhorsemanadvanced</key>
-        <class>soldier</class>
-        <name>horseman</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
-        <key>soldierinfantrymannovice</key>
-        <class>soldier</class>
-        <name>infantryman</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>soldierinfantrymanadvanced</key>
-        <class>soldier</class>
-        <name>infantryman</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
         <key>workerblacksmithnovice</key>
         <class>worker</class>
         <name>blacksmith</name>

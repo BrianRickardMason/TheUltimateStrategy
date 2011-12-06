@@ -100,9 +100,9 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, insertRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    EXPECT_CALL(*mock, insertRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE, 5));
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
@@ -112,7 +112,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 5));
 }
 
 TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent_Throw)
@@ -124,10 +124,10 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent_Throw)
 
     std::exception e;
 
-    EXPECT_CALL(*mock, insertRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5))
+    EXPECT_CALL(*mock, insertRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE, 5))
     .WillOnce(Throw(e));
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
@@ -137,7 +137,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsNotPresent_Throw)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-   ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
+   ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 5), std::exception);
 }
 
 TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
@@ -147,10 +147,10 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
-    EXPECT_CALL(*mock, increaseVolume(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    EXPECT_CALL(*mock, increaseVolume(_, m_id_holder, KEY_WORKER_MINER_NOVICE, 5));
 
     // Mocks setup: Wrapping around.
     IHumanAccessorAutPtr accessor(mock);
@@ -159,7 +159,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_NO_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 5));
 }
 
 TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
@@ -171,10 +171,10 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
 
     std::exception e;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
-    EXPECT_CALL(*mock, increaseVolume(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5))
+    EXPECT_CALL(*mock, increaseVolume(_, m_id_holder, KEY_WORKER_MINER_NOVICE, 5))
     .WillOnce(Throw(e));
 
     // Mocks setup: Wrapping around.
@@ -184,7 +184,7 @@ TEST_F(HumanPersistenceFacadeTest, addHuman_HumanIsPresent_Throw)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
+    ASSERT_THROW(persistence_facade.addHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 5), std::exception);
 }
 
 TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsNotPresent_TryToSubtract)
@@ -194,7 +194,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsNotPresent_TryToSubtract
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
@@ -204,7 +204,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsNotPresent_TryToSubtract
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 5));
 }
 
 TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart)
@@ -214,10 +214,10 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart)
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
-    EXPECT_CALL(*mock, decreaseVolume(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3));
+    EXPECT_CALL(*mock, decreaseVolume(_, m_id_holder, KEY_WORKER_MINER_NOVICE, 3));
 
     // Mocks setup: Wrapping around.
     IHumanAccessorAutPtr accessor(mock);
@@ -226,7 +226,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3));
+    ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 3));
 }
 
 TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart_Throw)
@@ -238,10 +238,10 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart_Thr
 
     std::exception e;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
-    EXPECT_CALL(*mock, decreaseVolume(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3))
+    EXPECT_CALL(*mock, decreaseVolume(_, m_id_holder, KEY_WORKER_MINER_NOVICE, 3))
     .WillOnce(Throw(e));
 
     // Mocks setup: Wrapping around.
@@ -251,7 +251,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractPart_Thr
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 3), std::exception);
+    ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 3), std::exception);
 }
 
 TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll)
@@ -261,10 +261,10 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll)
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, deleteRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE));
+    EXPECT_CALL(*mock, deleteRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE));
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
     IHumanAccessorAutPtr accessor(mock);
@@ -273,7 +273,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5));
+    ASSERT_TRUE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 5));
 }
 
 TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll_Throw)
@@ -285,11 +285,11 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll_Thro
 
     std::exception e;
 
-    EXPECT_CALL(*mock, deleteRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
+    EXPECT_CALL(*mock, deleteRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
     .WillOnce(Throw(e));
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
     IHumanAccessorAutPtr accessor(mock);
@@ -298,7 +298,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_SubtractAll_Thro
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5), std::exception);
+    ASSERT_THROW(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 5), std::exception);
 }
 
 TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_TryToSubtractTooMuch)
@@ -308,8 +308,8 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_TryToSubtractToo
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
     IHumanAccessorAutPtr accessor(mock);
@@ -318,7 +318,7 @@ TEST_F(HumanPersistenceFacadeTest, subtractHuman_HumanIsPresent_TryToSubtractToo
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands and assertions.
-    ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 6));
+    ASSERT_FALSE(persistence_facade.subtractHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE, 6));
 }
 
 TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
@@ -328,7 +328,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
     .WillOnce(Return(HumanWithVolumeRecordShrPtr()));
 
     // Mocks setup: Wrapping around.
@@ -338,7 +338,7 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsNotPresent)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
-    HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
+    HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE);
 
     // Test assertions.
     ASSERT_TRUE(human == NULL);
@@ -351,8 +351,8 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent)
     // Mocks setup: HumanAccessorMock.
     HumanAccessorMock * mock = new HumanAccessorMock;
 
-    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE))
-    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    EXPECT_CALL(*mock, getRecord(_, m_id_holder, KEY_WORKER_MINER_NOVICE))
+    .WillOnce(Return(make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
     // Mocks setup: Wrapping around.
     IHumanAccessorAutPtr accessor(mock);
@@ -361,12 +361,12 @@ TEST_F(HumanPersistenceFacadeTest, getHuman_HumanIsPresent)
     HumanPersistenceFacade persistence_facade(m_context, accessor);
 
     // Test commands.
-    HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_SOLDIER_ARCHER_NOVICE);
+    HumanWithVolumeShrPtr human = persistence_facade.getHuman(transaction, m_id_holder, KEY_WORKER_MINER_NOVICE);
 
     // Test assertions.
     ASSERT_TRUE(human != NULL);
 
-    compareHuman(human, KEY_SOLDIER_ARCHER_NOVICE, 5);
+    compareHuman(human, KEY_WORKER_MINER_NOVICE, 5);
 }
 
 TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansAreNotPresent)
@@ -400,7 +400,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OneHuman
     HumanAccessorMock * mock = new HumanAccessorMock;
 
     HumanWithVolumeRecordMap map;
-    map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    map.insert(make_pair(KEY_WORKER_MINER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
 
     EXPECT_CALL(*mock, getRecords(_, m_id_holder))
     .WillOnce(Return(map));
@@ -419,7 +419,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_OneHuman
 
     ASSERT_EQ(1, humans.size());
 
-    compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 5);
+    compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 5);
 }
 
 TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHumans)
@@ -430,7 +430,7 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHuman
     HumanAccessorMock * mock = new HumanAccessorMock;
 
     HumanWithVolumeRecordMap map;
-    map.insert(make_pair(KEY_SOLDIER_ARCHER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_SOLDIER_ARCHER_NOVICE, 5)));
+    map.insert(make_pair(KEY_WORKER_MINER_NOVICE, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_MINER_NOVICE, 5)));
     map.insert(make_pair(KEY_WORKER_FARMER_ADVANCED, make_shared<HumanWithVolumeRecord>(m_id_holder, KEY_WORKER_FARMER_ADVANCED, 9)));
 
     EXPECT_CALL(*mock, getRecords(_, m_id_holder))
@@ -450,6 +450,6 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHuman
 
     ASSERT_EQ(2, humans.size());
 
-    compareHuman(humans[KEY_SOLDIER_ARCHER_NOVICE], KEY_SOLDIER_ARCHER_NOVICE, 5);
+    compareHuman(humans[KEY_WORKER_MINER_NOVICE], KEY_WORKER_MINER_NOVICE, 5);
     compareHuman(humans[KEY_WORKER_FARMER_ADVANCED], KEY_WORKER_FARMER_ADVANCED, 9);
 }

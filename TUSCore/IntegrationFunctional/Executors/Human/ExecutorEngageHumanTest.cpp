@@ -83,7 +83,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_SettlementDoesNotExist)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_SOLDIER_ARCHER_NOVICE,
+                KEY_WORKER_MINER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthorized))));
 
@@ -184,7 +184,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioEngageHuman(
@@ -192,7 +192,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughBuildings)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_SOLDIER_ARCHER_NOVICE,
+                KEY_WORKER_FARMER_NOVICE,
                 11)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationNotEnoughBuildings))));
 
@@ -500,7 +500,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_Unauthorized)
             IScenarioActionShrPtr(new ScenarioEngageHumanActionSuccess(
                 "Login2", "Password2",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_SOLDIER_ARCHER_NOVICE,
+                KEY_WORKER_FARMER_NOVICE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioEngageHumanVerificationUnauthorized))));
 

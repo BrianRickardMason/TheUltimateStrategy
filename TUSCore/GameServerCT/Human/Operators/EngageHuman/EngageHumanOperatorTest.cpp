@@ -570,7 +570,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ZeroBuildi
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 1).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 1).m_exit_code);
     }
 
     assertDatabaseUntouched();
@@ -582,7 +582,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_TooFewBuil
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 1);
 
         transaction->commit();
     }
@@ -592,7 +592,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_TooFewBuil
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 11).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 11).m_exit_code);
     }
 
     assertDatabaseUntouched();
@@ -604,9 +604,9 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 1);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 5);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 5);
 
         transaction->commit();
     }
@@ -616,7 +616,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 6).m_exit_code);
     }
 
     vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
@@ -640,7 +640,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(5, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
+        ASSERT_EQ(5, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -651,9 +651,9 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_FARM, 1);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_ADVANCED, 5);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_ADVANCED, 5);
 
         transaction->commit();
     }
@@ -663,7 +663,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE, 6).m_exit_code);
     }
 
     vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
@@ -687,7 +687,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(5, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_ADVANCED)->getVolume());
+        ASSERT_EQ(5, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_ADVANCED)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -698,11 +698,10 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_FARM, 1);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED, 3);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_NOVICE, 1);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE, 2);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE, 3);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_ADVANCED, 3);
 
         transaction->commit();
     }
@@ -712,7 +711,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE, 6).m_exit_code);
     }
 
     vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
@@ -731,14 +730,13 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_OneBuildin
         compareResourceMap(resource_map_12, expected_volumes_2);
         compareResourceMap(resource_map_21, expected_volumes_1);
 
-        ASSERT_EQ(4, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+        ASSERT_EQ(3, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(3, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED)->getVolume());
-        ASSERT_EQ(1, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_NOVICE)->getVolume());
-        ASSERT_EQ(2, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE)->getVolume());
+        ASSERT_EQ(3, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE)->getVolume());
+        ASSERT_EQ(3, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_ADVANCED)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -749,14 +747,10 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildi
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_FARM, 3);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 3);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED, 7);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_NOVICE, 6);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE, 2);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_ADVANCED, 5);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE, 20);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_ADVANCED, 7);
 
         transaction->commit();
     }
@@ -766,7 +760,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildi
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 6).m_exit_code);
     }
 
     vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
@@ -785,17 +779,13 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughPlaceInBuildings_ManyBuildi
         compareResourceMap(resource_map_12, expected_volumes_2);
         compareResourceMap(resource_map_21, expected_volumes_1);
 
-        ASSERT_EQ(7, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+        ASSERT_EQ(3, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(3, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
-        ASSERT_EQ(7, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED)->getVolume());
-        ASSERT_EQ(6, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_NOVICE)->getVolume());
-        ASSERT_EQ(4, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_ADVANCED)->getVolume());
-        ASSERT_EQ(2, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE)->getVolume());
-        ASSERT_EQ(5, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_ADVANCED)->getVolume());
+        ASSERT_EQ(20, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE)->getVolume());
+        ASSERT_EQ(7, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_ADVANCED)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -970,7 +960,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 1);
 
         transaction->commit();
     }
@@ -980,7 +970,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 1).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 1).m_exit_code);
 
         transaction->commit();
     }
@@ -1007,7 +997,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_One)
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(999, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(1, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
+        ASSERT_EQ(1, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -1018,7 +1008,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 1);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 1);
 
         transaction->commit();
     }
@@ -1028,7 +1018,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 6).m_exit_code);
 
         transaction->commit();
     }
@@ -1055,7 +1045,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Some)
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(994, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(6, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
+        ASSERT_EQ(6, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -1066,7 +1056,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResou
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 11);
 
         transaction->commit();
 
@@ -1077,7 +1067,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResou
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 100).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 100).m_exit_code);
 
         transaction->commit();
     }
@@ -1104,7 +1094,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnResou
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(900, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(100, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
+        ASSERT_EQ(100, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -1117,7 +1107,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJoble
 
         m_human_persistence_facade->subtractHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE, 930);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 11);
 
         transaction->commit();
     }
@@ -1127,7 +1117,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJoble
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 70).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 70).m_exit_code);
 
         transaction->commit();
     }
@@ -1153,7 +1143,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnJoble
         ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
-        ASSERT_EQ(70, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
+        ASSERT_EQ(70, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -1164,9 +1154,9 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 3);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 24);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 24);
 
         transaction->commit();
     }
@@ -1176,7 +1166,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 6).m_exit_code);
 
         transaction->commit();
     }
@@ -1203,7 +1193,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(994, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(30, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
+        ASSERT_EQ(30, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }
@@ -1214,9 +1204,9 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_FARM, 3);
 
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE, 24);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE, 24);
 
         transaction->commit();
     }
@@ -1226,7 +1216,58 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE, 6).m_exit_code);
+
+        transaction->commit();
+    }
+
+    vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
+    vector<R::Volume> expected_volumes_3 = assign::list_of(940)(9940)(9940)(940)(940)(940)(940);
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        ResourceWithVolumeMap
+            resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
+            resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
+            resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
+
+        compareResourceMap(resource_map_11, expected_volumes_3);
+        compareResourceMap(resource_map_12, expected_volumes_2);
+        compareResourceMap(resource_map_21, expected_volumes_1);
+
+        ASSERT_EQ(2, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
+        ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
+        ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
+
+        ASSERT_EQ(994, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+        ASSERT_EQ(30, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_FARMER_NOVICE)->getVolume());
+        ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
+    }
+}
+
+TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuildings_ManyTypesOfHumansOccupying)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_MINE, 3);
+
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 14);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_ADVANCED, 10);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
+                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE, 6).m_exit_code);
 
         transaction->commit();
     }
@@ -1253,68 +1294,8 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuild
         ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
 
         ASSERT_EQ(994, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(6, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
-        ASSERT_EQ(24, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE)->getVolume());
-        ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-    }
-}
-
-TEST_F(EngageHumanOperatorTest, engageHuman_BuildingRequired_Engaged_Max_OnBuildings_ManyTypesOfHumansOccupying)
-{
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_11, KEY_REGULAR_BARRACKS, 3);
-
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 2);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED, 6);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_NOVICE, 5);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_ADVANCED, 4);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE, 2);
-        m_human_persistence_facade->addHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_ADVANCED, 5);
-
-        transaction->commit();
-    }
-
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        ASSERT_EQ(ENGAGE_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_ENGAGED,
-                  m_engage_human_operator->engageHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE, 6).m_exit_code);
-
-        transaction->commit();
-    }
-
-    vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
-    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    vector<R::Volume> expected_volumes_3 = assign::list_of(940)(9940)(9940)(940)(940)(940)(940);
-
-    {
-        IConnectionShrPtr connection = m_persistence.getConnection();
-        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
-
-        ResourceWithVolumeMap
-            resource_map_11 = m_resource_persistence_facade->getResources(transaction, m_id_holder_11),
-            resource_map_12 = m_resource_persistence_facade->getResources(transaction, m_id_holder_12),
-            resource_map_21 = m_resource_persistence_facade->getResources(transaction, m_id_holder_21);
-
-        compareResourceMap(resource_map_11, expected_volumes_3);
-        compareResourceMap(resource_map_12, expected_volumes_2);
-        compareResourceMap(resource_map_21, expected_volumes_1);
-
-        ASSERT_EQ(7, m_human_persistence_facade->getHumans(transaction, m_id_holder_11).size());
-        ASSERT_TRUE(m_human_persistence_facade->getHumans(transaction, m_id_holder_12).empty());
-        ASSERT_EQ(1, m_human_persistence_facade->getHumans(transaction, m_id_holder_21).size());
-
-        ASSERT_EQ(994, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
-        ASSERT_EQ(8, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_NOVICE)->getVolume());
-        ASSERT_EQ(6, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_ARCHER_ADVANCED)->getVolume());
-        ASSERT_EQ(5, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_NOVICE)->getVolume());
-        ASSERT_EQ(4, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_HORSEMAN_ADVANCED)->getVolume());
-        ASSERT_EQ(2, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_NOVICE)->getVolume());
-        ASSERT_EQ(5, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_SOLDIER_INFANTRYMAN_ADVANCED)->getVolume());
+        ASSERT_EQ(20, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_NOVICE)->getVolume());
+        ASSERT_EQ(10, m_human_persistence_facade->getHuman(transaction, m_id_holder_11, KEY_WORKER_MINER_ADVANCED)->getVolume());
         ASSERT_EQ(1000, m_human_persistence_facade->getHuman(transaction, m_id_holder_21, KEY_WORKER_JOBLESS_NOVICE)->getVolume());
     }
 }

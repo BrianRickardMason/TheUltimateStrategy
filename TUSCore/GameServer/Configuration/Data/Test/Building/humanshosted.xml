@@ -1,27 +1,5 @@
 <?xml version="1.0" ?>
 <buildings>
-    <building key="regularbarracks">
-        <humans>
-            <human>
-                <key>soldierarchernovice</key>
-            </human>
-            <human>
-                <key>soldierarcheradvanced</key>
-            </human>
-            <human>
-                <key>soldierhorsemannovice</key>
-            </human>
-            <human>
-                <key>soldierhorsemanadvanced</key>
-            </human>
-            <human>
-                <key>soldierinfantrymannovice</key>
-            </human>
-            <human>
-                <key>soldierinfantrymanadvanced</key>
-            </human>
-        </humans>
-    </building>
     <building key="regularfarm">
         <humans>
             <human>

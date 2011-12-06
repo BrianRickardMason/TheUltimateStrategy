@@ -1,35 +1,5 @@
 <?xml version="1.0" ?>
 <humans>
-    <human key="soldierarchernovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="soldierarcheradvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="soldierhorsemannovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="soldierhorsemanadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="soldierinfantrymannovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="soldierinfantrymanadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
     <human key="workerblacksmithnovice">
         <dismissable value="true" />
         <engageable value="true" />
