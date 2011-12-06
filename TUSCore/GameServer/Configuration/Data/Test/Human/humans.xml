@@ -85,18 +85,6 @@
         <experience>advanced</experience>
     </human>
     <human>
-        <key>workerpriestnovice</key>
-        <class>worker</class>
-        <name>priest</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>workerpriestadvanced</key>
-        <class>worker</class>
-        <name>priest</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
         <key>workersteelworkernovice</key>
         <class>worker</class>
         <name>steelworker</name>
