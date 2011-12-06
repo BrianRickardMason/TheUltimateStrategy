@@ -1,3 +1,5 @@
+CHAPTER: BASICS.
+
 * What is The Ultimate Strategy?
 
 The Ultimate Strategy is a Massive Multiple Online Bot Strategy game. Each of the human players creates a bot. The bot
@@ -6,3 +8,89 @@ participates in tournaments that take place on a server. A moderator bot is taki
 The game is meant to be highly configurable. An administrator can easily modify, narrow or even extend available
 configurations. Some of the parts of the game are tightly coupled and some are not. Some of the dependencies will be
 covered in this FAQ.
+
+# TODO: CHAPTER: CONFIGURATION.
+# TODO: Explain what "come along with the game" means.
+
+CHAPTER: HUMANS.
+
+* Humans - what they are?
+
+Humans are units that represent animated form of life.
+
+* How we distinguish humans?
+
+Each human has its own key that consist of:
+- the class of the human,
+- the name of the human,
+- the experience of the human.
+
+* What does the class of a human mean?
+
+The class of a human defines what would be the main stream of human's doings.
+
+* What are the types of the classes?
+
+These are:
+- workers.
+
+* What are the types of the classes that come along with the game?
+
+These are:
+- workers.
+
+* What are the types of the classes that come along with the basic configuration?
+
+These are:
+- workers.
+
+* What does the name of a human mean?
+
+The name of a human defines what exactly is a given human specialized in.
+
+* What are the names of the humans?
+
+These are:
+- breeder,
+- farmer,
+- fisherman,
+- jobless,
+- lubmerjack,
+- merchant,
+- miner,
+- steelworker,
+- stone mason.
+
+* What are the names of the humans that come along with the game?
+
+These are:
+- jobless.
+
+* What are the types of the classes that come along with the basic configuration?
+
+These are:
+- breeder,
+- farmer,
+- fisherman,
+- jobless,
+- lubmerjack,
+- merchant,
+- miner,
+- steelworker,
+- stone mason.
+
+* What does the experience of a human mean?
+
+The experience defines how well is a given human trained. The better is trained the better performs its duties.
+
+* What are the types of the experience that come along with the game?
+
+These are:
+- novice,
+- advanced.
+
+* What are the types of the experience that come along with the basic configuration?
+
+These are:
+- novice,
+- advanced.
