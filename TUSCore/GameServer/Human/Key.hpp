@@ -54,8 +54,6 @@ Configuration::IKey const KEY_WORKER_MERCHANT_NOVICE      ("workermerchantnovice
 Configuration::IKey const KEY_WORKER_MERCHANT_ADVANCED    ("workermerchantadvanced");
 Configuration::IKey const KEY_WORKER_MINER_NOVICE         ("workerminernovice");
 Configuration::IKey const KEY_WORKER_MINER_ADVANCED       ("workermineradvanced");
-Configuration::IKey const KEY_WORKER_OFFICIAL_NOVICE      ("workerofficialnovice");
-Configuration::IKey const KEY_WORKER_OFFICIAL_ADVANCED    ("workerofficialadvanced");
 Configuration::IKey const KEY_WORKER_PRIEST_NOVICE        ("workerpriestnovice");
 Configuration::IKey const KEY_WORKER_PRIEST_ADVANCED      ("workerpriestadvanced");
 Configuration::IKey const KEY_WORKER_STEELWORKER_NOVICE   ("workersteelworkernovice");

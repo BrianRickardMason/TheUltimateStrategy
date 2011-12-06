@@ -70,16 +70,6 @@
         <engageable value="false" />
         <production value="10" />
     </human>
-    <human key="workerofficialnovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="workerofficialadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
     <human key="workerpriestnovice">
         <dismissable value="true" />
         <engageable value="true" />
