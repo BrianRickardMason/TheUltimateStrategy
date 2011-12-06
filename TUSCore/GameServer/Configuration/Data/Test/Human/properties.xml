@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>    
+<?xml version="1.0" ?>
 <humans>
     <human key="soldierarchernovice">
         <dismissable value="true" />
@@ -66,36 +66,6 @@
         <production value="0" />
     </human>
     <human key="sorcerersorcererwindadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="spyagentnovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="spyagentadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="spyspynovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="spyspyadvanced">
-        <dismissable value="true" />
-        <engageable value="false" />
-        <production value="0" />
-    </human>
-    <human key="spythugnovice">
-        <dismissable value="true" />
-        <engageable value="true" />
-        <production value="0" />
-    </human>
-    <human key="spythugadvanced">
         <dismissable value="true" />
         <engageable value="false" />
         <production value="0" />

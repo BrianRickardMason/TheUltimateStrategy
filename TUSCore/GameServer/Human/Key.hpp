@@ -56,13 +56,6 @@ Configuration::IKey const KEY_SORCERER_WATER_ADVANCED     ("sorcerersorcererwate
 Configuration::IKey const KEY_SORCERER_WIND_NOVICE        ("sorcerersorcererwindnovice");
 Configuration::IKey const KEY_SORCERER_WIND_ADVANCED      ("sorcerersorcererwindadvanced");
 
-Configuration::IKey const KEY_SPY_AGENT_NOVICE            ("spyagentnovice");
-Configuration::IKey const KEY_SPY_AGENT_ADVANCED          ("spyagentadvanced");
-Configuration::IKey const KEY_SPY_SPY_NOVICE              ("spyspynovice");
-Configuration::IKey const KEY_SPY_SPY_ADVANCED            ("spyspyadvanced");
-Configuration::IKey const KEY_SPY_THUG_NOVICE             ("spythugnovice");
-Configuration::IKey const KEY_SPY_THUG_ADVANCED           ("spythugadvanced");
-
 Configuration::IKey const KEY_WORKER_BLACKSMITH_NOVICE    ("workerblacksmithnovice");
 Configuration::IKey const KEY_WORKER_BLACKSMITH_ADVANCED  ("workerblacksmithadvanced");
 Configuration::IKey const KEY_WORKER_BREEDER_NOVICE       ("workerbreedernovice");

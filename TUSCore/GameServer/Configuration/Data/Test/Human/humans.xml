@@ -85,42 +85,6 @@
         <experience>advanced</experience>
     </human>
     <human>
-        <key>spyagentnovice</key>
-        <class>spy</class>
-        <name>agent</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>spyagentadvanced</key>
-        <class>spy</class>
-        <name>agent</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
-        <key>spyspynovice</key>
-        <class>spy</class>
-        <name>spy</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>spyspyadvanced</key>
-        <class>spy</class>
-        <name>spy</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
-        <key>spythugnovice</key>
-        <class>spy</class>
-        <name>thug</name>
-        <experience>novice</experience>
-    </human>
-    <human>
-        <key>spythugadvanced</key>
-        <class>spy</class>
-        <name>thug</name>
-        <experience>advanced</experience>
-    </human>
-    <human>
         <key>workerblacksmithnovice</key>
         <class>worker</class>
         <name>blacksmith</name>
