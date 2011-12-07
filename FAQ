@@ -131,3 +131,72 @@ These are:
 * How does human reproduce?
 * What happens if there is not enough food?
 * What happens if there is not enough gold?
+
+CHAPTER: RESOURCES.
+
+* Resources - what they are?
+
+Resources are inanimate objects that can be used to support various actions.
+
+* How we distinguish resources?
+
+Each human has its own key that consist of:
+- the name of the resource.
+
+* What does the name of a resource mean?
+
+The name of a resource is a human friendly identifier that should help the players to understand its goal.
+
+* What are the names of the resources?
+
+These are:
+- coal,
+- food,
+- gold,
+- iron,
+- rock,
+- wood.
+
+* What are the names of the humans that come along with the game?
+
+These are:
+- food,
+- gold.
+
+* What are the types of the classes that come along with the basic configuration?
+
+These are:
+- coal,
+- food,
+- gold,
+- iron,
+- rock,
+- wood.
+
+* Where does the resources come from?
+
+Out of nowhere. At least for now. They are produced by humans. We kindly do not ask where do they get them from.
+
+* Who produces resources?
+
+Resources are produced by humans.
+
+* What are resources used to?
+
+To cover the costs of:
+- building a building,
+- destroying a building,
+- engaging a human,
+- dismissing a human,
+- feeding a human,
+- rewarding (compensating) a human.
+
+* What are the active actions concerning humans?
+
+These are:
+- transporting a resource.
+
+* What are the passive actions involving humans?
+
+These are:
+- covering costs of other actions.
