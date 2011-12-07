@@ -36,22 +36,4 @@
     <building key="regulartemple">
         <capacity value="10" />
     </building>
-    <building key="specialaqueduct">
-        <capacity value="10" />
-    </building>
-    <building key="specialbawdyhouse">
-        <capacity value="10" />
-    </building>
-    <building key="specialcommercialport">
-        <capacity value="10" />
-    </building>
-    <building key="specialcourt">
-        <capacity value="10" />
-    </building>
-    <building key="specialgranary">
-        <capacity value="10" />
-    </building>
-    <building key="specialsewerage">
-        <capacity value="10" />
-    </building>
 </buildings>

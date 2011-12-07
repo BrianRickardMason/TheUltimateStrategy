@@ -51,13 +51,6 @@ Configuration::IKey const KEY_REGULAR_SAWMILL          ("regularsawmill");
 Configuration::IKey const KEY_REGULAR_SCHOOL           ("regularschool");
 Configuration::IKey const KEY_REGULAR_STEELWORKS       ("regularsteelworks");
 Configuration::IKey const KEY_REGULAR_TEMPLE           ("regulartemple");
-
-Configuration::IKey const KEY_SPECIAL_AQUEDUCT         ("specialaqueduct");
-Configuration::IKey const KEY_SPECIAL_BAWDY_HOUSE      ("specialbawdyhouse");
-Configuration::IKey const KEY_SPECIAL_COMMERCIAL_PORT  ("specialcommercialport");
-Configuration::IKey const KEY_SPECIAL_COURT            ("specialcourt");
-Configuration::IKey const KEY_SPECIAL_GRANARY          ("specialgranary");
-Configuration::IKey const KEY_SPECIAL_SEWERAGE         ("specialsewerage");
 //}@
 
 } // namespace Building
