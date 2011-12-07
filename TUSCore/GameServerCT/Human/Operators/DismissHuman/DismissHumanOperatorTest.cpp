@@ -134,8 +134,8 @@ protected:
      */
     void assertDatabaseUntouched()
     {
-        vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
-        vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
+        vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
+        vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0);
 
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -513,9 +513,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_One)
         transaction->commit();
     }
 
-    vector<R::Volume> expected_volumes_1 = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
-    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+    vector<R::Volume> expected_volumes_1 = assign::list_of(990)(9990)(9990)(990)(990)(990);
+    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0);
+    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -562,9 +562,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Some)
         transaction->commit();
     }
 
-    vector<R::Volume> expected_volumes_1 = assign::list_of(940)(9940)(9940)(940)(940)(940)(940);
-    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+    vector<R::Volume> expected_volumes_1 = assign::list_of(940)(9940)(9940)(940)(940)(940);
+    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0);
+    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -610,9 +610,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnEngaged)
         transaction->commit();
     }
 
-    vector<R::Volume> expected_volumes_1 = assign::list_of(900)(9900)(9900)(900)(900)(900)(900);
-    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+    vector<R::Volume> expected_volumes_1 = assign::list_of(900)(9900)(9900)(900)(900)(900);
+    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0);
+    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(10000)(1000)(1000);
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();
@@ -657,9 +657,9 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_Max_OnResources)
         transaction->commit();
     }
 
-    vector<R::Volume> expected_volumes_1 = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
-    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
-    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+    vector<R::Volume> expected_volumes_1 = assign::list_of(0)(9000)(9000)(0)(0)(0);
+    vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0);
+    vector<R::Volume> expected_volumes_3 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
 
     {
         IConnectionShrPtr connection = m_persistence.getConnection();

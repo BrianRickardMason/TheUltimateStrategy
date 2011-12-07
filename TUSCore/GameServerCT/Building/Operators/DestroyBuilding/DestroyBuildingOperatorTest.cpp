@@ -117,8 +117,8 @@ protected:
      */
     void assertDatabaseUntouched()
     {
-        vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
-        vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0)(0);
+        vector<R::Volume> expected_volumes_1 = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
+        vector<R::Volume> expected_volumes_2 = assign::list_of(0)(0)(0)(0)(0)(0);
 
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
@@ -394,7 +394,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        vector<R::Volume> expected = assign::list_of(1)(1)(1)(1)(1)(1)(1);
+        vector<R::Volume> expected = assign::list_of(1)(1)(1)(1)(1)(1);
 
         compareResourceMap(resource_map, expected);
     }
@@ -442,7 +442,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        vector<R::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1);
+        vector<R::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1);
 
         compareResourceMap(resource_map, expected);
     }
@@ -482,7 +482,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        vector<R::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
+        vector<R::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990);
 
         compareResourceMap(resource_map, expected);
     }
@@ -522,7 +522,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        vector<R::Volume> expected = assign::list_of(370)(9370)(9370)(370)(370)(370)(370);
+        vector<R::Volume> expected = assign::list_of(370)(9370)(9370)(370)(370)(370);
 
         compareResourceMap(resource_map, expected);
     }
@@ -561,7 +561,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        vector<R::Volume> expected = assign::list_of(500)(9500)(9500)(500)(500)(500)(500);
+        vector<R::Volume> expected = assign::list_of(500)(9500)(9500)(500)(500)(500);
 
         compareResourceMap(resource_map, expected);
     }
@@ -601,7 +601,7 @@ TEST_F(DestroyBuildingOperatorTest, buildBuilding_Success_MaxNumberOfBuildings_O
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        vector<R::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
+        vector<R::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0);
 
         compareResourceMap(resource_map, expected);
     }

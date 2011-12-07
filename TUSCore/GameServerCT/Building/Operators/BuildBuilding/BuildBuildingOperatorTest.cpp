@@ -218,7 +218,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_TryingToBuildZeroBuildings)
         ASSERT_TRUE(m_building_persistence_facade->getBuilding(transaction, m_id_holder_11, KEY_DEFENSIVE_BARBICAN) == NULL);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+        std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
 
         compareResourceMap(resource_map, expected);
     }
@@ -246,7 +246,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_MissingIDHolder)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+        std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
 
         compareResourceMap(resource_map, expected);
     }
@@ -274,7 +274,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_AllResources)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000)(1000);
+        std::vector<GameServer::Resource::Volume> expected = assign::list_of(1000)(10000)(10000)(1000)(1000)(1000);
 
         compareResourceMap(resource_map, expected);
     }
@@ -311,7 +311,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        std::vector<GameServer::Resource::Volume> expected = assign::list_of(999)(10000)(10000)(1000)(1000)(1000)(1000);
+        std::vector<GameServer::Resource::Volume> expected = assign::list_of(999)(10000)(10000)(1000)(1000)(1000);
 
         compareResourceMap(resource_map, expected);
     }
@@ -342,7 +342,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        std::vector<GameServer::Resource::Volume> expected = assign::list_of(990)(9990)(9990)(990)(990)(990)(990);
+        std::vector<GameServer::Resource::Volume> expected = assign::list_of(990)(9990)(9990)(990)(900)(990);
 
         compareResourceMap(resource_map, expected);
     }
@@ -373,7 +373,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        std::vector<GameServer::Resource::Volume> expected = assign::list_of(930)(9930)(9930)(930)(930)(930)(930);
+        std::vector<GameServer::Resource::Volume> expected = assign::list_of(930)(9930)(9930)(930)(930)(930);
 
         compareResourceMap(resource_map, expected);
     }
@@ -404,7 +404,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, m_id_holder_11);
-        std::vector<GameServer::Resource::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0)(0);
+        std::vector<GameServer::Resource::Volume> expected = assign::list_of(0)(9000)(9000)(0)(0)(0);
 
         compareResourceMap(resource_map, expected);
     }

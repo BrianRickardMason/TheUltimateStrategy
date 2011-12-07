@@ -71,10 +71,10 @@ protected:
     ResourcePersistenceFacadeMock * produceResourcePersistenceFacadeMock()
     {
         // Mocks setup: ResourcePersistenceFacadeMock.
-        std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+        std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
         configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
-        resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+        resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
         configureResourcePersistenceFacadeMockForSubtractResourceMap(getResourceMap(m_context, resource_volumes));
 
         return m_resource_persistence_facade;
@@ -269,7 +269,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_ZeroVolumes)
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BREEDER_NOVICE, 10);
 
-    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0)(0);
+    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0);
     configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     DismissHumanOperator dismiss_human_operator(m_context,
@@ -286,7 +286,7 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_LowerVolumes)
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BREEDER_NOVICE, 10);
 
-    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1)(1);
+    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1);
     configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     DismissHumanOperator dismiss_human_operator(m_context,
@@ -321,11 +321,11 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceMapThrows)
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BREEDER_NOVICE, 10);
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     std::exception e;
-    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
     .WillOnce(Throw(e));
 
@@ -343,10 +343,10 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_SubtractResourceMapReturnsFalse)
 
     configureHumanPersistenceFacadeMockForGetHuman(KEY_WORKER_BREEDER_NOVICE, 10);
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
-    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
     .WillOnce(Return(false));
 

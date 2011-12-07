@@ -88,10 +88,10 @@ protected:
     ResourcePersistenceFacadeMock * produceResourcePersistenceFacadeMock()
     {
         // Mocks setup: ResourcePersistenceFacadeMock.
-        std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+        std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
         configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
-        resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+        resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
         configureResourcePersistenceFacadeMockForSubtractResourceMap(getResourceMap(m_context, resource_volumes));
 
         return m_resource_persistence_facade;
@@ -312,7 +312,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_ZeroVolumes)
 
     configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
-    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0)(0);
+    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(0)(0)(0)(0)(0)(0);
     configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
@@ -330,7 +330,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_NotEnoughResources_LowerVolumes)
 
     configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
-    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1)(1);
+    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1)(1)(1)(1)(1)(1);
     configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
@@ -367,7 +367,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesNotExist_
 
     configureHumanPersistenceFacadeMockFARMtHuman(KEY_WORKER_JOBLESS_NOVICE, 10);
 
-    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     configureResourcePersistenceFacadeMockFARMtResources(getResourceMap(m_context, resource_volumes));
 
     EngageHumanOperator engage_human_operator(m_context,
@@ -394,7 +394,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
@@ -410,7 +410,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
     // Subtract resources.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 
@@ -445,7 +445,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
@@ -461,7 +461,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
     // Subtract resources.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 
@@ -496,7 +496,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
@@ -512,7 +512,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_FARMER_NOVICE, 9)));
 
     // Subtract resources.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 
@@ -547,7 +547,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
@@ -586,7 +586,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(make_shared<HumanWithVolume>(m_context, KEY_WORKER_JOBLESS_NOVICE, jobless_available)));
 
     // Get resources.
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     EXPECT_CALL(*m_resource_persistence_facade, getResources(transaction, m_id_holder))
     .WillOnce(Return(getResourceMap(m_context, resource_volumes)));
 
@@ -602,7 +602,7 @@ TEST_F(EngageHumanOperatorTest, engageHuman_BuildingNeeded_BuildingDoesExist_Hos
     .WillOnce(Return(HumanWithVolumeShrPtr()));
 
     // Subtract resources.
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(transaction, m_id_holder, _))
     .WillOnce(Return(true));
 

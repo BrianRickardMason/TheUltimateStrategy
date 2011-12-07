@@ -205,7 +205,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(9)(9)(9)(9)(9)(9)(9);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(9)(9)(9)(9)(9)(9);
     configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     DestroyBuildingOperator destroy_building_operator(m_context,
@@ -222,7 +222,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(9)(10)(10);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(9)(10);
     configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     DestroyBuildingOperator destroy_building_operator(m_context,
@@ -239,7 +239,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
 
@@ -262,7 +262,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     ResourceWithVolumeMap resource_map =  getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
     EXPECT_CALL(*m_resource_persistence_facade, subtractResources(_, m_id_holder, _))
@@ -285,7 +285,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Throw(e));
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
     configureResourcePersistenceFacadeMockForSubtractResourceMap(resource_map);
@@ -306,7 +306,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(false));
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
     configureResourcePersistenceFacadeMockForSubtractResourceMap(resource_map);
@@ -327,10 +327,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
     .WillOnce(Return(true));
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
-    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(10);
+    resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
     resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForSubtractResourceMap(resource_map);
 
@@ -350,10 +350,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5))
     .WillOnce(Return(true));
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
-    resource_volumes = assign::list_of(50)(50)(50)(50)(50)(50)(50);
+    resource_volumes = assign::list_of(50)(50)(50)(50)(50)(50);
     resource_map = getResourceMap(m_context, resource_volumes);
 
     configureResourcePersistenceFacadeMockForSubtractResourceMap(resource_map);
@@ -373,10 +373,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1000)(1000)(1000)(1000)(1000)(1000)(1000);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1000)(1000)(1000)(1000)(1000)(1000);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
-    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     resource_map = getResourceMap(m_context, resource_volumes);
 
     configureResourcePersistenceFacadeMockForSubtractResourceMap(resource_map);
@@ -396,10 +396,10 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
     EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
     .WillOnce(Return(true));
 
-    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
     configureResourcePersistenceFacadeMockForGetResources(resource_map);
-    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100)(100);
+    resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     resource_map = getResourceMap(m_context, resource_volumes);
 
     configureResourcePersistenceFacadeMockForSubtractResourceMap(resource_map);
