@@ -153,4 +153,4 @@ private:
 } // namespace Resource
 } // namespace GameServer
 
-#endif // GAMESERVER_HUMAN_HUMANACCESSORPOSTGRESQL_HPP
+#endif // GAMESERVER_RESOURCE_RESOURCEACCESSORPOSTGRESQL_HPP
