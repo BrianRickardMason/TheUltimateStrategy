@@ -95,14 +95,12 @@ protected:
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 10000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 10000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 1000);
-            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_COAL, 1000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_FOOD, 10000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_GOLD, 10000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_IRON, 1000);
-            m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_MANA, 1000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_ROCK, 1000);
             m_resource_persistence_facade->subtractResource(transaction, m_id_holder_2, KEY_RESOURCE_WOOD, 1000);
 
@@ -123,7 +121,6 @@ protected:
         map.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
         map.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_GOLD, 300)));
         map.insert(make_pair(KEY_RESOURCE_IRON, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_IRON, 400)));
-        map.insert(make_pair(KEY_RESOURCE_MANA, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_MANA, 500)));
         map.insert(make_pair(KEY_RESOURCE_ROCK, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_ROCK, 600)));
         map.insert(make_pair(KEY_RESOURCE_WOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_WOOD, 700)));
 
@@ -631,7 +628,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
@@ -657,13 +653,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
 
         ASSERT_FALSE(resource_map.empty());
 
-        ASSERT_EQ(7, resource_map.size());
+        ASSERT_EQ(6, resource_map.size());
 
         compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 100);
         compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 200);
         compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 300);
         compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 400);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 500);
         compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 600);
         compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 700);
     }
@@ -679,7 +674,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
@@ -721,7 +715,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
@@ -747,13 +740,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
 
         ASSERT_FALSE(resource_map.empty());
 
-        ASSERT_EQ(7, resource_map.size());
+        ASSERT_EQ(6, resource_map.size());
 
         compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 100);
         compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 200);
         compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 300);
         compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 400);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 500);
         compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 600);
         compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 700);
     }
@@ -769,7 +761,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_TryT
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 299);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
@@ -793,13 +784,12 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_TryT
 
         ASSERT_FALSE(resource_map.empty());
 
-        ASSERT_EQ(7, resource_map.size());
+        ASSERT_EQ(6, resource_map.size());
 
         compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 200);
         compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 400);
         compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 299);
         compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 800);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 1000);
         compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 1200);
         compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 1400);
     }
@@ -815,7 +805,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
@@ -864,7 +853,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
@@ -926,7 +914,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
@@ -956,7 +943,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 200);
         compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 300);
         compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 400);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 500);
         compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 600);
         compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 700);
     }
@@ -972,7 +958,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 300);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 400);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 500);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 700);
 
@@ -1012,7 +997,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
@@ -1042,7 +1026,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 200);
         compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 300);
         compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 400);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 500);
         compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 600);
         compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 700);
     }
@@ -1058,7 +1041,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 299);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
@@ -1084,12 +1066,11 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
 
         ASSERT_FALSE(resource_map.empty());
 
-        ASSERT_EQ(6, resource_map.size());
+        ASSERT_EQ(5, resource_map.size());
 
         compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 100);
         compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 200);
         compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 400);
-        compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 500);
         compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 600);
         compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 700);
     }
@@ -1105,7 +1086,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 
@@ -1154,7 +1134,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_FOOD, 400);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_GOLD, 600);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_IRON, 800);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_ROCK, 1200);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_1, KEY_RESOURCE_WOOD, 1400);
 

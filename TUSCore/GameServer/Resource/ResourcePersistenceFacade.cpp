@@ -179,8 +179,10 @@ ResourceWithVolumeMap ResourcePersistenceFacade::getResources(
 
     for (ResourceWithVolumeRecordMap::iterator it = records.begin(); it != records.end(); ++it)
     {
+
         if (it->second)
         {
+
             ResourceWithVolumeShrPtr resource = make_shared<ResourceWithVolume>(m_context, *it->second);
             ResourceWithVolumePair pair(it->first, resource);
             resource_map.insert(pair);

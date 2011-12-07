@@ -156,12 +156,11 @@ protected:
             ResourceWithVolumeMap resource_map = m_resource_persistence_facade->getResources(transaction, id_holder);
 
             ASSERT_FALSE(resource_map.empty());
-            ASSERT_EQ(7, resource_map.size());
+            ASSERT_EQ(6, resource_map.size());
             compareResource(resource_map[KEY_RESOURCE_COAL], KEY_RESOURCE_COAL, 1000);
             compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 10000);
             compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 10000);
             compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 1000);
-            compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 1000);
             compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 1000);
             compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 1000);
         }

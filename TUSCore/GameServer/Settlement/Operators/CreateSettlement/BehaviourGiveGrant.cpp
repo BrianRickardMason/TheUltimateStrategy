@@ -66,7 +66,6 @@ bool BehaviourGiveGrant::giveGrant(
         m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_FOOD, 10000);
         m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_GOLD, 10000);
         m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_IRON, 1000);
-        m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_ROCK, 1000);
         m_resource_persistence_facade->addResource(a_transaction, id_holder, Resource::KEY_RESOURCE_WOOD, 1000);
 

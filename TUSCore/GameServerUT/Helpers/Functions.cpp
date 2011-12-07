@@ -51,15 +51,13 @@ ResourceWithVolumeMap getResourceMap(
             resource_with_volume_food = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_FOOD, a_volumes[1]),
             resource_with_volume_gold = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_GOLD, a_volumes[2]),
             resource_with_volume_iron = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_IRON, a_volumes[3]),
-            resource_with_volume_mana = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_MANA, a_volumes[4]),
-            resource_with_volume_rock = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_ROCK, a_volumes[5]),
-            resource_with_volume_wood = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_WOOD, a_volumes[6]);
+            resource_with_volume_rock = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_ROCK, a_volumes[4]),
+            resource_with_volume_wood = make_shared<ResourceWithVolume>(a_context, KEY_RESOURCE_WOOD, a_volumes[5]);
 
         resource_map.insert(make_pair(KEY_RESOURCE_COAL, resource_with_volume_coal));
         resource_map.insert(make_pair(KEY_RESOURCE_FOOD, resource_with_volume_food));
         resource_map.insert(make_pair(KEY_RESOURCE_GOLD, resource_with_volume_gold));
         resource_map.insert(make_pair(KEY_RESOURCE_IRON, resource_with_volume_iron));
-        resource_map.insert(make_pair(KEY_RESOURCE_MANA, resource_with_volume_mana));
         resource_map.insert(make_pair(KEY_RESOURCE_ROCK, resource_with_volume_rock));
         resource_map.insert(make_pair(KEY_RESOURCE_WOOD, resource_with_volume_wood));
     }

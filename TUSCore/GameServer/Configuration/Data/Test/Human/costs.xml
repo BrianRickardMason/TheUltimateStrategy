@@ -6,7 +6,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -15,7 +14,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -24,7 +22,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -35,7 +32,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -44,7 +40,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -53,7 +48,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -64,7 +58,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -73,7 +66,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -82,7 +74,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -93,7 +84,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -102,7 +92,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -111,7 +100,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -122,7 +110,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -131,7 +118,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -140,7 +126,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -151,7 +136,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -160,7 +144,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -169,7 +152,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -180,7 +162,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -189,7 +170,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -198,7 +178,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -209,7 +188,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -218,7 +196,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -227,7 +204,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -238,7 +214,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -247,7 +222,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -256,7 +230,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -267,7 +240,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -276,7 +248,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -285,7 +256,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -296,7 +266,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -305,7 +274,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -314,7 +282,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -325,7 +292,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -334,7 +300,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -343,7 +308,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -354,7 +318,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -363,7 +326,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -372,7 +334,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -383,7 +344,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -392,7 +352,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -401,7 +360,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -412,7 +370,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -421,7 +378,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -430,7 +386,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -441,7 +396,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -450,7 +404,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -459,7 +412,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -470,7 +422,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -479,7 +430,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -488,7 +438,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>
@@ -499,7 +448,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </dismiss>
@@ -508,7 +456,6 @@
             <food value="10" />
             <gold value="10" />
             <iron value="10" />
-            <mana value="10" />
             <rock value="10" />
             <wood value="10" />
         </engage>
@@ -517,7 +464,6 @@
             <food value="1" />
             <gold value="1" />
             <iron value="1" />
-            <mana value="1" />
             <rock value="1" />
             <wood value="1" />
         </live>

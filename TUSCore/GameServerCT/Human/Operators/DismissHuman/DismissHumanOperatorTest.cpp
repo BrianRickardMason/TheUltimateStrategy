@@ -331,7 +331,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
-        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
@@ -363,7 +362,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_ZeroResources)
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 10000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 10000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 1000);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 1000);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 1000);
 
@@ -386,7 +384,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
-        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
@@ -411,7 +408,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_AllResources)
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_FOOD, 9999);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_IRON, 999);
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_ROCK, 999);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
@@ -432,7 +428,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
         // TODO: Subtract map of resources.
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_COAL, 999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
-        m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
         m_resource_persistence_facade->subtractResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
         transaction->commit();
@@ -456,7 +451,6 @@ TEST_F(DismissHumanOperatorTest, dismissHuman_NotEnoughResources_SomeResources)
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_GOLD, 9999);
         m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_WOOD, 999);
 
-        m_resource_persistence_facade->addResource(transaction, m_id_holder_11, KEY_RESOURCE_MANA, 999);
         transaction->commit();
     }
 

@@ -88,7 +88,6 @@ protected:
         map.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_FOOD, 200)));
         map.insert(make_pair(KEY_RESOURCE_GOLD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_GOLD, 300)));
         map.insert(make_pair(KEY_RESOURCE_IRON, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_IRON, 400)));
-        map.insert(make_pair(KEY_RESOURCE_MANA, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_MANA, 500)));
         map.insert(make_pair(KEY_RESOURCE_ROCK, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_ROCK, 600)));
         map.insert(make_pair(KEY_RESOURCE_WOOD, make_shared<ResourceWithVolume>(m_context, KEY_RESOURCE_WOOD, 700)));
 
@@ -508,8 +507,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_GOLD, 1000)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_IRON))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_IRON, 1000)));
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_MANA))
-    .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_MANA, 1000)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_ROCK, 1000)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD))
@@ -519,7 +516,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_FOOD, 200));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_GOLD, 300));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_IRON, 400));
-    EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_MANA, 500));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_ROCK, 600));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_WOOD, 700));
 
@@ -575,8 +571,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_GOLD, 300)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_IRON))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_IRON, 400)));
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_MANA))
-    .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_MANA, 500)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_ROCK, 600)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD))
@@ -586,7 +580,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResources_ResourcesArePresent_Subt
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_FOOD));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_GOLD));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_IRON));
-    EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_MANA));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD));
 
@@ -710,8 +703,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_GOLD, 1000)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_IRON))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_IRON, 1000)));
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_MANA))
-    .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_MANA, 1000)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_ROCK, 1000)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD))
@@ -721,7 +712,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_FOOD, 200));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_GOLD, 300));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_IRON, 400));
-    EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_MANA, 500));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_ROCK, 600));
     EXPECT_CALL(*mock, decreaseVolume(transaction, m_id_holder, KEY_RESOURCE_WOOD, 700));
 
@@ -771,8 +761,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_GOLD, 300)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_IRON))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_IRON, 400)));
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_MANA))
-    .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_MANA, 500)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_ROCK, 600)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD))
@@ -782,7 +770,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_FOOD));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_GOLD));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_IRON));
-    EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_MANA));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK));
     EXPECT_CALL(*mock, deleteRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD));
 
@@ -835,8 +822,6 @@ TEST_F(ResourcePersistenceFacadeTest, subtractResourcesSafely_ResourcesArePresen
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_GOLD, 300)));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_IRON))
     .WillOnce(Return(make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_IRON, 399)));
-    EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_MANA))
-    .WillOnce(Return(ResourceWithVolumeRecordShrPtr()));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_ROCK))
     .WillOnce(Return(ResourceWithVolumeRecordShrPtr()));
     EXPECT_CALL(*mock, getRecord(transaction, m_id_holder, KEY_RESOURCE_WOOD))
@@ -926,7 +911,6 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesAreNotPresent)
     // compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 0);
     // compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
     // compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
-    // compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
     // compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
     // compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
 }
@@ -960,7 +944,6 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_OneResour
     // compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 0);
     // compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
     // compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
-    // compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
     // compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
     // compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
 }
@@ -977,7 +960,6 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoResour
     map.insert(make_pair(KEY_RESOURCE_FOOD, make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_FOOD, 5)));
     map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_GOLD, 0)));
     map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_IRON, 0)));
-    map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_MANA, 0)));
     map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_ROCK, 0)));
     map.insert(make_pair(KEY_RESOURCE_COAL, make_shared<ResourceWithVolumeRecord>(m_id_holder, KEY_RESOURCE_WOOD, 0)));
 
@@ -1000,7 +982,6 @@ TEST_F(ResourcePersistenceFacadeTest, getResources_ResourcesArePresent_TwoResour
     compareResource(resource_map[KEY_RESOURCE_FOOD], KEY_RESOURCE_FOOD, 5);
     // compareResource(resource_map[KEY_RESOURCE_GOLD], KEY_RESOURCE_GOLD, 0);
     // compareResource(resource_map[KEY_RESOURCE_IRON], KEY_RESOURCE_IRON, 0);
-    // compareResource(resource_map[KEY_RESOURCE_MANA], KEY_RESOURCE_MANA, 0);
     // compareResource(resource_map[KEY_RESOURCE_ROCK], KEY_RESOURCE_ROCK, 0);
     // compareResource(resource_map[KEY_RESOURCE_WOOD], KEY_RESOURCE_WOOD, 0);
 }

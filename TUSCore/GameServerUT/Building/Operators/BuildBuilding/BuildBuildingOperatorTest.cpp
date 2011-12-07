@@ -167,7 +167,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10)(9);
+    vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(9);
     configureResourcePersistenceFacadeMockForGetResources(getResourceMap(m_context, resource_volumes));
 
     BuildBuildingOperator build_building_operator(m_context,
