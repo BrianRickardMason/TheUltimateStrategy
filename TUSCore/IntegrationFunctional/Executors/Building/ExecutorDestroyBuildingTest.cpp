@@ -80,7 +80,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_SettlementDoesNotExist)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationUnauthorized))));
 
@@ -128,7 +128,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_Unauthorized)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login2", "Password2",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationUnauthorized))));
 
@@ -172,7 +172,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_DifferentBuilding)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -180,7 +180,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_DifferentBuilding)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BATTLEMENTS,
+                KEY_REGULAR_MINE,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationThereAreNoBuildings))));
 
@@ -224,7 +224,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_NotEnoughBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -232,7 +232,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_NotEnoughBuildings)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 2)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationNotEnoughBuildings))));
 
@@ -276,7 +276,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 60)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -284,7 +284,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationNotEnoughResources))));
 
@@ -328,7 +328,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_MaxBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -336,7 +336,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_MaxBuildings)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationBuildingHasBeenDestroyed))));
 
@@ -380,7 +380,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_ManyBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -388,7 +388,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_ManyBuildings)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 40)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationBuildingHasBeenDestroyed))));
 
@@ -432,7 +432,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_OneBuilding)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -440,7 +440,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_OneBuilding)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationBuildingHasBeenDestroyed))));
 
@@ -484,7 +484,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_LastOneBuilding)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -492,7 +492,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_LastOneBuilding)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationBuildingHasBeenDestroyed))));
 
@@ -536,7 +536,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_LastOneBuildingDoubleDestroy)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -544,7 +544,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_LastOneBuildingDoubleDestroy)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationBuildingHasBeenDestroyed))))
         (IScenarioShrPtr(new ScenarioDestroyBuilding(
@@ -552,7 +552,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_LastOneBuildingDoubleDestroy)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationThereAreNoBuildings))));
 
@@ -596,7 +596,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_ZeroBuildings)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 0)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationTryingToDestroyZeroBuildings))));
 
@@ -640,7 +640,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_Unauthenticated)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "BadPassword",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationUnauthenticated))));
 
@@ -660,7 +660,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_InvalidRequest)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionInvalidRequest(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationInvalidRequest))));
 
@@ -708,7 +708,7 @@ TEST_F(IntegrationFunctionalTest, DestroyBuilding_EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioDestroyBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioDestroyBuildingVerificationEpochIsNotActive))));
 

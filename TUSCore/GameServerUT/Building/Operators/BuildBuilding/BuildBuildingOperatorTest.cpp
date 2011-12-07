@@ -129,7 +129,7 @@ TEST_F(BuildBuildingOperatorTest, BuildBuildingReturnsProperValueWhileTryingToBu
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_TRYING_TO_BUILD_ZERO_BUILDINGS,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 0).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 0).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_GetResourcesThrows)
@@ -145,7 +145,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_GetResourcesThrows)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_AllResources)
@@ -160,7 +160,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_AllResources)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
@@ -175,7 +175,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_NotEnoughResources_OneResource)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceThrows)
@@ -194,7 +194,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceThrows)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceReturnsFalse)
@@ -212,7 +212,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_SubtractResourceReturnsFalse)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_RESOURCES_MISSING_IN_THE_MEANTIME,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_AddBuildinghrows)
@@ -220,7 +220,7 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_AddBuildinghrows)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     std::exception e;
-    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
+    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_REGULAR_FARM, 1))
     .WillOnce(Throw(e));
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
@@ -233,14 +233,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_AddBuildinghrows)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1));
+    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_REGULAR_FARM, 1));
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
@@ -254,14 +254,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_OneBuilding)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 4));
+    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_REGULAR_FARM, 4));
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
@@ -275,14 +275,14 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_ManyBuildings)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 4).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 4).m_exit_code);
 }
 
 TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10));
+    EXPECT_CALL(*m_building_persistence_facade, addBuilding(_, m_id_holder, KEY_REGULAR_FARM, 10));
 
     vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
     ResourceWithVolumeMap resource_map = getResourceMap(m_context, resource_volumes);
@@ -296,5 +296,5 @@ TEST_F(BuildBuildingOperatorTest, buildBuilding_Success_Max_OnResources)
                                                   IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(BUILD_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_BUILT,
-              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10).m_exit_code);
+              build_building_operator.buildBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 10).m_exit_code);
 }

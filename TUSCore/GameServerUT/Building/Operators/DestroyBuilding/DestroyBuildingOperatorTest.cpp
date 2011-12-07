@@ -73,8 +73,8 @@ protected:
         GameServer::Building::Volume const & a_volume
     )
     {
-        EXPECT_CALL(*m_building_persistence_facade, getBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN))
-        .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_DEFENSIVE_BARBICAN, a_volume)));
+        EXPECT_CALL(*m_building_persistence_facade, getBuilding(_, m_id_holder, KEY_REGULAR_FARM))
+        .WillOnce(Return(make_shared<BuildingWithVolume>(m_context, KEY_REGULAR_FARM, a_volume)));
     }
 
     /**
@@ -148,14 +148,14 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_TryingToDestroyZeroBuildings
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_TRYING_TO_DESTROY_ZERO_BUILDINGS,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 0).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 0).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_ZeroBuildings)
 {
     ITransactionShrPtr transaction(new TransactionDummy);
 
-    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN))
+    EXPECT_CALL(*m_building_persistence_facade, getBuilding(transaction, m_id_holder, KEY_REGULAR_FARM))
     .WillOnce(Return(BuildingWithVolumeShrPtr()));
 
     DestroyBuildingOperator destroy_building_operator(m_context,
@@ -163,7 +163,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_ZeroBuildings)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_THERE_ARE_NO_BUILDINGS,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughBuildings)
@@ -177,7 +177,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughBuildings)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_BUILDINGS,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 2).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 2).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetResourcesThrows)
@@ -196,7 +196,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_GetResourcesThrows)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResources)
@@ -213,7 +213,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_AllResour
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResource)
@@ -230,7 +230,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_NotEnoughResources_OneResour
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_NOT_ENOUGH_RESOURCES,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
@@ -253,7 +253,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceThrows)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse)
@@ -273,7 +273,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractResourceReturnsFalse
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_RESOURCES_MISSING_IN_THE_MEANTIME,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
@@ -282,7 +282,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
     std::exception e;
-    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_REGULAR_FARM, 1))
     .WillOnce(Throw(e));
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
@@ -295,7 +295,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingThrows)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse)
@@ -303,7 +303,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_REGULAR_FARM, 1))
     .WillOnce(Return(false));
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(10)(10)(10)(10)(10)(10);
@@ -316,7 +316,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_SubtractBuildingReturnsFalse
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDINGS_MISSING_IN_THE_MEANTIME,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
@@ -324,7 +324,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_REGULAR_FARM, 1))
     .WillOnce(Return(true));
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
@@ -339,7 +339,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_OneBuilding)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 1).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 1).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
@@ -347,7 +347,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_REGULAR_FARM, 5))
     .WillOnce(Return(true));
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
@@ -362,7 +362,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_ManyBuildings)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 5).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 5).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
@@ -370,7 +370,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingPersistenceFacadeMockForGetBuilding(10);
-    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_REGULAR_FARM, 10))
     .WillOnce(Return(true));
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(1000)(1000)(1000)(1000)(1000)(1000);
@@ -385,7 +385,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnBuildings)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 10).m_exit_code);
 }
 
 TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
@@ -393,7 +393,7 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
     ITransactionShrPtr transaction(new TransactionDummy);
 
     configureBuildingPersistenceFacadeMockForGetBuilding(20);
-    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10))
+    EXPECT_CALL(*m_building_persistence_facade, subtractBuilding(_, m_id_holder, KEY_REGULAR_FARM, 10))
     .WillOnce(Return(true));
 
     std::vector<GameServer::Resource::Volume> resource_volumes = assign::list_of(100)(100)(100)(100)(100)(100);
@@ -408,5 +408,5 @@ TEST_F(DestroyBuildingOperatorTest, destroyBuilding_Success_Max_OnResources)
                                                       IResourcePersistenceFacadeShrPtr(m_resource_persistence_facade));
 
     ASSERT_EQ(DESTROY_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_DESTROYED,
-              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_DEFENSIVE_BARBICAN, 10).m_exit_code);
+              destroy_building_operator.destroyBuilding(transaction, m_id_holder, KEY_REGULAR_FARM, 10).m_exit_code);
 }

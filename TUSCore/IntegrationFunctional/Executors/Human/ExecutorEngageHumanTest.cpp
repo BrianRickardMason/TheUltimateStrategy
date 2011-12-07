@@ -132,7 +132,7 @@ TEST_F(IntegrationFunctionalTest, EngageHuman_NotEnoughResources)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 50)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioEngageHuman(

@@ -192,7 +192,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsNotPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -205,7 +205,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsNotPresent)
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(1, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
     }
 }
 
@@ -215,7 +215,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -224,7 +224,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -237,7 +237,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent)
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(1, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 22);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 22);
     }
 }
 
@@ -247,7 +247,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent_DifferentBui
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -269,7 +269,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent_DifferentBui
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(2, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
         compareBuilding(buildings[KEY_GOLD_ALTAR_OF_WISHES], KEY_GOLD_ALTAR_OF_WISHES, 22);
     }
 
@@ -283,7 +283,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsArePresent_Subtr
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
 
         transaction->commit();
@@ -306,7 +306,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsArePresent_Subtr
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(1, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
     }
 }
 
@@ -316,7 +316,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingIsPresent_Subtrac
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 22);
 
         transaction->commit();
     }
@@ -325,7 +325,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingIsPresent_Subtrac
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11));
+        ASSERT_TRUE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11));
 
         transaction->commit();
     }
@@ -338,7 +338,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingIsPresent_Subtrac
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(1, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
     }
 }
 
@@ -348,7 +348,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsPresent_TryToS
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -357,7 +357,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsPresent_TryToS
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_FALSE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 12));
+        ASSERT_FALSE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 12));
     }
 
     {
@@ -368,7 +368,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsPresent_TryToS
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(1, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
     }
 }
 
@@ -378,7 +378,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsPresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -387,7 +387,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsPresent_Subtra
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11));
+        ASSERT_TRUE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11));
 
         transaction->commit();
     }
@@ -407,7 +407,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsIsNotPresent_Try
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    ASSERT_FALSE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11));
+    ASSERT_FALSE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11));
 }
 
 /**
@@ -418,7 +418,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsNotPresent)
     IConnectionShrPtr connection = m_persistence.getConnection();
     ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-    BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN);
+    BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM);
 
     ASSERT_TRUE(building == NULL);
 }
@@ -429,7 +429,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBu
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -438,10 +438,10 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBu
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN);
+        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM);
 
         ASSERT_FALSE(building == NULL);
-        compareBuilding(building, KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(building, KEY_REGULAR_FARM, 11);
     }
 }
 
@@ -451,7 +451,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBu
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -460,7 +460,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBu
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_2, KEY_DEFENSIVE_BARBICAN);
+        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_2, KEY_REGULAR_FARM);
 
         ASSERT_TRUE(building == NULL);
     }
@@ -472,7 +472,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBu
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -481,7 +481,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetPresentBu
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_3, KEY_DEFENSIVE_BARBICAN);
+        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_3, KEY_REGULAR_FARM);
 
         ASSERT_TRUE(building == NULL);
     }
@@ -493,7 +493,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -514,7 +514,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -535,7 +535,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -579,7 +579,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingIsPresent_OfHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -592,7 +592,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingIsPresent_OfHolder)
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(1, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
     }
 }
 
@@ -602,7 +602,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingIsPresent_OfDifferent
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -623,7 +623,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingIsPresent_OfDifferent
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
 
         transaction->commit();
     }
@@ -644,7 +644,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfHolder)
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
 
         transaction->commit();
@@ -658,7 +658,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfHolder)
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(2, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
         compareBuilding(buildings[KEY_GOLD_ALTAR_OF_WISHES], KEY_GOLD_ALTAR_OF_WISHES, 22);
     }
 }
@@ -669,7 +669,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfDiffere
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
 
         transaction->commit();
@@ -691,7 +691,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfDiffere
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
 
         transaction->commit();
@@ -713,9 +713,9 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_DEFENSIVE_BARBICAN, 33);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_REGULAR_FARM, 33);
 
         transaction->commit();
     }
@@ -728,7 +728,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(2, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 11);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
         compareBuilding(buildings[KEY_GOLD_ALTAR_OF_WISHES], KEY_GOLD_ALTAR_OF_WISHES, 22);
     }
 }
@@ -739,9 +739,9 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_DEFENSIVE_BARBICAN, 33);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_REGULAR_FARM, 33);
 
         transaction->commit();
     }
@@ -754,7 +754,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
 
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(1, buildings.size());
-        compareBuilding(buildings[KEY_DEFENSIVE_BARBICAN], KEY_DEFENSIVE_BARBICAN, 33);
+        compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 33);
     }
 }
 
@@ -764,9 +764,9 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_DEFENSIVE_BARBICAN, 11);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_DEFENSIVE_BARBICAN, 33);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_REGULAR_FARM, 33);
 
         transaction->commit();
     }

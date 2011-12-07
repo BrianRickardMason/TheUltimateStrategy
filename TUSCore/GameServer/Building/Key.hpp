@@ -39,16 +39,6 @@ namespace Building
 /**
  * @brief The available key.
  */
-Configuration::IKey const KEY_DEFENSIVE_BARBICAN       ("defensivebarbican");
-Configuration::IKey const KEY_DEFENSIVE_BATTLEMENTS    ("defensivebattlements");
-Configuration::IKey const KEY_DEFENSIVE_CASEMATE       ("defensivecasemate");
-Configuration::IKey const KEY_DEFENSIVE_CIRCUMVALLATION("defensivecircumvallation");
-Configuration::IKey const KEY_DEFENSIVE_DONJON         ("defensivedonjon");
-Configuration::IKey const KEY_DEFENSIVE_MACHICOLATION  ("defensivemachicolation");
-Configuration::IKey const KEY_DEFENSIVE_PORTCULLIS     ("defensiveportcullis");
-Configuration::IKey const KEY_DEFENSIVE_POSTERN        ("defensivepostern");
-Configuration::IKey const KEY_DEFENSIVE_VIEWING_TOWER  ("defensiveviewingtower");
-
 Configuration::IKey const KEY_GOLD_ALTAR_OF_WISHES     ("goldaltarofwishes");
 Configuration::IKey const KEY_GOLD_COMMUNICATION_TOWERS("goldcommunicationtowers");
 Configuration::IKey const KEY_GOLD_ETERNAL_CALENDAR    ("goldeternalcalendar");

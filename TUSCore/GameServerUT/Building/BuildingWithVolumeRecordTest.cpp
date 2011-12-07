@@ -45,8 +45,8 @@ protected:
      */
     BuildingWithVolumeRecordTest()
         : m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
-          m_record(m_id_holder, KEY_DEFENSIVE_BARBICAN, 4),
-          m_model_key(KEY_DEFENSIVE_BARBICAN)
+          m_record(m_id_holder, KEY_REGULAR_FARM, 4),
+          m_model_key(KEY_REGULAR_FARM)
     {
     }
 
@@ -68,7 +68,7 @@ protected:
 
 TEST_F(BuildingWithVolumeRecordTest, BuildingWithVolumeRecord)
 {
-    BuildingWithVolumeRecord record(m_id_holder, KEY_DEFENSIVE_BARBICAN, 4);
+    BuildingWithVolumeRecord record(m_id_holder, KEY_REGULAR_FARM, 4);
 
     ASSERT_TRUE(m_id_holder == record.getIDHolder());
     ASSERT_TRUE(m_model_key == record.getKey());

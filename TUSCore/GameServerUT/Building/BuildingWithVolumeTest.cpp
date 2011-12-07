@@ -46,8 +46,8 @@ protected:
      */
     BuildingWithVolumeTest()
         : m_context(new Context),
-          m_building_with_volume(m_context, KEY_DEFENSIVE_BARBICAN, 4),
-          m_model_key(KEY_DEFENSIVE_BARBICAN)
+          m_building_with_volume(m_context, KEY_REGULAR_FARM, 4),
+          m_model_key(KEY_REGULAR_FARM)
     {
     }
 
@@ -69,7 +69,7 @@ protected:
 
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnArguments)
 {
-    BuildingWithVolume building_with_volume(m_context, KEY_DEFENSIVE_BARBICAN, 4);
+    BuildingWithVolume building_with_volume(m_context, KEY_REGULAR_FARM, 4);
 
     ASSERT_TRUE(m_model_key == building_with_volume.getBuilding()->getKey());
     ASSERT_EQ(4, building_with_volume.getVolume());
@@ -78,7 +78,7 @@ TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnArguments)
 TEST_F(BuildingWithVolumeTest, BuildingWithVolume_BasedOnRecord)
 {
     BuildingWithVolumeRecord
-        building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_DEFENSIVE_BARBICAN, 4);
+        building_with_volume_record(IDHolder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"), KEY_REGULAR_FARM, 4);
 
     BuildingWithVolume building_with_volume(m_context, building_with_volume_record);
 

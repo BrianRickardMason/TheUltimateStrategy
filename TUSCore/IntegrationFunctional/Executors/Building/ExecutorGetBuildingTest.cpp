@@ -80,7 +80,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_SettlementDoesNotExist)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -127,7 +127,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_Unauthorized)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionSuccess(
                 "Login2", "Password2",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationUnauthorized))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -170,7 +170,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_ManyBuildingsExist)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 11)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioBuildBuilding(
@@ -178,7 +178,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_ManyBuildingsExist)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BATTLEMENTS,
+                KEY_REGULAR_MINE,
                 22)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuilding(
@@ -186,7 +186,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_ManyBuildingsExist)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationBuildingHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -229,7 +229,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_OneBuildingExists)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 10)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuilding(
@@ -237,7 +237,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_OneBuildingExists)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationBuildingHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -280,7 +280,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_ZeroBuildingsExist)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationBuildingHasBeenGot))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -323,7 +323,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_Unauthenticated)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionSuccess(
                 "Login", "BadPassword",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationUnauthenticated))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -342,7 +342,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_InvalidRequest)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionInvalidRequest(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationInvalidRequest))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)
@@ -389,7 +389,7 @@ TEST_F(IntegrationFunctionalTest, GetBuilding_EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioGetBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN)),
+                KEY_REGULAR_FARM)),
             IScenarioVerificationShrPtr(new ScenarioGetBuildingVerificationEpochIsNotActive))));
 
     for (vector<IScenarioShrPtr>::iterator it = m_scenarios.begin(); it != m_scenarios.end(); ++it)

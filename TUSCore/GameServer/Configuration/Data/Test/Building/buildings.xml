@@ -1,50 +1,5 @@
-<?xml version="1.0" ?>    
+<?xml version="1.0" ?>
 <buildings>
-    <building>
-        <key>defensivebarbican</key>
-        <class>defensive</class>
-        <name>barbican</name>
-    </building>
-    <building>
-        <key>defensivebattlements</key>
-        <class>defensive</class>
-        <name>battlements</name>
-    </building>
-    <building>
-        <key>defensivecasemate</key>
-        <class>defensive</class>
-        <name>casemate</name>
-    </building>
-    <building>
-        <key>defensivecircumvallation</key>
-        <class>defensive</class>
-        <name>circumvallation</name>
-    </building>
-    <building>
-        <key>defensivedonjon</key>
-        <class>defensive</class>
-        <name>donjon</name>
-    </building>
-    <building>
-        <key>defensivemachicolation</key>
-        <class>defensive</class>
-        <name>machicolation</name>
-    </building>
-    <building>
-        <key>defensiveportcullis</key>
-        <class>defensive</class>
-        <name>portcullis</name>
-    </building>
-    <building>
-        <key>defensivepostern</key>
-        <class>defensive</class>
-        <name>postern</name>
-    </building>
-    <building>
-        <key>defensiveviewingtower</key>
-        <class>defensive</class>
-        <name>viewing tower</name>
-    </building>
     <building>
         <key>goldaltarofwishes</key>
         <class>gold</class>

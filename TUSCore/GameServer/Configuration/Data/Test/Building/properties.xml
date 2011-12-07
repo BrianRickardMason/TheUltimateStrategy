@@ -1,32 +1,5 @@
 <?xml version="1.0" ?>
 <buildings>
-    <building key="defensivebarbican">
-        <capacity value="10" />
-    </building>
-    <building key="defensivebattlements">
-        <capacity value="10" />
-    </building>
-    <building key="defensivecasemate">
-        <capacity value="10" />
-    </building>
-    <building key="defensivecircumvallation">
-        <capacity value="10" />
-    </building>
-    <building key="defensivedonjon">
-        <capacity value="10" />
-    </building>
-    <building key="defensivemachicolation">
-        <capacity value="10" />
-    </building>
-    <building key="defensiveportcullis">
-        <capacity value="10" />
-    </building>
-    <building key="defensivepostern">
-        <capacity value="10" />
-    </building>
-    <building key="defensiveviewingtower">
-        <capacity value="10" />
-    </building>
     <building key="goldaltarofwishes">
         <capacity value="10" />
     </building>

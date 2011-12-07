@@ -79,7 +79,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_SettlementDoesNotExist)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationUnauthorized))));
 
@@ -127,7 +127,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_Unauthorized)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login2", "Password2",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationUnauthorized))));
 
@@ -171,7 +171,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_TooManyBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 101)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationNotEnoughResources))));
 
@@ -215,7 +215,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_MaxBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 100)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))));
 
@@ -259,7 +259,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_ManyBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 63)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))));
 
@@ -303,7 +303,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_OneBuilding)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))));
 
@@ -347,7 +347,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_ZeroBuildings)
                 IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                     "Login", "Password",
                     ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                    KEY_DEFENSIVE_BARBICAN,
+                    KEY_REGULAR_FARM,
                     0)),
                 IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationTryingToBuildZeroBuildings))));
 
@@ -391,7 +391,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_Unauthenticated)
                 IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                     "Login", "BadPassword",
                     ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                    KEY_DEFENSIVE_BARBICAN,
+                    KEY_REGULAR_FARM,
                     1)),
                 IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationUnauthenticated))));
 
@@ -411,7 +411,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_InvalidRequest)
                 IScenarioActionShrPtr(new ScenarioBuildBuildingActionInvalidRequest(
                     "Login", "Password",
                     ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                    KEY_DEFENSIVE_BARBICAN,
+                    KEY_REGULAR_FARM,
                     1)),
                 IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationInvalidRequest))));
 
@@ -459,7 +459,7 @@ TEST_F(IntegrationFunctionalTest, BuildBuilding_EpochIsNotActive)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationEpochIsNotActive))));
 

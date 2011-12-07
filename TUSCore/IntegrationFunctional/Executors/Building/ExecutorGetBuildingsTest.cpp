@@ -168,7 +168,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_ManyBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioBuildBuilding(
@@ -176,7 +176,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_ManyBuildings)
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BATTLEMENTS,
+                KEY_REGULAR_MINE,
                 2)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuildings(
@@ -226,7 +226,7 @@ TEST_F(IntegrationFunctionalTest, GetBuildings_SettlementDoesExist_Authorized_On
             IScenarioActionShrPtr(new ScenarioBuildBuildingActionSuccess(
                 "Login", "Password",
                 ID_HOLDER_CLASS_SETTLEMENT, "Settlement",
-                KEY_DEFENSIVE_BARBICAN,
+                KEY_REGULAR_FARM,
                 1)),
             IScenarioVerificationShrPtr(new ScenarioBuildBuildingVerificationBuildingHasBeenBuilt))))
         (IScenarioShrPtr(new ScenarioGetBuildings(

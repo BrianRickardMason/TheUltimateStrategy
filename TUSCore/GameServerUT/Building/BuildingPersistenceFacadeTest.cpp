@@ -54,7 +54,7 @@ protected:
     BuildingPersistenceFacadeTest()
         : m_context(new Context),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
-          m_key_1(KEY_DEFENSIVE_BARBICAN),
+          m_key_1(KEY_REGULAR_FARM),
           m_key_2(KEY_GOLD_ALTAR_OF_WISHES)
     {
     }
