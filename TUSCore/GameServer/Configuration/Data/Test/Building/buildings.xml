@@ -1,66 +1,6 @@
 <?xml version="1.0" ?>
 <buildings>
     <building>
-        <key>goldaltarofwishes</key>
-        <class>gold</class>
-        <name>altar of wishes</name>
-    </building>
-    <building>
-        <key>goldcommunicationtowers</key>
-        <class>gold</class>
-        <name>communication towers</name>
-    </building>
-    <building>
-        <key>goldeternalcalendar</key>
-        <class>gold</class>
-        <name>eternal calendar</name>
-    </building>
-    <building>
-        <key>goldhunterofmeteors</key>
-        <class>gold</class>
-        <name>hunter of meteors</name>
-    </building>
-    <building>
-        <key>goldhunterofrains</key>
-        <class>gold</class>
-        <name>hunter of rains</name>
-    </building>
-    <building>
-        <key>goldhunterofstorms</key>
-        <class>gold</class>
-        <name>hunter of storms</name>
-    </building>
-    <building>
-        <key>goldhunterofwinds</key>
-        <class>gold</class>
-        <name>hunter of winds</name>
-    </building>
-    <building>
-        <key>goldnecropolis</key>
-        <class>gold</class>
-        <name>necropolis</name>
-    </building>
-    <building>
-        <key>goldoracle</key>
-        <class>gold</class>
-        <name>oracle</name>
-    </building>
-    <building>
-        <key>goldportalofelements</key>
-        <class>gold</class>
-        <name>portal of elements</name>
-    </building>
-    <building>
-        <key>goldpsionicacademy</key>
-        <class>gold</class>
-        <name>psionic academy</name>
-    </building>
-    <building>
-        <key>goldtowerofchaos</key>
-        <class>gold</class>
-        <name>tower of chaos</name>
-    </building>
-    <building>
         <key>regularbarracks</key>
         <class>regular</class>
         <name>barracks</name>

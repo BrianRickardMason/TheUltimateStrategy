@@ -256,7 +256,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent_DifferentBui
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
 
         transaction->commit();
     }
@@ -270,7 +270,7 @@ TEST_F(BuildingPersistenceFacadeTest, addBuilding_BuildingIsPresent_DifferentBui
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(2, buildings.size());
         compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
-        compareBuilding(buildings[KEY_GOLD_ALTAR_OF_WISHES], KEY_GOLD_ALTAR_OF_WISHES, 22);
+        compareBuilding(buildings[KEY_REGULAR_MARKETPLACE], KEY_REGULAR_MARKETPLACE, 22);
     }
 
 }
@@ -284,7 +284,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsArePresent_Subtr
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
 
         transaction->commit();
     }
@@ -293,7 +293,7 @@ TEST_F(BuildingPersistenceFacadeTest, subtractBuilding_BuildingsArePresent_Subtr
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        ASSERT_TRUE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22));
+        ASSERT_TRUE(m_building_persistence_facade->subtractBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22));
 
         transaction->commit();
     }
@@ -502,7 +502,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES);
+        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE);
 
         ASSERT_TRUE(building == NULL);
     }
@@ -523,7 +523,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_2, KEY_GOLD_ALTAR_OF_WISHES);
+        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_2, KEY_REGULAR_MARKETPLACE);
 
         ASSERT_TRUE(building == NULL);
     }
@@ -544,7 +544,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuilding_BuildingIsPresent_GetNonPresen
         IConnectionShrPtr connection = m_persistence.getConnection();
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_3, KEY_GOLD_ALTAR_OF_WISHES);
+        BuildingWithVolumeShrPtr building = m_building_persistence_facade->getBuilding(transaction, m_id_holder_3, KEY_REGULAR_MARKETPLACE);
 
         ASSERT_TRUE(building == NULL);
     }
@@ -645,7 +645,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfHolder)
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
 
         transaction->commit();
     }
@@ -659,7 +659,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfHolder)
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(2, buildings.size());
         compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
-        compareBuilding(buildings[KEY_GOLD_ALTAR_OF_WISHES], KEY_GOLD_ALTAR_OF_WISHES, 22);
+        compareBuilding(buildings[KEY_REGULAR_MARKETPLACE], KEY_REGULAR_MARKETPLACE, 22);
     }
 }
 
@@ -670,7 +670,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfDiffere
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
 
         transaction->commit();
     }
@@ -692,7 +692,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_OfDiffere
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
 
         transaction->commit();
     }
@@ -714,7 +714,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_REGULAR_FARM, 33);
 
         transaction->commit();
@@ -729,7 +729,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
         ASSERT_FALSE(buildings.empty());
         ASSERT_EQ(2, buildings.size());
         compareBuilding(buildings[KEY_REGULAR_FARM], KEY_REGULAR_FARM, 11);
-        compareBuilding(buildings[KEY_GOLD_ALTAR_OF_WISHES], KEY_GOLD_ALTAR_OF_WISHES, 22);
+        compareBuilding(buildings[KEY_REGULAR_MARKETPLACE], KEY_REGULAR_MARKETPLACE, 22);
     }
 }
 
@@ -740,7 +740,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_REGULAR_FARM, 33);
 
         transaction->commit();
@@ -765,7 +765,7 @@ TEST_F(BuildingPersistenceFacadeTest, getBuildings_BuildingsArePresent_TwoHolder
         ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_FARM, 11);
-        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_GOLD_ALTAR_OF_WISHES, 22);
+        m_building_persistence_facade->addBuilding(transaction, m_id_holder_1, KEY_REGULAR_MARKETPLACE, 22);
         m_building_persistence_facade->addBuilding(transaction, m_id_holder_2, KEY_REGULAR_FARM, 33);
 
         transaction->commit();

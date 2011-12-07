@@ -39,19 +39,6 @@ namespace Building
 /**
  * @brief The available key.
  */
-Configuration::IKey const KEY_GOLD_ALTAR_OF_WISHES     ("goldaltarofwishes");
-Configuration::IKey const KEY_GOLD_COMMUNICATION_TOWERS("goldcommunicationtowers");
-Configuration::IKey const KEY_GOLD_ETERNAL_CALENDAR    ("goldeternalcalendar");
-Configuration::IKey const KEY_GOLD_HUNTER_OF_METEORS   ("goldhunterofmeteors");
-Configuration::IKey const KEY_GOLD_HUNTER_OF_RAINS     ("goldhuterofrains");
-Configuration::IKey const KEY_GOLD_HUNTER_OF_STORMS    ("goldhunterofstorms");
-Configuration::IKey const KEY_GOLD_HUNTER_OF_WINDS     ("goldhunterofwinds");
-Configuration::IKey const KEY_GOLD_NECROPOLIS          ("goldnecropolis");
-Configuration::IKey const KEY_GOLD_ORACLE              ("goldoracle");
-Configuration::IKey const KEY_GOLD_PORTAL_OF_ELEMENTS  ("goldportalofelements");
-Configuration::IKey const KEY_GOLD_PSIONIC_ACADEMY     ("goldpsionicacademy");
-Configuration::IKey const KEY_GOLD_TOWER_OF_CHAOS      ("goldtowerofchaos");
-
 Configuration::IKey const KEY_REGULAR_BARRACKS         ("regularbarracks");
 Configuration::IKey const KEY_REGULAR_FARM             ("regularfarm");
 Configuration::IKey const KEY_REGULAR_FORGE            ("regularforge");
