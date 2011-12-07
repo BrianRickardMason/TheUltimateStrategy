@@ -43,7 +43,6 @@ std::string const KEY_RESOURCE_COAL("coal"); // TODO: A key.
 std::string const KEY_RESOURCE_FOOD("food");
 std::string const KEY_RESOURCE_GOLD("gold");
 std::string const KEY_RESOURCE_IRON("iron");
-std::string const KEY_RESOURCE_MANA("mana");
 std::string const KEY_RESOURCE_ROCK("rock");
 std::string const KEY_RESOURCE_WOOD("wood");
 //}@
