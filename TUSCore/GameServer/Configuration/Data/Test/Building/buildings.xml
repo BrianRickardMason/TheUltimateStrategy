@@ -6,11 +6,6 @@
         <name>farm</name>
     </building>
     <building>
-        <key>regularforge</key>
-        <class>regular</class>
-        <name>forge</name>
-    </building>
-    <building>
         <key>regularguild</key>
         <class>regular</class>
         <name>guild</name>

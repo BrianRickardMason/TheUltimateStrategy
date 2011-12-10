@@ -3,9 +3,6 @@
     <building key="regularfarm">
         <capacity value="10" />
     </building>
-    <building key="regularforge">
-        <capacity value="10" />
-    </building>
     <building key="regularguild">
         <capacity value="10" />
     </building>

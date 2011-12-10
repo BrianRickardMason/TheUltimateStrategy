@@ -40,7 +40,6 @@ namespace Building
  * @brief The available key.
  */
 Configuration::IKey const KEY_REGULAR_FARM       ("regularfarm");
-Configuration::IKey const KEY_REGULAR_FORGE      ("regularforge");
 Configuration::IKey const KEY_REGULAR_GUILD      ("regularguild");
 Configuration::IKey const KEY_REGULAR_HOUSE      ("regularhouse");
 Configuration::IKey const KEY_REGULAR_MARKETPLACE("regularmarketplace");
