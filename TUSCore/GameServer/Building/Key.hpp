@@ -39,18 +39,17 @@ namespace Building
 /**
  * @brief The available key.
  */
-Configuration::IKey const KEY_REGULAR_BARRACKS         ("regularbarracks");
-Configuration::IKey const KEY_REGULAR_FARM             ("regularfarm");
-Configuration::IKey const KEY_REGULAR_FORGE            ("regularforge");
-Configuration::IKey const KEY_REGULAR_GUILD            ("regularguild");
-Configuration::IKey const KEY_REGULAR_HOUSE            ("regularhouse");
-Configuration::IKey const KEY_REGULAR_MARKETPLACE      ("regularmarketplace");
-Configuration::IKey const KEY_REGULAR_MINE             ("regularmine");
-Configuration::IKey const KEY_REGULAR_QUARRY           ("regularquarry");
-Configuration::IKey const KEY_REGULAR_SAWMILL          ("regularsawmill");
-Configuration::IKey const KEY_REGULAR_SCHOOL           ("regularschool");
-Configuration::IKey const KEY_REGULAR_STEELWORKS       ("regularsteelworks");
-Configuration::IKey const KEY_REGULAR_TEMPLE           ("regulartemple");
+Configuration::IKey const KEY_REGULAR_FARM       ("regularfarm");
+Configuration::IKey const KEY_REGULAR_FORGE      ("regularforge");
+Configuration::IKey const KEY_REGULAR_GUILD      ("regularguild");
+Configuration::IKey const KEY_REGULAR_HOUSE      ("regularhouse");
+Configuration::IKey const KEY_REGULAR_MARKETPLACE("regularmarketplace");
+Configuration::IKey const KEY_REGULAR_MINE       ("regularmine");
+Configuration::IKey const KEY_REGULAR_QUARRY     ("regularquarry");
+Configuration::IKey const KEY_REGULAR_SAWMILL    ("regularsawmill");
+Configuration::IKey const KEY_REGULAR_SCHOOL     ("regularschool");
+Configuration::IKey const KEY_REGULAR_STEELWORKS ("regularsteelworks");
+Configuration::IKey const KEY_REGULAR_TEMPLE     ("regulartemple");
 //}@
 
 } // namespace Building

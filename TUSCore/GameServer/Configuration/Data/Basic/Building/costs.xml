@@ -1,23 +1,5 @@
 <?xml version="1.0" ?>
 <buildings>
-    <building key="regularbarracks">
-        <build>
-            <coal value="10" />
-            <food value="10" />
-            <gold value="10" />
-            <iron value="10" />
-            <rock value="10" />
-            <wood value="10" />
-        </build>
-        <destroy>
-            <coal value="10" />
-            <food value="10" />
-            <gold value="10" />
-            <iron value="10" />
-            <rock value="10" />
-            <wood value="10" />
-        </destroy>
-    </building>
     <building key="regularfarm">
         <build>
             <coal value="10" />

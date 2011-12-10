@@ -1,8 +1,5 @@
 <?xml version="1.0" ?>
 <buildings>
-    <building key="regularbarracks">
-        <capacity value="10" />
-    </building>
     <building key="regularfarm">
         <capacity value="10" />
     </building>

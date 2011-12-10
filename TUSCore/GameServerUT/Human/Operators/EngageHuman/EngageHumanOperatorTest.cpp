@@ -68,19 +68,6 @@ protected:
     }
 
     /**
-     * @brief Produces configured BuildingPersistenceFacadeMock.
-     *
-     * @return The prepared mock.
-     */
-    BuildingPersistenceFacadeMock * produceBuildingPersistenceFacadeMock()
-    {
-        // Mocks setup: BuildingPersistenceFacadeMock.
-        configureBuildingPersistenceFacadeMockFARMtBuilding(KEY_REGULAR_BARRACKS, 2);
-
-        return m_building_persistence_facade;
-    }
-
-    /**
      * @brief Produces configured ResourcePersistenceFacadeMock.
      *
      * @return The prepared mock.

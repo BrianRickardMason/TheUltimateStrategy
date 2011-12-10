@@ -1,11 +1,6 @@
 <?xml version="1.0" ?>
 <buildings>
     <building>
-        <key>regularbarracks</key>
-        <class>regular</class>
-        <name>barracks</name>
-    </building>
-    <building>
         <key>regularfarm</key>
         <class>regular</class>
         <name>farm</name>
