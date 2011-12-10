@@ -183,6 +183,93 @@ A given number of humans die. The factor is 10%. Each and every type of human is
 A given number of humans is dismissed (becomes jobless). The factor is 10%. Each and every type of human is dismissed
 equally.
 
+CHAPTER: BUILDINGS.
+
+* Buildings - what they are?
+
+Buildings are units that represent places where humans work.
+
+* How we distinguish buildings?
+
+Each building has its own key that consist of:
+- the class of the building,
+- the name of the building.
+
+* What does the class of a building mean?
+
+The class of a building defines what would be the main stream of building's usage.
+
+* What are the types of the classes?
+
+These are:
+- regular.
+
+* What are the types of the classes that come along with the game?
+
+These are:
+- regular.
+
+* What are the types of the classes that come along with the basic configuration?
+
+These are:
+- regular.
+
+* What does the name of a building mean?
+
+The name of a building is a unique identifier.
+
+* What are the names of the buildings?
+
+These are:
+- farm,
+- marketplace,
+- mine,
+- quarry,
+- sawmill,
+- steelworks.
+
+* What are the names of the humans that come along with the game?
+
+There are not any buildings that come along with the game.
+
+* What are the types of the classes that come along with the basic configuration?
+
+These are:
+- farm,
+- marketplace,
+- mine,
+- quarry,
+- sawmill,
+- steelworks.
+
+* What humans occupy buildings?
+
+These are:
+- farmers occupy farms,
+- lumberjacks occupy sawmills,
+- merchants occupy marketplaces,
+- miners occupy mines,
+- steelworkers occupy steelworks,
+- stone masons occupy quarries.
+
+* What are the active actions concerning buildings?
+
+These are:
+- building a building,
+- destroying a building.
+
+* What are the passive actions involving buildings?
+
+There are not any passive actions involving buildings.
+
+* What are the costs of buildings?
+
+These are:
+- costs of building,
+- costs of destroying.
+
+TODO: * What happens if buildings are destroyed and there is not enough space for humans to work in?
+
 CHAPTER: RESOURCES.
 
 * Resources - what they are?
