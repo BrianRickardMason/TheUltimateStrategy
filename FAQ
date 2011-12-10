@@ -36,8 +36,14 @@ The game is meant to be highly configurable. An administrator can easily modify,
 configurations. Some of the parts of the game are tightly coupled and some are not. Some of the dependencies will be
 covered in this FAQ.
 
-# TODO: CHAPTER: CONFIGURATION.
-# TODO: Explain what "come along with the game" means.
+CHAPTER: CONFIGURATION.
+
+The game is configured via configuration files. An administrator may change the files and modify the behaviour of a
+given tournament.
+
+There are some parts of the game that come along with the game itself. It means that there are behviours that are not
+configurable. For example: when a human is dismissed it changes into a jobless. It means one cannot remove jobless from
+configuration.
 
 CHAPTER: HUMANS.
 
