@@ -157,7 +157,7 @@ These are:
 - rock,
 - wood.
 
-* What are the names of the humans that come along with the game?
+* What are the names of the resources that come along with the game?
 
 These are:
 - food,
@@ -191,12 +191,12 @@ To cover the costs of:
 - feeding a human,
 - rewarding (compensating) a human.
 
-* What are the active actions concerning humans?
+* What are the active actions concerning resources?
 
 These are:
 - transporting a resource.
 
-* What are the passive actions involving humans?
+* What are the passive actions involving resources?
 
 These are:
 - covering costs of other actions.
