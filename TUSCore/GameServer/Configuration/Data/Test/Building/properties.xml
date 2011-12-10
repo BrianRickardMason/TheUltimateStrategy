@@ -3,12 +3,6 @@
     <building key="regularfarm">
         <capacity value="10" />
     </building>
-    <building key="regularguild">
-        <capacity value="10" />
-    </building>
-    <building key="regularhouse">
-        <capacity value="10" />
-    </building>
     <building key="regularmarketplace">
         <capacity value="10" />
     </building>
@@ -21,13 +15,7 @@
     <building key="regularsawmill">
         <capacity value="10" />
     </building>
-    <building key="regularschool">
-        <capacity value="10" />
-    </building>
     <building key="regularsteelworks">
-        <capacity value="10" />
-    </building>
-    <building key="regulartemple">
         <capacity value="10" />
     </building>
 </buildings>

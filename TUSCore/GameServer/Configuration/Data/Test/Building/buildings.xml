@@ -6,16 +6,6 @@
         <name>farm</name>
     </building>
     <building>
-        <key>regularguild</key>
-        <class>regular</class>
-        <name>guild</name>
-    </building>
-    <building>
-        <key>regularhouse</key>
-        <class>regular</class>
-        <name>house</name>
-    </building>
-    <building>
         <key>regularmarketplace</key>
         <class>regular</class>
         <name>marketplace</name>
@@ -36,18 +26,8 @@
         <name>sawmill</name>
     </building>
     <building>
-        <key>regularschool</key>
-        <class>regular</class>
-        <name>school</name>
-    </building>
-    <building>
         <key>regularsteelworks</key>
         <class>regular</class>
         <name>steelworks</name>
-    </building>
-    <building>
-        <key>regulartemple</key>
-        <class>regular</class>
-        <name>temple</name>
     </building>
 </buildings>
