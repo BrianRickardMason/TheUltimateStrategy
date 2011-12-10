@@ -122,15 +122,60 @@ These are:
 - novice,
 - advanced.
 
-# TODO:
 * What buildings are occupied by humans?
+
+These are:
+- farms by farmers,
+- sawmills by lumberjacks,
+- marketplaces by merchants,
+- mines by miners,
+- steelworks by steelworkers,
+- quarries by stone masons.
+
 * What resources are produced by humans?
+
+These are:
+- food by breeders, farmers and fishermans,
+- wood by lumberjacks,
+- gold by merchants,
+- coal by miners,
+- iron by steelworkers,
+- rock by stone masons.
+
 * What are the active actions concerning humans?
+
+These are:
+- engaging a human,
+- dismissing a human,
+- transporting a human.
+
 * What are the passive actions involving humans?
+
+These are:
+- feeding a human,
+- rewarding (compensating) a human.
+
 * What are the costs of humans?
+
+These are:
+- costs of engagement,
+- costs of dismiss,
+- costs of feeding,
+- costs of reward (compensation).
+
 * How does human reproduce?
+
+Each and every unit increases its number by a given factor (10%) every turn. Reproduced humans begins to exist
+as jobless.
+
 * What happens if there is not enough food?
+
+A given number of humans die. The factor is 10%. Each and every type of human is killed equally.
+
 * What happens if there is not enough gold?
+
+A given number of humans is dismissed (becomes jobless). The factor is 10%. Each and every type of human is dismissed
+equally.
 
 CHAPTER: RESOURCES.
 
