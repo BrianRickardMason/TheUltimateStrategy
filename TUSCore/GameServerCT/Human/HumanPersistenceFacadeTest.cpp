@@ -55,12 +55,15 @@ protected:
     HumanPersistenceFacadeTest()
         : m_context(new Context),
           m_epoch_name("Epoch"),
-          m_login("Login"),
+          m_login_1("Login1"),
+          m_login_2("Login2"),
           m_world_name("World"),
-          m_land_name("Land"),
+          m_land_name_1("Land1"),
+          m_land_name_2("Land2"),
           m_settlement_name_1("Settlement1"),
           m_settlement_name_2("Settlement2"),
           m_settlement_name_3("Settlement3"),
+          m_settlement_name_4("Settlement4"),
           m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_land_persistence_facade(m_persistence_facade_abstract_factory->createLandPersistenceFacade()),
@@ -70,26 +73,30 @@ protected:
           m_create_settlement_operator(CreateSettlementOperatorFactory::createCreateSettlementOperator(m_persistence_facade_abstract_factory)),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_1),
           m_id_holder_2(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_2),
-          m_id_holder_3(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3)
+          m_id_holder_3(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_3),
+          m_id_holder_4(ID_HOLDER_CLASS_SETTLEMENT, m_settlement_name_4)
     {
         {
             IConnectionShrPtr connection = m_persistence.getConnection();
             ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
 
-            m_user_persistence_facade->createUser(transaction, "Login", "Password");
+            m_user_persistence_facade->createUser(transaction, m_login_1, "Password");
+            m_user_persistence_facade->createUser(transaction, m_login_2, "Password");
 
             m_world_persistence_facade->createWorld(transaction, m_world_name);
 
             m_epoch_persistence_facade->createEpoch(transaction, m_world_name, m_epoch_name);
 
-            m_land_persistence_facade->createLand(transaction, m_login, m_world_name, m_land_name);
+            m_land_persistence_facade->createLand(transaction, m_login_1, m_world_name, m_land_name_1);
+            m_land_persistence_facade->createLand(transaction, m_login_2, m_world_name, m_land_name_2);
 
-            m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_1);
-            m_create_settlement_operator->createSettlement(transaction, m_land_name, m_settlement_name_2);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_1);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_1, m_settlement_name_2);
+            m_create_settlement_operator->createSettlement(transaction, m_land_name_2, m_settlement_name_4);
 
             // Remove humans that have been added.
             m_human_persistence_facade->subtractHuman(transaction, m_id_holder_1, KEY_WORKER_JOBLESS_NOVICE, 1000);
-            m_human_persistence_facade->subtractHuman(transaction, m_id_holder_2, KEY_WORKER_JOBLESS_NOVICE, 1000);
+            m_human_persistence_facade->subtractHuman(transaction, m_id_holder_4, KEY_WORKER_JOBLESS_NOVICE, 1000);
 
             transaction->commit();
         }
@@ -125,7 +132,8 @@ protected:
     /**
      * @brief Test constants: the login of the user.
      */
-    string m_login;
+    string m_login_1,
+           m_login_2;
 
     /**
      * @brief Test constants: the name of the world.
@@ -135,14 +143,16 @@ protected:
     /**
      * @brief Test constants: the name of the land.
      */
-    string m_land_name;
+    string m_land_name_1,
+           m_land_name_2;
 
     /**
      * @brief Test constants: the names of the settlements.
      */
     string m_settlement_name_1,
            m_settlement_name_2,
-           m_settlement_name_3;
+           m_settlement_name_3,
+           m_settlement_name_4;
 
     /**
      * @brief The abstract factory of persistence facades.
@@ -170,7 +180,8 @@ protected:
      */
     IDHolder m_id_holder_1,
              m_id_holder_2,
-             m_id_holder_3;
+             m_id_holder_3,
+             m_id_holder_4;
 };
 
 /**
@@ -776,5 +787,126 @@ TEST_F(HumanPersistenceFacadeTest, getHumans_AllHumans_HumansArePresent_TwoHolde
         HumanWithVolumeMap humans = m_human_persistence_facade->getHumans(transaction, m_id_holder_3);
 
         ASSERT_TRUE(humans.empty());
+    }
+}
+
+TEST_F(HumanPersistenceFacadeTest, CountHumansOneLandOneSettlementOneHuman)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        Volume volume = m_human_persistence_facade->countHumans(transaction, m_land_name_1);
+
+        ASSERT_EQ(11, volume);
+    }
+}
+
+TEST_F(HumanPersistenceFacadeTest, CountHumansOneLandOneSettlementManyHumans)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_ADVANCED, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_FARMER_NOVICE, 43);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        Volume volume = m_human_persistence_facade->countHumans(transaction, m_land_name_1);
+
+        ASSERT_EQ(65, volume);
+    }
+}
+
+TEST_F(HumanPersistenceFacadeTest, CountHumansOneLandTwoSettlementsOneHuman)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_WORKER_MINER_NOVICE, 11);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        Volume volume = m_human_persistence_facade->countHumans(transaction, m_land_name_1);
+
+        ASSERT_EQ(22, volume);
+    }
+}
+
+TEST_F(HumanPersistenceFacadeTest, CountHumansOneLandTwoSettlementsManyHumans)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_ADVANCED, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_2, KEY_WORKER_FARMER_NOVICE, 43);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        Volume volume = m_human_persistence_facade->countHumans(transaction, m_land_name_1);
+
+        ASSERT_EQ(65, volume);
+    }
+}
+
+TEST_F(HumanPersistenceFacadeTest, CountHumansTwoLandsTwoSettlementsManyHumans)
+{
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_NOVICE, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_1, KEY_WORKER_MINER_ADVANCED, 11);
+        m_human_persistence_facade->addHuman(transaction, m_id_holder_4, KEY_WORKER_FARMER_NOVICE, 43);
+
+        transaction->commit();
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        Volume volume = m_human_persistence_facade->countHumans(transaction, m_land_name_1);
+
+        ASSERT_EQ(22, volume);
+    }
+
+    {
+        IConnectionShrPtr connection = m_persistence.getConnection();
+        ITransactionShrPtr transaction = m_persistence.getTransaction(connection);
+
+        Volume volume = m_human_persistence_facade->countHumans(transaction, m_land_name_2);
+
+        ASSERT_EQ(43, volume);
     }
 }
