@@ -157,6 +157,28 @@ void HumanAccessorPostgresql::decreaseVolume(
     pqxx::result result = backbone_transaction.exec(query);
 }
 
+
+Volume HumanAccessorPostgresql::countHumans(
+    Persistence::ITransactionShrPtr       a_transaction,
+    std::string                     const a_land_name
+) const
+{
+    TransactionPostgresqlShrPtr transaction = shared_dynamic_cast<TransactionPostgresql>(a_transaction);
+    pqxx::transaction<> & backbone_transaction = transaction->getBackboneTransaction();
+
+    string query = "SELECT SUM(volume) AS volume FROM humans_settlement "
+                   "WHERE holder_name IN (SELECT settlement_name FROM settlements WHERE land_name = "
+                   + backbone_transaction.quote(a_land_name.c_str()) +
+                   ")";
+
+    pqxx::result result = backbone_transaction.exec(query);
+
+    Volume volume;
+    result[0]["volume"].to(volume);
+
+    return volume;
+}
+
 HumanWithVolumeRecordMap HumanAccessorPostgresql::prepareResultGetRecords(
     pqxx::result const & a_result,
     IDHolder     const & a_id_holder

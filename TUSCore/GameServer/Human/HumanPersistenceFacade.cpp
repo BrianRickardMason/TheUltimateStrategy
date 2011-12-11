@@ -112,6 +112,14 @@ HumanWithVolumeMap HumanPersistenceFacade::getHumans(
     return prepareResultGetHumans(m_accessor->getRecords(a_transaction, a_id_holder));
 }
 
+Volume HumanPersistenceFacade::countHumans(
+    ITransactionShrPtr       a_transaction,
+    std::string        const a_land_name
+) const
+{
+    return m_accessor->countHumans(a_transaction, a_land_name);
+}
+
 HumanWithVolumeMap HumanPersistenceFacade::prepareResultGetHumans(
     HumanWithVolumeRecordMap const & a_records
 ) const

@@ -146,6 +146,22 @@ public:
             Volume                                      const & a_volume
         )
     );
+
+    /**
+     * @brief Gets the number of humans of the land.
+     *
+     * @param a_transaction The transaction.
+     * @param a_land_name   The name of the land.
+     *
+     * @return The number of humans of the land.
+     */
+    MOCK_CONST_METHOD2(
+        countHumans,
+        Volume(
+            GameServer::Persistence::ITransactionShrPtr       a_transaction,
+            std::string                                 const a_land_name
+        )
+    );
 };
 
 } // namespace Human
