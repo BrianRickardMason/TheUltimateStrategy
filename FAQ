@@ -153,6 +153,31 @@ These are:
 - deleting a land,
 - getting information about a land.
 
+CHAPTER: SETTLEMENTS.
+
+* What is a settlement?
+
+A settlement is a place to be. It is located in a land. Humans, buildings and resources are stored/located per
+settlement. It means one settlement can prosper well and the other may experience many problems.
+
+* Who crates a settlement?
+
+A settlement is created by a user (the user's bot).
+
+* How many settlements can a user create?
+
+As many as wants.
+
+* What happens when the first settlement in a land is created for the first time?
+
+When the first settlement in a land is created for the first time a special grant is given. It contains some humans
+and some resources. For a good start.
+
+* What happens when the first settlement in a land is created for the second time
+  (e.g. after the first one was deleted)?
+
+Well, for sure the special grant will not be given again.
+
 CHAPTER: HUMANS.
 
 * Humans - what they are?
