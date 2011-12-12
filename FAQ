@@ -136,6 +136,23 @@ For example during the tick humans reproduce, produce and consume resources, etc
 
 It is dependent on the moderator bot. The bot decides when to finish the epoch.
 
+CHAPTER: LANDS.
+
+* What is a land?
+
+A land is the biggest part of the game that belongs to the user. Settlements are created in a given land.
+
+* Who creates a land?
+
+A land is created by a user (the user's bot).
+
+* What are the active actions concerning lands?
+
+These are:
+- creating a land,
+- deleting a land,
+- getting information about a land.
+
 CHAPTER: HUMANS.
 
 * Humans - what they are?
