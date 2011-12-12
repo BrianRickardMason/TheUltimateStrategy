@@ -28,6 +28,7 @@
 #include <GameServer/Achievement/Managers/AchievementManager.hpp>
 
 using namespace GameServer::Epoch;
+using namespace GameServer::Human;
 using namespace GameServer::Land;
 using namespace GameServer::Persistence;
 using namespace GameServer::User;
@@ -41,12 +42,14 @@ namespace Achievement
 AchievementManager::AchievementManager(
     IAchievementPersistenceFacadeShrPtr a_achievement_persistence_facade,
     IEpochPersistenceFacadeShrPtr       a_epoch_persistence_facade,
+    IHumanPersistenceFacadeShrPtr       a_human_persistence_facade,
     ILandPersistenceFacadeShrPtr        a_land_persistence_facade,
     IUserPersistenceFacadeShrPtr        a_user_persistence_facade,
     IWorldPersistenceFacadeShrPtr       a_world_persistence_facade
 )
     : m_achievement_persistence_facade(a_achievement_persistence_facade),
       m_epoch_persistence_facade(a_epoch_persistence_facade),
+      m_human_persistence_facade(a_human_persistence_facade),
       m_land_persistence_facade(a_land_persistence_facade),
       m_user_persistence_facade(a_user_persistence_facade),
       m_world_persistence_facade(a_world_persistence_facade)

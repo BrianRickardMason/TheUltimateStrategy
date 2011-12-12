@@ -31,6 +31,7 @@
 #include <GameServer/Achievement/IAchievementPersistenceFacade.hpp>
 #include <GameServer/Achievement/Managers/IAchievementManager.hpp>
 #include <GameServer/Epoch/IEpochPersistenceFacade.hpp>
+#include <GameServer/Human/IHumanPersistenceFacade.hpp>
 #include <GameServer/Land/ILandPersistenceFacade.hpp>
 #include <GameServer/User/IUserPersistenceFacade.hpp>
 #include <GameServer/World/IWorldPersistenceFacade.hpp>
@@ -53,12 +54,14 @@ public:
      * @param a_achievement_persistence_facade The persistence facade of achievements.
      * @param a_epoch_persistence_facade       The persistence facade of epochs.
      * @param a_land_persistence_facade        The persistence facade of lands.
+     * @param a_human_persistence_facade       The persistence facade of humans.
      * @param a_user_persistence_facade        The persistence facade of users.
      * @param a_world_persistence_facade       The persistence facade of worlds.
      */
     AchievementManager(
         IAchievementPersistenceFacadeShrPtr  a_achievement_persistence_facade,
         Epoch::IEpochPersistenceFacadeShrPtr a_epoch_persistence_facade,
+        Human::IHumanPersistenceFacadeShrPtr a_human_persistence_facade,
         Land::ILandPersistenceFacadeShrPtr   a_land_persistence_facade,
         User::IUserPersistenceFacadeShrPtr   a_user_persistence_facade,
         World::IWorldPersistenceFacadeShrPtr a_world_persistence_facade
@@ -100,6 +103,7 @@ private:
     IAchievementPersistenceFacadeShrPtr  m_achievement_persistence_facade;
     Epoch::IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
     Land::ILandPersistenceFacadeShrPtr   m_land_persistence_facade;
+    Human::IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
     User::IUserPersistenceFacadeShrPtr   m_user_persistence_facade;
     World::IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
     //}@

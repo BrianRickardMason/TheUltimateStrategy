@@ -41,6 +41,7 @@ AchievementManagerAutPtr AchievementManagerFactory::create(
     return AchievementManagerAutPtr(
                new AchievementManager(a_persistence_facade_abstract_factory->createAchievementPersistenceFacade(),
                                       a_persistence_facade_abstract_factory->createEpochPersistenceFacade(),
+                                      a_persistence_facade_abstract_factory->createHumanPersistenceFacade(),
                                       a_persistence_facade_abstract_factory->createLandPersistenceFacade(),
                                       a_persistence_facade_abstract_factory->createUserPersistenceFacade(),
                                       a_persistence_facade_abstract_factory->createWorldPersistenceFacade())
