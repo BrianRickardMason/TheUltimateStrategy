@@ -103,23 +103,27 @@ bool AchievementManager::grantAchievements(
 
     if (turns == 88 or turns == 44 or turns == 22)
     {
-        IUserShrPtr user = m_user_persistence_facade->getUser(a_transaction, a_land->getLogin());
-
-        if (!user)
+    	// TODO: Hardcoded human number.
+        if (m_human_persistence_facade->countHumans(a_transaction, a_land->getLandName()) > 500)
         {
-            return false;
-        }
+            IUserShrPtr user = m_user_persistence_facade->getUser(a_transaction, a_land->getLogin());
 
-        switch (turns)
-        {
-            case 88:
-                return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived88");
-            case 44:
-                return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived44");
-            case 22:
-                return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived22");
-            default:
-                BOOST_ASSERT(false);
+            if (!user)
+            {
+                return false;
+            }
+
+            switch (turns)
+            {
+                case 88:
+                    return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived88");
+                case 44:
+                    return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived44");
+                case 22:
+                    return m_achievement_persistence_facade->grantAchievement(a_transaction, a_epoch, user, "survived22");
+                default:
+                    BOOST_ASSERT(false);
+            }
         }
     }
 
