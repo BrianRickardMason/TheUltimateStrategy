@@ -58,6 +58,13 @@ These are:
 - 44 turns survived and more than 500 humans alive in the land,
 - 88 turns survived and more than 500 humans alive in the land.
 
+CHAPTER: USERS.
+
+* What are users?
+
+Users are just the players that participate the tournament (the game). The bot is identified by the login and
+the password of the user.
+
 CHAPTER: HUMANS.
 
 * Humans - what they are?
