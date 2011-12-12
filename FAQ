@@ -95,6 +95,47 @@ No, there are not any. The only thing that differs worlds are the players that d
 
 TODO.
 
+CHAPTER: EPOCHS.
+
+* What is an epoch?
+
+An epoch is a part of the tournament. In the beginning of each epoch there are not any lands. After the end of the epoch
+the lands are deleted and everything starts all over again.
+
+* Is there only one epoch at time?
+
+Yes, there is only one epoch at time.
+
+* What does an epoch serve?
+
+Epoch helps to limit the play time.
+
+* Who creates an epoch?
+
+An epoch is created by the moderator bot.
+
+* What else can be done with an epoch?
+
+An epoch can be activated, deactivated, tack and finished.
+
+* What does it mean that the epoch is active?
+
+It means that it has been activated by the moderator bot. All other bots are allowed to execute requests.
+
+* What does it mean that the epoch is deactivated?
+
+It means that it has been deactivated by the moderator bot. All other bots are not allowed to execute requests. All
+incoming requests will be ignored.
+
+* What does it mean that the epoch is being tacked?
+
+It means that it is been tacked regularly by the moderator bot. Each tick causes various calculations to happen.
+For example during the tick humans reproduce, produce and consume resources, etc.
+
+* How many ticks does an epoch have?
+
+It is dependent on the moderator bot. The bot decides when to finish the epoch.
+
 CHAPTER: HUMANS.
 
 * Humans - what they are?
