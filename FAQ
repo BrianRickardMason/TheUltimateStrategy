@@ -65,6 +65,36 @@ CHAPTER: USERS.
 Users are just the players that participate the tournament (the game). The bot is identified by the login and
 the password of the user.
 
+CHAPTER: WORLDS.
+
+* What is a world?
+
+A world is a kind of arena that is a place where many lands can be created and exist.
+
+* Who creates a world?
+
+A world can be created by a moderator bot.
+
+* How many worlds there are?
+
+As many as were created by moderator bots.
+
+* Can a user play in different worlds at the same time?
+
+No. A user (the user's bot) can create and only one land at the same time.
+
+* Can a user create a land in any world?
+
+Yes. A user (the user's bot) can create a land in any of the available worlds.
+
+* Are there any differences between worlds?
+
+No, there are not any. The only thing that differs worlds are the players that decided to participate in the world.
+
+* What worlds come along with the game?
+
+TODO.
+
 CHAPTER: HUMANS.
 
 * Humans - what they are?
