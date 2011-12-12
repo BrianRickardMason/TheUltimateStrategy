@@ -27,7 +27,7 @@ def clean_up_reply(dom):
     remove_whitespace_nodes(dom)
     dom.normalize();
     return dom
-        
+
 def print_response( ret, full = False ):
     # get status and message
     st = int(ret.getElementsByTagName('status')[0].getAttribute('value') );
@@ -52,10 +52,10 @@ def extract_items(aItemTagName, aReply):
             item[ch._get_localName()] = ch.getAttribute('value')
             # Tag contents variant below
             #item[ch._get_localName()]  = ch.firstChild.nodeValue
-        
+
         ret.append(item)
     return ret
-        
+
 LAND = ['login','world_name','land_name','granted']
 SITE = ['land_name', 'settlement_name']
 BUILDING =['buildingclass','buildingname','volume']
@@ -128,18 +128,6 @@ print_response(ret)
 ret = interface.build(B["quarry"], 1)
 print_response(ret)
 
-ret = interface.build(B["school"], 1)
-print_response(ret)
-
-ret = interface.build(B["temple"], 1)
-print_response(ret)
-
-ret = interface.build(B["house"], 20)
-print_response(ret)
-
-ret = interface.build(B["forge"], 1)
-print_response(ret)
-
 ret = interface.build(B["steelworks"], 1)
 print_response(ret)
 
@@ -160,22 +148,7 @@ print_response(ret)
 ret = interface.engage(H["stone mason"], 5)
 print_response(ret)
 
-ret = interface.engage(H["teacher"], 5)
-print_response(ret)
-
-ret = interface.engage(H["priest"], 1)
-print_response(ret)
-
-ret = interface.engage(H["druid"], 1)
-print_response(ret)
-
-ret = interface.engage(H["official"], 1)
-print_response(ret)
-
 ret = interface.engage(H["breeder"], 5)
-print_response(ret)
-
-ret = interface.engage(H["blacksmith"], 1)
 print_response(ret)
 
 ret = interface.engage(H["steelworker"], 1)
@@ -215,7 +188,7 @@ for land in lands:
         print_response(ret)
 
         interface.setCurrentHolder( ID_HOLDER_CLASS_SETTLEMENT, site['settlement_name'])
-        
+
         ret = interface.listHumans()
         print_response(ret,True);
         humans = extract_items('object', ret)
