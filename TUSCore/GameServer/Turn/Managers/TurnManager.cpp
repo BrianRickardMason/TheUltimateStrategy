@@ -184,8 +184,9 @@ bool TurnManager::executeTurnSettlement(
                 continue;
             }
 
-            // TODO: Hardcoded HUMAN_EXPERIENCE_FACTOR.
-            Human::Volume const experienced = it->second->getVolume() * 0.1;
+            Human::Volume const experienced =
+                    it->second->getVolume()
+                    * m_context->getConfiguratorBase()->getHumanExperienceFactor() / 100;
 
             if (experienced)
             {
