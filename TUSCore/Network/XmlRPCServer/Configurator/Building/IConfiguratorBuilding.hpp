@@ -72,4 +72,4 @@ public:
  */
 typedef boost::shared_ptr<IConfiguratorBuilding> IConfiguratorBuildingShrPtr;
 
-#endif // CONFIGURATORBUILDING_HPP
+#endif // ICONFIGURATORBUILDING_HPP
