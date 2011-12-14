@@ -103,7 +103,7 @@ bool AchievementManager::grantAchievements(
 
     if (turns == 88 or turns == 44 or turns == 22)
     {
-    	// TODO: Hardcoded human number.
+        // TODO: Hardcoded human number.
         if (m_human_persistence_facade->countHumans(a_transaction, a_land->getLandName()) > 500)
         {
             IUserShrPtr user = m_user_persistence_facade->getUser(a_transaction, a_land->getLogin());
