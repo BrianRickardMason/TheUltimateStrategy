@@ -72,7 +72,5 @@ bool ConfiguratorBase::parseXml()
 
     m_human_experience_factor = boost::lexical_cast<unsigned short int>(base.child_value("humanexperiencefactor"));
 
-    std::cout << m_human_experience_factor << std::endl;
-
     return true;
 }
