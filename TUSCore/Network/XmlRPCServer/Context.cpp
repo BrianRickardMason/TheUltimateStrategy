@@ -25,6 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include <Network/XmlRPCServer/Configurator/Base/ConfiguratorBase.hpp>
 #include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
 #include <Network/XmlRPCServer/Configurator/Configurator.hpp>
 #include <Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
@@ -33,6 +34,7 @@
 
 Context::Context()
     : m_configurator(new Configurator),
+      m_configurator_base(new ConfiguratorBase(m_configurator)),
       m_configurator_building(new ConfiguratorBuilding(m_configurator)),
       m_configurator_human(new ConfiguratorHuman(m_configurator)),
       m_configurator_resource(new ConfiguratorResource(m_configurator))
@@ -42,6 +44,11 @@ Context::Context()
 IConfiguratorShrPtr Context::getConfigurator() const
 {
     return m_configurator;
+}
+
+IConfiguratorBaseShrPtr Context::getConfiguratorBase() const
+{
+    return m_configurator_base;
 }
 
 IConfiguratorBuildingShrPtr Context::getConfiguratorBuilding() const

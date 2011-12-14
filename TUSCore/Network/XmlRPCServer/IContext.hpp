@@ -28,6 +28,7 @@
 #ifndef ICONTEXT_HPP
 #define ICONTEXT_HPP
 
+#include <Network/XmlRPCServer/Configurator/Base/IConfiguratorBase.hpp>
 #include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
 #include <Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
 #include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
@@ -50,6 +51,13 @@ public:
      * @return Configurator.
      */
     virtual IConfiguratorShrPtr getConfigurator() const = 0;
+
+    /**
+     * @brief Gets ConfiguratorBase.
+     *
+     * @return ConfiguratorBase.
+     */
+    virtual IConfiguratorBaseShrPtr getConfiguratorBase() const = 0;
 
     /**
      * @brief Gets ConfiguratorBuilding.

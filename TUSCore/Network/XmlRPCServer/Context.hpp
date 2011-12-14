@@ -50,6 +50,13 @@ public:
     virtual IConfiguratorShrPtr getConfigurator() const;
 
     /**
+     * @brief Gets ConfiguratorBase.
+     *
+     * @return ConfiguratorBase.
+     */
+    virtual IConfiguratorBaseShrPtr getConfiguratorBase() const;
+
+    /**
      * @brief Gets ConfiguratorBuilding.
      *
      * @return ConfiguratorBuilding.
@@ -75,6 +82,11 @@ private:
      * @brief Configurator.
      */
     IConfiguratorShrPtr const m_configurator;
+
+    /**
+     * @brief ConfiguratorBase.
+     */
+    IConfiguratorBaseShrPtr const m_configurator_base;
 
     /**
      * @brief ConfiguratorBuilding.
