@@ -53,6 +53,13 @@ public:
      * @return The value of the human experience factor in percents.
      */
     virtual unsigned short int getHumanExperienceFactor() const = 0;
+
+    /**
+     * @brief Gets the human reproduce factor.
+     *
+     * @return The value of the human reproduce factor in percents.
+     */
+    virtual unsigned short int getHumanReproduceFactor() const = 0;
 };
 
 /**

@@ -56,6 +56,11 @@ unsigned short int ConfiguratorBase::getHumanExperienceFactor() const
     return m_human_experience_factor;
 }
 
+unsigned short int ConfiguratorBase::getHumanReproduceFactor() const
+{
+    return m_human_reproduce_factor;
+}
+
 bool ConfiguratorBase::loadXml()
 {
     std::string path_base_xml =
@@ -66,11 +71,14 @@ bool ConfiguratorBase::loadXml()
 
 bool ConfiguratorBase::parseXml()
 {
+    using boost::lexical_cast;
+
     // TODO: Add verification here.
 
     pugi::xml_node base = m_base_xml.child("base");
 
-    m_human_experience_factor = boost::lexical_cast<unsigned short int>(base.child_value("humanexperiencefactor"));
+    m_human_experience_factor = lexical_cast<unsigned short int>(base.child_value("humanexperiencefactor"));
+    m_human_reproduce_factor  = lexical_cast<unsigned short int>(base.child_value("humanreproducefactor"));
 
     return true;
 }
