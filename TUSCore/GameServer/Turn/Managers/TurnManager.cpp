@@ -230,9 +230,9 @@ bool TurnManager::executeTurnSettlement(
         {
             // TODO: Use property reproduceable.
 
-            // TODO: Hardcoded HUMAN_REPRODUCE_FACTOR.
-            // TODO: Random choosing if reproduction happened (if the uint result of volume * HUMAN_REPRODUCE_FACTOR < 1).
-            Human::Volume const reproduced = it->second->getVolume() * 0.1;
+            Human::Volume const reproduced =
+                    it->second->getVolume()
+                    * m_context->getConfiguratorBase()->getHumanReproduceFactor() / 100;
 
             if (reproduced)
             {
