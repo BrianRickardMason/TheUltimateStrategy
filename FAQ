@@ -81,7 +81,8 @@ As many as were created by moderator bots.
 
 * Can a user play in different worlds at the same time?
 
-No. A user (the user's bot) can create and only one land at the same time.
+No. A user (the user's bot) can create and manage only one land at the same time. As a consequence the user can play
+in only one world at a time.
 
 * Can a user create a land in any world?
 
