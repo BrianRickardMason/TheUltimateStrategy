@@ -48,6 +48,13 @@ public:
     virtual bool configure() = 0;
 
     /**
+     * @brief Gets the famine death factor.
+     *
+     * @return The value of the famine death factor in percents.
+     */
+    virtual unsigned short int getFamineDeathFactor() const = 0;
+
+    /**
      * @brief Gets the human experience factor.
      *
      * @return The value of the human experience factor in percents.

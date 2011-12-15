@@ -51,6 +51,11 @@ bool ConfiguratorBase::configure()
     return true;
 }
 
+unsigned short int ConfiguratorBase::getFamineDeathFactor() const
+{
+    return m_famine_death_factor;
+}
+
 unsigned short int ConfiguratorBase::getHumanExperienceFactor() const
 {
     return m_human_experience_factor;
@@ -77,6 +82,7 @@ bool ConfiguratorBase::parseXml()
 
     pugi::xml_node base = m_base_xml.child("base");
 
+    m_famine_death_factor     = lexical_cast<unsigned short int>(base.child_value("faminedeathfactor"));
     m_human_experience_factor = lexical_cast<unsigned short int>(base.child_value("humanexperiencefactor"));
     m_human_reproduce_factor  = lexical_cast<unsigned short int>(base.child_value("humanreproducefactor"));
 

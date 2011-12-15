@@ -56,6 +56,13 @@ public:
     virtual bool configure();
 
     /**
+     * @brief Gets the famine death factor.
+     *
+     * @return The value of the famine death factor in percents.
+     */
+    virtual unsigned short int getFamineDeathFactor() const;
+
+    /**
      * @brief Gets the human experience factor.
      *
      * @return The value of the human experience factor in percents.
@@ -95,6 +102,11 @@ private:
      * TODO: Add the abstraction.
      */
     pugi::xml_document m_base_xml;
+
+    /**
+     * @brief The value of the famine death factor in percents.
+     */
+    unsigned short int m_famine_death_factor;
 
     /**
      * @brief The value of the human experience factor in percents.
