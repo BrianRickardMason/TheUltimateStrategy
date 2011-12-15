@@ -1,4 +1,7 @@
 <?xml version="1.0" ?>
 <base>
+    <faminedeathfactor>10</faminedeathfactor>
     <humanexperiencefactor>10</humanexperiencefactor>
+    <humanreproducefactor>10</humanreproducefactor>
+    <povertydismissfactor>10</povertydismissfactor>
 </base>
