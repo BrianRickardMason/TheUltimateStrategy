@@ -317,8 +317,11 @@ bool TurnManager::famine(
 
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        // TODO: Hardcoded FAMINE_DEATH_FACTOR.
-        Human::Volume died = ceil(it->second->getVolume() * 0.1);
+        Human::Volume const died =
+                ceil(
+                    it->second->getVolume()
+                    * m_context->getConfiguratorBase()->getFamineDeathFactor() / 100
+                );
 
         if (died)
         {
