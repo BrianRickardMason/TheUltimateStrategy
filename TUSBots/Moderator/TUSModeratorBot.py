@@ -46,3 +46,5 @@ for epoch in range(NUMBER_OF_EPOCHS):
     interface.deactivateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
     interface.finishEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
     interface.deleteEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+    
+del interface

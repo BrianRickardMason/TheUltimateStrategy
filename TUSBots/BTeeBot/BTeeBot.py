@@ -277,3 +277,5 @@ for i,h in hDict.items():
     print( pRVec( h, "hum_"+str(i)) + ";")
 #print(pRVec( hExp, "hExp") + ";")
 #print(pRVec( hVol, "hVol") + ";")
+
+del interface

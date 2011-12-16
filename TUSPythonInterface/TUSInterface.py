@@ -13,8 +13,17 @@ class TUSInterface():
 
     def __init__(self):
         """ TODO """
-
         self.m_command_builder = CommandBuilder()
+        
+        self.link = TUScomm.CommLink('127.0.0.1',2222)
+        #self.link = TUScomm.AsynchCommLink('127.0.0.1',3333)
+        
+    def __del__(self):
+        """ Disposes the commlink """
+        if(self.link):
+            self.link.stop()
+            del self.link
+            
 
     def echo(self):
         command = self.m_command_builder.build("ECHO", [], [])
@@ -185,6 +194,16 @@ class TUSInterface():
         return self.__send(command)
 
     def __send(self, a_command):
-        link = TUScomm.CommLink('127.0.0.1', 2222)
-        return link.exchange_xmls(a_command)
+        return self.link.exchange_xmls(a_command)
 
+    def waitForNextRound() :
+        ret = False
+        if self.link.indQueue.empy():
+            # wait for indication
+            ret = self.link.indQueue.get()
+        else :
+            # clear the queue
+            while not self.link.indQueue.empty():
+                ret = self.link.indQueue.get()
+        return ret
+        
