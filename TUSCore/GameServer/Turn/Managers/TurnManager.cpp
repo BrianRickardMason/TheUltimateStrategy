@@ -318,10 +318,10 @@ bool TurnManager::famine(
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
         Human::Volume const died =
-                ceil(
-                    it->second->getVolume()
-                    * m_context->getConfiguratorBase()->getFamineDeathFactor() / 100
-                );
+            ceil(
+                it->second->getVolume()
+                * m_context->getConfiguratorBase()->getFamineDeathFactor() / 100
+            );
 
         if (died)
         {
@@ -382,8 +382,11 @@ bool TurnManager::poverty(
 
     for (HumanWithVolumeMap::const_iterator it = humans.begin(); it != humans.end(); ++it)
     {
-        // TODO: Hardcoded POVERTY_DISMISS_FACTOR.
-        Human::Volume dismissed = ceil(it->second->getVolume() * 0.1);
+        Human::Volume const dismissed=
+            ceil(
+                it->second->getVolume()
+                * m_context->getConfiguratorBase()->getPovertyDismissFactor() / 100
+            );
 
         if (dismissed)
         {
