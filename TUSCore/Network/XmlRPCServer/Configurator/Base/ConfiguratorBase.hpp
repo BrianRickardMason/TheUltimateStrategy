@@ -76,6 +76,13 @@ public:
      */
     virtual unsigned short int getHumanReproduceFactor() const;
 
+    /**
+     * @brief Gets the poverty dismiss factor.
+     *
+     * @return The value of the poverty dismiss factor in percents.
+     */
+    virtual unsigned short int getPovertyDismissFactor() const;
+
 private:
     /**
      * @brief Loads the data from an xml configuration file into the xml document.
@@ -117,6 +124,11 @@ private:
      * @brief The value of the human reproduce factor in percents.
      */
     unsigned short int m_human_reproduce_factor;
+
+    /**
+     * @brief The value of the poverty dismiss factor in percents.
+     */
+    unsigned short int m_poverty_dismiss_factor;
 };
 
 #endif // CONFIGURATORBASE_HPP

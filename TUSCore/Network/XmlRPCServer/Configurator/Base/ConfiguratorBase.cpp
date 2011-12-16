@@ -66,6 +66,11 @@ unsigned short int ConfiguratorBase::getHumanReproduceFactor() const
     return m_human_reproduce_factor;
 }
 
+unsigned short int ConfiguratorBase::getPovertyDismissFactor() const
+{
+    return m_poverty_dismiss_factor;
+}
+
 bool ConfiguratorBase::loadXml()
 {
     std::string path_base_xml =
@@ -85,6 +90,7 @@ bool ConfiguratorBase::parseXml()
     m_famine_death_factor     = lexical_cast<unsigned short int>(base.child_value("faminedeathfactor"));
     m_human_experience_factor = lexical_cast<unsigned short int>(base.child_value("humanexperiencefactor"));
     m_human_reproduce_factor  = lexical_cast<unsigned short int>(base.child_value("humanreproducefactor"));
+    m_poverty_dismiss_factor  = lexical_cast<unsigned short int>(base.child_value("povertydismissfactor"));
 
     return true;
 }

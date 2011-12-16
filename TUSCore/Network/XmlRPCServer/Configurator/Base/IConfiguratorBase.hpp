@@ -67,6 +67,13 @@ public:
      * @return The value of the human reproduce factor in percents.
      */
     virtual unsigned short int getHumanReproduceFactor() const = 0;
+
+    /**
+     * @brief Gets the poverty dismiss factor.
+     *
+     * @return The value of the poverty dismiss factor in percents.
+     */
+    virtual unsigned short int getPovertyDismissFactor() const = 0;
 };
 
 /**
