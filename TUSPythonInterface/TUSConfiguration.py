@@ -148,35 +148,37 @@ def printPossibleResources(aResourceDict):
 
 # TODO: tidy up the format strings mess
         
-def printPossibleHumans(aHumansDict, aEngageableOnly = True):
+def printPossibleHumans(aHumansDict, aEngageableOnly = True, aResSet = None):
     """Prints engageable humans' definitions from given file in one line format."""
     # humans.human.{key|class|name|experience} 
-    print( "{:>10}{:>16}{:>9}{:>6}{:>6}| e:{:->21}| d:{:->21}| l:{:->21}#".format(
-        'class', 'name', 'exp.', 'dism.','prod.', costHead(), costHead(), costHead()))
-    print( "{:->10}{:->16}{:->9}{:->6}{:->6}|---{:->21}|---{:->21}|---{:->21}#".format(
-        '', '', '', '','','','',''))
+    costStrLen = 3*len(aResSet)
+    print( "{0:>10}{1:>16}{2:>9}{3:>6}{4:>6}| e:{5:->{8}}| d:{6:->{8}}| l:{7:->{8}}#".format(
+        'class', 'name', 'exp.', 'dism.','prod.', costHead(aResSet), costHead(aResSet), costHead(aResSet), costStrLen))
+    print( "{0:->10}{1:->16}{2:->9}{3:->6}{4:->6}|---{5:->{8}}|---{6:->{8}}|---{7:->{8}}#".format(
+        '', '', '', '', '', '', '', '', costStrLen ))
     for i, h in aHumansDict.items():
         if aEngageableOnly and h['engageable'] != 'true':
             continue
         print( "{:>10}{:>16}{:>9}{:>6}{:>6}|   {}|   {}|   {}".format(
             h['class'], h['name'], h['experience'], h['dismissable'], h['production'],
-            costString(h['costs']['engage']),
-            costString(h['costs']['dismiss']),
-            costString(h['costs']['live'])
+            costString(h['costs']['engage'], aResSet),
+            costString(h['costs']['dismiss'], aResSet),
+            costString(h['costs']['live'], aResSet)
         ))        
     
-def printPossibleBuildings(aBuildingsDict):
+def printPossibleBuildings(aBuildingsDict, aResSet = None):
     """Prints buildings' definitions from given files in one line format."""
     # buildings.building.{key|class|name} 
-    print( "{0:>10}{1:>20}{2:>6}| b:{3:->21}| d:{3:->21}#".format(
-        'class', 'name', 'cap.', costHead(), costHead()))
-    print( "{0:->10}{1:->20}{2:->6}|---{3:->21}|---{3:->21}#".format(
-        '', '', '', '',''))
+    costStrLen = 3*len(aResSet)
+    print( "{0:>10}{1:>20}{2:>6}| b:{3:->{5}}| d:{4:->{5}}#".format(
+        'class', 'name', 'cap.', costHead(aResSet), costHead(aResSet), costStrLen ) )
+    print( "{0:->10}{1:->20}{2:->6}|---{3:->{5}}|---{4:->{5}}#".format(
+        '', '', '', '', '', costStrLen) )
     for i, b in aBuildingsDict.items():
         print( "{0:>10}{1:>20}{2:>6}|   {3}|   {4}".format(
             b['class'], b['name'], b['capacity'], 
-            costString(b['costs']['build']),  
-            costString(b['costs']['destroy']) 
+            costString(b['costs']['build'], aResSet),  
+            costString(b['costs']['destroy'], aResSet)
         ))
 
 
@@ -217,11 +219,11 @@ def main(argv=None):
     resources, buildings, humans = read_configuration(dataRoot)
     
     if type == 'humans' :
-        printPossibleHumans(humans)
+        printPossibleHumans(humans, True, resources.keys())
     elif type == 'allhumans' :
-        printPossibleHumans(humans, False)
+        printPossibleHumans(humans, False, resources.keys())
     elif type == 'buildings':
-        printPossibleBuildings(buildings)
+        printPossibleBuildings(buildings, resources.keys())
     elif type == 'resources':
         printPossibleResources(resources)
     elif type == 'all' or type == 'raw':
