@@ -82,6 +82,12 @@ int main(int aNumberOfArguments, char **aArguments){
     ModeratorContextBuilder ctxBuider;
     ctxBuider.make();
     ctxBuider.fillDefault();
+    // config for SimpleGameControl
+    ctxBuider.peek().Config()["sgc_ticks"] = "20";
+    ctxBuider.peek().Config()["sgc_epochs"] = "1";
+    ctxBuider.peek().Config()["sgc_world"] = "World";
+    ctxBuider.peek().Config()["sgc_notify"] = "1";
+    ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
     
     std::auto_ptr< Moderator > moderator( new Moderator(ctxBuider.extract()) );
     

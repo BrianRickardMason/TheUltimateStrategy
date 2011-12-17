@@ -2,11 +2,13 @@
 #ifndef _IMODERATORCONTEXT_H_
 #define _IMODERATORCONTEXT_H_
 
+#include <Poco/SharedPtr.h>
+
 class IBotConnectionConfiguration;
 class IModeratorServerConfiguration;
 class Credentials;
 
-#include <Poco/SharedPtr.h>
+#include "GeneralConfig.h"
 
 class IModeratorContext {
 public:
@@ -16,6 +18,8 @@ public:
     virtual const IModeratorServerConfiguration& getModeratorServerConf()const = 0;
     
     virtual const Credentials& getModeratorCredentials()const = 0;
+    
+    virtual const GeneralConfig& getGeneralConfig()const=0;
     
     virtual ~IModeratorContext(){}
 protected:

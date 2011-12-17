@@ -8,6 +8,14 @@ IModeratorContext::Handle ModeratorContextBuilder::extract() {
     return IModeratorContext::Handle( mContext.release() );
 }
 
+ModeratorContext& ModeratorContextBuilder::peek() {
+    if(! mContext.get()){
+        make();
+    }
+    return *mContext;
+}
+
+
 void ModeratorContextBuilder::fillDefault() {
     mContext->mBotConnectionConf.reset(new BotConnectionConfiguration());
     mContext->mServerConf.reset( new ModeratorServerConfiguration());

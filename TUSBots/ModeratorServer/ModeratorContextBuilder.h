@@ -9,6 +9,8 @@ public:
     
     void fillDefault();
     
+    ModeratorContext& peek();
+    
     IModeratorContext::Handle extract();
 private:
     std::auto_ptr<ModeratorContext> mContext;
