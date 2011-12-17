@@ -16,3 +16,9 @@ test_details_*.xml
 # Waf specific files.
 .lock*
 .waf*
+
+# kdevelop files and directories
+*.kdev4
+.kdev4
+*~
+
