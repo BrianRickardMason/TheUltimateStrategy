@@ -11,12 +11,15 @@ from TUSCommandBuilder import *
 class TUSInterface():
     """ TODO """
 
-    def __init__(self):
+    def __init__(self, moderated = False):
         """ TODO """
         self.m_command_builder = CommandBuilder()
         
-        self.link = TUScomm.CommLink('127.0.0.1',2222)
-        #self.link = TUScomm.AsynchCommLink('127.0.0.1',3333)
+        if moderated:
+            self.link = TUScomm.AsynchCommLink('127.0.0.1',3333)
+        else:
+            self.link = TUScomm.CommLink('127.0.0.1',2222)
+        
         
     def __del__(self):
         """ Disposes the commlink """
@@ -196,13 +199,15 @@ class TUSInterface():
     def __send(self, a_command):
         return self.link.exchange_xmls(a_command)
 
-    def waitForNextRound() :
+    def waitForNextRound(self) :
         ret = False
-        if self.link.indQueue.empy():
+        if self.link.indQueue.empty():
             # wait for indication
+            print ("waiting for indication")
             ret = self.link.indQueue.get()
         else :
             # clear the queue
+            print ("clearing indication queue")
             while not self.link.indQueue.empty():
                 ret = self.link.indQueue.get()
         return ret

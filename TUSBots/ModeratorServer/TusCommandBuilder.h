@@ -31,6 +31,15 @@ public:
     virtual ~TusReturnValue(){};
 };
 
+class TusIndication: public std::string {
+public:
+    typedef std::auto_ptr<TusIndication> SingleHandle;
+    
+    TusIndication(const std::string& aValue): std::string(aValue){};
+    
+    virtual ~TusIndication(){};
+};
+
 class TusCommandBuilder {
 public:
     void makeCommand(const std::string aCommandName){

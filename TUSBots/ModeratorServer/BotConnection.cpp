@@ -94,7 +94,7 @@ void BotConnection::run() {
 }
 
 void BotConnection::forwardMessageToServer() {
-    // TODO : a mutex with send()
+    Poco::ScopedLock<Poco::Mutex> sendMutex(mSendMutex);
     
     // TODO : move it somewhere else
     Poco::Net::SocketAddress serverAddress(
@@ -114,9 +114,9 @@ void BotConnection::forwardMessageToServer() {
     typedef std::ostream_iterator<IMessageBuffer::TPayload::value_type> ostr_it;
     typedef std::istream_iterator<IMessageBuffer::TPayload::value_type> istr_it;
    
-std::stringstream tmp;
-tmp << std::noskipws;
-std::cout << "sending: " << std::string(msg.begin(), msg.end()) <<std::endl;
+    std::stringstream tmp;
+    tmp << std::noskipws;
+// std::cout << "sending: " << std::string(msg.begin(), msg.end()) <<std::endl;
 
     std::copy(msg.begin(), msg.end(), ostr_it(serverStream));
     serverStream.flush();
@@ -125,10 +125,18 @@ std::cout << "sending: " << std::string(msg.begin(), msg.end()) <<std::endl;
 	std::copy(istr_it(serverStream), istr_it(), ostr_it(tmp));
     std::copy(istr_it(tmp), istr_it(), ostr_it(mSocketStream));
     mSocketStream.flush();
-std::cout << "reply sent: " << tmp.str() << std::endl;
+// std::cout << "reply sent: " << tmp.str() << std::endl;
 }
 
-void BotConnection::send() {
-
+void BotConnection::send(const TusIndication& aIndication) {
+    typedef std::ostream_iterator<IMessageBuffer::TPayload::value_type> ostr_it;
+    
+    Poco::ScopedLock<Poco::Mutex> sendMutex(mSendMutex);
+    
+// std::clog << "bc: " << aIndication << std::endl;
+    
+    mSocketStream << std::nounitbuf << std::noskipws;
+    std::copy(aIndication.begin(), aIndication.end(), ostr_it(mSocketStream));
+    mSocketStream.flush();
 }
 

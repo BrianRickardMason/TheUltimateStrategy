@@ -66,11 +66,11 @@ public:
     }
     
     void startGame(){
-        SimpleGameControl game(mContext);
+        SimpleGameControl game(mContext, mBotManger);
         game.run();
     }
 private:
-    BotConnectionManager::Ptr mBotManger;
+    Poco::SharedPtr<BotConnectionManager> mBotManger;
     std::auto_ptr<Poco::Net::TCPServer> mServer;
     IModeratorContext::Handle mContext;
     
@@ -87,7 +87,7 @@ int main(int aNumberOfArguments, char **aArguments){
     
     moderator->startServer();
     moderator->startGame();    
-    moderator->startInputRead();
+    //moderator->startInputRead();
     
     return 0;
 }

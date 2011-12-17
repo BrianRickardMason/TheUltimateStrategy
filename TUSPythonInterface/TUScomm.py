@@ -180,8 +180,13 @@ class AsynchCommLink(CommLink):
         """
         while self.doReceive :
             reply = self._receive()
+            
             if reply:
-                self.msgQueue.put(reply);
+                repel = reply.getElementsByTagName('reply');
+                if repel and repel[0].getAttribute("isdummy") :
+                    self.indQueue.put(reply);
+                else :
+                    self.msgQueue.put(reply);
             else:
                 self.doReceive = False
                 break;

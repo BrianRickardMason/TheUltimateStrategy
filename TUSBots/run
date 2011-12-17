@@ -3,7 +3,13 @@
 export PATH=${PATH}:"../TUSPythonInterface:./Moderator"
 export PYTHONPATH=${PATH}
 
-./Moderator/TUSModeratorBot.py &
-sleep 1
+#./Moderator/TUSModeratorBot.py &
+#sleep 1
+
+./ModeratorServer/build/moderator & 
+
 ./BTeeBot/BTeeBot.py
+
+sleep 1
+kill %1
 

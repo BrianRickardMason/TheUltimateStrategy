@@ -88,7 +88,8 @@ SLEEP_BETWEEN_TICKS = 3
 # Define bot specific "constants".
 LOGIN = "btee"
 PASSWORD = "bteepasswd"
-interface = TUSUserInterface(LOGIN, PASSWORD)
+MODERATED = True
+interface = TUSUserInterface(LOGIN, PASSWORD, MODERATED)
 
 # Define names.
 WORLD_NAME = "World"
@@ -268,8 +269,11 @@ for iEpoch in range(NUMBER_OF_EPOCHS):
 
             #hVol.append( int( hum[0]['volume']) )
             #hExp.append( int( hum[0]['experience']) )
-
-        sleep(SLEEP_BETWEEN_TICKS)
+        if MODERATED:
+            interface.waitForNextRound()
+            #print ("BTee: next round")
+        else:
+            sleep(SLEEP_BETWEEN_TICKS)
 
 for i,r in rDict.items():
     print( pRVec( r, "res_"+str(i)) + ";")

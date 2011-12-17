@@ -9,8 +9,8 @@
 
 class SimpleGameControl{
 public:
-    SimpleGameControl(IModeratorContext::Handle aContext)
-    :   mContext(aContext), mInterface( new ModeratorInterface(mContext) ) {
+    SimpleGameControl(IModeratorContext::Handle aContext, IBotManager::Handle aBotManager)
+    :   mContext(aContext), mInterface( new ModeratorInterface(mContext, aBotManager) ) {
         mInterface->setModeratorCredentials(mContext->getModeratorCredentials());
         mEpochCount = 1;
         mTickCount = 20;
@@ -30,10 +30,12 @@ public:
              
             //# Control the epoch of X ticks.
             for(unsigned j=0; j<mTickCount; ++j){
-                Poco::Thread::current()->sleep(3000/*ms*/);
+                Poco::Thread::current()->sleep(1250/*ms*/);
                 mInterface->deactivateEpoch();
                 mInterface->tickEpoch();
                 mInterface->activateEpoch();
+                
+                mInterface->notifyTick();
             }
             mInterface->deactivateEpoch();
             mInterface->finishEpoch();

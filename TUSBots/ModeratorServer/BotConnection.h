@@ -56,11 +56,13 @@ public:
      * 
      * Allows next tick message broadcast
      */
-    virtual void send();
+    virtual void send(const TusIndication&);
 private:
     IModeratorContext::Handle mContext;
     
+    Poco::Mutex mSendMutex;
     Poco::Net::SocketStream mSocketStream;
+    
     std::auto_ptr<IMessageBuffer> mMessageBuffer;
     
     std::list<ICloseConnectionListener*> mCloseListeners;

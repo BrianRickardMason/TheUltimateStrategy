@@ -14,8 +14,8 @@
 #include <sstream>
 #include <iostream>
 
-ModeratorInterface::ModeratorInterface(IModeratorContext::Handle aContext): 
-    mContext(aContext) {
+ModeratorInterface::ModeratorInterface(IModeratorContext::Handle aContext, IBotManager::Handle aManager): 
+    mContext(aContext), mBotManager(aManager) {
 
 }
 
@@ -113,7 +113,7 @@ void ModeratorInterface::sendCommand(std::auto_ptr< TusCommand >& in, std::auto_
     
     stream << std::noskipws << std::nounitbuf;
 
-writer.writeNode(std::clog, in.get());
+// writer.writeNode(std::clog, in.get());
     writer.writeNode(stream, in.get());
     stream.flush();
     
@@ -123,9 +123,15 @@ writer.writeNode(std::clog, in.get());
     Poco::XML::Document* doc(parser.parse(&is));
     stream.close();
     
-writer.writeNode(std::clog, doc);
+// writer.writeNode(std::clog, doc);
     out.reset( new TusReturnValue );
     out->appendChild( out->importNode(doc->documentElement(), true) );
 
     doc->release();
+}
+
+void ModeratorInterface::notifyTick() {
+    TusIndication notification("<reply isdummy=\"true\">dummy</reply>\n");
+    
+    mBotManager->broadcast(notification);
 }

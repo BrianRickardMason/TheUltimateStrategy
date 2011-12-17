@@ -19,6 +19,12 @@ Poco::Net::TCPServerConnection* BotConnectionManager::createConnection(const Poc
 }
 
 void BotConnectionManager::handleClosed(const IBotConnection* aConnection) {
-    mBotConnections.remove(aConnection);
+    mBotConnections.remove(const_cast<IBotConnection*>(aConnection));
 }
 
+void BotConnectionManager::broadcast(const TusIndication& aIndication) {
+    std::list <IBotConnection*> :: iterator it;
+    for( it = mBotConnections.begin(); mBotConnections.end() != it; ++it) {
+        (*it)->send(aIndication);
+    }
+}

@@ -22,6 +22,8 @@ public:
     virtual int tickEpoch()=0;
     virtual int finishEpoch()=0;
     virtual int deleteEpoch()=0;
+    
+    virtual void notifyTick()=0;
 };
 
 #endif

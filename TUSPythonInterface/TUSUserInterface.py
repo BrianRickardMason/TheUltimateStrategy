@@ -49,9 +49,9 @@ def assert_resource_key(aResource):
 class TUSUserInterface(TUSInterface):
     """ TODO """
 
-    def __init__(self, aUser, aPassword):
+    def __init__(self, aUser, aPassword, aModerated = True):
         """ TODO """
-        TUSInterface.__init__(self)
+        TUSInterface.__init__(self, aModerated)
         self.mUser = aUser
         self.mPassword = aPassword
 
