@@ -4,6 +4,7 @@
 
 class IBotConnectionConfiguration;
 class IModeratorServerConfiguration;
+class Credentials;
 
 #include <Poco/SharedPtr.h>
 
@@ -13,6 +14,8 @@ public:
     
     virtual const IBotConnectionConfiguration& getBotConnectionConf()const = 0;
     virtual const IModeratorServerConfiguration& getModeratorServerConf()const = 0;
+    
+    virtual const Credentials& getModeratorCredentials()const = 0;
     
     virtual ~IModeratorContext(){}
 protected:

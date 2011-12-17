@@ -2,6 +2,7 @@
 #include "ModeratorContextBuilder.h"
 #include "BotConnectionConfiguration.h"
 #include "ModeratorServerConfiguration.h"
+#include "Credentials.h"
 
 IModeratorContext::Handle ModeratorContextBuilder::extract() {
     return IModeratorContext::Handle( mContext.release() );
@@ -16,6 +17,8 @@ void ModeratorContextBuilder::fillDefault() {
     
     mContext->mServerConf->setAddress("127.0.0.1");
     mContext->mServerConf->setPort(3333);
+    
+    mContext->mModeratorCredentials.reset( new Credentials("modbot", "modbotpass"));
 }
 
 void ModeratorContextBuilder::make() {

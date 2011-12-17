@@ -2,31 +2,48 @@
 #ifndef _SIMPLEGAMECONTROL_H_
 #define _SIMPLEGAMECONTROL_H_
 
+#include "IModeratorContext.h"
+#include "IModeratorInterface.h"
+#include "ModeratorInterface.h"
+#include <Poco/Thread.h>
+
 class SimpleGameControl{
 public:
+    SimpleGameControl(IModeratorContext::Handle aContext)
+    :   mContext(aContext), mInterface( new ModeratorInterface(mContext) ) {
+        mInterface->setModeratorCredentials(mContext->getModeratorCredentials());
+        mEpochCount = 1;
+        mTickCount = 20;
+    }
+    
     void run(){
         //# TODO: Delete the world is needed to be bullet proof.
-        //interface.createWorld(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-
-//         # Control the tournament of X epochs.
+        mInterface->createWorld("World");
+        mInterface->setCurrentWorld("World");
+        
+        //# Control the tournament of X epochs.
         for(unsigned i=0;i<mEpochCount; ++i){
-//             epoch_name = EPOCH_NAME + repr(epoch)
-//             interface.createEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME, epoch_name)
-//             interface.activateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-
-//             # Control the epoch of X ticks.
+             std::string epoch_name = "epoch";
+             
+             mInterface->createEpoch(epoch_name);
+             mInterface->activateEpoch();
+             
+            //# Control the epoch of X ticks.
             for(unsigned j=0; j<mTickCount; ++j){
-//                 sleep(SLEEP_BETWEEN_TICKS)
-//                 interface.deactivateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-//                 interface.tickEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-//                 interface.activateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+                Poco::Thread::current()->sleep(3000/*ms*/);
+                mInterface->deactivateEpoch();
+                mInterface->tickEpoch();
+                mInterface->activateEpoch();
             }
-//             interface.deactivateEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-//             interface.finishEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
-//             interface.deleteEpoch(MODBOT_LOGIN, MODBOT_PASSWORD, WORLD_NAME)
+            mInterface->deactivateEpoch();
+            mInterface->finishEpoch();
+            mInterface->deleteEpoch();
         }   
     }
 private:
+    IModeratorContext::Handle mContext;
+    IModeratorInterface::Handle mInterface;
+    
     unsigned mEpochCount;
     unsigned mTickCount;
 };

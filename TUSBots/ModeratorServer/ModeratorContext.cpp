@@ -12,11 +12,19 @@ const IModeratorServerConfiguration& ModeratorContext::getModeratorServerConf() 
     return *mServerConf;
 }
 
+const Credentials& ModeratorContext::getModeratorCredentials() const{
+    return *mModeratorCredentials;
+}
+
 void ModeratorContext::setBotConnectionConf(std::auto_ptr< BotConnectionConfiguration > aConf) {
     mBotConnectionConf = aConf;
 }
 
 void ModeratorContext::setModeratorServerConf(std::auto_ptr< ModeratorServerConfiguration > aConf) {
     mServerConf = aConf;
+}
+
+void ModeratorContext::setModeratorCredentials(std::auto_ptr< Credentials > aCredentials){
+    mModeratorCredentials = aCredentials;
 }
 

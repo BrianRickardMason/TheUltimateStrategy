@@ -9,9 +9,12 @@
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/NodeList.h>
 #include <stdexcept>
+#include "Credentials.h"
 
 class TusCommand: public Poco::XML::Document {
 public:
+    typedef std::auto_ptr<TusCommand> SingleHandle;
+    
     TusCommand(Poco::XML::NamePool* pNamePool = 0)
     :   Document(pNamePool){}
     
@@ -20,6 +23,8 @@ public:
 
 class TusReturnValue: public Poco::XML::Document {
 public:
+    typedef std::auto_ptr<TusReturnValue> SingleHandle;
+    
     TusReturnValue(Poco::XML::NamePool* pNamePool = 0)
     :   Document(pNamePool){}
     
@@ -39,7 +44,7 @@ public:
         mCurrentNode = mCurrentNode->appendChild( el );
     }
     
-    void setCredentials(const std::string aLogin, const std::string aPassword){
+    void setCredentials(const Credentials& aCredentials){
         Poco::XML::Element *el;
         
         el = mDocument->createElement("user");
@@ -47,11 +52,11 @@ public:
         mCurrentNode = el;
         
         el = mDocument->createElement("login");
-        el->setAttribute("value", aLogin);
+        el->setAttribute("value", aCredentials.Username);
         mCurrentNode->appendChild(el);
         
         el = mDocument->createElement("password");
-        el->setAttribute("value", aPassword);
+        el->setAttribute("value", aCredentials.Password);
         mCurrentNode->appendChild(el);
         
         mCurrentNode = mDocument->documentElement();

@@ -1,11 +1,17 @@
 
 #ifndef _IMODERATORINTERFACE_H_
 #define _IMODERATORINTERFACE_H_
-#include <string>
 
-class IModeratorInterface{
+#include <string>
+#include <Poco/SharedPtr.h>
+
+class Credentials;
+
+class IModeratorInterface {
 public:
-    virtual void setModeratorCredentials(const std::string& aLogin, const std::string& aPassword)=0;
+    typedef Poco::SharedPtr<IModeratorInterface> Handle;
+    
+    virtual void setModeratorCredentials(const Credentials& aCredenetials)=0;
     
     virtual int createWorld(const std::string& aWorldName)=0;
     virtual void setCurrentWorld(const std::string& aWorldName)=0;

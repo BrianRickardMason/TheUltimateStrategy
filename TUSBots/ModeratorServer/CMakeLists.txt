@@ -9,6 +9,7 @@ add_executable(moderator
     ModeratorContextBuilder.cpp
     ModeratorServerConfiguration.cpp
     TusMessageBuffer.cpp
+    ModeratorInterface.cpp
 )
 
 target_link_libraries(moderator
