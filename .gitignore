@@ -22,3 +22,10 @@ test_details_*.xml
 .kdev4
 *~
 
+# CMake specific files and directories.
+CMakeFiles
+bin
+lib
+CMakeCache.txt
+cmake_install.cmake
+Makefile
