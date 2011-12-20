@@ -9,6 +9,7 @@ build
 
 # Python specific files.
 *.pyc
+__pycache__
 
 # Test specific files.
 test_details_*.xml
