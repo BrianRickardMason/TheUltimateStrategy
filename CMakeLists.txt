@@ -39,25 +39,19 @@ ADD_SUBDIRECTORY(TUSCore/GameServerCT)
 ADD_SUBDIRECTORY(TUSCore/GameServerUT)
 ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCCommon)
 ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCServer)
+ADD_SUBDIRECTORY(TUSCore/NetworkUT)
 
 include_directories(TUSCore)
 
-FILE(GLOB_RECURSE files_networkut TUSCore/NetworkUT/*.cpp)
-FILE(GLOB_RECURSE files_server TUSCore/Network/XmlRPCServer/xml_server_main.cpp
-                               TUSCore/Network/XmlRPCServer/Configurator.cpp)
 FILE(GLOB_RECURSE files_integrationcommon TUSCore/IntegrationCommon/*.cpp)
 FILE(GLOB_RECURSE files_integrationfunctional TUSCore/IntegrationFunctional/*.cpp)
 FILE(GLOB_RECURSE files_integrationstress TUSCore/IntegrationStress/*.cpp)
 
 ADD_LIBRARY(integrationcommon ${files_integrationcommon})
 
-ADD_EXECUTABLE(networkut ${files_networkut})
-ADD_EXECUTABLE(server ${files_server})
 ADD_EXECUTABLE(integrationfunctional ${files_integrationfunctional})
 ADD_EXECUTABLE(integrationstress ${files_integrationstress})
 
-TARGET_LINK_LIBRARIES(networkut boost_system boost_thread gtest gmock pthread log4cpp xmlrpcserver xmlrpccommon)
-TARGET_LINK_LIBRARIES(server boost_system boost_thread log4cpp xmlrpcserver xmlrpccommon)
 TARGET_LINK_LIBRARIES(integrationfunctional boost_system boost_thread gmock gtest
                       log4cpp pthread xmlrpcserver xmlrpccommon integrationcommon gameserver PocoFoundation)
 TARGET_LINK_LIBRARIES(integrationstress boost_system boost_thread gmock gtest

@@ -11,6 +11,18 @@ ADD_LIBRARY(xmlrpcserver
     ${FILES_XMLRPCSERVER}
 )
 
+ADD_EXECUTABLE(server
+    xml_server_main.cpp
+)
+
 TARGET_LINK_LIBRARIES(xmlrpcserver
     gameserver
+)
+
+TARGET_LINK_LIBRARIES(server
+    boost_system
+    boost_thread
+    log4cpp
+    xmlrpcserver
+    xmlrpccommon
 )
