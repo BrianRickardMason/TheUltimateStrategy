@@ -74,13 +74,6 @@ def build(bld):
                        includes='.'
                    )
 
-    xmlrpcclientasync = bld.new_task_gen(
-                            features='cxx cxxstlib',
-                            target='xmlrpcclientasync',
-                            source=bld.path.ant_glob('Network/XmlRPCClientAsync/Client/*.cpp'),
-                            includes='.'
-                        )
-
     networkut = bld.new_task_gen(
                     features='cxx cxxprogram',
                     target='networkut',
@@ -97,15 +90,6 @@ def build(bld):
                         + bld.path.ant_glob('Network/XmlRPCServer/Configurator.cpp'),
                  use='gameserver xmlrpccommon xmlrpcserver',
                  lib='boost_system boost_thread log4cpp pqxx pugixml',
-                 includes='.'
-             )
-
-    client = bld.new_task_gen(
-                 features='cxx cxxprogram',
-                 target='client',
-                 source='Network/XmlRPCClientAsync/xml_client_async_main.cpp',
-                 use='xmlrpcclientasync xmlrpccommon',
-                 lib='boost_system boost_thread pthread pugixml',
                  includes='.'
              )
 
