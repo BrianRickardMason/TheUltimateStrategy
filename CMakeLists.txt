@@ -32,6 +32,8 @@ PROJECT(TheUltimateStrategy)
 SET(LIBRARY_OUTPUT_PATH lib)
 SET(EXECUTABLE_OUTPUT_PATH bin)
 
+ADD_SUBDIRECTORY(TUSBots/ModeratorServer)
+
 include_directories(TUSCore)
 
 FILE(GLOB_RECURSE files_pugixml TUSCore/3rdParty/*.cpp)
@@ -49,7 +51,6 @@ FILE(GLOB_RECURSE files_client TUSCore/Network/XmlRPCClientAsync/xml_client_asyn
 FILE(GLOB_RECURSE files_integrationcommon TUSCore/IntegrationCommon/*.cpp)
 FILE(GLOB_RECURSE files_integrationfunctional TUSCore/IntegrationFunctional/*.cpp)
 FILE(GLOB_RECURSE files_integrationstress TUSCore/IntegrationStress/*.cpp)
-FILE(GLOB_RECURSE files_moderator TUSBots/ModeratorServer/*.cpp)
 
 LIST(REMOVE_ITEM files_xmlrpcserver ${files_xmlrpcserver_filtered})
 
@@ -67,7 +68,6 @@ ADD_EXECUTABLE(server ${files_server})
 ADD_EXECUTABLE(client ${files_client})
 ADD_EXECUTABLE(integrationfunctional ${files_integrationfunctional})
 ADD_EXECUTABLE(integrationstress ${files_integrationstress})
-ADD_EXECUTABLE(moderator ${files_moderator})
 
 TARGET_LINK_LIBRARIES(gameserver pugixml pqxx)
 TARGET_LINK_LIBRARIES(xmlrpcserver gameserver)
@@ -80,4 +80,3 @@ TARGET_LINK_LIBRARIES(integrationfunctional boost_system boost_thread gmock gtes
                       log4cpp pthread xmlrpcserver xmlrpccommon integrationcommon gameserver PocoFoundation)
 TARGET_LINK_LIBRARIES(integrationstress boost_system boost_thread gmock gtest
                       log4cpp pthread xmlrpcserver xmlrpccommon integrationcommon gameserver PocoFoundation)
-TARGET_LINK_LIBRARIES(moderator PocoNet PocoFoundation PocoXML)
