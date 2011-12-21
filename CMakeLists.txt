@@ -37,11 +37,11 @@ ADD_SUBDIRECTORY(TUSCore/3rdParty)
 ADD_SUBDIRECTORY(TUSCore/GameServer)
 ADD_SUBDIRECTORY(TUSCore/GameServerCT)
 ADD_SUBDIRECTORY(TUSCore/GameServerUT)
+ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCCommon)
 ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCServer)
 
 include_directories(TUSCore)
 
-FILE(GLOB_RECURSE files_xmlrpccommon TUSCore/Network/XmlRPCCommon/*.cpp)
 FILE(GLOB_RECURSE files_xmlrpcclientacync TUSCore/Network/XmlRPCClientAsync/*.cpp)
 FILE(GLOB_RECURSE files_networkut TUSCore/NetworkUT/*.cpp)
 FILE(GLOB_RECURSE files_server TUSCore/Network/XmlRPCServer/xml_server_main.cpp
@@ -51,7 +51,6 @@ FILE(GLOB_RECURSE files_integrationcommon TUSCore/IntegrationCommon/*.cpp)
 FILE(GLOB_RECURSE files_integrationfunctional TUSCore/IntegrationFunctional/*.cpp)
 FILE(GLOB_RECURSE files_integrationstress TUSCore/IntegrationStress/*.cpp)
 
-ADD_LIBRARY(xmlrpccommon ${files_xmlrpccommon})
 ADD_LIBRARY(xmlrpcclientasync ${files_xmlrpcclientacync})
 ADD_LIBRARY(integrationcommon ${files_integrationcommon})
 
