@@ -42,12 +42,6 @@ ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCServer)
 ADD_SUBDIRECTORY(TUSCore/NetworkUT)
 ADD_SUBDIRECTORY(TUSCore/IntegrationCommon)
 ADD_SUBDIRECTORY(TUSCore/IntegrationFunctional)
+ADD_SUBDIRECTORY(TUSCore/IntegrationStress)
 
 include_directories(TUSCore)
-
-FILE(GLOB_RECURSE files_integrationstress TUSCore/IntegrationStress/*.cpp)
-
-ADD_EXECUTABLE(integrationstress ${files_integrationstress})
-
-TARGET_LINK_LIBRARIES(integrationstress boost_system boost_thread gmock gtest
-                      log4cpp pthread xmlrpcserver xmlrpccommon integrationcommon gameserver PocoFoundation)
