@@ -122,7 +122,7 @@ void BotConnection::forwardMessageToServer() {
     serverStream.flush();
     
     mSocketStream << std::nounitbuf;
-	std::copy(istr_it(serverStream), istr_it(), ostr_it(tmp));
+    std::copy(istr_it(serverStream), istr_it(), ostr_it(tmp));
     std::copy(istr_it(tmp), istr_it(), ostr_it(mSocketStream));
     mSocketStream.flush();
 // std::cout << "reply sent: " << tmp.str() << std::endl;
