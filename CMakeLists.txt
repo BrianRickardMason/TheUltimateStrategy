@@ -33,11 +33,11 @@ SET(LIBRARY_OUTPUT_PATH lib)
 SET(EXECUTABLE_OUTPUT_PATH bin)
 
 ADD_SUBDIRECTORY(TUSBots/ModeratorServer)
+ADD_SUBDIRECTORY(TUSCore/3rdParty)
+ADD_SUBDIRECTORY(TUSCore/GameServer)
 
 include_directories(TUSCore)
 
-FILE(GLOB_RECURSE files_pugixml TUSCore/3rdParty/*.cpp)
-FILE(GLOB_RECURSE files_gameserver TUSCore/GameServer/*.cpp)
 FILE(GLOB_RECURSE files_xmlrpcserver TUSCore/Network/XmlRPCServer/*.cpp)
 FILE(GLOB_RECURSE files_xmlrpcserver_filtered TUSCore/Network/XmlRPCServer/xml_server_main.cpp)
 FILE(GLOB_RECURSE files_gameserverut TUSCore/GameServerUT/*.cpp)
@@ -54,8 +54,6 @@ FILE(GLOB_RECURSE files_integrationstress TUSCore/IntegrationStress/*.cpp)
 
 LIST(REMOVE_ITEM files_xmlrpcserver ${files_xmlrpcserver_filtered})
 
-ADD_LIBRARY(pugixml ${files_pugixml})
-ADD_LIBRARY(gameserver ${files_gameserver})
 ADD_LIBRARY(xmlrpcserver ${files_xmlrpcserver})
 ADD_LIBRARY(xmlrpccommon ${files_xmlrpccommon})
 ADD_LIBRARY(xmlrpcclientasync ${files_xmlrpcclientacync})
@@ -69,7 +67,6 @@ ADD_EXECUTABLE(client ${files_client})
 ADD_EXECUTABLE(integrationfunctional ${files_integrationfunctional})
 ADD_EXECUTABLE(integrationstress ${files_integrationstress})
 
-TARGET_LINK_LIBRARIES(gameserver pugixml pqxx)
 TARGET_LINK_LIBRARIES(xmlrpcserver gameserver)
 TARGET_LINK_LIBRARIES(gameserverut gtest gmock pthread xmlrpcserver)
 TARGET_LINK_LIBRARIES(gameserverct gtest gmock pthread xmlrpcserver)

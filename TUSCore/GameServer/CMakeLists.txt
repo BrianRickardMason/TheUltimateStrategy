@@ -1,0 +1,14 @@
+PROJECT(gameserver)
+
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/..)
+
+FILE(GLOB_RECURSE FILES_GAMESERVER *.cpp)
+
+ADD_LIBRARY(gameserver
+    ${FILES_GAMESERVER}
+)
+
+TARGET_LINK_LIBRARIES(gameserver
+    pugixml
+    pqxx
+)
