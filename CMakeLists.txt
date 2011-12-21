@@ -43,5 +43,3 @@ ADD_SUBDIRECTORY(TUSCore/NetworkUT)
 ADD_SUBDIRECTORY(TUSCore/IntegrationCommon)
 ADD_SUBDIRECTORY(TUSCore/IntegrationFunctional)
 ADD_SUBDIRECTORY(TUSCore/IntegrationStress)
-
-include_directories(TUSCore)
