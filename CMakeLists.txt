@@ -29,17 +29,16 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 PROJECT(TheUltimateStrategy)
 
-SET(LIBRARY_OUTPUT_PATH lib)
-SET(EXECUTABLE_OUTPUT_PATH bin)
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
 ADD_SUBDIRECTORY(TUSBots/ModeratorServer)
 ADD_SUBDIRECTORY(TUSCore/3rdParty)
 ADD_SUBDIRECTORY(TUSCore/GameServer)
+ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCServer)
 
 include_directories(TUSCore)
 
-FILE(GLOB_RECURSE files_xmlrpcserver TUSCore/Network/XmlRPCServer/*.cpp)
-FILE(GLOB_RECURSE files_xmlrpcserver_filtered TUSCore/Network/XmlRPCServer/xml_server_main.cpp)
 FILE(GLOB_RECURSE files_gameserverut TUSCore/GameServerUT/*.cpp)
 FILE(GLOB_RECURSE files_gameserverct TUSCore/GameServerCT/*.cpp)
 FILE(GLOB_RECURSE files_xmlrpccommon TUSCore/Network/XmlRPCCommon/*.cpp)
@@ -52,9 +51,6 @@ FILE(GLOB_RECURSE files_integrationcommon TUSCore/IntegrationCommon/*.cpp)
 FILE(GLOB_RECURSE files_integrationfunctional TUSCore/IntegrationFunctional/*.cpp)
 FILE(GLOB_RECURSE files_integrationstress TUSCore/IntegrationStress/*.cpp)
 
-LIST(REMOVE_ITEM files_xmlrpcserver ${files_xmlrpcserver_filtered})
-
-ADD_LIBRARY(xmlrpcserver ${files_xmlrpcserver})
 ADD_LIBRARY(xmlrpccommon ${files_xmlrpccommon})
 ADD_LIBRARY(xmlrpcclientasync ${files_xmlrpcclientacync})
 ADD_LIBRARY(integrationcommon ${files_integrationcommon})
@@ -67,7 +63,6 @@ ADD_EXECUTABLE(client ${files_client})
 ADD_EXECUTABLE(integrationfunctional ${files_integrationfunctional})
 ADD_EXECUTABLE(integrationstress ${files_integrationstress})
 
-TARGET_LINK_LIBRARIES(xmlrpcserver gameserver)
 TARGET_LINK_LIBRARIES(gameserverut gtest gmock pthread xmlrpcserver)
 TARGET_LINK_LIBRARIES(gameserverct gtest gmock pthread xmlrpcserver)
 TARGET_LINK_LIBRARIES(networkut boost_system boost_thread gtest gmock pthread log4cpp xmlrpcserver xmlrpccommon)
