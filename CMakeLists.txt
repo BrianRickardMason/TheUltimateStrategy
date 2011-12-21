@@ -40,14 +40,12 @@ ADD_SUBDIRECTORY(TUSCore/GameServerUT)
 ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCCommon)
 ADD_SUBDIRECTORY(TUSCore/Network/XmlRPCServer)
 ADD_SUBDIRECTORY(TUSCore/NetworkUT)
+ADD_SUBDIRECTORY(TUSCore/IntegrationCommon)
 
 include_directories(TUSCore)
 
-FILE(GLOB_RECURSE files_integrationcommon TUSCore/IntegrationCommon/*.cpp)
 FILE(GLOB_RECURSE files_integrationfunctional TUSCore/IntegrationFunctional/*.cpp)
 FILE(GLOB_RECURSE files_integrationstress TUSCore/IntegrationStress/*.cpp)
-
-ADD_LIBRARY(integrationcommon ${files_integrationcommon})
 
 ADD_EXECUTABLE(integrationfunctional ${files_integrationfunctional})
 ADD_EXECUTABLE(integrationstress ${files_integrationstress})
