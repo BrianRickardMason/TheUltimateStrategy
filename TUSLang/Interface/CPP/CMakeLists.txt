@@ -30,3 +30,7 @@ PROJECT(interfacecpp)
 ADD_LIBRARY(interfacecpp
     Command.cpp
 )
+
+TARGET_LINK_LIBRARIES(interfacecpp
+    PocoXML
+)
