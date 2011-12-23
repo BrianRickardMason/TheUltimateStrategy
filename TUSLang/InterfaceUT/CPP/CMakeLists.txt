@@ -28,9 +28,7 @@
 PROJECT(interfacecpput)
 
 ADD_EXECUTABLE(interfacecpput
-    BodyTest.cpp
     CommandTest.cpp
-    HeaderTest.cpp
     main.cpp
 )
 
