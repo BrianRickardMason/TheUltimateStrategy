@@ -39,6 +39,22 @@ public:
     typedef std::auto_ptr<ICommand> SingleHandle;
 
     virtual ~ICommand(){}
+
+    /**
+     * @brief Gets the identifier of the command.
+     *
+     * @return The identifier of the command.
+     */
+    virtual unsigned short int getID() const = 0;
+
+    /**
+     * @brief Sets the identifier of the command.
+     *
+     * @param a_id The identifier of the command.
+     */
+    virtual void setID(
+        unsigned short int a_id
+    ) = 0;
 };
 
 } // namespace TUSLang

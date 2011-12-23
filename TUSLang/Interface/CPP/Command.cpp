@@ -29,4 +29,22 @@
 
 namespace TUSLang
 {
+
+Command::Command()
+    : m_id(0)
+{
+}
+
+unsigned short int Command::getID() const
+{
+    return m_id;
+}
+
+void Command::setID(
+    unsigned short int a_id
+)
+{
+    m_id = a_id;
+}
+
 } // namespace TUSLang

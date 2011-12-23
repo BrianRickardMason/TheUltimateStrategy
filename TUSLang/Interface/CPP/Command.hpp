@@ -36,6 +36,30 @@ namespace TUSLang
 class Command
     : public ICommand
 {
+public:
+    Command();
+
+    /**
+     * @brief Gets the identifier of the command.
+     *
+     * @return The identifier of the command.
+     */
+    virtual unsigned short int getID() const;
+
+    /**
+     * @brief Sets the identifier of the command.
+     *
+     * @param a_id The identifier of the command.
+     */
+    virtual void setID(
+        unsigned short int a_id
+    );
+
+private:
+    /**
+     * @brief The identifier of the command.
+     */
+    unsigned short int m_id;
 };
 
 } // namespace TUSLang
