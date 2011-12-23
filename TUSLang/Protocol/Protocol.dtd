@@ -1,0 +1,172 @@
+<!DOCTYPE message>
+<!ELEMENT message (header,(request|reply|indication))>
+<!ELEMENT header (id,user?)>
+<!ELEMENT user (login,password)>
+
+<!ELEMENT request (echo_request
+                  |error_request
+                  |create_land_request
+                  |delete_land_request
+                  |get_land_request
+                  |get_lands_request
+                  |create_settlement_request
+                  |delete_settlement_request
+                  |get_settlement_request
+                  |get_settlements_request)>
+                  |build_building_request
+                  |destroy_building_request
+                  |get_building_request
+                  |get_buildings_request
+                  |dismiss_human_request
+                  |engage_human_request
+                  |get_human_request
+                  |get_humans_request
+                  |get_resource_request
+                  |get_resources_request
+                  |create_user_request
+                  |create_world_request
+                  |create_epoch_request
+                  |delete_epoch_request
+                  |activate_epoch_request
+                  |deactivate_epoch_request
+                  |finish_epoch_request
+                  |tick_epoch_request
+                  |get_epoch_request
+                  |transport_human_request
+                  |transport_resource_request))>
+<!ELEMENT echo_request EMPTY>
+<!ELEMENT error_request EMPTY>
+<!ELEMENT create_land_request (world_name,land_name)>
+<!ELEMENT delete_land_request (land_name)>
+<!ELEMENT get_land_request (land_name)>
+<!ELEMENT get_lands_request EMPTY>
+<!ELEMENT create_settlement_request (land_name,settlement_name)>
+<!ELEMENT delete_settlement_request (settlement_name)>
+<!ELEMENT get_settlement_request (settlement_name)>
+<!ELEMENT get_settlements_request (land_name)>
+<!ELEMENT build_building_request (idholderclass,holder_name,buildingkey,volume)>
+<!ELEMENT destroy_building_request (idholderclass,holder_name,buildingkey,volume)>
+<!ELEMENT get_building_request (idholderclass,holder_name,buildingkey)>
+<!ELEMENT get_buildings_request (idholderclass,holder_name)>
+<!ELEMENT dismiss_human_request (idholderclass,holder_name,humankey,volume)>
+<!ELEMENT engage_human_request (idholderclass,holder_name,humankey,volume)>
+<!ELEMENT get_human_request (idholderclass,holder_name,humankey)>
+<!ELEMENT get_humans_request (idholderclass,holder_name)>
+<!ELEMENT get_resource_request (idholderclass,holder_name,resourcekey)>
+<!ELEMENT get_resources_request (idholderclass,holder_name)>
+<!ELEMENT create_user_request (login,password)>
+<!ELEMENT create_world_request (world_name)>
+<!ELEMENT create_epoch_request (world_name)>
+<!ELEMENT delete_epoch_request (world_name)>
+<!ELEMENT activate_epoch_request (world_name)>
+<!ELEMENT deactivate_epoch_request (world_name)>
+<!ELEMENT finish_epoch_request (world_name)>
+<!ELEMENT tick_epoch_request (world_name)>
+<!ELEMENT get_epoch_request (world_name)>
+<!ELEMENT transport_human_request (settlement_name_source,settlement_name_destination,humankey,volume)>
+<!ELEMENT transport_resource_request (settlement_name_source,settlement_name_destination,resourcekey,volume)>
+
+<!ELEMENT reply (code,message?,
+                (echo_reply
+                |error_reply
+                |create_land_reply
+                |delete_land_reply
+                |get_land_reply
+                |get_lands_reply
+                |create_settlement_reply
+                |delete_settlement_reply
+                |get_settlement_reply
+                |get_settlements_reply
+                |build_building_reply
+                |destroy_building_reply
+                |get_building_reply
+                |get_buildings_reply
+                |dismiss_human_reply
+                |engage_human_reply
+                |get_human_reply
+                |get_humans_reply
+                |get_resource_reply
+                |get_resources_reply
+                |create_user_reply
+                |create_world_reply
+                |create_epoch_reply
+                |delete_epoch_reply
+                |activate_epoch_reply
+                |deactivate_epoch_reply
+                |finish_epoch_reply
+                |tick_epoch_reply
+                |get_epoch_reply
+                |transport_human_request
+                |transport_resource_request))>
+<!ELEMENT echo_reply EMPTY>
+<!ELEMENT error_reply EMPTY>
+<!ELEMENT create_land_reply EMPTY>
+<!ELEMENT delete_land_reply EMPTY>
+<!ELEMENT get_land_reply (land)>
+<!ELEMENT get_lands_reply (lands)>
+<!ELEMENT create_settlement_reply EMPTY>
+<!ELEMENT delete_settlement_reply EMPTY>
+<!ELEMENT get_settlement_reply (settlement)>
+<!ELEMENT get_settlements_reply (settlements)>
+<!ELEMENT build_building_reply EMPTY>
+<!ELEMENT destroy_building_reply EMPTY>
+<!ELEMENT get_building_reply (building)>
+<!ELEMENT get_buildings_reply (buildings)>
+<!ELEMENT dismiss_human_reply EMPTY>
+<!ELEMENT engage_human_reply EMPTY>
+<!ELEMENT get_human_reply (human)>
+<!ELEMENT get_humans_reply (humans)>
+<!ELEMENT get_resource_reply (resource)>
+<!ELEMENT get_resources_request (idholderclass,holder_name)>
+<!ELEMENT create_user_reply EMPTY>
+<!ELEMENT create_world_reply EMPTY>
+<!ELEMENT create_epoch_reply EMPTY>
+<!ELEMENT delete_epoch_reply EMPTY>
+<!ELEMENT activate_epoch_reply EMPTY>
+<!ELEMENT deactivate_epoch_reply EMPTY>
+<!ELEMENT finish_epoch_reply EMPTY>
+<!ELEMENT tick_epoch_reply EMPTY>
+<!ELEMENT get_epoch_reply (epoch)>
+<!ELEMENT transport_human_reply EMPTY>
+<!ELEMENT transport_resource_reply EMPTY>
+
+<!ELEMENT indication (ready|tick|new_epoch)>
+<!ELEMENT ready EMPTY>
+<!ELEMENT tick EMPTY>
+<!ELEMENT new_epoch EMPTY>
+
+<!ELEMENT building (buildingclass,buildingname,volume)>
+<!ELEMENT buildings (building*)>
+<!ELEMENT epoch (epoch_name,world_name,active,finished,ticks)>
+<!ELEMENT human (humanclass,humanname,experience,volume)>
+<!ELEMENT humans (human*)>
+<!ELEMENT land (login,world_name,land_name,granted)>
+<!ELEMENT lands (land*)>
+<!ELEMENT resource (resourcename,volume)>
+<!ELEMENT resources (resource*)>
+<!ELEMENT settlement (land_name,settlement_name)>
+<!ELEMENT settlements (settlement*)>
+
+<!ELEMENT active (#PCDATA)>
+<!ELEMENT buildingclass (#PCDATA)>
+<!ELEMENT buildingkey (#PCDATA)>
+<!ELEMENT buildingname (#PCDATA)>
+<!ELEMENT epoch_name (#PCDATA)>
+<!ELEMENT experience (#PCDATA)>
+<!ELEMENT finished (#PCDATA)>
+<!ELEMENT granted (#PCDATA)>
+<!ELEMENT holder_name (#PCDATA)>
+<!ELEMENT humanclass (#PCDATA)>
+<!ELEMENT humankey (#PCDATA)>
+<!ELEMENT humanname (#PCDATA)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT idholderclass (#PCDATA)>
+<!ELEMENT land_name (#PCDATA)>
+<!ELEMENT login (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT resourcekey (#PCDATA)>
+<!ELEMENT resourcename (#PCDATA)>
+<!ELEMENT settlement_name (#PCDATA)>
+<!ELEMENT ticks (#PCDATA)>
+<!ELEMENT volume (#PCDATA)>
+<!ELEMENT world_name (#PCDATA)>
