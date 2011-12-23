@@ -29,10 +29,15 @@
 #define TUSLANG_COMMAND_HPP
 
 #include "ICommand.hpp"
+#include <Poco/DOM/Document.h>
 
 class Command
-    : public ICommand
+    : public ICommand,
+             Poco::XML::Document
 {
+    Command(
+        Poco::XML::NamePool * a_name_pool = 0
+    );
 };
 
 #endif // TUSLANG_COMMAND_HPP

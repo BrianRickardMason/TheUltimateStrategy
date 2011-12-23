@@ -24,3 +24,12 @@
 // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
+
+#include "Command.hpp"
+
+Command::Command(
+    Poco::XML::NamePool * a_name_pool
+)
+    : Document(a_name_pool)
+{
+}
