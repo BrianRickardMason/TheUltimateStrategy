@@ -29,12 +29,4 @@
 
 namespace TUSLang
 {
-
-Command::Command(
-    Poco::XML::NamePool * a_name_pool
-)
-    : Document(a_name_pool)
-{
-}
-
 } // namespace TUSLang
