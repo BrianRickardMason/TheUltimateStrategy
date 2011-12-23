@@ -29,6 +29,7 @@ PROJECT(interfacecpput)
 
 ADD_EXECUTABLE(interfacecpput
     CommandTest.cpp
+    RequestBuilderTest.cpp
     main.cpp
 )
 
