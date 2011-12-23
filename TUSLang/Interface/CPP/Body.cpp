@@ -25,36 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSLANG_ICOMMAND_HPP
-#define TUSLANG_ICOMMAND_HPP
-
-#include <memory>
+#include "Body.hpp"
 
 namespace TUSLang
 {
-
-class IHeader
-{
-    typedef std::auto_ptr<IHeader> SingleHandle;
-
-    virtual ~IHeader(){}
-};
-
-class IBody
-{
-    typedef std::auto_ptr<IBody> SingleHandle;
-
-    virtual ~IBody(){}
-};
-
-class ICommand
-{
-public:
-    typedef std::auto_ptr<ICommand> SingleHandle;
-
-    virtual ~ICommand(){}
-};
-
 } // namespace TUSLang
-
-#endif // TUSLANG_ICOMMAND_HPP

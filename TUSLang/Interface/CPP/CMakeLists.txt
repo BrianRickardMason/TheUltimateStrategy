@@ -28,7 +28,9 @@
 PROJECT(interfacecpp)
 
 ADD_LIBRARY(interfacecpp
+    Body.cpp
     Command.cpp
+    Header.cpp
 )
 
 TARGET_LINK_LIBRARIES(interfacecpp
