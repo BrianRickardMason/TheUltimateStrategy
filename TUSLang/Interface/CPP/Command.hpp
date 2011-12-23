@@ -38,6 +38,7 @@ class Command
     : public ICommand,
              Poco::XML::Document
 {
+public:
     Command(
         Poco::XML::NamePool * a_name_pool = 0
     );
