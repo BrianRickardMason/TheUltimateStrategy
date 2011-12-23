@@ -29,6 +29,7 @@ PROJECT(interfacecpp)
 
 ADD_LIBRARY(interfacecpp
     Command.cpp
+    RequestBuilder.cpp
 )
 
 TARGET_LINK_LIBRARIES(interfacecpp
