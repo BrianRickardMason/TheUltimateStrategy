@@ -28,12 +28,16 @@
 #ifndef TUSLANG_ICOMMAND_HPP
 #define TUSLANG_ICOMMAND_HPP
 
+#include <Poco/AutoPtr.h>
+
 namespace TUSLang
 {
 
 class ICommand
 {
 public:
+    typedef Poco::AutoPtr<ICommand> SingleHandle;
+
     virtual ~ICommand(){}
 };
 
