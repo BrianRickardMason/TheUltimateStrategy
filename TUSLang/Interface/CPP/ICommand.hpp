@@ -35,6 +35,7 @@ namespace TUSLang
 
 class IHeader
 {
+public:
     typedef std::auto_ptr<IHeader> SingleHandle;
 
     virtual ~IHeader(){}
@@ -42,6 +43,7 @@ class IHeader
 
 class IBody
 {
+public:
     typedef std::auto_ptr<IBody> SingleHandle;
 
     virtual ~IBody(){}
