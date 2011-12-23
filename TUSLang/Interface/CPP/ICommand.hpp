@@ -28,10 +28,15 @@
 #ifndef TUSLANG_ICOMMAND_HPP
 #define TUSLANG_ICOMMAND_HPP
 
+namespace TUSLang
+{
+
 class ICommand
 {
 public:
     virtual ~ICommand(){}
 };
+
+} // namespace TUSLang
 
 #endif // TUSLANG_ICOMMAND_HPP
