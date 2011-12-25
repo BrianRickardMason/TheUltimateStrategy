@@ -43,7 +43,7 @@ TEST_F(CommandTest, CtorDoesNotThrow)
     ASSERT_NO_THROW(TUSLang::Command::SingleHandle command(new TUSLang::Command));
 }
 
-TEST_F(CommandTest, GetIDReturnsProperValue)
+TEST_F(CommandTest, GetIDReturnsProperInitialValue)
 {
     ASSERT_EQ(0, m_command.getID());
 }
@@ -52,4 +52,26 @@ TEST_F(CommandTest, SetIDSetsProperValue)
 {
     m_command.setID(22);
     ASSERT_EQ(22, m_command.getID());
+}
+
+TEST_F(CommandTest, GetLoginReturnsProperInitialValue)
+{
+    ASSERT_STREQ("", m_command.getLogin().c_str());
+}
+
+TEST_F(CommandTest, SetLoginSetsProperValue)
+{
+    m_command.setLogin("Login");
+    ASSERT_STREQ("Login", m_command.getLogin().c_str());
+}
+
+TEST_F(CommandTest, GetPasswordReturnsProperInitialValue)
+{
+    ASSERT_STREQ("", m_command.getPassword().c_str());
+}
+
+TEST_F(CommandTest, SetPasswordSetsProperValue)
+{
+    m_command.setPassword("Password");
+    ASSERT_STREQ("Password", m_command.getPassword().c_str());
 }

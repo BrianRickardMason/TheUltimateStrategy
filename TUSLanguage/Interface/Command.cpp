@@ -47,4 +47,28 @@ void Command::setID(
     m_id = a_id;
 }
 
+std::string Command::getLogin() const
+{
+    return m_login;
+}
+
+void Command::setLogin(
+    std::string a_login
+)
+{
+    m_login = a_login;
+}
+
+std::string Command::getPassword() const
+{
+    return m_password;
+}
+
+void Command::setPassword(
+    std::string a_password
+)
+{
+    m_password = a_password;
+}
+
 } // namespace TUSLang

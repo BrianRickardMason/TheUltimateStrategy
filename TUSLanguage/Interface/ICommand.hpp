@@ -29,6 +29,7 @@
 #define TUSLANG_ICOMMAND_HPP
 
 #include <memory>
+#include <string>
 
 namespace TUSLang
 {
@@ -54,6 +55,38 @@ public:
      */
     virtual void setID(
         unsigned short int a_id
+    ) = 0;
+
+    /**
+     * @brief Gets the login of the user.
+     *
+     * @return The login of the user, an empty string if not set.
+     */
+    virtual std::string getLogin() const = 0;
+
+    /**
+     * @brief Sets the login of the user.
+     *
+     * @param a_login The login of the user.
+     */
+    virtual void setLogin(
+        std::string a_login
+    ) = 0;
+
+    /**
+     * @brief Gets the password of the user.
+     *
+     * @return The password of the user, an empty string if not set.
+     */
+    virtual std::string getPassword() const = 0;
+
+    /**
+     * @brief Sets the password of the user.
+     *
+     * @param a_password The password of the user.
+     */
+    virtual void setPassword(
+        std::string a_password
     ) = 0;
 };
 

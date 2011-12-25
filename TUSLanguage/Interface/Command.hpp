@@ -55,11 +55,53 @@ public:
         unsigned short int a_id
     );
 
+    /**
+     * @brief Gets the login of the user.
+     *
+     * @return The login of the user, an empty string if not set.
+     */
+    virtual std::string getLogin() const;
+
+    /**
+     * @brief Sets the login of the user.
+     *
+     * @param a_login The login of the user.
+     */
+    virtual void setLogin(
+        std::string a_login
+    );
+
+    /**
+     * @brief Gets the password of the user.
+     *
+     * @return The password of the user, an empty string if not set.
+     */
+    virtual std::string getPassword() const;
+
+    /**
+     * @brief Sets the password of the user.
+     *
+     * @param a_password The password of the user.
+     */
+    virtual void setPassword(
+        std::string a_password
+    );
+
 private:
     /**
      * @brief The identifier of the command.
      */
     unsigned short int m_id;
+
+    /**
+     * @brief The login of the user, an empty string if not set.
+     */
+    std::string m_login;
+
+    /**
+     * @brief The password of the user, an empty string if not set.
+     */
+    std::string m_password;
 };
 
 } // namespace TUSLang
