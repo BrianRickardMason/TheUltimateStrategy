@@ -33,8 +33,9 @@ namespace TUSLang
 
 ICommand::SingleHandle RequestBuilder::buildEchoRequest() const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+	ICommand::SingleHandle command(new Command);
+	command->setID(1);
+	return command;
 }
 
 ICommand::SingleHandle RequestBuilder::buildErrorRequest() const

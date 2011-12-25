@@ -48,6 +48,11 @@ TEST_F(RequestBuilderTest, BuildEchoRequestReturnsNotNull)
     ASSERT_TRUE(m_request_builder.buildEchoRequest().get());
 }
 
+TEST_F(RequestBuilderTest, BuildEchoRequestSetsProperRequestID)
+{
+    ASSERT_EQ(1, m_request_builder.buildEchoRequest()->getID());
+}
+
 TEST_F(RequestBuilderTest, BuildErrorRequestReturnsNotNull)
 {
     ASSERT_TRUE(m_request_builder.buildErrorRequest().get());
