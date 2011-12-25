@@ -65,12 +65,20 @@ TEST_F(RequestBuilderTest, BuildErrorRequestSetsProperRequestID)
 
 TEST_F(RequestBuilderTest, BuildCreateLandRequestReturnsNotNull)
 {
-    ASSERT_TRUE(m_request_builder.buildCreateLandRequest().get());
+    TUSLang::ICommand::SingleHandle command = m_request_builder.buildCreateLandRequest("Login");
+    ASSERT_TRUE(command.get());
 }
 
 TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperRequestID)
 {
-    ASSERT_EQ(3, m_request_builder.buildCreateLandRequest()->getID());
+    TUSLang::ICommand::SingleHandle command = m_request_builder.buildCreateLandRequest("Login");
+    ASSERT_EQ(3, command->getID());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperLogin)
+{
+    TUSLang::ICommand::SingleHandle command = m_request_builder.buildCreateLandRequest("Login");
+    ASSERT_EQ("Login", command->getLogin());
 }
 
 TEST_F(RequestBuilderTest, BuildDeleteLandRequestReturnsNotNull)

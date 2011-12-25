@@ -45,11 +45,14 @@ ICommand::SingleHandle RequestBuilder::buildErrorRequest() const
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateLandRequest() const
+ICommand::SingleHandle RequestBuilder::buildCreateLandRequest(
+    std::string a_login
+) const
 {
     // TODO: Implement me!
     ICommand::SingleHandle command(new Command);
     command->setID(3);
+    command->setLogin(a_login);
     return command;
 }
 

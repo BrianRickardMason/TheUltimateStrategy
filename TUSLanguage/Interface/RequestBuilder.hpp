@@ -38,13 +38,37 @@ class RequestBuilder
     : boost::noncopyable
 {
 public:
+    /**
+     * @brief Builds EchoRequest.
+     *
+     * @return EchoRequest.
+     */
+    ICommand::SingleHandle buildEchoRequest() const;
+
+    /**
+     * @brief Builds ErrorRequest.
+     *
+     * @return ErrorRequest.
+     */
+    ICommand::SingleHandle buildErrorRequest() const;
+
+    /**
+     * @brief Builds CreateLandRequest.
+     *
+     * @param a_login The login of the user.
+     *
+     * @return CreateLandRequest
+     */
+    ICommand::SingleHandle buildCreateLandRequest(
+        std::string a_login
+    ) const;
+
     //@{
     /**
      * @brief Builds a request.
+     *
+     * @return Built request.
      */
-    ICommand::SingleHandle buildEchoRequest()              const;
-    ICommand::SingleHandle buildErrorRequest()             const;
-    ICommand::SingleHandle buildCreateLandRequest()        const;
     ICommand::SingleHandle buildDeleteLandRequest()        const;
     ICommand::SingleHandle buildGetLandRequest()           const;
     ICommand::SingleHandle buildGetLandsRequest()          const;
