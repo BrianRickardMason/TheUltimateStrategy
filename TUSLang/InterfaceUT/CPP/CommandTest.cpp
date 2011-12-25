@@ -28,7 +28,28 @@
 #include "../../Interface/CPP/Command.hpp"
 #include <gtest/gtest.h>
 
-TEST(CommandTest, CtorDoesNotThrow)
+class CommandTest
+    : public ::testing::Test
+{
+protected:
+    /**
+     * @brief The command to be tested.
+     */
+    TUSLang::Command m_command;
+};
+
+TEST_F(CommandTest, CtorDoesNotThrow)
 {
     ASSERT_NO_THROW(TUSLang::Command::SingleHandle command(new TUSLang::Command));
+}
+
+TEST_F(CommandTest, GetIDReturnsProperValue)
+{
+    ASSERT_EQ(0, m_command.getID());
+}
+
+TEST_F(CommandTest, SetIDSetsProperValue)
+{
+	m_command.setID(22);
+    ASSERT_EQ(22, m_command.getID());
 }
