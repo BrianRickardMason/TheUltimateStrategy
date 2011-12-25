@@ -50,6 +50,6 @@ TEST_F(CommandTest, GetIDReturnsProperValue)
 
 TEST_F(CommandTest, SetIDSetsProperValue)
 {
-	m_command.setID(22);
+    m_command.setID(22);
     ASSERT_EQ(22, m_command.getID());
 }

@@ -58,6 +58,11 @@ TEST_F(RequestBuilderTest, BuildErrorRequestReturnsNotNull)
     ASSERT_TRUE(m_request_builder.buildErrorRequest().get());
 }
 
+TEST_F(RequestBuilderTest, BuildErrorRequestSetsProperRequestID)
+{
+    ASSERT_EQ(2, m_request_builder.buildErrorRequest()->getID());
+}
+
 TEST_F(RequestBuilderTest, BuildCreateLandRequestReturnsNotNull)
 {
     ASSERT_TRUE(m_request_builder.buildCreateLandRequest().get());
