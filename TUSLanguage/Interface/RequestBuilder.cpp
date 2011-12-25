@@ -46,13 +46,15 @@ ICommand::SingleHandle RequestBuilder::buildErrorRequest() const
 }
 
 ICommand::SingleHandle RequestBuilder::buildCreateLandRequest(
-    std::string a_login
+    std::string a_login,
+    std::string a_password
 ) const
 {
     // TODO: Implement me!
     ICommand::SingleHandle command(new Command);
     command->setID(3);
     command->setLogin(a_login);
+    command->setPassword(a_password);
     return command;
 }
 

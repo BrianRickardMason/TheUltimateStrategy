@@ -55,12 +55,14 @@ public:
     /**
      * @brief Builds CreateLandRequest.
      *
-     * @param a_login The login of the user.
+     * @param a_login    The login of the user.
+     * @param a_password The password of the user.
      *
      * @return CreateLandRequest
      */
     ICommand::SingleHandle buildCreateLandRequest(
-        std::string a_login
+        std::string a_login,
+        std::string a_password
     ) const;
 
     //@{
