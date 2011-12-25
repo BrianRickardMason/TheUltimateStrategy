@@ -68,6 +68,11 @@ TEST_F(RequestBuilderTest, BuildCreateLandRequestReturnsNotNull)
     ASSERT_TRUE(m_request_builder.buildCreateLandRequest().get());
 }
 
+TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperRequestID)
+{
+    ASSERT_EQ(3, m_request_builder.buildCreateLandRequest()->getID());
+}
+
 TEST_F(RequestBuilderTest, BuildDeleteLandRequestReturnsNotNull)
 {
     ASSERT_TRUE(m_request_builder.buildDeleteLandRequest().get());

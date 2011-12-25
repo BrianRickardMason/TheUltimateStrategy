@@ -48,7 +48,9 @@ ICommand::SingleHandle RequestBuilder::buildErrorRequest() const
 ICommand::SingleHandle RequestBuilder::buildCreateLandRequest() const
 {
     // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(3);
+    return command;
 }
 
 ICommand::SingleHandle RequestBuilder::buildDeleteLandRequest() const
