@@ -89,10 +89,16 @@ ICommand::SingleHandle RequestBuilder::buildGetLandRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetLandsRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetLandsRequest(
+    std::string a_login,
+    std::string a_password
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(6);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    return command;
 }
 
 ICommand::SingleHandle RequestBuilder::buildCreateSettlementRequest() const
