@@ -29,6 +29,7 @@
 #define TUSLANG_COMMAND_HPP
 
 #include "ICommand.hpp"
+#include <map>
 
 namespace TUSLang
 {
@@ -87,6 +88,30 @@ public:
         std::string a_password
     );
 
+    /**
+     * @brief Gets the value of the parameter.
+     *
+     * @param a_param_name The name of the parameter.
+     *
+     * @return The value of the parameter.
+     *
+     * @throw std::out_of_range If no such parameter is present.
+     */
+    virtual std::string getParam(
+        std::string a_param_name
+    ) const;
+
+    /**
+     * @brief Sets the parameter.
+     *
+     * @param a_param_name  The name of the parameter.
+     * @param a_param_value The value of the parameter.
+     */
+    virtual void setParam(
+        std::string a_param_name,
+        std::string a_param_value
+    );
+
 private:
     /**
      * @brief The identifier of the command.
@@ -102,6 +127,11 @@ private:
      * @brief The password of the user, an empty string if not set.
      */
     std::string m_password;
+
+    /**
+     * @brief The map of parameters.
+     */
+    std::map<std::string, std::string> m_parameters;
 };
 
 } // namespace TUSLang

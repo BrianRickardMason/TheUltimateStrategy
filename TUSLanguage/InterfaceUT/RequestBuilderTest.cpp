@@ -65,26 +65,44 @@ TEST_F(RequestBuilderTest, BuildErrorRequestSetsProperRequestID)
 
 TEST_F(RequestBuilderTest, BuildCreateLandRequestReturnsNotNull)
 {
-    TUSLang::ICommand::SingleHandle command = m_request_builder.buildCreateLandRequest("Login", "Password");
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildCreateLandRequest("Login", "Password", "World", "Land");
     ASSERT_TRUE(command.get());
 }
 
 TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperRequestID)
 {
-    TUSLang::ICommand::SingleHandle command = m_request_builder.buildCreateLandRequest("Login", "Password");
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildCreateLandRequest("Login", "Password", "World", "Land");
     ASSERT_EQ(3, command->getID());
 }
 
 TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperLogin)
 {
-    TUSLang::ICommand::SingleHandle command = m_request_builder.buildCreateLandRequest("Login", "Password");
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildCreateLandRequest("Login", "Password", "World", "Land");
     ASSERT_STREQ("Login", command->getLogin().c_str());
 }
 
 TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperPassword)
 {
-    TUSLang::ICommand::SingleHandle command = m_request_builder.buildCreateLandRequest("Login", "Password");
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildCreateLandRequest("Login", "Password", "World", "Land");
     ASSERT_STREQ("Password", command->getPassword().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperWorldName)
+{
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildCreateLandRequest("Login", "Password", "World", "Land");
+    ASSERT_STREQ("World", command->getParam("world_name").c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperLandName)
+{
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildCreateLandRequest("Login", "Password", "World", "Land");
+    ASSERT_STREQ("Land", command->getParam("land_name").c_str());
 }
 
 TEST_F(RequestBuilderTest, BuildDeleteLandRequestReturnsNotNull)

@@ -88,6 +88,30 @@ public:
     virtual void setPassword(
         std::string a_password
     ) = 0;
+
+    /**
+     * @brief Gets the value of the parameter.
+     *
+     * @param a_param_name The name of the parameter.
+     *
+     * @return The value of the parameter.
+     *
+     * @throw std::out_of_range If no such parameter is present.
+     */
+    virtual std::string getParam(
+        std::string a_param_name
+    ) const = 0;
+
+    /**
+     * @brief Sets the parameter.
+     *
+     * @param a_param_name  The name of the parameter.
+     * @param a_param_value The value of the parameter.
+     */
+    virtual void setParam(
+        std::string a_param_name,
+        std::string a_param_value
+    ) = 0;
 };
 
 } // namespace TUSLang

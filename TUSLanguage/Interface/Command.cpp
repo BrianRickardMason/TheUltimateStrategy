@@ -71,4 +71,19 @@ void Command::setPassword(
     m_password = a_password;
 }
 
+std::string Command::getParam(
+    std::string a_param_name
+) const
+{
+    return m_parameters.at(a_param_name);
+}
+
+void Command::setParam(
+    std::string a_param_name,
+    std::string a_param_value
+)
+{
+    m_parameters[a_param_name] = a_param_value;
+}
+
 } // namespace TUSLang

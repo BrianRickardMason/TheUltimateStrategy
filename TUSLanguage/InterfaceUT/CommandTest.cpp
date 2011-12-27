@@ -27,6 +27,7 @@
 
 #include "../Interface/Command.hpp"
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 class CommandTest
     : public ::testing::Test
@@ -74,4 +75,15 @@ TEST_F(CommandTest, SetPasswordSetsProperValue)
 {
     m_command.setPassword("Password");
     ASSERT_STREQ("Password", m_command.getPassword().c_str());
+}
+
+TEST_F(CommandTest, GetParamThrowsIfParamDoesNotExist)
+{
+    ASSERT_THROW(m_command.getParam("non_existent"), std::out_of_range);
+}
+
+TEST_F(CommandTest, GetParamReturnsPropverValueOfParam)
+{
+    m_command.setParam("existent", "value");
+    ASSERT_STREQ("value", m_command.getParam("existent").c_str());
 }
