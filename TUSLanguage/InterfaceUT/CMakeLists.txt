@@ -25,16 +25,16 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-PROJECT(interfacecpput)
+PROJECT(interfaceut)
 
-ADD_EXECUTABLE(interfacecpput
+ADD_EXECUTABLE(interfaceut
     CommandTest.cpp
     RequestBuilderTest.cpp
     main.cpp
 )
 
-TARGET_LINK_LIBRARIES(interfacecpput
+TARGET_LINK_LIBRARIES(interfaceut
+    interface
     gtest
-    interfacecpp
     pthread
 )

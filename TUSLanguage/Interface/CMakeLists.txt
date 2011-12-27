@@ -25,13 +25,13 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-PROJECT(interfacecpp)
+PROJECT(interface)
 
-ADD_LIBRARY(interfacecpp
+ADD_LIBRARY(interface
     Command.cpp
     RequestBuilder.cpp
 )
 
-TARGET_LINK_LIBRARIES(interfacecpp
+TARGET_LINK_LIBRARIES(interface
     PocoXML
 )
