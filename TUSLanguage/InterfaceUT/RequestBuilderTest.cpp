@@ -185,22 +185,149 @@ TEST_F(RequestBuilderTest, BuildGetLandsRequestSetsProperPassword)
 
 TEST_F(RequestBuilderTest, BuildCreateSettlementRequestReturnsNotNull)
 {
-    ASSERT_TRUE(m_request_builder.buildCreateSettlementRequest().get());
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement");
+    ASSERT_TRUE(command.get());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateSettlementRequestSetsProperRequestID)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement");
+    ASSERT_EQ(7, command->getID());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateSettlementRequestSetsProperLogin)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement");
+    ASSERT_STREQ("Login", command->getLogin().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateSettlementRequestSetsProperPassword)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement");
+    ASSERT_STREQ("Password", command->getPassword().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateSettlementRequestSetsProperLandName)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement");
+    ASSERT_STREQ("Land", command->getParam("land_name").c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildCreateSettlementRequestSetsProperSettlementName)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement");
+    ASSERT_STREQ("Settlement", command->getParam("settlement_name").c_str());
 }
 
 TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestReturnsNotNull)
 {
-    ASSERT_TRUE(m_request_builder.buildDeleteSettlementRequest().get());
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildDeleteSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_TRUE(command.get());
+}
+
+TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestSetsProperRequestID)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildDeleteSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_EQ(8, command->getID());
+}
+
+TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestSetsProperLogin)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildDeleteSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_STREQ("Login", command->getLogin().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestSetsProperPassword)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildDeleteSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_STREQ("Password", command->getPassword().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestSetsProperSettlementName)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildDeleteSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_STREQ("Settlement", command->getParam("settlement_name").c_str());
 }
 
 TEST_F(RequestBuilderTest, BuildGetSettlementRequestReturnsNotNull)
 {
-    ASSERT_TRUE(m_request_builder.buildGetSettlementRequest().get());
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_TRUE(command.get());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementRequestSetsProperRequestID)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_EQ(9, command->getID());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementRequestSetsProperLogin)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_STREQ("Login", command->getLogin().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementRequestSetsProperPassword)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_STREQ("Password", command->getPassword().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementRequestSetsProperSettlementName)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementRequest("Login", "Password", "Settlement");
+    ASSERT_STREQ("Settlement", command->getParam("settlement_name").c_str());
 }
 
 TEST_F(RequestBuilderTest, BuildGetSettlementsRequestReturnsNotNull)
 {
-    ASSERT_TRUE(m_request_builder.buildGetSettlementsRequest().get());
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementsRequest("Login", "Password", "Land");
+    ASSERT_TRUE(command.get());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementsRequestSetsProperRequestID)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementsRequest("Login", "Password", "Land");
+    ASSERT_EQ(10, command->getID());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementsRequestSetsProperLogin)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementsRequest("Login", "Password", "Land");
+    ASSERT_STREQ("Login", command->getLogin().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementsRequestSetsProperPassword)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementsRequest("Login", "Password", "Land");
+    ASSERT_STREQ("Password", command->getPassword().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildGetSettlementsRequestSetsProperLandName)
+{
+    TUSLanguage::ICommand::SingleHandle command =
+        m_request_builder.buildGetSettlementsRequest("Login", "Password", "Land");
+    ASSERT_STREQ("Land", command->getParam("land_name").c_str());
 }
 
 TEST_F(RequestBuilderTest, BuildBuildBuildingRequestReturnsNotNull)

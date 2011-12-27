@@ -101,28 +101,62 @@ ICommand::SingleHandle RequestBuilder::buildGetLandsRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateSettlementRequest() const
+ICommand::SingleHandle RequestBuilder::buildCreateSettlementRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_land_name,
+    std::string a_settlement_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(7);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("land_name", a_land_name);
+    command->setParam("settlement_name", a_settlement_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeleteSettlementRequest() const
+ICommand::SingleHandle RequestBuilder::buildDeleteSettlementRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_settlement_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(8);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("settlement_name", a_settlement_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetSettlementRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetSettlementRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_settlement_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(9);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("settlement_name", a_settlement_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetSettlementsRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetSettlementsRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_land_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(10);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("land_name", a_land_name);
+    return command;
 }
 
 ICommand::SingleHandle RequestBuilder::buildBuildBuildingRequest() const

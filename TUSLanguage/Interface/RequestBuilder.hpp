@@ -112,16 +112,74 @@ public:
         std::string a_password
     ) const;
 
+    /**
+     * @brief Builds CreateSettlementRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_land_name       The name of the land.
+     * @param a_settlement_name The name of the settlement.
+     *
+     * @return CreateSettlementRequest
+     */
+    ICommand::SingleHandle buildCreateSettlementRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_land_name,
+        std::string a_settlement_name
+    ) const;
+
+    /**
+     * @brief Builds DeleteSettlementRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_settlement_name The name of the settlement.
+     *
+     * @return DeleteSettlementRequest
+     */
+    ICommand::SingleHandle buildDeleteSettlementRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_settlement_name
+    ) const;
+
+    /**
+     * @brief Builds GetSettlementRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_settlement_name The name of the settlement.
+     *
+     * @return GetSettlementRequest
+     */
+    ICommand::SingleHandle buildGetSettlementRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_settlement_name
+    ) const;
+
+    /**
+     * @brief Builds GetSettlementsRequest.
+     *
+     * @param a_login     The login of the user.
+     * @param a_password  The password of the user.
+     * @param a_land_name The name of the land.
+     *
+     * @return GetSettlementsRequest
+     */
+    ICommand::SingleHandle buildGetSettlementsRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_land_name
+    ) const;
+
     //@{
     /**
      * @brief Builds a request.
      *
      * @return Built request.
      */
-    ICommand::SingleHandle buildCreateSettlementRequest()  const;
-    ICommand::SingleHandle buildDeleteSettlementRequest()  const;
-    ICommand::SingleHandle buildGetSettlementRequest()     const;
-    ICommand::SingleHandle buildGetSettlementsRequest()    const;
     ICommand::SingleHandle buildBuildBuildingRequest()     const;
     ICommand::SingleHandle buildDestroyBuildingRequest()   const;
     ICommand::SingleHandle buildGetBuildingRequest()       const;
