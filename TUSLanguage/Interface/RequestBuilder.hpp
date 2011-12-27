@@ -69,13 +69,27 @@ public:
         std::string a_land_name
     ) const;
 
+    /**
+     * @brief Builds DeleteLandRequest.
+     *
+     * @param a_login     The login of the user.
+     * @param a_password  The password of the user.
+     * @param a_land_name The name of the land.
+     *
+     * @return DeleteLandRequest
+     */
+    ICommand::SingleHandle buildDeleteLandRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_land_name
+    ) const;
+
     //@{
     /**
      * @brief Builds a request.
      *
      * @return Built request.
      */
-    ICommand::SingleHandle buildDeleteLandRequest()        const;
     ICommand::SingleHandle buildGetLandRequest()           const;
     ICommand::SingleHandle buildGetLandsRequest()          const;
     ICommand::SingleHandle buildCreateSettlementRequest()  const;

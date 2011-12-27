@@ -61,10 +61,18 @@ ICommand::SingleHandle RequestBuilder::buildCreateLandRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeleteLandRequest() const
+ICommand::SingleHandle RequestBuilder::buildDeleteLandRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_land_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(4);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("land_name", a_land_name);
+    return command;
 }
 
 ICommand::SingleHandle RequestBuilder::buildGetLandRequest() const
