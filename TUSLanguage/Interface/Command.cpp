@@ -27,7 +27,7 @@
 
 #include "Command.hpp"
 
-namespace TUSLang
+namespace TUSLanguage
 {
 
 Command::Command()
@@ -86,4 +86,4 @@ void Command::setParam(
     m_parameters[a_param_name] = a_param_value;
 }
 
-} // namespace TUSLang
+} // namespace TUSLanguage

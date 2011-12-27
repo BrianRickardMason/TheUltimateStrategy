@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSLANG_REQUESTBUILDER_HPP
-#define TUSLANG_REQUESTBUILDER_HPP
+#ifndef TUSLANGUAGE_REQUESTBUILDER_HPP
+#define TUSLANGUAGE_REQUESTBUILDER_HPP
 
 #include "ICommand.hpp"
 #include <boost/noncopyable.hpp>
 
-namespace TUSLang
+namespace TUSLanguage
 {
 
 class RequestBuilder
@@ -146,6 +146,6 @@ public:
     //}@
 };
 
-} // namespace TUSLang
+} // namespace TUSLanguage
 
-#endif // TUSLANG_REQUESTBUILDER_HPP
+#endif // TUSLANGUAGE_REQUESTBUILDER_HPP

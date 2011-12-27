@@ -36,12 +36,12 @@ protected:
     /**
      * @brief The command to be tested.
      */
-    TUSLang::Command m_command;
+    TUSLanguage::Command m_command;
 };
 
 TEST_F(CommandTest, CtorDoesNotThrow)
 {
-    ASSERT_NO_THROW(TUSLang::Command::SingleHandle command(new TUSLang::Command));
+    ASSERT_NO_THROW(TUSLanguage::Command::SingleHandle command(new TUSLanguage::Command));
 }
 
 TEST_F(CommandTest, GetIDReturnsProperInitialValue)

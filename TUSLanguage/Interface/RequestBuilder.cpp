@@ -28,7 +28,7 @@
 #include "Command.hpp"
 #include "RequestBuilder.hpp"
 
-namespace TUSLang
+namespace TUSLanguage
 {
 
 ICommand::SingleHandle RequestBuilder::buildEchoRequest() const
@@ -251,4 +251,4 @@ ICommand::SingleHandle RequestBuilder::buildTransportResourceRequest() const
     return ICommand::SingleHandle(new Command);
 }
 
-} // namespace TUSLang
+} // namespace TUSLanguage
