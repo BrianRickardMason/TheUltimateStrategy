@@ -142,7 +142,37 @@ TEST_F(RequestBuilderTest, BuildDeleteLandRequestSetsProperLandName)
 
 TEST_F(RequestBuilderTest, BuildGetLandRequestReturnsNotNull)
 {
-    ASSERT_TRUE(m_request_builder.buildGetLandRequest().get());
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildGetLandRequest("Login", "Password", "Land");
+    ASSERT_TRUE(command.get());
+}
+
+TEST_F(RequestBuilderTest, BuildGetLandRequestSetsProperRequestID)
+{
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildGetLandRequest("Login", "Password", "Land");
+    ASSERT_EQ(5, command->getID());
+}
+
+TEST_F(RequestBuilderTest, BuildGetLandRequestSetsProperLogin)
+{
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildGetLandRequest("Login", "Password", "Land");
+    ASSERT_STREQ("Login", command->getLogin().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildGetLandRequestSetsProperPassword)
+{
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildGetLandRequest("Login", "Password", "Land");
+    ASSERT_STREQ("Password", command->getPassword().c_str());
+}
+
+TEST_F(RequestBuilderTest, BuildGetLandRequestSetsProperLandName)
+{
+    TUSLang::ICommand::SingleHandle command =
+        m_request_builder.buildGetLandRequest("Login", "Password", "Land");
+    ASSERT_STREQ("Land", command->getParam("land_name").c_str());
 }
 
 TEST_F(RequestBuilderTest, BuildGetLandsRequestReturnsNotNull)
