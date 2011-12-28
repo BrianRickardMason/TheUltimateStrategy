@@ -48,11 +48,21 @@ public:
         unsigned short int const a_code
     ) const;
 
+    /**
+     * @brief Builds ErrorReply.
+     *
+     * @param a_code The exit code.
+     *
+     * @return ErrorReply.
+     */
+    ICommand::SingleHandle buildErrorReply(
+        unsigned short int const a_code
+    ) const;
+
     //@{
     /**
      * @brief Builds a reply.
      */
-    ICommand::SingleHandle buildErrorReply()             const;
     ICommand::SingleHandle buildCreateLandReply()        const;
     ICommand::SingleHandle buildDeleteLandReply()        const;
     ICommand::SingleHandle buildGetLandReply()           const;

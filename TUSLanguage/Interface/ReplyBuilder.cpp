@@ -41,10 +41,14 @@ ICommand::SingleHandle ReplyBuilder::buildEchoReply(
     return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildErrorReply() const
+ICommand::SingleHandle ReplyBuilder::buildErrorReply(
+    unsigned short int const a_code
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(33);
+    command->setCode(a_code);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildCreateLandReply() const

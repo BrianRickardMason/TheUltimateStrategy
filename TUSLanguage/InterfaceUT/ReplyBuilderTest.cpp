@@ -36,7 +36,8 @@ protected:
      * @brief Ctor.
      */
     ReplyBuilderTest()
-        : m_command_echo_reply(m_reply_builder.buildEchoReply(1))
+        : m_command_echo_reply(m_reply_builder.buildEchoReply(1)),
+          m_command_error_reply(m_reply_builder.buildErrorReply(1))
     {
     }
 
@@ -45,10 +46,13 @@ protected:
      */
     TUSLanguage::ReplyBuilder m_reply_builder;
 
+    //@{
     /**
      * @brief The command to be tested.
      */
-    TUSLanguage::ICommand::SingleHandle m_command_echo_reply;
+    TUSLanguage::ICommand::SingleHandle m_command_echo_reply,
+                                        m_command_error_reply;
+    //}@
 };
 
 TEST_F(ReplyBuilderTest, CtorDoesNotThrow)
@@ -73,7 +77,17 @@ TEST_F(ReplyBuilderTest, BuildEchoReplySetsProperCode)
 
 TEST_F(ReplyBuilderTest, BuildErrorReplyReturnsNotNull)
 {
-    ASSERT_TRUE(m_reply_builder.buildErrorReply().get());
+    ASSERT_TRUE(m_command_error_reply.get());
+}
+
+TEST_F(ReplyBuilderTest, BuildErrorReplySetsProperReplyID)
+{
+    ASSERT_EQ(33, m_command_error_reply->getID());
+}
+
+TEST_F(ReplyBuilderTest, BuildErrorReplySetsProperCode)
+{
+    ASSERT_EQ(1, m_command_error_reply->getCode());
 }
 
 TEST_F(ReplyBuilderTest, BuildCreateLandReplyReturnsNotNull)
