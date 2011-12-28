@@ -132,7 +132,7 @@ TEST_F(RequestBuilderTest, BuildEchoRequestReturnsNotNull)
     ASSERT_TRUE(m_request_builder.buildEchoRequest().get());
 }
 
-TEST_F(RequestBuilderTest, BuildEchoRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildEchoRequestSetsProperID)
 {
     ASSERT_EQ(1, m_request_builder.buildEchoRequest()->getID());
 }
@@ -142,7 +142,7 @@ TEST_F(RequestBuilderTest, BuildErrorRequestReturnsNotNull)
     ASSERT_TRUE(m_request_builder.buildErrorRequest().get());
 }
 
-TEST_F(RequestBuilderTest, BuildErrorRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildErrorRequestSetsProperID)
 {
     ASSERT_EQ(2, m_request_builder.buildErrorRequest()->getID());
 }
@@ -152,7 +152,7 @@ TEST_F(RequestBuilderTest, BuildCreateLandRequestReturnsNotNull)
     ASSERT_TRUE(m_command_create_land.get());
 }
 
-TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildCreateLandRequestSetsProperID)
 {
     ASSERT_EQ(3, m_command_create_land->getID());
 }
@@ -182,7 +182,7 @@ TEST_F(RequestBuilderTest, BuildDeleteLandRequestReturnsNotNull)
     ASSERT_TRUE(m_command_delete_land.get());
 }
 
-TEST_F(RequestBuilderTest, BuildDeleteLandRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildDeleteLandRequestSetsProperID)
 {
     ASSERT_EQ(4, m_command_delete_land->getID());
 }
@@ -207,7 +207,7 @@ TEST_F(RequestBuilderTest, BuildGetLandRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_land.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetLandRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetLandRequestSetsProperID)
 {
     ASSERT_EQ(5, m_command_get_land->getID());
 }
@@ -232,7 +232,7 @@ TEST_F(RequestBuilderTest, BuildGetLandsRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_lands.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetLandsRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetLandsRequestSetsProperID)
 {
     ASSERT_EQ(6, m_command_get_lands->getID());
 }
@@ -252,7 +252,7 @@ TEST_F(RequestBuilderTest, BuildCreateSettlementRequestReturnsNotNull)
     ASSERT_TRUE(m_command_create_settlement.get());
 }
 
-TEST_F(RequestBuilderTest, BuildCreateSettlementRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildCreateSettlementRequestSetsProperID)
 {
     ASSERT_EQ(7, m_command_create_settlement->getID());
 }
@@ -282,7 +282,7 @@ TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestReturnsNotNull)
     ASSERT_TRUE(m_command_delete_settlement.get());
 }
 
-TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildDeleteSettlementRequestSetsProperID)
 {
     ASSERT_EQ(8, m_command_delete_settlement->getID());
 }
@@ -307,7 +307,7 @@ TEST_F(RequestBuilderTest, BuildGetSettlementRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_settlement.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetSettlementRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetSettlementRequestSetsProperID)
 {
     ASSERT_EQ(9, m_command_get_settlement->getID());
 }
@@ -332,7 +332,7 @@ TEST_F(RequestBuilderTest, BuildGetSettlementsRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_settlements.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetSettlementsRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetSettlementsRequestSetsProperID)
 {
     ASSERT_EQ(10, m_command_get_settlements->getID());
 }
@@ -357,7 +357,7 @@ TEST_F(RequestBuilderTest, BuildBuildBuildingRequestReturnsNotNull)
     ASSERT_TRUE(m_command_build_building.get());
 }
 
-TEST_F(RequestBuilderTest, BuildBuildBuildingRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildBuildBuildingRequestSetsProperID)
 {
     ASSERT_EQ(11, m_command_build_building->getID());
 }
@@ -397,7 +397,7 @@ TEST_F(RequestBuilderTest, BuildDestroyBuildingRequestReturnsNotNull)
     ASSERT_TRUE(m_command_destroy_building.get());
 }
 
-TEST_F(RequestBuilderTest, BuildDestroyBuildingRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildDestroyBuildingRequestSetsProperID)
 {
     ASSERT_EQ(12, m_command_destroy_building->getID());
 }
@@ -437,7 +437,7 @@ TEST_F(RequestBuilderTest, BuildGetBuildingRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_building.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetBuildingRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetBuildingRequestSetsProperID)
 {
     ASSERT_EQ(13, m_command_get_building->getID());
 }
@@ -472,7 +472,7 @@ TEST_F(RequestBuilderTest, BuildGetBuildingsRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_buildings.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetBuildingsRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetBuildingsRequestSetsProperID)
 {
     ASSERT_EQ(14, m_command_get_buildings->getID());
 }
@@ -502,7 +502,7 @@ TEST_F(RequestBuilderTest, BuildDismissHumanRequestReturnsNotNull)
     ASSERT_TRUE(m_command_dismiss_human.get());
 }
 
-TEST_F(RequestBuilderTest, BuildDismissHumanRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildDismissHumanRequestSetsProperID)
 {
     ASSERT_EQ(15, m_command_dismiss_human->getID());
 }
@@ -542,7 +542,7 @@ TEST_F(RequestBuilderTest, BuildEngageHumanRequestReturnsNotNull)
     ASSERT_TRUE(m_command_engage_human.get());
 }
 
-TEST_F(RequestBuilderTest, BuildEngageHumanRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildEngageHumanRequestSetsProperID)
 {
     ASSERT_EQ(16, m_command_engage_human->getID());
 }
@@ -582,7 +582,7 @@ TEST_F(RequestBuilderTest, BuildGetHumanRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_human.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetHumanRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetHumanRequestSetsProperID)
 {
     ASSERT_EQ(17, m_command_get_human->getID());
 }
@@ -617,7 +617,7 @@ TEST_F(RequestBuilderTest, BuildGetHumansRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_humans.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetHumansRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetHumansRequestSetsProperID)
 {
     ASSERT_EQ(18, m_command_get_humans->getID());
 }
@@ -647,7 +647,7 @@ TEST_F(RequestBuilderTest, BuildGetResourceRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_resource.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetResourceRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetResourceRequestSetsProperID)
 {
     ASSERT_EQ(19, m_command_get_resource->getID());
 }
@@ -682,7 +682,7 @@ TEST_F(RequestBuilderTest, BuildGetResourcesRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_resources.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetResourcesRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetResourcesRequestSetsProperID)
 {
     ASSERT_EQ(20, m_command_get_resources->getID());
 }
@@ -712,7 +712,7 @@ TEST_F(RequestBuilderTest, BuildCreateUserRequestReturnsNotNull)
     ASSERT_TRUE(m_command_create_user.get());
 }
 
-TEST_F(RequestBuilderTest, BuildCreateUserRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildCreateUserRequestSetsProperID)
 {
     ASSERT_EQ(21, m_command_create_user->getID());
 }
@@ -742,7 +742,7 @@ TEST_F(RequestBuilderTest, BuildCreateWorldRequestReturnsNotNull)
     ASSERT_TRUE(m_command_create_world.get());
 }
 
-TEST_F(RequestBuilderTest, BuildCreateWorldRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildCreateWorldRequestSetsProperID)
 {
     ASSERT_EQ(22, m_command_create_world->getID());
 }
@@ -767,7 +767,7 @@ TEST_F(RequestBuilderTest, BuildCreateEpochRequestReturnsNotNull)
     ASSERT_TRUE(m_command_create_epoch.get());
 }
 
-TEST_F(RequestBuilderTest, BuildCreateEpochRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildCreateEpochRequestSetsProperID)
 {
     ASSERT_EQ(23, m_command_create_epoch->getID());
 }
@@ -797,7 +797,7 @@ TEST_F(RequestBuilderTest, BuildDeleteEpochRequestReturnsNotNull)
     ASSERT_TRUE(m_command_delete_epoch.get());
 }
 
-TEST_F(RequestBuilderTest, BuildDeleteEpochRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildDeleteEpochRequestSetsProperID)
 {
     ASSERT_EQ(24, m_command_delete_epoch->getID());
 }
@@ -822,7 +822,7 @@ TEST_F(RequestBuilderTest, BuildActivateEpochRequestReturnsNotNull)
     ASSERT_TRUE(m_command_activate_epoch.get());
 }
 
-TEST_F(RequestBuilderTest, BuildActivateEpochRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildActivateEpochRequestSetsProperID)
 {
     ASSERT_EQ(25, m_command_activate_epoch->getID());
 }
@@ -847,7 +847,7 @@ TEST_F(RequestBuilderTest, BuildDeactivateEpochRequestReturnsNotNull)
     ASSERT_TRUE(m_command_deactivate_epoch.get());
 }
 
-TEST_F(RequestBuilderTest, BuildDeactivateEpochRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildDeactivateEpochRequestSetsProperID)
 {
     ASSERT_EQ(26, m_command_deactivate_epoch->getID());
 }
@@ -872,7 +872,7 @@ TEST_F(RequestBuilderTest, BuildFinishEpochRequestReturnsNotNull)
     ASSERT_TRUE(m_command_finish_epoch.get());
 }
 
-TEST_F(RequestBuilderTest, BuildFinishEpochRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildFinishEpochRequestSetsProperID)
 {
     ASSERT_EQ(27, m_command_finish_epoch->getID());
 }
@@ -897,7 +897,7 @@ TEST_F(RequestBuilderTest, BuildTickEpochRequestReturnsNotNull)
     ASSERT_TRUE(m_command_tick_epoch.get());
 }
 
-TEST_F(RequestBuilderTest, BuildTickEpochRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildTickEpochRequestSetsProperID)
 {
     ASSERT_EQ(28, m_command_tick_epoch->getID());
 }
@@ -922,7 +922,7 @@ TEST_F(RequestBuilderTest, BuildGetEpochRequestReturnsNotNull)
     ASSERT_TRUE(m_command_get_epoch.get());
 }
 
-TEST_F(RequestBuilderTest, BuildGetEpochRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildGetEpochRequestSetsProperID)
 {
     ASSERT_EQ(29, m_command_get_epoch->getID());
 }
@@ -947,7 +947,7 @@ TEST_F(RequestBuilderTest, BuildTransportHumanRequestReturnsNotNull)
     ASSERT_TRUE(m_command_transport_human.get());
 }
 
-TEST_F(RequestBuilderTest, BuildTransportHumanRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildTransportHumanRequestSetsProperID)
 {
     ASSERT_EQ(30, m_command_transport_human->getID());
 }
@@ -987,7 +987,7 @@ TEST_F(RequestBuilderTest, BuildTransportResourceRequestReturnsNotNull)
     ASSERT_TRUE(m_command_transport_resource.get());
 }
 
-TEST_F(RequestBuilderTest, BuildTransportResourceRequestSetsProperRequestID)
+TEST_F(RequestBuilderTest, BuildTransportResourceRequestSetsProperID)
 {
     ASSERT_EQ(31, m_command_transport_resource->getID());
 }
