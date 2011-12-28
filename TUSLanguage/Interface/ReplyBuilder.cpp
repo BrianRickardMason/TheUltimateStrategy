@@ -63,10 +63,16 @@ ICommand::SingleHandle ReplyBuilder::buildCreateLandReply(
     return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildDeleteLandReply() const
+ICommand::SingleHandle ReplyBuilder::buildDeleteLandReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(35);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildGetLandReply() const
@@ -81,16 +87,28 @@ ICommand::SingleHandle ReplyBuilder::buildGetLandsReply() const
     return ICommand::SingleHandle(new Command);
 }
 
-ICommand::SingleHandle ReplyBuilder::buildCreateSettlementReply() const
+ICommand::SingleHandle ReplyBuilder::buildCreateSettlementReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(38);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildDeleteSettlementReply() const
+ICommand::SingleHandle ReplyBuilder::buildDeleteSettlementReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(39);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildGetSettlementReply() const
@@ -105,16 +123,28 @@ ICommand::SingleHandle ReplyBuilder::buildGetSettlementsReply() const
     return ICommand::SingleHandle(new Command);
 }
 
-ICommand::SingleHandle ReplyBuilder::buildBuildBuildingReply() const
+ICommand::SingleHandle ReplyBuilder::buildBuildBuildingReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(42);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildDestroyBuildingReply() const
+ICommand::SingleHandle ReplyBuilder::buildDestroyBuildingReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(43);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildGetBuildingReply() const
@@ -129,16 +159,28 @@ ICommand::SingleHandle ReplyBuilder::buildGetBuildingsReply() const
     return ICommand::SingleHandle(new Command);
 }
 
-ICommand::SingleHandle ReplyBuilder::buildDismissHumanReply() const
+ICommand::SingleHandle ReplyBuilder::buildDismissHumanReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(46);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildEngageHumanReply() const
+ICommand::SingleHandle ReplyBuilder::buildEngageHumanReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(47);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildGetHumanReply() const
@@ -165,52 +207,100 @@ ICommand::SingleHandle ReplyBuilder::buildGetResourcesReply() const
     return ICommand::SingleHandle(new Command);
 }
 
-ICommand::SingleHandle ReplyBuilder::buildCreateUserReply() const
+ICommand::SingleHandle ReplyBuilder::buildCreateUserReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(52);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildCreateWorldReply() const
+ICommand::SingleHandle ReplyBuilder::buildCreateWorldReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(53);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildCreateEpochReply() const
+ICommand::SingleHandle ReplyBuilder::buildCreateEpochReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(54);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildDeleteEpochReply() const
+ICommand::SingleHandle ReplyBuilder::buildDeleteEpochReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(55);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildActivateEpochReply() const
+ICommand::SingleHandle ReplyBuilder::buildActivateEpochReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(56);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildDeactivateEpochReply() const
+ICommand::SingleHandle ReplyBuilder::buildDeactivateEpochReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(57);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildFinishEpochReply() const
+ICommand::SingleHandle ReplyBuilder::buildFinishEpochReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(58);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildTickEpochReply() const
+ICommand::SingleHandle ReplyBuilder::buildTickEpochReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(59);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildGetEpochReply() const
@@ -219,16 +309,28 @@ ICommand::SingleHandle ReplyBuilder::buildGetEpochReply() const
     return ICommand::SingleHandle(new Command);
 }
 
-ICommand::SingleHandle ReplyBuilder::buildTransportHumanReply() const
+ICommand::SingleHandle ReplyBuilder::buildTransportHumanReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(61);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildTransportResourceReply() const
+ICommand::SingleHandle ReplyBuilder::buildTransportResourceReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(62);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
 } // namespace TUSLanguage

@@ -62,7 +62,8 @@ public:
     /**
      * @brief Builds CreateLandReply.
      *
-     * @param a_code The exit code.
+     * @param a_code    The exit code.
+     * @param a_message The status message.
      *
      * @return CreateLandReply.
      */
@@ -71,38 +72,242 @@ public:
         std::string        const a_message
     ) const;
 
+    /**
+     * @brief Builds DeleteLandReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DeleteLandReply.
+     */
+    ICommand::SingleHandle buildDeleteLandReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds CreateSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateSettlementReply.
+     */
+    ICommand::SingleHandle buildCreateSettlementReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds DeleteSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DeleteSettlementReply.
+     */
+    ICommand::SingleHandle buildDeleteSettlementReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds BuildBuildingReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return BuildBuildingReply.
+     */
+    ICommand::SingleHandle buildBuildBuildingReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds DestroyBuildingReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DestroyBuildingReply.
+     */
+    ICommand::SingleHandle buildDestroyBuildingReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds DismissHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DismissHumanReply.
+     */
+    ICommand::SingleHandle buildDismissHumanReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds EngageHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return EngageHumanReply.
+     */
+    ICommand::SingleHandle buildEngageHumanReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds CreateUserReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateUserReply.
+     */
+    ICommand::SingleHandle buildCreateUserReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds CreateWorldReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateWorldReply.
+     */
+    ICommand::SingleHandle buildCreateWorldReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds CreateEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateEpochReply.
+     */
+    ICommand::SingleHandle buildCreateEpochReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds DeleteEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DeleteEpochReply.
+     */
+    ICommand::SingleHandle buildDeleteEpochReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds ActivateEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return ActivateEpochReply.
+     */
+    ICommand::SingleHandle buildActivateEpochReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds DectivateEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DectivateEpochReply.
+     */
+    ICommand::SingleHandle buildDeactivateEpochReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds FinishEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return FinishEpochReply.
+     */
+    ICommand::SingleHandle buildFinishEpochReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds TickEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return TickEpochReply.
+     */
+    ICommand::SingleHandle buildTickEpochReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds TransportHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return TransportHumanReply.
+     */
+    ICommand::SingleHandle buildTransportHumanReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds TransportResourceReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return TransportResourceReply.
+     */
+    ICommand::SingleHandle buildTransportResourceReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
     //@{
     /**
      * @brief Builds a reply.
      */
-    ICommand::SingleHandle buildDeleteLandReply()        const;
     ICommand::SingleHandle buildGetLandReply()           const;
     ICommand::SingleHandle buildGetLandsReply()          const;
-    ICommand::SingleHandle buildCreateSettlementReply()  const;
-    ICommand::SingleHandle buildDeleteSettlementReply()  const;
     ICommand::SingleHandle buildGetSettlementReply()     const;
     ICommand::SingleHandle buildGetSettlementsReply()    const;
-    ICommand::SingleHandle buildBuildBuildingReply()     const;
-    ICommand::SingleHandle buildDestroyBuildingReply()   const;
     ICommand::SingleHandle buildGetBuildingReply()       const;
     ICommand::SingleHandle buildGetBuildingsReply()      const;
-    ICommand::SingleHandle buildDismissHumanReply()      const;
-    ICommand::SingleHandle buildEngageHumanReply()       const;
     ICommand::SingleHandle buildGetHumanReply()          const;
     ICommand::SingleHandle buildGetHumansReply()         const;
     ICommand::SingleHandle buildGetResourceReply()       const;
     ICommand::SingleHandle buildGetResourcesReply()      const;
-    ICommand::SingleHandle buildCreateUserReply()        const;
-    ICommand::SingleHandle buildCreateWorldReply()       const;
-    ICommand::SingleHandle buildCreateEpochReply()       const;
-    ICommand::SingleHandle buildDeleteEpochReply()       const;
-    ICommand::SingleHandle buildActivateEpochReply()     const;
-    ICommand::SingleHandle buildDeactivateEpochReply()   const;
-    ICommand::SingleHandle buildFinishEpochReply()       const;
-    ICommand::SingleHandle buildTickEpochReply()         const;
     ICommand::SingleHandle buildGetEpochReply()          const;
-    ICommand::SingleHandle buildTransportHumanReply()    const;
-    ICommand::SingleHandle buildTransportResourceReply() const;
     //}@
 };
 
