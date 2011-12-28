@@ -54,7 +54,7 @@ public:
      * @param a_id The identifier of the command.
      */
     virtual void setID(
-        unsigned short int a_id
+        unsigned short int const a_id
     ) = 0;
 
     /**
@@ -70,7 +70,7 @@ public:
      * @param a_login The login of the user.
      */
     virtual void setLogin(
-        std::string a_login
+        std::string const a_login
     ) = 0;
 
     /**
@@ -86,7 +86,7 @@ public:
      * @param a_password The password of the user.
      */
     virtual void setPassword(
-        std::string a_password
+        std::string const a_password
     ) = 0;
 
     /**
@@ -99,7 +99,7 @@ public:
      * @throw std::out_of_range If no such parameter is present.
      */
     virtual std::string getParam(
-        std::string a_param_name
+        std::string const a_param_name
     ) const = 0;
 
     /**
@@ -109,8 +109,8 @@ public:
      * @param a_param_value The value of the parameter.
      */
     virtual void setParam(
-        std::string a_param_name,
-        std::string a_param_value
+        std::string const a_param_name,
+        std::string const a_param_value
     ) = 0;
 
     /**

@@ -41,7 +41,7 @@ unsigned short int Command::getID() const
 }
 
 void Command::setID(
-    unsigned short int a_id
+    unsigned short int const a_id
 )
 {
     m_id = a_id;
@@ -53,7 +53,7 @@ std::string Command::getLogin() const
 }
 
 void Command::setLogin(
-    std::string a_login
+    std::string const a_login
 )
 {
     m_login = a_login;
@@ -65,22 +65,22 @@ std::string Command::getPassword() const
 }
 
 void Command::setPassword(
-    std::string a_password
+    std::string const a_password
 )
 {
     m_password = a_password;
 }
 
 std::string Command::getParam(
-    std::string a_param_name
+    std::string const a_param_name
 ) const
 {
     return m_parameters.at(a_param_name);
 }
 
 void Command::setParam(
-    std::string a_param_name,
-    std::string a_param_value
+    std::string const a_param_name,
+    std::string const a_param_value
 )
 {
     m_parameters[a_param_name] = a_param_value;
