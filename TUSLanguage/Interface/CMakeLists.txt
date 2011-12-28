@@ -29,6 +29,7 @@ PROJECT(interface)
 
 ADD_LIBRARY(interface
     Command.cpp
+    ReplyBuilder.cpp
     RequestBuilder.cpp
 )
 

@@ -29,6 +29,7 @@ PROJECT(interfaceut)
 
 ADD_EXECUTABLE(interfaceut
     CommandTest.cpp
+    ReplyBuilderTest.cpp
     RequestBuilderTest.cpp
     main.cpp
 )
