@@ -31,10 +31,14 @@
 namespace TUSLanguage
 {
 
-ICommand::SingleHandle ReplyBuilder::buildEchoReply() const
+ICommand::SingleHandle ReplyBuilder::buildEchoReply(
+    unsigned short int const a_code
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(32);
+    command->setCode(a_code);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildErrorReply() const

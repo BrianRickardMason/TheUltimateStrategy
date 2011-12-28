@@ -33,9 +33,22 @@ class ReplyBuilderTest
 {
 protected:
     /**
+     * @brief Ctor.
+     */
+    ReplyBuilderTest()
+        : m_command_echo_reply(m_reply_builder.buildEchoReply(1))
+    {
+    }
+
+    /**
      * @brief The reply builder to be tested.
      */
     TUSLanguage::ReplyBuilder m_reply_builder;
+
+    /**
+     * @brief The command to be tested.
+     */
+    TUSLanguage::ICommand::SingleHandle m_command_echo_reply;
 };
 
 TEST_F(ReplyBuilderTest, CtorDoesNotThrow)
@@ -45,7 +58,17 @@ TEST_F(ReplyBuilderTest, CtorDoesNotThrow)
 
 TEST_F(ReplyBuilderTest, BuildEchoReplyReturnsNotNull)
 {
-    ASSERT_TRUE(m_reply_builder.buildEchoReply().get());
+    ASSERT_TRUE(m_command_echo_reply.get());
+}
+
+TEST_F(ReplyBuilderTest, BuildEchoReplySetsProperReplyID)
+{
+    ASSERT_EQ(32, m_command_echo_reply->getID());
+}
+
+TEST_F(ReplyBuilderTest, BuildEchoReplySetsProperCode)
+{
+    ASSERT_EQ(1, m_command_echo_reply->getCode());
 }
 
 TEST_F(ReplyBuilderTest, BuildErrorReplyReturnsNotNull)

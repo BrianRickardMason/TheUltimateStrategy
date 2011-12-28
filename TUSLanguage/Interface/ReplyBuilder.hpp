@@ -37,11 +37,21 @@ class ReplyBuilder
     : boost::noncopyable
 {
 public:
+    /**
+     * @brief Builds EchoReply.
+     *
+     * @param a_code The exit code.
+     *
+     * @return EchoReply.
+     */
+    ICommand::SingleHandle buildEchoReply(
+        unsigned short int const a_code
+    ) const;
+
     //@{
     /**
      * @brief Builds a reply.
      */
-    ICommand::SingleHandle buildEchoReply()              const;
     ICommand::SingleHandle buildErrorReply()             const;
     ICommand::SingleHandle buildCreateLandReply()        const;
     ICommand::SingleHandle buildDeleteLandReply()        const;
