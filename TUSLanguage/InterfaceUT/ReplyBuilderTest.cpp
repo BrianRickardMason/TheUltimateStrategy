@@ -37,7 +37,8 @@ protected:
      */
     ReplyBuilderTest()
         : m_command_echo_reply(m_reply_builder.buildEchoReply(1)),
-          m_command_error_reply(m_reply_builder.buildErrorReply(1))
+          m_command_error_reply(m_reply_builder.buildErrorReply(1)),
+          m_command_create_land_reply(m_reply_builder.buildCreateLandReply(1, "Message"))
     {
     }
 
@@ -51,7 +52,8 @@ protected:
      * @brief The command to be tested.
      */
     TUSLanguage::ICommand::SingleHandle m_command_echo_reply,
-                                        m_command_error_reply;
+                                        m_command_error_reply,
+                                        m_command_create_land_reply;
     //}@
 };
 
@@ -92,7 +94,22 @@ TEST_F(ReplyBuilderTest, BuildErrorReplySetsProperCode)
 
 TEST_F(ReplyBuilderTest, BuildCreateLandReplyReturnsNotNull)
 {
-    ASSERT_TRUE(m_reply_builder.buildCreateLandReply().get());
+    ASSERT_TRUE(m_command_create_land_reply.get());
+}
+
+TEST_F(ReplyBuilderTest, BuildCreateLandReplySetsProperReplyID)
+{
+    ASSERT_EQ(34, m_command_create_land_reply->getID());
+}
+
+TEST_F(ReplyBuilderTest, BuildCreateLandReplySetsProperCode)
+{
+    ASSERT_EQ(1, m_command_create_land_reply->getCode());
+}
+
+TEST_F(ReplyBuilderTest, BuildCreateLandReplySetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command_create_land_reply->getMessage().c_str());
 }
 
 TEST_F(ReplyBuilderTest, BuildDeleteLandReplyReturnsNotNull)

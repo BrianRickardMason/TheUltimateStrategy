@@ -51,10 +51,16 @@ ICommand::SingleHandle ReplyBuilder::buildErrorReply(
     return command;
 }
 
-ICommand::SingleHandle ReplyBuilder::buildCreateLandReply() const
+ICommand::SingleHandle ReplyBuilder::buildCreateLandReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(34);
+    command->setCode(a_code);
+    command->setMessage(a_message);
+    return command;
 }
 
 ICommand::SingleHandle ReplyBuilder::buildDeleteLandReply() const

@@ -59,11 +59,22 @@ public:
         unsigned short int const a_code
     ) const;
 
+    /**
+     * @brief Builds CreateLandReply.
+     *
+     * @param a_code The exit code.
+     *
+     * @return CreateLandReply.
+     */
+    ICommand::SingleHandle buildCreateLandReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
     //@{
     /**
      * @brief Builds a reply.
      */
-    ICommand::SingleHandle buildCreateLandReply()        const;
     ICommand::SingleHandle buildDeleteLandReply()        const;
     ICommand::SingleHandle buildGetLandReply()           const;
     ICommand::SingleHandle buildGetLandsReply()          const;
