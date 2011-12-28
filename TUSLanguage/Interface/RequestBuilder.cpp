@@ -159,130 +159,352 @@ ICommand::SingleHandle RequestBuilder::buildGetSettlementsRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildBuildBuildingRequest() const
+ICommand::SingleHandle RequestBuilder::buildBuildBuildingRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name,
+    std::string a_building_key,
+    std::string a_volume
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(11);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    command->setParam("buildingkey", a_building_key);
+    command->setParam("volume", a_volume);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDestroyBuildingRequest() const
+ICommand::SingleHandle RequestBuilder::buildDestroyBuildingRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name,
+    std::string a_building_key,
+    std::string a_volume
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(12);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    command->setParam("buildingkey", a_building_key);
+    command->setParam("volume", a_volume);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetBuildingRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetBuildingRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name,
+    std::string a_building_key
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(13);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    command->setParam("buildingkey", a_building_key);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetBuildingsRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetBuildingsRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(14);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDismissHumanRequest() const
+ICommand::SingleHandle RequestBuilder::buildDismissHumanRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name,
+    std::string a_human_key,
+    std::string a_volume
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(15);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    command->setParam("humankey", a_human_key);
+    command->setParam("volume", a_volume);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildEngageHumanRequest() const
+ICommand::SingleHandle RequestBuilder::buildEngageHumanRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name,
+    std::string a_human_key,
+    std::string a_volume
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(16);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    command->setParam("humankey", a_human_key);
+    command->setParam("volume", a_volume);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetHumanRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetHumanRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name,
+    std::string a_human_key
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(17);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    command->setParam("humankey", a_human_key);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetHumansRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetHumansRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(18);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetResourceRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetResourceRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name,
+    std::string a_resource_key
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(19);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    command->setParam("resourcekey", a_resource_key);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetResourcesRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetResourcesRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_id_holder_class,
+    std::string a_holder_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(20);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("idholderclass", a_id_holder_class);
+    command->setParam("holder_name", a_holder_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateUserRequest() const
+ICommand::SingleHandle RequestBuilder::buildCreateUserRequest(
+    std::string a_login,
+    std::string a_password
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(21);
+    command->setParam("login", a_login);
+    command->setParam("password", a_password);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateWorldRequest() const
+ICommand::SingleHandle RequestBuilder::buildCreateWorldRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(22);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateEpochRequest() const
+ICommand::SingleHandle RequestBuilder::buildCreateEpochRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name,
+    std::string a_epoch_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(23);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    command->setParam("epoch_name", a_epoch_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeleteEpochRequest() const
+ICommand::SingleHandle RequestBuilder::buildDeleteEpochRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(24);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildActivateEpochRequest() const
+ICommand::SingleHandle RequestBuilder::buildActivateEpochRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(25);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeactivateEpochRequest() const
+ICommand::SingleHandle RequestBuilder::buildDeactivateEpochRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(26);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildFinishEpochRequest() const
+ICommand::SingleHandle RequestBuilder::buildFinishEpochRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(27);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildTickEpochRequest() const
+ICommand::SingleHandle RequestBuilder::buildTickEpochRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(28);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetEpochRequest() const
+ICommand::SingleHandle RequestBuilder::buildGetEpochRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_world_name
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(29);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("world_name", a_world_name);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildTransportHumanRequest() const
+ICommand::SingleHandle RequestBuilder::buildTransportHumanRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_settlement_name_source,
+    std::string a_settlement_name_destination,
+    std::string a_human_key,
+    std::string a_volume
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(30);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("settlement_name_source", a_settlement_name_source);
+    command->setParam("settlement_name_destination", a_settlement_name_destination);
+    command->setParam("humankey", a_human_key);
+    command->setParam("volume", a_volume);
+    return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildTransportResourceRequest() const
+ICommand::SingleHandle RequestBuilder::buildTransportResourceRequest(
+    std::string a_login,
+    std::string a_password,
+    std::string a_settlement_name_source,
+    std::string a_settlement_name_destination,
+    std::string a_resource_key,
+    std::string a_volume
+) const
 {
-    // TODO: Implement me!
-    return ICommand::SingleHandle(new Command);
+    ICommand::SingleHandle command(new Command);
+    command->setID(31);
+    command->setLogin(a_login);
+    command->setPassword(a_password);
+    command->setParam("settlement_name_source", a_settlement_name_source);
+    command->setParam("settlement_name_destination", a_settlement_name_destination);
+    command->setParam("resourcekey", a_resource_key);
+    command->setParam("volume", a_volume);
+    return command;
 }
 
 } // namespace TUSLanguage

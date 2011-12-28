@@ -174,34 +174,374 @@ public:
         std::string a_land_name
     ) const;
 
-    //@{
     /**
-     * @brief Builds a request.
+     * @brief Builds BuildBuildingRequest.
      *
-     * @return Built request.
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     * @param a_building_key    The key of the building.
+     * @param a_volume          The volume of the building.
+     *
+     * @return BuildBuildingRequest
      */
-    ICommand::SingleHandle buildBuildBuildingRequest()     const;
-    ICommand::SingleHandle buildDestroyBuildingRequest()   const;
-    ICommand::SingleHandle buildGetBuildingRequest()       const;
-    ICommand::SingleHandle buildGetBuildingsRequest()      const;
-    ICommand::SingleHandle buildDismissHumanRequest()      const;
-    ICommand::SingleHandle buildEngageHumanRequest()       const;
-    ICommand::SingleHandle buildGetHumanRequest()          const;
-    ICommand::SingleHandle buildGetHumansRequest()         const;
-    ICommand::SingleHandle buildGetResourceRequest()       const;
-    ICommand::SingleHandle buildGetResourcesRequest()      const;
-    ICommand::SingleHandle buildCreateUserRequest()        const;
-    ICommand::SingleHandle buildCreateWorldRequest()       const;
-    ICommand::SingleHandle buildCreateEpochRequest()       const;
-    ICommand::SingleHandle buildDeleteEpochRequest()       const;
-    ICommand::SingleHandle buildActivateEpochRequest()     const;
-    ICommand::SingleHandle buildDeactivateEpochRequest()   const;
-    ICommand::SingleHandle buildFinishEpochRequest()       const;
-    ICommand::SingleHandle buildTickEpochRequest()         const;
-    ICommand::SingleHandle buildGetEpochRequest()          const;
-    ICommand::SingleHandle buildTransportHumanRequest()    const;
-    ICommand::SingleHandle buildTransportResourceRequest() const;
-    //}@
+    ICommand::SingleHandle buildBuildBuildingRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name,
+        std::string a_building_key,
+        std::string a_volume
+    ) const;
+
+    /**
+     * @brief Builds DestroyBuildingRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     * @param a_building_key    The key of the building.
+     * @param a_volume          The volume of the building.
+     *
+     * @return DestroyBuildingRequest
+     */
+    ICommand::SingleHandle buildDestroyBuildingRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name,
+        std::string a_building_key,
+        std::string a_volume
+    ) const;
+
+    /**
+     * @brief Builds GetBuildingRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     * @param a_building_key    The key of the building.
+     *
+     * @return GetBuildingRequest
+     */
+    ICommand::SingleHandle buildGetBuildingRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name,
+        std::string a_building_key
+    ) const;
+
+    /**
+     * @brief Builds GetBuildingsRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     *
+     * @return GetBuildingsRequest
+     */
+    ICommand::SingleHandle buildGetBuildingsRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name
+    ) const;
+
+    /**
+     * @brief Builds DismissHumanRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     * @param a_human_key       The key of the human.
+     * @param a_volume          The volume of the human.
+     *
+     * @return DismissHumanRequest
+     */
+    ICommand::SingleHandle buildDismissHumanRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name,
+        std::string a_human_key,
+        std::string a_volume
+    ) const;
+
+    /**
+     * @brief Builds EngageHumanRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     * @param a_human_key       The key of the human.
+     * @param a_volume          The volume of the human.
+     *
+     * @return EngageHumanRequest
+     */
+    ICommand::SingleHandle buildEngageHumanRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name,
+        std::string a_human_key,
+        std::string a_volume
+    ) const;
+
+    /**
+     * @brief Builds GetHumanRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     * @param a_human_key       The key of the human.
+     *
+     * @return GetHumanRequest
+     */
+    ICommand::SingleHandle buildGetHumanRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name,
+        std::string a_human_key
+    ) const;
+
+    /**
+     * @brief Builds GetHumansRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     *
+     * @return GetHumansRequest
+     */
+    ICommand::SingleHandle buildGetHumansRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name
+    ) const;
+
+    /**
+     * @brief Builds GetResourceRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     * @param a_resource_key    The key of the resource.
+     *
+     * @return GetResourceRequest
+     */
+    ICommand::SingleHandle buildGetResourceRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name,
+        std::string a_resource_key
+    ) const;
+
+    /**
+     * @brief Builds GetResourcesRequest.
+     *
+     * @param a_login           The login of the user.
+     * @param a_password        The password of the user.
+     * @param a_id_holder_class The identifier of the class of the holder.
+     * @param a_holder_name     The name of the holder.
+     *
+     * @return GetResourcesRequest
+     */
+    ICommand::SingleHandle buildGetResourcesRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_id_holder_class,
+        std::string a_holder_name
+    ) const;
+
+    /**
+     * @brief Builds CreateUserRequest.
+     *
+     * @param a_login    The login of the user.
+     * @param a_password The password of the user.
+     *
+     * @return CreateUserRequest
+     */
+    ICommand::SingleHandle buildCreateUserRequest(
+        std::string a_login,
+        std::string a_password
+    ) const;
+
+    /**
+     * @brief Builds CreateWorldRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     *
+     * @return CreateWorldRequest
+     */
+    ICommand::SingleHandle buildCreateWorldRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name
+    ) const;
+
+    /**
+     * @brief Builds CreateEpochRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     * @param a_epoch_name The name of the epoch.
+     *
+     * @return CreateEpochRequest
+     */
+    ICommand::SingleHandle buildCreateEpochRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name,
+        std::string a_epoch_name
+    ) const;
+
+    /**
+     * @brief Builds DeleteEpochRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     *
+     * @return DeleteEpochRequest
+     */
+    ICommand::SingleHandle buildDeleteEpochRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name
+    ) const;
+
+    /**
+     * @brief Builds ActivateEpochRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     *
+     * @return ActivateEpochRequest
+     */
+    ICommand::SingleHandle buildActivateEpochRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name
+    ) const;
+
+    /**
+     * @brief Builds DeactivateEpochRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     *
+     * @return DeactivateEpochRequest
+     */
+    ICommand::SingleHandle buildDeactivateEpochRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name
+    ) const;
+
+    /**
+     * @brief Builds FinishEpochRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     *
+     * @return FinishEpochRequest
+     */
+    ICommand::SingleHandle buildFinishEpochRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name
+    ) const;
+
+    /**
+     * @brief Builds TickEpochRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     *
+     * @return TickEpochRequest
+     */
+    ICommand::SingleHandle buildTickEpochRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name
+    ) const;
+
+    /**
+     * @brief Builds GetEpochRequest.
+     *
+     * @param a_login      The login of the user.
+     * @param a_password   The password of the user.
+     * @param a_world_name The name of the world.
+     *
+     * @return GetEpochRequest
+     */
+    ICommand::SingleHandle buildGetEpochRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_world_name
+    ) const;
+
+    /**
+     * @brief Builds TransportHumanRequest.
+     *
+     * @param a_login                       The login of the user.
+     * @param a_password                    The password of the user.
+     * @param a_settlement_name_source      The name of the source settlement.
+     * @param a_settlement_name_destination The name of the destination settlement.
+     * @param a_human_key                   The key of the human.
+     * @param a_volume                      The volume of the human.
+     *
+     * @return TransportHumanRequest
+     */
+    ICommand::SingleHandle buildTransportHumanRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_settlement_name_source,
+        std::string a_settlement_name_destination,
+        std::string a_human_key,
+        std::string a_volume
+    ) const;
+
+    /**
+     * @brief Builds TransportResourceRequest.
+     *
+     * @param a_login                       The login of the user.
+     * @param a_password                    The password of the user.
+     * @param a_settlement_name_source      The name of the source settlement.
+     * @param a_settlement_name_destination The name of the destination settlement.
+     * @param a_resource_key                The key of the resource.
+     * @param a_volume                      The volume of the resource.
+     *
+     * @return TransportResourceRequest
+     */
+    ICommand::SingleHandle buildTransportResourceRequest(
+        std::string a_login,
+        std::string a_password,
+        std::string a_settlement_name_source,
+        std::string a_settlement_name_destination,
+        std::string a_resource_key,
+        std::string a_volume
+    ) const;
 };
 
 } // namespace TUSLanguage
