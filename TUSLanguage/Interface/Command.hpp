@@ -122,10 +122,26 @@ public:
     /**
      * @brief Sets the exit code of the command.
      *
-     * @param a_code The exit code of the command, 0 if not set.
+     * @param a_code The exit code of the command.
      */
     virtual void setCode(
         unsigned short int const a_code
+    );
+
+    /**
+     * @brief Gets the status message of the command.
+     *
+     * @return The status message of the command, an empty string if not found.
+     */
+    virtual std::string getMessage() const;
+
+    /**
+     * @brief Sets the status message of the command.
+     *
+     * @param a_message The status message of the command.
+     */
+    virtual void setMessage(
+        std::string const a_message
     );
 
 private:
@@ -153,6 +169,11 @@ private:
      * @brief The exit code of the command.
      */
     unsigned short int m_code;
+
+    /**
+     * @brief The status message of the command.
+     */
+    std::string m_message;
 };
 
 } // namespace TUSLanguage

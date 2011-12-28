@@ -123,10 +123,26 @@ public:
     /**
      * @brief Sets the exit code of the command.
      *
-     * @param a_code The exit code of the command, 0 if not set.
+     * @param a_code The exit code of the command.
      */
     virtual void setCode(
         unsigned short int const a_code
+    ) = 0;
+
+    /**
+     * @brief Gets the status message of the command.
+     *
+     * @return The status message of the command, an empty string if not found.
+     */
+    virtual std::string getMessage() const = 0;
+
+    /**
+     * @brief Sets the status message of the command.
+     *
+     * @param a_message The status message of the command.
+     */
+    virtual void setMessage(
+        std::string const a_message
     ) = 0;
 };
 

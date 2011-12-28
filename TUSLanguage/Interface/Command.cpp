@@ -31,7 +31,8 @@ namespace TUSLanguage
 {
 
 Command::Command()
-    : m_id(0)
+    : m_id(0),
+      m_code(0)
 {
 }
 
@@ -96,6 +97,18 @@ void Command::setCode(
 )
 {
     m_code = a_code;
+}
+
+std::string Command::getMessage() const
+{
+    return m_message;
+}
+
+void Command::setMessage(
+    std::string const a_message
+)
+{
+    m_message = a_message;
 }
 
 } // namespace TUSLanguage

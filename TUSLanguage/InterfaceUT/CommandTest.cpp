@@ -98,3 +98,14 @@ TEST_F(CommandTest, SetCodeSetsProperValue)
     m_command.setCode(44);
     ASSERT_EQ(44, m_command.getCode());
 }
+
+TEST_F(CommandTest, GetMessageReturnsProperInitialValue)
+{
+    ASSERT_STREQ("", m_command.getMessage().c_str());
+}
+
+TEST_F(CommandTest, SetMessageSetsProperValue)
+{
+    m_command.setMessage("Message");
+    ASSERT_STREQ("Message", m_command.getMessage().c_str());
+}
