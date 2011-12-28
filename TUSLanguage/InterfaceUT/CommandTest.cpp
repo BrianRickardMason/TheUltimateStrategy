@@ -87,3 +87,14 @@ TEST_F(CommandTest, GetParamReturnsPropverValueOfParam)
     m_command.setParam("existent", "value");
     ASSERT_STREQ("value", m_command.getParam("existent").c_str());
 }
+
+TEST_F(CommandTest, GetCodeReturnsProperInitialValue)
+{
+    ASSERT_EQ(0, m_command.getCode());
+}
+
+TEST_F(CommandTest, SetCodeSetsProperValue)
+{
+    m_command.setCode(44);
+    ASSERT_EQ(44, m_command.getCode());
+}

@@ -112,6 +112,22 @@ public:
         std::string a_param_name,
         std::string a_param_value
     ) = 0;
+
+    /**
+     * @brief Gets the exit code of the command.
+     *
+     * @return The exit code of the command, 0 if not set.
+     */
+    virtual unsigned short int getCode() const = 0;
+
+    /**
+     * @brief Sets the exit code of the command.
+     *
+     * @param a_code The exit code of the command, 0 if not set.
+     */
+    virtual void setCode(
+        unsigned short int const a_code
+    ) = 0;
 };
 
 } // namespace TUSLanguage

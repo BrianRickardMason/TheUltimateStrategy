@@ -86,4 +86,16 @@ void Command::setParam(
     m_parameters[a_param_name] = a_param_value;
 }
 
+unsigned short int Command::getCode() const
+{
+    return m_code;
+}
+
+void Command::setCode(
+    unsigned short int const a_code
+)
+{
+    m_code = a_code;
+}
+
 } // namespace TUSLanguage
