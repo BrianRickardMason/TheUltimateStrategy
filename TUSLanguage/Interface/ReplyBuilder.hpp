@@ -86,6 +86,36 @@ public:
     ) const;
 
     /**
+     * @brief Builds GetLandReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetLandReply.
+     */
+    ICommand::SingleHandle buildGetLandReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Object   const & a_object
+    ) const;
+
+    /**
+     * @brief Builds GetLandsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetLandsReply.
+     */
+    ICommand::SingleHandle buildGetLandsReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Objects  const & a_objects
+    ) const;
+
+    /**
      * @brief Builds CreateSettlementReply.
      *
      * @param a_code    The exit code.
@@ -109,6 +139,36 @@ public:
     ICommand::SingleHandle buildDeleteSettlementReply(
         unsigned short int const a_code,
         std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds GetSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetSettlementReply.
+     */
+    ICommand::SingleHandle buildGetSettlementReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Object   const & a_object
+    ) const;
+
+    /**
+     * @brief Builds GetSettlementsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetSettlementsReply.
+     */
+    ICommand::SingleHandle buildGetSettlementsReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Objects  const & a_objects
     ) const;
 
     /**
@@ -138,6 +198,36 @@ public:
     ) const;
 
     /**
+     * @brief Builds GetBuildingReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetBuildingReply.
+     */
+    ICommand::SingleHandle buildGetBuildingReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Object   const & a_object
+    ) const;
+
+    /**
+     * @brief Builds GetBuildingsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetBuildingsReply.
+     */
+    ICommand::SingleHandle buildGetBuildingsReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Objects  const & a_objects
+    ) const;
+
+    /**
      * @brief Builds DismissHumanReply.
      *
      * @param a_code    The exit code.
@@ -161,6 +251,66 @@ public:
     ICommand::SingleHandle buildEngageHumanReply(
         unsigned short int const a_code,
         std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds GetHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetHumanReply.
+     */
+    ICommand::SingleHandle buildGetHumanReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Object   const & a_object
+    ) const;
+
+    /**
+     * @brief Builds GetHumansReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetHumansReply.
+     */
+    ICommand::SingleHandle buildGetHumansReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Objects  const & a_objects
+    ) const;
+
+    /**
+     * @brief Builds GetResourceReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetResourceReply.
+     */
+    ICommand::SingleHandle buildGetResourceReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Object   const & a_object
+    ) const;
+
+    /**
+     * @brief Builds GetResourcesReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetResourcesReply.
+     */
+    ICommand::SingleHandle buildGetResourcesReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Objects  const & a_objects
     ) const;
 
     /**
@@ -293,22 +443,20 @@ public:
         std::string        const a_message
     ) const;
 
-    //@{
     /**
-     * @brief Builds a reply.
+     * @brief Builds GetEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetEpochReply.
      */
-    ICommand::SingleHandle buildGetLandReply()           const;
-    ICommand::SingleHandle buildGetLandsReply()          const;
-    ICommand::SingleHandle buildGetSettlementReply()     const;
-    ICommand::SingleHandle buildGetSettlementsReply()    const;
-    ICommand::SingleHandle buildGetBuildingReply()       const;
-    ICommand::SingleHandle buildGetBuildingsReply()      const;
-    ICommand::SingleHandle buildGetHumanReply()          const;
-    ICommand::SingleHandle buildGetHumansReply()         const;
-    ICommand::SingleHandle buildGetResourceReply()       const;
-    ICommand::SingleHandle buildGetResourcesReply()      const;
-    ICommand::SingleHandle buildGetEpochReply()          const;
-    //}@
+    ICommand::SingleHandle buildGetEpochReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Object   const & a_object
+    ) const;
 };
 
 } // namespace TUSLanguage

@@ -28,8 +28,10 @@
 #ifndef TUSLANGUAGE_ICOMMAND_HPP
 #define TUSLANGUAGE_ICOMMAND_HPP
 
+#include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace TUSLanguage
 {
@@ -38,6 +40,8 @@ class ICommand
 {
 public:
     typedef std::auto_ptr<ICommand> SingleHandle;
+    typedef std::map<std::string, std::string> Object;
+    typedef std::vector<Object> Objects;
 
     virtual ~ICommand(){}
 
@@ -143,6 +147,22 @@ public:
      */
     virtual void setMessage(
         std::string const a_message
+    ) = 0;
+
+    /**
+     * @brief Gets the objects.
+     *
+     * @return The objects.
+     */
+    virtual Objects const & getObjects() const = 0;
+
+    /**
+     * @brief Adds an object.
+     *
+     * @param a_object The object.
+     */
+    virtual void addObject(
+        Object const & a_object
     ) = 0;
 };
 

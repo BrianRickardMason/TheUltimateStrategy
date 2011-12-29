@@ -109,3 +109,37 @@ TEST_F(CommandTest, SetMessageSetsProperValue)
     m_command.setMessage("Message");
     ASSERT_STREQ("Message", m_command.getMessage().c_str());
 }
+
+TEST_F(CommandTest, GetObjectsReturnsProperInitialValue)
+{
+    ASSERT_TRUE(m_command.getObjects().empty());
+}
+
+TEST_F(CommandTest, GetObjectsReturnsProperObjects)
+{
+    TUSLanguage::ICommand::Object land;
+    land.insert(std::make_pair("login", "Login"));
+    land.insert(std::make_pair("world_name", "World"));
+    land.insert(std::make_pair("land_name", "Land"));
+    land.insert(std::make_pair("granted", "false"));
+    m_command.addObject(land);
+    TUSLanguage::ICommand::Objects objects = m_command.getObjects();
+    for (TUSLanguage::ICommand::Objects::const_iterator it = objects.begin(); it != objects.end(); ++it)
+    {
+        ASSERT_STREQ("Login", (*it).at("login").c_str());
+        ASSERT_STREQ("World", (*it).at("world_name").c_str());
+        ASSERT_STREQ("Land", (*it).at("land_name").c_str());
+        ASSERT_STREQ("false", (*it).at("granted").c_str());
+    }
+}
+
+TEST_F(CommandTest, AddObjectInsertsObjectProperly)
+{
+    TUSLanguage::ICommand::Object land;
+    land.insert(std::make_pair("login", "Login"));
+    land.insert(std::make_pair("world_name", "World"));
+    land.insert(std::make_pair("land_name", "Land"));
+    land.insert(std::make_pair("granted", "false"));
+    m_command.addObject(land);
+    ASSERT_FALSE(m_command.getObjects().empty());
+}

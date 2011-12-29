@@ -144,6 +144,22 @@ public:
         std::string const a_message
     );
 
+    /**
+     * @brief Gets the objects.
+     *
+     * @return The objects.
+     */
+    virtual Objects const & getObjects() const;
+
+    /**
+     * @brief Adds an object.
+     *
+     * @param a_object The object.
+     */
+    virtual void addObject(
+        Object const & a_object
+    );
+
 private:
     /**
      * @brief The identifier of the command.
@@ -174,6 +190,11 @@ private:
      * @brief The status message of the command.
      */
     std::string m_message;
+
+    /**
+     * @brief The objects.
+     */
+    Objects m_objects;
 };
 
 } // namespace TUSLanguage

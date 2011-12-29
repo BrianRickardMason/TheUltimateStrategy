@@ -111,4 +111,16 @@ void Command::setMessage(
     m_message = a_message;
 }
 
+ICommand::Objects const & Command::getObjects() const
+{
+    return m_objects;
+}
+
+void Command::addObject(
+    Object const & a_object
+)
+{
+    m_objects.push_back(a_object);
+}
+
 } // namespace TUSLanguage
