@@ -28,11 +28,14 @@
 #ifndef TUSLANGUAGE_REQUESTBUILDER_HPP
 #define TUSLANGUAGE_REQUESTBUILDER_HPP
 
+// TODO: Keep the standardized include format.
 #include "ICommand.hpp"
 #include <boost/noncopyable.hpp>
 
 namespace TUSLanguage
 {
+
+// TODO: Refactor me!
 
 class RequestBuilder
     : boost::noncopyable

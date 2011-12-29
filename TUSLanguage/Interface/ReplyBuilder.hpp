@@ -27,11 +27,14 @@
 #ifndef TUSLANGUAGE_REPLYBUILDER_HPP
 #define TUSLANGUAGE_REPLYBUILDER_HPP
 
+// TODO: Keep the standardized include format.
 #include "ICommand.hpp"
 #include <boost/noncopyable.hpp>
 
 namespace TUSLanguage
 {
+
+// TODO: Refactor me!
 
 class ReplyBuilder
     : boost::noncopyable
