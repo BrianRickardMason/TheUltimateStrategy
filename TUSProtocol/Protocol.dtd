@@ -117,7 +117,7 @@
 <!ELEMENT get_human_reply (human)>
 <!ELEMENT get_humans_reply (humans)>
 <!ELEMENT get_resource_reply (resource)>
-<!ELEMENT get_resources_request (idholderclass,holder_name)>
+<!ELEMENT get_resources_reply (resources)>
 <!ELEMENT create_user_reply EMPTY>
 <!ELEMENT create_world_reply EMPTY>
 <!ELEMENT create_epoch_reply EMPTY>
