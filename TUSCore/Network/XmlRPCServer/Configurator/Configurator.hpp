@@ -29,7 +29,7 @@
 #define CONFIGURATOR_HPP
 
 #include <3rdParty/pugixml/src/pugixml.hpp>
-#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/IConfigurator.hpp>
 
 /**
  * @brief Configurator.

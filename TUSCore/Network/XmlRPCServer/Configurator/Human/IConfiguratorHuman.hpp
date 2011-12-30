@@ -28,7 +28,7 @@
 #ifndef ICONFIGURATORHUMAN_HPP
 #define ICONFIGURATORHUMAN_HPP
 
-#include <GameServer/Configuration/Configurator/Human/IHuman.hpp>
+#include <TUSGame/GameServer/Configuration/Configurator/Human/IHuman.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 

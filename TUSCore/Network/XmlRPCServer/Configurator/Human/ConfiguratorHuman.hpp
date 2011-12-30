@@ -29,8 +29,8 @@
 #define CONFIGURATORHUMAN_HPP
 
 #include <3rdParty/pugixml/src/pugixml.hpp>
-#include <Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
-#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/IConfigurator.hpp>
 
 /**
  * @brief ConfiguratorHuman.

@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <GameServer/Configuration/Configurator/Building/Building.hpp>
-#include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
+#include <TUSGame/GameServer/Configuration/Configurator/Building/Building.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
 #include <string>
 #include <vector>
 

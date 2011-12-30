@@ -28,9 +28,9 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDESTROYBUILDING_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDESTROYBUILDING_HPP
 
-#include "../../../../../GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorExitCode.hpp"
-#include "../../../../../GameServer/Building/Volume.hpp"
-#include "../../../../../GameServer/Common/IDHolder.hpp"
+#include <TUSGame/GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperatorExitCode.hpp>
+#include <TUSGame/GameServer/Building/Volume.hpp>
+#include <TUSGame/GameServer/Common/IDHolder.hpp>
 #include "../Executor.hpp"
 #include <string>
 

@@ -28,9 +28,9 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORBUILDBUILDING_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORBUILDBUILDING_HPP
 
-#include "../../../../../GameServer/Building/Operators/BuildBuilding/BuildBuildingOperatorExitCode.hpp"
-#include "../../../../../GameServer/Building/Volume.hpp"
-#include "../../../../../GameServer/Common/IDHolder.hpp"
+#include <TUSGame/GameServer/Building/Operators/BuildBuilding/BuildBuildingOperatorExitCode.hpp>
+#include <TUSGame/GameServer/Building/Volume.hpp>
+#include <TUSGame/GameServer/Common/IDHolder.hpp>
 #include "../Executor.hpp"
 #include <string>
 

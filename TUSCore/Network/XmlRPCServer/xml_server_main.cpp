@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Network/XmlRPCServer/Server/Server.hpp>
-#include <Network/XmlRPCServer/Context.hpp>
+#include <TUSCore/Network/XmlRPCServer/Server/Server.hpp>
+#include <TUSCore/Network/XmlRPCServer/Context.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/thread.hpp>
 #include <log4cpp/Category.hh>

@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <GameServer/Configuration/Configurator/Human/Human.hpp>
-#include <Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
+#include <TUSGame/GameServer/Configuration/Configurator/Human/Human.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
 
 ConfiguratorHuman::ConfiguratorHuman(
     IConfiguratorShrPtr const a_configurator

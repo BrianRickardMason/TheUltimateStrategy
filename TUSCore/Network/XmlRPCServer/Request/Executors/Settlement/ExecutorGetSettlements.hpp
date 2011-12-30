@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENTS_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETSETTLEMENTS_HPP
 
-#include "../../../../../GameServer/Settlement/Operators/GetSettlements/GetSettlementsOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Settlement/Operators/GetSettlements/GetSettlementsOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

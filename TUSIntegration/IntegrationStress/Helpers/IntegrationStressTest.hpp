@@ -29,7 +29,7 @@
 #define INTEGRATIONSTRESSTEST_HPP
 
 #include <Poco/Process.h>
-#include <TUSCore/GameServer/Persistence/PersistencePostgresql.hpp>
+#include <TUSGame/GameServer/Persistence/PersistencePostgresql.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/thread.hpp>
 #include <gmock/gmock.h>

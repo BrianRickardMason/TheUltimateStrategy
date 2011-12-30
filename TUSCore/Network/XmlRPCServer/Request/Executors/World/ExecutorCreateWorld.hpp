@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEWORLD_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEWORLD_HPP
 
-#include "../../../../../GameServer/World/Operators/CreateWorld/CreateWorldOperatorExitCode.hpp"
+#include <TUSGame/GameServer/World/Operators/CreateWorld/CreateWorldOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

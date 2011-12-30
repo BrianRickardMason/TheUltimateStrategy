@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETHUMAN_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETHUMAN_HPP
 
-#include "../../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../../GameServer/Human/Operators/GetHuman/GetHumanOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Common/IDHolder.hpp>
+#include <TUSGame/GameServer/Human/Operators/GetHuman/GetHumanOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

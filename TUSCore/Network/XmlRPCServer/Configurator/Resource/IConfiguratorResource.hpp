@@ -28,7 +28,7 @@
 #ifndef ICONFIGURATORRESOURCE_HPP
 #define ICONFIGURATORRESOURCE_HPP
 
-#include <GameServer/Configuration/Configurator/Resource/IResource.hpp>
+#include <TUSGame/GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 

@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCCOMMON_REQUEST_REQUEST_HPP
 #define NETWORK_XMLRPCCOMMON_REQUEST_REQUEST_HPP
 
-#include <Network/XmlRPCCommon/Common/Message.hpp>
-#include <Network/XmlRPCCommon/Request/InvalidRequest.hpp>
+#include <TUSCore/Network/XmlRPCCommon/Common/Message.hpp>
+#include <TUSCore/Network/XmlRPCCommon/Request/InvalidRequest.hpp>
 
 namespace Network
 {

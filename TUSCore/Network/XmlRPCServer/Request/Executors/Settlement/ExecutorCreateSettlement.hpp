@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATESETTLEMENT_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATESETTLEMENT_HPP
 
-#include "../../../../../GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

@@ -28,9 +28,9 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_REQUESTHANDLER_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_REQUESTHANDLER_HPP
 
-#include "../../XmlRPCCommon/Request/Request.hpp"
+#include <TUSCore/Network/XmlRPCCommon/Request/Request.hpp>
 #include "IRequestDispatcher.hpp"
-#include <Network/XmlRPCServer/IContext.hpp>
+#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
 
 namespace Network
 {

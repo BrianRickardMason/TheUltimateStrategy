@@ -28,11 +28,11 @@
 #ifndef ICONTEXT_HPP
 #define ICONTEXT_HPP
 
-#include <Network/XmlRPCServer/Configurator/Base/IConfiguratorBase.hpp>
-#include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
-#include <Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
-#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
-#include <Network/XmlRPCServer/Configurator/Resource/IConfiguratorResource.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Base/IConfiguratorBase.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Human/IConfiguratorHuman.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/IConfigurator.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Resource/IConfiguratorResource.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 

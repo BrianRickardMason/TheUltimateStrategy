@@ -29,7 +29,7 @@
 #define INTEGRATIONFUNCTIONALTEST_HPP
 
 #include <Poco/Process.h>
-#include <TUSCore/GameServer/Persistence/PersistencePostgresql.hpp>
+#include <TUSGame/GameServer/Persistence/PersistencePostgresql.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
 #include <boost/asio.hpp>
 #include <boost/assign/list_of.hpp>

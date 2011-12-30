@@ -28,7 +28,7 @@
 #ifndef ICONFIGURATORBUILDING_HPP
 #define ICONFIGURATORBUILDING_HPP
 
-#include <GameServer/Configuration/Configurator/Building/IBuilding.hpp>
+#include <TUSGame/GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 

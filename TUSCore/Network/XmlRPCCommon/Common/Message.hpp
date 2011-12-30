@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCCOMMON_COMMON_MESSAGE_HPP
 #define NETWORK_XMLRPCCOMMON_COMMON_MESSAGE_HPP
 
-#include "../Xml/IXmlDocument.hpp"
-#include "IMessage.hpp"
+#include <TUSCore/Network/XmlRPCCommon/Common/IMessage.hpp>
+#include <TUSCore/Network/XmlRPCCommon/Xml/IXmlDocument.hpp>
 
 namespace Network
 {

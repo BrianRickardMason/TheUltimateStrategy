@@ -28,9 +28,9 @@
 #ifndef CONFIGURATORBASE_HPP
 #define CONFIGURATORBASE_HPP
 
-#include <3rdParty/pugixml/src/pugixml.hpp>
-#include <Network/XmlRPCServer/Configurator/Base/IConfiguratorBase.hpp>
-#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Base/IConfiguratorBase.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/IConfigurator.hpp>
+#include <TUSGame/3rdParty/pugixml/src/pugixml.hpp>
 
 /**
  * @brief ConfiguratorBase.

@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETRESOURCE_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETRESOURCE_HPP
 
-#include "../../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../../GameServer/Resource/Operators/GetResource/GetResourceOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Common/IDHolder.hpp>
+#include <TUSGame/GameServer/Resource/Operators/GetResource/GetResourceOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

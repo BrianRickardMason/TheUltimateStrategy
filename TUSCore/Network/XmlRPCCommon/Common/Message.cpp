@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Xml/XmlDocumentPugi.hpp"
+#include <TUSCore/Network/XmlRPCCommon/Xml/XmlDocumentPugi.hpp>
 #include "Message.hpp"
 #include <boost/make_shared.hpp>
 

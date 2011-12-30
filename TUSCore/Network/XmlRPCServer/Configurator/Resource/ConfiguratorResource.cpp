@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <GameServer/Configuration/Configurator/Resource/Resource.hpp>
-#include <Network/XmlRPCServer/Configurator/Resource/ConfiguratorResource.hpp>
+#include <TUSGame/GameServer/Configuration/Configurator/Resource/Resource.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Resource/ConfiguratorResource.hpp>
 
 ConfiguratorResource::ConfiguratorResource(
     IConfiguratorShrPtr const a_configurator

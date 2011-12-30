@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCCOMMON_XML_XMLNODEPUGI_HPP
 #define NETWORK_XMLRPCCOMMON_XML_XMLNODEPUGI_HPP
 
-#include "../../../3rdParty/pugixml/src/pugixml.hpp"
+#include <TUSGame/3rdParty/pugixml/src/pugixml.hpp>
 #include "IXmlNode.hpp"
 
 namespace Network

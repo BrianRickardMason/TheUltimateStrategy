@@ -28,9 +28,9 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORENGAGEHUMAN_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORENGAGEHUMAN_HPP
 
-#include "../../../../../GameServer/Common/IDHolder.hpp"
-#include "../../../../../GameServer/Human/Operators/EngageHuman/EngageHumanOperatorExitCode.hpp"
-#include "../../../../../GameServer/Human/Volume.hpp"
+#include <TUSGame/GameServer/Common/IDHolder.hpp>
+#include <TUSGame/GameServer/Human/Operators/EngageHuman/EngageHumanOperatorExitCode.hpp>
+#include <TUSGame/GameServer/Human/Volume.hpp>
 #include "../Executor.hpp"
 
 namespace Network

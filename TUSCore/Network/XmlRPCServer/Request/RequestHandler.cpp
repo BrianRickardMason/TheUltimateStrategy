@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "RequestHandler.hpp"
+#include <TUSCore/Network/XmlRPCServer/Request/RequestHandler.hpp>
 #include "RequestDispatcher.hpp"
 #include "Executors/IExecutor.hpp"
 

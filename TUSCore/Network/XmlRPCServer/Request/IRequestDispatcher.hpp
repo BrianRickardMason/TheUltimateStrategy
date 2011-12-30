@@ -30,7 +30,7 @@
 
 #include "../../XmlRPCCommon/Request/Request.hpp"
 #include "Executors/IExecutor.hpp"
-#include <Network/XmlRPCServer/IContext.hpp>
+#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace Network

@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETEEPOCH_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETEEPOCH_HPP
 
-#include <GameServer/Epoch/Operators/DeleteEpoch/DeleteEpochOperatorExitCode.hpp>
-#include <Network/XmlRPCServer/Request/Executors/Executor.hpp>
+#include <TUSGame/GameServer/Epoch/Operators/DeleteEpoch/DeleteEpochOperatorExitCode.hpp>
+#include <TUSCore/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 #include <string>
 
 namespace Network

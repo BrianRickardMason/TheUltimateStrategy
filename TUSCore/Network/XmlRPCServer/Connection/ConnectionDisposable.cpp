@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../XmlRPCCommon/Request/Request.hpp"
-#include "../Request/RequestParser.hpp"
-#include "ConnectionDisposable.hpp"
+#include <TUSCore/Network/XmlRPCCommon/Request/Request.hpp>
+#include <TUSCore/Network/XmlRPCServer/Connection/ConnectionDisposable.hpp>
+#include <TUSCore/Network/XmlRPCServer/Request/RequestParser.hpp>
 #include <boost/bind.hpp>
 #include <log4cpp/Category.hh>
 

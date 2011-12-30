@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDS_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETLANDS_HPP
 
-#include "../../../../../GameServer/Land/Operators/GetLands/GetLandsOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Land/Operators/GetLands/GetLandsOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

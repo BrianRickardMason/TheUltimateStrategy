@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETELAND_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETELAND_HPP
 
-#include "../../../../../GameServer/Land/Operators/DeleteLand/DeleteLandOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Land/Operators/DeleteLand/DeleteLandOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

@@ -29,8 +29,8 @@
 #define CONFIGURATORBUILDING_HPP
 
 #include <3rdParty/pugixml/src/pugixml.hpp>
-#include <Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
-#include <Network/XmlRPCServer/Configurator/IConfigurator.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Building/IConfiguratorBuilding.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/IConfigurator.hpp>
 
 /**
  * @brief ConfiguratorBuilding.

@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTICKEPOCH_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTICKEPOCH_HPP
 
-#include <GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorExitCode.hpp>
-#include <Network/XmlRPCServer/Request/Executors/Executor.hpp>
+#include <TUSGame/GameServer/Epoch/Operators/TickEpoch/TickEpochOperatorExitCode.hpp>
+#include <TUSCore/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 #include <string>
 
 namespace Network

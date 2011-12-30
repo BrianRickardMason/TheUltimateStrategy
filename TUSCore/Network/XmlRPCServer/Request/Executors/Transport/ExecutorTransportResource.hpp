@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTRANSPORTRESOURCE_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORTRANSPORTRESOURCE_HPP
 
-#include "../../../../../GameServer/Resource/Volume.hpp"
-#include "../../../../../GameServer/Transport/Operators/TransportResource/TransportResourceOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Resource/Volume.hpp>
+#include <TUSGame/GameServer/Transport/Operators/TransportResource/TransportResourceOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

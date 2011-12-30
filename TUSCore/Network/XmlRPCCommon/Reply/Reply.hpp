@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCCOMMON_REPLY_REPLY_HPP
 #define NETWORK_XMLRPCCOMMON_REPLY_REPLY_HPP
 
-#include <Network/XmlRPCCommon/Common/Message.hpp>
-#include <Network/XmlRPCCommon/Reply/InvalidReply.hpp>
+#include <TUSCore/Network/XmlRPCCommon/Common/Message.hpp>
+#include <TUSCore/Network/XmlRPCCommon/Reply/InvalidReply.hpp>
 
 namespace Network
 {

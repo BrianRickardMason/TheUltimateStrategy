@@ -28,11 +28,11 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTOR_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTOR_HPP
 
-#include <GameServer/Common/IOperatorAbstractFactory.hpp>
-#include <GameServer/Persistence/IPersistence.hpp>
-#include <GameServer/User/IUser.hpp>
-#include <Network/XmlRPCServer/IContext.hpp>
-#include <Network/XmlRPCServer/Request/Executors/IExecutor.hpp>
+#include <TUSGame/GameServer/Common/IOperatorAbstractFactory.hpp>
+#include <TUSGame/GameServer/Persistence/IPersistence.hpp>
+#include <TUSGame/GameServer/User/IUser.hpp>
+#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSCore/Network/XmlRPCServer/Request/Executors/IExecutor.hpp>
 
 namespace Network
 {

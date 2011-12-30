@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <TUSCore/GameServer/Human/Key.hpp>
+#include <TUSGame/GameServer/Human/Key.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioActivateEpoch.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioDeactivateEpoch.hpp>

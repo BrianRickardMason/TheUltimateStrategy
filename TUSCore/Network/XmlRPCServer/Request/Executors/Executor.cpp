@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <GameServer/Common/OperatorAbstractFactoryPostgresql.hpp>
-#include <GameServer/Persistence/PersistencePostgresql.hpp>
-#include <Network/XmlRPCServer/Request/Executors/Executor.hpp>
+#include <TUSGame/GameServer/Common/OperatorAbstractFactoryPostgresql.hpp>
+#include <TUSGame/GameServer/Persistence/PersistencePostgresql.hpp>
+#include <TUSCore/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Common;

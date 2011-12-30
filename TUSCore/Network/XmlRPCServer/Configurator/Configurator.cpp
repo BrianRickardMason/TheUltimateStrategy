@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Network/XmlRPCServer/Configurator/Configurator.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Configurator.hpp>
 #include <boost/lexical_cast.hpp>
 
 using namespace boost;

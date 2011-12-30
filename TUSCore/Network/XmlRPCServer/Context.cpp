@@ -25,12 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Network/XmlRPCServer/Configurator/Base/ConfiguratorBase.hpp>
-#include <Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
-#include <Network/XmlRPCServer/Configurator/Configurator.hpp>
-#include <Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
-#include <Network/XmlRPCServer/Configurator/Resource/ConfiguratorResource.hpp>
-#include <Network/XmlRPCServer/Context.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Base/ConfiguratorBase.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Building/ConfiguratorBuilding.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Configurator.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Human/ConfiguratorHuman.hpp>
+#include <TUSCore/Network/XmlRPCServer/Configurator/Resource/ConfiguratorResource.hpp>
+#include <TUSCore/Network/XmlRPCServer/Context.hpp>
 
 Context::Context()
     : m_configurator(new Configurator),

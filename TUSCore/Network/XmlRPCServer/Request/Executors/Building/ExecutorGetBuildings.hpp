@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETBUILDINGS_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORGETBUILDINGS_HPP
 
-#include "../../../../../GameServer/Building/Operators/GetBuildings/GetBuildingsOperatorExitCode.hpp"
-#include "../../../../../GameServer/Common/IDHolder.hpp"
+#include <TUSGame/GameServer/Building/Operators/GetBuildings/GetBuildingsOperatorExitCode.hpp>
+#include <TUSGame/GameServer/Common/IDHolder.hpp>
 #include "../Executor.hpp"
 
 namespace Network

@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETESETTLEMENT_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETESETTLEMENT_HPP
 
-#include "../../../../../GameServer/Settlement/Operators/DeleteSettlement/DeleteSettlementOperatorExitCode.hpp"
+#include <TUSGame/GameServer/Settlement/Operators/DeleteSettlement/DeleteSettlementOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network

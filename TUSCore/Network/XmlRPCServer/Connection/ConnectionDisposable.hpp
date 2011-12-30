@@ -28,11 +28,11 @@
 #ifndef NETWORK_XMLRPCSERVER_CONNECTION_CONNECTIONDISPOSABLE_HPP
 #define NETWORK_XMLRPCSERVER_CONNECTION_CONNECTIONDISPOSABLE_HPP
 
-#include "../../XmlRPCCommon/Reply/Reply.hpp"
-#include "../Request/RequestHandler.hpp"
-#include "../Request/IRequestParser.hpp"
-#include "IConnection.hpp"
-#include <Network/XmlRPCServer/IContext.hpp>
+#include <TUSCore/Network/XmlRPCCommon/Reply/Reply.hpp>
+#include <TUSCore/Network/XmlRPCServer/Connection/IConnection.hpp>
+#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSCore/Network/XmlRPCServer/Request/IRequestParser.hpp>
+#include <TUSCore/Network/XmlRPCServer/Request/RequestHandler.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
 namespace Network

@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEUSER_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEUSER_HPP
 
-#include "../../../../../GameServer/User/Operators/CreateUser/CreateUserOperatorExitCode.hpp"
+#include <TUSGame/GameServer/User/Operators/CreateUser/CreateUserOperatorExitCode.hpp>
 #include "../Executor.hpp"
 
 namespace Network
