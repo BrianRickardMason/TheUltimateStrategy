@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Interface/ReplyBuilder.hpp"
+#include <TUSLanguage/Interface/ReplyBuilder.hpp>
 #include <gtest/gtest.h>
 
 class ReplyBuilderTest

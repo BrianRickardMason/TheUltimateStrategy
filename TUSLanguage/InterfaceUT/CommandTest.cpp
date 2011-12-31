@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Interface/Command.hpp"
+#include <TUSLanguage/Interface/Command.hpp>
 #include <gtest/gtest.h>
 #include <stdexcept>
 

@@ -27,6 +27,8 @@
 
 PROJECT(interface)
 
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../..)
+
 ADD_LIBRARY(interface
     Command.cpp
     ReplyBuilder.cpp

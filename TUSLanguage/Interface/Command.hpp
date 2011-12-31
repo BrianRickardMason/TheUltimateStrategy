@@ -28,7 +28,7 @@
 #ifndef TUSLANGUAGE_COMMAND_HPP
 #define TUSLANGUAGE_COMMAND_HPP
 
-#include "ICommand.hpp"
+#include <TUSLanguage/Interface/ICommand.hpp>
 #include <map>
 
 namespace TUSLanguage

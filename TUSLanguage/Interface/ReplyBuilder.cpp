@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "Command.hpp"
-#include "ReplyBuilder.hpp"
+#include <TUSLanguage/Interface/Command.hpp>
+#include <TUSLanguage/Interface/ReplyBuilder.hpp>
 
 namespace TUSLanguage
 {

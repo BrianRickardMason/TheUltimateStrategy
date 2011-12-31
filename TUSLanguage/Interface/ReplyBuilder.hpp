@@ -27,8 +27,7 @@
 #ifndef TUSLANGUAGE_REPLYBUILDER_HPP
 #define TUSLANGUAGE_REPLYBUILDER_HPP
 
-// TODO: Keep the standardized include format.
-#include "ICommand.hpp"
+#include <TUSLanguage/Interface/ICommand.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace TUSLanguage

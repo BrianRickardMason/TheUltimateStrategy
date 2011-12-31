@@ -27,6 +27,8 @@
 
 PROJECT(interfaceut)
 
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../..)
+
 ADD_EXECUTABLE(interfaceut
     CommandTest.cpp
     ReplyBuilderTest.cpp

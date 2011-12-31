@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Interface/RequestBuilder.hpp"
+#include <TUSLanguage/Interface/RequestBuilder.hpp>
 #include <gtest/gtest.h>
 
 class RequestBuilderTest
