@@ -1,4 +1,4 @@
-# Copyright (C) 2010 and 2011 Marcin Arkadiusz Skrobiranda.
+# Copyright (C) 2010, 2011 and 2012 Marcin Arkadiusz Skrobiranda.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
