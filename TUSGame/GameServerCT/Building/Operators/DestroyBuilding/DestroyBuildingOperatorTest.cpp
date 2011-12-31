@@ -31,7 +31,7 @@
 #include <TUSGame/GameServer/Resource/Key.hpp>
 #include <TUSGame/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <TUSGame/GameServerCT/ComponentTest.hpp>
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;

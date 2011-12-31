@@ -30,7 +30,7 @@
 
 #include <TUSGame/GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <TUSGame/GameServer/Resource/ResourceWithVolumeRecord.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

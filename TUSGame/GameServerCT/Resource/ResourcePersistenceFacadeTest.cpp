@@ -29,7 +29,7 @@
 #include <TUSGame/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <TUSGame/GameServerCT/ComponentTest.hpp>
 #include <TUSGame/GameServer/Resource/Key.hpp>
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace GameServer::Common;

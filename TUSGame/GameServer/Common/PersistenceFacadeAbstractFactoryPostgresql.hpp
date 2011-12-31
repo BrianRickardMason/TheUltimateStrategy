@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_COMMON_PERSISTENCEFACADEABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_PERSISTENCEFACADEABSTRACTFACTORYPOSTGRESQL_HPP
 
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <TUSGame/GameServer/Common/IAccessorAbstractFactory.hpp>
 #include <TUSGame/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 

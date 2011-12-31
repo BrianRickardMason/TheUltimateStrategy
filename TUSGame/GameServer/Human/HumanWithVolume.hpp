@@ -30,7 +30,7 @@
 
 #include <TUSGame/GameServer/Configuration/Configurator/Human/IHuman.hpp>
 #include <TUSGame/GameServer/Human/HumanWithVolumeRecord.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

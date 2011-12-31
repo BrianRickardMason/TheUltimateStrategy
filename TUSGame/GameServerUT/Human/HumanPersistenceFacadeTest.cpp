@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 #include <TUSGame/GameServer/Human/HumanPersistenceFacade.hpp>
 #include <TUSGame/GameServer/Human/Key.hpp>
 #include <TUSGame/GameServerUT/Human/HumanAccessorMock.hpp>

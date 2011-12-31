@@ -28,7 +28,7 @@
 #ifndef REQUESTCREATORS_HPP
 #define REQUESTCREATORS_HPP
 
-#include <TUSCore/Network/XmlRPCCommon/Request/Request.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Request/Request.hpp>
 #include <string>
 
 /**

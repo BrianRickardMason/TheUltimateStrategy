@@ -28,8 +28,8 @@
 #ifndef ICLIENTSYNCHRONOUS_HPP
 #define ICLIENTSYNCHRONOUS_HPP
 
-#include <TUSCore/Network/XmlRPCCommon/Reply/Reply.hpp>
-#include <TUSCore/Network/XmlRPCCommon/Request/Request.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Reply/Reply.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Request/Request.hpp>
 
 /**
  * @brief The interface of Client.

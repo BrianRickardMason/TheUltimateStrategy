@@ -29,7 +29,7 @@
 #include <TUSGame/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <TUSGame/GameServer/Transport/Operators/TransportHuman/TransportHumanOperatorFactory.hpp>
 #include <TUSGame/GameServerCT/ComponentTest.hpp>
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;

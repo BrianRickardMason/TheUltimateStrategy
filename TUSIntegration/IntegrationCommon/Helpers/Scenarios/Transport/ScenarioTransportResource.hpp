@@ -28,8 +28,8 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_TRANSPORT_SCENARIOTRANSPORTRESOURCE_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_TRANSPORT_SCENARIOTRANSPORTRESOURCE_HPP
 
-#include <TUSCore/Network/XmlRPCCommon/Xml/IXmlNode.hpp>
-#include <TUSCore/Network/XmlRPCServer/Request/Executors/Constants.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Xml/IXmlNode.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Commands/Transport/TransportCommands.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/IScenarioAction.hpp>

@@ -31,7 +31,7 @@
 #include <TUSGame/GameServer/Human/IHumanPersistenceFacade.hpp>
 #include <TUSGame/GameServer/Resource/IResourcePersistenceFacade.hpp>
 #include <TUSGame/GameServer/Human/Operators/DismissHuman/IDismissHumanOperator.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

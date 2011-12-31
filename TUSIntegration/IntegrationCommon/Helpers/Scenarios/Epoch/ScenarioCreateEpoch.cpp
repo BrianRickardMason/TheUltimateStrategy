@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <TUSCore/Network/XmlRPCServer/Request/Executors/Constants.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Commands/Epoch/EpochCommands.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/Epoch/ScenarioCreateEpoch.hpp>
 

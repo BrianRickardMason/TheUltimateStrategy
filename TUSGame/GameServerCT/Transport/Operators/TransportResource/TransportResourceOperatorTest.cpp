@@ -30,7 +30,7 @@
 #include <TUSGame/GameServer/Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp>
 #include <TUSGame/GameServerCT/ComponentTest.hpp>
 #include <TUSGame/GameServer/Resource/Key.hpp>
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;

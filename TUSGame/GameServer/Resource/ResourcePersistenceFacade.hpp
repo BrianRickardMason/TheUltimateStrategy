@@ -30,7 +30,7 @@
 
 #include <TUSGame/GameServer/Resource/IResourceAccessor.hpp>
 #include <TUSGame/GameServer/Resource/IResourcePersistenceFacade.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

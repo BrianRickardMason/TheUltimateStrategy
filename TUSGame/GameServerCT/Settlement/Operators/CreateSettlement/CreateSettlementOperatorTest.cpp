@@ -30,7 +30,7 @@
 #include <TUSGame/GameServerCT/ComponentTest.hpp>
 #include <TUSGame/GameServer/Human/Key.hpp>
 #include <TUSGame/GameServer/Resource/Key.hpp>
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;

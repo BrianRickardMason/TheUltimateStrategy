@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_BUILDBUILDINGOPERATORFACTORY_HPP
 #define GAMESERVER_BUILDING_BUILDBUILDINGOPERATORFACTORY_HPP
 
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <TUSGame/GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp>
 #include <TUSGame/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 

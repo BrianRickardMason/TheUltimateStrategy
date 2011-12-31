@@ -33,7 +33,7 @@
 #include <TUSGame/GameServer/Resource/IResourcePersistenceFacade.hpp>
 #include <TUSGame/GameServer/Settlement/ISettlementPersistenceFacade.hpp>
 #include <TUSGame/GameServer/Turn/Managers/ITurnManager.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

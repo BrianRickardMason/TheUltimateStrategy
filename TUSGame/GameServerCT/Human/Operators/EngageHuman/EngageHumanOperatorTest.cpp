@@ -33,7 +33,7 @@
 #include <TUSGame/GameServer/Building/Key.hpp>
 #include <TUSGame/GameServer/Human/Key.hpp>
 #include <TUSGame/GameServer/Resource/Key.hpp>
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <TUSGame/GameServer/Common/IManagerAbstractFactory.hpp>
 #include <TUSGame/GameServer/Common/IOperatorAbstractFactory.hpp>
 #include <TUSGame/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>

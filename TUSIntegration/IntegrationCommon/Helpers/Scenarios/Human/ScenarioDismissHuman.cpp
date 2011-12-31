@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <TUSCore/Network/XmlRPCServer/Request/Executors/Constants.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Commands/Human/HumanCommands.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/Human/ScenarioDismissHuman.hpp>
 

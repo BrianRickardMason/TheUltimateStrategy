@@ -27,7 +27,7 @@
 
 #include <TUSGame/GameServer/Resource/Helpers.hpp>
 #include <boost/make_shared.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

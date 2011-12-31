@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_DESTROYBUILDINGOPERATOR_HPP
 #define GAMESERVER_BUILDING_DESTROYBUILDINGOPERATOR_HPP
 
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <TUSGame/GameServer/Building/IBuildingPersistenceFacade.hpp>
 #include <TUSGame/GameServer/Building/Operators/DestroyBuilding/IDestroyBuildingOperator.hpp>
 #include <TUSGame/GameServer/Resource/IResourcePersistenceFacade.hpp>

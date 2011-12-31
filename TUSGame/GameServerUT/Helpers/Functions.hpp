@@ -28,7 +28,7 @@
 #ifndef FUNCTIONS_HPP
 #define FUNCTIONS_HPP
 
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <TUSGame/GameServer/Resource/ResourceWithVolume.hpp>
 #include <boost/make_shared.hpp>
 #include <vector>

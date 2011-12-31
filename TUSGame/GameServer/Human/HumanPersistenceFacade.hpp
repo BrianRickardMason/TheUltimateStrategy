@@ -30,7 +30,7 @@
 
 #include <TUSGame/GameServer/Human/IHumanAccessor.hpp>
 #include <TUSGame/GameServer/Human/IHumanPersistenceFacade.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

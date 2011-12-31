@@ -27,7 +27,7 @@
 
 #include <TUSGame/GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <TUSGame/GameServerCT/ComponentTest.hpp>
-#include <TUSCore/Network/XmlRPCServer/Context.hpp>
+#include <TUSServer/Network/XmlRPCServer/Context.hpp>
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Common;

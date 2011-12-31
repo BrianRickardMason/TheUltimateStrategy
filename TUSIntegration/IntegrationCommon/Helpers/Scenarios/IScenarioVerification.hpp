@@ -28,7 +28,7 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_ISCENARIOVERIFICATION_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_ISCENARIOVERIFICATION_HPP
 
-#include <TUSCore/Network/XmlRPCCommon/Reply/Reply.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Reply/Reply.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 

@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGWITHVOLUME_HPP
 #define GAMESERVER_BUILDING_BUILDINGWITHVOLUME_HPP
 
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <TUSGame/GameServer/Building/BuildingWithVolumeRecord.hpp>
 #include <TUSGame/GameServer/Configuration/Configurator/Building/IBuilding.hpp>
 

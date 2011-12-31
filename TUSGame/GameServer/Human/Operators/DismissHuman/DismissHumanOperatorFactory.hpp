@@ -30,7 +30,7 @@
 
 #include <TUSGame/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 #include <TUSGame/GameServer/Human/Operators/DismissHuman/DismissHumanOperator.hpp>
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace GameServer
 {

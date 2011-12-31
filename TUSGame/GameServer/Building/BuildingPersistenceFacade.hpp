@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADE_HPP
 #define GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADE_HPP
 
-#include <TUSCore/Network/XmlRPCServer/IContext.hpp>
+#include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <TUSGame/GameServer/Building/IBuildingAccessor.hpp>
 #include <TUSGame/GameServer/Building/IBuildingPersistenceFacade.hpp>
 

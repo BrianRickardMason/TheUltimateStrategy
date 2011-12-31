@@ -28,8 +28,8 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_HUMAN_SCENARIOENGAGEHUMAN_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_HUMAN_SCENARIOENGAGEHUMAN_HPP
 
-#include <TUSCore/Network/XmlRPCCommon/Xml/IXmlNode.hpp>
-#include <TUSCore/Network/XmlRPCServer/Request/Executors/Constants.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Xml/IXmlNode.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Commands/Human/HumanCommands.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/IScenarioAction.hpp>

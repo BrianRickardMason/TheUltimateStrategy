@@ -28,7 +28,7 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_COMMANDS_TRANSPORT_TRANSPORTCOMMANDS_HPP
 #define INTEGRATIONCOMMON_HELPERS_COMMANDS_TRANSPORT_TRANSPORTCOMMANDS_HPP
 
-#include <TUSCore/Network/XmlRPCCommon/Reply/Reply.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Reply/Reply.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/XmlRPCClient/ClientSynchronous/IClientSynchronous.hpp>
 
 namespace IntegrationCommon

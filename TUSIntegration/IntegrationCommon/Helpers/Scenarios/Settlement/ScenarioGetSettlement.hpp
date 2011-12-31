@@ -28,8 +28,8 @@
 #ifndef INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENT_HPP
 #define INTEGRATIONCOMMON_HELPERS_SCENARIOS_SETTLEMENT_SCENARIOGETSETTLEMENT_HPP
 
-#include <TUSCore/Network/XmlRPCCommon/Xml/IXmlNode.hpp>
-#include <TUSCore/Network/XmlRPCServer/Request/Executors/Constants.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Xml/IXmlNode.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Constants.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Commands/Settlement/SettlementCommands.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/IScenario.hpp>
 #include <TUSIntegration/IntegrationCommon/Helpers/Scenarios/IScenarioAction.hpp>
