@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Connection/ConnectionDisposable.hpp"
-#include "Server.hpp"
+#include <TUSServer/Network/XmlRPCServer/Connection/ConnectionDisposable.hpp>
+#include <TUSServer/Network/XmlRPCServer/Server/Server.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 #include <log4cpp/Category.hh>

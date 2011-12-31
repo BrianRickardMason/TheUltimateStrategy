@@ -29,7 +29,7 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETESETTLEMENT_HPP
 
 #include <TUSGame/GameServer/Settlement/Operators/DeleteSettlement/DeleteSettlementOperatorExitCode.hpp>
-#include "../Executor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 namespace Network
 {

@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_REQUESTDISPATCHER_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_REQUESTDISPATCHER_HPP
 
-#include "IRequestDispatcher.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/IRequestDispatcher.hpp>
 
 namespace Network
 {

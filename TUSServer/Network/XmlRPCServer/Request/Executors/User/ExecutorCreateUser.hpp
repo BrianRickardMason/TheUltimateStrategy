@@ -29,7 +29,7 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEUSER_HPP
 
 #include <TUSGame/GameServer/User/Operators/CreateUser/CreateUserOperatorExitCode.hpp>
-#include "../Executor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 namespace Network
 {

@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCCOMMON_COMMON_IMESSAGE_HPP
 #define NETWORK_XMLRPCCOMMON_COMMON_IMESSAGE_HPP
 
-#include "../Common/MessageWrapper.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Common/MessageWrapper.hpp>
 
 namespace Network
 {

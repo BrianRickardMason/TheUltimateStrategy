@@ -29,7 +29,7 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORCREATEWORLD_HPP
 
 #include <TUSGame/GameServer/World/Operators/CreateWorld/CreateWorldOperatorExitCode.hpp>
-#include "../Executor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 namespace Network
 {

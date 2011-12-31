@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCCOMMON_XML_IXMLNODE_HPP
 #define NETWORK_XMLRPCCOMMON_XML_IXMLNODE_HPP
 
-#include "IXmlAttribute.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Xml/IXmlAttribute.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace Network

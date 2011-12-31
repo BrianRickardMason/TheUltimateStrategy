@@ -29,7 +29,7 @@
 #define NETWORK_XMLRPCCOMMON_XML_XMLNODEPUGI_HPP
 
 #include <TUSGame/3rdParty/pugixml/src/pugixml.hpp>
-#include "IXmlNode.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Xml/IXmlNode.hpp>
 
 namespace Network
 {

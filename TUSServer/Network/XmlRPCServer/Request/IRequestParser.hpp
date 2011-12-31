@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_IREQUESTPARSER_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_IREQUESTPARSER_HPP
 
-#include "../../XmlRPCCommon/Request/Request.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Request/Request.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 

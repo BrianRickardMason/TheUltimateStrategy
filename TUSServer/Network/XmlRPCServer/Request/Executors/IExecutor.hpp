@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_IEXECUTOR_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_IEXECUTOR_HPP
 
-#include "../../../XmlRPCCommon/Reply/Reply.hpp"
-#include "../../../XmlRPCCommon/Request/Request.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Reply/Reply.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Request/Request.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 

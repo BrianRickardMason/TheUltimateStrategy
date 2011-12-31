@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../Constants.hpp"
-#include "ExecutorFinishEpoch.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Constants.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Epoch/ExecutorFinishEpoch.hpp>
 #include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 

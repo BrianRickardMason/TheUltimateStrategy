@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "XmlDocumentPugi.hpp"
-#include "XmlNodePugi.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Xml/XmlDocumentPugi.hpp>
+#include <TUSServer/Network/XmlRPCCommon/Xml/XmlNodePugi.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace boost;

@@ -29,7 +29,7 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_REQUESTHANDLER_HPP
 
 #include <TUSServer/Network/XmlRPCCommon/Request/Request.hpp>
-#include "IRequestDispatcher.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/IRequestDispatcher.hpp>
 #include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 
 namespace Network

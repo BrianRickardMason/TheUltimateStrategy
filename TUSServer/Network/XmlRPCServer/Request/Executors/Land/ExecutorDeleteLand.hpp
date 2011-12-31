@@ -29,7 +29,7 @@
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORDELETELAND_HPP
 
 #include <TUSGame/GameServer/Land/Operators/DeleteLand/DeleteLandOperatorExitCode.hpp>
-#include "../Executor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 namespace Network
 {

@@ -26,8 +26,8 @@
 // SUCH DAMAGE.
 
 #include <TUSServer/Network/XmlRPCServer/Request/RequestHandler.hpp>
-#include "RequestDispatcher.hpp"
-#include "Executors/IExecutor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/RequestDispatcher.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/IExecutor.hpp>
 
 using namespace Network::XmlRPCCommon::Reply;
 using namespace Network::XmlRPCCommon::Request;

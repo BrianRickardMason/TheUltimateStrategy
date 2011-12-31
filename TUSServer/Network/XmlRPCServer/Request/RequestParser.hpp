@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_REQUESTPARSER_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_REQUESTPARSER_HPP
 
-#include "IRequestParser.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/IRequestParser.hpp>
 
 namespace Network
 {

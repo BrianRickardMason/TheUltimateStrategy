@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "RequestParser.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/RequestParser.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace Network::XmlRPCCommon::Common;

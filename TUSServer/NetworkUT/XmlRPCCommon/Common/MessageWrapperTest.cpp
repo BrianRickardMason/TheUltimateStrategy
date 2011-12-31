@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../Network/XmlRPCCommon/Common/MessageWrapper.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Common/MessageWrapper.hpp>
 #include <boost/make_shared.hpp>
 #include <gmock/gmock.h>
 

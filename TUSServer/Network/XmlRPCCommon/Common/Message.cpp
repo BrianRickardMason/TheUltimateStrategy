@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include <TUSServer/Network/XmlRPCCommon/Xml/XmlDocumentPugi.hpp>
-#include "Message.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Common/Message.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace boost;

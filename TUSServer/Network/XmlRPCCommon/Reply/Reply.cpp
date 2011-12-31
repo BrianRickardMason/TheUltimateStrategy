@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "Reply.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Reply/Reply.hpp>
 #include <boost/lexical_cast.hpp>
 
 using namespace Network::XmlRPCCommon::Xml;

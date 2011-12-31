@@ -30,7 +30,7 @@
 
 #include <TUSGame/GameServer/Resource/Volume.hpp>
 #include <TUSGame/GameServer/Transport/Operators/TransportResource/TransportResourceOperatorExitCode.hpp>
-#include "../Executor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 namespace Network
 {

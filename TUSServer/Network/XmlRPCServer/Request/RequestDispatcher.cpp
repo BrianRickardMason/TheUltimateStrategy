@@ -56,7 +56,7 @@
 #include <TUSServer/Network/XmlRPCServer/Request/Executors/Transport/ExecutorTransportResource.hpp>
 #include <TUSServer/Network/XmlRPCServer/Request/Executors/User/ExecutorCreateUser.hpp>
 #include <TUSServer/Network/XmlRPCServer/Request/Executors/World/ExecutorCreateWorld.hpp>
-#include "RequestDispatcher.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/RequestDispatcher.hpp>
 
 using namespace Network::XmlRPCCommon::Request;
 using namespace Network::XmlRPCServer::Request::Executors;

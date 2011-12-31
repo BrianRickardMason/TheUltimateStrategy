@@ -28,8 +28,8 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_IREQUESTDISPATCHER_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_IREQUESTDISPATCHER_HPP
 
-#include "../../XmlRPCCommon/Request/Request.hpp"
-#include "Executors/IExecutor.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Request/Request.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/IExecutor.hpp>
 #include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <boost/shared_ptr.hpp>
 

@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORECHO_HPP
 #define NETWORK_XMLRPCSERVER_REQUEST_EXECUTORS_EXECUTORECHO_HPP
 
-#include "../Executor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 namespace Network
 {

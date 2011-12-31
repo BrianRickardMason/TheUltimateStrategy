@@ -28,7 +28,7 @@
 #ifndef NETWORK_XMLRPCSERVER_SERVER_SERVER_HPP
 #define NETWORK_XMLRPCSERVER_SERVER_SERVER_HPP
 
-#include "../Connection/IConnection.hpp"
+#include <TUSServer/Network/XmlRPCServer/Connection/IConnection.hpp>
 #include <TUSServer/Network/XmlRPCServer/IContext.hpp>
 #include <boost/asio.hpp>
 #include <boost/noncopyable.hpp>

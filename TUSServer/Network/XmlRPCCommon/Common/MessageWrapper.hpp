@@ -28,8 +28,7 @@
 #ifndef NETWORK_XMLRPCCOMMON_COMMON_MESSAGEWRAPPER_HPP
 #define NETWORK_XMLRPCCOMMON_COMMON_MESSAGEWRAPPER_HPP
 
-#include "IMessageWrapper.hpp"
-
+#include <TUSServer/Network/XmlRPCCommon/Common/IMessageWrapper.hpp>
 #include <boost/asio.hpp>
 #include <string>
 

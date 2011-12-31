@@ -30,7 +30,7 @@
 
 #include <TUSGame/GameServer/Common/IDHolder.hpp>
 #include <TUSGame/GameServer/Resource/Operators/GetResources/GetResourcesOperatorExitCode.hpp>
-#include "../Executor.hpp"
+#include <TUSServer/Network/XmlRPCServer/Request/Executors/Executor.hpp>
 
 namespace Network
 {

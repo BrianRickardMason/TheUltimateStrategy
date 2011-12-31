@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "../../../Network/XmlRPCCommon/Common/MessageWrapper.hpp"
-#include "../../../Network/XmlRPCServer/Request/RequestParser.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Common/MessageWrapper.hpp>
+#include <TUSServer/Network/XmlRPCServer/Request/RequestParser.hpp>
 #include <gmock/gmock.h>
 
 using namespace std;

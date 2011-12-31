@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include "XmlAttributePugi.hpp"
+#include <TUSServer/Network/XmlRPCCommon/Xml/XmlAttributePugi.hpp>
 #include <boost/make_shared.hpp>
 
 using namespace pugi;
