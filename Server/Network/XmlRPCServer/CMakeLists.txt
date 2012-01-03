@@ -25,23 +25,32 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+PROJECT(xmlrpcserver)
 
-PROJECT(TheUltimateStrategy)
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../../..)
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../../../Game)
 
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+FILE(GLOB_RECURSE FILES_XMLRPCSERVER *.cpp)
+FILE(GLOB_RECURSE FILES_XMLRPCSERVER_FILTERED xml_server_main.cpp)
 
-ADD_SUBDIRECTORY(Bots/ModeratorServer)
-ADD_SUBDIRECTORY(Game/3rdParty)
-ADD_SUBDIRECTORY(Game/GameServer)
-ADD_SUBDIRECTORY(Game/GameServerCT)
-ADD_SUBDIRECTORY(Game/GameServerUT)
-ADD_SUBDIRECTORY(Integration/IntegrationCommon)
-ADD_SUBDIRECTORY(Integration/IntegrationFunctional)
-ADD_SUBDIRECTORY(Integration/IntegrationStress)
-ADD_SUBDIRECTORY(Language/Interface)
-ADD_SUBDIRECTORY(Language/InterfaceUT)
-ADD_SUBDIRECTORY(Server/Network/XmlRPCCommon)
-ADD_SUBDIRECTORY(Server/Network/XmlRPCServer)
-ADD_SUBDIRECTORY(Server/NetworkUT)
+LIST(REMOVE_ITEM FILES_XMLRPCSERVER ${FILES_XMLRPCSERVER_FILTERED})
+
+ADD_LIBRARY(xmlrpcserver
+    ${FILES_XMLRPCSERVER}
+)
+
+ADD_EXECUTABLE(server
+    xml_server_main.cpp
+)
+
+TARGET_LINK_LIBRARIES(xmlrpcserver
+    gameserver
+)
+
+TARGET_LINK_LIBRARIES(server
+    boost_system
+    boost_thread
+    log4cpp
+    xmlrpcserver
+    xmlrpccommon
+)
