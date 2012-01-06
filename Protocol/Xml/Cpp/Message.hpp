@@ -29,14 +29,13 @@
 #define TUSPROTOCOL_MESSAGE_HPP
 
 #include <Poco/DOM/Document.h>
-#include <Protocol/Xml/Cpp/IMessage.hpp>
+#include <memory>
 
 namespace TUSProtocol
 {
 
 class Message
-    : public IMessage,
-      public Poco::XML::Document
+    : public Poco::XML::Document
 {
 public:
     typedef std::auto_ptr<Message> SingleHandle;

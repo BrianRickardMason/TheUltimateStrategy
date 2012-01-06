@@ -29,7 +29,7 @@
 #define TUSPROTOCOL_IPROTOCOLTOLANGUAGETRANSLATOR_HPP
 
 #include <Language/Interface/ICommand.hpp>
-#include <Protocol/Xml/Cpp/IMessage.hpp>
+#include <Protocol/Xml/Cpp/Message.hpp>
 
 namespace TUSProtocol
 {
@@ -49,7 +49,7 @@ public:
      * @return The command.
      */
     virtual TUSLanguage::ICommand::SingleHandle translate(
-        IMessage::SingleHandle a_message
+        Message::SingleHandle a_message
     ) const = 0;
 };
 
