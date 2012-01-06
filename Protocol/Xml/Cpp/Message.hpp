@@ -39,14 +39,16 @@ class Message
       public Poco::XML::Document
 {
 public:
+    typedef std::auto_ptr<Message> SingleHandle;
+
     /**
      * @brief Ctor.
      *
      * @param a_name_pool The name pool.
      */
-	Message(
-		Poco::XML::NamePool * a_name_pool = 0
-	);
+    Message(
+        Poco::XML::NamePool * a_name_pool = 0
+    );
 };
 
 } // namespace TUSProtocol
