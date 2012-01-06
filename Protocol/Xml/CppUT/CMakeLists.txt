@@ -25,25 +25,18 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+PROJECT(protocolxmlcpput)
 
-PROJECT(TheUltimateStrategy)
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../../..)
 
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+ADD_EXECUTABLE(protocolxmlcpput
+    MessageFactoryTest.cpp
+    main.cpp
+)
 
-ADD_SUBDIRECTORY(Bots/ModeratorServer)
-ADD_SUBDIRECTORY(Game/3rdParty)
-ADD_SUBDIRECTORY(Game/GameServer)
-ADD_SUBDIRECTORY(Game/GameServerCT)
-ADD_SUBDIRECTORY(Game/GameServerUT)
-ADD_SUBDIRECTORY(Integration/IntegrationCommon)
-ADD_SUBDIRECTORY(Integration/IntegrationFunctional)
-ADD_SUBDIRECTORY(Integration/IntegrationStress)
-ADD_SUBDIRECTORY(Language/Interface)
-ADD_SUBDIRECTORY(Language/InterfaceUT)
-ADD_SUBDIRECTORY(Protocol/Xml/Cpp)
-ADD_SUBDIRECTORY(Protocol/Xml/CppUT)
-ADD_SUBDIRECTORY(Server/Network/XmlRPCCommon)
-ADD_SUBDIRECTORY(Server/Network/XmlRPCServer)
-ADD_SUBDIRECTORY(Server/NetworkUT)
+TARGET_LINK_LIBRARIES(protocolxmlcpput
+    PocoFoundation
+    gtest
+    protocolxmlcpp
+    pthread
+)
