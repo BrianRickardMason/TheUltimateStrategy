@@ -68,26 +68,25 @@ public:
     }
     
     void startGame(){
-        SimpleGameControl game(mContext, mBotManger);
-        game.run();
-        
-        mGameThread;
+        mGameControl.reset(new SimpleGameControl(mContext, mBotManger));
+        mGameThread.start(*mGameControl);
     }
     
     void run() {
         startServer();
         startGame();    
-        //moderator->startInputRead();
+        
+        startInputRead();
     }
 private:
     Poco::SharedPtr<BotConnectionManager> mBotManger;
     std::auto_ptr<Poco::Net::TCPServer> mServer;
     IModeratorContext::Handle mContext;
     
+    std::auto_ptr<SimpleGameControl> mGameControl;
     Poco::Thread mGameThread;
     
 //     GameServerAgent& mGameServer;
-//     GameControl& mGameControl;
 };
 
 int main(int aNumberOfArguments, char **aArguments){

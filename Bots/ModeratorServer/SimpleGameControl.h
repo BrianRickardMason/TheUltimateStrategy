@@ -12,7 +12,7 @@
 #include <iostream>
 #include <sstream>
 
-class SimpleGameControl{
+class SimpleGameControl: public Poco::Runnable {
 public:
     SimpleGameControl(IModeratorContext::Handle aContext, IBotManager::Handle aBotManager)
     :   
@@ -60,7 +60,7 @@ public:
         << std::endl;
     }
     
-    void run(){
+    virtual void run(){
         //# TODO: Delete the world is needed to be bullet proof.
         mInterface->createWorld(mWorldName);
         mInterface->setCurrentWorld(mWorldName);
