@@ -44,6 +44,8 @@ public:
         using Poco::Net::ServerSocket;
         using Poco::Net::TCPServer;
         
+        // TODO check if server is running already
+        
         SocketAddress addr(
             mContext->getModeratorServerConf().getAddress(), 
             mContext->getModeratorServerConf().getPort()
@@ -68,11 +70,21 @@ public:
     void startGame(){
         SimpleGameControl game(mContext, mBotManger);
         game.run();
+        
+        mGameThread;
+    }
+    
+    void run() {
+        startServer();
+        startGame();    
+        //moderator->startInputRead();
     }
 private:
     Poco::SharedPtr<BotConnectionManager> mBotManger;
     std::auto_ptr<Poco::Net::TCPServer> mServer;
     IModeratorContext::Handle mContext;
+    
+    Poco::Thread mGameThread;
     
 //     GameServerAgent& mGameServer;
 //     GameControl& mGameControl;
@@ -90,10 +102,7 @@ int main(int aNumberOfArguments, char **aArguments){
     ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
     
     std::auto_ptr< Moderator > moderator( new Moderator(ctxBuider.extract()) );
-    
-    moderator->startServer();
-    moderator->startGame();    
-    //moderator->startInputRead();
+    moderator->run();
     
     return 0;
 }
