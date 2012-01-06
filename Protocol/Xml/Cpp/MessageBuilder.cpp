@@ -25,7 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include <Poco/AutoPtr.h>
 #include <Poco/DOM/Element.h>
+#include <Poco/DOM/Text.h>
 #include <Protocol/Xml/Cpp/MessageBuilder.hpp>
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
@@ -48,21 +50,22 @@ void MessageBuilder::addHeader(
     unsigned short int const a_id
 )
 {
-    Poco::XML::Element * element;
+    Poco::AutoPtr<Poco::XML::Element> element;
 
     element = m_document->createElement("header");
     m_current_node = m_document->documentElement()->appendChild(element);
 
-    element = m_document->createElement("id");
     try
     {
-        element->setNodeValue(boost::lexical_cast<std::string>(a_id));
+        element = m_document->createElement("id");
+        Poco::AutoPtr<Poco::XML::Text> value = m_document->createTextNode(boost::lexical_cast<std::string>(a_id));
+        element->appendChild(value);
+        m_current_node->appendChild(element);
     }
     catch (boost::bad_lexical_cast &)
     {
         BOOST_ASSERT_MSG(false, "Invalid lexical cast of the identifier of the message.");
     }
-    m_current_node->appendChild(element);
 }
 
 Message::SingleHandle MessageBuilder::extract()

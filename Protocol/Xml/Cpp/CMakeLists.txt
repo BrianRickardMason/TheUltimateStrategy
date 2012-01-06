@@ -36,5 +36,6 @@ ADD_LIBRARY(protocolxmlcpp
 )
 
 TARGET_LINK_LIBRARIES(protocolxmlcpp
+    PocoFoundation
     PocoXML
 )
