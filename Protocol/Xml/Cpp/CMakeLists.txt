@@ -32,6 +32,7 @@ INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../../..)
 ADD_LIBRARY(protocolxmlcpp
     Message.cpp
     MessageBuilder.cpp
+    MessageFactory.cpp
 )
 
 TARGET_LINK_LIBRARIES(protocolxmlcpp
