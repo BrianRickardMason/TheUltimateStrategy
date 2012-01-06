@@ -51,14 +51,15 @@ void MessageBuilder::addHeader(
 )
 {
     Poco::AutoPtr<Poco::XML::Element> element;
+    Poco::AutoPtr<Poco::XML::Text> value;
 
     element = m_document->createElement("header");
     m_current_node = m_document->documentElement()->appendChild(element);
 
     try
     {
+        value = m_document->createTextNode(boost::lexical_cast<std::string>(a_id));
         element = m_document->createElement("id");
-        Poco::AutoPtr<Poco::XML::Text> value = m_document->createTextNode(boost::lexical_cast<std::string>(a_id));
         element->appendChild(value);
         m_current_node->appendChild(element);
     }
@@ -66,6 +67,71 @@ void MessageBuilder::addHeader(
     {
         BOOST_ASSERT_MSG(false, "Invalid lexical cast of the identifier of the message.");
     }
+}
+
+void MessageBuilder::addHeader(
+    unsigned short int const a_id,
+    std::string        const a_login,
+    std::string        const a_password
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+    Poco::AutoPtr<Poco::XML::Text> value;
+
+    element = m_document->createElement("header");
+    m_current_node = m_document->documentElement()->appendChild(element);
+
+    try
+    {
+        value = m_document->createTextNode(boost::lexical_cast<std::string>(a_id));
+        element = m_document->createElement("id");
+        element->appendChild(value);
+        m_current_node->appendChild(element);
+    }
+    catch (boost::bad_lexical_cast &)
+    {
+        BOOST_ASSERT_MSG(false, "Invalid lexical cast of the identifier of the message.");
+    }
+
+    element = m_document->createElement("user");
+    m_current_node = m_current_node->appendChild(element);
+
+    value = m_document->createTextNode(a_login);
+    element = m_document->createElement("login");
+    element->appendChild(value);
+    m_current_node->appendChild(element);
+
+    value = m_document->createTextNode(a_password);
+    element = m_document->createElement("password");
+    element->appendChild(value);
+    m_current_node->appendChild(element);
+}
+
+void MessageBuilder::addRequest(
+    std::string const a_request
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+
+    element = m_document->createElement("request");
+    m_current_node = m_document->documentElement()->appendChild(element);
+
+    element = m_document->createElement(a_request);
+    m_current_node = m_current_node->appendChild(element);
+}
+
+void MessageBuilder::addParam(
+    std::string const a_param_name,
+    std::string const a_param_value
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+    Poco::AutoPtr<Poco::XML::Text> value;
+
+    value = m_document->createTextNode(a_param_value);
+    element = m_document->createElement(a_param_name);
+    element->appendChild(value);
+    m_current_node->appendChild(element);
 }
 
 Message::SingleHandle MessageBuilder::extract()

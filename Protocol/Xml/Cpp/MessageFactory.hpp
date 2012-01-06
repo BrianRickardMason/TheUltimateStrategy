@@ -60,7 +60,7 @@ public:
      * @param a_world_name The name of the world.
      * @param a_land_name  The name of the land.
      *
-     * @return CreateLandRequest
+     * @return CreateLandRequest.
      */
     Message::SingleHandle createCreateLandRequest(
         std::string const a_login,
@@ -76,7 +76,7 @@ public:
      * @param a_password  The password of the user.
      * @param a_land_name The name of the land.
      *
-     * @return DeleteLandRequest
+     * @return DeleteLandRequest.
      */
     Message::SingleHandle createDeleteLandRequest(
         std::string const a_login,
@@ -91,7 +91,7 @@ public:
      * @param a_password  The password of the user.
      * @param a_land_name The name of the land.
      *
-     * @return GetLandRequest
+     * @return GetLandRequest.
      */
     Message::SingleHandle createGetLandRequest(
         std::string const a_login,
@@ -105,7 +105,7 @@ public:
      * @param a_login    The login of the user.
      * @param a_password The password of the user.
      *
-     * @return GetLandsRequest
+     * @return GetLandsRequest.
      */
     Message::SingleHandle createGetLandsRequest(
         std::string const a_login,
@@ -120,7 +120,7 @@ public:
      * @param a_land_name       The name of the land.
      * @param a_settlement_name The name of the settlement.
      *
-     * @return CreateSettlementRequest
+     * @return CreateSettlementRequest.
      */
     Message::SingleHandle createCreateSettlementRequest(
         std::string const a_login,
@@ -136,7 +136,7 @@ public:
      * @param a_password        The password of the user.
      * @param a_settlement_name The name of the settlement.
      *
-     * @return DeleteSettlementRequest
+     * @return DeleteSettlementRequest.
      */
     Message::SingleHandle createDeleteSettlementRequest(
         std::string const a_login,
@@ -151,7 +151,7 @@ public:
      * @param a_password        The password of the user.
      * @param a_settlement_name The name of the settlement.
      *
-     * @return GetSettlementRequest
+     * @return GetSettlementRequest.
      */
     Message::SingleHandle createGetSettlementRequest(
         std::string const a_login,
@@ -166,7 +166,7 @@ public:
      * @param a_password  The password of the user.
      * @param a_land_name The name of the land.
      *
-     * @return GetSettlementsRequest
+     * @return GetSettlementsRequest.
      */
     Message::SingleHandle createGetSettlementsRequest(
         std::string const a_login,
@@ -184,7 +184,7 @@ public:
      * @param a_building_key    The key of the building.
      * @param a_volume          The volume of the building.
      *
-     * @return BuildBuildingRequest
+     * @return BuildBuildingRequest.
      */
     Message::SingleHandle createBuildBuildingRequest(
         std::string const a_login,
@@ -205,7 +205,7 @@ public:
      * @param a_building_key    The key of the building.
      * @param a_volume          The volume of the building.
      *
-     * @return DestroyBuildingRequest
+     * @return DestroyBuildingRequest.
      */
     Message::SingleHandle createDestroyBuildingRequest(
         std::string const a_login,
@@ -225,7 +225,7 @@ public:
      * @param a_holder_name     The name of the holder.
      * @param a_building_key    The key of the building.
      *
-     * @return GetBuildingRequest
+     * @return GetBuildingRequest.
      */
     Message::SingleHandle createGetBuildingRequest(
         std::string const a_login,
@@ -243,7 +243,7 @@ public:
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_holder_name     The name of the holder.
      *
-     * @return GetBuildingsRequest
+     * @return GetBuildingsRequest.
      */
     Message::SingleHandle createGetBuildingsRequest(
         std::string const a_login,
@@ -262,7 +262,7 @@ public:
      * @param a_human_key       The key of the human.
      * @param a_volume          The volume of the human.
      *
-     * @return DismissHumanRequest
+     * @return DismissHumanRequest.
      */
     Message::SingleHandle createDismissHumanRequest(
         std::string const a_login,
@@ -283,7 +283,7 @@ public:
      * @param a_human_key       The key of the human.
      * @param a_volume          The volume of the human.
      *
-     * @return EngageHumanRequest
+     * @return EngageHumanRequest.
      */
     Message::SingleHandle createEngageHumanRequest(
         std::string const a_login,
@@ -303,7 +303,7 @@ public:
      * @param a_holder_name     The name of the holder.
      * @param a_human_key       The key of the human.
      *
-     * @return GetHumanRequest
+     * @return GetHumanRequest.
      */
     Message::SingleHandle createGetHumanRequest(
         std::string const a_login,
@@ -321,7 +321,7 @@ public:
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_holder_name     The name of the holder.
      *
-     * @return GetHumansRequest
+     * @return GetHumansRequest.
      */
     Message::SingleHandle createGetHumansRequest(
         std::string const a_login,
@@ -339,7 +339,7 @@ public:
      * @param a_holder_name     The name of the holder.
      * @param a_resource_key    The key of the resource.
      *
-     * @return GetResourceRequest
+     * @return GetResourceRequest.
      */
     Message::SingleHandle createGetResourceRequest(
         std::string const a_login,
@@ -357,7 +357,7 @@ public:
      * @param a_id_holder_class The identifier of the class of the holder.
      * @param a_holder_name     The name of the holder.
      *
-     * @return GetResourcesRequest
+     * @return GetResourcesRequest.
      */
     Message::SingleHandle createGetResourcesRequest(
         std::string const a_login,
@@ -372,7 +372,7 @@ public:
      * @param a_login    The login of the user.
      * @param a_password The password of the user.
      *
-     * @return CreateUserRequest
+     * @return CreateUserRequest.
      */
     Message::SingleHandle createCreateUserRequest(
         std::string const a_login,
@@ -386,7 +386,7 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      *
-     * @return CreateWorldRequest
+     * @return CreateWorldRequest.
      */
     Message::SingleHandle createCreateWorldRequest(
         std::string const a_login,
@@ -402,7 +402,7 @@ public:
      * @param a_world_name The name of the world.
      * @param a_epoch_name The name of the epoch.
      *
-     * @return CreateEpochRequest
+     * @return CreateEpochRequest.
      */
     Message::SingleHandle createCreateEpochRequest(
         std::string const a_login,
@@ -418,7 +418,7 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      *
-     * @return DeleteEpochRequest
+     * @return DeleteEpochRequest.
      */
     Message::SingleHandle createDeleteEpochRequest(
         std::string const a_login,
@@ -433,7 +433,7 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      *
-     * @return ActivateEpochRequest
+     * @return ActivateEpochRequest.
      */
     Message::SingleHandle createActivateEpochRequest(
         std::string const a_login,
@@ -448,7 +448,7 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      *
-     * @return DeactivateEpochRequest
+     * @return DeactivateEpochRequest.
      */
     Message::SingleHandle createDeactivateEpochRequest(
         std::string const a_login,
@@ -463,7 +463,7 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      *
-     * @return FinishEpochRequest
+     * @return FinishEpochRequest.
      */
     Message::SingleHandle createFinishEpochRequest(
         std::string const a_login,
@@ -478,7 +478,7 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      *
-     * @return TickEpochRequest
+     * @return TickEpochRequest.
      */
     Message::SingleHandle createTickEpochRequest(
         std::string const a_login,
@@ -493,7 +493,7 @@ public:
      * @param a_password   The password of the user.
      * @param a_world_name The name of the world.
      *
-     * @return GetEpochRequest
+     * @return GetEpochRequest.
      */
     Message::SingleHandle createGetEpochRequest(
         std::string const a_login,
@@ -511,7 +511,7 @@ public:
      * @param a_human_key                   The key of the human.
      * @param a_volume                      The volume of the human.
      *
-     * @return TransportHumanRequest
+     * @return TransportHumanRequest.
      */
     Message::SingleHandle createTransportHumanRequest(
         std::string const a_login,
@@ -532,7 +532,7 @@ public:
      * @param a_resource_key                The key of the resource.
      * @param a_volume                      The volume of the resource.
      *
-     * @return TransportResourceRequest
+     * @return TransportResourceRequest.
      */
     Message::SingleHandle createTransportResourceRequest(
         std::string const a_login,

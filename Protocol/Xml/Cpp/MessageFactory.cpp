@@ -61,7 +61,10 @@ Message::SingleHandle MessageFactory::createCreateLandRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(3);
+    message_builder.addHeader(3, "Login", "Password");
+    message_builder.addRequest("create_land_request");
+    message_builder.addParam("world_name", a_world_name);
+    message_builder.addParam("land_name", a_land_name);
 
     return message_builder.extract();
 }

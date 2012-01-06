@@ -38,7 +38,8 @@ protected:
      */
     MessageFactoryTest()
         : m_message_echo_request(m_message_factory.createEchoRequest()),
-          m_message_error_request(m_message_factory.createErrorRequest())
+          m_message_error_request(m_message_factory.createErrorRequest()),
+          m_message_create_land_request(m_message_factory.createCreateLandRequest("Login", "Password", "World", "Land"))
     {
     }
 
@@ -52,7 +53,8 @@ protected:
      * @brief The message to be tested.
      */
     TUSProtocol::Message::SingleHandle m_message_echo_request,
-                                       m_message_error_request;
+                                       m_message_error_request,
+                                       m_message_create_land_request;
     //}@
 };
 
@@ -68,9 +70,9 @@ TEST_F(MessageFactoryTest, CreateEchoRequestReturnsNotNull)
 
 TEST_F(MessageFactoryTest, CreateEchoRequestSetsProperID)
 {
-    Poco::XML::Element * element =
-        m_message_echo_request->documentElement()->getChildElement("header")->getChildElement("id");
-    ASSERT_EQ("1", element->innerText());
+    Poco::XML::Element * element = m_message_echo_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateErrorRequestReturnsNotNull)
@@ -80,7 +82,47 @@ TEST_F(MessageFactoryTest, CreateErrorRequestReturnsNotNull)
 
 TEST_F(MessageFactoryTest, CreateErrorRequestSetsProperID)
 {
-    Poco::XML::Element * element =
-        m_message_error_request->documentElement()->getChildElement("header")->getChildElement("id");
-    ASSERT_EQ("2", element->innerText());
+    Poco::XML::Element * element = m_message_error_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("2", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateLandRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_create_land_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateLandRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_create_land_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("3", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateLandRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_create_land_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateLandRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_create_land_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateLandRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_create_land_request->documentElement()->
+        getChildElement("request")->getChildElement("create_land_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateLandRequestSetsProperLandName)
+{
+    Poco::XML::Element * element = m_message_create_land_request->documentElement()->
+        getChildElement("request")->getChildElement("create_land_request")->getChildElement("land_name");
+    ASSERT_STREQ("Land", element->innerText().c_str());
 }

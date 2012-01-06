@@ -53,6 +53,39 @@ public:
     );
 
     /**
+     * @brief Adds the header.
+     *
+     * @param a_id       The identifier of the message.
+     * @param a_login    The login of the user, null if user is not set.
+     * @param a_password The password of the user, null if user is not set.
+     */
+    void addHeader(
+        unsigned short int const a_id,
+        std::string        const a_login,
+        std::string        const a_password
+    );
+
+    /**
+     * @brief Adds the request.
+     *
+     * @param a_request The name of the request.
+     */
+    void addRequest(
+        std::string const a_request
+    );
+
+    /**
+     * @brief Adds a parameter.
+     *
+     * @param a_param_name  The name of the parameter.
+     * @param a_param_value The value of the parameter.
+     */
+    void addParam(
+        std::string const a_param_name,
+        std::string const a_param_value
+    );
+
+    /**
      * @brief Extracts the message.
      *
      * @return The built message.
