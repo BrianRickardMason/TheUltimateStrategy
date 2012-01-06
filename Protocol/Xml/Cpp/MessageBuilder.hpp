@@ -29,11 +29,13 @@
 #define TUSPROTOCOL_MESSAGEBUILDER_HPP
 
 #include <Protocol/Xml/Cpp/Message.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace TUSProtocol
 {
 
 class MessageBuilder
+    : boost::noncopyable
 {
 public:
     /**
