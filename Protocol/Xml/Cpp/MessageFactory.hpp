@@ -35,7 +35,7 @@ namespace TUSProtocol
 {
 
 class MessageFactory
-    : public boost::noncopyable
+    : boost::noncopyable
 {
 public:
     /**
