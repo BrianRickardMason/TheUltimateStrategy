@@ -420,6 +420,21 @@ public:
     ) const;
 
     /**
+     * @brief Builds GetEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetEpochReply.
+     */
+    ICommand::SingleHandle buildGetEpochReply(
+        unsigned short int const   a_code,
+        std::string        const   a_message,
+        ICommand::Object   const & a_object
+    ) const;
+
+    /**
      * @brief Builds TransportHumanReply.
      *
      * @param a_code    The exit code.
@@ -443,21 +458,6 @@ public:
     ICommand::SingleHandle buildTransportResourceReply(
         unsigned short int const a_code,
         std::string        const a_message
-    ) const;
-
-    /**
-     * @brief Builds GetEpochReply.
-     *
-     * @param a_code    The exit code.
-     * @param a_message The status message.
-     * @param a_object  The object.
-     *
-     * @return GetEpochReply.
-     */
-    ICommand::SingleHandle buildGetEpochReply(
-        unsigned short int const   a_code,
-        std::string        const   a_message,
-        ICommand::Object   const & a_object
     ) const;
 };
 
