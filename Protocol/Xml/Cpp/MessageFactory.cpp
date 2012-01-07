@@ -275,7 +275,12 @@ Message::SingleHandle MessageFactory::createDismissHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(15);
+    message_builder.addHeader(15, "Login", "Password");
+    message_builder.addRequest("dismiss_human_request");
+    message_builder.addParam("idholderclass", a_id_holder_class);
+    message_builder.addParam("holder_name", a_holder_name);
+    message_builder.addParam("humankey", a_human_key);
+    message_builder.addParam("volume", a_volume);
 
     return message_builder.extract();
 }
@@ -292,7 +297,12 @@ Message::SingleHandle MessageFactory::createEngageHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(16);
+    message_builder.addHeader(16, "Login", "Password");
+    message_builder.addRequest("engage_human_request");
+    message_builder.addParam("idholderclass", a_id_holder_class);
+    message_builder.addParam("holder_name", a_holder_name);
+    message_builder.addParam("humankey", a_human_key);
+    message_builder.addParam("volume", a_volume);
 
     return message_builder.extract();
 }
@@ -308,7 +318,11 @@ Message::SingleHandle MessageFactory::createGetHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(17);
+    message_builder.addHeader(17, "Login", "Password");
+    message_builder.addRequest("get_human_request");
+    message_builder.addParam("idholderclass", a_id_holder_class);
+    message_builder.addParam("holder_name", a_holder_name);
+    message_builder.addParam("humankey", a_human_key);
 
     return message_builder.extract();
 }
@@ -323,7 +337,10 @@ Message::SingleHandle MessageFactory::createGetHumansRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(18);
+    message_builder.addHeader(18, "Login", "Password");
+    message_builder.addRequest("get_humans_request");
+    message_builder.addParam("idholderclass", a_id_holder_class);
+    message_builder.addParam("holder_name", a_holder_name);
 
     return message_builder.extract();
 }
