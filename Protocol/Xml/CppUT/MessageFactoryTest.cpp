@@ -50,7 +50,15 @@ protected:
               "Login", "Password", "Settlement")),
           m_message_get_settlement_request(m_message_factory.createGetSettlementRequest(
               "Login", "Password", "Settlement")),
-          m_message_get_settlements_request(m_message_factory.createGetSettlementsRequest("Login", "Password", "Land"))
+          m_message_get_settlements_request(m_message_factory.createGetSettlementsRequest("Login", "Password", "Land")),
+          m_message_build_building_request(m_message_factory.createBuildBuildingRequest(
+              "Login", "Password", "HolderClassSettlement", "Settlement", "RegularForge", "100")),
+          m_message_destroy_building_request(m_message_factory.createDestroyBuildingRequest(
+              "Login", "Password", "HolderClassSettlement", "Settlement", "RegularForge", "100")),
+          m_message_get_building_request(m_message_factory.createGetBuildingRequest(
+              "Login", "Password", "HolderClassSettlement", "Settlement", "RegularForge")),
+          m_message_get_buildings_request(m_message_factory.createGetBuildingsRequest(
+              "Login", "Password", "HolderClassSettlement", "Settlement"))
     {
     }
 
@@ -72,7 +80,11 @@ protected:
                                        m_message_create_settlement_request,
                                        m_message_delete_settlement_request,
                                        m_message_get_settlement_request,
-                                       m_message_get_settlements_request;
+                                       m_message_get_settlements_request,
+                                       m_message_build_building_request,
+                                       m_message_destroy_building_request,
+                                       m_message_get_building_request,
+                                       m_message_get_buildings_request;
     //}@
 };
 
@@ -354,4 +366,199 @@ TEST_F(MessageFactoryTest, CreateGetSettlementsRequestSetsProperLandName)
     Poco::XML::Element * element = m_message_get_settlements_request->documentElement()->
         getChildElement("request")->getChildElement("get_settlements_request")->getChildElement("land_name");
     ASSERT_STREQ("Land", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_build_building_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_build_building_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("11", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_build_building_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_build_building_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestSetsProperIDHolderClass)
+{
+    Poco::XML::Element * element = m_message_build_building_request->documentElement()->
+        getChildElement("request")->getChildElement("build_building_request")->getChildElement("idholderclass");
+    ASSERT_STREQ("HolderClassSettlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestSetsProperHolderName)
+{
+    Poco::XML::Element * element = m_message_build_building_request->documentElement()->
+        getChildElement("request")->getChildElement("build_building_request")->getChildElement("holder_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestSetsProperBuildingKey)
+{
+    Poco::XML::Element * element = m_message_build_building_request->documentElement()->
+        getChildElement("request")->getChildElement("build_building_request")->getChildElement("buildingkey");
+    ASSERT_STREQ("RegularForge", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateBuildBuildingRequestSetsProperVolume)
+{
+    Poco::XML::Element * element = m_message_build_building_request->documentElement()->
+        getChildElement("request")->getChildElement("build_building_request")->getChildElement("volume");
+    ASSERT_STREQ("100", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_destroy_building_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_destroy_building_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("12", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_destroy_building_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_destroy_building_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestSetsProperIDHolderClass)
+{
+    Poco::XML::Element * element = m_message_destroy_building_request->documentElement()->
+        getChildElement("request")->getChildElement("destroy_building_request")->getChildElement("idholderclass");
+    ASSERT_STREQ("HolderClassSettlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestSetsProperHolderName)
+{
+    Poco::XML::Element * element = m_message_destroy_building_request->documentElement()->
+        getChildElement("request")->getChildElement("destroy_building_request")->getChildElement("holder_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestSetsProperBuildingKey)
+{
+    Poco::XML::Element * element = m_message_destroy_building_request->documentElement()->
+        getChildElement("request")->getChildElement("destroy_building_request")->getChildElement("buildingkey");
+    ASSERT_STREQ("RegularForge", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDestroyBuildingRequestSetsProperVolume)
+{
+    Poco::XML::Element * element = m_message_destroy_building_request->documentElement()->
+        getChildElement("request")->getChildElement("destroy_building_request")->getChildElement("volume");
+    ASSERT_STREQ("100", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_get_building_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_building_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("13", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_building_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_building_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingRequestSetsProperIDHolderClass)
+{
+    Poco::XML::Element * element = m_message_get_building_request->documentElement()->
+        getChildElement("request")->getChildElement("get_building_request")->getChildElement("idholderclass");
+    ASSERT_STREQ("HolderClassSettlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingRequestSetsProperHolderName)
+{
+    Poco::XML::Element * element = m_message_get_building_request->documentElement()->
+        getChildElement("request")->getChildElement("get_building_request")->getChildElement("holder_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingRequestSetsProperBuildingKey)
+{
+    Poco::XML::Element * element = m_message_get_building_request->documentElement()->
+        getChildElement("request")->getChildElement("get_building_request")->getChildElement("buildingkey");
+    ASSERT_STREQ("RegularForge", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingsRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_get_buildings_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingsRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_buildings_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("14", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingsRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_buildings_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingsRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_buildings_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingsRequestSetsProperIDHolderClass)
+{
+    Poco::XML::Element * element = m_message_get_buildings_request->documentElement()->
+        getChildElement("request")->getChildElement("get_buildings_request")->getChildElement("idholderclass");
+    ASSERT_STREQ("HolderClassSettlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetBuildingsRequestSetsProperHolderName)
+{
+    Poco::XML::Element * element = m_message_get_buildings_request->documentElement()->
+        getChildElement("request")->getChildElement("get_buildings_request")->getChildElement("holder_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
 }
