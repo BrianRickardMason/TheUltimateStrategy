@@ -66,6 +66,10 @@ protected:
           m_message_get_human_request(m_message_factory.createGetHumanRequest(
               "Login", "Password", "HolderClassSettlement", "Settlement", "WorkerBlacksmithNovice")),
           m_message_get_humans_request(m_message_factory.createGetHumansRequest(
+              "Login", "Password", "HolderClassSettlement", "Settlement")),
+          m_message_get_resource_request(m_message_factory.createGetResourceRequest(
+              "Login", "Password", "HolderClassSettlement", "Settlement", "Coal")),
+          m_message_get_resources_request(m_message_factory.createGetResourcesRequest(
               "Login", "Password", "HolderClassSettlement", "Settlement"))
     {
     }
@@ -96,7 +100,9 @@ protected:
                                        m_message_dismiss_human_request,
                                        m_message_engage_human_request,
                                        m_message_get_human_request,
-                                       m_message_get_humans_request;
+                                       m_message_get_humans_request,
+                                       m_message_get_resource_request,
+                                       m_message_get_resources_request;
     //}@
 };
 
@@ -685,7 +691,7 @@ TEST_F(MessageFactoryTest, CreateEngageHumanRequestSetsProperVolume)
 
 TEST_F(MessageFactoryTest, CreateGetHumanRequestReturnsNotNull)
 {
-    ASSERT_TRUE(m_message_get_humans_request.get());
+    ASSERT_TRUE(m_message_get_human_request.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumanRequestSetsProperID)
@@ -767,5 +773,92 @@ TEST_F(MessageFactoryTest, CreateGetHumansRequestSetsProperHolderName)
 {
     Poco::XML::Element * element = m_message_get_humans_request->documentElement()->
         getChildElement("request")->getChildElement("get_humans_request")->getChildElement("holder_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourceRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_get_resources_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourceRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_resource_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("19", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourceRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_resource_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourceRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_resource_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourceRequestSetsProperIDHolderClass)
+{
+    Poco::XML::Element * element = m_message_get_resource_request->documentElement()->
+        getChildElement("request")->getChildElement("get_resource_request")->getChildElement("idholderclass");
+    ASSERT_STREQ("HolderClassSettlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourceRequestSetsProperHolderName)
+{
+    Poco::XML::Element * element = m_message_get_resource_request->documentElement()->
+        getChildElement("request")->getChildElement("get_resource_request")->getChildElement("holder_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourceRequestSetsProperResourceKey)
+{
+    Poco::XML::Element * element = m_message_get_resource_request->documentElement()->
+        getChildElement("request")->getChildElement("get_resource_request")->getChildElement("resourcekey");
+    ASSERT_STREQ("Coal", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourcesRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_get_resources_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourcesRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_resources_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("20", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourcesRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_resources_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourcesRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_resources_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourcesRequestSetsProperIDHolderClass)
+{
+    Poco::XML::Element * element = m_message_get_resources_request->documentElement()->
+        getChildElement("request")->getChildElement("get_resources_request")->getChildElement("idholderclass");
+    ASSERT_STREQ("HolderClassSettlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetResourcesRequestSetsProperHolderName)
+{
+    Poco::XML::Element * element = m_message_get_resources_request->documentElement()->
+        getChildElement("request")->getChildElement("get_resources_request")->getChildElement("holder_name");
     ASSERT_STREQ("Settlement", element->innerText().c_str());
 }

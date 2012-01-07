@@ -356,7 +356,11 @@ Message::SingleHandle MessageFactory::createGetResourceRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(19);
+    message_builder.addHeader(19, "Login", "Password");
+    message_builder.addRequest("get_resource_request");
+    message_builder.addParam("idholderclass", a_id_holder_class);
+    message_builder.addParam("holder_name", a_holder_name);
+    message_builder.addParam("resourcekey", a_resource_key);
 
     return message_builder.extract();
 }
@@ -371,7 +375,10 @@ Message::SingleHandle MessageFactory::createGetResourcesRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(20);
+    message_builder.addHeader(20, "Login", "Password");
+    message_builder.addRequest("get_resources_request");
+    message_builder.addParam("idholderclass", a_id_holder_class);
+    message_builder.addParam("holder_name", a_holder_name);
 
     return message_builder.extract();
 }
