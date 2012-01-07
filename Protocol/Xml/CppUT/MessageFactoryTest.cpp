@@ -39,10 +39,18 @@ protected:
     MessageFactoryTest()
         : m_message_echo_request(m_message_factory.createEchoRequest()),
           m_message_error_request(m_message_factory.createErrorRequest()),
-          m_message_create_land_request(m_message_factory.createCreateLandRequest("Login", "Password", "World", "Land")),
+          m_message_create_land_request(m_message_factory.createCreateLandRequest(
+              "Login", "Password", "World", "Land")),
           m_message_delete_land_request(m_message_factory.createDeleteLandRequest("Login", "Password", "Land")),
           m_message_get_land_request(m_message_factory.createGetLandRequest("Login", "Password", "Land")),
-          m_message_get_lands_request(m_message_factory.createGetLandsRequest("Login", "Password"))
+          m_message_get_lands_request(m_message_factory.createGetLandsRequest("Login", "Password")),
+          m_message_create_settlement_request(m_message_factory.createCreateSettlementRequest(
+              "Login", "Password", "Land", "Settlement")),
+          m_message_delete_settlement_request(m_message_factory.createDeleteSettlementRequest(
+              "Login", "Password", "Settlement")),
+          m_message_get_settlement_request(m_message_factory.createGetSettlementRequest(
+              "Login", "Password", "Settlement")),
+          m_message_get_settlements_request(m_message_factory.createGetSettlementsRequest("Login", "Password", "Land"))
     {
     }
 
@@ -60,7 +68,11 @@ protected:
                                        m_message_create_land_request,
                                        m_message_delete_land_request,
                                        m_message_get_land_request,
-                                       m_message_get_lands_request;
+                                       m_message_get_lands_request,
+                                       m_message_create_settlement_request,
+                                       m_message_delete_settlement_request,
+                                       m_message_get_settlement_request,
+                                       m_message_get_settlements_request;
     //}@
 };
 
@@ -213,4 +225,133 @@ TEST_F(MessageFactoryTest, CreateGetLandsRequestSetsProperPassword)
     Poco::XML::Element * element = m_message_get_lands_request->documentElement()->
         getChildElement("header")->getChildElement("user")->getChildElement("password");
     ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateSettlementRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_create_settlement_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateSettlementRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_create_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("7", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateSettlementRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_create_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateSettlementRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_create_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateSettlementRequestSetsProperLandName)
+{
+    Poco::XML::Element * element = m_message_create_settlement_request->documentElement()->
+        getChildElement("request")->getChildElement("create_settlement_request")->getChildElement("land_name");
+    ASSERT_STREQ("Land", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateSettlementRequestSetsProperSettlementName)
+{
+    Poco::XML::Element * element = m_message_create_settlement_request->documentElement()->
+        getChildElement("request")->getChildElement("create_settlement_request")->getChildElement("settlement_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteSettlementRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_delete_settlement_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteSettlementRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_delete_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("8", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteSettlementRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_delete_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteSettlementRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_delete_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteSettlementRequestSetsProperSettlementName)
+{
+    Poco::XML::Element * element = m_message_delete_settlement_request->documentElement()->
+        getChildElement("request")->getChildElement("delete_settlement_request")->getChildElement("settlement_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("9", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_settlement_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementRequestSetsProperSettlementName)
+{
+    Poco::XML::Element * element = m_message_get_settlement_request->documentElement()->
+        getChildElement("request")->getChildElement("get_settlement_request")->getChildElement("settlement_name");
+    ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementsRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_settlements_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("10", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementsRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_settlements_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementsRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_settlements_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetSettlementsRequestSetsProperLandName)
+{
+    Poco::XML::Element * element = m_message_get_settlements_request->documentElement()->
+        getChildElement("request")->getChildElement("get_settlements_request")->getChildElement("land_name");
+    ASSERT_STREQ("Land", element->innerText().c_str());
 }

@@ -125,7 +125,10 @@ Message::SingleHandle MessageFactory::createCreateSettlementRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(7);
+    message_builder.addHeader(7, "Login", "Password");
+    message_builder.addRequest("create_settlement_request");
+    message_builder.addParam("land_name", a_land_name);
+    message_builder.addParam("settlement_name", a_settlement_name);
 
     return message_builder.extract();
 }
@@ -139,7 +142,9 @@ Message::SingleHandle MessageFactory::createDeleteSettlementRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(8);
+    message_builder.addHeader(8, "Login", "Password");
+    message_builder.addRequest("delete_settlement_request");
+    message_builder.addParam("settlement_name", a_settlement_name);
 
     return message_builder.extract();
 }
@@ -153,7 +158,9 @@ Message::SingleHandle MessageFactory::createGetSettlementRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(9);
+    message_builder.addHeader(9, "Login", "Password");
+    message_builder.addRequest("get_settlement_request");
+    message_builder.addParam("settlement_name", a_settlement_name);
 
     return message_builder.extract();
 }
@@ -167,7 +174,9 @@ Message::SingleHandle MessageFactory::createGetSettlementsRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(10);
+    message_builder.addHeader(10, "Login", "Password");
+    message_builder.addRequest("get_settlements_request");
+    message_builder.addParam("land_name", a_land_name);
 
     return message_builder.extract();
 }
