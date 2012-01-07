@@ -1,6 +1,11 @@
 #include <iostream>
 #include <vector>
 
+#include <Poco/Util/ServerApplication.h>
+#include <Poco/Util/HelpFormatter.h>
+#include <Poco/Util/Option.h>
+#include <Poco/Util/OptionSet.h>
+
 #include <Poco/Net/ServerSocket.h>
 #include <Poco/Net/TCPServer.h>
 
@@ -37,7 +42,7 @@ class BotConnectionManager;
 /**
  * Binds all the parts together, main application object
  */
-class Moderator{
+class Moderator: public Poco::Util::ServerApplication {
 public:
     Moderator(IModeratorContext::Handle aContext)
         :   mContext(aContext), mServerRunning(false), 
@@ -93,13 +98,6 @@ public:
             mGameThread.start(*mGameControl);
         }
     }
-    
-    void run() {
-        startServer();
-        startGame();    
-        
-        startInputRead();
-    }
 private:
     Poco::SharedPtr<BotConnectionManager> mBotManger;
     
@@ -115,6 +113,7 @@ private:
     Poco::SharedPtr<Console> mConsole;
     
 //     GameServerAgent& mGameServer;
+    bool mHelpRequested;
 private:
     void setupCommands() {
         mCommands = new ConfigurableCommandFactory();
@@ -124,6 +123,71 @@ private:
         
         mConsole->setCommandFactory(mCommands);
     }
+    
+protected:
+    void initialize(Application& self) {
+        Poco::Util::ServerApplication::initialize(self);
+    }
+
+    void uninitialize() {
+        Poco::Util::ServerApplication::uninitialize();
+    }
+
+    void defineOptions(Poco::Util::OptionSet& options) {
+        Poco::Util::ServerApplication::defineOptions(options);
+
+        options.addOption(
+        Poco::Util::Option("help", "h", "display argument help information")
+            .required(false)
+            .repeatable(false)
+            .callback(Poco::Util::OptionCallback<Moderator>(
+                this, &Moderator::handleHelp))
+        );
+        
+        options.addOption(
+        Poco::Util::Option("interactive", "i", "runs interactive mode")
+            .required(false)
+            .repeatable(false)
+            .binding("interactive")
+            .noArgument()
+        );
+    }
+
+    void handleHelp(const std::string& name, const std::string& value) {
+        Poco::Util::HelpFormatter helpFormatter(options());
+        helpFormatter.setCommand(commandName());
+        helpFormatter.setUsage("OPTIONS");
+        helpFormatter.setHeader("Moderator server for The Ultimate Strategy");
+        helpFormatter.setFooter(
+            "Moderator controls the game -- creates epochs, ticks the turns etc. "
+            "The program can be run in interactive mode -- controlls happen by stdin, "
+            "or in normal mode, when the game is started automatically and blah blah blah");
+        helpFormatter.format(std::cout);
+        
+        stopOptionsProcessing();
+        mHelpRequested = true;
+    }
+
+    int main(const std::vector<std::string>& args) {
+        if (!mHelpRequested) {
+            if(! config().hasOption("interactive")){
+                std::clog << "noninteractive" << std::endl;
+                startServer();
+                startGame();    
+                
+                mGameThread.join();
+            }
+            else {
+                std::clog << "interactive" << std::endl;
+                startInputRead();
+                
+                //waitForTerminationRequest();
+            }
+        }
+        
+        return Poco::Util::Application::EXIT_OK;
+    }
+
 };
 
 int main(int aNumberOfArguments, char **aArguments){
@@ -138,9 +202,7 @@ int main(int aNumberOfArguments, char **aArguments){
     ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
     
     std::auto_ptr< Moderator > moderator( new Moderator(ctxBuider.extract()) );
-    moderator->run();
-    
-    return 0;
+    return moderator->run(aNumberOfArguments, aArguments);
 }
 
 #include "TusCommandBuilder.h"

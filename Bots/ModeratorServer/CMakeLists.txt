@@ -13,5 +13,5 @@ add_executable(moderator
 )
 
 target_link_libraries(moderator
-    PocoNet PocoFoundation PocoXML
+    PocoNet PocoFoundation PocoXML PocoUtil
 )
