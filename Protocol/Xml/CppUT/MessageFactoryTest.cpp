@@ -70,7 +70,8 @@ protected:
           m_message_get_resource_request(m_message_factory.createGetResourceRequest(
               "Login", "Password", "HolderClassSettlement", "Settlement", "Coal")),
           m_message_get_resources_request(m_message_factory.createGetResourcesRequest(
-              "Login", "Password", "HolderClassSettlement", "Settlement"))
+              "Login", "Password", "HolderClassSettlement", "Settlement")),
+          m_message_create_user_request(m_message_factory.createCreateUserRequest("Login", "Password"))
     {
     }
 
@@ -102,7 +103,8 @@ protected:
                                        m_message_get_human_request,
                                        m_message_get_humans_request,
                                        m_message_get_resource_request,
-                                       m_message_get_resources_request;
+                                       m_message_get_resources_request,
+                                       m_message_create_user_request;
     //}@
 };
 
@@ -861,4 +863,30 @@ TEST_F(MessageFactoryTest, CreateGetResourcesRequestSetsProperHolderName)
     Poco::XML::Element * element = m_message_get_resources_request->documentElement()->
         getChildElement("request")->getChildElement("get_resources_request")->getChildElement("holder_name");
     ASSERT_STREQ("Settlement", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateUserRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_create_user_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateUserRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_create_user_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("21", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateUserRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_create_user_request->documentElement()->
+        getChildElement("request")->getChildElement("create_user_request")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateUserRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_create_user_request->documentElement()->
+        getChildElement("request")->getChildElement("create_user_request")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
 }

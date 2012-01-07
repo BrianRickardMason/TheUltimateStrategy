@@ -392,6 +392,9 @@ Message::SingleHandle MessageFactory::createCreateUserRequest(
 
     message_builder.makeMessage();
     message_builder.addHeader(21);
+    message_builder.addRequest("create_user_request");
+    message_builder.addParam("login", a_login);
+    message_builder.addParam("password", a_password);
 
     return message_builder.extract();
 }
