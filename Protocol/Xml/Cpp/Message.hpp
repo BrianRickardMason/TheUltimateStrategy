@@ -29,7 +29,10 @@
 #define TUSPROTOCOL_MESSAGE_HPP
 
 #include <Poco/DOM/Document.h>
+#include <map>
 #include <memory>
+#include <string>
+#include <vector>
 
 namespace TUSProtocol
 {
@@ -39,6 +42,8 @@ class Message
 {
 public:
     typedef std::auto_ptr<Message> SingleHandle;
+    typedef std::map<std::string, std::string> Object;
+    typedef std::vector<Object> Objects;
 
     /**
      * @brief Ctor.
