@@ -408,7 +408,9 @@ Message::SingleHandle MessageFactory::createCreateWorldRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(22);
+    message_builder.addHeader(22, "Login", "Password");
+    message_builder.addRequest("create_world_request");
+    message_builder.addParam("world_name", a_world_name);
 
     return message_builder.extract();
 }

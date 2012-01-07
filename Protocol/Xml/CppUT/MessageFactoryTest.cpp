@@ -71,7 +71,8 @@ protected:
               "Login", "Password", "HolderClassSettlement", "Settlement", "Coal")),
           m_message_get_resources_request(m_message_factory.createGetResourcesRequest(
               "Login", "Password", "HolderClassSettlement", "Settlement")),
-          m_message_create_user_request(m_message_factory.createCreateUserRequest("Login", "Password"))
+          m_message_create_user_request(m_message_factory.createCreateUserRequest("Login", "Password")),
+          m_message_create_world_request(m_message_factory.createCreateWorldRequest("Login", "Password", "World"))
     {
     }
 
@@ -104,7 +105,8 @@ protected:
                                        m_message_get_humans_request,
                                        m_message_get_resource_request,
                                        m_message_get_resources_request,
-                                       m_message_create_user_request;
+                                       m_message_create_user_request,
+                                       m_message_create_world_request;
     //}@
 };
 
@@ -889,4 +891,37 @@ TEST_F(MessageFactoryTest, CreateCreateUserRequestSetsProperPassword)
     Poco::XML::Element * element = m_message_create_user_request->documentElement()->
         getChildElement("request")->getChildElement("create_user_request")->getChildElement("password");
     ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateWorldRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_create_world_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateWorldRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_create_world_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("22", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateWorldRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_create_world_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateWorldRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_create_world_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateWorldRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_create_world_request->documentElement()->
+        getChildElement("request")->getChildElement("create_world_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
 }
