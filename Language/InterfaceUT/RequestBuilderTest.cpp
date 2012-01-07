@@ -120,6 +120,7 @@ protected:
                                         m_command_get_epoch,
                                         m_command_transport_human,
                                         m_command_transport_resource;
+    //}@
 };
 
 TEST_F(RequestBuilderTest, CtorDoesNotThrow)

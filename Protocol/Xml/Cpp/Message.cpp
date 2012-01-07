@@ -25,34 +25,16 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_IPROTOCOLTOLANGUAGETRANSLATOR_HPP
-#define TUSPROTOCOL_IPROTOCOLTOLANGUAGETRANSLATOR_HPP
-
-#include <Language/Interface/ICommand.hpp>
 #include <Protocol/Xml/Cpp/Message.hpp>
 
 namespace TUSProtocol
 {
 
-class IProtocolToLanguageTranslator
+Message::Message(
+    Poco::XML::NamePool * a_name_pool
+)
+    : Document(a_name_pool)
 {
-public:
-    typedef std::auto_ptr<IProtocolToLanguageTranslator> SingleHandle;
-
-    virtual ~IProtocolToLanguageTranslator(){}
-
-    /**
-     * @brief Translates a message to a command.
-     *
-     * @param a_message The message.
-     *
-     * @return The command.
-     */
-    virtual TUSLanguage::ICommand::SingleHandle translate(
-        Message::SingleHandle a_message
-    ) const = 0;
 };
 
 } // namespace TUSProtocol
-
-#endif // TUSPROTOCOL_IPROTOCOLTOLANGUAGETRANSLATOR_HPP

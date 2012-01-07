@@ -25,16 +25,17 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-PROJECT(interface)
+PROJECT(protocolxmlcpp)
 
-INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../..)
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../../..)
 
-ADD_LIBRARY(interface
-    Command.cpp
-    ReplyBuilder.cpp
-    RequestBuilder.cpp
+ADD_LIBRARY(protocolxmlcpp
+    Message.cpp
+    MessageBuilder.cpp
+    MessageFactory.cpp
 )
 
-TARGET_LINK_LIBRARIES(interface
+TARGET_LINK_LIBRARIES(protocolxmlcpp
+    PocoFoundation
     PocoXML
 )

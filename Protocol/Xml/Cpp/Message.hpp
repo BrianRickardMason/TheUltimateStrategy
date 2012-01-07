@@ -25,22 +25,31 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_IMESSAGE_HPP
-#define TUSPROTOCOL_IMESSAGE_HPP
+#ifndef TUSPROTOCOL_MESSAGE_HPP
+#define TUSPROTOCOL_MESSAGE_HPP
 
+#include <Poco/DOM/Document.h>
 #include <memory>
 
 namespace TUSProtocol
 {
 
-class IMessage
+class Message
+    : public Poco::XML::Document
 {
 public:
-    typedef std::auto_ptr<IMessage> SingleHandle;
+    typedef std::auto_ptr<Message> SingleHandle;
 
-    virtual ~IMessage(){}
+    /**
+     * @brief Ctor.
+     *
+     * @param a_name_pool The name pool.
+     */
+    Message(
+        Poco::XML::NamePool * a_name_pool = 0
+    );
 };
 
 } // namespace TUSProtocol
 
-#endif // TUSPROTOCOL_IMESSAGE_HPP
+#endif // TUSPROTOCOL_MESSAGE_HPP

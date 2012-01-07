@@ -25,34 +25,85 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_IPROTOCOLTOLANGUAGETRANSLATOR_HPP
-#define TUSPROTOCOL_IPROTOCOLTOLANGUAGETRANSLATOR_HPP
+#ifndef TUSPROTOCOL_MESSAGEBUILDER_HPP
+#define TUSPROTOCOL_MESSAGEBUILDER_HPP
 
-#include <Language/Interface/ICommand.hpp>
 #include <Protocol/Xml/Cpp/Message.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace TUSProtocol
 {
 
-class IProtocolToLanguageTranslator
+class MessageBuilder
+    : boost::noncopyable
 {
 public:
-    typedef std::auto_ptr<IProtocolToLanguageTranslator> SingleHandle;
-
-    virtual ~IProtocolToLanguageTranslator(){}
+    /**
+     * @brief Initializes the building of a message.
+     */
+    void makeMessage();
 
     /**
-     * @brief Translates a message to a command.
+     * @brief Adds the header.
      *
-     * @param a_message The message.
-     *
-     * @return The command.
+     * @param a_id The identifier of the message.
      */
-    virtual TUSLanguage::ICommand::SingleHandle translate(
-        Message::SingleHandle a_message
-    ) const = 0;
+    void addHeader(
+        unsigned short int const a_id
+    );
+
+    /**
+     * @brief Adds the header.
+     *
+     * @param a_id       The identifier of the message.
+     * @param a_login    The login of the user, null if user is not set.
+     * @param a_password The password of the user, null if user is not set.
+     */
+    void addHeader(
+        unsigned short int const a_id,
+        std::string        const a_login,
+        std::string        const a_password
+    );
+
+    /**
+     * @brief Adds the request.
+     *
+     * @param a_request The name of the request.
+     */
+    void addRequest(
+        std::string const a_request
+    );
+
+    /**
+     * @brief Adds a parameter.
+     *
+     * @param a_param_name  The name of the parameter.
+     * @param a_param_value The value of the parameter.
+     */
+    void addParam(
+        std::string const a_param_name,
+        std::string const a_param_value
+    );
+
+    /**
+     * @brief Extracts the message.
+     *
+     * @return The built message.
+     */
+    Message::SingleHandle extract();
+
+private:
+   /**
+    * @brief The document representing the message.
+    */
+    Message::SingleHandle m_document;
+
+    /**
+     * @brief The current node of the document.
+     */
+    Poco::XML::Node * m_current_node;
 };
 
 } // namespace TUSProtocol
 
-#endif // TUSPROTOCOL_IPROTOCOLTOLANGUAGETRANSLATOR_HPP
+#endif // TUSPROTOCOL_MESSAGEBUILDER_HPP

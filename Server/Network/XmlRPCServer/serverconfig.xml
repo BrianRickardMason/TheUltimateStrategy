@@ -23,7 +23,7 @@
     -->
     <persistence>postgresql</persistence>
     <configuration>
-        <path>/home/brian/workspace/theultimatestrategy/TUSGame/GameServer/Configuration/Data/</path>
+        <path>/home/brian/workspace/TheUltimateStrategy/Game/GameServer/Configuration/Data/</path>
         <selected>Test</selected>
     </configuration>
 </server>
