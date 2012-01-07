@@ -72,7 +72,20 @@ protected:
           m_message_get_resources_request(m_message_factory.createGetResourcesRequest(
               "Login", "Password", "HolderClassSettlement", "Settlement")),
           m_message_create_user_request(m_message_factory.createCreateUserRequest("Login", "Password")),
-          m_message_create_world_request(m_message_factory.createCreateWorldRequest("Login", "Password", "World"))
+          m_message_create_world_request(m_message_factory.createCreateWorldRequest("Login", "Password", "World")),
+          m_message_create_epoch_request(m_message_factory.createCreateEpochRequest(
+              "Login", "Password", "World", "Epoch")),
+          m_message_delete_epoch_request(m_message_factory.createDeleteEpochRequest("Login", "Password", "World")),
+          m_message_activate_epoch_request(m_message_factory.createActivateEpochRequest("Login", "Password", "World")),
+          m_message_deactivate_epoch_request(m_message_factory.createDeactivateEpochRequest(
+              "Login", "Password", "World")),
+          m_message_finish_epoch_request(m_message_factory.createFinishEpochRequest("Login", "Password", "World")),
+          m_message_tick_epoch_request(m_message_factory.createTickEpochRequest("Login", "Password", "World")),
+          m_message_get_epoch_request(m_message_factory.createGetEpochRequest("Login", "Password", "World")),
+          m_message_transport_human_request(m_message_factory.createTransportHumanRequest(
+              "Login", "Password", "SettlementSource", "SettlementDestination", "WorkerBlacksmithNovice", "100")),
+          m_message_transport_resource_request(m_message_factory.createTransportResourceRequest(
+              "Login", "Password", "SettlementSource", "SettlementDestination", "Coal", "100"))
     {
     }
 
@@ -106,7 +119,16 @@ protected:
                                        m_message_get_resource_request,
                                        m_message_get_resources_request,
                                        m_message_create_user_request,
-                                       m_message_create_world_request;
+                                       m_message_create_world_request,
+                                       m_message_create_epoch_request,
+                                       m_message_delete_epoch_request,
+                                       m_message_activate_epoch_request,
+                                       m_message_deactivate_epoch_request,
+                                       m_message_finish_epoch_request,
+                                       m_message_tick_epoch_request,
+                                       m_message_get_epoch_request,
+                                       m_message_transport_human_request,
+                                       m_message_transport_resource_request;
     //}@
 };
 
@@ -924,4 +946,354 @@ TEST_F(MessageFactoryTest, CreateCreateWorldRequestSetsProperWorldName)
     Poco::XML::Element * element = m_message_create_world_request->documentElement()->
         getChildElement("request")->getChildElement("create_world_request")->getChildElement("world_name");
     ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateEpochRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_create_epoch_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateEpochRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_create_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("23", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateEpochRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_create_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateEpochRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_create_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateEpochRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_create_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("create_epoch_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateCreateEpochRequestSetsProperEpochName)
+{
+    Poco::XML::Element * element = m_message_create_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("create_epoch_request")->getChildElement("epoch_name");
+    ASSERT_STREQ("Epoch", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteEpochRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_delete_epoch_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteEpochRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_delete_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("24", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteEpochRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_delete_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteEpochRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_delete_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteEpochRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_delete_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("delete_epoch_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateActivateEpochRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_activate_epoch_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateActivateEpochRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_activate_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("25", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateActivateEpochRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_activate_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateActivateEpochRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_activate_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateActivateEpochRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_activate_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("activate_epoch_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeactivateEpochRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_deactivate_epoch_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateDeactivateEpochRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_deactivate_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("26", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeactivateEpochRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_deactivate_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeactivateEpochRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_deactivate_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeactivateEpochRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_deactivate_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("deactivate_epoch_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateFinishEpochRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_finish_epoch_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateFinishEpochRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_finish_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("27", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateFinishEpochRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_finish_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateFinishEpochRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_finish_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateFinishEpochRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_finish_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("finish_epoch_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTickEpochRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_tick_epoch_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateTickEpochRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_tick_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("28", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTickEpochRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_tick_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTickEpochRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_tick_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTickEpochRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_tick_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("tick_epoch_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetEpochRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_get_epoch_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateGetEpochRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("29", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetEpochRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetEpochRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_epoch_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetEpochRequestSetsProperWorldName)
+{
+    Poco::XML::Element * element = m_message_get_epoch_request->documentElement()->
+        getChildElement("request")->getChildElement("get_epoch_request")->getChildElement("world_name");
+    ASSERT_STREQ("World", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_transport_human_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_transport_human_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("30", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_transport_human_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_transport_human_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestSetsProperSettlementNameSource)
+{
+    Poco::XML::Element * element = m_message_transport_human_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_human_request")->
+        getChildElement("settlement_name_source");
+    ASSERT_STREQ("SettlementSource", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestSetsProperSettlementNameDestination)
+{
+    Poco::XML::Element * element = m_message_transport_human_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_human_request")->
+        getChildElement("settlement_name_destination");
+    ASSERT_STREQ("SettlementDestination", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestSetsProperHumanKey)
+{
+    Poco::XML::Element * element = m_message_transport_human_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_human_request")->getChildElement("humankey");
+    ASSERT_STREQ("WorkerBlacksmithNovice", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportHumanRequestSetsProperVolume)
+{
+    Poco::XML::Element * element = m_message_transport_human_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_human_request")->getChildElement("volume");
+    ASSERT_STREQ("100", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_transport_resource_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_transport_resource_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("31", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_transport_resource_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_transport_resource_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestSetsProperSettlementNameSource)
+{
+    Poco::XML::Element * element = m_message_transport_resource_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_resource_request")->
+        getChildElement("settlement_name_source");
+    ASSERT_STREQ("SettlementSource", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestSetsProperSettlementNameDestination)
+{
+    Poco::XML::Element * element = m_message_transport_resource_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_resource_request")->
+        getChildElement("settlement_name_destination");
+    ASSERT_STREQ("SettlementDestination", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestSetsProperResourceKey)
+{
+    Poco::XML::Element * element = m_message_transport_resource_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_resource_request")->getChildElement("resourcekey");
+    ASSERT_STREQ("Coal", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateTransportResourceRequestSetsProperVolume)
+{
+    Poco::XML::Element * element = m_message_transport_resource_request->documentElement()->
+        getChildElement("request")->getChildElement("transport_resource_request")->getChildElement("volume");
+    ASSERT_STREQ("100", element->innerText().c_str());
 }

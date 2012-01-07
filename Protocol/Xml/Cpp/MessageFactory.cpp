@@ -425,7 +425,10 @@ Message::SingleHandle MessageFactory::createCreateEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(23);
+    message_builder.addHeader(23, "Login", "Password");
+    message_builder.addRequest("create_epoch_request");
+    message_builder.addParam("world_name", a_world_name);
+    message_builder.addParam("epoch_name", a_epoch_name);
 
     return message_builder.extract();
 }
@@ -439,7 +442,9 @@ Message::SingleHandle MessageFactory::createDeleteEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(24);
+    message_builder.addHeader(24, "Login", "Password");
+    message_builder.addRequest("delete_epoch_request");
+    message_builder.addParam("world_name", a_world_name);
 
     return message_builder.extract();
 }
@@ -453,7 +458,9 @@ Message::SingleHandle MessageFactory::createActivateEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(25);
+    message_builder.addHeader(25, "Login", "Password");
+    message_builder.addRequest("activate_epoch_request");
+    message_builder.addParam("world_name", a_world_name);
 
     return message_builder.extract();
 }
@@ -467,7 +474,9 @@ Message::SingleHandle MessageFactory::createDeactivateEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(26);
+    message_builder.addHeader(26, "Login", "Password");
+    message_builder.addRequest("deactivate_epoch_request");
+    message_builder.addParam("world_name", a_world_name);
 
     return message_builder.extract();
 }
@@ -481,7 +490,9 @@ Message::SingleHandle MessageFactory::createFinishEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(27);
+    message_builder.addHeader(27, "Login", "Password");
+    message_builder.addRequest("finish_epoch_request");
+    message_builder.addParam("world_name", a_world_name);
 
     return message_builder.extract();
 }
@@ -495,7 +506,9 @@ Message::SingleHandle MessageFactory::createTickEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(28);
+    message_builder.addHeader(28, "Login", "Password");
+    message_builder.addRequest("tick_epoch_request");
+    message_builder.addParam("world_name", a_world_name);
 
     return message_builder.extract();
 }
@@ -509,7 +522,9 @@ Message::SingleHandle MessageFactory::createGetEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(29);
+    message_builder.addHeader(29, "Login", "Password");
+    message_builder.addRequest("get_epoch_request");
+    message_builder.addParam("world_name", a_world_name);
 
     return message_builder.extract();
 }
@@ -526,7 +541,12 @@ Message::SingleHandle MessageFactory::createTransportHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(30);
+    message_builder.addHeader(30, "Login", "Password");
+    message_builder.addRequest("transport_human_request");
+    message_builder.addParam("settlement_name_source", a_settlement_name_source);
+    message_builder.addParam("settlement_name_destination", a_settlement_name_destination);
+    message_builder.addParam("humankey", a_human_key);
+    message_builder.addParam("volume", a_volume);
 
     return message_builder.extract();
 }
@@ -543,7 +563,12 @@ Message::SingleHandle MessageFactory::createTransportResourceRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(21);
+    message_builder.addHeader(31, "Login", "Password");
+    message_builder.addRequest("transport_resource_request");
+    message_builder.addParam("settlement_name_source", a_settlement_name_source);
+    message_builder.addParam("settlement_name_destination", a_settlement_name_destination);
+    message_builder.addParam("resourcekey", a_resource_key);
+    message_builder.addParam("volume", a_volume);
 
     return message_builder.extract();
 }
