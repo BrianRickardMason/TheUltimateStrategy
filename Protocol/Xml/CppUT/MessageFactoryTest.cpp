@@ -39,7 +39,10 @@ protected:
     MessageFactoryTest()
         : m_message_echo_request(m_message_factory.createEchoRequest()),
           m_message_error_request(m_message_factory.createErrorRequest()),
-          m_message_create_land_request(m_message_factory.createCreateLandRequest("Login", "Password", "World", "Land"))
+          m_message_create_land_request(m_message_factory.createCreateLandRequest("Login", "Password", "World", "Land")),
+          m_message_delete_land_request(m_message_factory.createDeleteLandRequest("Login", "Password", "Land")),
+          m_message_get_land_request(m_message_factory.createGetLandRequest("Login", "Password", "Land")),
+          m_message_get_lands_request(m_message_factory.createGetLandsRequest("Login", "Password"))
     {
     }
 
@@ -54,7 +57,10 @@ protected:
      */
     TUSProtocol::Message::SingleHandle m_message_echo_request,
                                        m_message_error_request,
-                                       m_message_create_land_request;
+                                       m_message_create_land_request,
+                                       m_message_delete_land_request,
+                                       m_message_get_land_request,
+                                       m_message_get_lands_request;
     //}@
 };
 
@@ -125,4 +131,86 @@ TEST_F(MessageFactoryTest, CreateCreateLandRequestSetsProperLandName)
     Poco::XML::Element * element = m_message_create_land_request->documentElement()->
         getChildElement("request")->getChildElement("create_land_request")->getChildElement("land_name");
     ASSERT_STREQ("Land", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteLandRequestReturnsNotNull)
+{
+    ASSERT_TRUE(m_message_delete_land_request.get());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteLandRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_delete_land_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("4", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteLandRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_delete_land_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteLandRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_delete_land_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateDeleteLandRequestSetsProperLandName)
+{
+    Poco::XML::Element * element = m_message_delete_land_request->documentElement()->
+        getChildElement("request")->getChildElement("delete_land_request")->getChildElement("land_name");
+    ASSERT_STREQ("Land", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetLandRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_land_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("5", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetLandRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_land_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetLandRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_land_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetLandRequestSetsProperLandName)
+{
+    Poco::XML::Element * element = m_message_get_land_request->documentElement()->
+        getChildElement("request")->getChildElement("get_land_request")->getChildElement("land_name");
+    ASSERT_STREQ("Land", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetLandsRequestSetsProperID)
+{
+    Poco::XML::Element * element = m_message_get_lands_request->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("6", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetLandsRequestSetsProperLogin)
+{
+    Poco::XML::Element * element = m_message_get_lands_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("login");
+    ASSERT_STREQ("Login", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTest, CreateGetLandsRequestSetsProperPassword)
+{
+    Poco::XML::Element * element = m_message_get_lands_request->documentElement()->
+        getChildElement("header")->getChildElement("user")->getChildElement("password");
+    ASSERT_STREQ("Password", element->innerText().c_str());
 }

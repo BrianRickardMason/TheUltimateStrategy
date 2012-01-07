@@ -78,7 +78,9 @@ Message::SingleHandle MessageFactory::createDeleteLandRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(4);
+    message_builder.addHeader(4, "Login", "Password");
+    message_builder.addRequest("delete_land_request");
+    message_builder.addParam("land_name", a_land_name);
 
     return message_builder.extract();
 }
@@ -92,7 +94,9 @@ Message::SingleHandle MessageFactory::createGetLandRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(5);
+    message_builder.addHeader(5, "Login", "Password");
+    message_builder.addRequest("get_land_request");
+    message_builder.addParam("land_name", a_land_name);
 
     return message_builder.extract();
 }
@@ -105,7 +109,8 @@ Message::SingleHandle MessageFactory::createGetLandsRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(6);
+    message_builder.addHeader(6, "Login", "Password");
+    message_builder.addRequest("get_lands_request");
 
     return message_builder.extract();
 }
