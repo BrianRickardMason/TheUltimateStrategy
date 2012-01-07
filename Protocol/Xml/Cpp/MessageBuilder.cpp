@@ -134,6 +134,100 @@ void MessageBuilder::addParam(
     m_current_node->appendChild(element);
 }
 
+void MessageBuilder::addReply()
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+
+    element = m_document->createElement("reply");
+    m_current_node = m_document->documentElement()->appendChild(element);
+}
+
+void MessageBuilder::addCode(
+    std::string const a_code
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+    Poco::AutoPtr<Poco::XML::Text> value;
+
+    value = m_document->createTextNode(a_code);
+    element = m_document->createElement("code");
+    element->appendChild(value);
+    m_current_node->appendChild(element);
+}
+
+void MessageBuilder::addMessage(
+    std::string const a_message
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+    Poco::AutoPtr<Poco::XML::Text> value;
+
+    value = m_document->createTextNode(a_message);
+    element = m_document->createElement("message");
+    element->appendChild(value);
+    m_current_node->appendChild(element);
+}
+
+void MessageBuilder::addSpecificReply(
+    std::string const a_reply
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+
+    element = m_document->createElement(a_reply);
+    m_current_node = m_current_node->appendChild(element);
+}
+
+void MessageBuilder::addObject(
+    std::string     const   a_object_name,
+    Message::Object const & a_object
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+    Poco::AutoPtr<Poco::XML::Text> value;
+
+    element = m_document->createElement(a_object_name);
+    m_current_node = m_current_node->appendChild(element);
+
+    for (Message::Object::const_iterator it = a_object.begin(); it != a_object.end(); ++it)
+    {
+        value = m_document->createTextNode(it->second);
+        element = m_document->createElement(it->first);
+        element->appendChild(value);
+        m_current_node->appendChild(element);
+    }
+}
+
+void MessageBuilder::addObjects(
+    std::string      const   a_objects_name,
+    std::string      const   a_object_name,
+    Message::Objects const & a_objects
+)
+{
+    Poco::AutoPtr<Poco::XML::Element> element;
+    Poco::AutoPtr<Poco::XML::Text> value;
+
+    element = m_document->createElement(a_objects_name);
+    m_current_node = m_current_node->appendChild(element);
+
+    for (Message::Objects::const_iterator it = a_objects.begin(); it != a_objects.end(); ++it)
+    {
+        Poco::AutoPtr<Poco::XML::Element> object_element;
+
+        object_element = m_document->createElement(a_object_name);
+
+        for (Message::Object::const_iterator itr = (*it).begin(); itr != (*it).end(); ++itr)
+        {
+            value = m_document->createTextNode(itr->second);
+            element = m_document->createElement(itr->first);
+            element->appendChild(value);
+            object_element->appendChild(element);
+        }
+
+        m_current_node->appendChild(object_element);
+    }
+}
+
 Message::SingleHandle MessageBuilder::extract()
 {
     return m_document;

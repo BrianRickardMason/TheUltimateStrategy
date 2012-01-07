@@ -573,4 +573,549 @@ Message::SingleHandle MessageFactory::createTransportResourceRequest(
     return message_builder.extract();
 }
 
+Message::SingleHandle MessageFactory::createEchoReply(
+    std::string const a_code
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(32);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addSpecificReply("echo_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createErrorReply(
+    std::string const a_code
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(33);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addSpecificReply("error_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createCreateLandReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(34);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("create_land_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createDeleteLandReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(35);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("delete_land_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetLandReply(
+    std::string     const   a_code,
+    std::string     const   a_message,
+    Message::Object const & a_object
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(36);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_land_reply");
+    message_builder.addObject("land", a_object);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetLandsReply(
+    std::string      const   a_code,
+    std::string      const   a_message,
+    Message::Objects const & a_objects
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(37);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_lands_reply");
+    message_builder.addObjects("lands", "land", a_objects);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createCreateSettlementReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(38);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("create_settlement_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createDeleteSettlementReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(39);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("delete_settlement_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetSettlementReply(
+    std::string     const   a_code,
+    std::string     const   a_message,
+    Message::Object const & a_object
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(40);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_settlement_reply");
+    message_builder.addObject("settlement", a_object);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetSettlementsReply(
+    std::string      const   a_code,
+    std::string      const   a_message,
+    Message::Objects const & a_objects
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(41);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_settlements_reply");
+    message_builder.addObjects("settlements", "settlement", a_objects);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createBuildBuildingReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(42);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("build_building_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createDestroyBuildingReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(43);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("destroy_building_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetBuildingReply(
+    std::string     const   a_code,
+    std::string     const   a_message,
+    Message::Object const & a_object
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(44);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_building_reply");
+    message_builder.addObject("building", a_object);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetBuildingsReply(
+    std::string      const   a_code,
+    std::string      const   a_message,
+    Message::Objects const & a_objects
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(45);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_buildings_reply");
+    message_builder.addObjects("buildings", "building", a_objects);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createDismissHumanReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(46);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("dismiss_human_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createEngageHumanReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(47);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("engage_human_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetHumanReply(
+    std::string     const   a_code,
+    std::string     const   a_message,
+    Message::Object const & a_object
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(48);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_human_reply");
+    message_builder.addObject("human", a_object);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetHumansReply(
+    std::string      const   a_code,
+    std::string      const   a_message,
+    Message::Objects const & a_objects
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(49);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_humans_reply");
+    message_builder.addObjects("humans", "human", a_objects);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetResourceReply(
+    std::string     const   a_code,
+    std::string     const   a_message,
+    Message::Object const & a_object
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(50);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_resource_reply");
+    message_builder.addObject("resource", a_object);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetResourcesReply(
+    std::string      const   a_code,
+    std::string      const   a_message,
+    Message::Objects const & a_objects
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(51);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_resources_reply");
+    message_builder.addObjects("resources", "resource", a_objects);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createCreateUserReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(52);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("create_user_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createCreateWorldReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(53);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("create_world_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createCreateEpochReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(54);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("create_epoch_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createDeleteEpochReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(55);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("delete_epoch_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createActivateEpochReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(56);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("activate_epoch_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createDeactivateEpochReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(57);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("deactivate_epoch_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createFinishEpochReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(58);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("finish_epoch_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createTickEpochReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(59);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("tick_epoch_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createGetEpochReply(
+    std::string     const   a_code,
+    std::string     const   a_message,
+    Message::Object const & a_object
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(60);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_epoch_reply");
+    message_builder.addObject("epoch", a_object);
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createTransportHumanReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(61);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("transport_human_reply");
+
+    return message_builder.extract();
+}
+
+Message::SingleHandle MessageFactory::createTransportResourceReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(62);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("transport_resource_reply");
+
+    return message_builder.extract();
+}
+
 } // namespace TUSProtocol
