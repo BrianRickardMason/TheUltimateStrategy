@@ -181,6 +181,7 @@ protected:
                 std::clog << "interactive" << std::endl;
                 startInputRead();
                 
+                // TODO use this, and be compatible with deamon mode
                 //waitForTerminationRequest();
             }
         }
