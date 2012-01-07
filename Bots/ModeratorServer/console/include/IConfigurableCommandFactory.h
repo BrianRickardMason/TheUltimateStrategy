@@ -7,6 +7,8 @@
 
 class IConfigurableCommandFactory: public ICommandFactory {
 public:
+    typedef Poco::SharedPtr<IConfigurableCommandFactory> Handle;
+    
     virtual void addCreator(const std::string& aCmdName, ICommandCreator::SingleHandle aCreator) = 0;
     virtual ICommandCreator::SingleHandle removeCreator(const std::string& aCmdName) = 0;
     

@@ -5,6 +5,8 @@
 #include <sstream>
 #include <stdexcept>
 
+#include <Poco/RegularExpression.h>
+
 #include "include/IConsoleInterpreter.h"
 
 class ConsoleInterpreter: public IConsoleInterpreter {

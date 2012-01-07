@@ -6,6 +6,8 @@
 
 #include <list>
 
+#include "ICommand.h"
+
 class ICommandFactory {
 public:
     typedef Poco::SharedPtr <ICommandFactory> Handle;

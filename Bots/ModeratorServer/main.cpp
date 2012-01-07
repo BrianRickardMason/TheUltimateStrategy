@@ -10,6 +10,10 @@
 #include "ModeratorContextBuilder.h"
 #include "IModeratorServerConfiguration.h"
 #include "SimpleGameControl.h"
+#include "console/Console.h"
+#include "console/ConfigurableCommandFactory.h"
+#include "console/EchoCommand.h"
+#include "console/CloseCommand.h"
 
 
 /**
@@ -36,40 +40,58 @@ class BotConnectionManager;
 class Moderator{
 public:
     Moderator(IModeratorContext::Handle aContext)
-        :   mContext(aContext){
-        }
-    
-    void startServer(){
-        using Poco::Net::SocketAddress;
-        using Poco::Net::ServerSocket;
-        using Poco::Net::TCPServer;
-        
-        // TODO check if server is running already
-        
-        SocketAddress addr(
-            mContext->getModeratorServerConf().getAddress(), 
-            mContext->getModeratorServerConf().getPort()
-        );
-    
-        ServerSocket sock(addr);
-        
-        mBotManger = new BotConnectionManager(mContext);
-        mServer.reset( new TCPServer(mBotManger, sock));
-        
-        mServer->start();
+        :   mContext(aContext), mServerRunning(false), 
+            mConsole(new Console(std::cin, std::cout, std::cerr, std::clog)) {
+        //---
+        setupCommands();
     }
     
+    void startServer(){
+        if(mServerRunning) {
+            // TODO report
+            std::clog << "Server is already running" << std::endl;
+        }
+        else {
+            using Poco::Net::SocketAddress;
+            using Poco::Net::ServerSocket;
+            using Poco::Net::TCPServer;
+        
+            SocketAddress addr(
+                mContext->getModeratorServerConf().getAddress(), 
+                mContext->getModeratorServerConf().getPort()
+            );
+        
+            ServerSocket sock(addr);
+            
+            mBotManger = new BotConnectionManager(mContext);
+            mServer.reset( new TCPServer(mBotManger, sock));
+            
+            mServer->start();
+            mServerRunning = true;
+        }
+    }
+    
+    /**
+     * Starts interpreting commands
+     * 
+     * @remark Blocking in the current thread
+     */
     void startInputRead(){
-        std::vector<char> buf(255,0);
+        mConsole->echo("*** Moderator console");
+        mConsole->echo("*   Type 'close' to end the application");
         
-        std::clog << '\n' << "Press enter to close the application" << std::endl;
-        
-        std::cin.getline(&buf[0],buf.size());
+        mConsole->run();
     }
     
     void startGame(){
-        mGameControl.reset(new SimpleGameControl(mContext, mBotManger));
-        mGameThread.start(*mGameControl);
+        if(mGameThread.isRunning()){
+            // TODO report
+            std::clog << "Game is already running" << std::endl;
+        }
+        else {
+            mGameControl.reset(new SimpleGameControl(mContext, mBotManger));
+            mGameThread.start(*mGameControl);
+        }
     }
     
     void run() {
@@ -80,13 +102,28 @@ public:
     }
 private:
     Poco::SharedPtr<BotConnectionManager> mBotManger;
+    
+    bool mServerRunning;
     std::auto_ptr<Poco::Net::TCPServer> mServer;
+    
     IModeratorContext::Handle mContext;
     
     std::auto_ptr<SimpleGameControl> mGameControl;
     Poco::Thread mGameThread;
     
+    IConfigurableCommandFactory::Handle mCommands;
+    Poco::SharedPtr<Console> mConsole;
+    
 //     GameServerAgent& mGameServer;
+private:
+    void setupCommands() {
+        mCommands = new ConfigurableCommandFactory();
+        
+        mCommands->addCreator("echo", ICommandCreator::SingleHandle(new EchoCommandCreator(*mConsole)));
+        mCommands->addCreator("close", ICommandCreator::SingleHandle(new CloseCommandCreator(*mConsole)));
+        
+        mConsole->setCommandFactory(mCommands);
+    }
 };
 
 int main(int aNumberOfArguments, char **aArguments){
