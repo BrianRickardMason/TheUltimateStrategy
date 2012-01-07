@@ -615,7 +615,7 @@ TEST_F(MessageFactoryTest, CreateDismissHumanRequestSetsProperHolderName)
     ASSERT_STREQ("Settlement", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateDismissHumanRequestSetsProperBuildingKey)
+TEST_F(MessageFactoryTest, CreateDismissHumanRequestSetsProperHumanKey)
 {
     Poco::XML::Element * element = m_message_dismiss_human_request->documentElement()->
         getChildElement("request")->getChildElement("dismiss_human_request")->getChildElement("humankey");
@@ -669,7 +669,7 @@ TEST_F(MessageFactoryTest, CreateEngageHumanRequestSetsProperHolderName)
     ASSERT_STREQ("Settlement", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateEngageHumanRequestSetsProperBuildingKey)
+TEST_F(MessageFactoryTest, CreateEngageHumanRequestSetsProperHumanKey)
 {
     Poco::XML::Element * element = m_message_engage_human_request->documentElement()->
         getChildElement("request")->getChildElement("engage_human_request")->getChildElement("humankey");
@@ -723,7 +723,7 @@ TEST_F(MessageFactoryTest, CreateGetHumanRequestSetsProperHolderName)
     ASSERT_STREQ("Settlement", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetHumanRequestSetsProperBuildingKey)
+TEST_F(MessageFactoryTest, CreateGetHumanRequestSetsProperHumanKey)
 {
     Poco::XML::Element * element = m_message_get_human_request->documentElement()->
         getChildElement("request")->getChildElement("get_human_request")->getChildElement("humankey");
