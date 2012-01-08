@@ -3,9 +3,9 @@
 #define _CLOSECOMMAND_H_
 
 // needed for implementing ICommand and ICommandCreator
-#include "include/ICommand.h"
-#include "include/ACommand.h"
-#include "include/ICommandCreator.h"
+#include <ICommand.h>
+#include <ACommand.h>
+#include <ICommandCreator.h>
 
 // needed by the CloseCommand itself
 #include "Console.h"
@@ -15,7 +15,7 @@
  */
 class CloseCommand: public ACommand {
 public:
-    CloseCommand(Console& aConsole,const ICommand::Params& aParams)
+    CloseCommand(IConsole& aConsole,const ICommand::Params& aParams)
         : ACommand(aParams), mConsole(aConsole){}
     
     virtual int execute()const{
@@ -24,13 +24,13 @@ public:
     }
     
 private:
-    Console& mConsole;
+    IConsole& mConsole;
 };
 
 
 class CloseCommandCreator: public ICommandCreator {
 public:
-    CloseCommandCreator(Console& aConsole): mConsole(aConsole){}
+    CloseCommandCreator(IConsole& aConsole): mConsole(aConsole){}
     
     virtual ICommand::SingleHandle create(const ICommand::Params& aParams){
         return ICommand::SingleHandle( new CloseCommand(mConsole, aParams) );
@@ -40,7 +40,7 @@ public:
         return "closes the console";
     }
 private:
-    Console& mConsole;
+    IConsole& mConsole;
 };
 
 #endif

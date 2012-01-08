@@ -6,6 +6,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <sstream>
 
 #include <Poco/SharedPtr.h>
 

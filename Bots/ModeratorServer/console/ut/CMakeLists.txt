@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8)
+
+add_executable(console_ut 
+    main.cpp
+)
+
+target_link_libraries(console_ut
+    console
+)
+
+set(CMAKE_BUILD_TYPE Debug)

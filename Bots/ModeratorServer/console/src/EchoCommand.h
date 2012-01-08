@@ -3,9 +3,9 @@
 #define _ECHOCOMMAND_H_
 
 // needed for implementing ICommand and ICommandCreator
-#include "include/ICommand.h"
-#include "include/ACommand.h"
-#include "include/ICommandCreator.h"
+#include <ICommand.h>
+#include <ACommand.h>
+#include <ICommandCreator.h>
 
 // needed by the EchoCommand itself
 #include "Console.h"
@@ -15,7 +15,7 @@
  */
 class EchoCommand: public ACommand {
 public:
-    EchoCommand(Console& aConsole,const ICommand::Params& aParams)
+    EchoCommand(IConsole& aConsole,const ICommand::Params& aParams)
         : ACommand(aParams), mConsole(aConsole){}
     
     virtual int execute()const{
@@ -28,13 +28,13 @@ public:
     }
     
 private:
-    Console& mConsole;
+    IConsole& mConsole;
 };
 
 
 class EchoCommandCreator: public ICommandCreator {
 public:
-    EchoCommandCreator(Console& aConsole): mConsole(aConsole){}
+    EchoCommandCreator(IConsole& aConsole): mConsole(aConsole){}
     
     virtual ICommand::SingleHandle create(const ICommand::Params& aParams){
         return ICommand::SingleHandle( new EchoCommand(mConsole, aParams) );
@@ -44,7 +44,7 @@ public:
         return "echoes the parameters on the console";
     }
 private:
-    Console& mConsole;
+    IConsole& mConsole;
 };
 
 #endif
