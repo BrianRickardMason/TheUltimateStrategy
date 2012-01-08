@@ -36,6 +36,69 @@
 namespace TUSLanguage
 {
 
+unsigned short int const ID_COMMAND_ECHO_REQUEST               = 1;
+unsigned short int const ID_COMMAND_ERROR_REQUEST              = 2;
+unsigned short int const ID_COMMAND_CREATE_LAND_REQUEST        = 3;
+unsigned short int const ID_COMMAND_DELETE_LAND_REQUEST        = 4;
+unsigned short int const ID_COMMAND_GET_LAND_REQUEST           = 5;
+unsigned short int const ID_COMMAND_GET_LANDS_REQUEST          = 6;
+unsigned short int const ID_COMMAND_CREATE_SETTLEMENT_REQUEST  = 7;
+unsigned short int const ID_COMMAND_DELETE_SETTLEMENT_REQUEST  = 8;
+unsigned short int const ID_COMMAND_GET_SETTLEMENT_REQUEST     = 9;
+unsigned short int const ID_COMMAND_GET_SETTLEMENTS_REQUEST    = 10;
+unsigned short int const ID_COMMAND_BUILD_BUILDING_REQUEST     = 11;
+unsigned short int const ID_COMMAND_DESTROY_BUILDING_REQUEST   = 12;
+unsigned short int const ID_COMMAND_GET_BUILDING_REQUEST       = 13;
+unsigned short int const ID_COMMAND_GET_BUILDINGS_REQUEST      = 14;
+unsigned short int const ID_COMMAND_DISMISS_HUMAN_REQUEST      = 15;
+unsigned short int const ID_COMMAND_ENGAGE_HUMAN_REQUEST       = 16;
+unsigned short int const ID_COMMAND_GET_HUMAN_REQUEST          = 17;
+unsigned short int const ID_COMMAND_GET_HUMANS_REQUEST         = 18;
+unsigned short int const ID_COMMAND_GET_RESOURCE_REQUEST       = 19;
+unsigned short int const ID_COMMAND_GET_RESOURCES_REQUEST      = 20;
+unsigned short int const ID_COMMAND_CREATE_USER_REQUEST        = 21;
+unsigned short int const ID_COMMAND_CREATE_WORLD_REQUEST       = 22;
+unsigned short int const ID_COMMAND_CREATE_EPOCH_REQUEST       = 23;
+unsigned short int const ID_COMMAND_DELETE_EPOCH_REQUEST       = 24;
+unsigned short int const ID_COMMAND_ACTIVATE_EPOCH_REQUEST     = 25;
+unsigned short int const ID_COMMAND_DEACTIVATE_EPOCH_REQUEST   = 26;
+unsigned short int const ID_COMMAND_FINISH_EPOCH_REQUEST       = 27;
+unsigned short int const ID_COMMAND_TICK_EPOCH_REQUEST         = 28;
+unsigned short int const ID_COMMAND_GET_EPOCH_REQUEST          = 29;
+unsigned short int const ID_COMMAND_TRANSPORT_HUMAN_REQUEST    = 30;
+unsigned short int const ID_COMMAND_TRANSPORT_RESOURCE_REQUEST = 31;
+unsigned short int const ID_COMMAND_ECHO_REPLY                 = 32;
+unsigned short int const ID_COMMAND_ERROR_REPLY                = 33;
+unsigned short int const ID_COMMAND_CREATE_LAND_REPLY          = 34;
+unsigned short int const ID_COMMAND_DELETE_LAND_REPLY          = 35;
+unsigned short int const ID_COMMAND_GET_LAND_REPLY             = 36;
+unsigned short int const ID_COMMAND_GET_LANDS_REPLY            = 37;
+unsigned short int const ID_COMMAND_CREATE_SETTLEMENT_REPLY    = 38;
+unsigned short int const ID_COMMAND_DELETE_SETTLEMENT_REPLY    = 39;
+unsigned short int const ID_COMMAND_GET_SETTLEMENT_REPLY       = 40;
+unsigned short int const ID_COMMAND_GET_SETTLEMENTS_REPLY      = 41;
+unsigned short int const ID_COMMAND_BUILD_BUILDING_REPLY       = 42;
+unsigned short int const ID_COMMAND_DESTROY_BUILDING_REPLY     = 43;
+unsigned short int const ID_COMMAND_GET_BUILDING_REPLY         = 44;
+unsigned short int const ID_COMMAND_GET_BUILDINGS_REPLY        = 45;
+unsigned short int const ID_COMMAND_DISMISS_HUMAN_REPLY        = 46;
+unsigned short int const ID_COMMAND_ENGAGE_HUMAN_REPLY         = 47;
+unsigned short int const ID_COMMAND_GET_HUMAN_REPLY            = 48;
+unsigned short int const ID_COMMAND_GET_HUMANS_REPLY           = 49;
+unsigned short int const ID_COMMAND_GET_RESOURCE_REPLY         = 50;
+unsigned short int const ID_COMMAND_GET_RESOURCES_REPLY        = 51;
+unsigned short int const ID_COMMAND_CREATE_USER_REPLY          = 52;
+unsigned short int const ID_COMMAND_CREATE_WORLD_REPLY         = 53;
+unsigned short int const ID_COMMAND_CREATE_EPOCH_REPLY         = 54;
+unsigned short int const ID_COMMAND_DELETE_EPOCH_REPLY         = 55;
+unsigned short int const ID_COMMAND_ACTIVATE_EPOCH_REPLY       = 56;
+unsigned short int const ID_COMMAND_DEACTIVATE_EPOCH_REPLY     = 57;
+unsigned short int const ID_COMMAND_FINISH_EPOCH_REPLY         = 58;
+unsigned short int const ID_COMMAND_TICK_EPOCH_REPLY           = 59;
+unsigned short int const ID_COMMAND_GET_EPOCH_REPLY            = 60;
+unsigned short int const ID_COMMAND_TRANSPORT_HUMAN_REPLY      = 61;
+unsigned short int const ID_COMMAND_TRANSPORT_RESOURCE_REPLY   = 62;
+
 class ICommand
 {
 public:
