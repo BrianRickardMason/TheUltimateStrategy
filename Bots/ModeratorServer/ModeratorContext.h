@@ -9,6 +9,7 @@
 class BotConnectionConfiguration;
 class ModeratorServerConfiguration;
 class ModeratorContextBuilder;
+class ConsoleFacade;
 
 class ModeratorContext: public IModeratorContext{
 public:
@@ -18,10 +19,12 @@ public:
     virtual const IModeratorServerConfiguration& getModeratorServerConf()const;
     virtual const Credentials& getModeratorCredentials() const;
     virtual const GeneralConfig& getGeneralConfig() const;
+    virtual ConsoleFacade& getConsoleFacade();
     
     void setModeratorServerConf( std::auto_ptr<ModeratorServerConfiguration> aConf );
     void setBotConnectionConf( std::auto_ptr<BotConnectionConfiguration> aConf );
     void setModeratorCredentials( std::auto_ptr<Credentials> aCredentials );
+    void setModeratorCredentials( std::auto_ptr<ConsoleFacade> aCredentials );
     
     GeneralConfig& Config();
 private:
@@ -33,6 +36,7 @@ private:
     std::auto_ptr<BotConnectionConfiguration> mBotConnectionConf;
     
     std::auto_ptr<Credentials> mModeratorCredentials;
+    std::auto_ptr<ConsoleFacade> mConsoleFacade;
 };
 
 #endif

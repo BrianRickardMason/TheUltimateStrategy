@@ -1,4 +1,10 @@
+cmake_minimum_required(VERSION 2.8)
+
 project(moderator)
+
+include_directories(
+    console/include
+)
 
 add_executable(moderator 
     main.cpp
@@ -13,5 +19,8 @@ add_executable(moderator
 )
 
 target_link_libraries(moderator
+    console
     PocoNet PocoFoundation PocoXML PocoUtil
 )
+
+add_subdirectory(console)

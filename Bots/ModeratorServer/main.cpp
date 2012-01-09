@@ -15,10 +15,8 @@
 #include "ModeratorContextBuilder.h"
 #include "IModeratorServerConfiguration.h"
 #include "SimpleGameControl.h"
-#include "console/Console.h"
-#include "console/ConfigurableCommandFactory.h"
-#include "console/EchoCommand.h"
-#include "console/CloseCommand.h"
+
+#include <ConsoleFacade.h>
 
 
 /**
@@ -46,7 +44,7 @@ class Moderator: public Poco::Util::ServerApplication {
 public:
     Moderator(IModeratorContext::Handle aContext)
         :   mContext(aContext), mServerRunning(false), 
-            mConsole(new Console(std::cin, std::cout, std::cerr, std::clog)) {
+            mConsole(mContext->getConsoleFacade().createConsole(std::cin, std::cout, std::cerr, std::clog)) {
         //---
         setupCommands();
     }
@@ -110,16 +108,16 @@ private:
     Poco::Thread mGameThread;
     
     IConfigurableCommandFactory::Handle mCommands;
-    Poco::SharedPtr<Console> mConsole;
+    Poco::SharedPtr<IConsole> mConsole;
     
 //     GameServerAgent& mGameServer;
     bool mHelpRequested;
 private:
     void setupCommands() {
-        mCommands = new ConfigurableCommandFactory();
+        mCommands = mContext->getConsoleFacade().createConfigurableCommandFactory();
         
-        mCommands->addCreator("echo", ICommandCreator::SingleHandle(new EchoCommandCreator(*mConsole)));
-        mCommands->addCreator("close", ICommandCreator::SingleHandle(new CloseCommandCreator(*mConsole)));
+        mCommands->addCreator("echo", mContext->getConsoleFacade().getEchoCmdCreator (*mConsole) );
+        mCommands->addCreator("close", mContext->getConsoleFacade().getCloseCmdCreator (*mConsole) );
         
         mConsole->setCommandFactory(mCommands);
     }

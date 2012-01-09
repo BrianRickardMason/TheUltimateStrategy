@@ -44,3 +44,11 @@ void ModeratorContext::setModeratorCredentials(std::auto_ptr< Credentials > aCre
 GeneralConfig& ModeratorContext::Config() {
     return mGeneralConfig;
 }
+
+ConsoleFacade& ModeratorContext::getConsoleFacade() {
+    return *mConsoleFacade;
+}
+
+void ModeratorContext::setModeratorCredentials(std::auto_ptr< ConsoleFacade > aCredentials) {
+    mConsoleFacade = aCredentials;
+}

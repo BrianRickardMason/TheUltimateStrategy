@@ -1,4 +1,6 @@
 
+#include <ConsoleFacade.h>
+
 #include "ModeratorContextBuilder.h"
 #include "BotConnectionConfiguration.h"
 #include "ModeratorServerConfiguration.h"
@@ -19,6 +21,7 @@ ModeratorContext& ModeratorContextBuilder::peek() {
 void ModeratorContextBuilder::fillDefault() {
     mContext->mBotConnectionConf.reset(new BotConnectionConfiguration());
     mContext->mServerConf.reset( new ModeratorServerConfiguration());
+    mContext->mConsoleFacade.reset( new ConsoleFacade());
     
     mContext->mBotConnectionConf->setServerAddress("127.0.0.1");
     mContext->mBotConnectionConf->setServerPort(2222);

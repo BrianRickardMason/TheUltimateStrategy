@@ -7,6 +7,7 @@
 class IBotConnectionConfiguration;
 class IModeratorServerConfiguration;
 class Credentials;
+class ConsoleFacade;
 
 #include "GeneralConfig.h"
 
@@ -20,6 +21,8 @@ public:
     virtual const Credentials& getModeratorCredentials()const = 0;
     
     virtual const GeneralConfig& getGeneralConfig()const=0;
+    
+    virtual ConsoleFacade& getConsoleFacade() = 0;
     
     virtual ~IModeratorContext(){}
 protected:
