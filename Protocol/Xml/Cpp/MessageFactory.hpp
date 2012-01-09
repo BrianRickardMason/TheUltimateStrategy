@@ -39,21 +39,21 @@ class MessageFactory
 {
 public:
     /**
-     * @brief Builds EchoRequest.
+     * @brief Creates EchoRequest.
      *
      * @return EchoRequest.
      */
     Message::SingleHandle createEchoRequest() const;
 
     /**
-     * @brief Builds ErrorRequest.
+     * @brief Creates ErrorRequest.
      *
      * @return ErrorRequest.
      */
     Message::SingleHandle createErrorRequest() const;
 
     /**
-     * @brief Builds CreateLandRequest.
+     * @brief Creates CreateLandRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -70,7 +70,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds DeleteLandRequest.
+     * @brief Creates DeleteLandRequest.
      *
      * @param a_login     The login of the user.
      * @param a_password  The password of the user.
@@ -85,7 +85,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetLandRequest.
+     * @brief Creates GetLandRequest.
      *
      * @param a_login     The login of the user.
      * @param a_password  The password of the user.
@@ -100,7 +100,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetLandsRequest.
+     * @brief Creates GetLandsRequest.
      *
      * @param a_login    The login of the user.
      * @param a_password The password of the user.
@@ -113,7 +113,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds CreateSettlementRequest.
+     * @brief Creates CreateSettlementRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -130,7 +130,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds DeleteSettlementRequest.
+     * @brief Creates DeleteSettlementRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -145,7 +145,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetSettlementRequest.
+     * @brief Creates GetSettlementRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -160,7 +160,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetSettlementsRequest.
+     * @brief Creates GetSettlementsRequest.
      *
      * @param a_login     The login of the user.
      * @param a_password  The password of the user.
@@ -175,7 +175,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds BuildBuildingRequest.
+     * @brief Creates BuildBuildingRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -196,7 +196,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds DestroyBuildingRequest.
+     * @brief Creates DestroyBuildingRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -217,7 +217,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetBuildingRequest.
+     * @brief Creates GetBuildingRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -236,7 +236,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetBuildingsRequest.
+     * @brief Creates GetBuildingsRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -253,7 +253,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds DismissHumanRequest.
+     * @brief Creates DismissHumanRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -274,7 +274,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds EngageHumanRequest.
+     * @brief Creates EngageHumanRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -295,7 +295,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetHumanRequest.
+     * @brief Creates GetHumanRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -314,7 +314,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetHumansRequest.
+     * @brief Creates GetHumansRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -331,7 +331,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetResourceRequest.
+     * @brief Creates GetResourceRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -350,7 +350,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetResourcesRequest.
+     * @brief Creates GetResourcesRequest.
      *
      * @param a_login           The login of the user.
      * @param a_password        The password of the user.
@@ -367,7 +367,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds CreateUserRequest.
+     * @brief Creates CreateUserRequest.
      *
      * @param a_login    The login of the user.
      * @param a_password The password of the user.
@@ -380,7 +380,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds CreateWorldRequest.
+     * @brief Creates CreateWorldRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -395,7 +395,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds CreateEpochRequest.
+     * @brief Creates CreateEpochRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -412,7 +412,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds DeleteEpochRequest.
+     * @brief Creates DeleteEpochRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -427,7 +427,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds ActivateEpochRequest.
+     * @brief Creates ActivateEpochRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -442,7 +442,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds DeactivateEpochRequest.
+     * @brief Creates DeactivateEpochRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -457,7 +457,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds FinishEpochRequest.
+     * @brief Creates FinishEpochRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -472,7 +472,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds TickEpochRequest.
+     * @brief Creates TickEpochRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -487,7 +487,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds GetEpochRequest.
+     * @brief Creates GetEpochRequest.
      *
      * @param a_login      The login of the user.
      * @param a_password   The password of the user.
@@ -502,7 +502,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds TransportHumanRequest.
+     * @brief Creates TransportHumanRequest.
      *
      * @param a_login                       The login of the user.
      * @param a_password                    The password of the user.
@@ -523,7 +523,7 @@ public:
     ) const;
 
     /**
-     * @brief Builds TransportResourceRequest.
+     * @brief Creates TransportResourceRequest.
      *
      * @param a_login                       The login of the user.
      * @param a_password                    The password of the user.
@@ -541,6 +541,427 @@ public:
         std::string const a_settlement_name_destination,
         std::string const a_resource_key,
         std::string const a_volume
+    ) const;
+
+    /**
+     * @brief Creates EchoReply.
+     *
+     * @param a_code The exit code.
+     *
+     * @return EchoReply.
+     */
+    Message::SingleHandle createEchoReply(
+        std::string const a_code
+    ) const;
+
+    /**
+     * @brief Creates ErrorReply.
+     *
+     * @param a_code The exit code.
+     *
+     * @return ErrorReply.
+     */
+    Message::SingleHandle createErrorReply(
+        std::string const a_code
+    ) const;
+
+    /**
+     * @brief Creates CreateLandReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateLandReply.
+     */
+    Message::SingleHandle createCreateLandReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates DeleteLandReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DeleteLandReply.
+     */
+    Message::SingleHandle createDeleteLandReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates GetLandReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetLandReply.
+     */
+    Message::SingleHandle createGetLandReply(
+        std::string     const   a_code,
+        std::string     const   a_message,
+        Message::Object const & a_object
+    ) const;
+
+    /**
+     * @brief Creates GetLandsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetLandsReply.
+     */
+    Message::SingleHandle createGetLandsReply(
+        std::string      const   a_code,
+        std::string      const   a_message,
+        Message::Objects const & a_objects
+    ) const;
+
+    /**
+     * @brief Creates CreateSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateSettlementReply.
+     */
+    Message::SingleHandle createCreateSettlementReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates DeleteSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DeleteSettlementReply.
+     */
+    Message::SingleHandle createDeleteSettlementReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates GetSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetSettlementReply.
+     */
+    Message::SingleHandle createGetSettlementReply(
+        std::string     const   a_code,
+        std::string     const   a_message,
+        Message::Object const & a_object
+    ) const;
+
+    /**
+     * @brief Creates GetSettlementsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetSettlementsReply.
+     */
+    Message::SingleHandle createGetSettlementsReply(
+        std::string      const   a_code,
+        std::string      const   a_message,
+        Message::Objects const & a_objects
+    ) const;
+
+    /**
+     * @brief Creates BuildBuildingReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return BuildBuildingReply.
+     */
+    Message::SingleHandle createBuildBuildingReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates DestroyBuildingReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DestroyBuildingReply.
+     */
+    Message::SingleHandle createDestroyBuildingReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates GetBuildingReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetBuildingReply.
+     */
+    Message::SingleHandle createGetBuildingReply(
+        std::string     const   a_code,
+        std::string     const   a_message,
+        Message::Object const & a_object
+    ) const;
+
+    /**
+     * @brief Creates GetBuildingsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetBuildingsReply.
+     */
+    Message::SingleHandle createGetBuildingsReply(
+        std::string      const   a_code,
+        std::string      const   a_message,
+        Message::Objects const & a_objects
+    ) const;
+
+    /**
+     * @brief Creates DismissHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DismissHumanReply.
+     */
+    Message::SingleHandle createDismissHumanReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates EngageHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return EngageHumanReply.
+     */
+    Message::SingleHandle createEngageHumanReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates GetHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetHumanReply.
+     */
+    Message::SingleHandle createGetHumanReply(
+        std::string     const   a_code,
+        std::string     const   a_message,
+        Message::Object const & a_object
+    ) const;
+
+    /**
+     * @brief Creates GetHumansReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetHumansReply.
+     */
+    Message::SingleHandle createGetHumansReply(
+        std::string      const   a_code,
+        std::string      const   a_message,
+        Message::Objects const & a_objects
+    ) const;
+
+    /**
+     * @brief Creates GetResourceReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetResourceReply.
+     */
+    Message::SingleHandle createGetResourceReply(
+        std::string     const   a_code,
+        std::string     const   a_message,
+        Message::Object const & a_object
+    ) const;
+
+    /**
+     * @brief Creates GetResourcesReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetResourcesReply.
+     */
+    Message::SingleHandle createGetResourcesReply(
+        std::string      const   a_code,
+        std::string      const   a_message,
+        Message::Objects const & a_objects
+    ) const;
+
+    /**
+     * @brief Creates CreateUserReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateUserReply.
+     */
+    Message::SingleHandle createCreateUserReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates CreateWorldReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateWorldReply.
+     */
+    Message::SingleHandle createCreateWorldReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates CreateEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return CreateEpochReply.
+     */
+    Message::SingleHandle createCreateEpochReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates DeleteEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DeleteEpochReply.
+     */
+    Message::SingleHandle createDeleteEpochReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates ActivateEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return ActivateEpochReply.
+     */
+    Message::SingleHandle createActivateEpochReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates DectivateEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return DectivateEpochReply.
+     */
+    Message::SingleHandle createDeactivateEpochReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates FinishEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return FinishEpochReply.
+     */
+    Message::SingleHandle createFinishEpochReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates TickEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return TickEpochReply.
+     */
+    Message::SingleHandle createTickEpochReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates GetEpochReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_object  The object.
+     *
+     * @return GetEpochReply.
+     */
+    Message::SingleHandle createGetEpochReply(
+        std::string     const   a_code,
+        std::string     const   a_message,
+        Message::Object const & a_object
+    ) const;
+
+    /**
+     * @brief Creates TransportHumanReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return TransportHumanReply.
+     */
+    Message::SingleHandle createTransportHumanReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates TransportResourceReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return TransportResourceReply.
+     */
+    Message::SingleHandle createTransportResourceReply(
+        std::string const a_code,
+        std::string const a_message
     ) const;
 };
 

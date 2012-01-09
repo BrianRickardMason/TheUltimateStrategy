@@ -86,6 +86,62 @@ public:
     );
 
     /**
+     * @brief Adds the reply.
+     */
+    void addReply();
+
+    /**
+     * @brief Adds the exit code.
+     *
+     * @param a_code The exit code.
+     */
+    void addCode(
+        std::string const a_code
+    );
+
+    /**
+     * @brief Adds the message.
+     *
+     * @param a_message The message.
+     */
+    void addMessage(
+        std::string const a_message
+    );
+
+    /**
+     * @brief Adds the specific reply.
+     *
+     * @param a_reply The name of the reply.
+     */
+    void addSpecificReply(
+        std::string const a_reply
+    );
+
+    /**
+     * @brief Adds an object.
+     *
+     * @param a_object_name The name of the object.
+     * @param a_object      The object.
+     */
+    void addObject(
+        std::string     const   a_object_name,
+        Message::Object const & a_object
+    );
+
+    /**
+     * @brief Adds objects.
+     *
+     * @param a_objects_name The name of the objects.
+     * @param a_object_name  The name of the object.
+     * @param a_objects      The objects.
+     */
+    void addObjects(
+        std::string      const   a_objects_name,
+        std::string      const   a_object_name,
+        Message::Objects const & a_objects
+    );
+
+    /**
      * @brief Extracts the message.
      *
      * @return The built message.

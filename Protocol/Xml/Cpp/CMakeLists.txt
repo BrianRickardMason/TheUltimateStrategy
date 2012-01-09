@@ -30,9 +30,11 @@ PROJECT(protocolxmlcpp)
 INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/../../..)
 
 ADD_LIBRARY(protocolxmlcpp
+    LanguageToProtocolTranslator.cpp
     Message.cpp
     MessageBuilder.cpp
     MessageFactory.cpp
+    ProtocolToLanguageTranslator.cpp
 )
 
 TARGET_LINK_LIBRARIES(protocolxmlcpp
