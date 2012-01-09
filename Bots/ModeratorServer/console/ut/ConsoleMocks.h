@@ -8,6 +8,9 @@
 
 class MockConsole: public IConsole {
 public:
+    MockConsole();
+    virtual ~MockConsole();
+    
     MOCK_METHOD1( echo, void(const std::string& aString));
     MOCK_METHOD0( interpretLine, void ());
     MOCK_METHOD0( run, void ());
@@ -19,14 +22,20 @@ public:
 
 class MockCommand: public ACommand { 
 public:
-    MOCK_CONST_METHOD0( execute, int());
+    MockCommand(const Params& aParams);
     
-    MockCommand(const Params& aParams): ACommand(aParams){}
+    virtual ~MockCommand();
+    
+    MOCK_CONST_METHOD0( execute, int());
 };
 
 #include <ICommandCreator.h>
 
 class MockCommandCreator: public ICommandCreator {
+public:
+    MockCommandCreator();
+    virtual ~MockCommandCreator();
+    
     /**
      * To be wrapped to get the proper API
      */
@@ -43,6 +52,9 @@ class MockCommandCreator: public ICommandCreator {
 
 class MockConsoleInterpreter: public IConsoleInterpreter {
 public:
+    MockConsoleInterpreter();
+    virtual ~MockConsoleInterpreter();
+    
     MOCK_METHOD3(interpret, bool(const std::string& aInput, std::string& outName, ICommand::Params& outParams));
 };
 
@@ -50,6 +62,9 @@ public:
 
 class MockCommandFactory: public ICommandFactory {
 public:
+    MockCommandFactory();
+    virtual ~MockCommandFactory();
+    
     MOCK_CONST_METHOD0( availableCommands, std::list< std::string > () );
     /**
      * To be wrapped to get auto_ptr in return
@@ -67,6 +82,9 @@ public:
 
 class MockConfigurableCommandFactory: public IConfigurableCommandFactory {
 public:
+    MockConfigurableCommandFactory();
+    virtual ~MockConfigurableCommandFactory();
+    
     MOCK_CONST_METHOD0( availableCommands, std::list< std::string > () );
     /**
      * To be wrapped to get auto_ptr in return
