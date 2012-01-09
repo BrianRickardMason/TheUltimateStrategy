@@ -1,4 +1,12 @@
 
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
+
 #include <iostream>
 
 #include <IConsole.h>
@@ -7,7 +15,7 @@
 using namespace Poco;
 using namespace std;
 
-int main(){
+void manual(){
     ConsoleFacade c;
     
     std::string subject = "foo bar=blurp meh ra=\"bar bar\" kapow=':D' 'lol' \"rotfl\"";
@@ -30,6 +38,4 @@ int main(){
     con->setCommandFactory(ccfh);
     
     con->interpretLine();
-    
-    return 0;
 }
