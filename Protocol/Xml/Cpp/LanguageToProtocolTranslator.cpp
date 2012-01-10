@@ -28,9 +28,12 @@
 #include <Protocol/Xml/Cpp/LanguageToProtocolTranslator.hpp>
 #include <Protocol/Xml/Cpp/MessageFactory.hpp>
 #include <boost/assert.hpp>
+#include <boost/lexical_cast.hpp>
 
 namespace TUSProtocol
 {
+
+// TODO: Consider removing lexical cast.
 
 Message::SingleHandle LanguageToProtocolTranslator::translate(
     TUSLanguage::ICommand::SingleHandle a_command
@@ -275,6 +278,201 @@ Message::SingleHandle LanguageToProtocolTranslator::translate(
                        a_command->getParam("settlement_name_destination"),
                        a_command->getParam("resourcekey"),
                        a_command->getParam("volume")
+                   );
+
+        case TUSLanguage::ID_COMMAND_ECHO_REPLY:
+            return message_factory.createEchoReply(
+                       boost::lexical_cast<std::string>(a_command->getCode())
+                   );
+
+        case TUSLanguage::ID_COMMAND_ERROR_REPLY:
+            return message_factory.createErrorReply(
+                       boost::lexical_cast<std::string>(a_command->getCode())
+                   );
+
+        case TUSLanguage::ID_COMMAND_CREATE_LAND_REPLY:
+            return message_factory.createCreateLandReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_DELETE_LAND_REPLY:
+            return message_factory.createDeleteLandReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_LAND_REPLY:
+            return message_factory.createGetLandReply(
+                    boost::lexical_cast<std::string>(a_command->getCode()),
+                        a_command->getMessage(),
+                       a_command->getObjects().front()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_LANDS_REPLY:
+            return message_factory.createGetLandsReply(
+                    boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects()
+                   );
+
+        case TUSLanguage::ID_COMMAND_CREATE_SETTLEMENT_REPLY:
+            return message_factory.createCreateSettlementReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_DELETE_SETTLEMENT_REPLY:
+            return message_factory.createDeleteSettlementReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REPLY:
+            return message_factory.createGetSettlementReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects().front()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REPLY:
+            return message_factory.createGetSettlementsReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects()
+                   );
+
+        case TUSLanguage::ID_COMMAND_BUILD_BUILDING_REPLY:
+            return message_factory.createBuildBuildingReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_DESTROY_BUILDING_REPLY:
+            return message_factory.createDestroyBuildingReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_BUILDING_REPLY:
+            return message_factory.createGetBuildingReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects().front()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_BUILDINGS_REPLY:
+            return message_factory.createGetBuildingsReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects()
+                   );
+
+        case TUSLanguage::ID_COMMAND_DISMISS_HUMAN_REPLY:
+            return message_factory.createDismissHumanReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_ENGAGE_HUMAN_REPLY:
+            return message_factory.createEngageHumanReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_HUMAN_REPLY:
+            return message_factory.createGetHumanReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects().front()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_HUMANS_REPLY:
+            return message_factory.createGetHumansReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_RESOURCE_REPLY:
+            return message_factory.createGetResourceReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects().front()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_RESOURCES_REPLY:
+            return message_factory.createGetResourcesReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects()
+                   );
+
+        case TUSLanguage::ID_COMMAND_CREATE_USER_REPLY:
+            return message_factory.createCreateUserReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_CREATE_WORLD_REPLY:
+            return message_factory.createCreateWorldReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_CREATE_EPOCH_REPLY:
+            return message_factory.createCreateEpochReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_DELETE_EPOCH_REPLY:
+            return message_factory.createDeleteEpochReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_ACTIVATE_EPOCH_REPLY:
+            return message_factory.createActivateEpochReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_DEACTIVATE_EPOCH_REPLY:
+            return message_factory.createDeactivateEpochReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_FINISH_EPOCH_REPLY:
+            return message_factory.createFinishEpochReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_TICK_EPOCH_REPLY:
+            return message_factory.createTickEpochReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_GET_EPOCH_REPLY:
+            return message_factory.createGetEpochReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage(),
+                       a_command->getObjects().front()
+                   );
+
+        case TUSLanguage::ID_COMMAND_TRANSPORT_HUMAN_REPLY:
+            return message_factory.createTransportHumanReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
+                   );
+
+        case TUSLanguage::ID_COMMAND_TRANSPORT_RESOURCE_REPLY:
+            return message_factory.createTransportResourceReply(
+                       boost::lexical_cast<std::string>(a_command->getCode()),
+                       a_command->getMessage()
                    );
 
         default:
