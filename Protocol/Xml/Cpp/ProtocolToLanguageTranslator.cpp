@@ -37,6 +37,8 @@
 namespace TUSProtocol
 {
 
+// TODO: Add UTs for both translators.
+
 TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
     Message::SingleHandle a_message
 ) const
@@ -60,7 +62,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
     Element element_id = header->getChildElement("id");
     if (not element_id) throw std::exception();
 
-    id = boost::lexical_cast<unsigned short int>(element_id->innerText().c_str());
+    id = boost::lexical_cast<unsigned short int>(element_id->innerText());
 
     Element user = header->getChildElement("user");
     if (user)
@@ -69,8 +71,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
         Element element_password = user->getChildElement("password");
         if (not (element_login and element_password)) throw std::exception();
 
-        login = element_login->innerText().c_str();
-        password = element_password->innerText().c_str();
+        login = element_login->innerText();
+        password = element_password->innerText();
     }
 
     switch (id)
@@ -96,8 +98,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildCreateLandRequest(
                        login,
                        password,
-                       world_name->innerText().c_str(),
-                       land_name->innerText().c_str()
+                       world_name->innerText(),
+                       land_name->innerText()
                    );
         }
 
@@ -116,7 +118,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildDeleteLandRequest(
                        login,
                        password,
-                       land_name->innerText().c_str()
+                       land_name->innerText()
                    );
         }
 
@@ -134,7 +136,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetLandRequest(
                        login,
                        password,
-                       land_name->innerText().c_str()
+                       land_name->innerText()
                    );
         }
 
@@ -167,8 +169,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildCreateSettlementRequest(
                        login,
                        password,
-                       land_name->innerText().c_str(),
-                       settlement_name->innerText().c_str()
+                       land_name->innerText(),
+                       settlement_name->innerText()
                    );
         }
 
@@ -186,7 +188,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildDeleteSettlementRequest(
                        login,
                        password,
-                       settlement_name->innerText().c_str()
+                       settlement_name->innerText()
                    );
         }
 
@@ -204,7 +206,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetSettlementRequest(
                        login,
                        password,
-                       settlement_name->innerText().c_str()
+                       settlement_name->innerText()
                    );
         }
 
@@ -222,7 +224,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetSettlementsRequest(
                        login,
                        password,
-                       land_name->innerText().c_str()
+                       land_name->innerText()
                    );
         }
 
@@ -243,10 +245,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildBuildBuildingRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str(),
-                       buildingkey->innerText().c_str(),
-                       volume->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText(),
+                       buildingkey->innerText(),
+                       volume->innerText()
                    );
         }
 
@@ -267,10 +269,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildDestroyBuildingRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str(),
-                       buildingkey->innerText().c_str(),
-                       volume->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText(),
+                       buildingkey->innerText(),
+                       volume->innerText()
                    );
         }
 
@@ -290,9 +292,9 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetBuildingRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str(),
-                       buildingkey->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText(),
+                       buildingkey->innerText()
                    );
         }
 
@@ -311,8 +313,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetBuildingsRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText()
                    );
         }
 
@@ -333,10 +335,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildDismissHumanRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str(),
-                       humankey->innerText().c_str(),
-                       volume->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText(),
+                       humankey->innerText(),
+                       volume->innerText()
                    );
         }
 
@@ -357,10 +359,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildEngageHumanRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str(),
-                       humankey->innerText().c_str(),
-                       volume->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText(),
+                       humankey->innerText(),
+                       volume->innerText()
                    );
         }
 
@@ -380,9 +382,9 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetHumanRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str(),
-                       humankey->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText(),
+                       humankey->innerText()
                    );
         }
 
@@ -401,8 +403,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetHumansRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText()
                    );
         }
 
@@ -422,9 +424,9 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetHumanRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str(),
-                       resourcekey->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText(),
+                       resourcekey->innerText()
                    );
         }
 
@@ -443,8 +445,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetResourcesRequest(
                        login,
                        password,
-                       idholderclass->innerText().c_str(),
-                       holder_name->innerText().c_str()
+                       idholderclass->innerText(),
+                       holder_name->innerText()
                    );
         }
 
@@ -461,8 +463,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (login and password)) throw std::exception();
 
             return request_builder.buildCreateUserRequest(
-                       login->innerText().c_str(),
-                       password->innerText().c_str()
+                       login->innerText(),
+                       password->innerText()
                    );
         }
 
@@ -480,7 +482,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildCreateWorldRequest(
                        login,
                        password,
-                       world_name->innerText().c_str()
+                       world_name->innerText()
                    );
         }
 
@@ -499,8 +501,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildCreateEpochRequest(
                        login,
                        password,
-                       world_name->innerText().c_str(),
-                       epoch_name->innerText().c_str()
+                       world_name->innerText(),
+                       epoch_name->innerText()
                    );
         }
 
@@ -518,7 +520,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildDeleteEpochRequest(
                        login,
                        password,
-                       world_name->innerText().c_str()
+                       world_name->innerText()
                    );
         }
 
@@ -536,7 +538,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildActivateEpochRequest(
                        login,
                        password,
-                       world_name->innerText().c_str()
+                       world_name->innerText()
                    );
         }
 
@@ -554,7 +556,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildDeactivateEpochRequest(
                        login,
                        password,
-                       world_name->innerText().c_str()
+                       world_name->innerText()
                    );
         }
 
@@ -572,7 +574,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildFinishEpochRequest(
                        login,
                        password,
-                       world_name->innerText().c_str()
+                       world_name->innerText()
                    );
         }
 
@@ -590,7 +592,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildTickEpochRequest(
                        login,
                        password,
-                       world_name->innerText().c_str()
+                       world_name->innerText()
                    );
         }
 
@@ -608,7 +610,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildGetEpochRequest(
                        login,
                        password,
-                       world_name->innerText().c_str()
+                       world_name->innerText()
                    );
         }
 
@@ -631,10 +633,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildTransportHumanRequest(
                        login,
                        password,
-                       settlement_name_source->innerText().c_str(),
-                       settlement_name_destination->innerText().c_str(),
-                       humankey->innerText().c_str(),
-                       volume->innerText().c_str()
+                       settlement_name_source->innerText(),
+                       settlement_name_destination->innerText(),
+                       humankey->innerText(),
+                       volume->innerText()
                    );
         }
 
@@ -657,10 +659,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             return request_builder.buildTransportResourceRequest(
                        login,
                        password,
-                       settlement_name_source->innerText().c_str(),
-                       settlement_name_destination->innerText().c_str(),
-                       resourcekey->innerText().c_str(),
-                       volume->innerText().c_str()
+                       settlement_name_source->innerText(),
+                       settlement_name_destination->innerText(),
+                       resourcekey->innerText(),
+                       volume->innerText()
                    );
         }
 
@@ -675,7 +677,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element code = specific_reply->getChildElement("code");
             if (not code) throw std::exception();
 
-            return reply_builder.buildEchoReply(boost::lexical_cast<unsigned short int>(code->innerText().c_str()));
+            return reply_builder.buildEchoReply(boost::lexical_cast<unsigned short int>(code->innerText()));
         }
 
         case TUSLanguage::ID_COMMAND_ERROR_REPLY:
@@ -689,7 +691,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element code = specific_reply->getChildElement("code");
             if (not code) throw std::exception();
 
-            return reply_builder.buildErrorReply(boost::lexical_cast<unsigned short int>(code->innerText().c_str()));
+            return reply_builder.buildErrorReply(boost::lexical_cast<unsigned short int>(code->innerText()));
         }
 
         case TUSLanguage::ID_COMMAND_CREATE_LAND_REPLY:
@@ -705,7 +707,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateLandReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -723,7 +725,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeleteLandReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -757,7 +759,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             object.insert(std::make_pair("granted", granted->innerText()));
 
             return reply_builder.buildGetLandReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        object
                    );
@@ -803,7 +805,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             }
 
             return reply_builder.buildGetLandsReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        objects
                    );
@@ -822,7 +824,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateSettlementReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -840,7 +842,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeleteSettlementReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -870,7 +872,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             object.insert(std::make_pair("settlement_name", settlement_name->innerText()));
 
             return reply_builder.buildGetSettlementReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        object
                    );
@@ -912,7 +914,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             }
 
             return reply_builder.buildGetSettlementsReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        objects
                    );
@@ -931,7 +933,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildBuildBuildingReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -949,7 +951,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDestroyBuildingReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -981,7 +983,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             object.insert(std::make_pair("volume", volume->innerText()));
 
             return reply_builder.buildGetBuildingReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        object
                    );
@@ -1025,7 +1027,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             }
 
             return reply_builder.buildGetBuildingsReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        objects
                    );
@@ -1044,7 +1046,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDismissHumanReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1062,7 +1064,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildEngageHumanReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1096,7 +1098,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             object.insert(std::make_pair("volume", volume->innerText()));
 
             return reply_builder.buildGetHumanReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        object
                    );
@@ -1142,7 +1144,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             }
 
             return reply_builder.buildGetHumansReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        objects
                    );
@@ -1173,7 +1175,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             object.insert(std::make_pair("volume", volume->innerText()));
 
             return reply_builder.buildGetResourceReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        object
                    );
@@ -1215,7 +1217,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             }
 
             return reply_builder.buildGetResourcesReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        objects
                    );
@@ -1234,7 +1236,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateUserReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1252,7 +1254,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateWorldReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1270,7 +1272,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1288,7 +1290,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeleteEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1306,7 +1308,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildActivateEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1324,7 +1326,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeactivateEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1342,7 +1344,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildFinishEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1360,7 +1362,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildTickEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1396,7 +1398,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             object.insert(std::make_pair("ticks", ticks->innerText()));
 
             return reply_builder.buildGetEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText(),
                        object
                    );
@@ -1415,7 +1417,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildTransportHumanReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
@@ -1433,7 +1435,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             if (not (code and message)) throw std::exception();
 
             return reply_builder.buildTransportResourceReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText().c_str()),
+                       boost::lexical_cast<unsigned short int>(code->innerText()),
                        message->innerText()
                    );
         }
