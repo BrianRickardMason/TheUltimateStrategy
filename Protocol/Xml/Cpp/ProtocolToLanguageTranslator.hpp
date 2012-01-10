@@ -34,7 +34,7 @@
 namespace TUSProtocol
 {
 
-// TODO: Dear future me, if you don't refactor this class within 6 months, I ma going to give you a titty twister.
+// TODO: Dear future me, if you don't refactor this class within 6 months, I am going to give you a titty twister.
 class ProtocolToLanguageTranslator
 {
 public:
@@ -47,7 +47,8 @@ public:
      *
      * @return The command.
      *
-     * @throw std::exception In case of failure.
+     * @throw std::exception          In case of failure.
+     * @throw boost::bad_lexical_cast In case of invalid reply code.
      */
     TUSLanguage::ICommand::SingleHandle translate(
         Message::SingleHandle a_message
