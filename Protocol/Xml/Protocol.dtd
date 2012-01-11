@@ -1,4 +1,4 @@
-<!DOCTYPE message>
+<!DOCTYPE message [
 <!ELEMENT message (header,(request|reply|indication))>
 <!ELEMENT header (id,user?)>
 <!ELEMENT user (login,password)>
@@ -12,7 +12,7 @@
                   |create_settlement_request
                   |delete_settlement_request
                   |get_settlement_request
-                  |get_settlements_request)>
+                  |get_settlements_request)
                   |build_building_request
                   |destroy_building_request
                   |get_building_request
@@ -170,3 +170,4 @@
 <!ELEMENT ticks (#PCDATA)>
 <!ELEMENT volume (#PCDATA)>
 <!ELEMENT world_name (#PCDATA)>
+]>
