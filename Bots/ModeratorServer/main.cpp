@@ -189,7 +189,11 @@ protected:
 
 };
 
+void test();
 int main(int aNumberOfArguments, char **aArguments){
+    test();
+    //^ quick hack tests, see below
+    
     ModeratorContextBuilder ctxBuider;
     ctxBuider.make();
     ctxBuider.fillDefault();
@@ -208,6 +212,8 @@ int main(int aNumberOfArguments, char **aArguments){
 #include "TusCommands.h"
 
 #include <Poco/DOM/DOMWriter.h>
+#include <Poco/XML/XMLWriter.h>
+#include <Protocol/Xml/Cpp/MessageFactory.hpp>
 
 void test(){
     TusCommandBuilder b;
@@ -220,7 +226,19 @@ void test(){
     std::auto_ptr<TusCommand> cmd( b.extract() );
     
     Poco::XML::DOMWriter writer;
-    writer.writeNode(std::clog, cmd.get()); 
+    writer.setOptions(
+            Poco::XML::XMLWriter::PRETTY_PRINT 
+        |   Poco::XML::XMLWriter::WRITE_XML_DECLARATION
+    );
     
+    writer.writeNode(std::clog, cmd.get());
     std::clog << "\n\n" << std::endl;
+    
+    TUSProtocol::MessageFactory fac;
+    TUSProtocol::Message::SingleHandle msg = fac.createCreateWorldRequest("modbot","modbotpass","World");
+    
+    writer.writeNode(std::clog, msg.get());
+    std::clog << "\n\n" << std::endl;
+    
+    std::clog << "----------- hacking zone ends --------------" << std::endl;
 }

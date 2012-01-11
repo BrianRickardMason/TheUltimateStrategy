@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 
+#include <Poco/DOM/DOMImplementation.h>
 #include <Poco/DOM/Document.h>
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/NodeList.h>
@@ -18,6 +19,9 @@ public:
     TusCommand(Poco::XML::NamePool* pNamePool = 0)
     :   Document(pNamePool){}
     
+    TusCommand(Poco::XML::DocumentType* pDocumentType, Poco::XML::NamePool* pNamePool = 0)
+    :   Document(pDocumentType, pNamePool){}
+    
     virtual ~TusCommand(){};
 };
 
@@ -27,6 +31,9 @@ public:
     
     TusReturnValue(Poco::XML::NamePool* pNamePool = 0)
     :   Document(pNamePool){}
+    
+    TusReturnValue(Poco::XML::DocumentType* pDocumentType, Poco::XML::NamePool* pNamePool = 0)
+    :   Document(pDocumentType, pNamePool){}
     
     virtual ~TusReturnValue(){};
 };
@@ -45,7 +52,8 @@ public:
     void makeCommand(const std::string aCommandName){
         using Poco::XML::Document;
         
-        mDocument.reset( new TusCommand() );
+        mDocument.reset( new TusCommand(
+            Poco::XML::DOMImplementation::instance().createDocumentType("message","TUS 1.0 -- RPC protocol","Protocol.dtd")) );
         mCurrentNode = mDocument.get();
         
         Poco::XML::Element *el = mDocument->createElement("request") ;

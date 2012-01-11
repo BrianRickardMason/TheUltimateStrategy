@@ -4,6 +4,7 @@ project(moderator)
 
 include_directories(
     console/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../..
 )
 
 add_executable(moderator 
@@ -20,6 +21,7 @@ add_executable(moderator
 
 target_link_libraries(moderator
     console
+    protocolxmlcpp
     PocoNet PocoFoundation PocoXML PocoUtil
 )
 
