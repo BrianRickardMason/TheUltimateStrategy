@@ -28,6 +28,7 @@
 #include <Poco/AutoPtr.h>
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/Text.h>
+#include <Poco/DOM/DOMImplementation.h>
 #include <Protocol/Xml/Cpp/MessageBuilder.hpp>
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
@@ -35,13 +36,24 @@
 namespace TUSProtocol
 {
 
+MessageBuilder::MessageBuilder():
+    ROOT_ELEMENT_NAME("message"),
+    DTD_FORMAL_PUBLIC_IDENTIFIER("-//BrianRickardMason//TUS -- RPC protocol 1.0//EN"),
+    DTD_FILE_PATH("Protocol.dtd")
+{
+    m_document_type = Poco::XML::DOMImplementation::instance().createDocumentType(
+        ROOT_ELEMENT_NAME, DTD_FORMAL_PUBLIC_IDENTIFIER, DTD_FILE_PATH
+    );
+}
+
+
 void MessageBuilder::makeMessage()
 {
-    m_document.reset(new Message());
+    m_document.reset(new Message(m_document_type.get()));
 
     m_current_node = m_document.get();
 
-    Poco::AutoPtr<Poco::XML::Element> message = m_document->createElement("message");
+    Poco::AutoPtr<Poco::XML::Element> message = m_document->createElement(ROOT_ELEMENT_NAME);
 
     m_current_node = m_current_node->appendChild(message);
 }

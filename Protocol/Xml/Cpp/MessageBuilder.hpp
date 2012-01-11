@@ -31,6 +31,9 @@
 #include <Protocol/Xml/Cpp/Message.hpp>
 #include <boost/noncopyable.hpp>
 
+#include <Poco/AutoPtr.h>
+#include <Poco/DOM/DocumentType.h>
+
 namespace TUSProtocol
 {
 
@@ -38,6 +41,11 @@ class MessageBuilder
     : boost::noncopyable
 {
 public:
+    /**
+     * @brief Ctor.
+     */
+    MessageBuilder();
+    
     /**
      * @brief Initializes the building of a message.
      */
@@ -149,7 +157,12 @@ public:
     Message::SingleHandle extract();
 
 private:
-   /**
+    /**
+     * @brief The document type definition of created messages.
+     */
+    Poco::AutoPtr<Poco::XML::DocumentType> m_document_type;
+    
+    /**
     * @brief The document representing the message.
     */
     Message::SingleHandle m_document;
@@ -158,6 +171,11 @@ private:
      * @brief The current node of the document.
      */
     Poco::XML::Node * m_current_node;
+public:
+    // TODO : refactor this out of here?
+    const std::string ROOT_ELEMENT_NAME;
+    const std::string DTD_FORMAL_PUBLIC_IDENTIFIER;
+    const std::string DTD_FILE_PATH;
 };
 
 } // namespace TUSProtocol

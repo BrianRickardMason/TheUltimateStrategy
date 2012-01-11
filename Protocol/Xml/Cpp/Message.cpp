@@ -35,6 +35,15 @@ Message::Message(
 )
     : Document(a_name_pool)
 {
-};
+}
+
+Message::Message(
+    Poco::XML::DocumentType* a_document_type, 
+    Poco::XML::NamePool* a_name_pool
+)
+    : Document(a_document_type, a_name_pool)
+{
+}
+
 
 } // namespace TUSProtocol
