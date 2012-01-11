@@ -6,6 +6,15 @@
 #include "ModeratorServerConfiguration.h"
 #include "Credentials.h"
 
+ModeratorContextBuilder::ModeratorContextBuilder()
+:
+    LOCALHOST("127.0.0.1"),
+    DEFAULT_MODERATOR_LOGIN("modbot"),
+    DEFAULT_MODERATOR_PASSWORD("modbotpass")
+{}
+
+ModeratorContextBuilder::~ModeratorContextBuilder(){}
+
 IModeratorContext::Handle ModeratorContextBuilder::extract() {
     return IModeratorContext::Handle( mContext.release() );
 }
@@ -23,16 +32,18 @@ void ModeratorContextBuilder::fillDefault() {
     mContext->mServerConf.reset( new ModeratorServerConfiguration());
     mContext->mConsoleFacade.reset( new ConsoleFacade());
     
-    mContext->mBotConnectionConf->setServerAddress("127.0.0.1");
+    mContext->mBotConnectionConf->setServerAddress(LOCALHOST);
     mContext->mBotConnectionConf->setServerPort(2222);
     
-    mContext->mServerConf->setAddress("127.0.0.1");
+    mContext->mServerConf->setAddress(LOCALHOST);
     mContext->mServerConf->setPort(3333);
     
-    mContext->mModeratorCredentials.reset( new Credentials("modbot", "modbotpass"));
+    mContext->mModeratorCredentials.reset( 
+        new Credentials(DEFAULT_MODERATOR_LOGIN, DEFAULT_MODERATOR_PASSWORD)
+    );
 }
 
 void ModeratorContextBuilder::make() {
-    mContext.reset( new ModeratorContext);
+    mContext.reset( new ModeratorContext());
 }
 

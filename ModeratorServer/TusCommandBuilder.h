@@ -9,8 +9,11 @@
 #include <Poco/DOM/Document.h>
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/NodeList.h>
+#include <Poco/DOM/DocumentType.h>
+
 #include <stdexcept>
 #include "Credentials.h"
+#include <Poco/AutoPtr.h>
 
 class TusCommand: public Poco::XML::Document {
 public:
@@ -51,18 +54,22 @@ class TusCommandBuilder {
 public:
     void makeCommand(const std::string aCommandName){
         using Poco::XML::Document;
+        using Poco::XML::DocumentType;
         
-        mDocument.reset( new TusCommand(
-            Poco::XML::DOMImplementation::instance().createDocumentType("message","TUS 1.0 -- RPC protocol","Protocol.dtd")) );
+        Poco::AutoPtr<DocumentType> dtd(
+            Poco::XML::DOMImplementation::instance().createDocumentType(
+                "message","TUS 1.0 -- RPC protocol","Protocol.dtd"));
+        
+        mDocument.reset( new TusCommand(dtd.get()) );
         mCurrentNode = mDocument.get();
         
-        Poco::XML::Element *el = mDocument->createElement("request") ;
+        Poco::AutoPtr<Poco::XML::Element> el = mDocument->createElement("request") ;
         el->setAttribute("id",aCommandName);
-        mCurrentNode = mCurrentNode->appendChild( el );
+        mCurrentNode = mCurrentNode->appendChild( el.get() );
     }
     
     void setCredentials(const Credentials& aCredentials){
-        Poco::XML::Element *el;
+        Poco::AutoPtr<Poco::XML::Element> el;
         
         el = mDocument->createElement("user");
         mDocument->documentElement()->appendChild(el);
@@ -80,8 +87,8 @@ public:
     }
     
     void openParamSet(){
-        Poco::XML::Element *el;
-        Poco::XML::NodeList *nl = mDocument->getElementsByTagName("parameters");
+        Poco::AutoPtr<Poco::XML::Element> el;
+        Poco::AutoPtr<Poco::XML::NodeList> nl = mDocument->getElementsByTagName("parameters");
         
         if( nl->length() == 1){
             mCurrentNode = nl->item(0);
@@ -101,7 +108,7 @@ public:
     }
     
     void addParam(const std::string aParam, const std::string aValue){
-        Poco::XML::Element *el;
+        Poco::AutoPtr<Poco::XML::Element> el;
         el = mDocument->createElement(aParam);
         el->setAttribute("value", aValue);
         mCurrentNode->appendChild(el);

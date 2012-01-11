@@ -43,7 +43,7 @@ class BotConnectionManager;
 class Moderator: public Poco::Util::ServerApplication {
 public:
     Moderator(IModeratorContext::Handle aContext)
-        :   mContext(aContext), mServerRunning(false), 
+        :   mContext(aContext), mServerRunning(false), mHelpRequested(false), mBotManger(),
             mConsole(mContext->getConsoleFacade().createConsole(std::cin, std::cout, std::cerr, std::clog)) {
         //---
         setupCommands();
@@ -190,21 +190,28 @@ protected:
 };
 
 void test();
+
+
+
 int main(int aNumberOfArguments, char **aArguments){
     test();
     //^ quick hack tests, see below
     
-    ModeratorContextBuilder ctxBuider;
-    ctxBuider.make();
-    ctxBuider.fillDefault();
-    // config for SimpleGameControl
-    ctxBuider.peek().Config()["sgc_ticks"] = "20";
-    ctxBuider.peek().Config()["sgc_epochs"] = "1";
-    ctxBuider.peek().Config()["sgc_world"] = "World";
-    ctxBuider.peek().Config()["sgc_notify"] = "1";
-    ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
+    std::auto_ptr< Moderator > moderator;
+    {
+        ModeratorContextBuilder ctxBuider;
+        ctxBuider.make();
+        ctxBuider.fillDefault();
+        // config for SimpleGameControl
+        ctxBuider.peek().Config()["sgc_ticks"] = "20";
+        ctxBuider.peek().Config()["sgc_epochs"] = "1";
+        ctxBuider.peek().Config()["sgc_world"] = "World";
+        ctxBuider.peek().Config()["sgc_notify"] = "1";
+        ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
+        
+        moderator.reset( new Moderator(ctxBuider.extract()) );
+    }
     
-    std::auto_ptr< Moderator > moderator( new Moderator(ctxBuider.extract()) );
     return moderator->run(aNumberOfArguments, aArguments);
 }
 

@@ -11,7 +11,7 @@ class IModeratorInterface {
 public:
     typedef Poco::SharedPtr<IModeratorInterface> Handle;
     
-    virtual void setModeratorCredentials(const Credentials& aCredenetials)=0;
+    virtual void setModeratorCredentials(const Credentials& aCredentials)=0;
     
     virtual int createWorld(const std::string& aWorldName)=0;
     virtual void setCurrentWorld(const std::string& aWorldName)=0;
@@ -24,6 +24,8 @@ public:
     virtual int deleteEpoch()=0;
     
     virtual void notifyTick()=0;
+    
+    virtual ~IModeratorInterface(){}
 };
 
 #endif

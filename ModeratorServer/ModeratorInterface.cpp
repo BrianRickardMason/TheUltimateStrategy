@@ -15,7 +15,7 @@
 #include <iostream>
 
 ModeratorInterface::ModeratorInterface(IModeratorContext::Handle aContext, IBotManager::Handle aManager): 
-    mContext(aContext), mBotManager(aManager) {
+    mContext(aContext), mBotManager(aManager), mCredentials() {
 
 }
 
@@ -95,9 +95,9 @@ int ModeratorInterface::executeCommand(std::auto_ptr< TusCommand >& in){
     
     sendCommand(in,ret);
 
+    Poco::AutoPtr<Poco::XML::NodeList> nl = ret->getElementsByTagName("status");
     std::stringstream status;
-    status << ret->getElementsByTagName("status")->item(0)->
-                attributes()->getNamedItem("value")->getNodeValue();
+    status << nl->item(0)->attributes()->getNamedItem("value")->getNodeValue();
     int r = -1;
     status >> r;
     
