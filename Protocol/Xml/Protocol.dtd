@@ -1,4 +1,25 @@
-<!DOCTYPE message [
+<!--
+    The Ultimate Strategy Protocol external DTD
+
+    The FPI of this document is
+    "-//BrianRickardMason//TUS -- RPC protocol 1.0//EN"
+-->
+<!--
+    Typical usage:
+    <!DOCTYPE message 
+        PUBLIC "-//BrianRickardMason//TUS -- RPC protocol 1.0//EN" 
+        SYSTEM "Protocol.dtd">
+    <message>
+        ...
+    </message>
+
+    <!DOCTYPE message 
+        PUBLIC "-//BrianRickardMason//TUS -- RPC protocol 1.0//EN" 
+        SYSTEM "https://raw.github.com/BrianRickardMason/TheUltimateStrategy/master/Protocol/Xml/Protocol.dtd">
+    <message>
+        ...
+    </message>
+-->
 <!ELEMENT message (header,(request|reply|indication))>
 <!ELEMENT header (id,user?)>
 <!ELEMENT user (login,password)>
@@ -170,4 +191,3 @@
 <!ELEMENT ticks (#PCDATA)>
 <!ELEMENT volume (#PCDATA)>
 <!ELEMENT world_name (#PCDATA)>
-]>
