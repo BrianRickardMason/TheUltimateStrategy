@@ -41,7 +41,7 @@ void MessageBuilder::makeMessage()
 
     m_current_node = m_document.get();
 
-    Poco::XML::Element * message = m_document->createElement("message");
+    Poco::AutoPtr<Poco::XML::Element> message = m_document->createElement("message");
 
     m_current_node = m_current_node->appendChild(message);
 }
