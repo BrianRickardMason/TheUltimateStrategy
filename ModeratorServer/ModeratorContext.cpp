@@ -1,9 +1,9 @@
 
 #include "ModeratorContext.h"
 
+#include <ConsoleFacade.h>
 #include "BotConnectionConfiguration.h"
 #include "ModeratorServerConfiguration.h"
-
 #include "Credentials.h"
 
 ModeratorContext::ModeratorContext()

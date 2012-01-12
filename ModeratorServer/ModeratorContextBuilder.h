@@ -4,9 +4,6 @@
 
 #include "ModeratorContext.h"
 
-/// TODO revert wtf valgrind debugging
-#include "wtf.h"
-
 class ModeratorContextBuilder {
 public:
     ModeratorContextBuilder();
@@ -22,9 +19,9 @@ public:
 private:
     std::auto_ptr<ModeratorContext> mContext;
     
-    const wtf::string LOCALHOST;
-    const wtf::string DEFAULT_MODERATOR_LOGIN;
-    const wtf::string DEFAULT_MODERATOR_PASSWORD;
+    const std::string LOCALHOST;
+    const std::string DEFAULT_MODERATOR_LOGIN;
+    const std::string DEFAULT_MODERATOR_PASSWORD;
 };
 
 #endif

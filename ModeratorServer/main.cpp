@@ -191,19 +191,11 @@ protected:
 
 void test();
 
-
-
 int main(int aNumberOfArguments, char **aArguments){
-    //test();
-	std::clog << "***hack" << std::endl;
-	{
-    ModeratorContextBuilder b;
-    b.make();
-	b.fillDefault();
-	}
-	std::clog << "###slash" << std::endl;
-	return 0;
-	//^ quick hack tests, see below
+    std::clog << "***hack" << std::endl;
+    test();
+    std::clog << "###slash" << std::endl;
+    //^ quick hack tests, see below
     
     std::auto_ptr< Moderator > moderator;
     {
@@ -211,12 +203,11 @@ int main(int aNumberOfArguments, char **aArguments){
         ctxBuider.make();
         ctxBuider.fillDefault();
         // config for SimpleGameControl
-		
         ctxBuider.peek().Config()["sgc_ticks"] = "20";
         ctxBuider.peek().Config()["sgc_epochs"] = "1";
         ctxBuider.peek().Config()["sgc_world"] = "World";
         ctxBuider.peek().Config()["sgc_notify"] = "1";
-		ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
+        ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
         
         moderator.reset( new Moderator(ctxBuider.extract()) );
     }
@@ -255,6 +246,4 @@ void test(){
     
     writer.writeNode(std::clog, msg.get());
     std::clog << "\n\n" << std::endl;
-    
-    std::clog << "----------- hacking zone ends --------------" << std::endl;
 }
