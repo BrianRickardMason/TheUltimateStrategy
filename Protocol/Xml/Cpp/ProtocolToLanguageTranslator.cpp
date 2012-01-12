@@ -670,11 +670,11 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            if (not code) throw std::exception();
+
             Element specific_reply = reply->getChildElement("echo_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            if (not code) throw std::exception();
 
             return reply_builder.buildEchoReply(boost::lexical_cast<unsigned short int>(code->innerText()));
         }
@@ -684,11 +684,11 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            if (not code) throw std::exception();
+
             Element specific_reply = reply->getChildElement("error_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            if (not code) throw std::exception();
 
             return reply_builder.buildErrorReply(boost::lexical_cast<unsigned short int>(code->innerText()));
         }
@@ -698,12 +698,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("create_land_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateLandReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -716,12 +716,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("delete_land_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeleteLandReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -734,13 +734,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_land_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_land_reply = specific_reply->getChildElement("get_land_reply");
-            if (not (code and message and get_land_reply)) throw std::exception();
+            if (not get_land_reply) throw std::exception();
 
             Element land = get_land_reply->getChildElement("land");
             if (not land) throw std::exception();
@@ -769,13 +771,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_lands_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_lands_reply = specific_reply->getChildElement("get_lands_reply");
-            if (not (code and message and get_lands_reply)) throw std::exception();
+            if (not get_lands_reply) throw std::exception();
 
             Element lands = get_lands_reply->getChildElement("lands");
             if (not lands) throw std::exception();
@@ -815,12 +819,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("create_settlement_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateSettlementReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -833,12 +837,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("delete_settlement_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeleteSettlementReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -851,13 +855,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_settlement_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_settlement_reply = specific_reply->getChildElement("get_settlement_reply");
-            if (not (code and message and get_settlement_reply)) throw std::exception();
+            if (not get_settlement_reply) throw std::exception();
 
             Element settlement = get_settlement_reply->getChildElement("settlement");
             if (not settlement) throw std::exception();
@@ -882,13 +888,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_settlements_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_settlements_reply = specific_reply->getChildElement("get_settlements_reply");
-            if (not (code and message and get_settlements_reply)) throw std::exception();
+            if (not get_settlements_reply) throw std::exception();
 
             Element settlements = get_settlements_reply->getChildElement("settlements");
             if (not settlements) throw std::exception();
@@ -924,12 +932,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("build_building_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildBuildBuildingReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -942,12 +950,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("destroy_building_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDestroyBuildingReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -960,13 +968,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_building_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_building_reply = specific_reply->getChildElement("get_building_reply");
-            if (not (code and message and get_building_reply)) throw std::exception();
+            if (not get_building_reply) throw std::exception();
 
             Element building = get_building_reply->getChildElement("building");
             if (not building) throw std::exception();
@@ -993,13 +1003,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_buildings_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_buildings_reply = specific_reply->getChildElement("get_buildings_reply");
-            if (not (code and message and get_buildings_reply)) throw std::exception();
+            if (not get_buildings_reply) throw std::exception();
 
             Element buildings = get_buildings_reply->getChildElement("buildings");
             if (not buildings) throw std::exception();
@@ -1037,12 +1049,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("dismiss_human_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDismissHumanReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1055,12 +1067,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("engage_human_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildEngageHumanReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1073,13 +1085,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_human_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_human_reply = specific_reply->getChildElement("get_human_reply");
-            if (not (code and message and get_human_reply)) throw std::exception();
+            if (not get_human_reply) throw std::exception();
 
             Element human = get_human_reply->getChildElement("human");
             if (not human) throw std::exception();
@@ -1108,13 +1122,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_humans_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_humans_reply = specific_reply->getChildElement("get_humans_reply");
-            if (not (code and message and get_humans_reply)) throw std::exception();
+            if (not get_humans_reply) throw std::exception();
 
             Element humans = get_humans_reply->getChildElement("humans");
             if (not humans) throw std::exception();
@@ -1154,13 +1170,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_resource_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_resource_reply = specific_reply->getChildElement("get_resource_reply");
-            if (not (code and message and get_resource_reply)) throw std::exception();
+            if (not get_resource_reply) throw std::exception();
 
             Element resource = get_resource_reply->getChildElement("resource");
             if (not resource) throw std::exception();
@@ -1185,13 +1203,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_resources_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_resources_reply = specific_reply->getChildElement("get_resources_reply");
-            if (not (code and message and get_resources_reply)) throw std::exception();
+            if (not get_resources_reply) throw std::exception();
 
             Element resources = get_resources_reply->getChildElement("resources");
             if (not resources) throw std::exception();
@@ -1227,12 +1247,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("create_user_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateUserReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1245,12 +1265,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("create_world_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateWorldReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1263,12 +1283,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("create_epoch_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildCreateEpochReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1281,12 +1301,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("delete_epoch_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeleteEpochReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1299,12 +1319,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("activate_epoch_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildActivateEpochReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1317,12 +1337,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("deactivate_epoch_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildDeactivateEpochReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1335,12 +1355,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("finish_epoch_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildFinishEpochReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1353,12 +1373,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("tick_epoch_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildTickEpochReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1371,13 +1391,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("get_epoch_reply");
             if (not specific_reply) throw std::exception();
 
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
             Element get_epoch_reply = specific_reply->getChildElement("get_epoch_reply");
-            if (not (code and message and get_epoch_reply)) throw std::exception();
+            if (not get_epoch_reply) throw std::exception();
 
             Element epoch = get_epoch_reply->getChildElement("epoch");
             if (not epoch) throw std::exception();
@@ -1408,12 +1430,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("transport_human_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildTransportHumanReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
@@ -1426,12 +1448,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
 
+            Element code = reply->getChildElement("code");
+            Element message = reply->getChildElement("message");
+            if (not (code and message)) throw std::exception();
+
             Element specific_reply = reply->getChildElement("transport_resource_reply");
             if (not specific_reply) throw std::exception();
-
-            Element code = specific_reply->getChildElement("code");
-            Element message = specific_reply->getChildElement("message");
-            if (not (code and message)) throw std::exception();
 
             return reply_builder.buildTransportResourceReply(
                        boost::lexical_cast<unsigned short int>(code->innerText()),
