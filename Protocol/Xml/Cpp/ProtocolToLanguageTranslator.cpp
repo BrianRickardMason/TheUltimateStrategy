@@ -741,10 +741,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_land_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_land_reply = specific_reply->getChildElement("get_land_reply");
-            if (not get_land_reply) throw std::exception();
-
-            Element land = get_land_reply->getChildElement("land");
+            Element land = specific_reply->getChildElement("land");
             if (not land) throw std::exception();
 
             Element login = land->getChildElement("login");
@@ -862,10 +859,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_settlement_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_settlement_reply = specific_reply->getChildElement("get_settlement_reply");
-            if (not get_settlement_reply) throw std::exception();
-
-            Element settlement = get_settlement_reply->getChildElement("settlement");
+            Element settlement = specific_reply->getChildElement("settlement");
             if (not settlement) throw std::exception();
 
             Element land_name = settlement->getChildElement("land_name");
