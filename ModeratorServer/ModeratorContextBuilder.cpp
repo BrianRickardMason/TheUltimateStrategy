@@ -9,8 +9,8 @@
 ModeratorContextBuilder::ModeratorContextBuilder()
 :
     LOCALHOST("127.0.0.1"),
-    DEFAULT_MODERATOR_LOGIN("modbot"),
-    DEFAULT_MODERATOR_PASSWORD("modbotpass")
+	DEFAULT_MODERATOR_LOGIN("modbot"),
+	DEFAULT_MODERATOR_PASSWORD("modbotpass")
 {}
 
 ModeratorContextBuilder::~ModeratorContextBuilder(){}
@@ -29,14 +29,14 @@ ModeratorContext& ModeratorContextBuilder::peek() {
 
 void ModeratorContextBuilder::fillDefault() {
     mContext->mBotConnectionConf.reset(new BotConnectionConfiguration());
-    mContext->mServerConf.reset( new ModeratorServerConfiguration());
-    mContext->mConsoleFacade.reset( new ConsoleFacade());
-    
     mContext->mBotConnectionConf->setServerAddress(LOCALHOST);
     mContext->mBotConnectionConf->setServerPort(2222);
     
+    mContext->mServerConf.reset( new ModeratorServerConfiguration());
     mContext->mServerConf->setAddress(LOCALHOST);
     mContext->mServerConf->setPort(3333);
+    
+    mContext->mConsoleFacade.reset( new ConsoleFacade());
     
     mContext->mModeratorCredentials.reset( 
         new Credentials(DEFAULT_MODERATOR_LOGIN, DEFAULT_MODERATOR_PASSWORD)

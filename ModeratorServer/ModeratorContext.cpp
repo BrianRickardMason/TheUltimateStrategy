@@ -4,6 +4,8 @@
 #include "BotConnectionConfiguration.h"
 #include "ModeratorServerConfiguration.h"
 
+#include "Credentials.h"
+
 ModeratorContext::ModeratorContext()
 :
     mGeneralConfig()
@@ -48,6 +50,6 @@ ConsoleFacade& ModeratorContext::getConsoleFacade() {
     return *mConsoleFacade;
 }
 
-void ModeratorContext::setModeratorCredentials(std::auto_ptr< ConsoleFacade > aCredentials) {
-    mConsoleFacade = aCredentials;
+void ModeratorContext::setConsoleFacade(std::auto_ptr< ConsoleFacade > aConsoleFacade) {
+    mConsoleFacade = aConsoleFacade;
 }

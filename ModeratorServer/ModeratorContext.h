@@ -25,7 +25,7 @@ public:
     void setModeratorServerConf( std::auto_ptr<ModeratorServerConfiguration> aConf );
     void setBotConnectionConf( std::auto_ptr<BotConnectionConfiguration> aConf );
     void setModeratorCredentials( std::auto_ptr<Credentials> aCredentials );
-    void setModeratorCredentials( std::auto_ptr<ConsoleFacade> aCredentials );
+    void setConsoleFacade( std::auto_ptr<ConsoleFacade> aFacade );
     
     GeneralConfig& Config();
 private:

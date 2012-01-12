@@ -10,14 +10,16 @@ namespace wtf {
     public:
         string(const char* s): std::string(s){
             std::clog << "+wtf = " << this << " s = " 
-                << (unsigned)static_cast<std::string&>(*this).c_str() << "/" 
+                << (const void*)static_cast<std::string&>(*this).c_str() << "/" 
+                << (const void*)static_cast<std::string&>(*this).data() << "/" 
                 << static_cast<std::string&>(*this) << "/" 
-                << (unsigned)s 
+                << (const void*)s 
             << std::endl;
         }
         ~string(){
             std::clog << "-wtf = " << this << " s = " 
-                << (unsigned)static_cast<std::string&>(*this).c_str() << "/" 
+                << (const void*)static_cast<std::string&>(*this).c_str() << "/" 
+                << (const void*)static_cast<std::string&>(*this).data() << "/" 
                 << static_cast<std::string&>(*this) 
             << std::endl;
         }
