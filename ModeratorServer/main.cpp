@@ -191,10 +191,10 @@ protected:
 
 void test();
 
-
-
 int main(int aNumberOfArguments, char **aArguments){
+    std::clog << "***hack" << std::endl;
     test();
+    std::clog << "###slash" << std::endl;
     //^ quick hack tests, see below
     
     std::auto_ptr< Moderator > moderator;
@@ -246,6 +246,4 @@ void test(){
     
     writer.writeNode(std::clog, msg.get());
     std::clog << "\n\n" << std::endl;
-    
-    std::clog << "----------- hacking zone ends --------------" << std::endl;
 }
