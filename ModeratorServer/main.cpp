@@ -43,7 +43,7 @@ class BotConnectionManager;
 class Moderator: public Poco::Util::ServerApplication {
 public:
     Moderator(IModeratorContext::Handle aContext)
-        :   mContext(aContext), mServerRunning(false), 
+        :   mContext(aContext), mServerRunning(false), mHelpRequested(false), mBotManger(),
             mConsole(mContext->getConsoleFacade().createConsole(std::cin, std::cout, std::cerr, std::clog)) {
         //---
         setupCommands();
@@ -189,18 +189,29 @@ protected:
 
 };
 
+void test();
+
+
+
 int main(int aNumberOfArguments, char **aArguments){
-    ModeratorContextBuilder ctxBuider;
-    ctxBuider.make();
-    ctxBuider.fillDefault();
-    // config for SimpleGameControl
-    ctxBuider.peek().Config()["sgc_ticks"] = "20";
-    ctxBuider.peek().Config()["sgc_epochs"] = "1";
-    ctxBuider.peek().Config()["sgc_world"] = "World";
-    ctxBuider.peek().Config()["sgc_notify"] = "1";
-    ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
+    test();
+    //^ quick hack tests, see below
     
-    std::auto_ptr< Moderator > moderator( new Moderator(ctxBuider.extract()) );
+    std::auto_ptr< Moderator > moderator;
+    {
+        ModeratorContextBuilder ctxBuider;
+        ctxBuider.make();
+        ctxBuider.fillDefault();
+        // config for SimpleGameControl
+        ctxBuider.peek().Config()["sgc_ticks"] = "20";
+        ctxBuider.peek().Config()["sgc_epochs"] = "1";
+        ctxBuider.peek().Config()["sgc_world"] = "World";
+        ctxBuider.peek().Config()["sgc_notify"] = "1";
+        ctxBuider.peek().Config()["sgc_sleep"] = "1250"/*ms*/;
+        
+        moderator.reset( new Moderator(ctxBuider.extract()) );
+    }
+    
     return moderator->run(aNumberOfArguments, aArguments);
 }
 
@@ -208,6 +219,8 @@ int main(int aNumberOfArguments, char **aArguments){
 #include "TusCommands.h"
 
 #include <Poco/DOM/DOMWriter.h>
+#include <Poco/XML/XMLWriter.h>
+#include <Protocol/Xml/Cpp/MessageFactory.hpp>
 
 void test(){
     TusCommandBuilder b;
@@ -220,7 +233,19 @@ void test(){
     std::auto_ptr<TusCommand> cmd( b.extract() );
     
     Poco::XML::DOMWriter writer;
-    writer.writeNode(std::clog, cmd.get()); 
+    writer.setOptions(
+            Poco::XML::XMLWriter::PRETTY_PRINT 
+        |   Poco::XML::XMLWriter::WRITE_XML_DECLARATION
+    );
     
+    writer.writeNode(std::clog, cmd.get());
     std::clog << "\n\n" << std::endl;
+    
+    TUSProtocol::MessageFactory fac;
+    TUSProtocol::Message::SingleHandle msg = fac.createCreateWorldRequest("modbot","modbotpass","World");
+    
+    writer.writeNode(std::clog, msg.get());
+    std::clog << "\n\n" << std::endl;
+    
+    std::clog << "----------- hacking zone ends --------------" << std::endl;
 }

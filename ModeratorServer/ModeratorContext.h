@@ -14,6 +14,7 @@ class ConsoleFacade;
 class ModeratorContext: public IModeratorContext{
 public:
     ModeratorContext();
+    virtual ~ModeratorContext();
     
     virtual const IBotConnectionConfiguration& getBotConnectionConf()const;
     virtual const IModeratorServerConfiguration& getModeratorServerConf()const;

@@ -53,6 +53,17 @@ public:
     Message(
         Poco::XML::NamePool * a_name_pool = 0
     );
+    
+    /**
+     * @brief Ctor specifying document type.
+     * 
+     * @param a_document_type The document type definition.
+     * @param a_name_poll The name pool
+     */
+    Message(
+        Poco::XML::DocumentType* a_document_type, 
+        Poco::XML::NamePool* a_name_pool = 0
+    );
 };
 
 } // namespace TUSProtocol

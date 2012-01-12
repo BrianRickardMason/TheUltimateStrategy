@@ -7,10 +7,9 @@
 ModeratorContext::ModeratorContext()
 :
     mGeneralConfig()
-{
+{}
 
-}
-
+ModeratorContext::~ModeratorContext(){}
 
 const IBotConnectionConfiguration& ModeratorContext::getBotConnectionConf() const {
     return *mBotConnectionConf;
