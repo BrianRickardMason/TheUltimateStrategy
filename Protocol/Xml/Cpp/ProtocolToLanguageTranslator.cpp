@@ -420,7 +420,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element resourcekey = specific_request->getChildElement("resourcekey");
             if (not (idholderclass and holder_name and resourcekey)) throw std::exception();
 
-            return request_builder.buildGetHumanRequest(
+            return request_builder.buildGetResourceRequest(
                        login,
                        password,
                        idholderclass->innerText(),
