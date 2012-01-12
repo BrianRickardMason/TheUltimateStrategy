@@ -741,10 +741,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_land_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_land_reply = specific_reply->getChildElement("get_land_reply");
-            if (not get_land_reply) throw std::exception();
-
-            Element land = get_land_reply->getChildElement("land");
+            Element land = specific_reply->getChildElement("land");
             if (not land) throw std::exception();
 
             Element login = land->getChildElement("login");
@@ -862,10 +859,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_settlement_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_settlement_reply = specific_reply->getChildElement("get_settlement_reply");
-            if (not get_settlement_reply) throw std::exception();
-
-            Element settlement = get_settlement_reply->getChildElement("settlement");
+            Element settlement = specific_reply->getChildElement("settlement");
             if (not settlement) throw std::exception();
 
             Element land_name = settlement->getChildElement("land_name");
@@ -975,10 +969,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_building_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_building_reply = specific_reply->getChildElement("get_building_reply");
-            if (not get_building_reply) throw std::exception();
-
-            Element building = get_building_reply->getChildElement("building");
+            Element building = specific_reply->getChildElement("building");
             if (not building) throw std::exception();
 
             Element buildingclass = building->getChildElement("buildingclass");
@@ -1092,10 +1083,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_human_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_human_reply = specific_reply->getChildElement("get_human_reply");
-            if (not get_human_reply) throw std::exception();
-
-            Element human = get_human_reply->getChildElement("human");
+            Element human = specific_reply->getChildElement("human");
             if (not human) throw std::exception();
 
             Element humanclass = human->getChildElement("humanclass");
@@ -1177,10 +1165,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_resource_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_resource_reply = specific_reply->getChildElement("get_resource_reply");
-            if (not get_resource_reply) throw std::exception();
-
-            Element resource = get_resource_reply->getChildElement("resource");
+            Element resource = specific_reply->getChildElement("resource");
             if (not resource) throw std::exception();
 
             Element resourcename = resource->getChildElement("resourcename");
@@ -1398,10 +1383,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_epoch_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_epoch_reply = specific_reply->getChildElement("get_epoch_reply");
-            if (not get_epoch_reply) throw std::exception();
-
-            Element epoch = get_epoch_reply->getChildElement("epoch");
+            Element epoch = specific_reply->getChildElement("epoch");
             if (not epoch) throw std::exception();
 
             Element epoch_name = epoch->getChildElement("epoch_name");
