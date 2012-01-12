@@ -111,9 +111,8 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_request = request->getChildElement("delete_land_request");
             if (not specific_request) throw std::exception();
 
-            Element world_name = specific_request->getChildElement("world_name");
             Element land_name = specific_request->getChildElement("land_name");
-            if (not (world_name and land_name)) throw std::exception();
+            if (not (land_name)) throw std::exception();
 
             return request_builder.buildDeleteLandRequest(
                        login,
