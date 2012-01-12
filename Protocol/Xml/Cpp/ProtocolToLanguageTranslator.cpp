@@ -1389,15 +1389,15 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element epoch_name = epoch->getChildElement("epoch_name");
             Element world_name = epoch->getChildElement("world_name");
             Element active = epoch->getChildElement("active");
-            Element finish = epoch->getChildElement("finish");
+            Element finished = epoch->getChildElement("finished");
             Element ticks = epoch->getChildElement("ticks");
-            if (not (epoch_name and world_name and active and finish and ticks)) throw std::exception();
+            if (not (epoch_name and world_name and active and finished and ticks)) throw std::exception();
 
             TUSLanguage::ICommand::Object object;
             object.insert(std::make_pair("epoch_name", epoch_name->innerText()));
             object.insert(std::make_pair("world_name", world_name->innerText()));
             object.insert(std::make_pair("active", active->innerText()));
-            object.insert(std::make_pair("finish", finish->innerText()));
+            object.insert(std::make_pair("finished", finished->innerText()));
             object.insert(std::make_pair("ticks", ticks->innerText()));
 
             return reply_builder.buildGetEpochReply(
