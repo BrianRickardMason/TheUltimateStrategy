@@ -34,6 +34,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../..)
 ADD_EXECUTABLE(protocolxmlcpput
     LanguageToProtocolTranslatorTest.cpp
     MessageFactoryTest.cpp
+    ProtocolToLanguageTranslatorTest.cpp
     main.cpp
 )
 

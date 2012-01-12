@@ -29,8 +29,8 @@
 #define TUSPROTOCOL_MESSAGE_HPP
 
 #include <Poco/DOM/Document.h>
+#include <boost/shared_ptr.hpp>
 #include <map>
-#include <memory>
 #include <string>
 #include <vector>
 
@@ -41,7 +41,8 @@ class Message
     : public Poco::XML::Document
 {
 public:
-    typedef std::auto_ptr<Message> SingleHandle;
+    // TODO: Rename to Handle.
+    typedef boost::shared_ptr<Message> SingleHandle;
     typedef std::map<std::string, std::string> Object;
     typedef std::vector<Object> Objects;
 
@@ -53,15 +54,15 @@ public:
     Message(
         Poco::XML::NamePool * a_name_pool = 0
     );
-    
+
     /**
      * @brief Ctor specifying document type.
-     * 
+     *
      * @param a_document_type The document type definition.
      * @param a_name_poll The name pool
      */
     Message(
-        Poco::XML::DocumentType* a_document_type, 
+        Poco::XML::DocumentType* a_document_type,
         Poco::XML::NamePool* a_name_pool = 0
     );
 };
