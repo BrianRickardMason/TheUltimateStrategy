@@ -32,6 +32,7 @@ PROJECT(protocolxmlcpput)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../..)
 
 ADD_EXECUTABLE(protocolxmlcpput
+    LanguageToProtocolTranslatorTest.cpp
     MessageFactoryTest.cpp
     main.cpp
 )
@@ -39,6 +40,7 @@ ADD_EXECUTABLE(protocolxmlcpput
 TARGET_LINK_LIBRARIES(protocolxmlcpput
     PocoFoundation
     gtest
+    interface
     protocolxmlcpp
     pthread
 )
