@@ -775,10 +775,7 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
             Element specific_reply = reply->getChildElement("get_lands_reply");
             if (not specific_reply) throw std::exception();
 
-            Element get_lands_reply = specific_reply->getChildElement("get_lands_reply");
-            if (not get_lands_reply) throw std::exception();
-
-            Element lands = get_lands_reply->getChildElement("lands");
+            Element lands = specific_reply->getChildElement("lands");
             if (not lands) throw std::exception();
 
             Poco::AutoPtr<Poco::XML::NodeList> elements = lands->getElementsByTagName("land");
@@ -787,12 +784,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
 
             for (int i = 0; i < elements->length(); ++i)
             {
-                Element land = static_cast<Poco::XML::Element*>(elements->item(i));
+                Poco::XML::Element * land = static_cast<Poco::XML::Element*>(elements->item(i));
 
-                Element login = land->getChildElement("login");
-                Element world_name = land->getChildElement("world_name");
-                Element land_name = land->getChildElement("land_name");
-                Element granted = land->getChildElement("granted");
+                Poco::XML::Element * login = land->getChildElement("login");
+                Poco::XML::Element * world_name = land->getChildElement("world_name");
+                Poco::XML::Element * land_name = land->getChildElement("land_name");
+                Poco::XML::Element * granted = land->getChildElement("granted");
                 if (not (login and world_name and land_name and granted)) throw std::exception();
 
                 TUSLanguage::ICommand::Object object;
@@ -901,10 +898,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
 
             for (int i = 0; i < elements->length(); ++i)
             {
-                Element settlement = static_cast<Poco::XML::Element*>(elements->item(i));
+            	Poco::XML::Element * settlement = static_cast<Poco::XML::Element*>(elements->item(i));
 
-                Element land_name = settlement->getChildElement("land_name");
-                Element settlement_name = settlement->getChildElement("settlement_name");
+            	Poco::XML::Element * land_name = settlement->getChildElement("land_name");
+            	Poco::XML::Element * settlement_name = settlement->getChildElement("settlement_name");
                 if (not (land_name and settlement_name)) throw std::exception();
 
                 TUSLanguage::ICommand::Object object;
@@ -1013,11 +1010,11 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
 
             for (int i = 0; i < elements->length(); ++i)
             {
-                Element building = static_cast<Poco::XML::Element*>(elements->item(i));
+            	Poco::XML::Element * building = static_cast<Poco::XML::Element*>(elements->item(i));
 
-                Element buildingclass = building->getChildElement("buildingclass");
-                Element buildingname = building->getChildElement("buildingname");
-                Element volume = building->getChildElement("volume");
+            	Poco::XML::Element * buildingclass = building->getChildElement("buildingclass");
+            	Poco::XML::Element * buildingname = building->getChildElement("buildingname");
+            	Poco::XML::Element * volume = building->getChildElement("volume");
                 if (not (buildingclass and buildingname and volume)) throw std::exception();
 
                 TUSLanguage::ICommand::Object object;
@@ -1129,12 +1126,12 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
 
             for (int i = 0; i < elements->length(); ++i)
             {
-                Element human = static_cast<Poco::XML::Element*>(elements->item(i));
+            	Poco::XML::Element * human = static_cast<Poco::XML::Element*>(elements->item(i));
 
-                Element humanclass = human->getChildElement("humanclass");
-                Element humanname = human->getChildElement("humanname");
-                Element experience = human->getChildElement("experience");
-                Element volume = human->getChildElement("volume");
+                Poco::XML::Element * humanclass = human->getChildElement("humanclass");
+                Poco::XML::Element * humanname = human->getChildElement("humanname");
+                Poco::XML::Element * experience = human->getChildElement("experience");
+                Poco::XML::Element * volume = human->getChildElement("volume");
                 if (not (humanclass and humanname and experience and volume)) throw std::exception();
 
                 TUSLanguage::ICommand::Object object;
@@ -1207,10 +1204,10 @@ TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
 
             for (int i = 0; i < elements->length(); ++i)
             {
-                Element resource = static_cast<Poco::XML::Element*>(elements->item(i));
+            	Poco::XML::Element * resource = static_cast<Poco::XML::Element*>(elements->item(i));
 
-                Element resourcename = resource->getChildElement("resourcename");
-                Element volume = resource->getChildElement("volume");
+            	Poco::XML::Element * resourcename = resource->getChildElement("resourcename");
+            	Poco::XML::Element * volume = resource->getChildElement("volume");
                 if (not (resourcename and volume)) throw std::exception();
 
                 TUSLanguage::ICommand::Object object;
