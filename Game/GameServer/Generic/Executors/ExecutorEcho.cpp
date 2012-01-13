@@ -109,7 +109,7 @@ TUSLanguage::ICommand::Handle ExecutorEcho::getBasicReply(
     unsigned int const a_status
 ) const
 {
-	TUSLanguage::ReplyBuilder reply_builder;
+    TUSLanguage::ReplyBuilder reply_builder;
 
     return reply_builder.buildEchoReply(a_status);
 }
