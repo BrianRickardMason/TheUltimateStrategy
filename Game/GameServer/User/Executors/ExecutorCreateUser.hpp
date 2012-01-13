@@ -29,6 +29,7 @@
 #define GAME_EXECUTORCREATEUSER_HPP
 
 #include <Game/GameServer/Common/Executor.hpp>
+#include <Game/GameServer/User/Operators/CreateUser/CreateUserOperatorExitCode.hpp>
 
 namespace Game
 {
