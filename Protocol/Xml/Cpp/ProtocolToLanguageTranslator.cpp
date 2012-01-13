@@ -39,8 +39,8 @@ namespace TUSProtocol
 
 // TODO: Add UTs for both translators.
 
-TUSLanguage::ICommand::SingleHandle ProtocolToLanguageTranslator::translate(
-    Message::SingleHandle a_message
+TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
+    Message::Handle a_message
 ) const
 {
     typedef Poco::XML::Element * Element;

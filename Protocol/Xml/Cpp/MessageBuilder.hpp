@@ -154,7 +154,7 @@ public:
      *
      * @return The built message.
      */
-    Message::SingleHandle extract();
+    Message::Handle extract();
 
 private:
     /**
@@ -165,7 +165,7 @@ private:
     /**
     * @brief The document representing the message.
     */
-    Message::SingleHandle m_document;
+    Message::Handle m_document;
 
     /**
      * @brief The current node of the document.

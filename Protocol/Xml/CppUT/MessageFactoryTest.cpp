@@ -168,68 +168,68 @@ protected:
     /**
      * @brief The message to be tested.
      */
-    TUSProtocol::Message::SingleHandle m_message_echo_request,
-                                       m_message_error_request,
-                                       m_message_create_land_request,
-                                       m_message_delete_land_request,
-                                       m_message_get_land_request,
-                                       m_message_get_lands_request,
-                                       m_message_create_settlement_request,
-                                       m_message_delete_settlement_request,
-                                       m_message_get_settlement_request,
-                                       m_message_get_settlements_request,
-                                       m_message_build_building_request,
-                                       m_message_destroy_building_request,
-                                       m_message_get_building_request,
-                                       m_message_get_buildings_request,
-                                       m_message_dismiss_human_request,
-                                       m_message_engage_human_request,
-                                       m_message_get_human_request,
-                                       m_message_get_humans_request,
-                                       m_message_get_resource_request,
-                                       m_message_get_resources_request,
-                                       m_message_create_user_request,
-                                       m_message_create_world_request,
-                                       m_message_create_epoch_request,
-                                       m_message_delete_epoch_request,
-                                       m_message_activate_epoch_request,
-                                       m_message_deactivate_epoch_request,
-                                       m_message_finish_epoch_request,
-                                       m_message_tick_epoch_request,
-                                       m_message_get_epoch_request,
-                                       m_message_transport_human_request,
-                                       m_message_transport_resource_request,
-                                       m_message_echo_reply,
-                                       m_message_error_reply,
-                                       m_message_create_land_reply,
-                                       m_message_delete_land_reply,
-                                       m_message_get_land_reply,
-                                       m_message_get_lands_reply,
-                                       m_message_create_settlement_reply,
-                                       m_message_delete_settlement_reply,
-                                       m_message_get_settlement_reply,
-                                       m_message_get_settlements_reply,
-                                       m_message_build_building_reply,
-                                       m_message_destroy_building_reply,
-                                       m_message_get_building_reply,
-                                       m_message_get_buildings_reply,
-                                       m_message_dismiss_human_reply,
-                                       m_message_engage_human_reply,
-                                       m_message_get_human_reply,
-                                       m_message_get_humans_reply,
-                                       m_message_get_resource_reply,
-                                       m_message_get_resources_reply,
-                                       m_message_create_user_reply,
-                                       m_message_create_world_reply,
-                                       m_message_create_epoch_reply,
-                                       m_message_delete_epoch_reply,
-                                       m_message_activate_epoch_reply,
-                                       m_message_deactivate_epoch_reply,
-                                       m_message_finish_epoch_reply,
-                                       m_message_tick_epoch_reply,
-                                       m_message_get_epoch_reply,
-                                       m_message_transport_human_reply,
-                                       m_message_transport_resource_reply;
+    TUSProtocol::Message::Handle m_message_echo_request,
+                                 m_message_error_request,
+                                 m_message_create_land_request,
+                                 m_message_delete_land_request,
+                                 m_message_get_land_request,
+                                 m_message_get_lands_request,
+                                 m_message_create_settlement_request,
+                                 m_message_delete_settlement_request,
+                                 m_message_get_settlement_request,
+                                 m_message_get_settlements_request,
+                                 m_message_build_building_request,
+                                 m_message_destroy_building_request,
+                                 m_message_get_building_request,
+                                 m_message_get_buildings_request,
+                                 m_message_dismiss_human_request,
+                                 m_message_engage_human_request,
+                                 m_message_get_human_request,
+                                 m_message_get_humans_request,
+                                 m_message_get_resource_request,
+                                 m_message_get_resources_request,
+                                 m_message_create_user_request,
+                                 m_message_create_world_request,
+                                 m_message_create_epoch_request,
+                                 m_message_delete_epoch_request,
+                                 m_message_activate_epoch_request,
+                                 m_message_deactivate_epoch_request,
+                                 m_message_finish_epoch_request,
+                                 m_message_tick_epoch_request,
+                                 m_message_get_epoch_request,
+                                 m_message_transport_human_request,
+                                 m_message_transport_resource_request,
+                                 m_message_echo_reply,
+                                 m_message_error_reply,
+                                 m_message_create_land_reply,
+                                 m_message_delete_land_reply,
+                                 m_message_get_land_reply,
+                                 m_message_get_lands_reply,
+                                 m_message_create_settlement_reply,
+                                 m_message_delete_settlement_reply,
+                                 m_message_get_settlement_reply,
+                                 m_message_get_settlements_reply,
+                                 m_message_build_building_reply,
+                                 m_message_destroy_building_reply,
+                                 m_message_get_building_reply,
+                                 m_message_get_buildings_reply,
+                                 m_message_dismiss_human_reply,
+                                 m_message_engage_human_reply,
+                                 m_message_get_human_reply,
+                                 m_message_get_humans_reply,
+                                 m_message_get_resource_reply,
+                                 m_message_get_resources_reply,
+                                 m_message_create_user_reply,
+                                 m_message_create_world_reply,
+                                 m_message_create_epoch_reply,
+                                 m_message_delete_epoch_reply,
+                                 m_message_activate_epoch_reply,
+                                 m_message_deactivate_epoch_reply,
+                                 m_message_finish_epoch_reply,
+                                 m_message_tick_epoch_reply,
+                                 m_message_get_epoch_reply,
+                                 m_message_transport_human_reply,
+                                 m_message_transport_resource_reply;
     //}@
 
     //@{
@@ -1589,34 +1589,34 @@ TEST_F(MessageFactoryTest, CreateDeleteLandReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetLandReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("36", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_land_reply");
     ASSERT_TRUE(element != NULL);
@@ -1624,7 +1624,7 @@ TEST_F(MessageFactoryTest, CreateGetLandReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperObject)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_land_reply")->getChildElement("land");
     ASSERT_STREQ("Login1", element->getChildElement("login")->innerText().c_str());
@@ -1635,34 +1635,34 @@ TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperObject)
 
 TEST_F(MessageFactoryTest, CreateGetLandsReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("37", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetLandsReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_lands_reply");
     ASSERT_TRUE(element != NULL);
@@ -1670,7 +1670,7 @@ TEST_F(MessageFactoryTest, CreateGetLandsReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperObjects)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_lands_reply")->getChildElement("lands");
 
@@ -1745,14 +1745,14 @@ TEST_F(MessageFactoryTest, CreateDeleteSettlementReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("40", element->innerText().c_str());
@@ -1760,7 +1760,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperID)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
@@ -1768,7 +1768,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperCode)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
@@ -1776,7 +1776,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperMessage)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlement_reply");
@@ -1785,7 +1785,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperObject)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlement_reply")->getChildElement("settlement");
@@ -1795,14 +1795,14 @@ TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperObject)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementsReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("41", element->innerText().c_str());
@@ -1810,7 +1810,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperID)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
@@ -1818,7 +1818,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperCode)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
@@ -1826,7 +1826,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperMessage)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlements_reply");
@@ -1835,7 +1835,7 @@ TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperObjects)
 {
-    TUSProtocol::Message::SingleHandle message =
+    TUSProtocol::Message::Handle message =
         m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlements_reply")->getChildElement("settlements");
@@ -1911,34 +1911,34 @@ TEST_F(MessageFactoryTest, CreateDestroyBuildingReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetBuildingReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("44", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_building_reply");
     ASSERT_TRUE(element != NULL);
@@ -1946,7 +1946,7 @@ TEST_F(MessageFactoryTest, CreateGetBuildingReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetBuildingReplySetsProperObject)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingReply("1", "Message", m_building_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_building_reply")->getChildElement("building");
     ASSERT_STREQ("Regular", element->getChildElement("buildingclass")->innerText().c_str());
@@ -1956,34 +1956,34 @@ TEST_F(MessageFactoryTest, CreateGetBuildingReplySetsProperObject)
 
 TEST_F(MessageFactoryTest, CreateGetBuildingsReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingsReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("45", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingsReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingsReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetBuildingsReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_buildings_reply");
     ASSERT_TRUE(element != NULL);
@@ -1991,7 +1991,7 @@ TEST_F(MessageFactoryTest, CreateGetBuildingsReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetBuildingsReplySetsProperObjects)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetBuildingsReply("1", "Message", m_buildings);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_buildings_reply")->getChildElement("buildings");
 
@@ -2066,34 +2066,34 @@ TEST_F(MessageFactoryTest, CreateEngageHumanReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetHumanReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumanReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("48", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumanReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumanReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumanReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_human_reply");
     ASSERT_TRUE(element != NULL);
@@ -2101,7 +2101,7 @@ TEST_F(MessageFactoryTest, CreateGetHumanReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetHumanReplySetsProperObject)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumanReply("1", "Message", m_human_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_human_reply")->getChildElement("human");
     ASSERT_STREQ("Worker", element->getChildElement("humanclass")->innerText().c_str());
@@ -2112,34 +2112,34 @@ TEST_F(MessageFactoryTest, CreateGetHumanReplySetsProperObject)
 
 TEST_F(MessageFactoryTest, CreateGetHumansReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumansReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("49", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumansReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumansReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetHumansReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_humans_reply");
     ASSERT_TRUE(element != NULL);
@@ -2147,7 +2147,7 @@ TEST_F(MessageFactoryTest, CreateGetHumansReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetHumansReplySetsProperObjects)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetHumansReply("1", "Message", m_humans);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_humans_reply")->getChildElement("humans");
 
@@ -2156,34 +2156,34 @@ TEST_F(MessageFactoryTest, CreateGetHumansReplySetsProperObjects)
 
 TEST_F(MessageFactoryTest, CreateGetResourceReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourceReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("50", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourceReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourceReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourceReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_resource_reply");
     ASSERT_TRUE(element != NULL);
@@ -2191,7 +2191,7 @@ TEST_F(MessageFactoryTest, CreateGetResourceReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetResourceReplySetsProperObject)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourceReply("1", "Message", m_resource_1);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_resource_reply")->getChildElement("resource");
     ASSERT_STREQ("Coal", element->getChildElement("resourcename")->innerText().c_str());
@@ -2200,34 +2200,34 @@ TEST_F(MessageFactoryTest, CreateGetResourceReplySetsProperObject)
 
 TEST_F(MessageFactoryTest, CreateGetResourcesReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourcesReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("51", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourcesReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourcesReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetResourcesReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_resources_reply");
     ASSERT_TRUE(element != NULL);
@@ -2235,7 +2235,7 @@ TEST_F(MessageFactoryTest, CreateGetResourcesReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetResourcesReplySetsProperObjects)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetResourcesReply("1", "Message", m_resources);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_resources_reply")->getChildElement("resources");
 
@@ -2508,34 +2508,34 @@ TEST_F(MessageFactoryTest, CreateTickEpochReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetEpochReplyReturnsNotNull)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
     ASSERT_TRUE(message.get());
 }
 
 TEST_F(MessageFactoryTest, CreateGetEpochReplySetsProperID)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
     Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("60", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetEpochReplySetsProperCode)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetEpochReplySetsProperMessage)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
     Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
 TEST_F(MessageFactoryTest, CreateGetEpochReplySetsSpecificReply)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_epoch_reply");
     ASSERT_TRUE(element != NULL);
@@ -2543,7 +2543,7 @@ TEST_F(MessageFactoryTest, CreateGetEpochReplySetsSpecificReply)
 
 TEST_F(MessageFactoryTest, CreateGetEpochReplySetsProperObject)
 {
-    TUSProtocol::Message::SingleHandle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
+    TUSProtocol::Message::Handle message = m_message_factory.createGetEpochReply("1", "Message", m_epoch);
     Poco::XML::Element * element = message->documentElement()->
         getChildElement("reply")->getChildElement("get_epoch_reply")->getChildElement("epoch");
     ASSERT_STREQ("Epoch", element->getChildElement("epoch_name")->innerText().c_str());

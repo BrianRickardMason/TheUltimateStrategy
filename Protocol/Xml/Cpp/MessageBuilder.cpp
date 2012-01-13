@@ -240,7 +240,7 @@ void MessageBuilder::addObjects(
     }
 }
 
-Message::SingleHandle MessageBuilder::extract()
+Message::Handle MessageBuilder::extract()
 {
     return m_document;
 }

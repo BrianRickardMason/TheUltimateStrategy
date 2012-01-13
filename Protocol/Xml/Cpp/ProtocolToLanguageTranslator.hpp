@@ -38,7 +38,7 @@ namespace TUSProtocol
 class ProtocolToLanguageTranslator
 {
 public:
-    typedef std::auto_ptr<ProtocolToLanguageTranslator> SingleHandle;
+    typedef std::auto_ptr<ProtocolToLanguageTranslator> Handle;
 
     /**
      * @brief Translates a message to a command.
@@ -50,8 +50,8 @@ public:
      * @throw std::exception          In case of failure.
      * @throw boost::bad_lexical_cast In case of invalid reply code.
      */
-    TUSLanguage::ICommand::SingleHandle translate(
-        Message::SingleHandle a_message
+    TUSLanguage::ICommand::Handle translate(
+        Message::Handle a_message
     ) const;
 };
 

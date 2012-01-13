@@ -41,8 +41,7 @@ class Message
     : public Poco::XML::Document
 {
 public:
-    // TODO: Rename to Handle.
-    typedef boost::shared_ptr<Message> SingleHandle;
+    typedef boost::shared_ptr<Message> Handle;
     typedef std::map<std::string, std::string> Object;
     typedef std::vector<Object> Objects;
 

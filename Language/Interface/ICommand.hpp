@@ -102,8 +102,7 @@ unsigned short int const ID_COMMAND_TRANSPORT_RESOURCE_REPLY   = 62;
 class ICommand
 {
 public:
-    // TODO: Rename to Handle.
-    typedef boost::shared_ptr<ICommand> SingleHandle;
+    typedef boost::shared_ptr<ICommand> Handle;
     typedef std::map<std::string, std::string> Object;
     typedef std::vector<Object> Objects;
 

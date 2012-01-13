@@ -45,14 +45,14 @@ public:
      *
      * @return EchoRequest.
      */
-    ICommand::SingleHandle buildEchoRequest() const;
+    ICommand::Handle buildEchoRequest() const;
 
     /**
      * @brief Builds ErrorRequest.
      *
      * @return ErrorRequest.
      */
-    ICommand::SingleHandle buildErrorRequest() const;
+    ICommand::Handle buildErrorRequest() const;
 
     /**
      * @brief Builds CreateLandRequest.
@@ -64,7 +64,7 @@ public:
      *
      * @return CreateLandRequest
      */
-    ICommand::SingleHandle buildCreateLandRequest(
+    ICommand::Handle buildCreateLandRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name,
@@ -80,7 +80,7 @@ public:
      *
      * @return DeleteLandRequest
      */
-    ICommand::SingleHandle buildDeleteLandRequest(
+    ICommand::Handle buildDeleteLandRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name
@@ -95,7 +95,7 @@ public:
      *
      * @return GetLandRequest
      */
-    ICommand::SingleHandle buildGetLandRequest(
+    ICommand::Handle buildGetLandRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name
@@ -109,7 +109,7 @@ public:
      *
      * @return GetLandsRequest
      */
-    ICommand::SingleHandle buildGetLandsRequest(
+    ICommand::Handle buildGetLandsRequest(
         std::string const a_login,
         std::string const a_password
     ) const;
@@ -124,7 +124,7 @@ public:
      *
      * @return CreateSettlementRequest
      */
-    ICommand::SingleHandle buildCreateSettlementRequest(
+    ICommand::Handle buildCreateSettlementRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name,
@@ -140,7 +140,7 @@ public:
      *
      * @return DeleteSettlementRequest
      */
-    ICommand::SingleHandle buildDeleteSettlementRequest(
+    ICommand::Handle buildDeleteSettlementRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name
@@ -155,7 +155,7 @@ public:
      *
      * @return GetSettlementRequest
      */
-    ICommand::SingleHandle buildGetSettlementRequest(
+    ICommand::Handle buildGetSettlementRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name
@@ -170,7 +170,7 @@ public:
      *
      * @return GetSettlementsRequest
      */
-    ICommand::SingleHandle buildGetSettlementsRequest(
+    ICommand::Handle buildGetSettlementsRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name
@@ -188,7 +188,7 @@ public:
      *
      * @return BuildBuildingRequest
      */
-    ICommand::SingleHandle buildBuildBuildingRequest(
+    ICommand::Handle buildBuildBuildingRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -209,7 +209,7 @@ public:
      *
      * @return DestroyBuildingRequest
      */
-    ICommand::SingleHandle buildDestroyBuildingRequest(
+    ICommand::Handle buildDestroyBuildingRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -229,7 +229,7 @@ public:
      *
      * @return GetBuildingRequest
      */
-    ICommand::SingleHandle buildGetBuildingRequest(
+    ICommand::Handle buildGetBuildingRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -247,7 +247,7 @@ public:
      *
      * @return GetBuildingsRequest
      */
-    ICommand::SingleHandle buildGetBuildingsRequest(
+    ICommand::Handle buildGetBuildingsRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -266,7 +266,7 @@ public:
      *
      * @return DismissHumanRequest
      */
-    ICommand::SingleHandle buildDismissHumanRequest(
+    ICommand::Handle buildDismissHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -287,7 +287,7 @@ public:
      *
      * @return EngageHumanRequest
      */
-    ICommand::SingleHandle buildEngageHumanRequest(
+    ICommand::Handle buildEngageHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -307,7 +307,7 @@ public:
      *
      * @return GetHumanRequest
      */
-    ICommand::SingleHandle buildGetHumanRequest(
+    ICommand::Handle buildGetHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -325,7 +325,7 @@ public:
      *
      * @return GetHumansRequest
      */
-    ICommand::SingleHandle buildGetHumansRequest(
+    ICommand::Handle buildGetHumansRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -343,7 +343,7 @@ public:
      *
      * @return GetResourceRequest
      */
-    ICommand::SingleHandle buildGetResourceRequest(
+    ICommand::Handle buildGetResourceRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -361,7 +361,7 @@ public:
      *
      * @return GetResourcesRequest
      */
-    ICommand::SingleHandle buildGetResourcesRequest(
+    ICommand::Handle buildGetResourcesRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -376,7 +376,7 @@ public:
      *
      * @return CreateUserRequest
      */
-    ICommand::SingleHandle buildCreateUserRequest(
+    ICommand::Handle buildCreateUserRequest(
         std::string const a_login,
         std::string const a_password
     ) const;
@@ -390,7 +390,7 @@ public:
      *
      * @return CreateWorldRequest
      */
-    ICommand::SingleHandle buildCreateWorldRequest(
+    ICommand::Handle buildCreateWorldRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -406,7 +406,7 @@ public:
      *
      * @return CreateEpochRequest
      */
-    ICommand::SingleHandle buildCreateEpochRequest(
+    ICommand::Handle buildCreateEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name,
@@ -422,7 +422,7 @@ public:
      *
      * @return DeleteEpochRequest
      */
-    ICommand::SingleHandle buildDeleteEpochRequest(
+    ICommand::Handle buildDeleteEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -437,7 +437,7 @@ public:
      *
      * @return ActivateEpochRequest
      */
-    ICommand::SingleHandle buildActivateEpochRequest(
+    ICommand::Handle buildActivateEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -452,7 +452,7 @@ public:
      *
      * @return DeactivateEpochRequest
      */
-    ICommand::SingleHandle buildDeactivateEpochRequest(
+    ICommand::Handle buildDeactivateEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -467,7 +467,7 @@ public:
      *
      * @return FinishEpochRequest
      */
-    ICommand::SingleHandle buildFinishEpochRequest(
+    ICommand::Handle buildFinishEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -482,7 +482,7 @@ public:
      *
      * @return TickEpochRequest
      */
-    ICommand::SingleHandle buildTickEpochRequest(
+    ICommand::Handle buildTickEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -497,7 +497,7 @@ public:
      *
      * @return GetEpochRequest
      */
-    ICommand::SingleHandle buildGetEpochRequest(
+    ICommand::Handle buildGetEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -515,7 +515,7 @@ public:
      *
      * @return TransportHumanRequest
      */
-    ICommand::SingleHandle buildTransportHumanRequest(
+    ICommand::Handle buildTransportHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name_source,
@@ -536,7 +536,7 @@ public:
      *
      * @return TransportResourceRequest
      */
-    ICommand::SingleHandle buildTransportResourceRequest(
+    ICommand::Handle buildTransportResourceRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name_source,

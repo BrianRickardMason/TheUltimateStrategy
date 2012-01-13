@@ -46,7 +46,7 @@ public:
      *
      * @return EchoReply.
      */
-    ICommand::SingleHandle buildEchoReply(
+    ICommand::Handle buildEchoReply(
         unsigned short int const a_code
     ) const;
 
@@ -57,7 +57,7 @@ public:
      *
      * @return ErrorReply.
      */
-    ICommand::SingleHandle buildErrorReply(
+    ICommand::Handle buildErrorReply(
         unsigned short int const a_code
     ) const;
 
@@ -69,7 +69,7 @@ public:
      *
      * @return CreateLandReply.
      */
-    ICommand::SingleHandle buildCreateLandReply(
+    ICommand::Handle buildCreateLandReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -82,7 +82,7 @@ public:
      *
      * @return DeleteLandReply.
      */
-    ICommand::SingleHandle buildDeleteLandReply(
+    ICommand::Handle buildDeleteLandReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -96,7 +96,7 @@ public:
      *
      * @return GetLandReply.
      */
-    ICommand::SingleHandle buildGetLandReply(
+    ICommand::Handle buildGetLandReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Object   const & a_object
@@ -111,7 +111,7 @@ public:
      *
      * @return GetLandsReply.
      */
-    ICommand::SingleHandle buildGetLandsReply(
+    ICommand::Handle buildGetLandsReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Objects  const & a_objects
@@ -125,7 +125,7 @@ public:
      *
      * @return CreateSettlementReply.
      */
-    ICommand::SingleHandle buildCreateSettlementReply(
+    ICommand::Handle buildCreateSettlementReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -138,7 +138,7 @@ public:
      *
      * @return DeleteSettlementReply.
      */
-    ICommand::SingleHandle buildDeleteSettlementReply(
+    ICommand::Handle buildDeleteSettlementReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -152,7 +152,7 @@ public:
      *
      * @return GetSettlementReply.
      */
-    ICommand::SingleHandle buildGetSettlementReply(
+    ICommand::Handle buildGetSettlementReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Object   const & a_object
@@ -167,7 +167,7 @@ public:
      *
      * @return GetSettlementsReply.
      */
-    ICommand::SingleHandle buildGetSettlementsReply(
+    ICommand::Handle buildGetSettlementsReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Objects  const & a_objects
@@ -181,7 +181,7 @@ public:
      *
      * @return BuildBuildingReply.
      */
-    ICommand::SingleHandle buildBuildBuildingReply(
+    ICommand::Handle buildBuildBuildingReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -194,7 +194,7 @@ public:
      *
      * @return DestroyBuildingReply.
      */
-    ICommand::SingleHandle buildDestroyBuildingReply(
+    ICommand::Handle buildDestroyBuildingReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -208,7 +208,7 @@ public:
      *
      * @return GetBuildingReply.
      */
-    ICommand::SingleHandle buildGetBuildingReply(
+    ICommand::Handle buildGetBuildingReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Object   const & a_object
@@ -223,7 +223,7 @@ public:
      *
      * @return GetBuildingsReply.
      */
-    ICommand::SingleHandle buildGetBuildingsReply(
+    ICommand::Handle buildGetBuildingsReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Objects  const & a_objects
@@ -237,7 +237,7 @@ public:
      *
      * @return DismissHumanReply.
      */
-    ICommand::SingleHandle buildDismissHumanReply(
+    ICommand::Handle buildDismissHumanReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -250,7 +250,7 @@ public:
      *
      * @return EngageHumanReply.
      */
-    ICommand::SingleHandle buildEngageHumanReply(
+    ICommand::Handle buildEngageHumanReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -264,7 +264,7 @@ public:
      *
      * @return GetHumanReply.
      */
-    ICommand::SingleHandle buildGetHumanReply(
+    ICommand::Handle buildGetHumanReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Object   const & a_object
@@ -279,7 +279,7 @@ public:
      *
      * @return GetHumansReply.
      */
-    ICommand::SingleHandle buildGetHumansReply(
+    ICommand::Handle buildGetHumansReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Objects  const & a_objects
@@ -294,7 +294,7 @@ public:
      *
      * @return GetResourceReply.
      */
-    ICommand::SingleHandle buildGetResourceReply(
+    ICommand::Handle buildGetResourceReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Object   const & a_object
@@ -309,7 +309,7 @@ public:
      *
      * @return GetResourcesReply.
      */
-    ICommand::SingleHandle buildGetResourcesReply(
+    ICommand::Handle buildGetResourcesReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Objects  const & a_objects
@@ -323,7 +323,7 @@ public:
      *
      * @return CreateUserReply.
      */
-    ICommand::SingleHandle buildCreateUserReply(
+    ICommand::Handle buildCreateUserReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -336,7 +336,7 @@ public:
      *
      * @return CreateWorldReply.
      */
-    ICommand::SingleHandle buildCreateWorldReply(
+    ICommand::Handle buildCreateWorldReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -349,7 +349,7 @@ public:
      *
      * @return CreateEpochReply.
      */
-    ICommand::SingleHandle buildCreateEpochReply(
+    ICommand::Handle buildCreateEpochReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -362,7 +362,7 @@ public:
      *
      * @return DeleteEpochReply.
      */
-    ICommand::SingleHandle buildDeleteEpochReply(
+    ICommand::Handle buildDeleteEpochReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -375,7 +375,7 @@ public:
      *
      * @return ActivateEpochReply.
      */
-    ICommand::SingleHandle buildActivateEpochReply(
+    ICommand::Handle buildActivateEpochReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -388,7 +388,7 @@ public:
      *
      * @return DectivateEpochReply.
      */
-    ICommand::SingleHandle buildDeactivateEpochReply(
+    ICommand::Handle buildDeactivateEpochReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -401,7 +401,7 @@ public:
      *
      * @return FinishEpochReply.
      */
-    ICommand::SingleHandle buildFinishEpochReply(
+    ICommand::Handle buildFinishEpochReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -414,7 +414,7 @@ public:
      *
      * @return TickEpochReply.
      */
-    ICommand::SingleHandle buildTickEpochReply(
+    ICommand::Handle buildTickEpochReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -428,7 +428,7 @@ public:
      *
      * @return GetEpochReply.
      */
-    ICommand::SingleHandle buildGetEpochReply(
+    ICommand::Handle buildGetEpochReply(
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Object   const & a_object
@@ -442,7 +442,7 @@ public:
      *
      * @return TransportHumanReply.
      */
-    ICommand::SingleHandle buildTransportHumanReply(
+    ICommand::Handle buildTransportHumanReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;
@@ -455,7 +455,7 @@ public:
      *
      * @return TransportResourceReply.
      */
-    ICommand::SingleHandle buildTransportResourceReply(
+    ICommand::Handle buildTransportResourceReply(
         unsigned short int const a_code,
         std::string        const a_message
     ) const;

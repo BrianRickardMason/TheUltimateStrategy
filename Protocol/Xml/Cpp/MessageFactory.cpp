@@ -32,7 +32,7 @@
 namespace TUSProtocol
 {
 
-Message::SingleHandle MessageFactory::createEchoRequest() const
+Message::Handle MessageFactory::createEchoRequest() const
 {
     MessageBuilder message_builder;
 
@@ -42,7 +42,7 @@ Message::SingleHandle MessageFactory::createEchoRequest() const
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createErrorRequest() const
+Message::Handle MessageFactory::createErrorRequest() const
 {
     MessageBuilder message_builder;
 
@@ -52,7 +52,7 @@ Message::SingleHandle MessageFactory::createErrorRequest() const
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateLandRequest(
+Message::Handle MessageFactory::createCreateLandRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name,
@@ -70,7 +70,7 @@ Message::SingleHandle MessageFactory::createCreateLandRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeleteLandRequest(
+Message::Handle MessageFactory::createDeleteLandRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name
@@ -86,7 +86,7 @@ Message::SingleHandle MessageFactory::createDeleteLandRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetLandRequest(
+Message::Handle MessageFactory::createGetLandRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name
@@ -102,7 +102,7 @@ Message::SingleHandle MessageFactory::createGetLandRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetLandsRequest(
+Message::Handle MessageFactory::createGetLandsRequest(
     std::string const a_login,
     std::string const a_password
 ) const
@@ -116,7 +116,7 @@ Message::SingleHandle MessageFactory::createGetLandsRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateSettlementRequest(
+Message::Handle MessageFactory::createCreateSettlementRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name,
@@ -134,7 +134,7 @@ Message::SingleHandle MessageFactory::createCreateSettlementRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeleteSettlementRequest(
+Message::Handle MessageFactory::createDeleteSettlementRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name
@@ -150,7 +150,7 @@ Message::SingleHandle MessageFactory::createDeleteSettlementRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetSettlementRequest(
+Message::Handle MessageFactory::createGetSettlementRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name
@@ -166,7 +166,7 @@ Message::SingleHandle MessageFactory::createGetSettlementRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetSettlementsRequest(
+Message::Handle MessageFactory::createGetSettlementsRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name
@@ -182,7 +182,7 @@ Message::SingleHandle MessageFactory::createGetSettlementsRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createBuildBuildingRequest(
+Message::Handle MessageFactory::createBuildBuildingRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -204,7 +204,7 @@ Message::SingleHandle MessageFactory::createBuildBuildingRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDestroyBuildingRequest(
+Message::Handle MessageFactory::createDestroyBuildingRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -226,7 +226,7 @@ Message::SingleHandle MessageFactory::createDestroyBuildingRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetBuildingRequest(
+Message::Handle MessageFactory::createGetBuildingRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -246,7 +246,7 @@ Message::SingleHandle MessageFactory::createGetBuildingRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetBuildingsRequest(
+Message::Handle MessageFactory::createGetBuildingsRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -264,7 +264,7 @@ Message::SingleHandle MessageFactory::createGetBuildingsRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDismissHumanRequest(
+Message::Handle MessageFactory::createDismissHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -286,7 +286,7 @@ Message::SingleHandle MessageFactory::createDismissHumanRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createEngageHumanRequest(
+Message::Handle MessageFactory::createEngageHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -308,7 +308,7 @@ Message::SingleHandle MessageFactory::createEngageHumanRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetHumanRequest(
+Message::Handle MessageFactory::createGetHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -328,7 +328,7 @@ Message::SingleHandle MessageFactory::createGetHumanRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetHumansRequest(
+Message::Handle MessageFactory::createGetHumansRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -346,7 +346,7 @@ Message::SingleHandle MessageFactory::createGetHumansRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetResourceRequest(
+Message::Handle MessageFactory::createGetResourceRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -366,7 +366,7 @@ Message::SingleHandle MessageFactory::createGetResourceRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetResourcesRequest(
+Message::Handle MessageFactory::createGetResourcesRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -384,7 +384,7 @@ Message::SingleHandle MessageFactory::createGetResourcesRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateUserRequest(
+Message::Handle MessageFactory::createCreateUserRequest(
     std::string const a_login,
     std::string const a_password
 ) const
@@ -400,7 +400,7 @@ Message::SingleHandle MessageFactory::createCreateUserRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateWorldRequest(
+Message::Handle MessageFactory::createCreateWorldRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
@@ -416,7 +416,7 @@ Message::SingleHandle MessageFactory::createCreateWorldRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateEpochRequest(
+Message::Handle MessageFactory::createCreateEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name,
@@ -434,7 +434,7 @@ Message::SingleHandle MessageFactory::createCreateEpochRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeleteEpochRequest(
+Message::Handle MessageFactory::createDeleteEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
@@ -450,7 +450,7 @@ Message::SingleHandle MessageFactory::createDeleteEpochRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createActivateEpochRequest(
+Message::Handle MessageFactory::createActivateEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
@@ -466,7 +466,7 @@ Message::SingleHandle MessageFactory::createActivateEpochRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeactivateEpochRequest(
+Message::Handle MessageFactory::createDeactivateEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
@@ -482,7 +482,7 @@ Message::SingleHandle MessageFactory::createDeactivateEpochRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createFinishEpochRequest(
+Message::Handle MessageFactory::createFinishEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
@@ -498,7 +498,7 @@ Message::SingleHandle MessageFactory::createFinishEpochRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createTickEpochRequest(
+Message::Handle MessageFactory::createTickEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
@@ -514,7 +514,7 @@ Message::SingleHandle MessageFactory::createTickEpochRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetEpochRequest(
+Message::Handle MessageFactory::createGetEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
@@ -530,7 +530,7 @@ Message::SingleHandle MessageFactory::createGetEpochRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createTransportHumanRequest(
+Message::Handle MessageFactory::createTransportHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name_source,
@@ -552,7 +552,7 @@ Message::SingleHandle MessageFactory::createTransportHumanRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createTransportResourceRequest(
+Message::Handle MessageFactory::createTransportResourceRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name_source,
@@ -574,7 +574,7 @@ Message::SingleHandle MessageFactory::createTransportResourceRequest(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createEchoReply(
+Message::Handle MessageFactory::createEchoReply(
     std::string const a_code
 ) const
 {
@@ -589,7 +589,7 @@ Message::SingleHandle MessageFactory::createEchoReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createErrorReply(
+Message::Handle MessageFactory::createErrorReply(
     std::string const a_code
 ) const
 {
@@ -604,7 +604,7 @@ Message::SingleHandle MessageFactory::createErrorReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateLandReply(
+Message::Handle MessageFactory::createCreateLandReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -621,7 +621,7 @@ Message::SingleHandle MessageFactory::createCreateLandReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeleteLandReply(
+Message::Handle MessageFactory::createDeleteLandReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -638,7 +638,7 @@ Message::SingleHandle MessageFactory::createDeleteLandReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetLandReply(
+Message::Handle MessageFactory::createGetLandReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -657,7 +657,7 @@ Message::SingleHandle MessageFactory::createGetLandReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetLandsReply(
+Message::Handle MessageFactory::createGetLandsReply(
     std::string      const   a_code,
     std::string      const   a_message,
     Message::Objects const & a_objects
@@ -676,7 +676,7 @@ Message::SingleHandle MessageFactory::createGetLandsReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateSettlementReply(
+Message::Handle MessageFactory::createCreateSettlementReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -693,7 +693,7 @@ Message::SingleHandle MessageFactory::createCreateSettlementReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeleteSettlementReply(
+Message::Handle MessageFactory::createDeleteSettlementReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -710,7 +710,7 @@ Message::SingleHandle MessageFactory::createDeleteSettlementReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetSettlementReply(
+Message::Handle MessageFactory::createGetSettlementReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -729,7 +729,7 @@ Message::SingleHandle MessageFactory::createGetSettlementReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetSettlementsReply(
+Message::Handle MessageFactory::createGetSettlementsReply(
     std::string      const   a_code,
     std::string      const   a_message,
     Message::Objects const & a_objects
@@ -748,7 +748,7 @@ Message::SingleHandle MessageFactory::createGetSettlementsReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createBuildBuildingReply(
+Message::Handle MessageFactory::createBuildBuildingReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -765,7 +765,7 @@ Message::SingleHandle MessageFactory::createBuildBuildingReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDestroyBuildingReply(
+Message::Handle MessageFactory::createDestroyBuildingReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -782,7 +782,7 @@ Message::SingleHandle MessageFactory::createDestroyBuildingReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetBuildingReply(
+Message::Handle MessageFactory::createGetBuildingReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -801,7 +801,7 @@ Message::SingleHandle MessageFactory::createGetBuildingReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetBuildingsReply(
+Message::Handle MessageFactory::createGetBuildingsReply(
     std::string      const   a_code,
     std::string      const   a_message,
     Message::Objects const & a_objects
@@ -820,7 +820,7 @@ Message::SingleHandle MessageFactory::createGetBuildingsReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDismissHumanReply(
+Message::Handle MessageFactory::createDismissHumanReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -837,7 +837,7 @@ Message::SingleHandle MessageFactory::createDismissHumanReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createEngageHumanReply(
+Message::Handle MessageFactory::createEngageHumanReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -854,7 +854,7 @@ Message::SingleHandle MessageFactory::createEngageHumanReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetHumanReply(
+Message::Handle MessageFactory::createGetHumanReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -873,7 +873,7 @@ Message::SingleHandle MessageFactory::createGetHumanReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetHumansReply(
+Message::Handle MessageFactory::createGetHumansReply(
     std::string      const   a_code,
     std::string      const   a_message,
     Message::Objects const & a_objects
@@ -892,7 +892,7 @@ Message::SingleHandle MessageFactory::createGetHumansReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetResourceReply(
+Message::Handle MessageFactory::createGetResourceReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -911,7 +911,7 @@ Message::SingleHandle MessageFactory::createGetResourceReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetResourcesReply(
+Message::Handle MessageFactory::createGetResourcesReply(
     std::string      const   a_code,
     std::string      const   a_message,
     Message::Objects const & a_objects
@@ -930,7 +930,7 @@ Message::SingleHandle MessageFactory::createGetResourcesReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateUserReply(
+Message::Handle MessageFactory::createCreateUserReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -947,7 +947,7 @@ Message::SingleHandle MessageFactory::createCreateUserReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateWorldReply(
+Message::Handle MessageFactory::createCreateWorldReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -964,7 +964,7 @@ Message::SingleHandle MessageFactory::createCreateWorldReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createCreateEpochReply(
+Message::Handle MessageFactory::createCreateEpochReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -981,7 +981,7 @@ Message::SingleHandle MessageFactory::createCreateEpochReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeleteEpochReply(
+Message::Handle MessageFactory::createDeleteEpochReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -998,7 +998,7 @@ Message::SingleHandle MessageFactory::createDeleteEpochReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createActivateEpochReply(
+Message::Handle MessageFactory::createActivateEpochReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -1015,7 +1015,7 @@ Message::SingleHandle MessageFactory::createActivateEpochReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createDeactivateEpochReply(
+Message::Handle MessageFactory::createDeactivateEpochReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -1032,7 +1032,7 @@ Message::SingleHandle MessageFactory::createDeactivateEpochReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createFinishEpochReply(
+Message::Handle MessageFactory::createFinishEpochReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -1049,7 +1049,7 @@ Message::SingleHandle MessageFactory::createFinishEpochReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createTickEpochReply(
+Message::Handle MessageFactory::createTickEpochReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -1066,7 +1066,7 @@ Message::SingleHandle MessageFactory::createTickEpochReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createGetEpochReply(
+Message::Handle MessageFactory::createGetEpochReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -1085,7 +1085,7 @@ Message::SingleHandle MessageFactory::createGetEpochReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createTransportHumanReply(
+Message::Handle MessageFactory::createTransportHumanReply(
     std::string const a_code,
     std::string const a_message
 ) const
@@ -1102,7 +1102,7 @@ Message::SingleHandle MessageFactory::createTransportHumanReply(
     return message_builder.extract();
 }
 
-Message::SingleHandle MessageFactory::createTransportResourceReply(
+Message::Handle MessageFactory::createTransportResourceReply(
     std::string const a_code,
     std::string const a_message
 ) const

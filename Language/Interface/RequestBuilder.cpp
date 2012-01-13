@@ -31,28 +31,28 @@
 namespace TUSLanguage
 {
 
-ICommand::SingleHandle RequestBuilder::buildEchoRequest() const
+ICommand::Handle RequestBuilder::buildEchoRequest() const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(1);
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildErrorRequest() const
+ICommand::Handle RequestBuilder::buildErrorRequest() const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(2);
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateLandRequest(
+ICommand::Handle RequestBuilder::buildCreateLandRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name,
     std::string const a_land_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(3);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -61,13 +61,13 @@ ICommand::SingleHandle RequestBuilder::buildCreateLandRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeleteLandRequest(
+ICommand::Handle RequestBuilder::buildDeleteLandRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(4);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -75,13 +75,13 @@ ICommand::SingleHandle RequestBuilder::buildDeleteLandRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetLandRequest(
+ICommand::Handle RequestBuilder::buildGetLandRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(5);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -89,26 +89,26 @@ ICommand::SingleHandle RequestBuilder::buildGetLandRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetLandsRequest(
+ICommand::Handle RequestBuilder::buildGetLandsRequest(
     std::string const a_login,
     std::string const a_password
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(6);
     command->setLogin(a_login);
     command->setPassword(a_password);
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateSettlementRequest(
+ICommand::Handle RequestBuilder::buildCreateSettlementRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name,
     std::string const a_settlement_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(7);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -117,13 +117,13 @@ ICommand::SingleHandle RequestBuilder::buildCreateSettlementRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeleteSettlementRequest(
+ICommand::Handle RequestBuilder::buildDeleteSettlementRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(8);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -131,13 +131,13 @@ ICommand::SingleHandle RequestBuilder::buildDeleteSettlementRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetSettlementRequest(
+ICommand::Handle RequestBuilder::buildGetSettlementRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(9);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -145,13 +145,13 @@ ICommand::SingleHandle RequestBuilder::buildGetSettlementRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetSettlementsRequest(
+ICommand::Handle RequestBuilder::buildGetSettlementsRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_land_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(10);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -159,7 +159,7 @@ ICommand::SingleHandle RequestBuilder::buildGetSettlementsRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildBuildBuildingRequest(
+ICommand::Handle RequestBuilder::buildBuildBuildingRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -168,7 +168,7 @@ ICommand::SingleHandle RequestBuilder::buildBuildBuildingRequest(
     std::string const a_volume
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(11);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -179,7 +179,7 @@ ICommand::SingleHandle RequestBuilder::buildBuildBuildingRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDestroyBuildingRequest(
+ICommand::Handle RequestBuilder::buildDestroyBuildingRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -188,7 +188,7 @@ ICommand::SingleHandle RequestBuilder::buildDestroyBuildingRequest(
     std::string const a_volume
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(12);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -199,7 +199,7 @@ ICommand::SingleHandle RequestBuilder::buildDestroyBuildingRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetBuildingRequest(
+ICommand::Handle RequestBuilder::buildGetBuildingRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -207,7 +207,7 @@ ICommand::SingleHandle RequestBuilder::buildGetBuildingRequest(
     std::string const a_building_key
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(13);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -217,14 +217,14 @@ ICommand::SingleHandle RequestBuilder::buildGetBuildingRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetBuildingsRequest(
+ICommand::Handle RequestBuilder::buildGetBuildingsRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
     std::string const a_holder_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(14);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -233,7 +233,7 @@ ICommand::SingleHandle RequestBuilder::buildGetBuildingsRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDismissHumanRequest(
+ICommand::Handle RequestBuilder::buildDismissHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -242,7 +242,7 @@ ICommand::SingleHandle RequestBuilder::buildDismissHumanRequest(
     std::string const a_volume
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(15);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -253,7 +253,7 @@ ICommand::SingleHandle RequestBuilder::buildDismissHumanRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildEngageHumanRequest(
+ICommand::Handle RequestBuilder::buildEngageHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -262,7 +262,7 @@ ICommand::SingleHandle RequestBuilder::buildEngageHumanRequest(
     std::string const a_volume
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(16);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -273,7 +273,7 @@ ICommand::SingleHandle RequestBuilder::buildEngageHumanRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetHumanRequest(
+ICommand::Handle RequestBuilder::buildGetHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -281,7 +281,7 @@ ICommand::SingleHandle RequestBuilder::buildGetHumanRequest(
     std::string const a_human_key
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(17);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -291,14 +291,14 @@ ICommand::SingleHandle RequestBuilder::buildGetHumanRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetHumansRequest(
+ICommand::Handle RequestBuilder::buildGetHumansRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
     std::string const a_holder_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(18);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -307,7 +307,7 @@ ICommand::SingleHandle RequestBuilder::buildGetHumansRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetResourceRequest(
+ICommand::Handle RequestBuilder::buildGetResourceRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
@@ -315,7 +315,7 @@ ICommand::SingleHandle RequestBuilder::buildGetResourceRequest(
     std::string const a_resource_key
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(19);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -325,14 +325,14 @@ ICommand::SingleHandle RequestBuilder::buildGetResourceRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetResourcesRequest(
+ICommand::Handle RequestBuilder::buildGetResourcesRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_id_holder_class,
     std::string const a_holder_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(20);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -341,25 +341,25 @@ ICommand::SingleHandle RequestBuilder::buildGetResourcesRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateUserRequest(
+ICommand::Handle RequestBuilder::buildCreateUserRequest(
     std::string const a_login,
     std::string const a_password
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(21);
     command->setParam("login", a_login);
     command->setParam("password", a_password);
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateWorldRequest(
+ICommand::Handle RequestBuilder::buildCreateWorldRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(22);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -367,14 +367,14 @@ ICommand::SingleHandle RequestBuilder::buildCreateWorldRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildCreateEpochRequest(
+ICommand::Handle RequestBuilder::buildCreateEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name,
     std::string const a_epoch_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(23);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -383,13 +383,13 @@ ICommand::SingleHandle RequestBuilder::buildCreateEpochRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeleteEpochRequest(
+ICommand::Handle RequestBuilder::buildDeleteEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(24);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -397,13 +397,13 @@ ICommand::SingleHandle RequestBuilder::buildDeleteEpochRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildActivateEpochRequest(
+ICommand::Handle RequestBuilder::buildActivateEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(25);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -411,13 +411,13 @@ ICommand::SingleHandle RequestBuilder::buildActivateEpochRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildDeactivateEpochRequest(
+ICommand::Handle RequestBuilder::buildDeactivateEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(26);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -425,13 +425,13 @@ ICommand::SingleHandle RequestBuilder::buildDeactivateEpochRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildFinishEpochRequest(
+ICommand::Handle RequestBuilder::buildFinishEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(27);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -439,13 +439,13 @@ ICommand::SingleHandle RequestBuilder::buildFinishEpochRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildTickEpochRequest(
+ICommand::Handle RequestBuilder::buildTickEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(28);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -453,13 +453,13 @@ ICommand::SingleHandle RequestBuilder::buildTickEpochRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildGetEpochRequest(
+ICommand::Handle RequestBuilder::buildGetEpochRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_world_name
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(29);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -467,7 +467,7 @@ ICommand::SingleHandle RequestBuilder::buildGetEpochRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildTransportHumanRequest(
+ICommand::Handle RequestBuilder::buildTransportHumanRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name_source,
@@ -476,7 +476,7 @@ ICommand::SingleHandle RequestBuilder::buildTransportHumanRequest(
     std::string const a_volume
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(30);
     command->setLogin(a_login);
     command->setPassword(a_password);
@@ -487,7 +487,7 @@ ICommand::SingleHandle RequestBuilder::buildTransportHumanRequest(
     return command;
 }
 
-ICommand::SingleHandle RequestBuilder::buildTransportResourceRequest(
+ICommand::Handle RequestBuilder::buildTransportResourceRequest(
     std::string const a_login,
     std::string const a_password,
     std::string const a_settlement_name_source,
@@ -496,7 +496,7 @@ ICommand::SingleHandle RequestBuilder::buildTransportResourceRequest(
     std::string const a_volume
 ) const
 {
-    ICommand::SingleHandle command(new Command);
+    ICommand::Handle command(new Command);
     command->setID(31);
     command->setLogin(a_login);
     command->setPassword(a_password);

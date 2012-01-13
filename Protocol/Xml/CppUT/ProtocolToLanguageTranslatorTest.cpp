@@ -43,8 +43,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorEchoRequestTranslation, ReturnsNotNull)
@@ -69,8 +69,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorErrorRequestTranslation, ReturnsNotNull)
@@ -95,8 +95,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateLandRequestTranslation, ReturnsNotNull)
@@ -141,8 +141,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteLandRequestTranslation, ReturnsNotNull)
@@ -182,8 +182,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandRequestTranslation, ReturnsNotNull)
@@ -223,8 +223,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandsRequestTranslation, ReturnsNotNull)
@@ -259,8 +259,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateSettlementRequestTranslation, ReturnsNotNull)
@@ -305,8 +305,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteSettlementRequestTranslation, ReturnsNotNull)
@@ -346,8 +346,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementRequestTranslation, ReturnsNotNull)
@@ -387,8 +387,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementsRequestTranslation, ReturnsNotNull)
@@ -429,8 +429,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorBuildBuildingRequestTranslation, ReturnsNotNull)
@@ -486,8 +486,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDestroyBuildingRequestTranslation, ReturnsNotNull)
@@ -543,8 +543,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingRequestTranslation, ReturnsNotNull)
@@ -594,8 +594,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingsRequestTranslation, ReturnsNotNull)
@@ -641,8 +641,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDismissHumanRequestTranslation, ReturnsNotNull)
@@ -698,8 +698,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorEngageHumanRequestTranslation, ReturnsNotNull)
@@ -755,8 +755,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumanRequestTranslation, ReturnsNotNull)
@@ -806,8 +806,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumansRequestTranslation, ReturnsNotNull)
@@ -853,8 +853,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourceRequestTranslation, ReturnsNotNull)
@@ -904,8 +904,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourcesRequestTranslation, ReturnsNotNull)
@@ -950,8 +950,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateUserRequestTranslation, ReturnsNotNull)
@@ -996,8 +996,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateWorldRequestTranslation, ReturnsNotNull)
@@ -1037,8 +1037,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateEpochRequestTranslation, ReturnsNotNull)
@@ -1083,8 +1083,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteEpochRequestTranslation, ReturnsNotNull)
@@ -1124,8 +1124,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorActivateEpochRequestTranslation, ReturnsNotNull)
@@ -1165,8 +1165,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeactivateEpochRequestTranslation, ReturnsNotNull)
@@ -1206,8 +1206,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorFinishEpochRequestTranslation, ReturnsNotNull)
@@ -1247,8 +1247,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTickEpochRequestTranslation, ReturnsNotNull)
@@ -1288,8 +1288,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetEpochRequestTranslation, ReturnsNotNull)
@@ -1330,8 +1330,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportHumanRequestTranslation, ReturnsNotNull)
@@ -1387,8 +1387,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportResourceRequestTranslation, ReturnsNotNull)
@@ -1443,8 +1443,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorEchoReplyTranslation, ReturnsNotNull)
@@ -1474,8 +1474,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorErrorReplyTranslation, ReturnsNotNull)
@@ -1505,8 +1505,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateLandReplyTranslation, ReturnsNotNull)
@@ -1541,8 +1541,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteLandReplyTranslation, ReturnsNotNull)
@@ -1582,8 +1582,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandReplyTranslation, ReturnsNotNull)
@@ -1645,8 +1645,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandsReplyTranslation, ReturnsNotNull)
@@ -1701,8 +1701,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateSettlementReplyTranslation, ReturnsNotNull)
@@ -1737,8 +1737,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteSettlementReplyTranslation, ReturnsNotNull)
@@ -1776,8 +1776,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, ReturnsNotNull)
@@ -1833,8 +1833,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyTranslation, ReturnsNotNull)
@@ -1885,8 +1885,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorBuildBuildingReplyTranslation, ReturnsNotNull)
@@ -1921,8 +1921,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDestroyBuildingReplyTranslation, ReturnsNotNull)
@@ -1961,8 +1961,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingReplyTranslation, ReturnsNotNull)
@@ -2021,8 +2021,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingsReplyTranslation, ReturnsNotNull)
@@ -2075,8 +2075,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDismissHumanReplyTranslation, ReturnsNotNull)
@@ -2116,8 +2116,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumanReplyTranslation, ReturnsNotNull)
@@ -2179,8 +2179,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumansReplyTranslation, ReturnsNotNull)
@@ -2238,8 +2238,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourceReplyTranslation, ReturnsNotNull)
@@ -2295,8 +2295,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourcesReplyTranslation, ReturnsNotNull)
@@ -2347,8 +2347,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateUserReplyTranslation, ReturnsNotNull)
@@ -2383,8 +2383,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateWorldReplyTranslation, ReturnsNotNull)
@@ -2419,8 +2419,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateEpochReplyTranslation, ReturnsNotNull)
@@ -2455,8 +2455,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteEpochReplyTranslation, ReturnsNotNull)
@@ -2491,8 +2491,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorActivateEpochReplyTranslation, ReturnsNotNull)
@@ -2527,8 +2527,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeactivateEpochReplyTranslation, ReturnsNotNull)
@@ -2563,8 +2563,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorFinishEpochReplyTranslation, ReturnsNotNull)
@@ -2599,8 +2599,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTickEpochReplyTranslation, ReturnsNotNull)
@@ -2641,8 +2641,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetEpochReplyTranslation, ReturnsNotNull)
@@ -2693,8 +2693,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportHumanReplyTranslation, ReturnsNotNull)
@@ -2729,8 +2729,8 @@ protected:
 
     TUSProtocol::MessageFactory m_factory;
     TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::SingleHandle m_message;
-    TUSLanguage::ICommand::SingleHandle m_command;
+    TUSProtocol::Message::Handle m_message;
+    TUSLanguage::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportResourceReplyTranslation, ReturnsNotNull)

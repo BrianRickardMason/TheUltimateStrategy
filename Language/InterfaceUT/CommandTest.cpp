@@ -41,7 +41,7 @@ protected:
 
 TEST_F(CommandTest, CtorDoesNotThrow)
 {
-    ASSERT_NO_THROW(TUSLanguage::Command::SingleHandle command(new TUSLanguage::Command));
+    ASSERT_NO_THROW(TUSLanguage::Command::Handle command(new TUSLanguage::Command));
 }
 
 TEST_F(CommandTest, GetIDReturnsProperInitialValue)

@@ -43,14 +43,14 @@ public:
      *
      * @return EchoRequest.
      */
-    Message::SingleHandle createEchoRequest() const;
+    Message::Handle createEchoRequest() const;
 
     /**
      * @brief Creates ErrorRequest.
      *
      * @return ErrorRequest.
      */
-    Message::SingleHandle createErrorRequest() const;
+    Message::Handle createErrorRequest() const;
 
     /**
      * @brief Creates CreateLandRequest.
@@ -62,7 +62,7 @@ public:
      *
      * @return CreateLandRequest.
      */
-    Message::SingleHandle createCreateLandRequest(
+    Message::Handle createCreateLandRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name,
@@ -78,7 +78,7 @@ public:
      *
      * @return DeleteLandRequest.
      */
-    Message::SingleHandle createDeleteLandRequest(
+    Message::Handle createDeleteLandRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name
@@ -93,7 +93,7 @@ public:
      *
      * @return GetLandRequest.
      */
-    Message::SingleHandle createGetLandRequest(
+    Message::Handle createGetLandRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name
@@ -107,7 +107,7 @@ public:
      *
      * @return GetLandsRequest.
      */
-    Message::SingleHandle createGetLandsRequest(
+    Message::Handle createGetLandsRequest(
         std::string const a_login,
         std::string const a_password
     ) const;
@@ -122,7 +122,7 @@ public:
      *
      * @return CreateSettlementRequest.
      */
-    Message::SingleHandle createCreateSettlementRequest(
+    Message::Handle createCreateSettlementRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name,
@@ -138,7 +138,7 @@ public:
      *
      * @return DeleteSettlementRequest.
      */
-    Message::SingleHandle createDeleteSettlementRequest(
+    Message::Handle createDeleteSettlementRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name
@@ -153,7 +153,7 @@ public:
      *
      * @return GetSettlementRequest.
      */
-    Message::SingleHandle createGetSettlementRequest(
+    Message::Handle createGetSettlementRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name
@@ -168,7 +168,7 @@ public:
      *
      * @return GetSettlementsRequest.
      */
-    Message::SingleHandle createGetSettlementsRequest(
+    Message::Handle createGetSettlementsRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_land_name
@@ -186,7 +186,7 @@ public:
      *
      * @return BuildBuildingRequest.
      */
-    Message::SingleHandle createBuildBuildingRequest(
+    Message::Handle createBuildBuildingRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -207,7 +207,7 @@ public:
      *
      * @return DestroyBuildingRequest.
      */
-    Message::SingleHandle createDestroyBuildingRequest(
+    Message::Handle createDestroyBuildingRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -227,7 +227,7 @@ public:
      *
      * @return GetBuildingRequest.
      */
-    Message::SingleHandle createGetBuildingRequest(
+    Message::Handle createGetBuildingRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -245,7 +245,7 @@ public:
      *
      * @return GetBuildingsRequest.
      */
-    Message::SingleHandle createGetBuildingsRequest(
+    Message::Handle createGetBuildingsRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -264,7 +264,7 @@ public:
      *
      * @return DismissHumanRequest.
      */
-    Message::SingleHandle createDismissHumanRequest(
+    Message::Handle createDismissHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -285,7 +285,7 @@ public:
      *
      * @return EngageHumanRequest.
      */
-    Message::SingleHandle createEngageHumanRequest(
+    Message::Handle createEngageHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -305,7 +305,7 @@ public:
      *
      * @return GetHumanRequest.
      */
-    Message::SingleHandle createGetHumanRequest(
+    Message::Handle createGetHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -323,7 +323,7 @@ public:
      *
      * @return GetHumansRequest.
      */
-    Message::SingleHandle createGetHumansRequest(
+    Message::Handle createGetHumansRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -341,7 +341,7 @@ public:
      *
      * @return GetResourceRequest.
      */
-    Message::SingleHandle createGetResourceRequest(
+    Message::Handle createGetResourceRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -359,7 +359,7 @@ public:
      *
      * @return GetResourcesRequest.
      */
-    Message::SingleHandle createGetResourcesRequest(
+    Message::Handle createGetResourcesRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_id_holder_class,
@@ -374,7 +374,7 @@ public:
      *
      * @return CreateUserRequest.
      */
-    Message::SingleHandle createCreateUserRequest(
+    Message::Handle createCreateUserRequest(
         std::string const a_login,
         std::string const a_password
     ) const;
@@ -388,7 +388,7 @@ public:
      *
      * @return CreateWorldRequest.
      */
-    Message::SingleHandle createCreateWorldRequest(
+    Message::Handle createCreateWorldRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -404,7 +404,7 @@ public:
      *
      * @return CreateEpochRequest.
      */
-    Message::SingleHandle createCreateEpochRequest(
+    Message::Handle createCreateEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name,
@@ -420,7 +420,7 @@ public:
      *
      * @return DeleteEpochRequest.
      */
-    Message::SingleHandle createDeleteEpochRequest(
+    Message::Handle createDeleteEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -435,7 +435,7 @@ public:
      *
      * @return ActivateEpochRequest.
      */
-    Message::SingleHandle createActivateEpochRequest(
+    Message::Handle createActivateEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -450,7 +450,7 @@ public:
      *
      * @return DeactivateEpochRequest.
      */
-    Message::SingleHandle createDeactivateEpochRequest(
+    Message::Handle createDeactivateEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -465,7 +465,7 @@ public:
      *
      * @return FinishEpochRequest.
      */
-    Message::SingleHandle createFinishEpochRequest(
+    Message::Handle createFinishEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -480,7 +480,7 @@ public:
      *
      * @return TickEpochRequest.
      */
-    Message::SingleHandle createTickEpochRequest(
+    Message::Handle createTickEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -495,7 +495,7 @@ public:
      *
      * @return GetEpochRequest.
      */
-    Message::SingleHandle createGetEpochRequest(
+    Message::Handle createGetEpochRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_world_name
@@ -513,7 +513,7 @@ public:
      *
      * @return TransportHumanRequest.
      */
-    Message::SingleHandle createTransportHumanRequest(
+    Message::Handle createTransportHumanRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name_source,
@@ -534,7 +534,7 @@ public:
      *
      * @return TransportResourceRequest.
      */
-    Message::SingleHandle createTransportResourceRequest(
+    Message::Handle createTransportResourceRequest(
         std::string const a_login,
         std::string const a_password,
         std::string const a_settlement_name_source,
@@ -550,7 +550,7 @@ public:
      *
      * @return EchoReply.
      */
-    Message::SingleHandle createEchoReply(
+    Message::Handle createEchoReply(
         std::string const a_code
     ) const;
 
@@ -561,7 +561,7 @@ public:
      *
      * @return ErrorReply.
      */
-    Message::SingleHandle createErrorReply(
+    Message::Handle createErrorReply(
         std::string const a_code
     ) const;
 
@@ -573,7 +573,7 @@ public:
      *
      * @return CreateLandReply.
      */
-    Message::SingleHandle createCreateLandReply(
+    Message::Handle createCreateLandReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -586,7 +586,7 @@ public:
      *
      * @return DeleteLandReply.
      */
-    Message::SingleHandle createDeleteLandReply(
+    Message::Handle createDeleteLandReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -600,7 +600,7 @@ public:
      *
      * @return GetLandReply.
      */
-    Message::SingleHandle createGetLandReply(
+    Message::Handle createGetLandReply(
         std::string     const   a_code,
         std::string     const   a_message,
         Message::Object const & a_object
@@ -615,7 +615,7 @@ public:
      *
      * @return GetLandsReply.
      */
-    Message::SingleHandle createGetLandsReply(
+    Message::Handle createGetLandsReply(
         std::string      const   a_code,
         std::string      const   a_message,
         Message::Objects const & a_objects
@@ -629,7 +629,7 @@ public:
      *
      * @return CreateSettlementReply.
      */
-    Message::SingleHandle createCreateSettlementReply(
+    Message::Handle createCreateSettlementReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -642,7 +642,7 @@ public:
      *
      * @return DeleteSettlementReply.
      */
-    Message::SingleHandle createDeleteSettlementReply(
+    Message::Handle createDeleteSettlementReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -656,7 +656,7 @@ public:
      *
      * @return GetSettlementReply.
      */
-    Message::SingleHandle createGetSettlementReply(
+    Message::Handle createGetSettlementReply(
         std::string     const   a_code,
         std::string     const   a_message,
         Message::Object const & a_object
@@ -671,7 +671,7 @@ public:
      *
      * @return GetSettlementsReply.
      */
-    Message::SingleHandle createGetSettlementsReply(
+    Message::Handle createGetSettlementsReply(
         std::string      const   a_code,
         std::string      const   a_message,
         Message::Objects const & a_objects
@@ -685,7 +685,7 @@ public:
      *
      * @return BuildBuildingReply.
      */
-    Message::SingleHandle createBuildBuildingReply(
+    Message::Handle createBuildBuildingReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -698,7 +698,7 @@ public:
      *
      * @return DestroyBuildingReply.
      */
-    Message::SingleHandle createDestroyBuildingReply(
+    Message::Handle createDestroyBuildingReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -712,7 +712,7 @@ public:
      *
      * @return GetBuildingReply.
      */
-    Message::SingleHandle createGetBuildingReply(
+    Message::Handle createGetBuildingReply(
         std::string     const   a_code,
         std::string     const   a_message,
         Message::Object const & a_object
@@ -727,7 +727,7 @@ public:
      *
      * @return GetBuildingsReply.
      */
-    Message::SingleHandle createGetBuildingsReply(
+    Message::Handle createGetBuildingsReply(
         std::string      const   a_code,
         std::string      const   a_message,
         Message::Objects const & a_objects
@@ -741,7 +741,7 @@ public:
      *
      * @return DismissHumanReply.
      */
-    Message::SingleHandle createDismissHumanReply(
+    Message::Handle createDismissHumanReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -754,7 +754,7 @@ public:
      *
      * @return EngageHumanReply.
      */
-    Message::SingleHandle createEngageHumanReply(
+    Message::Handle createEngageHumanReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -768,7 +768,7 @@ public:
      *
      * @return GetHumanReply.
      */
-    Message::SingleHandle createGetHumanReply(
+    Message::Handle createGetHumanReply(
         std::string     const   a_code,
         std::string     const   a_message,
         Message::Object const & a_object
@@ -783,7 +783,7 @@ public:
      *
      * @return GetHumansReply.
      */
-    Message::SingleHandle createGetHumansReply(
+    Message::Handle createGetHumansReply(
         std::string      const   a_code,
         std::string      const   a_message,
         Message::Objects const & a_objects
@@ -798,7 +798,7 @@ public:
      *
      * @return GetResourceReply.
      */
-    Message::SingleHandle createGetResourceReply(
+    Message::Handle createGetResourceReply(
         std::string     const   a_code,
         std::string     const   a_message,
         Message::Object const & a_object
@@ -813,7 +813,7 @@ public:
      *
      * @return GetResourcesReply.
      */
-    Message::SingleHandle createGetResourcesReply(
+    Message::Handle createGetResourcesReply(
         std::string      const   a_code,
         std::string      const   a_message,
         Message::Objects const & a_objects
@@ -827,7 +827,7 @@ public:
      *
      * @return CreateUserReply.
      */
-    Message::SingleHandle createCreateUserReply(
+    Message::Handle createCreateUserReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -840,7 +840,7 @@ public:
      *
      * @return CreateWorldReply.
      */
-    Message::SingleHandle createCreateWorldReply(
+    Message::Handle createCreateWorldReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -853,7 +853,7 @@ public:
      *
      * @return CreateEpochReply.
      */
-    Message::SingleHandle createCreateEpochReply(
+    Message::Handle createCreateEpochReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -866,7 +866,7 @@ public:
      *
      * @return DeleteEpochReply.
      */
-    Message::SingleHandle createDeleteEpochReply(
+    Message::Handle createDeleteEpochReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -879,7 +879,7 @@ public:
      *
      * @return ActivateEpochReply.
      */
-    Message::SingleHandle createActivateEpochReply(
+    Message::Handle createActivateEpochReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -892,7 +892,7 @@ public:
      *
      * @return DectivateEpochReply.
      */
-    Message::SingleHandle createDeactivateEpochReply(
+    Message::Handle createDeactivateEpochReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -905,7 +905,7 @@ public:
      *
      * @return FinishEpochReply.
      */
-    Message::SingleHandle createFinishEpochReply(
+    Message::Handle createFinishEpochReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -918,7 +918,7 @@ public:
      *
      * @return TickEpochReply.
      */
-    Message::SingleHandle createTickEpochReply(
+    Message::Handle createTickEpochReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -932,7 +932,7 @@ public:
      *
      * @return GetEpochReply.
      */
-    Message::SingleHandle createGetEpochReply(
+    Message::Handle createGetEpochReply(
         std::string     const   a_code,
         std::string     const   a_message,
         Message::Object const & a_object
@@ -946,7 +946,7 @@ public:
      *
      * @return TransportHumanReply.
      */
-    Message::SingleHandle createTransportHumanReply(
+    Message::Handle createTransportHumanReply(
         std::string const a_code,
         std::string const a_message
     ) const;
@@ -959,7 +959,7 @@ public:
      *
      * @return TransportResourceReply.
      */
-    Message::SingleHandle createTransportResourceReply(
+    Message::Handle createTransportResourceReply(
         std::string const a_code,
         std::string const a_message
     ) const;

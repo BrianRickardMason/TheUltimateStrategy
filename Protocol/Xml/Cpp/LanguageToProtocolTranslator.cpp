@@ -35,8 +35,8 @@ namespace TUSProtocol
 
 // TODO: Consider removing lexical cast.
 
-Message::SingleHandle LanguageToProtocolTranslator::translate(
-    TUSLanguage::ICommand::SingleHandle a_command
+Message::Handle LanguageToProtocolTranslator::translate(
+    TUSLanguage::ICommand::Handle a_command
 ) const
 {
     MessageFactory message_factory;
