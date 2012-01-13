@@ -27,6 +27,7 @@
 
 #include <Game/GameServer/Common/Constants.hpp>
 #include <Game/GameServer/Generic/Executors/ExecutorEcho.hpp>
+#include <Language/Interface/ReplyBuilder.hpp>
 #include <boost/make_shared.hpp>
 #include <log4cpp/Category.hh>
 
@@ -108,12 +109,9 @@ TUSLanguage::ICommand::Handle ExecutorEcho::getBasicReply(
     unsigned int const a_status
 ) const
 {
-//    TUSLanguage::ICommand::Handle reply = make_shared<Reply>();
-//
-//    reply->m_xml_document->appendNode("reply")->appendAttribute("id")->setValue(REPLY_ID_ECHO);
-//    reply->m_xml_document->getNode("reply")->appendNode("status")->appendAttribute("value")->setValue(a_status);
-//
-//    return reply;
+	TUSLanguage::ReplyBuilder reply_builder;
+
+    return reply_builder.buildEchoReply(a_status);
 }
 
 } // namespace Game
