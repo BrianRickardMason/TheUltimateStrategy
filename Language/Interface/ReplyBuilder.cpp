@@ -149,16 +149,37 @@ ICommand::Handle ReplyBuilder::buildDeleteSettlementReply(
 }
 
 ICommand::Handle ReplyBuilder::buildGetSettlementReply(
-    unsigned short int const   a_code,
-    std::string        const   a_message,
-    ICommand::Object   const & a_object
+    unsigned short int const a_code,
+    std::string        const a_message
 ) const
 {
     ICommand::Handle command(new Command);
     command->setID(40);
     command->setCode(a_code);
     command->setMessage(a_message);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetSettlementReply(
+    unsigned short int const   a_code,
+    std::string        const   a_message,
+    ICommand::Object   const & a_object
+) const
+{
+    ICommand::Handle command = buildGetSettlementReply(a_code, a_message);
     command->addObject(a_object);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetSettlementsReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
+{
+    ICommand::Handle command(new Command);
+    command->setID(41);
+    command->setCode(a_code);
+    command->setMessage(a_message);
     return command;
 }
 
@@ -168,10 +189,7 @@ ICommand::Handle ReplyBuilder::buildGetSettlementsReply(
     ICommand::Objects  const & a_objects
 ) const
 {
-    ICommand::Handle command(new Command);
-    command->setID(41);
-    command->setCode(a_code);
-    command->setMessage(a_message);
+    ICommand::Handle command = buildGetSettlementsReply(a_code, a_message);
     for (ICommand::Objects::const_iterator it = a_objects.begin(); it != a_objects.end(); ++it)
     {
         command->addObject((*it));
