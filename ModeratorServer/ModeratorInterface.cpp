@@ -67,7 +67,7 @@ int ModeratorInterface::tickEpoch() {
 
 void ModeratorInterface::setCurrentWorld(const std::string& aWorldName) {
     mCurrentWorld = aWorldName;
-    
+
     mReqBuilder->setWorld(aWorldName);
 }
 

@@ -44,15 +44,22 @@ bool TusMessageBuffer::lookForMessage(){
     if(mValidMessage){
         return true;
     }
-    
+
     using std::string;
     #define found(pos) (std::string::npos != pos)
-    
+
     // current state of the ostream buffer
     string state = mBuf.str().substr(mBuf.tellg());
-    
+
+    int prePos = state.find("<?");
+    if( ! found(prePos)){
+        prePos = state.find("<!");
+    }
+
+    // TODO handle some other message in between (assure that <? <! is for the message
+
     int sPos = state.find(START);
-    
+
     if(!found(sPos)){
         // there is no starting tag even... Exit, stage left!
         return false;
@@ -86,10 +93,15 @@ bool TusMessageBuffer::lookForMessage(){
             ePos += END.size(); // start looking after the closing tag
         }
     }
-    
-    mMessageStart = sPos;
+
+    if(found(prePos)) {
+        mMessageStart = prePos;
+    } else {
+        mMessageStart = sPos;
+    }
+
     mMessageLength = ePos-sPos;
-    
+
     //Exit, stage right!
     return true;
 }

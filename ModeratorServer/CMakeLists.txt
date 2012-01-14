@@ -20,6 +20,7 @@ add_executable(moderator
     TusMessageBuffer.cpp
     ModeratorInterface.cpp
     Credentials.cpp
+    Moderator.cpp
 )
 
 target_link_libraries(moderator
