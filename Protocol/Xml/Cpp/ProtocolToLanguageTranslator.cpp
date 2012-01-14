@@ -742,25 +742,33 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             if (not specific_reply) throw std::exception();
 
             Element land = specific_reply->getChildElement("land");
-            if (not land) throw std::exception();
+            if (not land)
+            {
+                return reply_builder.buildGetLandReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
+            }
+            else
+            {
+                Element login = land->getChildElement("login");
+                Element world_name = land->getChildElement("world_name");
+                Element land_name = land->getChildElement("land_name");
+                Element granted = land->getChildElement("granted");
+                if (not (login and world_name and land_name and granted)) throw std::exception();
 
-            Element login = land->getChildElement("login");
-            Element world_name = land->getChildElement("world_name");
-            Element land_name = land->getChildElement("land_name");
-            Element granted = land->getChildElement("granted");
-            if (not (login and world_name and land_name and granted)) throw std::exception();
+                TUSLanguage::ICommand::Object object;
+                object.insert(std::make_pair("login", login->innerText()));
+                object.insert(std::make_pair("world_name", world_name->innerText()));
+                object.insert(std::make_pair("land_name", land_name->innerText()));
+                object.insert(std::make_pair("granted", granted->innerText()));
 
-            TUSLanguage::ICommand::Object object;
-            object.insert(std::make_pair("login", login->innerText()));
-            object.insert(std::make_pair("world_name", world_name->innerText()));
-            object.insert(std::make_pair("land_name", land_name->innerText()));
-            object.insert(std::make_pair("granted", granted->innerText()));
-
-            return reply_builder.buildGetLandReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       object
-                   );
+                return reply_builder.buildGetLandReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           object
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_GET_LANDS_REPLY:

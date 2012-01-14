@@ -286,40 +286,90 @@ TEST_F(ReplyBuilderTest, BuildDeleteLandReplySetsProperMessage)
     ASSERT_STREQ("Message", m_command_delete_land_reply->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetLandReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetLandReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetLandReply(1, "Message", m_land_1);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetLandReplyWithoutObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetLandReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetLandReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithoutObject, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetLandReply(1, "Message", m_land_1);
-    ASSERT_EQ(36, command->getID());
+    ASSERT_EQ(36, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetLandReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithoutObject, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetLandReply(1, "Message", m_land_1);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetLandReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithoutObject, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetLandReply(1, "Message", m_land_1);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetLandReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithoutObject, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetLandReply(1, "Message", m_land_1);
-    ASSERT_EQ(1, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetLandReplySetsProperObject)
+class ReplyBuilderTestBuildGetLandReplyWithObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetLandReply(1, "Message", m_land_1);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetLandReplyWithObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object land;
+        land.insert(std::make_pair("login", "Login1"));
+        land.insert(std::make_pair("world_name", "World1"));
+        land.insert(std::make_pair("land_name", "Land1"));
+        land.insert(std::make_pair("granted", "false"));
+        m_command = reply_builder.buildGetLandReply(1, "Message", land);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithObject, SetsProperID)
+{
+    ASSERT_EQ(36, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithObject, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithObject, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithObject, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(1, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetLandReplyWithObject, SetsProperObject)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Login1", object.at("login").c_str());
     ASSERT_STREQ("World1", object.at("world_name").c_str());

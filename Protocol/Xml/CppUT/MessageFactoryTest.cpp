@@ -1587,45 +1587,114 @@ TEST_F(MessageFactoryTest, CreateDeleteLandReplySetsSpecificReply)
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandReplyReturnsNotNull)
+class MessageFactoryTestCreateGetLandReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
-    ASSERT_TRUE(message.get());
+protected:
+    MessageFactoryTestCreateGetLandReplyWithoutObject()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        m_message = message_factory.createGetLandReply("1", "Message");
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperID)
+TEST_F(MessageFactoryTestCreateGetLandReplyWithoutObject, SetsProperID)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("36", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperCode)
+TEST_F(MessageFactoryTestCreateGetLandReplyWithoutObject, SetsProperCode)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperMessage)
+TEST_F(MessageFactoryTestCreateGetLandReplyWithoutObject, SetsProperMessage)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandReplySetsSpecificReply)
+TEST_F(MessageFactoryTestCreateGetLandReplyWithoutObject, SetsSpecificReply)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_land_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandReplySetsProperObject)
+TEST_F(MessageFactoryTestCreateGetLandReplyWithoutObject, DoesNotSetObject)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandReply("1", "Message", m_land_1);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_land_reply")->getChildElement("land");
+    ASSERT_TRUE(element == NULL);
+}
+
+class MessageFactoryTestCreateGetLandReplyWithObject
+    : public ::testing::Test
+{
+protected:
+    MessageFactoryTestCreateGetLandReplyWithObject()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        TUSProtocol::Message::Object land;
+        land.insert(std::make_pair("login", "Login1"));
+        land.insert(std::make_pair("world_name", "World1"));
+        land.insert(std::make_pair("land_name", "Land1"));
+        land.insert(std::make_pair("granted", "false"));
+        m_message = message_factory.createGetLandReply("1", "Message", land);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("36", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_land_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, SetsObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_land_reply")->getChildElement("land");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, SetsProperObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_land_reply")->getChildElement("land");
     ASSERT_STREQ("Login1", element->getChildElement("login")->innerText().c_str());
     ASSERT_STREQ("World1", element->getChildElement("world_name")->innerText().c_str());

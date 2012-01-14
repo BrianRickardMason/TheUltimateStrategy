@@ -6,15 +6,15 @@
 -->
 <!--
     Typical usage:
-    <!DOCTYPE message 
-        PUBLIC "-//BrianRickardMason//TUS -- RPC protocol 1.0//EN" 
+    <!DOCTYPE message
+        PUBLIC "-//BrianRickardMason//TUS -- RPC protocol 1.0//EN"
         SYSTEM "Protocol.dtd">
     <message>
         ...
     </message>
 
-    <!DOCTYPE message 
-        PUBLIC "-//BrianRickardMason//TUS -- RPC protocol 1.0//EN" 
+    <!DOCTYPE message
+        PUBLIC "-//BrianRickardMason//TUS -- RPC protocol 1.0//EN"
         SYSTEM "https://raw.github.com/BrianRickardMason/TheUltimateStrategy/master/Protocol/Xml/Protocol.dtd">
     <message>
         ...
@@ -123,7 +123,7 @@
 <!ELEMENT error_reply EMPTY>
 <!ELEMENT create_land_reply EMPTY>
 <!ELEMENT delete_land_reply EMPTY>
-<!ELEMENT get_land_reply (land)>
+<!ELEMENT get_land_reply (land*)>
 <!ELEMENT get_lands_reply (lands)>
 <!ELEMENT create_settlement_reply EMPTY>
 <!ELEMENT delete_settlement_reply EMPTY>

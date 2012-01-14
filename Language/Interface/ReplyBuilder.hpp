@@ -92,6 +92,19 @@ public:
      *
      * @param a_code    The exit code.
      * @param a_message The status message.
+     *
+     * @return GetLandReply.
+     */
+    ICommand::Handle buildGetLandReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds GetLandReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
      * @param a_object  The object.
      *
      * @return GetLandReply.

@@ -303,11 +303,23 @@ Message::Handle LanguageToProtocolTranslator::translate(
                    );
 
         case TUSLanguage::ID_COMMAND_GET_LAND_REPLY:
-            return message_factory.createGetLandReply(
-                    boost::lexical_cast<std::string>(a_command->getCode()),
-                        a_command->getMessage(),
-                       a_command->getObjects().front()
-                   );
+        {
+            if (a_command->getObjects().empty())
+            {
+                return message_factory.createGetLandReply(
+                        boost::lexical_cast<std::string>(a_command->getCode()),
+                            a_command->getMessage()
+                       );
+            }
+            else
+            {
+                return message_factory.createGetLandReply(
+                        boost::lexical_cast<std::string>(a_command->getCode()),
+                            a_command->getMessage(),
+                            a_command->getObjects().front()
+                       );
+            }
+        }
 
         case TUSLanguage::ID_COMMAND_GET_LANDS_REPLY:
             return message_factory.createGetLandsReply(
