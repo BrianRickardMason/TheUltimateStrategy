@@ -874,21 +874,29 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             if (not specific_reply) throw std::exception();
 
             Element settlement = specific_reply->getChildElement("settlement");
-            if (not settlement) throw std::exception();
+            if (not settlement)
+            {
+                return reply_builder.buildGetSettlementReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
+            }
+            else
+            {
+                Element land_name = settlement->getChildElement("land_name");
+                Element settlement_name = settlement->getChildElement("settlement_name");
+                if (not (land_name and settlement_name)) throw std::exception();
 
-            Element land_name = settlement->getChildElement("land_name");
-            Element settlement_name = settlement->getChildElement("settlement_name");
-            if (not (land_name and settlement_name)) throw std::exception();
+                TUSLanguage::ICommand::Object object;
+                object.insert(std::make_pair("land_name", land_name->innerText()));
+                object.insert(std::make_pair("settlement_name", settlement_name->innerText()));
 
-            TUSLanguage::ICommand::Object object;
-            object.insert(std::make_pair("land_name", land_name->innerText()));
-            object.insert(std::make_pair("settlement_name", settlement_name->innerText()));
-
-            return reply_builder.buildGetSettlementReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       object
-                   );
+                return reply_builder.buildGetSettlementReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           object
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REPLY:
@@ -907,29 +915,38 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             if (not settlements) throw std::exception();
 
             Poco::AutoPtr<Poco::XML::NodeList> elements = settlements->getElementsByTagName("settlement");
-
-            TUSLanguage::ICommand::Objects objects;
-
-            for (int i = 0; i < elements->length(); ++i)
+            if (elements->length() == 0)
             {
-                Element settlement = static_cast<Poco::XML::Element*>(elements->item(i));
-
-                Element land_name = settlement->getChildElement("land_name");
-                Element settlement_name = settlement->getChildElement("settlement_name");
-                if (not (land_name and settlement_name)) throw std::exception();
-
-                TUSLanguage::ICommand::Object object;
-                object.insert(std::make_pair("land_name", land_name->innerText()));
-                object.insert(std::make_pair("settlement_name", settlement_name->innerText()));
-
-                objects.push_back(object);
+                return reply_builder.buildGetSettlementsReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
             }
+            else
+            {
+                TUSLanguage::ICommand::Objects objects;
 
-            return reply_builder.buildGetSettlementsReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       objects
-                   );
+                for (int i = 0; i < elements->length(); ++i)
+                {
+                    Element settlement = static_cast<Poco::XML::Element*>(elements->item(i));
+
+                    Element land_name = settlement->getChildElement("land_name");
+                    Element settlement_name = settlement->getChildElement("settlement_name");
+                    if (not (land_name and settlement_name)) throw std::exception();
+
+                    TUSLanguage::ICommand::Object object;
+                    object.insert(std::make_pair("land_name", land_name->innerText()));
+                    object.insert(std::make_pair("settlement_name", settlement_name->innerText()));
+
+                    objects.push_back(object);
+                }
+
+                return reply_builder.buildGetSettlementsReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           objects
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_BUILD_BUILDING_REPLY:

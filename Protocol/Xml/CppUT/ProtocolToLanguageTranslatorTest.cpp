@@ -1839,51 +1839,90 @@ TEST_F(ProtocolToLanguageTranslatorDeleteSettlementReplyTranslation, SetsProperM
     ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-class ProtocolToLanguageTranslatorGetSettlementReplyTranslation
+class ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation
     : public ::testing::Test
 {
 protected:
-    ProtocolToLanguageTranslatorGetSettlementReplyTranslation()
+    ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation()
     {
-        TUSProtocol::Message::Object settlement;
-        settlement.insert(std::make_pair("land_name", "Land1"));
-        settlement.insert(std::make_pair("settlement_name", "Settlement1"));
-        m_message = m_factory.createGetSettlementReply("1", "Message", settlement);
-        m_command = m_translator.translate(m_message);
+        TUSProtocol::MessageFactory factory;
+        TUSProtocol::ProtocolToLanguageTranslator translator;
+        TUSProtocol::Message::Handle message = factory.createGetSettlementReply("1", "Message");
+        m_command = translator.translate(message);
     }
 
-    TUSProtocol::MessageFactory m_factory;
-    TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::Handle m_message;
     TUSLanguage::ICommand::Handle m_command;
 };
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, ReturnsNotNull)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, SetsProperID)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation, SetsProperID)
 {
     ASSERT_EQ(40, m_command->getID());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, SetsProperCode)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation, SetsProperCode)
 {
     ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, SetsProperMessage)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation, SetsProperMessage)
 {
     ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, SetsProperNumberOfObjects)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(0, m_command->getObjects().size());
+}
+
+class ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation
+    : public ::testing::Test
+{
+protected:
+    ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation()
+    {
+        TUSProtocol::MessageFactory factory;
+        TUSProtocol::ProtocolToLanguageTranslator translator;
+        TUSProtocol::Message::Object settlement;
+        settlement.insert(std::make_pair("land_name", "Land1"));
+        settlement.insert(std::make_pair("settlement_name", "Settlement1"));
+        TUSProtocol::Message::Handle message = factory.createGetSettlementReply("1", "Message", settlement);
+        m_command = translator.translate(message);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, SetsProperID)
+{
+    ASSERT_EQ(40, m_command->getID());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, SetsProperNumberOfObjects)
 {
     ASSERT_EQ(1, m_command->getObjects().size());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, SetsProperObject)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, SetsProperObject)
 {
     TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
@@ -1891,12 +1930,54 @@ TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyTranslation, SetsProperObje
     ASSERT_STREQ("Settlement1", object.at("settlement_name").c_str());
 }
 
-class ProtocolToLanguageTranslatorGetSettlementsReplyTranslation
+class ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation
     : public ::testing::Test
 {
 protected:
-    ProtocolToLanguageTranslatorGetSettlementsReplyTranslation()
+    ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation()
     {
+        TUSProtocol::MessageFactory factory;
+        TUSProtocol::ProtocolToLanguageTranslator translator;
+        TUSProtocol::Message::Handle message = factory.createGetSettlementsReply("1", "Message");
+        m_command = translator.translate(message);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation, SetsProperID)
+{
+    ASSERT_EQ(41, m_command->getID());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(0, m_command->getObjects().size());
+}
+
+class ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation
+    : public ::testing::Test
+{
+protected:
+    ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation()
+    {
+        TUSProtocol::MessageFactory factory;
+        TUSProtocol::ProtocolToLanguageTranslator translator;
         TUSProtocol::Message::Object settlement_1, settlement_2;
         TUSProtocol::Message::Objects settlements;
         settlement_1.insert(std::make_pair("land_name", "Land1"));
@@ -1905,42 +1986,39 @@ protected:
         settlement_2.insert(std::make_pair("settlement_name", "Settlement2"));
         settlements.push_back(settlement_1);
         settlements.push_back(settlement_2);
-        m_message = m_factory.createGetSettlementsReply("1", "Message", settlements);
-        m_command = m_translator.translate(m_message);
+        TUSProtocol::Message::Handle message = factory.createGetSettlementsReply("1", "Message", settlements);
+        m_command = translator.translate(message);
     }
 
-    TUSProtocol::MessageFactory m_factory;
-    TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::Handle m_message;
     TUSLanguage::ICommand::Handle m_command;
 };
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyTranslation, ReturnsNotNull)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyTranslation, SetsProperID)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, SetsProperID)
 {
     ASSERT_EQ(41, m_command->getID());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyTranslation, SetsProperCode)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, SetsProperCode)
 {
     ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyTranslation, SetsProperMessage)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, SetsProperMessage)
 {
     ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyTranslation, SetsProperNumberOfObjects)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, SetsProperNumberOfObjects)
 {
     ASSERT_EQ(2, m_command->getObjects().size());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyTranslation, SetsProperObjects)
+TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, SetsProperObjects)
 {
     TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();

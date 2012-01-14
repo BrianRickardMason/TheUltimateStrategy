@@ -139,13 +139,6 @@ protected:
         m_resource_2.insert(std::make_pair("volume", "20"));
         m_resources.push_back(m_resource_1);
         m_resources.push_back(m_resource_2);
-
-        m_settlement_1.insert(std::make_pair("land_name", "Land1"));
-        m_settlement_1.insert(std::make_pair("settlement_name", "Settlement1"));
-        m_settlement_2.insert(std::make_pair("land_name", "Land2"));
-        m_settlement_2.insert(std::make_pair("settlement_name", "Settlement2"));
-        m_settlements.push_back(m_settlement_1);
-        m_settlements.push_back(m_settlement_2);
     }
 
     /**
@@ -262,19 +255,6 @@ protected:
      * @brief The resources to be tested.
      */
     TUSProtocol::Message::Objects m_resources;
-
-    //@{
-    /**
-     * @brief The settlement to be inserted.
-     */
-    TUSProtocol::Message::Object m_settlement_1,
-                                 m_settlement_2;
-    //}@
-
-    /**
-     * @brief The settlements to be tested.
-     */
-    TUSProtocol::Message::Objects m_settlements;
 };
 
 TEST_F(MessageFactoryTest, CtorDoesNotThrow)
@@ -1856,101 +1836,222 @@ TEST_F(MessageFactoryTest, CreateDeleteSettlementReplySetsSpecificReply)
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementReplyReturnsNotNull)
+class MessageFactoryTestCreateGetSettlementReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
-    ASSERT_TRUE(message.get());
+protected:
+    MessageFactoryTestCreateGetSettlementReplyWithoutObject()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        m_message = message_factory.createGetSettlementReply("1", "Message");
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperID)
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithoutObject, SetsProperID)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("40", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperCode)
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithoutObject, SetsProperCode)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperMessage)
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithoutObject, SetsProperMessage)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsSpecificReply)
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithoutObject, SetsSpecificReply)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlement_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementReplySetsProperObject)
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithoutObject, DoesNotSetObject)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementReply("1", "Message", m_settlement_1);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_settlement_reply")->getChildElement("settlement");
+    ASSERT_TRUE(element == NULL);
+}
+
+class MessageFactoryTestCreateGetSettlementReplyWithObject
+    : public ::testing::Test
+{
+protected:
+    MessageFactoryTestCreateGetSettlementReplyWithObject()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        TUSProtocol::Message::Object settlement;
+        settlement.insert(std::make_pair("land_name", "Land1"));
+        settlement.insert(std::make_pair("settlement_name", "Settlement1"));
+        m_message = message_factory.createGetSettlementReply("1", "Message", settlement);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("40", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_settlement_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, SetsObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_settlement_reply")->getChildElement("settlement");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, SetsProperObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlement_reply")->getChildElement("settlement");
     ASSERT_STREQ("Land1", element->getChildElement("land_name")->innerText().c_str());
     ASSERT_STREQ("Settlement1", element->getChildElement("settlement_name")->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementsReplyReturnsNotNull)
+class MessageFactoryTestCreateGetSettlementsReplyWithoutObjects
+    : public ::testing::Test
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
-    ASSERT_TRUE(message.get());
+protected:
+    MessageFactoryTestCreateGetSettlementsReplyWithoutObjects()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        m_message = message_factory.createGetSettlementsReply("1", "Message");
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithoutObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperID)
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithoutObjects, SetsProperID)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("41", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperCode)
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithoutObjects, SetsProperCode)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperMessage)
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithoutObjects, SetsProperMessage)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsSpecificReply)
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithoutObjects, SetsSpecificReply)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlements_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(MessageFactoryTest, CreateGetSettlementsReplySetsProperObjects)
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithoutObjects, SetsProperObjects)
 {
-    TUSProtocol::Message::Handle message =
-        m_message_factory.createGetSettlementsReply("1", "Message", m_settlements);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_settlements_reply")->getChildElement("settlements");
+
+    // TODO: Extend testing.
+}
+
+class MessageFactoryTestCreateGetSettlementsReplyWithObjects
+    : public ::testing::Test
+{
+protected:
+    MessageFactoryTestCreateGetSettlementsReplyWithObjects()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        TUSProtocol::Message::Object settlement_1, settlement_2;
+        TUSProtocol::Message::Objects settlements;
+        settlement_1.insert(std::make_pair("land_name", "Land1"));
+        settlement_1.insert(std::make_pair("settlement_name", "Settlement1"));
+        settlement_2.insert(std::make_pair("land_name", "Land2"));
+        settlement_2.insert(std::make_pair("settlement_name", "Settlement2"));
+        settlements.push_back(settlement_1);
+        settlements.push_back(settlement_2);
+        m_message = message_factory.createGetSettlementsReply("1", "Message", settlements);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithObjects, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("41", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithObjects, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithObjects, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithObjects, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_settlements_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithObjects, SetsProperObjects)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_settlements_reply")->getChildElement("settlements");
 
     // TODO: Extend testing.

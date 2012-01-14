@@ -678,6 +678,19 @@ public:
      *
      * @param a_code    The exit code.
      * @param a_message The status message.
+     *
+     * @return GetSettlementReply.
+     */
+    Message::Handle createGetSettlementReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates GetSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
      * @param a_object  The object.
      *
      * @return GetSettlementReply.
@@ -686,6 +699,19 @@ public:
         std::string     const   a_code,
         std::string     const   a_message,
         Message::Object const & a_object
+    ) const;
+
+    /**
+     * @brief Creates GetSettlementsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     *
+     * @return GetSettlementsReply.
+     */
+    Message::Handle createGetSettlementsReply(
+        std::string const a_code,
+        std::string const a_message
     ) const;
 
     /**

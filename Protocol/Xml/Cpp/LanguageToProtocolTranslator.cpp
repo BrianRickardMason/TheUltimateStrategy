@@ -353,18 +353,42 @@ Message::Handle LanguageToProtocolTranslator::translate(
                    );
 
         case TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REPLY:
-            return message_factory.createGetSettlementReply(
-                       boost::lexical_cast<std::string>(a_command->getCode()),
-                       a_command->getMessage(),
-                       a_command->getObjects().front()
-                   );
+        {
+            if (a_command->getObjects().empty())
+            {
+                return message_factory.createGetSettlementReply(
+                        boost::lexical_cast<std::string>(a_command->getCode()),
+                            a_command->getMessage()
+                       );
+            }
+            else
+            {
+                return message_factory.createGetSettlementReply(
+                        boost::lexical_cast<std::string>(a_command->getCode()),
+                            a_command->getMessage(),
+                            a_command->getObjects().front()
+                       );
+            }
+        }
 
         case TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REPLY:
-            return message_factory.createGetSettlementsReply(
-                       boost::lexical_cast<std::string>(a_command->getCode()),
-                       a_command->getMessage(),
-                       a_command->getObjects()
-                   );
+        {
+            if (a_command->getObjects().empty())
+            {
+                return message_factory.createGetSettlementsReply(
+                           boost::lexical_cast<std::string>(a_command->getCode()),
+                           a_command->getMessage()
+                       );
+            }
+            else
+            {
+                return message_factory.createGetSettlementsReply(
+                           boost::lexical_cast<std::string>(a_command->getCode()),
+                           a_command->getMessage(),
+                           a_command->getObjects()
+                       );
+            }
+        }
 
         case TUSLanguage::ID_COMMAND_BUILD_BUILDING_REPLY:
             return message_factory.createBuildBuildingReply(

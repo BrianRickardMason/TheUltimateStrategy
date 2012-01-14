@@ -747,6 +747,23 @@ Message::Handle MessageFactory::createDeleteSettlementReply(
 }
 
 Message::Handle MessageFactory::createGetSettlementReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REPLY);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_settlement_reply");
+
+    return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetSettlementReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -761,6 +778,25 @@ Message::Handle MessageFactory::createGetSettlementReply(
     message_builder.addMessage(a_message);
     message_builder.addSpecificReply("get_settlement_reply");
     message_builder.addObject("settlement", a_object);
+
+    return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetSettlementsReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+    Message::Objects objects;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REPLY);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_settlements_reply");
+    message_builder.addObjects("settlements", "settlement", objects);
 
     return message_builder.extract();
 }
