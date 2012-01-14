@@ -222,16 +222,37 @@ ICommand::Handle ReplyBuilder::buildDestroyBuildingReply(
 }
 
 ICommand::Handle ReplyBuilder::buildGetBuildingReply(
-    unsigned short int const   a_code,
-    std::string        const   a_message,
-    ICommand::Object   const & a_object
+    unsigned short int const a_code,
+    std::string        const a_message
 ) const
 {
     ICommand::Handle command(new Command);
     command->setID(44);
     command->setCode(a_code);
     command->setMessage(a_message);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetBuildingReply(
+    unsigned short int const   a_code,
+    std::string        const   a_message,
+    ICommand::Object   const & a_object
+) const
+{
+    ICommand::Handle command = buildGetBuildingReply(a_code, a_message);
     command->addObject(a_object);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetBuildingsReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
+{
+    ICommand::Handle command(new Command);
+    command->setID(45);
+    command->setCode(a_code);
+    command->setMessage(a_message);
     return command;
 }
 
@@ -241,10 +262,7 @@ ICommand::Handle ReplyBuilder::buildGetBuildingsReply(
     ICommand::Objects  const & a_objects
 ) const
 {
-    ICommand::Handle command(new Command);
-    command->setID(45);
-    command->setCode(a_code);
-    command->setMessage(a_message);
+    ICommand::Handle command = buildGetBuildingsReply(a_code, a_message);
     for (ICommand::Objects::const_iterator it = a_objects.begin(); it != a_objects.end(); ++it)
     {
         command->addObject((*it));
@@ -277,16 +295,37 @@ ICommand::Handle ReplyBuilder::buildEngageHumanReply(
 }
 
 ICommand::Handle ReplyBuilder::buildGetHumanReply(
-    unsigned short int const   a_code,
-    std::string        const   a_message,
-    ICommand::Object   const & a_object
+    unsigned short int const a_code,
+    std::string        const a_message
 ) const
 {
     ICommand::Handle command(new Command);
     command->setID(48);
     command->setCode(a_code);
     command->setMessage(a_message);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetHumanReply(
+    unsigned short int const   a_code,
+    std::string        const   a_message,
+    ICommand::Object   const & a_object
+) const
+{
+    ICommand::Handle command = buildGetHumanReply(a_code, a_message);
     command->addObject(a_object);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetHumansReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
+{
+    ICommand::Handle command(new Command);
+    command->setID(49);
+    command->setCode(a_code);
+    command->setMessage(a_message);
     return command;
 }
 
@@ -296,14 +335,23 @@ ICommand::Handle ReplyBuilder::buildGetHumansReply(
     ICommand::Objects  const & a_objects
 ) const
 {
-    ICommand::Handle command(new Command);
-    command->setID(49);
-    command->setCode(a_code);
-    command->setMessage(a_message);
+    ICommand::Handle command = buildGetHumansReply(a_code, a_message);
     for (ICommand::Objects::const_iterator it = a_objects.begin(); it != a_objects.end(); ++it)
     {
         command->addObject((*it));
     }
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetResourceReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
+{
+    ICommand::Handle command(new Command);
+    command->setID(50);
+    command->setCode(a_code);
+    command->setMessage(a_message);
     return command;
 }
 
@@ -313,11 +361,20 @@ ICommand::Handle ReplyBuilder::buildGetResourceReply(
     ICommand::Object   const & a_object
 ) const
 {
+    ICommand::Handle command = buildGetResourceReply(a_code, a_message);
+    command->addObject(a_object);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetResourcesReply(
+    unsigned short int const a_code,
+    std::string        const a_message
+) const
+{
     ICommand::Handle command(new Command);
-    command->setID(50);
+    command->setID(51);
     command->setCode(a_code);
     command->setMessage(a_message);
-    command->addObject(a_object);
     return command;
 }
 
@@ -327,10 +384,7 @@ ICommand::Handle ReplyBuilder::buildGetResourcesReply(
     ICommand::Objects  const & a_objects
 ) const
 {
-    ICommand::Handle command(new Command);
-    command->setID(51);
-    command->setCode(a_code);
-    command->setMessage(a_message);
+    ICommand::Handle command = buildGetResourcesReply(a_code, a_message);
     for (ICommand::Objects::const_iterator it = a_objects.begin(); it != a_objects.end(); ++it)
     {
         command->addObject((*it));
@@ -435,15 +489,24 @@ ICommand::Handle ReplyBuilder::buildTickEpochReply(
 }
 
 ICommand::Handle ReplyBuilder::buildGetEpochReply(
-    unsigned short int const   a_code,
-    std::string        const   a_message,
-    ICommand::Object   const & a_object
+    unsigned short int const a_code,
+    std::string        const a_message
 ) const
 {
     ICommand::Handle command(new Command);
     command->setID(60);
     command->setCode(a_code);
     command->setMessage(a_message);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetEpochReply(
+    unsigned short int const   a_code,
+    std::string        const   a_message,
+    ICommand::Object   const & a_object
+) const
+{
+    ICommand::Handle command = buildGetEpochReply(a_code, a_message);
     command->addObject(a_object);
     return command;
 }

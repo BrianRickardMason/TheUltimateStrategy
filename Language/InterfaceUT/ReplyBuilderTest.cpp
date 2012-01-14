@@ -699,80 +699,184 @@ TEST_F(ReplyBuilderTest, BuildDestroyBuildingReplySetsProperMessage)
     ASSERT_STREQ("Message", m_command_destroy_building_reply->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetBuildingReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingReply(1, "Message", m_building_1);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetBuildingReplyWithoutObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetBuildingReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithoutObject, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingReply(1, "Message", m_building_1);
-    ASSERT_EQ(44, command->getID());
+    ASSERT_EQ(44, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithoutObject, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingReply(1, "Message", m_building_1);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithoutObject, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingReply(1, "Message", m_building_1);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithoutObject, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingReply(1, "Message", m_building_1);
-    ASSERT_EQ(1, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingReplySetsProperObject)
+class ReplyBuilderTestBuildGetBuildingReplyWithObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingReply(1, "Message", m_building_1);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetBuildingReplyWithObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object building;
+        building.insert(std::make_pair("buildingclass", "Regular"));
+        building.insert(std::make_pair("buildingname", "Farm"));
+        building.insert(std::make_pair("volume", "10"));
+        m_command = reply_builder.buildGetBuildingReply(1, "Message", building);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithObject, SetsProperID)
+{
+    ASSERT_EQ(44, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithObject, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithObject, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithObject, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(1, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingReplyWithObject, SetsProperObject)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Regular", object.at("buildingclass").c_str());
     ASSERT_STREQ("Farm", object.at("buildingname").c_str());
     ASSERT_STREQ("10", object.at("volume").c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingsReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetBuildingsReplyWithoutObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingsReply(1, "Message", m_buildings);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetBuildingsReplyWithoutObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetBuildingsReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithoutObjects, ReplyReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingsReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithoutObjects, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingsReply(1, "Message", m_buildings);
-    ASSERT_EQ(45, command->getID());
+    ASSERT_EQ(45, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingsReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithoutObjects, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingsReply(1, "Message", m_buildings);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingsReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithoutObjects, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingsReply(1, "Message", m_buildings);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingsReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithoutObjects, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingsReply(1, "Message", m_buildings);
-    ASSERT_EQ(2, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetBuildingsReplySetsProperObjects)
+class ReplyBuilderTestBuildGetBuildingsReplyWithObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetBuildingsReply(1, "Message", m_buildings);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetBuildingsReplyWithObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object building_1, building_2;
+        TUSLanguage::ICommand::Objects buildings;
+        building_1.insert(std::make_pair("buildingclass", "Regular"));
+        building_1.insert(std::make_pair("buildingname", "Farm"));
+        building_1.insert(std::make_pair("volume", "10"));
+        building_2.insert(std::make_pair("buildingclass", "Regular"));
+        building_2.insert(std::make_pair("buildingname", "Sawmill"));
+        building_2.insert(std::make_pair("volume", "20"));
+        buildings.push_back(building_1);
+        buildings.push_back(building_2);
+        m_command = reply_builder.buildGetBuildingsReply(1, "Message", buildings);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithObjects, ReplyReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithObjects, SetsProperID)
+{
+    ASSERT_EQ(45, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithObjects, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithObjects, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithObjects, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(2, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetBuildingsReplyWithObjects, SetsProperObjects)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Regular", object.at("buildingclass").c_str());
     ASSERT_STREQ("Farm", object.at("buildingname").c_str());
@@ -823,40 +927,90 @@ TEST_F(ReplyBuilderTest, BuildEngageHumanReplySetsProperMessage)
     ASSERT_STREQ("Message", m_command_engage_human_reply->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumanReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetHumanReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumanReply(1, "Message", m_human_1);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetHumanReplyWithoutObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetHumanReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumanReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithoutObject, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumanReply(1, "Message", m_human_1);
-    ASSERT_EQ(48, command->getID());
+    ASSERT_EQ(48, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumanReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithoutObject, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumanReply(1, "Message", m_human_1);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumanReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithoutObject, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumanReply(1, "Message", m_human_1);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumanReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithoutObject, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumanReply(1, "Message", m_human_1);
-    ASSERT_EQ(1, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumanReplySetsProperObject)
+class ReplyBuilderTestBuildGetHumanReplyWithObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumanReply(1, "Message", m_human_1);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetHumanReplyWithObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object human;
+        human.insert(std::make_pair("humanclass", "Worker"));
+        human.insert(std::make_pair("humanname", "Farmer"));
+        human.insert(std::make_pair("experience", "Novice"));
+        human.insert(std::make_pair("volume", "10"));
+        m_command = reply_builder.buildGetHumanReply(1, "Message", human);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithObject, SetsProperID)
+{
+    ASSERT_EQ(48, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithObject, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithObject, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithObject, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(1, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumanReplyWithObject, SetsProperObject)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Worker", object.at("humanclass").c_str());
     ASSERT_STREQ("Farmer", object.at("humanname").c_str());
@@ -864,40 +1018,97 @@ TEST_F(ReplyBuilderTest, BuildGetHumanReplySetsProperObject)
     ASSERT_STREQ("10", object.at("volume").c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumansReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetHumansReplyWithoutObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumansReply(1, "Message", m_humans);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetHumansReplyWithoutObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetHumansReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithoutObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumansReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithoutObjects, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumansReply(1, "Message", m_humans);
-    ASSERT_EQ(49, command->getID());
+    ASSERT_EQ(49, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumansReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithoutObjects, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumansReply(1, "Message", m_humans);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumansReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithoutObjects, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumansReply(1, "Message", m_humans);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumansReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithoutObjects, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumansReply(1, "Message", m_humans);
-    ASSERT_EQ(2, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetHumansReplySetsProperObjects)
+class ReplyBuilderTestBuildGetHumansReplyWithObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetHumansReply(1, "Message", m_humans);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetHumansReplyWithObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object human_1, human_2;
+        TUSLanguage::ICommand::Objects humans;
+        human_1.insert(std::make_pair("humanclass", "Worker"));
+        human_1.insert(std::make_pair("humanname", "Farmer"));
+        human_1.insert(std::make_pair("experience", "Novice"));
+        human_1.insert(std::make_pair("volume", "10"));
+        human_2.insert(std::make_pair("humanclass", "Worker"));
+        human_2.insert(std::make_pair("humanname", "Steelworker"));
+        human_2.insert(std::make_pair("experience", "Advanced"));
+        human_2.insert(std::make_pair("volume", "20"));
+        humans.push_back(human_1);
+        humans.push_back(human_2);
+        m_command = reply_builder.buildGetHumansReply(1, "Message", humans);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithObjects, SetsProperID)
+{
+    ASSERT_EQ(49, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithObjects, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithObjects, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithObjects, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(2, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetHumansReplyWithObjects, SetsProperObjects)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Worker", object.at("humanclass").c_str());
     ASSERT_STREQ("Farmer", object.at("humanname").c_str());
@@ -910,79 +1121,181 @@ TEST_F(ReplyBuilderTest, BuildGetHumansReplySetsProperObjects)
     ASSERT_STREQ("20", object.at("volume").c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourceReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetResourceReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourceReply(1, "Message", m_resource_1);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetResourceReplyWithoutObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object resource;
+        m_command = reply_builder.buildGetResourceReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourceReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithoutObject, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourceReply(1, "Message", m_resource_1);
-    ASSERT_EQ(50, command->getID());
+    ASSERT_EQ(50, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourceReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithoutObject, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourceReply(1, "Message", m_resource_1);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourceReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithoutObject, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourceReply(1, "Message", m_resource_1);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourceReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithoutObject, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourceReply(1, "Message", m_resource_1);
-    ASSERT_EQ(1, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourceReplySetsProperObject)
+class ReplyBuilderTestBuildGetResourceReplyWithObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourceReply(1, "Message", m_resource_1);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetResourceReplyWithObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object resource;
+        resource.insert(std::make_pair("resourcename", "Coal"));
+        resource.insert(std::make_pair("volume", "10"));
+        m_command = reply_builder.buildGetResourceReply(1, "Message", resource);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithObject, SetsProperID)
+{
+    ASSERT_EQ(50, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithObject, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithObject, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithObject, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(1, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourceReplyWithObject, SetsProperObject)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Coal", object.at("resourcename").c_str());
     ASSERT_STREQ("10", object.at("volume").c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourcesReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetResourcesReplyWithoutObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourcesReply(1, "Message", m_resources);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetResourcesReplyWithoutObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetResourcesReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithoutObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourcesReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithoutObjects, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourcesReply(1, "Message", m_resources);
-    ASSERT_EQ(51, command->getID());
+    ASSERT_EQ(51, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourcesReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithoutObjects, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourcesReply(1, "Message", m_resources);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourcesReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithoutObjects, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourcesReply(1, "Message", m_resources);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourcesReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithoutObjects, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourcesReply(1, "Message", m_resources);
-    ASSERT_EQ(2, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetResourcesReplySetsProperObjects)
+class ReplyBuilderTestBuildGetResourcesReplyWithObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetResourcesReply(1, "Message", m_resources);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetResourcesReplyWithObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object resource_1, resource_2;
+        TUSLanguage::ICommand::Objects resources;
+        resource_1.insert(std::make_pair("resourcename", "Coal"));
+        resource_1.insert(std::make_pair("volume", "10"));
+        resource_2.insert(std::make_pair("resourcename", "Wood"));
+        resource_2.insert(std::make_pair("volume", "20"));
+        resources.push_back(resource_1);
+        resources.push_back(resource_2);
+        m_command = reply_builder.buildGetResourcesReply(1, "Message", resources);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithObjects, SetsProperID)
+{
+    ASSERT_EQ(51, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithObjects, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithObjects, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithObjects, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(2, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetResourcesReplyWithObjects, SetsProperObjects)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Coal", object.at("resourcename").c_str());
     ASSERT_STREQ("10", object.at("volume").c_str());
@@ -1151,40 +1464,91 @@ TEST_F(ReplyBuilderTest, BuildTickEpochReplySetsProperMessage)
     ASSERT_STREQ("Message", m_command_tick_epoch_reply->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetEpochReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetEpochReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetEpochReply(1, "Message", m_epoch);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetEpochReplyWithoutObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetEpochReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetEpochReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithoutObject, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetEpochReply(1, "Message", m_epoch);
-    ASSERT_EQ(60, command->getID());
+    ASSERT_EQ(60, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetEpochReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithoutObject, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetEpochReply(1, "Message", m_epoch);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetEpochReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithoutObject, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetEpochReply(1, "Message", m_epoch);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetEpochReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithoutObject, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetEpochReply(1, "Message", m_epoch);
-    ASSERT_EQ(1, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetEpochReplySetsProperObject)
+class ReplyBuilderTestBuildGetEpochReplyWithObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetEpochReply(1, "Message", m_epoch);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetEpochReplyWithObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object epoch;
+        epoch.insert(std::make_pair("epoch_name", "Epoch"));
+        epoch.insert(std::make_pair("world_name", "World"));
+        epoch.insert(std::make_pair("active", "true"));
+        epoch.insert(std::make_pair("finished", "false"));
+        epoch.insert(std::make_pair("ticks", "22"));
+        m_command = reply_builder.buildGetEpochReply(1, "Message", epoch);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithObject, SetsProperID)
+{
+    ASSERT_EQ(60, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithObject, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithObject, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithObject, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(1, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetEpochReplyWithObject, SetsProperObject)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Epoch", object.at("epoch_name").c_str());
     ASSERT_STREQ("World", object.at("world_name").c_str());
