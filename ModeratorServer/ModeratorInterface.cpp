@@ -17,104 +17,95 @@
 ModeratorInterface::ModeratorInterface(IModeratorContext::Handle aContext, IBotManager::Handle aManager): 
     mContext(aContext), mBotManager(aManager), mCredentials() {
 
-}
-
-std::auto_ptr< TusCommand > ModeratorInterface::prepareWorldCommand(const std::string& aCommandName){
-    mCmdBuilder.makeCommand(aCommandName);
-    mCmdBuilder.setCredentials(*mCredentials);
-    mCmdBuilder.openParamSet();
-    mCmdBuilder.addParam("world_name", mCurrentWorld);
-    mCmdBuilder.closeParamSet();
-    
-    return mCmdBuilder.extract();
+    // TODO get this from context / factory / facade / implementation when available
+    mReqBuilder.reset( new TUSLanguage::UserRequestBuilder(new TUSLanguage::RequestBuilder));
+    mToProtocol.reset( new TUSProtocol::LanguageToProtocolTranslator);
+    mToLanguage.reset( new TUSProtocol::ProtocolToLanguageTranslator);
 }
 
 int ModeratorInterface::createEpoch(const std::string& aEpochName) {
-    mCmdBuilder.makeCommand(CREATE_EPOCH);
-    mCmdBuilder.setCredentials(*mCredentials);
-    mCmdBuilder.openParamSet();
-    mCmdBuilder.addParam("world_name", mCurrentWorld);
-    mCmdBuilder.addParam("epoch_name", aEpochName);
-    mCmdBuilder.closeParamSet();
-    
-    TusCommand::SingleHandle cmd = mCmdBuilder.extract();
+    TUSLanguage::ICommand::Handle cmd = 
+        mReqBuilder->buildCreateEpochRequest(aEpochName);
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::createWorld(const std::string& aWorldName) {
-    mCmdBuilder.makeCommand(CREATE_WORLD);
-    mCmdBuilder.setCredentials(*mCredentials);
-    mCmdBuilder.openParamSet();
-    mCmdBuilder.addParam("world_name", aWorldName);
-    mCmdBuilder.closeParamSet();
-    
-    TusCommand::SingleHandle cmd = mCmdBuilder.extract();
+    TUSLanguage::ICommand::Handle cmd =
+        mReqBuilder->buildCreateWorldRequest(aWorldName);
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::activateEpoch() {
-    std::auto_ptr< TusCommand > cmd = prepareWorldCommand(ACTIVATE_EPOCH);
-    
+    TUSLanguage::ICommand::Handle cmd =
+        mReqBuilder->buildActivateEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::deactivateEpoch() {
-    std::auto_ptr< TusCommand > cmd = prepareWorldCommand(DEACTIVATE_EPOCH);
-    
+    TUSLanguage::ICommand::Handle cmd =
+        mReqBuilder->buildDeactivateEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::deleteEpoch() {
-    std::auto_ptr< TusCommand > cmd = prepareWorldCommand(DELETE_EPOCH);
-    
+    TUSLanguage::ICommand::Handle cmd =
+        mReqBuilder->buildDeleteEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::finishEpoch() {
-    std::auto_ptr< TusCommand > cmd = prepareWorldCommand(FINISH_EPOCH);
-    
+    TUSLanguage::ICommand::Handle cmd =
+        mReqBuilder->buildFinishEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::tickEpoch() {
-    std::auto_ptr< TusCommand > cmd = prepareWorldCommand(TICK_EPOCH);
-    
+    TUSLanguage::ICommand::Handle cmd =
+        mReqBuilder->buildTickEpochRequest();
     return executeCommand(cmd);
 }
 
 void ModeratorInterface::setCurrentWorld(const std::string& aWorldName) {
     mCurrentWorld = aWorldName;
+    
+    mReqBuilder->setWorld(aWorldName);
 }
 
 void ModeratorInterface::setModeratorCredentials(const Credentials& aCredenetials) {
     mCredentials = new Credentials(aCredenetials);
+
+    mReqBuilder->setCredenials(
+        mCredentials->Username,
+        mCredentials->Password
+    );
 }
 
-int ModeratorInterface::executeCommand(std::auto_ptr< TusCommand >& in){
-    std::auto_ptr< TusReturnValue > ret;
-    
+int ModeratorInterface::executeCommand(TUSLanguage::ICommand::Handle in){
+    TUSLanguage::ICommand::Handle ret;
+
     sendCommand(in,ret);
 
-    Poco::AutoPtr<Poco::XML::NodeList> nl = ret->getElementsByTagName("status");
-    std::stringstream status;
-    status << nl->item(0)->attributes()->getNamedItem("value")->getNodeValue();
-    int r = -1;
-    status >> r;
-    
-    return r;
+    return ret->getCode();
 }
 
-void ModeratorInterface::sendCommand(std::auto_ptr< TusCommand >& in, std::auto_ptr< TusReturnValue >& out) {
+void ModeratorInterface::sendCommand(
+    TUSLanguage::ICommand::Handle& in,
+    TUSLanguage::ICommand::Handle& out
+) {
     const IBotConnectionConfiguration& conf( mContext->getBotConnectionConf());
-    Poco::Net::SocketAddress address(conf.getServerAddress(), conf.getServerPort());
+    Poco::Net::SocketAddress address(
+        conf.getServerAddress(), conf.getServerPort()
+    );
     Poco::Net::StreamSocket server(address);
     Poco::Net::SocketStream stream(server);
     Poco::XML::DOMWriter writer;
+
+    TUSProtocol::Message::Handle req = mToProtocol->translate(in);
     
     stream << std::noskipws << std::nounitbuf;
 
-// writer.writeNode(std::clog, in.get());
-    writer.writeNode(stream, in.get());
+// writer.writeNode(std::clog, req.get());
+    writer.writeNode(stream, req.get());
     stream.flush();
     
     Poco::XML::DOMParser parser;
@@ -122,10 +113,13 @@ void ModeratorInterface::sendCommand(std::auto_ptr< TusCommand >& in, std::auto_
     
     Poco::XML::Document* doc(parser.parse(&is));
     stream.close();
-    
+
+    TUSProtocol::Message::Handle resp( new TUSProtocol::Message());
+    resp->appendChild( resp->importNode(doc->documentElement(), true) );
+
+    out = mToLanguage->translate(resp);
+
 // writer.writeNode(std::clog, doc);
-    out.reset( new TusReturnValue );
-    out->appendChild( out->importNode(doc->documentElement(), true) );
 
     doc->release();
 }

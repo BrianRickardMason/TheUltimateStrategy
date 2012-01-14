@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(moderator)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fno-inline")
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fno-inline")
 
 include_directories(
     console/include
@@ -22,8 +23,9 @@ add_executable(moderator
 )
 
 target_link_libraries(moderator
-    console
     protocolxmlcpp
+    interface
+    console
     PocoNet PocoFoundation PocoXML PocoUtil
 )
 

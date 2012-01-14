@@ -6,6 +6,10 @@
 
 #include <memory>
 
+#include <Language/Interface/UserRequestBuilder.hpp>
+#include <Protocol/Xml/Cpp/LanguageToProtocolTranslator.hpp>
+#include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
+
 #include "TusCommandBuilder.h"
 #include "IModeratorContext.h"
 #include "BotConnectionManager.h"
@@ -28,11 +32,12 @@ public:
     
     virtual void notifyTick();
 private:
-    void sendCommand(std::auto_ptr<TusCommand>& in, std::auto_ptr<TusReturnValue>& out );
-    int  executeCommand(std::auto_ptr<TusCommand>& in);
-    
-    std::auto_ptr<TusCommand> prepareWorldCommand(const std::string& aCommandName);
-    
+    void sendCommand(
+        TUSLanguage::ICommand::Handle& in,
+        TUSLanguage::ICommand::Handle& out
+    );
+    int  executeCommand( TUSLanguage::ICommand::Handle in);
+
     Credentials::Handle mCredentials;
     std::string mCurrentWorld;
     
@@ -41,6 +46,9 @@ private:
     
     TusCommandBuilder mCmdBuilder;
     
+    TUSLanguage::UserRequestBuilder::Handle mReqBuilder;
+    TUSProtocol::LanguageToProtocolTranslator::Handle mToProtocol;
+    TUSProtocol::ProtocolToLanguageTranslator::Handle mToLanguage;
 };
 
 #endif
