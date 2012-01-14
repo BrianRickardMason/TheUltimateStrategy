@@ -35,6 +35,7 @@ ADD_LIBRARY(interface
     Command.cpp
     ReplyBuilder.cpp
     RequestBuilder.cpp
+    UserRequestBuilder.cpp
 )
 
 TARGET_LINK_LIBRARIES(interface

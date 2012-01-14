@@ -30,6 +30,7 @@
 
 #include <Language/Interface/ICommand.hpp>
 #include <boost/noncopyable.hpp>
+#include <Poco/SharedPtr.h>
 
 namespace TUSLanguage
 {
@@ -40,6 +41,11 @@ class RequestBuilder
     : boost::noncopyable
 {
 public:
+    /**
+     * Handle to RequestBuilder object
+     */
+    typedef Poco::SharedPtr<RequestBuilder> Handle;
+    
     /**
      * @brief Builds EchoRequest.
      *
