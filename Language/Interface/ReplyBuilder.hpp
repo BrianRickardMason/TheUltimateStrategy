@@ -120,6 +120,19 @@ public:
      *
      * @param a_code    The exit code.
      * @param a_message The status message.
+     *
+     * @return GetLandsReply.
+     */
+    ICommand::Handle buildGetLandsReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds GetLandsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
      * @param a_objects The objects.
      *
      * @return GetLandsReply.

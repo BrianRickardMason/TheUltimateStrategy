@@ -1660,12 +1660,54 @@ TEST_F(ProtocolToLanguageTranslatorGetLandReplyWithObjectTranslation, SetsProper
     ASSERT_STREQ("false", object.at("granted").c_str());
 }
 
-class ProtocolToLanguageTranslatorGetLandsReplyTranslation
+class ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation
     : public ::testing::Test
 {
 protected:
-    ProtocolToLanguageTranslatorGetLandsReplyTranslation()
+    ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation()
     {
+        TUSProtocol::MessageFactory factory;
+        TUSProtocol::ProtocolToLanguageTranslator translator;
+        TUSProtocol::Message::Handle message = factory.createGetLandsReply("1", "Message");
+        m_command = translator.translate(message);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation, SetsProperID)
+{
+    ASSERT_EQ(37, m_command->getID());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(0, m_command->getObjects().size());
+}
+
+class ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation
+    : public ::testing::Test
+{
+protected:
+            ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation()
+    {
+                TUSProtocol::MessageFactory factory;
+                TUSProtocol::ProtocolToLanguageTranslator translator;
         TUSProtocol::Message::Object land_1, land_2;
         TUSProtocol::Message::Objects lands;
         land_1.insert(std::make_pair("login", "Login1"));
@@ -1678,42 +1720,39 @@ protected:
         land_2.insert(std::make_pair("granted", "false"));
         lands.push_back(land_1);
         lands.push_back(land_2);
-        m_message = m_factory.createGetLandsReply("1", "Message", lands);
-        m_command = m_translator.translate(m_message);
+                TUSProtocol::Message::Handle message = factory.createGetLandsReply("1", "Message", lands);
+        m_command = translator.translate(message);
     }
 
-    TUSProtocol::MessageFactory m_factory;
-    TUSProtocol::ProtocolToLanguageTranslator m_translator;
-    TUSProtocol::Message::Handle m_message;
     TUSLanguage::ICommand::Handle m_command;
 };
 
-TEST_F(ProtocolToLanguageTranslatorGetLandsReplyTranslation, ReturnsNotNull)
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetLandsReplyTranslation, SetsProperID)
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, SetsProperID)
 {
     ASSERT_EQ(37, m_command->getID());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetLandsReplyTranslation, SetsProperCode)
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, SetsProperCode)
 {
     ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetLandsReplyTranslation, SetsProperMessage)
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, SetsProperMessage)
 {
     ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetLandsReplyTranslation, SetsProperNumberOfObjects)
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, SetsProperNumberOfObjects)
 {
     ASSERT_EQ(2, m_command->getObjects().size());
 }
 
-TEST_F(ProtocolToLanguageTranslatorGetLandsReplyTranslation, SetsProperObjects)
+TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, SetsProperObjects)
 {
     TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();

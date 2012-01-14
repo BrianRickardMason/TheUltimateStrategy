@@ -322,11 +322,23 @@ Message::Handle LanguageToProtocolTranslator::translate(
         }
 
         case TUSLanguage::ID_COMMAND_GET_LANDS_REPLY:
-            return message_factory.createGetLandsReply(
-                    boost::lexical_cast<std::string>(a_command->getCode()),
-                       a_command->getMessage(),
-                       a_command->getObjects()
-                   );
+        {
+            if (a_command->getObjects().empty())
+            {
+                return message_factory.createGetLandsReply(
+                           boost::lexical_cast<std::string>(a_command->getCode()),
+                           a_command->getMessage()
+                       );
+            }
+            else
+            {
+                return message_factory.createGetLandsReply(
+                           boost::lexical_cast<std::string>(a_command->getCode()),
+                           a_command->getMessage(),
+                           a_command->getObjects()
+                       );
+            }
+        }
 
         case TUSLanguage::ID_COMMAND_CREATE_SETTLEMENT_REPLY:
             return message_factory.createCreateSettlementReply(

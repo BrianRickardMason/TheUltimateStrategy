@@ -675,6 +675,25 @@ Message::Handle MessageFactory::createGetLandReply(
 }
 
 Message::Handle MessageFactory::createGetLandsReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+    Message::Objects objects;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_LANDS_REPLY);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_lands_reply");
+    message_builder.addObjects("lands", "land", objects);
+
+    return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetLandsReply(
     std::string      const   a_code,
     std::string      const   a_message,
     Message::Objects const & a_objects

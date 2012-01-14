@@ -133,17 +133,6 @@ protected:
         m_humans.push_back(m_human_1);
         m_humans.push_back(m_human_2);
 
-        m_land_1.insert(std::make_pair("login", "Login1"));
-        m_land_1.insert(std::make_pair("world_name", "World1"));
-        m_land_1.insert(std::make_pair("land_name", "Land1"));
-        m_land_1.insert(std::make_pair("granted", "false"));
-        m_land_2.insert(std::make_pair("login", "Login2"));
-        m_land_2.insert(std::make_pair("world_name", "World2"));
-        m_land_2.insert(std::make_pair("land_name", "Land2"));
-        m_land_2.insert(std::make_pair("granted", "false"));
-        m_lands.push_back(m_land_1);
-        m_lands.push_back(m_land_2);
-
         m_resource_1.insert(std::make_pair("resourcename", "Coal"));
         m_resource_1.insert(std::make_pair("volume", "10"));
         m_resource_2.insert(std::make_pair("resourcename", "Wood"));
@@ -203,8 +192,6 @@ protected:
                                  m_message_error_reply,
                                  m_message_create_land_reply,
                                  m_message_delete_land_reply,
-                                 m_message_get_land_reply,
-                                 m_message_get_lands_reply,
                                  m_message_create_settlement_reply,
                                  m_message_delete_settlement_reply,
                                  m_message_get_settlement_reply,
@@ -262,19 +249,6 @@ protected:
      * @brief The humans to be tested.
      */
     TUSProtocol::Message::Objects m_humans;
-
-    //@{
-    /**
-     * @brief The land to be inserted.
-     */
-    TUSProtocol::Message::Object m_land_1,
-                                 m_land_2;
-    //}@
-
-    /**
-     * @brief The lands to be tested.
-     */
-    TUSProtocol::Message::Objects m_lands;
 
     //@{
     /**
@@ -1702,45 +1676,115 @@ TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, SetsProperObject)
     ASSERT_STREQ("false", element->getChildElement("granted")->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandsReplyReturnsNotNull)
+class MessageFactoryTestCreateGetLandsReplyWithoutObjects
+    : public ::testing::Test
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
-    ASSERT_TRUE(message.get());
+protected:
+    MessageFactoryTestCreateGetLandsReplyWithoutObjects()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        m_message = message_factory.createGetLandsReply("1", "Message");
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithoutObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperID)
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithoutObjects, SetsProperID)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("header")->getChildElement("id");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("37", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperCode)
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithoutObjects, SetsProperCode)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("code");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperMessage)
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithoutObjects, SetsProperMessage)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
-    Poco::XML::Element * element = message->documentElement()->getChildElement("reply")->getChildElement("message");
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandsReplySetsSpecificReply)
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithoutObjects, SetsSpecificReply)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_lands_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(MessageFactoryTest, CreateGetLandsReplySetsProperObjects)
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithoutObjects, SetsProperObjects)
 {
-    TUSProtocol::Message::Handle message = m_message_factory.createGetLandsReply("1", "Message", m_lands);
-    Poco::XML::Element * element = message->documentElement()->
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_lands_reply")->getChildElement("lands");
+
+    // TODO: Extend testing.
+}
+
+class MessageFactoryTestCreateGetLandsReplyWithObjects
+    : public ::testing::Test
+{
+protected:
+    MessageFactoryTestCreateGetLandsReplyWithObjects()
+    {
+        TUSProtocol::MessageFactory message_factory;
+        TUSProtocol::Message::Object land_1, land_2;
+        TUSProtocol::Message::Objects lands;
+        land_1.insert(std::make_pair("login", "Login1"));
+        land_1.insert(std::make_pair("world_name", "World1"));
+        land_1.insert(std::make_pair("land_name", "Land1"));
+        land_1.insert(std::make_pair("granted", "false"));
+        land_2.insert(std::make_pair("login", "Login2"));
+        land_2.insert(std::make_pair("world_name", "World2"));
+        land_2.insert(std::make_pair("land_name", "Land2"));
+        land_2.insert(std::make_pair("granted", "false"));
+        lands.push_back(land_1);
+        lands.push_back(land_2);
+        m_message = message_factory.createGetLandsReply("1", "Message", lands);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithObjects, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("37", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithObjects, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithObjects, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithObjects, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_lands_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(MessageFactoryTestCreateGetLandsReplyWithObjects, SetsProperObjects)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_lands_reply")->getChildElement("lands");
 
     // TODO: Extend testing.

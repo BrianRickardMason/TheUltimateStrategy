@@ -624,6 +624,19 @@ public:
      *
      * @param a_code    The exit code.
      * @param a_message The status message.
+     *
+     * @return GetLandsReply.
+     */
+    Message::Handle createGetLandsReply(
+        std::string const a_code,
+        std::string const a_message
+    ) const;
+
+    /**
+     * @brief Creates GetLandsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
      * @param a_objects The objects.
      *
      * @return GetLandsReply.

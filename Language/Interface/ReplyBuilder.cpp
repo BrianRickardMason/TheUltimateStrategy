@@ -99,15 +99,24 @@ ICommand::Handle ReplyBuilder::buildGetLandReply(
 }
 
 ICommand::Handle ReplyBuilder::buildGetLandsReply(
-    unsigned short int const   a_code,
-    std::string        const   a_message,
-    ICommand::Objects  const & a_objects
+    unsigned short int const a_code,
+    std::string        const a_message
 ) const
 {
     ICommand::Handle command(new Command);
     command->setID(37);
     command->setCode(a_code);
     command->setMessage(a_message);
+    return command;
+}
+
+ICommand::Handle ReplyBuilder::buildGetLandsReply(
+    unsigned short int const   a_code,
+    std::string        const   a_message,
+    ICommand::Objects  const & a_objects
+) const
+{
+    ICommand::Handle command = buildGetLandsReply(a_code, a_message);
     for (ICommand::Objects::const_iterator it = a_objects.begin(); it != a_objects.end(); ++it)
     {
         command->addObject((*it));
