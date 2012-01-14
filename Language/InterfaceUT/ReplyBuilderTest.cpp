@@ -89,13 +89,6 @@ protected:
         m_resource_2.insert(std::make_pair("volume", "20"));
         m_resources.push_back(m_resource_1);
         m_resources.push_back(m_resource_2);
-
-        m_settlement_1.insert(std::make_pair("land_name", "Land1"));
-        m_settlement_1.insert(std::make_pair("settlement_name", "Settlement1"));
-        m_settlement_2.insert(std::make_pair("land_name", "Land2"));
-        m_settlement_2.insert(std::make_pair("settlement_name", "Settlement2"));
-        m_settlements.push_back(m_settlement_1);
-        m_settlements.push_back(m_settlement_2);
     }
 
     /**
@@ -172,19 +165,6 @@ protected:
      * @brief The resources to be tested.
      */
     TUSLanguage::ICommand::Objects m_resources;
-
-    //@{
-    /**
-     * @brief The settlement to be inserted.
-     */
-    TUSLanguage::ICommand::Object m_settlement_1,
-                                  m_settlement_2;
-    //}@
-
-    /**
-     * @brief The settlements to be tested.
-     */
-    TUSLanguage::ICommand::Objects m_settlements;
 };
 
 TEST_F(ReplyBuilderTest, CtorDoesNotThrow)
@@ -496,79 +476,181 @@ TEST_F(ReplyBuilderTest, BuildDeleteSettlementReplySetsProperMessage)
     ASSERT_STREQ("Message", m_command_delete_settlement_reply->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetSettlementReplyWithoutObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementReply(1, "Message", m_settlement_1);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetSettlementReplyWithoutObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object settlement;
+        m_command = reply_builder.buildGetSettlementReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithoutObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithoutObject, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementReply(1, "Message", m_settlement_1);
-    ASSERT_EQ(40, command->getID());
+    ASSERT_EQ(40, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithoutObject, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementReply(1, "Message", m_settlement_1);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithoutObject, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementReply(1, "Message", m_settlement_1);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithoutObject, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementReply(1, "Message", m_settlement_1);
-    ASSERT_EQ(1, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementReplySetsProperObject)
+class ReplyBuilderTestBuildGetSettlementReplyWithObject
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementReply(1, "Message", m_settlement_1);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetSettlementReplyWithObject()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object settlement;
+        settlement.insert(std::make_pair("land_name", "Land1"));
+        settlement.insert(std::make_pair("settlement_name", "Settlement1"));
+        m_command = reply_builder.buildGetSettlementReply(1, "Message", settlement);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithObject, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithObject, SetsProperID)
+{
+    ASSERT_EQ(40, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithObject, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithObject, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithObject, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(1, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementReplyWithObject, SetsProperObject)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Land1", object.at("land_name").c_str());
     ASSERT_STREQ("Settlement1", object.at("settlement_name").c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementsReplyReturnsNotNull)
+class ReplyBuilderTestBuildGetSettlementsReplyWithoutObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementsReply(1, "Message", m_settlements);
-    ASSERT_TRUE(command.get());
+protected:
+    ReplyBuilderTestBuildGetSettlementsReplyWithoutObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        m_command = reply_builder.buildGetSettlementsReply(1, "Message");
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithoutObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementsReplySetsProperID)
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithoutObjects, SetsProperID)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementsReply(1, "Message", m_settlements);
-    ASSERT_EQ(41, command->getID());
+    ASSERT_EQ(41, m_command->getID());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementsReplySetsProperCode)
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithoutObjects, SetsProperCode)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementsReply(1, "Message", m_settlements);
-    ASSERT_EQ(1, command->getCode());
+    ASSERT_EQ(1, m_command->getCode());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementsReplySetsProperMessage)
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithoutObjects, SetsProperMessage)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementsReply(1, "Message", m_settlements);
-    ASSERT_STREQ("Message", command->getMessage().c_str());
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementsReplySetsProperNumberOfObjects)
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithoutObjects, SetsProperNumberOfObjects)
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementsReply(1, "Message", m_settlements);
-    ASSERT_EQ(2, command->getObjects().size());
+    ASSERT_EQ(0, m_command->getObjects().size());
 }
 
-TEST_F(ReplyBuilderTest, BuildGetSettlementsReplySetsProperObjects)
+class ReplyBuilderTestBuildGetSettlementsReplyWithObjects
+    : public ::testing::Test
 {
-    TUSLanguage::ICommand::Handle command = m_reply_builder.buildGetSettlementsReply(1, "Message", m_settlements);
-    TUSLanguage::ICommand::Objects objects = command->getObjects();
+protected:
+    ReplyBuilderTestBuildGetSettlementsReplyWithObjects()
+    {
+        TUSLanguage::ReplyBuilder reply_builder;
+        TUSLanguage::ICommand::Object settlement_1, settlement_2;
+        TUSLanguage::ICommand::Objects settlements;
+        settlement_1.insert(std::make_pair("land_name", "Land1"));
+        settlement_1.insert(std::make_pair("settlement_name", "Settlement1"));
+        settlement_2.insert(std::make_pair("land_name", "Land2"));
+        settlement_2.insert(std::make_pair("settlement_name", "Settlement2"));
+        settlements.push_back(settlement_1);
+        settlements.push_back(settlement_2);
+        m_command = reply_builder.buildGetSettlementsReply(1, "Message", settlements);
+    }
+
+    TUSLanguage::ICommand::Handle m_command;
+};
+
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithObjects, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_command.get());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithObjects, SetsProperID)
+{
+    ASSERT_EQ(41, m_command->getID());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithObjects, SetsProperCode)
+{
+    ASSERT_EQ(1, m_command->getCode());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithObjects, SetsProperMessage)
+{
+    ASSERT_STREQ("Message", m_command->getMessage().c_str());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithObjects, SetsProperNumberOfObjects)
+{
+    ASSERT_EQ(2, m_command->getObjects().size());
+}
+
+TEST_F(ReplyBuilderTestBuildGetSettlementsReplyWithObjects, SetsProperObjects)
+{
+    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
     TUSLanguage::ICommand::Object object = objects.front();
     ASSERT_STREQ("Land1", object.at("land_name").c_str());
     ASSERT_STREQ("Settlement1", object.at("settlement_name").c_str());

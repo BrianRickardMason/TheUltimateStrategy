@@ -174,6 +174,19 @@ public:
      *
      * @param a_code    The exit code.
      * @param a_message The status message.
+     *
+     * @return GetSettlementReply.
+     */
+    ICommand::Handle buildGetSettlementReply(
+        unsigned short int const a_code,
+        std::string        const a_message
+    ) const;
+
+    /**
+     * @brief Builds GetSettlementReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
      * @param a_object  The object.
      *
      * @return GetSettlementReply.
@@ -182,6 +195,20 @@ public:
         unsigned short int const   a_code,
         std::string        const   a_message,
         ICommand::Object   const & a_object
+    ) const;
+
+    /**
+     * @brief Builds GetSettlementsReply.
+     *
+     * @param a_code    The exit code.
+     * @param a_message The status message.
+     * @param a_objects The objects.
+     *
+     * @return GetSettlementsReply.
+     */
+    ICommand::Handle buildGetSettlementsReply(
+        unsigned short int const a_code,
+        std::string        const a_message
     ) const;
 
     /**
