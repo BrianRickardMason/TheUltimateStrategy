@@ -855,6 +855,23 @@ Message::Handle MessageFactory::createDestroyBuildingReply(
 }
 
 Message::Handle MessageFactory::createGetBuildingReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_BUILDING_REPLY);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_building_reply");
+
+    return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetBuildingReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -871,6 +888,15 @@ Message::Handle MessageFactory::createGetBuildingReply(
     message_builder.addObject("building", a_object);
 
     return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetBuildingsReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    Message::Objects objects;
+    return createGetBuildingsReply(a_code, a_message, objects);
 }
 
 Message::Handle MessageFactory::createGetBuildingsReply(
@@ -927,6 +953,23 @@ Message::Handle MessageFactory::createEngageHumanReply(
 }
 
 Message::Handle MessageFactory::createGetHumanReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_HUMAN_REPLY);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_human_reply");
+
+    return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetHumanReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -943,6 +986,15 @@ Message::Handle MessageFactory::createGetHumanReply(
     message_builder.addObject("human", a_object);
 
     return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetHumansReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    Message::Objects objects;
+    return createGetHumansReply(a_code, a_message, objects);
 }
 
 Message::Handle MessageFactory::createGetHumansReply(
@@ -965,6 +1017,23 @@ Message::Handle MessageFactory::createGetHumansReply(
 }
 
 Message::Handle MessageFactory::createGetResourceReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_RESOURCE_REPLY);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_resource_reply");
+
+    return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetResourceReply(
     std::string     const   a_code,
     std::string     const   a_message,
     Message::Object const & a_object
@@ -981,6 +1050,15 @@ Message::Handle MessageFactory::createGetResourceReply(
     message_builder.addObject("resource", a_object);
 
     return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetResourcesReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    Message::Objects objects;
+    return createGetResourcesReply(a_code, a_message, objects);
 }
 
 Message::Handle MessageFactory::createGetResourcesReply(
@@ -1134,6 +1212,23 @@ Message::Handle MessageFactory::createTickEpochReply(
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
     message_builder.addSpecificReply("tick_epoch_reply");
+
+    return message_builder.extract();
+}
+
+Message::Handle MessageFactory::createGetEpochReply(
+    std::string const a_code,
+    std::string const a_message
+) const
+{
+    MessageBuilder message_builder;
+
+    message_builder.makeMessage();
+    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_EPOCH_REPLY);
+    message_builder.addReply();
+    message_builder.addCode(a_code);
+    message_builder.addMessage(a_message);
+    message_builder.addSpecificReply("get_epoch_reply");
 
     return message_builder.extract();
 }
