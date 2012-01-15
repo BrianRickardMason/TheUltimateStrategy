@@ -127,17 +127,17 @@
 <!ELEMENT get_lands_reply (lands)>
 <!ELEMENT create_settlement_reply EMPTY>
 <!ELEMENT delete_settlement_reply EMPTY>
-<!ELEMENT get_settlement_reply (settlement)>
+<!ELEMENT get_settlement_reply (settlement*)>
 <!ELEMENT get_settlements_reply (settlements)>
 <!ELEMENT build_building_reply EMPTY>
 <!ELEMENT destroy_building_reply EMPTY>
-<!ELEMENT get_building_reply (building)>
+<!ELEMENT get_building_reply (building*)>
 <!ELEMENT get_buildings_reply (buildings)>
 <!ELEMENT dismiss_human_reply EMPTY>
 <!ELEMENT engage_human_reply EMPTY>
-<!ELEMENT get_human_reply (human)>
+<!ELEMENT get_human_reply (human*)>
 <!ELEMENT get_humans_reply (humans)>
-<!ELEMENT get_resource_reply (resource)>
+<!ELEMENT get_resource_reply (resource*)>
 <!ELEMENT get_resources_reply (resources)>
 <!ELEMENT create_user_reply EMPTY>
 <!ELEMENT create_world_reply EMPTY>
@@ -147,7 +147,7 @@
 <!ELEMENT deactivate_epoch_reply EMPTY>
 <!ELEMENT finish_epoch_reply EMPTY>
 <!ELEMENT tick_epoch_reply EMPTY>
-<!ELEMENT get_epoch_reply (epoch)>
+<!ELEMENT get_epoch_reply (epoch*)>
 <!ELEMENT transport_human_reply EMPTY>
 <!ELEMENT transport_resource_reply EMPTY>
 
