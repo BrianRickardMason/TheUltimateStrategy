@@ -998,23 +998,31 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             if (not specific_reply) throw std::exception();
 
             Element building = specific_reply->getChildElement("building");
-            if (not building) throw std::exception();
+            if (not building)
+            {
+                return reply_builder.buildGetBuildingReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
+            }
+            else
+            {
+                Element buildingclass = building->getChildElement("buildingclass");
+                Element buildingname = building->getChildElement("buildingname");
+                Element volume = building->getChildElement("volume");
+                if (not (buildingclass and buildingname and volume)) throw std::exception();
 
-            Element buildingclass = building->getChildElement("buildingclass");
-            Element buildingname = building->getChildElement("buildingname");
-            Element volume = building->getChildElement("volume");
-            if (not (buildingclass and buildingname and volume)) throw std::exception();
+                TUSLanguage::ICommand::Object object;
+                object.insert(std::make_pair("buildingclass", buildingclass->innerText()));
+                object.insert(std::make_pair("buildingname", buildingname->innerText()));
+                object.insert(std::make_pair("volume", volume->innerText()));
 
-            TUSLanguage::ICommand::Object object;
-            object.insert(std::make_pair("buildingclass", buildingclass->innerText()));
-            object.insert(std::make_pair("buildingname", buildingname->innerText()));
-            object.insert(std::make_pair("volume", volume->innerText()));
-
-            return reply_builder.buildGetBuildingReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       object
-                   );
+                return reply_builder.buildGetBuildingReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           object
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_GET_BUILDINGS_REPLY:
@@ -1032,32 +1040,42 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element buildings = specific_reply->getChildElement("buildings");
             if (not buildings) throw std::exception();
 
+            // FIXME: Not AutoPtr!
             Poco::AutoPtr<Poco::XML::NodeList> elements = buildings->getElementsByTagName("building");
-
-            TUSLanguage::ICommand::Objects objects;
-
-            for (int i = 0; i < elements->length(); ++i)
+            if (elements->length() == 0)
             {
-                Element building = static_cast<Poco::XML::Element*>(elements->item(i));
-
-                Element buildingclass = building->getChildElement("buildingclass");
-                Element buildingname = building->getChildElement("buildingname");
-                Element volume = building->getChildElement("volume");
-                if (not (buildingclass and buildingname and volume)) throw std::exception();
-
-                TUSLanguage::ICommand::Object object;
-                object.insert(std::make_pair("buildingclass", buildingclass->innerText()));
-                object.insert(std::make_pair("buildingname", buildingname->innerText()));
-                object.insert(std::make_pair("volume", volume->innerText()));
-
-                objects.push_back(object);
+                return reply_builder.buildGetBuildingsReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
             }
+            else
+            {
+                TUSLanguage::ICommand::Objects objects;
 
-            return reply_builder.buildGetBuildingsReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       objects
-                   );
+                for (int i = 0; i < elements->length(); ++i)
+                {
+                    Element building = static_cast<Poco::XML::Element*>(elements->item(i));
+
+                    Element buildingclass = building->getChildElement("buildingclass");
+                    Element buildingname = building->getChildElement("buildingname");
+                    Element volume = building->getChildElement("volume");
+                    if (not (buildingclass and buildingname and volume)) throw std::exception();
+
+                    TUSLanguage::ICommand::Object object;
+                    object.insert(std::make_pair("buildingclass", buildingclass->innerText()));
+                    object.insert(std::make_pair("buildingname", buildingname->innerText()));
+                    object.insert(std::make_pair("volume", volume->innerText()));
+
+                    objects.push_back(object);
+                }
+
+                return reply_builder.buildGetBuildingsReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           objects
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_DISMISS_HUMAN_REPLY:
@@ -1109,25 +1127,33 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             if (not specific_reply) throw std::exception();
 
             Element human = specific_reply->getChildElement("human");
-            if (not human) throw std::exception();
+            if (not human)
+            {
+                return reply_builder.buildGetHumanReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
+            }
+            else
+            {
+                Element humanclass = human->getChildElement("humanclass");
+                Element humanname = human->getChildElement("humanname");
+                Element experience = human->getChildElement("experience");
+                Element volume = human->getChildElement("volume");
+                if (not (humanclass and humanname and experience and volume)) throw std::exception();
 
-            Element humanclass = human->getChildElement("humanclass");
-            Element humanname = human->getChildElement("humanname");
-            Element experience = human->getChildElement("experience");
-            Element volume = human->getChildElement("volume");
-            if (not (humanclass and humanname and experience and volume)) throw std::exception();
+                TUSLanguage::ICommand::Object object;
+                object.insert(std::make_pair("humanclass", humanclass->innerText()));
+                object.insert(std::make_pair("humanname", humanname->innerText()));
+                object.insert(std::make_pair("experience", experience->innerText()));
+                object.insert(std::make_pair("volume", volume->innerText()));
 
-            TUSLanguage::ICommand::Object object;
-            object.insert(std::make_pair("humanclass", humanclass->innerText()));
-            object.insert(std::make_pair("humanname", humanname->innerText()));
-            object.insert(std::make_pair("experience", experience->innerText()));
-            object.insert(std::make_pair("volume", volume->innerText()));
-
-            return reply_builder.buildGetHumanReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       object
-                   );
+                return reply_builder.buildGetHumanReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           object
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_GET_HUMANS_REPLY:
@@ -1145,34 +1171,44 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element humans = specific_reply->getChildElement("humans");
             if (not humans) throw std::exception();
 
+            // FIXME: Not AutoPtr!
             Poco::AutoPtr<Poco::XML::NodeList> elements = humans->getElementsByTagName("human");
-
-            TUSLanguage::ICommand::Objects objects;
-
-            for (int i = 0; i < elements->length(); ++i)
+            if (elements->length() == 0)
             {
-                Element human = static_cast<Poco::XML::Element*>(elements->item(i));
-
-                Element humanclass = human->getChildElement("humanclass");
-                Element humanname = human->getChildElement("humanname");
-                Element experience = human->getChildElement("experience");
-                Element volume = human->getChildElement("volume");
-                if (not (humanclass and humanname and experience and volume)) throw std::exception();
-
-                TUSLanguage::ICommand::Object object;
-                object.insert(std::make_pair("humanclass", humanclass->innerText()));
-                object.insert(std::make_pair("humanname", humanname->innerText()));
-                object.insert(std::make_pair("experience", experience->innerText()));
-                object.insert(std::make_pair("volume", volume->innerText()));
-
-                objects.push_back(object);
+                return reply_builder.buildGetHumansReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
             }
+            else
+            {
+                TUSLanguage::ICommand::Objects objects;
 
-            return reply_builder.buildGetHumansReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       objects
-                   );
+                for (int i = 0; i < elements->length(); ++i)
+                {
+                    Element human = static_cast<Poco::XML::Element*>(elements->item(i));
+
+                    Element humanclass = human->getChildElement("humanclass");
+                    Element humanname = human->getChildElement("humanname");
+                    Element experience = human->getChildElement("experience");
+                    Element volume = human->getChildElement("volume");
+                    if (not (humanclass and humanname and experience and volume)) throw std::exception();
+
+                    TUSLanguage::ICommand::Object object;
+                    object.insert(std::make_pair("humanclass", humanclass->innerText()));
+                    object.insert(std::make_pair("humanname", humanname->innerText()));
+                    object.insert(std::make_pair("experience", experience->innerText()));
+                    object.insert(std::make_pair("volume", volume->innerText()));
+
+                    objects.push_back(object);
+                }
+
+                return reply_builder.buildGetHumansReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           objects
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_GET_RESOURCE_REPLY:
@@ -1188,21 +1224,29 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             if (not specific_reply) throw std::exception();
 
             Element resource = specific_reply->getChildElement("resource");
-            if (not resource) throw std::exception();
+            if (not resource)
+            {
+                return reply_builder.buildGetResourceReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
+            }
+            else
+            {
+                Element resourcename = resource->getChildElement("resourcename");
+                Element volume = resource->getChildElement("volume");
+                if (not (resourcename and volume)) throw std::exception();
 
-            Element resourcename = resource->getChildElement("resourcename");
-            Element volume = resource->getChildElement("volume");
-            if (not (resourcename and volume)) throw std::exception();
+                TUSLanguage::ICommand::Object object;
+                object.insert(std::make_pair("resourcename", resourcename->innerText()));
+                object.insert(std::make_pair("volume", volume->innerText()));
 
-            TUSLanguage::ICommand::Object object;
-            object.insert(std::make_pair("resourcename", resourcename->innerText()));
-            object.insert(std::make_pair("volume", volume->innerText()));
-
-            return reply_builder.buildGetResourceReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       object
-                   );
+                return reply_builder.buildGetResourceReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           object
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_GET_RESOURCES_REPLY:
@@ -1220,30 +1264,40 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element resources = specific_reply->getChildElement("resources");
             if (not resources) throw std::exception();
 
+            // FIXME: Not AutoPtr!
             Poco::AutoPtr<Poco::XML::NodeList> elements = resources->getElementsByTagName("resource");
-
-            TUSLanguage::ICommand::Objects objects;
-
-            for (int i = 0; i < elements->length(); ++i)
+            if (elements->length() == 0)
             {
-                Element resource = static_cast<Poco::XML::Element*>(elements->item(i));
-
-                Element resourcename = resource->getChildElement("resourcename");
-                Element volume = resource->getChildElement("volume");
-                if (not (resourcename and volume)) throw std::exception();
-
-                TUSLanguage::ICommand::Object object;
-                object.insert(std::make_pair("resourcename", resourcename->innerText()));
-                object.insert(std::make_pair("volume", volume->innerText()));
-
-                objects.push_back(object);
+                return reply_builder.buildGetResourcesReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
             }
+            else
+            {
+                TUSLanguage::ICommand::Objects objects;
 
-            return reply_builder.buildGetResourcesReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       objects
-                   );
+                for (int i = 0; i < elements->length(); ++i)
+                {
+                    Element resource = static_cast<Poco::XML::Element*>(elements->item(i));
+
+                    Element resourcename = resource->getChildElement("resourcename");
+                    Element volume = resource->getChildElement("volume");
+                    if (not (resourcename and volume)) throw std::exception();
+
+                    TUSLanguage::ICommand::Object object;
+                    object.insert(std::make_pair("resourcename", resourcename->innerText()));
+                    object.insert(std::make_pair("volume", volume->innerText()));
+
+                    objects.push_back(object);
+                }
+
+                return reply_builder.buildGetResourcesReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           objects
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_CREATE_USER_REPLY:
@@ -1403,27 +1457,35 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             if (not specific_reply) throw std::exception();
 
             Element epoch = specific_reply->getChildElement("epoch");
-            if (not epoch) throw std::exception();
+            if (not epoch)
+            {
+                return reply_builder.buildGetEpochReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText()
+                       );
+            }
+            else
+            {
+                Element epoch_name = epoch->getChildElement("epoch_name");
+                Element world_name = epoch->getChildElement("world_name");
+                Element active = epoch->getChildElement("active");
+                Element finished = epoch->getChildElement("finished");
+                Element ticks = epoch->getChildElement("ticks");
+                if (not (epoch_name and world_name and active and finished and ticks)) throw std::exception();
 
-            Element epoch_name = epoch->getChildElement("epoch_name");
-            Element world_name = epoch->getChildElement("world_name");
-            Element active = epoch->getChildElement("active");
-            Element finished = epoch->getChildElement("finished");
-            Element ticks = epoch->getChildElement("ticks");
-            if (not (epoch_name and world_name and active and finished and ticks)) throw std::exception();
+                TUSLanguage::ICommand::Object object;
+                object.insert(std::make_pair("epoch_name", epoch_name->innerText()));
+                object.insert(std::make_pair("world_name", world_name->innerText()));
+                object.insert(std::make_pair("active", active->innerText()));
+                object.insert(std::make_pair("finished", finished->innerText()));
+                object.insert(std::make_pair("ticks", ticks->innerText()));
 
-            TUSLanguage::ICommand::Object object;
-            object.insert(std::make_pair("epoch_name", epoch_name->innerText()));
-            object.insert(std::make_pair("world_name", world_name->innerText()));
-            object.insert(std::make_pair("active", active->innerText()));
-            object.insert(std::make_pair("finished", finished->innerText()));
-            object.insert(std::make_pair("ticks", ticks->innerText()));
-
-            return reply_builder.buildGetEpochReply(
-                       boost::lexical_cast<unsigned short int>(code->innerText()),
-                       message->innerText(),
-                       object
-                   );
+                return reply_builder.buildGetEpochReply(
+                           boost::lexical_cast<unsigned short int>(code->innerText()),
+                           message->innerText(),
+                           object
+                       );
+            }
         }
 
         case TUSLanguage::ID_COMMAND_TRANSPORT_HUMAN_REPLY:
