@@ -57,38 +57,6 @@ protected:
           m_command_transport_human_reply(m_reply_builder.buildTransportHumanReply(1, "Message")),
           m_command_transport_resource_reply(m_reply_builder.buildTransportResourceReply(1, "Message"))
     {
-        m_building_1.insert(std::make_pair("buildingclass", "Regular"));
-        m_building_1.insert(std::make_pair("buildingname", "Farm"));
-        m_building_1.insert(std::make_pair("volume", "10"));
-        m_building_2.insert(std::make_pair("buildingclass", "Regular"));
-        m_building_2.insert(std::make_pair("buildingname", "Sawmill"));
-        m_building_2.insert(std::make_pair("volume", "20"));
-        m_buildings.push_back(m_building_1);
-        m_buildings.push_back(m_building_2);
-
-        m_epoch.insert(std::make_pair("epoch_name", "Epoch"));
-        m_epoch.insert(std::make_pair("world_name", "World"));
-        m_epoch.insert(std::make_pair("active", "true"));
-        m_epoch.insert(std::make_pair("finished", "false"));
-        m_epoch.insert(std::make_pair("ticks", "22"));
-
-        m_human_1.insert(std::make_pair("humanclass", "Worker"));
-        m_human_1.insert(std::make_pair("humanname", "Farmer"));
-        m_human_1.insert(std::make_pair("experience", "Novice"));
-        m_human_1.insert(std::make_pair("volume", "10"));
-        m_human_2.insert(std::make_pair("humanclass", "Worker"));
-        m_human_2.insert(std::make_pair("humanname", "Steelworker"));
-        m_human_2.insert(std::make_pair("experience", "Advanced"));
-        m_human_2.insert(std::make_pair("volume", "20"));
-        m_humans.push_back(m_human_1);
-        m_humans.push_back(m_human_2);
-
-        m_resource_1.insert(std::make_pair("resourcename", "Coal"));
-        m_resource_1.insert(std::make_pair("volume", "10"));
-        m_resource_2.insert(std::make_pair("resourcename", "Wood"));
-        m_resource_2.insert(std::make_pair("volume", "20"));
-        m_resources.push_back(m_resource_1);
-        m_resources.push_back(m_resource_2);
     }
 
     /**
@@ -121,50 +89,6 @@ protected:
                                   m_command_transport_human_reply,
                                   m_command_transport_resource_reply;
     //}@
-
-    //@{
-    /**
-     * @brief The building to be inserted.
-     */
-    TUSLanguage::ICommand::Object m_building_1,
-                                  m_building_2;
-    //}@
-
-    /**
-     * @brief The buildings to be tested.
-     */
-    TUSLanguage::ICommand::Objects m_buildings;
-
-    /**
-     * @brief The epoch to be inserted.
-     */
-    TUSLanguage::ICommand::Object m_epoch;
-
-    //@{
-    /**
-     * @brief The human to be inserted.
-     */
-    TUSLanguage::ICommand::Object m_human_1,
-                                  m_human_2;
-    //}@
-
-    /**
-     * @brief The humans to be tested.
-     */
-    TUSLanguage::ICommand::Objects m_humans;
-
-    //@{
-    /**
-     * @brief The resource to be inserted.
-     */
-    TUSLanguage::ICommand::Object m_resource_1,
-                                  m_resource_2;
-    //}@
-
-    /**
-     * @brief The resources to be tested.
-     */
-    TUSLanguage::ICommand::Objects m_resources;
 };
 
 TEST_F(ReplyBuilderTest, CtorDoesNotThrow)
