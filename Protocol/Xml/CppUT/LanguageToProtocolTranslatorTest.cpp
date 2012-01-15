@@ -2569,60 +2569,121 @@ TEST_F(LanguageToProtocolTranslatorDestroyBuildingReplyTranslation, SetsSpecific
     ASSERT_TRUE(element != NULL);
 }
 
-class LanguageToProtocolTranslatorGetBuildingReplyTranslation
+class LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation
     : public ::testing::Test
 {
 protected:
-    LanguageToProtocolTranslatorGetBuildingReplyTranslation()
+    LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation()
     {
-        TUSLanguage::ICommand::Object building;
-        building.insert(std::make_pair("buildingclass", "Regular"));
-        building.insert(std::make_pair("buildingname", "Farm"));
-        building.insert(std::make_pair("volume", "10"));
-        m_command = m_builder.buildGetBuildingReply(1, "Message", building);
-        m_message = m_translator.translate(m_command);
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Handle command = builder.buildGetBuildingReply(1, "Message");
+        m_message = translator.translate(command);
     }
 
-    TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
-    TUSLanguage::ICommand::Handle m_command;
     TUSProtocol::Message::Handle m_message;
 };
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingReplyTranslation, ReturnsNotNull)
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingReplyTranslation, SetsProperID)
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation, SetsProperID)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("44", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingReplyTranslation, SetsProperCode)
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation, SetsProperCode)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingReplyTranslation, SetsProperMessage)
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation, SetsProperMessage)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingReplyTranslation, SetsSpecificReply)
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation, SetsSpecificReply)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_building_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingReplyTranslation, SetsProperObject)
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation, DoesNotSetObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_building_reply")->getChildElement("get_building_reply");
+    ASSERT_TRUE(element == NULL);
+}
+
+class LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation
+    : public ::testing::Test
+{
+protected:
+    LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation()
+    {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Object building;
+        building.insert(std::make_pair("buildingclass", "Regular"));
+        building.insert(std::make_pair("buildingname", "Farm"));
+        building.insert(std::make_pair("volume", "10"));
+        TUSLanguage::ICommand::Handle command = builder.buildGetBuildingReply(1, "Message", building);
+        m_message = translator.translate(command);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("44", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_building_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, SetsObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_building_reply")->getChildElement("building");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, SetsProperObject)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_building_reply")->getChildElement("building");
@@ -2631,12 +2692,70 @@ TEST_F(LanguageToProtocolTranslatorGetBuildingReplyTranslation, SetsProperObject
     ASSERT_STREQ("10", element->getChildElement("volume")->innerText().c_str());
 }
 
-class LanguageToProtocolTranslatorGetBuildingsReplyTranslation
+class LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation
     : public ::testing::Test
 {
 protected:
-    LanguageToProtocolTranslatorGetBuildingsReplyTranslation()
+    LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation()
     {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Handle command = builder.buildGetBuildingsReply(1, "Message");
+        m_message = translator.translate(command);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("45", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_buildings_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation, SetsProperObjects)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_buildings_reply")->getChildElement("buildings");
+
+    // TODO: Extend testing.
+}
+
+class LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation
+    : public ::testing::Test
+{
+protected:
+    LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation()
+    {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object building_1, building_2;
         TUSLanguage::ICommand::Objects buildings;
         building_1.insert(std::make_pair("buildingclass", "Regular"));
@@ -2647,50 +2766,47 @@ protected:
         building_2.insert(std::make_pair("volume", "20"));
         buildings.push_back(building_1);
         buildings.push_back(building_2);
-        m_command = m_builder.buildGetBuildingsReply(1, "Message", buildings);
-        m_message = m_translator.translate(m_command);
+        TUSLanguage::ICommand::Handle command = builder.buildGetBuildingsReply(1, "Message", buildings);
+        m_message = translator.translate(command);
     }
 
-    TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
-    TUSLanguage::ICommand::Handle m_command;
     TUSProtocol::Message::Handle m_message;
 };
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyTranslation, ReturnsNotNull)
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyTranslation, SetsProperID)
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation, SetsProperID)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("45", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyTranslation, SetsProperCode)
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation, SetsProperCode)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyTranslation, SetsProperMessage)
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation, SetsProperMessage)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyTranslation, SetsSpecificReply)
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation, SetsSpecificReply)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_buildings_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyTranslation, SetsProperObjects)
+TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation, SetsProperObjects)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_buildings_reply")->getChildElement("buildings");
@@ -2796,61 +2912,122 @@ TEST_F(LanguageToProtocolTranslatorEngageHumanReplyTranslation, SetsSpecificRepl
     ASSERT_TRUE(element != NULL);
 }
 
-class LanguageToProtocolTranslatorGetHumanReplyTranslation
+class LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation
     : public ::testing::Test
 {
 protected:
-    LanguageToProtocolTranslatorGetHumanReplyTranslation()
+    LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation()
     {
-        TUSLanguage::ICommand::Object human;
-        human.insert(std::make_pair("humanclass", "Worker"));
-        human.insert(std::make_pair("humanname", "Farmer"));
-        human.insert(std::make_pair("experience", "Novice"));
-        human.insert(std::make_pair("volume", "10"));
-        m_command = m_builder.buildGetHumanReply(1, "Message", human);
-        m_message = m_translator.translate(m_command);
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Handle command = builder.buildGetHumanReply(1, "Message");
+        m_message = translator.translate(command);
     }
 
-    TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
-    TUSLanguage::ICommand::Handle m_command;
     TUSProtocol::Message::Handle m_message;
 };
 
-TEST_F(LanguageToProtocolTranslatorGetHumanReplyTranslation, ReturnsNotNull)
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumanReplyTranslation, SetsProperID)
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation, SetsProperID)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("48", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumanReplyTranslation, SetsProperCode)
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation, SetsProperCode)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumanReplyTranslation, SetsProperMessage)
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation, SetsProperMessage)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumanReplyTranslation, SetsSpecificReply)
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation, SetsSpecificReply)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_human_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumanReplyTranslation, CreateGetHumanReplySetsProperObject)
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation, DoesNotSetObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_human_reply")->getChildElement("human");
+    ASSERT_TRUE(element == NULL);
+}
+
+class LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation
+    : public ::testing::Test
+{
+protected:
+    LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation()
+    {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Object human;
+        human.insert(std::make_pair("humanclass", "Worker"));
+        human.insert(std::make_pair("humanname", "Farmer"));
+        human.insert(std::make_pair("experience", "Novice"));
+        human.insert(std::make_pair("volume", "10"));
+        TUSLanguage::ICommand::Handle command = builder.buildGetHumanReply(1, "Message", human);
+        m_message = translator.translate(command);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("48", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_human_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, SetsObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_human_reply")->getChildElement("human");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, SetsProperObject)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_human_reply")->getChildElement("human");
@@ -2860,12 +3037,70 @@ TEST_F(LanguageToProtocolTranslatorGetHumanReplyTranslation, CreateGetHumanReply
     ASSERT_STREQ("10", element->getChildElement("volume")->innerText().c_str());
 }
 
-class LanguageToProtocolTranslatorGetHumansReplyTranslation
+class LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation
     : public ::testing::Test
 {
 protected:
-    LanguageToProtocolTranslatorGetHumansReplyTranslation()
+    LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation()
     {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Handle command = builder.buildGetHumansReply(1, "Message");
+        m_message = translator.translate(command);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("49", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_humans_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation, SetsProperObjects)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_humans_reply")->getChildElement("humans");
+
+    // TODO: Extend testing.
+}
+
+class LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation
+    : public ::testing::Test
+{
+protected:
+    LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation()
+    {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object human_1, human_2;
         TUSLanguage::ICommand::Objects humans;
         human_1.insert(std::make_pair("humanclass", "Worker"));
@@ -2878,50 +3113,47 @@ protected:
         human_2.insert(std::make_pair("volume", "20"));
         humans.push_back(human_1);
         humans.push_back(human_2);
-        m_command = m_builder.buildGetHumansReply(1, "Message", humans);
-        m_message = m_translator.translate(m_command);
+        TUSLanguage::ICommand::Handle command = builder.buildGetHumansReply(1, "Message", humans);
+        m_message = translator.translate(command);
     }
 
-    TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
-    TUSLanguage::ICommand::Handle m_command;
     TUSProtocol::Message::Handle m_message;
 };
 
-TEST_F(LanguageToProtocolTranslatorGetHumansReplyTranslation, ReturnsNotNull)
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumansReplyTranslation, SetsProperID)
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation, SetsProperID)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("49", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumansReplyTranslation, SetsProperCode)
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation, SetsProperCode)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumansReplyTranslation, SetsProperMessage)
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation, SetsProperMessage)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumansReplyTranslation, SetsSpecificReply)
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation, SetsSpecificReply)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_humans_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(LanguageToProtocolTranslatorGetHumansReplyTranslation, SetsProperObjects)
+TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation, SetsProperObjects)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_humans_reply")->getChildElement("humans");
@@ -2929,59 +3161,120 @@ TEST_F(LanguageToProtocolTranslatorGetHumansReplyTranslation, SetsProperObjects)
     // TODO: Extend testing.
 }
 
-class LanguageToProtocolTranslatorGetResourceReplyTranslation
+class LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation
     : public ::testing::Test
 {
 protected:
-    LanguageToProtocolTranslatorGetResourceReplyTranslation()
+    LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation()
     {
-        TUSLanguage::ICommand::Object resource;
-        resource.insert(std::make_pair("resourcename", "Coal"));
-        resource.insert(std::make_pair("volume", "10"));
-        m_command = m_builder.buildGetResourceReply(1, "Message", resource);
-        m_message = m_translator.translate(m_command);
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Handle command = builder.buildGetResourceReply(1, "Message");
+        m_message = translator.translate(command);
     }
 
-    TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
-    TUSLanguage::ICommand::Handle m_command;
     TUSProtocol::Message::Handle m_message;
 };
 
-TEST_F(LanguageToProtocolTranslatorGetResourceReplyTranslation, ReturnsNotNull)
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourceReplyTranslation, SetsProperID)
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation, SetsProperID)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("50", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourceReplyTranslation, SetsProperCode)
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation, SetsProperCode)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourceReplyTranslation, SetsProperMessage)
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation, SetsProperMessage)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourceReplyTranslation, SetsSpecificReply)
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation, SetsSpecificReply)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_resource_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourceReplyTranslation, SetsProperObject)
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation, DoesNotSetObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_resource_reply")->getChildElement("resource");
+    ASSERT_TRUE(element == NULL);
+}
+
+class LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation
+    : public ::testing::Test
+{
+protected:
+    LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation()
+    {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Object resource;
+        resource.insert(std::make_pair("resourcename", "Coal"));
+        resource.insert(std::make_pair("volume", "10"));
+        TUSLanguage::ICommand::Handle command = builder.buildGetResourceReply(1, "Message", resource);
+        m_message = translator.translate(command);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("50", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_resource_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, SetsObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_resource_reply")->getChildElement("resource");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, SetsProperObject)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_resource_reply")->getChildElement("resource");
@@ -2989,12 +3282,70 @@ TEST_F(LanguageToProtocolTranslatorGetResourceReplyTranslation, SetsProperObject
     ASSERT_STREQ("10", element->getChildElement("volume")->innerText().c_str());
 }
 
-class LanguageToProtocolTranslatorGetResourcesReplyTranslation
+class LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation
     : public ::testing::Test
 {
 protected:
-    LanguageToProtocolTranslatorGetResourcesReplyTranslation()
+    LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation()
     {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Handle command = builder.buildGetResourcesReply(1, "Message");
+        m_message = translator.translate(command);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("51", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_resources_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation, SetsProperObjects)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_resources_reply")->getChildElement("resources");
+
+    // TODO: Extend testing.
+}
+
+class LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation
+    : public ::testing::Test
+{
+protected:
+    LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation()
+    {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object resource_1, resource_2;
         TUSLanguage::ICommand::Objects resources;
         resource_1.insert(std::make_pair("resourcename", "Coal"));
@@ -3003,50 +3354,47 @@ protected:
         resource_2.insert(std::make_pair("volume", "20"));
         resources.push_back(resource_1);
         resources.push_back(resource_2);
-        m_command = m_builder.buildGetResourcesReply(1, "Message", resources);
-        m_message = m_translator.translate(m_command);
+        TUSLanguage::ICommand::Handle command = builder.buildGetResourcesReply(1, "Message", resources);
+        m_message = translator.translate(command);
     }
 
-    TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
-    TUSLanguage::ICommand::Handle m_command;
     TUSProtocol::Message::Handle m_message;
 };
 
-TEST_F(LanguageToProtocolTranslatorGetResourcesReplyTranslation, ReturnsNotNull)
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourcesReplyTranslation, SetsProperID)
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation, SetsProperID)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("51", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourcesReplyTranslation, SetsProperCode)
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation, SetsProperCode)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourcesReplyTranslation, SetsProperMessage)
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation, SetsProperMessage)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourcesReplyTranslation, SetsSpecificReply)
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation, SetsSpecificReply)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_resources_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(LanguageToProtocolTranslatorGetResourcesReplyTranslation, SetsProperObjects)
+TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation, SetsProperObjects)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_resources_reply")->getChildElement("resources");
@@ -3446,62 +3794,123 @@ TEST_F(LanguageToProtocolTranslatorTickEpochReplyTranslation, SetsSpecificReply)
     ASSERT_TRUE(element != NULL);
 }
 
-class LanguageToProtocolTranslatorGetEpochReplyTranslation
+class LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation
     : public ::testing::Test
 {
 protected:
-    LanguageToProtocolTranslatorGetEpochReplyTranslation()
+    LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation()
     {
-        TUSLanguage::ICommand::Object epoch;
-        epoch.insert(std::make_pair("epoch_name", "Epoch"));
-        epoch.insert(std::make_pair("world_name", "World"));
-        epoch.insert(std::make_pair("active", "true"));
-        epoch.insert(std::make_pair("finished", "false"));
-        epoch.insert(std::make_pair("ticks", "22"));
-        m_command = m_builder.buildGetEpochReply(1, "Message", epoch);
-        m_message = m_translator.translate(m_command);
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Handle command = builder.buildGetEpochReply(1, "Message");
+        m_message = translator.translate(command);
     }
 
-    TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
-    TUSLanguage::ICommand::Handle m_command;
     TUSProtocol::Message::Handle m_message;
 };
 
-TEST_F(LanguageToProtocolTranslatorGetEpochReplyTranslation, ReturnsNotNull)
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation, ReturnsNotNull)
 {
     ASSERT_TRUE(m_message.get());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetEpochReplyTranslation, SetsProperID)
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation, SetsProperID)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("header")->getChildElement("id");
     ASSERT_STREQ("60", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetEpochReplyTranslation, SetsProperCode)
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation, SetsProperCode)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("code");
     ASSERT_STREQ("1", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetEpochReplyTranslation, SetsProperMessage)
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation, SetsProperMessage)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("message");
     ASSERT_STREQ("Message", element->innerText().c_str());
 }
 
-TEST_F(LanguageToProtocolTranslatorGetEpochReplyTranslation, SetsSpecificReply)
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation, SetsSpecificReply)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_epoch_reply");
     ASSERT_TRUE(element != NULL);
 }
 
-TEST_F(LanguageToProtocolTranslatorGetEpochReplyTranslation, SetsProperObject)
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation, DoesNotSetObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_epoch_reply")->getChildElement("epoch");
+    ASSERT_TRUE(element == NULL);
+}
+
+class LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation
+    : public ::testing::Test
+{
+protected:
+    LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation()
+    {
+        TUSLanguage::ReplyBuilder builder;
+        TUSProtocol::LanguageToProtocolTranslator translator;
+        TUSLanguage::ICommand::Object epoch;
+        epoch.insert(std::make_pair("epoch_name", "Epoch"));
+        epoch.insert(std::make_pair("world_name", "World"));
+        epoch.insert(std::make_pair("active", "true"));
+        epoch.insert(std::make_pair("finished", "false"));
+        epoch.insert(std::make_pair("ticks", "22"));
+        TUSLanguage::ICommand::Handle command = builder.buildGetEpochReply(1, "Message", epoch);
+        m_message = translator.translate(command);
+    }
+
+    TUSProtocol::Message::Handle m_message;
+};
+
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, ReturnsNotNull)
+{
+    ASSERT_TRUE(m_message.get());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, SetsProperID)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("header")->getChildElement("id");
+    ASSERT_STREQ("60", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, SetsProperCode)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("code");
+    ASSERT_STREQ("1", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, SetsProperMessage)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("message");
+    ASSERT_STREQ("Message", element->innerText().c_str());
+}
+
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, SetsSpecificReply)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_epoch_reply");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, SetsObject)
+{
+    Poco::XML::Element * element = m_message->documentElement()->
+        getChildElement("reply")->getChildElement("get_epoch_reply")->getChildElement("epoch");
+    ASSERT_TRUE(element != NULL);
+}
+
+TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, SetsProperObject)
 {
     Poco::XML::Element * element = m_message->documentElement()->
         getChildElement("reply")->getChildElement("get_epoch_reply")->getChildElement("epoch");
