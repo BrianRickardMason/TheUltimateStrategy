@@ -43,9 +43,6 @@ public:
 private:
     virtual void run();
 
-    /**
-     * @brief The socket stream.
-     */
     Poco::Net::SocketStream mSocketStream;
 };
 

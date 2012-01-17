@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include <Server/Server/include/Connection.hpp>
+#include <iostream>
 
 namespace Server
 {
@@ -40,6 +41,8 @@ Connection::Connection(
 
 void Connection::run()
 {
+	// TODO: Remove me! This is a temporary workaround.
+	std::clog << mSocketStream.rdbuf() << std::endl;
 }
 
 } // namespace Server
