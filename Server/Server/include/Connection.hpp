@@ -28,6 +28,7 @@
 #ifndef SERVER_CONNECTION_HPP
 #define SERVER_CONNECTION_HPP
 
+#include <Poco/Net/SocketStream.h>
 #include <Poco/Net/TCPServerConnection.h>
 
 namespace Server
@@ -41,6 +42,11 @@ public:
 
 private:
     virtual void run();
+
+    /**
+     * @brief The socket stream.
+     */
+    Poco::Net::SocketStream mSocketStream;
 };
 
 } // namespace Server

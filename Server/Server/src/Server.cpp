@@ -56,6 +56,10 @@ void Server::startServer()
 
         mServer->start();
         mServerStarted = true;
+
+        waitForTerminationRequest();
+
+        mServer->stop();
     }
     else
     {

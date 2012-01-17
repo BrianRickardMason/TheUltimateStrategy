@@ -33,7 +33,8 @@ namespace Server
 Connection::Connection(
     Poco::Net::StreamSocket const & aSocket
 )
-    : TCPServerConnection(aSocket)
+    : TCPServerConnection(aSocket),
+      mSocketStream(socket())
 {
 }
 
