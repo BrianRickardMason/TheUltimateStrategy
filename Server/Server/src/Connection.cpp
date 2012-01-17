@@ -41,8 +41,8 @@ Connection::Connection(
 
 void Connection::run()
 {
-	// TODO: Remove me! This is a temporary workaround.
-	std::clog << mSocketStream.rdbuf() << std::endl;
+    // TODO: Remove me! This is a temporary workaround.
+    std::clog << mSocketStream.rdbuf() << std::endl;
 }
 
 } // namespace Server
