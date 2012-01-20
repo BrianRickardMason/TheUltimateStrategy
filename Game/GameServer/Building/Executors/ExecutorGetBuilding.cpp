@@ -181,10 +181,10 @@ TUSLanguage::ICommand::Handle ExecutorGetBuilding::produceReply(
             // TODO: Translate this automatically!
             TUSLanguage::ICommand::Object building;
             building.insert(std::make_pair("buildingclass", a_exit_code.m_building->getBuilding()->getClass()));
-            building.insert(std::make_pair("world_name", a_exit_code.m_building->getBuilding()->getName()));
+            building.insert(std::make_pair("buildingname", a_exit_code.m_building->getBuilding()->getName()));
             building.insert(std::make_pair("volume",
                 boost::lexical_cast<std::string>(a_exit_code.m_building->getVolume())));
-            return reply_builder.buildGetBuildingReply(REPLY_STATUS_OK, GET_BUILDING_BUILDING_HAS_BEEN_GOT,building);
+            return reply_builder.buildGetBuildingReply(REPLY_STATUS_OK, GET_BUILDING_BUILDING_HAS_BEEN_GOT, building);
         }
 
         case GameServer::Building::GET_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:

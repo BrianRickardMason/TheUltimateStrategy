@@ -185,7 +185,7 @@ TUSLanguage::ICommand::Handle ExecutorGetBuildings::produceReply(
                 // TODO: Translate this automatically!
                 TUSLanguage::ICommand::Object building;
                 building.insert(std::make_pair("buildingclass", it->second->getBuilding()->getClass()));
-                building.insert(std::make_pair("world_name", it->second->getBuilding()->getName()));
+                building.insert(std::make_pair("buildingname", it->second->getBuilding()->getName()));
                 building.insert(std::make_pair("volume", boost::lexical_cast<std::string>(it->second->getVolume())));
                 buildings.push_back(building);
             }
