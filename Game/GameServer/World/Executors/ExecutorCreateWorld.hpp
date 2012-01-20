@@ -38,135 +38,53 @@ class ExecutorCreateWorld
     : public Executor
 {
 public:
-    /**
-     * @brief Ctor.
-     *
-     * @param a_context The context of the server.
-     */
     ExecutorCreateWorld(
         IContextShrPtr const a_context
     );
 
 private:
-    /**
-     * @brief Logs the start of the executor.
-     */
     virtual void logExecutorStart() const;
 
-    /**
-     * @brief Gets parameters from the request.
-     *
-     * @param a_request The request.
-     *
-     * @return True if all parameters have been got, false otherwise.
-     */
     virtual bool getParameters(
         TUSLanguage::ICommand::Handle a_request
     );
 
-    /**
-     * @brief Process parameters from the request.
-     *
-     * @return True if all parameters have been processed, false otherwise.
-     */
     virtual bool processParameters();
 
-    /**
-     * @brief Filters out non moderators.
-     *
-     * @return True if user is a moderator or moderator's rights are not required, false otherwise.
-     */
     virtual bool filterOutNonModerator() const;
 
-    /**
-     * @brief Authenticates the user.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if user has been authenticated, false otherwise.
-     */
     virtual bool authenticate(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Authorizes the user.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if user has been authorized, false otherwise.
-     */
     virtual bool authorize(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Gets the acting user.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if the acting user has been got, false otherwise.
-     */
     virtual bool getActingUser(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     );
 
-    /**
-     * @brief Verifies whether the epoch is active.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if the epoch is active, false otherwise.
-     */
     virtual bool epochIsActive(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Verifies whether the world configuration allows an action.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if the action is allowed, false otherwise.
-     */
     virtual bool verifyWorldConfiguration(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Performs the main operation.
-     *
-     * @return The reply.
-     */
     virtual TUSLanguage::ICommand::Handle perform(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Produces the basic reply with a given status.
-     *
-     * @param a_status The status of the reply.
-     *
-     * @return The reply.
-     */
     virtual TUSLanguage::ICommand::Handle getBasicReply(
         unsigned int const a_status
     ) const;
 
-    /**
-     * @brief Produces the reply.
-     *
-     * @param a_exit_code The exit code.
-     *
-     * @return The reply.
-     */
     TUSLanguage::ICommand::Handle produceReply(
         GameServer::World::CreateWorldOperatorExitCode const & a_exit_code
     ) const;
 
-    /**
-     * @brief The name of the world.
-     */
     std::string m_world_name;
 };
 
