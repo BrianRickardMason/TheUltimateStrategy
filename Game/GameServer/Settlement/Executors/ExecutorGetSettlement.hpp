@@ -38,106 +38,43 @@ class ExecutorGetSettlement
     : public Executor
 {
 public:
-    /**
-     * @brief Ctor.
-     *
-     * @param a_context The context of the server.
-     */
     ExecutorGetSettlement(
         IContextShrPtr const a_context
     );
 
 private:
-    /**
-     * @brief Logs the start of the executor.
-     */
     virtual void logExecutorStart() const;
 
-    /**
-     * @brief Gets parameters from the request.
-     *
-     * @param a_request The request.
-     *
-     * @return True if all parameters have been got, false otherwise.
-     */
     virtual bool getParameters(
         TUSLanguage::ICommand::Handle a_request
     );
 
-    /**
-     * @brief Process parameters from the request.
-     *
-     * @return True if all parameters have been processed, false otherwise.
-     */
     virtual bool processParameters();
 
-    /**
-     * @brief Authorizes the user.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if user has been authorized, false otherwise.
-     */
     virtual bool authorize(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Verifies whether the epoch is active.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if the epoch is active, false otherwise.
-     */
     virtual bool epochIsActive(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Verifies whether the world configuration allows an action.
-     *
-     * @param a_persistence The persistence.
-     *
-     * @return True if the action is allowed, false otherwise.
-     */
     virtual bool verifyWorldConfiguration(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Performs the main operation.
-     *
-     * @return The reply.
-     */
     virtual TUSLanguage::ICommand::Handle perform(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    /**
-     * @brief Produces the basic reply with a given status.
-     *
-     * @param a_status The status of the reply.
-     *
-     * @return The reply.
-     */
     virtual TUSLanguage::ICommand::Handle getBasicReply(
         unsigned int const a_status
     ) const;
 
-    /**
-     * @brief Produces the reply.
-     *
-     * @param a_exit_code The exit code.
-     *
-     * @return The reply.
-     */
     TUSLanguage::ICommand::Handle produceReply(
         GameServer::Settlement::GetSettlementOperatorExitCode const & a_exit_code
     ) const;
 
-    /**
-     * @brief The name of the settlement.
-     */
     std::string m_settlement_name;
 };
 
