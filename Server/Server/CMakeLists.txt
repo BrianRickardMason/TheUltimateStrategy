@@ -29,13 +29,16 @@ PROJECT(servernew)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
-FILE(GLOB_RECURSE FILES_SERVERNEW *.cpp)
-
 ADD_EXECUTABLE(servernew
-    ${FILES_SERVERNEW}
+    src/Connection.cpp
+    src/main.cpp
+    src/Server.cpp
 )
 
 TARGET_LINK_LIBRARIES(servernew
+    gameserver
+    protocolxmlcpp
+    interface
     PocoFoundation
     PocoNet
     PocoUtil

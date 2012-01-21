@@ -25,8 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include <Language/Interface/Command.hpp>
+#include <Poco/AutoPtr.h>
+#include <Poco/DOM/DOMParser.h>
+#include <Poco/DOM/Document.h>
+#include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
 #include <Server/Server/include/Connection.hpp>
-#include <iostream>
 
 namespace Server
 {
@@ -41,8 +45,25 @@ Connection::Connection(
 
 void Connection::run()
 {
-    // TODO: Remove me! This is a temporary workaround.
-    std::clog << mSocketStream.rdbuf() << std::endl;
+    size_t const BUFFER_SIZE = 2048U;
+
+    // Read the data from the socket.
+    int length;
+    mSocketStream >> length;
+
+    char buffer[2048];
+    mSocketStream.get(&buffer[0], length + 1);
+
+    // Translate the data to the protocol. TODO: Remove the hardcoded xml protocol!
+    std::string content(buffer);
+    Poco::XML::DOMParser parser;
+    // TODO: What to do if the message is not valid according to the DTD (blocks here).
+    Poco::AutoPtr<Poco::XML::Document> document = parser.parseString(content);
+    TUSProtocol::Message::Handle message(new TUSProtocol::Message(document));
+
+    // Translate the protocol to the language. TODO: Remove the hardcoded xml protocol!
+    TUSProtocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
+    TUSLanguage::Command::Handle command = protocolToLanguageTranslator.translate(message);
 }
 
 } // namespace Server
