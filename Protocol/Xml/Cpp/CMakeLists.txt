@@ -37,6 +37,7 @@ ADD_LIBRARY(protocolxmlcpp
     MessageBuilder.cpp
     MessageFactory.cpp
     Payload.cpp
+    PayloadToProtocolTranslator.cpp
     ProtocolToLanguageTranslator.cpp
 )
 
