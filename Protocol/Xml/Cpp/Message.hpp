@@ -53,10 +53,6 @@ public:
         Poco::XML::DocumentType * aDocumentType,
         Poco::XML::NamePool     * aNamePool = 0
     );
-
-    Message(
-        Poco::XML::Document * aDocument
-    );
 };
 
 } // namespace TUSProtocol

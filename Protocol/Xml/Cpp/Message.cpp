@@ -45,11 +45,4 @@ Message::Message(
 {
 }
 
-Message::Message(
-    Poco::XML::Document * aDocument
-)
-    : Document(const_cast<Poco::XML::DocumentType *>(aDocument->doctype()), &aDocument->namePool())
-{
-}
-
 } // namespace TUSProtocol
