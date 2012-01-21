@@ -31,19 +31,25 @@ namespace TUSProtocol
 {
 
 Message::Message(
-    Poco::XML::NamePool * a_name_pool
+    Poco::XML::NamePool * aNamePool
 )
-    : Document(a_name_pool)
+    : Document(aNamePool)
 {
 }
 
 Message::Message(
-    Poco::XML::DocumentType* a_document_type, 
-    Poco::XML::NamePool* a_name_pool
+    Poco::XML::DocumentType * aDocumentType,
+    Poco::XML::NamePool     * aNamePool
 )
-    : Document(a_document_type, a_name_pool)
+    : Document(aDocumentType, aNamePool)
 {
 }
 
+Message::Message(
+    Poco::XML::Document * aDocument
+)
+    : Document(const_cast<Poco::XML::DocumentType *>(aDocument->doctype()), &aDocument->namePool())
+{
+}
 
 } // namespace TUSProtocol

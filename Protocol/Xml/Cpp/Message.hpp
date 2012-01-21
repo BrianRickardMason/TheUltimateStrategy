@@ -45,24 +45,17 @@ public:
     typedef std::map<std::string, std::string> Object;
     typedef std::vector<Object> Objects;
 
-    /**
-     * @brief Ctor.
-     *
-     * @param a_name_pool The name pool.
-     */
     Message(
-        Poco::XML::NamePool * a_name_pool = 0
+        Poco::XML::NamePool * aNamePool = 0
     );
 
-    /**
-     * @brief Ctor specifying document type.
-     *
-     * @param a_document_type The document type definition.
-     * @param a_name_poll The name pool
-     */
     Message(
-        Poco::XML::DocumentType* a_document_type,
-        Poco::XML::NamePool* a_name_pool = 0
+        Poco::XML::DocumentType * aDocumentType,
+        Poco::XML::NamePool     * aNamePool = 0
+    );
+
+    Message(
+        Poco::XML::Document * aDocument
     );
 };
 
