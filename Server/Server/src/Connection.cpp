@@ -58,8 +58,8 @@ void Connection::run()
     std::string content(buffer);
     Poco::XML::DOMParser parser;
     // TODO: What to do if the message is not valid according to the DTD (blocks here).
-    Poco::AutoPtr<Poco::XML::Document> document = parser.parseString(content);
-    TUSProtocol::Message::Handle message(new TUSProtocol::Message(document));
+    // TODO: Add Message::ctor(std::string).
+    TUSProtocol::Message::Handle message(static_cast<TUSProtocol::Message *>(parser.parseString(content)));
 
     // Translate the protocol to the language. TODO: Remove the hardcoded xml protocol!
     TUSProtocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
