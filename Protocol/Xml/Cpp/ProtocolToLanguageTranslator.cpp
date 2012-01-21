@@ -38,6 +38,7 @@ namespace TUSProtocol
 {
 
 // TODO: Add UTs for both translators.
+// TODO: Remove auto pointers.
 
 TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
     Message::Handle a_message
@@ -800,7 +801,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
-                    Element land = static_cast<Poco::XML::Element*>(elements->item(i));
+                    Element land = static_cast<Poco::XML::Element *>(elements->item(i));
 
                     Element login = land->getChildElement("login");
                     Element world_name = land->getChildElement("world_name");
@@ -928,7 +929,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
-                    Element settlement = static_cast<Poco::XML::Element*>(elements->item(i));
+                    Element settlement = static_cast<Poco::XML::Element *>(elements->item(i));
 
                     Element land_name = settlement->getChildElement("land_name");
                     Element settlement_name = settlement->getChildElement("settlement_name");
@@ -1055,7 +1056,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
-                    Element building = static_cast<Poco::XML::Element*>(elements->item(i));
+                    Element building = static_cast<Poco::XML::Element *>(elements->item(i));
 
                     Element buildingclass = building->getChildElement("buildingclass");
                     Element buildingname = building->getChildElement("buildingname");
@@ -1186,7 +1187,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
-                    Element human = static_cast<Poco::XML::Element*>(elements->item(i));
+                    Element human = static_cast<Poco::XML::Element *>(elements->item(i));
 
                     Element humanclass = human->getChildElement("humanclass");
                     Element humanname = human->getChildElement("humanname");
@@ -1279,7 +1280,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
-                    Element resource = static_cast<Poco::XML::Element*>(elements->item(i));
+                    Element resource = static_cast<Poco::XML::Element *>(elements->item(i));
 
                     Element resourcename = resource->getChildElement("resourcename");
                     Element volume = resource->getChildElement("volume");
