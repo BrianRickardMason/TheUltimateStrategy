@@ -38,7 +38,9 @@ namespace TUSProtocol
 
 MessageBuilder::MessageBuilder():
     ROOT_ELEMENT_NAME("message"),
-    DTD_FORMAL_PUBLIC_IDENTIFIER("-//BrianRickardMason//TUS -- RPC protocol 1.0//EN"),
+    // FIXME: Problems with Poco.
+    // DTD_FORMAL_PUBLIC_IDENTIFIER("-//BrianRickardMason//TUS -- RPC protocol 1.0//EN"),
+    DTD_FORMAL_PUBLIC_IDENTIFIER(""),
     DTD_FILE_PATH("Protocol.dtd")
 {
     m_document_type = Poco::XML::DOMImplementation::instance().createDocumentType(
