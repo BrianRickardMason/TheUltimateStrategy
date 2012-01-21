@@ -47,6 +47,17 @@ Payload::Payload(
     mLength = mContent.length();
 }
 
+Payload::Payload(
+    int                 aLength,
+    std::string const & aContent
+)
+    : mLength(aLength),
+      mContent(aContent)
+{
+    // TODO: Throw an exception instead.
+    BOOST_ASSERT_MSG(mLength == mContent.length(), "Invalid length set.");
+}
+
 int Payload::getLength() const
 {
     return mLength;

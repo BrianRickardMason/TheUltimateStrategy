@@ -41,6 +41,11 @@ public:
         Message::Handle aMessage
     );
 
+    Payload(
+        int                 aLength,
+        std::string const & aContent
+    );
+
     int getLength() const;
 
     std::string const & getContent() const;
