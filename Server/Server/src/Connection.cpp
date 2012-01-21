@@ -26,7 +26,7 @@
 // SUCH DAMAGE.
 
 #include <Language/Interface/Command.hpp>
-#include <Poco/DOM/DOMParser.h>
+#include <Protocol/Xml/Cpp/PayloadToProtocolTranslator.hpp>
 #include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
 #include <Server/Server/include/Connection.hpp>
 
@@ -52,12 +52,13 @@ void Connection::run()
     char buffer[2048];
     mSocketStream.get(&buffer[0], length + 1);
 
-    // Translate the data to the protocol. TODO: Remove the hardcoded xml protocol!
+    // Translate the data to the payload.
     std::string content(buffer);
-    Poco::XML::DOMParser parser;
-    // TODO: What to do if the message is not valid according to the DTD (blocks here).
-    // TODO: Add Message::ctor(std::string).
-    TUSProtocol::Message::Handle message(static_cast<TUSProtocol::Message *>(parser.parseString(content)));
+    TUSProtocol::Payload payload(length, content);
+
+    // Translate the payload to the protocol. TODO: Remove the hardcoded xml protocol!
+    TUSProtocol::PayloadToProtocolTranslator payloadToProtocolTranslator;
+    TUSProtocol::Message::Handle message = payloadToProtocolTranslator.translate(payload);
 
     // Translate the protocol to the language. TODO: Remove the hardcoded xml protocol!
     TUSProtocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
