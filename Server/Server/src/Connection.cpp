@@ -26,9 +26,7 @@
 // SUCH DAMAGE.
 
 #include <Language/Interface/Command.hpp>
-#include <Poco/AutoPtr.h>
 #include <Poco/DOM/DOMParser.h>
-#include <Poco/DOM/Document.h>
 #include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
 #include <Server/Server/include/Connection.hpp>
 
