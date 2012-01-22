@@ -35,7 +35,7 @@ namespace Human
 {
 
 DismissHumanOperatorAutPtr DismissHumanOperatorFactory::createDismissHumanOperator(
-    IContextShrPtr                                  const a_context,
+    Server::IContextShrPtr                          const a_context,
     Common::IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
 )
 {

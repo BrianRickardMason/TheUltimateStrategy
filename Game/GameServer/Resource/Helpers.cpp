@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Resource/Helpers.hpp>
 #include <boost/make_shared.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -39,9 +39,9 @@ namespace Resource
  */
 
 ResourceWithVolumeMap add(
-    IContextShrPtr        const   a_context,
-    ResourceWithVolumeMap const & a_map_1,
-    ResourceWithVolumeMap const & a_map_2
+    Server::IContextShrPtr const   a_context,
+    ResourceWithVolumeMap  const & a_map_1,
+    ResourceWithVolumeMap  const & a_map_2
 )
 {
     ResourceWithVolumeMap new_map;
@@ -92,9 +92,9 @@ ResourceWithVolumeMap add(
 }
 
 ResourceWithVolumeMap multiply(
-    IContextShrPtr        const   a_context,
-    ResourceWithVolumeMap const & a_map,
-    unsigned int          const   a_factor
+    Server::IContextShrPtr const   a_context,
+    ResourceWithVolumeMap  const & a_map,
+    unsigned int           const   a_factor
 )
 {
     ResourceWithVolumeMap new_map;

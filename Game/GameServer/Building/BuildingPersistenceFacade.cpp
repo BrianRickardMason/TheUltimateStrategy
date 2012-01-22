@@ -38,7 +38,7 @@ namespace Building
 {
 
 BuildingPersistenceFacade::BuildingPersistenceFacade(
-    IContextShrPtr          const a_context,
+    Server::IContextShrPtr  const a_context,
     IBuildingAccessorAutPtr       a_accessor
 )
     : m_context(a_context),

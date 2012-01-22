@@ -39,7 +39,7 @@ class ExecutorDestroyBuilding
 {
 public:
     ExecutorDestroyBuilding(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

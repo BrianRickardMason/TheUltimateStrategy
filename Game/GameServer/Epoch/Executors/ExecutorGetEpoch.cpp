@@ -41,7 +41,7 @@ namespace Game
 {
 
 ExecutorGetEpoch::ExecutorGetEpoch(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -49,7 +49,7 @@ ExecutorGetEpoch::ExecutorGetEpoch(
 
 void ExecutorGetEpoch::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetEpoch.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorGetEpoch.";
 }
 
 bool ExecutorGetEpoch::getParameters(

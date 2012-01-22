@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 #include <Game/GameServer/Human/Operators/DismissHuman/DismissHumanOperator.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -52,7 +52,7 @@ public:
      * @return The newly created DismissHumanOperator.
      */
     static DismissHumanOperatorAutPtr createDismissHumanOperator(
-        IContextShrPtr                                  const a_context,
+        Server::IContextShrPtr                          const a_context,
         Common::IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
     );
 };

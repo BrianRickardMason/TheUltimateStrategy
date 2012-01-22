@@ -39,7 +39,7 @@ class ExecutorCreateEpoch
 {
 public:
     ExecutorCreateEpoch(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Resource/Helpers.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
+#include <Server/Server/include/Context.hpp>
 #include <boost/make_shared.hpp>
 #include <gmock/gmock.h>
 
@@ -43,14 +43,11 @@ protected:
      * @brief Ctor.
      */
     HelpersTest()
-        : m_context(new Context)
+        : m_context(new Server::Context)
     {
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 };
 
 

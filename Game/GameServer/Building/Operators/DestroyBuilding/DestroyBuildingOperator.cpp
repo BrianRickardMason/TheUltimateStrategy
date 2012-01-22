@@ -40,7 +40,7 @@ namespace Building
 {
 
 DestroyBuildingOperator::DestroyBuildingOperator(
-    IContextShrPtr                   const a_context,
+    Server::IContextShrPtr           const a_context,
     IBuildingPersistenceFacadeShrPtr       a_building_persistence_facade,
     IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
 )

@@ -35,7 +35,7 @@ namespace Building
 {
 
 BuildingPersistenceFacadeAutPtr BuildingPersistenceFacadeFactory::create(
-    IContextShrPtr                 const a_context,
+    Server::IContextShrPtr         const a_context,
     IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
 )
 {

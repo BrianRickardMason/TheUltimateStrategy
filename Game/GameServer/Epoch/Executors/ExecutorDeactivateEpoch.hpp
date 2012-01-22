@@ -39,7 +39,7 @@ class ExecutorDeactivateEpoch
 {
 public:
     ExecutorDeactivateEpoch(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

@@ -39,7 +39,7 @@ class ExecutorGetBuildings
 {
 public:
     ExecutorGetBuildings(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorDeleteSettlement::ExecutorDeleteSettlement(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorDeleteSettlement::ExecutorDeleteSettlement(
 
 void ExecutorDeleteSettlement::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteSettlement.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteSettlement.";
 }
 
 bool ExecutorDeleteSettlement::getParameters(

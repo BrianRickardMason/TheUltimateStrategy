@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Building/BuildingPersistenceFacadeFactory.hpp>
 #include <Game/GameServer/Common/AccessorAbstractFactoryPostgresql.hpp>
+#include <Server/Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
@@ -37,7 +37,7 @@ TEST(BuildingagerFactoryTest, CreateDoesNotThrow)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    IContextShrPtr context(new Context);
+    Server::IContextShrPtr context(new Server::Context);
 
     ASSERT_NO_THROW(
         BuildingPersistenceFacadeAutPtr persistence_facade =
@@ -49,7 +49,7 @@ TEST(BuildingagerFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    IContextShrPtr context(new Context);
+    Server::IContextShrPtr context(new Server::Context);
 
     BuildingPersistenceFacadeAutPtr persistence_facade =
         BuildingPersistenceFacadeFactory::create(context, accessor_abstract_factory);

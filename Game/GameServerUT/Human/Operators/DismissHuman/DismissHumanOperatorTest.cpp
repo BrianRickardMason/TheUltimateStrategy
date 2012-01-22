@@ -24,13 +24,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Human/Key.hpp>
 #include <Game/GameServer/Human/Operators/DismissHuman/DismissHumanOperator.hpp>
 #include <Game/GameServerUT/Helpers/Functions.hpp>
 #include <Game/GameServerUT/Human/HumanPersistenceFacadeMock.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
 #include <Game/GameServerUT/Resource/ResourcePersistenceFacadeMock.hpp>
+#include <Server/Server/include/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Common;
@@ -56,7 +56,7 @@ protected:
      * @brief Creates a test class.
      */
     DismissHumanOperatorTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_human_persistence_facade(new HumanPersistenceFacadeMock),
           m_resource_persistence_facade(new ResourcePersistenceFacadeMock),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
@@ -157,18 +157,10 @@ protected:
         .WillOnce(Return(true));
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 
-    //@{
-    /**
-     * @brief A persistence facade used in tests.
-     */
     HumanPersistenceFacadeMock    * m_human_persistence_facade;
     ResourcePersistenceFacadeMock * m_resource_persistence_facade;
-    //}@
 
     /**
      * @brief An exemplary id holder.

@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Human/HumanPersistenceFacade.hpp>
 #include <Game/GameServer/Human/Key.hpp>
 #include <Game/GameServerUT/Human/HumanAccessorMock.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -53,7 +53,7 @@ protected:
      * @brief Creates a test class.
      */
     HumanPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_id_holder(ID_HOLDER_CLASS_SETTLEMENT, "Settlement")
     {
     }
@@ -75,10 +75,7 @@ protected:
         ASSERT_EQ(a_volume, a_human->getVolume());
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 
     /**
      * @brief An exemplary id holder.

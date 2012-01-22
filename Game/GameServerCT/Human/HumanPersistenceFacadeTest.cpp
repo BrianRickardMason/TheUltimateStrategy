@@ -29,7 +29,7 @@
 #include <Game/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
 #include <Game/GameServer/Human/Key.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -53,7 +53,7 @@ protected:
      * @brief Constructs the test class.
      */
     HumanPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_epoch_name("Epoch"),
           m_login_1("Login1"),
           m_login_2("Login2"),
@@ -119,10 +119,7 @@ protected:
         ASSERT_EQ(a_volume, a_human->getVolume());
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

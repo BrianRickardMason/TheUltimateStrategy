@@ -29,7 +29,8 @@ PROJECT(servernew)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
-ADD_EXECUTABLE(servernew
+ADD_LIBRARY(servernewlib
+    src/CommandDispatcher.cpp
     src/ConnectionFactory.cpp
     src/Configurator.cpp
     src/ConfiguratorBase.cpp
@@ -39,10 +40,14 @@ ADD_EXECUTABLE(servernew
     src/Connection.cpp
     src/Context.cpp
     src/Server.cpp
+)
+
+ADD_EXECUTABLE(servernew
     src/main.cpp
 )
 
 TARGET_LINK_LIBRARIES(servernew
+    servernewlib
     gameserver
     protocolxmlcpp
     interface

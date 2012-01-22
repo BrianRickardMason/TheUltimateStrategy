@@ -28,42 +28,26 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGWITHVOLUME_HPP
 #define GAMESERVER_BUILDING_BUILDINGWITHVOLUME_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
 #include <Game/GameServer/Building/BuildingWithVolumeRecord.hpp>
 #include <Game/GameServer/Configuration/Configurator/Building/IBuilding.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
 namespace Building
 {
 
-/**
- * @brief BuildingWithVolume.
- */
 class BuildingWithVolume
 {
 public:
-    /**
-     * @brief Constructs the building with volume.
-     *
-     * @param a_context The context of the server.
-     * @param a_key     The key of the building.
-     * @param a_volume  The volume of the building.
-     */
     BuildingWithVolume(
-        IContextShrPtr      const a_context,
-        Configuration::IKey const a_key,
-        Volume              const a_volume
+        Server::IContextShrPtr const a_context,
+        Configuration::IKey    const a_key,
+        Volume                 const a_volume
     );
 
-    /**
-     * @brief Constructs the build with volume.
-     *
-     * @param a_context The context of the server.
-     * @param a_record  The record of building with volume.
-     */
     BuildingWithVolume(
-        IContextShrPtr           const   a_context,
+        Server::IContextShrPtr   const   a_context,
         BuildingWithVolumeRecord const & a_record
     );
 

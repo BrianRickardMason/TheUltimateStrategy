@@ -39,7 +39,7 @@ class ExecutorCreateWorld
 {
 public:
     ExecutorCreateWorld(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

@@ -39,7 +39,7 @@ namespace Human
 {
 
 DismissHumanOperator::DismissHumanOperator(
-    IContextShrPtr                   const a_context,
+    Server::IContextShrPtr           const a_context,
     IHumanPersistenceFacadeShrPtr          a_human_persistence_facade,
     IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
 )

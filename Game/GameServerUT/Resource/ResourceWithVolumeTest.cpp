@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
 #include <Game/GameServer/Resource/ResourceWithVolume.hpp>
+#include <Server/Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
@@ -45,16 +45,13 @@ protected:
      * @brief Constructs a test class.
      */
     ResourceWithVolumeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_resource_with_volume(m_context, KEY_RESOURCE_COAL, 2),
           m_model_key(KEY_RESOURCE_COAL)
     {
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 
     /**
      * @brief A resource with volume to be tested.

@@ -47,7 +47,7 @@ namespace Turn
 {
 
 TurnManager::TurnManager(
-    IContextShrPtr                     const a_context,
+    Server::IContextShrPtr             const a_context,
     IHumanPersistenceFacadeShrPtr            a_human_persistence_facade,
     ILandPersistenceFacadeShrPtr             a_land_persistence_facade,
     IResourcePersistenceFacadeShrPtr         a_resource_persistence_facade,

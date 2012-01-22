@@ -25,30 +25,25 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Game/GameServer/Turn/Managers/TurnManagerFactory.hpp>
+#ifndef SERVER_COMMANDDISPATCHER_HPP
+#define SERVER_COMMANDDISPATCHER_HPP
 
-using namespace GameServer::Common;
+#include <Game/GameServer/Common/IExecutor.hpp>
+#include <Language/Interface/ICommand.hpp>
+#include <Server/Server/include/IContext.hpp>
 
-namespace GameServer
+namespace Server
 {
-namespace Turn
-{
 
-TurnManagerAutPtr TurnManagerFactory::create(
-    Server::IContextShrPtr                  const aContext,
-    IPersistenceFacadeAbstractFactoryShrPtr       aPersistenceFacadeAbstractFactory
-)
+class CommandDispatcher
 {
-    return TurnManagerAutPtr(
-               new TurnManager(
-                       aContext,
-                       aPersistenceFacadeAbstractFactory->createHumanPersistenceFacade(),
-                       aPersistenceFacadeAbstractFactory->createLandPersistenceFacade(),
-                       aPersistenceFacadeAbstractFactory->createResourcePersistenceFacade(),
-                       aPersistenceFacadeAbstractFactory->createSettlementPersistenceFacade()
-                   )
-           );
-}
+public:
+    Game::IExecutorShrPtr dispatch(
+        TUSLanguage::ICommand::Handle const aCommand,
+        IContextShrPtr                const aContext
+    ) const;
+};
 
-} // namespace Land
-} // namespace GameServer
+} // namespace Server
+
+#endif // SERVER_COMMANDDISPATCHER_HPP

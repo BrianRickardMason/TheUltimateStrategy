@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorCreateWorld::ExecutorCreateWorld(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorCreateWorld::ExecutorCreateWorld(
 
 void ExecutorCreateWorld::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorCreateWorld.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorCreateWorld.";
 }
 
 bool ExecutorCreateWorld::getParameters(

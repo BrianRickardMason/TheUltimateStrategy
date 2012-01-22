@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 #include <Game/GameServer/Human/Operators/EngageHuman/EngageHumanOperator.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -52,7 +52,7 @@ public:
      * @return The newly created EngageHumanOperator.
      */
     static EngageHumanOperatorAutPtr createEngageHumanOperator(
-        IContextShrPtr                                  const a_context,
+        Server::IContextShrPtr                          const a_context,
         Common::IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
     );
 };

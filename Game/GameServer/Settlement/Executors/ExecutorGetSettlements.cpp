@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorGetSettlements::ExecutorGetSettlements(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorGetSettlements::ExecutorGetSettlements(
 
 void ExecutorGetSettlements::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetSettlements.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorGetSettlements.";
 }
 
 bool ExecutorGetSettlements::getParameters(

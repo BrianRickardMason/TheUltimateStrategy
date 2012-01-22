@@ -30,7 +30,7 @@
 #include <Game/GameServerCT/ComponentTest.hpp>
 #include <Game/GameServer/Human/Key.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;
@@ -55,7 +55,7 @@ protected:
      * @brief Constructs the test class.
      */
     CreateSettlementOperatorTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_operator_abstract_factory(new OperatorAbstractFactoryPostgresql(m_context)),
           m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
@@ -196,37 +196,19 @@ protected:
         }
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    //@{
-    /**
-     * @brief An abstract factory used in tests.
-     */
     IPersistenceFacadeAbstractFactoryShrPtr  m_persistence_facade_abstract_factory;
     IOperatorAbstractFactoryShrPtr m_operator_abstract_factory;
-    //}@
 
-    //@{
-    /**
-     * @brief A persistence facade used in tests.
-     */
     IHumanPersistenceFacadeShrPtr    m_human_persistence_facade;
     IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
-    //}@
 
-    //@{
-    /**
-     * @brief An operator used in tests.
-     */
     ICreateEpochOperatorShrPtr      m_create_epoch_operator;
     ICreateLandOperatorShrPtr       m_create_land_operator;
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     ICreateUserOperatorShrPtr       m_create_user_operator;
     ICreateWorldOperatorShrPtr      m_create_world_operator;
-    //}@
 
     /**
      * @brief Test constants: the name of the epoch.

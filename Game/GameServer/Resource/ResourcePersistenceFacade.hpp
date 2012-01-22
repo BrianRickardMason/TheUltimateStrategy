@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Resource/IResourceAccessor.hpp>
 #include <Game/GameServer/Resource/IResourcePersistenceFacade.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -51,7 +51,7 @@ public:
      * @param a_accessor An accessor to be injected.
      */
     ResourcePersistenceFacade(
-        IContextShrPtr          const a_context,
+        Server::IContextShrPtr  const a_context,
         IResourceAccessorAutPtr       a_accessor
     );
 
@@ -167,14 +167,8 @@ public:
     ) const;
 
 private:
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    /**
-     * @brief An accessor.
-     */
     IResourceAccessorScpPtr m_accessor;
 };
 

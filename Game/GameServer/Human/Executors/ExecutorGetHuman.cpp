@@ -41,7 +41,7 @@ namespace Game
 {
 
 ExecutorGetHuman::ExecutorGetHuman(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -49,7 +49,7 @@ ExecutorGetHuman::ExecutorGetHuman(
 
 void ExecutorGetHuman::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetHuman.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorGetHuman.";
 }
 
 bool ExecutorGetHuman::getParameters(

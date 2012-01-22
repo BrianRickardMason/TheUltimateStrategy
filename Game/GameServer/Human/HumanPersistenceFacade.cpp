@@ -38,8 +38,8 @@ namespace Human
 {
 
 HumanPersistenceFacade::HumanPersistenceFacade(
-    IContextShrPtr       const a_context,
-    IHumanAccessorAutPtr       a_accessor
+    Server::IContextShrPtr const a_context,
+    IHumanAccessorAutPtr         a_accessor
 )
     : m_context(a_context),
       m_accessor(a_accessor)

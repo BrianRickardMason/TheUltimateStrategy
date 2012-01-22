@@ -44,7 +44,7 @@ public:
      * @param a_context The context of the server.
      */
     ExecutorDeleteSettlement(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

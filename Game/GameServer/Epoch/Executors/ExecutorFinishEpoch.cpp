@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorFinishEpoch::ExecutorFinishEpoch(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorFinishEpoch::ExecutorFinishEpoch(
 
 void ExecutorFinishEpoch::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorFinishEpoch.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorFinishEpoch.";
 }
 
 bool ExecutorFinishEpoch::getParameters(

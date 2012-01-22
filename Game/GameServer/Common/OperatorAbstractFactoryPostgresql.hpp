@@ -28,10 +28,10 @@
 #ifndef GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_OPERATORABSTRACTFACTORYPOSTGRESQL_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
 #include <Game/GameServer/Common/IManagerAbstractFactory.hpp>
 #include <Game/GameServer/Common/IOperatorAbstractFactory.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -51,7 +51,7 @@ public:
      * @param a_context The context of the server.
      */
     OperatorAbstractFactoryPostgresql(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
     //@{
@@ -100,19 +100,9 @@ public:
     //}@
 
 private:
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    /**
-     * @brief The abstract factory of managers.
-     */
-    IManagerAbstractFactoryShrPtr m_manager_abstract_factory;
-
-    /**
-     * @brief The abstract factory of persistence facades.
-     */
+    IManagerAbstractFactoryShrPtr           m_manager_abstract_factory;
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 };
 

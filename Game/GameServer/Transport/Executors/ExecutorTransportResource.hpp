@@ -39,7 +39,7 @@ class ExecutorTransportResource
 {
 public:
     ExecutorTransportResource(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

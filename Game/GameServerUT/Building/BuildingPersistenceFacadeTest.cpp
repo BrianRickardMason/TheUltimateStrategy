@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Building/BuildingPersistenceFacade.hpp>
 #include <Game/GameServer/Building/Key.hpp>
 #include <Game/GameServerUT/Building/BuildingAccessorMock.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -52,7 +52,7 @@ protected:
      * @brief Creates a test class.
      */
     BuildingPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_id_holder_1(ID_HOLDER_CLASS_SETTLEMENT, "Settlement"),
           m_key_1(KEY_REGULAR_FARM),
           m_key_2(KEY_REGULAR_MARKETPLACE)
@@ -76,10 +76,7 @@ protected:
         ASSERT_EQ(a_volume, a_building->getVolume());
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 
     /**
      * @brief Test constants id holders.

@@ -35,7 +35,7 @@ namespace Building
 {
 
 DestroyBuildingOperatorAutPtr DestroyBuildingOperatorFactory::createDestroyBuildingOperator(
-    IContextShrPtr                          const a_context,
+    Server::IContextShrPtr                  const a_context,
     IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
 )
 {

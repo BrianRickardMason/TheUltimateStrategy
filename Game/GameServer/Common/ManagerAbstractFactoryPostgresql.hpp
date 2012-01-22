@@ -28,9 +28,9 @@
 #ifndef GAMESERVER_COMMON_MANAGERABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_MANAGERABSTRACTFACTORYPOSTGRESQL_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
 #include <Game/GameServer/Common/IManagerAbstractFactory.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -44,34 +44,16 @@ class ManagerAbstractFactoryPostgresql
     : public IManagerAbstractFactory
 {
 public:
-    /**
-     * @brief Ctor.
-     *
-     * @param a_context The context of the server.
-     */
     ManagerAbstractFactoryPostgresql(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
-    //@{
-    /**
-     * @brief Creates a manager.
-     *
-     * @return The newly created manager.
-     */
     virtual Achievement::IAchievementManagerShrPtr createAchievementManager() const;
     virtual Turn::ITurnManagerShrPtr               createTurnManager()        const;
-    //}@
 
 private:
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    /**
-     * @brief The abstract factory of persistence facades.
-     */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 };
 

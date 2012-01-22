@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorError::ExecutorError(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorError::ExecutorError(
 
 void ExecutorError::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorError.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorError.";
 }
 
 bool ExecutorError::getParameters(

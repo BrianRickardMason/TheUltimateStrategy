@@ -41,7 +41,7 @@ namespace Game
 {
 
 ExecutorTransportResource::ExecutorTransportResource(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -49,7 +49,7 @@ ExecutorTransportResource::ExecutorTransportResource(
 
 void ExecutorTransportResource::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorTransportResource.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorTransportResource.";
 }
 
 bool ExecutorTransportResource::getParameters(

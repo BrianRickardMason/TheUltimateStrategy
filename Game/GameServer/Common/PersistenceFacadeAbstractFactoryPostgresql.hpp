@@ -28,9 +28,9 @@
 #ifndef GAMESERVER_COMMON_PERSISTENCEFACADEABSTRACTFACTORYPOSTGRESQL_HPP
 #define GAMESERVER_COMMON_PERSISTENCEFACADEABSTRACTFACTORYPOSTGRESQL_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
 #include <Game/GameServer/Common/IAccessorAbstractFactory.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -44,21 +44,10 @@ class PersistenceFacadeAbstractFactoryPostgresql
     : public IPersistenceFacadeAbstractFactory
 {
 public:
-    /**
-     * @brief Ctor.
-     *
-     * @param a_context The context of the server.
-     */
     PersistenceFacadeAbstractFactoryPostgresql(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
-    //@{
-    /**
-     * @brief Creates a persistence facade.
-     *
-     * @return The newly created persistence facade.
-     */
     virtual Achievement::IAchievementPersistenceFacadeShrPtr       createAchievementPersistenceFacade()    const;
     virtual Authentication::IAuthenticationPersistenceFacadeShrPtr createAuthenticationPersistenceFacade() const;
     virtual Authorization::IAuthorizationPersistenceFacadeShrPtr   createAuthorizationPersistenceFacade()  const;
@@ -70,17 +59,10 @@ public:
     virtual Settlement::ISettlementPersistenceFacadeShrPtr         createSettlementPersistenceFacade()     const;
     virtual User::IUserPersistenceFacadeShrPtr                     createUserPersistenceFacade()           const;
     virtual World::IWorldPersistenceFacadeShrPtr                   createWorldPersistenceFacade()          const;
-    //}@
 
 private:
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    /**
-     * @brief The abstract factory of accessors.
-     */
     IAccessorAbstractFactoryShrPtr m_accessor_abstract_factory;
 };
 

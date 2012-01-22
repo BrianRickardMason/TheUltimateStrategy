@@ -49,9 +49,9 @@ namespace Resource
  * @return The sum of two maps.
  */
 ResourceWithVolumeMap add(
-    IContextShrPtr        const   a_context,
-    ResourceWithVolumeMap const & a_map_1,
-    ResourceWithVolumeMap const & a_map_2
+    Server::IContextShrPtr const   a_context,
+    ResourceWithVolumeMap  const & a_map_1,
+    ResourceWithVolumeMap  const & a_map_2
 );
 
 /**
@@ -64,9 +64,9 @@ ResourceWithVolumeMap add(
  * @return The sum of two maps.
  */
 ResourceWithVolumeMap multiply(
-    IContextShrPtr        const   a_context,
-    ResourceWithVolumeMap const & a_map,
-    unsigned int          const   a_factor
+    Server::IContextShrPtr const   a_context,
+    ResourceWithVolumeMap  const & a_map,
+    unsigned int           const   a_factor
 );
 
 /**

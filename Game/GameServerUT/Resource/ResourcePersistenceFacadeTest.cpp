@@ -25,11 +25,11 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
 #include <Game/GameServer/Resource/ResourcePersistenceFacade.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
 #include <Game/GameServerUT/Resource/ResourceAccessorMock.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -54,7 +54,7 @@ protected:
      * @brief Creates a test class.
      */
     ResourcePersistenceFacadeTest()
-        : m_context(new Context)
+        : m_context(new Server::Context)
     {
     }
 
@@ -94,10 +94,7 @@ protected:
         return map;
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 
     /**
      * @brief An exemplary id holder.

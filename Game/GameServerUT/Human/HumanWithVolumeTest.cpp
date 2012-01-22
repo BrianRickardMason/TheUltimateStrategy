@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Human/HumanWithVolume.hpp>
 #include <Game/GameServer/Human/Key.hpp>
+#include <Server/Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
@@ -45,16 +45,13 @@ protected:
      * @brief Constructs a test class.
      */
     HumanWithVolumeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_human_with_volume(m_context, KEY_WORKER_MINER_NOVICE, 4),
           m_model_key(KEY_WORKER_MINER_NOVICE)
     {
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 
     /**
      * @brief A human with volume to be tested.

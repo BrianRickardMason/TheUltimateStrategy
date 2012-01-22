@@ -39,7 +39,7 @@ class ExecutorGetHuman
 {
 public:
     ExecutorGetHuman(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

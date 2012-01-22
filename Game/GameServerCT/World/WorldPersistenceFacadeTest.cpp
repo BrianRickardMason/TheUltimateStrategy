@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;
@@ -45,7 +45,7 @@ protected:
      * @brief Constructs the test class.
      */
     WorldPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_world_name_1("World1"),
           m_world_name_2("World2"),
           m_world_name_3("World3"),
@@ -69,10 +69,7 @@ protected:
         ASSERT_STREQ(a_world_name.c_str(), a_world->getWorldName().c_str());
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
     /**
      * @brief Test constants: the names of the worlds.

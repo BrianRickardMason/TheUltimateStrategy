@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Human/IHumanAccessor.hpp>
 #include <Game/GameServer/Human/IHumanPersistenceFacade.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -44,15 +44,9 @@ class HumanPersistenceFacade
     : public IHumanPersistenceFacade
 {
 public:
-    /**
-     * @brief Constructs the human persistence facade.
-     *
-     * @param a_context  The context of the server.
-     * @param a_accessor An accessor to be injected.
-     */
     HumanPersistenceFacade(
-        IContextShrPtr       const a_context,
-        IHumanAccessorAutPtr       a_accessor
+        Server::IContextShrPtr const a_context,
+        IHumanAccessorAutPtr         a_accessor
     );
 
     /**
@@ -144,14 +138,8 @@ private:
         HumanWithVolumeRecordMap const & a_records
     ) const;
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    /**
-     * @brief The accessor.
-     */
     IHumanAccessorScpPtr m_accessor;
 };
 

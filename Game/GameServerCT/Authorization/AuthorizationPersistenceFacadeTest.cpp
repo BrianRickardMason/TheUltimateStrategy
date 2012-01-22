@@ -28,7 +28,7 @@
 #include <Game/GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <Game/GameServer/Settlement/SettlementPersistenceFacadeFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Authorization;
 using namespace GameServer::Common;
@@ -51,7 +51,7 @@ protected:
      * @brief Constructs the test class.
      */
     AuthorizationPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_epoch_name("Epoch"),
           m_land_name_1("Land1"),
           m_land_name_2("Land2"),
@@ -94,10 +94,7 @@ protected:
         }
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

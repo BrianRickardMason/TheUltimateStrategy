@@ -28,7 +28,7 @@
 #include <Game/GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <Game/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
@@ -50,7 +50,7 @@ protected:
      * @brief Constructs the test class.
      */
     EpochPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_epoch_name_1("Epoch1"),
           m_epoch_name_2("Epoch2"),
           m_epoch_name_3("Epoch3"),
@@ -104,10 +104,7 @@ protected:
         ASSERT_EQ(a_ticks, a_epoch->getTicks());
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
     /**
      * @brief Test constants: the names of the epochs.

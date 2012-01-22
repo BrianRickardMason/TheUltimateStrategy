@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorCreateUser::ExecutorCreateUser(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorCreateUser::ExecutorCreateUser(
 
 void ExecutorCreateUser::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorCreateUser.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorCreateUser.";
 }
 
 bool ExecutorCreateUser::getParameters(

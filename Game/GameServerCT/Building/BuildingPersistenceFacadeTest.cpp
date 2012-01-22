@@ -29,7 +29,7 @@
 #include <Game/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
 #include <Game/GameServer/Building/Key.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;
@@ -53,7 +53,7 @@ protected:
      * @brief Constructs the test class.
      */
     BuildingPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_epoch_name("Epoch"),
           m_login("Login"),
           m_world_name("World"),
@@ -108,10 +108,7 @@ protected:
         ASSERT_EQ(a_volume, a_building->getVolume());
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
     /**
      * @brief Test constants: the name of the epoch.

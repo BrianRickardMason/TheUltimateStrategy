@@ -38,8 +38,7 @@ int main(
 {
     TUSProtocol::MessageFactory messageFactory;
 
-    TUSProtocol::Message::Handle message = messageFactory.createCreateEpochRequest(
-        "Login", "Password", "WorldName", "EpochName");
+    TUSProtocol::Message::Handle message = messageFactory.createEchoRequest();
     TUSProtocol::Payload payload(message);
 
     Poco::Net::SocketAddress socketAddress("localhost", 2222);

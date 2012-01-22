@@ -41,7 +41,7 @@ namespace Game
 {
 
 ExecutorGetResource::ExecutorGetResource(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -49,7 +49,7 @@ ExecutorGetResource::ExecutorGetResource(
 
 void ExecutorGetResource::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetResource.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorGetResource.";
 }
 
 bool ExecutorGetResource::getParameters(

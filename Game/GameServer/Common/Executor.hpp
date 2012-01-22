@@ -32,25 +32,17 @@
 #include <Game/GameServer/Common/IOperatorAbstractFactory.hpp>
 #include <Game/GameServer/Persistence/IPersistence.hpp>
 #include <Game/GameServer/User/IUser.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace Game
 {
 
-/**
- * @brief The Base executor.
- */
 class Executor
     : public IExecutor
 {
 public:
-    /**
-     * @brief Ctor.
-     *
-     * @param a_context The context of the server.
-     */
     Executor(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
     /**
@@ -233,7 +225,7 @@ protected:
     /**
      * @brief The context of the server.
      */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 };
 
 } // namespace Game

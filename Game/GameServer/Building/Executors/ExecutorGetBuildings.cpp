@@ -41,7 +41,7 @@ namespace Game
 {
 
 ExecutorGetBuildings::ExecutorGetBuildings(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -49,7 +49,7 @@ ExecutorGetBuildings::ExecutorGetBuildings(
 
 void ExecutorGetBuildings::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorGetBuildings.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorGetBuildings.";
 }
 
 bool ExecutorGetBuildings::getParameters(

@@ -25,12 +25,12 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include <Game/GameServer/Common/IExecutor.hpp>
 #include <Language/Interface/Command.hpp>
 #include <Protocol/Xml/Cpp/PayloadToProtocolTranslator.hpp>
 #include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
+#include <Server/Server/include/CommandDispatcher.hpp>
 #include <Server/Server/include/Connection.hpp>
-
-#include <Game/GameServer/Generic/Executors/ExecutorEcho.hpp>
 
 namespace Server
 {
@@ -67,6 +67,10 @@ void Connection::run()
     // Translate the protocol to the language. TODO: Remove the hardcoded xml protocol!
     TUSProtocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
     TUSLanguage::Command::Handle command = protocolToLanguageTranslator.translate(message);
+
+    // Dispatch the command.
+    CommandDispatcher commandDispatcher;
+    Game::IExecutorShrPtr executor = commandDispatcher.dispatch(command, mContext);
 }
 
 } // namespace Server

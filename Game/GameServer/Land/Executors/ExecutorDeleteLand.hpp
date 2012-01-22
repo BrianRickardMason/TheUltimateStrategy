@@ -39,7 +39,7 @@ class ExecutorDeleteLand
 {
 public:
     ExecutorDeleteLand(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

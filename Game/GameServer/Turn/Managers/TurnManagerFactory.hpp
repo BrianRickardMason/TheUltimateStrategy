@@ -30,30 +30,19 @@
 
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 #include <Game/GameServer/Turn/Managers/TurnManager.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
 namespace Turn
 {
 
-/**
- * @brief The factory of TurnManager.
- */
 class TurnManagerFactory
 {
 public:
-    /**
-     * @brief The factory method.
-     *
-     * @param a_context                             The content of the server.
-     * @param a_persistence_facade_abstract_factory The abstract factory of persistence facades.
-     *
-     * @return The newly created TurnManager.
-     */
     static TurnManagerAutPtr create(
-        IContextShrPtr                                  const a_context,
-        Common::IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
+        Server::IContextShrPtr                          const aContext,
+        Common::IPersistenceFacadeAbstractFactoryShrPtr       aPersistenceFacadeAbstractFactory
     );
 };
 

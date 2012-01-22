@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Common/IAccessorAbstractFactory.hpp>
 #include <Game/GameServer/Resource/ResourcePersistenceFacade.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -52,7 +52,7 @@ public:
      * @return A newly created resource persistence facade.
      */
     static ResourcePersistenceFacadeAutPtr create(
-        IContextShrPtr                         const a_context,
+        Server::IContextShrPtr                 const a_context,
         Common::IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
     );
 };

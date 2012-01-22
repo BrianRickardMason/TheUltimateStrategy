@@ -35,12 +35,12 @@ namespace Human
 {
 
 HumanPersistenceFacadeAutPtr HumanPersistenceFacadeFactory::create(
-    IContextShrPtr                 const a_context,
-    IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
+    Server::IContextShrPtr         const aContext,
+    IAccessorAbstractFactoryShrPtr       aAccessorAbstractFactory
 )
 {
     return HumanPersistenceFacadeAutPtr(
-               new HumanPersistenceFacade(a_context, a_accessor_abstract_factory->createHumanAccessor())
+               new HumanPersistenceFacade(aContext, aAccessorAbstractFactory->createHumanAccessor())
            );
 }
 

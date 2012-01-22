@@ -35,9 +35,9 @@ namespace Human
 {
 
 HumanWithVolume::HumanWithVolume(
-    IContextShrPtr const a_context,
-    IKey           const a_key,
-    Volume         const a_volume
+    Server::IContextShrPtr const a_context,
+    IKey                   const a_key,
+    Volume                 const a_volume
 )
     : m_volume(a_volume)
 {
@@ -45,8 +45,8 @@ HumanWithVolume::HumanWithVolume(
 }
 
 HumanWithVolume::HumanWithVolume(
-    IContextShrPtr        const   a_context,
-    HumanWithVolumeRecord const & a_record
+    Server::IContextShrPtr const   a_context,
+    HumanWithVolumeRecord  const & a_record
 )
     : m_volume(a_record.getVolume())
 {

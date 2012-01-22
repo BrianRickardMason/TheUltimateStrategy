@@ -24,6 +24,6 @@
     <persistence>postgresql</persistence>
     <configuration>
         <path>/home/brian/workspace/TheUltimateStrategy/Game/GameServer/Configuration/Data/</path>
-        <selected>Test</selected>
+        <selected>NewFormat</selected>
     </configuration>
 </server>

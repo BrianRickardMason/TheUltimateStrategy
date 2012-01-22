@@ -29,7 +29,7 @@
 #include <Game/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <Game/GameServer/Transport/Operators/TransportHuman/TransportHumanOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;
@@ -53,7 +53,7 @@ protected:
      * @brief Constructs the test class.
      */
     TransportHumanOperatorTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context)),
           m_epoch_persistence_facade(m_persistence_facade_abstract_factory->createEpochPersistenceFacade()),
           m_human_persistence_facade(m_persistence_facade_abstract_factory->createHumanPersistenceFacade()),
@@ -97,34 +97,18 @@ protected:
         }
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    /**
-     * @brief The abstract factory of persistence facades.
-     */
     IPersistenceFacadeAbstractFactoryShrPtr m_persistence_facade_abstract_factory;
 
-    //@{
-    /**
-     * @brief A persistence facade used in tests.
-     */
     IEpochPersistenceFacadeShrPtr m_epoch_persistence_facade;
     IHumanPersistenceFacadeShrPtr m_human_persistence_facade;
     ILandPersistenceFacadeShrPtr  m_land_persistence_facade;
     IUserPersistenceFacadeShrPtr  m_user_persistence_facade;
     IWorldPersistenceFacadeShrPtr m_world_persistence_facade;
-    //}@
 
-    //@{
-    /**
-     * @brief An operator used in tests.
-     */
     ICreateSettlementOperatorShrPtr m_create_settlement_operator;
     TransportHumanOperatorAutPtr    m_transport_human_operator;
-    //}@
 
     /**
      * @brief Test constants: the name of the epoch.

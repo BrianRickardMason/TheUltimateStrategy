@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
-#include <Server/Network/XmlRPCServer/Context.hpp>
+#include <Server/Server/include/Context.hpp>
 
 using namespace GameServer::Authentication;
 using namespace GameServer::Common;
@@ -46,7 +46,7 @@ protected:
      * @brief Constructs the test class.
      */
     AuthenticationPersistenceFacadeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_login_1("Login1"),
           m_login_2("Login2"),
           m_login_5("Login5"),
@@ -71,10 +71,7 @@ protected:
            m_login_2,
            m_login_5;
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
     /**
      * @brief The abstract factory of persistence facades.

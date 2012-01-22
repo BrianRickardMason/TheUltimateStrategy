@@ -28,31 +28,20 @@
 #ifndef GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEFACTORY_HPP
 #define GAMESERVER_BUILDING_BUILDINGPERSISTENCEFACADEFACTORY_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
 #include <Game/GameServer/Building/BuildingPersistenceFacade.hpp>
 #include <Game/GameServer/Common/IAccessorAbstractFactory.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
 namespace Building
 {
 
-/**
- * @brief A factory of building persistence facade.
- */
 class BuildingPersistenceFacadeFactory
 {
 public:
-    /**
-     * @brief A factory method.
-     *
-     * @param a_context                   The content of the server.
-     * @param a_accessor_abstract_factory The abstract factory of accessors.
-     *
-     * @return A newly created building persistence facade.
-     */
     static BuildingPersistenceFacadeAutPtr create(
-        IContextShrPtr                         const a_context,
+        Server::IContextShrPtr                 const a_context,
         Common::IAccessorAbstractFactoryShrPtr       a_accessor_abstract_factory
     );
 };

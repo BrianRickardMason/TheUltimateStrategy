@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorDeleteEpoch::ExecutorDeleteEpoch(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorDeleteEpoch::ExecutorDeleteEpoch(
 
 void ExecutorDeleteEpoch::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteEpoch.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteEpoch.";
 }
 
 bool ExecutorDeleteEpoch::getParameters(

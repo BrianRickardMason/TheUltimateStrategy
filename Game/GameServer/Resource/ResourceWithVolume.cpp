@@ -35,9 +35,9 @@ namespace Resource
 {
 
 ResourceWithVolume::ResourceWithVolume(
-    IContextShrPtr const a_context,
-    IKey           const a_key,
-    Volume         const a_volume
+    Server::IContextShrPtr const a_context,
+    IKey                   const a_key,
+    Volume                 const a_volume
 )
     : m_volume(a_volume)
 {
@@ -45,7 +45,7 @@ ResourceWithVolume::ResourceWithVolume(
 }
 
 ResourceWithVolume::ResourceWithVolume(
-    IContextShrPtr           const   a_context,
+    Server::IContextShrPtr   const   a_context,
     ResourceWithVolumeRecord const & a_record
 )
     : m_volume(a_record.getVolume())

@@ -39,7 +39,7 @@ class ExecutorBuildBuilding
 {
 public:
     ExecutorBuildBuilding(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

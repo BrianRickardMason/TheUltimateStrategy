@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorActivateEpoch::ExecutorActivateEpoch(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorActivateEpoch::ExecutorActivateEpoch(
 
 void ExecutorActivateEpoch::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorActivateEpoch.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorActivateEpoch.";
 }
 
 bool ExecutorActivateEpoch::getParameters(

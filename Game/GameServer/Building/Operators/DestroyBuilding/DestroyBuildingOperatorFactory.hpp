@@ -28,7 +28,7 @@
 #ifndef GAMESERVER_BUILDING_DESTROYBUILDINGOPERATORFACTORY_HPP
 #define GAMESERVER_BUILDING_DESTROYBUILDINGOPERATORFACTORY_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 #include <Game/GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperator.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 
@@ -52,7 +52,7 @@ public:
      * @return The newly created DestroyBuildingOperator.
      */
     static DestroyBuildingOperatorAutPtr createDestroyBuildingOperator(
-        IContextShrPtr                                  const a_context,
+        Server::IContextShrPtr                          const a_context,
         Common::IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
     );
 };

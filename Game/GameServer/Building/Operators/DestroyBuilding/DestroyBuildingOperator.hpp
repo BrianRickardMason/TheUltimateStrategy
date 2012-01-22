@@ -28,10 +28,10 @@
 #ifndef GAMESERVER_BUILDING_DESTROYBUILDINGOPERATOR_HPP
 #define GAMESERVER_BUILDING_DESTROYBUILDINGOPERATOR_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
 #include <Game/GameServer/Building/IBuildingPersistenceFacade.hpp>
 #include <Game/GameServer/Building/Operators/DestroyBuilding/IDestroyBuildingOperator.hpp>
 #include <Game/GameServer/Resource/IResourcePersistenceFacade.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -53,7 +53,7 @@ public:
      * @param a_resource_persistence_facade The persistence facade of resources.
      */
     DestroyBuildingOperator(
-        IContextShrPtr                             const a_context,
+        Server::IContextShrPtr                     const a_context,
         IBuildingPersistenceFacadeShrPtr                 a_building_persistence_facade,
         Resource::IResourcePersistenceFacadeShrPtr       a_resource_persistence_facade
     );
@@ -76,18 +76,10 @@ public:
     ) const;
 
 private:
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr const m_context;
 
-    //@{
-    /**
-     * @brief A persistence facade.
-     */
     IBuildingPersistenceFacadeShrPtr           m_building_persistence_facade;
     Resource::IResourcePersistenceFacadeShrPtr m_resource_persistence_facade;
-    //@}
 };
 
 /**

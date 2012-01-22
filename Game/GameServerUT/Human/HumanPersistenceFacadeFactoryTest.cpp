@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Common/AccessorAbstractFactoryPostgresql.hpp>
 #include <Game/GameServer/Human/HumanPersistenceFacadeFactory.hpp>
+#include <Server/Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;
@@ -37,7 +37,7 @@ TEST(HumanPersistenceFacadeFactoryTest, CreateReturnsNotNullObject)
 {
     IAccessorAbstractFactoryShrPtr accessor_abstract_factory(new AccessorAbstractFactoryPostgresql);
 
-    IContextShrPtr context(new Context);
+    Server::IContextShrPtr context(new Server::Context);
 
     HumanPersistenceFacadeAutPtr persistence_facade =
         HumanPersistenceFacadeFactory::create(context, accessor_abstract_factory);

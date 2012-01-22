@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorDeleteLand::ExecutorDeleteLand(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorDeleteLand::ExecutorDeleteLand(
 
 void ExecutorDeleteLand::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteLand.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorDeleteLand.";
 }
 
 bool ExecutorDeleteLand::getParameters(

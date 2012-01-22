@@ -40,7 +40,7 @@ namespace Game
 {
 
 ExecutorEcho::ExecutorEcho(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : Executor(a_context)
 {
@@ -48,7 +48,7 @@ ExecutorEcho::ExecutorEcho(
 
 void ExecutorEcho::logExecutorStart() const
 {
-    Category::getInstance("Category").infoStream() << "Starting the ExecutorEcho.";
+// TODO: Replace with Poco::Logger. Category::getInstance("Category").infoStream() << "Starting the ExecutorEcho.";
 }
 
 bool ExecutorEcho::getParameters(

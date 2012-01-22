@@ -39,7 +39,7 @@ namespace Common
 {
 
 ManagerAbstractFactoryPostgresql::ManagerAbstractFactoryPostgresql(
-    IContextShrPtr const a_context
+    Server::IContextShrPtr const a_context
 )
     : m_context(a_context),
       m_persistence_facade_abstract_factory(new PersistenceFacadeAbstractFactoryPostgresql(m_context))

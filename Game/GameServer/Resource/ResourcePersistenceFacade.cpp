@@ -38,7 +38,7 @@ namespace Resource
 {
 
 ResourcePersistenceFacade::ResourcePersistenceFacade(
-    IContextShrPtr          const a_context,
+    Server::IContextShrPtr  const a_context,
     IResourceAccessorAutPtr       a_accessor
 )
     : m_context(a_context),

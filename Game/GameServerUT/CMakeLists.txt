@@ -38,8 +38,11 @@ ADD_EXECUTABLE(gameserverut
 )
 
 TARGET_LINK_LIBRARIES(gameserverut
-    xmlrpcserver
+    servernewlib
+    gameserver
     gmock
     gtest
     pthread
+    PocoFoundation
+    PocoXML
 )

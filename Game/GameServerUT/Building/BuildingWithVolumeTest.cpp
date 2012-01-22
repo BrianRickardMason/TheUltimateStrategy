@@ -25,9 +25,9 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Network/XmlRPCServer/Context.hpp>
 #include <Game/GameServer/Building/BuildingWithVolume.hpp>
 #include <Game/GameServer/Building/Key.hpp>
+#include <Server/Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;
@@ -45,25 +45,16 @@ protected:
      * @brief Constructs a test class.
      */
     BuildingWithVolumeTest()
-        : m_context(new Context),
+        : m_context(new Server::Context),
           m_building_with_volume(m_context, KEY_REGULAR_FARM, 4),
           m_model_key(KEY_REGULAR_FARM)
     {
     }
 
-    /**
-     * @brief The context of the server.
-     */
-    IContextShrPtr m_context;
+    Server::IContextShrPtr m_context;
 
-    /**
-     * @brief A building with volume to be tested.
-     */
     BuildingWithVolume m_building_with_volume;
 
-    /**
-     * @brief A model key.
-     */
     IKey m_model_key;
 };
 

@@ -39,7 +39,7 @@ class ExecutorGetLand
 {
 public:
     ExecutorGetLand(
-        IContextShrPtr const a_context
+        Server::IContextShrPtr const a_context
     );
 
 private:

@@ -28,31 +28,20 @@
 #ifndef GAMESERVER_BUILDING_BUILDBUILDINGOPERATORFACTORY_HPP
 #define GAMESERVER_BUILDING_BUILDBUILDINGOPERATORFACTORY_HPP
 
-#include <Server/Network/XmlRPCServer/IContext.hpp>
 #include <Game/GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
 namespace Building
 {
 
-/**
- * @brief The factory of BuildBuildingOperator.
- */
 class BuildBuildingOperatorFactory
 {
 public:
-    /**
-     * @brief The factory method.
-     *
-     * @param a_context                             The context of the server.
-     * @param a_persistence_facade_abstract_factory The abstract factory of persistence facades.
-     *
-     * @return The newly created BuildBuildingOperator.
-     */
     static BuildBuildingOperatorAutPtr createBuildBuildingOperator(
-        IContextShrPtr                                  const a_context,
+        Server::IContextShrPtr                          const a_context,
         Common::IPersistenceFacadeAbstractFactoryShrPtr       a_persistence_facade_abstract_factory
     );
 };

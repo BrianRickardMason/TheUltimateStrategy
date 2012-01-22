@@ -39,7 +39,7 @@ namespace Game
 {
 
 Executor::Executor(
-    IContextShrPtr a_context
+    Server::IContextShrPtr const a_context
 )
     : m_context(a_context)
 {

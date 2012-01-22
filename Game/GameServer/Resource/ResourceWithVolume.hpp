@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Configuration/Configurator/Resource/IResource.hpp>
 #include <Game/GameServer/Resource/ResourceWithVolumeRecord.hpp>
-#include <Server/Network/XmlRPCServer/IContext.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace GameServer
 {
@@ -51,9 +51,9 @@ public:
      * @param a_volume  The volume of the resource.
      */
     ResourceWithVolume(
-        IContextShrPtr      const a_context,
-        Configuration::IKey const a_key,
-        Volume              const a_volume
+        Server::IContextShrPtr const a_context,
+        Configuration::IKey    const a_key,
+        Volume                 const a_volume
     );
 
     /**
@@ -63,7 +63,7 @@ public:
      * @param a_record  The record of resource with volume.
      */
     explicit ResourceWithVolume(
-        IContextShrPtr           const   a_context,
+        Server::IContextShrPtr   const   a_context,
         ResourceWithVolumeRecord const & a_record
     );
 
