@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<resources>
+    <resource>
+        <key>coal</key>
+        <name>coal</name>
+    </resource>
+    <resource>
+        <key>food</key>
+        <name>food</name>
+    </resource>
+    <resource>
+        <key>gold</key>
+        <name>gold</name>
+    </resource>
+    <resource>
+        <key>iron</key>
+        <name>iron</name>
+    </resource>
+    <resource>
+        <key>rock</key>
+        <name>rock</name>
+    </resource>
+    <resource>
+        <key>wood</key>
+        <name>wood</name>
+    </resource>
+</resources>
