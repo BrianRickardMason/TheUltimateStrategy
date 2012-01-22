@@ -27,6 +27,7 @@
 
 #include <Game/GameServer/Common/IExecutor.hpp>
 #include <Language/Interface/Command.hpp>
+#include <Protocol/Xml/Cpp/LanguageToProtocolTranslator.hpp>
 #include <Protocol/Xml/Cpp/PayloadToProtocolTranslator.hpp>
 #include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
 #include <Server/Server/include/CommandDispatcher.hpp>
@@ -45,6 +46,8 @@ Connection::Connection(
 {
 }
 
+// TODO: shutdownReceive(), shutdownSend(), shutdown().
+// TODO: Remove the hardcoded xml protocol!
 void Connection::run()
 {
     size_t const BUFFER_SIZE = 2048U;
@@ -58,19 +61,35 @@ void Connection::run()
 
     // Translate the data to the payload.
     std::string content(buffer);
-    TUSProtocol::Payload payload(length, content);
+    TUSProtocol::Payload payloadRequest(length, content);
 
-    // Translate the payload to the protocol. TODO: Remove the hardcoded xml protocol!
+    // Translate the payload to the protocol.
     TUSProtocol::PayloadToProtocolTranslator payloadToProtocolTranslator;
-    TUSProtocol::Message::Handle message = payloadToProtocolTranslator.translate(payload);
+    TUSProtocol::Message::Handle messageRequest = payloadToProtocolTranslator.translate(payloadRequest);
 
-    // Translate the protocol to the language. TODO: Remove the hardcoded xml protocol!
+    // Translate the protocol to the language.
     TUSProtocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
-    TUSLanguage::Command::Handle command = protocolToLanguageTranslator.translate(message);
+    TUSLanguage::Command::Handle commandRequest = protocolToLanguageTranslator.translate(messageRequest);
 
     // Dispatch the command.
     CommandDispatcher commandDispatcher;
-    Game::IExecutorShrPtr executor = commandDispatcher.dispatch(command, mContext);
+    Game::IExecutorShrPtr executor = commandDispatcher.dispatch(commandRequest, mContext);
+
+    // Execute the command.
+    TUSLanguage::Command::Handle commandReply = executor->execute(commandRequest);
+
+    // Translate the language to the protocol.
+    TUSProtocol::LanguageToProtocolTranslator languageToProtocolTranslator;
+    TUSProtocol::Message::Handle messageReply = languageToProtocolTranslator.translate(commandReply);
+
+    // Translate the protocol to the payload.
+    TUSProtocol::Payload payloadReply(messageReply);
+
+    // Write the data to the socket.
+    mSocketStream.clear();
+    mSocketStream << payloadReply.getLength();
+    mSocketStream << payloadReply.getContent();
+	mSocketStream.flush();
 }
 
 } // namespace Server

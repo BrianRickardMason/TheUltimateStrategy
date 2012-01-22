@@ -25,28 +25,57 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include <Poco/Net/SocketAddress.h>
+#include <Poco/Net/SocketStream.h>
+#include <Poco/Net/StreamSocket.h>
 #include <Protocol/Xml/Cpp/MessageFactory.hpp>
 #include <Protocol/Xml/Cpp/Payload.hpp>
-#include <Poco/Net/SocketAddress.h>
-#include <Poco/Net/StreamSocket.h>
-#include <Poco/Net/SocketStream.h>
+#include <Protocol/Xml/Cpp/PayloadToProtocolTranslator.hpp>
 
+// TODO: shutdownReceive(), shutdown().
 int main(
     int     aNumberOfArguments,
     char ** aArguments
 )
 {
-    TUSProtocol::MessageFactory messageFactory;
-
-    TUSProtocol::Message::Handle message = messageFactory.createEchoRequest();
-    TUSProtocol::Payload payload(message);
+    size_t const BUFFER_SIZE = 2048U;
 
     Poco::Net::SocketAddress socketAddress("localhost", 2222);
     Poco::Net::StreamSocket socket(socketAddress);
     Poco::Net::SocketStream socketStream(socket);
 
-    socketStream << payload.getLength();
-    socketStream << payload.getContent();
+    // Create the message.
+    TUSProtocol::MessageFactory messageFactory;
+    TUSProtocol::Message::Handle messageRequest = messageFactory.createCreateUserRequest("Login", "Password");
+
+    // Translate the protocol to the payload.
+    TUSProtocol::Payload payloadRequest(messageRequest);
+
+    // Write the data to the socket.
+    socketStream << payloadRequest.getLength();
+    socketStream << payloadRequest.getContent();
+    socketStream.flush();
+
+    // TODO: WTF?
+    socket.shutdownSend();
+
+    // Read the data from the socket.
+    int length;
+    socketStream >> length;
+
+    char buffer[2048];
+    socketStream.get(&buffer[0], length + 1);
+
+    // Translate the data to the payload.
+    std::string content(buffer);
+    TUSProtocol::Payload payloadReply(length, content);
+
+    // Translate the payload to the protocol.
+    TUSProtocol::PayloadToProtocolTranslator payloadToProtocolTranslator;
+    TUSProtocol::Message::Handle messageReply = payloadToProtocolTranslator.translate(payloadReply);
+
+    // Be proud of yourself for a while!
+    std::cout << content << std::endl;
 
     return 0;
 }
