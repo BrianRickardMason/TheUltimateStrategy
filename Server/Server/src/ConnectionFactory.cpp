@@ -25,54 +25,23 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Poco/Net/ServerSocket.h>
-#include <Poco/Net/SocketAddress.h>
 #include <Server/Server/include/ConnectionFactory.hpp>
-#include <Server/Server/include/Server.hpp>
-#include <iostream>
 
 namespace Server
 {
 
-Server::Server(
+ConnectionFactory::ConnectionFactory(
     IContextShrPtr aContext
 )
     : mContext(aContext)
 {
-}
+};
 
-int Server::main(
-    std::vector<std::string> const & aArguments
+Poco::Net::TCPServerConnection * ConnectionFactory::createConnection(
+    Poco::Net::StreamSocket const & aSocket
 )
 {
-    startServer();
-
-    return Poco::Util::Application::EXIT_OK;
-}
-
-void Server::startServer()
-{
-    if (not mServerStarted)
-    {
-        Poco::Net::SocketAddress address("localhost", 2222);
-        Poco::Net::ServerSocket socket(address);
-
-        ConnectionFactoryShrPtr connectionFactory(new ConnectionFactory(mContext));
-
-        mServer.reset(new Poco::Net::TCPServer(connectionFactory, socket));
-
-        mServer->start();
-        mServerStarted = true;
-
-        waitForTerminationRequest();
-
-        mServer->stop();
-    }
-    else
-    {
-        // TODO: Apply Poco::Logger and remove <iostream> usage.
-        std::clog << "Server has been started before." << std::endl;
-    }
+    return new Connection(aSocket, mContext);
 }
 
 } // namespace Server

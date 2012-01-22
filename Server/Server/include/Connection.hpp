@@ -30,6 +30,7 @@
 
 #include <Poco/Net/SocketStream.h>
 #include <Poco/Net/TCPServerConnection.h>
+#include <Server/Server/include/IContext.hpp>
 
 namespace Server
 {
@@ -38,12 +39,17 @@ class Connection
     : public Poco::Net::TCPServerConnection
 {
 public:
-    Connection(Poco::Net::StreamSocket const & socket);
+    Connection(
+        Poco::Net::StreamSocket const & aSocket,
+        IContextShrPtr                  aContext
+    );
 
 private:
     virtual void run();
 
     Poco::Net::SocketStream mSocketStream;
+
+    IContextShrPtr mContext;
 };
 
 } // namespace Server

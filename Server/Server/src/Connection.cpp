@@ -36,10 +36,12 @@ namespace Server
 {
 
 Connection::Connection(
-    Poco::Net::StreamSocket const & aSocket
+    Poco::Net::StreamSocket const & aSocket,
+    IContextShrPtr                  aContext
 )
     : TCPServerConnection(aSocket),
-      mSocketStream(socket())
+      mSocketStream(socket()),
+      mContext(aContext)
 {
 }
 

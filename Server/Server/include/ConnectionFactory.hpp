@@ -31,11 +31,28 @@
 #include <Poco/Net/TCPServerConnectionFactory.h>
 #include <Poco/SharedPtr.h>
 #include <Server/Server/include/Connection.hpp>
+#include <Server/Server/include/IContext.hpp>
 
 namespace Server
 {
 
-typedef Poco::Net::TCPServerConnectionFactoryImpl<Connection> ConnectionFactory;
+class ConnectionFactory
+    : public Poco::Net::TCPServerConnectionFactory
+{
+public:
+    ConnectionFactory(
+        IContextShrPtr aContext
+    );
+
+    virtual Poco::Net::TCPServerConnection * createConnection(
+        Poco::Net::StreamSocket const & aSocket
+    );
+
+private:
+    IContextShrPtr mContext;
+};
+
+//typedef Poco::Net::TCPServerConnectionFactoryImpl<Connection> ConnectionFactory;
 typedef Poco::SharedPtr<ConnectionFactory> ConnectionFactoryShrPtr;
 
 } // namespace Server
