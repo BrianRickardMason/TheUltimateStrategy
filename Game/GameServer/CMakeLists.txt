@@ -36,6 +36,5 @@ ADD_LIBRARY(gameserver
 )
 
 TARGET_LINK_LIBRARIES(gameserver
-    pugixml
     pqxx
 )
