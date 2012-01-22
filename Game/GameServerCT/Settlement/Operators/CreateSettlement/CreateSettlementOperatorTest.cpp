@@ -30,7 +30,7 @@
 #include <Game/GameServerCT/ComponentTest.hpp>
 #include <Game/GameServer/Human/Key.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;

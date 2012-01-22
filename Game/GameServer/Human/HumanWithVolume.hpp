@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Configuration/Configurator/Human/IHuman.hpp>
 #include <Game/GameServer/Human/HumanWithVolumeRecord.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

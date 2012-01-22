@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Resource/Helpers.hpp>
 #include <boost/make_shared.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

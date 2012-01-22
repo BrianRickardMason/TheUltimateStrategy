@@ -30,7 +30,7 @@
 #include <Poco/DOM/DOMParser.h>
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/NodeList.h>
-#include <Server/Server/include/ConfiguratorResource.hpp>
+#include <Server/include/ConfiguratorResource.hpp>
 
 namespace Server
 {

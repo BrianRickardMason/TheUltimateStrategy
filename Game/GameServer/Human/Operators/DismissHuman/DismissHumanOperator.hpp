@@ -31,7 +31,7 @@
 #include <Game/GameServer/Human/IHumanPersistenceFacade.hpp>
 #include <Game/GameServer/Resource/IResourcePersistenceFacade.hpp>
 #include <Game/GameServer/Human/Operators/DismissHuman/IDismissHumanOperator.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

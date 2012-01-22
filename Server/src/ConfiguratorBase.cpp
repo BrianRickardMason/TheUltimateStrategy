@@ -27,7 +27,7 @@
 
 #include <Poco/DOM/DOMParser.h>
 #include <Poco/DOM/Element.h>
-#include <Server/Server/include/ConfiguratorBase.hpp>
+#include <Server/include/ConfiguratorBase.hpp>
 #include <boost/lexical_cast.hpp>
 
 namespace Server

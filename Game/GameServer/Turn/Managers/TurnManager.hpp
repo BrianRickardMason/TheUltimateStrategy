@@ -33,7 +33,7 @@
 #include <Game/GameServer/Resource/IResourcePersistenceFacade.hpp>
 #include <Game/GameServer/Settlement/ISettlementPersistenceFacade.hpp>
 #include <Game/GameServer/Turn/Managers/ITurnManager.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

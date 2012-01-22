@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Building/Operators/BuildBuilding/BuildBuildingOperator.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

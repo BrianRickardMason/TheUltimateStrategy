@@ -25,32 +25,32 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_CONFIGURATORBUILDING_HPP
-#define SERVER_CONFIGURATORBUILDING_HPP
+#ifndef SERVER_CONFIGURATORHUMAN_HPP
+#define SERVER_CONFIGURATORHUMAN_HPP
 
 #include <Poco/AutoPtr.h>
 #include <Poco/DOM/Document.h>
-#include <Server/Server/include/IConfigurator.hpp>
-#include <Server/Server/include/IConfiguratorBuilding.hpp>
+#include <Server/include/IConfigurator.hpp>
+#include <Server/include/IConfiguratorHuman.hpp>
 
 namespace Server
 {
 
-class ConfiguratorBuilding
-    : public IConfiguratorBuilding
+class ConfiguratorHuman
+    : public IConfiguratorHuman
 {
 public:
-    ConfiguratorBuilding(
+    ConfiguratorHuman(
         IConfiguratorShrPtr const a_configurator
     );
 
     virtual bool configure();
 
-    virtual GameServer::Configuration::IBuildingShrPtr getBuilding(
+    virtual GameServer::Configuration::IHumanShrPtr getHuman(
         GameServer::Configuration::IKey const aKey
     ) const;
 
-    virtual GameServer::Configuration::IBuildingMap const & getBuildings() const;
+    virtual GameServer::Configuration::IHumanMap const & getHumans() const;
 
 private:
     bool loadXml();
@@ -58,14 +58,15 @@ private:
 
     IConfiguratorShrPtr const mConfigurator;
 
-    Poco::AutoPtr<Poco::XML::Document> mBuildingsXml;
+    Poco::AutoPtr<Poco::XML::Document> mHumansXml;
     Poco::AutoPtr<Poco::XML::Document> mCostsXml;
-    Poco::AutoPtr<Poco::XML::Document> mHumansHostedXml;
+    Poco::AutoPtr<Poco::XML::Document> mPlacesOfWorkXml;
+    Poco::AutoPtr<Poco::XML::Document> mProductionXml;
     Poco::AutoPtr<Poco::XML::Document> mPropertiesXml;
 
-    GameServer::Configuration::IBuildingMap mBuildings;
+    GameServer::Configuration::IHumanMap mHumans;
 };
 
 } // namespace Server;
 
-#endif // SERVER_CONFIGURATORBUILDING_HPP
+#endif // SERVER_CONFIGURATORHUMAN_HPP

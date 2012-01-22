@@ -27,7 +27,7 @@
 
 PROJECT(servernew)
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../..)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 ADD_LIBRARY(servernewlib
     src/CommandDispatcher.cpp

@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Human/HumanWithVolume.hpp>
 #include <Game/GameServer/Human/Key.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;

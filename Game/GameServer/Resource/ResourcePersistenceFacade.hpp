@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Resource/IResourceAccessor.hpp>
 #include <Game/GameServer/Resource/IResourcePersistenceFacade.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

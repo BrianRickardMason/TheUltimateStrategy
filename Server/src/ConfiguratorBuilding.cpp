@@ -30,7 +30,7 @@
 #include <Poco/DOM/DOMParser.h>
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/NodeList.h>
-#include <Server/Server/include/ConfiguratorBuilding.hpp>
+#include <Server/include/ConfiguratorBuilding.hpp>
 #include <boost/lexical_cast.hpp>
 
 namespace Server

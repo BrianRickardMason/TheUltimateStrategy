@@ -31,7 +31,7 @@
 #include <Game/GameServer/Building/IBuildingPersistenceFacade.hpp>
 #include <Game/GameServer/Building/Operators/DestroyBuilding/IDestroyBuildingOperator.hpp>
 #include <Game/GameServer/Resource/IResourcePersistenceFacade.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

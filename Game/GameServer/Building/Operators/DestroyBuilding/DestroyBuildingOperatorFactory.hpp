@@ -28,9 +28,9 @@
 #ifndef GAMESERVER_BUILDING_DESTROYBUILDINGOPERATORFACTORY_HPP
 #define GAMESERVER_BUILDING_DESTROYBUILDINGOPERATORFACTORY_HPP
 
-#include <Server/Server/include/IContext.hpp>
 #include <Game/GameServer/Building/Operators/DestroyBuilding/DestroyBuildingOperator.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

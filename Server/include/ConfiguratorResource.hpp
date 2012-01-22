@@ -25,18 +25,44 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Server/include/Context.hpp>
-#include <Server/Server/include/Server.hpp>
-#include <boost/scoped_ptr.hpp>
+#ifndef SERVER_CONFIGURATORRESOURCE_HPP
+#define SERVER_CONFIGURATORRESOURCE_HPP
 
-int main(
-    int     aNumberOfArguments,
-    char ** aArguments
-)
+#include <Poco/AutoPtr.h>
+#include <Poco/DOM/Document.h>
+#include <Server/include/IConfigurator.hpp>
+#include <Server/include/IConfiguratorResource.hpp>
+
+namespace Server
 {
-    Server::IContextShrPtr context(new Server::Context);
 
-    boost::scoped_ptr<Server::Server> server(new Server::Server(context));
+class ConfiguratorResource
+    : public IConfiguratorResource
+{
+public:
+    ConfiguratorResource(
+        IConfiguratorShrPtr const a_configurator
+    );
 
-    return server->run(aNumberOfArguments, aArguments);
-}
+    virtual bool configure();
+
+    virtual GameServer::Configuration::IResourceShrPtr getResource(
+        GameServer::Configuration::IKey const aKey
+    ) const;
+
+    virtual GameServer::Configuration::IResourceMap const & getResources() const;
+
+private:
+    bool loadXml();
+    bool parseXml();
+
+    IConfiguratorShrPtr const mConfigurator;
+
+    Poco::AutoPtr<Poco::XML::Document> mResourcesXml;
+
+    GameServer::Configuration::IResourceMap mResources;
+};
+
+} // namespace Server;
+
+#endif // SERVER_CONFIGURATORRESOURCE_HPP

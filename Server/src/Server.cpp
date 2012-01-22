@@ -25,48 +25,54 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_CONFIGURATORHUMAN_HPP
-#define SERVER_CONFIGURATORHUMAN_HPP
-
-#include <Poco/AutoPtr.h>
-#include <Poco/DOM/Document.h>
-#include <Server/Server/include/IConfigurator.hpp>
-#include <Server/Server/include/IConfiguratorHuman.hpp>
+#include <Poco/Net/ServerSocket.h>
+#include <Poco/Net/SocketAddress.h>
+#include <Server/include/ConnectionFactory.hpp>
+#include <Server/include/Server.hpp>
+#include <iostream>
 
 namespace Server
 {
 
-class ConfiguratorHuman
-    : public IConfiguratorHuman
+Server::Server(
+    IContextShrPtr aContext
+)
+    : mContext(aContext)
 {
-public:
-    ConfiguratorHuman(
-        IConfiguratorShrPtr const a_configurator
-    );
+}
 
-    virtual bool configure();
+int Server::main(
+    std::vector<std::string> const & aArguments
+)
+{
+    startServer();
 
-    virtual GameServer::Configuration::IHumanShrPtr getHuman(
-        GameServer::Configuration::IKey const aKey
-    ) const;
+    return Poco::Util::Application::EXIT_OK;
+}
 
-    virtual GameServer::Configuration::IHumanMap const & getHumans() const;
+void Server::startServer()
+{
+    if (not mServerStarted)
+    {
+        Poco::Net::SocketAddress address("localhost", 2222);
+        Poco::Net::ServerSocket socket(address);
 
-private:
-    bool loadXml();
-    bool parseXml();
+        ConnectionFactoryShrPtr connectionFactory(new ConnectionFactory(mContext));
 
-    IConfiguratorShrPtr const mConfigurator;
+        mServer.reset(new Poco::Net::TCPServer(connectionFactory, socket));
 
-    Poco::AutoPtr<Poco::XML::Document> mHumansXml;
-    Poco::AutoPtr<Poco::XML::Document> mCostsXml;
-    Poco::AutoPtr<Poco::XML::Document> mPlacesOfWorkXml;
-    Poco::AutoPtr<Poco::XML::Document> mProductionXml;
-    Poco::AutoPtr<Poco::XML::Document> mPropertiesXml;
+        mServer->start();
+        mServerStarted = true;
 
-    GameServer::Configuration::IHumanMap mHumans;
-};
+        waitForTerminationRequest();
 
-} // namespace Server;
+        mServer->stop();
+    }
+    else
+    {
+        // TODO: Apply Poco::Logger and remove <iostream> usage.
+        std::clog << "Server has been started before." << std::endl;
+    }
+}
 
-#endif // SERVER_CONFIGURATORHUMAN_HPP
+} // namespace Server

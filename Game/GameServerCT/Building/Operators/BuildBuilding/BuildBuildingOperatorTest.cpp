@@ -31,7 +31,7 @@
 #include <Game/GameServer/Resource/Key.hpp>
 #include <Game/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;

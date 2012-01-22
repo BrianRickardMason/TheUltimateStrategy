@@ -30,7 +30,7 @@
 #include <Game/GameServer/Transport/Operators/TransportResource/TransportResourceOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;

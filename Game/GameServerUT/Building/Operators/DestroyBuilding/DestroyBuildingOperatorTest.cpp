@@ -31,7 +31,7 @@
 #include <Game/GameServerUT/Helpers/Functions.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
 #include <Game/GameServerUT/Resource/ResourcePersistenceFacadeMock.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;

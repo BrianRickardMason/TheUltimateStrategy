@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Building/BuildingWithVolumeRecord.hpp>
 #include <Game/GameServer/Configuration/Configurator/Building/IBuilding.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

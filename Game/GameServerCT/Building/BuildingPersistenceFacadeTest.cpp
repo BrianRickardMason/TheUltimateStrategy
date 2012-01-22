@@ -29,7 +29,7 @@
 #include <Game/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
 #include <Game/GameServer/Building/Key.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;

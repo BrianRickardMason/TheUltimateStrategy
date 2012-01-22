@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Resource/Helpers.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <boost/make_shared.hpp>
 #include <gmock/gmock.h>
 

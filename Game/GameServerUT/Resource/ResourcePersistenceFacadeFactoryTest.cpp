@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Common/AccessorAbstractFactoryPostgresql.hpp>
 #include <Game/GameServer/Resource/ResourcePersistenceFacadeFactory.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Common;

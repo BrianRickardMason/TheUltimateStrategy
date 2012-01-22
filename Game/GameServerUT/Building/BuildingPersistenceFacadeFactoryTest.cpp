@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Building/BuildingPersistenceFacadeFactory.hpp>
 #include <Game/GameServer/Common/AccessorAbstractFactoryPostgresql.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;

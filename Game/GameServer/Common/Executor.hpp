@@ -32,7 +32,7 @@
 #include <Game/GameServer/Common/IOperatorAbstractFactory.hpp>
 #include <Game/GameServer/Persistence/IPersistence.hpp>
 #include <Game/GameServer/User/IUser.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace Game
 {

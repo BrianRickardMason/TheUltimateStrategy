@@ -30,8 +30,8 @@
 #include <Protocol/Xml/Cpp/LanguageToProtocolTranslator.hpp>
 #include <Protocol/Xml/Cpp/PayloadToProtocolTranslator.hpp>
 #include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
-#include <Server/Server/include/CommandDispatcher.hpp>
-#include <Server/Server/include/Connection.hpp>
+#include <Server/include/CommandDispatcher.hpp>
+#include <Server/include/Connection.hpp>
 
 namespace Server
 {

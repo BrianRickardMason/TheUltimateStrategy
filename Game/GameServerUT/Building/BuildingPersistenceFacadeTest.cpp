@@ -29,7 +29,7 @@
 #include <Game/GameServer/Building/Key.hpp>
 #include <Game/GameServerUT/Building/BuildingAccessorMock.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 
 using namespace GameServer::Building;
 using namespace GameServer::Common;

@@ -25,48 +25,33 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Server/include/Configurator.hpp>
-#include <Server/Server/include/ConfiguratorBase.hpp>
-#include <Server/Server/include/ConfiguratorBuilding.hpp>
-#include <Server/Server/include/ConfiguratorHuman.hpp>
-#include <Server/Server/include/ConfiguratorResource.hpp>
-#include <Server/Server/include/Context.hpp>
+#ifndef SERVER_ICONTEXT_HPP
+#define SERVER_ICONTEXT_HPP
+
+#include <Server/include/IConfigurator.hpp>
+#include <Server/include/IConfiguratorBase.hpp>
+#include <Server/include/IConfiguratorBuilding.hpp>
+#include <Server/include/IConfiguratorHuman.hpp>
+#include <Server/include/IConfiguratorResource.hpp>
 
 namespace Server
 {
 
-Context::Context()
-    : mConfigurator(new Configurator),
-      mConfiguratorBase(new ConfiguratorBase(mConfigurator)),
-      mConfiguratorBuilding(new ConfiguratorBuilding(mConfigurator)),
-      mConfiguratorHuman(new ConfiguratorHuman(mConfigurator)),
-      mConfiguratorResource(new ConfiguratorResource(mConfigurator))
+class IContext
+    : private boost::noncopyable
 {
-}
+public:
+    virtual ~IContext(){}
 
-IConfiguratorShrPtr Context::getConfigurator() const
-{
-    return mConfigurator;
-}
+    virtual IConfiguratorShrPtr         getConfigurator()         const = 0;
+    virtual IConfiguratorBaseShrPtr     getConfiguratorBase()     const = 0;
+    virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const = 0;
+    virtual IConfiguratorHumanShrPtr    getConfiguratorHuman()    const = 0;
+    virtual IConfiguratorResourceShrPtr getConfiguratorResource() const = 0;
+};
 
-IConfiguratorBaseShrPtr Context::getConfiguratorBase() const
-{
-    return mConfiguratorBase;
-}
-
-IConfiguratorBuildingShrPtr Context::getConfiguratorBuilding() const
-{
-    return mConfiguratorBuilding;
-}
-
-IConfiguratorHumanShrPtr Context::getConfiguratorHuman() const
-{
-    return mConfiguratorHuman;
-}
-
-IConfiguratorResourceShrPtr Context::getConfiguratorResource() const
-{
-    return mConfiguratorResource;
-}
+typedef boost::shared_ptr<IContext> IContextShrPtr;
 
 } // namespace Server
+
+#endif // SERVER_ICONTEXT_HPP

@@ -25,7 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Server/Server/include/ConnectionFactory.hpp>
+#include <Server/include/ConnectionFactory.hpp>
 
 namespace Server
 {

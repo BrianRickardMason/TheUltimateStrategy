@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Building/IBuildingAccessor.hpp>
 #include <Game/GameServer/Building/IBuildingPersistenceFacade.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

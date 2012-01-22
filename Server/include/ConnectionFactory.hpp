@@ -25,39 +25,36 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_SERVER_HPP
-#define SERVER_SERVER_HPP
+#ifndef SERVER_CONNECTIONFACTORY_HPP
+#define SERVER_CONNECTIONFACTORY_HPP
 
-#include <Poco/Net/TCPServer.h>
-#include <Poco/Util/ServerApplication.h>
-#include <Server/Server/include/IContext.hpp>
-#include <memory>
-#include <string>
-#include <vector>
+#include <Poco/Net/TCPServerConnectionFactory.h>
+#include <Poco/SharedPtr.h>
+#include <Server/include/Connection.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace Server
 {
 
-class Server
-    : public Poco::Util::ServerApplication
+class ConnectionFactory
+    : public Poco::Net::TCPServerConnectionFactory
 {
 public:
-    Server(
+    ConnectionFactory(
         IContextShrPtr aContext
     );
 
+    virtual Poco::Net::TCPServerConnection * createConnection(
+        Poco::Net::StreamSocket const & aSocket
+    );
+
 private:
-    int main(std::vector<std::string> const & aArguments);
-
-    void startServer();
-
-    std::auto_ptr<Poco::Net::TCPServer> mServer;
-
-    bool mServerStarted;
-
     IContextShrPtr mContext;
 };
 
+//typedef Poco::Net::TCPServerConnectionFactoryImpl<Connection> ConnectionFactory;
+typedef Poco::SharedPtr<ConnectionFactory> ConnectionFactoryShrPtr;
+
 } // namespace Server
 
-#endif // SERVER_SERVER_HPP
+#endif // SERVER_CONNECTIONFACTORY_HPP

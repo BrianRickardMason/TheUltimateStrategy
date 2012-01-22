@@ -27,7 +27,7 @@
 
 #include <Poco/DOM/DOMParser.h>
 #include <Poco/DOM/Element.h>
-#include <Server/Server/include/Configurator.hpp>
+#include <Server/include/Configurator.hpp>
 #include <boost/lexical_cast.hpp>
 
 namespace Server
@@ -94,7 +94,7 @@ bool Configurator::loadXml()
 
     // TODO: Guess the path.
     mServerConfigXml =
-        parser.parse("/home/brian/workspace/TheUltimateStrategy/Server/Server/serverconfig.xml");
+        parser.parse("/home/brian/workspace/TheUltimateStrategy/Server/serverconfig.xml");
 
     return true;
 }

@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
 #include <Game/GameServer/Turn/Managers/TurnManager.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

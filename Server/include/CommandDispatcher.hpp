@@ -25,33 +25,25 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_ICONTEXT_HPP
-#define SERVER_ICONTEXT_HPP
+#ifndef SERVER_COMMANDDISPATCHER_HPP
+#define SERVER_COMMANDDISPATCHER_HPP
 
-#include <Server/Server/include/IConfigurator.hpp>
-#include <Server/Server/include/IConfiguratorBase.hpp>
-#include <Server/Server/include/IConfiguratorBuilding.hpp>
-#include <Server/Server/include/IConfiguratorHuman.hpp>
-#include <Server/Server/include/IConfiguratorResource.hpp>
+#include <Game/GameServer/Common/IExecutor.hpp>
+#include <Language/Interface/ICommand.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace Server
 {
 
-class IContext
-    : private boost::noncopyable
+class CommandDispatcher
 {
 public:
-    virtual ~IContext(){}
-
-    virtual IConfiguratorShrPtr         getConfigurator()         const = 0;
-    virtual IConfiguratorBaseShrPtr     getConfiguratorBase()     const = 0;
-    virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const = 0;
-    virtual IConfiguratorHumanShrPtr    getConfiguratorHuman()    const = 0;
-    virtual IConfiguratorResourceShrPtr getConfiguratorResource() const = 0;
+    Game::IExecutorShrPtr dispatch(
+        Language::ICommand::Handle const aCommand,
+        IContextShrPtr             const aContext
+    ) const;
 };
-
-typedef boost::shared_ptr<IContext> IContextShrPtr;
 
 } // namespace Server
 
-#endif // SERVER_ICONTEXT_HPP
+#endif // SERVER_COMMANDDISPATCHER_HPP

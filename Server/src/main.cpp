@@ -25,33 +25,18 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_CONNECTION_HPP
-#define SERVER_CONNECTION_HPP
+#include <Server/include/Context.hpp>
+#include <Server/include/Server.hpp>
+#include <boost/scoped_ptr.hpp>
 
-#include <Poco/Net/SocketStream.h>
-#include <Poco/Net/TCPServerConnection.h>
-#include <Server/Server/include/IContext.hpp>
-
-namespace Server
+int main(
+    int     aNumberOfArguments,
+    char ** aArguments
+)
 {
+    Server::IContextShrPtr context(new Server::Context);
 
-class Connection
-    : public Poco::Net::TCPServerConnection
-{
-public:
-    Connection(
-        Poco::Net::StreamSocket const & aSocket,
-        IContextShrPtr                  aContext
-    );
+    boost::scoped_ptr<Server::Server> server(new Server::Server(context));
 
-private:
-    virtual void run();
-
-    Poco::Net::SocketStream mSocketStream;
-
-    IContextShrPtr mContext;
-};
-
-} // namespace Server
-
-#endif // SERVER_CONNECTION_HPP
+    return server->run(aNumberOfArguments, aArguments);
+}

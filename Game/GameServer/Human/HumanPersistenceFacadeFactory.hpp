@@ -30,7 +30,7 @@
 
 #include <Game/GameServer/Common/IAccessorAbstractFactory.hpp>
 #include <Game/GameServer/Human/HumanPersistenceFacade.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

@@ -28,7 +28,7 @@
 #include <Game/GameServer/Common/PersistenceFacadeAbstractFactoryPostgresql.hpp>
 #include <Game/GameServer/Settlement/Operators/CreateSettlement/CreateSettlementOperatorFactory.hpp>
 #include <Game/GameServerCT/ComponentTest.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Epoch;

@@ -25,46 +25,33 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_CONFIGURATORBASE_HPP
-#define SERVER_CONFIGURATORBASE_HPP
+#ifndef SERVER_CONNECTION_HPP
+#define SERVER_CONNECTION_HPP
 
-#include <Poco/AutoPtr.h>
-#include <Poco/DOM/Document.h>
-#include <Server/Server/include/IConfigurator.hpp>
-#include <Server/Server/include/IConfiguratorBase.hpp>
+#include <Poco/Net/SocketStream.h>
+#include <Poco/Net/TCPServerConnection.h>
+#include <Server/include/IContext.hpp>
 
 namespace Server
 {
 
-class ConfiguratorBase
-    : public IConfiguratorBase
+class Connection
+    : public Poco::Net::TCPServerConnection
 {
 public:
-    ConfiguratorBase(
-        IConfiguratorShrPtr const a_configurator
+    Connection(
+        Poco::Net::StreamSocket const & aSocket,
+        IContextShrPtr                  aContext
     );
 
-    virtual bool configure();
-
-    virtual unsigned short int getFamineDeathFactor()     const;
-    virtual unsigned short int getHumanExperienceFactor() const;
-    virtual unsigned short int getHumanReproduceFactor()  const;
-    virtual unsigned short int getPovertyDismissFactor()  const;
-
 private:
-    bool loadXml();
-    bool parseXml();
+    virtual void run();
 
-    IConfiguratorShrPtr const mConfigurator;
+    Poco::Net::SocketStream mSocketStream;
 
-    Poco::AutoPtr<Poco::XML::Document> mBaseXml;
-
-    unsigned short int mFamineDeathFactor;
-    unsigned short int mHumanExperienceFactor;
-    unsigned short int mHumanReproduceFactor;
-    unsigned short int mPovertyDismissFactor;
+    IContextShrPtr mContext;
 };
 
-} // namespace Server;
+} // namespace Server
 
-#endif // SERVER_CONFIGURATORBASE_HPP
+#endif // SERVER_CONNECTION_HPP

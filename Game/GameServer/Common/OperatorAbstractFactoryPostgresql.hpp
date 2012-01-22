@@ -31,7 +31,7 @@
 #include <Game/GameServer/Common/IManagerAbstractFactory.hpp>
 #include <Game/GameServer/Common/IOperatorAbstractFactory.hpp>
 #include <Game/GameServer/Common/IPersistenceFacadeAbstractFactory.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

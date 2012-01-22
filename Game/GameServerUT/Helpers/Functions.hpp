@@ -29,7 +29,7 @@
 #define FUNCTIONS_HPP
 
 #include <Game/GameServer/Resource/ResourceWithVolume.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/IContext.hpp>
 #include <boost/make_shared.hpp>
 #include <vector>
 

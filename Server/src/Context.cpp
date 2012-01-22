@@ -25,34 +25,48 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_CONTEXT_HPP
-#define SERVER_CONTEXT_HPP
-
-#include <Server/Server/include/IContext.hpp>
+#include <Server/include/Configurator.hpp>
+#include <Server/include/ConfiguratorBase.hpp>
+#include <Server/include/ConfiguratorBuilding.hpp>
+#include <Server/include/ConfiguratorHuman.hpp>
+#include <Server/include/ConfiguratorResource.hpp>
+#include <Server/include/Context.hpp>
 
 namespace Server
 {
 
-class Context
-    : public IContext
+Context::Context()
+    : mConfigurator(new Configurator),
+      mConfiguratorBase(new ConfiguratorBase(mConfigurator)),
+      mConfiguratorBuilding(new ConfiguratorBuilding(mConfigurator)),
+      mConfiguratorHuman(new ConfiguratorHuman(mConfigurator)),
+      mConfiguratorResource(new ConfiguratorResource(mConfigurator))
 {
-public:
-    Context();
+}
 
-    virtual IConfiguratorShrPtr         getConfigurator()         const;
-    virtual IConfiguratorBaseShrPtr     getConfiguratorBase()     const;
-    virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const;
-    virtual IConfiguratorHumanShrPtr    getConfiguratorHuman()    const;
-    virtual IConfiguratorResourceShrPtr getConfiguratorResource() const;
+IConfiguratorShrPtr Context::getConfigurator() const
+{
+    return mConfigurator;
+}
 
-private:
-    IConfiguratorShrPtr         const mConfigurator;
-    IConfiguratorBaseShrPtr     const mConfiguratorBase;
-    IConfiguratorBuildingShrPtr const mConfiguratorBuilding;
-    IConfiguratorHumanShrPtr    const mConfiguratorHuman;
-    IConfiguratorResourceShrPtr const mConfiguratorResource;
-};
+IConfiguratorBaseShrPtr Context::getConfiguratorBase() const
+{
+    return mConfiguratorBase;
+}
+
+IConfiguratorBuildingShrPtr Context::getConfiguratorBuilding() const
+{
+    return mConfiguratorBuilding;
+}
+
+IConfiguratorHumanShrPtr Context::getConfiguratorHuman() const
+{
+    return mConfiguratorHuman;
+}
+
+IConfiguratorResourceShrPtr Context::getConfiguratorResource() const
+{
+    return mConfiguratorResource;
+}
 
 } // namespace Server
-
-#endif // SERVER_CONTEXT_HPP

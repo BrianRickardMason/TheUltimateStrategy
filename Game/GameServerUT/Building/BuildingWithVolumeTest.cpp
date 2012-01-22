@@ -27,7 +27,7 @@
 
 #include <Game/GameServer/Building/BuildingWithVolume.hpp>
 #include <Game/GameServer/Building/Key.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <gmock/gmock.h>
 
 using namespace GameServer::Building;

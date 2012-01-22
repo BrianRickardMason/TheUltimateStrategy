@@ -29,7 +29,7 @@
 #include <Game/GameServer/Resource/ResourcePersistenceFacade.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
 #include <Game/GameServerUT/Resource/ResourceAccessorMock.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Persistence;

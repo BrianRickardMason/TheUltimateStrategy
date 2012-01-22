@@ -25,25 +25,47 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef SERVER_COMMANDDISPATCHER_HPP
-#define SERVER_COMMANDDISPATCHER_HPP
+#ifndef SERVER_CONFIGURATOR_HPP
+#define SERVER_CONFIGURATOR_HPP
 
-#include <Game/GameServer/Common/IExecutor.hpp>
-#include <Language/Interface/ICommand.hpp>
-#include <Server/Server/include/IContext.hpp>
+#include <Poco/AutoPtr.h>
+#include <Poco/DOM/Document.h>
+#include <Server/include/IConfigurator.hpp>
 
 namespace Server
 {
 
-class CommandDispatcher
+class Configurator
+    : public IConfigurator
 {
 public:
-    Game::IExecutorShrPtr dispatch(
-        Language::ICommand::Handle const aCommand,
-        IContextShrPtr             const aContext
-    ) const;
+    Configurator();
+
+    virtual bool configure();
+
+    virtual std::string        getHost()                  const;
+    virtual std::string        getPort()                  const;
+    virtual unsigned short int getThreads()               const;
+    virtual int                getLoggerPriority()        const;
+    virtual std::string        getPersistence()           const;
+    virtual std::string        getConfigurationPath()     const;
+    virtual std::string        getConfigurationSelected() const;
+
+private:
+    bool loadXml();
+    bool parseXml();
+
+    Poco::AutoPtr<Poco::XML::Document> mServerConfigXml;
+
+    std::string        mHost;
+    std::string        mPort;
+    unsigned short int mThreads;
+    int                mLoggerPriority;
+    std::string        mPersistence;
+    std::string        mConfigurationPath;
+    std::string        mConfigurationSelected;
 };
 
-} // namespace Server
+} // namespace Server;
 
-#endif // SERVER_COMMANDDISPATCHER_HPP
+#endif // SERVER_CONFIGURATOR_HPP

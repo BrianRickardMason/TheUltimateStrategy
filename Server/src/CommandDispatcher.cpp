@@ -56,7 +56,7 @@
 #include <Game/GameServer/Transport/Executors/ExecutorTransportResource.hpp>
 #include <Game/GameServer/User/Executors/ExecutorCreateUser.hpp>
 #include <Game/GameServer/World/Executors/ExecutorCreateWorld.hpp>
-#include <Server/Server/include/CommandDispatcher.hpp>
+#include <Server/include/CommandDispatcher.hpp>
 
 namespace Server
 {

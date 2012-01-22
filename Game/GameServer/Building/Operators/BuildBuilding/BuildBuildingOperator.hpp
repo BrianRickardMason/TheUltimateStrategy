@@ -28,10 +28,10 @@
 #ifndef GAMESERVER_BUILDING_BUILDBUILDINGOPERATOR_HPP
 #define GAMESERVER_BUILDING_BUILDBUILDINGOPERATOR_HPP
 
-#include <Server/Server/include/IContext.hpp>
 #include <Game/GameServer/Building/IBuildingPersistenceFacade.hpp>
 #include <Game/GameServer/Building/Operators/BuildBuilding/IBuildBuildingOperator.hpp>
 #include <Game/GameServer/Resource/IResourcePersistenceFacade.hpp>
+#include <Server/include/IContext.hpp>
 
 namespace GameServer
 {

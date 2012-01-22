@@ -29,7 +29,7 @@
 #include <Game/GameServer/Human/Key.hpp>
 #include <Game/GameServerUT/Human/HumanAccessorMock.hpp>
 #include <Game/GameServerUT/Persistence/TransactionDummy.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 
 using namespace GameServer::Common;
 using namespace GameServer::Configuration;

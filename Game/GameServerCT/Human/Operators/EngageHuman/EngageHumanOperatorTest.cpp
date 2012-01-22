@@ -33,7 +33,7 @@
 #include <Game/GameServer/Building/Key.hpp>
 #include <Game/GameServer/Human/Key.hpp>
 #include <Game/GameServer/Resource/Key.hpp>
-#include <Server/Server/include/Context.hpp>
+#include <Server/include/Context.hpp>
 #include <boost/assign.hpp>
 
 using namespace GameServer::Building;
