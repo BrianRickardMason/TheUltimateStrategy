@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<buildings>
+    <building>
+        <key>regularfarm</key>
+        <class>regular</class>
+        <name>farm</name>
+    </building>
+    <building>
+        <key>regularmarketplace</key>
+        <class>regular</class>
+        <name>marketplace</name>
+    </building>
+    <building>
+        <key>regularmine</key>
+        <class>regular</class>
+        <name>mine</name>
+    </building>
+    <building>
+        <key>regularquarry</key>
+        <class>regular</class>
+        <name>quarry</name>
+    </building>
+    <building>
+        <key>regularsawmill</key>
+        <class>regular</class>
+        <name>sawmill</name>
+    </building>
+    <building>
+        <key>regularsteelworks</key>
+        <class>regular</class>
+        <name>steelworks</name>
+    </building>
+</buildings>

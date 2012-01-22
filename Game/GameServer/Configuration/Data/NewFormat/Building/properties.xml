@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<buildings>
+    <building>
+        <key>regularfarm</key>
+        <capacity>10</capacity>
+    </building>
+    <building>
+        <key>regularmarketplace</key>
+        <capacity>10</capacity>
+    </building>
+    <building>
+        <key>regularmine</key>
+        <capacity>10</capacity>
+    </building>
+    <building>
+        <key>regularquarry</key>
+        <capacity>10</capacity>
+    </building>
+    <building>
+        <key>regularsawmill</key>
+        <capacity>10</capacity>
+    </building>
+    <building>
+        <key>regularsteelworks</key>
+        <capacity>10</capacity>
+    </building>
+</buildings>
