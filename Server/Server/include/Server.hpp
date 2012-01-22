@@ -30,6 +30,7 @@
 
 #include <Poco/Net/TCPServer.h>
 #include <Poco/Util/ServerApplication.h>
+#include <Server/Server/include/IContext.hpp>
 #include <memory>
 #include <string>
 #include <vector>
@@ -40,22 +41,21 @@ namespace Server
 class Server
     : public Poco::Util::ServerApplication
 {
+public:
+    Server(
+        IContextShrPtr aContext
+    );
+
+private:
     int main(std::vector<std::string> const & aArguments);
 
-    /**
-     * @brief Starts the server - the main entry point.
-     */
     void startServer();
 
-    /**
-     * @brief The TCP server.
-     */
     std::auto_ptr<Poco::Net::TCPServer> mServer;
 
-    /**
-     * @brief Stores the information whether the server has been started.
-     */
     bool mServerStarted;
+
+    IContextShrPtr mContext;
 };
 
 } // namespace Server

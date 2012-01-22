@@ -30,9 +30,15 @@ PROJECT(servernew)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
 ADD_EXECUTABLE(servernew
+    src/Configurator.cpp
+    src/ConfiguratorBase.cpp
+    src/ConfiguratorBuilding.cpp
+    src/ConfiguratorHuman.cpp
+    src/ConfiguratorResource.cpp
     src/Connection.cpp
-    src/main.cpp
+    src/Context.cpp
     src/Server.cpp
+    src/main.cpp
 )
 
 TARGET_LINK_LIBRARIES(servernew

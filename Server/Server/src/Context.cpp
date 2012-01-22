@@ -25,54 +25,48 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Poco/Net/ServerSocket.h>
-#include <Poco/Net/SocketAddress.h>
-#include <Server/Server/include/ConnectionFactory.hpp>
-#include <Server/Server/include/Server.hpp>
-#include <iostream>
+#include <Server/Server/include/Configurator.hpp>
+#include <Server/Server/include/ConfiguratorBase.hpp>
+#include <Server/Server/include/ConfiguratorBuilding.hpp>
+#include <Server/Server/include/ConfiguratorHuman.hpp>
+#include <Server/Server/include/ConfiguratorResource.hpp>
+#include <Server/Server/include/Context.hpp>
 
 namespace Server
 {
 
-Server::Server(
-    IContextShrPtr aContext
-)
-    : mContext(aContext)
+Context::Context()
+    : mConfigurator(new Configurator),
+      mConfiguratorBase(new ConfiguratorBase(mConfigurator)),
+      mConfiguratorBuilding(new ConfiguratorBuilding(mConfigurator)),
+      mConfiguratorHuman(new ConfiguratorHuman(mConfigurator)),
+      mConfiguratorResource(new ConfiguratorResource(mConfigurator))
 {
 }
 
-int Server::main(
-    std::vector<std::string> const & aArguments
-)
+IConfiguratorShrPtr Context::getConfigurator() const
 {
-    startServer();
-
-    return Poco::Util::Application::EXIT_OK;
+    return mConfigurator;
 }
 
-void Server::startServer()
+IConfiguratorBaseShrPtr Context::getConfiguratorBase() const
 {
-    if (not mServerStarted)
-    {
-        Poco::Net::SocketAddress address("localhost", 2222);
-        Poco::Net::ServerSocket socket(address);
+    return mConfiguratorBase;
+}
 
-        ConnectionFactoryShrPtr connectionFactory(new ConnectionFactory);
+IConfiguratorBuildingShrPtr Context::getConfiguratorBuilding() const
+{
+    return mConfiguratorBuilding;
+}
 
-        mServer.reset(new Poco::Net::TCPServer(connectionFactory, socket));
+IConfiguratorHumanShrPtr Context::getConfiguratorHuman() const
+{
+    return mConfiguratorHuman;
+}
 
-        mServer->start();
-        mServerStarted = true;
-
-        waitForTerminationRequest();
-
-        mServer->stop();
-    }
-    else
-    {
-        // TODO: Apply Poco::Logger and remove <iostream> usage.
-        std::clog << "Server has been started before." << std::endl;
-    }
+IConfiguratorResourceShrPtr Context::getConfiguratorResource() const
+{
+    return mConfiguratorResource;
 }
 
 } // namespace Server

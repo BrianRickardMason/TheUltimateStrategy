@@ -25,54 +25,33 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Poco/Net/ServerSocket.h>
-#include <Poco/Net/SocketAddress.h>
-#include <Server/Server/include/ConnectionFactory.hpp>
-#include <Server/Server/include/Server.hpp>
-#include <iostream>
+#ifndef SERVER_ICONTEXT_HPP
+#define SERVER_ICONTEXT_HPP
+
+#include <Server/Server/include/IConfigurator.hpp>
+#include <Server/Server/include/IConfiguratorBase.hpp>
+#include <Server/Server/include/IConfiguratorBuilding.hpp>
+#include <Server/Server/include/IConfiguratorHuman.hpp>
+#include <Server/Server/include/IConfiguratorResource.hpp>
 
 namespace Server
 {
 
-Server::Server(
-    IContextShrPtr aContext
-)
-    : mContext(aContext)
+class IContext
+    : private boost::noncopyable
 {
-}
+public:
+    virtual ~IContext(){}
 
-int Server::main(
-    std::vector<std::string> const & aArguments
-)
-{
-    startServer();
+    virtual IConfiguratorShrPtr         getConfigurator()         const = 0;
+    virtual IConfiguratorBaseShrPtr     getConfiguratorBase()     const = 0;
+    virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const = 0;
+    virtual IConfiguratorHumanShrPtr    getConfiguratorHuman()    const = 0;
+    virtual IConfiguratorResourceShrPtr getConfiguratorResource() const = 0;
+};
 
-    return Poco::Util::Application::EXIT_OK;
-}
-
-void Server::startServer()
-{
-    if (not mServerStarted)
-    {
-        Poco::Net::SocketAddress address("localhost", 2222);
-        Poco::Net::ServerSocket socket(address);
-
-        ConnectionFactoryShrPtr connectionFactory(new ConnectionFactory);
-
-        mServer.reset(new Poco::Net::TCPServer(connectionFactory, socket));
-
-        mServer->start();
-        mServerStarted = true;
-
-        waitForTerminationRequest();
-
-        mServer->stop();
-    }
-    else
-    {
-        // TODO: Apply Poco::Logger and remove <iostream> usage.
-        std::clog << "Server has been started before." << std::endl;
-    }
-}
+typedef boost::shared_ptr<IContext> IContextShrPtr;
 
 } // namespace Server
+
+#endif // SERVER_ICONTEXT_HPP

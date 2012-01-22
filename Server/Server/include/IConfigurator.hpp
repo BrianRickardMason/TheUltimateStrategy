@@ -25,54 +25,35 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Poco/Net/ServerSocket.h>
-#include <Poco/Net/SocketAddress.h>
-#include <Server/Server/include/ConnectionFactory.hpp>
-#include <Server/Server/include/Server.hpp>
-#include <iostream>
+#ifndef SERVER_ICONFIGURATOR_HPP
+#define SERVER_ICONFIGURATOR_HPP
+
+#include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace Server
 {
 
-Server::Server(
-    IContextShrPtr aContext
-)
-    : mContext(aContext)
+class IConfigurator
+    : private boost::noncopyable
 {
-}
+public:
+    virtual ~IConfigurator(){};
 
-int Server::main(
-    std::vector<std::string> const & aArguments
-)
-{
-    startServer();
+    virtual bool configure() = 0;
 
-    return Poco::Util::Application::EXIT_OK;
-}
+    virtual std::string        getHost()                  const = 0;
+    virtual std::string        getPort()                  const = 0;
+    virtual unsigned short int getThreads()               const = 0;
+    virtual int                getLoggerPriority()        const = 0;
+    virtual std::string        getPersistence()           const = 0;
+    virtual std::string        getConfigurationPath()     const = 0;
+    virtual std::string        getConfigurationSelected() const = 0;
+};
 
-void Server::startServer()
-{
-    if (not mServerStarted)
-    {
-        Poco::Net::SocketAddress address("localhost", 2222);
-        Poco::Net::ServerSocket socket(address);
-
-        ConnectionFactoryShrPtr connectionFactory(new ConnectionFactory);
-
-        mServer.reset(new Poco::Net::TCPServer(connectionFactory, socket));
-
-        mServer->start();
-        mServerStarted = true;
-
-        waitForTerminationRequest();
-
-        mServer->stop();
-    }
-    else
-    {
-        // TODO: Apply Poco::Logger and remove <iostream> usage.
-        std::clog << "Server has been started before." << std::endl;
-    }
-}
+typedef boost::shared_ptr<IConfigurator> IConfiguratorShrPtr;
 
 } // namespace Server
+
+#endif // SERVER_ICONFIGURATOR_HPP

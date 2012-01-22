@@ -25,54 +25,34 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Poco/Net/ServerSocket.h>
-#include <Poco/Net/SocketAddress.h>
-#include <Server/Server/include/ConnectionFactory.hpp>
-#include <Server/Server/include/Server.hpp>
-#include <iostream>
+#ifndef SERVER_CONTEXT_HPP
+#define SERVER_CONTEXT_HPP
+
+#include <Server/Server/include/IContext.hpp>
 
 namespace Server
 {
 
-Server::Server(
-    IContextShrPtr aContext
-)
-    : mContext(aContext)
+class Context
+    : public IContext
 {
-}
+public:
+    Context();
 
-int Server::main(
-    std::vector<std::string> const & aArguments
-)
-{
-    startServer();
+    virtual IConfiguratorShrPtr         getConfigurator()         const;
+    virtual IConfiguratorBaseShrPtr     getConfiguratorBase()     const;
+    virtual IConfiguratorBuildingShrPtr getConfiguratorBuilding() const;
+    virtual IConfiguratorHumanShrPtr    getConfiguratorHuman()    const;
+    virtual IConfiguratorResourceShrPtr getConfiguratorResource() const;
 
-    return Poco::Util::Application::EXIT_OK;
-}
-
-void Server::startServer()
-{
-    if (not mServerStarted)
-    {
-        Poco::Net::SocketAddress address("localhost", 2222);
-        Poco::Net::ServerSocket socket(address);
-
-        ConnectionFactoryShrPtr connectionFactory(new ConnectionFactory);
-
-        mServer.reset(new Poco::Net::TCPServer(connectionFactory, socket));
-
-        mServer->start();
-        mServerStarted = true;
-
-        waitForTerminationRequest();
-
-        mServer->stop();
-    }
-    else
-    {
-        // TODO: Apply Poco::Logger and remove <iostream> usage.
-        std::clog << "Server has been started before." << std::endl;
-    }
-}
+private:
+    IConfiguratorShrPtr         const mConfigurator;
+    IConfiguratorBaseShrPtr     const mConfiguratorBase;
+    IConfiguratorBuildingShrPtr const mConfiguratorBuilding;
+    IConfiguratorHumanShrPtr    const mConfiguratorHuman;
+    IConfiguratorResourceShrPtr const mConfiguratorResource;
+};
 
 } // namespace Server
+
+#endif // SERVER_CONTEXT_HPP

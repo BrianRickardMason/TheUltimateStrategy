@@ -30,6 +30,8 @@
 #include <Protocol/Xml/Cpp/ProtocolToLanguageTranslator.hpp>
 #include <Server/Server/include/Connection.hpp>
 
+#include <Game/GameServer/Generic/Executors/ExecutorEcho.hpp>
+
 namespace Server
 {
 

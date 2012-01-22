@@ -25,54 +25,44 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <Poco/Net/ServerSocket.h>
-#include <Poco/Net/SocketAddress.h>
-#include <Server/Server/include/ConnectionFactory.hpp>
-#include <Server/Server/include/Server.hpp>
-#include <iostream>
+#ifndef SERVER_CONFIGURATORRESOURCE_HPP
+#define SERVER_CONFIGURATORRESOURCE_HPP
+
+#include <Poco/AutoPtr.h>
+#include <Poco/DOM/Document.h>
+#include <Server/Server/include/IConfigurator.hpp>
+#include <Server/Server/include/IConfiguratorResource.hpp>
 
 namespace Server
 {
 
-Server::Server(
-    IContextShrPtr aContext
-)
-    : mContext(aContext)
+class ConfiguratorResource
+    : public IConfiguratorResource
 {
-}
+public:
+    ConfiguratorResource(
+        IConfiguratorShrPtr const a_configurator
+    );
 
-int Server::main(
-    std::vector<std::string> const & aArguments
-)
-{
-    startServer();
+    virtual bool configure();
 
-    return Poco::Util::Application::EXIT_OK;
-}
+    virtual GameServer::Configuration::IResourceShrPtr getResource(
+        GameServer::Configuration::IKey const aKey
+    ) const;
 
-void Server::startServer()
-{
-    if (not mServerStarted)
-    {
-        Poco::Net::SocketAddress address("localhost", 2222);
-        Poco::Net::ServerSocket socket(address);
+    virtual GameServer::Configuration::IResourceMap const & getResources() const;
 
-        ConnectionFactoryShrPtr connectionFactory(new ConnectionFactory);
+private:
+    bool loadXml();
+    bool parseXml();
 
-        mServer.reset(new Poco::Net::TCPServer(connectionFactory, socket));
+    IConfiguratorShrPtr const mConfigurator;
 
-        mServer->start();
-        mServerStarted = true;
+    Poco::AutoPtr<Poco::XML::Document> mResourcesXml;
 
-        waitForTerminationRequest();
+    GameServer::Configuration::IResourceMap mResources;
+};
 
-        mServer->stop();
-    }
-    else
-    {
-        // TODO: Apply Poco::Logger and remove <iostream> usage.
-        std::clog << "Server has been started before." << std::endl;
-    }
-}
+} // namespace Server;
 
-} // namespace Server
+#endif // SERVER_CONFIGURATORRESOURCE_HPP

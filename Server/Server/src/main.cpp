@@ -25,6 +25,7 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
+#include <Server/Server/include/Context.hpp>
 #include <Server/Server/include/Server.hpp>
 #include <boost/scoped_ptr.hpp>
 
@@ -33,7 +34,9 @@ int main(
     char ** aArguments
 )
 {
-    boost::scoped_ptr<Server::Server> server(new Server::Server);
+    Server::IContextShrPtr context(new Server::Context);
+
+    boost::scoped_ptr<Server::Server> server(new Server::Server(context));
 
     return server->run(aNumberOfArguments, aArguments);
 }
