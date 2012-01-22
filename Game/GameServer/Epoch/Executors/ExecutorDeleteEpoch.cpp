@@ -52,7 +52,7 @@ void ExecutorDeleteEpoch::logExecutorStart() const
 }
 
 bool ExecutorDeleteEpoch::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -93,7 +93,7 @@ bool ExecutorDeleteEpoch::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteEpoch::perform(
+Language::ICommand::Handle ExecutorDeleteEpoch::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -117,7 +117,7 @@ TUSLanguage::ICommand::Handle ExecutorDeleteEpoch::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteEpoch::getBasicReply(
+Language::ICommand::Handle ExecutorDeleteEpoch::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -125,11 +125,11 @@ TUSLanguage::ICommand::Handle ExecutorDeleteEpoch::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteEpoch::produceReply(
+Language::ICommand::Handle ExecutorDeleteEpoch::produceReply(
     GameServer::Epoch::DeleteEpochOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

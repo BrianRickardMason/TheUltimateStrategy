@@ -52,7 +52,7 @@ void ExecutorGetLand::logExecutorStart() const
 }
 
 bool ExecutorGetLand::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -122,7 +122,7 @@ bool ExecutorGetLand::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetLand::perform(
+Language::ICommand::Handle ExecutorGetLand::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -144,7 +144,7 @@ TUSLanguage::ICommand::Handle ExecutorGetLand::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetLand::getBasicReply(
+Language::ICommand::Handle ExecutorGetLand::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -152,18 +152,18 @@ TUSLanguage::ICommand::Handle ExecutorGetLand::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetLand::produceReply(
+Language::ICommand::Handle ExecutorGetLand::produceReply(
     GameServer::Land::GetLandOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Land::GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_BEEN_GOT:
         {
             // TODO: Translate this automatically!
-            TUSLanguage::ICommand::Object land;
+            Language::ICommand::Object land;
             land.insert(std::make_pair("login", a_exit_code.m_land->getLogin()));
             land.insert(std::make_pair("world_name", a_exit_code.m_land->getWorldName()));
             land.insert(std::make_pair("land_name", a_exit_code.m_land->getLandName()));

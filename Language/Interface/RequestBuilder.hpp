@@ -25,14 +25,14 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSLANGUAGE_REQUESTBUILDER_HPP
-#define TUSLANGUAGE_REQUESTBUILDER_HPP
+#ifndef LANGUAGE_REQUESTBUILDER_HPP
+#define LANGUAGE_REQUESTBUILDER_HPP
 
 #include <Language/Interface/ICommand.hpp>
 #include <boost/noncopyable.hpp>
 #include <Poco/SharedPtr.h>
 
-namespace TUSLanguage
+namespace Language
 {
 
 // TODO: Refactor me!
@@ -552,6 +552,6 @@ public:
     ) const;
 };
 
-} // namespace TUSLanguage
+} // namespace Language
 
-#endif // TUSLANGUAGE_REQUESTBUILDER_HPP
+#endif // LANGUAGE_REQUESTBUILDER_HPP

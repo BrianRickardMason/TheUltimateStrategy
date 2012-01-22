@@ -50,7 +50,7 @@ public:
      * @throw std::exception          In case of failure.
      * @throw boost::bad_lexical_cast In case of invalid reply code.
      */
-    TUSLanguage::ICommand::Handle translate(
+    Language::ICommand::Handle translate(
         Message::Handle a_message
     ) const;
 };

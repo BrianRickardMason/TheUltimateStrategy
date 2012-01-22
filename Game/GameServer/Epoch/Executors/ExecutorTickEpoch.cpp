@@ -52,7 +52,7 @@ void ExecutorTickEpoch::logExecutorStart() const
 }
 
 bool ExecutorTickEpoch::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -93,7 +93,7 @@ bool ExecutorTickEpoch::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorTickEpoch::perform(
+Language::ICommand::Handle ExecutorTickEpoch::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -116,7 +116,7 @@ TUSLanguage::ICommand::Handle ExecutorTickEpoch::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorTickEpoch::getBasicReply(
+Language::ICommand::Handle ExecutorTickEpoch::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -124,11 +124,11 @@ TUSLanguage::ICommand::Handle ExecutorTickEpoch::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorTickEpoch::produceReply(
+Language::ICommand::Handle ExecutorTickEpoch::produceReply(
     GameServer::Epoch::TickEpochOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

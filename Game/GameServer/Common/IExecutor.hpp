@@ -51,8 +51,8 @@ public:
      *
      * @return The reply.
      */
-    virtual TUSLanguage::ICommand::Handle execute(
-        TUSLanguage::ICommand::Handle a_request
+    virtual Language::ICommand::Handle execute(
+        Language::ICommand::Handle a_request
     ) = 0;
 };
 

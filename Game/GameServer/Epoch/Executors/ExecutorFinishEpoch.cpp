@@ -52,7 +52,7 @@ void ExecutorFinishEpoch::logExecutorStart() const
 }
 
 bool ExecutorFinishEpoch::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -93,7 +93,7 @@ bool ExecutorFinishEpoch::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorFinishEpoch::perform(
+Language::ICommand::Handle ExecutorFinishEpoch::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -117,7 +117,7 @@ TUSLanguage::ICommand::Handle ExecutorFinishEpoch::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorFinishEpoch::getBasicReply(
+Language::ICommand::Handle ExecutorFinishEpoch::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -125,11 +125,11 @@ TUSLanguage::ICommand::Handle ExecutorFinishEpoch::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorFinishEpoch::produceReply(
+Language::ICommand::Handle ExecutorFinishEpoch::produceReply(
     GameServer::Epoch::FinishEpochOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

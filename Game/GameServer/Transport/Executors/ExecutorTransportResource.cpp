@@ -53,7 +53,7 @@ void ExecutorTransportResource::logExecutorStart() const
 }
 
 bool ExecutorTransportResource::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -156,7 +156,7 @@ bool ExecutorTransportResource::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorTransportResource::perform(
+Language::ICommand::Handle ExecutorTransportResource::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -181,7 +181,7 @@ TUSLanguage::ICommand::Handle ExecutorTransportResource::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorTransportResource::getBasicReply(
+Language::ICommand::Handle ExecutorTransportResource::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -189,11 +189,11 @@ TUSLanguage::ICommand::Handle ExecutorTransportResource::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorTransportResource::produceReply(
+Language::ICommand::Handle ExecutorTransportResource::produceReply(
     GameServer::Transport::TransportResourceOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

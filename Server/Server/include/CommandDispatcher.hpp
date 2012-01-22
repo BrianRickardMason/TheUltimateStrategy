@@ -39,8 +39,8 @@ class CommandDispatcher
 {
 public:
     Game::IExecutorShrPtr dispatch(
-        TUSLanguage::ICommand::Handle const aCommand,
-        IContextShrPtr                const aContext
+        Language::ICommand::Handle const aCommand,
+        IContextShrPtr             const aContext
     ) const;
 };
 

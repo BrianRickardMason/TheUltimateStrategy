@@ -53,7 +53,7 @@ void ExecutorGetHuman::logExecutorStart() const
 }
 
 bool ExecutorGetHuman::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -136,7 +136,7 @@ bool ExecutorGetHuman::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetHuman::perform(
+Language::ICommand::Handle ExecutorGetHuman::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -160,7 +160,7 @@ TUSLanguage::ICommand::Handle ExecutorGetHuman::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetHuman::getBasicReply(
+Language::ICommand::Handle ExecutorGetHuman::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -168,18 +168,18 @@ TUSLanguage::ICommand::Handle ExecutorGetHuman::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetHuman::produceReply(
+Language::ICommand::Handle ExecutorGetHuman::produceReply(
     GameServer::Human::GetHumanOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Human::GET_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_GOT:
         {
             // TODO: Translate this automatically!
-            TUSLanguage::ICommand::Object human;
+            Language::ICommand::Object human;
             human.insert(std::make_pair("humanclass", a_exit_code.m_human->getHuman()->getClass()));
             human.insert(std::make_pair("humanname", a_exit_code.m_human->getHuman()->getName()));
             human.insert(std::make_pair("experience", a_exit_code.m_human->getHuman()->getExperience()));

@@ -52,7 +52,7 @@ void ExecutorCreateEpoch::logExecutorStart() const
 }
 
 bool ExecutorCreateEpoch::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -94,7 +94,7 @@ bool ExecutorCreateEpoch::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateEpoch::perform(
+Language::ICommand::Handle ExecutorCreateEpoch::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -118,7 +118,7 @@ TUSLanguage::ICommand::Handle ExecutorCreateEpoch::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateEpoch::getBasicReply(
+Language::ICommand::Handle ExecutorCreateEpoch::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -126,11 +126,11 @@ TUSLanguage::ICommand::Handle ExecutorCreateEpoch::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateEpoch::produceReply(
+Language::ICommand::Handle ExecutorCreateEpoch::produceReply(
     GameServer::Epoch::CreateEpochOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

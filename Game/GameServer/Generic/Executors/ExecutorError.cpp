@@ -52,7 +52,7 @@ void ExecutorError::logExecutorStart() const
 }
 
 bool ExecutorError::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     return true;
@@ -98,18 +98,18 @@ bool ExecutorError::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorError::perform(
+Language::ICommand::Handle ExecutorError::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
     return getBasicReply(REPLY_STATUS_OK);
 }
 
-TUSLanguage::ICommand::Handle ExecutorError::getBasicReply(
+Language::ICommand::Handle ExecutorError::getBasicReply(
     unsigned int const a_status
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     return reply_builder.buildErrorReply(a_status);
 }

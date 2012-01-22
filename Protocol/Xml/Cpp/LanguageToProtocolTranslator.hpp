@@ -47,7 +47,7 @@ public:
      * @return The message.
      */
     Message::Handle translate(
-        TUSLanguage::ICommand::Handle a_command
+        Language::ICommand::Handle a_command
     ) const;
 };
 

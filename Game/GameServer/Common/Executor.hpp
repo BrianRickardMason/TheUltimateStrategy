@@ -52,8 +52,8 @@ public:
      *
      * @return The reply.
      */
-    virtual TUSLanguage::ICommand::Handle execute(
-        TUSLanguage::ICommand::Handle a_request
+    virtual Language::ICommand::Handle execute(
+        Language::ICommand::Handle a_request
     );
 
 private:
@@ -77,7 +77,7 @@ private:
      * @return True if all parameters have been got, false otherwise.
      */
     virtual bool getParameters(
-       TUSLanguage::ICommand::Handle a_request
+       Language::ICommand::Handle a_request
     ) = 0;
 
     /**
@@ -156,7 +156,7 @@ private:
      *
      * @return The reply.
      */
-    virtual TUSLanguage::ICommand::Handle perform(
+    virtual Language::ICommand::Handle perform(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const = 0;
 
@@ -167,7 +167,7 @@ private:
      *
      * @return The reply.
      */
-    virtual TUSLanguage::ICommand::Handle getBasicReply(
+    virtual Language::ICommand::Handle getBasicReply(
         unsigned int const a_status
     ) const = 0;
 
@@ -177,15 +177,15 @@ private:
      *
      * @return The reply.
      */
-    TUSLanguage::ICommand::Handle produceReplyServerIsNotListening()    const;
-    TUSLanguage::ICommand::Handle produceReplyInvalidRequest()          const;
-    TUSLanguage::ICommand::Handle produceReplyInvalidRange()            const;
-    TUSLanguage::ICommand::Handle produceReplyUnauthenticated()         const;
-    TUSLanguage::ICommand::Handle produceReplyActingUserHasNotBeenGot() const;
-    TUSLanguage::ICommand::Handle produceReplyNonModeratorFilteredOut() const;
-    TUSLanguage::ICommand::Handle produceReplyUnauthorized()            const;
-    TUSLanguage::ICommand::Handle produceReplyEpochIsNotActive()        const;
-    TUSLanguage::ICommand::Handle produceReplyActionUnavailable()       const;
+    Language::ICommand::Handle produceReplyServerIsNotListening()    const;
+    Language::ICommand::Handle produceReplyInvalidRequest()          const;
+    Language::ICommand::Handle produceReplyInvalidRange()            const;
+    Language::ICommand::Handle produceReplyUnauthenticated()         const;
+    Language::ICommand::Handle produceReplyActingUserHasNotBeenGot() const;
+    Language::ICommand::Handle produceReplyNonModeratorFilteredOut() const;
+    Language::ICommand::Handle produceReplyUnauthorized()            const;
+    Language::ICommand::Handle produceReplyEpochIsNotActive()        const;
+    Language::ICommand::Handle produceReplyActionUnavailable()       const;
     //}@
 
 protected:

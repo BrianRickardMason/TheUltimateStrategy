@@ -69,14 +69,14 @@ void Connection::run()
 
     // Translate the protocol to the language.
     Protocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
-    TUSLanguage::Command::Handle commandRequest = protocolToLanguageTranslator.translate(messageRequest);
+    Language::Command::Handle commandRequest = protocolToLanguageTranslator.translate(messageRequest);
 
     // Dispatch the command.
     CommandDispatcher commandDispatcher;
     Game::IExecutorShrPtr executor = commandDispatcher.dispatch(commandRequest, mContext);
 
     // Execute the command.
-    TUSLanguage::Command::Handle commandReply = executor->execute(commandRequest);
+    Language::Command::Handle commandReply = executor->execute(commandRequest);
 
     // Translate the language to the protocol.
     Protocol::LanguageToProtocolTranslator languageToProtocolTranslator;
@@ -89,7 +89,7 @@ void Connection::run()
     mSocketStream.clear();
     mSocketStream << payloadReply.getLength();
     mSocketStream << payloadReply.getContent();
-	mSocketStream.flush();
+    mSocketStream.flush();
 }
 
 } // namespace Server

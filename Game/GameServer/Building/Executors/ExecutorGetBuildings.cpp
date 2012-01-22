@@ -53,7 +53,7 @@ void ExecutorGetBuildings::logExecutorStart() const
 }
 
 bool ExecutorGetBuildings::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -135,7 +135,7 @@ bool ExecutorGetBuildings::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetBuildings::perform(
+Language::ICommand::Handle ExecutorGetBuildings::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -159,7 +159,7 @@ TUSLanguage::ICommand::Handle ExecutorGetBuildings::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetBuildings::getBasicReply(
+Language::ICommand::Handle ExecutorGetBuildings::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -167,23 +167,23 @@ TUSLanguage::ICommand::Handle ExecutorGetBuildings::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetBuildings::produceReply(
+Language::ICommand::Handle ExecutorGetBuildings::produceReply(
     GameServer::Building::GetBuildingsOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Building::GET_BUILDINGS_OPERATOR_EXIT_CODE_BUILDINGS_HAVE_BEEN_GOT:
         {
-            TUSLanguage::ICommand::Objects buildings;
+            Language::ICommand::Objects buildings;
 
             for (GameServer::Building::BuildingWithVolumeMap::const_iterator it = a_exit_code.m_buildings.begin();
                  it != a_exit_code.m_buildings.end(); ++it)
             {
                 // TODO: Translate this automatically!
-                TUSLanguage::ICommand::Object building;
+                Language::ICommand::Object building;
                 building.insert(std::make_pair("buildingclass", it->second->getBuilding()->getClass()));
                 building.insert(std::make_pair("buildingname", it->second->getBuilding()->getName()));
                 building.insert(std::make_pair("volume", boost::lexical_cast<std::string>(it->second->getVolume())));

@@ -52,7 +52,7 @@ void ExecutorGetSettlements::logExecutorStart() const
 }
 
 bool ExecutorGetSettlements::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -122,7 +122,7 @@ bool ExecutorGetSettlements::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetSettlements::perform(
+Language::ICommand::Handle ExecutorGetSettlements::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -146,7 +146,7 @@ TUSLanguage::ICommand::Handle ExecutorGetSettlements::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetSettlements::getBasicReply(
+Language::ICommand::Handle ExecutorGetSettlements::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -154,11 +154,11 @@ TUSLanguage::ICommand::Handle ExecutorGetSettlements::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetSettlements::produceReply(
+Language::ICommand::Handle ExecutorGetSettlements::produceReply(
     GameServer::Settlement::GetSettlementsOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
@@ -168,13 +168,13 @@ TUSLanguage::ICommand::Handle ExecutorGetSettlements::produceReply(
 
         case GameServer::Settlement::GET_SETTLEMENTS_OPERATOR_EXIT_CODE_SETTLEMENTS_HAVE_BEEN_GOT:
         {
-            TUSLanguage::ICommand::Objects settlements;
+            Language::ICommand::Objects settlements;
 
             for (GameServer::Settlement::ISettlementMap::const_iterator it = a_exit_code.m_settlements.begin();
                  it != a_exit_code.m_settlements.end(); ++it)
             {
                 // TODO: Translate this automatically!
-                TUSLanguage::ICommand::Object settlement;
+                Language::ICommand::Object settlement;
                 settlement.insert(std::make_pair("land_name", it->second->getLandName()));
                 settlement.insert(std::make_pair("settlement_name", it->second->getSettlementName()));
                 settlements.push_back(settlement);

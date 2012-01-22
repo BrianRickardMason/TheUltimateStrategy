@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSLANGUAGE_COMMAND_HPP
-#define TUSLANGUAGE_COMMAND_HPP
+#ifndef LANGUAGE_COMMAND_HPP
+#define LANGUAGE_COMMAND_HPP
 
 #include <Language/Interface/ICommand.hpp>
 #include <map>
 
-namespace TUSLanguage
+namespace Language
 {
 
 class Command
@@ -197,6 +197,6 @@ private:
     Objects m_objects;
 };
 
-} // namespace TUSLanguage
+} // namespace Language
 
-#endif // TUSLANGUAGE_COMMAND_HPP
+#endif // LANGUAGE_COMMAND_HPP

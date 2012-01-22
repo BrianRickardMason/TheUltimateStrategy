@@ -52,7 +52,7 @@ void ExecutorCreateSettlement::logExecutorStart() const
 }
 
 bool ExecutorCreateSettlement::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -123,7 +123,7 @@ bool ExecutorCreateSettlement::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateSettlement::perform(
+Language::ICommand::Handle ExecutorCreateSettlement::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -147,7 +147,7 @@ TUSLanguage::ICommand::Handle ExecutorCreateSettlement::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateSettlement::getBasicReply(
+Language::ICommand::Handle ExecutorCreateSettlement::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -155,11 +155,11 @@ TUSLanguage::ICommand::Handle ExecutorCreateSettlement::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateSettlement::produceReply(
+Language::ICommand::Handle ExecutorCreateSettlement::produceReply(
     GameServer::Settlement::CreateSettlementOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

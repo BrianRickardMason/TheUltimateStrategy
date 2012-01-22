@@ -37,7 +37,7 @@ Message::Handle MessageFactory::createEchoRequest() const
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ECHO_REQUEST);
+    message_builder.addHeader(Language::ID_COMMAND_ECHO_REQUEST);
 
     return message_builder.extract();
 }
@@ -47,7 +47,7 @@ Message::Handle MessageFactory::createErrorRequest() const
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ERROR_REQUEST);
+    message_builder.addHeader(Language::ID_COMMAND_ERROR_REQUEST);
 
     return message_builder.extract();
 }
@@ -62,7 +62,7 @@ Message::Handle MessageFactory::createCreateLandRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_LAND_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_LAND_REQUEST, a_login, a_password);
     message_builder.addRequest("create_land_request");
     message_builder.addParam("world_name", a_world_name);
     message_builder.addParam("land_name", a_land_name);
@@ -79,7 +79,7 @@ Message::Handle MessageFactory::createDeleteLandRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DELETE_LAND_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_DELETE_LAND_REQUEST, a_login, a_password);
     message_builder.addRequest("delete_land_request");
     message_builder.addParam("land_name", a_land_name);
 
@@ -95,7 +95,7 @@ Message::Handle MessageFactory::createGetLandRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_LAND_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_LAND_REQUEST, a_login, a_password);
     message_builder.addRequest("get_land_request");
     message_builder.addParam("land_name", a_land_name);
 
@@ -110,7 +110,7 @@ Message::Handle MessageFactory::createGetLandsRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_LANDS_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_LANDS_REQUEST, a_login, a_password);
     message_builder.addRequest("get_lands_request");
 
     return message_builder.extract();
@@ -126,7 +126,7 @@ Message::Handle MessageFactory::createCreateSettlementRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_SETTLEMENT_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_SETTLEMENT_REQUEST, a_login, a_password);
     message_builder.addRequest("create_settlement_request");
     message_builder.addParam("land_name", a_land_name);
     message_builder.addParam("settlement_name", a_settlement_name);
@@ -143,7 +143,7 @@ Message::Handle MessageFactory::createDeleteSettlementRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DELETE_SETTLEMENT_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_DELETE_SETTLEMENT_REQUEST, a_login, a_password);
     message_builder.addRequest("delete_settlement_request");
     message_builder.addParam("settlement_name", a_settlement_name);
 
@@ -159,7 +159,7 @@ Message::Handle MessageFactory::createGetSettlementRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_SETTLEMENT_REQUEST, a_login, a_password);
     message_builder.addRequest("get_settlement_request");
     message_builder.addParam("settlement_name", a_settlement_name);
 
@@ -175,7 +175,7 @@ Message::Handle MessageFactory::createGetSettlementsRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_SETTLEMENTS_REQUEST, a_login, a_password);
     message_builder.addRequest("get_settlements_request");
     message_builder.addParam("land_name", a_land_name);
 
@@ -194,7 +194,7 @@ Message::Handle MessageFactory::createBuildBuildingRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_BUILD_BUILDING_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_BUILD_BUILDING_REQUEST, a_login, a_password);
     message_builder.addRequest("build_building_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -216,7 +216,7 @@ Message::Handle MessageFactory::createDestroyBuildingRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DESTROY_BUILDING_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_DESTROY_BUILDING_REQUEST, a_login, a_password);
     message_builder.addRequest("destroy_building_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -237,7 +237,7 @@ Message::Handle MessageFactory::createGetBuildingRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_BUILDING_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_BUILDING_REQUEST, a_login, a_password);
     message_builder.addRequest("get_building_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -256,7 +256,7 @@ Message::Handle MessageFactory::createGetBuildingsRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_BUILDINGS_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_BUILDINGS_REQUEST, a_login, a_password);
     message_builder.addRequest("get_buildings_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -276,7 +276,7 @@ Message::Handle MessageFactory::createDismissHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DISMISS_HUMAN_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_DISMISS_HUMAN_REQUEST, a_login, a_password);
     message_builder.addRequest("dismiss_human_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -298,7 +298,7 @@ Message::Handle MessageFactory::createEngageHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ENGAGE_HUMAN_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_ENGAGE_HUMAN_REQUEST, a_login, a_password);
     message_builder.addRequest("engage_human_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -319,7 +319,7 @@ Message::Handle MessageFactory::createGetHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_HUMAN_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_HUMAN_REQUEST, a_login, a_password);
     message_builder.addRequest("get_human_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -338,7 +338,7 @@ Message::Handle MessageFactory::createGetHumansRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_HUMANS_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_HUMANS_REQUEST, a_login, a_password);
     message_builder.addRequest("get_humans_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -357,7 +357,7 @@ Message::Handle MessageFactory::createGetResourceRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_RESOURCE_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_RESOURCE_REQUEST, a_login, a_password);
     message_builder.addRequest("get_resource_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -376,7 +376,7 @@ Message::Handle MessageFactory::createGetResourcesRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_RESOURCES_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_RESOURCES_REQUEST, a_login, a_password);
     message_builder.addRequest("get_resources_request");
     message_builder.addParam("idholderclass", a_id_holder_class);
     message_builder.addParam("holder_name", a_holder_name);
@@ -392,7 +392,7 @@ Message::Handle MessageFactory::createCreateUserRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_USER_REQUEST);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_USER_REQUEST);
     message_builder.addRequest("create_user_request");
     message_builder.addParam("login", a_login);
     message_builder.addParam("password", a_password);
@@ -409,7 +409,7 @@ Message::Handle MessageFactory::createCreateWorldRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_WORLD_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_WORLD_REQUEST, a_login, a_password);
     message_builder.addRequest("create_world_request");
     message_builder.addParam("world_name", a_world_name);
 
@@ -426,7 +426,7 @@ Message::Handle MessageFactory::createCreateEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_EPOCH_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_EPOCH_REQUEST, a_login, a_password);
     message_builder.addRequest("create_epoch_request");
     message_builder.addParam("world_name", a_world_name);
     message_builder.addParam("epoch_name", a_epoch_name);
@@ -443,7 +443,7 @@ Message::Handle MessageFactory::createDeleteEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DELETE_EPOCH_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_DELETE_EPOCH_REQUEST, a_login, a_password);
     message_builder.addRequest("delete_epoch_request");
     message_builder.addParam("world_name", a_world_name);
 
@@ -459,7 +459,7 @@ Message::Handle MessageFactory::createActivateEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ACTIVATE_EPOCH_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_ACTIVATE_EPOCH_REQUEST, a_login, a_password);
     message_builder.addRequest("activate_epoch_request");
     message_builder.addParam("world_name", a_world_name);
 
@@ -475,7 +475,7 @@ Message::Handle MessageFactory::createDeactivateEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DEACTIVATE_EPOCH_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_DEACTIVATE_EPOCH_REQUEST, a_login, a_password);
     message_builder.addRequest("deactivate_epoch_request");
     message_builder.addParam("world_name", a_world_name);
 
@@ -491,7 +491,7 @@ Message::Handle MessageFactory::createFinishEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_FINISH_EPOCH_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_FINISH_EPOCH_REQUEST, a_login, a_password);
     message_builder.addRequest("finish_epoch_request");
     message_builder.addParam("world_name", a_world_name);
 
@@ -507,7 +507,7 @@ Message::Handle MessageFactory::createTickEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_TICK_EPOCH_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_TICK_EPOCH_REQUEST, a_login, a_password);
     message_builder.addRequest("tick_epoch_request");
     message_builder.addParam("world_name", a_world_name);
 
@@ -523,7 +523,7 @@ Message::Handle MessageFactory::createGetEpochRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_EPOCH_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_GET_EPOCH_REQUEST, a_login, a_password);
     message_builder.addRequest("get_epoch_request");
     message_builder.addParam("world_name", a_world_name);
 
@@ -542,7 +542,7 @@ Message::Handle MessageFactory::createTransportHumanRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_TRANSPORT_HUMAN_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_TRANSPORT_HUMAN_REQUEST, a_login, a_password);
     message_builder.addRequest("transport_human_request");
     message_builder.addParam("settlement_name_source", a_settlement_name_source);
     message_builder.addParam("settlement_name_destination", a_settlement_name_destination);
@@ -564,7 +564,7 @@ Message::Handle MessageFactory::createTransportResourceRequest(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_TRANSPORT_RESOURCE_REQUEST, a_login, a_password);
+    message_builder.addHeader(Language::ID_COMMAND_TRANSPORT_RESOURCE_REQUEST, a_login, a_password);
     message_builder.addRequest("transport_resource_request");
     message_builder.addParam("settlement_name_source", a_settlement_name_source);
     message_builder.addParam("settlement_name_destination", a_settlement_name_destination);
@@ -581,7 +581,7 @@ Message::Handle MessageFactory::createEchoReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ECHO_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_ECHO_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addSpecificReply("echo_reply");
@@ -596,7 +596,7 @@ Message::Handle MessageFactory::createErrorReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ERROR_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_ERROR_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addSpecificReply("error_reply");
@@ -612,7 +612,7 @@ Message::Handle MessageFactory::createCreateLandReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_LAND_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_LAND_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -629,7 +629,7 @@ Message::Handle MessageFactory::createDeleteLandReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DELETE_LAND_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_DELETE_LAND_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -646,7 +646,7 @@ Message::Handle MessageFactory::createGetLandReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_LAND_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_LAND_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -664,7 +664,7 @@ Message::Handle MessageFactory::createGetLandReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_LAND_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_LAND_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -683,7 +683,7 @@ Message::Handle MessageFactory::createGetLandsReply(
     Message::Objects objects;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_LANDS_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_LANDS_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -702,7 +702,7 @@ Message::Handle MessageFactory::createGetLandsReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_LANDS_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_LANDS_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -720,7 +720,7 @@ Message::Handle MessageFactory::createCreateSettlementReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_SETTLEMENT_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_SETTLEMENT_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -737,7 +737,7 @@ Message::Handle MessageFactory::createDeleteSettlementReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DELETE_SETTLEMENT_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_DELETE_SETTLEMENT_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -754,7 +754,7 @@ Message::Handle MessageFactory::createGetSettlementReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_SETTLEMENT_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -772,7 +772,7 @@ Message::Handle MessageFactory::createGetSettlementReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_SETTLEMENT_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -791,7 +791,7 @@ Message::Handle MessageFactory::createGetSettlementsReply(
     Message::Objects objects;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_SETTLEMENTS_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -810,7 +810,7 @@ Message::Handle MessageFactory::createGetSettlementsReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_SETTLEMENTS_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -828,7 +828,7 @@ Message::Handle MessageFactory::createBuildBuildingReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_BUILD_BUILDING_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_BUILD_BUILDING_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -845,7 +845,7 @@ Message::Handle MessageFactory::createDestroyBuildingReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DESTROY_BUILDING_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_DESTROY_BUILDING_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -862,7 +862,7 @@ Message::Handle MessageFactory::createGetBuildingReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_BUILDING_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_BUILDING_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -880,7 +880,7 @@ Message::Handle MessageFactory::createGetBuildingReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_BUILDING_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_BUILDING_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -908,7 +908,7 @@ Message::Handle MessageFactory::createGetBuildingsReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_BUILDINGS_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_BUILDINGS_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -926,7 +926,7 @@ Message::Handle MessageFactory::createDismissHumanReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DISMISS_HUMAN_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_DISMISS_HUMAN_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -943,7 +943,7 @@ Message::Handle MessageFactory::createEngageHumanReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ENGAGE_HUMAN_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_ENGAGE_HUMAN_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -960,7 +960,7 @@ Message::Handle MessageFactory::createGetHumanReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_HUMAN_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_HUMAN_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -978,7 +978,7 @@ Message::Handle MessageFactory::createGetHumanReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_HUMAN_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_HUMAN_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1006,7 +1006,7 @@ Message::Handle MessageFactory::createGetHumansReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_HUMANS_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_HUMANS_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1024,7 +1024,7 @@ Message::Handle MessageFactory::createGetResourceReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_RESOURCE_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_RESOURCE_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1042,7 +1042,7 @@ Message::Handle MessageFactory::createGetResourceReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_RESOURCE_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_RESOURCE_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1070,7 +1070,7 @@ Message::Handle MessageFactory::createGetResourcesReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_RESOURCES_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_RESOURCES_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1088,7 +1088,7 @@ Message::Handle MessageFactory::createCreateUserReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_USER_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_USER_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1105,7 +1105,7 @@ Message::Handle MessageFactory::createCreateWorldReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_WORLD_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_WORLD_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1122,7 +1122,7 @@ Message::Handle MessageFactory::createCreateEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_CREATE_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_CREATE_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1139,7 +1139,7 @@ Message::Handle MessageFactory::createDeleteEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DELETE_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_DELETE_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1156,7 +1156,7 @@ Message::Handle MessageFactory::createActivateEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_ACTIVATE_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_ACTIVATE_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1173,7 +1173,7 @@ Message::Handle MessageFactory::createDeactivateEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_DEACTIVATE_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_DEACTIVATE_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1190,7 +1190,7 @@ Message::Handle MessageFactory::createFinishEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_FINISH_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_FINISH_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1207,7 +1207,7 @@ Message::Handle MessageFactory::createTickEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_TICK_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_TICK_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1224,7 +1224,7 @@ Message::Handle MessageFactory::createGetEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1242,7 +1242,7 @@ Message::Handle MessageFactory::createGetEpochReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_GET_EPOCH_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_GET_EPOCH_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1260,7 +1260,7 @@ Message::Handle MessageFactory::createTransportHumanReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_TRANSPORT_HUMAN_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_TRANSPORT_HUMAN_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);
@@ -1277,7 +1277,7 @@ Message::Handle MessageFactory::createTransportResourceReply(
     MessageBuilder message_builder;
 
     message_builder.makeMessage();
-    message_builder.addHeader(TUSLanguage::ID_COMMAND_TRANSPORT_RESOURCE_REPLY);
+    message_builder.addHeader(Language::ID_COMMAND_TRANSPORT_RESOURCE_REPLY);
     message_builder.addReply();
     message_builder.addCode(a_code);
     message_builder.addMessage(a_message);

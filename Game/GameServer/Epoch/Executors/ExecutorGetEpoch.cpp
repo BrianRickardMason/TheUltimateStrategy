@@ -53,7 +53,7 @@ void ExecutorGetEpoch::logExecutorStart() const
 }
 
 bool ExecutorGetEpoch::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -94,7 +94,7 @@ bool ExecutorGetEpoch::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetEpoch::perform(
+Language::ICommand::Handle ExecutorGetEpoch::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -118,7 +118,7 @@ TUSLanguage::ICommand::Handle ExecutorGetEpoch::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetEpoch::getBasicReply(
+Language::ICommand::Handle ExecutorGetEpoch::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -126,18 +126,18 @@ TUSLanguage::ICommand::Handle ExecutorGetEpoch::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetEpoch::produceReply(
+Language::ICommand::Handle ExecutorGetEpoch::produceReply(
     GameServer::Epoch::GetEpochByWorldNameOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Epoch::GET_EPOCH_BY_WORLD_NAME_OPERATOR_EXIT_CODE_EPOCH_HAS_BEEN_GOT:
         {
             // TODO: Translate this automatically!
-            TUSLanguage::ICommand::Object epoch;
+            Language::ICommand::Object epoch;
             epoch.insert(std::make_pair("epoch_name", a_exit_code.m_epoch->getEpochName()));
             epoch.insert(std::make_pair("world_name", a_exit_code.m_epoch->getWorldName()));
             std::string active = a_exit_code.m_epoch->getActive() ? "true" : "false";

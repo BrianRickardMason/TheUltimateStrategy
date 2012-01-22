@@ -33,10 +33,10 @@ public:
     virtual void notifyTick();
 private:
     void sendCommand(
-        TUSLanguage::ICommand::Handle& in,
-        TUSLanguage::ICommand::Handle& out
+        Language::ICommand::Handle& in,
+        Language::ICommand::Handle& out
     );
-    int  executeCommand( TUSLanguage::ICommand::Handle in);
+    int  executeCommand( Language::ICommand::Handle in);
 
     Credentials::Handle mCredentials;
     std::string mCurrentWorld;
@@ -46,7 +46,7 @@ private:
     
     TusCommandBuilder mCmdBuilder;
     
-    TUSLanguage::UserRequestBuilder::Handle mReqBuilder;
+    Language::UserRequestBuilder::Handle mReqBuilder;
     Protocol::LanguageToProtocolTranslator::Handle mToProtocol;
     Protocol::ProtocolToLanguageTranslator::Handle mToLanguage;
 };

@@ -53,7 +53,7 @@ void ExecutorGetResources::logExecutorStart() const
 }
 
 bool ExecutorGetResources::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -135,7 +135,7 @@ bool ExecutorGetResources::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetResources::perform(
+Language::ICommand::Handle ExecutorGetResources::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -159,7 +159,7 @@ TUSLanguage::ICommand::Handle ExecutorGetResources::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetResources::getBasicReply(
+Language::ICommand::Handle ExecutorGetResources::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -167,23 +167,23 @@ TUSLanguage::ICommand::Handle ExecutorGetResources::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetResources::produceReply(
+Language::ICommand::Handle ExecutorGetResources::produceReply(
     GameServer::Resource::GetResourcesOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Resource::GET_RESOURCES_OPERATOR_EXIT_CODE_RESOURCES_HAVE_BEEN_GOT:
         {
-            TUSLanguage::ICommand::Objects resources;
+            Language::ICommand::Objects resources;
 
             for (GameServer::Resource::ResourceWithVolumeMap::const_iterator it = a_exit_code.m_resources.begin();
                  it != a_exit_code.m_resources.end(); ++it)
             {
                 // TODO: Translate this automatically!
-                TUSLanguage::ICommand::Object resource;
+                Language::ICommand::Object resource;
                 resource.insert(std::make_pair("resourcename", it->second->getResource()->getName()));
                 resource.insert(std::make_pair("volume", boost::lexical_cast<std::string>(it->second->getVolume())));
                 resources.push_back(resource);

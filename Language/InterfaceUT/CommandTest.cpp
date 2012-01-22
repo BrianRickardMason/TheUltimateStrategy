@@ -36,12 +36,12 @@ protected:
     /**
      * @brief The command to be tested.
      */
-    TUSLanguage::Command m_command;
+    Language::Command m_command;
 };
 
 TEST_F(CommandTest, CtorDoesNotThrow)
 {
-    ASSERT_NO_THROW(TUSLanguage::Command::Handle command(new TUSLanguage::Command));
+    ASSERT_NO_THROW(Language::Command::Handle command(new Language::Command));
 }
 
 TEST_F(CommandTest, GetIDReturnsProperInitialValue)
@@ -117,14 +117,14 @@ TEST_F(CommandTest, GetObjectsReturnsProperInitialValue)
 
 TEST_F(CommandTest, GetObjectsReturnsProperObjects)
 {
-    TUSLanguage::ICommand::Object land;
+    Language::ICommand::Object land;
     land.insert(std::make_pair("login", "Login"));
     land.insert(std::make_pair("world_name", "World"));
     land.insert(std::make_pair("land_name", "Land"));
     land.insert(std::make_pair("granted", "false"));
     m_command.addObject(land);
-    TUSLanguage::ICommand::Objects objects = m_command.getObjects();
-    for (TUSLanguage::ICommand::Objects::const_iterator it = objects.begin(); it != objects.end(); ++it)
+    Language::ICommand::Objects objects = m_command.getObjects();
+    for (Language::ICommand::Objects::const_iterator it = objects.begin(); it != objects.end(); ++it)
     {
         ASSERT_STREQ("Login", (*it).at("login").c_str());
         ASSERT_STREQ("World", (*it).at("world_name").c_str());
@@ -135,7 +135,7 @@ TEST_F(CommandTest, GetObjectsReturnsProperObjects)
 
 TEST_F(CommandTest, AddObjectInsertsObjectProperly)
 {
-    TUSLanguage::ICommand::Object land;
+    Language::ICommand::Object land;
     land.insert(std::make_pair("login", "Login"));
     land.insert(std::make_pair("world_name", "World"));
     land.insert(std::make_pair("land_name", "Land"));

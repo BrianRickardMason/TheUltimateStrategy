@@ -52,7 +52,7 @@ void ExecutorDeleteSettlement::logExecutorStart() const
 }
 
 bool ExecutorDeleteSettlement::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -122,7 +122,7 @@ bool ExecutorDeleteSettlement::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteSettlement::perform(
+Language::ICommand::Handle ExecutorDeleteSettlement::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -146,7 +146,7 @@ TUSLanguage::ICommand::Handle ExecutorDeleteSettlement::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteSettlement::getBasicReply(
+Language::ICommand::Handle ExecutorDeleteSettlement::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -154,11 +154,11 @@ TUSLanguage::ICommand::Handle ExecutorDeleteSettlement::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteSettlement::produceReply(
+Language::ICommand::Handle ExecutorDeleteSettlement::produceReply(
     GameServer::Settlement::DeleteSettlementOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

@@ -53,7 +53,7 @@ void ExecutorGetResource::logExecutorStart() const
 }
 
 bool ExecutorGetResource::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -136,7 +136,7 @@ bool ExecutorGetResource::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetResource::perform(
+Language::ICommand::Handle ExecutorGetResource::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -160,7 +160,7 @@ TUSLanguage::ICommand::Handle ExecutorGetResource::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetResource::getBasicReply(
+Language::ICommand::Handle ExecutorGetResource::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -168,18 +168,18 @@ TUSLanguage::ICommand::Handle ExecutorGetResource::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetResource::produceReply(
+Language::ICommand::Handle ExecutorGetResource::produceReply(
     GameServer::Resource::GetResourceOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Resource::GET_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_GOT:
         {
             // TODO: Translate this automatically!
-            TUSLanguage::ICommand::Object resource;
+            Language::ICommand::Object resource;
             resource.insert(std::make_pair("resourcename", a_exit_code.m_resource->getResource()->getName()));
             resource.insert(std::make_pair("volume",
                 boost::lexical_cast<std::string>(a_exit_code.m_resource->getVolume())));

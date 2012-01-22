@@ -53,7 +53,7 @@ void ExecutorGetHumans::logExecutorStart() const
 }
 
 bool ExecutorGetHumans::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -135,7 +135,7 @@ bool ExecutorGetHumans::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetHumans::perform(
+Language::ICommand::Handle ExecutorGetHumans::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -159,7 +159,7 @@ TUSLanguage::ICommand::Handle ExecutorGetHumans::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetHumans::getBasicReply(
+Language::ICommand::Handle ExecutorGetHumans::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -167,23 +167,23 @@ TUSLanguage::ICommand::Handle ExecutorGetHumans::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetHumans::produceReply(
+Language::ICommand::Handle ExecutorGetHumans::produceReply(
     GameServer::Human::GetHumansOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Human::GET_HUMANS_OPERATOR_EXIT_CODE_HUMANS_HAVE_BEEN_GOT:
         {
-            TUSLanguage::ICommand::Objects humans;
+            Language::ICommand::Objects humans;
 
             for (GameServer::Human::HumanWithVolumeMap::const_iterator it = a_exit_code.m_humans.begin();
                  it != a_exit_code.m_humans.end(); ++it)
             {
                 // TODO: Translate this automatically!
-                TUSLanguage::ICommand::Object human;
+                Language::ICommand::Object human;
                 human.insert(std::make_pair("humanclass", it->second->getHuman()->getClass()));
                 human.insert(std::make_pair("humanname", it->second->getHuman()->getName()));
                 human.insert(std::make_pair("experience", it->second->getHuman()->getExperience()));

@@ -44,7 +44,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorEchoRequestTranslation, ReturnsNotNull)
@@ -70,7 +70,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorErrorRequestTranslation, ReturnsNotNull)
@@ -96,7 +96,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateLandRequestTranslation, ReturnsNotNull)
@@ -142,7 +142,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteLandRequestTranslation, ReturnsNotNull)
@@ -183,7 +183,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandRequestTranslation, ReturnsNotNull)
@@ -224,7 +224,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandsRequestTranslation, ReturnsNotNull)
@@ -260,7 +260,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateSettlementRequestTranslation, ReturnsNotNull)
@@ -306,7 +306,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteSettlementRequestTranslation, ReturnsNotNull)
@@ -347,7 +347,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementRequestTranslation, ReturnsNotNull)
@@ -388,7 +388,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementsRequestTranslation, ReturnsNotNull)
@@ -430,7 +430,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorBuildBuildingRequestTranslation, ReturnsNotNull)
@@ -487,7 +487,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDestroyBuildingRequestTranslation, ReturnsNotNull)
@@ -544,7 +544,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingRequestTranslation, ReturnsNotNull)
@@ -595,7 +595,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingsRequestTranslation, ReturnsNotNull)
@@ -642,7 +642,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDismissHumanRequestTranslation, ReturnsNotNull)
@@ -699,7 +699,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorEngageHumanRequestTranslation, ReturnsNotNull)
@@ -756,7 +756,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumanRequestTranslation, ReturnsNotNull)
@@ -807,7 +807,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumansRequestTranslation, ReturnsNotNull)
@@ -854,7 +854,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourceRequestTranslation, ReturnsNotNull)
@@ -905,7 +905,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourcesRequestTranslation, ReturnsNotNull)
@@ -951,7 +951,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateUserRequestTranslation, ReturnsNotNull)
@@ -997,7 +997,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateWorldRequestTranslation, ReturnsNotNull)
@@ -1038,7 +1038,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateEpochRequestTranslation, ReturnsNotNull)
@@ -1084,7 +1084,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteEpochRequestTranslation, ReturnsNotNull)
@@ -1125,7 +1125,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorActivateEpochRequestTranslation, ReturnsNotNull)
@@ -1166,7 +1166,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeactivateEpochRequestTranslation, ReturnsNotNull)
@@ -1207,7 +1207,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorFinishEpochRequestTranslation, ReturnsNotNull)
@@ -1248,7 +1248,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTickEpochRequestTranslation, ReturnsNotNull)
@@ -1289,7 +1289,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetEpochRequestTranslation, ReturnsNotNull)
@@ -1331,7 +1331,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportHumanRequestTranslation, ReturnsNotNull)
@@ -1388,7 +1388,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportResourceRequestTranslation, ReturnsNotNull)
@@ -1444,7 +1444,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorEchoReplyTranslation, ReturnsNotNull)
@@ -1475,7 +1475,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorErrorReplyTranslation, ReturnsNotNull)
@@ -1506,7 +1506,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateLandReplyTranslation, ReturnsNotNull)
@@ -1542,7 +1542,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteLandReplyTranslation, ReturnsNotNull)
@@ -1577,7 +1577,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -1622,7 +1622,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandReplyWithObjectTranslation, ReturnsNotNull)
@@ -1652,8 +1652,8 @@ TEST_F(ProtocolToLanguageTranslatorGetLandReplyWithObjectTranslation, SetsProper
 
 TEST_F(ProtocolToLanguageTranslatorGetLandReplyWithObjectTranslation, SetsProperObject)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Login1", object.at("login").c_str());
     ASSERT_STREQ("World1", object.at("world_name").c_str());
     ASSERT_STREQ("Land1", object.at("land_name").c_str());
@@ -1672,7 +1672,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -1724,7 +1724,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, ReturnsNotNull)
@@ -1754,8 +1754,8 @@ TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, SetsProp
 
 TEST_F(ProtocolToLanguageTranslatorGetLandsReplyWithObjectsTranslation, SetsProperObjects)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Login1", object.at("login").c_str());
     ASSERT_STREQ("World1", object.at("world_name").c_str());
     ASSERT_STREQ("Land1", object.at("land_name").c_str());
@@ -1780,7 +1780,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateSettlementReplyTranslation, ReturnsNotNull)
@@ -1816,7 +1816,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteSettlementReplyTranslation, ReturnsNotNull)
@@ -1851,7 +1851,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -1894,7 +1894,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, ReturnsNotNull)
@@ -1924,8 +1924,8 @@ TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, Sets
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementReplyWithObjectTranslation, SetsProperObject)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Land1", object.at("land_name").c_str());
     ASSERT_STREQ("Settlement1", object.at("settlement_name").c_str());
 }
@@ -1942,7 +1942,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -1990,7 +1990,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, ReturnsNotNull)
@@ -2020,8 +2020,8 @@ TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, Se
 
 TEST_F(ProtocolToLanguageTranslatorGetSettlementsReplyWithObjectsTranslation, SetsProperObjects)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Land1", object.at("land_name").c_str());
     ASSERT_STREQ("Settlement1", object.at("settlement_name").c_str());
     object = objects.back();
@@ -2042,7 +2042,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorBuildBuildingReplyTranslation, ReturnsNotNull)
@@ -2078,7 +2078,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDestroyBuildingReplyTranslation, ReturnsNotNull)
@@ -2113,7 +2113,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -2157,7 +2157,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingReplyWithObjectTranslation, ReturnsNotNull)
@@ -2187,8 +2187,8 @@ TEST_F(ProtocolToLanguageTranslatorGetBuildingReplyWithObjectTranslation, SetsPr
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingReplyWithObjectTranslation, SetsProperObject)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Regular", object.at("buildingclass").c_str());
     ASSERT_STREQ("Farm", object.at("buildingname").c_str());
     ASSERT_STREQ("10", object.at("volume").c_str());
@@ -2206,7 +2206,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingsReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -2256,7 +2256,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingsReplyWithObjectsTranslation, ReturnsNotNull)
@@ -2286,8 +2286,8 @@ TEST_F(ProtocolToLanguageTranslatorGetBuildingsReplyWithObjectsTranslation, Sets
 
 TEST_F(ProtocolToLanguageTranslatorGetBuildingsReplyWithObjectsTranslation, SetsProperObjects)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Regular", object.at("buildingclass").c_str());
     ASSERT_STREQ("Farm", object.at("buildingname").c_str());
     ASSERT_STREQ("10", object.at("volume").c_str());
@@ -2310,7 +2310,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDismissHumanReplyTranslation, ReturnsNotNull)
@@ -2345,7 +2345,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumanReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -2390,7 +2390,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumanReplyWithObjectTranslation, ReturnsNotNull)
@@ -2420,8 +2420,8 @@ TEST_F(ProtocolToLanguageTranslatorGetHumanReplyWithObjectTranslation, SetsPrope
 
 TEST_F(ProtocolToLanguageTranslatorGetHumanReplyWithObjectTranslation, SetsProperObject)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Worker", object.at("humanclass").c_str());
     ASSERT_STREQ("Farmer", object.at("humanname").c_str());
     ASSERT_STREQ("Novice", object.at("experience").c_str());
@@ -2452,7 +2452,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumansReplyWithObjectsTranslation, ReturnsNotNull)
@@ -2482,8 +2482,8 @@ TEST_F(ProtocolToLanguageTranslatorGetHumansReplyWithObjectsTranslation, SetsPro
 
 TEST_F(ProtocolToLanguageTranslatorGetHumansReplyWithObjectsTranslation, SetsProperObjects)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Worker", object.at("humanclass").c_str());
     ASSERT_STREQ("Farmer", object.at("humanname").c_str());
     ASSERT_STREQ("Novice", object.at("experience").c_str());
@@ -2507,7 +2507,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetHumansReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -2547,7 +2547,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourceReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -2590,7 +2590,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourceReplyWithObjectTranslation, ReturnsNotNull)
@@ -2620,8 +2620,8 @@ TEST_F(ProtocolToLanguageTranslatorGetResourceReplyWithObjectTranslation, SetsPr
 
 TEST_F(ProtocolToLanguageTranslatorGetResourceReplyWithObjectTranslation, SetsProperObject)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Coal", object.at("resourcename").c_str());
     ASSERT_STREQ("10", object.at("volume").c_str());
 }
@@ -2638,7 +2638,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourcesReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -2686,7 +2686,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetResourcesReplyWithObjectsTranslation, ReturnsNotNull)
@@ -2716,8 +2716,8 @@ TEST_F(ProtocolToLanguageTranslatorGetResourcesReplyWithObjectsTranslation, Sets
 
 TEST_F(ProtocolToLanguageTranslatorGetResourcesReplyWithObjectsTranslation, SetsProperObjects)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Coal", object.at("resourcename").c_str());
     ASSERT_STREQ("10", object.at("volume").c_str());
     object = objects.back();
@@ -2738,7 +2738,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateUserReplyTranslation, ReturnsNotNull)
@@ -2774,7 +2774,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateWorldReplyTranslation, ReturnsNotNull)
@@ -2810,7 +2810,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorCreateEpochReplyTranslation, ReturnsNotNull)
@@ -2846,7 +2846,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeleteEpochReplyTranslation, ReturnsNotNull)
@@ -2882,7 +2882,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorActivateEpochReplyTranslation, ReturnsNotNull)
@@ -2918,7 +2918,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorDeactivateEpochReplyTranslation, ReturnsNotNull)
@@ -2954,7 +2954,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorFinishEpochReplyTranslation, ReturnsNotNull)
@@ -2990,7 +2990,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTickEpochReplyTranslation, ReturnsNotNull)
@@ -3025,7 +3025,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetEpochReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -3071,7 +3071,7 @@ protected:
         m_command = translator.translate(message);
     }
 
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorGetEpochReplyWithObjectTranslation, ReturnsNotNull)
@@ -3101,8 +3101,8 @@ TEST_F(ProtocolToLanguageTranslatorGetEpochReplyWithObjectTranslation, SetsPrope
 
 TEST_F(ProtocolToLanguageTranslatorGetEpochReplyWithObjectTranslation, SetsProperObject)
 {
-    TUSLanguage::ICommand::Objects objects = m_command->getObjects();
-    TUSLanguage::ICommand::Object object = objects.front();
+    Language::ICommand::Objects objects = m_command->getObjects();
+    Language::ICommand::Object object = objects.front();
     ASSERT_STREQ("Epoch", object.at("epoch_name").c_str());
     ASSERT_STREQ("World", object.at("world_name").c_str());
     ASSERT_STREQ("true", object.at("active").c_str());
@@ -3123,7 +3123,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportHumanReplyTranslation, ReturnsNotNull)
@@ -3159,7 +3159,7 @@ protected:
     Protocol::MessageFactory m_factory;
     Protocol::ProtocolToLanguageTranslator m_translator;
     Protocol::Message::Handle m_message;
-    TUSLanguage::ICommand::Handle m_command;
+    Language::ICommand::Handle m_command;
 };
 
 TEST_F(ProtocolToLanguageTranslatorTransportResourceReplyTranslation, ReturnsNotNull)

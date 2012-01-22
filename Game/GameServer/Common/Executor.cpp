@@ -54,8 +54,8 @@ Executor::Executor(
     }
 }
 
-TUSLanguage::ICommand::Handle Executor::execute(
-    TUSLanguage::ICommand::Handle a_request
+Language::ICommand::Handle Executor::execute(
+    Language::ICommand::Handle a_request
 )
 {
     logExecutorStart();
@@ -172,47 +172,47 @@ bool Executor::filterOutNonModerator() const
     return true;
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyServerIsNotListening() const
+Language::ICommand::Handle Executor::produceReplyServerIsNotListening() const
 {
     return getBasicReply(REPLY_STATUS_SERVER_IS_NOT_LISTENING);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyInvalidRequest() const
+Language::ICommand::Handle Executor::produceReplyInvalidRequest() const
 {
     return getBasicReply(REPLY_STATUS_INVALID_REQUEST);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyInvalidRange() const
+Language::ICommand::Handle Executor::produceReplyInvalidRange() const
 {
     return getBasicReply(REPLY_STATUS_INVALID_RANGE);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyUnauthenticated() const
+Language::ICommand::Handle Executor::produceReplyUnauthenticated() const
 {
     return getBasicReply(REPLY_STATUS_UNAUTHENTICATED);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyActingUserHasNotBeenGot() const
+Language::ICommand::Handle Executor::produceReplyActingUserHasNotBeenGot() const
 {
     return getBasicReply(REPLY_STATUS_ACTING_USER_HAS_NOT_BEEN_GOT);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyNonModeratorFilteredOut() const
+Language::ICommand::Handle Executor::produceReplyNonModeratorFilteredOut() const
 {
     return getBasicReply(REPLY_STATUS_NON_MODERATOR_FILTERED_OUT);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyUnauthorized() const
+Language::ICommand::Handle Executor::produceReplyUnauthorized() const
 {
     return getBasicReply(REPLY_STATUS_UNAUTHORIZED);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyEpochIsNotActive() const
+Language::ICommand::Handle Executor::produceReplyEpochIsNotActive() const
 {
     return getBasicReply(REPLY_STATUS_EPOCH_IS_NOT_ACTIVE);
 }
 
-TUSLanguage::ICommand::Handle Executor::produceReplyActionUnavailable() const
+Language::ICommand::Handle Executor::produceReplyActionUnavailable() const
 {
     return getBasicReply(REPLY_STATUS_ACTION_UNAVAILABLE);
 }

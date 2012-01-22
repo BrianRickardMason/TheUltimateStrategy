@@ -24,13 +24,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSLANGUAGE_REPLYBUILDER_HPP
-#define TUSLANGUAGE_REPLYBUILDER_HPP
+#ifndef LANGUAGE_REPLYBUILDER_HPP
+#define LANGUAGE_REPLYBUILDER_HPP
 
 #include <Language/Interface/ICommand.hpp>
 #include <boost/noncopyable.hpp>
 
-namespace TUSLanguage
+namespace Language
 {
 
 // TODO: Refactor me!
@@ -259,6 +259,6 @@ public:
     ) const;
 };
 
-} // namespace TUSLanguage
+} // namespace Language
 
-#endif // TUSLANGUAGE_REPLYBUILDER_HPP
+#endif // LANGUAGE_REPLYBUILDER_HPP

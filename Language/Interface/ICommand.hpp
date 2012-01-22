@@ -25,15 +25,15 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSLANGUAGE_ICOMMAND_HPP
-#define TUSLANGUAGE_ICOMMAND_HPP
+#ifndef LANGUAGE_ICOMMAND_HPP
+#define LANGUAGE_ICOMMAND_HPP
 
 #include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
 #include <vector>
 
-namespace TUSLanguage
+namespace Language
 {
 
 unsigned short int const ID_COMMAND_ECHO_REQUEST               = 1;
@@ -229,6 +229,6 @@ public:
     ) = 0;
 };
 
-} // namespace TUSLanguage
+} // namespace Language
 
-#endif // TUSLANGUAGE_ICOMMAND_HPP
+#endif // LANGUAGE_ICOMMAND_HPP

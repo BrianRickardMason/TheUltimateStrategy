@@ -46,7 +46,7 @@ private:
     virtual void logExecutorStart() const;
 
     virtual bool getParameters(
-        TUSLanguage::ICommand::Handle a_request
+        Language::ICommand::Handle a_request
     );
 
     virtual bool processParameters();
@@ -63,15 +63,15 @@ private:
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    virtual TUSLanguage::ICommand::Handle perform(
+    virtual Language::ICommand::Handle perform(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    virtual TUSLanguage::ICommand::Handle getBasicReply(
+    virtual Language::ICommand::Handle getBasicReply(
         unsigned int const a_status
     ) const;
 
-    TUSLanguage::ICommand::Handle produceReply(
+    Language::ICommand::Handle produceReply(
         GameServer::Land::DeleteLandOperatorExitCode const & a_exit_code
     ) const;
 

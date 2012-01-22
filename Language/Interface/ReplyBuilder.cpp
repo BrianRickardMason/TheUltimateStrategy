@@ -28,7 +28,7 @@
 #include <Language/Interface/Command.hpp>
 #include <Language/Interface/ReplyBuilder.hpp>
 
-namespace TUSLanguage
+namespace Language
 {
 
 ICommand::Handle ReplyBuilder::buildEchoReply(
@@ -535,4 +535,4 @@ ICommand::Handle ReplyBuilder::buildTransportResourceReply(
     return command;
 }
 
-} // namespace TUSLanguage
+} // namespace Language

@@ -61,7 +61,7 @@ private:
      * @return True if all parameters have been got, false otherwise.
      */
     virtual bool getParameters(
-        TUSLanguage::ICommand::Handle a_request
+        Language::ICommand::Handle a_request
     );
 
     /**
@@ -109,7 +109,7 @@ private:
      *
      * @return The reply.
      */
-    virtual TUSLanguage::ICommand::Handle perform(
+    virtual Language::ICommand::Handle perform(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
@@ -120,7 +120,7 @@ private:
      *
      * @return The reply.
      */
-    virtual TUSLanguage::ICommand::Handle getBasicReply(
+    virtual Language::ICommand::Handle getBasicReply(
         unsigned int const a_status
     ) const;
 
@@ -131,7 +131,7 @@ private:
      *
      * @return The reply.
      */
-    TUSLanguage::ICommand::Handle produceReply(
+    Language::ICommand::Handle produceReply(
         GameServer::Settlement::DeleteSettlementOperatorExitCode const & a_exit_code
     ) const;
 

@@ -62,12 +62,12 @@ namespace Server
 {
 
 Game::IExecutorShrPtr CommandDispatcher::dispatch(
-    TUSLanguage::ICommand::Handle const aCommand,
-    IContextShrPtr                const aContext
+    Language::ICommand::Handle const aCommand,
+    IContextShrPtr             const aContext
 ) const
 {
     using namespace Game;
-    using namespace TUSLanguage;
+    using namespace Language;
 
     if (!aCommand)
     {

@@ -39,15 +39,15 @@ namespace Protocol
 
 // TODO: Add UTs for both translators (exceptions).
 
-TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
+Language::ICommand::Handle ProtocolToLanguageTranslator::translate(
     Message::Handle a_message
 ) const
 {
     typedef Poco::XML::Element *               Element;
     typedef Poco::AutoPtr<Poco::XML::NodeList> NodeList;
 
-    TUSLanguage::RequestBuilder request_builder;
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::RequestBuilder request_builder;
+    Language::ReplyBuilder reply_builder;
 
     // Default values.
     unsigned short int id(0);
@@ -78,13 +78,13 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
 
     switch (id)
     {
-        case TUSLanguage::ID_COMMAND_ECHO_REQUEST:
+        case Language::ID_COMMAND_ECHO_REQUEST:
             return request_builder.buildEchoRequest();
 
-        case TUSLanguage::ID_COMMAND_ERROR_REQUEST:
+        case Language::ID_COMMAND_ERROR_REQUEST:
             return request_builder.buildErrorRequest();
 
-        case TUSLanguage::ID_COMMAND_CREATE_LAND_REQUEST:
+        case Language::ID_COMMAND_CREATE_LAND_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -104,7 +104,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DELETE_LAND_REQUEST:
+        case Language::ID_COMMAND_DELETE_LAND_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -122,7 +122,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_LAND_REQUEST:
+        case Language::ID_COMMAND_GET_LAND_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -140,7 +140,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_LANDS_REQUEST:
+        case Language::ID_COMMAND_GET_LANDS_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -154,7 +154,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_SETTLEMENT_REQUEST:
+        case Language::ID_COMMAND_CREATE_SETTLEMENT_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -174,7 +174,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DELETE_SETTLEMENT_REQUEST:
+        case Language::ID_COMMAND_DELETE_SETTLEMENT_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -192,7 +192,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REQUEST:
+        case Language::ID_COMMAND_GET_SETTLEMENT_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -210,7 +210,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REQUEST:
+        case Language::ID_COMMAND_GET_SETTLEMENTS_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -228,7 +228,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_BUILD_BUILDING_REQUEST:
+        case Language::ID_COMMAND_BUILD_BUILDING_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -252,7 +252,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DESTROY_BUILDING_REQUEST:
+        case Language::ID_COMMAND_DESTROY_BUILDING_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -276,7 +276,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_BUILDING_REQUEST:
+        case Language::ID_COMMAND_GET_BUILDING_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -298,7 +298,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_BUILDINGS_REQUEST:
+        case Language::ID_COMMAND_GET_BUILDINGS_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -318,7 +318,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DISMISS_HUMAN_REQUEST:
+        case Language::ID_COMMAND_DISMISS_HUMAN_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -342,7 +342,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_ENGAGE_HUMAN_REQUEST:
+        case Language::ID_COMMAND_ENGAGE_HUMAN_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -366,7 +366,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_HUMAN_REQUEST:
+        case Language::ID_COMMAND_GET_HUMAN_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -388,7 +388,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_HUMANS_REQUEST:
+        case Language::ID_COMMAND_GET_HUMANS_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -408,7 +408,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_RESOURCE_REQUEST:
+        case Language::ID_COMMAND_GET_RESOURCE_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -430,7 +430,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_RESOURCES_REQUEST:
+        case Language::ID_COMMAND_GET_RESOURCES_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -450,7 +450,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_USER_REQUEST:
+        case Language::ID_COMMAND_CREATE_USER_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -468,7 +468,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_WORLD_REQUEST:
+        case Language::ID_COMMAND_CREATE_WORLD_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -486,7 +486,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_EPOCH_REQUEST:
+        case Language::ID_COMMAND_CREATE_EPOCH_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -506,7 +506,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DELETE_EPOCH_REQUEST:
+        case Language::ID_COMMAND_DELETE_EPOCH_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -524,7 +524,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_ACTIVATE_EPOCH_REQUEST:
+        case Language::ID_COMMAND_ACTIVATE_EPOCH_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -542,7 +542,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DEACTIVATE_EPOCH_REQUEST:
+        case Language::ID_COMMAND_DEACTIVATE_EPOCH_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -560,7 +560,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_FINISH_EPOCH_REQUEST:
+        case Language::ID_COMMAND_FINISH_EPOCH_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -578,7 +578,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_TICK_EPOCH_REQUEST:
+        case Language::ID_COMMAND_TICK_EPOCH_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -596,7 +596,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_EPOCH_REQUEST:
+        case Language::ID_COMMAND_GET_EPOCH_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -614,7 +614,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_TRANSPORT_HUMAN_REQUEST:
+        case Language::ID_COMMAND_TRANSPORT_HUMAN_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -640,7 +640,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_TRANSPORT_RESOURCE_REQUEST:
+        case Language::ID_COMMAND_TRANSPORT_RESOURCE_REQUEST:
         {
             Element request = message->getChildElement("request");
             if (not request) throw std::exception();
@@ -666,7 +666,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_ECHO_REPLY:
+        case Language::ID_COMMAND_ECHO_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -680,7 +680,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             return reply_builder.buildEchoReply(boost::lexical_cast<unsigned short int>(code->innerText()));
         }
 
-        case TUSLanguage::ID_COMMAND_ERROR_REPLY:
+        case Language::ID_COMMAND_ERROR_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -694,7 +694,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             return reply_builder.buildErrorReply(boost::lexical_cast<unsigned short int>(code->innerText()));
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_LAND_REPLY:
+        case Language::ID_COMMAND_CREATE_LAND_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -712,7 +712,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DELETE_LAND_REPLY:
+        case Language::ID_COMMAND_DELETE_LAND_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -730,7 +730,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_LAND_REPLY:
+        case Language::ID_COMMAND_GET_LAND_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -758,7 +758,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                 Element granted = land->getChildElement("granted");
                 if (not (login and world_name and land_name and granted)) throw std::exception();
 
-                TUSLanguage::ICommand::Object object;
+                Language::ICommand::Object object;
                 object.insert(std::make_pair("login", login->innerText()));
                 object.insert(std::make_pair("world_name", world_name->innerText()));
                 object.insert(std::make_pair("land_name", land_name->innerText()));
@@ -772,7 +772,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_GET_LANDS_REPLY:
+        case Language::ID_COMMAND_GET_LANDS_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -797,7 +797,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
             else
             {
-                TUSLanguage::ICommand::Objects objects;
+                Language::ICommand::Objects objects;
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
@@ -809,7 +809,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                     Element granted = land->getChildElement("granted");
                     if (not (login and world_name and land_name and granted)) throw std::exception();
 
-                    TUSLanguage::ICommand::Object object;
+                    Language::ICommand::Object object;
                     object.insert(std::make_pair("login", login->innerText()));
                     object.insert(std::make_pair("world_name", world_name->innerText()));
                     object.insert(std::make_pair("land_name", land_name->innerText()));
@@ -826,7 +826,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_SETTLEMENT_REPLY:
+        case Language::ID_COMMAND_CREATE_SETTLEMENT_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -844,7 +844,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DELETE_SETTLEMENT_REPLY:
+        case Language::ID_COMMAND_DELETE_SETTLEMENT_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -862,7 +862,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_SETTLEMENT_REPLY:
+        case Language::ID_COMMAND_GET_SETTLEMENT_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -888,7 +888,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                 Element settlement_name = settlement->getChildElement("settlement_name");
                 if (not (land_name and settlement_name)) throw std::exception();
 
-                TUSLanguage::ICommand::Object object;
+                Language::ICommand::Object object;
                 object.insert(std::make_pair("land_name", land_name->innerText()));
                 object.insert(std::make_pair("settlement_name", settlement_name->innerText()));
 
@@ -900,7 +900,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_GET_SETTLEMENTS_REPLY:
+        case Language::ID_COMMAND_GET_SETTLEMENTS_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -925,7 +925,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
             else
             {
-                TUSLanguage::ICommand::Objects objects;
+                Language::ICommand::Objects objects;
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
@@ -935,7 +935,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                     Element settlement_name = settlement->getChildElement("settlement_name");
                     if (not (land_name and settlement_name)) throw std::exception();
 
-                    TUSLanguage::ICommand::Object object;
+                    Language::ICommand::Object object;
                     object.insert(std::make_pair("land_name", land_name->innerText()));
                     object.insert(std::make_pair("settlement_name", settlement_name->innerText()));
 
@@ -950,7 +950,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_BUILD_BUILDING_REPLY:
+        case Language::ID_COMMAND_BUILD_BUILDING_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -968,7 +968,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DESTROY_BUILDING_REPLY:
+        case Language::ID_COMMAND_DESTROY_BUILDING_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -986,7 +986,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_BUILDING_REPLY:
+        case Language::ID_COMMAND_GET_BUILDING_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1013,7 +1013,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                 Element volume = building->getChildElement("volume");
                 if (not (buildingclass and buildingname and volume)) throw std::exception();
 
-                TUSLanguage::ICommand::Object object;
+                Language::ICommand::Object object;
                 object.insert(std::make_pair("buildingclass", buildingclass->innerText()));
                 object.insert(std::make_pair("buildingname", buildingname->innerText()));
                 object.insert(std::make_pair("volume", volume->innerText()));
@@ -1026,7 +1026,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_GET_BUILDINGS_REPLY:
+        case Language::ID_COMMAND_GET_BUILDINGS_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1051,7 +1051,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
             else
             {
-                TUSLanguage::ICommand::Objects objects;
+                Language::ICommand::Objects objects;
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
@@ -1062,7 +1062,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                     Element volume = building->getChildElement("volume");
                     if (not (buildingclass and buildingname and volume)) throw std::exception();
 
-                    TUSLanguage::ICommand::Object object;
+                    Language::ICommand::Object object;
                     object.insert(std::make_pair("buildingclass", buildingclass->innerText()));
                     object.insert(std::make_pair("buildingname", buildingname->innerText()));
                     object.insert(std::make_pair("volume", volume->innerText()));
@@ -1078,7 +1078,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_DISMISS_HUMAN_REPLY:
+        case Language::ID_COMMAND_DISMISS_HUMAN_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1096,7 +1096,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_ENGAGE_HUMAN_REPLY:
+        case Language::ID_COMMAND_ENGAGE_HUMAN_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1114,7 +1114,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_HUMAN_REPLY:
+        case Language::ID_COMMAND_GET_HUMAN_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1142,7 +1142,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                 Element volume = human->getChildElement("volume");
                 if (not (humanclass and humanname and experience and volume)) throw std::exception();
 
-                TUSLanguage::ICommand::Object object;
+                Language::ICommand::Object object;
                 object.insert(std::make_pair("humanclass", humanclass->innerText()));
                 object.insert(std::make_pair("humanname", humanname->innerText()));
                 object.insert(std::make_pair("experience", experience->innerText()));
@@ -1156,7 +1156,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_GET_HUMANS_REPLY:
+        case Language::ID_COMMAND_GET_HUMANS_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1181,7 +1181,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
             else
             {
-                TUSLanguage::ICommand::Objects objects;
+                Language::ICommand::Objects objects;
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
@@ -1193,7 +1193,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                     Element volume = human->getChildElement("volume");
                     if (not (humanclass and humanname and experience and volume)) throw std::exception();
 
-                    TUSLanguage::ICommand::Object object;
+                    Language::ICommand::Object object;
                     object.insert(std::make_pair("humanclass", humanclass->innerText()));
                     object.insert(std::make_pair("humanname", humanname->innerText()));
                     object.insert(std::make_pair("experience", experience->innerText()));
@@ -1210,7 +1210,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_GET_RESOURCE_REPLY:
+        case Language::ID_COMMAND_GET_RESOURCE_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1236,7 +1236,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                 Element volume = resource->getChildElement("volume");
                 if (not (resourcename and volume)) throw std::exception();
 
-                TUSLanguage::ICommand::Object object;
+                Language::ICommand::Object object;
                 object.insert(std::make_pair("resourcename", resourcename->innerText()));
                 object.insert(std::make_pair("volume", volume->innerText()));
 
@@ -1248,7 +1248,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_GET_RESOURCES_REPLY:
+        case Language::ID_COMMAND_GET_RESOURCES_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1273,7 +1273,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
             else
             {
-                TUSLanguage::ICommand::Objects objects;
+                Language::ICommand::Objects objects;
 
                 for (int i = 0; i < elements->length(); ++i)
                 {
@@ -1283,7 +1283,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                     Element volume = resource->getChildElement("volume");
                     if (not (resourcename and volume)) throw std::exception();
 
-                    TUSLanguage::ICommand::Object object;
+                    Language::ICommand::Object object;
                     object.insert(std::make_pair("resourcename", resourcename->innerText()));
                     object.insert(std::make_pair("volume", volume->innerText()));
 
@@ -1298,7 +1298,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_USER_REPLY:
+        case Language::ID_COMMAND_CREATE_USER_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1316,7 +1316,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_WORLD_REPLY:
+        case Language::ID_COMMAND_CREATE_WORLD_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1334,7 +1334,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_CREATE_EPOCH_REPLY:
+        case Language::ID_COMMAND_CREATE_EPOCH_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1352,7 +1352,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DELETE_EPOCH_REPLY:
+        case Language::ID_COMMAND_DELETE_EPOCH_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1370,7 +1370,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_ACTIVATE_EPOCH_REPLY:
+        case Language::ID_COMMAND_ACTIVATE_EPOCH_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1388,7 +1388,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_DEACTIVATE_EPOCH_REPLY:
+        case Language::ID_COMMAND_DEACTIVATE_EPOCH_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1406,7 +1406,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_FINISH_EPOCH_REPLY:
+        case Language::ID_COMMAND_FINISH_EPOCH_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1424,7 +1424,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_TICK_EPOCH_REPLY:
+        case Language::ID_COMMAND_TICK_EPOCH_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1442,7 +1442,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_GET_EPOCH_REPLY:
+        case Language::ID_COMMAND_GET_EPOCH_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1471,7 +1471,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                 Element ticks = epoch->getChildElement("ticks");
                 if (not (epoch_name and world_name and active and finished and ticks)) throw std::exception();
 
-                TUSLanguage::ICommand::Object object;
+                Language::ICommand::Object object;
                 object.insert(std::make_pair("epoch_name", epoch_name->innerText()));
                 object.insert(std::make_pair("world_name", world_name->innerText()));
                 object.insert(std::make_pair("active", active->innerText()));
@@ -1486,7 +1486,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             }
         }
 
-        case TUSLanguage::ID_COMMAND_TRANSPORT_HUMAN_REPLY:
+        case Language::ID_COMMAND_TRANSPORT_HUMAN_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();
@@ -1504,7 +1504,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
                    );
         }
 
-        case TUSLanguage::ID_COMMAND_TRANSPORT_RESOURCE_REPLY:
+        case Language::ID_COMMAND_TRANSPORT_RESOURCE_REPLY:
         {
             Element reply = message->getChildElement("reply");
             if (not reply) throw std::exception();

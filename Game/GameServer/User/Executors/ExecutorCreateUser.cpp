@@ -52,7 +52,7 @@ void ExecutorCreateUser::logExecutorStart() const
 }
 
 bool ExecutorCreateUser::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getParam("login");
@@ -101,7 +101,7 @@ bool ExecutorCreateUser::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateUser::perform(
+Language::ICommand::Handle ExecutorCreateUser::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -124,7 +124,7 @@ TUSLanguage::ICommand::Handle ExecutorCreateUser::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateUser::getBasicReply(
+Language::ICommand::Handle ExecutorCreateUser::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -132,11 +132,11 @@ TUSLanguage::ICommand::Handle ExecutorCreateUser::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateUser::produceReply(
+Language::ICommand::Handle ExecutorCreateUser::produceReply(
     GameServer::User::CreateUserOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

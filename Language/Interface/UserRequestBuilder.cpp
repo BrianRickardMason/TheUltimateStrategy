@@ -1,7 +1,7 @@
 
 #include "UserRequestBuilder.hpp"
 
-namespace TUSLanguage {
+namespace Language {
 
 const std::string UserRequestBuilder::SETTLEMENT_CLASS_ID = "1";
 

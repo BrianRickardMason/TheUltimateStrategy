@@ -52,7 +52,7 @@ void ExecutorGetSettlement::logExecutorStart() const
 }
 
 bool ExecutorGetSettlement::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -122,7 +122,7 @@ bool ExecutorGetSettlement::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetSettlement::perform(
+Language::ICommand::Handle ExecutorGetSettlement::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -146,7 +146,7 @@ TUSLanguage::ICommand::Handle ExecutorGetSettlement::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetSettlement::getBasicReply(
+Language::ICommand::Handle ExecutorGetSettlement::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -154,18 +154,18 @@ TUSLanguage::ICommand::Handle ExecutorGetSettlement::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetSettlement::produceReply(
+Language::ICommand::Handle ExecutorGetSettlement::produceReply(
     GameServer::Settlement::GetSettlementOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Settlement::GET_SETTLEMENT_OPERATOR_EXIT_CODE_SETTLEMENT_HAS_BEEN_GOT:
         {
             // TODO: Translate this automatically!
-            TUSLanguage::ICommand::Object settlement;
+            Language::ICommand::Object settlement;
             settlement.insert(std::make_pair("land_name", a_exit_code.m_settlement->getLandName()));
             settlement.insert(std::make_pair("settlement_name", a_exit_code.m_settlement->getSettlementName()));
             return reply_builder.buildGetSettlementReply(

@@ -53,7 +53,7 @@ void ExecutorDestroyBuilding::logExecutorStart() const
 }
 
 bool ExecutorDestroyBuilding::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -138,7 +138,7 @@ bool ExecutorDestroyBuilding::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorDestroyBuilding::perform(
+Language::ICommand::Handle ExecutorDestroyBuilding::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -162,7 +162,7 @@ TUSLanguage::ICommand::Handle ExecutorDestroyBuilding::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorDestroyBuilding::getBasicReply(
+Language::ICommand::Handle ExecutorDestroyBuilding::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -170,11 +170,11 @@ TUSLanguage::ICommand::Handle ExecutorDestroyBuilding::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorDestroyBuilding::produceReply(
+Language::ICommand::Handle ExecutorDestroyBuilding::produceReply(
     GameServer::Building::DestroyBuildingOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

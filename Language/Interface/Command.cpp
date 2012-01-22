@@ -27,7 +27,7 @@
 
 #include <Language/Interface/Command.hpp>
 
-namespace TUSLanguage
+namespace Language
 {
 
 Command::Command()
@@ -123,4 +123,4 @@ void Command::addObject(
     m_objects.push_back(a_object);
 }
 
-} // namespace TUSLanguage
+} // namespace Language

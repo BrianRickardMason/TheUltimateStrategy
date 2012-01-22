@@ -53,7 +53,7 @@ void ExecutorEngageHuman::logExecutorStart() const
 }
 
 bool ExecutorEngageHuman::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -138,7 +138,7 @@ bool ExecutorEngageHuman::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorEngageHuman::perform(
+Language::ICommand::Handle ExecutorEngageHuman::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -162,7 +162,7 @@ TUSLanguage::ICommand::Handle ExecutorEngageHuman::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorEngageHuman::getBasicReply(
+Language::ICommand::Handle ExecutorEngageHuman::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -170,11 +170,11 @@ TUSLanguage::ICommand::Handle ExecutorEngageHuman::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorEngageHuman::produceReply(
+Language::ICommand::Handle ExecutorEngageHuman::produceReply(
     GameServer::Human::EngageHumanOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

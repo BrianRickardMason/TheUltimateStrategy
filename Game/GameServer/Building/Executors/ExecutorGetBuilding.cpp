@@ -53,7 +53,7 @@ void ExecutorGetBuilding::logExecutorStart() const
 }
 
 bool ExecutorGetBuilding::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -136,7 +136,7 @@ bool ExecutorGetBuilding::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetBuilding::perform(
+Language::ICommand::Handle ExecutorGetBuilding::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -160,7 +160,7 @@ TUSLanguage::ICommand::Handle ExecutorGetBuilding::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetBuilding::getBasicReply(
+Language::ICommand::Handle ExecutorGetBuilding::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -168,18 +168,18 @@ TUSLanguage::ICommand::Handle ExecutorGetBuilding::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorGetBuilding::produceReply(
+Language::ICommand::Handle ExecutorGetBuilding::produceReply(
     GameServer::Building::GetBuildingOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
         case GameServer::Building::GET_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_GOT:
         {
             // TODO: Translate this automatically!
-            TUSLanguage::ICommand::Object building;
+            Language::ICommand::Object building;
             building.insert(std::make_pair("buildingclass", a_exit_code.m_building->getBuilding()->getClass()));
             building.insert(std::make_pair("buildingname", a_exit_code.m_building->getBuilding()->getName()));
             building.insert(std::make_pair("volume",

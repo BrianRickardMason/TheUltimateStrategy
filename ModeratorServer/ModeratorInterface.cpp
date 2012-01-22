@@ -18,49 +18,49 @@ ModeratorInterface::ModeratorInterface(IModeratorContext::Handle aContext, IBotM
     mContext(aContext), mBotManager(aManager), mCredentials() {
 
     // TODO get this from context / factory / facade / implementation when available
-    mReqBuilder.reset( new TUSLanguage::UserRequestBuilder(new TUSLanguage::RequestBuilder));
+    mReqBuilder.reset( new Language::UserRequestBuilder(new Language::RequestBuilder));
     mToProtocol.reset( new Protocol::LanguageToProtocolTranslator);
     mToLanguage.reset( new Protocol::ProtocolToLanguageTranslator);
 }
 
 int ModeratorInterface::createEpoch(const std::string& aEpochName) {
-    TUSLanguage::ICommand::Handle cmd = 
+    Language::ICommand::Handle cmd = 
         mReqBuilder->buildCreateEpochRequest(aEpochName);
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::createWorld(const std::string& aWorldName) {
-    TUSLanguage::ICommand::Handle cmd =
+    Language::ICommand::Handle cmd =
         mReqBuilder->buildCreateWorldRequest(aWorldName);
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::activateEpoch() {
-    TUSLanguage::ICommand::Handle cmd =
+    Language::ICommand::Handle cmd =
         mReqBuilder->buildActivateEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::deactivateEpoch() {
-    TUSLanguage::ICommand::Handle cmd =
+    Language::ICommand::Handle cmd =
         mReqBuilder->buildDeactivateEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::deleteEpoch() {
-    TUSLanguage::ICommand::Handle cmd =
+    Language::ICommand::Handle cmd =
         mReqBuilder->buildDeleteEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::finishEpoch() {
-    TUSLanguage::ICommand::Handle cmd =
+    Language::ICommand::Handle cmd =
         mReqBuilder->buildFinishEpochRequest();
     return executeCommand(cmd);
 }
 
 int ModeratorInterface::tickEpoch() {
-    TUSLanguage::ICommand::Handle cmd =
+    Language::ICommand::Handle cmd =
         mReqBuilder->buildTickEpochRequest();
     return executeCommand(cmd);
 }
@@ -80,8 +80,8 @@ void ModeratorInterface::setModeratorCredentials(const Credentials& aCredenetial
     );
 }
 
-int ModeratorInterface::executeCommand(TUSLanguage::ICommand::Handle in){
-    TUSLanguage::ICommand::Handle ret;
+int ModeratorInterface::executeCommand(Language::ICommand::Handle in){
+    Language::ICommand::Handle ret;
 
     sendCommand(in,ret);
 
@@ -89,8 +89,8 @@ int ModeratorInterface::executeCommand(TUSLanguage::ICommand::Handle in){
 }
 
 void ModeratorInterface::sendCommand(
-    TUSLanguage::ICommand::Handle& in,
-    TUSLanguage::ICommand::Handle& out
+    Language::ICommand::Handle& in,
+    Language::ICommand::Handle& out
 ) {
     const IBotConnectionConfiguration& conf( mContext->getBotConnectionConf());
     Poco::Net::SocketAddress address(

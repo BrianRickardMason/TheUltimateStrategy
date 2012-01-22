@@ -7,7 +7,7 @@
 #include "RequestBuilder.hpp"
 #include "ICommand.hpp"
 
-namespace TUSLanguage {
+namespace Language {
 
 // TODO coherent coding style
     
@@ -460,6 +460,6 @@ protected:
     }
 };
 
-} // namespace TUSLanguage
+} // namespace Language
 
 #endif

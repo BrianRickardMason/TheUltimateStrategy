@@ -52,7 +52,7 @@ void ExecutorDeleteLand::logExecutorStart() const
 }
 
 bool ExecutorDeleteLand::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -122,7 +122,7 @@ bool ExecutorDeleteLand::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteLand::perform(
+Language::ICommand::Handle ExecutorDeleteLand::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -145,7 +145,7 @@ TUSLanguage::ICommand::Handle ExecutorDeleteLand::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteLand::getBasicReply(
+Language::ICommand::Handle ExecutorDeleteLand::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -153,11 +153,11 @@ TUSLanguage::ICommand::Handle ExecutorDeleteLand::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorDeleteLand::produceReply(
+Language::ICommand::Handle ExecutorDeleteLand::produceReply(
     GameServer::Land::DeleteLandOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {

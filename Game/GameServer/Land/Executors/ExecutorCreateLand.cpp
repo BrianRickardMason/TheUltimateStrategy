@@ -52,7 +52,7 @@ void ExecutorCreateLand::logExecutorStart() const
 }
 
 bool ExecutorCreateLand::getParameters(
-    TUSLanguage::ICommand::Handle a_request
+    Language::ICommand::Handle a_request
 )
 {
     m_login = a_request->getLogin();
@@ -106,7 +106,7 @@ bool ExecutorCreateLand::verifyWorldConfiguration(
     return true;
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateLand::perform(
+Language::ICommand::Handle ExecutorCreateLand::perform(
     IPersistenceShrPtr a_persistence
 ) const
 {
@@ -129,7 +129,7 @@ TUSLanguage::ICommand::Handle ExecutorCreateLand::perform(
     }
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateLand::getBasicReply(
+Language::ICommand::Handle ExecutorCreateLand::getBasicReply(
     unsigned int const a_status
 ) const
 {
@@ -137,11 +137,11 @@ TUSLanguage::ICommand::Handle ExecutorCreateLand::getBasicReply(
     BOOST_ASSERT_MSG(false, "Should never be called!");
 }
 
-TUSLanguage::ICommand::Handle ExecutorCreateLand::produceReply(
+Language::ICommand::Handle ExecutorCreateLand::produceReply(
     GameServer::Land::CreateLandOperatorExitCode const & a_exit_code
 ) const
 {
-    TUSLanguage::ReplyBuilder reply_builder;
+    Language::ReplyBuilder reply_builder;
 
     switch (a_exit_code.m_exit_code)
     {
