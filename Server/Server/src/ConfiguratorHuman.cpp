@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include <Game/GameServer/Configuration/Configurator/Human/Human.hpp>
+#include <Poco/AutoPtr.h>
 #include <Poco/DOM/DOMParser.h>
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/NodeList.h>
@@ -99,10 +100,10 @@ bool ConfiguratorHuman::parseXml()
 {
     // TODO: Add verification here.
 
-    typedef GameServer::Configuration::IKey IKey;
-    typedef GameServer::Resource::Volume Volume;
-    typedef Poco::XML::Element * Element;
-    typedef Poco::XML::NodeList * NodeList;
+    typedef GameServer::Configuration::IKey    IKey;
+    typedef GameServer::Resource::Volume       Volume;
+    typedef Poco::XML::Element *               Element;
+    typedef Poco::AutoPtr<Poco::XML::NodeList> NodeList;
 
     Element documentElement = mHumansXml->documentElement();
 

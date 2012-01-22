@@ -26,6 +26,7 @@
 // SUCH DAMAGE.
 
 #include <Game/GameServer/Configuration/Configurator/Resource/Resource.hpp>
+#include <Poco/AutoPtr.h>
 #include <Poco/DOM/DOMParser.h>
 #include <Poco/DOM/Element.h>
 #include <Poco/DOM/NodeList.h>
@@ -86,9 +87,9 @@ bool ConfiguratorResource::parseXml()
 {
     // TODO: Add verification here.
 
-    typedef GameServer::Configuration::IKey IKey;
-    typedef Poco::XML::Element * Element;
-    typedef Poco::XML::NodeList * NodeList;
+    typedef GameServer::Configuration::IKey    IKey;
+    typedef Poco::XML::Element *               Element;
+    typedef Poco::AutoPtr<Poco::XML::NodeList> NodeList;
 
     Element documentElement = mResourcesXml->documentElement();
 
