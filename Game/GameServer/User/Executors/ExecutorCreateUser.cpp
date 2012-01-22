@@ -55,8 +55,8 @@ bool ExecutorCreateUser::getParameters(
     TUSLanguage::ICommand::Handle a_request
 )
 {
-    m_login = a_request->getLogin();
-    m_password = a_request->getPassword();
+    m_login = a_request->getParam("login");
+    m_password = a_request->getParam("password");
 
     return true;
 }
