@@ -94,7 +94,7 @@ bool Configurator::loadXml()
 
     // TODO: Guess the path.
     mServerConfigXml =
-        parser.parse("/home/brian/workspace/TheUltimateStrategy/Server/Network/XmlRPCServer/serverconfig.xml");
+        parser.parse("/home/brian/workspace/TheUltimateStrategy/Server/Server/serverconfig.xml");
 
     return true;
 }
