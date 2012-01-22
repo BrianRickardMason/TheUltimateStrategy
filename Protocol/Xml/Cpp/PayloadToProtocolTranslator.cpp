@@ -28,7 +28,7 @@
 #include <Poco/DOM/DOMParser.h>
 #include <Protocol/Xml/Cpp/PayloadToProtocolTranslator.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 Message::Handle PayloadToProtocolTranslator::translate(
@@ -38,11 +38,11 @@ Message::Handle PayloadToProtocolTranslator::translate(
     Poco::XML::DOMParser parser;
 
     // TODO: What to do if the message is not valid according to the DTD (blocks here).
-    TUSProtocol::Message::Handle message(
-        static_cast<TUSProtocol::Message *>(parser.parseString(aPayload.getContent()))
+    Protocol::Message::Handle message(
+        static_cast<Protocol::Message *>(parser.parseString(aPayload.getContent()))
     );
 
     return message;
 }
 
-} // namespace TUSProtocol
+} // namespace Protocol

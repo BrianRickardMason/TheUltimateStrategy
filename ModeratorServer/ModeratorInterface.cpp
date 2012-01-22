@@ -19,8 +19,8 @@ ModeratorInterface::ModeratorInterface(IModeratorContext::Handle aContext, IBotM
 
     // TODO get this from context / factory / facade / implementation when available
     mReqBuilder.reset( new TUSLanguage::UserRequestBuilder(new TUSLanguage::RequestBuilder));
-    mToProtocol.reset( new TUSProtocol::LanguageToProtocolTranslator);
-    mToLanguage.reset( new TUSProtocol::ProtocolToLanguageTranslator);
+    mToProtocol.reset( new Protocol::LanguageToProtocolTranslator);
+    mToLanguage.reset( new Protocol::ProtocolToLanguageTranslator);
 }
 
 int ModeratorInterface::createEpoch(const std::string& aEpochName) {
@@ -100,7 +100,7 @@ void ModeratorInterface::sendCommand(
     Poco::Net::SocketStream stream(server);
     Poco::XML::DOMWriter writer;
 
-    TUSProtocol::Message::Handle req = mToProtocol->translate(in);
+    Protocol::Message::Handle req = mToProtocol->translate(in);
     
     stream << std::noskipws << std::nounitbuf;
 
@@ -114,7 +114,7 @@ void ModeratorInterface::sendCommand(
     Poco::XML::Document* doc(parser.parse(&is));
     stream.close();
 
-    TUSProtocol::Message::Handle resp( new TUSProtocol::Message());
+    Protocol::Message::Handle resp( new Protocol::Message());
     resp->appendChild( resp->importNode(doc->documentElement(), true) );
 
     out = mToLanguage->translate(resp);

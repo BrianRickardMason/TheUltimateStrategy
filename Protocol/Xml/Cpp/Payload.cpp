@@ -30,7 +30,7 @@
 #include <Protocol/Xml/Cpp/Payload.hpp>
 #include <sstream>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 Payload::Payload(
@@ -68,4 +68,4 @@ std::string const & Payload::getContent() const
     return mContent;
 }
 
-} // namespace TUSProtocol
+} // namespace Protocol

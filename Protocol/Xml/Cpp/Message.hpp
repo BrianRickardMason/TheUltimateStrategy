@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_MESSAGE_HPP
-#define TUSPROTOCOL_MESSAGE_HPP
+#ifndef PROTOCOL_MESSAGE_HPP
+#define PROTOCOL_MESSAGE_HPP
 
 #include <Poco/DOM/Document.h>
 #include <boost/shared_ptr.hpp>
@@ -34,7 +34,7 @@
 #include <string>
 #include <vector>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 class Message
@@ -55,6 +55,6 @@ public:
     );
 };
 
-} // namespace TUSProtocol
+} // namespace Protocol
 
-#endif // TUSPROTOCOL_MESSAGE_HPP
+#endif // PROTOCOL_MESSAGE_HPP

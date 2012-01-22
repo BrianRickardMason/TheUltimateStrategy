@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_MESSAGEFACTORY_HPP
-#define TUSPROTOCOL_MESSAGEFACTORY_HPP
+#ifndef PROTOCOL_MESSAGEFACTORY_HPP
+#define PROTOCOL_MESSAGEFACTORY_HPP
 
 #include <Protocol/Xml/Cpp/Message.hpp>
 #include <boost/noncopyable.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 class MessageFactory
@@ -464,6 +464,6 @@ public:
     ) const;
 };
 
-} // namespace TUSProtocol
+} // namespace Protocol
 
-#endif // TUSPROTOCOL_MESSAGEFACTORY_HPP
+#endif // PROTOCOL_MESSAGEFACTORY_HPP

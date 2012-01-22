@@ -61,14 +61,14 @@ void Connection::run()
 
     // Translate the data to the payload.
     std::string content(buffer);
-    TUSProtocol::Payload payloadRequest(length, content);
+    Protocol::Payload payloadRequest(length, content);
 
     // Translate the payload to the protocol.
-    TUSProtocol::PayloadToProtocolTranslator payloadToProtocolTranslator;
-    TUSProtocol::Message::Handle messageRequest = payloadToProtocolTranslator.translate(payloadRequest);
+    Protocol::PayloadToProtocolTranslator payloadToProtocolTranslator;
+    Protocol::Message::Handle messageRequest = payloadToProtocolTranslator.translate(payloadRequest);
 
     // Translate the protocol to the language.
-    TUSProtocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
+    Protocol::ProtocolToLanguageTranslator protocolToLanguageTranslator;
     TUSLanguage::Command::Handle commandRequest = protocolToLanguageTranslator.translate(messageRequest);
 
     // Dispatch the command.
@@ -79,11 +79,11 @@ void Connection::run()
     TUSLanguage::Command::Handle commandReply = executor->execute(commandRequest);
 
     // Translate the language to the protocol.
-    TUSProtocol::LanguageToProtocolTranslator languageToProtocolTranslator;
-    TUSProtocol::Message::Handle messageReply = languageToProtocolTranslator.translate(commandReply);
+    Protocol::LanguageToProtocolTranslator languageToProtocolTranslator;
+    Protocol::Message::Handle messageReply = languageToProtocolTranslator.translate(commandReply);
 
     // Translate the protocol to the payload.
-    TUSProtocol::Payload payloadReply(messageReply);
+    Protocol::Payload payloadReply(messageReply);
 
     // Write the data to the socket.
     mSocketStream.clear();

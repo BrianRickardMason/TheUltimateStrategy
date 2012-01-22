@@ -33,7 +33,7 @@
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 MessageBuilder::MessageBuilder():
@@ -247,4 +247,4 @@ Message::Handle MessageBuilder::extract()
     return m_document;
 }
 
-} // namespace TUSProtocol
+} // namespace Protocol

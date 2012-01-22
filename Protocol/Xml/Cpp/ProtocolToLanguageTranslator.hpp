@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_PROTOCOLTOLANGUAGETRANSLATOR_HPP
-#define TUSPROTOCOL_PROTOCOLTOLANGUAGETRANSLATOR_HPP
+#ifndef PROTOCOL_PROTOCOLTOLANGUAGETRANSLATOR_HPP
+#define PROTOCOL_PROTOCOLTOLANGUAGETRANSLATOR_HPP
 
 #include <Language/Interface/ICommand.hpp>
 #include <Protocol/Xml/Cpp/Message.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 // TODO: Dear future me, if you don't refactor this class within 6 months, I am going to give you a titty twister.
@@ -55,6 +55,6 @@ public:
     ) const;
 };
 
-} // namespace TUSProtocol
+} // namespace Protocol
 
-#endif // TUSPROTOCOL_PROTOCOLTOLANGUAGETRANSLATOR_HPP
+#endif // PROTOCOL_PROTOCOLTOLANGUAGETRANSLATOR_HPP

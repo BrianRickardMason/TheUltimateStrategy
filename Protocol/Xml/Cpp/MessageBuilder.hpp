@@ -25,8 +25,8 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_MESSAGEBUILDER_HPP
-#define TUSPROTOCOL_MESSAGEBUILDER_HPP
+#ifndef PROTOCOL_MESSAGEBUILDER_HPP
+#define PROTOCOL_MESSAGEBUILDER_HPP
 
 #include <Protocol/Xml/Cpp/Message.hpp>
 #include <boost/noncopyable.hpp>
@@ -34,7 +34,7 @@
 #include <Poco/AutoPtr.h>
 #include <Poco/DOM/DocumentType.h>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 class MessageBuilder
@@ -178,6 +178,6 @@ public:
     const std::string DTD_FILE_PATH;
 };
 
-} // namespace TUSProtocol
+} // namespace Protocol
 
-#endif // TUSPROTOCOL_MESSAGEBUILDER_HPP
+#endif // PROTOCOL_MESSAGEBUILDER_HPP

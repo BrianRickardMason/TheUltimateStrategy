@@ -58,8 +58,8 @@ void test(){
     writer.writeNode(std::clog, cmd.get());
     std::clog << "\n\n" << std::endl;
 
-    TUSProtocol::MessageFactory fac;
-    TUSProtocol::Message::Handle msg = fac.createCreateWorldRequest("modbot","modbotpass","World");
+    Protocol::MessageFactory fac;
+    Protocol::Message::Handle msg = fac.createCreateWorldRequest("modbot","modbotpass","World");
 
     writer.writeNode(std::clog, msg.get());
     std::clog << "\n\n" << std::endl;

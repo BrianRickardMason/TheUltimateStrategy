@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_PAYLOADTOPROTOCOLTRANSLATOR_HPP
-#define TUSPROTOCOL_PAYLOADTOPROTOCOLTRANSLATOR_HPP
+#ifndef PROTOCOL_PAYLOADTOPROTOCOLTRANSLATOR_HPP
+#define PROTOCOL_PAYLOADTOPROTOCOLTRANSLATOR_HPP
 
 #include <Protocol/Xml/Cpp/Message.hpp>
 #include <Protocol/Xml/Cpp/Payload.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 // TODO: Add verification and error handling.
@@ -44,6 +44,6 @@ public:
     ) const;
 };
 
-} // namespace TUSProtocol
+} // namespace Protocol
 
-#endif // TUSPROTOCOL_PAYLOADTOPROTOCOLTRANSLATOR_HPP
+#endif // PROTOCOL_PAYLOADTOPROTOCOLTRANSLATOR_HPP

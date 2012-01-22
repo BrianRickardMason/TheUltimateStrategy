@@ -47,8 +47,8 @@ private:
     TusCommandBuilder mCmdBuilder;
     
     TUSLanguage::UserRequestBuilder::Handle mReqBuilder;
-    TUSProtocol::LanguageToProtocolTranslator::Handle mToProtocol;
-    TUSProtocol::ProtocolToLanguageTranslator::Handle mToLanguage;
+    Protocol::LanguageToProtocolTranslator::Handle mToProtocol;
+    Protocol::ProtocolToLanguageTranslator::Handle mToLanguage;
 };
 
 #endif

@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_PAYLOAD_HPP
-#define TUSPROTOCOL_PAYLOAD_HPP
+#ifndef PROTOCOL_PAYLOAD_HPP
+#define PROTOCOL_PAYLOAD_HPP
 
 #include <Protocol/Xml/Cpp/Message.hpp>
 #include <string>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 class Payload
@@ -56,6 +56,6 @@ private:
     std::string mContent;
 };
 
-} // namespace TUSProtocol
+} // namespace Protocol
 
-#endif // TUSPROTOCOL_PAYLOAD_HPP
+#endif // PROTOCOL_PAYLOAD_HPP

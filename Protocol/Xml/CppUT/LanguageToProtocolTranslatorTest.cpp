@@ -43,9 +43,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorEchoRequestTranslation, ReturnsNotNull)
@@ -71,9 +71,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorErrorRequestTranslation, ReturnsNotNull)
@@ -99,9 +99,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateLandRequestTranslation, ReturnsNotNull)
@@ -155,9 +155,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeleteLandRequestTranslation, ReturnsNotNull)
@@ -204,9 +204,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetLandRequestTranslation, SetsProperID)
@@ -248,9 +248,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetLandsRequestTranslation, SetsProperID)
@@ -285,9 +285,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateSettlementRequestTranslation, ReturnsNotNull)
@@ -341,9 +341,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeleteSettlementRequestTranslation, ReturnsNotNull)
@@ -390,9 +390,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetSettlementRequestTranslation, SetsProperID)
@@ -434,9 +434,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetSettlementsRequestTranslation, SetsProperID)
@@ -479,9 +479,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorBuildBuildingRequestTranslation, ReturnsNotNull)
@@ -550,9 +550,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDestroyBuildingRequestTranslation, ReturnsNotNull)
@@ -621,9 +621,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetBuildingRequestTranslation, ReturnsNotNull)
@@ -685,9 +685,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetBuildingsRequestTranslation, ReturnsNotNull)
@@ -742,9 +742,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDismissHumanRequestTranslation, ReturnsNotNull)
@@ -813,9 +813,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorEngageHumanRequestTranslation, ReturnsNotNull)
@@ -884,9 +884,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetHumanRequestTranslation, ReturnsNotNull)
@@ -948,9 +948,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetHumansRequestTranslation, ReturnsNotNull)
@@ -1005,9 +1005,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetResourceRequestTranslation, ReturnsNotNull)
@@ -1069,9 +1069,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetResourcesRequestTranslation, ReturnsNotNull)
@@ -1125,9 +1125,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateUserRequestTranslation, ReturnsNotNull)
@@ -1167,9 +1167,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateWorldRequestTranslation, ReturnsNotNull)
@@ -1216,9 +1216,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateEpochRequestTranslation, ReturnsNotNull)
@@ -1272,9 +1272,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeleteEpochRequestTranslation, ReturnsNotNull)
@@ -1321,9 +1321,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorActivateEpochRequestTranslation, ReturnsNotNull)
@@ -1370,9 +1370,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeactivateEpochRequestTranslation, ReturnsNotNull)
@@ -1419,9 +1419,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorFinishEpochRequestTranslation, ReturnsNotNull)
@@ -1468,9 +1468,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorTickEpochRequestTranslation, ReturnsNotNull)
@@ -1517,9 +1517,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetEpochRequestTranslation, ReturnsNotNull)
@@ -1567,9 +1567,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorTransportHumanRequestTranslation, ReturnsNotNull)
@@ -1640,9 +1640,9 @@ protected:
     }
 
     TUSLanguage::RequestBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorTransportResourceRequestTranslation, ReturnsNotNull)
@@ -1712,9 +1712,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorEchoReplyTranslation, ReturnsNotNull)
@@ -1754,9 +1754,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorErrorReplyTranslation, CreateErrorReplyReturnsNotNull)
@@ -1796,9 +1796,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateLandReplyTranslation, ReturnsNotNull)
@@ -1845,9 +1845,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeleteLandReplyTranslation, ReturnsNotNull)
@@ -1890,12 +1890,12 @@ protected:
     LanguageToProtocolTranslatorGetLandReplyWithoutObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetLandReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetLandReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -1945,7 +1945,7 @@ protected:
     LanguageToProtocolTranslatorGetLandReplyWithObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object land;
         land.insert(std::make_pair("login", "Login1"));
         land.insert(std::make_pair("world_name", "World1"));
@@ -1955,7 +1955,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetLandReplyWithObjectTranslation, ReturnsNotNull)
@@ -2015,12 +2015,12 @@ protected:
     LanguageToProtocolTranslatorGetLandsReplyWithoutObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetLandsReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetLandsReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -2071,7 +2071,7 @@ protected:
     LanguageToProtocolTranslatorGetLandsReplyWithObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object land_1, land_2;
         TUSLanguage::ICommand::Objects lands;
         land_1.insert(std::make_pair("login", "Login1"));
@@ -2088,7 +2088,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetLandsReplyWithObjectsTranslation, ReturnsNotNull)
@@ -2143,9 +2143,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateSettlementReplyTranslation, ReturnsNotNull)
@@ -2192,9 +2192,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeleteSettlementReplyTranslation, ReturnsNotNull)
@@ -2237,12 +2237,12 @@ protected:
     LanguageToProtocolTranslatorGetSettlementReplyWithoutObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetSettlementReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetSettlementReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -2292,7 +2292,7 @@ protected:
     LanguageToProtocolTranslatorGetSettlementReplyWithObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object settlement;
         settlement.insert(std::make_pair("land_name", "Land1"));
         settlement.insert(std::make_pair("settlement_name", "Settlement1"));
@@ -2300,7 +2300,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetSettlementReplyWithObjectTranslation, ReturnsNotNull)
@@ -2358,12 +2358,12 @@ protected:
     LanguageToProtocolTranslatorGetSettlementsReplyWithoutObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetSettlementsReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetSettlementsReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -2414,7 +2414,7 @@ protected:
     LanguageToProtocolTranslatorGetSettlementsReplyWithObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object settlement_1, settlement_2;
         TUSLanguage::ICommand::Objects settlements;
         settlement_1.insert(std::make_pair("land_name", "Land1"));
@@ -2427,7 +2427,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetSettlementsReplyWithObjectsTranslation, ReturnsNotNull)
@@ -2482,9 +2482,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorBuildBuildingReplyTranslation, ReturnsNotNull)
@@ -2531,9 +2531,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDestroyBuildingReplyTranslation, ReturnsNotNull)
@@ -2576,12 +2576,12 @@ protected:
     LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetBuildingReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -2631,7 +2631,7 @@ protected:
     LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object building;
         building.insert(std::make_pair("buildingclass", "Regular"));
         building.insert(std::make_pair("buildingname", "Farm"));
@@ -2640,7 +2640,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetBuildingReplyWithObjectTranslation, ReturnsNotNull)
@@ -2699,12 +2699,12 @@ protected:
     LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetBuildingsReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -2755,7 +2755,7 @@ protected:
     LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object building_1, building_2;
         TUSLanguage::ICommand::Objects buildings;
         building_1.insert(std::make_pair("buildingclass", "Regular"));
@@ -2770,7 +2770,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetBuildingsReplyWithObjectsTranslation, ReturnsNotNull)
@@ -2825,9 +2825,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDismissHumanReplyTranslation, ReturnsNotNull)
@@ -2874,9 +2874,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorEngageHumanReplyTranslation, ReturnsNotNull)
@@ -2919,12 +2919,12 @@ protected:
     LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetHumanReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -2974,7 +2974,7 @@ protected:
     LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object human;
         human.insert(std::make_pair("humanclass", "Worker"));
         human.insert(std::make_pair("humanname", "Farmer"));
@@ -2984,7 +2984,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetHumanReplyWithObjectTranslation, ReturnsNotNull)
@@ -3044,12 +3044,12 @@ protected:
     LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetHumansReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -3100,7 +3100,7 @@ protected:
     LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object human_1, human_2;
         TUSLanguage::ICommand::Objects humans;
         human_1.insert(std::make_pair("humanclass", "Worker"));
@@ -3117,7 +3117,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetHumansReplyWithObjectsTranslation, ReturnsNotNull)
@@ -3168,12 +3168,12 @@ protected:
     LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetResourceReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -3223,7 +3223,7 @@ protected:
     LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object resource;
         resource.insert(std::make_pair("resourcename", "Coal"));
         resource.insert(std::make_pair("volume", "10"));
@@ -3231,7 +3231,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetResourceReplyWithObjectTranslation, ReturnsNotNull)
@@ -3289,12 +3289,12 @@ protected:
     LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetResourcesReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithoutObjectsTranslation, ReturnsNotNull)
@@ -3345,7 +3345,7 @@ protected:
     LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object resource_1, resource_2;
         TUSLanguage::ICommand::Objects resources;
         resource_1.insert(std::make_pair("resourcename", "Coal"));
@@ -3358,7 +3358,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetResourcesReplyWithObjectsTranslation, ReturnsNotNull)
@@ -3413,9 +3413,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateUserReplyTranslation, ReturnsNotNull)
@@ -3462,9 +3462,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateWorldReplyTranslation, ReturnsNotNull)
@@ -3511,9 +3511,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorCreateEpochReplyTranslation, ReturnsNotNull)
@@ -3560,9 +3560,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeleteEpochReplyTranslation, ReturnsNotNull)
@@ -3609,9 +3609,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorActivateEpochReplyTranslation, ReturnsNotNull)
@@ -3658,9 +3658,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorDeactivateEpochReplyTranslation, ReturnsNotNull)
@@ -3707,9 +3707,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorFinishEpochReplyTranslation, ReturnsNotNull)
@@ -3756,9 +3756,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorTickEpochReplyTranslation, ReturnsNotNull)
@@ -3801,12 +3801,12 @@ protected:
     LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Handle command = builder.buildGetEpochReply(1, "Message");
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithoutObjectTranslation, ReturnsNotNull)
@@ -3856,7 +3856,7 @@ protected:
     LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation()
     {
         TUSLanguage::ReplyBuilder builder;
-        TUSProtocol::LanguageToProtocolTranslator translator;
+        Protocol::LanguageToProtocolTranslator translator;
         TUSLanguage::ICommand::Object epoch;
         epoch.insert(std::make_pair("epoch_name", "Epoch"));
         epoch.insert(std::make_pair("world_name", "World"));
@@ -3867,7 +3867,7 @@ protected:
         m_message = translator.translate(command);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorGetEpochReplyWithObjectTranslation, ReturnsNotNull)
@@ -3932,9 +3932,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorTransportHumanReplyTranslation, ReturnsNotNull)
@@ -3981,9 +3981,9 @@ protected:
     }
 
     TUSLanguage::ReplyBuilder m_builder;
-    TUSProtocol::LanguageToProtocolTranslator m_translator;
+    Protocol::LanguageToProtocolTranslator m_translator;
     TUSLanguage::ICommand::Handle m_command;
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(LanguageToProtocolTranslatorTransportResourceReplyTranslation, ReturnsNotNull)

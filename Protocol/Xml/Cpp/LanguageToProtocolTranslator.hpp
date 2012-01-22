@@ -25,13 +25,13 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#ifndef TUSPROTOCOL_LANGUAGETOPROTOCOLTRANSLATOR_HPP
-#define TUSPROTOCOL_LANGUAGETOPROTOCOLTRANSLATOR_HPP
+#ifndef PROTOCOL_LANGUAGETOPROTOCOLTRANSLATOR_HPP
+#define PROTOCOL_LANGUAGETOPROTOCOLTRANSLATOR_HPP
 
 #include <Language/Interface/ICommand.hpp>
 #include <Protocol/Xml/Cpp/Message.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 class LanguageToProtocolTranslator
@@ -51,6 +51,6 @@ public:
     ) const;
 };
 
-} // namespace TUSProtocol
+} // namespace Protocol
 
-#endif // TUSPROTOCOL_LANGUAGETOPROTOCOLTRANSLATOR_HPP
+#endif // PROTOCOL_LANGUAGETOPROTOCOLTRANSLATOR_HPP

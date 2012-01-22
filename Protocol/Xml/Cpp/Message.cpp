@@ -27,7 +27,7 @@
 
 #include <Protocol/Xml/Cpp/Message.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 Message::Message(
@@ -45,4 +45,4 @@ Message::Message(
 {
 }
 
-} // namespace TUSProtocol
+} // namespace Protocol

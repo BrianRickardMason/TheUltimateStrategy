@@ -112,13 +112,13 @@ protected:
     /**
      * @brief The message factory to be tested.
      */
-    TUSProtocol::MessageFactory m_message_factory;
+    Protocol::MessageFactory m_message_factory;
 
     //@{
     /**
      * @brief The message to be tested.
      */
-    TUSProtocol::Message::Handle m_message_echo_request,
+    Protocol::Message::Handle m_message_echo_request,
                                  m_message_error_request,
                                  m_message_create_land_request,
                                  m_message_delete_land_request,
@@ -174,7 +174,7 @@ protected:
 
 TEST_F(MessageFactoryTest, CtorDoesNotThrow)
 {
-    ASSERT_NO_THROW(TUSProtocol::MessageFactory message_factory);
+    ASSERT_NO_THROW(Protocol::MessageFactory message_factory);
 }
 
 TEST_F(MessageFactoryTest, CreateEchoRequestReturnsNotNull)
@@ -1462,11 +1462,11 @@ class MessageFactoryTestCreateGetLandReplyWithoutObject
 protected:
     MessageFactoryTestCreateGetLandReplyWithoutObject()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetLandReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetLandReplyWithoutObject, ReturnsNotNull)
@@ -1512,8 +1512,8 @@ class MessageFactoryTestCreateGetLandReplyWithObject
 protected:
     MessageFactoryTestCreateGetLandReplyWithObject()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object land;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object land;
         land.insert(std::make_pair("login", "Login1"));
         land.insert(std::make_pair("world_name", "World1"));
         land.insert(std::make_pair("land_name", "Land1"));
@@ -1521,7 +1521,7 @@ protected:
         m_message = message_factory.createGetLandReply("1", "Message", land);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetLandReplyWithObject, ReturnsNotNull)
@@ -1577,11 +1577,11 @@ class MessageFactoryTestCreateGetLandsReplyWithoutObjects
 protected:
     MessageFactoryTestCreateGetLandsReplyWithoutObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetLandsReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetLandsReplyWithoutObjects, ReturnsNotNull)
@@ -1628,9 +1628,9 @@ class MessageFactoryTestCreateGetLandsReplyWithObjects
 protected:
     MessageFactoryTestCreateGetLandsReplyWithObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object land_1, land_2;
-        TUSProtocol::Message::Objects lands;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object land_1, land_2;
+        Protocol::Message::Objects lands;
         land_1.insert(std::make_pair("login", "Login1"));
         land_1.insert(std::make_pair("world_name", "World1"));
         land_1.insert(std::make_pair("land_name", "Land1"));
@@ -1644,7 +1644,7 @@ protected:
         m_message = message_factory.createGetLandsReply("1", "Message", lands);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetLandsReplyWithObjects, ReturnsNotNull)
@@ -1757,11 +1757,11 @@ class MessageFactoryTestCreateGetSettlementReplyWithoutObject
 protected:
     MessageFactoryTestCreateGetSettlementReplyWithoutObject()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetSettlementReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetSettlementReplyWithoutObject, ReturnsNotNull)
@@ -1807,14 +1807,14 @@ class MessageFactoryTestCreateGetSettlementReplyWithObject
 protected:
     MessageFactoryTestCreateGetSettlementReplyWithObject()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object settlement;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object settlement;
         settlement.insert(std::make_pair("land_name", "Land1"));
         settlement.insert(std::make_pair("settlement_name", "Settlement1"));
         m_message = message_factory.createGetSettlementReply("1", "Message", settlement);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetSettlementReplyWithObject, ReturnsNotNull)
@@ -1868,11 +1868,11 @@ class MessageFactoryTestCreateGetSettlementsReplyWithoutObjects
 protected:
     MessageFactoryTestCreateGetSettlementsReplyWithoutObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetSettlementsReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithoutObjects, ReturnsNotNull)
@@ -1919,9 +1919,9 @@ class MessageFactoryTestCreateGetSettlementsReplyWithObjects
 protected:
     MessageFactoryTestCreateGetSettlementsReplyWithObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object settlement_1, settlement_2;
-        TUSProtocol::Message::Objects settlements;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object settlement_1, settlement_2;
+        Protocol::Message::Objects settlements;
         settlement_1.insert(std::make_pair("land_name", "Land1"));
         settlement_1.insert(std::make_pair("settlement_name", "Settlement1"));
         settlement_2.insert(std::make_pair("land_name", "Land2"));
@@ -1931,7 +1931,7 @@ protected:
         m_message = message_factory.createGetSettlementsReply("1", "Message", settlements);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetSettlementsReplyWithObjects, ReturnsNotNull)
@@ -2044,11 +2044,11 @@ class MessageFactoryTestCreateGetBuildingReplyWithoutObject
 protected:
     MessageFactoryTestCreateGetBuildingReplyWithoutObject()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetBuildingReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetBuildingReplyWithoutObject, ReturnsNotNull)
@@ -2094,15 +2094,15 @@ class MessageFactoryTestCreateGetBuildingReplyWithObject
 protected:
     MessageFactoryTestCreateGetBuildingReplyWithObject()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object building;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object building;
         building.insert(std::make_pair("buildingclass", "Regular"));
         building.insert(std::make_pair("buildingname", "Farm"));
         building.insert(std::make_pair("volume", "10"));
         m_message = message_factory.createGetBuildingReply("1", "Message", building);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetBuildingReplyWithObject, ReturnsNotNull)
@@ -2157,11 +2157,11 @@ class MessageFactoryTestCreateGetBuildingsReplyWithoutObjects
 protected:
     MessageFactoryTestCreateGetBuildingsReplyWithoutObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetBuildingsReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetBuildingsReplyWithoutObjects, ReturnsNotNull)
@@ -2208,9 +2208,9 @@ class MessageFactoryTestCreateGetBuildingsReplyWithObjects
 protected:
     MessageFactoryTestCreateGetBuildingsReplyWithObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object building_1, building_2;
-        TUSProtocol::Message::Objects buildings;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object building_1, building_2;
+        Protocol::Message::Objects buildings;
         building_1.insert(std::make_pair("buildingclass", "Regular"));
         building_1.insert(std::make_pair("buildingname", "Farm"));
         building_1.insert(std::make_pair("volume", "10"));
@@ -2222,7 +2222,7 @@ protected:
         m_message = message_factory.createGetBuildingsReply("1", "Message", buildings);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetBuildingsReplyWithObjects, ReturnsNotNull)
@@ -2335,11 +2335,11 @@ class MessageFactoryTestCreateGetHumanReplyWithoutObject
 protected:
     MessageFactoryTestCreateGetHumanReplyWithoutObject()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetHumanReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetHumanReplyWithoutObject, ReturnsNotNull)
@@ -2385,8 +2385,8 @@ class MessageFactoryTestCreateGetHumanReplyWithObject
 protected:
     MessageFactoryTestCreateGetHumanReplyWithObject()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object human;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object human;
         human.insert(std::make_pair("humanclass", "Worker"));
         human.insert(std::make_pair("humanname", "Farmer"));
         human.insert(std::make_pair("experience", "Novice"));
@@ -2394,7 +2394,7 @@ protected:
         m_message = message_factory.createGetHumanReply("1", "Message", human);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetHumanReplyWithObject, ReturnsNotNull)
@@ -2450,11 +2450,11 @@ class MessageFactoryTestCreateGetHumansReplyWithoutObjects
 protected:
     MessageFactoryTestCreateGetHumansReplyWithoutObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetHumansReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetHumansReplyWithoutObjects, ReturnsNotNull)
@@ -2501,9 +2501,9 @@ class MessageFactoryTestCreateGetHumansReplyWithObjects
 protected:
     MessageFactoryTestCreateGetHumansReplyWithObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object human_1, human_2;
-        TUSProtocol::Message::Objects humans;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object human_1, human_2;
+        Protocol::Message::Objects humans;
         human_1.insert(std::make_pair("humanclass", "Worker"));
         human_1.insert(std::make_pair("humanname", "Farmer"));
         human_1.insert(std::make_pair("experience", "Novice"));
@@ -2517,7 +2517,7 @@ protected:
         m_message = message_factory.createGetHumansReply("1", "Message", humans);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetHumansReplyWithObjects, ReturnsNotNull)
@@ -2564,11 +2564,11 @@ class MessageFactoryTestCreateGetResourceReplyWithoutObject
 protected:
     MessageFactoryTestCreateGetResourceReplyWithoutObject()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetResourceReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetResourceReplyWithoutObject, ReturnsNotNull)
@@ -2614,14 +2614,14 @@ class MessageFactoryTestCreateGetResourceReplyWithObject
 protected:
     MessageFactoryTestCreateGetResourceReplyWithObject()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object resource;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object resource;
         resource.insert(std::make_pair("resourcename", "Coal"));
         resource.insert(std::make_pair("volume", "10"));
         m_message = message_factory.createGetResourceReply("1", "Message", resource);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetResourceReplyWithObject, ReturnsNotNull)
@@ -2675,11 +2675,11 @@ class MessageFactoryTestCreateGetResourcesReplyWithoutObjects
 protected:
     MessageFactoryTestCreateGetResourcesReplyWithoutObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetResourcesReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetResourcesReplyWithoutObjects, ReturnsNotNull)
@@ -2726,9 +2726,9 @@ class MessageFactoryTestCreateGetResourcesReplyWithObjects
 protected:
     MessageFactoryTestCreateGetResourcesReplyWithObjects()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object resource_1, resource_2;
-        TUSProtocol::Message::Objects resources;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object resource_1, resource_2;
+        Protocol::Message::Objects resources;
         resource_1.insert(std::make_pair("resourcename", "Coal"));
         resource_1.insert(std::make_pair("volume", "10"));
         resource_2.insert(std::make_pair("resourcename", "Wood"));
@@ -2738,7 +2738,7 @@ protected:
         m_message = message_factory.createGetResourcesReply("1", "Message", resources);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetResourcesReplyWithObjects, ReturnsNotNull)
@@ -3049,11 +3049,11 @@ class MessageFactoryTestCreateGetEpochReplyWithoutObject
 protected:
     MessageFactoryTestCreateGetEpochReplyWithoutObject()
     {
-        TUSProtocol::MessageFactory message_factory;
+        Protocol::MessageFactory message_factory;
         m_message = message_factory.createGetEpochReply("1", "Message");
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetEpochReplyWithoutObject, ReturnsNotNull)
@@ -3099,8 +3099,8 @@ class MessageFactoryTestCreateGetEpochReplyWithObject
 protected:
     MessageFactoryTestCreateGetEpochReplyWithObject()
     {
-        TUSProtocol::MessageFactory message_factory;
-        TUSProtocol::Message::Object epoch;
+        Protocol::MessageFactory message_factory;
+        Protocol::Message::Object epoch;
         epoch.insert(std::make_pair("epoch_name", "Epoch"));
         epoch.insert(std::make_pair("world_name", "World"));
         epoch.insert(std::make_pair("active", "true"));
@@ -3109,7 +3109,7 @@ protected:
         m_message = message_factory.createGetEpochReply("1", "Message", epoch);
     }
 
-    TUSProtocol::Message::Handle m_message;
+    Protocol::Message::Handle m_message;
 };
 
 TEST_F(MessageFactoryTestCreateGetEpochReplyWithObject, ReturnsNotNull)

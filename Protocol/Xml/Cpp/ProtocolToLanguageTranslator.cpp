@@ -34,7 +34,7 @@
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 // TODO: Add UTs for both translators (exceptions).
@@ -1527,4 +1527,4 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
     }
 }
 
-} // namespace TUSProtocol
+} // namespace Protocol

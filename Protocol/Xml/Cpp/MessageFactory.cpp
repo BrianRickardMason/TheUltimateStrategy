@@ -29,7 +29,7 @@
 #include <Protocol/Xml/Cpp/MessageBuilder.hpp>
 #include <Protocol/Xml/Cpp/MessageFactory.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 Message::Handle MessageFactory::createEchoRequest() const
@@ -1286,4 +1286,4 @@ Message::Handle MessageFactory::createTransportResourceReply(
     return message_builder.extract();
 }
 
-} // namespace TUSProtocol
+} // namespace Protocol

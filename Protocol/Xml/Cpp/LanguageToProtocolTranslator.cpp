@@ -30,7 +30,7 @@
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace TUSProtocol
+namespace Protocol
 {
 
 // TODO: Consider removing lexical cast.
@@ -612,4 +612,4 @@ Message::Handle LanguageToProtocolTranslator::translate(
     }
 }
 
-} // namespace TUSProtocol
+} // namespace Protocol

@@ -45,11 +45,11 @@ int main(
     Poco::Net::SocketStream socketStream(socket);
 
     // Create the message.
-    TUSProtocol::MessageFactory messageFactory;
-    TUSProtocol::Message::Handle messageRequest = messageFactory.createCreateUserRequest("Login", "Password");
+    Protocol::MessageFactory messageFactory;
+    Protocol::Message::Handle messageRequest = messageFactory.createCreateUserRequest("Login", "Password");
 
     // Translate the protocol to the payload.
-    TUSProtocol::Payload payloadRequest(messageRequest);
+    Protocol::Payload payloadRequest(messageRequest);
 
     // Write the data to the socket.
     socketStream << payloadRequest.getLength();
@@ -68,11 +68,11 @@ int main(
 
     // Translate the data to the payload.
     std::string content(buffer);
-    TUSProtocol::Payload payloadReply(length, content);
+    Protocol::Payload payloadReply(length, content);
 
     // Translate the payload to the protocol.
-    TUSProtocol::PayloadToProtocolTranslator payloadToProtocolTranslator;
-    TUSProtocol::Message::Handle messageReply = payloadToProtocolTranslator.translate(payloadReply);
+    Protocol::PayloadToProtocolTranslator payloadToProtocolTranslator;
+    Protocol::Message::Handle messageReply = payloadToProtocolTranslator.translate(payloadReply);
 
     // Be proud of yourself for a while!
     std::cout << content << std::endl;
