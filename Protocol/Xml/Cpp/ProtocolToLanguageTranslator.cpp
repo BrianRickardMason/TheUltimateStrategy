@@ -37,20 +37,20 @@
 namespace TUSProtocol
 {
 
-// TODO: Add UTs for both translators.
-// TODO: Remove auto pointers.
+// TODO: Add UTs for both translators (exceptions).
 
 TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
     Message::Handle a_message
 ) const
 {
-    typedef Poco::XML::Element * Element;
+    typedef Poco::XML::Element *               Element;
+    typedef Poco::AutoPtr<Poco::XML::NodeList> NodeList;
 
     TUSLanguage::RequestBuilder request_builder;
     TUSLanguage::ReplyBuilder reply_builder;
 
     // Default values.
-    unsigned short int id(0); // TODO: Verify the initialization!
+    unsigned short int id(0);
     std::string login, password;
 
     Element message = a_message->documentElement();
@@ -787,7 +787,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element lands = specific_reply->getChildElement("lands");
             if (not lands) throw std::exception();
 
-            Poco::AutoPtr<Poco::XML::NodeList> elements = lands->getElementsByTagName("land");
+            NodeList elements = lands->getElementsByTagName("land");
             if (elements->length() == 0)
             {
                 return reply_builder.buildGetLandsReply(
@@ -915,7 +915,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element settlements = specific_reply->getChildElement("settlements");
             if (not settlements) throw std::exception();
 
-            Poco::AutoPtr<Poco::XML::NodeList> elements = settlements->getElementsByTagName("settlement");
+            NodeList elements = settlements->getElementsByTagName("settlement");
             if (elements->length() == 0)
             {
                 return reply_builder.buildGetSettlementsReply(
@@ -1041,8 +1041,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element buildings = specific_reply->getChildElement("buildings");
             if (not buildings) throw std::exception();
 
-            // FIXME: Not AutoPtr!
-            Poco::AutoPtr<Poco::XML::NodeList> elements = buildings->getElementsByTagName("building");
+            NodeList elements = buildings->getElementsByTagName("building");
             if (elements->length() == 0)
             {
                 return reply_builder.buildGetBuildingsReply(
@@ -1172,8 +1171,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element humans = specific_reply->getChildElement("humans");
             if (not humans) throw std::exception();
 
-            // FIXME: Not AutoPtr!
-            Poco::AutoPtr<Poco::XML::NodeList> elements = humans->getElementsByTagName("human");
+            NodeList elements = humans->getElementsByTagName("human");
             if (elements->length() == 0)
             {
                 return reply_builder.buildGetHumansReply(
@@ -1265,8 +1263,7 @@ TUSLanguage::ICommand::Handle ProtocolToLanguageTranslator::translate(
             Element resources = specific_reply->getChildElement("resources");
             if (not resources) throw std::exception();
 
-            // FIXME: Not AutoPtr!
-            Poco::AutoPtr<Poco::XML::NodeList> elements = resources->getElementsByTagName("resource");
+            NodeList elements = resources->getElementsByTagName("resource");
             if (elements->length() == 0)
             {
                 return reply_builder.buildGetResourcesReply(
