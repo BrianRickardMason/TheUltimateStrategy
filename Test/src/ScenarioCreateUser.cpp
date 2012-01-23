@@ -30,11 +30,11 @@
 #include <Test/include/Client.hpp>
 #include <Test/include/IntegrationTest.hpp>
 
-class UserCommandScenarioCreateUser
+class ScenarioCreateUser
     : public IntegrationTest
 {
 protected:
-    UserCommandScenarioCreateUser()
+    ScenarioCreateUser()
     {
         Language::Command::Handle commandRequest = mRequestBuilder.buildCreateUserRequest("Login", "Password");
         mCommandReply = mClient.send(commandRequest);
@@ -46,26 +46,26 @@ protected:
     Language::Command::Handle mCommandReply;
 };
 
-TEST_F(UserCommandScenarioCreateUser, ReturnsProperID)
+TEST_F(ScenarioCreateUser, ReturnsProperID)
 {
     ASSERT_EQ(Language::ID_COMMAND_CREATE_USER_REPLY, mCommandReply->getID());
 }
 
-TEST_F(UserCommandScenarioCreateUser, ReturnsProperCode)
+TEST_F(ScenarioCreateUser, ReturnsProperCode)
 {
     ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
 }
 
-TEST_F(UserCommandScenarioCreateUser, ReturnsProperMessage)
+TEST_F(ScenarioCreateUser, ReturnsProperMessage)
 {
     ASSERT_STREQ(Game::CREATE_USER_USER_HAS_BEEN_CREATED.c_str(), mCommandReply->getMessage().c_str());
 }
 
-class UserCommandScenarioCreateTwoUsersOfTheSameLogin
+class ScenarioCreateTwoUsersOfTheSameLogin
     : public IntegrationTest
 {
 protected:
-    UserCommandScenarioCreateTwoUsersOfTheSameLogin()
+    ScenarioCreateTwoUsersOfTheSameLogin()
     {
         Language::Command::Handle commandRequest = mRequestBuilder.buildCreateUserRequest("Login", "Password");
         mClient.send(commandRequest);
@@ -78,17 +78,17 @@ protected:
     Language::Command::Handle mCommandReply;
 };
 
-TEST_F(UserCommandScenarioCreateTwoUsersOfTheSameLogin, ReturnsProperID)
+TEST_F(ScenarioCreateTwoUsersOfTheSameLogin, ReturnsProperID)
 {
     ASSERT_EQ(Language::ID_COMMAND_CREATE_USER_REPLY, mCommandReply->getID());
 }
 
-TEST_F(UserCommandScenarioCreateTwoUsersOfTheSameLogin, ReturnsProperCode)
+TEST_F(ScenarioCreateTwoUsersOfTheSameLogin, ReturnsProperCode)
 {
     ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
 }
 
-TEST_F(UserCommandScenarioCreateTwoUsersOfTheSameLogin, ReturnsProperMessage)
+TEST_F(ScenarioCreateTwoUsersOfTheSameLogin, ReturnsProperMessage)
 {
     ASSERT_STREQ(Game::CREATE_USER_USER_DOES_EXIST.c_str(), mCommandReply->getMessage().c_str());
 }

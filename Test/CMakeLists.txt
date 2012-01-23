@@ -31,8 +31,8 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 ADD_EXECUTABLE(integration
     src/Client.cpp
-    src/EchoTest.cpp
-    src/UserTest.cpp
+    src/ScenarioCreateUser.cpp
+    src/ScenarioEcho.cpp
     src/main.cpp
 )
 

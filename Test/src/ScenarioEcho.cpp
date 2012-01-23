@@ -30,11 +30,11 @@
 #include <Test/include/Client.hpp>
 #include <Test/include/IntegrationTest.hpp>
 
-class EchoCommandScenarioBasic
+class ScenarioEcho
     : public IntegrationTest
 {
 protected:
-    EchoCommandScenarioBasic()
+    ScenarioEcho()
     {
         Language::Command::Handle commandRequest = mRequestBuilder.buildEchoRequest();
         mCommandReply = mClient.send(commandRequest);
@@ -46,12 +46,12 @@ protected:
     Language::Command::Handle mCommandReply;
 };
 
-TEST_F(EchoCommandScenarioBasic, ReturnsProperID)
+TEST_F(ScenarioEcho, ReturnsProperID)
 {
     ASSERT_EQ(Language::ID_COMMAND_ECHO_REPLY, mCommandReply->getID());
 }
 
-TEST_F(EchoCommandScenarioBasic, ReturnsProperCode)
+TEST_F(ScenarioEcho, ReturnsProperCode)
 {
     ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
 }
