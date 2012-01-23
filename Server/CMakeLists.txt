@@ -25,11 +25,11 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-PROJECT(servernew)
+PROJECT(server)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-ADD_LIBRARY(servernewlib
+ADD_LIBRARY(serverlib
     src/CommandDispatcher.cpp
     src/ConnectionFactory.cpp
     src/Configurator.cpp
@@ -42,12 +42,12 @@ ADD_LIBRARY(servernewlib
     src/Server.cpp
 )
 
-ADD_EXECUTABLE(servernew
+ADD_EXECUTABLE(server
     src/main.cpp
 )
 
-TARGET_LINK_LIBRARIES(servernew
-    servernewlib
+TARGET_LINK_LIBRARIES(server
+    serverlib
     gameserver
     protocolxmlcpp
     interface

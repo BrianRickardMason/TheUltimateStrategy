@@ -36,7 +36,7 @@ ADD_EXECUTABLE(gameserverut
 )
 
 TARGET_LINK_LIBRARIES(gameserverut
-    servernewlib
+    serverlib
     gameserver
     gmock
     gtest

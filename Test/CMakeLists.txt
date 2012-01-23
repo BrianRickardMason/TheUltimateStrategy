@@ -25,22 +25,22 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-PROJECT(gameserverct)
+PROJECT(integration)
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../..)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-FILE(GLOB_RECURSE FILES_GAMESERVERCT *.cpp)
-
-ADD_EXECUTABLE(gameserverct
-    ${FILES_GAMESERVERCT}
+ADD_EXECUTABLE(integration
+    src/main.cpp
 )
 
-TARGET_LINK_LIBRARIES(gameserverct
-    serverlib
-    gameserver
+TARGET_LINK_LIBRARIES(integration
+    boost_system
+    boost_thread
     gmock
     gtest
     pthread
-    PocoFoundation
-    PocoXML
+)
+
+ADD_DEPENDENCIES(integration
+    server
 )
