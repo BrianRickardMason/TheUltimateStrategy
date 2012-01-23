@@ -49,17 +49,17 @@ public:
 
     ICommand::Handle buildCreateLandReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildDeleteLandReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetLandReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetLandReply(
@@ -70,7 +70,7 @@ public:
 
     ICommand::Handle buildGetLandsReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetLandsReply(
@@ -81,17 +81,17 @@ public:
 
     ICommand::Handle buildCreateSettlementReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildDeleteSettlementReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetSettlementReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetSettlementReply(
@@ -102,7 +102,7 @@ public:
 
     ICommand::Handle buildGetSettlementsReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetSettlementsReply(
@@ -113,17 +113,17 @@ public:
 
     ICommand::Handle buildBuildBuildingReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildDestroyBuildingReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetBuildingReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetBuildingReply(
@@ -134,7 +134,7 @@ public:
 
     ICommand::Handle buildGetBuildingsReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetBuildingsReply(
@@ -145,17 +145,17 @@ public:
 
     ICommand::Handle buildDismissHumanReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildEngageHumanReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetHumanReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetHumanReply(
@@ -166,7 +166,7 @@ public:
 
     ICommand::Handle buildGetHumansReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetHumansReply(
@@ -177,7 +177,7 @@ public:
 
     ICommand::Handle buildGetResourceReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetResourceReply(
@@ -188,7 +188,7 @@ public:
 
     ICommand::Handle buildGetResourcesReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetResourcesReply(
@@ -199,47 +199,47 @@ public:
 
     ICommand::Handle buildCreateUserReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildCreateWorldReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildCreateEpochReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildDeleteEpochReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildActivateEpochReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildDeactivateEpochReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildFinishEpochReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildTickEpochReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetEpochReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildGetEpochReply(
@@ -250,12 +250,12 @@ public:
 
     ICommand::Handle buildTransportHumanReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 
     ICommand::Handle buildTransportResourceReply(
         unsigned short int const a_code,
-        std::string        const a_message
+        std::string        const a_message = ""
     ) const;
 };
 

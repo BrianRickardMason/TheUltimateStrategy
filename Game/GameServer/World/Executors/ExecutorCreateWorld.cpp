@@ -72,13 +72,6 @@ bool ExecutorCreateWorld::filterOutNonModerator() const
     return m_user->isModerator();
 }
 
-bool ExecutorCreateWorld::authenticate(
-    IPersistenceShrPtr a_persistence
-) const
-{
-    return true;
-}
-
 bool ExecutorCreateWorld::authorize(
     IPersistenceShrPtr a_persistence
 ) const

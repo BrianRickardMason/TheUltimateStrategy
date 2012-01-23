@@ -53,10 +53,6 @@ private:
 
     virtual bool filterOutNonModerator() const;
 
-    virtual bool authenticate(
-        GameServer::Persistence::IPersistenceShrPtr a_persistence
-    ) const;
-
     virtual bool authorize(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
