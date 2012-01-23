@@ -36,8 +36,7 @@ class ScenarioCreateUser
 protected:
     ScenarioCreateUser()
     {
-        Language::Command::Handle commandRequest = mRequestBuilder.buildCreateUserRequest("Login", "Password");
-        mCommandReply = mClient.send(commandRequest);
+        mCommandReply = mClient.send(mRequestBuilder.buildCreateUserRequest("Login", "Password"));
     }
 
     Client mClient;
@@ -61,15 +60,48 @@ TEST_F(ScenarioCreateUser, ReturnsProperMessage)
     ASSERT_STREQ(Game::CREATE_USER_USER_HAS_BEEN_CREATED.c_str(), mCommandReply->getMessage().c_str());
 }
 
+class ScenarioCreateTwoUsersOfDifferentLogin
+    : public IntegrationTest
+{
+protected:
+    ScenarioCreateTwoUsersOfDifferentLogin()
+    {
+        Language::Command::Handle request1 = mRequestBuilder.buildCreateUserRequest("Login1", "Password1");
+        Language::Command::Handle request2 = mRequestBuilder.buildCreateUserRequest("Login2", "Password2");
+        mClient.send(request1);
+        mCommandReply = mClient.send(request2);
+    }
+
+    Client mClient;
+
+    Language::RequestBuilder  mRequestBuilder;
+    Language::Command::Handle mCommandReply;
+};
+
+TEST_F(ScenarioCreateTwoUsersOfDifferentLogin, ReturnsProperID)
+{
+    ASSERT_EQ(Language::ID_COMMAND_CREATE_USER_REPLY, mCommandReply->getID());
+}
+
+TEST_F(ScenarioCreateTwoUsersOfDifferentLogin, ReturnsProperCode)
+{
+    ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
+}
+
+TEST_F(ScenarioCreateTwoUsersOfDifferentLogin, ReturnsProperMessage)
+{
+    ASSERT_STREQ(Game::CREATE_USER_USER_HAS_BEEN_CREATED.c_str(), mCommandReply->getMessage().c_str());
+}
+
 class ScenarioCreateTwoUsersOfTheSameLogin
     : public IntegrationTest
 {
 protected:
     ScenarioCreateTwoUsersOfTheSameLogin()
     {
-        Language::Command::Handle commandRequest = mRequestBuilder.buildCreateUserRequest("Login", "Password");
-        mClient.send(commandRequest);
-        mCommandReply = mClient.send(commandRequest);
+        Language::Command::Handle request = mRequestBuilder.buildCreateUserRequest("Login", "Password");
+        mClient.send(request);
+        mCommandReply = mClient.send(request);
     }
 
     Client mClient;
