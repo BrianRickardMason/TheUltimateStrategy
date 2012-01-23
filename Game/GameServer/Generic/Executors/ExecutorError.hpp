@@ -54,13 +54,13 @@ private:
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     ) const;
 
-    virtual bool authorize(
-        GameServer::Persistence::IPersistenceShrPtr a_persistence
-    ) const;
-
     virtual bool getActingUser(
         GameServer::Persistence::IPersistenceShrPtr a_persistence
     );
+
+    virtual bool authorize(
+        GameServer::Persistence::IPersistenceShrPtr a_persistence
+    ) const;
 
     virtual bool epochIsActive(
         GameServer::Persistence::IPersistenceShrPtr a_persistence

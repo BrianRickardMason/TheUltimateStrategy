@@ -79,13 +79,6 @@ bool ExecutorCreateWorld::authenticate(
     return true;
 }
 
-bool ExecutorCreateWorld::getActingUser(
-    IPersistenceShrPtr a_persistence
-)
-{
-    return true;
-}
-
 bool ExecutorCreateWorld::authorize(
     IPersistenceShrPtr a_persistence
 ) const
