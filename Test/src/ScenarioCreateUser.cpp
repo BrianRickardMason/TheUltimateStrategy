@@ -60,16 +60,14 @@ TEST_F(ScenarioCreateUser, ReturnsProperMessage)
     ASSERT_STREQ(Game::CREATE_USER_USER_HAS_BEEN_CREATED.c_str(), mCommandReply->getMessage().c_str());
 }
 
-class ScenarioCreateTwoUsersOfDifferentLogin
+class ScenarioCreateTwoUsersOfDifferentLogins
     : public IntegrationTest
 {
 protected:
-    ScenarioCreateTwoUsersOfDifferentLogin()
+    ScenarioCreateTwoUsersOfDifferentLogins()
     {
-        Language::Command::Handle request1 = mRequestBuilder.buildCreateUserRequest("Login1", "Password1");
-        Language::Command::Handle request2 = mRequestBuilder.buildCreateUserRequest("Login2", "Password2");
-        mClient.send(request1);
-        mCommandReply = mClient.send(request2);
+        mClient.send(mRequestBuilder.buildCreateUserRequest("Login1", "Password1"));
+        mCommandReply = mClient.send(mRequestBuilder.buildCreateUserRequest("Login2", "Password2"));
     }
 
     Client mClient;
@@ -78,17 +76,17 @@ protected:
     Language::Command::Handle mCommandReply;
 };
 
-TEST_F(ScenarioCreateTwoUsersOfDifferentLogin, ReturnsProperID)
+TEST_F(ScenarioCreateTwoUsersOfDifferentLogins, ReturnsProperID)
 {
     ASSERT_EQ(Language::ID_COMMAND_CREATE_USER_REPLY, mCommandReply->getID());
 }
 
-TEST_F(ScenarioCreateTwoUsersOfDifferentLogin, ReturnsProperCode)
+TEST_F(ScenarioCreateTwoUsersOfDifferentLogins, ReturnsProperCode)
 {
     ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
 }
 
-TEST_F(ScenarioCreateTwoUsersOfDifferentLogin, ReturnsProperMessage)
+TEST_F(ScenarioCreateTwoUsersOfDifferentLogins, ReturnsProperMessage)
 {
     ASSERT_STREQ(Game::CREATE_USER_USER_HAS_BEEN_CREATED.c_str(), mCommandReply->getMessage().c_str());
 }

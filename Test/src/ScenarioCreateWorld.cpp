@@ -111,3 +111,91 @@ TEST_F(ScenarioCreateWorldInvalidPasswordOfTheModerator, ReturnsProperCode)
 {
     ASSERT_EQ(Game::REPLY_STATUS_UNAUTHENTICATED, mCommandReply->getCode());
 }
+
+class ScenarioCreateWorldNonExistentUser
+    : public IntegrationTest
+{
+protected:
+    ScenarioCreateWorldNonExistentUser()
+    {
+        mCommandReply = mClient.send(mRequestBuilder.buildCreateWorldRequest("Login", "Password", "World"));
+    }
+
+    Client mClient;
+
+    Language::RequestBuilder  mRequestBuilder;
+    Language::Command::Handle mCommandReply;
+};
+
+TEST_F(ScenarioCreateWorldNonExistentUser, ReturnsProperID)
+{
+    ASSERT_EQ(Language::ID_COMMAND_CREATE_WORLD_REPLY, mCommandReply->getID());
+}
+
+TEST_F(ScenarioCreateWorldNonExistentUser, ReturnsProperCode)
+{
+    ASSERT_EQ(Game::REPLY_STATUS_UNAUTHENTICATED, mCommandReply->getCode());
+}
+
+class ScenarioCreateTwoWorldsOfDifferentNames
+    : public IntegrationTest
+{
+protected:
+    ScenarioCreateTwoWorldsOfDifferentNames()
+    {
+        mClient.send(mRequestBuilder.buildCreateWorldRequest("modbot", "modbotpass", "World1"));
+        mCommandReply = mClient.send(mRequestBuilder.buildCreateWorldRequest("modbot", "modbotpass", "World2"));
+    }
+
+    Client mClient;
+
+    Language::RequestBuilder  mRequestBuilder;
+    Language::Command::Handle mCommandReply;
+};
+
+TEST_F(ScenarioCreateTwoWorldsOfDifferentNames, ReturnsProperID)
+{
+    ASSERT_EQ(Language::ID_COMMAND_CREATE_WORLD_REPLY, mCommandReply->getID());
+}
+
+TEST_F(ScenarioCreateTwoWorldsOfDifferentNames, ReturnsProperCode)
+{
+    ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
+}
+
+TEST_F(ScenarioCreateTwoWorldsOfDifferentNames, ReturnsProperMessage)
+{
+    ASSERT_STREQ(Game::CREATE_WORLD_WORLD_HAS_BEEN_CREATED.c_str(), mCommandReply->getMessage().c_str());
+}
+
+class ScenarioCreateTwoWorldsOfTheSameName
+    : public IntegrationTest
+{
+protected:
+    ScenarioCreateTwoWorldsOfTheSameName()
+    {
+        Language::Command::Handle request = mRequestBuilder.buildCreateWorldRequest("modbot", "modbotpass", "World");
+        mClient.send(request);
+        mCommandReply = mClient.send(request);
+    }
+
+    Client mClient;
+
+    Language::RequestBuilder  mRequestBuilder;
+    Language::Command::Handle mCommandReply;
+};
+
+TEST_F(ScenarioCreateTwoWorldsOfTheSameName, ReturnsProperID)
+{
+    ASSERT_EQ(Language::ID_COMMAND_CREATE_WORLD_REPLY, mCommandReply->getID());
+}
+
+TEST_F(ScenarioCreateTwoWorldsOfTheSameName, ReturnsProperCode)
+{
+    ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
+}
+
+TEST_F(ScenarioCreateTwoWorldsOfTheSameName, ReturnsProperMessage)
+{
+    ASSERT_STREQ(Game::CREATE_WORLD_WORLD_DOES_EXIST.c_str(), mCommandReply->getMessage().c_str());
+}
