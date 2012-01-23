@@ -27,6 +27,8 @@
 
 #include <gtest/gtest.h>
 
+// TODO: Consider stress integration once again.
+
 int main(
     int     aNumberOfArguments,
     char ** aArguments
