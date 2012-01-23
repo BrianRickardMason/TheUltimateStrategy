@@ -25,14 +25,17 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <gtest/gtest.h>
+#ifndef CLIENT_HPP
+#define CLIENT_HPP
 
-int main(
-    int     aNumberOfArguments,
-    char ** aArguments
-)
+#include <Language/Interface/Command.hpp>
+
+class Client
 {
-    testing::InitGoogleTest(&aNumberOfArguments, aArguments);
+public:
+    Language::Command::Handle send(
+        Language::Command::Handle aRequest
+    );
+};
 
-    return RUN_ALL_TESTS();
-}
+#endif // CLIENT_HPP

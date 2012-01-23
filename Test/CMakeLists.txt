@@ -30,6 +30,8 @@ PROJECT(integration)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 ADD_EXECUTABLE(integration
+    src/Client.cpp
+    src/EchoTest.cpp
     src/main.cpp
 )
 
@@ -39,6 +41,11 @@ TARGET_LINK_LIBRARIES(integration
     gmock
     gtest
     pthread
+    gameserver
+    protocolxmlcpp
+    interface
+    PocoFoundation
+    PocoNet
 )
 
 ADD_DEPENDENCIES(integration

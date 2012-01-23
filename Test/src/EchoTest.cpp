@@ -25,14 +25,33 @@
 // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 // SUCH DAMAGE.
 
-#include <gtest/gtest.h>
+#include <Game/GameServer/Common/Constants.hpp>
+#include <Language/Interface/RequestBuilder.hpp>
+#include <Test/include/Client.hpp>
+#include <Test/include/IntegrationTest.hpp>
 
-int main(
-    int     aNumberOfArguments,
-    char ** aArguments
-)
+class EchoCommand
+    : public IntegrationTest
 {
-    testing::InitGoogleTest(&aNumberOfArguments, aArguments);
+protected:
+    EchoCommand()
+    {
+        Language::Command::Handle commandRequest = mRequestBuilder.buildEchoRequest();
+        mCommandReply = mClient.send(commandRequest);
+    }
 
-    return RUN_ALL_TESTS();
+    Client mClient;
+
+    Language::RequestBuilder  mRequestBuilder;
+    Language::Command::Handle mCommandReply;
+};
+
+TEST_F(EchoCommand, ReturnsProperID)
+{
+    ASSERT_EQ(Language::ID_COMMAND_ECHO_REPLY, mCommandReply->getID());
+}
+
+TEST_F(EchoCommand, ReturnsProperCode)
+{
+    ASSERT_EQ(Game::REPLY_STATUS_OK, mCommandReply->getCode());
 }
