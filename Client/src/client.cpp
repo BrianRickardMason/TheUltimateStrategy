@@ -29,7 +29,6 @@
 #include <Poco/Net/SocketStream.h>
 #include <Poco/Net/StreamSocket.h>
 #include <Protocol/Xml/Cpp/MessageFactory.hpp>
-#include <Protocol/Xml/Cpp/Payload.hpp>
 #include <Protocol/Xml/Cpp/PayloadToProtocolTranslator.hpp>
 
 // TODO: shutdownReceive(), shutdown().
