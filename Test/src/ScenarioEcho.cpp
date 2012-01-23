@@ -36,8 +36,7 @@ class ScenarioEcho
 protected:
     ScenarioEcho()
     {
-        Language::Command::Handle commandRequest = mRequestBuilder.buildEchoRequest();
-        mCommandReply = mClient.send(commandRequest);
+        mCommandReply = mClient.send(mRequestBuilder.buildEchoRequest());
     }
 
     Client mClient;
