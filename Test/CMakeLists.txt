@@ -36,6 +36,7 @@ ADD_EXECUTABLE(integration
     src/ScenarioDeactivateEpoch.cpp
     src/ScenarioCreateUser.cpp
     src/ScenarioCreateWorld.cpp
+    src/ScenarioDeleteEpoch.cpp
     src/ScenarioEcho.cpp
     src/main.cpp
 )
