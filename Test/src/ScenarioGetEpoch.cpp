@@ -122,3 +122,33 @@ TEST_F(ScenarioGetEpoch, ReturnsProperMessage)
 {
     ASSERT_STREQ(Game::GET_EPOCH_EPOCH_HAS_BEEN_GOT.c_str(), mCommandReply->getMessage().c_str());
 }
+
+TEST_F(ScenarioGetEpoch, ReturnsOneObject)
+{
+    ASSERT_EQ(1, mCommandReply->getObjects().size());
+}
+
+TEST_F(ScenarioGetEpoch, ReturnsObjectWithValidEpochName)
+{
+    ASSERT_STREQ("Epoch", mCommandReply->getObjects().front().at("epoch_name").c_str());
+}
+
+TEST_F(ScenarioGetEpoch, ReturnsObjectWithValidWorldName)
+{
+    ASSERT_STREQ("World", mCommandReply->getObjects().front().at("world_name").c_str());
+}
+
+TEST_F(ScenarioGetEpoch, ReturnsObjectWithValidActiveField)
+{
+    ASSERT_STREQ("false", mCommandReply->getObjects().front().at("active").c_str());
+}
+
+TEST_F(ScenarioGetEpoch, ReturnsObjectWithValidFinishedField)
+{
+    ASSERT_STREQ("false", mCommandReply->getObjects().front().at("finished").c_str());
+}
+
+TEST_F(ScenarioGetEpoch, ReturnsObjectWithValidNumberOfTicks)
+{
+    ASSERT_STREQ("0", mCommandReply->getObjects().front().at("ticks").c_str());
+}
