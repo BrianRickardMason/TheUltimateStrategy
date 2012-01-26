@@ -198,7 +198,9 @@ protected:
         mClient.send(mRequestBuilder.buildCreateUserRequest("Login", "Password"));
         mClient.send(mRequestBuilder.buildCreateWorldRequest("modbot", "modbotpass", "World"));
         mClient.send(mRequestBuilder.buildCreateEpochRequest("modbot", "modbotpass", "World", "Epoch"));
+        mClient.send(mRequestBuilder.buildActivateEpochRequest("modbot", "modbotpass", "World"));
         mClient.send(mRequestBuilder.buildCreateLandRequest("Login", "Password", "World", "Land"));
+        mClient.send(mRequestBuilder.buildDeactivateEpochRequest("modbot", "modbotpass", "World"));
         mCommandReply = mClient.send(mRequestBuilder.buildTickEpochRequest("modbot", "modbotpass", "World"));
     }
 
@@ -224,7 +226,9 @@ protected:
         mClient.send(mRequestBuilder.buildCreateUserRequest("Login", "Password"));
         mClient.send(mRequestBuilder.buildCreateWorldRequest("modbot", "modbotpass", "World"));
         mClient.send(mRequestBuilder.buildCreateEpochRequest("modbot", "modbotpass", "World", "Epoch"));
+        mClient.send(mRequestBuilder.buildActivateEpochRequest("modbot", "modbotpass", "World"));
         mClient.send(mRequestBuilder.buildCreateLandRequest("Login", "Password", "World", "Land"));
+        mClient.send(mRequestBuilder.buildDeactivateEpochRequest("modbot", "modbotpass", "World"));
         for (unsigned short int i = 0; i < 10; ++i)
         {
             mCommandReplies.push_back(
@@ -258,7 +262,9 @@ protected:
         mClient.send(mRequestBuilder.buildCreateUserRequest("Login", "Password"));
         mClient.send(mRequestBuilder.buildCreateWorldRequest("modbot", "modbotpass", "World"));
         mClient.send(mRequestBuilder.buildCreateEpochRequest("modbot", "modbotpass", "World", "Epoch"));
+        mClient.send(mRequestBuilder.buildActivateEpochRequest("modbot", "modbotpass", "World"));
         mClient.send(mRequestBuilder.buildCreateLandRequest("Login", "Password", "World", "Land"));
+        mClient.send(mRequestBuilder.buildDeactivateEpochRequest("modbot", "modbotpass", "World"));
         for (unsigned short int i = 0; i < 100; ++i)
         {
             mCommandReplies.push_back(
