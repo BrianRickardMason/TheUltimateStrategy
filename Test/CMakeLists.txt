@@ -30,7 +30,6 @@ PROJECT(integration)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 ADD_EXECUTABLE(integration
-    src/Client.cpp
     src/ScenarioActivateEpoch.cpp
     src/ScenarioCreateEpoch.cpp
     src/ScenarioDeactivateEpoch.cpp
@@ -39,6 +38,8 @@ ADD_EXECUTABLE(integration
     src/ScenarioDeleteEpoch.cpp
     src/ScenarioEcho.cpp
     src/ScenarioFinishEpoch.cpp
+    src/ScenarioGetEpoch.cpp
+    src/Client.cpp
     src/main.cpp
 )
 
