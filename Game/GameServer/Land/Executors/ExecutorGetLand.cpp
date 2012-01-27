@@ -148,8 +148,9 @@ Language::ICommand::Handle ExecutorGetLand::getBasicReply(
     unsigned int const a_status
 ) const
 {
-    // FIXME: Remove this method!
-    BOOST_ASSERT_MSG(false, "Should never be called!");
+    Language::ReplyBuilder reply_builder;
+
+    return reply_builder.buildGetLandReply(a_status);
 }
 
 Language::ICommand::Handle ExecutorGetLand::produceReply(
@@ -169,11 +170,11 @@ Language::ICommand::Handle ExecutorGetLand::produceReply(
             land.insert(std::make_pair("land_name", a_exit_code.m_land->getLandName()));
             std::string granted = a_exit_code.m_land->getGranted() ? "true" : "false";
             land.insert(std::make_pair("granted", granted));
-            return reply_builder.buildGetLandReply(REPLY_STATUS_OK, DELETE_LAND_LAND_DOES_NOT_EXIST, land);
+            return reply_builder.buildGetLandReply(REPLY_STATUS_OK, GET_LAND_LAND_HAS_BEEN_GOT, land);
         }
 
         case GameServer::Land::GET_LAND_OPERATOR_EXIT_CODE_LAND_HAS_NOT_BEEN_GOT:
-            return reply_builder.buildGetLandReply(REPLY_STATUS_OK, DELETE_LAND_LAND_HAS_BEEN_DELETED);
+            return reply_builder.buildGetLandReply(REPLY_STATUS_OK, GET_LAND_LAND_HAS_NOT_BEEN_GOT);
 
         case GameServer::Land::GET_LAND_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR:
             return reply_builder.buildGetLandReply(REPLY_STATUS_OK, GET_LAND_UNEXPECTED_ERROR);
