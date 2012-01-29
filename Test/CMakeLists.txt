@@ -39,6 +39,7 @@ ADD_EXECUTABLE(integration
     src/ScenarioDeactivateEpoch.cpp
     src/ScenarioDeleteEpoch.cpp
     src/ScenarioDeleteLand.cpp
+    src/ScenarioDeleteSettlement.cpp
     src/ScenarioEcho.cpp
     src/ScenarioFinishEpoch.cpp
     src/ScenarioGetEpoch.cpp
