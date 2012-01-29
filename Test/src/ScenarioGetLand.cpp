@@ -129,7 +129,7 @@ protected:
         mClient.send(mRequestBuilder.buildCreateWorldRequest("modbot", "modbotpass", "World"));
         mClient.send(mRequestBuilder.buildCreateEpochRequest("modbot", "modbotpass", "World", "Epoch"));
         mClient.send(mRequestBuilder.buildActivateEpochRequest("modbot", "modbotpass", "World"));
-        mClient.send(mRequestBuilder.buildCreateLandRequest("Login1", "Password", "World", "Land"));
+        mClient.send(mRequestBuilder.buildCreateLandRequest("Login", "Password", "World", "Land"));
         mCommandReply = mClient.send(mRequestBuilder.buildGetLandRequest("Login", "BadPassword", "Land"));
     }
 
