@@ -33,15 +33,17 @@ ADD_EXECUTABLE(integration
     src/ScenarioActivateEpoch.cpp
     src/ScenarioCreateEpoch.cpp
     src/ScenarioCreateLand.cpp
-    src/ScenarioDeactivateEpoch.cpp
+    src/ScenarioCreateSettlement.cpp
     src/ScenarioCreateUser.cpp
     src/ScenarioCreateWorld.cpp
+    src/ScenarioDeactivateEpoch.cpp
     src/ScenarioDeleteEpoch.cpp
     src/ScenarioDeleteLand.cpp
     src/ScenarioEcho.cpp
     src/ScenarioFinishEpoch.cpp
     src/ScenarioGetEpoch.cpp
     src/ScenarioGetLand.cpp
+    src/ScenarioGetLands.cpp
     src/ScenarioTickEpoch.cpp
     src/Client.cpp
     src/main.cpp

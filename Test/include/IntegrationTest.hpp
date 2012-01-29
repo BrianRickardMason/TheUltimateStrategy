@@ -83,7 +83,7 @@ private:
     void synchronizeServerReady() const
     {
         // TODO: Make it asynchronous.
-        usleep(50000);
+        usleep(100000);
     }
 
 protected:
