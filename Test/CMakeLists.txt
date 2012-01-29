@@ -44,6 +44,7 @@ ADD_EXECUTABLE(integration
     src/ScenarioDestroyBuilding.cpp
     src/ScenarioEcho.cpp
     src/ScenarioFinishEpoch.cpp
+    src/ScenarioGetBuilding.cpp
     src/ScenarioGetEpoch.cpp
     src/ScenarioGetLand.cpp
     src/ScenarioGetLands.cpp
