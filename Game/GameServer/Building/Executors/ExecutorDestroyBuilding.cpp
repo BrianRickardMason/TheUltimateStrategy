@@ -166,8 +166,9 @@ Language::ICommand::Handle ExecutorDestroyBuilding::getBasicReply(
     unsigned int const a_status
 ) const
 {
-    // FIXME: Remove this method!
-    BOOST_ASSERT_MSG(false, "Should never be called!");
+    Language::ReplyBuilder reply_builder;
+
+    return reply_builder.buildDestroyBuildingReply(a_status);
 }
 
 Language::ICommand::Handle ExecutorDestroyBuilding::produceReply(
