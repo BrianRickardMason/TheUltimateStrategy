@@ -70,8 +70,10 @@ bool ExecutorDestroyBuilding::processParameters()
 {
     try
     {
-        m_id_holder_class = boost::lexical_cast<unsigned int>(m_value_id_holder_class);
-        m_volume = boost::lexical_cast<unsigned int>(m_volume);
+        // TODO: Remove this temporary workaround.
+        // m_id_holder_class = boost::lexical_cast<unsigned int>(m_value_id_holder_class);
+        m_id_holder_class = 1;
+        m_volume = boost::lexical_cast<unsigned int>(m_value_volume);
 
         m_id_holder.assign(m_id_holder_class, m_holder_name);
 
