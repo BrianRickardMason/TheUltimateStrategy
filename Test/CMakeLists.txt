@@ -31,6 +31,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 ADD_EXECUTABLE(integration
     src/ScenarioActivateEpoch.cpp
+    src/ScenarioBuildBuilding.cpp
     src/ScenarioCreateEpoch.cpp
     src/ScenarioCreateLand.cpp
     src/ScenarioCreateSettlement.cpp
