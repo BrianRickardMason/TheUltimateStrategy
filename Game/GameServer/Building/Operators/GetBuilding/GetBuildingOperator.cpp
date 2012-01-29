@@ -54,7 +54,10 @@ GetBuildingOperatorExitCode GetBuildingOperator::getBuilding(
         BuildingWithVolumeShrPtr const building =
             m_building_persistence_facade->getBuilding(a_transaction, a_id_holder, a_key);
 
-        return GetBuildingOperatorExitCode(GET_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_GOT, building);
+        return (building)
+                   ? GetBuildingOperatorExitCode(GET_BUILDING_OPERATOR_EXIT_CODE_BUILDING_HAS_BEEN_GOT, building)
+                   // TODO: Add building has not been got.
+                   : GetBuildingOperatorExitCode(GET_BUILDING_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
     }
     catch (...)
     {
