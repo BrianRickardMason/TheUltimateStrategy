@@ -58,6 +58,7 @@ ADD_EXECUTABLE(integration
     src/ScenarioGetSettlements.cpp
     src/ScenarioTickEpoch.cpp
     src/ScenarioTransportHuman.cpp
+    src/ScenarioTransportResource.cpp
     src/Client.cpp
     src/main.cpp
 )
