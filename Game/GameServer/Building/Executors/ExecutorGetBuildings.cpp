@@ -68,7 +68,9 @@ bool ExecutorGetBuildings::processParameters()
 {
     try
     {
-        m_id_holder_class = boost::lexical_cast<unsigned int>(m_value_id_holder_class);
+        // TODO: Remove this temporary workaround.
+        // m_id_holder_class = boost::lexical_cast<unsigned int>(m_value_id_holder_class);
+        m_id_holder_class = 1;
 
         m_id_holder.assign(m_id_holder_class, m_holder_name);
 

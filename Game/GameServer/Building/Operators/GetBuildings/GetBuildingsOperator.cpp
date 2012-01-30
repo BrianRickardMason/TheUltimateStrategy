@@ -51,7 +51,9 @@ GetBuildingsOperatorExitCode GetBuildingsOperator::getBuildings(
     {
         BuildingWithVolumeMap const buildings = m_building_persistence_facade->getBuildings(a_transaction, a_id_holder);
 
-        return GetBuildingsOperatorExitCode(GET_BUILDINGS_OPERATOR_EXIT_CODE_BUILDINGS_HAVE_BEEN_GOT, buildings);
+        return (buildings.empty())
+            ? GetBuildingsOperatorExitCode(GET_BUILDINGS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR)
+            : GetBuildingsOperatorExitCode(GET_BUILDINGS_OPERATOR_EXIT_CODE_BUILDINGS_HAVE_BEEN_GOT, buildings);
     }
     catch (...)
     {
