@@ -60,7 +60,7 @@ bool ExecutorTransportResource::getParameters(
     m_password = a_request->getPassword();
     m_settlement_name_source = a_request->getParam("settlement_name_source");
     m_settlement_name_destination = a_request->getParam("settlement_name_destination");
-    m_key = a_request->getParam("buildingkey");
+    m_key = a_request->getParam("resourcekey");
     m_value_volume = a_request->getParam("volume");
 
     return true;
@@ -70,7 +70,7 @@ bool ExecutorTransportResource::processParameters()
 {
     try
     {
-        m_volume = boost::lexical_cast<unsigned int>(m_volume);
+        m_volume = boost::lexical_cast<unsigned int>(m_value_volume);
 
         return true;
     }
@@ -185,8 +185,9 @@ Language::ICommand::Handle ExecutorTransportResource::getBasicReply(
     unsigned int const a_status
 ) const
 {
-    // FIXME: Remove this method!
-    BOOST_ASSERT_MSG(false, "Should never be called!");
+    Language::ReplyBuilder reply_builder;
+
+    return reply_builder.buildTransportResourceReply(a_status);
 }
 
 Language::ICommand::Handle ExecutorTransportResource::produceReply(
