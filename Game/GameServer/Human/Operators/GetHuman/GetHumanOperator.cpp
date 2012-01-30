@@ -53,7 +53,10 @@ GetHumanOperatorExitCode GetHumanOperator::getHuman(
     {
         HumanWithVolumeShrPtr const human = m_human_persistence_facade->getHuman(a_transaction, a_id_holder, a_key);
 
-        return GetHumanOperatorExitCode(GET_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_GOT, human);
+        return (human)
+            ? GetHumanOperatorExitCode(GET_HUMAN_OPERATOR_EXIT_CODE_HUMAN_HAS_BEEN_GOT, human)
+            // TODO: Add building has not been got.
+            : GetHumanOperatorExitCode(GET_HUMAN_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
     }
     catch (...)
     {
