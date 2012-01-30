@@ -54,7 +54,9 @@ GetResourceOperatorExitCode GetResourceOperator::getResource(
         ResourceWithVolumeShrPtr const resource =
             m_resource_persistence_facades->getResource(a_transaction, a_id_holder, a_key);
 
-        return GetResourceOperatorExitCode(GET_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_GOT, resource);
+        return (resource)
+            ? GetResourceOperatorExitCode(GET_RESOURCE_OPERATOR_EXIT_CODE_RESOURCE_HAS_BEEN_GOT, resource)
+            : GetResourceOperatorExitCode(GET_RESOURCE_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR);
     }
     catch (...)
     {

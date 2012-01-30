@@ -52,7 +52,9 @@ GetResourcesOperatorExitCode GetResourcesOperator::getResources(
         ResourceWithVolumeMap const resources =
             m_resource_persistence_facades->getResources(a_transaction, a_id_holder);
 
-        return GetResourcesOperatorExitCode(GET_RESOURCES_OPERATOR_EXIT_CODE_RESOURCES_HAVE_BEEN_GOT, resources);
+        return (resources.empty())
+            ? GetResourcesOperatorExitCode(GET_RESOURCES_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR)
+            : GetResourcesOperatorExitCode(GET_RESOURCES_OPERATOR_EXIT_CODE_RESOURCES_HAVE_BEEN_GOT, resources);
     }
     catch (...)
     {

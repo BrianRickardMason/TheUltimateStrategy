@@ -69,7 +69,9 @@ bool ExecutorGetResource::processParameters()
 {
     try
     {
-        m_id_holder_class = boost::lexical_cast<unsigned int>(m_value_id_holder_class);
+        // TODO: Remove this temporary workaround.
+        // m_id_holder_class = boost::lexical_cast<unsigned int>(m_value_id_holder_class);
+        m_id_holder_class = 1;
 
         m_id_holder.assign(m_id_holder_class, m_holder_name);
 
@@ -164,8 +166,9 @@ Language::ICommand::Handle ExecutorGetResource::getBasicReply(
     unsigned int const a_status
 ) const
 {
-    // FIXME: Remove this method!
-    BOOST_ASSERT_MSG(false, "Should never be called!");
+    Language::ReplyBuilder reply_builder;
+
+    return reply_builder.buildGetResourceReply(a_status);
 }
 
 Language::ICommand::Handle ExecutorGetResource::produceReply(
