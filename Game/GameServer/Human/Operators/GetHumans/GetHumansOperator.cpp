@@ -51,7 +51,9 @@ GetHumansOperatorExitCode GetHumansOperator::getHumans(
     {
         HumanWithVolumeMap const humans = m_human_persistence_facade->getHumans(a_transaction, a_id_holder);
 
-        return GetHumansOperatorExitCode(GET_HUMANS_OPERATOR_EXIT_CODE_HUMANS_HAVE_BEEN_GOT, humans);
+        return (humans.empty())
+            ? GetHumansOperatorExitCode(GET_HUMANS_OPERATOR_EXIT_CODE_UNEXPECTED_ERROR)
+            : GetHumansOperatorExitCode(GET_HUMANS_OPERATOR_EXIT_CODE_HUMANS_HAVE_BEEN_GOT, humans);
     }
     catch (...)
     {
