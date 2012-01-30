@@ -254,7 +254,7 @@ TEST_F(ScenarioGetBuildingZeroBuildingsExist, ReturnsProperMessage)
     ASSERT_STREQ(Game::GET_BUILDING_UNEXPECTED_ERROR.c_str(), mCommandReply->getMessage().c_str());
 }
 
-TEST_F(ScenarioGetBuildingZeroBuildingsExist, ReturnsOneObject)
+TEST_F(ScenarioGetBuildingZeroBuildingsExist, ReturnsZeroObjects)
 {
     ASSERT_EQ(0, mCommandReply->getObjects().size());
 }
