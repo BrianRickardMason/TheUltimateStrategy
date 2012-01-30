@@ -331,7 +331,7 @@ protected:
         mClient.send(mRequestBuilder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement1"));
         mClient.send(mRequestBuilder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement2"));
         mCommandReply = mClient.send(mRequestBuilder.buildTransportHumanRequest(
-            "Login", "Password", "Settlement1", "Settlement2", "workerjoblessnovice", "1"));
+            "Login", "Password", "Settlement1", "Settlement2", "workerjoblessnovice", "484"));
     }
 
     Client mClient;
@@ -369,7 +369,7 @@ protected:
         mClient.send(mRequestBuilder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement1"));
         mClient.send(mRequestBuilder.buildCreateSettlementRequest("Login", "Password", "Land", "Settlement2"));
         mCommandReply = mClient.send(mRequestBuilder.buildTransportHumanRequest(
-            "Login", "Password", "Settlement1", "Settlement2", "workerjoblessnovice", "1"));
+            "Login", "Password", "Settlement1", "Settlement2", "workerjoblessnovice", "1000"));
     }
 
     Client mClient;
