@@ -42,6 +42,7 @@ ADD_EXECUTABLE(integration
     src/ScenarioDeleteLand.cpp
     src/ScenarioDeleteSettlement.cpp
     src/ScenarioDestroyBuilding.cpp
+    src/ScenarioDismissHuman.cpp
     src/ScenarioEcho.cpp
     src/ScenarioFinishEpoch.cpp
     src/ScenarioGetBuilding.cpp
