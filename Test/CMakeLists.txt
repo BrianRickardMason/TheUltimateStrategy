@@ -53,6 +53,7 @@ ADD_EXECUTABLE(integration
     src/ScenarioGetHumans.cpp
     src/ScenarioGetLand.cpp
     src/ScenarioGetLands.cpp
+    src/ScenarioGetResources.cpp
     src/ScenarioGetSettlement.cpp
     src/ScenarioGetSettlements.cpp
     src/ScenarioTickEpoch.cpp
