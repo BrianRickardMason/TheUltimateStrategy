@@ -156,7 +156,7 @@ std::string const GET_BUILDING_BUILDING_HAS_BEEN_GOT = "Building has been got.";
 std::string const GET_BUILDING_UNEXPECTED_ERROR      = "Unexpected error.";
 
 std::string const GET_BUILDINGS_BUILDINGS_HAVE_BEEN_GOT = "Buildings have been got.";
-std::string const GET_BUILDINGS_UNEXPECTED_ERROR        = "Buildings have not been got.";
+std::string const GET_BUILDINGS_UNEXPECTED_ERROR        = "Unexpected error.";
 
 std::string const TRANSPORT_HUMAN_DESTINATION_SETTLEMENT_DOES_NOT_EXIST  = "Destination settlement does not exist.";
 std::string const TRANSPORT_HUMAN_HUMAN_HAS_BEEN_TRANSPORTED             = "Human has been transported.";
